@@ -30,6 +30,7 @@ permissions:
 concurrency:
   group: editorial-inbox
   cancel-in-progress: false
+  queue: max
 jobs:
   review:
     runs-on: ubuntu-latest
