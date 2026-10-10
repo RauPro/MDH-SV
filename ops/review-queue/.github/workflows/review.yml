@@ -17,7 +17,11 @@ on:
         type: boolean
         default: false
       record_json:
-        description: Ficha pública JSON completa (solo para aprobar; consultar README)
+        description: JSON manual opcional; vacío usa el borrador privado drafts del candidato
+        required: false
+        type: string
+      review_notes:
+        description: Comprobaciones humanas efectuadas (mínimo 20 caracteres para aprobar)
         required: false
         type: string
 permissions:

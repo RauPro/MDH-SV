@@ -113,6 +113,9 @@ def issue_body(candidate):
         "- [ ] Revisar atribución, minimización de datos y riesgo para personas.\n\n"
         "Usa Actions → Revisar noticia para aprobar una ficha preparada o rechazar la noticia. "
         "No pegues testimonios privados, credenciales ni documentos personales.\n\n"
+        f"Si se ha generado un borrador asistido, está en `drafts/{candidate['id']}.json` "
+        "dentro de este repositorio privado. Contrástalo y corrígelo antes de aprobar; "
+        "deja `record_json` vacío para usarlo y escribe tus propias notas de revisión.\n\n"
         f"### Metadatos de captura\n```json\n{safe}\n```\n")
 
 
@@ -189,6 +192,48 @@ def collect(inbox, fetch=fetch_feed, feeds=FEEDS, max_new=20):
     return report
 
 
+def private_draft_record(inbox, candidate):
+    """Read only an explicitly unapproved draft from this already-verified private inbox."""
+    import base64
+    import binascii
+    relative_path = 'drafts/' + candidate['id'] + '.json'
+    response = inbox.get_file(inbox.base + '/contents/' + relative_path)
+    if response is None:
+        raise ValueError('No private draft exists; prepare a draft or provide record_json')
+    limit = 512_000
+    if (not isinstance(response, dict) or response.get('type') != 'file'
+            or response.get('encoding') != 'base64' or response.get('path') != relative_path
+            or type(response.get('size')) is not int or not 0 < response['size'] <= limit
+            or not isinstance(response.get('content'), str) or len(response['content']) > limit * 2):
+        raise ValueError('Malformed private draft file metadata')
+    try:
+        raw = base64.b64decode(''.join(response['content'].splitlines()), validate=True)
+        if not raw or len(raw) > limit or len(raw) != response['size']:
+            raise ValueError('Invalid private draft file size')
+        draft = json.loads(raw.decode('utf-8'))
+    except (binascii.Error, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError('Malformed private draft content') from error
+    if (not isinstance(draft, dict) or type(draft.get('schema_version')) is not int or draft['schema_version'] != 1
+            or draft.get('candidate_id') != candidate['id']
+            or draft.get('source_url') != candidate['source_url']):
+        raise ValueError('Private draft identity does not match the candidate')
+    if (draft.get('status') != 'draft' or draft.get('relevant') is not True
+            or draft.get('publishable') is not False or draft.get('human_reviewed') is not False):
+        raise ValueError('Private draft requires scope or privacy review before approval')
+    classification = draft.get('classification')
+    if (not isinstance(classification, dict) or classification.get('jurisdiction') != 'SV'
+            or classification.get('relevance') != 'relevant'):
+        raise ValueError('Private draft has unresolved jurisdiction or relevance')
+    record = draft.get('record')
+    if (not isinstance(record, dict) or record.get('source_url') != candidate['source_url']
+            or record.get('origin_candidate_id') != candidate['id']
+            or record.get('human_reviewed') is not False
+            or record.get('review_status') != 'source_checked'
+            or record.get('record_type') != classification.get('record_type')):
+        raise ValueError('Private draft record is missing, mismatched or already marked reviewed')
+    return record.copy()
+
+
 def review(inbox, event):
     from .publication import Publication
     sender = event['sender']
@@ -204,8 +249,11 @@ def review(inbox, event):
     body = issue.get('body') or ''
     match = re.search(r'<!-- mdh-candidate:([0-9a-f]{64}) -->', body)
     if not match: raise ValueError('Issue is not a collected candidate')
-    candidate = json.loads(re.search(r'```json\n(.*?)\n```', body, re.S).group(1))
-    if hashlib.sha256(canonical_url(candidate['source_url']).encode()).hexdigest() != match.group(1):
+    metadata = re.search(r'```json\n(.*?)\n```', body, re.S)
+    if not metadata: raise ValueError('Candidate metadata is missing')
+    candidate = json.loads(metadata.group(1))
+    if (not isinstance(candidate, dict) or candidate.get('id') != match.group(1)
+            or hashlib.sha256(canonical_url(candidate.get('source_url')).encode()).hexdigest() != match.group(1)):
         raise ValueError('Candidate identity mismatch')
     decision = inputs['decision']
     if decision == 'reject':
@@ -213,14 +261,33 @@ def review(inbox, event):
         return {'decision':'rejected','issue':issue_number}
     if decision != 'approve' or str(inputs.get('privacy_reviewed', '')).lower() != 'true':
         raise ValueError('Explicit editorial and privacy approval required')
-    proposed = json.loads(inputs['record_json'])
+    manual_json = inputs.get('record_json') or ''
+    if not isinstance(manual_json, str): raise ValueError('record_json must be JSON text')
+    manual_json = manual_json.strip()
+    notes = inputs.get('review_notes') or ''
+    if not isinstance(notes, str): raise ValueError('Review notes must be text')
+    notes = notes.strip()
+    if not manual_json and len(notes) < 20:
+        raise ValueError('Draft approval requires human review_notes of at least 20 characters')
+    proposed = json.loads(manual_json) if manual_json else private_draft_record(inbox, candidate)
+    if not isinstance(proposed, dict): raise ValueError('Public draft must be a record object')
+    # Compatibility for the existing manual workflow; AI draft notes can never satisfy approval.
+    if manual_json and not notes:
+        notes = proposed.get('review_notes') or ''
+        if not isinstance(notes, str): raise ValueError('Review notes must be text')
+        notes = notes.strip()
+    if len(notes) < 20: raise ValueError('Approval requires human review_notes of at least 20 characters')
     if proposed.get('source_url') != candidate['source_url']:
         raise ValueError('Public draft must refer to the collected source')
     today = datetime.now(ZoneInfo('America/El_Salvador')).date().isoformat()
     proposed.update(human_reviewed=True, review_status='editorially_reviewed', reviewed_by=username,
-        reviewed_at=today, origin_candidate_id=candidate['id'], source_checked_at=today,
+        reviewed_at=today, review_notes=notes, origin_candidate_id=candidate['id'], source_checked_at=today,
         source_check_method=f'Revisión editorial de la fuente por {username}; no implica corroboración independiente de los hechos.')
-    record = Publication.model_validate(proposed)
+    try:
+        record = Publication.model_validate(proposed)
+    except ValueError:
+        # Validation errors can otherwise include the entire private draft in Action logs.
+        raise ValueError('Public draft failed publication validation; inspect the private draft and schema') from None
     approval = {'schema_version': 1, 'record': record.model_dump(mode='json'),
         'review_repository': inbox.repository, 'review_issue': issue_number,
         'review_run_id': os.environ.get('GITHUB_RUN_ID'), 'approved_at': datetime.now(timezone.utc).isoformat()}

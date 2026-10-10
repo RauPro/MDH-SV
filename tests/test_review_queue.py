@@ -1,3 +1,4 @@
+import base64
 import json
 from datetime import datetime, timezone
 from unittest.mock import MagicMock
@@ -14,11 +15,11 @@ def entry(title='Denuncian detención en El Salvador', url='https://gatoencerrad
 class Inbox:
     base='/repos/RauPro/MDH-SV-review'
     repository='RauPro/MDH-SV-review'
-    def __init__(self): self.ids=set(); self.candidates=[]; self.calls=[]; self.permission='admin'
+    def __init__(self): self.ids=set(); self.candidates=[]; self.calls=[]; self.permission='admin'; self.files={}; self.reads=[]
     def ensure_labels(self): pass
     def existing_ids(self): return set(self.ids)
     def enqueue(self,c): self.ids.add(c['id']); self.candidates.append(c)
-    def get_file(self,path): return None
+    def get_file(self,path): self.reads.append(path); return self.files.get(path)
     def call(self,method,path,**kw):
         self.calls.append((method,path,kw))
         if path.endswith('/permission'):return {'permission':self.permission}
@@ -84,6 +85,146 @@ def test_only_explicit_human_review_can_prepare_public_proposal(tmp_path,monkeyp
     assert proposal['record']['origin_candidate_id']==inbox.candidates[0]['id']
     assert all('RauPro/MDH-SV-review/' in path for _,path,_ in inbox.calls)
     assert all('RauPro/MDH-SV/' not in path for _,path,_ in inbox.calls)
+
+def draft_envelope(candidate):
+    record=proposed()
+    record.update(origin_candidate_id=candidate['id'],human_reviewed=False,
+                  review_status='source_checked',review_notes=None,reviewed_by=None,reviewed_at=None)
+    return {'schema_version':1,'candidate_id':candidate['id'],'source_url':candidate['source_url'],
+        'status':'draft','relevant':True,'publishable':False,'human_reviewed':False,
+        'classification':{'jurisdiction':'SV','relevance':'relevant','record_type':record['record_type']},
+        'record':record,'grounding':{'facts':[{'paragraph_id':'p1','quote':'Cita privada de trabajo'}]},
+        'extraction':{'provider':'gemini','model':'test-model','content_sha256':'a'*64}}
+
+def draft_file(candidate, envelope):
+    raw=json.dumps(envelope).encode()
+    return {'type':'file','path':f'drafts/{candidate["id"]}.json','encoding':'base64',
+            'size':len(raw),'content':base64.b64encode(raw).decode(),'sha':'file-revision'}
+
+def prepared_draft_inbox():
+    inbox=Inbox();candidate=candidate_from_entry(entry(),FEEDS[1],NOW);inbox.enqueue(candidate)
+    envelope=draft_envelope(candidate)
+    path=inbox.base+'/contents/drafts/'+candidate['id']+'.json'
+    inbox.files[path]=draft_file(candidate,envelope)
+    ev=event();ev['inputs']['record_json']='';ev['inputs']['review_notes']='He leído la fuente y contrastado fechas, atribución, duplicados y privacidad.'
+    return inbox,envelope,path,ev
+
+def assert_no_approval(inbox,tmp_path):
+    assert not (tmp_path/'proposal.json').exists()
+    assert not any(method in ('POST','PATCH','PUT','DELETE') for method,_,_ in inbox.calls)
+
+def test_stored_private_draft_requires_and_records_human_review_without_exporting_wrapper(tmp_path,monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    inbox,envelope,path,ev=prepared_draft_inbox()
+    with pytest.raises(ValueError):Publication.model_validate(envelope['record'])
+    result=review(inbox,ev)
+    assert result=={'decision':'approved_for_proposal','issue':1,'publications':0}
+    assert inbox.reads[0]==path
+    proposal=json.loads((tmp_path/'proposal.json').read_text())
+    assert proposal['record']['review_notes']==ev['inputs']['review_notes']
+    assert proposal['record']['reviewed_by']=='RauPro'
+    assert proposal['record']['human_reviewed'] is True
+    assert proposal['record']['origin_candidate_id']==envelope['candidate_id']
+    assert 'grounding' not in proposal and 'extraction' not in proposal
+    assert 'Cita privada de trabajo' not in (tmp_path/'proposal.json').read_text()
+    assert all('RauPro/MDH-SV-review/' in requested for _,requested,_ in inbox.calls)
+    assert envelope['publishable'] is False and envelope['human_reviewed'] is False
+
+@pytest.mark.parametrize('notes',[None,'','   ','Revisado'])
+def test_stored_draft_cannot_use_ai_notes_as_human_approval(notes,tmp_path,monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    inbox,envelope,path,ev=prepared_draft_inbox()
+    envelope['record']['review_notes']='Texto atribuido por una máquina que no es una revisión humana.'
+    inbox.files[path]=draft_file(inbox.candidates[0],envelope)
+    ev['inputs']['review_notes']=notes
+    with pytest.raises(ValueError,match='review_notes'):review(inbox,ev)
+    assert not inbox.reads
+    assert_no_approval(inbox,tmp_path)
+
+@pytest.mark.parametrize('change',[
+    lambda d:d.update(candidate_id='0'*64),
+    lambda d:d.update(source_url='https://gatoencerrado.news/otra-noticia/'),
+    lambda d:d.update(schema_version=2),
+    lambda d:d.update(schema_version=True),
+    lambda d:d.update(status='needs_scope_review'),
+    lambda d:d.update(status='needs_privacy_review'),
+    lambda d:d.update(relevant=False),
+    lambda d:d.update(publishable=True),
+    lambda d:d.update(human_reviewed=True),
+    lambda d:d.update(record=None),
+    lambda d:d['classification'].update(jurisdiction='other'),
+    lambda d:d['classification'].update(relevance='unclear'),
+    lambda d:d['classification'].update(record_type=None),
+    lambda d:d['record'].update(origin_candidate_id='0'*64),
+    lambda d:d['record'].update(source_url='https://gatoencerrado.news/otra-noticia/'),
+    lambda d:d['record'].update(human_reviewed=True),
+    lambda d:d['record'].update(review_status='editorially_reviewed'),
+    lambda d:d['record'].update(dossier=None),
+])
+def test_mismatched_or_unresolved_drafts_never_prepare_a_proposal(change,tmp_path,monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    inbox,envelope,path,ev=prepared_draft_inbox();change(envelope)
+    inbox.files[path]=draft_file(inbox.candidates[0],envelope)
+    with pytest.raises(ValueError):review(inbox,ev)
+    assert_no_approval(inbox,tmp_path)
+
+@pytest.mark.parametrize('change',[
+    lambda f:None,
+    lambda f:[],
+    lambda f:{**f,'type':'dir'},
+    lambda f:{**f,'path':'drafts/other.json'},
+    lambda f:{**f,'encoding':'none','download_url':'https://unapproved.example/draft.json'},
+    lambda f:{**f,'size':512001},
+    lambda f:{**f,'size':1},
+    lambda f:{**f,'content':'not-valid-base64$$'},
+    lambda f:{**f,'content':base64.b64encode(b'not-json').decode(),'size':8},
+    lambda f:{**f,'content':base64.b64encode(b'[]').decode(),'size':2},
+    lambda f:{**f,'content':base64.b64encode(b'\xff').decode(),'size':1},
+])
+def test_malformed_private_contents_responses_fail_without_writes(change,tmp_path,monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    inbox,_,path,ev=prepared_draft_inbox();inbox.files[path]=change(inbox.files[path])
+    with pytest.raises(ValueError):review(inbox,ev)
+    assert_no_approval(inbox,tmp_path)
+
+def test_manual_json_accepts_explicit_human_notes_and_keeps_existing_notes_compatibility(tmp_path,monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    inbox=Inbox();inbox.enqueue(candidate_from_entry(entry(),FEEDS[1],NOW))
+    ev=event();ev['inputs']['review_notes']='La fuente original fue contrastada; no se detectaron datos privados.'
+    review(inbox,ev)
+    assert json.loads((tmp_path/'proposal.json').read_text())['record']['review_notes']==ev['inputs']['review_notes']
+    assert not any('/contents/drafts/' in path for path in inbox.reads)
+    (tmp_path/'proposal.json').unlink()
+    r=proposed();r['review_notes']=None;ev=event(record=r)
+    with pytest.raises(ValueError,match='review_notes'):review(inbox,ev)
+    assert not (tmp_path/'proposal.json').exists()
+
+def test_stored_draft_approval_requires_privacy_checkbox_before_fetch(tmp_path,monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    inbox,_,_,ev=prepared_draft_inbox();ev['inputs']['privacy_reviewed']='false'
+    with pytest.raises(ValueError,match='privacy'):review(inbox,ev)
+    assert not inbox.reads
+    assert_no_approval(inbox,tmp_path)
+
+def test_real_contents_http_malformed_response_cannot_fall_back_to_external_download(tmp_path,monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    candidate=candidate_from_entry(entry(),FEEDS[1],NOW)
+    session=MagicMock()
+    def response(value):
+        result=MagicMock();result.status_code=200;result.content=b'{}';result.json.return_value=value
+        return result
+    session.request.side_effect=[
+        response({'full_name':'RauPro/MDH-SV-review','private':True}),
+        response({'permission':'admin'}),
+        response({'body':issue_body(candidate),'labels':[{'name':'review/pending'}]}),
+    ]
+    session.get.return_value=response({'type':'file','encoding':'none','download_url':'https://unapproved.example/private-draft'})
+    inbox=GitHubInbox('RauPro/MDH-SV-review','test-token',session)
+    ev=event();ev['inputs'].update(record_json='',review_notes='He contrastado la fuente y la privacidad de la ficha.')
+    with pytest.raises(ValueError,match='metadata'):review(inbox,ev)
+    session.get.assert_called_once_with('https://api.github.com/repos/RauPro/MDH-SV-review/contents/drafts/'+candidate['id']+'.json',timeout=(8,30))
+    assert all(call.args[0]=='GET' for call in session.request.call_args_list)
+    assert not (tmp_path/'proposal.json').exists()
 
 @pytest.mark.parametrize('change',[{'type':'Bot'},{'login':'outsider'}])
 def test_bot_and_unauthorized_approvals_fail(change):
