@@ -77,7 +77,13 @@ def _request(url, source, session, budget, limit):
 
 def _article_url(value, base, source):
     try:
-        url = canonical_url(urljoin(base, value), set(source["hosts"]))
+        joined = urljoin(base, value)
+        parts = urlsplit(joined)
+        # Old public indexes contain HTTP links. Upgrade only explicitly approved
+        # hosts before any request; credentials/ports still fail canonical_url.
+        if parts.scheme == "http" and parts.hostname in source["hosts"]:
+            joined = parts._replace(scheme="https").geturl()
+        url = canonical_url(joined, set(source["hosts"]))
     except (ValueError, TypeError):
         return None
     path = urlsplit(url).path
@@ -98,8 +104,8 @@ def _blocked(soup):
         raise ArchiveError("access_restricted")
 
 
-def parse_index(raw, content_type, url, source, diagnostics=None):
-    """Return article/index URLs only. lastmod is deliberately never read."""
+def parse_index(raw, content_type, url, source, diagnostics=None, selection_hints=None):
+    """Return URLs. Anchor relevance is ephemeral; no anchor title/date is published."""
     articles, indexes, observed = [], [], 0
     if "xml" in content_type.lower() or raw.lstrip().startswith((b"<?xml", b"<urlset", b"<sitemapindex")):
         if b"<!DOCTYPE" in raw.upper() or b"<!ENTITY" in raw.upper():
@@ -126,6 +132,8 @@ def parse_index(raw, content_type, url, source, diagnostics=None):
                 if article:
                     articles.append(article)
     else:
+        from .history import TOPICS
+        terms = tuple(term for group in TOPICS.values() for term in group)
         soup = BeautifulSoup(raw, "html.parser")
         _blocked(soup)
         for anchor in soup.find_all("a", href=True):
@@ -133,12 +141,16 @@ def parse_index(raw, content_type, url, source, diagnostics=None):
             article = _article_url(anchor["href"], url, source)
             if article:
                 articles.append(article)
+                if selection_hints is not None:
+                    hint = normalize(anchor.get_text(" ", strip=True))
+                    selection_hints[article] = selection_hints.get(article, False) or any(term in hint for term in terms)
     if len(articles) > MAX_DISCOVERED_URLS:
         raise ArchiveError("too_many_urls")
     if diagnostics is not None:
         diagnostics.update(url_entries_observed=observed,
             url_entries_rejected=observed - len(articles) - len(indexes),
-            duplicate_article_urls=len(articles) - len(set(articles)))
+            duplicate_article_urls=len(articles) - len(set(articles)),
+            article_urls_matching_anchor=sum(bool(value) for value in (selection_hints or {}).values()))
     return list(dict.fromkeys(articles)), list(dict.fromkeys(indexes))
 
 
@@ -225,7 +237,7 @@ def collect_html_archive(source, start, end, folder, *, max_pages=150, refresh=F
         collection.setdefault("last_attempt_at", None)
         atomic_json(path, state)
         return {"source": source["id"], "requests": 0, "successful_pages": 0, "failed_page_attempts": 0, "references": len(records), "enumerated_months": 0}
-    collection["notice"] += " La consulta de artículos se limita a URLs con términos temáticos y enlaces históricos configurados; puede omitir noticias pertinentes."
+    collection["notice"] += " La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo."
     if refresh:
         for key in ("indexes", "index_cursor", "articles", "article_cursor", "visited", "failures"):
             collection.pop(key, None)
@@ -291,10 +303,11 @@ def collect_html_archive(source, start, end, folder, *, max_pages=150, refresh=F
             collection["last_attempt_at"] = now
             try:
                 raw, content_type, final = _request(url, source, session, budget, MAX_INDEX_BYTES)
-                diagnostics = {}
-                articles, indexes = parse_index(raw, content_type, final, source, diagnostics)
+                diagnostics, selection_hints = {}, {}
+                articles, indexes = parse_index(raw, content_type, final, source, diagnostics, selection_hints)
                 terms = tuple(term for group in TOPICS.values() for term in group)
-                relevant = [article for article in articles if any(term in normalize(unquote(article)).replace("-", " ") for term in terms)]
+                relevant = [article for article in articles if selection_hints.get(article)
+                            or any(term in normalize(unquote(article)).replace("-", " ") for term in terms)]
                 collection["index_stats"][url] = {**diagnostics, "article_urls_observed": len(articles), "article_urls_selected": len(relevant), "last_attempt_at": now}
                 fresh = [article for article in relevant if article not in known_articles]
                 if len(known_articles) + len(fresh) > MAX_DISCOVERED_URLS:

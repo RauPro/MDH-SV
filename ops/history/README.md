@@ -42,7 +42,11 @@ No se crea ninguna cuenta en los medios.
 
 El Faro, Diario El Mundo y el archivo de El Diario de Hoy usan el adaptador
 `html_archive`: recorre índices públicos configurados y enlaces históricos
-verificados, filtra URLs temáticas y consulta los metadatos del artículo. Guarda
+verificados, filtra indicios temáticos en URLs y textos de enlaces, y consulta los
+metadatos del artículo. Los textos de los enlaces sólo sirven para seleccionar
+candidatas y no se conservan como títulos o fechas. Los enlaces HTTP antiguos sólo
+se convierten a HTTPS para hosts explícitamente aprobados, antes de cualquier
+petición. Guarda
 título abreviado, URL y fecha declarada, nunca el cuerpo periodístico. La fecha
 `lastmod` de los sitemaps, la fecha de migración y el año incluido en una URL no se
 convierten en fechas de publicación. `source_post_id` es nulo cuando el medio no

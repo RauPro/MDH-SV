@@ -135,6 +135,55 @@ def test_html_listings_and_explicit_seeds_are_supported(tmp_path):
     assert stats["article_urls_selected"] == 1
 
 
+def test_numeric_legacy_http_link_uses_anchor_only_as_temporary_selection_hint(tmp_path):
+    numeric = "https://historico.elsalvador.com/es/201001/noticias/123/"
+    anchor = "ANCLA NO PUBLICABLE: denuncian asesinato en enero de 2010"
+    listing = f'<a href="{numeric.replace("https:", "http:")}">{anchor}</a>'
+    session = Session([Response(listing), Response(article(numeric))])
+    report = collect_html_archive(SOURCE, START, END, tmp_path, max_pages=2, session=session, now=NOW)
+    assert all(call[0].startswith("https://") for call in session.calls)
+    assert session.calls[1][0] == numeric
+    assert report["references"] == 1
+    checkpoint = state(tmp_path)
+    assert checkpoint["records"][0]["title"] == "Denuncian violaciones de derechos humanos"
+    assert checkpoint["records"][0]["published_date"] == "2013-03-13"
+    assert checkpoint["collection"]["index_stats"][SOURCE["endpoint"]]["article_urls_matching_anchor"] == 1
+    assert "ANCLA NO PUBLICABLE" not in (tmp_path / "archive-test.json").read_text()
+
+
+def test_anchor_match_never_replaces_article_title_relevance_or_publication_date(tmp_path):
+    numeric = "https://historico.elsalvador.com/es/201001/noticias/123/"
+    listing = f'<a href="{numeric}">Derechos humanos, 1 de enero de 2010</a>'
+    content = article(numeric).replace("Denuncian violaciones de derechos humanos", "Resultados deportivos")
+    collect_html_archive(SOURCE, START, END, tmp_path, max_pages=2,
+                         session=Session([Response(listing), Response(content)]), now=NOW)
+    assert not state(tmp_path)["records"]
+    assert state(tmp_path)["collection"]["visited"][numeric]["status"] == "not_relevant"
+    collect_html_archive(SOURCE, START, END, tmp_path, max_pages=2, refresh=True,
+                         session=Session([Response(listing), Response('<h1>Derechos humanos</h1>')]), now=NOW)
+    assert not state(tmp_path)["records"]
+    assert state(tmp_path)["collection"]["failures"][numeric]["code"] == "missing_publication_date"
+
+
+def test_http_upgrade_rejects_unapproved_hosts_credentials_and_ports():
+    unsafe = ["http://evil.example/es/201001/noticias/123/",
+              "http://historico.elsalvador.com.evil.example/es/201001/noticias/123/",
+              "http://user:secret@historico.elsalvador.com/es/201001/noticias/123/",
+              "http://historico.elsalvador.com:80/es/201001/noticias/123/"]
+    raw = ''.join(f'<a href="{url}">Derechos humanos</a>' for url in unsafe).encode()
+    hints, diagnostics = {}, {}
+    articles, indexes = parse_index(raw, "text/html", SOURCE["endpoint"], SOURCE, diagnostics, hints)
+    assert articles == indexes == []
+    assert hints == {}
+    assert diagnostics["url_entries_rejected"] == 4
+
+
+def test_xml_http_links_upgrade_on_approved_host_without_using_lastmod():
+    articles, indexes = parse_index(sitemap(URL.replace("https:", "http:")).encode(), "text/xml", SOURCE["endpoint"], SOURCE)
+    assert articles == [URL]
+    assert not indexes
+
+
 def test_no_date_from_url_lastmod_modified_or_migration_metadata():
     raw = b'<meta property="og:title" content="Noticia"><meta property="article:modified_time" content="2010-01-02"><meta name="DC.date.issued" content="2026-01-01">'
     with pytest.raises(ArchiveError, match="missing_publication_date"):
