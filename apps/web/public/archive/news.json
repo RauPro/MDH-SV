@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-10T05:05:31.764386+00:00",
+  "generated_at": "2026-10-10T13:00:56.476733+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 2,
@@ -34,19 +34,19 @@
   },
   "coverage": {
     "start_date": "2025-03-26",
-    "end_date": "2026-10-09",
+    "end_date": "2026-10-10",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 956,
+    "records": 958,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 911,
+        "records": 913,
         "first_published_date": "2025-03-26",
-        "last_published_date": "2026-10-09",
+        "last_published_date": "2026-10-10",
         "months": [
           {
             "month": "2025-03",
@@ -273,19 +273,19 @@
             "source_total_posts": 351,
             "pages_fetched": 4,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-10T05:05:26.881879+00:00",
+            "last_attempt_at": "2026-10-10T13:00:50.143052+00:00",
             "error": null
           },
           {
             "month": "2026-10",
             "status": "enumerated",
-            "records": 11,
+            "records": 13,
             "screen_version": 2,
-            "posts_scanned": 104,
-            "source_total_posts": 104,
+            "posts_scanned": 112,
+            "source_total_posts": 112,
             "pages_fetched": 2,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-10T05:05:26.881879+00:00",
+            "last_attempt_at": "2026-10-10T13:00:50.143052+00:00",
             "error": null
           }
         ]
@@ -524,7 +524,7 @@
             "source_total_posts": 8,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-10T05:05:26.882138+00:00",
+            "last_attempt_at": "2026-10-10T13:00:50.143358+00:00",
             "error": null
           },
           {
@@ -536,7 +536,7 @@
             "source_total_posts": 1,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-10T05:05:26.882138+00:00",
+            "last_attempt_at": "2026-10-10T13:00:50.143358+00:00",
             "error": null
           }
         ]
@@ -775,7 +775,7 @@
             "source_total_posts": 7,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-10T05:05:26.883665+00:00",
+            "last_attempt_at": "2026-10-10T13:00:50.143611+00:00",
             "error": null
           },
           {
@@ -787,7 +787,7 @@
             "source_total_posts": 0,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-10T05:05:26.883665+00:00",
+            "last_attempt_at": "2026-10-10T13:00:50.143611+00:00",
             "error": null
           }
         ]
@@ -1234,13 +1234,13 @@
       {
         "month": "2026-10",
         "start_date": "2026-10-01",
-        "end_date": "2026-10-09",
-        "records": 11,
+        "end_date": "2026-10-10",
+        "records": 13,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 11
+            "records": 13
           },
           {
             "source_id": "gatoencerrado",
@@ -1257,6 +1257,54 @@
     ]
   },
   "records": [
+    {
+      "id": "e2f992e65ff67ddd92e714168f1c8ea48526a18b007b7c0765dc514a77a5acb6",
+      "title": "Cristosal exige transparencia sobre donaciones de bitcoin",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cristosal-exige-transparencia-sobre-donaciones-de-bitcoin/",
+      "published_date": "2026-10-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420475,
+        "retrieved_at": "2026-10-10T13:00:50.143052+00:00"
+      }
+    },
+    {
+      "id": "c387278d3c5c225d66caedf2f934a5cd5ce55486e838093ceab9303b7024fbe7",
+      "title": "Cristosal denuncia campaña de desprestigio contra Ruth López",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cristosal-denuncia-campana-de-desprestigio-contra-ruth-lopez/",
+      "published_date": "2026-10-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "ruth lopez"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420467,
+        "retrieved_at": "2026-10-10T13:00:50.143052+00:00"
+      }
+    },
     {
       "id": "8ed1589bd38934526c9b050cd88bf2ee6bb0bb0ada532d3d9c71622e9d82fb41",
       "title": "Maduro y esposa enfrentan nuevo cargo en EEUU por presunta tortura",
