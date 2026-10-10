@@ -3,9 +3,14 @@ export interface Publication {
   record_type: 'publication' | 'incident' | 'aggregate';
   incident_date: string | null;
   incident_date_end: string | null;
-  date_precision: 'day' | 'unknown' | 'month_range';
-  review_status: 'source_checked';
-  human_reviewed: false;
+  date_precision: 'day' | 'unknown' | 'month_range' | 'year_range';
+  review_status: 'source_checked' | 'editorially_reviewed';
+  human_reviewed: boolean;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
+  review_notes: string | null;
+  origin_candidate_id: string | null;
+  related_sources: {url:string;title:string;published_date:string;locator:string}[];
   reported_actor: string | null;
   source_record_key: string;
   privacy_note: string;
@@ -35,7 +40,7 @@ export interface Catalog {
   records: Publication[];
 }
 
-const sourceHosts = new Set(['www.hrw.org', 'www.oas.org', 'www.amnesty.org', 'citizenlab.ca']);
+const sourceHosts = new Set(['www.hrw.org', 'www.oas.org', 'www.amnesty.org', 'citizenlab.ca', 'www.corteidh.or.cr', 'spcommreports.ohchr.org', 'www.ohchr.org', 'www.diariocolatino.com', 'diariocolatino.com', 'gatoencerrado.news', 'www.revistafactum.com', 'revistafactum.com']);
 export function safeSource(value: string): boolean {
   try {
     const url = new URL(value);
@@ -57,7 +62,10 @@ export function parseCatalog(value: unknown): Catalog {
       || r.published_date > r.source_checked_at || r.source_checked_at > data.updated_at
       || !Array.isArray(r.tags) || !r.tags.every(t => typeof t === 'string')
       || r.geometry !== null || (r.department !== null && typeof r.department !== 'string')
-      || r.review_status !== 'source_checked' || r.human_reviewed !== false
+      || typeof r.human_reviewed !== 'boolean'
+      || (r.human_reviewed ? (r.review_status !== 'editorially_reviewed' || !r.reviewed_by || !validDate(r.reviewed_at) || (r.review_notes || '').length < 20) : (r.review_status !== 'source_checked' || Boolean(r.reviewed_by || r.reviewed_at || r.review_notes)))
+      || (Boolean(r.origin_candidate_id) && !r.human_reviewed)
+      || !Array.isArray(r.related_sources) || !r.related_sources.every(s => safeSource(s.url) && typeof s.title === 'string' && validDate(s.published_date) && typeof s.locator === 'string')
       || (r.incident_date !== null && !validDate(r.incident_date))
       || (r.incident_date_end !== null && !validDate(r.incident_date_end))
       || typeof r.source_record_key !== 'string' || typeof r.privacy_note !== 'string' || typeof r.penitentiary_related !== 'boolean'
@@ -78,7 +86,7 @@ export const normalize = (value: string) => value.normalize('NFD').replace(/[\u0
 export function filterRecords(records: Publication[], query: string, category: string, year: string) {
   const terms = normalize(query).split(/\s+/).filter(Boolean);
   return records.filter(r => (!category || r.category === category) && (!year || r.published_date.startsWith(year))
-    && terms.every(term => normalize([r.title, r.summary, r.publisher, r.category, r.department || '', ...r.tags].join(' ')).includes(term)));
+    && terms.every(term => normalize([r.id, r.title, r.source_title, r.summary, r.publisher, r.category, r.department || '', ...r.tags].join(' ')).includes(term)));
 }
 export function formatDate(value: string) {
   return new Intl.DateTimeFormat('es-SV', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`));
@@ -90,6 +98,7 @@ export function citation(record: Publication) {
 
 export function eventDate(record: Publication) {
   if (!record.incident_date) return 'No determinada';
+  if (record.date_precision === 'year_range') return `${record.incident_date.slice(0,4)} (precisión anual)`;
   if (record.date_precision === 'month_range' && record.incident_date_end) {
     const month = (value: string) => new Intl.DateTimeFormat('es-SV', {month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(value));
     return `${month(record.incident_date)} — ${month(record.incident_date_end)}`;

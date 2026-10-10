@@ -1,0 +1,55 @@
+name: Revisar noticia
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Número de la noticia en Issues
+        required: true
+        type: string
+      decision:
+        description: Decisión editorial (aprobar solo una ficha ya contrastada)
+        required: true
+        type: choice
+        options: [reject, approve]
+      privacy_reviewed:
+        description: He contrastado fuente, fechas, duplicados y privacidad
+        required: true
+        type: boolean
+        default: false
+      record_json:
+        description: Ficha pública JSON completa (solo para aprobar; consultar README)
+        required: false
+        type: string
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: editorial-inbox
+  cancel-in-progress: false
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install -r monitor/ops/review-queue/requirements.txt
+      - name: Validar decisión humana y preparar propuesta
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.review_queue review
+      - uses: actions/upload-artifact@v4
+        if: github.event.inputs.decision == 'approve'
+        with:
+          name: propuesta-publica
+          path: proposal.json
+          if-no-files-found: error
+          retention-days: 14

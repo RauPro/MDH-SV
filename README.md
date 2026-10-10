@@ -2,7 +2,7 @@
 
 Monitor independiente de **reportes de presuntas violaciones de derechos humanos** para consulta pública, investigación y seguimiento institucional. Cada registro identifica su fuente y un localizador dentro del documento. La existencia de una fuente no equivale a corroboración independiente ni a una determinación judicial.
 
-La edición inicial contiene cuatro reportes individuales, un reporte colectivo y cuatro informes de contexto. Es una muestra documental limitada, con revisión humana pendiente. No mide prevalencia, no constituye un censo y no suma personas entre fuentes. Las organizaciones citadas no patrocinan ni validan el proyecto.
+La edición inicial contiene 17 reportes individuales, 2 reportes colectivos y 5 informes de contexto. Es una muestra documental limitada, con revisión humana pendiente. No mide prevalencia, no constituye un censo y no suma personas entre fuentes. Las organizaciones citadas no patrocinan ni validan el proyecto.
 
 ## Integridad de la publicación
 
@@ -12,7 +12,7 @@ El prototipo contenía registros sintéticos atribuidos a organizaciones reales.
 - Validador y exportador: `python -m mdh_pipeline.publication`.
 - Las geometrías públicas son nulas; el departamento no representa un lugar preciso.
 - El manifest SHA-256 comprueba los archivos exportados, no la veracidad de los hechos.
-- La ingesta local produce candidatos privados, sin publicar ni actualizar la web.
+- La recolección cada seis horas registra noticias en una cola privada de GitHub, sin publicar ni actualizar la web.
 - El servidor MCP consulta exclusivamente el conjunto público de solo lectura.
 
 ## Desarrollo y pruebas
@@ -45,3 +45,10 @@ npm --prefix apps/web run dev
 ```
 
 Vercel usa la raíz del repositorio y `vercel.json`. No necesita variables de entorno. El build verifica que todas las descargas correspondan al conjunto canónico. Más detalles en [operación](docs/OPERATIONS.md), [metodología](docs/METHODOLOGY.md) y [seguridad](SECURITY.md).
+
+
+## Recolección y revisión editorial
+
+La cola está en el repositorio privado `RauPro/MDH-SV-review`. Recoge Co Latino, GatoEncerrado y Revista Factum cada seis horas. Las candidatas se deduplican por URL y conservan su decisión editorial. La aprobación manual exige identidad de revisor, comprobación de privacidad y una ficha validada; genera una propuesta privada, nunca un despliegue automático.
+
+Los workflows reproducibles y las instrucciones de revisión están en [ops/review-queue](ops/review-queue/README.md). Para importar una propuesta aprobada: `python -m mdh_pipeline.review_import --candidate IDENTIFICADOR --repository RauPro/MDH-SV-review`. El comando verifica la aprobación vigente y prepara cambios locales para revisión y CI.

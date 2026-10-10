@@ -10,7 +10,7 @@ El monitor indexa reportes públicos de presuntas violaciones de derechos humano
 - `aggregate`: un reporte colectivo o conjunto de eventos. No se descompone en casos inventados.
 - `publication`: un documento de contexto. No se cuenta como incidente.
 
-La cobertura inicial es deliberadamente pequeña y no representativa: cuatro reportes individuales, un colectivo y cuatro informes, respaldados por cinco documentos. No se pueden derivar tendencias nacionales, tasas de incidencia, totales de víctimas ni comparaciones departamentales representativas. La ausencia de registros no prueba ausencia de violaciones.
+La cobertura inicial es deliberadamente pequeña y no representativa: 17 reportes individuales, dos colectivos y cinco informes de contexto, respaldados por 16 documentos, incluidas actualizaciones. No se pueden derivar tendencias nacionales, tasas de incidencia, totales de víctimas ni comparaciones departamentales representativas. La ausencia de registros no prueba ausencia de violaciones.
 
 ## Procedencia y revisión
 
@@ -26,7 +26,7 @@ Solo se publica departamento cuando está respaldado por la fuente. No se asigna
 
 ## Protección de personas
 
-No se incorporan nombres de víctimas, edades exactas, domicilios, coordenadas individuales, fotografías, historias clínicas, expedientes privados ni identidades inferidas. Los documentos enlazados pueden contener datos personales bajo sus propias políticas. No se reconstruyen identidades a partir de seudónimos. El esquema público rechaza campos adicionales.
+Se omiten identidades de menores, edades exactas, domicilios, coordenadas individuales, fotografías, historias clínicas, expedientes privados e identidades inferidas. En casos ampliamente documentados pueden conservarse los nombres públicos de defensores o los seudónimos judiciales necesarios para identificar la fuente. No se agregan datos personales ajenos al objeto de documentación. Los documentos enlazados pueden contener datos personales bajo sus propias políticas. No se reconstruyen identidades a partir de seudónimos. El esquema público rechaza campos adicionales.
 
 Una solicitud de retiro puede señalar solo el ID de la ficha en un issue público. No existe todavía un canal confidencial; nunca se debe pedir a una persona que revele circunstancias privadas para solicitar una corrección. El sitio no recibe denuncias ni atiende emergencias.
 
@@ -36,13 +36,13 @@ Una solicitud de retiro puede señalar solo el ID de la ficha en un issue públi
 2. Identificar una unidad de registro localizable; mantener separados informes y casos.
 3. Elaborar un resumen neutral atribuido, fechas fieles y localizador. No completar campos desconocidos con invenciones.
 4. Revisar riesgos para personas, posible solapamiento con registros existentes y condiciones de reutilización. La coincidencia de centro penal, día o palabras no identifica a una víctima ni autoriza una fusión.
-5. Antes de usar el conjunto para conclusiones institucionales, un revisor humano con competencia temática debe contrastar cada ficha. Cualquier futura certificación humana requiere ampliar explícitamente el esquema y registrar revisor, fecha, evidencia y alcance; no basta cambiar una etiqueta.
+5. Antes de usar el conjunto para conclusiones institucionales, un revisor humano con competencia temática debe contrastar cada ficha. El estado `editorially_reviewed` exige `human_reviewed=true`, identificador del revisor, fecha y notas sustantivas. Las candidatas de la cola llevan `origin_candidate_id` y no pueden publicarse sin ese estado; una etiqueta manual en GitHub no sustituye la aprobación validada. La revisión editorial no certifica hechos ni culpabilidad.
 6. Editar la fuente canónica, ejecutar `python -m mdh_pipeline.publication`, revisar todas las diferencias y correr las pruebas. Publicar un commit y conservar su identificador para reproducibilidad.
 7. Ante un error o riesgo, retirar temporalmente la ficha del conjunto público, regenerar descargas y desplegar. Registrar una nota sin exponer datos sensibles. Si alguna vez se publica información personal indebidamente, retirar el archivo actual no borra copias o historial: evaluar purga de historial y cachés con el responsable y la persona afectada.
 
 ## IA, deduplicación y preservación
 
-La recolección automática está separada de la publicación. Los candidatos se guardan localmente y no se suben como artefactos de GitHub. No se envía información a Gemini sin activar expresamente esa opción. La IA no aumenta el nivel de certeza; su salida requiere revisión.
+La recolección automática está separada de la publicación. Las noticias candidatas se conservan como issues en un repositorio privado. Solo se almacenan enlace, titular limitado y metadatos; nunca el cuerpo completo de la noticia. El workflow de recolección carece de permisos de escritura en el repositorio público. No se envía información a Gemini sin activar expresamente esa opción. La IA no aumenta el nivel de certeza; su salida requiere revisión.
 
 La deduplicación automática solo evita reingestas idénticas. Dos medios pueden depender de una misma fuente, por lo que su número no demuestra independencia. La Wayback Machine es un respaldo de disponibilidad, no una garantía de inmutabilidad, veracidad o validez probatoria. No se fabrican URLs de archivo si una solicitud falla.
 
@@ -51,3 +51,10 @@ El manifest SHA-256 verifica los bytes de nuestras exportaciones. No representa 
 ## Licencias y correcciones
 
 Código bajo MIT. Metadatos y resúmenes propios: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), con atribución a MDH-SV y versión consultada. Documentos originales: derechos de sus respectivos autores; no se distribuyen copias completas. Las correcciones no sensibles se reciben en [GitHub](https://github.com/RauPro/MDH-SV/issues). No hay plazo de respuesta garantizado.
+
+
+## Fuentes complementarias y precisión temporal
+
+`related_sources` conserva actualizaciones, como una liberación posterior, dentro del mismo expediente. No crea un segundo caso ni aumenta automáticamente la certeza. El conteo de documentos elimina URLs repetidas entre fuentes principales y complementarias. `year_range` expresa el año conocido; los límites del año se usan únicamente para filtrar y la interfaz muestra su precisión anual. No se presenta la fecha de una sentencia como fecha del hecho.
+
+Las ampliaciones documentales realizadas durante la preparación inicial siguen como `source_checked`, con revisión humana pendiente. Las incorporaciones futuras procedentes de la recolección tienen una aprobación editorial explícita antes de preparar su publicación.

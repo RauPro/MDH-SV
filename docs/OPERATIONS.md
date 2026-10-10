@@ -38,3 +38,16 @@ Los fallos de carga de datos se muestran explícitamente, sin cifras falsas de c
 Asignar revisión editorial humana con experiencia en derechos humanos, frecuencia de actualización, canal seguro de contacto y protocolo de respuesta a correcciones/retiros. Expandir cobertura con fuentes comprobadas. Estas tareas no quedan sustituidas por una compilación o un despliegue exitoso.
 
 La clave de Google del código legado debe revocarse por su titular. No forma parte de la nueva publicación ni de su historial. Los archivos históricos y datos no revisados permanecen locales en `legacy/`, `data/` y `.local-quarantine/`, además del respaldo temporal de esta auditoría.
+
+
+## Cola privada operativa
+
+Repositorio: `RauPro/MDH-SV-review`. Workflow `Recoger noticias`, cron `17 */6 * * *` UTC: aproximadamente 00:17, 06:17, 12:17 y 18:17 en El Salvador (GitHub puede retrasar ejecuciones). Usa un commit fijo del código público y un token efímero limitado al repositorio privado. No hay PAT persistente, acceso de escritura al monitor público ni dependencia de cuotas de Gemini.
+
+Se verificaron los tres RSS: Co Latino, GatoEncerrado y Factum. El Faro no se configuró porque su URL RSS devolvió HTML sin entradas; Amnistía no se usa como RSS por bloqueo HTTP. Estas exclusiones no afectan las fuentes documentales ya enlazadas en las fichas.
+
+La primera ejecución satisfactoria leyó 35 entradas, abrió cinco candidatas y no publicó registros. La cola mantiene descartes y aprobaciones entre ejecuciones. Un fallo total marca el job como fallido; los fallos parciales quedan identificados por fuente en el resumen. Revisar los fallos en Actions según las preferencias de notificación de GitHub.
+
+El workflow manual `Revisar noticia` exige cuenta humana con acceso de escritura y confirmación de revisión de privacidad para aprobar. La propuesta queda en `approved/` y como artefacto privado. El importador vuelve a comprobar el estado de aprobación: una candidatura rechazada o sin propuesta validada no se importa. La publicación sigue requiriendo commit/PR y CI.
+
+Para actualizar código de la cola, cambiar `ref` en ambos workflows privados por el commit revisado; no apuntar a código mutable de pull requests. Los patrones reproducibles están en `ops/review-queue/` y contienen un marcador que debe sustituirse por el SHA al instalar. No son workflows activos del repositorio público.

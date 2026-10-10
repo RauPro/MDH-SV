@@ -21,8 +21,10 @@ assert.equal(catalog.records.length, manifest.records_count);
 assert.deepEqual([...catalog.records].sort((a,b)=>a.id.localeCompare(b.id)), [...original.records].sort((a,b)=>a.id.localeCompare(b.id)));
 for (const row of catalog.records) {
   assert.ok(['incident', 'aggregate', 'publication'].includes(row.record_type));
-  assert.equal(row.review_status, 'source_checked');
-  assert.equal(row.human_reviewed, false);
+  assert.ok(['source_checked','editorially_reviewed'].includes(row.review_status));
+  assert.equal(row.human_reviewed, row.review_status === 'editorially_reviewed');
+  if (row.human_reviewed) assert.ok(row.reviewed_by && row.reviewed_at && row.review_notes?.length >= 20);
+  if (row.origin_candidate_id) assert.equal(row.human_reviewed, true);
   assert.equal(row.geometry, null);
   assert.ok(row.source_locator && row.source_record_key);
   assert.ok(!('victims' in row) && !('perpetrators' in row));

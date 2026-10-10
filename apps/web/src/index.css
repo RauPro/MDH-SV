@@ -1,8 +1,8 @@
 /* Default / Dark Theme (Harvey AI Dark Style) */
-:root, html.dark {
-  --font-serif: Georgia, Cambria, serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: monospace;
+html.dark {
+  --font-serif: 'Newsreader Variable', Georgia, Cambria, serif;
+  --font-sans: 'Plus Jakarta Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', monospace;
 
   /* Backgrounds */
   --bg-primary: #0A0A0A;
@@ -23,7 +23,7 @@
   --text-inverse: #0A0A0A;
 
   /* Functional Accents */
-  --accent-critical: #E11D48;
+  --accent-critical: #FB7185;
   --accent-critical-bg: rgba(225, 29, 72, 0.12);
   --accent-warning: #F59E0B;
   --accent-warning-bg: rgba(245, 158, 11, 0.12);
@@ -42,14 +42,17 @@
 }
 
 /* Light Theme (Harvey AI Ivory / Clean Legal Style) */
-html.light {
+:root, html.light {
+  --font-serif: 'Newsreader Variable', Georgia, Cambria, serif;
+  --font-sans: 'Plus Jakarta Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', monospace;
   /* Backgrounds */
-  --bg-primary: #FAFAFA;
+  --bg-primary: #FAF9F6;
   --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F4F4F5;
+  --bg-tertiary: #F4F3EF;
   --bg-card: #FFFFFF;
   --bg-card-hover: #F8F8F9;
-  --header-bg: rgba(250, 250, 250, 0.88);
+  --header-bg: rgba(250, 249, 246, 0.95);
 
   /* Borders */
   --border-subtle: #E4E4E7;
@@ -62,11 +65,11 @@ html.light {
   --text-inverse: #FFFFFF;
 
   /* Functional Accents */
-  --accent-critical: #DC2626;
+  --accent-critical: #B91C1C;
   --accent-critical-bg: rgba(220, 38, 38, 0.08);
-  --accent-warning: #D97706;
+  --accent-warning: #9A600B;
   --accent-warning-bg: rgba(217, 119, 6, 0.08);
-  --accent-verified: #059669;
+  --accent-verified: #16764F;
   --accent-verified-bg: rgba(5, 150, 105, 0.08);
   --accent-neutral-bg: rgba(113, 113, 122, 0.08);
 
