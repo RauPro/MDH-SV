@@ -1,0 +1,82 @@
+name: Publicar ubicaciones automáticas
+on:
+  workflow_run:
+    workflows: [Preparar fichas con Gemini, Revisar noticia]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: read
+concurrency:
+  group: editorial-inbox
+  cancel-in-progress: false
+  queue: max
+jobs:
+  publish:
+    if: github.event.repository.private == true && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: inbox
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Instalar entorno fijado
+        run: pip install -r monitor/ops/review-queue/requirements.txt
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: main
+          path: publication
+          ssh-key: ${{ secrets.NEWS_LOCATION_PUBLISH_KEY }}
+      - name: Excluir decisiones editoriales y fichas ya aprobadas
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: |
+          python - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          from mdh_pipeline.review_queue import GitHubInbox
+          from mdh_pipeline.gemini_review import pending_issues, candidate_from_issue
+          inbox = GitHubInbox(os.environ['GITHUB_REPOSITORY'], os.environ['GH_TOKEN'])
+          pending = {candidate_from_issue(issue)['id'] for issue in pending_issues(inbox)}
+          saved = {p.stem for p in Path('inbox/drafts').glob('*.json') if re.fullmatch(r'[a-f0-9]{64}', p.stem)}
+          approved = json.loads(Path('publication/apps/web/public/archive/dossiers.json').read_text())
+          excluded = saved - pending | {d['candidate_id'] for d in approved['dossiers']}
+          Path('excluded-locations.json').write_text(json.dumps(sorted(excluded)))
+          print(json.dumps({'pending_candidates': len(pending), 'excluded_candidates': len(excluded)}))
+          PY
+      - name: Proyectar únicamente departamentos con evidencia explícita
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.automatic_locations --drafts inbox/drafts --archive publication/apps/web/public/archive/news.json --output publication/apps/web/public/archive/locations.json --excluded-ids excluded-locations.json --limit 20
+      - name: Validar frontera pública y publicar solamente la capa geográfica
+        working-directory: publication
+        run: |
+          set -euo pipefail
+          node apps/web/scripts/check-data.mjs
+          python ../monitor/scripts/audit_release.py
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- apps/web/public/archive/locations.json
+          if git diff --cached --quiet; then exit 0; fi
+          test "$(git diff --cached --name-only)" = 'apps/web/public/archive/locations.json'
+          git commit -m 'chore: refresh unreviewed automatic news locations'
+          git pull --rebase origin main
+          node apps/web/scripts/check-data.mjs
+          git push origin HEAD:main

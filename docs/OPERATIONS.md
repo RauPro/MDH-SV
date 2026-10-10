@@ -27,7 +27,7 @@ En el sitio publicado, comprobar portada, filtros, fichas por URL, teclado, móv
 
 ## Actualizar el conjunto
 
-Editar `data/reviewed/publications.json` siguiendo la metodología. Regenerar exportaciones y revisar el diff. Abrir una rama y PR, comprobar CI y realizar revisión editorial antes de merge. El push a `main` activa Vercel. No programar publicación automática de candidatos de IA.
+Editar `data/reviewed/publications.json` siguiendo la metodología. Regenerar exportaciones y revisar el diff. Abrir una rama y PR, comprobar CI y realizar revisión editorial antes de merge. El push a `main` activa Vercel. No programar publicación automática de fichas o casos de IA. La excepción autorizada es la proyección mínima de departamentos Sin revisar; véase AUTOMATIC-LOCATIONS.md.
 
 ## Reversión y continuidad
 
