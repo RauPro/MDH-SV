@@ -403,6 +403,77 @@ def test_event_date_requires_explicit_year_in_cited_source_not_publication(date_
         assert record["dossier"]["event_date"]["status"] == "not_reported"
 
 
+def test_literal_country_cannot_be_published_as_a_department():
+    document = extraction()
+    document["record"]["department"] = claim("El Salvador", citation())
+    result = run(document)
+    assert result["status"] == "draft"
+    assert result["record"]["department"] is None
+    assert result["record"]["dossier"]["location"]["department"]["status"] == "not_reported"
+    assert "department" in result["extraction"]["rejected_fields"]
+    assert result["record"]["dossier"]["facts"]["evidence_refs"]
+
+
+def test_department_spelling_can_be_canonicalized_without_inferring_a_place():
+    document = extraction()
+    document["record"]["department"]["value"] = "SAN SALVADOR"
+    result = run(document)
+    assert result["record"]["department"] == "San Salvador"
+    assert result["record"]["dossier"]["location"]["department"]["value"] == "San Salvador"
+    assert "department" not in result["extraction"]["rejected_fields"]
+
+
+def test_overview_report_preserves_event_fields_as_not_applicable_even_when_model_supplies_them():
+    candidate, article = inputs("El informe analiza hechos del 27 de agosto de 2025, a las 10:00, en San Salvador.")
+    document = extraction()
+    document["record_type"] = "publication"
+    envelope = json.loads(response(document).body)
+    part = envelope["candidates"][0]["content"]["parts"][0]
+    wire = json.loads(part["text"])
+    wire["date_precision"] = "day"
+    wire["record"] += [{"field": "event_date", "values": ["2025-08-27"], "evidence_refs": ["e4"]},
+                       {"field": "event_time", "values": ["10:00"], "evidence_refs": ["e4"]},
+                       {"field": "municipality", "values": ["San Salvador"], "evidence_refs": ["e4"]}]
+    part["text"] = json.dumps(wire)
+    result = extract_draft(candidate, article, api_key=API_KEY, model=MODEL, request_session=Session([Response(envelope)]))
+    record = result["record"]
+    assert result["status"] == "draft" and record["record_type"] == "publication"
+    assert record["incident_date"] is None and record["department"] is None and record["date_precision"] == "unknown"
+    for field in ("event_date", "event_date_end", "event_time"):
+        assert record["dossier"][field]["value"] is None
+        assert record["dossier"][field]["status"] == "not_applicable"
+    for field in ("department", "municipality", "public_place"):
+        assert record["dossier"]["location"][field]["value"] is None
+        assert record["dossier"]["location"][field]["status"] == "not_applicable"
+    assert {"department", "municipality", "event_date", "event_time"} <= set(result["extraction"]["rejected_fields"])
+
+
+@pytest.mark.parametrize("precision, text, start, end, published", [
+    ("month_range", "La fuente reporta hechos de marzo de 2025.", "2025-03-01", "2025-03-31", "2025-03-26"),
+    ("year_range", "La fuente reporta hechos del año 2025.", "2025-01-01", "2025-12-31", "2025-03-26"),
+    ("day", "La fuente menciona el 28 de marzo de 2025.", "2025-03-28", None, "2025-03-26"),
+    ("day", "La fuente menciona el 27 de marzo de 2025 y el 25 de marzo de 2025.", "2025-03-27", "2025-03-25", "2025-03-28"),
+])
+def test_inconsistent_or_future_event_interval_becomes_unknown_without_inventing_an_end(precision, text, start, end, published):
+    candidate, article = inputs(text)
+    candidate["published_date"] = article["published_date"] = published
+    envelope = json.loads(response().body)
+    part = envelope["candidates"][0]["content"]["parts"][0]
+    wire = json.loads(part["text"])
+    wire["date_precision"] = precision
+    wire["record"].append({"field": "event_date", "values": [start], "evidence_refs": ["e4"]})
+    if end:
+        wire["record"].append({"field": "event_date_end", "values": [end], "evidence_refs": ["e4"]})
+    part["text"] = json.dumps(wire)
+    result = extract_draft(candidate, article, api_key=API_KEY, model=MODEL, request_session=Session([Response(envelope)]))
+    record = result["record"]
+    assert result["status"] == "draft" and record["incident_date"] is None
+    assert record["incident_date_end"] is None and record["date_precision"] == "unknown"
+    assert "event_date" in result["extraction"]["rejected_fields"]
+    assert record["dossier"]["event_date"]["status"] == "not_reported"
+    assert record["dossier"]["facts"]["evidence_refs"]
+
+
 def test_uncited_scope_and_automated_certainty_are_rejected():
     document = extraction()
     document["scope_evidence"]["jurisdiction"] = []

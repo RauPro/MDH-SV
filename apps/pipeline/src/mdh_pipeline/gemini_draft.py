@@ -513,6 +513,49 @@ def _ground_dates(record):
     return rejected
 
 
+def _normalize_record_scope(record, record_type, published_date):
+    """Align supported values with publication semantics without inventing places/dates."""
+    from mdh_schema import DepartmentEnum
+    discarded = []
+    def clear(name, status="not_reported"):
+        field = getattr(record, name)
+        if field.value is not None:
+            discarded.append(name)
+        field.value, field.status, field.citations = None, status, []
+
+    if record_type == "publication":
+        # A general report may mention many places and dates. They do not locate
+        # or date that report as a single incident, even when literally cited.
+        for name in ("department", "municipality", "public_place", "event_date", "event_date_end", "event_time"):
+            clear(name, "not_applicable")
+        record.date_precision = "unknown"
+        return discarded
+
+    if record.department.value is not None:
+        departments = {normalize(item.value): item.value for item in DepartmentEnum
+                       if item is not DepartmentEnum.DESCONOCIDO}
+        canonical = departments.get(normalize(record.department.value).strip())
+        if canonical is None:
+            # Country names, municipalities and unknown labels remain unknown;
+            # never map "El Salvador" to the department of San Salvador.
+            clear("department")
+        else:
+            # Case and diacritics are spelling, not a geographic inference.
+            record.department.value = canonical
+
+    publication_day = date.fromisoformat(published_date)
+    start = date.fromisoformat(record.event_date.value) if record.event_date.value else None
+    end = date.fromisoformat(record.event_date_end.value) if record.event_date_end.value else None
+    if ((start and start > publication_day) or (end and end > publication_day)
+            or (start and end and end < start)):
+        # A monthly/yearly boundary can fall after the article date. Do not
+        # replace it with the publication day or manufacture an exact interval.
+        clear("event_date")
+        clear("event_date_end")
+        record.date_precision = "unknown"
+    return discarded
+
+
 def _privacy_flags(text):
     # Conservative triage, not identity inference. Ambiguous sensitive articles go to
     # manual review without retaining model prose or quotations. No automatic rejection.
@@ -635,7 +678,9 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None):
     for key in ExtractedRecord.model_fields:
         if key != "date_precision":
             _ground(getattr(extracted, key).citations, paragraphs)
-    rejected_fields = sorted(set(output.discarded_fields + _ground_named_values(extracted, paragraphs) + _ground_dates(extracted)))
+    rejected_fields = sorted(set(output.discarded_fields + _ground_named_values(extracted, paragraphs)
+                                 + _ground_dates(extracted)
+                                 + _normalize_record_scope(extracted, output.record_type, prepared["published_date"])))
     if any(getattr(extracted, field).status != "reported" for field in ("title", "summary", "facts", "alleged_violation")):
         return result
     try:
@@ -680,7 +725,7 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None):
         result["extraction"]["penitentiary_related_unknown"] = extracted.penitentiary_related.value is None
         result["extraction"]["rejected_fields"] = rejected_fields
         if rejected_fields:
-            result["completion_required"].insert(0, "Revisar campos descartados por falta de respaldo literal: " + ", ".join(rejected_fields) + ". Sus valores no se han conservado.")
+            result["completion_required"].insert(0, "Revisar campos descartados por evidencia insuficiente, ambigüedad o incoherencia de alcance/fecha: " + ", ".join(rejected_fields) + ". Sus valores no se han conservado.")
         return result
     except (ValidationError, ValueError, TypeError, KeyError):
         raise GeminiDraftError("invalid_generated_draft") from None
