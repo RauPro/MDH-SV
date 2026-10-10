@@ -17,7 +17,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import urlencode, urljoin, urlsplit
+from urllib.parse import unquote, urlencode, urljoin, urlsplit
 from zoneinfo import ZoneInfo
 
 import requests
@@ -27,6 +27,7 @@ from .review_queue import canonical_url, normalize, require_public_dns
 ROOT = Path(__file__).resolve().parents[4]
 START_DATE = date(2025, 3, 26)
 SCREEN_VERSION = 2
+SCOPE_VERSION = 1
 SOURCES = (
     {"id": "co-latino", "name": "Diario Co Latino", "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts", "hosts": ["www.diariocolatino.com", "diariocolatino.com"]},
     {"id": "gatoencerrado", "name": "GatoEncerrado", "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts", "hosts": ["gatoencerrado.news"]},
@@ -42,9 +43,34 @@ TOPICS = {
     "derechos_sociales_y_ambientales": ("desaloj", "derecho al agua", "derecho-al-agua", "derechos laborales", "derechos-laborales", "despidos", "mineria", "extractiv", "contaminacion"),
     "derechos_humanos": ("derechos humanos", "derechos-humanos", "ddhh", "derechos de la ninez", "derechos-de-la-ninez", "derechos de las mujeres", "derechos-de-las-mujeres"),
 }
+SALVADOR_SCOPE_PATTERNS = (
+    r"\bel salvador\b", r"\bsalvadoren[oa]s?\b", r"\bbukele\b", r"\bcecot\b",
+    r"\bsan salvador\b", r"\bsanta tecla\b", r"\bsonsonate\b", r"\bahuachapan\b",
+    r"\bchalatenango\b", r"\busulutan\b", r"\bchalchuapa\b", r"\bcojutepeque\b",
+    r"\bapanteos\b", r"\bizalco\b", r"\bzacatecoluca\b", r"\bpenal de mariona\b",
+    r"\bruth lopez\b", r"\bfidel zavala\b", r"\balejandro muyshondt\b",
+    r"\bingrid escobar\b", r"\bmovir\b", r"\bsocorro juridico humanitario\b",
+)
+INTERNATIONAL_SCOPE_PATTERNS = (
+    r"\bestados unidos\b", r"\bee\s?uu\b", r"\bestadounidenses?\b",
+    r"\bmaduro\b", r"\btrump\b", r"\bvenezolan[oa]s?\b", r"\bcuban[oa]s?\b",
+    *[rf"\b{term}\b" for term in (
+        "nicaragua", "venezuela", "cuba", "colombia", "guatemala", "honduras",
+        "haiti", "mexico", "argentina", "chile", "ecuador", "peru", "brasil",
+        "bolivia", "uruguay", "paraguay", "panama", "costa rica", "espana",
+        "francia", "alemania", "italia", "reino unido", "rusia", "ucrania",
+        "gaza", "israel", "palestina", "iran", "libano", "siria", "china",
+        "taiwan", "japon", "india", "pakistan", "afganistan", "sudan", "congo",
+        "washington", "caracas", "la habana", "bogota", "tegucigalpa",
+        "buenos aires", "madrid", "paris", "londres", "moscu", "kiev", "teheran",
+        "beirut", "new york", "nueva york",
+    )],
+)
 POLICY = {
     "record_type": "news_reference",
     "screen_version": SCREEN_VERSION,
+    "scope_version": SCOPE_VERSION,
+    "scope_method": "Indicio conservador de relación territorial basado en términos explícitos del título y URL. El Salvador tiene prioridad cuando aparecen ambos contextos. scope_terms conserva los fragmentos detectados normalizados (sin tildes, en minúsculas y con separadores de URL convertidos en espacios). No confirma jurisdicción. Las referencias históricas anteriores a este filtro usan el título abreviado guardado y su URL; las nuevas capturas usan el título completo antes de abreviarlo.",
     "selection_method": "Coincidencia automática de términos en título y URL; sin lectura del cuerpo.",
     "review_status": "not_reviewed",
     "notice": "Archivo bibliográfico parcial de noticias candidatas. No acredita violaciones, víctimas, jurisdicción salvadoreña ni hechos verificados. No forma parte del recuento de casos. La revisión editorial y de privacidad es un proceso separado.",
@@ -57,6 +83,30 @@ POLICY = {
     ],
     "rights": "Se redistribuyen referencias bibliográficas y títulos abreviados. El contenido periodístico permanece en su fuente y conserva sus propios derechos.",
 }
+
+
+def scope_hint(title, url):
+    """A discoverability hint, never an assertion of the incident's jurisdiction."""
+    text = normalize(title + " " + unquote(urlsplit(url).path))
+    text = re.sub(r"[-_/]+", " ", text).replace(".", "")
+    text = " ".join(text.split())
+    domestic = sorted({match.group(0) for pattern in SALVADOR_SCOPE_PATTERNS for match in re.finditer(pattern, text)})
+    international = sorted({match.group(0) for pattern in INTERNATIONAL_SCOPE_PATTERNS for match in re.finditer(pattern, text)})
+    return {"scope_hint": "el_salvador" if domestic else "international_context" if international else "undetermined",
+            "scope_terms": sorted(set(domestic + international))}
+
+
+def migrate_scope_hints(folder, sources=SOURCES):
+    """Enrich old metadata only; preserve dates, collection counters and review state."""
+    for source in sources:
+        path = folder / (source["id"] + ".json")
+        if not path.exists():
+            continue
+        state = read_json(path, {})
+        for reference in state.get("records", []):
+            if "scope_hint" not in reference or "scope_terms" not in reference:
+                reference.update(scope_hint(reference["title"], reference["source_url"]))
+        atomic_json(path, state)
 
 
 def month_windows(start: date, end: date):
@@ -116,6 +166,7 @@ def reference_from_post(post, source, start, end, retrieved_at):
         "jurisdiction_status": "not_reviewed",
         "record_type": "news_reference",
         "topics": topics,
+        **scope_hint(title, url),
         "discovery": {"method": "wordpress_rest_title_screen", "endpoint": source["endpoint"], "source_post_id": post["id"], "retrieved_at": retrieved_at},
     }
 
@@ -281,7 +332,7 @@ def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=
 
 
 def validate_reference(reference, source):
-    required = {"id", "title", "title_truncated", "publisher", "source_id", "source_url", "published_date", "review_status", "jurisdiction_status", "record_type", "topics", "discovery"}
+    required = {"id", "title", "title_truncated", "publisher", "source_id", "source_url", "published_date", "review_status", "jurisdiction_status", "record_type", "topics", "scope_hint", "scope_terms", "discovery"}
     if set(reference) != required:
         raise ValueError("Unexpected fields in public bibliography")
     url = canonical_url(reference["source_url"], set(source["hosts"]))
@@ -296,6 +347,13 @@ def validate_reference(reference, source):
     date.fromisoformat(reference["published_date"])
     if not isinstance(reference["topics"], list) or not reference["topics"] or any(t not in TOPICS for t in reference["topics"]):
         raise ValueError("Invalid bibliography topic")
+    if reference["scope_hint"] not in ("el_salvador", "international_context", "undetermined"):
+        raise ValueError("Invalid geographic scope hint")
+    terms = reference["scope_terms"]
+    if not isinstance(terms, list) or any(not isinstance(t, str) or not t or len(t) > 80 for t in terms):
+        raise ValueError("Invalid geographic scope terms")
+    if (reference["scope_hint"] == "undetermined") != (len(terms) == 0):
+        raise ValueError("Scope hint must retain the terms supporting it")
     discovery = reference["discovery"]
     if set(discovery) != {"method", "endpoint", "source_post_id", "retrieved_at"} or discovery["method"] != "wordpress_rest_title_screen" or discovery["endpoint"] != source["endpoint"]:
         raise ValueError("Invalid discovery metadata")
@@ -316,6 +374,7 @@ def main():
     args = parser.parse_args()
     if args.start > args.end or not 1 <= args.max_pages <= 1000:
         parser.error("Invalid date range or page budget")
+    migrate_scope_hints(args.data_dir)
     results = []
     if not args.export_only:
         with ThreadPoolExecutor(max_workers=3) as pool:

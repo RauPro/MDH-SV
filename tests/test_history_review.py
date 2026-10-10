@@ -7,8 +7,8 @@ from mdh_pipeline.history import SOURCES, reference_from_post
 from mdh_pipeline.history_review import enqueue_history
 
 
-def reference(n):
-    return reference_from_post({"id": n, "date": f"2025-04-{n:02}T12:00:00", "link": f"https://www.diariocolatino.com/detenciones-{n}/", "title": {"rendered": "Denuncian detenciones"}}, SOURCES[0], date(2025, 4, 1), date(2025, 4, 30), "2026-10-10T04:00:00+00:00")
+def reference(n, title="Denuncian detenciones"):
+    return reference_from_post({"id": n, "date": f"2025-04-{n:02}T12:00:00", "link": f"https://www.diariocolatino.com/detenciones-{n}/", "title": {"rendered": title}}, SOURCES[0], date(2025, 4, 1), date(2025, 4, 30), "2026-10-10T04:00:00+00:00")
 
 
 class Inbox:
@@ -28,12 +28,46 @@ def test_history_enqueues_oldest_bounded_batch_and_deduplicates_rss_candidates()
     archive = {"schema_version": 1, "records": [third, first, second]}
     report = enqueue_history(inbox, archive, limit=1)
     assert [r["id"] for r in inbox.created] == [second["id"]]
-    assert report == {"references": 3, "already_in_review_queue": 1, "added": 1, "remaining": 1, "publications": 0}
+    assert report == {"references": 3, "eligible_references": 3, "excluded_international": 0, "already_in_review_queue": 1, "added": 1, "remaining": 1, "publications": 0}
     assert inbox.created[0]["record_type"] == "news_candidate"
     assert inbox.created[0]["status"] == "pending"
     assert inbox.created[0]["jurisdiction_status"] == "not_reviewed"
     assert enqueue_history(inbox, archive, limit=10)["added"] == 1
     assert enqueue_history(inbox, archive, limit=10)["added"] == 0
+
+
+def test_salvadoran_hints_take_priority_and_foreign_context_requires_explicit_opt_in():
+    unknown = reference(1)
+    foreign = reference(2, "Detenciones en Venezuela")
+    salvadoran = reference(3, "Detenciones en El Salvador")
+    archive = {"schema_version": 1, "records": [unknown, foreign, salvadoran]}
+    inbox = Inbox()
+    report = enqueue_history(inbox, archive, limit=1)
+    assert [r["id"] for r in inbox.created] == [salvadoran["id"]]
+    assert report["eligible_references"] == 2
+    assert report["excluded_international"] == 1
+    assert report["remaining"] == 1
+    report = enqueue_history(inbox, archive, limit=20)
+    assert [r["id"] for r in inbox.created] == [salvadoran["id"], unknown["id"]]
+    assert report["remaining"] == 0
+    assert report["already_in_review_queue"] == 1
+    report = enqueue_history(inbox, archive, limit=20, include_international=True)
+    assert inbox.created[-1]["id"] == foreign["id"]
+    assert report["eligible_references"] == 3
+    assert report["excluded_international"] == 0
+    assert report["already_in_review_queue"] == 2
+    assert report["remaining"] == 0
+
+
+def test_preexisting_foreign_candidates_do_not_inflate_eligible_queue_counters():
+    foreign = reference(1, "Detenciones en Venezuela")
+    inbox = Inbox([foreign["id"]])
+    report = enqueue_history(inbox, {"schema_version": 1, "records": [foreign]})
+    assert report["eligible_references"] == 0
+    assert report["excluded_international"] == 1
+    assert report["already_in_review_queue"] == 0
+    assert report["remaining"] == 0
+    assert report["added"] == 0
 
 
 def test_entire_batch_is_validated_before_creating_any_issue():

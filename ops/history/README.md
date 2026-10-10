@@ -38,6 +38,21 @@ el resultado de un filtro automático de títulos y URLs; pueden incluir asuntos
 otros países, opinión y noticias sin una violación. Las fechas son las declaradas
 por el medio y no se sustituyen con la fecha actual cuando faltan.
 
+`scope_hint` distingue `el_salvador`, `international_context` y `undetermined` como
+**indicios para explorar el archivo**, sin modificar `jurisdiction_status`.
+`scope_terms` conserva los fragmentos explícitos detectados en título y URL,
+normalizados sin tildes, en minúsculas y con separadores de URL como espacios.
+Referencias a El Salvador, salvadoreños, Bukele, CECOT o nombres inequívocos como
+Ruth López y Fidel Zavala tienen prioridad sobre referencias internacionales. PNC,
+«régimen de excepción», «San Miguel» o «Rubén Zamora» por sí solos no prueban relación
+salvadoreña. Si faltan términos precisos, la referencia permanece sin determinar;
+**eso no significa que carezca de relación con El Salvador**.
+
+Las nuevas capturas calculan este indicio antes de abreviar el título. La migración
+del archivo inicial usa sus títulos ya guardados y URLs completas, sin nuevas
+peticiones, y preserva fechas, contadores de cobertura y estados de revisión.
+La clasificación puede fallar: la pertinencia debe resolverse durante la revisión.
+
 Se guardan enlaces y títulos abreviados a 24 palabras/180 caracteres; no cuerpos,
 imágenes, testimonios privados ni identidades extraídas. Los contenidos originales
 conservan los derechos de sus medios. El API no aporta corroboración independiente.
@@ -55,8 +70,14 @@ requiere revisar la fuente y sus riesgos. Este colector no modifica
 `data/reviewed`, no crea publicaciones, y no dispone de la cola editorial privada.
 La cola periódica de RSS mantiene su proceso independiente de aprobación humana.
 
-`python -m mdh_pipeline.history_review --limit 20` permite transferir las referencias
-más antiguas a esa misma cola privada en lotes acotados. Requiere `GH_TOKEN` y
+`python -m mdh_pipeline.history_review --limit 20` permite transferir referencias
+a esa misma cola privada en lotes acotados. Prioriza indicios de El Salvador y luego
+las referencias sin determinar; dentro de cada grupo procesa las más antiguas.
+Excluye el contexto internacional por defecto. Solo el operador puede incluirlo
+expresamente con `--include-international`, y se atiende después de los otros grupos.
+Los contadores `eligible_references`, `remaining` y `already_in_review_queue` se
+refieren al conjunto elegible; `excluded_international` explica la exclusión.
+Requiere `GH_TOKEN` y
 `GITHUB_REPOSITORY` del repositorio privado: `GitHubInbox` rechaza repositorios
 públicos. La deduplicación usa el mismo identificador de URL de la recolección RSS,
 incluidas noticias rechazadas o ya aprobadas. No cambia el estado público de una

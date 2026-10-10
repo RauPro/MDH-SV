@@ -26,8 +26,10 @@ curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2025-04-01&date_to=2025-04
 | `/records` | Fichas completas: `q`, `publisher`, `record_type`, `department`, `category`, `review_status`, `date_from`, `date_to`, `incident_date_from`, `incident_date_to`, `limit`, `offset`. |
 | `/records/{id}` | Ficha completa y fuentes por identificador estable. Sin filtros. |
 | `/stats` | Conteos por tipo, categoría, departamento y revisión; los filtros de `/records`, sin paginación. |
-| `/news` | Referencias bibliográficas históricas: `q`, `publisher`, `date_from`, `date_to`, `limit`, `offset`. La respuesta incluye cobertura y referencia del paper. |
+| `/news` | Referencias bibliográficas históricas: `q`, `publisher`, `scope_hint`, `date_from`, `date_to`, `limit`, `offset`. La respuesta incluye cobertura y referencia del paper. |
 | `/openapi.json` | Contrato con parámetros, respuestas, dossier y errores para generar un cliente. |
+
+`scope_hint` en noticias acepta `el_salvador`, `international_context` o `undetermined`. Es una señal automática basada en título y URL, no una confirmación de jurisdicción. Omitir el filtro conserva todo el archivo; el sitio web comienza con `el_salvador`. `scope_terms` declara los términos que produjeron la señal.
 
 `q` busca en títulos, resúmenes, etiquetas y los campos públicos del dossier: hechos, personas o grupos descritos por la fuente, actores, grupos vulnerables, temas y lugar público. Ignora tildes y mayúsculas. `publisher`, `department` y `category` requieren el valor completo; `department=unknown` busca ubicación no determinada.
 

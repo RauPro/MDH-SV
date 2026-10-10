@@ -116,6 +116,13 @@ test('historical news endpoint serves the actual public snapshot and preserves c
   assert.deepEqual(body.meta.paper, archive.paper);
   assert.deepEqual(body.meta.policy, archive.policy);
   assert.equal((await get('/api/v1/news?record_type=incident')).response.status, 400);
+  assert.equal((await get('/api/v1/news?scope_hint=confirmed')).response.status, 400);
+  for (const scope of ['el_salvador', 'international_context', 'undetermined']) {
+    const { response: scopedResponse, body: scoped } = await get(`/api/v1/news?scope_hint=${scope}&limit=100`);
+    assert.equal(scopedResponse.status, 200);
+    assert.equal(scoped.pagination.total, archive.records.filter(record => record.scope_hint === scope).length);
+    assert.ok(scoped.data.every(record => record.scope_hint === scope && record.jurisdiction_status === 'not_reviewed'));
+  }
 });
 
 test('MCP officially connects, discovers read-only tools, calls and reads resources over HTTP', async () => {
@@ -132,8 +139,10 @@ test('MCP officially connects, discovers read-only tools, calls and reads resour
     assert.equal(record.structuredContent.data.source_url, result.structuredContent.data[0].source_url);
     const bad = await client.callTool({ name: 'search_records', arguments: { limit: 1000 } });
     assert.equal(bad.isError, true);
-    const news = await client.callTool({ name: 'search_news', arguments: { limit: 1 } });
+    const news = await client.callTool({ name: 'search_news', arguments: { limit: 1, scope_hint: 'el_salvador' } });
     assert.equal(news.structuredContent.data[0].review_status, 'not_reviewed');
+    assert.equal(news.structuredContent.data[0].scope_hint, 'el_salvador');
+    assert.ok(Array.isArray(news.structuredContent.data[0].scope_terms));
     assert.ok(news.structuredContent.meta.policy.notice);
     const resources = await client.listResources();
     assert.equal(resources.resources.length, 2);

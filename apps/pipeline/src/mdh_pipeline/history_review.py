@@ -15,7 +15,7 @@ from .history import ROOT, SOURCES, validate_reference
 from .review_queue import GitHubInbox
 
 
-def enqueue_history(inbox, archive, *, limit=20):
+def enqueue_history(inbox, archive, *, limit=20, include_international=False):
     if not 1 <= limit <= 100:
         raise ValueError("Historical queue limit must be between 1 and 100")
     if archive.get("schema_version") != 1 or not isinstance(archive.get("records"), list):
@@ -30,7 +30,10 @@ def enqueue_history(inbox, archive, *, limit=20):
     inbox.ensure_labels()
     seen = inbox.existing_ids()
     added, already_present = 0, 0
-    for reference in sorted(archive["records"], key=lambda item: (item["published_date"], item["id"])):
+    eligible = [reference for reference in archive["records"]
+                if include_international or reference["scope_hint"] != "international_context"]
+    priority = {"el_salvador": 0, "undetermined": 1, "international_context": 2}
+    for reference in sorted(eligible, key=lambda item: (priority[item["scope_hint"]], item["published_date"], item["id"])):
         if reference["id"] in seen:
             already_present += 1
             continue
@@ -44,12 +47,15 @@ def enqueue_history(inbox, archive, *, limit=20):
             "matched_terms": reference["topics"], "status": "pending",
             "record_type": "news_candidate", "discovery_method": "historical_bibliography",
             "jurisdiction_status": "not_reviewed",
+            "scope_hint": reference["scope_hint"], "scope_terms": reference["scope_terms"],
         }
         inbox.enqueue(candidate)
         seen.add(reference["id"])
         added += 1
-    return {"references": len(archive["records"]), "already_in_review_queue": already_present,
-            "added": added, "remaining": sum(r["id"] not in seen for r in archive["records"]),
+    return {"references": len(archive["records"]), "eligible_references": len(eligible),
+            "excluded_international": len(archive["records"]) - len(eligible),
+            "already_in_review_queue": already_present,
+            "added": added, "remaining": sum(r["id"] not in seen for r in eligible),
             "publications": 0}
 
 
@@ -57,10 +63,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, default=ROOT / "apps/web/public/archive/news.json")
     parser.add_argument("--limit", type=int, default=20)
+    parser.add_argument("--include-international", action="store_true", help="Explicitly include international-context references after Salvadoran and undetermined references")
     args = parser.parse_args()
     archive = json.loads(args.archive.read_text(encoding="utf-8"))
     inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
-    report = enqueue_history(inbox, archive, limit=args.limit)
+    report = enqueue_history(inbox, archive, limit=args.limit, include_international=args.include_international)
     print(json.dumps(report, ensure_ascii=False, indent=2))
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:

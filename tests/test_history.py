@@ -8,7 +8,7 @@ import requests
 
 from mdh_pipeline.history import (
     SOURCES, collect_source, export_archive, fetch_page, month_windows,
-    page_url, reference_from_post, validate_reference,
+    migrate_scope_hints, page_url, reference_from_post, scope_hint, validate_reference,
 )
 
 SOURCE = SOURCES[0]
@@ -56,6 +56,48 @@ def test_keyword_screen_and_quote_minimization():
     assert len(reference["title"]) <= 180
     assert "<b>" not in reference["title"]
     assert reference["title_truncated"] is True
+
+
+@pytest.mark.parametrize("title,url,expected,terms", [
+    ("Maduro enfrenta acusaciones de tortura en EEUU", "https://www.diariocolatino.com/noticia/", "international_context", ["eeuu", "maduro"]),
+    ("Detenciones en El Salvador y Estados Unidos", "https://www.diariocolatino.com/noticia/", "el_salvador", ["el salvador", "estados unidos"]),
+    ("Periodistas salvadoreñas denuncian censura", "https://www.diariocolatino.com/noticia/", "el_salvador", ["salvadorenas"]),
+    ("Preocupación por Ruth López", "https://www.diariocolatino.com/noticia/", "el_salvador", ["ruth lopez"]),
+    ("PNC reporta detenciones durante el régimen de excepción", "https://www.diariocolatino.com/noticia/", "undetermined", []),
+    ("José Rubén Zamora permanece preso en Guatemala", "https://www.diariocolatino.com/noticia/", "international_context", ["guatemala"]),
+    ("Denuncian detenciones", "https://www.diariocolatino.com/detenciones-en-el-salvador/", "el_salvador", ["el salvador"]),
+    ("Denuncian detenciones", "https://www.diariocolatino.com/detenciones-en-san-miguel/", "undetermined", []),
+])
+def test_scope_hints_are_conservative_traceable_and_prioritize_salvador(title, url, expected, terms):
+    assert scope_hint(title, url) == {"scope_hint": expected, "scope_terms": terms}
+
+
+def test_new_captures_determine_scope_before_title_truncation():
+    item = post(title="Detenciones " + "palabra " * 30 + "en El Salvador")
+    reference = reference_from_post(item, SOURCE, START, END, NOW)
+    assert reference["title_truncated"] is True
+    assert "Salvador" not in reference["title"]
+    assert reference["scope_hint"] == "el_salvador"
+    assert reference["scope_terms"] == ["el salvador"]
+    assert reference["jurisdiction_status"] == "not_reviewed"
+
+
+def test_scope_migration_preserves_source_coverage_and_never_claims_review(tmp_path):
+    collect_source(SOURCE, START, END, tmp_path, fetch=lambda *args: ([post(title="Detenciones en El Salvador")], 1, 1), delay=0, now=NOW)
+    path = tmp_path / "co-latino.json"
+    before = json.loads(path.read_text())
+    del before["records"][0]["scope_hint"]
+    del before["records"][0]["scope_terms"]
+    path.write_text(json.dumps(before))
+    migrate_scope_hints(tmp_path, [SOURCE])
+    after = json.loads(path.read_text())
+    assert after["months"] == before["months"]
+    assert after["records"][0]["discovery"] == before["records"][0]["discovery"]
+    assert after["records"][0]["scope_hint"] == "el_salvador"
+    assert after["records"][0]["review_status"] == "not_reviewed"
+    assert after["records"][0]["jurisdiction_status"] == "not_reviewed"
+    migrate_scope_hints(tmp_path, [SOURCE])
+    assert json.loads(path.read_text()) == after
 
 
 @pytest.mark.parametrize("published", [None, "", "invalid", "2025-03-25T23:59:59", "2025-04-01T00:00:00", "2027-01-01T00:00:00"])
@@ -132,6 +174,8 @@ def test_invalid_posts_counted_without_aborting_the_month(tmp_path):
     lambda r: r.update(record_type="individual_case"),
     lambda r: r.update(id="0" * 64),
     lambda r: r.update(publisher="Someone else"),
+    lambda r: r.update(scope_hint="verified"),
+    lambda r: r.update(scope_hint="el_salvador", scope_terms=[]),
     lambda r: r["discovery"].update(body="Full text"),
 ])
 def test_export_fails_closed_on_unexpected_or_editorially_approved_fields(tmp_path, mutation):

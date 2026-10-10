@@ -30,7 +30,7 @@ export const recordFilters = {
   review_status: z.enum(['source_checked', 'editorially_reviewed']).optional(),
 };
 export const recordSearchSchema = z.object({ ...recordFilters, ...page }).strict();
-export const newsSearchSchema = z.object({ ...commonFilters, ...page }).strict();
+export const newsSearchSchema = z.object({ ...commonFilters, scope_hint: z.enum(['el_salvador', 'international_context', 'undetermined']).optional(), ...page }).strict();
 export const statsSchema = z.object(recordFilters).strict();
 export const recordIdSchema = z.string().regex(/^[a-z0-9][a-z0-9-]{0,149}$/);
 
@@ -89,7 +89,7 @@ function matching(records, filters) {
     const dossier = record.dossier;
     const dossierText = dossier ? [dossier.alleged_violation?.value, dossier.facts?.value, ...(dossier.affected_persons?.value ?? []), ...(dossier.reported_actors?.value ?? []), ...(dossier.vulnerable_groups?.value ?? []), ...(dossier.themes?.value ?? []), dossier.location?.public_place?.value] : [];
     if (filters.q && !normalize([record.title, record.summary, record.publisher, record.category, ...(record.tags ?? []), ...(record.topics ?? []), ...dossierText].join(' ')).includes(normalize(filters.q))) return false;
-    for (const key of ['publisher', 'record_type', 'category', 'review_status']) {
+    for (const key of ['publisher', 'record_type', 'category', 'review_status', 'scope_hint']) {
       if (filters[key] && normalize(record[key]) !== normalize(filters[key])) return false;
     }
     if (filters.department && normalize(record.department ?? 'unknown') !== normalize(filters.department)) return false;
