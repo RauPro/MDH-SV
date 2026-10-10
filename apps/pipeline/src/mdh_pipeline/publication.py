@@ -10,6 +10,7 @@ from typing import Generic, Literal, TypeVar
 from urllib.parse import urlparse
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from .publishers import NEWS_HOSTS
 
 ROOT = Path(__file__).resolve().parents[4]
 CATALOG = ROOT / "data/reviewed/publications.json"
@@ -137,9 +138,7 @@ class Publication(BaseModel):
         url = urlparse(value)
         if (url.scheme != "https" or url.hostname not in
                 {"www.hrw.org", "www.oas.org", "www.amnesty.org", "citizenlab.ca",
-                 "www.corteidh.or.cr", "spcommreports.ohchr.org", "www.ohchr.org",
-                 "www.diariocolatino.com", "diariocolatino.com", "gatoencerrado.news",
-                 "www.revistafactum.com", "revistafactum.com"}
+                 "www.corteidh.or.cr", "spcommreports.ohchr.org", "www.ohchr.org", *NEWS_HOSTS}
                 or url.username or url.password or url.port or len(url.path) < 5):
             raise ValueError("Expected an explicit, reviewed primary-source HTTPS URL")
         return value

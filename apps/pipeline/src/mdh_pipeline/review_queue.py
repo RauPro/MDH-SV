@@ -15,13 +15,14 @@ from zoneinfo import ZoneInfo
 
 import feedparser
 import requests
+from .publishers import NEWS_HOSTS
 
 FEEDS = [
     {'name': 'Diario Co Latino', 'url': 'https://www.diariocolatino.com/feed/', 'hosts': ['www.diariocolatino.com', 'diariocolatino.com']},
     {'name': 'GatoEncerrado', 'url': 'https://gatoencerrado.news/feed/', 'hosts': ['gatoencerrado.news']},
     {'name': 'Revista Factum', 'url': 'https://www.revistafactum.com/feed/', 'hosts': ['www.revistafactum.com', 'revistafactum.com']},
 ]
-HOSTS = {h for feed in FEEDS for h in feed['hosts']}
+HOSTS = NEWS_HOSTS
 KEYWORDS = ('derechos humanos', 'regimen de excepcion', 'detencion', 'detenido', 'detenida',
     'tortura', 'custodia', 'desaparecid', 'desaparicion', 'periodista', 'prensa', 'censura',
     'desalojo', 'defensor', 'feminicidio', 'violencia contra', 'libertad', 'cristosal',

@@ -23,16 +23,12 @@ from zoneinfo import ZoneInfo
 import requests
 
 from .review_queue import canonical_url, normalize, require_public_dns
+from .publishers import SOURCES
 
 ROOT = Path(__file__).resolve().parents[4]
 START_DATE = date(2010, 1, 1)
 SCREEN_VERSION = 2
 SCOPE_VERSION = 1
-SOURCES = (
-    {"id": "co-latino", "name": "Diario Co Latino", "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts", "hosts": ["www.diariocolatino.com", "diariocolatino.com"]},
-    {"id": "gatoencerrado", "name": "GatoEncerrado", "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts", "hosts": ["gatoencerrado.news"]},
-    {"id": "factum", "name": "Revista Factum", "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts", "hosts": ["www.revistafactum.com", "revistafactum.com"]},
-)
 TOPICS = {
     "detencion_y_debido_proceso": ("regimen de excepcion", "regimen-de-excepcion", "deten", "detencion", "captur", "habeas", "inocente", "debido proceso", "debido-proceso", "defensa publica"),
     "condiciones_de_reclusion": ("carcel", "prision", "penitenciari", "custodia", "bartolina", "tortura", "cecot", "mariona", "apanteos"),
