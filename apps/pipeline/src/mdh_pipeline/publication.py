@@ -72,8 +72,8 @@ class Publication(BaseModel):
                 raise ValueError('Human review requires reviewer, date and substantive notes')
             if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9-]{0,38}', self.reviewed_by):
                 raise ValueError('Invalid reviewer identifier')
-            if self.reviewed_at > date.today():
-                raise ValueError('Future review date')
+            if self.reviewed_at > date.today() or self.reviewed_at < self.source_checked_at:
+                raise ValueError('Inconsistent review date')
         elif (self.review_status != 'source_checked' or self.reviewed_by or self.reviewed_at or self.review_notes):
             raise ValueError('Do not attribute a human review that did not take place')
         if self.origin_candidate_id and not self.human_reviewed:

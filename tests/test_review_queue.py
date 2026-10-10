@@ -78,6 +78,8 @@ def test_only_explicit_human_review_can_prepare_public_proposal(tmp_path,monkeyp
     proposal=json.loads((tmp_path/'proposal.json').read_text())
     assert proposal['record']['human_reviewed'] is True
     assert proposal['record']['reviewed_by']=='RauPro'
+    assert proposal['record']['reviewed_at']==proposal['record']['source_checked_at']
+    assert 'RauPro' in proposal['record']['source_check_method']
     assert proposal['record']['origin_candidate_id']==inbox.candidates[0]['id']
     assert all('RauPro/MDH-SV-review/' in path for _,path,_ in inbox.calls)
     assert all('RauPro/MDH-SV/' not in path for _,path,_ in inbox.calls)

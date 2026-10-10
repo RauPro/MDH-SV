@@ -218,7 +218,8 @@ def review(inbox, event):
         raise ValueError('Public draft must refer to the collected source')
     today = datetime.now(ZoneInfo('America/El_Salvador')).date().isoformat()
     proposed.update(human_reviewed=True, review_status='editorially_reviewed', reviewed_by=username,
-        reviewed_at=today, origin_candidate_id=candidate['id'])
+        reviewed_at=today, origin_candidate_id=candidate['id'], source_checked_at=today,
+        source_check_method=f'Revisión editorial de la fuente por {username}; no implica corroboración independiente de los hechos.')
     record = Publication.model_validate(proposed)
     approval = {'schema_version': 1, 'record': record.model_dump(mode='json'),
         'review_repository': inbox.repository, 'review_issue': issue_number,
