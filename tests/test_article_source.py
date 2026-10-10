@@ -103,6 +103,49 @@ def test_html_fallback_extracts_jsonld_date_but_never_its_articlebody():
     assert "SECRET" not in result["text"] and "NO EXTRAER" not in result["text"]
 
 
+def test_elementor_editorial_post_precedes_related_article_cards_and_excludes_theme_widgets():
+    """Regression for GatoEncerrado's labor-hours article: <article> is only related news."""
+    url = "https://gatoencerrado.news/2026/09/30/noticia-editorial/"
+    page = (f'<html><head><link rel="canonical" href="{url}">'
+            '<meta property="article:published_time" content="2026-10-01T02:32:11+00:00">'
+            '</head><body><h1>Artículo editorial de prueba</h1>'
+            '<div data-elementor-type="wp-post" data-elementor-post-type="elementor-hf"><p>ENCABEZADO AJENO</p></div>'
+            '<article class="elementor-post"><h3>TARJETA RELACIONADA AJENA</h3></article>'
+            '<div data-elementor-type="wp-post" data-elementor-post-type="post" data-elementor-id="83375">'
+            '<div class="elementor-widget-author-box"><p>BIOGRAFIA AJENA</p></div>'
+            '<div class="elementor-widget-post-info"><p>METADATOS AJENOS</p></div>'
+            '<div class="elementor-widget-text-editor"><h2>Hechos de la fuente</h2>' + CONTENT + '</div>'
+            '<div class="elementor-widget-html"><p>Contexto del gráfico editorial.</p><script>NO EJECUTAR</script></div>'
+            '<div class="elementor-widget-posts"><article><h3>OTRA NOTICIA AJENA</h3><p>RESUMEN AJENO</p></article></div>'
+            '<div class="elementor-widget-post-comments"><p>COMENTARIO AJENO</p></div>'
+            '<div class="elementor-widget-share-buttons"><p>COMPARTIR AJENO</p></div>'
+            '</div><div data-elementor-type="wp-post" data-elementor-post-type="elementor-hf"><p>PIE AJENO</p></div>'
+            '</body></html>').encode()
+    # The public API can redirect to the homepage while the public article remains available.
+    session = Session([
+        Response(b"", status=302, headers={"Location": "https://gatoencerrado.news"}),
+        Response(b"<html><title>Medio de prueba</title></html>", content_type="text/html"),
+        Response(page, content_type="text/html"),
+    ])
+    result = fetch_article(candidate(source_url=url, publisher="GatoEncerrado"), session)
+    assert result["source_url"] == url
+    assert result["published_date"] == "2026-10-01"
+    assert result["extraction_method"] == "html_article_content"
+    assert result["paragraphs"][0]["text"] == "Hechos de la fuente"
+    assert len(result["paragraphs"]) == 4
+    assert "Contexto del gráfico editorial." in result["text"]
+    assert "AJENO" not in result["text"] and "AJENA" not in result["text"]
+    assert "NO EJECUTAR" not in result["text"]
+    assert result["truncated"] is False
+
+
+def test_elementor_header_alone_is_not_an_editorial_article():
+    page = ('<html><body><div data-elementor-type="wp-post" data-elementor-post-type="elementor-hf">'
+            + CONTENT + '</div></body></html>').encode()
+    with pytest.raises(SourceFetchError, match="source_article_container_missing"):
+        fetch_article(candidate(), Session([Response([]), Response(page, content_type="text/html")]))
+
+
 @pytest.mark.parametrize("date_value,expected", [(None, None), ("not-a-date", None), ("2025-02-30", None), ("2025-04-04", "2025-04-04")])
 def test_unknown_dates_never_become_today(date_value, expected):
     result = fetch_article(candidate(published_date=date_value), Session([Response([wp(date="invalid")])]))
