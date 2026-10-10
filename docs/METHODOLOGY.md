@@ -58,3 +58,7 @@ Código bajo MIT. Metadatos y resúmenes propios: [CC BY 4.0](https://creativeco
 `related_sources` conserva actualizaciones, como una liberación posterior, dentro del mismo expediente. No crea un segundo caso ni aumenta automáticamente la certeza. El conteo de documentos elimina URLs repetidas entre fuentes principales y complementarias. `year_range` expresa el año conocido; los límites del año se usan únicamente para filtrar y la interfaz muestra su precisión anual. No se presenta la fecha de una sentencia como fecha del hecho.
 
 Las ampliaciones documentales realizadas durante la preparación inicial siguen como `source_checked`, con revisión humana pendiente. Las incorporaciones futuras procedentes de la recolección tienen una aprobación editorial explícita antes de preparar su publicación.
+
+## Consulta territorial
+
+El mapa interactivo muestra únicamente reportes individuales con departamento documentado y respeta la búsqueda, temática, fechas y filtro de custodia. Los cinco reportes individuales sin departamento identificado en la edición actual se consultan por separado; nunca se sitúan en un centroide. Los informes y registros colectivos no se suman a esos recuentos. Un valor cero describe el conjunto consultado, no la ausencia de violaciones. Los contornos departamentales son una cartografía simplificada de Simplemaps, con fuente y licencia visibles, y no representan ubicaciones personales.

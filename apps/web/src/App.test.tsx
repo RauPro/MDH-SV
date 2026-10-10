@@ -89,3 +89,38 @@ it('shows supporting updates and authentic editorial review separately', async (
   expect(dialog).toHaveTextContent('Revisión editorial por Editor');
   expect(within(dialog).getByRole('link',{name:/Actualización del caso/})).toBeInTheDocument();
 });
+
+it('restores the map and synchronizes native department buttons with the filters', async () => {
+  await ready();
+  const map = screen.getByRole('region',{name:'Mapa de El Salvador'});
+  const sonsonate = within(map).getByRole('button',{name:'Sonsonate: 2 reportes individuales'});
+  sonsonate.focus();
+  await userEvent.keyboard('{Enter}');
+  expect(screen.getByLabelText('Departamento')).toHaveValue('Sonsonate');
+  expect(screen.getByText('2 resultados')).toBeInTheDocument();
+  expect(sonsonate).toHaveAttribute('aria-pressed','true');
+  await userEvent.click(within(map).getByRole('button',{name:'Quitar filtro del mapa'}));
+  expect(screen.getByText('4 resultados')).toBeInTheDocument();
+});
+
+it('filters from the SVG and preserves the other search constraints', async () => {
+  await ready();
+  await userEvent.type(screen.getByRole('searchbox'), 'detencion');
+  fireEvent.click(screen.getByTestId('map-region-SVSO'));
+  expect(screen.getByText('1 resultado')).toBeInTheDocument();
+  expect(screen.getByRole('button',{name:'Sonsonate: 1 reporte individual'})).toHaveAttribute('aria-pressed','true');
+  await userEvent.click(screen.getByRole('button',{name:'La Unión: 0 reportes individuales'}));
+  expect(screen.getByText('0 resultados')).toBeInTheDocument();
+  expect(screen.getByText(/La ausencia de registros en este conjunto/)).toBeInTheDocument();
+});
+
+it('keeps unlocated individual reports outside the map and makes them consultable', async () => {
+  const revised=structuredClone(data);
+  const incident=revised.records.find(r=>r.record_type==='incident')!;
+  incident.department=null;
+  vi.mocked(fetch).mockResolvedValue({ok:true,json:async()=>revised} as Response);
+  await ready();
+  await userEvent.click(screen.getByRole('button',{name:'Sin departamento identificado 1'}));
+  expect(screen.getByText('1 resultado')).toBeInTheDocument();
+  expect(screen.getByLabelText('Departamento')).toHaveValue('__unknown__');
+});
