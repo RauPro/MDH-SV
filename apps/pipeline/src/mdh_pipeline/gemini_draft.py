@@ -6,6 +6,7 @@ No secrets are loaded here, no article bodies are persisted, and no publication 
 from __future__ import annotations
 
 import hashlib
+import calendar
 import json
 import re
 import time
@@ -451,6 +452,53 @@ def _ground_named_values(record, paragraphs):
     return rejected
 
 
+def _ground_dates(record):
+    """Never derive an event year from publication time or a weekday reference."""
+    months = ("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto",
+              "(?:septiembre|setiembre)", "octubre", "noviembre", "diciembre")
+    rejected = []
+    def explicit(claim, ending=False):
+        if claim.value is None:
+            return True
+        try:
+            value = date.fromisoformat(claim.value)
+        except (ValueError, TypeError):
+            return False
+        text = normalize(" ".join(c.quote for c in claim.citations))
+        month = months[value.month - 1]
+        joiner = r"(?:\s+de(?:l)?(?:\s+ano)?\s+|\s+)"
+        if record.date_precision == "day":
+            patterns = [rf"\b{value.isoformat()}\b",
+                        rf"\b0?{value.day}[/-]0?{value.month}[/-]{value.year}\b",
+                        rf"\b0?{value.day}{joiner}{month}{joiner}{value.year}\b"]
+        elif record.date_precision == "month_range":
+            boundary = calendar.monthrange(value.year, value.month)[1] if ending else 1
+            if value.day != boundary:
+                return False
+            patterns = [rf"\b{value.year}-{value.month:02}\b", rf"\b{month}{joiner}{value.year}\b"]
+        elif record.date_precision == "year_range":
+            if (value.month, value.day) != ((12, 31) if ending else (1, 1)):
+                return False
+            patterns = [rf"\b{value.year}\b"]
+        else:
+            return False
+        return any(re.search(pattern, text) for pattern in patterns)
+    start_ok = explicit(record.event_date)
+    end_ok = explicit(record.event_date_end, ending=True)
+    if record.event_date.value is None and record.event_date_end.value is None:
+        record.date_precision = "unknown"
+    range_incomplete = record.date_precision in {"month_range", "year_range"} and (
+        record.event_date.value is None or record.event_date_end.value is None)
+    if not start_ok or not end_ok or range_incomplete or (record.event_date_end.value and record.event_date.value is None):
+        for name in ("event_date", "event_date_end"):
+            field = getattr(record, name)
+            if field.value is not None:
+                rejected.append(name)
+            field.value, field.status, field.citations = None, "not_reported", []
+        record.date_precision = "unknown"
+    return rejected
+
+
 def _privacy_flags(text):
     # Conservative triage, not identity inference. Ambiguous sensitive articles go to
     # manual review without retaining model prose or quotations. No automatic rejection.
@@ -573,7 +621,7 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None):
     for key in ExtractedRecord.model_fields:
         if key != "date_precision":
             _ground(getattr(extracted, key).citations, paragraphs)
-    rejected_fields = sorted(set(output.discarded_fields + _ground_named_values(extracted, paragraphs)))
+    rejected_fields = sorted(set(output.discarded_fields + _ground_named_values(extracted, paragraphs) + _ground_dates(extracted)))
     if any(getattr(extracted, field).status != "reported" for field in ("title", "summary", "facts", "alleged_violation")):
         return result
     try:
@@ -595,7 +643,9 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None):
             tags=extracted.themes.value or ["Pendiente de revisión"], dossier=dossier,
             department=extracted.department.value, incident_date=extracted.event_date.value,
             incident_date_end=extracted.event_date_end.value, date_precision=extracted.date_precision,
-            date_note="Fecha del hecho extraída de la fuente; respete la precisión indicada y la revisión pendiente.",
+            date_note=("Fecha del hecho extraída de la fuente; respete la precisión indicada y la revisión pendiente."
+                       if extracted.event_date.value else
+                       "Fecha del hecho desconocida en este borrador; no se deduce a partir de la publicación."),
             reported_actor="; ".join(extracted.reported_actors.value) if extracted.reported_actors.value else None,
             penitentiary_related=extracted.penitentiary_related.value or False,
             coverage="El Salvador según clasificación automatizada; alcance pendiente de revisión humana.",

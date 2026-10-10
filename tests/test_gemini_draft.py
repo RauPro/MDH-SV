@@ -251,7 +251,6 @@ def test_sensitive_title_is_checked_even_when_body_omits_that_detail():
     lambda doc: doc.update(human_reviewed=True),
     lambda doc: doc["record"]["facts"].update(value="No citado", citations=[]),
     lambda doc: doc["record"]["facts"].update(value={"unsupported": "object"}),
-    lambda doc: doc["record"]["event_date"].update(value="2027-01-01", status="reported", citations=[citation()]),
 ])
 def test_invalid_or_promoted_model_fields_fail_with_sanitized_errors(mutate):
     document = extraction()
@@ -332,6 +331,29 @@ def test_prose_fragments_join_in_order_but_ambiguous_scalar_facts_stay_unknown()
     assert result["record"]["department"] is None
     assert result["extraction"]["rejected_fields"] == ["department"]
     assert "Sonsonate" not in json.dumps(result)
+
+
+@pytest.mark.parametrize("date_text, extracted_date, kept", [
+    ("Los hechos ocurrieron el jueves 27 de agosto.", "2025-08-27", False),
+    ("La fuente describe hechos del 27 de agosto de 2025.", "2025-08-27", True),
+    ("La fuente describe hechos del 27 de agosto de 2026.", "2025-08-27", False),
+    ("La fuente indica la fecha 2025-08-27 para el hecho.", "2025-08-27", True),
+])
+def test_event_date_requires_explicit_year_in_cited_source_not_publication(date_text, extracted_date, kept):
+    candidate, article = inputs(date_text)
+    envelope = json.loads(response().body)
+    part = envelope["candidates"][0]["content"]["parts"][0]
+    wire = json.loads(part["text"])
+    wire["date_precision"] = "day"
+    wire["record"].append({"field": "event_date", "values": [extracted_date], "evidence_refs": ["e4"]})
+    part["text"] = json.dumps(wire)
+    result = extract_draft(candidate, article, api_key=API_KEY, model=MODEL, request_session=Session([Response(envelope)]))
+    record = result["record"]
+    assert record["incident_date"] == (extracted_date if kept else None)
+    assert record["date_precision"] == ("day" if kept else "unknown")
+    if not kept:
+        assert "event_date" in result["extraction"]["rejected_fields"]
+        assert record["dossier"]["event_date"]["status"] == "not_reported"
 
 
 def test_uncited_scope_and_automated_certainty_are_rejected():
