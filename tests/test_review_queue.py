@@ -65,6 +65,7 @@ def test_private_network_is_rejected(monkeypatch):
 def proposed():
     r=load_catalog().records[0].model_dump(mode='json')
     r.update(source_url=entry()['link'],review_notes='Fuente, fecha, duplicados y privacidad contrastados por el revisor.')
+    r['dossier']['evidence'][0]['url'] = r['source_url']
     return r
 
 def event(decision='approve',record=None):
