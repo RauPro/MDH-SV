@@ -20,6 +20,12 @@ y controles de compartir. Se preservan párrafos, encabezados y elementos de lis
 como unidades numeradas `p1`, `p2`, etc. Estos identificadores corresponden a la
 versión normalizada recuperada, no a la numeración editorial del medio.
 
+En publicaciones de Elementor se selecciona exclusivamente el contenedor
+`data-elementor-type="wp-post"` con `data-elementor-post-type="post"`; sus plantillas
+de encabezado y pie usan otro tipo y quedan fuera. Se descartan widgets de noticias
+relacionadas, biografía, comentarios, metadatos y botones sociales. Esto evita
+confundir las tarjetas `<article>` de recomendaciones con el cuerpo de la noticia.
+
 No se sortean captchas, restricciones de acceso, contraseñas ni muros de pago.
 Respuestas 401, 402, 403, 429 o 503 se registran como fuente restringida, sin intentar
 otro canal para obtener el contenido. Un bloqueo reconocido en WordPress tampoco

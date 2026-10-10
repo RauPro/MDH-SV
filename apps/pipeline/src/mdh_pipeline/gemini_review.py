@@ -198,6 +198,29 @@ def error_category(error):
     return "extraction_failed", False
 
 
+
+def safe_validation_issues(error):
+    """Retain schema locations/types only, never model values or validator messages."""
+    from .gemini_draft import ExtractedRecord, WireOutput, WireScopeEvidence, WireClaim
+    allowed = set(ExtractedRecord.model_fields) | set(WireOutput.model_fields)
+    allowed |= set(WireScopeEvidence.model_fields) | set(WireClaim.model_fields)
+    allowed |= {"value", "status", "citations", "paragraph_id", "quote", "str", "bool", "list[str]", "unknown"}
+    types = {"too_long", "too_short", "missing", "literal_error", "list_type", "string_type", "bool_type",
+             "string_pattern_mismatch", "extra_forbidden", "value_error", "model_type", "int_type"}
+    issues = getattr(error, "validation_issues", [])
+    if not isinstance(issues, list):
+        return []
+    result = []
+    for item in issues[:8]:
+        if not isinstance(item, dict):
+            continue
+        value = item.get("field")
+        tokens = value.split(".")[:10] if isinstance(value, str) and len(value) <= 200 else ["unknown"]
+        field = ".".join(token if token in allowed or (token.isdigit() and len(token) <= 4) else "unknown" for token in tokens)
+        kind = item.get("type")
+        result.append({"field": field, "type": kind if isinstance(kind, str) and kind in types else "validation_error"})
+    return result
+
 def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seconds=4,
                   retry_failed=False, archive=None, fetch=None, extract=None, now=None, sleep=time.sleep):
     if not api_key or not isinstance(model, str) or not re.fullmatch(r"gemini-[a-zA-Z0-9.-]+", model):
@@ -288,6 +311,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             failed = {"candidate_id": identifier, "source_url": candidate["source_url"], "status": "error",
                       "attempts": attempts if stop else attempts + 1, "error_code": code,
                       "next_retry_at": next_retry.isoformat(), "updated_at": utcnow().isoformat(), "model": model}
+            if code == "invalid_extraction_schema":
+                failed["validation_issues"] = safe_validation_issues(error)
             put_private_file(inbox, "processing", identifier, failed, state_sha)
             update_issue(inbox, issue["number"], candidate, error_code=code)
             report["errors"] += 1

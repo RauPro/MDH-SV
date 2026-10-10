@@ -453,3 +453,16 @@ def test_cli_global_failures_do_not_print_private_exception_context(monkeypatch,
     assert "Sensitive" not in output.out + output.err
     assert "test-private" not in output.out + output.err
     assert json.loads(output.out)["publications"] == 0
+
+
+def test_validation_diagnostics_preserve_only_known_schema_paths_and_types():
+    from mdh_pipeline.gemini_review import safe_validation_issues
+    error = RuntimeError(KEY + FULL_BODY)
+    error.validation_issues = [
+        {"field":"record.3.values", "type":"too_long", "input":FULL_BODY, "message":KEY},
+        {"field":KEY, "type":KEY},
+    ]
+    details = safe_validation_issues(error)
+    assert details[0] == {"field":"record.3.values", "type":"too_long"}
+    assert details[1] == {"field":"unknown", "type":"validation_error"}
+    assert KEY not in json.dumps(details) and FULL_BODY not in json.dumps(details)

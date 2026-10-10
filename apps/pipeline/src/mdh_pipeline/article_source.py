@@ -24,8 +24,14 @@ MAX_PARAGRAPHS = 160
 MAX_PARAGRAPH_CHARS = 4_000
 MIN_TEXT_CHARS = 200
 USER_AGENT = "MDH-SV/2.3 source-review (+https://github.com/RauPro/MDH-SV)"
-ARTICLE_SELECTORS = ("[itemprop='articleBody']", ".entry-content", ".post-content", ".article-content", ".td-post-content", "article")
-UNWANTED = "script,style,nav,header,footer,aside,form,button,iframe,noscript,template,svg,figure,.advertisement,.advertising,.ads,.ad-container,.sharedaddy,.share-buttons,.social-share,.related-posts,.related-articles,.comments,#comments,.newsletter,.author-box,.post-meta,.entry-meta"
+ARTICLE_SELECTORS = (
+    "[itemprop='articleBody']",
+    # Elementor renders the editorial body without <article>. Header/footer
+    # templates also use wp-post, so requiring post-type=post is essential.
+    "[data-elementor-type='wp-post'][data-elementor-post-type='post']",
+    ".entry-content", ".post-content", ".article-content", ".td-post-content", "article",
+)
+UNWANTED = "script,style,nav,header,footer,aside,form,button,iframe,noscript,template,svg,figure,.advertisement,.advertising,.ads,.ad-container,.sharedaddy,.share-buttons,.social-share,.related-posts,.related-articles,.comments,#comments,.newsletter,.author-box,.post-meta,.entry-meta,.elementor-widget-posts,.elementor-widget-loop-grid,.elementor-widget-author-box,.elementor-widget-share-buttons,.elementor-widget-post-info,.elementor-widget-post-comments,.elementor-widget-nav-menu,[data-elementor-post-type='elementor-hf']"
 PAYWALL_SELECTORS = "[class*='paywall'],[id*='paywall'],[class*='subscribe-wall'],[class*='subscription-wall'],[class*='piano-paywall']"
 BLOCKED_TEXT = ("verify you are human", "verifica que eres humano", "verifique que es humano", "checking your browser", "enable javascript and cookies to continue", "suscribete para seguir leyendo", "suscribete para continuar leyendo", "subscribe to continue reading", "inicia sesion para continuar leyendo", "this content is password protected", "este contenido esta protegido por contrasena")
 

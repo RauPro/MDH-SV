@@ -125,8 +125,8 @@ class WireScopeEvidence(BaseModel):
 class WireClaim(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     field: str
-    values: list[str] = Field(min_length=1, max_length=12)
-    evidence_refs: list[str] = Field(min_length=1, max_length=25)
+    values: list[str] = Field(max_length=12)
+    evidence_refs: list[str] = Field(max_length=25)
 
 
 class WireOutput(BaseModel):
@@ -186,17 +186,31 @@ def _decode_wire(document, anchors):
             if field.field not in fields or field.field in seen:
                 raise GeminiDraftError("invalid_or_duplicate_extraction_field")
             seen.add(field.field)
+            values = [value for value in field.values if value.strip()]
+            if not values:
+                # Some provider responses spell an unknown field as empty arrays
+                # rather than omitting it. Keep the prebuilt null/not_reported.
+                # Any supplied references must nevertheless be real and unique.
+                if field.evidence_refs:
+                    resolve(field.evidence_refs)
+                discarded.append(field.field)
+                continue
+            if not field.evidence_refs:
+                # A model value without evidence is never retained. Do not fail
+                # otherwise usable, cited fields merely because one is unknown.
+                discarded.append(field.field)
+                continue
             if field.field in {"affected_persons", "reported_actors", "institutional_sources", "vulnerable_groups", "themes", "instrument"}:
-                value = field.values
+                value = values
             else:
-                if len(field.values) != 1:
+                if len(values) != 1:
                     if field.field in {"title", "summary", "facts", "alleged_violation", "hypothesis"}:
-                        value = " ".join(field.values)
+                        value = " ".join(values)
                     else:
                         discarded.append(field.field)
                         continue  # Ambiguous date/place/classification stays unknown.
                 else:
-                    value = field.values[0]
+                    value = values[0]
                 if field.field == "penitentiary_related":
                     if value not in {"true", "false"}:
                         discarded.append(field.field)

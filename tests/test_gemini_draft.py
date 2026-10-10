@@ -249,7 +249,6 @@ def test_sensitive_title_is_checked_even_when_body_omits_that_detail():
 
 @pytest.mark.parametrize("mutate", [
     lambda doc: doc.update(human_reviewed=True),
-    lambda doc: doc["record"]["facts"].update(value="No citado", citations=[]),
     lambda doc: doc["record"]["facts"].update(value={"unsupported": "object"}),
 ])
 def test_invalid_or_promoted_model_fields_fail_with_sanitized_errors(mutate):
@@ -314,6 +313,54 @@ def test_omitted_wire_fields_expand_to_explicit_unknowns_without_inventing_value
     dossier = result["record"]["dossier"]
     assert dossier["event_date"]["value"] is None and dossier["event_date"]["status"] == "not_reported"
     assert dossier["instrument"]["value"] is None and dossier["hypothesis"]["value"] is None
+
+
+@pytest.mark.parametrize("values, refs", [([], []), (["", " "], []), ([], ["e1"])])
+def test_empty_wire_values_are_unknown_and_do_not_discard_other_grounded_fields(values, refs):
+    envelope = json.loads(response().body)
+    part = envelope["candidates"][0]["content"]["parts"][0]
+    wire = json.loads(part["text"])
+    wire["record"].append({"field": "instrument", "values": values, "evidence_refs": refs})
+    part["text"] = json.dumps(wire)
+    result = run(session=Session([Response(envelope)]))
+    assert result["status"] == "draft"
+    assert "instrument" in result["extraction"]["rejected_fields"]
+    assert result["record"]["dossier"]["instrument"] == {
+        "value": None, "status": "not_reported", "evidence_refs": [],
+        "note": "Dato no extraído del texto consultado; no se infiere ni se considera inexistente.",
+    }
+    assert result["record"]["dossier"]["facts"]["evidence_refs"] == ["article-p3"]
+
+
+def test_empty_field_cannot_smuggle_an_invalid_reference():
+    envelope = json.loads(response().body)
+    part = envelope["candidates"][0]["content"]["parts"][0]
+    wire = json.loads(part["text"])
+    wire["record"].append({"field": "instrument", "values": [], "evidence_refs": ["e999"]})
+    part["text"] = json.dumps(wire)
+    with pytest.raises(GeminiDraftError, match="invalid_evidence_reference"):
+        run(session=Session([Response(envelope)]))
+
+
+def test_value_without_evidence_is_discarded_instead_of_becoming_a_claim():
+    document = extraction()
+    document["record"]["department"] = claim("Ubicación inventada", citation())
+    document["record"]["department"]["citations"] = []
+    result = run(document)
+    assert result["status"] == "draft" and result["record"]["department"] is None
+    assert "department" in result["extraction"]["rejected_fields"]
+    assert "Ubicación inventada" not in json.dumps(result)
+    assert result["record"]["dossier"]["facts"]["evidence_refs"] == ["article-p3"]
+
+
+def test_missing_evidence_for_required_facts_sends_the_item_to_review_without_a_record():
+    document = extraction()
+    document["record"]["facts"] = claim("Afirmación sin ningún respaldo", citation())
+    document["record"]["facts"]["citations"] = []
+    result = run(document)
+    assert result["status"] == "needs_scope_review" and result["record"] is None
+    assert result["extraction"]["rejected_fields"] == ["facts"]
+    assert "Afirmación sin ningún respaldo" not in json.dumps(result)
 
 
 def test_prose_fragments_join_in_order_but_ambiguous_scalar_facts_stay_unknown():
