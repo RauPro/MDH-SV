@@ -44,6 +44,9 @@ def draft(item, *, status="draft"):
         record["dossier"]["evidence"][0]["url"] = item["source_url"]
         value["record"] = record
         value["classification"]["record_type"] = record["record_type"]
+    from mdh_pipeline.news_dossier import empty_news_dossier, from_legacy_record
+    value["news_dossier"] = (from_legacy_record(value) if value["record"] else
+                              empty_news_dossier(item, extraction_status="processed"))
     return value
 
 
@@ -98,7 +101,7 @@ class PrivateInbox:
         if method == "GET" and path.endswith("/git/trees/main"):
             if self.tree_response is not None:
                 return deepcopy(self.tree_response)
-            return {"truncated": False, "tree": [{"path": file["path"], "type": "blob"}
+            return {"truncated": False, "tree": [{"path": file["path"], "type": "blob", "sha": file["sha"]}
                 for file in self.files.values() if isinstance(file, dict)]}
         if method == "GET" and path.endswith("/issues"):
             page = kwargs["params"]["page"]
@@ -218,6 +221,7 @@ def test_human_decision_while_model_runs_is_never_reversed(decision):
     report = run(inbox, workers)
     assert inbox.issues[1]["labels"] == [{"name": decision}]
     assert not any(method == "PATCH" for method, _, _ in inbox.calls)
+    assert not inbox.files, "Do not persist new drafts after observing a human decision"
     assert_private_minimal(inbox, report)
 
 
@@ -267,7 +271,9 @@ def test_ordinary_failure_records_safe_code_and_backoff_without_body_or_error_me
     assert state["attempts"] == 1 and state["error_code"] == "extraction_failed"
     assert datetime.fromisoformat(state["next_retry_at"]) == NOW + timedelta(hours=1)
     assert report["errors"] == 1 and report["stopped_reason"] is None
-    assert inbox.path("drafts", item["id"]) not in inbox.files
+    failed_draft = inbox.document("drafts", item["id"])
+    assert failed_draft["news_dossier"]["extraction_status"] == "error"
+    assert all(field["status"] == "pending" for field in failed_draft["news_dossier"]["fields"].values())
     assert_private_minimal(inbox, report)
 
 
@@ -466,3 +472,178 @@ def test_validation_diagnostics_preserve_only_known_schema_paths_and_types():
     assert details[0] == {"field":"record.3.values", "type":"too_long"}
     assert details[1] == {"field":"unknown", "type":"validation_error"}
     assert KEY not in json.dumps(details) and FULL_BODY not in json.dumps(details)
+
+
+def test_legacy_case_migrates_without_fetching_source_or_calling_gemini():
+    item = candidate(); inbox = PrivateInbox([item]); workers = Extractors()
+    legacy = draft(item); legacy.pop("news_dossier")
+    original_record = deepcopy(legacy["record"])
+    inbox.store("drafts", item["id"], legacy)
+    before_sha = inbox.files[inbox.path("drafts", item["id"])]["sha"]
+    report = run(inbox, workers)
+    migrated = inbox.document("drafts", item["id"])
+    assert report["migrated"] == report["skipped_existing"] == 1
+    assert report["attempted"] == 0
+    assert not workers.fetch_calls and not workers.model_calls
+    assert migrated["record"] == original_record
+    assert migrated["news_dossier"]["extraction_status"] == "processed"
+    assert migrated["news_dossier"]["human_reviewed"] is False
+    assert any(field["status"] == "pending" for field in migrated["news_dossier"]["fields"].values())
+    draft_put = next(kwargs["json"] for method, path, kwargs in inbox.calls if method == "PUT" and "/drafts/" in path)
+    assert draft_put["sha"] == before_sha
+    reads = len(inbox.reads)
+    assert run(inbox, workers)["skipped_existing"] == 1
+    assert len(inbox.reads) == reads
+
+
+def test_offline_legacy_migration_is_bounded_per_run_and_resumes_without_ai():
+    items = [candidate(number) for number in (1, 2, 3)]
+    inbox = PrivateInbox(items); workers = Extractors()
+    for item in items:
+        legacy = draft(item); legacy.pop("news_dossier")
+        inbox.store("drafts", item["id"], legacy)
+    for index in range(3):
+        report = run(inbox, workers, limit=1)
+        assert report["migrated"] == 1
+        assert report["offline_candidates"] == 1, "Migrating and repairing one candidate share a slot"
+        assert report["attempted"] == 0
+        assert report["deferred"] == 2 - index
+        migrated = [item for item in items if "news_dossier" in inbox.document("drafts", item["id"])]
+        assert len(migrated) == index + 1
+        for item in items[index + 1:]:
+            issue = inbox.issues[items.index(item) + 1]
+            assert "<!-- mdh-news-dossier:" not in issue["body"]
+    assert not workers.fetch_calls and not workers.model_calls
+    assert run(inbox, workers, limit=1)["migrated"] == 0
+
+
+def test_legacy_error_skeletons_share_offline_budget_even_during_retry_cooldown():
+    items = [candidate(number) for number in (1, 2, 3)]
+    inbox = PrivateInbox(items); workers = Extractors()
+    for item in items:
+        inbox.store("processing", item["id"], processing(item, attempts=3,
+                    next_retry_at=(NOW + timedelta(hours=6)).isoformat()))
+    for count in (1, 2, 3):
+        before_puts = len([path for method, path, _ in inbox.calls if method == "PUT" and "/drafts/" in path])
+        report = run(inbox, workers, limit=1)
+        after_puts = len([path for method, path, _ in inbox.calls if method == "PUT" and "/drafts/" in path])
+        assert after_puts - before_puts == 1
+        assert report["offline_candidates"] == report["partial_dossiers"] == 1
+        assert report["attempted"] == report["skipped_existing"] == 0
+        assert report["deferred"] == 3
+        assert sum(inbox.path("drafts", item["id"]) in inbox.files for item in items) == count
+        assert all("<!-- mdh-news-dossier:" not in issue["body"] for issue in inbox.issues.values())
+    assert not workers.fetch_calls and not workers.model_calls
+
+
+def test_unmarked_completed_dossier_repairs_share_offline_budget_and_resume():
+    items = [candidate(number) for number in (1, 2, 3)]
+    inbox = PrivateInbox(items); workers = Extractors()
+    for item in items:
+        inbox.store("drafts", item["id"], draft(item))
+    for count in (1, 2, 3):
+        before = len([path for method, path, _ in inbox.calls if method == "PUT" and "/processing/" in path])
+        report = run(inbox, workers, limit=1)
+        after = len([path for method, path, _ in inbox.calls if method == "PUT" and "/processing/" in path])
+        assert after - before == 1
+        assert report["offline_candidates"] == 1
+        assert report["attempted"] == 0
+        assert report["deferred"] == 3 - count
+        assert sum("<!-- mdh-news-dossier:v1:" in issue["body"] for issue in inbox.issues.values()) == count
+    assert not workers.model_calls and not workers.fetch_calls
+    assert not [path for method, path, _ in inbox.calls if method == "PUT" and "/drafts/" in path]
+
+
+def test_all_runner_writes_are_paced_including_migration_and_marker_repairs():
+    from mdh_pipeline.gemini_review import _PacedInbox
+    clock = [0.0]
+    writes, sleeps = [], []
+    class Client:
+        def call(self, method, path, **kwargs):
+            if method != "GET": writes.append(clock[0])
+            return {}
+    def sleep(seconds):
+        sleeps.append(seconds)
+        clock[0] += seconds
+    paced = _PacedInbox(Client(), sleep, lambda: clock[0])
+    for _ in range(85):
+        paced.call("GET", "/read")
+        paced.call("PUT", "/private/drafts/fixture")
+    assert len(writes) == paced.write_calls == 85
+    assert all(b - a >= 2 for a, b in zip(writes, writes[1:]))
+    assert max(sum(start <= value < start + 60 for value in writes) for start in writes) <= 30
+    assert len(sleeps) == 84, "Reads are not unnecessarily delayed"
+
+
+@pytest.mark.parametrize("legacy_status", ["needs_scope_review", "needs_privacy_review"])
+def test_legacy_triage_gets_pending_worksheet_then_new_extraction_not_a_false_complete_marker(legacy_status):
+    item = candidate(historical=True, scope="international_context")
+    inbox = PrivateInbox([item]); workers = Extractors(status=legacy_status)
+    legacy = draft(item, status=legacy_status); legacy.pop("news_dossier")
+    inbox.store("drafts", item["id"], legacy)
+    inbox.store("processing", item["id"], processing(item, attempts=3, status="completed"))
+    report = run(inbox, workers)
+    assert report["migrated"] == 1 and report["attempted"] == 1
+    assert workers.model_calls == [item["id"]]
+    puts = [json.loads(base64.b64decode(kwargs["json"]["content"])) for method, path, kwargs in inbox.calls if method == "PUT" and "/drafts/" in path]
+    assert puts[0]["status"] == "pending"
+    assert all(field["status"] == "pending" for field in puts[0]["news_dossier"]["fields"].values())
+    assert puts[-1]["news_dossier"]["extraction_status"] == "processed"
+    assert puts[-1]["record"] is None
+    assert inbox.document("processing", item["id"])["attempts"] == 1
+    assert inbox.document("processing", item["id"])["dossier_schema_version"] == 1
+
+
+def test_unavailable_source_has_pending_worksheet_and_is_not_skipped_as_completed():
+    item = candidate(); inbox = PrivateInbox([item]); workers = Extractors()
+    calls = []
+    def failed_fetch(metadata):
+        calls.append(metadata)
+        error = RuntimeError(FULL_BODY)
+        error.code = "source_access_restricted"
+        raise error
+    report = process_queue(inbox, api_key=KEY, model="gemini-2.5-flash", fetch=failed_fetch,
+                           extract=workers.extract, now=NOW, sleep=lambda _: None)
+    assert report["errors"] == report["partial_dossiers"] == 1
+    document = inbox.document("drafts", item["id"])
+    assert document["status"] == document["news_dossier"]["extraction_status"] == "source_unavailable"
+    assert all(field["status"] == "pending" for field in document["news_dossier"]["fields"].values())
+    assert "<!-- mdh-news-dossier:" not in inbox.issues[1]["body"]
+    immediate = run(inbox, workers)
+    assert immediate["deferred"] == 1 and immediate["skipped_existing"] == 0
+    later = process_queue(inbox, api_key=KEY, model="gemini-2.5-flash", fetch=workers.fetch,
+                          extract=workers.extract, now=NOW + timedelta(hours=2), sleep=lambda _: None)
+    assert later["attempted"] == 1 and later["skipped_existing"] == 0
+    assert inbox.document("drafts", item["id"])["news_dossier"]["extraction_status"] == "processed"
+    assert_private_minimal(inbox, later)
+
+
+def test_fastpath_marker_is_bound_to_exact_blob_and_cannot_hide_a_modified_invalid_worksheet():
+    item = candidate(); inbox = PrivateInbox([item]); workers = Extractors()
+    run(inbox, workers)
+    document = inbox.document("drafts", item["id"])
+    document["news_dossier"]["candidate_id"] = "0" * 64
+    inbox.store("drafts", item["id"], document)
+    with pytest.raises(ValueError, match="invalid_news_dossier"):
+        run(inbox, workers)
+    assert len(workers.model_calls) == 1
+
+
+def test_historical_runner_fair_share_reaches_international_and_unknown_news():
+    items = [candidate(n, historical=True) for n in range(1, 21)]
+    unknown = candidate(30, historical=True, scope="undetermined")
+    international = candidate(31, historical=True, scope="international_context")
+    inbox = PrivateInbox([*items, unknown, international]); workers = Extractors(status="needs_scope_review")
+    report = run(inbox, workers, limit=6)
+    assert unknown["id"] in workers.model_calls and international["id"] in workers.model_calls
+    assert report["attempted"] == report["news_dossiers"] == 6
+
+
+def test_error_skeleton_does_not_bypass_attempt_limit_and_is_preserved():
+    item = candidate(); inbox = PrivateInbox([item]); workers = Extractors()
+    inbox.store("processing", item["id"], processing(item, attempts=3))
+    report = run(inbox, workers)
+    assert report["attempted"] == 0 and report["deferred"] == 1
+    assert not workers.model_calls
+    assert inbox.document("drafts", item["id"])["news_dossier"]["extraction_status"] == "source_unavailable"
+    assert run(inbox, workers)["skipped_existing"] == 0

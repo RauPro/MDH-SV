@@ -10,6 +10,7 @@ from mdh_pipeline.gemini_draft import (
     _source_anchors,
 )
 from mdh_pipeline.publication import Publication
+from mdh_pipeline.news_dossier import FIELD_NAMES, validate_news_dossier
 
 API_KEY = "unit-test-key-not-a-real-secret"
 MODEL = "gemini-3.8-flash"
@@ -132,6 +133,8 @@ def test_grounded_result_retains_human_review_barrier_and_no_source_prose():
     assert inputs()[1]["text"] not in json.dumps(result, ensure_ascii=False)
     assert "article-p3" in record["dossier"]["facts"]["evidence_refs"]
     assert result["extraction"]["penitentiary_related_unknown"] is True
+    assert validate_news_dossier(result["news_dossier"])["extraction_status"] == "processed"
+    assert result["news_dossier"]["human_reviewed"] is False
 
 
 def test_request_uses_header_only_fixed_endpoint_json_schema_and_bounds():
@@ -445,7 +448,8 @@ def test_overview_report_preserves_event_fields_as_not_applicable_even_when_mode
     for field in ("department", "municipality", "public_place"):
         assert record["dossier"]["location"][field]["value"] is None
         assert record["dossier"]["location"][field]["status"] == "not_applicable"
-    assert {"department", "municipality", "event_date", "event_time"} <= set(result["extraction"]["rejected_fields"])
+    assert {"department", "municipality", "event_date", "event_time"} <= set(result["extraction"]["case_rejected_fields"])
+    assert result["news_dossier"]["fields"]["event_date"]["value"] == "2025-08-27"
 
 
 @pytest.mark.parametrize("precision, text, start, end, published", [
@@ -469,9 +473,107 @@ def test_inconsistent_or_future_event_interval_becomes_unknown_without_inventing
     record = result["record"]
     assert result["status"] == "draft" and record["incident_date"] is None
     assert record["incident_date_end"] is None and record["date_precision"] == "unknown"
-    assert "event_date" in result["extraction"]["rejected_fields"]
+    assert "event_date" in set(result["extraction"]["rejected_fields"] + result["extraction"]["case_rejected_fields"])
     assert record["dossier"]["event_date"]["status"] == "not_reported"
     assert record["dossier"]["facts"]["evidence_refs"]
+
+
+def test_foreign_or_unrelated_news_keeps_a_complete_research_worksheet_without_a_case():
+    candidate, article = inputs("El texto sitúa los hechos en Guatemala, departamento de Quetzaltenango.")
+    document = extraction()
+    document["jurisdiction"] = "other"
+    document["relevance"] = "not_relevant"
+    envelope = json.loads(response(document).body)
+    part = envelope["candidates"][0]["content"]["parts"][0]
+    wire = json.loads(part["text"])
+    wire["scope_evidence"]["jurisdiction"] = ["e4"]
+    wire["record"] = [item for item in wire["record"] if item["field"] not in {"alleged_violation", "department"}]
+    wire["record"] += [{"field": "country", "values": ["Guatemala"], "evidence_refs": ["e4"]},
+                       {"field": "department", "values": ["Quetzaltenango"], "evidence_refs": ["e4"]}]
+    wire["not_reported_fields"] = ["alleged_violation", "instrument"]
+    part["text"] = json.dumps(wire)
+    result = extract_draft(candidate, article, api_key=API_KEY, model=MODEL, request_session=Session([Response(envelope)]))
+    assert result["record"] is None and result["status"] == "needs_scope_review"
+    news = validate_news_dossier(result["news_dossier"])
+    assert set(news["fields"]) == set(FIELD_NAMES)
+    assert news["fields"]["country"]["value"] == "Guatemala"
+    assert news["fields"]["department"]["value"] == "Quetzaltenango"
+    assert news["fields"]["summary"]["status"] == "reported"
+    assert news["fields"]["alleged_violation"]["value"] is None
+    assert news["fields"]["alleged_violation"]["status"] == "not_reported"
+    assert news["human_reviewed"] is False
+
+
+def test_empty_model_record_still_has_a_dossier_and_absence_requires_an_explicit_assessment():
+    document = extraction()
+    document["record"] = None
+    document["not_reported_fields"] = ["affected_persons", "instrument"]
+    result = run(document)
+    news = result["news_dossier"]
+    assert news["extraction_status"] == "processed" and set(news["fields"]) == set(FIELD_NAMES)
+    assert news["fields"]["affected_persons"]["status"] == "not_reported"
+    assert news["fields"]["facts"]["status"] == "pending"
+    assert news["fields"]["facts"]["value"] is None
+    assert result["record"] is None
+
+
+def test_privacy_produces_protected_fields_even_for_foreign_news_without_retaining_generated_details():
+    document = extraction()
+    document["jurisdiction"] = "other"
+    result = run(document, article_extra="La adolescente fue identificada en la publicación original.")
+    assert result["status"] == "needs_privacy_review" and result["record"] is None
+    news = validate_news_dossier(result["news_dossier"])
+    assert all(field["status"] == "withheld" and field["value"] is None for field in news["fields"].values())
+    assert result["grounding"] == {}
+    assert '"quote"' not in json.dumps(news)
+    assert extraction()["record"]["summary"]["value"] not in json.dumps(news)
+
+
+def test_readable_news_without_a_publication_date_can_be_processed_without_inventing_one():
+    candidate, article = inputs()
+    candidate["published_date"] = article["published_date"] = None
+    result = extract_draft(candidate, article, api_key=API_KEY, model=MODEL, request_session=Session([response()]))
+    assert result["record"] is None
+    assert result["news_dossier"]["published_date"] is None
+    assert result["news_dossier"]["extraction_status"] == "processed"
+    assert result["news_dossier"]["fields"]["facts"]["status"] == "reported"
+
+
+def test_case_only_validation_failure_does_not_erase_the_valid_news_dossier():
+    document = extraction()
+    document["record"]["title"]["value"] = "T" * 301
+    result = run(document)
+    assert result["record"] is None
+    assert result["news_dossier"]["extraction_status"] == "processed"
+    assert result["news_dossier"]["fields"]["summary"]["status"] == "reported"
+    assert result["extraction"]["case_validation_error"] == "invalid_generated_draft"
+    assert "T" * 301 not in json.dumps(result)
+
+
+def test_truncated_text_limits_the_scope_of_a_not_mentioned_statement():
+    candidate, article = inputs()
+    article["truncated"] = True
+    document = extraction()
+    document["not_reported_fields"] = ["instrument"]
+    result = extract_draft(candidate, article, api_key=API_KEY, model=MODEL, request_session=Session([response(document)]))
+    field = result["news_dossier"]["fields"]["instrument"]
+    assert field["status"] == "not_reported" and "recortado" in field["note"]
+
+
+def test_a_rejected_value_is_pending_not_falsely_described_as_absent_from_the_article():
+    document = extraction()
+    document["record"]["reported_actors"] = claim(["Actor no respaldado"], citation("p3", "agentes policiales"))
+    result = run(document)
+    field = result["news_dossier"]["fields"]["reported_actors"]
+    assert field["status"] == "pending" and field["value"] is None
+    assert "Actor no respaldado" not in json.dumps(result)
+
+
+def test_model_cannot_assert_reported_and_absent_for_the_same_field():
+    document = extraction()
+    document["not_reported_fields"] = ["facts"]
+    with pytest.raises(GeminiDraftError, match="contradictory_field_status"):
+        run(document)
 
 
 def test_uncited_scope_and_automated_certainty_are_rejected():

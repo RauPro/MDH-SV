@@ -136,10 +136,11 @@ requiere revisar la fuente y sus riesgos. Este colector no modifica
 La cola periódica de RSS mantiene su proceso independiente de aprobación humana.
 
 `python -m mdh_pipeline.history_review --limit 20` permite transferir referencias
-a esa misma cola privada en lotes acotados. Prioriza indicios de El Salvador y luego
-las referencias sin determinar; dentro de cada grupo procesa las más antiguas.
-Excluye el contexto internacional por defecto. Solo el operador puede incluirlo
-expresamente con `--include-international`, y se atiende después de los otros grupos.
+a esa misma cola privada en lotes acotados. Da más turnos a los indicios de El Salvador y reserva turnos para los demás
+ámbitos; dentro de cada grupo procesa las referencias más antiguas.
+Incluye por defecto también el contexto internacional: todas las noticias pueden
+tener ficha. La rotación reserva turnos para las referencias por determinar e
+internacionales; `--exclude-international` es una exclusión explícita del operador.
 Los contadores `eligible_references`, `remaining` y `already_in_review_queue` se
 refieren al conjunto elegible; `excluded_international` explica la exclusión.
 Requiere `GH_TOKEN` y

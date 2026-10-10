@@ -48,6 +48,7 @@ jobs:
       - name: Verify bibliography publication boundary
         run: |
           pytest -q tests/test_history.py tests/test_archive_sources.py
+          python -m mdh_pipeline.news_publication
           npm --prefix apps/web test -- src/newsArchive.test.ts
       - name: Commit bibliography and coverage only
         run: |
