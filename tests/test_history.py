@@ -48,6 +48,43 @@ def test_reference_is_unreviewed_bibliography_not_a_case():
     validate_reference(reference, SOURCE)
 
 
+def test_html_archive_metadata_preserves_html_urls_and_does_not_invent_a_post_id():
+    from mdh_pipeline.history import reference_from_metadata
+    source = next(s for s in SOURCES if s["id"] == "el-diario-de-hoy")
+    url = "https://historico.elsalvador.com/historico/123/detenciones.html"
+    result = reference_from_metadata("Denuncian detenciones en El Salvador", url,
+        "2013-02-01", source, date(2010, 1, 1), END, NOW)
+    assert result["source_url"] == url
+    assert result["discovery"]["method"] == "html_article_metadata"
+    assert result["discovery"]["source_post_id"] is None
+    assert result["published_date"] == "2013-02-01"
+    validate_reference(result, source)
+    result["discovery"]["method"] = "wordpress_rest_title_screen"
+    with pytest.raises(ValueError, match="discovery"):
+        validate_reference(result, source)
+
+
+def test_html_metadata_requires_a_full_publisher_date_and_rejects_unapproved_hosts():
+    from mdh_pipeline.history import reference_from_metadata
+    source = next(s for s in SOURCES if s["id"] == "el-mundo")
+    for published in ("2013", "2013-02", "2013-02-30"):
+        with pytest.raises(ValueError):
+            reference_from_metadata("Detenciones", "https://diario.elmundo.sv/nacionales/detenciones",
+                published, source, date(2010, 1, 1), END, NOW)
+    with pytest.raises(ValueError):
+        reference_from_metadata("Detenciones", "https://evil.elmundo.sv/nacionales/detenciones",
+            "2013-02-01", source, date(2010, 1, 1), END, NOW)
+
+
+def test_plural_extrajudicial_executions_are_not_lost_by_title_screening():
+    from mdh_pipeline.history import reference_from_metadata
+    source = next(s for s in SOURCES if s["id"] == "el-mundo")
+    result = reference_from_metadata("PDDH señala a policía y ejército por ejecuciones extrajudiciales",
+        "https://diario.elmundo.sv/nacionales/ejecuciones-extrajudiciales", "2016-04-25",
+        source, date(2010, 1, 1), date(2026, 10, 10), NOW)
+    assert result["topics"] == ["violencia_y_desapariciones"]
+
+
 def test_keyword_screen_and_quote_minimization():
     assert reference_from_post(post(title="Resultado del partido de fútbol"), SOURCE, START, END, NOW) is None
     item = post(title="<b>Detención &amp; tortura</b> " + "palabra " * 100)

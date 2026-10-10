@@ -33,6 +33,12 @@ curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2010-01-01&limit=25'
 
 El objetivo histórico es recuperar noticias desde 2010. Lea `meta.coverage.start_date` y `meta.coverage.end_date` para conocer el intervalo solicitado por la versión consultada, junto con los estados por medio y mes para evaluar su avance. Un intervalo amplio no acredita cobertura completa ni la disponibilidad de noticias en todos sus meses. La referencia IEEE se conserva como antecedente independiente de ese inicio.
 
+`discovery.method` distingue `wordpress_rest_title_screen` de `html_article_metadata`.
+En este último, `source_post_id` puede ser nulo; no se inventa un identificador del
+medio. `meta.coverage.sources[].collection`, cuando existe, explica el canal y las
+restricciones del recorrido. Una fuente registrada con acceso restringido no
+equivale a una fuente recolectada satisfactoriamente.
+
 `q` busca en títulos, resúmenes, etiquetas y los campos públicos del dossier: hechos, personas o grupos descritos por la fuente, actores, grupos vulnerables, temas y lugar público. Ignora tildes y mayúsculas. `publisher`, `department` y `category` requieren el valor completo; `department=unknown` busca ubicación no determinada.
 
 **Las fechas tienen significados distintos.** `date_from` y `date_to` filtran la publicación de la fuente. `incident_date_from` y `incident_date_to` filtran el período del hecho, incluyendo intervalos que se solapan; excluyen hechos de fecha desconocida. Los límites son inclusivos. La precisión mensual/anual de una ficha no se convierte en certeza sobre un día: conserve `date_precision` y `date_note`.

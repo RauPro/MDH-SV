@@ -1,6 +1,6 @@
 """Resumable bibliography of public news, independent of reviewed case publication.
 
-Only approved publishers' WordPress metadata is read. Article bodies, people extraction,
+Only approved publishers' public metadata is retained. Article bodies, people extraction,
 and claims of violations are deliberately absent from this catalog. Selection is a
 documented title/URL keyword screen, not editorial or jurisdictional verification.
 """
@@ -23,22 +23,18 @@ from zoneinfo import ZoneInfo
 import requests
 
 from .review_queue import canonical_url, normalize, require_public_dns
+from .publishers import SOURCES
 
 ROOT = Path(__file__).resolve().parents[4]
 START_DATE = date(2010, 1, 1)
-SCREEN_VERSION = 2
+SCREEN_VERSION = 3
 SCOPE_VERSION = 1
-SOURCES = (
-    {"id": "co-latino", "name": "Diario Co Latino", "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts", "hosts": ["www.diariocolatino.com", "diariocolatino.com"]},
-    {"id": "gatoencerrado", "name": "GatoEncerrado", "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts", "hosts": ["gatoencerrado.news"]},
-    {"id": "factum", "name": "Revista Factum", "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts", "hosts": ["www.revistafactum.com", "revistafactum.com"]},
-)
 TOPICS = {
     "detencion_y_debido_proceso": ("regimen de excepcion", "regimen-de-excepcion", "deten", "detencion", "captur", "habeas", "inocente", "debido proceso", "debido-proceso", "defensa publica"),
     "condiciones_de_reclusion": ("carcel", "prision", "penitenciari", "custodia", "bartolina", "tortura", "cecot", "mariona", "apanteos"),
     "libertad_de_expresion": ("periodis", "censura", "libertad de expresion", "libertad-de-expresion", "libertad de prensa", "libertad-de-prensa"),
     "defensores_y_sociedad_civil": ("defensor", "cristosal", "socorro juridico", "socorro-juridico", "udapt", "oudh", "idelca", "movir", "sindical"),
-    "violencia_y_desapariciones": ("desaparecid", "desaparicion", "feminicid", "homicid", "asesin", "violencia contra", "violencia-contra", "violencia de genero", "violencia-de-genero", "ejecucion extrajudicial"),
+    "violencia_y_desapariciones": ("desaparecid", "desaparicion", "feminicid", "homicid", "asesin", "violencia contra", "violencia-contra", "violencia de genero", "violencia-de-genero", "ejecucion extrajudicial", "ejecuciones extrajudiciales", "ejecuciones-extrajudiciales"),
     "violencia_sexual_y_discriminacion": ("violacion", "abuso sexual", "abuso-sexual", "acoso sexual", "acoso-sexual", "discriminacion", "lgbti", "transfobia", "homofobia", "racismo"),
     "derechos_sociales_y_ambientales": ("desaloj", "derecho al agua", "derecho-al-agua", "derechos laborales", "derechos-laborales", "despidos", "mineria", "extractiv", "contaminacion"),
     "derechos_humanos": ("derechos humanos", "derechos-humanos", "ddhh", "derechos de la ninez", "derechos-de-la-ninez", "derechos de las mujeres", "derechos-de-las-mujeres"),
@@ -71,11 +67,11 @@ POLICY = {
     "screen_version": SCREEN_VERSION,
     "scope_version": SCOPE_VERSION,
     "scope_method": "Indicio conservador de relación territorial basado en términos explícitos del título y URL. El Salvador tiene prioridad cuando aparecen ambos contextos. scope_terms conserva los fragmentos detectados normalizados (sin tildes, en minúsculas y con separadores de URL convertidos en espacios). No confirma jurisdicción. Las referencias históricas anteriores a este filtro usan el título abreviado guardado y su URL; las nuevas capturas usan el título completo antes de abreviarlo.",
-    "selection_method": "Coincidencia automática de términos en título y URL; sin lectura del cuerpo.",
+    "selection_method": "Coincidencia automática de términos en título y URL. Se conservan metadatos públicos; no cuerpos periodísticos.",
     "review_status": "not_reviewed",
     "notice": "Archivo bibliográfico parcial de noticias candidatas. No acredita violaciones, víctimas, jurisdicción salvadoreña ni hechos verificados. No forma parte del recuento de casos. La revisión editorial y de privacidad es un proceso separado.",
     "coverage_limitations": [
-        "Tres medios configurados; no representa toda la prensa ni todas las violaciones.",
+        "La selección de medios configurados no representa toda la prensa ni todas las violaciones.",
         "El filtro de títulos y URL puede omitir noticias pertinentes y seleccionar noticias de otros países o sin una violación.",
         "La fecha es la publicación declarada por el medio, no la fecha del hecho.",
         "La enumeración de un mes solo acredita que se recorrió su API pública; no la integridad del archivo del medio.",
@@ -133,18 +129,33 @@ def read_json(path: Path, default):
 
 def reference_from_post(post, source, start, end, retrieved_at):
     """Return a minimal reference; never invent a date or infer a victim/violation."""
-    if not isinstance(post, dict) or not isinstance(post.get("id"), int):
+    if not isinstance(post, dict) or type(post.get("id")) is not int or post["id"] < 1:
         raise ValueError("Malformed WordPress post")
     try:
         published = datetime.fromisoformat(post["date"]).date()
     except (KeyError, TypeError, ValueError) as error:
         raise ValueError("Missing or invalid publisher date") from error
+    raw_title = post.get("title", {}).get("rendered", "")
+    return reference_from_metadata(raw_title, post.get("link", ""), published.isoformat(),
+        source, start, end, retrieved_at, source_post_id=post["id"])
+
+
+def reference_from_metadata(title, url, published_date, source, start, end,
+                            retrieved_at, source_post_id=None):
+    """A publisher-declared date is required; never derive it from sitemap lastmod."""
+    published = date.fromisoformat(published_date)
     if not start <= published <= end:
         raise ValueError("Publisher date outside requested interval")
-    url = canonical_url(post.get("link", ""), set(source["hosts"]))
-    # A slash variant and tracking query must not produce separate news references.
-    url = url.rstrip("/") + "/"
-    raw_title = post.get("title", {}).get("rendered", "")
+    url = canonical_url(url, set(source["hosts"]))
+    wordpress = source.get("kind", "wordpress") == "wordpress"
+    if wordpress:
+        if type(source_post_id) is not int or source_post_id < 1:
+            raise ValueError("Missing WordPress post identifier")
+        # WP slash variants share one identity; .html/.htm archive paths must stay intact.
+        url = url.rstrip("/") + "/"
+    elif source_post_id is not None and (type(source_post_id) is not int or source_post_id < 1):
+        raise ValueError("Invalid publisher post identifier")
+    raw_title = title
     if not isinstance(raw_title, str):
         raise ValueError("Invalid publisher title")
     title = " ".join(html.unescape(re.sub(r"<[^>]*>", " ", raw_title)).split())
@@ -168,7 +179,7 @@ def reference_from_post(post, source, start, end, retrieved_at):
         "record_type": "news_reference",
         "topics": topics,
         **scope_hint(title, url),
-        "discovery": {"method": "wordpress_rest_title_screen", "endpoint": source["endpoint"], "source_post_id": post["id"], "retrieved_at": retrieved_at},
+        "discovery": {"method": "wordpress_rest_title_screen" if wordpress else "html_article_metadata", "endpoint": source["endpoint"], "source_post_id": source_post_id, "retrieved_at": retrieved_at},
     }
 
 
@@ -228,6 +239,10 @@ def collect_source(source, start, end, folder, *, max_pages=300, refresh=False,
     """Checkpoint each page; a failed month does not erase prior references."""
     if not 1 <= max_pages <= 1000:
         raise ValueError("Page-attempt budget must be between 1 and 1000")
+    if source.get("kind", "wordpress") != "wordpress":
+        from .archive_sources import collect_html_archive
+        return collect_html_archive(source, start, end, folder, max_pages=max_pages,
+                                    refresh=refresh, now=now)
     now = now or datetime.now(timezone.utc).isoformat()
     state_path = folder / (source["id"] + ".json")
     state = read_json(state_path, {"schema_version": 1, "source_id": source["id"], "months": {}, "records": []})
@@ -364,6 +379,13 @@ def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=
             "status": "enumerated" if all(m["status"] == "enumerated" for m in months) else "partial",
             "records": len(selected), "first_published_date": dates[0] if dates else None,
             "last_published_date": dates[-1] if dates else None, "months": months})
+        if source.get("kind", "wordpress") != "wordpress":
+            collection = state.get("collection", {})
+            source_coverage[-1]["collection"] = {
+                "method": "html_article_metadata", "phase": collection.get("phase", "not_started"),
+                "access": source.get("access", "public"), "notice": source.get("notice", "Recorrido parcial de índices públicos; no prueba un archivo completo."),
+                "last_attempt_at": collection.get("last_attempt_at"),
+            }
     document = {"schema_version": 1, "generated_at": generated_at, "policy": POLICY,
         "paper": read_json(folder / "paper.json", {}),
         "coverage": {"start_date": start.isoformat(), "end_date": end.isoformat(), "timezone": "America/El_Salvador",
@@ -397,9 +419,12 @@ def validate_reference(reference, source):
     if (reference["scope_hint"] == "undetermined") != (len(terms) == 0):
         raise ValueError("Scope hint must retain the terms supporting it")
     discovery = reference["discovery"]
-    if set(discovery) != {"method", "endpoint", "source_post_id", "retrieved_at"} or discovery["method"] != "wordpress_rest_title_screen" or discovery["endpoint"] != source["endpoint"]:
+    wordpress = source.get("kind", "wordpress") == "wordpress"
+    expected_method = "wordpress_rest_title_screen" if wordpress else "html_article_metadata"
+    if set(discovery) != {"method", "endpoint", "source_post_id", "retrieved_at"} or discovery["method"] != expected_method or discovery["endpoint"] != source["endpoint"]:
         raise ValueError("Invalid discovery metadata")
-    if not isinstance(discovery["source_post_id"], int) or discovery["source_post_id"] < 1:
+    post_id = discovery["source_post_id"]
+    if (wordpress or post_id is not None) and (type(post_id) is not int or post_id < 1):
         raise ValueError("Invalid source post identifier")
     datetime.fromisoformat(discovery["retrieved_at"])
 

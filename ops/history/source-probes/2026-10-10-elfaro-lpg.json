@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-10-10",
+  "user_agent": "MDH-SV/2.4 source-discovery (+https://github.com/RauPro/MDH-SV)",
+  "procedure": "Small number of direct public HTTPS GET requests, verified TLS, no authentication, no implicit redirects or user-agent impersonation. No CAPTCHA, paywall or access-control bypass. Article bodies were not persisted.",
+  "observations": [
+    {
+      "publisher": "El Faro",
+      "url": "https://elfaro.net/robots.txt",
+      "http_status": 200,
+      "finding": "General web paths are not categorically disallowed; robots excludes /api*/ and administrative paths. No sitemap was declared."
+    },
+    {
+      "publisher": "El Faro",
+      "url": "https://elfaro.net/sitemap.xml",
+      "http_status": 404,
+      "finding": "No usable sitemap returned."
+    },
+    {
+      "publisher": "El Faro",
+      "url": "https://elfaro.net/",
+      "http_status": 200,
+      "finding": "Small landing page with links naming the beta/current site; no historical article listing."
+    },
+    {
+      "publisher": "El Faro",
+      "url": "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
+      "http_status": 200,
+      "finding": "Public editorial selection for 2010 with article links. Not an exhaustive archive; year/month in target URLs do not establish a complete publication date."
+    },
+    {
+      "publisher": "El Faro",
+      "url": "https://elfaro.net/es/201001/",
+      "http_status": 403,
+      "finding": "Cloudflare challenge page. No usable monthly listing. Access was not circumvented."
+    },
+    {
+      "publisher": "El Faro",
+      "url": "https://www.elfaro.net/es/201006/noticias/1967/",
+      "http_status": 403,
+      "discovered_from": "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
+      "finding": "One article followed from the public 2010 index returned a Cloudflare challenge, without usable publication date or article metadata. No alternate route was attempted."
+    },
+    {
+      "publisher": "La Prensa Gráfica",
+      "url": "https://www.laprensagrafica.com/robots.txt",
+      "http_status": 200,
+      "finding": "Robots allows named crawlers but sets User-agent: * / Disallow: /. The MDH-SV user agent is not among the named agents. No identity impersonation was attempted."
+    },
+    {
+      "publisher": "La Prensa Gráfica",
+      "url": "https://www.laprensagrafica.com/sitemap.xml",
+      "http_status": 403,
+      "finding": "Publisher security page explicitly says the request was blocked. No further automated article/archive requests were attempted."
+    }
+  ],
+  "operational_conclusion": {
+    "El Faro": "A limited public historical index was found, but automated article/monthly access tested was restricted. Do not invent exact dates from monthly URLs or represent the source as a working exhaustive archive collector.",
+    "La Prensa Gráfica": "Mark automated collection as restricted pending a permitted integration or publisher arrangement. Prior search-engine access to individual articles is not evidence that this collector is authorized or operational."
+  }
+}
