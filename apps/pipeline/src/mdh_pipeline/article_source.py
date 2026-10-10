@@ -26,6 +26,9 @@ MIN_TEXT_CHARS = 200
 USER_AGENT = "MDH-SV/2.3 source-review (+https://github.com/RauPro/MDH-SV)"
 ARTICLE_SELECTORS = (
     "[itemprop='articleBody']",
+    # Older Elementor single-post templates isolate the article in this widget;
+    # require its editorial parent so theme header/footer widgets cannot match.
+    "[data-elementor-type='single-post'] .elementor-widget-theme-post-content[data-widget_type='theme-post-content.default']",
     # Elementor renders the editorial body without <article>. Header/footer
     # templates also use wp-post, so requiring post-type=post is essential.
     "[data-elementor-type='wp-post'][data-elementor-post-type='post']",
