@@ -7,13 +7,23 @@ import catalog from '../__fixtures__/catalog.json';
 import { formatDate, parseCatalog } from '../catalog';
 import { NewsArchive } from './NewsArchive';
 import type { NewsArchiveData } from '../newsArchive';
+import { NEWS_DOSSIER_FIELDS, NEWS_DOSSIER_PENDING, pendingNewsDossier, type NewsDossier } from '../../../../shared/news-dossier.mjs';
 
-beforeEach(() => { vi.restoreAllMocks(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => fixture })); });
+const EMPTY = { schema_version: 1, dossiers: [] };
+function serve(archive: unknown = fixture, dossiers: unknown = EMPTY) {
+  vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: true, json: async () => url === '/archive/dossiers.json' ? dossiers : archive })));
+}
+function approved(): NewsDossier {
+  const dossier = pendingNewsDossier(fixture.records[0]);
+  dossier.extraction_status = 'processed'; dossier.human_reviewed = true; dossier.reviewed_by = 'reviewer'; dossier.reviewed_at = '2026-10-10'; dossier.review_notes = 'Fixture ficticia: revisión editorial explícita de fuente y privacidad.';
+  return dossier;
+}
+beforeEach(() => { vi.restoreAllMocks(); serve(); });
 const ready = async () => { render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>); await screen.findByText('3 noticias localizadas'); };
 it('discloses a registered but restricted publisher without inventing available news', async () => {
   const archive = structuredClone(fixture) as unknown as NewsArchiveData;
   archive.coverage.sources.push({ id: 'la-prensa-grafica', publisher: 'La Prensa Gráfica', endpoint: 'https://www.laprensagrafica.com/sitemap.xml', status: 'partial', records: 0, first_published_date: null, last_published_date: null, months: [], collection: { method: 'html_article_metadata', phase: 'restricted', access: 'restricted', notice: 'Pendiente de un canal autorizado.', last_attempt_at: null } });
-  vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => archive } as Response);
+  serve(archive);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('3 noticias localizadas');
   expect(screen.getByText(/Acceso automatizado restringido: La Prensa Gráfica/)).toBeInTheDocument();
@@ -24,7 +34,7 @@ it('discloses a registered but restricted publisher without inventing available 
 it('loads only public news, communicates review limits and exposes source/month coverage', async () => {
   await ready();
   expect(fetch).toHaveBeenCalledWith('/archive/news.json', expect.objectContaining({ signal: expect.any(AbortSignal) }));
-  expect(screen.getByText(/la jurisdicción salvadoreña y los hechos todavía no están evaluados/i)).toBeInTheDocument();
+  expect(screen.getByText(/Las etiquetas automáticas no confirman pertinencia, jurisdicción ni hechos/i)).toBeInTheDocument();
   expect(screen.getByRole('link', { name: 'Descargar archivo JSON' })).toHaveAttribute('href', '/archive/news.json');
   await userEvent.click(screen.getByText('Ver cobertura por medio y mes'));
   await userEvent.click(screen.getByText('GatoEncerrado · 1 referencias · API recorrida'));
@@ -33,7 +43,7 @@ it('loads only public news, communicates review limits and exposes source/month 
 it.each(['2010-01-01', '2014-06-01'])('shows the configured search start %s independently of the paper date and incomplete coverage', async start => {
   const archive = structuredClone(fixture);
   archive.coverage.start_date = start;
-  vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => archive } as Response);
+  serve(archive);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('3 noticias localizadas');
   expect(screen.getByText(`Periodo de búsqueda: del ${formatDate(start)} al ${formatDate(archive.coverage.end_date)}.`)).toBeInTheDocument();
@@ -62,7 +72,7 @@ it('starts with references to El Salvador and lets readers inspect other territo
   const archive = structuredClone(fixture);
   archive.records[1].scope_hint = 'international_context';
   archive.records[2].scope_hint = 'undetermined';
-  vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => archive } as Response);
+  serve(archive);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('1 noticia localizada');
   expect(screen.getByText('3 referencias · 3 medios · cobertura parcial.')).toBeInTheDocument();
@@ -81,8 +91,12 @@ it('opens bibliographic metadata, distinguishes unextracted fields and closes wi
   const trigger = screen.getByRole('button', { name: fixture.records[0].title });
   await userEvent.click(trigger);
   const dialog = screen.getByRole('dialog');
-  expect(within(dialog).getByText(/Extracción estructurada y revisión pendientes/)).toBeInTheDocument();
-  expect(within(dialog).getByText(/jurisdicción salvadoreña no ha sido evaluada/)).toBeInTheDocument();
+  expect(within(dialog).getByText(/No hay una ficha pública revisada asociada/)).toBeInTheDocument();
+  const sheet = within(dialog).getByRole('region', { name: 'Ficha estructurada de la noticia' });
+  expect(within(sheet).getAllByRole('definition')).toHaveLength(NEWS_DOSSIER_FIELDS.length + 3);
+  expect(within(sheet).getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(NEWS_DOSSIER_FIELDS.length);
+  expect(within(sheet).getByText('País').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(sheet).queryByText('Dato no mencionado en el texto analizado')).not.toBeInTheDocument();
   expect(within(dialog).getByRole('link', { name: /Consultar noticia original/ })).toHaveAttribute('href', fixture.records[0].source_url);
   await userEvent.click(within(dialog).getByRole('button', { name: 'Cerrar' }));
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -112,7 +126,7 @@ it('renders 30 items per page and resets pagination after filtering', async () =
   archive.coverage.records = 31;
   archive.coverage.sources = archive.coverage.sources.map(source => ({ ...source, records: source.id === 'co-latino' ? 31 : 0 }));
   archive.coverage.months = archive.coverage.months.map(month => ({ ...month, records: month.month === '2026-10' ? 31 : 0 }));
-  vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => archive } as Response);
+  serve(archive);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('31 noticias localizadas');
   expect(screen.getAllByRole('article')).toHaveLength(30);
@@ -130,4 +144,72 @@ it('has no automated accessibility violations in the archive and metadata dialog
   expect((await axe.run(document.body, options)).violations).toEqual([]);
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect((await axe.run(screen.getByRole('dialog'), options)).violations).toEqual([]);
+});
+
+it('keeps a full pending dossier for international news without inferring a country from the geographic hint', async () => {
+  const archive = structuredClone(fixture);
+  archive.records[0].scope_hint = 'international_context';
+  archive.records[0].scope_terms = ['guatemala'];
+  serve(archive);
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByLabelText('Vínculo territorial');
+  await userEvent.selectOptions(screen.getByLabelText('Vínculo territorial'), 'international_context');
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
+  expect(within(sheet).getAllByRole('definition')).toHaveLength(21);
+  expect(within(sheet).getByText('País').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(sheet).queryByText('Guatemala')).not.toBeInTheDocument();
+});
+
+it('shows an approved but out-of-scope partial dossier and labels editorial review separately from raw bibliography', async () => {
+  const dossier = approved();
+  dossier.source_title = 'Titular ficticio redactado por privacidad';
+  dossier.classification = { jurisdiction: 'other', relevance: 'not_relevant', record_type: 'publication' };
+  dossier.fields.country = { value: 'Guatemala', status: 'reported', evidence_refs: ['bibliography'], note: 'Dato ficticio para probar la interfaz.' };
+  dossier.fields.summary = { value: 'Resumen ficticio aprobado para esta prueba.', status: 'reported', evidence_refs: ['bibliography'], note: null };
+  dossier.fields.event_date = { value: null, status: 'not_reported', evidence_refs: [], note: null };
+  serve(fixture, { schema_version: 1, dossiers: [dossier] });
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('Ficha revisada editorialmente');
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  const dialog = screen.getByRole('dialog', { name: dossier.source_title });
+  expect(within(dialog).getByText('Ficha revisada editorialmente')).toBeInTheDocument();
+  expect(within(dialog).getByText('Guatemala')).toBeInTheDocument();
+  expect(within(dialog).getByText('Fuera del ámbito de seguimiento')).toBeInTheDocument();
+  expect(within(dialog).getByText(dossier.fields.summary.value as string)).toBeInTheDocument();
+  expect(within(dialog).getByText('Municipio').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(dialog).getByText('Fecha del hecho').closest('.dossier-field')).toHaveTextContent('Dato no mencionado en el texto analizado');
+  expect(fixture.records[0].review_status).toBe('not_reviewed');
+});
+
+it.each(['unreviewed', 'wrong_url', 'wrong_publisher', 'wrong_date', 'private_extra'])('never overlays unapproved or unrelated dossier data (%s)', async kind => {
+  const dossier = approved();
+  dossier.fields.facts = { value: 'PRIVATE_VALUE_MUST_NOT_RENDER', status: 'reported', evidence_refs: ['bibliography'], note: null };
+  if (kind === 'unreviewed') dossier.human_reviewed = false;
+  if (kind === 'wrong_url') dossier.source_url = 'https://www.diariocolatino.com/another-story/';
+  if (kind === 'wrong_publisher') dossier.publisher = 'Otra editorial';
+  if (kind === 'wrong_date') dossier.published_date = '2026-10-07';
+  if (kind === 'private_extra') Object.assign(dossier, { private_extraction: 'PRIVATE_VALUE_MUST_NOT_RENDER' });
+  serve(fixture, { schema_version: 1, dossiers: [dossier] });
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('3 noticias localizadas');
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
+  expect(within(sheet).getByText('Descripción de los hechos').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(screen.queryByText('PRIVATE_VALUE_MUST_NOT_RENDER')).not.toBeInTheDocument();
+});
+
+it('keeps the complete pending sheet when the public overlay is unavailable, and can retry it independently', async () => {
+  let available = false;
+  vi.mocked(fetch).mockImplementation(async url => ({ ok: String(url) !== '/archive/dossiers.json' || available, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : fixture }) as Response);
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  expect(screen.getByRole('region', { name: 'Ficha estructurada de la noticia' })).toBeInTheDocument();
+  expect(screen.getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThan(18);
+  await userEvent.click(screen.getByRole('button', { name: 'Cerrar' }));
+  available = true;
+  await userEvent.click(screen.getByRole('button', { name: 'Reintentar fichas públicas' }));
+  await screen.findByText('3 noticias localizadas');
+  expect(vi.mocked(fetch).mock.calls.filter(call => call[0] === '/archive/news.json')).toHaveLength(1);
 });

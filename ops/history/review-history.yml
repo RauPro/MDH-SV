@@ -32,8 +32,8 @@ jobs:
         with:
           python-version: '3.13'
       - run: pip install -r monitor/ops/review-queue/requirements.txt
-      - name: Añadir veinte referencias históricas a la cola privada
+      - name: Añadir veinte referencias de todos los ámbitos a la cola privada
         env:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 20
+        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 20 --include-international

@@ -36,7 +36,7 @@ def test_history_enqueues_oldest_bounded_batch_and_deduplicates_rss_candidates()
     assert enqueue_history(inbox, archive, limit=10)["added"] == 0
 
 
-def test_salvadoran_hints_take_priority_and_foreign_context_requires_explicit_opt_in():
+def test_all_scopes_are_included_by_default_with_salvadoran_priority():
     unknown = reference(1)
     foreign = reference(2, "Detenciones en Venezuela")
     salvadoran = reference(3, "Detenciones en El Salvador")
@@ -44,30 +44,50 @@ def test_salvadoran_hints_take_priority_and_foreign_context_requires_explicit_op
     inbox = Inbox()
     report = enqueue_history(inbox, archive, limit=1)
     assert [r["id"] for r in inbox.created] == [salvadoran["id"]]
-    assert report["eligible_references"] == 2
-    assert report["excluded_international"] == 1
-    assert report["remaining"] == 1
+    assert report["eligible_references"] == 3
+    assert report["excluded_international"] == 0
+    assert report["remaining"] == 2
     report = enqueue_history(inbox, archive, limit=20)
-    assert [r["id"] for r in inbox.created] == [salvadoran["id"], unknown["id"]]
+    assert [r["id"] for r in inbox.created] == [salvadoran["id"], unknown["id"], foreign["id"]]
     assert report["remaining"] == 0
     assert report["already_in_review_queue"] == 1
     report = enqueue_history(inbox, archive, limit=20, include_international=True)
     assert inbox.created[-1]["id"] == foreign["id"]
     assert report["eligible_references"] == 3
     assert report["excluded_international"] == 0
-    assert report["already_in_review_queue"] == 2
+    assert report["already_in_review_queue"] == 3
     assert report["remaining"] == 0
 
 
 def test_preexisting_foreign_candidates_do_not_inflate_eligible_queue_counters():
     foreign = reference(1, "Detenciones en Venezuela")
     inbox = Inbox([foreign["id"]])
-    report = enqueue_history(inbox, {"schema_version": 1, "records": [foreign]})
+    report = enqueue_history(inbox, {"schema_version": 1, "records": [foreign]}, include_international=False)
     assert report["eligible_references"] == 0
     assert report["excluded_international"] == 1
     assert report["already_in_review_queue"] == 0
     assert report["remaining"] == 0
     assert report["added"] == 0
+
+
+def test_fair_batch_reserves_slots_for_unknown_and_international_news():
+    salvadoran = [reference(n, "Detenciones en El Salvador") for n in range(1, 21)]
+    unknown = reference(21)
+    international = reference(22, "Detenciones en Venezuela")
+    inbox = Inbox()
+    enqueue_history(inbox, {"schema_version": 1, "records": [*salvadoran, unknown, international]}, limit=6)
+    assert [row["scope_hint"] for row in inbox.created] == [
+        "el_salvador", "el_salvador", "undetermined", "el_salvador", "el_salvador", "international_context"]
+    assert [row["published_date"] for row in inbox.created if row["scope_hint"] == "el_salvador"] == ["2025-04-01", "2025-04-02", "2025-04-03", "2025-04-04"]
+
+
+def test_one_item_batches_rotate_instead_of_starving_other_scopes():
+    records = [reference(n, "Detenciones en El Salvador") for n in range(1, 21)]
+    records += [reference(21), reference(22, "Detenciones en Venezuela")]
+    inbox = Inbox()
+    for _ in range(6):
+        enqueue_history(inbox, {"schema_version": 1, "records": records}, limit=1)
+    assert {row["scope_hint"] for row in inbox.created} == {"el_salvador", "undetermined", "international_context"}
 
 
 def test_entire_batch_is_validated_before_creating_any_issue():

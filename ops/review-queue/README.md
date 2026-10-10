@@ -1,38 +1,80 @@
 # Cola editorial privada de MDH-SV
 
-Este repositorio es privado. Las noticias son **candidatas**, no hechos verificados. Puede contener borradores asistidos y citas breves para contrastarlos. No adjuntes cuerpos completos de artículos, fotografías, testimonios privados ni documentos personales.
+Este repositorio es privado. Todas las noticias recogidas tienen una estructura
+de ficha, aunque falten datos, el ámbito territorial sea incierto o la noticia no
+describa una violación. Una ficha no acredita los hechos ni se publica por sí sola.
+No adjuntes cuerpos completos de artículos, fotografías, testimonios privados ni
+documentos personales.
 
-## Recolección
+## Generación y estados
 
-Actions → **Recoger noticias** se ejecuta cada seis horas (00:17, 06:17, 12:17 y 18:17 UTC; 18:17, 00:17, 06:17 y 12:17 en El Salvador). GitHub puede retrasar las ejecuciones. También puedes usar Run workflow. Las candidatas aparecen en [Issues](../../issues) con `review/pending`. Los enlaces ya revisados o rechazados no se vuelven a abrir.
+**Preparar fichas con Gemini** está programado cada hora al minuto 23. Recoge RSS,
+incorpora hasta 25 referencias históricas y procesa hasta 20 noticias por lote.
+Los RSS de Co Latino, GatoEncerrado y Factum y el ingreso histórico independiente
+también tienen horarios cada seis horas. Comprueba en Actions los eventos
+`schedule`: una ejecución manual exitosa no verifica el disparo del horario.
 
-Se consultan los RSS comprobados de Co Latino, GatoEncerrado y Revista Factum. Se seleccionan títulos/entradas por términos de interés; esto puede producir falsos positivos. Un feed vacío o HTML no cuenta como fuente sana. Cada ejecución informa entradas leídas, candidatas añadidas y fuentes fallidas. Un fallo total hace fallar el job. La recolección RSS no necesita claves de un modelo ni acceso de escritura al repositorio público. La generación asistida usa su configuración separada; sus credenciales deben permanecer en los secretos del repositorio, nunca en Issues o borradores.
+El histórico incluye por defecto todos los ámbitos territoriales y reserva turnos
+para que las referencias internacionales o por determinar puedan avanzar. Las
+fuentes bloqueadas no se eluden. Los fallos tienen diagnósticos y reintentos
+acotados; la estructura pendiente no se confunde con una extracción terminada.
 
-## Revisar
+`drafts/<id>.json` contiene `news_dossier`. Puede incluir además `record`, una
+propuesta de caso con requisitos más estrictos. Los datos desconocidos no se
+rellenan mediante suposiciones:
 
-1. Abre el enlace de la candidata y revisa el documento completo, fecha, lugar, atribución y actualizaciones. Comprueba que no esté ya publicada y que no sea una actualización de otro caso.
-2. Para rechazar: Actions → **Revisar noticia** → Run workflow; indica el número de issue y `reject`. La issue se cierra y queda como `review/rejected`.
-3. Abre el borrador privado `drafts/<identificador de candidata>.json`, si existe. Contrasta los campos de `record` y sus referencias con la fuente. La clasificación y las citas de `grounding` ayudan a localizar evidencia, pero pueden contener errores. Corrige y guarda el borrador antes de aprobar. No copies nombres de víctimas menores, direcciones, coordenadas personales ni detalles privados. No inventes fechas ni completes campos desconocidos por inferencia.
-4. En **Revisar noticia**, indica el número de issue, elige `approve`, marca la confirmación editorial y deja `record_json` vacío para usar ese borrador. Escribe tus propias comprobaciones en `review_notes` (mínimo 20 caracteres, además de la confirmación de privacidad): fuente leída, hechos y fechas contrastados, duplicados o actualizaciones y decisiones de minimización. Las notas generadas por el modelo no sustituyen estas notas humanas. El proceso exige una cuenta humana con permiso de escritura, vuelve a validar la ficha y registra revisor, fecha e identificador de candidata.
-5. La propuesta queda en `approved/<identificador>.json` y en el artefacto privado `propuesta-publica`. La issue pasa a `review/approved`. **Aprobar no publica la noticia.**
-6. Desde el repositorio del monitor, ejecuta `python -m mdh_pipeline.review_import --candidate IDENTIFICADOR --repository RauPro/MDH-SV-review`. Usa la autenticación GitHub existente o `GH_TOKEN`; no pegues credenciales en archivos. El importador vuelve a comprobar la aprobación privada, regenera las descargas y deja cambios revisables. Revisa el diff, crea un commit/PR, espera CI y publica siguiendo el protocolo del monitor.
+- `pending`: campo no evaluado o pendiente de contraste.
+- `not_reported`: dato expresamente no mencionado en el texto analizado.
+- `withheld`: valor protegido y omitido.
+- `not_applicable`: campo que no corresponde, con explicación.
+- `reported`: valor atribuido a la fuente, con referencia de evidencia.
 
-No uses etiquetas manuales como sustituto de la aprobación: el importador exige la propuesta validada. No se notifican ni asignan automáticamente terceras personas. Los fallos de Actions aparecen en este repositorio y se rigen por las preferencias de notificaciones de tu cuenta.
+Los borradores antiguos con datos reutilizables se migran sin una llamada al
+modelo. Sus vacíos no se transforman en ausencias declaradas. Los resultados que
+antes no extrajeron campos pasan por el nuevo análisis. Git conserva las versiones
+anteriores y se respetan las decisiones humanas existentes.
 
-### Estados del borrador y controles de aprobación
+## Revisar una ficha de noticia
 
-Sólo se admite un borrador con `status: draft`, `relevant: true`, clasificación `jurisdiction: SV` y `relevance: relevant`, `publishable: false` y `human_reviewed: false`. Debe contener una ficha con la URL y el identificador de origen de la misma candidata. El archivo se obtiene exclusivamente de `drafts/<id>.json` en esta cola privada; no se descargan archivos desde enlaces suministrados por el borrador.
+1. Abre la fuente original y `news_dossier` en el borrador. Contrasta la fecha,
+   hechos, campos no mencionados, atribuciones, duplicados y privacidad. Corrige
+   el JSON si corresponde; no necesitas inventar valores para completar campos.
+2. En **Revisar noticia**, selecciona la issue, `approve` y
+   `proposal_kind: news_dossier`. Confirma la revisión de privacidad y escribe tus
+   comprobaciones en `review_notes` (mínimo 20 caracteres). Deja `record_json`
+   vacío para usar el dossier guardado o proporciona el dossier corregido.
+3. La propuesta validada queda en `approved-news/<id>.json` y en el artefacto
+   privado `propuesta-publica`. La noticia pasa a `review/approved`. Esto todavía
+   no publica contenido.
+4. En el repositorio público del monitor, ejecuta:
 
-`needs_scope_review` y `needs_privacy_review` **no se aprueban directamente**. Requieren resolver el alcance o la privacidad contrastando la fuente y preparar una ficha completa para revisión humana. No cambies una bandera para omitir esa comprobación. Una clasificación no pertinente o incierta tampoco rechaza automáticamente la noticia: la decisión sigue siendo editorial.
+```sh
+python -m mdh_pipeline.review_import --kind news_dossier --candidate IDENTIFICADOR
+```
 
-Un borrador ausente, mal formado, de otra candidata o sin notas y confirmación humana detiene la aprobación sin generar una propuesta ni cambiar la issue. El esquema público rechaza la ficha de origen automatizado mientras no exista revisión humana. La aprobación exporta sólo los campos públicos validados; las citas de trabajo, clasificación, metadatos del modelo y contenido de la issue permanecen privados.
+El importador comprueba aprobación vigente, identidad y bibliografía, y prepara
+los archivos revisables. Revisa el diff, crea commit/PR y espera CI antes de
+publicar. La web y la API incorporarán únicamente los campos aprobados; comentarios,
+diagnósticos y envoltorios privados no se exportan.
 
-### Preparar una ficha manualmente
+Una ficha parcial o internacional puede aprobarse como ficha de noticia. Un fallo
+de lectura no puede aprobarse como lectura completada: primero consulta la fuente
+y prepara o corrige su ficha. Para rechazar, elige `reject`; no se exige una ficha.
 
-Sigue disponible `record_json` para pegar una ficha completa con el formato del [conjunto público](https://github.com/RauPro/MDH-SV/blob/main/data/reviewed/publications.json), manteniendo la URL original de la candidata. Si se proporciona, se usa en lugar del borrador guardado. Puedes escribir las notas en la entrada `review_notes`; para mantener el flujo anterior, una ficha manual también puede incluir sus propias `record.review_notes` de al menos 20 caracteres. Esta compatibilidad no se aplica a las notas del borrador asistido. La confirmación de privacidad y la validación del esquema siguen siendo obligatorias.
+## Proponer un caso
 
-Rechazar una noticia no exige ficha, borrador ni notas de aprobación. En ningún caso la generación asistida o la aprobación en esta cola publican por sí mismas en el portal.
+`proposal_kind: case` conserva las reglas de jurisdicción, pertinencia y esquema
+del catálogo. Usa `record` del borrador o un JSON manual completo. Las propuestas
+quedan en `approved/<id>.json`; el importador anterior sin `--kind news_dossier`
+incorpora casos. Las fichas de noticias nunca se suman automáticamente a ese catálogo.
 
-## Código y actualizaciones
+## Código, credenciales y publicación
 
-Los workflows usan un commit fijo del código público. Para actualizarlo, revisa los cambios y sustituye `ref` en los workflows por el commit aprobado. Nunca uses código de pull requests no confiables con el token de esta cola. No hagas público este repositorio ni subas su contenido al portal.
+Los workflows usan un commit fijo del código público revisado. `GEMINI_API_KEY`
+permanece en Actions Secrets y `GEMINI_MODEL` selecciona el modelo. No se guardan
+claves en Issues, fichas, archivos públicos o Vercel. La cola no puede escribir en
+el repositorio público y ninguna llamada al modelo aprueba una publicación.
+
+No hagas público este repositorio. Desactivar el workflow de Gemini detiene las
+llamadas nuevas sin eliminar los borradores. No se notifican ni asignan terceras
+personas automáticamente. [Protocolo de fichas](https://github.com/RauPro/MDH-SV/blob/main/docs/NEWS-DOSSIERS.md).

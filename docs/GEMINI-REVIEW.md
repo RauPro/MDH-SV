@@ -18,8 +18,8 @@ al modelo cuando una persona consulta el monitor.
   y procesa hasta 20 noticias con Gemini. La ejecución manual admite de 1 a 50.
 - Se reservan los primeros cinco intentos disponibles para noticias RSS nuevas;
   después se procesa el backlog priorizando indicios de El Salvador. Las
-  referencias de contexto internacional se excluyen del ingreso histórico
-  ordinario. No se promete una fecha de finalización: depende de cuotas, fuentes,
+  todos los ámbitos territoriales entran en el ingreso histórico ordinario, con
+  turnos para referencias salvadoreñas, indeterminadas e internacionales. No se promete una fecha de finalización: depende de cuotas, fuentes,
   revisiones pendientes y disponibilidad de los servicios.
 
 Para detener nuevas llamadas al modelo, desactive **Preparar fichas con Gemini** en Actions del repositorio privado. Los borradores ya guardados y el portal permanecen disponibles. Los flags `MDH_ENABLE_AI` y `MDH_ENABLE_INGESTION` de `.env.example` sólo controlan el colector local anterior.
@@ -52,32 +52,38 @@ modelo. Gemini no dispone de herramientas ni de acceso a otros documentos.
 
 Se conservan en el repositorio privado:
 
-- `drafts/<id>.json`: ficha propuesta o resultado que requiere aclarar alcance o
-  privacidad; modelo, versión del prompt, fecha, hash del texto de entrada,
+- `drafts/<id>.json`: siempre contiene `news_dossier`, con los campos disponibles,
+  pendientes, no mencionados o protegidos. Puede conservar además `record` como
+  propuesta opcional de caso; modelo, versión del prompt, fecha, hash del texto de entrada,
   párrafos de referencia, hashes de citas, commit del procesador y ejecución de Actions. Incluye el uso de tokens cuando Google
   lo proporciona. No contiene el cuerpo periodístico completo.
 - `processing/<id>.json`: estado, número de intentos y código de error sanitizado.
 - La issue original: enlace al borrador y una etiqueta de resultado.
 
-Los valores desconocidos permanecen nulos. Una noticia de pertinencia ambigua no
-se convierte forzosamente en un caso. Los textos con riesgos sensibles se derivan
-a revisión de privacidad y pueden quedar sin ficha utilizable hasta intervención
-humana. Estos resultados siguen en la cola; el modelo no los rechaza ni aprueba.
+Todas las noticias tienen estructura de ficha, aunque su pertinencia sea incierta
+o falten datos. Sólo una ausencia señalada expresamente por la extracción se
+muestra como «Dato no mencionado en el texto analizado»; los campos no evaluados
+o descartados quedan pendientes. Los datos protegidos llevan `withheld`, sin
+conservar su valor. La clasificación y la privacidad determinan qué revisar, no
+si existe una ficha. El modelo no aprueba ni publica noticias o casos.
 
 ## Estados, errores y reanudación
 
 | Etiqueta | Acción editorial |
 | --- | --- |
 | `ai/ready` | Contrastar y corregir la ficha estructurada. Sigue sin aprobar. |
-| `ai/scope-review` | Determinar pertinencia y jurisdicción; no hay un caso validado. |
-| `ai/privacy-review` | Revisar la protección de personas antes de preparar una ficha. |
-| `ai/error` | Revisar código de error y fuente. No se creó una ficha de sustitución. |
+| `ai/scope-review` | Determinar pertinencia y jurisdicción; existe una ficha de noticia, no un caso validado. |
+| `ai/privacy-review` | Revisar la protección de personas en la ficha con campos protegidos. |
+| `ai/error` | Revisar código de error y fuente. La estructura pendiente no inventa datos ni afirma una extracción terminada. |
 
 Las respuestas tienen un máximo de 4.096 tokens y 192 KiB. El cliente limita
 reintentos de red, 429 y 5xx a tres; el lote se detiene ante cuota, autenticación o configuración
 inválida del proveedor. Los fallos ordinarios se reintentan con espera y un máximo de tres
 intentos por candidata. `retry_failed` en la ejecución manual permite intentar
-otra vez tras corregir la causa. Nunca sobrescribe un borrador ya guardado.
+otra vez tras corregir la causa. No regenera fichas ya procesadas con el contrato actual. Los borradores anteriores
+se migran sin una llamada al modelo cuando contienen datos reutilizables; los
+resultados que no extrajeron campos reciben un nuevo presupuesto acotado. El
+historial Git conserva las versiones anteriores y las decisiones humanas se respetan.
 
 El índice privado y los estados evitan repetir llamadas al modelo al reanudar.
 Si el job se interrumpe después de guardar una ficha, la siguiente ejecución puede
@@ -91,13 +97,18 @@ Actions siempre incluye `publications: 0`.
 
 ## Revisión y publicación
 
-El borrador mantiene `human_reviewed:false`, `publishable:false` y
-`origin_candidate_id`; el esquema público lo rechaza en ese estado. Un editor abre
+El envoltorio privado mantiene `human_reviewed:false` y `publishable:false`. La
+ficha de noticia conserva `candidate_id`; una propuesta de caso conserva también
+`origin_candidate_id`. La exportación de contenido extraído exige revisión humana.
+La estructura pública inicial sólo usa metadatos bibliográficos y campos pendientes. Un editor abre
 la fuente, revisa los localizadores y modifica la ficha si corresponde. Luego usa
 **Revisar noticia**, confirma la comprobación de privacidad y redacta sus notas.
-Puede dejar `record_json` vacío para usar el archivo privado, o proporcionar una
-ficha corregida. Una respuesta que pide revisión de alcance o privacidad no se
-aprueba directamente como ficha.
+Elige `proposal_kind: news_dossier` para una ficha de noticia, incluso parcial o
+internacional. Puede dejar `record_json` vacío para usar el archivo privado o
+proporcionar una ficha corregida. Debe haber leído la fuente y resuelto qué datos
+pueden compartirse. `proposal_kind: case` conserva los requisitos adicionales del
+catálogo de casos. Las fichas pendientes por fallos de lectura no se aprueban como
+si la fuente se hubiese analizado.
 
 La aprobación registra a la persona revisora y prepara una propuesta privada.
 Publicar sigue requiriendo el importador, revisión del cambio y CI del monitor.
@@ -106,3 +117,5 @@ llama al importador.
 
 Referencias: [salidas estructuradas de Gemini](https://ai.google.dev/gemini-api/docs/structured-output)
 y [límites de la API](https://ai.google.dev/gemini-api/docs/rate-limits).
+
+El protocolo de [fichas para todas las noticias](NEWS-DOSSIERS.md) describe los estados y la importación con `--kind news_dossier`. El horario configurado debe comprobarse en Actions con el evento `schedule`; las ejecuciones manuales no demuestran que el disparo automático esté funcionando.

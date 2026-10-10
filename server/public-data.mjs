@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
+import { newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
 
 export const PUBLIC_URL = 'https://mdh-sv.vercel.app';
 export const LICENSE = 'https://creativecommons.org/licenses/by/4.0/';
@@ -82,6 +83,22 @@ export function loadNews() {
   return newsCache;
 }
 
+function dossierSnapshot(payload) {
+  try { return { index: parsePublishedNewsDossiers(payload), status: 'available' }; }
+  catch { return { index: new Map(), status: 'unavailable' }; }
+}
+let publicNewsDossiers;
+export function loadNewsDossiers() {
+  if (!publicNewsDossiers) {
+    try {
+      const payload = JSON.parse(readFileSync(new URL('../apps/web/public/archive/dossiers.json', import.meta.url), 'utf8'));
+      publicNewsDossiers = dossierSnapshot(payload);
+    } catch { publicNewsDossiers = { index: new Map(), status: 'unavailable' }; }
+    if (publicNewsDossiers.status === 'unavailable') console.error('Public news dossier snapshot unavailable; returning pending fields only.');
+  }
+  return publicNewsDossiers;
+}
+
 const normalize = value => String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function matching(records, filters) {
   validateRange(filters);
@@ -129,9 +146,13 @@ export function getRecord(id, catalog = loadCatalog()) {
   if (!record) throw new ApiError(404, 'record_not_found', 'Registro no encontrado.');
   return { data: record, meta: metadata(catalog) };
 }
-export function searchNews(filters = {}, archive = loadNews()) {
+export function searchNews(filters = {}, archive = loadNews(), dossierPayload) {
   const result = paginated(archive.records, newsSearchSchema.parse(filters), archive, '/api/v1/news');
-  result.meta = { ...result.meta, coverage: archive.coverage, paper: archive.paper, policy: archive.policy, review_notice: 'Metadatos de noticias localizadas; no constituyen casos validados. La pertinencia y jurisdicción pueden estar pendientes. No se incluye la cola privada de revisión.' };
+  const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
+  result.data = result.data.map(reference => ({ ...reference, news_dossier: newsDossierFor(reference, snapshot.index) }));
+  result.meta = { ...result.meta, coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
+    news_dossiers_status: snapshot.status,
+    review_notice: 'Noticias con ficha estructurada; no constituyen casos validados. Sin ficha pública revisada, los campos quedan pendientes de extracción o revisión. Esto no informa del estado de la cola privada, que nunca se consulta.' };
   return result;
 }
 export function getStats(filters = {}, catalog = loadCatalog()) {

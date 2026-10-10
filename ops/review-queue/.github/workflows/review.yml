@@ -11,13 +11,19 @@ on:
         required: true
         type: choice
         options: [reject, approve]
+      proposal_kind:
+        description: Ficha de noticia (admite datos no mencionados) o caso del monitor
+        required: true
+        type: choice
+        default: news_dossier
+        options: [news_dossier, case]
       privacy_reviewed:
         description: He contrastado fuente, fechas, duplicados y privacidad
         required: true
         type: boolean
         default: false
       record_json:
-        description: JSON manual opcional; vacío usa el borrador privado drafts del candidato
+        description: JSON manual opcional; vacío usa news_dossier o record del borrador privado según el tipo
         required: false
         type: string
       review_notes:

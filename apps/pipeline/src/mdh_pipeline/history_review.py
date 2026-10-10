@@ -9,13 +9,32 @@ from __future__ import annotations
 import argparse
 import json
 import os
+from collections import deque
 from pathlib import Path
 
 from .history import ROOT, SOURCES, validate_reference
 from .review_queue import GitHubInbox
 
 
-def enqueue_history(inbox, archive, *, limit=20, include_international=False):
+def fair_scope_order(items, *, scope=lambda item: item.get("scope_hint"), key=lambda item: (item.get("published_date") or "", item["id"]), offset=0):
+    """Weighted rotation: four SV slots, one undetermined and one international.
+
+    The offset advances between batches, including one-item batches, while each
+    territory retains oldest-first order. Empty groups donate their slots.
+    """
+    groups = {name: deque() for name in ("el_salvador", "undetermined", "international_context")}
+    for item in sorted(items, key=key):
+        groups[scope(item) if scope(item) in groups else "undetermined"].append(item)
+    slots = ("el_salvador", "el_salvador", "undetermined", "el_salvador", "el_salvador", "international_context")
+    position = offset % len(slots)
+    while any(groups.values()):
+        group = groups[slots[position]]
+        position = (position + 1) % len(slots)
+        if group:
+            yield group.popleft()
+
+
+def enqueue_history(inbox, archive, *, limit=20, include_international=True):
     if not 1 <= limit <= 100:
         raise ValueError("Historical queue limit must be between 1 and 100")
     if archive.get("schema_version") != 1 or not isinstance(archive.get("records"), list):
@@ -29,14 +48,12 @@ def enqueue_history(inbox, archive, *, limit=20, include_international=False):
         validate_reference(reference, source)
     inbox.ensure_labels()
     seen = inbox.existing_ids()
-    added, already_present = 0, 0
+    added = 0
     eligible = [reference for reference in archive["records"]
                 if include_international or reference["scope_hint"] != "international_context"]
-    priority = {"el_salvador": 0, "undetermined": 1, "international_context": 2}
-    for reference in sorted(eligible, key=lambda item: (priority[item["scope_hint"]], item["published_date"], item["id"])):
-        if reference["id"] in seen:
-            already_present += 1
-            continue
+    already_present = sum(reference["id"] in seen for reference in eligible)
+    unseen = [reference for reference in eligible if reference["id"] not in seen]
+    for reference in fair_scope_order(unseen, offset=already_present):
         if added >= limit:
             continue
         candidate = {
@@ -63,7 +80,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, default=ROOT / "apps/web/public/archive/news.json")
     parser.add_argument("--limit", type=int, default=20)
-    parser.add_argument("--include-international", action="store_true", help="Explicitly include international-context references after Salvadoran and undetermined references")
+    inclusion = parser.add_mutually_exclusive_group()
+    inclusion.add_argument("--include-international", dest="include_international", action="store_true", default=True, help="Include every geographic scope (the default)")
+    inclusion.add_argument("--exclude-international", dest="include_international", action="store_false", help="Operator opt-out for international-context references")
     args = parser.parse_args()
     archive = json.loads(args.archive.read_text(encoding="utf-8"))
     inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])

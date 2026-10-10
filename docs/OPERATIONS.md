@@ -75,3 +75,11 @@ se detiene el lote y el resumen identifica el motivo sin revelar secretos.
 Los errores, revisiones de alcance y revisiones de privacidad requieren atención
 del operador. Ningún estado de extracción aprueba una publicación. Véase el
 [procedimiento Gemini](GEMINI-REVIEW.md) y las instrucciones privadas de revisión.
+
+## Fichas de todas las noticias
+
+Cada referencia tiene una estructura consultable. Los campos sin extracción o
+aprobación pública permanecen pendientes; no se interpretan como ausencias en la
+fuente. La generación privada utiliza `news_dossier` para todos los ámbitos y
+conserva `record` sólo cuando hay además una propuesta de caso. Consulte
+[NEWS-DOSSIERS.md](NEWS-DOSSIERS.md) para revisión e importación de fichas parciales.

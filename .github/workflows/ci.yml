@@ -37,7 +37,9 @@ jobs:
           python scripts/audit_release.py
           pytest -q
           python -m mdh_pipeline.publication
+          python -m mdh_pipeline.news_publication
           git diff --exit-code -- apps/web/public/data
+          git diff --exit-code -- apps/web/public/archive/dossiers.json
       - name: Install, audit and test remote API and MCP
         run: |
           npm ci

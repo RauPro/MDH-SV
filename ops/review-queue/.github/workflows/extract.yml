@@ -52,12 +52,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: python -m mdh_pipeline.review_queue collect
-      - name: Incorporar el siguiente lote del backlog
+      - name: Incorporar noticias de todos los ámbitos con cuotas de revisión
         env:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 25
-      - name: Extraer fichas privadas sin publicación automática
+        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 25 --include-international
+      - name: Preparar fichas de noticia y migrar borradores previos sin publicarlos
         env:
           GH_TOKEN: ${{ github.token }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

@@ -81,3 +81,8 @@ supuestos. La aprobación humana exige contrastar la fuente, revisar privacidad 
 redactar notas; después prepara una propuesta, sin publicación automática.
 
 [Funcionamiento, cuotas, reanudación y revisión](docs/GEMINI-REVIEW.md).
+
+Cada noticia del archivo tiene una ficha estructurada, aunque esté pendiente o
+incompleta. Los datos no mencionados, los no evaluados y los protegidos se
+distinguen; una ficha de noticia no se cuenta automáticamente como violación.
+[Flujo y estados de las fichas](docs/NEWS-DOSSIERS.md).

@@ -4,6 +4,8 @@ import { ArrowUpRight, Download, Search } from 'lucide-react';
 import { formatDate, type Publication } from '../catalog';
 import { archiveInstant, archiveMonth, collectionStatusLabel, filterNews, invalidArchiveRange, parseNewsArchive, relatedPublications, scopeLabels, topicLabel, type NewsArchiveData, type NewsFilters, type NewsReference } from '../newsArchive';
 import { Dialog } from './Dialog';
+import { NewsDossier } from './NewsDossier';
+import { newsDossierFor, parsePublishedNewsDossiers, type NewsDossier as Dossier } from '../../../../shared/news-dossier.mjs';
 
 const PAGE_SIZE = 30;
 const emptyFilters: NewsFilters = { query: '', publisher: '', topic: '', from: '', to: '', scope: 'el_salvador' };
@@ -16,6 +18,9 @@ export function NewsArchive({ onOpenRecord, records }: { onOpenRecord: (id: stri
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState<NewsReference | null>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const [dossiers, setDossiers] = useState<Map<string, Dossier>>(new Map());
+  const [dossierState, setDossierState] = useState<'loading' | 'ready' | 'unavailable'>('loading');
+  const [dossierAttempt, setDossierAttempt] = useState(0);
   useEffect(() => {
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), 12000);
@@ -26,6 +31,18 @@ export function NewsArchive({ onOpenRecord, records }: { onOpenRecord: (id: stri
     }).then(data => { if (active) setArchive(data); }).catch(() => { if (active) setError(true); }).finally(() => window.clearTimeout(timer));
     return () => { active = false; controller.abort(); window.clearTimeout(timer); };
   }, [attempt]);
+  useEffect(() => {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 12000);
+    let active = true;
+    fetch('/archive/dossiers.json', { signal: controller.signal }).then(async response => {
+      if (!response.ok) throw new Error('Public dossiers unavailable');
+      return parsePublishedNewsDossiers(await response.json());
+    }).then(index => { if (active) { setDossiers(index); setDossierState('ready'); } })
+      .catch(() => { if (active) { setDossiers(new Map()); setDossierState('unavailable'); } })
+      .finally(() => window.clearTimeout(timer));
+    return () => { active = false; controller.abort(); window.clearTimeout(timer); };
+  }, [dossierAttempt]);
   const invalidDates = invalidArchiveRange(filters.from, filters.to);
   const filtered = useMemo(() => filterNews(archive?.records ?? [], filters), [archive, filters]);
   const topics = [...new Set(archive?.records.flatMap(record => record.topics) ?? [])].sort((a, b) => topicLabel(a).localeCompare(topicLabel(b), 'es'));
@@ -38,6 +55,7 @@ export function NewsArchive({ onOpenRecord, records }: { onOpenRecord: (id: stri
     resultsRef.current?.scrollIntoView?.({ block: 'start', behavior: 'smooth' });
   };
   const linked = selected ? relatedPublications(selected, records) : [];
+  const selectedDossier = selected ? newsDossierFor(selected, dossiers) : null;
   const openRecord = (id: string) => {
     flushSync(() => setSelected(null));
     onOpenRecord(id);
@@ -49,7 +67,9 @@ export function NewsArchive({ onOpenRecord, records }: { onOpenRecord: (id: stri
   return <section className="records-section archive-section" aria-labelledby="archive-title">
     <div className="section-heading archive-intro"><div className="eyebrow">MEMORIA DOCUMENTAL · ARCHIVO BIBLIOGRÁFICO</div><h2 id="archive-title">Archivo de noticias</h2><p>Periodo de búsqueda: del {formatDate(archive.coverage.start_date)} al {formatDate(archive.coverage.end_date)}.</p><p>{archive.records.length} referencias · {archive.coverage.sources.length} medios · cobertura parcial.</p><p>Este intervalo indica el alcance solicitado. Consulta la cobertura por medio y mes para distinguir lo recorrido, lo pendiente y los fallos.</p></div>
     {archive.coverage.sources.some(source => source.collection?.access === 'restricted') && <p className="filter-note">Acceso automatizado restringido: {archive.coverage.sources.filter(source => source.collection?.access === 'restricted').map(source => source.publisher).join(', ')}. Sus noticias no se incorporan automáticamente.</p>}
-    <aside className="notice archive-detail-note"><div><strong>Son referencias de prensa, con revisión pendiente.</strong> Las etiquetas se asignan mediante búsqueda automática de términos. La pertinencia, la jurisdicción salvadoreña y los hechos todavía no están evaluados. Estas noticias no se suman a los casos del monitor.</div></aside>
+    <aside className="notice archive-detail-note"><div><strong>Cada noticia tiene una ficha estructurada.</strong> Los datos bibliográficos conocidos se acompañan de campos pendientes o información publicada con revisión humana. Las etiquetas automáticas no confirman pertinencia, jurisdicción ni hechos. Estas noticias no se suman a los casos del monitor.</div></aside>
+    {dossierState === 'loading' && <p className="filter-note" role="status">Comprobando fichas públicas revisadas…</p>}
+    {dossierState === 'unavailable' && <p className="filter-note" role="status">No se pudieron comprobar las fichas públicas revisadas. Se muestran los datos bibliográficos y campos pendientes. <button className="text-button" onClick={() => { setDossierState('loading'); setDossierAttempt(value => value + 1); }}>Reintentar fichas públicas</button></p>}
     <details className="archive-coverage"><summary>Ver cobertura por medio y mes</summary><p>{archive.policy.selection_method} «API recorrida» indica que se consultaron las páginas disponibles del medio; no acredita un archivo exhaustivo ni una revisión del contenido.</p><p>Archivo generado: {archiveInstant(archive.generated_at)} (El Salvador). Antecedente de investigación: artículo incorporado a IEEE Xplore el {formatDate(archive.paper.publication_date)}. {archive.paper.publication_date_basis} La fecha del paper no determina el inicio del archivo histórico.</p>
       {archive.coverage.sources.map(source => <details className="archive-source" key={source.id}><summary>{source.publisher} · {source.records} referencias · {source.collection?.access === 'restricted' ? 'Acceso restringido' : collectionStatusLabel(source.status)}</summary>{source.collection && <p>{source.collection.notice}</p>}<div className="archive-table-wrap"><table><caption>Cobertura mensual de {source.publisher}</caption><thead><tr><th scope="col">Mes</th><th scope="col">Referencias</th><th scope="col">Publicaciones recorridas</th><th scope="col">Estado</th></tr></thead><tbody>{source.months.map(item => <tr key={item.month}><th scope="row">{archiveMonth(item.month)}</th><td>{item.records}</td><td>{item.posts_scanned}</td><td>{collectionStatusLabel(item.status)}</td></tr>)}</tbody></table></div></details>)}
       <ul>{archive.policy.coverage_limitations.map(limit => <li key={limit}>{limit}</li>)}</ul>
@@ -60,7 +80,23 @@ export function NewsArchive({ onOpenRecord, records }: { onOpenRecord: (id: stri
     <p className="filter-note" id="archive-date-help">Las fechas corresponden a la publicación declarada por el medio; no a la fecha de los hechos.</p>
     {invalidDates && <p role="alert" id="archive-date-error">La fecha inicial debe ser válida y anterior o igual a la final.</p>}
     <div className="results-heading archive-results" ref={resultsRef} tabIndex={-1} aria-label="Resultados de noticias"><span role="status">{filtered.length} {filtered.length === 1 ? 'noticia localizada' : 'noticias localizadas'}</span><span>Más recientes primero · por fecha de publicación</span></div>
-    {filtered.length > 0 ? <><div className="record-list">{filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map(reference => <article className="record archive-record" key={reference.id}><div className="record-top"><span className="tag">Referencia de prensa</span><span className="record-id">Revisión pendiente</span></div><div className="record-body"><div><p className="record-category">{reference.publisher}</p><h3><button onClick={() => setSelected(reference)}>{reference.title}{reference.title_truncated ? '…' : ''}</button></h3><p className="archive-topics">{reference.topics.map(topicLabel).join(' · ')}</p></div><button className="open-record" aria-label={`Consultar noticia: ${reference.title}`} onClick={() => setSelected(reference)}><ArrowUpRight size={22} aria-hidden="true"/></button></div><div className="record-footer"><span>Publicación: {formatDate(reference.published_date)}</span><a href={reference.source_url} target="_blank" rel="noopener noreferrer">Leer en {reference.publisher}<ArrowUpRight size={13} aria-label="abre en otra pestaña"/></a></div></article>)}</div><nav className="archive-pagination" aria-label="Paginación de noticias"><button disabled={page === 1} onClick={() => changePage(page - 1)}>Anterior</button><span>Página {page} de {pages}</span><button disabled={page === pages} onClick={() => changePage(page + 1)}>Siguiente</button></nav></> : <div className="empty"><h3>{invalidDates ? 'Revisa el rango de fechas' : 'No hay noticias con estos filtros'}</h3><p>La ausencia de referencias no implica ausencia de violaciones ni cobertura completa.</p><button onClick={reset}>Restablecer búsqueda de noticias</button></div>}
-    {selected && <Dialog title={selected.title} onClose={() => setSelected(null)}><div className="dossier-meta"><span className="tag">Referencia bibliográfica</span><span className="tag">Revisión pendiente</span></div><p className="archive-detail-note">La recolección conserva metadatos de prensa. No valida los hechos ni identifica automáticamente víctimas o responsables. La jurisdicción salvadoreña no ha sido evaluada.</p><dl><dt>Medio</dt><dd>{selected.publisher}</dd><dt>Fecha de publicación</dt><dd>{formatDate(selected.published_date)}. No se ha extraído la fecha del hecho.</dd><dt>Temas detectados automáticamente</dt><dd>{selected.topics.map(topicLabel).join(' · ')}</dd><dt>Vínculo territorial estimado</dt><dd>{scopeLabels[selected.scope_hint]}. {selected.scope_terms.length ? `Términos detectados: ${selected.scope_terms.join(', ')}. ` : 'Sin términos suficientes. '}Clasificación automática; no confirma jurisdicción ni pertinencia.</dd><dt>Localización de la referencia</dt><dd>{archiveInstant(selected.discovery.retrieved_at)} (El Salvador). Búsqueda de términos en título y URL mediante la API pública del medio; no equivale a lectura o revisión editorial.</dd><dt>Identificador estable</dt><dd className="citation">{selected.id}</dd></dl>{selected.title_truncated && <p>El título está abreviado; consulta su versión íntegra en el medio.</p>}<a className="primary" href={selected.source_url} target="_blank" rel="noopener noreferrer">Consultar noticia original <ArrowUpRight size={16} aria-label="abre en otra pestaña"/></a><h3>Ficha de investigación</h3>{linked.length ? <><p>La misma fuente está citada en estas fichas públicas. Su estado de revisión se muestra por separado; el enlace no valida automáticamente esta referencia.</p><div className="archive-linked-records">{linked.map(record => <button key={record.id} onClick={() => openRecord(record.id)}>{record.title} <ArrowUpRight size={14} aria-hidden="true"/></button>)}</div></> : <p>Extracción estructurada y revisión pendientes. Esta referencia todavía no tiene una ficha asociada de hechos, personas afectadas y ubicación. El proceso editorial debe evaluar la fuente antes de incorporarla al monitor.</p>}<p className="filter-note">{archive.policy.rights}</p></Dialog>}
+    {filtered.length > 0 ? <><div className="record-list">{filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map(reference => <article className="record archive-record" key={reference.id}><div className="record-top"><span className="tag">Referencia de prensa</span><span className="record-id">{newsDossierFor(reference, dossiers).human_reviewed ? 'Ficha revisada editorialmente' : 'Campos pendientes'}</span></div><div className="record-body"><div><p className="record-category">{reference.publisher}</p><h3><button onClick={() => setSelected(reference)}>{reference.title}{reference.title_truncated ? '…' : ''}</button></h3><p className="archive-topics">{reference.topics.map(topicLabel).join(' · ')}</p></div><button className="open-record" aria-label={`Consultar noticia: ${reference.title}`} onClick={() => setSelected(reference)}><ArrowUpRight size={22} aria-hidden="true"/></button></div><div className="record-footer"><span>Publicación: {formatDate(reference.published_date)}</span><a href={reference.source_url} target="_blank" rel="noopener noreferrer">Leer en {reference.publisher}<ArrowUpRight size={13} aria-label="abre en otra pestaña"/></a></div></article>)}</div><nav className="archive-pagination" aria-label="Paginación de noticias"><button disabled={page === 1} onClick={() => changePage(page - 1)}>Anterior</button><span>Página {page} de {pages}</span><button disabled={page === pages} onClick={() => changePage(page + 1)}>Siguiente</button></nav></> : <div className="empty"><h3>{invalidDates ? 'Revisa el rango de fechas' : 'No hay noticias con estos filtros'}</h3><p>La ausencia de referencias no implica ausencia de violaciones ni cobertura completa.</p><button onClick={reset}>Restablecer búsqueda de noticias</button></div>}
+    {selected && selectedDossier && <Dialog title={selectedDossier.source_title} onClose={() => setSelected(null)}>
+      <div className="dossier-meta"><span className="tag">Ficha de noticia</span><span className="tag">{selectedDossier.human_reviewed ? 'Ficha revisada editorialmente' : 'Extracción o revisión pendiente'}</span></div>
+      <h3>Referencia bibliográfica</h3><dl>
+        <dt>Medio</dt><dd>{selected.publisher}</dd>
+        <dt>Título de la fuente</dt><dd>{selectedDossier.source_title}</dd>
+        <dt>Fecha de publicación</dt><dd>{formatDate(selected.published_date)}.</dd>
+        <dt>Temas detectados automáticamente</dt><dd>{selected.topics.map(topicLabel).join(' · ')}</dd>
+        <dt>Vínculo territorial estimado</dt><dd>{scopeLabels[selected.scope_hint]}. {selected.scope_terms.length ? `Términos detectados: ${selected.scope_terms.join(', ')}. ` : 'Sin términos suficientes. '}Este indicio automático no confirma jurisdicción ni pertinencia.</dd>
+        <dt>Localización de la referencia</dt><dd>{archiveInstant(selected.discovery.retrieved_at)} (El Salvador). Búsqueda de términos en título y URL a partir de metadatos públicos del medio; no equivale a revisión editorial.</dd>
+        <dt>Identificador estable</dt><dd className="citation">{selected.id}</dd>
+      </dl>
+      {selected.title_truncated && !selectedDossier.human_reviewed && <p>El título está abreviado; consulta su versión íntegra en el medio.</p>}
+      <a className="primary" href={selected.source_url} target="_blank" rel="noopener noreferrer">Consultar noticia original <ArrowUpRight size={16} aria-label="abre en otra pestaña"/></a>
+      <NewsDossier dossier={selectedDossier}/>
+      {linked.length > 0 && <><h3>Fichas de casos relacionadas</h3><p>La misma fuente está citada en estas fichas públicas. Su estado de revisión se muestra por separado; el enlace no valida automáticamente esta noticia.</p><div className="archive-linked-records">{linked.map(record => <button key={record.id} onClick={() => openRecord(record.id)}>{record.title} <ArrowUpRight size={14} aria-hidden="true"/></button>)}</div></>}
+      <p className="filter-note">{archive.policy.rights}</p>
+    </Dialog>}
   </section>;
 }
