@@ -66,3 +66,18 @@ El monitor amplía la implementación del artículo [Generative AI-based tool fo
 - **Reutilización:** API REST y MCP remoto de solo lectura con filtros, paginación, atribución y estado editorial, para proyectos externos.
 
 El archivo se actualiza cada seis horas. La cola histórica incorpora hasta veinte referencias por ejecución para revisión privada, además de las candidatas RSS. No publica fichas automáticamente. [Colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
+
+## Gemini en el flujo privado de producción
+
+El workflow **Preparar fichas con Gemini**, instalado en `RauPro/MDH-SV-review`,
+recoge las noticias nuevas y procesa el backlog por lotes cada hora. Utiliza el
+secreto de Actions `GEMINI_API_KEY` y la variable `GEMINI_MODEL` (Gemini 3.5 Flash Lite).
+La clave nunca llega a Vercel, al navegador, al MCP ni a este repositorio público.
+
+Los borradores se guardan en `drafts/` del repositorio privado y se enlazan desde
+cada issue. Mantienen la revisión pendiente. Casos de alcance ambiguo, riesgos de
+privacidad o fallos de extracción se indican por separado; no se completan con
+supuestos. La aprobación humana exige contrastar la fuente, revisar privacidad y
+redactar notas; después prepara una propuesta, sin publicación automática.
+
+[Funcionamiento, cuotas, reanudación y revisión](docs/GEMINI-REVIEW.md).

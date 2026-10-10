@@ -44,7 +44,7 @@ La clave de Google del código legado debe revocarse por su titular. No forma pa
 
 ## Cola privada operativa
 
-Repositorio: `RauPro/MDH-SV-review`. Workflow `Recoger noticias`, cron `17 */6 * * *` UTC: aproximadamente 00:17, 06:17, 12:17 y 18:17 en El Salvador (GitHub puede retrasar ejecuciones). Usa un commit fijo del código público y un token efímero limitado al repositorio privado. No hay PAT persistente, acceso de escritura al monitor público ni dependencia de cuotas de Gemini.
+Repositorio: `RauPro/MDH-SV-review`. Workflow `Recoger noticias`, cron `17 */6 * * *` UTC: aproximadamente 00:17, 06:17, 12:17 y 18:17 en El Salvador (GitHub puede retrasar ejecuciones). Usa un commit fijo del código público y un token efímero limitado al repositorio privado. El recolector RSS no usa PAT persistente, no escribe en el monitor público y no depende de cuotas de Gemini. La etapa de extracción asistida sí utiliza la API de Gemini.
 
 Se verificaron los tres RSS: Co Latino, GatoEncerrado y Factum. El Faro no se configuró porque su URL RSS devolvió HTML sin entradas; Amnistía no se usa como RSS por bloqueo HTTP. Estas exclusiones no afectan las fuentes documentales ya enlazadas en las fichas.
 
@@ -61,3 +61,17 @@ Para actualizar código de la cola, cambiar `ref` en ambos workflows privados po
 `Revisar backlog histórico` en el repositorio privado añade hasta veinte referencias antiguas por ejecución. Comparte deduplicación y exclusión mutua con RSS. Sus aprobaciones siguen necesitando importación, revisión de cambios y CI antes de publicación. Para preparar una ficha sin inventar información se puede usar el [generador de borradores privados](PRIVATE-DRAFTS.md).
 
 Comprobar REST `/api/v1/records`, `/api/v1/records/{id}`, `/api/v1/news` y `/api/v1/openapi.json`. El endpoint remoto `/mcp` requiere POST Streamable HTTP: GET devuelve 405 de forma deliberada. Probar con cliente MCP oficial, no inferir disponibilidad por abrir la URL en un navegador. La guía y límites están en [API.md](API.md).
+
+## Procesamiento asistido de candidatas
+
+La extracción corre cada hora en **Preparar fichas con Gemini**, dentro del
+repositorio privado. El modelo y el secreto se configuran en Actions, no en Vercel.
+La plantilla usa un SHA público fijo y un token limitado a la cola. Procesa hasta
+20 noticias por ejecución programada; una ejecución manual puede ajustar el lote
+entre 1 y 50. Los archivos privados conservan estado y evitan repetir extracciones
+ya terminadas. Ante cuotas, autenticación o configuración del proveedor inválidas,
+se detiene el lote y el resumen identifica el motivo sin revelar secretos.
+
+Los errores, revisiones de alcance y revisiones de privacidad requieren atención
+del operador. Ningún estado de extracción aprueba una publicación. Véase el
+[procedimiento Gemini](GEMINI-REVIEW.md) y las instrucciones privadas de revisión.

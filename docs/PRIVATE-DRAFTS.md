@@ -46,3 +46,10 @@ Después de editar, envía **sólo `record`** al campo `record_json` del flujo p
 Los metadatos históricos o los bloques copiados no reflejan necesariamente la última decisión de la cola privada. Antes de preparar otra ficha, consulta si ya fue rechazada, aprobada o incorporada a un caso existente.
 
 Para integrar un editor, `prepare_draft(metadata, record_type=...)` devuelve el documento sin escribir en disco. `write_private_draft` aplica la ruta privada y los permisos. No existe opción de extracción mediante IA en este helper: los campos no se adivinan a partir del título.
+
+## Borradores generados por Gemini
+
+Este documento describe la plantilla manual sin IA. El procesamiento automático
+real utiliza `mdh_pipeline.gemini_review` en el repositorio privado, recupera el
+texto público y produce una propuesta con evidencia por campo. Conserva las
+mismas barreras de revisión y publicación. Consulte [GEMINI-REVIEW.md](GEMINI-REVIEW.md).
