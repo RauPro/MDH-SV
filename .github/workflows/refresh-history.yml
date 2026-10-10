@@ -3,6 +3,12 @@ on:
   schedule:
     - cron: '41 */6 * * *'
   workflow_dispatch:
+    inputs:
+      max_pages:
+        description: Máximo de páginas por medio (1 a 1000; reanuda en la siguiente ejecución)
+        type: number
+        required: true
+        default: 150
 permissions:
   contents: write
 concurrency:
@@ -25,7 +31,9 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install -e . --no-deps
       - name: Read publisher metadata and resume incomplete months
-        run: python -m mdh_pipeline.history --max-pages 150
+        env:
+          MDH_MAX_PAGES: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.max_pages) || '150' }}
+        run: python -m mdh_pipeline.history --max-pages "$MDH_MAX_PAGES"
       - name: Verify bibliography publication boundary
         run: pytest -q tests/test_history.py
       - name: Commit bibliography and coverage only
