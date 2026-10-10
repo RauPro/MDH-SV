@@ -1,14 +1,14 @@
-"""
-Módulo de pipeline, ingesta y preservación de evidencias del MDH-SV.
-"""
+"""Pipeline package. Optional ingestion dependencies load only when requested."""
+from importlib import import_module
 
-from .archiver import EvidenceArchiver
-from .ingest import IngestionPipeline
-from .scrapers.base import BaseNewsScraper, RawNewsArticle
+_EXPORTS = {
+    'EvidenceArchiver': '.archiver',
+    'IngestionPipeline': '.ingest',
+    'BaseNewsScraper': '.scrapers.base',
+    'RawNewsArticle': '.scrapers.base',
+}
+__all__ = list(_EXPORTS)
 
-__all__ = [
-    "EvidenceArchiver",
-    "IngestionPipeline",
-    "BaseNewsScraper",
-    "RawNewsArticle",
-]
+def __getattr__(name):
+    if name not in _EXPORTS: raise AttributeError(name)
+    return getattr(import_module(_EXPORTS[name], __name__), name)

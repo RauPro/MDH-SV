@@ -126,3 +126,10 @@ def test_import_requires_current_approval_and_is_idempotent(tmp_path,monkeypatch
     assert len(json.loads(source.read_text())['records'])==10
     approved.call=lambda method,path: {'content':content} if '/contents/' in path else {'labels':[],'body':issue_body(candidate)}
     with pytest.raises(ValueError):import_approved(approved,candidate['id'],source,export=False)
+
+def test_collector_does_not_import_optional_ingestion_stack():
+    import subprocess,sys,os
+    from pathlib import Path
+    root=Path(__file__).resolve().parents[1]
+    code='import sys; import mdh_pipeline.review_queue; import mdh_pipeline.publication; assert not any(x in sys.modules for x in ["bs4","google.genai","pyarrow","dotenv"])'
+    subprocess.run([sys.executable,'-c',code],check=True,env={**os.environ,'PYTHONPATH':str(root/'apps/pipeline/src')+os.pathsep+str(root/'packages/schema/src')})
