@@ -261,3 +261,137 @@ def test_never_reuses_authenticated_sessions():
     with pytest.raises(SourceFetchError, match="credentialed_source_session"):
         fetch_article(candidate(), session)
     assert not session.calls
+
+
+HTML_CASES = [
+    ("El Faro", "https://beta.elfaro.net/el-salvador/noticia-de-prueba", '<div class="article"><div id="main-text">', '</div></div>'),
+    ("Diario El Mundo", "https://diario.elmundo.sv/nacionales/noticia-de-prueba", '<article><div class="article-body">', '</div></article>'),
+    ("El Diario de Hoy (archivo)", "https://historico.elsalvador.com/historico/12345/noticia-de-prueba.html", '<article class="detail"><div class="entry-content">', '</div></article>'),
+]
+
+
+@pytest.mark.parametrize("publisher,url,opening,closing", HTML_CASES)
+def test_new_publishers_use_one_direct_html_request_and_verified_article_containers(publisher, url, opening, closing):
+    page = ('<html><head><link rel="canonical" href="' + url + '">'
+            '<meta property="article:published_time" content="2022-06-10 10:59:12">'
+            '</head><body><header><time datetime="2026-10-10">Hoy</time></header>'
+            '<article class="recommendation"><p>RECOMENDACION AJENA</p></article>'
+            + opening + '<h2>Hechos documentados</h2>' + CONTENT + closing + '</body></html>').encode()
+    session = Session([Response(page, content_type="text/html")])
+    result = fetch_article(candidate(source_url=url, publisher=publisher, published_date="2026-10-10",
+                                      discovery={"endpoint": "https://untrusted.example/wp-json/", "source_post_id": 123}), session)
+    assert len(session.calls) == 1 and session.calls[0][0] == url
+    assert result["published_date"] == "2022-06-10"
+    assert result["extraction_method"] == "html_article_content"
+    assert result["paragraphs"][0]["text"] == "Hechos documentados"
+    assert "RECOMENDACION AJENA" not in result["text"] and "Hoy" not in result["text"]
+
+
+@pytest.mark.parametrize("publisher,url,opening,closing", HTML_CASES)
+def test_new_publishers_do_not_treat_header_modified_or_candidate_dates_as_publication(publisher, url, opening, closing):
+    page = ('<html><head><meta name="date" content="2026-10-10">'
+            '<meta property="article:modified_time" content="2026-10-10T12:00:00Z"></head>'
+            '<body><header><time datetime="2026-10-10" itemprop="datePublished">Hoy</time></header>'
+            + opening + CONTENT + closing + '</body></html>').encode()
+    with pytest.raises(SourceFetchError, match="source_publication_date_missing"):
+        fetch_article(candidate(source_url=url, publisher=publisher, published_date="2026-10-10"),
+                      Session([Response(page, content_type="text/html")]))
+
+
+def test_el_faro_recommendation_cards_cannot_replace_its_missing_editorial_body():
+    url = HTML_CASES[0][1]
+    page = ('<html><head><meta property="article:published_time" content="2026-09-28T19:12:09Z"></head>'
+            '<body><h1>Título de prueba</h1><article class="recommendation">' + CONTENT + '</article></body></html>').encode()
+    with pytest.raises(SourceFetchError, match="source_article_container_missing"):
+        fetch_article(candidate(source_url=url, publisher="El Faro"), Session([Response(page, content_type="text/html")]))
+
+
+def test_el_mundo_nested_paragraphs_keep_their_order_without_repeating_or_losing_prose():
+    url = HTML_CASES[1][1]
+    content = ('<p>INTRODUCCION FICTICIA <strong>con énfasis</strong>.'
+               '<p>DETALLE FICTICIO ' + PARAGRAPH + '</p>CIERRE FICTICIO.</p>'
+               '<p>SEGUNDO PARRAFO ' + PARAGRAPH + '<!--COMENTARIO NO VISIBLE--></p>'
+               '<div hidden><p>CONTENIDO OCULTO</p></div>')
+    page = ('<html><head><meta property="article:published_time" content="2026-09-20T17:12:33-06:00"></head>'
+            '<body><h1>Título ficticio</h1><article><div class="article-body">' + content + '</div></article></body></html>').encode()
+    result = fetch_article(candidate(source_url=url, publisher="Diario El Mundo"), Session([Response(page, content_type="text/html")]))
+    assert [p["text"].split()[0] for p in result["paragraphs"]] == ["INTRODUCCION", "DETALLE", "CIERRE", "SEGUNDO"]
+    assert result["text"].count("DETALLE FICTICIO") == 1
+    assert result["text"].count("INTRODUCCION FICTICIA") == 1
+    assert "COMENTARIO NO VISIBLE" not in result["text"] and "CONTENIDO OCULTO" not in result["text"]
+
+
+def test_article_date_can_come_from_matching_jsonld_but_not_a_related_article():
+    url = HTML_CASES[1][1]
+    page = ('<html><head><script type="application/ld+json">' + json.dumps({"@graph": [
+        {"@type": "NewsArticle", "url": "https://diario.elmundo.sv/nacionales/otra-noticia", "datePublished": "2026-10-10"},
+        {"@type": "NewsArticle", "url": url, "datePublished": "2020-07-04T10:00:00-06:00"},
+    ]}) + '</script></head><body><h1>Título ficticio</h1><article><div class="article-body">' + CONTENT + '</div></article></body></html>').encode()
+    result = fetch_article(candidate(source_url=url, publisher="Diario El Mundo"), Session([Response(page, content_type="text/html")]))
+    assert result["published_date"] == "2020-07-04"
+    unrelated_only = page.replace(b'"datePublished": "2020-07-04T10:00:00-06:00"', b'"dateModified": "2020-07-04T10:00:00-06:00"')
+    with pytest.raises(SourceFetchError, match="source_publication_date_missing"):
+        fetch_article(candidate(source_url=url, publisher="Diario El Mundo"), Session([Response(unrelated_only, content_type="text/html")]))
+
+
+def test_new_html_jsonld_without_url_must_identify_the_current_headline():
+    url = HTML_CASES[1][1]
+    def page(headline):
+        return ('<html><head><script type="application/ld+json">' + json.dumps({"@type": "NewsArticle",
+                "headline": headline, "datePublished": "2020-07-04"}) + '</script></head>'
+                '<body><h1>Título ficticio actual</h1><article><div class="article-body">' + CONTENT + '</div></article></body></html>').encode()
+    result = fetch_article(candidate(source_url=url, publisher="Diario El Mundo"), Session([Response(page("Título ficticio actual"), content_type="text/html")]))
+    assert result["published_date"] == "2020-07-04"
+    with pytest.raises(SourceFetchError, match="source_publication_date_missing"):
+        fetch_article(candidate(source_url=url, publisher="Diario El Mundo"), Session([Response(page("Otra noticia distinta"), content_type="text/html")]))
+
+
+def test_article_scoped_publication_time_is_allowed_but_a_header_clock_is_not():
+    url = HTML_CASES[1][1]
+    page = ('<html><body><header><time itemprop="datePublished" datetime="2026-10-10">Hoy</time></header>'
+            '<h1>Título ficticio</h1><article><time itemprop="datePublished" datetime="2021-05-06">Fecha del artículo</time>'
+            '<div class="article-body">' + CONTENT + '</div></article></body></html>').encode()
+    result = fetch_article(candidate(source_url=url, publisher="Diario El Mundo"), Session([Response(page, content_type="text/html")]))
+    assert result["published_date"] == "2021-05-06"
+
+
+def test_lpg_registry_restriction_stops_before_any_http_request():
+    session = Session([])
+    with pytest.raises(SourceFetchError, match="source_access_restricted"):
+        fetch_article(candidate(source_url="https://www.laprensagrafica.com/elsalvador/noticia-de-prueba.html",
+                                publisher="La Prensa Gráfica"), session)
+    assert session.calls == []
+
+
+def test_new_html_source_paywall_is_not_bypassed_with_embedded_body():
+    url = HTML_CASES[0][1]
+    page = ('<html><head><script type="application/ld+json">' + json.dumps({"@type": "NewsArticle", "url": url,
+            "isAccessibleForFree": False, "datePublished": "2026-09-28", "articleBody": PARAGRAPH * 10})
+            + '</script></head><body><h1>Título ficticio</h1><div class="article"><div id="main-text">'
+            + CONTENT + '</div></div></body></html>').encode()
+    session = Session([Response(page, content_type="text/html")])
+    with pytest.raises(SourceFetchError, match="source_access_restricted"):
+        fetch_article(candidate(source_url=url, publisher="El Faro"), session)
+    assert len(session.calls) == 1
+
+
+@pytest.mark.parametrize("published, expected", [
+    ("2013-03-13 6:03:00", "2013-03-13"),
+    ("2013-03-13T6:03:00-06:00", "2013-03-13"),
+    ("2013-02-30 6:03:00", None),
+    ("2013-03-13 6:73:00", None),
+    ("2013-03-13 6:03:99", None),
+    ("2013-03-13 6:3:00", None),
+])
+def test_edh_legacy_one_digit_hour_preserves_only_a_valid_explicit_article_date(published, expected):
+    url = HTML_CASES[2][1]
+    page = ('<html><head><meta property="article:published_time" content="' + published + '"></head>'
+            '<body><h1>Artículo ficticio del archivo</h1><article class="detail"><div class="entry-content">'
+            + CONTENT + '</div></article></body></html>').encode()
+    request = candidate(source_url=url, publisher="El Diario de Hoy (archivo)", published_date="2026-10-10")
+    session = Session([Response(page, content_type="text/html")])
+    if expected is None:
+        with pytest.raises(SourceFetchError, match="source_publication_date_missing"):
+            fetch_article(request, session)
+    else:
+        assert fetch_article(request, session)["published_date"] == expected

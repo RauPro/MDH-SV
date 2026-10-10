@@ -13,9 +13,9 @@ from datetime import date, datetime, timezone
 from urllib.parse import unquote, urlencode, urljoin, urlsplit
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Comment, Declaration, Doctype, ProcessingInstruction
 
-from .history import SOURCES
+from .publishers import SOURCES
 from .review_queue import canonical_url, normalize, require_public_dns
 
 MAX_BYTES = 1_000_000
@@ -31,7 +31,14 @@ ARTICLE_SELECTORS = (
     "[data-elementor-type='wp-post'][data-elementor-post-type='post']",
     ".entry-content", ".post-content", ".article-content", ".td-post-content", "article",
 )
-UNWANTED = "script,style,nav,header,footer,aside,form,button,iframe,noscript,template,svg,figure,.advertisement,.advertising,.ads,.ad-container,.sharedaddy,.share-buttons,.social-share,.related-posts,.related-articles,.comments,#comments,.newsletter,.author-box,.post-meta,.entry-meta,.elementor-widget-posts,.elementor-widget-loop-grid,.elementor-widget-author-box,.elementor-widget-share-buttons,.elementor-widget-post-info,.elementor-widget-post-comments,.elementor-widget-nav-menu,[data-elementor-post-type='elementor-hf']"
+# These source-specific containers were inspected on public article pages. Do not
+# fall back to unrelated <article> recommendation cards if a known layout changes.
+PUBLISHER_ARTICLE_SELECTORS = {
+    "el-faro": (".article #main-text",),
+    "el-mundo": ("article .article-body",),
+    "el-diario-de-hoy": ("article.detail .entry-content",),
+}
+UNWANTED = "script,style,nav,header,footer,aside,form,button,iframe,noscript,template,svg,figure,[hidden],[aria-hidden='true'],.advertisement,.advertising,.ads,.ad-container,.sharedaddy,.share-buttons,.social-share,.related-posts,.related-articles,.comments,#comments,.newsletter,.author-box,.post-meta,.entry-meta,.elementor-widget-posts,.elementor-widget-loop-grid,.elementor-widget-author-box,.elementor-widget-share-buttons,.elementor-widget-post-info,.elementor-widget-post-comments,.elementor-widget-nav-menu,[data-elementor-post-type='elementor-hf']"
 PAYWALL_SELECTORS = "[class*='paywall'],[id*='paywall'],[class*='subscribe-wall'],[class*='subscription-wall'],[class*='piano-paywall']"
 BLOCKED_TEXT = ("verify you are human", "verifica que eres humano", "verifique que es humano", "checking your browser", "enable javascript and cookies to continue", "suscribete para seguir leyendo", "suscribete para continuar leyendo", "subscribe to continue reading", "inicia sesion para continuar leyendo", "this content is password protected", "este contenido esta protegido por contrasena")
 
@@ -54,6 +61,12 @@ def _date(value):
     try:
         if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
             return date.fromisoformat(value).isoformat()
+        # Legacy EDH article metadata uses e.g. "2013-03-13 6:03:00".
+        # Pad only the unambiguous single-digit hour of an otherwise ISO-shaped
+        # timestamp; datetime still validates the actual date and all clock parts.
+        value = re.sub(
+            r"^(\d{4}-\d{2}-\d{2}[T ])(\d)(:\d{2}(?::\d{2}(?:\.\d{1,6})?)?(?:Z|[+-]\d{2}:\d{2})?)$",
+            r"\g<1>0\2\3", value)
         return datetime.fromisoformat(value.replace("Z", "+00:00")).date().isoformat()
     except ValueError:
         return None
@@ -136,13 +149,30 @@ def _paragraphs(fragment):
     for node in soup.select(UNWANTED):
         node.decompose()
     paragraphs = []
-    for node in soup.find_all(["p", "h2", "h3", "h4", "li", "blockquote"]):
-        # Preserve document order but do not duplicate text from nested blocks.
-        if node.name in ("li", "blockquote") and node.find(["p", "h2", "h3", "h4", "li", "blockquote"]):
-            continue
-        text = _clean(node.get_text(" ", strip=True))
+    blocks = ("p", "h2", "h3", "h4", "li", "blockquote")
+    def read_block(node):
+        parts = []
+        for child in node.children:
+            if isinstance(child, (Comment, Declaration, Doctype, ProcessingInstruction)):
+                continue
+            if isinstance(child, str):
+                parts.append(child)
+            elif child.name in blocks or child.find(blocks):
+                text = _clean(" ".join(parts))
+                if text:
+                    paragraphs.append(text)
+                parts = []
+                read_block(child)
+            else:
+                parts.append(child.get_text(" ", strip=True))
+        text = _clean(" ".join(parts))
         if text:
             paragraphs.append(text)
+    for node in soup.find_all(blocks):
+        # HTML parsers can preserve malformed nested <p> tags. Read each block
+        # tree once, retaining leading/trailing prose in its actual order.
+        if not node.find_parent(blocks):
+            read_block(node)
     if not paragraphs:
         # Accept prose in an explicit WP/article container, never an entire unscoped page.
         paragraphs = [_clean(line) for line in soup.get_text("\n", strip=True).splitlines() if _clean(line)]
@@ -291,13 +321,33 @@ def _from_html(candidate, source, session):
     published_tag = soup.find("meta", property="article:published_time")
     published = published_tag.get("content") if published_tag else None
     if not _date(published):
-        published = next((item.get("datePublished") for item in structured if _date(item.get("datePublished"))), None)
-    if not _date(published):
-        time_tag = soup.select_one("time[datetime][itemprop='datePublished'], time[datetime].entry-date.published")
-        published = time_tag.get("datetime") if time_tag else None
-    container = next((soup.select_one(selector) for selector in ARTICLE_SELECTORS if soup.select_one(selector)), None)
+        expected = _identity(candidate["source_url"], source)
+        def same_article(item):
+            declared = item.get("url") or item.get("mainEntityOfPage")
+            if isinstance(declared, dict):
+                declared = declared.get("@id")
+            if not declared:
+                if source.get("kind", "wordpress") == "wordpress":
+                    return True  # Preserve the established WP fallback contract.
+                headline = _clean(item.get("headline"))
+                return bool(headline and title and normalize(headline) == normalize(_clean(title)))
+            try:
+                return _identity(urljoin(final_url, declared), source) == expected
+            except (SourceFetchError, TypeError):
+                return False
+        published = next((item.get("datePublished") for item in structured
+                          if same_article(item) and _date(item.get("datePublished"))), None)
+    selectors = PUBLISHER_ARTICLE_SELECTORS.get(source["id"], ARTICLE_SELECTORS)
+    container = next((soup.select_one(selector) for selector in selectors if soup.select_one(selector)), None)
     if not container:
         raise SourceFetchError("source_article_container_missing")
+    if not _date(published):
+        # A clock in the site header is not the article publication date.
+        article_scope = container.find_parent("article") or container
+        time_tag = article_scope.select_one("time[datetime][itemprop='datePublished'], time[datetime].entry-date.published")
+        published = time_tag.get("datetime") if time_tag else None
+    if source.get("kind", "wordpress") != "wordpress" and not _date(published):
+        raise SourceFetchError("source_publication_date_missing")
     return _result(candidate, title, published, _paragraphs(str(container)), "html_article_content")
 
 
@@ -316,6 +366,8 @@ def fetch_article(candidate, session=None):
     source = next((source for source in SOURCES if urlsplit(url).hostname in source["hosts"]), None)
     if source is None:
         raise SourceFetchError("unsupported_publisher")
+    if source.get("access") == "restricted":
+        raise SourceFetchError("source_access_restricted")
     if candidate.get("publisher") and candidate["publisher"] != source["name"]:
         raise SourceFetchError("source_publisher_mismatch")
     candidate = {**candidate, "source_url": url}
@@ -327,7 +379,7 @@ def fetch_article(candidate, session=None):
         raise SourceFetchError("credentialed_source_session")
     session.trust_env = False  # Disable implicit .netrc authentication and proxy credentials.
     try:
-        result = _from_wordpress(candidate, source, session)
+        result = _from_wordpress(candidate, source, session) if source.get("kind", "wordpress") == "wordpress" else None
         return result if result is not None else _from_html(candidate, source, session)
     except SourceFetchError:
         raise

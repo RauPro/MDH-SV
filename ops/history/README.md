@@ -40,7 +40,33 @@ quedan visibles en la cobertura. El presupuesto puede agotarse antes de recorrer
 todos los años; las ejecuciones siguientes continúan desde los checkpoints.
 No se crea ninguna cuenta en los medios.
 
-Con el presupuesto habitual de 150 intentos y el histórico pendiente, se reservan
+El Faro, Diario El Mundo y el archivo de El Diario de Hoy usan el adaptador
+`html_archive`: recorre índices públicos configurados y enlaces históricos
+verificados, filtra URLs temáticas y consulta los metadatos del artículo. Guarda
+título abreviado, URL y fecha declarada, nunca el cuerpo periodístico. La fecha
+`lastmod` de los sitemaps, la fecha de migración y el año incluido en una URL no se
+convierten en fechas de publicación. `source_post_id` es nulo cuando el medio no
+declara un identificador WordPress; `discovery.method` distingue ambos métodos.
+
+El presupuesto HTML cuenta cada petición HTTP, incluidas redirecciones, y se
+reanuda con las colas y cursores del checkpoint. Los índices XML tienen un máximo
+de 16 MiB y cada HTML de 1 MB. Los meses permanecen parciales: terminar una lista
+de enlaces no prueba haber recorrido todas las publicaciones de un mes.
+
+| Fuente nueva | Canal y límites observados |
+| --- | --- |
+| El Faro | Especial editorial de 2010 y páginas públicas actuales. Algunos artículos antiguos devuelven restricciones de acceso. |
+| Diario El Mundo | Secciones Nacionales y Política, más enlaces históricos verificados de 2016 y 2017. Sin índice histórico completo identificado. |
+| El Diario de Hoy (archivo) | Tres sitemaps del dominio oficial `historico.elsalvador.com`; se comprueba la fecha en cada artículo. |
+| La Prensa Gráfica | Registrada con `access: restricted`: sitemap HTTP 403 y reglas de acceso que no permiten el agente genérico. No se reitera ni se elude el bloqueo. |
+
+Los diagnósticos iniciales se conservan en `source-probes/`. Un medio restringido
+puede figurar entre las fuentes registradas sin aportar referencias al archivo.
+Los tres RSS originales siguen siendo el canal de noticias recientes; las nuevas
+fuentes se actualizan mediante el recorrido histórico periódico, no con feeds
+inventados o no verificados.
+
+En las fuentes WordPress, con el presupuesto habitual de 150 intentos y el histórico pendiente, se reservan
 hasta 20 para los dos meses más recientes; el resto queda disponible para avanzar
 en los años anteriores. El cupo reciente no utilizado también puede aprovecharse
 en el histórico. Así, recuperar el periodo desde 2010 no paraliza las noticias
@@ -126,7 +152,7 @@ concurrencia de la cola RSS para evitar carreras de deduplicación.
 ## Programación
 
 `refresh-history.yml` es la plantilla para `.github/workflows/refresh-history.yml`:
-se ejecuta cada seis horas y permite ejecución manual. Solo añade los tres
+se ejecuta cada seis horas y permite ejecución manual. Solo añade los siete
 checkpoints y el JSON bibliográfico a un commit. No usa `git add .` ni tiene
 credenciales del repositorio privado. El usuario autorizó la recolección periódica
 y el despliegue; el mantenedor integra esta plantilla después de revisar las pruebas.
