@@ -50,6 +50,26 @@ pendientes. No consultan el repositorio privado ni revelan su contenido o su
 estado individual. Por ello ese estado público no permite concluir si Gemini
 ya terminó una extracción privada.
 
+## Consulta en Fichas y mapa
+
+La vista principal abre la colección **Noticias**, con todas las referencias
+listables y acceso a sus fichas. **Reportes documentados** conserva el catálogo
+de casos e informes y sus conteos propios. El archivo bibliográfico mantiene la
+consulta de cobertura por medio y mes.
+
+En el mapa de noticias sólo se asigna un departamento cuando la ficha pública
+está revisada, su jurisdicción es salvadoreña y el campo de departamento contiene
+un valor explícito y respaldado de los 14 departamentos. No se deduce del título,
+la URL, el municipio o las etiquetas de descubrimiento. Los filtros de fechas de
+esta colección usan la publicación de la noticia, no la fecha del hecho.
+
+Las noticias sin esa ubicación siguen disponibles en la lista y mediante el
+filtro **Sin ubicación pública en El Salvador**. La interfaz distingue revisión
+pendiente, jurisdicción por determinar, noticias de otros países y departamento
+no disponible. Un mapa con cero noticias ubicadas no significa que el archivo
+esté vacío. Aprobar una ubicación no convierte una noticia en un caso ni suma
+personas al recuento de víctimas.
+
 ## Aprobar una ficha parcial
 
 1. En la cola privada, abra `drafts/<id>.json` y revise `news_dossier` con el texto

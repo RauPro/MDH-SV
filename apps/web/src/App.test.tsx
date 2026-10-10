@@ -6,8 +6,15 @@ import data from './__fixtures__/catalog.json';
 import archive from './__fixtures__/newsArchive.json';
 import App from './App';
 
-beforeEach(() => { vi.restoreAllMocks(); localStorage.clear(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => data })); });
-async function ready() { render(<App/>); await screen.findByText('4 resultados'); }
+const publicResponse = (input: unknown, catalog = data) => ({ ok: true, json: async () =>
+  String(input).endsWith('/archive/dossiers.json') ? { schema_version: 1, dossiers: [] }
+    : String(input).endsWith('/archive/news.json') ? archive : catalog }) as Response;
+beforeEach(() => { vi.restoreAllMocks(); localStorage.clear(); vi.stubGlobal('fetch', vi.fn().mockImplementation(async input => publicResponse(input))); });
+async function ready() {
+  render(<App/>);
+  await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
+  await screen.findByText('4 resultados');
+}
 it('filters departments and accent-insensitive text', async () => {
   await ready();
   await userEvent.selectOptions(screen.getByLabelText('Departamento'), 'Sonsonate');
@@ -42,15 +49,21 @@ it('opens a source-linked dossier and closes it', async () => {
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
 it('handles a failed fetch and retries', async () => {
-  vi.mocked(fetch).mockRejectedValueOnce(new Error('offline'));
+  let failed = false;
+  vi.mocked(fetch).mockImplementation(async input => {
+    if (String(input) === '/data/catalog.json' && !failed) { failed = true; throw new Error('offline'); }
+    return publicResponse(input);
+  });
   render(<App/>);
+  await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
   await screen.findByRole('alert');
   await userEvent.click(screen.getByRole('button',{name:'Reintentar'}));
   await screen.findByText('4 resultados');
 });
 it('fails closed for an invalid source URL', async () => {
-  vi.mocked(fetch).mockResolvedValueOnce({ok:true,json:async()=>({...data,records:[{...data.records[0],source_url:'javascript:alert(1)'}]})} as Response);
+  vi.mocked(fetch).mockImplementation(async input => publicResponse(input, {...data,records:[{...data.records[0],source_url:'javascript:alert(1)'}]}));
   render(<App/>);
+  await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
   await screen.findByRole('alert');
   expect(screen.queryByText('4 resultados')).not.toBeInTheDocument();
 });
@@ -139,8 +152,7 @@ it('keeps unlocated individual reports outside the map and makes them consultabl
   expect(screen.getByLabelText('Departamento')).toHaveValue('__unknown__');
 });
 
-it('opens the linked news archive and returns to the map without losing the catalogue', async () => {
-  vi.mocked(fetch).mockImplementation(async input => ({ok:true,json:async()=>String(input).includes('/archive/') ? archive : data}) as Response);
+it('opens the linked archive and returns to news in the main map while retaining access to reports', async () => {
   history.replaceState(null,'','/#archivo');
   render(<App/>);
   await screen.findByRole('region',{name:'Archivo de noticias'});
@@ -148,5 +160,63 @@ it('opens the linked news archive and returns to the map without losing the cata
   expect(screen.getByLabelText('Vínculo territorial')).toHaveValue('el_salvador');
   await userEvent.click(screen.getByRole('button',{name:'Fichas y mapa'}));
   await screen.findByRole('region',{name:'Mapa de El Salvador'});
+  expect(screen.getByRole('button', {name:'Noticias'})).toHaveAttribute('aria-pressed','true');
+  expect(screen.getByLabelText('Vínculo territorial')).toHaveValue('');
+  expect(screen.getByText('3 fichas de noticias')).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
   expect(screen.getByText('4 resultados')).toBeInTheDocument();
+});
+
+it('opens news and their full dossier directly from Fichas y mapa on the home page', async () => {
+  render(<App/>);
+  await screen.findByRole('region', { name:'Fichas de noticias' });
+  expect(screen.getByRole('button', { name:'Fichas y mapa' })).toHaveAttribute('aria-pressed','true');
+  expect(screen.getByText('3 fichas de noticias')).toBeInTheDocument();
+  expect(screen.getByRole('region', { name:'Mapa de El Salvador' })).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name:archive.records[0].title }));
+  const dialog = await screen.findByRole('dialog');
+  expect(dialog).toHaveTextContent('Ficha estructurada de la noticia');
+  expect(dialog).toHaveTextContent('Víctima o personas afectadas');
+  expect(within(dialog).getAllByText('Pendiente de extracción o revisión').length).toBeGreaterThanOrEqual(18);
+  await userEvent.click(within(dialog).getByRole('button', { name:'Cerrar' }));
+  expect(screen.getByRole('button', { name:'Noticias' })).toHaveAttribute('aria-pressed','true');
+});
+
+it('keeps news visible when the independent reports catalogue fails', async () => {
+  vi.mocked(fetch).mockImplementation(async input => {
+    if (String(input) === '/data/catalog.json') throw new Error('catalogue offline');
+    return publicResponse(input);
+  });
+  render(<App/>);
+  await screen.findByText('3 fichas de noticias');
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
+  expect(await screen.findByRole('alert')).toHaveTextContent('No pudimos cargar los datos');
+  await userEvent.click(screen.getByRole('button', { name:'Noticias' }));
+  await screen.findByText('3 fichas de noticias');
+});
+
+it('preserves report routes when closing a directly linked dossier', async () => {
+  history.replaceState(null,'','/#mdh-2022-001');
+  render(<App/>);
+  const dialog = await screen.findByRole('dialog');
+  expect(screen.getByRole('button', { name: /^Reportes documentados/ })).toHaveAttribute('aria-pressed','true');
+  await userEvent.click(within(dialog).getByRole('button',{name:'Cerrar'}));
+  expect(location.hash).toBe('#reportes');
+  expect(screen.getByText('4 resultados')).toBeInTheDocument();
+});
+
+it('restores the report collection from its URL without opening a missing-record dialog', async () => {
+  history.replaceState(null,'','/#reportes');
+  render(<App/>);
+  await screen.findByText('4 resultados');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^Reportes documentados/ })).toHaveAttribute('aria-pressed','true');
+});
+
+it('has no detectable structural accessibility violations on the news landing view', async () => {
+  render(<App/>);
+  await screen.findByText('3 fichas de noticias');
+  const result = await axe.run(document.body, { rules: { 'color-contrast': { enabled:false } } });
+  expect(result.violations.map(v => v.id)).toEqual([]);
 });
