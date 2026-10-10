@@ -146,6 +146,41 @@ def test_elementor_header_alone_is_not_an_editorial_article():
         fetch_article(candidate(), Session([Response([]), Response(page, content_type="text/html")]))
 
 
+def test_elementor_legacy_single_post_extracts_only_its_content_widget():
+    url = "https://gatoencerrado.news/2014/09/21/noticia-editorial/"
+    widget = '<div class="elementor-widget-theme-post-content" data-widget_type="theme-post-content.default">'
+    page = (f'<html><head><link rel="canonical" href="{url}">'
+            '<meta property="article:published_time" content="2014-09-21T21:02:32+00:00">'
+            '</head><body><h1>Noticia ficticia del archivo</h1>'
+            '<div data-elementor-type="wp-post" data-elementor-post-type="elementor-hf">'
+            + widget + '<p>ENCABEZADO AJENO</p></div></div>'
+            '<article><p>TARJETA RELACIONADA AJENA</p></article>'
+            '<div data-elementor-type="single-post" data-elementor-post-type="elementor_library">'
+            '<div class="elementor-widget-theme-post-excerpt"><p>EXTRACTO AJENO</p></div>'
+            + widget + CONTENT + '</div><p>PIE DE PLANTILLA AJENO</p></div>'
+            '<div data-elementor-type="wp-post" data-elementor-post-type="elementor-hf">'
+            + widget + '<p>PIE AJENO</p></div></div></body></html>').encode()
+    result = fetch_article(candidate(source_url=url, publisher="GatoEncerrado"),
+                           Session([Response([]), Response(page, content_type="text/html")]))
+    assert result["source_url"] == url
+    assert result["published_date"] == "2014-09-21"
+    assert result["extraction_method"] == "html_article_content"
+    assert [p["text"] for p in result["paragraphs"]] == [PARAGRAPH, PARAGRAPH.replace("fixture", "prueba")]
+    assert result["truncated"] is False
+
+
+@pytest.mark.parametrize("parent_type,widget_type", [
+    ("wp-post", "theme-post-content.default"),
+    ("single-post", "theme-post-excerpt.default"),
+])
+def test_elementor_legacy_widget_requires_both_editorial_parent_and_content_type(parent_type, widget_type):
+    page = (f'<html><body><div data-elementor-type="{parent_type}" data-elementor-post-type="elementor_library">'
+            f'<div class="elementor-widget-theme-post-content" data-widget_type="{widget_type}">'
+            + CONTENT + '</div></div></body></html>').encode()
+    with pytest.raises(SourceFetchError, match="source_article_container_missing"):
+        fetch_article(candidate(), Session([Response([]), Response(page, content_type="text/html")]))
+
+
 @pytest.mark.parametrize("date_value,expected", [(None, None), ("not-a-date", None), ("2025-02-30", None), ("2025-04-04", "2025-04-04")])
 def test_unknown_dates_never_become_today(date_value, expected):
     result = fetch_article(candidate(published_date=date_value), Session([Response([wp(date="invalid")])]))
