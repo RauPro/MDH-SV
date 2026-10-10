@@ -1,13 +1,210 @@
 {
   "schema_version": 1,
   "source_id": "el-faro",
-  "months": {},
-  "records": [],
+  "months": {
+    "2026-09": {
+      "status": "partial",
+      "posts_scanned": 1,
+      "pages_fetched": 1,
+      "invalid_posts": 0,
+      "source_total_posts": null,
+      "screen_version": 3,
+      "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+      "error": null
+    },
+    "2026-10": {
+      "status": "partial",
+      "posts_scanned": 3,
+      "pages_fetched": 3,
+      "invalid_posts": 0,
+      "source_total_posts": null,
+      "screen_version": 3,
+      "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+      "error": null
+    }
+  },
+  "records": [
+    {
+      "id": "d1ab4b3736f783014dc73447610835e44b7a6baa279479cbaed327700b2dfd14",
+      "title": "A la espera del juicio Samcam, Costa Rica deja de perseguir al autor intelectual de su asesinato",
+      "title_truncated": false,
+      "publisher": "El Faro",
+      "source_id": "el-faro",
+      "source_url": "https://beta.elfaro.net/centroamerica/caso-samcam-archivan-caso-autor-intelectual",
+      "published_date": "2026-10-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "costa rica"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-10T18:51:37.922217+00:00"
+      }
+    },
+    {
+      "id": "e59fe24a00a1bb8de96038a36403412e0c552a3bc08686253799ee1d0733cb62",
+      "title": "Thelma Aldana: “ Estados Unidos me pidió no detener al Presidente Pérez Molina”",
+      "title_truncated": false,
+      "publisher": "El Faro",
+      "source_id": "el-faro",
+      "source_url": "https://beta.elfaro.net/malas-companias/thelma-aldana-eeuu-pidio-no-detener-presidente-perez-molina",
+      "published_date": "2026-10-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "eeuu",
+        "estados unidos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-10T18:51:37.922217+00:00"
+      }
+    },
+    {
+      "id": "02fcdc4e94eb3de2bbca5a7be2090cc68ae15e32880ebd2b83ab3123b65e6c4e",
+      "title": "“Si Trump le dijera a Bukele que liberara de la cárcel a Ruth López, él lo haría”",
+      "title_truncated": false,
+      "publisher": "El Faro",
+      "source_id": "el-faro",
+      "source_url": "https://beta.elfaro.net/el-salvador/trump-bukele-carcel-ruth-lopez",
+      "published_date": "2026-09-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "el salvador",
+        "ruth lopez",
+        "trump"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-10T18:51:37.922217+00:00"
+      }
+    }
+  ],
   "collection": {
     "method": "html_archive",
-    "phase": "not_started",
+    "phase": "partial",
     "access": "public",
-    "notice": "Selección parcial del especial de 2010 y páginas públicas actuales. Algunos enlaces antiguos restringen el acceso; no es una hemeroteca completa.",
-    "last_attempt_at": null
+    "notice": "Selección parcial del especial de 2010 y páginas públicas actuales. Algunos enlaces antiguos restringen el acceso; no es una hemeroteca completa. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
+    "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+    "indexes": [
+      "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
+      "https://beta.elfaro.net/"
+    ],
+    "index_cursor": 2,
+    "articles": [
+      "https://beta.elfaro.net/el-salvador/trump-bukele-carcel-ruth-lopez",
+      "https://beta.elfaro.net/centroamerica/caso-samcam-archivan-caso-autor-intelectual",
+      "https://beta.elfaro.net/collage/archivo-nayib-bukele-mi-candidatura-por-fmln-veo-imposible",
+      "https://beta.elfaro.net/malas-companias/thelma-aldana-eeuu-pidio-no-detener-presidente-perez-molina",
+      "https://www.elfaro.net/es/201003/noticias/1403/",
+      "https://www.elfaro.net/es/201011/noticias/3030/",
+      "https://www.elfaro.net/es/201009/noticias/2528",
+      "https://www.elfaro.net/es/201001/noticias/867/",
+      "https://www.elfaro.net/es/201007/noticias/2044/",
+      "https://www.elfaro.net/es/201011/noticias/2911/",
+      "https://www.elfaro.net/es/201010/el_agora/2639/",
+      "https://www.elfaro.net/es/201003/opinion/1421/"
+    ],
+    "article_cursor": 7,
+    "visited": {
+      "https://beta.elfaro.net/el-salvador/trump-bukele-carcel-ruth-lopez": {
+        "status": "selected",
+        "published_date": "2026-09-28",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+        "screen_version": 3
+      },
+      "https://beta.elfaro.net/centroamerica/caso-samcam-archivan-caso-autor-intelectual": {
+        "status": "selected",
+        "published_date": "2026-10-06",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+        "screen_version": 3
+      },
+      "https://beta.elfaro.net/collage/archivo-nayib-bukele-mi-candidatura-por-fmln-veo-imposible": {
+        "status": "not_relevant",
+        "published_date": "2026-10-01",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+        "screen_version": 3
+      },
+      "https://beta.elfaro.net/malas-companias/thelma-aldana-eeuu-pidio-no-detener-presidente-perez-molina": {
+        "status": "selected",
+        "published_date": "2026-10-01",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+        "screen_version": 3
+      },
+      "https://www.elfaro.net/es/201003/noticias/1403/": {
+        "status": "failed",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+        "screen_version": 3
+      },
+      "https://www.elfaro.net/es/201011/noticias/3030/": {
+        "status": "failed",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+        "screen_version": 3
+      },
+      "https://www.elfaro.net/es/201009/noticias/2528": {
+        "status": "failed",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+        "screen_version": 3
+      }
+    },
+    "failures": {
+      "https://www.elfaro.net/es/201003/noticias/1403/": {
+        "code": "access_restricted",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00"
+      },
+      "https://www.elfaro.net/es/201011/noticias/3030/": {
+        "code": "access_restricted",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00"
+      },
+      "https://www.elfaro.net/es/201009/noticias/2528": {
+        "code": "access_restricted",
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00"
+      }
+    },
+    "index_stats": {
+      "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html": {
+        "url_entries_observed": 125,
+        "url_entries_rejected": 14,
+        "duplicate_article_urls": 21,
+        "article_urls_matching_anchor": 8,
+        "article_urls_observed": 90,
+        "article_urls_selected": 8,
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00"
+      },
+      "https://beta.elfaro.net/": {
+        "url_entries_observed": 49,
+        "url_entries_rejected": 8,
+        "duplicate_article_urls": 8,
+        "article_urls_matching_anchor": 3,
+        "article_urls_observed": 33,
+        "article_urls_selected": 3,
+        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00"
+      }
+    },
+    "index_screen_version": 3
   }
 }
