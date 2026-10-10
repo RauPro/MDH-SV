@@ -109,7 +109,7 @@
     "phase": "partial",
     "access": "public",
     "notice": "Selección parcial del especial de 2010 y páginas públicas actuales. Algunos enlaces antiguos restringen el acceso; no es una hemeroteca completa. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+    "last_attempt_at": "2026-10-10T22:01:23.634848+00:00",
     "indexes": [
       "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
       "https://beta.elfaro.net/"
@@ -129,7 +129,7 @@
       "https://www.elfaro.net/es/201010/el_agora/2639/",
       "https://www.elfaro.net/es/201003/opinion/1421/"
     ],
-    "article_cursor": 7,
+    "article_cursor": 10,
     "visited": {
       "https://beta.elfaro.net/el-salvador/trump-bukele-carcel-ruth-lopez": {
         "status": "selected",
@@ -169,6 +169,21 @@
         "status": "failed",
         "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
         "screen_version": 3
+      },
+      "https://www.elfaro.net/es/201001/noticias/867/": {
+        "status": "failed",
+        "last_attempt_at": "2026-10-10T22:01:23.634848+00:00",
+        "screen_version": 3
+      },
+      "https://www.elfaro.net/es/201007/noticias/2044/": {
+        "status": "failed",
+        "last_attempt_at": "2026-10-10T22:01:23.634848+00:00",
+        "screen_version": 3
+      },
+      "https://www.elfaro.net/es/201011/noticias/2911/": {
+        "status": "failed",
+        "last_attempt_at": "2026-10-10T22:01:23.634848+00:00",
+        "screen_version": 3
       }
     },
     "failures": {
@@ -183,6 +198,18 @@
       "https://www.elfaro.net/es/201009/noticias/2528": {
         "code": "access_restricted",
         "last_attempt_at": "2026-10-10T18:51:37.922217+00:00"
+      },
+      "https://www.elfaro.net/es/201001/noticias/867/": {
+        "code": "access_restricted",
+        "last_attempt_at": "2026-10-10T22:01:23.634848+00:00"
+      },
+      "https://www.elfaro.net/es/201007/noticias/2044/": {
+        "code": "access_restricted",
+        "last_attempt_at": "2026-10-10T22:01:23.634848+00:00"
+      },
+      "https://www.elfaro.net/es/201011/noticias/2911/": {
+        "code": "access_restricted",
+        "last_attempt_at": "2026-10-10T22:01:23.634848+00:00"
       }
     },
     "index_stats": {
@@ -193,7 +220,7 @@
         "article_urls_matching_anchor": 8,
         "article_urls_observed": 90,
         "article_urls_selected": 8,
-        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00"
+        "last_attempt_at": "2026-10-10T22:01:23.634848+00:00"
       },
       "https://beta.elfaro.net/": {
         "url_entries_observed": 49,
@@ -202,7 +229,7 @@
         "article_urls_matching_anchor": 3,
         "article_urls_observed": 33,
         "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-10T18:51:37.922217+00:00"
+        "last_attempt_at": "2026-10-10T22:01:23.634848+00:00"
       }
     },
     "index_screen_version": 3
