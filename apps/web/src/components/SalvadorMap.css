@@ -43,3 +43,21 @@ html.dark .map-region.map-level-4 path,html.dark .map-key.filled { fill:#478262;
 html.dark .map-region.selected path,html.dark .map-key.selected { fill:#60363c; background:#60363c; }
 @media(max-width:900px){ .map-layout { grid-template-columns:1fr; } .map-canvas { max-height:370px; } .map-departments { grid-template-columns:repeat(4,minmax(0,1fr)); } }
 @media(max-width:600px){ .territory-map { padding:16px; } .map-heading h2 { font-size:23px; } .map-departments { grid-template-columns:repeat(2,minmax(0,1fr)); } .map-departments button { font-size:11px; min-height:44px; } .map-name { display:none; } .map-count { font-size:27px; } }
+.map-region.automatic-location path { fill:#f4dfaa; stroke:#875908; stroke-dasharray:4 2; }
+.map-region.mixed-location path { fill:#d9dfb8; stroke:#875908; stroke-dasharray:4 2; }
+.map-region.automatic-location.selected path,.map-region.mixed-location.selected path { fill:#f3d2ce; stroke:var(--accent-critical); }
+.map-region.unavailable path { fill:#f0efeb; stroke-dasharray:none; }
+.map-key.automatic { background:#f4dfaa; border:1px dashed #875908; }
+.map-key.mixed { background:#d9dfb8; border:1px dashed #875908; }
+.map-location-breakdown { display:flex; flex-direction:column; margin-top:4px; font-size:9px; font-weight:400; }
+.map-review-summary { display:flex; flex-wrap:wrap; gap:8px 20px; }
+.map-review-summary .reviewed,.map-location-breakdown .reviewed { color:#315d47; }
+.map-review-summary .automatic,.map-location-breakdown .automatic { color:#775007; }
+.news-location-filter { display:flex; flex-direction:column; gap:6px; max-width:300px; margin-top:20px; font-size:12px; }
+.news-location-filter select { padding:10px; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-subtle); border-radius:4px; }
+.news-location-badge { font-size:10px; padding:4px 7px; border:1px solid; border-radius:4px; }
+.news-location-badge.automatic { color:#775007; border-color:#b9852e; background:#fbf0d4; }
+.news-location-badge.reviewed { color:#315d47; border-color:#5f8b72; background:#e8f1eb; }
+.news-automatic-location { margin:24px 0; padding:18px; border:1px dashed #b9852e; border-radius:6px; background:#fbf0d4; color:var(--text-primary); }
+.news-automatic-location h3 { margin:0 0 10px; }
+.news-automatic-location p { margin:10px 0; }

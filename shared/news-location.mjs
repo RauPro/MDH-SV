@@ -1,0 +1,50 @@
+import { safeSource } from './news-dossier.mjs';
+
+export const NEWS_LOCATION_DEPARTMENTS = Object.freeze(['Ahuachapán', 'Santa Ana', 'Sonsonate', 'Chalatenango', 'La Libertad', 'San Salvador', 'Cuscatlán', 'La Paz', 'Cabañas', 'San Vicente', 'Usulután', 'San Miguel', 'Morazán', 'La Unión']);
+const object = value => Boolean(value && typeof value === 'object' && !Array.isArray(value));
+const exact = (value, keys) => object(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
+const sha = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+const date = value => typeof value === 'string' && !value.startsWith('0000-') && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
+const instant = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})$/.test(value) && date(value.slice(0, 10)) && Number.isFinite(Date.parse(value));
+const fail = () => { throw new Error('Capa pública de ubicaciones automáticas inválida'); };
+
+export function validatePublishedNewsLocation(value) {
+  if (!exact(value, ['candidate_id', 'source_url', 'publisher', 'published_date', 'department', 'review_status', 'human_reviewed', 'method', 'extracted_at', 'source_checked_at', 'evidence'])
+    || !sha(value.candidate_id) || !safeSource(value.source_url) || value.source_url.length > 4096 || new URL(value.source_url).pathname.length < 5
+    || typeof value.publisher !== 'string' || value.publisher.trim().length < 3 || value.publisher.length > 200
+    || !date(value.published_date) || !NEWS_LOCATION_DEPARTMENTS.includes(value.department)
+    || value.review_status !== 'automated_unreviewed' || value.human_reviewed !== false || value.method !== 'gemini_explicit_department'
+    || !instant(value.extracted_at) || !instant(value.source_checked_at)
+    || !exact(value.evidence, ['paragraph_id', 'content_sha256']) || typeof value.evidence.paragraph_id !== 'string'
+    || !/^p[1-9]\d{0,2}$/.test(value.evidence.paragraph_id) || !sha(value.evidence.content_sha256)) fail();
+  return structuredClone(value);
+}
+
+export function parsePublishedNewsLocations(payload) {
+  if (!exact(payload, ['schema_version', 'generated_at', 'locations']) || payload.schema_version !== 1 || !instant(payload.generated_at) || !Array.isArray(payload.locations) || payload.locations.length > 100000) fail();
+  const index = new Map();
+  const urls = new Set();
+  for (const raw of payload.locations) {
+    const location = validatePublishedNewsLocation(raw);
+    if (index.has(location.candidate_id) || urls.has(location.source_url)) fail();
+    index.set(location.candidate_id, location);
+    urls.add(location.source_url);
+  }
+  return index;
+}
+
+export function validateLocationBindings(index, references) {
+  const byId = new Map(references.map(reference => [reference.id, reference]));
+  if (byId.size !== references.length) fail();
+  for (const location of index.values()) {
+    const reference = byId.get(location.candidate_id);
+    if (!reference || !bound(location, reference)) fail();
+  }
+  return index;
+}
+const bound = (location, reference) => location.candidate_id === reference.id && location.source_url === reference.source_url && location.publisher === reference.publisher && location.published_date === reference.published_date;
+
+export function newsLocationFor(reference, locations = new Map()) {
+  const location = locations.get(reference.id);
+  return location && bound(location, reference) ? validatePublishedNewsLocation(location) : null;
+}

@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
 import { newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
+import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
 
 export const PUBLIC_URL = 'https://mdh-sv.vercel.app';
 export const LICENSE = 'https://creativecommons.org/licenses/by/4.0/';
@@ -99,6 +100,19 @@ export function loadNewsDossiers() {
   return publicNewsDossiers;
 }
 
+function locationSnapshot(payload) {
+  try { return { index: parsePublishedNewsLocations(payload), status: 'available' }; }
+  catch { return { index: new Map(), status: 'unavailable' }; }
+}
+let publicNewsLocations;
+export function loadNewsLocations() {
+  if (!publicNewsLocations) {
+    try { publicNewsLocations = locationSnapshot(JSON.parse(readFileSync(new URL('../apps/web/public/archive/locations.json', import.meta.url), 'utf8'))); }
+    catch { publicNewsLocations = { index: new Map(), status: 'unavailable' }; }
+  }
+  return publicNewsLocations;
+}
+
 const normalize = value => String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function matching(records, filters) {
   validateRange(filters);
@@ -146,12 +160,19 @@ export function getRecord(id, catalog = loadCatalog()) {
   if (!record) throw new ApiError(404, 'record_not_found', 'Registro no encontrado.');
   return { data: record, meta: metadata(catalog) };
 }
-export function searchNews(filters = {}, archive = loadNews(), dossierPayload) {
+export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload) {
   const result = paginated(archive.records, newsSearchSchema.parse(filters), archive, '/api/v1/news');
   const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
-  result.data = result.data.map(reference => ({ ...reference, news_dossier: newsDossierFor(reference, snapshot.index) }));
+  const locations = locationPayload === undefined ? loadNewsLocations() : locationSnapshot(locationPayload);
+  result.data = result.data.map(reference => {
+    const dossier = newsDossierFor(reference, snapshot.index);
+    return { ...reference, news_dossier: dossier,
+      automatic_location: snapshot.status === 'available' && !dossier.human_reviewed ? newsLocationFor(reference, locations.index) : null };
+  });
   result.meta = { ...result.meta, coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
     news_dossiers_status: snapshot.status,
+    automatic_locations_status: locations.status,
+    automatic_location_notice: 'Departamento mencionado en la fuente, extraído automáticamente y sin revisión humana. No confirma ubicación de una violación ni completa la ficha revisada. null no implica ausencia de ubicación en la fuente.',
     review_notice: 'Noticias con ficha estructurada; no constituyen casos validados. Sin ficha pública revisada, los campos quedan pendientes de extracción o revisión. Esto no informa del estado de la cola privada, que nunca se consulta.' };
   return result;
 }
