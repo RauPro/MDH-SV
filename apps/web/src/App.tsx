@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowUpRight, BookOpen, Download, Moon, Search, Shield, ShieldAlert, FileText, Users, Sun } from 'lucide-react';
 import { Dialog } from './components/Dialog';
+import { SalvadorMap } from './components/SalvadorMap';
+import { DEPARTMENTS } from './geography/elSalvador';
+import { matchesTerritory, summarizeTerritory, UNKNOWN_DEPARTMENT } from './geography/territory';
 import { citation, eventDate, filterRecords, formatDate, parseCatalog, type Catalog } from './catalog';
 import './App.css';
 
@@ -50,16 +53,20 @@ export function App() {
   const reset = () => { setQuery(''); setCategory(''); setDepartment(''); setKind('incident'); setFrom(''); setTo(''); setPrisonOnly(false); setPage(1); };
   const records = catalog?.records ?? [];
   const invalidDates = Boolean(from && to && from > to);
-  const filtered = useMemo(() => filterRecords(catalog?.records ?? [], query, category, '')
-    .filter(r => (!kind || r.record_type === kind) && (!department || r.department === department)
-      && (!prisonOnly || r.penitentiary_related)
+  const recordsInContext = useMemo(() => invalidDates ? [] : filterRecords(catalog?.records ?? [], query, category, '')
+    .filter(r => (!prisonOnly || r.penitentiary_related)
       && (!from || (r.incident_date_end || r.incident_date || '') >= from)
-      && (!to || Boolean(r.incident_date && r.incident_date <= to)))
+      && (!to || Boolean(r.incident_date && r.incident_date <= to))),
+    [catalog, query, category, prisonOnly, from, to, invalidDates]);
+  const filtered = useMemo(() => recordsInContext
+    .filter(r => (!kind || r.record_type === kind) && matchesTerritory(r, department))
     .sort((a,b) => (b.incident_date || b.published_date).localeCompare(a.incident_date || a.published_date) || a.id.localeCompare(b.id)),
-    [catalog, query, category, department, kind, prisonOnly, from, to]);
+    [recordsInContext, department, kind]);
+  const territory = useMemo(() => summarizeTerritory(recordsInContext), [recordsInContext]);
+  const selectMapDepartment = (value: string) => { setDepartment(value); setKind('incident'); setPage(1); };
   const activeRecord = records.find(r => modal === r.id);
   const categories = [...new Set(records.map(r => r.category))].sort();
-  const departments = [...new Set(records.flatMap(r => r.department ? [r.department] : []))].sort();
+  const departments = DEPARTMENTS.map(d => d.name).toSorted((a,b) => a.localeCompare(b, 'es'));
   const totalIndividual = records.filter(r => r.record_type === 'incident').length;
   const totalCollective = records.filter(r => r.record_type === 'aggregate').length;
   const documents = new Set(records.flatMap(r => [r.source_url, ...r.related_sources.map(s => s.url)])).size;
@@ -85,11 +92,13 @@ export function App() {
         : !catalog ? <p role="status" className="empty">Cargando los reportes y sus fuentes…</p>
         : <>
           <section className="metrics" aria-label="Cobertura del monitor"><Metric number={totalIndividual} label="Reportes individuales" tone="red" icon={<ShieldAlert size={18}/>}/><Metric number={totalCollective} label="Reportes colectivos" tone="amber" icon={<Users size={18}/>}/><Metric number={documents} label="Documentos fuente" tone="green" icon={<FileText size={18}/>}/><div className="metric metric-note"><BookOpen aria-hidden="true" size={21}/><p>Los registros no equivalen a personas únicas. No se suman cifras de víctimas.</p></div></section>
+          <SalvadorMap selected={department} onSelect={selectMapDepartment} counts={territory.counts}
+            located={territory.located} unlocated={territory.unlocated} invalidDates={invalidDates}/>
           <section className="records-section" aria-labelledby="records-title"><div className="section-heading"><div className="eyebrow">CONSULTA DOCUMENTAL</div><h2 id="records-title">Explorar el monitor</h2><p>Filtra por tipo de reporte, derecho, departamento o fecha del hecho.</p></div>
             <div className="filters"><label className="search-label"><span>Buscar</span><div className="search-box"><Search aria-hidden="true" size={18}/><input type="search" value={query} onChange={e => update(setQuery)(e.target.value)} placeholder="Hecho, tema, fuente o departamento"/></div></label>
               <label>Tipo de registro<select value={kind} onChange={e => update(setKind)(e.target.value)}><option value="">Todos los registros</option><option value="incident">Reportes individuales</option><option value="aggregate">Reportes colectivos</option><option value="publication">Informes de contexto</option></select></label>
               <label>Derecho o temática<select value={category} onChange={e => update(setCategory)(e.target.value)}><option value="">Todas las temáticas</option>{categories.map(c => <option key={c}>{c}</option>)}</select></label>
-              <label>Departamento<select value={department} onChange={e => update(setDepartment)(e.target.value)}><option value="">Todos / alcance nacional</option>{departments.map(d => <option key={d}>{d}</option>)}</select></label>
+              <label>Departamento<select value={department} onChange={e => update(setDepartment)(e.target.value)}><option value="">Todos / alcance nacional</option><option value={UNKNOWN_DEPARTMENT}>Sin departamento (individuales)</option>{departments.map(d => <option key={d}>{d}</option>)}</select></label>
               <label>Hecho desde<input type="date" value={from} onChange={e => update(setFrom)(e.target.value)} aria-invalid={invalidDates}/></label><label>Hecho hasta<input type="date" value={to} onChange={e => update(setTo)(e.target.value)} aria-invalid={invalidDates}/></label>
               <label className="checkbox"><input type="checkbox" checked={prisonOnly} onChange={e => { setPrisonOnly(e.target.checked); setPage(1); }}/>Custodia o reclusión</label>
               <button className="reset" onClick={reset}>Restablecer filtros</button>

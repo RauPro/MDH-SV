@@ -1,0 +1,45 @@
+.territory-map { padding:22px; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; margin:24px 0; }
+.map-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+.map-heading h2 { display:flex; align-items:center; gap:9px; font-size:25px; font-weight:500; }
+.map-heading h2 svg { color:var(--accent-critical); }
+.map-heading p { font-size:12px; color:var(--text-secondary); margin-top:5px; }
+.map-clear { display:flex; align-items:center; gap:6px; font-size:11px; }
+.map-scope { color:var(--text-secondary); font-size:11px; margin:12px 0 18px; }
+.map-layout { display:grid; grid-template-columns:minmax(0,1fr) 285px; gap:20px; align-items:center; }
+.map-canvas { width:100%; height:auto; display:block; background:var(--bg-primary); border-radius:6px; }
+.map-region { cursor:pointer; }
+.map-region path { stroke:var(--text-muted); stroke-width:1.1; stroke-linejoin:round; vector-effect:non-scaling-stroke; fill:#f0efeb; transition:fill .15s,stroke .15s; }
+.map-region.map-level-1 path { fill:#dbe8e0; }
+.map-region.map-level-2 path { fill:#bfd6c8; }
+.map-region.map-level-3 path { fill:#a1c5b0; }
+.map-region.map-level-4 path { fill:#81b499; }
+.map-region.hovered path { stroke:var(--text-primary); stroke-width:2; }
+.map-region.selected path { fill:#f3d2ce; stroke:var(--accent-critical); stroke-width:2; }
+.map-region.unavailable { cursor:default; }
+.map-name,.map-count { pointer-events:none; fill:var(--text-primary); paint-order:stroke; stroke:var(--bg-secondary); stroke-width:3px; stroke-linejoin:round; }
+.map-name { font:14px var(--font-sans); }
+.map-count { font:600 21px var(--font-mono); }
+.map-departments { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+.map-departments button { display:flex; align-items:center; justify-content:space-between; gap:7px; padding:9px; min-height:40px; font-size:10px; text-align:left; }
+.map-departments strong { font-family:var(--font-mono); min-width:20px; text-align:center; color:var(--accent-verified); }
+.map-departments button.selected,.map-summary button[aria-pressed="true"] { border-color:var(--accent-critical); background:var(--accent-critical-bg); }
+.map-departments button.selected strong { color:var(--accent-critical); }
+.map-departments button:disabled { opacity:.55; cursor:default; }
+.map-legend { display:flex; gap:18px; flex-wrap:wrap; font-size:10px; color:var(--text-secondary); margin:15px 0; }
+.map-legend span { display:inline-flex; align-items:center; gap:6px; }
+.map-key { width:12px; height:12px; border:1px solid var(--border-focus); border-radius:2px; background:#f0efeb; }
+.map-key.filled { background:#81b499; }
+.map-key.selected { background:#f3d2ce; border-color:var(--accent-critical); }
+.map-summary { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; border-top:1px solid var(--border-subtle); padding-top:15px; }
+.map-summary p,.map-summary button { font-size:12px; }
+.map-summary button { display:flex; gap:12px; align-items:center; }
+.map-note { font-size:11px; line-height:1.7; color:var(--text-secondary); margin-top:13px; }
+.map-attribution { font-size:10px; color:var(--text-secondary); margin-top:7px; }
+html.dark .map-region path,html.dark .map-key.map-key-empty { fill:#252729; background:#252729; }
+html.dark .map-region.map-level-1 path { fill:#294136; }
+html.dark .map-region.map-level-2 path { fill:#335745; }
+html.dark .map-region.map-level-3 path { fill:#3c6b53; }
+html.dark .map-region.map-level-4 path,html.dark .map-key.filled { fill:#478262; background:#478262; }
+html.dark .map-region.selected path,html.dark .map-key.selected { fill:#60363c; background:#60363c; }
+@media(max-width:900px){ .map-layout { grid-template-columns:1fr; } .map-canvas { max-height:370px; } .map-departments { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+@media(max-width:600px){ .territory-map { padding:16px; } .map-heading h2 { font-size:23px; } .map-departments { grid-template-columns:repeat(2,minmax(0,1fr)); } .map-departments button { font-size:11px; min-height:44px; } .map-name { display:none; } .map-count { font-size:27px; } }
