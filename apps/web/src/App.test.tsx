@@ -5,7 +5,7 @@ import axe from 'axe-core';
 import data from './__fixtures__/catalog.json';
 import App from './App';
 
-beforeEach(() => { vi.restoreAllMocks(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => data })); });
+beforeEach(() => { vi.restoreAllMocks(); localStorage.clear(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => data })); });
 async function ready() { render(<App/>); await screen.findByText('4 resultados'); }
 it('filters departments and accent-insensitive text', async () => {
   await ready();
@@ -57,8 +57,8 @@ it('works when local storage is denied', async () => {
   vi.spyOn(Storage.prototype,'getItem').mockImplementation(()=>{throw new Error('denied');});
   vi.spyOn(Storage.prototype,'setItem').mockImplementation(()=>{throw new Error('denied');});
   await ready();
-  await userEvent.click(screen.getByRole('button',{name:'Activar tema claro'}));
-  expect(document.documentElement).toHaveClass('light');
+  await userEvent.click(screen.getByRole('button',{name:'Activar tema oscuro'}));
+  expect(document.documentElement).toHaveClass('dark');
 });
 it('offers same-origin downloads and describes MCP accurately', async () => {
   await ready();
@@ -77,4 +77,15 @@ it('opens a directly linked record', async () => {
   render(<App/>);
   await screen.findByRole('dialog');
   expect(screen.getByRole('dialog')).toHaveTextContent('Sonsonate');
+});
+
+it('shows supporting updates and authentic editorial review separately', async () => {
+  const revised=structuredClone(data);
+  revised.records[0]={...revised.records[0],human_reviewed:true,review_status:'editorially_reviewed',reviewed_by:'Editor',reviewed_at:'2026-10-09',review_notes:'Revisión de la fuente, fechas y privacidad completada.',related_sources:[{url:'https://www.amnesty.org/es/latest/news/2025/12/example/',title:'Actualización del caso',published_date:'2025-12-17',locator:'Comunicado de actualización'}]} as unknown as typeof revised.records[0];
+  vi.mocked(fetch).mockResolvedValue({ok:true,json:async()=>revised} as Response);
+  history.replaceState(null,'',`/#${revised.records[0].id}`);
+  render(<App/>);
+  const dialog=await screen.findByRole('dialog');
+  expect(dialog).toHaveTextContent('Revisión editorial por Editor');
+  expect(within(dialog).getByRole('link',{name:/Actualización del caso/})).toBeInTheDocument();
 });

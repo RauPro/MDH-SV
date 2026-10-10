@@ -1,5 +1,14 @@
 import json
 import pytest
+from pathlib import Path
+from mdh_pipeline.publication import Catalog
+from mdh_mcp import server as server_module
+
+@pytest.fixture(autouse=True)
+def fixture_catalog(monkeypatch):
+    catalog = Catalog.model_validate_json((Path(__file__).parent / "fixtures/catalog.json").read_text())
+    monkeypatch.setattr(server_module, "load_catalog", lambda: catalog)
+
 from mdh_mcp.server import (mcp, consultar_incidentes, obtener_expediente_completo,
     obtener_metricas_globales, recurso_taxonomia, prompt_analizar_patron)
 

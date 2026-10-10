@@ -38,7 +38,7 @@ class Publication(BaseModel):
     language: Literal["es"]
     incident_date: date | None
     incident_date_end: date | None
-    date_precision: Literal["day", "unknown", "month_range"]
+    date_precision: Literal["day", "unknown", "month_range", "year_range"]
     review_status: Literal["source_checked", "editorially_reviewed"]
     human_reviewed: bool
     reviewed_by: str | None = None
@@ -94,7 +94,7 @@ class Publication(BaseModel):
             raise ValueError("Do not locate or date a publication as an incident")
         if (self.date_precision == "unknown") != (self.incident_date is None):
             raise ValueError("Date precision must reflect available evidence")
-        if self.date_precision == "month_range" and self.incident_date_end is None:
+        if self.date_precision in ("month_range", "year_range") and self.incident_date_end is None:
             raise ValueError("A range requires an end date")
         if self.department:
             from mdh_schema import DepartmentEnum

@@ -14,7 +14,8 @@ from mdh_pipeline.deduplicator import IncidentDeduplicator
 
 def test_provenance_and_privacy_boundary():
     catalog = load_catalog()
-    assert len(catalog.records) == 9
+    assert len(catalog.records) >= 24
+    assert {"mdh-ruth-lopez-2025", "mdh-fidel-zavala-2025", "mdh-beatriz-2013"} <= {r.id for r in catalog.records}
     data = catalog.model_dump(mode='json')
     for field, value in [('victims', [{'name': 'private'}]), ('human_reviewed', True), ('geometry', {'type':'Point','coordinates':[0,0]}), ('source_url','javascript:alert(1)')]:
         changed = json.loads(json.dumps(data))
@@ -69,3 +70,15 @@ def test_private_ingestion_is_opt_in_and_does_not_publish(monkeypatch):
     before = CATALOG.read_bytes()
     with pytest.raises(RuntimeError): run_periodic_scan()
     assert CATALOG.read_bytes() == before
+
+
+def test_case_updates_and_individuals_are_not_double_counted():
+    records={r.id:r for r in load_catalog().records}
+    for key in ['mdh-alejandro-henriquez-2025','mdh-jose-angel-perez-2025']:
+        record=records[key]
+        assert 'liberación' in record.summary
+        assert record.related_sources[0]['published_date']=='2025-12-17'
+    assert records['mdh-beatriz-2013'].date_precision=='year_range'
+    assert records['mdh-venezolanos-cecot-2025'].record_type=='aggregate'
+    assert records['mdh-musico-custodia-2022'].department is None
+    assert all('victims_count' not in r.model_dump() for r in records.values())

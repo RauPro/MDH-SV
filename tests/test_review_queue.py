@@ -123,7 +123,7 @@ def test_import_requires_current_approval_and_is_idempotent(tmp_path,monkeypatch
     approved=ApprovedInbox()
     assert import_approved(approved,candidate['id'],source,export=False) is True
     assert import_approved(approved,candidate['id'],source,export=False) is False
-    assert len(json.loads(source.read_text())['records'])==10
+    assert len(json.loads(source.read_text())['records'])==len(load_catalog().records)+1
     approved.call=lambda method,path: {'content':content} if '/contents/' in path else {'labels':[],'body':issue_body(candidate)}
     with pytest.raises(ValueError):import_approved(approved,candidate['id'],source,export=False)
 

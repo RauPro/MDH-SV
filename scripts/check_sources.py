@@ -16,7 +16,7 @@ def check(url):
 
 if __name__ == '__main__':
     import json
-    urls = sorted({r.source_url for r in load_catalog().records})
+    urls = sorted({url for r in load_catalog().records for url in [r.source_url, *[s['url'] for s in r.related_sources]]})
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
         results = list(pool.map(check, urls))
     print(json.dumps(results, ensure_ascii=False, indent=2))
