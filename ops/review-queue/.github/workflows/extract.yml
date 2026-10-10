@@ -1,0 +1,72 @@
+name: Preparar fichas con Gemini
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: Máximo de noticias por lote (1 a 50)
+        type: number
+        default: 20
+        required: true
+      retry_failed:
+        description: Reintentar errores pendientes aunque hayan agotado los intentos ordinarios
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: editorial-inbox
+  cancel-in-progress: false
+  queue: max
+jobs:
+  extract:
+    if: github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: main
+          path: bibliography
+          sparse-checkout: apps/web/public/archive
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: monitor/ops/review-queue/requirements.txt
+      - name: Instalar entorno fijado
+        run: pip install -r monitor/ops/review-queue/requirements.txt
+      - name: Recoger las noticias nuevas
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.review_queue collect
+      - name: Incorporar el siguiente lote del backlog
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 25
+      - name: Extraer fichas privadas sin publicación automática
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MDH_CODE_REF: MDH_PUBLIC_CODE_REF
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
+          MDH_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.batch_size) || '20' }}
+          MDH_RETRY_FAILED: ${{ inputs.retry_failed || false }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: |
+          args=(--archive bibliography/apps/web/public/archive/news.json --limit "$MDH_BATCH_SIZE")
+          if [ "$MDH_RETRY_FAILED" = 'true' ]; then args+=(--retry-failed); fi
+          python -m mdh_pipeline.gemini_review "${args[@]}"
