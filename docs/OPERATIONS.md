@@ -56,7 +56,7 @@ Para actualizar código de la cola, cambiar `ref` en ambos workflows privados po
 
 ## Archivo y acceso remoto
 
-`Refresh public news bibliography` actualiza cada seis horas la bibliografía de tres medios y deja visible el estado de cada mes. Su commit solo modifica checkpoints y el archivo público, nunca las fichas. Debe verificarse que cada push automático llegue a Vercel. Los errores de fuente conservan el snapshot previo y exponen cobertura parcial; revisar el resumen de Actions.
+`Refresh public news bibliography` actualiza cada seis horas la bibliografía de tres medios, con un periodo objetivo desde el 1 de enero de 2010 hasta el día de ejecución en El Salvador, y deja visible el estado de cada mes. Ese alcance no garantiza que el recorrido histórico esté terminado: comprobar `coverage.start_date`, `coverage.end_date` y los estados mensuales del snapshot, no la fecha del paper. Su commit solo modifica checkpoints y el archivo público, nunca las fichas. Debe verificarse que cada push automático llegue a Vercel. Los errores de fuente conservan el snapshot previo y exponen cobertura parcial; revisar el resumen de Actions.
 
 `Revisar backlog histórico` en el repositorio privado añade hasta veinte referencias antiguas por ejecución. Comparte deduplicación y exclusión mutua con RSS. Sus aprobaciones siguen necesitando importación, revisión de cambios y CI antes de publicación. Para preparar una ficha sin inventar información se puede usar el [generador de borradores privados](PRIVATE-DRAFTS.md).
 

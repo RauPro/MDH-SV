@@ -18,7 +18,7 @@ Los endpoints aceptan `GET`, `HEAD` y `OPTIONS`. Las respuestas son JSON con COR
 curl 'https://mdh-sv.vercel.app/api/v1/records?record_type=incident&limit=25'
 curl 'https://mdh-sv.vercel.app/api/v1/records/mdh-ruth-lopez-2025'
 curl 'https://mdh-sv.vercel.app/api/v1/stats?record_type=incident'
-curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2025-04-01&date_to=2025-04-30'
+curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2010-01-01&limit=25'
 ```
 
 | Endpoint | Uso y filtros |
@@ -30,6 +30,8 @@ curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2025-04-01&date_to=2025-04
 | `/openapi.json` | Contrato con parámetros, respuestas, dossier y errores para generar un cliente. |
 
 `scope_hint` en noticias acepta `el_salvador`, `international_context` o `undetermined`. Es una señal automática basada en título y URL, no una confirmación de jurisdicción. Omitir el filtro conserva todo el archivo; el sitio web comienza con `el_salvador`. `scope_terms` declara los términos que produjeron la señal.
+
+El objetivo histórico es recuperar noticias desde 2010. Lea `meta.coverage.start_date` y `meta.coverage.end_date` para conocer el intervalo solicitado por la versión consultada, junto con los estados por medio y mes para evaluar su avance. Un intervalo amplio no acredita cobertura completa ni la disponibilidad de noticias en todos sus meses. La referencia IEEE se conserva como antecedente independiente de ese inicio.
 
 `q` busca en títulos, resúmenes, etiquetas y los campos públicos del dossier: hechos, personas o grupos descritos por la fuente, actores, grupos vulnerables, temas y lugar público. Ignora tildes y mayúsculas. `publisher`, `department` y `category` requieren el valor completo; `department=unknown` busca ubicación no determinada.
 

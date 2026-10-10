@@ -67,7 +67,18 @@ it('offers same-origin downloads and describes MCP accurately', async () => {
   const dialog = await screen.findByRole('dialog');
   expect(within(dialog).getByRole('link',{name:'CSV'})).toHaveAttribute('href','/data/records.csv');
   expect(dialog).toHaveTextContent('MCP remoto');
+  expect(dialog).toHaveTextContent('/api/v1/news?limit=20');
+  expect(dialog).not.toHaveTextContent('date_from=2025-03-26');
   expect(within(dialog).getByRole('link',{name:'Especificación OpenAPI'})).toHaveAttribute('href','/api/v1/openapi.json');
+});
+it('describes 2010 as the historical objective without equating it to the IEEE paper or completed coverage', async () => {
+  await ready();
+  await userEvent.click(screen.getByRole('button', { name: 'Metodología' }));
+  const dialog = await screen.findByRole('dialog');
+  expect(dialog).toHaveTextContent('objetivo recuperar noticias desde el 1 de enero de 2010');
+  expect(dialog).toHaveTextContent('la cobertura es parcial');
+  expect(dialog).toHaveTextContent('no el inicio del archivo');
+  expect(within(dialog).getByRole('link', { name: 'Artículo de investigación original' })).toHaveAttribute('href', 'https://ieeexplore.ieee.org/document/10933836');
 });
 it('has no detectable structural accessibility violations', async () => {
   await ready();

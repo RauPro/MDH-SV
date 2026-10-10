@@ -12,6 +12,8 @@ El monitor indexa reportes públicos de presuntas violaciones de derechos humano
 
 La cobertura inicial es deliberadamente pequeña y no representativa: 17 reportes individuales, dos colectivos y cinco informes de contexto, respaldados por 16 documentos, incluidas actualizaciones. No se pueden derivar tendencias nacionales, tasas de incidencia, totales de víctimas ni comparaciones departamentales representativas. La ausencia de registros no prueba ausencia de violaciones.
 
+El archivo bibliográfico tiene un alcance distinto al de esas fichas: busca recuperar noticias desde el 1 de enero de 2010 hasta la fecha local de cada ejecución. El intervalo publicado en `coverage.start_date` y `coverage.end_date` indica el periodo solicitado, no una cobertura completa. Los meses pendientes, recorridos o con fallos se muestran por fuente. La incorporación del artículo original a IEEE Xplore en 2025 es un antecedente de la investigación, no el inicio de este archivo. Ampliar el intervalo no transforma referencias pendientes en casos acreditados.
+
 ## Procedencia y revisión
 
 Cada fila contiene autor o institución, título de la fuente, URL HTTPS y localizador en el documento, junto con la fecha de consulta. Las fichas iniciales fueron elaboradas mediante consulta documental asistida por IA; **su revisión humana está pendiente**. `source_checked` solo significa que se consultó la fuente; nunca equivale a `confirmed`. No se atribuye apoyo institucional a las organizaciones citadas.
