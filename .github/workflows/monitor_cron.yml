@@ -1,0 +1,19 @@
+name: Check public source links (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: |
+          pip install -r requirements.txt
+          pip install -e . --no-deps
+          python scripts/check_sources.py
+# No scheduled publication of AI candidates. Editorial changes require a reviewed commit.

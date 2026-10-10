@@ -1,0 +1,13 @@
+name: Deployment configuration check
+on:
+  pull_request:
+    paths: ['vercel.json', 'package.json', 'apps/web/**']
+permissions:
+  contents: read
+jobs:
+  configuration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m json.tool vercel.json > /dev/null
+# Vercel's connected Git integration builds and deploys the main branch.
