@@ -5,6 +5,8 @@ import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/
 import { createPublicServer } from '../server/dev.mjs';
 import { getStats, loadCatalog, loadNews, searchNews, searchRecords } from '../server/public-data.mjs';
 import { validMcpRequest } from '../api/mcp.mjs';
+import recordHandler from '../api/v1/records/[id].mjs';
+import unknownV1Handler from '../api/v1/[...path].mjs';
 
 let server, base;
 before(async () => {
@@ -14,6 +16,34 @@ before(async () => {
 });
 after(async () => { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); });
 const get = async path => { const response = await fetch(`${base}${path}`); return { response, body: await response.json() }; };
+
+async function vercelRequest(handler, url, query = {}) {
+  const res = { statusCode: 200, headers: {}, setHeader(key, value) { this.headers[key.toLowerCase()] = value; }, end(value) { this.body = value ? JSON.parse(value) : null; } };
+  await handler({ method: 'GET', url, query }, res);
+  return res;
+}
+
+test('Vercel injected route ids work without permitting query-based record substitution', async () => {
+  const id = 'mdh-ruth-lopez-2025';
+  const routed = await vercelRequest(recordHandler, `/api/v1/records/${id}?id=${id}`, { id });
+  assert.equal(routed.statusCode, 200);
+  assert.equal(routed.body.data.id, id);
+  const http = await get(`/api/v1/records/${id}?id=${id}`);
+  assert.equal(http.response.status, 200);
+  assert.equal(http.body.data.id, id);
+  for (const url of [`/api/v1/records/${id}?id=other`, `/api/v1/records/${id}?id=${id}&id=${id}`, `/api/v1/records/${id}?id=${id}&limit=1`]) {
+    assert.equal((await vercelRequest(recordHandler, url, { id })).statusCode, 400);
+  }
+  assert.equal((await vercelRequest(recordHandler, `/api/v1/records/${id}`, { id: 'other' })).statusCode, 400);
+  assert.equal((await vercelRequest(recordHandler, `/api/v1/records/${id}?id=${id}`, { id: [id, id] })).statusCode, 400);
+});
+
+test('versioned Vercel fallback returns JSON even with injected catch-all routing parameters', async () => {
+  const response = await vercelRequest(unknownV1Handler, '/api/v1/not-found?path=not-found', { path: 'not-found' });
+  assert.equal(response.statusCode, 404);
+  assert.equal(response.headers['content-type'], 'application/json; charset=utf-8');
+  assert.equal(response.body.error.code, 'endpoint_not_found');
+});
 
 test('public REST pagination is deterministic and retains sources, review status and dossiers', async () => {
   const first = await get('/api/v1/records?limit=2');
