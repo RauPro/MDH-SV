@@ -1,4 +1,29 @@
+export interface EvidenceField<T = string | string[]> {
+  value: T | null;
+  status: 'reported' | 'not_reported' | 'withheld' | 'not_applicable';
+  evidence_refs: string[];
+  note: string | null;
+}
+export interface Dossier {
+  schema_version: 1;
+  alleged_violation: EvidenceField<string>;
+  facts: EvidenceField<string>;
+  affected_persons: EvidenceField<string[]>;
+  location: {department: EvidenceField<string>; municipality: EvidenceField<string>; public_place: EvidenceField<string>};
+  event_date: EvidenceField<string>;
+  event_date_end: EvidenceField<string>;
+  date_precision: 'day' | 'unknown' | 'month_range' | 'year_range';
+  event_time: EvidenceField<string>;
+  reported_actors: EvidenceField<string[]>;
+  institutional_sources: EvidenceField<string[]>;
+  vulnerable_groups: EvidenceField<string[]>;
+  themes: EvidenceField<string[]>;
+  hypothesis: EvidenceField<string>;
+  instrument: EvidenceField<string[]>;
+  evidence: {id: string; url: string; locator: string}[];
+}
 export interface Publication {
+  dossier: Dossier;
   id: string;
   record_type: 'publication' | 'incident' | 'aggregate';
   incident_date: string | null;
@@ -72,13 +97,14 @@ export function parseCatalog(value: unknown): Catalog {
       || !['title', 'source_title', 'publisher', 'summary', 'category', 'coverage', 'date_note', 'source_locator', 'source_check_method'].every(k => typeof r[k as keyof Publication] === 'string' && String(r[k as keyof Publication]).trim().length)) {
       throw new Error('Registro no apto para publicación');
     }
+    validateDossier(r);
     ids.add(r.id);
     urls.add(r.source_record_key);
   }
   return { ...data, records: [...data.records].sort((a, b) => b.published_date.localeCompare(a.published_date) || a.id.localeCompare(b.id)) };
 }
 
-function validDate(value: unknown): value is string {
+export function validDate(value: unknown): value is string {
   return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
 }
 
@@ -86,7 +112,7 @@ export const normalize = (value: string) => value.normalize('NFD').replace(/[\u0
 export function filterRecords(records: Publication[], query: string, category: string, year: string) {
   const terms = normalize(query).split(/\s+/).filter(Boolean);
   return records.filter(r => (!category || r.category === category) && (!year || r.published_date.startsWith(year))
-    && terms.every(term => normalize([r.id, r.title, r.source_title, r.summary, r.publisher, r.category, r.department || '', ...r.tags].join(' ')).includes(term)));
+    && terms.every(term => normalize([r.id, r.title, r.source_title, r.summary, r.publisher, r.category, r.department || '', JSON.stringify(r.dossier), ...r.tags].join(' ')).includes(term)));
 }
 export function formatDate(value: string) {
   return new Intl.DateTimeFormat('es-SV', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`));
@@ -104,4 +130,27 @@ export function eventDate(record: Publication) {
     return `${month(record.incident_date)} — ${month(record.incident_date_end)}`;
   }
   return formatDate(record.incident_date);
+}
+
+function validateDossier(record: Publication) {
+  const d = record.dossier;
+  const fail = () => { throw new Error('Ficha sin evidencia estructurada válida'); };
+  if (!d || d.schema_version !== 1 || !d.location || !Array.isArray(d.evidence) || !d.evidence.length) return fail();
+  const sources = new Set([record.source_url, ...record.related_sources.map(s => s.url)]);
+  const refs = new Set<string>();
+  for (const e of d.evidence) {
+    if (!e || typeof e.id !== 'string' || refs.has(e.id) || !sources.has(e.url) || !safeSource(e.url) || typeof e.locator !== 'string' || !e.locator.trim()) return fail();
+    refs.add(e.id);
+  }
+  const strings = [d.alleged_violation, d.facts, d.location.department, d.location.municipality, d.location.public_place, d.event_date, d.event_date_end, d.event_time, d.hypothesis];
+  const arrays = [d.affected_persons, d.reported_actors, d.institutional_sources, d.vulnerable_groups, d.themes, d.instrument];
+  for (const [fields, isList] of [[strings, false], [arrays, true]] as const) {
+    for (const f of fields) {
+      if (!f || !['reported','not_reported','withheld','not_applicable'].includes(f.status) || !Array.isArray(f.evidence_refs) || f.evidence_refs.some(id => !refs.has(id)) || (f.note !== null && typeof f.note !== 'string')) return fail();
+      if (f.status === 'reported') {
+        if (!f.evidence_refs.length || (isList ? !Array.isArray(f.value) || !f.value.length || !f.value.every(v => typeof v === 'string' && v.trim()) : typeof f.value !== 'string' || !f.value.trim())) return fail();
+      } else if (f.value !== null) return fail();
+    }
+  }
+  if (d.event_date.value !== record.incident_date || d.event_date_end.value !== record.incident_date_end || d.date_precision !== record.date_precision || d.location.department.value !== record.department) return fail();
 }

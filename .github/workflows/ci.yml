@@ -24,7 +24,9 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: apps/web/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            apps/web/package-lock.json
       - name: Install reproducible Python environment
         run: |
           python -m pip install -r requirements.txt
@@ -36,6 +38,11 @@ jobs:
           pytest -q
           python -m mdh_pipeline.publication
           git diff --exit-code -- apps/web/public/data
+      - name: Install, audit and test remote API and MCP
+        run: |
+          npm ci
+          npm audit --audit-level=moderate
+          npm run test:api
       - name: Install and audit frontend
         run: |
           npm --prefix apps/web ci

@@ -2,7 +2,7 @@
 
 ## Producción
 
-Vercel importa `RauPro/MDH-SV`, rama `main`, raíz `.` y `vercel.json`. Ejecuta `npm --prefix apps/web ci` y el build del portal; solo publica `apps/web/dist`. Node 22.x. El portal es estático, sin secretos, base de datos expuesta, autenticación, pagos ni servicios de IA en cada consulta.
+Vercel importa `RauPro/MDH-SV`, rama `main`, raíz `.` y `vercel.json`. Ejecuta `npm ci && npm --prefix apps/web ci`, el build del portal y las funciones Node de `api/`. Node 22.x. Sirve los archivos estáticos de `apps/web/dist` y la API REST/MCP de solo lectura. No requiere secretos, base de datos, autenticación ni servicios de IA en cada consulta.
 
 La web consume JSON del mismo origen. Tiene CSP, bloqueo de iframes, `nosniff`, política sin referrer y permisos de cámara/micrófono/geolocalización deshabilitados. El portal no incorpora analítica ni tipografías externas. El alojamiento conserva las políticas y registros técnicos propios de Vercel.
 
@@ -14,6 +14,8 @@ El prebuild comprueba la fuente canónica, la correspondencia exacta de registro
 .venv/bin/pytest -q
 .venv/bin/python -m mdh_pipeline.publication
 .venv/bin/python scripts/audit_release.py
+npm ci
+npm run test:api
 npm --prefix apps/web ci
 npm --prefix apps/web test
 npm --prefix apps/web run lint
@@ -51,3 +53,11 @@ La primera ejecución satisfactoria leyó 35 entradas, abrió cinco candidatas y
 El workflow manual `Revisar noticia` exige cuenta humana con acceso de escritura y confirmación de revisión de privacidad para aprobar. La propuesta queda en `approved/` y como artefacto privado. El importador vuelve a comprobar el estado de aprobación: una candidatura rechazada o sin propuesta validada no se importa. La publicación sigue requiriendo commit/PR y CI.
 
 Para actualizar código de la cola, cambiar `ref` en ambos workflows privados por el commit revisado; no apuntar a código mutable de pull requests. Los patrones reproducibles están en `ops/review-queue/` y contienen un marcador que debe sustituirse por el SHA al instalar. No son workflows activos del repositorio público.
+
+## Archivo y acceso remoto
+
+`Refresh public news bibliography` actualiza cada seis horas la bibliografía de tres medios y deja visible el estado de cada mes. Su commit solo modifica checkpoints y el archivo público, nunca las fichas. Debe verificarse que cada push automático llegue a Vercel. Los errores de fuente conservan el snapshot previo y exponen cobertura parcial; revisar el resumen de Actions.
+
+`Revisar backlog histórico` en el repositorio privado añade hasta veinte referencias antiguas por ejecución. Comparte deduplicación y exclusión mutua con RSS. Sus aprobaciones siguen necesitando importación, revisión de cambios y CI antes de publicación. Para preparar una ficha sin inventar información se puede usar el [generador de borradores privados](PRIVATE-DRAFTS.md).
+
+Comprobar REST `/api/v1/records`, `/api/v1/records/{id}`, `/api/v1/news` y `/api/v1/openapi.json`. El endpoint remoto `/mcp` requiere POST Streamable HTTP: GET devuelve 405 de forma deliberada. Probar con cliente MCP oficial, no inferir disponibilidad por abrir la URL en un navegador. La guía y límites están en [API.md](API.md).

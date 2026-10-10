@@ -6,7 +6,7 @@ import json
 import re
 from datetime import date
 from pathlib import Path
-from typing import Literal
+from typing import Generic, Literal, TypeVar
 from urllib.parse import urlparse
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -14,6 +14,85 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 ROOT = Path(__file__).resolve().parents[4]
 CATALOG = ROOT / "data/reviewed/publications.json"
 PUBLIC = ROOT / "apps/web/public/data"
+
+T = TypeVar("T")
+
+
+class EvidenceField(BaseModel, Generic[T]):
+    """A source-attributed value, never a determination that an allegation is proven."""
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    value: T | None
+    status: Literal["reported", "not_reported", "withheld", "not_applicable"]
+    evidence_refs: list[str] = Field(default_factory=list)
+    note: str | None = None
+
+    @model_validator(mode="after")
+    def meaningful_value(self):
+        if self.status == "reported":
+            if self.value is None or self.value == "" or self.value == [] or not self.evidence_refs:
+                raise ValueError("Reported dossier values require a value and evidence references")
+            if isinstance(self.value, list) and any(not item.strip() for item in self.value):
+                raise ValueError("Dossier lists cannot contain blank values")
+        elif self.value is not None:
+            raise ValueError("Missing or withheld dossier fields must have a null value")
+        if self.status in ("withheld", "not_applicable") and len(self.note or "") < 10:
+            raise ValueError("Withheld or inapplicable dossier fields require an explanation")
+        if len(set(self.evidence_refs)) != len(self.evidence_refs):
+            raise ValueError("Duplicate evidence reference")
+        return self
+
+
+class DossierEvidence(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    id: str = Field(pattern=r"^[a-z][a-z0-9-]*$")
+    url: str
+    locator: str = Field(min_length=10)
+
+
+class DossierLocation(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    department: EvidenceField[str]
+    municipality: EvidenceField[str]
+    public_place: EvidenceField[str]
+
+
+class Dossier(BaseModel):
+    """Public, minimised research fields derived from the original WSDS indicators."""
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal[1]
+    alleged_violation: EvidenceField[str]
+    facts: EvidenceField[str]
+    affected_persons: EvidenceField[list[str]]
+    location: DossierLocation
+    event_date: EvidenceField[date]
+    event_date_end: EvidenceField[date]
+    date_precision: Literal["day", "unknown", "month_range", "year_range"]
+    event_time: EvidenceField[str]
+    reported_actors: EvidenceField[list[str]]
+    institutional_sources: EvidenceField[list[str]]
+    vulnerable_groups: EvidenceField[list[str]]
+    themes: EvidenceField[list[str]]
+    hypothesis: EvidenceField[str]
+    instrument: EvidenceField[list[str]]
+    evidence: list[DossierEvidence] = Field(min_length=1)
+
+    def evidence_fields(self):
+        for name in type(self).model_fields:
+            value = getattr(self, name)
+            if isinstance(value, EvidenceField):
+                yield name, value
+        for name in DossierLocation.model_fields:
+            yield "location." + name, getattr(self.location, name)
+
+    @model_validator(mode="after")
+    def valid_references(self):
+        ids = [source.id for source in self.evidence]
+        if len(ids) != len(set(ids)):
+            raise ValueError("Duplicate dossier evidence identifier")
+        for _, field in self.evidence_fields():
+            if not set(field.evidence_refs) <= set(ids):
+                raise ValueError("Dossier field references missing evidence")
+        return self
 
 
 class Publication(BaseModel):
@@ -50,6 +129,7 @@ class Publication(BaseModel):
     source_record_key: str = Field(min_length=4)
     privacy_note: str = Field(min_length=10)
     penitentiary_related: bool
+    dossier: Dossier
 
     @field_validator("source_url")
     @classmethod
@@ -66,6 +146,22 @@ class Publication(BaseModel):
 
     @model_validator(mode="after")
     def dates(self):
+        allowed_evidence = {self.source_url, *(source.get('url') for source in self.related_sources)}
+        for evidence in self.dossier.evidence:
+            self.primary_source(evidence.url)
+            if evidence.url not in allowed_evidence:
+                raise ValueError("Dossier evidence must refer to a record's declared sources")
+        if (self.dossier.event_date.value != self.incident_date
+                or self.dossier.event_date_end.value != self.incident_date_end
+                or self.dossier.date_precision != self.date_precision
+                or self.dossier.location.department.value != self.department):
+            raise ValueError("Dossier dates and department must match the public record")
+        if self.record_type == "publication":
+            event_fields = (self.dossier.event_date, self.dossier.event_date_end,
+                            self.dossier.event_time, self.dossier.location.department,
+                            self.dossier.location.municipality, self.dossier.location.public_place)
+            if any(field.status != "not_applicable" for field in event_fields):
+                raise ValueError("An overview publication must not be located or timed as a single event")
         if self.human_reviewed:
             if (self.review_status != 'editorially_reviewed' or not self.reviewed_by
                     or not self.reviewed_at or len(self.review_notes or '') < 20):
@@ -144,7 +240,8 @@ def export_catalog(source=CATALOG, destination=PUBLIC):
     geo = {"type": "FeatureCollection", "scope": catalog.scope, "features": [
         {"type": "Feature", "geometry": None, "properties": r} for r in records]}
     files["records.geojson"] = json.dumps(geo, ensure_ascii=False, indent=2).encode()
-    flat = [{k: json.dumps(v, ensure_ascii=False) if isinstance(v, list) and v and isinstance(v[0], dict)
+    flat = [{k: json.dumps(v, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+             if isinstance(v, dict) or (isinstance(v, list) and v and isinstance(v[0], dict))
              else " | ".join(v) if isinstance(v, list) else v for k, v in r.items()
              if k != "geometry"} for r in records]
     stream = io.StringIO(newline="")

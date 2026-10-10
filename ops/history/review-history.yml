@@ -1,0 +1,38 @@
+name: Revisar backlog histórico
+on:
+  schedule:
+    - cron: '47 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: editorial-inbox
+  cancel-in-progress: false
+jobs:
+  enqueue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: main
+          path: bibliography
+          sparse-checkout: apps/web/public/archive
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install -r monitor/ops/review-queue/requirements.txt
+      - name: Añadir veinte referencias históricas a la cola privada
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 20

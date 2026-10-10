@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-10T04:53:24.084846+00:00",
+  "policy": {
+    "record_type": "news_reference",
+    "screen_version": 2,
+    "selection_method": "Coincidencia automática de términos en título y URL; sin lectura del cuerpo.",
+    "review_status": "not_reviewed",
+    "notice": "Archivo bibliográfico parcial de noticias candidatas. No acredita violaciones, víctimas, jurisdicción salvadoreña ni hechos verificados. No forma parte del recuento de casos. La revisión editorial y de privacidad es un proceso separado.",
+    "coverage_limitations": [
+      "Tres medios configurados; no representa toda la prensa ni todas las violaciones.",
+      "El filtro de títulos y URL puede omitir noticias pertinentes y seleccionar noticias de otros países o sin una violación.",
+      "La fecha es la publicación declarada por el medio, no la fecha del hecho.",
+      "La enumeración de un mes solo acredita que se recorrió su API pública; no la integridad del archivo del medio.",
+      "Las fichas requieren revisión humana antes de incorporarse a la colección de casos."
+    ],
+    "rights": "Se redistribuyen referencias bibliográficas y títulos abreviados. El contenido periodístico permanece en su fuente y conserva sus propios derechos."
+  },
+  "paper": {
+    "title": "Generative AI-based tool for efficient processing of Human Rights violations-related news",
+    "doi": "10.1109/CONCAPAN63470.2024.10933836",
+    "url": "https://ieeexplore.ieee.org/document/10933836",
+    "publication_date": "2025-03-26",
+    "publication_date_basis": "Date Added to IEEE Xplore, consultado en la página de IEEE; inicio del archivo solicitado.",
+    "conference_start_date": "2024-11-27",
+    "conference_end_date": "2024-11-29",
+    "crossref_bibliographic_date": "2024-11-27",
+    "crossref_registered_at": "2025-03-26T22:20:38Z",
+    "metadata_source_url": "https://api.crossref.org/works/10.1109/CONCAPAN63470.2024.10933836",
+    "checked_at": "2026-10-09",
+    "date_note": "La fecha del congreso y la fecha bibliográfica de Crossref no se usan como fecha de incorporación a IEEE Xplore."
+  },
+  "coverage": {
+    "start_date": "2025-03-26",
+    "end_date": "2026-10-09",
+    "timezone": "America/El_Salvador",
+    "status": "partial",
+    "records": 3,
+    "sources": [
+      {
+        "id": "co-latino",
+        "publisher": "Diario Co Latino",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "status": "enumerated",
+        "records": 1,
+        "first_published_date": "2026-10-08",
+        "last_published_date": "2026-10-08",
+        "months": [
+          {
+            "month": "2026-07",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 2,
+            "posts_scanned": 412,
+            "source_total_posts": 412,
+            "pages_fetched": 5,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.006906+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-08",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 2,
+            "posts_scanned": 323,
+            "source_total_posts": 323,
+            "pages_fetched": 4,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.006906+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-10",
+            "status": "enumerated",
+            "records": 1,
+            "screen_version": 2,
+            "posts_scanned": 104,
+            "source_total_posts": 104,
+            "pages_fetched": 2,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.006906+00:00",
+            "error": null
+          }
+        ]
+      },
+      {
+        "id": "gatoencerrado",
+        "publisher": "GatoEncerrado",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "status": "enumerated",
+        "records": 1,
+        "first_published_date": "2026-08-18",
+        "last_published_date": "2026-08-18",
+        "months": [
+          {
+            "month": "2026-07",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 2,
+            "posts_scanned": 12,
+            "source_total_posts": 12,
+            "pages_fetched": 1,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.006971+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-08",
+            "status": "enumerated",
+            "records": 1,
+            "screen_version": 2,
+            "posts_scanned": 14,
+            "source_total_posts": 14,
+            "pages_fetched": 1,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.006971+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-10",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 2,
+            "posts_scanned": 1,
+            "source_total_posts": 1,
+            "pages_fetched": 1,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.006971+00:00",
+            "error": null
+          }
+        ]
+      },
+      {
+        "id": "factum",
+        "publisher": "Revista Factum",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "status": "enumerated",
+        "records": 1,
+        "first_published_date": "2026-07-16",
+        "last_published_date": "2026-07-16",
+        "months": [
+          {
+            "month": "2026-07",
+            "status": "enumerated",
+            "records": 1,
+            "screen_version": 2,
+            "posts_scanned": 3,
+            "source_total_posts": 3,
+            "pages_fetched": 1,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.007040+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-08",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 2,
+            "posts_scanned": 2,
+            "source_total_posts": 2,
+            "pages_fetched": 1,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.007040+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-10",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 2,
+            "posts_scanned": 0,
+            "source_total_posts": 0,
+            "pages_fetched": 1,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-10-10T04:50:37.007040+00:00",
+            "error": null
+          }
+        ]
+      }
+    ],
+    "months": [
+      {
+        "month": "2026-07",
+        "start_date": "2026-07-01",
+        "end_date": "2026-07-31",
+        "records": 1,
+        "sources": [
+          {
+            "source_id": "co-latino",
+            "status": "enumerated",
+            "records": 0
+          },
+          {
+            "source_id": "gatoencerrado",
+            "status": "enumerated",
+            "records": 0
+          },
+          {
+            "source_id": "factum",
+            "status": "enumerated",
+            "records": 1
+          }
+        ]
+      },
+      {
+        "month": "2026-08",
+        "start_date": "2026-08-01",
+        "end_date": "2026-08-31",
+        "records": 1,
+        "sources": [
+          {
+            "source_id": "co-latino",
+            "status": "enumerated",
+            "records": 0
+          },
+          {
+            "source_id": "gatoencerrado",
+            "status": "enumerated",
+            "records": 1
+          },
+          {
+            "source_id": "factum",
+            "status": "enumerated",
+            "records": 0
+          }
+        ]
+      },
+      {
+        "month": "2026-10",
+        "start_date": "2026-10-01",
+        "end_date": "2026-10-09",
+        "records": 1,
+        "sources": [
+          {
+            "source_id": "co-latino",
+            "status": "enumerated",
+            "records": 1
+          },
+          {
+            "source_id": "gatoencerrado",
+            "status": "enumerated",
+            "records": 0
+          },
+          {
+            "source_id": "factum",
+            "status": "enumerated",
+            "records": 0
+          }
+        ]
+      }
+    ]
+  },
+  "records": [
+    {
+      "id": "e2887327f8b3644aef38dec5c8e48c6d3f7ab685382afeac7152b42065bea4e5",
+      "title": "Crecimiento económico contrasta con pobreza y crisis de pensiones en El Salvador, afirman periodistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/crecimiento-economico-contrasta-con-pobreza-y-crisis-de-pensiones-en-el-salvador-afirman-periodistas/",
+      "published_date": "2026-10-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420393,
+        "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
+      },
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ]
+    },
+    {
+      "id": "b000c547de9062e9cfa07a2b204e91618dad8da3e6c7745c5d0478119b5cdccb",
+      "title": "El Salvador fuera de lista OIT, pero sigue persecución sindical",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2026/08/18/el-salvador-lista-corta-oit-persecucion-sindical/",
+      "published_date": "2026-08-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 83005,
+        "retrieved_at": "2026-10-10T04:47:37.520243+00:00"
+      },
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ]
+    },
+    {
+      "id": "2a80c29d5f49c644099a36689ec48329beeae0efb921f7109fbedac66bcc47be",
+      "title": "«Esto es lo que ocurre con todas las personas detenidas en El Salvador»: Habla la hermana de Ruth López",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/entrevista-claudia-lopez/",
+      "published_date": "2026-07-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 72806,
+        "retrieved_at": "2026-10-10T04:47:37.520370+00:00"
+      },
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ]
+    }
+  ]
+}

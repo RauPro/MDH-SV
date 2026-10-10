@@ -3,6 +3,7 @@ import { render, screen, within, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import data from './__fixtures__/catalog.json';
+import archive from './__fixtures__/newsArchive.json';
 import App from './App';
 
 beforeEach(() => { vi.restoreAllMocks(); localStorage.clear(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => data })); });
@@ -35,7 +36,7 @@ it('opens a source-linked dossier and closes it', async () => {
   await ready();
   await userEvent.click(screen.getByRole('button', {name:'Reporte de detención de una adolescente en Sonsonate'}));
   const dialog = await screen.findByRole('dialog');
-  expect(within(dialog).getByText(/revisión humana pendiente/i)).toBeInTheDocument();
+  expect(dialog).toHaveTextContent(/revisión humana pendiente/i);
   expect(within(dialog).getByRole('link', {name:/Consultar documento original/})).toHaveAttribute('href', data.records.find(r => r.id === 'mdh-2022-001')?.source_url);
   await userEvent.click(within(dialog).getByRole('button',{name:'Cerrar'}));
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -65,7 +66,8 @@ it('offers same-origin downloads and describes MCP accurately', async () => {
   await userEvent.click(screen.getByRole('button',{name:'Datos y API'}));
   const dialog = await screen.findByRole('dialog');
   expect(within(dialog).getByRole('link',{name:'CSV'})).toHaveAttribute('href','/data/records.csv');
-  expect(dialog).toHaveTextContent('No hay un servidor remoto');
+  expect(dialog).toHaveTextContent('MCP remoto');
+  expect(within(dialog).getByRole('link',{name:'Especificación OpenAPI'})).toHaveAttribute('href','/api/v1/openapi.json');
 });
 it('has no detectable structural accessibility violations', async () => {
   await ready();
@@ -118,9 +120,22 @@ it('keeps unlocated individual reports outside the map and makes them consultabl
   const revised=structuredClone(data);
   const incident=revised.records.find(r=>r.record_type==='incident')!;
   incident.department=null;
+  incident.dossier.location.department={value:null,status:'not_reported',evidence_refs:[],note:'Departamento no consignado.'};
   vi.mocked(fetch).mockResolvedValue({ok:true,json:async()=>revised} as Response);
   await ready();
   await userEvent.click(screen.getByRole('button',{name:'Sin departamento identificado 1'}));
   expect(screen.getByText('1 resultado')).toBeInTheDocument();
   expect(screen.getByLabelText('Departamento')).toHaveValue('__unknown__');
+});
+
+it('opens the linked news archive and returns to the map without losing the catalogue', async () => {
+  vi.mocked(fetch).mockImplementation(async input => ({ok:true,json:async()=>String(input).includes('/archive/') ? archive : data}) as Response);
+  history.replaceState(null,'','/#archivo');
+  render(<App/>);
+  await screen.findByRole('region',{name:'Archivo de noticias'});
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(screen.getByLabelText('Vínculo territorial')).toHaveValue('el_salvador');
+  await userEvent.click(screen.getByRole('button',{name:'Fichas y mapa'}));
+  await screen.findByRole('region',{name:'Mapa de El Salvador'});
+  expect(screen.getByText('4 resultados')).toBeInTheDocument();
 });
