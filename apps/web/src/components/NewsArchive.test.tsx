@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import fixture from '../__fixtures__/newsArchive.json';
 import catalog from '../__fixtures__/catalog.json';
-import { parseCatalog } from '../catalog';
+import { formatDate, parseCatalog } from '../catalog';
 import { NewsArchive } from './NewsArchive';
 
 beforeEach(() => { vi.restoreAllMocks(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => fixture })); });
@@ -17,6 +17,19 @@ it('loads only public news, communicates review limits and exposes source/month 
   await userEvent.click(screen.getByText('Ver cobertura por medio y mes'));
   await userEvent.click(screen.getByText('GatoEncerrado · 1 referencias · API recorrida'));
   expect(screen.getByRole('table', { name: 'Cobertura mensual de GatoEncerrado' })).toBeInTheDocument();
+});
+it.each(['2010-01-01', '2014-06-01'])('shows the configured search start %s independently of the paper date and incomplete coverage', async start => {
+  const archive = structuredClone(fixture);
+  archive.coverage.start_date = start;
+  vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => archive } as Response);
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('3 noticias localizadas');
+  expect(screen.getByText(`Periodo de búsqueda: del ${formatDate(start)} al ${formatDate(archive.coverage.end_date)}.`)).toBeInTheDocument();
+  expect(screen.getByText(/Este intervalo indica el alcance solicitado/)).toBeInTheDocument();
+  expect(screen.getByText('3 referencias · 3 medios · cobertura parcial.')).toBeInTheDocument();
+  expect(screen.queryByText(/Noticias localizadas desde la incorporación del paper/)).not.toBeInTheDocument();
+  await userEvent.click(screen.getByText('Ver cobertura por medio y mes'));
+  expect(screen.getByText(/La fecha del paper no determina el inicio del archivo histórico/)).toHaveTextContent(formatDate(archive.paper.publication_date));
 });
 it('filters by words without accents, source, topic and publication dates', async () => {
   await ready();

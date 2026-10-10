@@ -25,7 +25,7 @@ import requests
 from .review_queue import canonical_url, normalize, require_public_dns
 
 ROOT = Path(__file__).resolve().parents[4]
-START_DATE = date(2025, 3, 26)
+START_DATE = date(2010, 1, 1)
 SCREEN_VERSION = 2
 SCOPE_VERSION = 1
 SOURCES = (
@@ -79,6 +79,7 @@ POLICY = {
         "El filtro de títulos y URL puede omitir noticias pertinentes y seleccionar noticias de otros países o sin una violación.",
         "La fecha es la publicación declarada por el medio, no la fecha del hecho.",
         "La enumeración de un mes solo acredita que se recorrió su API pública; no la integridad del archivo del medio.",
+        "Un mes vacío en la API no demuestra ausencia de noticias o violaciones; el archivo digital puede ser incompleto o no existir para ese período.",
         "Las fichas requieren revisión humana antes de incorporarse a la colección de casos.",
     ],
     "rights": "Se redistribuyen referencias bibliográficas y títulos abreviados. El contenido periodístico permanece en su fuente y conserva sus propios derechos.",
@@ -225,17 +226,48 @@ def fetch_page(source, start, end, page, session=None):
 def collect_source(source, start, end, folder, *, max_pages=300, refresh=False,
                    fetch=fetch_page, delay=0.3, now=None):
     """Checkpoint each page; a failed month does not erase prior references."""
+    if not 1 <= max_pages <= 1000:
+        raise ValueError("Page-attempt budget must be between 1 and 1000")
     now = now or datetime.now(timezone.utc).isoformat()
     state_path = folder / (source["id"] + ".json")
     state = read_json(state_path, {"schema_version": 1, "source_id": source["id"], "months": {}, "records": []})
     references = {item["id"]: item for item in state["records"]}
-    used_pages = 0
-    for month, first, last in month_windows(start, end):
+    used_pages, successful_pages, failed_pages, consecutive_failures = 0, 0, 0, 0
+    windows = list(month_windows(start, end))
+    recent_windows, historical_windows = windows[-2:], windows[:-2]
+    pending_history = any(
+        refresh or (saved := state["months"].get(month, {})).get("status") != "enumerated"
+        or saved.get("start_date") != first.isoformat() or saved.get("end_date") != last.isoformat()
+        or saved.get("screen_version") != SCREEN_VERSION
+        for month, first, last in historical_windows
+    )
+    # Recent news cannot wait until 2010's backfill finishes. Conversely, cap its
+    # share so every ordinary run advances history. A one-page budget advances
+    # history only; at least two attempts are needed to serve both workloads.
+    recent_budget = min(20, max(1, max_pages // 4), max_pages - 1) if pending_history else max_pages
+    recent_windows.sort(key=lambda window: (
+        state["months"].get(window[0], {}).get("last_attempt_at", ""), -window[1].toordinal()
+    ))
+    # A persistently failing early month must not strand every later month.
+    # Keep failed windows visible; after untouched/partial history, retry the
+    # least recently attempted failures first so the circuit cannot starve them.
+    historical_windows.sort(key=lambda window: (
+        state["months"].get(window[0], {}).get("status") == "failed",
+        (state["months"].get(window[0], {}).get("last_attempt_at", "")
+         if state["months"].get(window[0], {}).get("status") == "failed" else ""),
+        window[1],
+    ))
+    plans = [(window, recent_budget if index else (recent_budget + len(recent_windows) - 1) // len(recent_windows), True)
+             for index, window in enumerate(recent_windows)]
+    plans += [(window, max_pages, False) for window in historical_windows]
+    for (month, first, last), month_budget, recent in plans:
+        group_budget = recent_budget if recent else max_pages
+        if not month_budget or used_pages >= group_budget:
+            continue
         progress = state["months"].get(month, {})
         same_window = (progress.get("start_date") == first.isoformat() and progress.get("end_date") == last.isoformat()
                        and progress.get("screen_version") == SCREEN_VERSION)
         # Re-enumerate the two latest calendar months to catch additions/corrections.
-        recent = (end.year * 12 + end.month) - (first.year * 12 + first.month) < 2
         if progress.get("status") == "enumerated" and same_window and not refresh and not recent:
             continue
         if not same_window or (progress.get("status") == "enumerated" and (refresh or recent)):
@@ -246,7 +278,12 @@ def collect_source(source, start, end, folder, *, max_pages=300, refresh=False,
         progress.setdefault("posts_scanned", 0)
         progress.setdefault("invalid_posts", 0)
         state["months"][month] = progress
-        while used_pages < max_pages:
+        month_attempts = 0
+        while used_pages < group_budget and month_attempts < month_budget:
+            # Count unsuccessful page fetches as well. fetch_page itself retries
+            # at most twice, so this is a page-attempt budget, not raw HTTP calls.
+            used_pages += 1
+            month_attempts += 1
             try:
                 posts, total_pages, total_posts = fetch(source, first, last, progress["next_page"])
                 progress.update(source_total_posts=total_posts, source_total_pages=total_pages)
@@ -263,14 +300,17 @@ def collect_source(source, start, end, folder, *, max_pages=300, refresh=False,
                         references[reference["id"]] = reference
                 progress["posts_scanned"] += len(posts)
                 progress["pages_fetched"] += 1
-                used_pages += 1
                 progress["error"] = None
                 if progress["next_page"] >= total_pages:
                     progress.update(status="enumerated", completed_at=now)
                 elif not posts:
                     raise ValueError("Unexpected empty page before archive end")
                 progress["next_page"] += 1
+                successful_pages += 1
+                consecutive_failures = 0
             except (requests.RequestException, ValueError, KeyError, OSError) as error:
+                failed_pages += 1
+                consecutive_failures += 1
                 progress.update(status="failed", error=type(error).__name__)
                 # Log only a class name, never source response contents or credentials.
                 print(json.dumps({"source": source["id"], "month": month, "error": type(error).__name__}), flush=True)
@@ -280,13 +320,15 @@ def collect_source(source, start, end, folder, *, max_pages=300, refresh=False,
                 break
             if delay:
                 time.sleep(delay)
-        if used_pages >= max_pages:
+        if used_pages >= max_pages or consecutive_failures >= 3:
             break
         if delay:
             time.sleep(delay)
     state["records"] = sorted(references.values(), key=lambda item: (item["published_date"], item["id"]), reverse=True)
     atomic_json(state_path, state)
-    return {"source": source["id"], "requests": used_pages, "references": len(references), "enumerated_months": sum(m.get("status") == "enumerated" for m in state["months"].values())}
+    return {"source": source["id"], "requests": used_pages, "successful_pages": successful_pages,
+            "failed_page_attempts": failed_pages, "stopped_after_consecutive_failures": consecutive_failures >= 3,
+            "references": len(references), "enumerated_months": sum(m.get("status") == "enumerated" for m in state["months"].values())}
 
 
 def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=None):
@@ -368,7 +410,7 @@ def main():
     parser.add_argument("--end", type=date.fromisoformat, default=datetime.now(ZoneInfo("America/El_Salvador")).date())
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data/history")
     parser.add_argument("--output", type=Path, default=ROOT / "apps/web/public/archive/news.json")
-    parser.add_argument("--max-pages", type=int, default=300, help="Maximum successful pages per source per run; checkpoints resume next run")
+    parser.add_argument("--max-pages", type=int, default=300, help="Maximum page fetch attempts (including failures) per source per run; stop after 3 consecutive failures and resume checkpoints next run")
     parser.add_argument("--refresh", action="store_true", help="Re-enumerate completed historical months")
     parser.add_argument("--export-only", action="store_true", help="Validate and export existing metadata; no network")
     args = parser.parse_args()
@@ -388,7 +430,7 @@ def main():
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
             summary.write("## Archivo bibliográfico MDH-SV\n\n```json\n" + json.dumps(report, indent=2) + "\n```\n")
-    if not args.export_only and not any(result["requests"] for result in results):
+    if not args.export_only and not any(result["successful_pages"] for result in results):
         raise SystemExit("No successful archive page was read; retained previous references")
 
 
