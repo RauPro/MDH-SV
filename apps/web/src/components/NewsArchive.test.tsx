@@ -10,8 +10,10 @@ import type { NewsArchiveData } from '../newsArchive';
 import { NEWS_DOSSIER_FIELDS, NEWS_DOSSIER_PENDING, pendingNewsDossier, type NewsDossier } from '../../../../shared/news-dossier.mjs';
 
 const EMPTY = { schema_version: 1, dossiers: [] };
-function serve(archive: unknown = fixture, dossiers: unknown = EMPTY) {
-  vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: true, json: async () => url === '/archive/dossiers.json' ? dossiers : archive })));
+const EMPTY_LOCATIONS = { schema_version: 1, generated_at: '2026-10-10T10:00:00Z', locations: [] };
+const automatic = (reference = fixture.records[0]) => ({ candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date, department: 'San Salvador', review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department', extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00Z', evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) } });
+function serve(archive: unknown = fixture, dossiers: unknown = EMPTY, locations: unknown = EMPTY_LOCATIONS) {
+  vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: true, json: async () => url === '/archive/dossiers.json' ? dossiers : url === '/archive/locations.json' ? locations : archive })));
 }
 function approved(): NewsDossier {
   const dossier = pendingNewsDossier(fixture.records[0]);
@@ -201,7 +203,7 @@ it.each(['unreviewed', 'wrong_url', 'wrong_publisher', 'wrong_date', 'private_ex
 
 it('keeps the complete pending sheet when the public overlay is unavailable, and can retry it independently', async () => {
   let available = false;
-  vi.mocked(fetch).mockImplementation(async url => ({ ok: String(url) !== '/archive/dossiers.json' || available, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : fixture }) as Response);
+  vi.mocked(fetch).mockImplementation(async url => ({ ok: String(url) !== '/archive/dossiers.json' || available, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? EMPTY_LOCATIONS : fixture }) as Response);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
@@ -224,8 +226,8 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   expect(screen.getByRole('heading', { name: 'Fichas de noticias' })).toBeInTheDocument();
   expect(screen.getByLabelText('Vínculo territorial')).toHaveValue('');
   expect(screen.getAllByRole('article')).toHaveLength(3);
-  expect(screen.getByText(/Ninguna tiene un departamento de El Salvador respaldado/)).toBeInTheDocument();
-  expect(screen.getByText('3 pendientes de revisión pública.')).toBeInTheDocument();
+  expect(screen.getByText(/Ninguna noticia tiene un departamento disponible/)).toBeInTheDocument();
+  expect(screen.getByText('3 sin ubicación automática disponible ni ubicación revisada.')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
   expect(screen.queryByText('Ver cobertura por medio y mes')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: /Sin ubicación pública en El Salvador/ }));
@@ -293,13 +295,13 @@ it('retains every news reference and its pending sheet in the monitor when appro
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
   expect(screen.getAllByRole('article')).toHaveLength(3);
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.getByRole('region', { name: 'Ficha estructurada de la noticia' })).toBeInTheDocument();
   expect(screen.getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(18);
 });
 
-it('keeps a valid result page when a late public dossier response changes which news are unlocated', async () => {
+it('keeps a valid result page when a late public dossier response changes which news have reviewed locations', async () => {
   const archive = structuredClone(fixture);
   archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: (index + 1).toString(16).padStart(64, '0'), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
   archive.coverage.records = 31;
@@ -314,16 +316,17 @@ it('keeps a valid result page when a late public dossier response changes which 
   });
   let finishOverlay: (value: unknown) => void = () => {};
   const overlay = new Promise(resolve => { finishOverlay = resolve; });
-  vi.mocked(fetch).mockImplementation(async url => ({ ok: true, json: async () => String(url) === '/archive/dossiers.json' ? overlay : archive }) as Response);
+  vi.mocked(fetch).mockImplementation(async url => ({ ok: true, json: async () => String(url) === '/archive/dossiers.json' ? overlay : String(url) === '/archive/locations.json' ? EMPTY_LOCATIONS : archive }) as Response);
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('31 fichas de noticias');
-  await userEvent.click(screen.getByRole('button', { name: /Sin ubicación pública en El Salvador/ }));
+  expect(screen.getByRole('button', { name: /Sin ubicación pública en El Salvador/ })).toBeDisabled();
+  await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'reviewed');
   await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
   expect(screen.getByText('Página 2 de 2')).toBeInTheDocument();
   await act(async () => { finishOverlay({ schema_version: 1, dossiers }); });
-  await screen.findByText('1 ficha de noticia');
+  await screen.findByText('30 fichas de noticias');
   expect(screen.getByText('Página 1 de 1')).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Referencia 30' })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: 'Referencia 30' })).not.toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Anterior' })).toBeDisabled();
   expect(screen.getByRole('button', { name: 'Siguiente' })).toBeDisabled();
 });
@@ -332,4 +335,95 @@ it('has no automated accessibility violations in the news monitor and map', asyn
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('3 fichas de noticias');
   expect((await axe.run(document.body, { rules: { region: { enabled: false }, 'color-contrast': { enabled: false } } })).violations).toEqual([]);
+});
+
+it('maps automatic locations in a separate layer without publishing draft dossier fields', async () => {
+  const dossier = approved();
+  dossier.classification.jurisdiction = 'SV';
+  dossier.fields.department = { value: 'La Libertad', status: 'reported', evidence_refs: ['bibliography'], note: null };
+  const second = automatic(fixture.records[1]);
+  serve(fixture, { schema_version: 1, dossiers: [dossier] }, { ...EMPTY_LOCATIONS, locations: [automatic(), second] });
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
+  expect(screen.getByRole('button', { name: 'La Libertad: 1 noticia' })).toBeInTheDocument();
+  expect(screen.getByLabelText('Capa de ubicaciones')).toHaveValue('all');
+  expect(screen.getAllByRole('article')).toHaveLength(3);
+  expect(screen.getByText('Ubicación automática · Sin revisar')).toBeInTheDocument();
+  await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'automated_unreviewed');
+  expect(screen.getByText('1 ficha de noticia')).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: fixture.records[0].title })).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'La Libertad: 0 noticias' })).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[1].title }));
+  const dialog = screen.getByRole('dialog');
+  const locationPanel = within(dialog).getByRole('region', { name: 'Ubicación automática sin revisar' });
+  expect(locationPanel).toHaveTextContent('San Salvador');
+  expect(locationPanel).toHaveTextContent('no confirma el lugar de una violación');
+  expect(locationPanel).toHaveTextContent('Fuente comprobada');
+  expect(within(locationPanel).getByRole('link')).toHaveAttribute('href', second.source_url);
+  const sheet = within(dialog).getByRole('region', { name: 'Ficha estructurada de la noticia' });
+  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(sheet).getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(18);
+  await userEvent.click(within(dialog).getByRole('button', { name: 'Cerrar' }));
+  await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'reviewed');
+  expect(screen.getByText('1 ficha de noticia')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: fixture.records[0].title })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  expect(screen.queryByRole('region', { name: 'Ubicación automática sin revisar' })).not.toBeInTheDocument();
+});
+
+it.each(['unavailable', 'private_extra', 'wrong_binding'])('keeps the list and suppresses misleading zeroes when automatic locations are %s', async kind => {
+  const location = automatic();
+  if (kind === 'private_extra') Object.assign(location, { private_summary: 'PRIVATE VALUE' });
+  if (kind === 'wrong_binding') location.publisher = 'Otra editorial';
+  let retried = false;
+  vi.mocked(fetch).mockImplementation(async url => ({
+    ok: String(url) !== '/archive/locations.json' || kind !== 'unavailable' || retried,
+    json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? retried ? { ...EMPTY_LOCATIONS, locations: [automatic()] } : { ...EMPTY_LOCATIONS, locations: [location] } : fixture,
+  }) as Response);
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByRole('button', { name: 'Reintentar ubicaciones' });
+  expect(screen.getAllByRole('article')).toHaveLength(3);
+  expect(screen.queryByRole('button', { name: 'San Salvador: 0 noticias' })).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
+  expect(screen.queryByText('PRIVATE VALUE')).not.toBeInTheDocument();
+  retried = true;
+  await userEvent.click(screen.getByRole('button', { name: 'Reintentar ubicaciones' }));
+  await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
+  expect(screen.getAllByRole('article')).toHaveLength(3);
+  expect(vi.mocked(fetch).mock.calls.filter(call => call[0] === '/archive/news.json')).toHaveLength(1);
+});
+
+it('does not use automatic data while the human-review overlay is unavailable', async () => {
+  vi.mocked(fetch).mockImplementation(async url => ({
+    ok: String(url) !== '/archive/dossiers.json',
+    json: async () => String(url) === '/archive/locations.json' ? { ...EMPTY_LOCATIONS, locations: [automatic()] } : fixture,
+  }) as Response);
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
+  expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
+  expect(screen.queryByText('Ubicación automática · Sin revisar')).not.toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  expect(screen.queryByRole('region', { name: 'Ubicación automática sin revisar' })).not.toBeInTheDocument();
+});
+
+it('clamps a later page when a delayed automatic layer finishes loading', async () => {
+  const archive = structuredClone(fixture);
+  archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: (index + 1).toString(16).padStart(64, '0'), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
+  archive.coverage.records = 31;
+  archive.coverage.sources = archive.coverage.sources.map(source => ({ ...source, records: source.id === 'co-latino' ? 31 : 0 }));
+  archive.coverage.months = archive.coverage.months.map(month => ({ ...month, records: month.month === '2026-10' ? 31 : 0 }));
+  let finish: (value: unknown) => void = () => {};
+  const locations = new Promise(resolve => { finish = resolve; });
+  vi.mocked(fetch).mockImplementation(async url => ({ ok: true, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? locations : archive }) as Response);
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('31 fichas de noticias');
+  expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
+  await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'automated_unreviewed');
+  await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
+  expect(screen.getByText('Página 2 de 2')).toBeInTheDocument();
+  await act(async () => { finish({ ...EMPTY_LOCATIONS, locations: [automatic(archive.records[0])] }); });
+  await screen.findByText('1 ficha de noticia');
+  expect(screen.getByText('Página 1 de 1')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Referencia 0' })).toBeInTheDocument();
 });

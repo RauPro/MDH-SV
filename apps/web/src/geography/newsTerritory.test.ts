@@ -101,3 +101,29 @@ describe('news territory with a reviewed public source', () => {
     expect({ references, dossiers }).toEqual(before);
   });
 });
+
+const automatic = (source = reference) => new Map([[source.id, {
+  candidate_id: source.id, source_url: source.source_url, publisher: source.publisher, published_date: source.published_date, department: 'La Libertad',
+  review_status: 'automated_unreviewed' as const, human_reviewed: false as const, method: 'gemini_explicit_department' as const, extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00Z', evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) },
+}]]);
+it('counts the separate automatic projection while all dossier fields remain pending', () => {
+  const item = newsTerritoryItem(reference, new Map(), automatic());
+  expect(item.department).toBe('La Libertad');
+  expect(item.locationKind).toBe('automated_unreviewed');
+  expect(item.dossier.fields.department.status).toBe('pending');
+  expect(item.dossier.human_reviewed).toBe(false);
+  const summary = summarizeNewsTerritory([item]);
+  expect(summary.automated).toBe(1);
+  expect(summary.reviewed).toBe(0);
+  expect(summary.automaticCounts['La Libertad']).toBe(1);
+});
+it.each(['located', 'foreign', 'withheld', 'missing'])('always gives human review priority over automation: %s', variant => {
+  const dossier = approved();
+  if (variant === 'foreign') dossier.classification.jurisdiction = 'other';
+  if (variant === 'withheld' || variant === 'missing') dossier.fields.department = { value: null, status: variant === 'withheld' ? 'withheld' : 'not_reported', evidence_refs: [], note: 'Fixture: dato protegido o no mencionado.' };
+  const item = newsTerritoryItem(reference, index(dossier), automatic());
+  expect(item.department).toBe(variant === 'located' ? 'San Salvador' : null);
+  expect(item.automaticLocation).toBeNull();
+  expect(item.locationKind).toBe(variant === 'located' ? 'reviewed' : null);
+  expect(summarizeNewsTerritory([item]).automated).toBe(0);
+});

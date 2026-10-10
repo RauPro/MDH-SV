@@ -72,8 +72,12 @@ incorpora casos. Las fichas de noticias nunca se suman automáticamente a ese ca
 
 Los workflows usan un commit fijo del código público revisado. `GEMINI_API_KEY`
 permanece en Actions Secrets y `GEMINI_MODEL` selecciona el modelo. No se guardan
-claves en Issues, fichas, archivos públicos o Vercel. La cola no puede escribir en
-el repositorio público y ninguna llamada al modelo aprueba una publicación.
+claves en Issues, fichas, archivos públicos o Vercel. Ninguna llamada al modelo aprueba una ficha. El workflow Publicar ubicaciones
+automáticas puede actualizar únicamente la proyección geográfica pública
+`archive/locations.json`, marcada Sin revisar, mediante una deploy key del repositorio
+público. No exporta cuerpos, otros campos, comentarios ni identidades personales.
+Se ejecuta después de la extracción o revisión exitosa; las decisiones humanas
+retiran la proyección automática. Consulte el protocolo de ubicaciones automáticas.
 
 No hagas público este repositorio. Desactivar el workflow de Gemini detiene las
 llamadas nuevas sin eliminar los borradores. No se notifican ni asignan terceras

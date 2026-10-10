@@ -2,6 +2,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
+import { parsePublishedNewsLocations, validateLocationBindings } from '../../../shared/news-location.mjs';
 
 const source = new URL('../../../data/reviewed/publications.json', import.meta.url);
 const publicDir = new URL('../public/data/', import.meta.url);
@@ -43,3 +44,12 @@ for (const dossier of publicIndex.values()) {
   assert.ok(dossier.reviewed_at <= new Date().toISOString().slice(0, 10), 'News dossier review cannot be in the future');
 }
 console.log(`Validated ${publicIndex.size} human-reviewed news dossiers and bibliography bindings.`);
+
+const automaticLocations = JSON.parse(readFileSync(new URL('../public/archive/locations.json', import.meta.url)));
+const locationsIndex = validateLocationBindings(parsePublishedNewsLocations(automaticLocations), newsArchive.records);
+for (const location of locationsIndex.values()) {
+  assert.equal(hash(location.source_url), location.candidate_id, 'Automatic location must match its source URL');
+  assert.equal(location.human_reviewed, false);
+  assert.equal(location.review_status, 'automated_unreviewed');
+}
+console.log(`Validated ${locationsIndex.size} unreviewed automatic news locations; no dossier approvals implied.`);

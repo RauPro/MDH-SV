@@ -178,6 +178,41 @@ test('public news enrichment uses only approved dossiers bound to the exact bibl
   }
 });
 
+test('automatic locations are a separate unreviewed projection and never override a reviewed dossier', () => {
+  const source = loadNews().records[0];
+  const archive = { ...loadNews(), records: [source] };
+  const location = {
+    candidate_id: source.id, source_url: source.source_url, publisher: source.publisher,
+    published_date: source.published_date, department: 'San Salvador',
+    review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department',
+    extracted_at: '2026-10-10T12:00:00Z', source_checked_at: '2026-10-10T12:00:00Z',
+    evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) },
+  };
+  const payload = { schema_version: 1, generated_at: '2026-10-10T12:00:00Z', locations: [location] };
+  const empty = { schema_version: 1, dossiers: [] };
+  const result = searchNews({}, archive, empty, payload);
+  assert.deepEqual(result.data[0].automatic_location, location);
+  assert.equal(result.data[0].news_dossier.fields.department.value, null);
+  assert.equal(result.data[0].news_dossier.human_reviewed, false);
+  assert.equal(result.meta.automatic_locations_status, 'available');
+  const approved = pendingNewsDossier(source);
+  Object.assign(approved, { extraction_status: 'processed', human_reviewed: true, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture: ubicación deliberadamente omitida tras revisión editorial.' });
+  approved.fields.department = { value: null, status: 'withheld', evidence_refs: [], note: 'Ubicación protegida tras revisión editorial explícita.' };
+  assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, payload).data[0].automatic_location, null);
+  assert.equal(searchNews({}, archive, null, payload).data[0].automatic_location, null);
+  for (const change of [
+    value => { value.human_reviewed = true; },
+    value => { value.raw_article = 'PRIVATE_TEST_VALUE'; },
+    value => { value.publisher = 'Medio equivocado'; },
+    value => { value.department = 'Otra región'; },
+  ]) {
+    const unsafe = structuredClone(payload); change(unsafe.locations[0]);
+    const response = searchNews({}, archive, empty, unsafe);
+    assert.equal(response.data[0].automatic_location, null);
+    assert.ok(!JSON.stringify(response).includes('PRIVATE_TEST_VALUE'));
+  }
+});
+
 test('OpenAPI is a public, versioned executable contract', async () => {
   const { response, body } = await get('/api/v1/openapi.json');
   assert.equal(response.status, 200);

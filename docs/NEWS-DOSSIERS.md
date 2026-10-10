@@ -57,17 +57,18 @@ listables y acceso a sus fichas. **Reportes documentados** conserva el catálogo
 de casos e informes y sus conteos propios. El archivo bibliográfico mantiene la
 consulta de cobertura por medio y mes.
 
-En el mapa de noticias sólo se asigna un departamento cuando la ficha pública
-está revisada, su jurisdicción es salvadoreña y el campo de departamento contiene
-un valor explícito y respaldado de los 14 departamentos. No se deduce del título,
+El mapa distingue ubicaciones revisadas de ubicaciones automáticas **Sin revisar**.
+Las primeras proceden de fichas públicas aprobadas. Las segundas proceden de una
+[proyección mínima](AUTOMATIC-LOCATIONS.md) autorizada para departamentos explícitos,
+con evidencia y sin aprobar ni publicar los otros campos de la ficha. Una decisión
+humana siempre prevalece, incluida la omisión o protección del departamento. No se deduce del título,
 la URL, el municipio o las etiquetas de descubrimiento. Los filtros de fechas de
 esta colección usan la publicación de la noticia, no la fecha del hecho.
 
 Las noticias sin esa ubicación siguen disponibles en la lista y mediante el
 filtro **Sin ubicación pública en El Salvador**. La interfaz distingue revisión
 pendiente, jurisdicción por determinar, noticias de otros países y departamento
-no disponible. Un mapa con cero noticias ubicadas no significa que el archivo
-esté vacío. Aprobar una ubicación no convierte una noticia en un caso ni suma
+no disponible. La falta de datos geográficos no significa que el archivo esté vacío. Aprobar una ubicación no convierte una noticia en un caso ni suma
 personas al recuento de víctimas.
 
 ## Aprobar una ficha parcial
