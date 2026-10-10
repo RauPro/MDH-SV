@@ -1,5 +1,5 @@
 """
-Motor de Extracción Estructurada con IA (Google Gemini 2.5 Flash / Flash Lite).
+Motor de Extracción Estructurada con IA (Google Gemini).
 Analiza noticias periodísticas y extrae expedientes forenses de Derechos Humanos validados con Pydantic.
 Incluye un motor de respaldo heurístico/léxico para operación offline o sin API key.
 """
@@ -64,7 +64,7 @@ class HumanRightsExtractor:
 
     def __init__(self, api_key: Optional[str] = None, model_name: Optional[str] = None):
         self.api_key = api_key if api_key is not None else os.environ.get("GEMINI_API_KEY")
-        self.model_name = model_name or os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+        self.model_name = model_name or os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
         self.client = None
 
         if self.api_key:
