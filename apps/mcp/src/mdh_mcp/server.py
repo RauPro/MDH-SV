@@ -61,7 +61,7 @@ def obtener_expediente_completo(id_incidente: str) -> dict:
     r = next((r for r in _records() if r['id'] == id_incidente), None)
     if not r:
         return {'error': 'Registro no disponible en el conjunto público'}
-    return {'expediente': r, 'citacion_academica': f"{r['publisher']} ({r['published_date']}). {r['title']}. {r['source_url']} · {r['source_locator']}",
+    return {'expediente': r, 'citacion_academica': f"{r['publisher']} ({r['published_date']}). {r['source_title']}. {r['source_url']} · {r['source_locator']}",
             'geojson': {'type': 'Feature', 'geometry': None, 'properties': r}}
 
 

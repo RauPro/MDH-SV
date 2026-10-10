@@ -34,3 +34,14 @@ El módulo MCP se inicia desde el repositorio con `.venv/bin/python -m mdh_mcp.s
 Contraste cada reporte con su documento original. No use las fichas para determinar culpabilidad, elegibilidad o riesgo de personas. Para errores no sensibles, abra un issue con el identificador del registro. No adjunte denuncias, nombres de víctimas ni documentos privados: el repositorio es público y no es un canal confidencial ni de emergencia.
 
 Código nuevo bajo MIT; metadatos y resúmenes propios bajo CC BY 4.0. Los documentos originales conservan los derechos y condiciones de sus autores.
+
+## Portal y despliegue
+
+```sh
+npm --prefix apps/web ci
+npm --prefix apps/web test
+npm --prefix apps/web run build
+npm --prefix apps/web run dev
+```
+
+Vercel usa la raíz del repositorio y `vercel.json`. No necesita variables de entorno. El build verifica que todas las descargas correspondan al conjunto canónico. Más detalles en [operación](docs/OPERATIONS.md), [metodología](docs/METHODOLOGY.md) y [seguridad](SECURITY.md).

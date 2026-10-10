@@ -1,0 +1,140 @@
+/* Default / Dark Theme (Harvey AI Dark Style) */
+:root, html.dark {
+  --font-serif: Georgia, Cambria, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: monospace;
+
+  /* Backgrounds */
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #121212;
+  --bg-tertiary: #18181B;
+  --bg-card: #121212;
+  --bg-card-hover: #18181B;
+  --header-bg: rgba(10, 10, 10, 0.85);
+
+  /* Borders */
+  --border-subtle: #27272A;
+  --border-focus: #3F3F46;
+
+  /* Text */
+  --text-primary: #EDEDED;
+  --text-secondary: #A1A1AA;
+  --text-muted: #96969F;
+  --text-inverse: #0A0A0A;
+
+  /* Functional Accents */
+  --accent-critical: #E11D48;
+  --accent-critical-bg: rgba(225, 29, 72, 0.12);
+  --accent-warning: #F59E0B;
+  --accent-warning-bg: rgba(245, 158, 11, 0.12);
+  --accent-verified: #10B981;
+  --accent-verified-bg: rgba(16, 185, 129, 0.12);
+  --accent-neutral-bg: rgba(161, 161, 170, 0.10);
+
+  /* Map & Surfaces */
+  --map-bg: rgba(0, 0, 0, 0.35);
+  --map-rect-fill: rgba(255, 255, 255, 0.03);
+  --map-rect-has-cases: rgba(255, 255, 255, 0.08);
+  --map-rect-hover: rgba(255, 255, 255, 0.16);
+  --map-text-primary: #D4D4D8;
+  --map-text-secondary: #A1A1AA;
+  --modal-backdrop: rgba(0, 0, 0, 0.75);
+}
+
+/* Light Theme (Harvey AI Ivory / Clean Legal Style) */
+html.light {
+  /* Backgrounds */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F4F4F5;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8F8F9;
+  --header-bg: rgba(250, 250, 250, 0.88);
+
+  /* Borders */
+  --border-subtle: #E4E4E7;
+  --border-focus: #D4D4D8;
+
+  /* Text */
+  --text-primary: #09090B;
+  --text-secondary: #52525B;
+  --text-muted: #71717A;
+  --text-inverse: #FFFFFF;
+
+  /* Functional Accents */
+  --accent-critical: #DC2626;
+  --accent-critical-bg: rgba(220, 38, 38, 0.08);
+  --accent-warning: #D97706;
+  --accent-warning-bg: rgba(217, 119, 6, 0.08);
+  --accent-verified: #059669;
+  --accent-verified-bg: rgba(5, 150, 105, 0.08);
+  --accent-neutral-bg: rgba(113, 113, 122, 0.08);
+
+  /* Map & Surfaces */
+  --map-bg: rgba(240, 240, 243, 0.75);
+  --map-rect-fill: #FFFFFF;
+  --map-rect-has-cases: #F4F4F5;
+  --map-rect-hover: #E4E4E7;
+  --map-text-primary: #18181B;
+  --map-text-secondary: #52525B;
+  --modal-backdrop: rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Typography styles */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-focus);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}

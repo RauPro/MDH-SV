@@ -1,7 +1,1 @@
-"""
-Paquete del Servidor MCP para el Monitor de Derechos Humanos de El Salvador.
-"""
-
-from .server import mcp
-
-__all__ = ["mcp"]
+"""Read-only MCP package. Import mdh_mcp.server explicitly to construct the server."""

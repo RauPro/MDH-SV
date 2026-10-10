@@ -23,6 +23,7 @@ class Publication(BaseModel):
     record_type: Literal["publication", "incident", "aggregate"]
     title: str = Field(min_length=3, max_length=300)
     publisher: str = Field(min_length=3)
+    source_title: str = Field(min_length=3)
     published_date: date
     date_note: str = Field(min_length=10)
     category: str = Field(min_length=3)
