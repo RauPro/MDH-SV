@@ -7,6 +7,7 @@ import { getStats, loadCatalog, loadNews, searchNews, searchRecords } from '../s
 import { validMcpRequest } from '../api/mcp.mjs';
 import recordHandler from '../api/v1/records/[id].mjs';
 import unknownV1Handler from '../api/v1/[...path].mjs';
+import { NEWS_DOSSIER_FIELDS, pendingNewsDossier } from '../shared/news-dossier.mjs';
 
 let server, base;
 before(async () => {
@@ -124,6 +125,57 @@ test('news is a separate metadata archive with coverage and explicit unreviewed 
   assert.equal(result.data[0].review_status, 'not_reviewed');
   assert.equal(result.meta.coverage.status, 'partial');
   assert.ok(result.meta.review_notice.includes('no constituyen casos validados'));
+  assert.deepEqual(Object.keys(result.data[0].news_dossier.fields), NEWS_DOSSIER_FIELDS);
+  assert.ok(Object.values(result.data[0].news_dossier.fields).every(field => field.status === 'pending' && field.value === null));
+});
+
+test('every news result has a worksheet, including international or unclassified items, without inferring country or private processing', () => {
+  const current = loadNews();
+  for (const scope of ['el_salvador', 'international_context', 'undetermined']) {
+    const response = searchNews({ scope_hint: scope, limit: 2 }, current, { schema_version: 1, dossiers: [] });
+    assert.ok(response.data.length > 0);
+    for (const reference of response.data) {
+      assert.equal(reference.news_dossier.kind, 'news_dossier');
+      assert.equal(reference.news_dossier.candidate_id, reference.id);
+      assert.equal(reference.news_dossier.source_title, reference.title);
+      assert.equal(reference.news_dossier.fields.country.status, 'pending');
+      assert.equal(reference.news_dossier.fields.country.value, null);
+      assert.equal(reference.news_dossier.classification.jurisdiction, 'unclear');
+      assert.equal(reference.news_dossier.human_reviewed, false);
+      assert.equal(reference.news_dossier.extraction_status, 'pending');
+    }
+  }
+});
+
+test('public news enrichment uses only approved dossiers bound to the exact bibliography and never changes case counts', () => {
+  const source = loadNews().records[0];
+  const archive = { ...loadNews(), records: [source] };
+  const dossier = pendingNewsDossier(source);
+  Object.assign(dossier, { extraction_status: 'processed', human_reviewed: true, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture de revisión editorial explícita de fuente y privacidad.', source_title: 'Título ficticio minimizado por privacidad' });
+  dossier.classification = { jurisdiction: 'other', relevance: 'not_relevant', record_type: null };
+  dossier.fields.summary = { value: 'APPROVED_TEST_VALUE', status: 'reported', evidence_refs: ['bibliography'], note: null };
+  const baseline = getStats();
+  const approved = searchNews({}, archive, { schema_version: 1, dossiers: [dossier] });
+  assert.equal(approved.data[0].review_status, 'not_reviewed');
+  assert.equal(approved.data[0].news_dossier.human_reviewed, true);
+  assert.equal(approved.data[0].news_dossier.fields.summary.value, 'APPROVED_TEST_VALUE');
+  assert.equal(approved.data[0].news_dossier.classification.relevance, 'not_relevant');
+  assert.deepEqual(getStats(), baseline);
+  for (const change of [
+    value => { value.human_reviewed = false; },
+    value => { value.publisher = 'Editorial equivocada'; },
+    value => { value.published_date = '2025-01-01'; },
+    value => { value.source_url = 'https://www.diariocolatino.com/wrong-source/'; },
+    value => { value.fields.summary.evidence_refs = ['unknown']; },
+    value => { value.private_model_output = 'PRIVATE_TEST_VALUE'; },
+  ]) {
+    const unsafe = structuredClone(dossier); change(unsafe);
+    const response = searchNews({}, archive, { schema_version: 1, dossiers: [unsafe] });
+    assert.equal(response.data[0].news_dossier.human_reviewed, false);
+    assert.equal(response.data[0].news_dossier.fields.summary.status, 'pending');
+    assert.ok(!JSON.stringify(response).includes('APPROVED_TEST_VALUE'));
+    assert.ok(!JSON.stringify(response).includes('PRIVATE_TEST_VALUE'));
+  }
 });
 
 test('OpenAPI is a public, versioned executable contract', async () => {
@@ -133,6 +185,8 @@ test('OpenAPI is a public, versioned executable contract', async () => {
   assert.deepEqual(body.security, []);
   assert.ok(body.paths['/api/v1/records/{id}']);
   assert.ok(body.paths['/api/v1/news']);
+  assert.ok(body.components.schemas.News.required.includes('news_dossier'));
+  assert.deepEqual(body.components.schemas.NewsDossier.properties.fields.required, NEWS_DOSSIER_FIELDS);
   assert.equal(body.components.schemas.Record.properties.review_status.enum.includes('not_reviewed'), false);
 });
 
@@ -174,6 +228,8 @@ test('MCP officially connects, discovers read-only tools, calls and reads resour
     assert.equal(news.structuredContent.data[0].scope_hint, 'el_salvador');
     assert.ok(Array.isArray(news.structuredContent.data[0].scope_terms));
     assert.ok(news.structuredContent.meta.policy.notice);
+    assert.deepEqual(Object.keys(news.structuredContent.data[0].news_dossier.fields), NEWS_DOSSIER_FIELDS);
+    assert.equal(news.structuredContent.data[0].news_dossier.kind, 'news_dossier');
     const resources = await client.listResources();
     assert.equal(resources.resources.length, 2);
     const resource = await client.readResource({ uri: 'mdh-sv://catalog/metadata' });

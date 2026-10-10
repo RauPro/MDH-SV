@@ -1,4 +1,5 @@
 import { LICENSE, LIMITATION, PUBLIC_URL } from './public-data.mjs';
+import { NEWS_DOSSIER_FIELDS, NEWS_DOSSIER_LIST_FIELDS } from '../shared/news-dossier.mjs';
 
 const parameter = (name, description, schema = { type: 'string', maxLength: 200 }) => ({ name, in: 'query', description, schema });
 const common = [
@@ -22,6 +23,14 @@ const pagination = [
 ];
 const ref = name => ({ $ref: `#/components/schemas/${name}` });
 const evidenceField = valueSchema => ({ type: 'object', required: ['value', 'status', 'evidence_refs', 'note'], properties: { value: { anyOf: [valueSchema, { type: 'null' }] }, status: { type: 'string', enum: ['reported', 'not_reported', 'withheld', 'not_applicable'] }, evidence_refs: { type: 'array', items: { type: 'string' } }, note: { type: ['string', 'null'] } } });
+const newsField = name => {
+  const field = evidenceField(NEWS_DOSSIER_LIST_FIELDS.includes(name) ? { type: 'array', maxItems: 40, items: { type: 'string', maxLength: 300 } } : { type: 'string', maxLength: 2000 });
+  field.properties.status.enum.unshift('pending');
+  field.properties.evidence_refs.maxItems = 100;
+  field.properties.note.maxLength = 1000;
+  field.additionalProperties = false;
+  return field;
+};
 const json = schema => ({ 'application/json': { schema } });
 const errors = Object.fromEntries([400, 404, 405, 414, 500, 503].map(status => [status, { description: 'Error explícito; nunca devuelve HTML ni datos privados.', content: json(ref('Error')) }]));
 const operation = (id, summary, parameters, schema) => ({ operationId: id, summary, parameters, responses: { 200: { description: 'Lectura correcta del snapshot público.', content: json(schema) }, ...errors } });
@@ -40,6 +49,16 @@ export const openapi = {
     '/api/v1/openapi.json': { get: operation('getOpenApi', 'Contrato OpenAPI 3.1', [], { type: 'object' }) },
   },
   components: { schemas: {
+    NewsDossier: { type: 'object', additionalProperties: false, required: ['schema_version', 'kind', 'candidate_id', 'source_url', 'publisher', 'source_title', 'published_date', 'extraction_status', 'classification', 'fields', 'date_precision', 'evidence', 'human_reviewed', 'reviewed_by', 'reviewed_at', 'review_notes'], description: 'Ficha universal de noticia. Sin ficha pública aprobada todos los campos estructurados son pending; esto no significa ausencia en la fuente ni refleja el estado de una cola privada. Una ficha revisada puede ser parcial o declarar no pertinencia. No equivale a un caso ni se suma a estadísticas de violaciones.', properties: {
+      schema_version: { type: 'integer', const: 1 }, kind: { type: 'string', const: 'news_dossier' }, candidate_id: { type: 'string', pattern: '^[a-f0-9]{64}$' },
+      source_url: { type: 'string', format: 'uri', maxLength: 4096 }, publisher: { type: 'string', minLength: 3, maxLength: 200 }, source_title: { type: 'string', minLength: 3, maxLength: 500 }, published_date: { type: ['string', 'null'], format: 'date' },
+      extraction_status: { type: 'string', enum: ['pending', 'processed', 'source_unavailable', 'error'], description: 'La consulta pública devuelve pending si no hay ficha revisada; nunca deduce errores privados.' },
+      classification: { type: 'object', additionalProperties: false, required: ['jurisdiction', 'relevance', 'record_type'], properties: { jurisdiction: { type: 'string', enum: ['SV', 'other', 'unclear'] }, relevance: { type: 'string', enum: ['relevant', 'not_relevant', 'unclear'] }, record_type: { type: ['string', 'null'], enum: ['incident', 'aggregate', 'publication', null] } } },
+      fields: { type: 'object', additionalProperties: false, required: NEWS_DOSSIER_FIELDS, properties: Object.fromEntries(NEWS_DOSSIER_FIELDS.map(name => [name, newsField(name)])) },
+      date_precision: { type: 'string', enum: ['unknown', 'day', 'month_range', 'year_range'] },
+      evidence: { type: 'array', minItems: 1, maxItems: 200, items: { type: 'object', required: ['id', 'url', 'locator'], additionalProperties: false, properties: { id: { type: 'string' }, url: { type: 'string', format: 'uri', maxLength: 4096 }, locator: { type: 'string', minLength: 10, maxLength: 1000 } } } },
+      human_reviewed: { type: 'boolean' }, reviewed_by: { type: ['string', 'null'] }, reviewed_at: { type: ['string', 'null'], format: 'date' }, review_notes: { type: ['string', 'null'], maxLength: 4000 },
+    } },
     EvidenceText: evidenceField({ type: 'string' }),
     EvidenceList: evidenceField({ type: 'array', items: { type: 'string' } }),
     Dossier: { type: 'object', description: 'Campos atribuidos a fuentes con estado explícito de desconocido u omitido. Ver docs/DOSSIER-SCHEMA.md.', required: ['schema_version', 'alleged_violation', 'facts', 'affected_persons', 'location', 'event_date', 'evidence'], properties: {
@@ -53,9 +72,9 @@ export const openapi = {
       dossier: ref('Dossier'),
       id: { type: 'string' }, record_type: { type: 'string', enum: ['incident', 'aggregate', 'publication'] }, title: { type: 'string' }, summary: { type: 'string' }, publisher: { type: 'string' }, source_url: { type: 'string', format: 'uri' }, source_title: { type: 'string' }, source_locator: { type: 'string' }, published_date: { type: 'string', format: 'date' }, incident_date: { type: ['string', 'null'] }, incident_date_end: { type: ['string', 'null'] }, date_precision: { type: 'string' }, date_note: { type: 'string' }, department: { type: ['string', 'null'] }, coverage: { type: 'string' }, category: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } }, review_status: { type: 'string', enum: ['source_checked', 'editorially_reviewed'] }, human_reviewed: { type: 'boolean' }, source_checked_at: { type: 'string', format: 'date' }, source_check_method: { type: 'string' }, related_sources: { type: 'array', items: { type: 'object', additionalProperties: true } }, reported_actor: { type: ['string', 'null'] }, privacy_note: { type: 'string' },
     } },
-    News: { type: 'object', required: ['id', 'title', 'publisher', 'source_url', 'published_date', 'review_status', 'scope_hint', 'scope_terms'], additionalProperties: true, description: 'Referencia bibliográfica recolectada; no equivale a caso verificado. No contiene el cuerpo del artículo ni información de la cola privada.', properties: { scope_hint: { type: 'string', enum: ['el_salvador', 'international_context', 'undetermined'] }, scope_terms: { type: 'array', items: { type: 'string' } }, jurisdiction_status: { type: 'string', const: 'not_reviewed' }, id: { type: 'string' }, title: { type: 'string' }, publisher: { type: 'string' }, source_url: { type: 'string', format: 'uri' }, published_date: { type: 'string', format: 'date' }, review_status: { type: 'string' }, topics: { type: 'array', items: { type: 'string' } }, discovery: { type: 'object', additionalProperties: true } } },
+    News: { type: 'object', required: ['id', 'title', 'publisher', 'source_url', 'published_date', 'review_status', 'scope_hint', 'scope_terms', 'news_dossier'], additionalProperties: true, description: 'Referencia bibliográfica recolectada; no equivale a caso verificado. No contiene el cuerpo del artículo ni información de la cola privada.', properties: { news_dossier: ref('NewsDossier'), scope_hint: { type: 'string', enum: ['el_salvador', 'international_context', 'undetermined'] }, scope_terms: { type: 'array', items: { type: 'string' } }, jurisdiction_status: { type: 'string', const: 'not_reviewed' }, id: { type: 'string' }, title: { type: 'string' }, publisher: { type: 'string' }, source_url: { type: 'string', format: 'uri' }, published_date: { type: 'string', format: 'date' }, review_status: { type: 'string' }, topics: { type: 'array', items: { type: 'string' } }, discovery: { type: 'object', additionalProperties: true } } },
     Pagination: { type: 'object', required: ['total', 'limit', 'offset', 'next_offset', 'next'], properties: { total: { type: 'integer' }, limit: { type: 'integer' }, offset: { type: 'integer' }, next_offset: { type: ['integer', 'null'] }, next: { type: ['string', 'null'] } } },
-    Metadata: { type: 'object', required: ['api_version', 'schema_version', 'updated_at', 'license', 'limitations'], additionalProperties: true, properties: { api_version: { type: 'string', const: '1' }, schema_version: { type: 'integer' }, updated_at: { type: ['string', 'null'] }, license: { type: 'string', format: 'uri' }, attribution: { type: 'string' }, limitations: { type: 'string' }, coverage: { type: 'object', additionalProperties: true }, paper: { type: 'object', additionalProperties: true }, review_notice: { type: 'string' } } },
+    Metadata: { type: 'object', required: ['api_version', 'schema_version', 'updated_at', 'license', 'limitations'], additionalProperties: true, properties: { api_version: { type: 'string', const: '1' }, schema_version: { type: 'integer' }, updated_at: { type: ['string', 'null'] }, license: { type: 'string', format: 'uri' }, attribution: { type: 'string' }, limitations: { type: 'string' }, coverage: { type: 'object', additionalProperties: true }, paper: { type: 'object', additionalProperties: true }, review_notice: { type: 'string' }, news_dossiers_status: { type: 'string', enum: ['available', 'unavailable'] } } },
     Error: { type: 'object', required: ['error'], properties: { error: { type: 'object', required: ['code', 'message'], properties: { code: { type: 'string' }, message: { type: 'string' } } } } },
   } },
 };

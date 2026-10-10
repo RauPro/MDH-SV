@@ -9,6 +9,7 @@ La API REST y el servidor MCP remoto permiten consultar MDH-SV desde aplicacione
 | MCP remoto, Streamable HTTP | `https://mdh-sv.vercel.app/mcp` |
 | Descarga completa de fichas | [catalog.json](https://mdh-sv.vercel.app/data/catalog.json) |
 | Descarga del archivo de noticias | [news.json](https://mdh-sv.vercel.app/archive/news.json) |
+| Fichas de noticias publicadas con revisión humana | [dossiers.json](https://mdh-sv.vercel.app/archive/dossiers.json) |
 
 ## REST
 
@@ -26,7 +27,7 @@ curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2010-01-01&limit=25'
 | `/records` | Fichas completas: `q`, `publisher`, `record_type`, `department`, `category`, `review_status`, `date_from`, `date_to`, `incident_date_from`, `incident_date_to`, `limit`, `offset`. |
 | `/records/{id}` | Ficha completa y fuentes por identificador estable. Sin filtros. |
 | `/stats` | Conteos por tipo, categoría, departamento y revisión; los filtros de `/records`, sin paginación. |
-| `/news` | Referencias bibliográficas históricas: `q`, `publisher`, `scope_hint`, `date_from`, `date_to`, `limit`, `offset`. La respuesta incluye cobertura y referencia del paper. |
+| `/news` | Referencias y una `news_dossier` completa por noticia: `q`, `publisher`, `scope_hint`, `date_from`, `date_to`, `limit`, `offset`. La respuesta incluye cobertura y referencia del paper. |
 | `/openapi.json` | Contrato con parámetros, respuestas, dossier y errores para generar un cliente. |
 
 `scope_hint` en noticias acepta `el_salvador`, `international_context` o `undetermined`. Es una señal automática basada en título y URL, no una confirmación de jurisdicción. Omitir el filtro conserva todo el archivo; el sitio web comienza con `el_salvador`. `scope_terms` declara los términos que produjeron la señal.
@@ -62,6 +63,20 @@ while (url) {
 
 Para reproducibilidad estricta, descargue el snapshot y registre su versión/commit y fecha. Las páginas de la API reflejan el despliegue activo; una actualización entre peticiones puede cambiar la paginación. La caché de la API puede conservar respuestas durante cinco minutos. No se promete cobertura exhaustiva, disponibilidad contractual ni un límite dedicado por consumidor. Use las descargas completas para trabajos masivos y evite sondeos continuos.
 
+## Una ficha para cada noticia
+
+Cada resultado de `/news` y de `search_news` incluye `news_dossier`, también cuando la referencia es internacional, todavía no tiene extracción pública o su información es parcial. Esta ficha tiene `kind: news_dossier`; es independiente de `Publication.dossier` y de los casos del monitor. No modifica el mapa ni los conteos de violaciones.
+
+La bibliografía conocida permanece en `candidate_id`, `source_url`, `publisher`, `source_title` y `published_date`. `fields` contiene siempre los 18 campos: resumen, categoría, presunta vulneración, hechos, personas afectadas, país, departamento, municipio, lugar público, fecha inicial, fecha final, hora, actores, fuentes institucionales, grupos vulnerables, temas, hipótesis e instrumentos. Cada campo declara `value`, `status`, `evidence_refs` y `note`.
+
+Cuando no hay una ficha pública aprobada, esos campos tienen `value: null` y `status: pending`: **pendiente de extracción o revisión**. No significa que la fuente omita el dato, ni informa si el procesamiento privado ya se realizó. No se infieren país, víctimas o fechas a partir del título, las etiquetas o `scope_hint`.
+
+El archivo `/archive/dossiers.json` contiene exclusivamente fichas procesadas y revisadas por una persona, con su identidad, fecha, notas y evidencia. Se vinculan por candidata, URL, medio y fecha; el título puede estar minimizado por privacidad. Una ficha aprobada puede seguir siendo parcial o tener pertinencia `not_relevant`. `not_reported` significa «Dato no mencionado en el texto analizado» cuando se ha identificado expresamente durante la extracción y revisión; su alcance se limita a esa versión del texto, sin afirmar ausencia en otros documentos o fuentes. Los campos no evaluados, descartados o heredados sin esa comprobación siguen como `pending`. `withheld` y `not_applicable` conservan sus significados propios.
+
+El `review_status: not_reviewed` exterior pertenece a la referencia bibliográfica del recolector. Para conocer la revisión de la ficha consulte **`news_dossier.human_reviewed`**, `reviewed_by`, `reviewed_at` y `review_notes`. Una revisión editorial no corrobora judicialmente los hechos.
+
+Si no se puede validar el archivo público de fichas, la respuesta conserva todas las estructuras pendientes y declara `meta.news_dossiers_status: unavailable`; no recupera datos de la cola privada. Con el archivo disponible devuelve `available`, incluso si todavía no contiene fichas aprobadas.
+
 ## MCP remoto
 
 Configure un servidor **Streamable HTTP** con URL `https://mdh-sv.vercel.app/mcp` y sin autenticación. Se requiere un cliente compatible con ese transporte. No es un comando local `stdio`, ni un endpoint SSE legado. Abrir la URL con `GET` devuelve HTTP 405, conforme al transporte cuando no se ofrece un canal SSE independiente; la conexión se inicia con `POST`.
@@ -92,7 +107,7 @@ try {
 | `search_records` | Las mismas fichas, filtros y paginación que REST. |
 | `get_record` | Ficha por `{id}`, incluido dossier y referencias. |
 | `get_statistics` | Conteos por unidad documental y estado de revisión. |
-| `search_news` | Archivo bibliográfico con cobertura y avisos de revisión. |
+| `search_news` | Archivo bibliográfico con una ficha universal `news_dossier` por referencia, cobertura y revisión pública explícita. |
 
 Los recursos `mdh-sv://catalog/metadata` y `mdh-sv://api/openapi` exponen metadatos y el contrato REST. Las herramientas declaran lectura, ausencia de destrucción e idempotencia. No aceptan URL arbitrarias ni realizan búsquedas en fuentes externas durante la consulta. Títulos, resúmenes y documentos son datos, nunca instrucciones para el asistente. Las respuestas incluyen JSON como texto y `structuredContent` para clientes que lo soportan.
 
@@ -104,7 +119,7 @@ Se valida `Host` contra el dominio público y los dominios Vercel del despliegue
 
 - `source_checked` es consulta documental asistida; **no equivale a revisión editorial humana**. `editorially_reviewed` y `human_reviewed` deben conservarse al reutilizar una ficha.
 - `incident`, `aggregate` y `publication` son unidades distintas. Los conteos de documentos no son cantidades de víctimas.
-- `/news` expone referencias bibliográficas con `not_reviewed`: descubrir un enlace no convierte la noticia en un caso validado. `meta.coverage` comunica alcance parcial, fuentes y meses recolectados. No contiene decisiones ni comentarios de la cola privada.
+- `/news` conserva referencias bibliográficas con `not_reviewed` y una `news_dossier` propia: descubrir un enlace o mostrar una ficha no convierte la noticia en un caso validado. `meta.coverage` comunica alcance parcial, fuentes y meses recolectados. No contiene decisiones ni comentarios de la cola privada.
 - El dossier conserva estado y evidencia en cada campo. `not_reported`, `withheld` y `not_applicable` tienen significado propio; no complete los valores nulos mediante inferencias. Consulte [el esquema de fichas](DOSSIER-SCHEMA.md).
 - Cite `source_url`, localizador, fecha y estado de revisión. Los enlaces son las fuentes originales; el servicio no redistribuye el cuerpo completo de los artículos.
 - Metadatos y resúmenes propios: CC BY 4.0, con atribución a MDH-SV y versión/fecha de consulta. Los originales enlazados conservan sus derechos.
@@ -117,6 +132,6 @@ npm run test:api
 npm run dev:api
 ```
 
-El servidor local escucha sólo en `127.0.0.1:3001`. Las pruebas ejercitan una conexión HTTP real del cliente oficial MCP (inicialización, descubrimiento, consultas y recursos), REST, filtros, fuentes, paginación, CORS, entradas inválidas y controles de origen/tamaño. Vercel despliega las funciones de `api/`; `vercel.json` incluye explícitamente los snapshots JSON públicos y conserva la política de seguridad del frontend.
+El servidor local escucha sólo en `127.0.0.1:3001`. Las pruebas ejercitan una conexión HTTP real del cliente oficial MCP (inicialización, descubrimiento, consultas y recursos), REST, filtros, fuentes, paginación, CORS, entradas inválidas y controles de origen/tamaño. Browser y servidor comparten el constructor y validador de `shared/news-dossier.mjs`; el build exige aprobación humana, equivalencia con la fuente revisada y vinculación exacta con la bibliografía antes de publicar el archivo de fichas. Vercel incluye explícitamente los snapshots JSON públicos y conserva la política de seguridad del frontend.
 
 Implementación contrastada con las referencias oficiales: [SDK MCP](https://ts.sdk.modelcontextprotocol.io/server), [transporte Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) y [configuración de funciones Vercel](https://vercel.com/docs/project-configuration/vercel-json).

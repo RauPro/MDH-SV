@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
+import { parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
 
 const source = new URL('../../../data/reviewed/publications.json', import.meta.url);
 const publicDir = new URL('../public/data/', import.meta.url);
@@ -30,3 +31,15 @@ for (const row of catalog.records) {
   assert.ok(!('victims' in row) && !('perpetrators' in row));
 }
 console.log(`Validated ${catalog.records.length} public records and all download checksums.`);
+
+const approvedNews = JSON.parse(readFileSync(new URL('../../../data/reviewed/news_dossiers.json', import.meta.url)));
+const publicNews = JSON.parse(readFileSync(new URL('../public/archive/dossiers.json', import.meta.url)));
+const newsArchive = JSON.parse(readFileSync(new URL('../public/archive/news.json', import.meta.url)));
+const approvedIndex = validateDossierBindings(parsePublishedNewsDossiers(approvedNews), newsArchive.records);
+const publicIndex = validateDossierBindings(parsePublishedNewsDossiers(publicNews), newsArchive.records);
+assert.deepEqual([...publicIndex].sort(), [...approvedIndex].sort(), 'Regenerate public news dossiers after changing reviewed source');
+for (const dossier of publicIndex.values()) {
+  assert.equal(hash(dossier.source_url), dossier.candidate_id, 'News dossier identity must match its source URL');
+  assert.ok(dossier.reviewed_at <= new Date().toISOString().slice(0, 10), 'News dossier review cannot be in the future');
+}
+console.log(`Validated ${publicIndex.size} human-reviewed news dossiers and bibliography bindings.`);
