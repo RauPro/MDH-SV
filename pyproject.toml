@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mdh-sv"
+version = "2.0.0"
+description = "Monitor de Violaciones a Derechos Humanos en El Salvador - Open Data, AI & MCP"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "Raul Guillen" }
+]
+
+[tool.setuptools.packages.find]
+where = ["packages/schema/src", "apps/pipeline/src", "apps/mcp/src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [
+    "packages/schema/src",
+    "apps/pipeline/src",
+    "apps/mcp/src"
+]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
