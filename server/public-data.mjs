@@ -1,0 +1,141 @@
+import { readFileSync } from 'node:fs';
+import { z } from 'zod';
+
+export const PUBLIC_URL = 'https://mdh-sv.vercel.app';
+export const LICENSE = 'https://creativecommons.org/licenses/by/4.0/';
+export const LIMITATION = 'Cobertura parcial de reportes públicos; no es un censo ni una determinación judicial. Conservar fuentes, fechas y estado de revisión. No sumar noticias, informes y casos como víctimas.';
+
+export class ApiError extends Error {
+  constructor(status, code, message) { super(message); this.status = status; this.code = code; }
+}
+
+const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(value => {
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+}, 'Fecha inexistente');
+const text = z.string().trim().min(1).max(200);
+const page = {
+  limit: z.coerce.number().int().min(1).max(100).default(25),
+  offset: z.coerce.number().int().min(0).max(1000000).default(0),
+};
+export const commonFilters = {
+  q: text.optional(), publisher: text.optional(),
+  date_from: date.optional(), date_to: date.optional(),
+};
+export const recordFilters = {
+  ...commonFilters,
+  incident_date_from: date.optional(), incident_date_to: date.optional(),
+  record_type: z.enum(['incident', 'aggregate', 'publication']).optional(),
+  department: text.optional(), category: text.optional(),
+  review_status: z.enum(['source_checked', 'editorially_reviewed']).optional(),
+};
+export const recordSearchSchema = z.object({ ...recordFilters, ...page }).strict();
+export const newsSearchSchema = z.object({ ...commonFilters, ...page }).strict();
+export const statsSchema = z.object(recordFilters).strict();
+export const recordIdSchema = z.string().regex(/^[a-z0-9][a-z0-9-]{0,149}$/);
+
+function validateRange(filters) {
+  if (filters.date_from && filters.date_to && filters.date_from > filters.date_to) {
+    throw new ApiError(400, 'invalid_query', 'date_from no puede ser posterior a date_to.');
+  }
+  if (filters.incident_date_from && filters.incident_date_to && filters.incident_date_from > filters.incident_date_to) {
+    throw new ApiError(400, 'invalid_query', 'incident_date_from no puede ser posterior a incident_date_to.');
+  }
+  return filters;
+}
+
+export function parseFilters(params, schema) {
+  const input = {};
+  for (const [key, value] of params) {
+    if (Object.hasOwn(input, key)) throw new ApiError(400, 'invalid_query', `Parámetro repetido: ${key}.`);
+    // Null-prototype parsing is unnecessary here because inherited keys are rejected by the strict schema.
+    Object.defineProperty(input, key, { value, enumerable: true, configurable: true });
+  }
+  const parsed = schema.safeParse(input);
+  if (!parsed.success) throw new ApiError(400, 'invalid_query', 'Filtros inválidos. Consulte /api/v1/openapi.json.');
+  return validateRange(parsed.data);
+}
+
+let catalogCache;
+export function loadCatalog() {
+  if (!catalogCache) {
+    const catalog = JSON.parse(readFileSync(new URL('../apps/web/public/data/catalog.json', import.meta.url), 'utf8'));
+    if (!Array.isArray(catalog.records)) throw new Error('Invalid public catalog');
+    // Defense in depth: never expose collection candidates through the documented-case API.
+    catalogCache = { ...catalog, records: catalog.records.filter(record => ['source_checked', 'editorially_reviewed'].includes(record.review_status)) };
+  }
+  return catalogCache;
+}
+
+let newsCache;
+export function loadNews() {
+  if (!newsCache) {
+    try {
+      const news = JSON.parse(readFileSync(new URL('../apps/web/public/archive/news.json', import.meta.url), 'utf8'));
+      if (!Array.isArray(news.records)) throw new Error('Invalid public news archive');
+      newsCache = news;
+    } catch (error) {
+      if (error.code === 'ENOENT') throw new ApiError(503, 'archive_unavailable', 'El archivo de noticias no está disponible en este despliegue.');
+      throw error;
+    }
+  }
+  return newsCache;
+}
+
+const normalize = value => String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+function matching(records, filters) {
+  validateRange(filters);
+  return records.filter(record => {
+    const dossier = record.dossier;
+    const dossierText = dossier ? [dossier.alleged_violation?.value, dossier.facts?.value, ...(dossier.affected_persons?.value ?? []), ...(dossier.reported_actors?.value ?? []), ...(dossier.vulnerable_groups?.value ?? []), ...(dossier.themes?.value ?? []), dossier.location?.public_place?.value] : [];
+    if (filters.q && !normalize([record.title, record.summary, record.publisher, record.category, ...(record.tags ?? []), ...(record.topics ?? []), ...dossierText].join(' ')).includes(normalize(filters.q))) return false;
+    for (const key of ['publisher', 'record_type', 'category', 'review_status']) {
+      if (filters[key] && normalize(record[key]) !== normalize(filters[key])) return false;
+    }
+    if (filters.department && normalize(record.department ?? 'unknown') !== normalize(filters.department)) return false;
+    if (filters.date_from && (!record.published_date || record.published_date < filters.date_from)) return false;
+    if (filters.date_to && (!record.published_date || record.published_date > filters.date_to)) return false;
+    // Event ranges overlap inclusively; unknown dates are excluded, never replaced with publication dates.
+    if (filters.incident_date_from && (!record.incident_date || (record.incident_date_end ?? record.incident_date) < filters.incident_date_from)) return false;
+    if (filters.incident_date_to && (!record.incident_date || record.incident_date > filters.incident_date_to)) return false;
+    return true;
+  }).sort((a, b) => (b.published_date ?? '').localeCompare(a.published_date ?? '') || a.id.localeCompare(b.id));
+}
+
+function metadata(catalog) {
+  return { api_version: '1', schema_version: catalog.schema_version, updated_at: catalog.updated_at ?? catalog.generated_at ?? null, license: LICENSE, attribution: 'MDH-SV; citar versión/fecha y las fuentes originales.', limitations: LIMITATION };
+}
+
+function paginated(records, filters, source, path) {
+  const { limit = 25, offset = 0 } = filters;
+  const filtered = matching(records, filters);
+  const nextOffset = offset + limit < filtered.length ? offset + limit : null;
+  const query = new URLSearchParams(Object.entries(filters).map(([key, value]) => [key, String(value)]));
+  query.set('limit', String(limit));
+  if (nextOffset !== null) query.set('offset', String(nextOffset));
+  return {
+    data: filtered.slice(offset, offset + limit),
+    pagination: { total: filtered.length, limit, offset, next_offset: nextOffset, next: nextOffset === null ? null : `${PUBLIC_URL}${path}?${query}` },
+    meta: metadata(source),
+  };
+}
+
+export function searchRecords(filters = {}, catalog = loadCatalog()) {
+  return paginated(catalog.records, recordSearchSchema.parse(filters), catalog, '/api/v1/records');
+}
+export function getRecord(id, catalog = loadCatalog()) {
+  if (!recordIdSchema.safeParse(id).success) throw new ApiError(400, 'invalid_id', 'Identificador inválido.');
+  const record = catalog.records.find(value => value.id === id);
+  if (!record) throw new ApiError(404, 'record_not_found', 'Registro no encontrado.');
+  return { data: record, meta: metadata(catalog) };
+}
+export function searchNews(filters = {}, archive = loadNews()) {
+  const result = paginated(archive.records, newsSearchSchema.parse(filters), archive, '/api/v1/news');
+  result.meta = { ...result.meta, coverage: archive.coverage, paper: archive.paper, policy: archive.policy, review_notice: 'Metadatos de noticias localizadas; no constituyen casos validados. La pertinencia y jurisdicción pueden estar pendientes. No se incluye la cola privada de revisión.' };
+  return result;
+}
+export function getStats(filters = {}, catalog = loadCatalog()) {
+  const records = matching(catalog.records, statsSchema.parse(filters));
+  const counts = key => Object.fromEntries([...new Set(records.map(record => record[key] ?? 'unknown'))].sort().map(value => [value, records.filter(record => (record[key] ?? 'unknown') === value).length]));
+  return { data: { total_records: records.length, by_record_type: counts('record_type'), by_department: counts('department'), by_category: counts('category'), by_review_status: counts('review_status'), human_reviewed: records.filter(record => record.human_reviewed === true).length }, meta: metadata(catalog) };
+}

@@ -2,10 +2,18 @@
   "name": "mdh-sv",
   "private": true,
   "version": "2.0.0",
-  "engines": { "node": "22.x" },
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "build": "npm --prefix apps/web run build",
-    "test": "npm --prefix apps/web test",
+    "test": "npm run test:api && npm --prefix apps/web test",
+    "test:api": "node --test --test-timeout=15000 tests/public-api.test.mjs",
+    "dev:api": "node server/dev.mjs",
     "dev": "npm --prefix apps/web run dev"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "zod": "4.6.5"
   }
 }
