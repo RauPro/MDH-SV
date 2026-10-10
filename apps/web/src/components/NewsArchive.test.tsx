@@ -1,0 +1,108 @@
+import { beforeEach, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import axe from 'axe-core';
+import fixture from '../__fixtures__/newsArchive.json';
+import catalog from '../__fixtures__/catalog.json';
+import { parseCatalog } from '../catalog';
+import { NewsArchive } from './NewsArchive';
+
+beforeEach(() => { vi.restoreAllMocks(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => fixture })); });
+const ready = async () => { render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>); await screen.findByText('3 noticias localizadas'); };
+it('loads only public news, communicates review limits and exposes source/month coverage', async () => {
+  await ready();
+  expect(fetch).toHaveBeenCalledWith('/archive/news.json', expect.objectContaining({ signal: expect.any(AbortSignal) }));
+  expect(screen.getByText(/la jurisdicción salvadoreña y los hechos todavía no están evaluados/i)).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'Descargar archivo JSON' })).toHaveAttribute('href', '/archive/news.json');
+  await userEvent.click(screen.getByText('Ver cobertura por medio y mes'));
+  await userEvent.click(screen.getByText('GatoEncerrado · 1 referencias · API recorrida'));
+  expect(screen.getByRole('table', { name: 'Cobertura mensual de GatoEncerrado' })).toBeInTheDocument();
+});
+it('filters by words without accents, source, topic and publication dates', async () => {
+  await ready();
+  await userEvent.type(screen.getByRole('searchbox', { name: 'Buscar noticias' }), 'persecucion');
+  expect(screen.getByText('1 noticia localizada')).toBeInTheDocument();
+  await userEvent.selectOptions(screen.getByLabelText('Medio'), 'GatoEncerrado');
+  await userEvent.selectOptions(screen.getByLabelText('Tema detectado'), 'defensores_y_sociedad_civil');
+  fireEvent.change(screen.getByLabelText('Publicación desde'), { target: { value: '2026-08-18' } });
+  fireEvent.change(screen.getByLabelText('Publicación hasta'), { target: { value: '2026-08-18' } });
+  expect(screen.getByText('1 noticia localizada')).toBeInTheDocument();
+  fireEvent.change(screen.getByLabelText('Publicación hasta'), { target: { value: '2026-01-01' } });
+  expect(screen.getByRole('alert')).toHaveTextContent('fecha inicial');
+  expect(screen.getByText('0 noticias localizadas')).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: 'Restablecer filtros de noticias' }));
+  expect(screen.getByText('3 noticias localizadas')).toBeInTheDocument();
+});
+it('starts with references to El Salvador and lets readers inspect other territorial hints or the entire archive', async () => {
+  const archive = structuredClone(fixture);
+  archive.records[1].scope_hint = 'international_context';
+  archive.records[2].scope_hint = 'undetermined';
+  vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => archive } as Response);
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('1 noticia localizada');
+  expect(screen.getByText('3 referencias · 3 medios · cobertura parcial.')).toBeInTheDocument();
+  expect(screen.getByLabelText('Vínculo territorial')).toHaveValue('el_salvador');
+  expect(screen.getByText(/No confirma jurisdicción. Por defecto/)).toBeInTheDocument();
+  await userEvent.selectOptions(screen.getByLabelText('Vínculo territorial'), 'international_context');
+  expect(screen.getByRole('button', { name: fixture.records[1].title })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: fixture.records[0].title })).not.toBeInTheDocument();
+  await userEvent.selectOptions(screen.getByLabelText('Vínculo territorial'), 'undetermined');
+  expect(screen.getByRole('button', { name: fixture.records[2].title })).toBeInTheDocument();
+  await userEvent.selectOptions(screen.getByLabelText('Vínculo territorial'), '');
+  expect(screen.getByText('3 noticias localizadas')).toBeInTheDocument();
+});
+it('opens bibliographic metadata, distinguishes unextracted fields and closes with restored focus', async () => {
+  await ready();
+  const trigger = screen.getByRole('button', { name: fixture.records[0].title });
+  await userEvent.click(trigger);
+  const dialog = screen.getByRole('dialog');
+  expect(within(dialog).getByText(/Extracción estructurada y revisión pendientes/)).toBeInTheDocument();
+  expect(within(dialog).getByText(/jurisdicción salvadoreña no ha sido evaluada/)).toBeInTheDocument();
+  expect(within(dialog).getByRole('link', { name: /Consultar noticia original/ })).toHaveAttribute('href', fixture.records[0].source_url);
+  await userEvent.click(within(dialog).getByRole('button', { name: 'Cerrar' }));
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(trigger).toHaveFocus();
+});
+it('closes the news dialog before asking the parent to open a linked dossier', async () => {
+  const base = parseCatalog(catalog).records[0];
+  const linked = { ...base, source_url: fixture.records[0].source_url };
+  const onOpenRecord = vi.fn(() => { expect(screen.queryByRole('dialog')).not.toBeInTheDocument(); });
+  render(<NewsArchive records={[linked]} onOpenRecord={onOpenRecord}/>);
+  await screen.findByText('3 noticias localizadas');
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  await userEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: linked.title }));
+  expect(onOpenRecord).toHaveBeenCalledWith(linked.id);
+});
+it('shows failed or malformed loads and allows retry without silent empty results', async () => {
+  vi.mocked(fetch).mockResolvedValueOnce({ ok: true, json: async () => ({ ...fixture, coverage: { ...fixture.coverage, records: 999 } }) } as Response);
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  expect(await screen.findByRole('alert')).toHaveTextContent('No pudimos cargar');
+  expect(screen.queryByText('0 noticias localizadas')).not.toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: 'Reintentar archivo' }));
+  expect(await screen.findByText('3 noticias localizadas')).toBeInTheDocument();
+});
+it('renders 30 items per page and resets pagination after filtering', async () => {
+  const archive = structuredClone(fixture);
+  archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: (index + 1).toString(16).padStart(64, '0'), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
+  archive.coverage.records = 31;
+  archive.coverage.sources = archive.coverage.sources.map(source => ({ ...source, records: source.id === 'co-latino' ? 31 : 0 }));
+  archive.coverage.months = archive.coverage.months.map(month => ({ ...month, records: month.month === '2026-10' ? 31 : 0 }));
+  vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => archive } as Response);
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('31 noticias localizadas');
+  expect(screen.getAllByRole('article')).toHaveLength(30);
+  await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
+  expect(screen.getAllByRole('article')).toHaveLength(1);
+  expect(screen.getByText('Página 2 de 2')).toBeInTheDocument();
+  expect(screen.getByLabelText('Resultados de noticias')).toHaveFocus();
+  await userEvent.type(screen.getByRole('searchbox', { name: 'Buscar noticias' }), 'Referencia 30');
+  expect(screen.getByText('Página 1 de 1')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Anterior' })).toBeDisabled();
+});
+it('has no automated accessibility violations in the archive and metadata dialog', async () => {
+  await ready();
+  const options = { rules: { region: { enabled: false }, 'color-contrast': { enabled: false } } };
+  expect((await axe.run(document.body, options)).violations).toEqual([]);
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  expect((await axe.run(screen.getByRole('dialog'), options)).violations).toEqual([]);
+});
