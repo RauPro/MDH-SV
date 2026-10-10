@@ -193,7 +193,7 @@ def collect(inbox, fetch=fetch_feed, feeds=FEEDS, max_new=20):
     return report
 
 
-def private_draft_record(inbox, candidate):
+def read_private_draft(inbox, candidate):
     """Read only an explicitly unapproved draft from this already-verified private inbox."""
     import base64
     import binascii
@@ -218,6 +218,14 @@ def private_draft_record(inbox, candidate):
             or draft.get('candidate_id') != candidate['id']
             or draft.get('source_url') != candidate['source_url']):
         raise ValueError('Private draft identity does not match the candidate')
+    if draft.get('publishable') is not False or draft.get('human_reviewed') is not False:
+        raise ValueError('Expected an explicitly unapproved private draft')
+    return draft
+
+
+def private_draft_record(inbox, candidate):
+    """A case proposal retains its stricter scope requirements."""
+    draft = read_private_draft(inbox, candidate)
     if (draft.get('status') != 'draft' or draft.get('relevant') is not True
             or draft.get('publishable') is not False or draft.get('human_reviewed') is not False):
         raise ValueError('Private draft requires scope or privacy review before approval')
@@ -233,6 +241,22 @@ def private_draft_record(inbox, candidate):
             or record.get('record_type') != classification.get('record_type')):
         raise ValueError('Private draft record is missing, mismatched or already marked reviewed')
     return record.copy()
+
+
+def private_news_dossier(inbox, candidate):
+    """A partial news worksheet is reviewable without asserting a rights violation."""
+    from .news_dossier import validate_news_dossier
+    draft = read_private_draft(inbox, candidate)
+    try:
+        document = validate_news_dossier(draft.get('news_dossier'))
+    except (ValueError, TypeError):
+        raise ValueError('Private news dossier is missing or invalid') from None
+    if (document['candidate_id'] != candidate['id'] or document['source_url'] != candidate['source_url']
+            or document['human_reviewed'] is not False):
+        raise ValueError('Private news dossier identity or review state mismatch')
+    if document['extraction_status'] != 'processed':
+        raise ValueError('Read the source and complete the news worksheet before human approval')
+    return document.copy()
 
 
 def review(inbox, event):
@@ -270,7 +294,14 @@ def review(inbox, event):
     notes = notes.strip()
     if not manual_json and len(notes) < 20:
         raise ValueError('Draft approval requires human review_notes of at least 20 characters')
-    proposed = json.loads(manual_json) if manual_json else private_draft_record(inbox, candidate)
+    proposal_kind = inputs.get('proposal_kind', 'case')
+    if proposal_kind not in ('case', 'news_dossier'):
+        raise ValueError('Unknown editorial proposal kind')
+    if proposal_kind == 'news_dossier' and len(notes) < 20:
+        raise ValueError('News dossier approval requires explicit human review_notes')
+    proposed = json.loads(manual_json) if manual_json else (
+        private_news_dossier(inbox, candidate) if proposal_kind == 'news_dossier'
+        else private_draft_record(inbox, candidate))
     if not isinstance(proposed, dict): raise ValueError('Public draft must be a record object')
     # Compatibility for the existing manual workflow; AI draft notes can never satisfy approval.
     if manual_json and not notes:
@@ -281,15 +312,27 @@ def review(inbox, event):
     if proposed.get('source_url') != candidate['source_url']:
         raise ValueError('Public draft must refer to the collected source')
     today = datetime.now(ZoneInfo('America/El_Salvador')).date().isoformat()
-    proposed.update(human_reviewed=True, review_status='editorially_reviewed', reviewed_by=username,
-        reviewed_at=today, review_notes=notes, origin_candidate_id=candidate['id'], source_checked_at=today,
-        source_check_method=f'Revisión editorial de la fuente por {username}; no implica corroboración independiente de los hechos.')
-    try:
-        record = Publication.model_validate(proposed)
-    except ValueError:
-        # Validation errors can otherwise include the entire private draft in Action logs.
-        raise ValueError('Public draft failed publication validation; inspect the private draft and schema') from None
-    approval = {'schema_version': 1, 'record': record.model_dump(mode='json'),
+    if proposal_kind == 'news_dossier':
+        from .news_dossier import validate_news_dossier
+        if proposed.get('candidate_id') != candidate['id'] or proposed.get('extraction_status') != 'processed':
+            raise ValueError('News dossier identity or extraction state mismatch')
+        proposed.update(human_reviewed=True, reviewed_by=username, reviewed_at=today, review_notes=notes)
+        try:
+            record = validate_news_dossier(proposed, require_reviewed=True)
+        except (ValueError, TypeError):
+            raise ValueError('News dossier failed publication validation; inspect the private draft') from None
+        approval_fields = {'proposal_kind': 'news_dossier', 'news_dossier': record}
+    else:
+        proposed.update(human_reviewed=True, review_status='editorially_reviewed', reviewed_by=username,
+            reviewed_at=today, review_notes=notes, origin_candidate_id=candidate['id'], source_checked_at=today,
+            source_check_method=f'Revisión editorial de la fuente por {username}; no implica corroboración independiente de los hechos.')
+        try:
+            record = Publication.model_validate(proposed)
+        except ValueError:
+            # Validation errors can otherwise include the entire private draft in Action logs.
+            raise ValueError('Public draft failed publication validation; inspect the private draft and schema') from None
+        approval_fields = {'record': record.model_dump(mode='json')}
+    approval = {'schema_version': 1, **approval_fields,
         'review_repository': inbox.repository, 'review_issue': issue_number,
         'review_run_id': os.environ.get('GITHUB_RUN_ID'), 'approved_at': datetime.now(timezone.utc).isoformat()}
     from pathlib import Path
@@ -298,7 +341,8 @@ def review(inbox, event):
     output.write_text(json.dumps(approval, ensure_ascii=False, indent=2), encoding='utf-8')
     # Idempotent audit file in the private repository; only the human workflow can write it.
     import base64
-    path = inbox.base + '/contents/approved/' + candidate['id'] + '.json'
+    folder = 'approved-news' if proposal_kind == 'news_dossier' else 'approved'
+    path = inbox.base + '/contents/' + folder + '/' + candidate['id'] + '.json'
     existing = inbox.get_file(path)
     payload = {'message': f'Approve candidate {candidate["id"][:12]} for editorial publication',
         'content': base64.b64encode(output.read_bytes()).decode()}

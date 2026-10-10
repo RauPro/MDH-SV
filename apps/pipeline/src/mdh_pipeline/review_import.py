@@ -1,6 +1,7 @@
 """Import an explicitly approved proposal; never bypasses private review or pushes Git."""
 import argparse
 import base64
+import binascii
 import json
 import os
 import re
@@ -10,6 +11,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from .publication import CATALOG, Catalog, Publication, export_catalog
 from .review_queue import GitHubInbox
+from .news_publication import SOURCE as NEWS_SOURCE, PUBLIC as NEWS_PUBLIC, ARCHIVE as NEWS_ARCHIVE
 
 
 def github_token():
@@ -46,12 +48,70 @@ def import_approved(inbox, candidate_id, source=CATALOG, export=True):
     return True
 
 
+def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEWS_ARCHIVE,
+                         destination=NEWS_PUBLIC, export=True):
+    """Import only an approved news dossier; never turn it into a case or copy its wrapper."""
+    from .news_dossier import validate_news_dossier
+    from .news_publication import validate_collection, export_news_dossiers
+    if not re.fullmatch(r'[a-f0-9]{64}', candidate_id):
+        raise ValueError('Invalid candidate ID')
+    relative = 'approved-news/' + candidate_id + '.json'
+    file = inbox.call('GET', inbox.base + '/contents/' + relative)
+    limit = 512_000
+    if (not isinstance(file, dict) or file.get('type') != 'file' or file.get('path') != relative
+            or file.get('encoding') != 'base64' or type(file.get('size')) is not int
+            or not 0 < file['size'] <= limit or not isinstance(file.get('content'), str)
+            or len(file['content']) > limit * 2):
+        raise ValueError('Invalid private approval file metadata')
+    try:
+        raw = base64.b64decode(''.join(file['content'].splitlines()), validate=True)
+        if len(raw) != file['size']:
+            raise ValueError('Invalid private approval file size')
+        proposal = json.loads(raw.decode('utf-8'))
+    except (binascii.Error, UnicodeDecodeError, json.JSONDecodeError):
+        raise ValueError('Invalid private approval file') from None
+    if (not isinstance(proposal, dict) or type(proposal.get('schema_version')) is not int
+            or proposal['schema_version'] != 1 or proposal.get('proposal_kind') != 'news_dossier'
+            or proposal.get('review_repository') != inbox.repository
+            or type(proposal.get('review_issue')) is not int or proposal['review_issue'] < 1):
+        raise ValueError('Invalid news approval provenance')
+    dossier = validate_news_dossier(proposal.get('news_dossier'), require_reviewed=True)
+    if dossier['candidate_id'] != candidate_id:
+        raise ValueError('News approval identity mismatch')
+    issue = inbox.call('GET', inbox.base + '/issues/' + str(proposal['review_issue']))
+    labels = {label['name'] for label in issue['labels']}
+    if ('review/approved' not in labels or 'review/rejected' in labels
+            or f'<!-- mdh-candidate:{candidate_id} -->' not in (issue.get('body') or '')):
+        raise ValueError('Approval withdrawn, missing or mismatched')
+    bibliography = json.loads(Path(archive).read_text())
+    document = validate_collection(json.loads(Path(source).read_text()), archive=bibliography)
+    existing = next((item for item in document['dossiers'] if item['candidate_id'] == candidate_id), None)
+    if existing is not None:
+        if existing == dossier:
+            return False
+        raise ValueError('Conflicting news dossier; review the update explicitly')
+    document['dossiers'].append(dossier)
+    document = validate_collection(document, archive=bibliography)
+    path = Path(source)
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(json.dumps(document, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    temporary.replace(path)
+    if export:
+        export_news_dossiers(source=path, destination=destination, archive=archive)
+    return True
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--candidate', required=True)
     parser.add_argument('--repository', default='RauPro/MDH-SV-review')
+    parser.add_argument('--kind', choices=('case', 'news_dossier'), default='case')
     args=parser.parse_args()
-    changed=import_approved(GitHubInbox(args.repository,github_token()),args.candidate)
+    try:
+        importer = import_approved_news if args.kind == 'news_dossier' else import_approved
+        changed=importer(GitHubInbox(args.repository,github_token()),args.candidate)
+    except (ValueError, TypeError, KeyError, OSError):
+        raise SystemExit('No se importó la propuesta: revise su identidad, aprobación y validación en la cola privada.') from None
     print('Ficha incorporada localmente. Revise el diff y CI antes de publicar.' if changed else 'La ficha ya está incorporada; sin cambios.')
 
 if __name__=='__main__':main()
