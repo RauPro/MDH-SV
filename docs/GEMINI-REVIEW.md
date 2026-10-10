@@ -41,6 +41,10 @@ la cuenta y de su API.
 
 Se solicita un esquema JSON compacto compatible con la API de Google. El cliente reconstruye y valida localmente el contrato completo con Pydantic, incluidas las restricciones que la API no admite. El código divide el texto en fragmentos literales identificados y Gemini selecciona esas referencias para cada campo, sin transcribir citas. Las referencias se comprueban contra el texto antes de aceptar el campo. Las fechas sin componentes explícitos (incluido el año) quedan desconocidas. Los nombres de lugar,
 instituciones, actores e instrumentos también se contrastan con sus párrafos.
+Un país o municipio no se convierte en departamento. Las fechas posteriores a la
+publicación y los intervalos invertidos se descartan sin inventar límites. Los
+informes generales conservan fecha y ubicación del hecho como «no aplicable»;
+los campos descartados quedan señalados para el editor.
 Esto detecta referencias inventadas; **no demuestra la verdad del hecho ni que la
 cita respalde correctamente una interpretación**. El editor debe revisar ambas
 cosas. Los artículos se tratan como datos, aunque contengan instrucciones para un
