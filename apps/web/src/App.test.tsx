@@ -2,7 +2,7 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import { render, screen, within, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
-import data from '../public/data/catalog.json';
+import data from './__fixtures__/catalog.json';
 import App from './App';
 
 beforeEach(() => { vi.restoreAllMocks(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => data })); });

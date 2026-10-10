@@ -3,13 +3,12 @@ import csv
 import hashlib
 import io
 import json
+import re
 from datetime import date
 from pathlib import Path
 from typing import Literal
 from urllib.parse import urlparse
 
-import pyarrow as pa
-import pyarrow.parquet as pq
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -40,8 +39,13 @@ class Publication(BaseModel):
     incident_date: date | None
     incident_date_end: date | None
     date_precision: Literal["day", "unknown", "month_range"]
-    review_status: Literal["source_checked"]
-    human_reviewed: Literal[False]
+    review_status: Literal["source_checked", "editorially_reviewed"]
+    human_reviewed: bool
+    reviewed_by: str | None = None
+    reviewed_at: date | None = None
+    review_notes: str | None = None
+    origin_candidate_id: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    related_sources: list[dict[str, str]] = Field(default_factory=list)
     reported_actor: str | None
     source_record_key: str = Field(min_length=4)
     privacy_note: str = Field(min_length=10)
@@ -52,13 +56,34 @@ class Publication(BaseModel):
     def primary_source(cls, value):
         url = urlparse(value)
         if (url.scheme != "https" or url.hostname not in
-                {"www.hrw.org", "www.oas.org", "www.amnesty.org", "citizenlab.ca"}
+                {"www.hrw.org", "www.oas.org", "www.amnesty.org", "citizenlab.ca",
+                 "www.corteidh.or.cr", "spcommreports.ohchr.org", "www.ohchr.org",
+                 "www.diariocolatino.com", "diariocolatino.com", "gatoencerrado.news",
+                 "www.revistafactum.com", "revistafactum.com"}
                 or url.username or url.password or url.port or len(url.path) < 5):
             raise ValueError("Expected an explicit, reviewed primary-source HTTPS URL")
         return value
 
     @model_validator(mode="after")
     def dates(self):
+        if self.human_reviewed:
+            if (self.review_status != 'editorially_reviewed' or not self.reviewed_by
+                    or not self.reviewed_at or len(self.review_notes or '') < 20):
+                raise ValueError('Human review requires reviewer, date and substantive notes')
+            if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9-]{0,38}', self.reviewed_by):
+                raise ValueError('Invalid reviewer identifier')
+            if self.reviewed_at > date.today():
+                raise ValueError('Future review date')
+        elif (self.review_status != 'source_checked' or self.reviewed_by or self.reviewed_at or self.review_notes):
+            raise ValueError('Do not attribute a human review that did not take place')
+        if self.origin_candidate_id and not self.human_reviewed:
+            raise ValueError('Collected candidates require explicit human review before publication')
+        for source in self.related_sources:
+            if set(source) != {'url', 'title', 'published_date', 'locator'} or not all(source.values()):
+                raise ValueError('Invalid supporting source')
+            self.primary_source(source['url'])
+            if date.fromisoformat(source['published_date']) > self.source_checked_at:
+                raise ValueError('Supporting source newer than review')
         if self.published_date > self.source_checked_at or self.source_checked_at > date.today():
             raise ValueError("Publication/review dates are inconsistent")
         if self.incident_date and self.incident_date > self.published_date:
@@ -106,6 +131,8 @@ def csv_safe(value):
 
 
 def export_catalog(source=CATALOG, destination=PUBLIC):
+    import pyarrow as pa
+    import pyarrow.parquet as pq
     catalog = load_catalog(source)
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=True)
@@ -117,7 +144,8 @@ def export_catalog(source=CATALOG, destination=PUBLIC):
     geo = {"type": "FeatureCollection", "scope": catalog.scope, "features": [
         {"type": "Feature", "geometry": None, "properties": r} for r in records]}
     files["records.geojson"] = json.dumps(geo, ensure_ascii=False, indent=2).encode()
-    flat = [{k: " | ".join(v) if isinstance(v, list) else v for k, v in r.items()
+    flat = [{k: json.dumps(v, ensure_ascii=False) if isinstance(v, list) and v and isinstance(v[0], dict)
+             else " | ".join(v) if isinstance(v, list) else v for k, v in r.items()
              if k != "geometry"} for r in records]
     stream = io.StringIO(newline="")
     fields = list(Publication.model_fields)
@@ -126,7 +154,8 @@ def export_catalog(source=CATALOG, destination=PUBLIC):
     writer.writeheader()
     writer.writerows({k: csv_safe(v) for k, v in r.items()} for r in flat)
     files["records.csv"] = stream.getvalue().encode("utf-8-sig")
-    table = pa.Table.from_pylist(flat) if flat else pa.table({k: pa.array([], type=pa.string()) for k in fields})
+    schema = pa.schema([(key, pa.bool_() if key in ('human_reviewed', 'penitentiary_related') else pa.string()) for key in fields])
+    table = pa.Table.from_pylist(flat, schema=schema)
     buffer = pa.BufferOutputStream()
     pq.write_table(table, buffer, compression="snappy")
     files["records.parquet"] = buffer.getvalue().to_pybytes()

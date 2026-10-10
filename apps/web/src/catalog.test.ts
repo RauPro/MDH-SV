@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import data from '../public/data/catalog.json';
+import data from './__fixtures__/catalog.json';
 import { parseCatalog, filterRecords, safeSource, formatDate } from './catalog';
 
 describe('public catalogue boundary', () => {
