@@ -143,6 +143,160 @@ def test_page_budget_resumes_and_deduplicates_without_losing_references(tmp_path
     assert len(state["records"]) == 2
 
 
+def test_extended_range_preserves_old_checkpoints_and_exposes_unread_months(tmp_path):
+    from mdh_pipeline.history import START_DATE
+    assert START_DATE == date(2010, 1, 1)
+    collect_source(SOURCE, START, END, tmp_path, fetch=lambda *args: ([post()], 1, 1), delay=0, now=NOW)
+    path = tmp_path / "co-latino.json"
+    previous = json.loads(path.read_text())
+    collect_source(SOURCE, START_DATE, date(2026, 10, 10), tmp_path, max_pages=4,
+                   fetch=lambda *args: ([], 0, 0), delay=0, now=NOW)
+    state = json.loads(path.read_text())
+    assert state["records"] == previous["records"]
+    assert state["months"]["2025-03"] == previous["months"]["2025-03"]
+    document = export_archive(tmp_path, tmp_path / "public.json", START_DATE, date(2026, 10, 10), sources=[SOURCE])
+    assert document["coverage"]["start_date"] == "2010-01-01"
+    assert len(document["coverage"]["months"]) == 202
+    assert document["coverage"]["status"] == "partial"
+    months = {m["month"]: m for m in document["coverage"]["sources"][0]["months"]}
+    assert months["2010-01"]["status"] == "enumerated"
+    assert months["2010-01"]["source_total_posts"] == 0
+    assert months["2010-07"]["status"] == "not_started"
+    assert months["2010-07"]["source_total_posts"] is None
+    # The former March window started on the 26th; expansion cannot claim March 1–25 was read.
+    assert months["2025-03"]["status"] == "partial"
+
+
+def test_large_recent_months_leave_budget_for_backfill_and_resume(tmp_path):
+    calls = []
+    def fetch(source, first, last, page):
+        calls.append((first.strftime("%Y-%m"), page))
+        return [post(int(first.strftime("%Y%m")) * 1000 + page, published=first.isoformat() + "T12:00:00")], 1000, 100000
+    report = collect_source(SOURCE, date(2010, 1, 1), date(2026, 10, 10), tmp_path,
+                            max_pages=150, fetch=fetch, delay=0, now=NOW)
+    assert calls[:10] == [("2026-10", page) for page in range(1, 11)]
+    assert calls[10:20] == [("2026-09", page) for page in range(1, 11)]
+    assert calls[20:] == [("2010-01", page) for page in range(1, 131)]
+    assert report["requests"] == report["successful_pages"] == 150
+    assert report["failed_page_attempts"] == 0
+    calls.clear()
+    collect_source(SOURCE, date(2010, 1, 1), date(2026, 10, 10), tmp_path,
+                   max_pages=150, fetch=fetch, delay=0, now=NOW)
+    assert calls[0] == ("2026-10", 11)
+    assert calls[10] == ("2026-09", 11)
+    assert calls[20] == ("2010-01", 131)
+
+
+def test_small_budget_alternates_recent_months_without_starving_history(tmp_path):
+    calls = []
+    def fetch(source, first, last, page):
+        calls.append((first.strftime("%Y-%m"), page))
+        if first.year == 2026:
+            return [], 0, 0
+        return [post(page, published=first.isoformat() + "T12:00:00")], 3, 3
+    collect_source(SOURCE, date(2010, 1, 1), date(2026, 10, 10), tmp_path,
+                   max_pages=3, fetch=fetch, delay=0, now=NOW)
+    assert calls == [("2026-10", 1), ("2010-01", 1), ("2010-01", 2)]
+    calls.clear()
+    collect_source(SOURCE, date(2010, 1, 1), date(2026, 10, 10), tmp_path,
+                   max_pages=3, fetch=fetch, delay=0, now=NOW)
+    assert calls == [("2026-09", 1), ("2010-01", 3), ("2010-02", 1)]
+
+
+def test_failed_page_attempts_are_bounded_even_before_failure_circuit_opens(tmp_path):
+    calls = []
+    def fetch(*args):
+        calls.append(args)
+        raise requests.Timeout("withheld")
+    report = collect_source(SOURCE, date(2010, 1, 1), date(2026, 10, 10), tmp_path,
+                            max_pages=2, fetch=fetch, delay=0, now=NOW)
+    assert len(calls) == report["requests"] == report["failed_page_attempts"] == 2
+    assert report["successful_pages"] == 0
+
+
+def test_three_consecutive_source_failures_stop_without_attempting_all_historical_months(tmp_path):
+    calls = []
+    def fetch(*args):
+        calls.append(args)
+        raise requests.Timeout("withheld")
+    report = collect_source(SOURCE, date(2010, 1, 1), date(2026, 10, 10), tmp_path,
+                            max_pages=150, fetch=fetch, delay=0, now=NOW)
+    assert len(calls) == report["requests"] == report["failed_page_attempts"] == 3
+    assert report["successful_pages"] == 0
+    assert report["stopped_after_consecutive_failures"] is True
+    document = export_archive(tmp_path, tmp_path / "public.json", date(2010, 1, 1), date(2026, 10, 10), sources=[SOURCE])
+    months = document["coverage"]["sources"][0]["months"]
+    assert sum(m["status"] == "failed" for m in months) == 3
+    assert sum(m["status"] == "not_started" for m in months) == 199
+    assert document["coverage"]["status"] == "partial"
+
+
+def test_success_resets_consecutive_failure_counter(tmp_path):
+    calls = []
+    def fetch(*args):
+        calls.append(args)
+        if len(calls) == 2:
+            return [], 0, 0
+        raise requests.Timeout("withheld")
+    report = collect_source(SOURCE, date(2010, 1, 1), date(2026, 10, 10), tmp_path,
+                            max_pages=150, fetch=fetch, delay=0, now=NOW)
+    assert len(calls) == report["requests"] == 5
+    assert report["successful_pages"] == 1
+    assert report["failed_page_attempts"] == 4
+    assert report["stopped_after_consecutive_failures"] is True
+
+
+def test_failed_early_months_do_not_strand_later_history_and_are_retried_afterward(tmp_path):
+    calls = []
+    def fetch(source, first, last, page):
+        month = first.strftime("%Y-%m")
+        calls.append(month)
+        if month in ("2010-01", "2010-02", "2010-03"):
+            raise requests.Timeout("persistent historical gap")
+        return [], 0, 0
+    first = collect_source(SOURCE, date(2010, 1, 1), date(2010, 6, 30), tmp_path,
+                           max_pages=20, fetch=fetch, delay=0, now=NOW)
+    assert first["stopped_after_consecutive_failures"] is True
+    assert calls == ["2010-06", "2010-05", "2010-01", "2010-02", "2010-03"]
+    calls.clear()
+    second = collect_source(SOURCE, date(2010, 1, 1), date(2010, 6, 30), tmp_path,
+                            max_pages=20, fetch=fetch, delay=0, now=NOW)
+    assert calls == ["2010-06", "2010-05", "2010-04", "2010-01", "2010-02", "2010-03"]
+    state = json.loads((tmp_path / "co-latino.json").read_text())
+    assert state["months"]["2010-04"]["status"] == "enumerated"
+    assert all(state["months"][month]["status"] == "failed" for month in ("2010-01", "2010-02", "2010-03"))
+    assert second["successful_pages"] == 3
+
+
+def test_failure_rotation_eventually_retries_fourth_previously_failed_month(tmp_path):
+    from mdh_pipeline.history import SCREEN_VERSION
+    months = {
+        month: {"start_date": first.isoformat(), "end_date": last.isoformat(),
+                "status": "failed", "screen_version": SCREEN_VERSION,
+                "last_attempt_at": "2026-10-10T01:00:00+00:00", "next_page": 1,
+                "pages_fetched": 0, "posts_scanned": 0, "invalid_posts": 0}
+        for month, first, last in month_windows(date(2010, 1, 1), date(2010, 4, 30))
+    }
+    (tmp_path / "co-latino.json").write_text(json.dumps({"schema_version": 1, "source_id": SOURCE["id"], "records": [], "months": months}))
+    calls = []
+    def fetch(source, first, last, page):
+        month = first.strftime("%Y-%m")
+        calls.append(month)
+        if month in ("2010-01", "2010-02", "2010-03"):
+            raise requests.Timeout("still unavailable")
+        return [], 0, 0
+    collect_source(SOURCE, date(2010, 1, 1), date(2010, 6, 30), tmp_path,
+                   max_pages=20, fetch=fetch, delay=0, now="2026-10-10T02:00:00+00:00")
+    assert calls[-3:] == ["2010-01", "2010-02", "2010-03"]
+    assert "2010-04" not in calls
+    calls.clear()
+    collect_source(SOURCE, date(2010, 1, 1), date(2010, 6, 30), tmp_path,
+                   max_pages=20, fetch=fetch, delay=0, now="2026-10-10T03:00:00+00:00")
+    assert calls[2] == "2010-04"
+    state = json.loads((tmp_path / "co-latino.json").read_text())
+    assert state["months"]["2010-04"]["status"] == "enumerated"
+
+
 def test_source_failure_preserves_references_and_reports_partial_coverage(tmp_path):
     collect_source(SOURCE, START, END, tmp_path, fetch=lambda *args: ([post()], 1, 1), delay=0, now=NOW)
 
