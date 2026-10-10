@@ -65,7 +65,7 @@ export interface Catalog {
   records: Publication[];
 }
 
-const sourceHosts = new Set(['www.hrw.org', 'www.oas.org', 'www.amnesty.org', 'citizenlab.ca', 'www.corteidh.or.cr', 'spcommreports.ohchr.org', 'www.ohchr.org', 'www.diariocolatino.com', 'diariocolatino.com', 'gatoencerrado.news', 'www.revistafactum.com', 'revistafactum.com']);
+const sourceHosts = new Set(['www.hrw.org', 'www.oas.org', 'www.amnesty.org', 'citizenlab.ca', 'www.corteidh.or.cr', 'spcommreports.ohchr.org', 'www.ohchr.org', 'www.diariocolatino.com', 'diariocolatino.com', 'gatoencerrado.news', 'www.revistafactum.com', 'revistafactum.com', 'elfaro.net', 'www.elfaro.net', 'beta.elfaro.net', 'diario.elmundo.sv', 'www.laprensagrafica.com', 'laprensagrafica.com', 'historico.elsalvador.com', 'www.elsalvador.com', 'elsalvador.com']);
 export function safeSource(value: string): boolean {
   try {
     const url = new URL(value);

@@ -16,7 +16,7 @@ export interface NewsReference {
   scope_terms: string[];
   record_type: 'news_reference';
   topics: string[];
-  discovery: { method: string; endpoint: string; source_post_id: number; retrieved_at: string };
+  discovery: { method: 'wordpress_rest_title_screen' | 'html_article_metadata'; endpoint: string; source_post_id: number | null; retrieved_at: string };
 }
 export interface SourceMonth {
   month: string;
@@ -36,6 +36,7 @@ export interface ArchiveSource {
   first_published_date: string | null;
   last_published_date: string | null;
   months: SourceMonth[];
+  collection?: { method: 'html_article_metadata'; phase: string; access: 'public' | 'restricted'; notice: string; last_attempt_at: string | null };
 }
 export interface NewsArchiveData {
   schema_version: 1;
@@ -63,6 +64,14 @@ const month = (value: unknown): value is string => typeof value === 'string' && 
 const safeUrl = (value: unknown): value is string => typeof value === 'string' && safeSource(value);
 const strings = (value: unknown): value is string[] => Array.isArray(value) && value.every(text);
 const fail = (): never => { throw new Error('Archivo de noticias inválido o no compatible'); };
+const publisherHosts: Record<string, string[]> = {
+  'co-latino': ['www.diariocolatino.com', 'diariocolatino.com'],
+  gatoencerrado: ['gatoencerrado.news'], factum: ['www.revistafactum.com', 'revistafactum.com'],
+  'el-faro': ['elfaro.net', 'www.elfaro.net', 'beta.elfaro.net'],
+  'el-mundo': ['diario.elmundo.sv'], 'la-prensa-grafica': ['www.laprensagrafica.com', 'laprensagrafica.com'],
+  'el-diario-de-hoy': ['historico.elsalvador.com', 'www.elsalvador.com', 'elsalvador.com'],
+};
+const htmlPublishers = new Set(['el-faro', 'el-mundo', 'la-prensa-grafica', 'el-diario-de-hoy']);
 export const validArchiveDate = (value: unknown): value is string => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
 
 /** Validate the public metadata boundary before rendering any publisher links or counts. */
@@ -76,6 +85,8 @@ export function parseNewsArchive(value: unknown): NewsArchiveData {
   const sourceIds = new Set<string>();
   for (const source of coverage.sources) {
     if (!object(source) || !text(source.id) || sourceIds.has(source.id) || !text(source.publisher) || !safeUrl(source.endpoint) || !count(source.records) || !status(source.status) || !Array.isArray(source.months) || (source.first_published_date !== null && !validArchiveDate(source.first_published_date)) || (source.last_published_date !== null && !validArchiveDate(source.last_published_date))) fail();
+    if (!publisherHosts[source.id]?.includes(new URL(source.endpoint).hostname)) fail();
+    if (source.collection !== undefined && (!object(source.collection) || source.collection.method !== 'html_article_metadata' || !text(source.collection.phase) || !['public', 'restricted'].includes(source.collection.access) || !text(source.collection.notice) || (source.collection.last_attempt_at !== null && !instant(source.collection.last_attempt_at)))) fail();
     sourceIds.add(source.id);
     const sourceMonths = new Set<string>();
     for (const item of source.months) {
@@ -92,10 +103,13 @@ export function parseNewsArchive(value: unknown): NewsArchiveData {
   const ids = new Set<string>();
   const urls = new Set<string>();
   for (const reference of data.records) {
-    if (!object(reference) || !/^[a-f0-9]{64}$/.test(reference.id) || ids.has(reference.id) || !text(reference.title) || reference.title.length > 180 || typeof reference.title_truncated !== 'boolean' || !text(reference.publisher) || !sourceIds.has(reference.source_id) || !safeUrl(reference.source_url) || urls.has(reference.source_url) || !validArchiveDate(reference.published_date) || reference.published_date < coverage.start_date || reference.published_date > coverage.end_date || reference.review_status !== 'not_reviewed' || reference.jurisdiction_status !== 'not_reviewed' || reference.record_type !== 'news_reference' || !strings(reference.topics) || !reference.topics.length || !object(reference.discovery) || !text(reference.discovery.method) || !safeUrl(reference.discovery.endpoint) || !count(reference.discovery.source_post_id) || !instant(reference.discovery.retrieved_at)) fail();
+    if (!object(reference) || !/^[a-f0-9]{64}$/.test(reference.id) || ids.has(reference.id) || !text(reference.title) || reference.title.length > 180 || typeof reference.title_truncated !== 'boolean' || !text(reference.publisher) || !sourceIds.has(reference.source_id) || !safeUrl(reference.source_url) || urls.has(reference.source_url) || !validArchiveDate(reference.published_date) || reference.published_date < coverage.start_date || reference.published_date > coverage.end_date || reference.review_status !== 'not_reviewed' || reference.jurisdiction_status !== 'not_reviewed' || reference.record_type !== 'news_reference' || !strings(reference.topics) || !reference.topics.length || !object(reference.discovery) || !safeUrl(reference.discovery.endpoint) || !instant(reference.discovery.retrieved_at)) fail();
+    const htmlPublisher = htmlPublishers.has(reference.source_id);
+    if (reference.discovery.method !== (htmlPublisher ? 'html_article_metadata' : 'wordpress_rest_title_screen')) fail();
+    if (!(htmlPublisher && reference.discovery.source_post_id === null) && (!count(reference.discovery.source_post_id) || reference.discovery.source_post_id < 1)) fail();
     const source = coverage.sources.find(source => source.id === reference.source_id)!;
     if (!['el_salvador', 'international_context', 'undetermined'].includes(reference.scope_hint) || !strings(reference.scope_terms)) fail();
-    if (source.publisher !== reference.publisher || source.endpoint !== reference.discovery.endpoint || new URL(source.endpoint).hostname.replace(/^www\./, '') !== new URL(reference.source_url).hostname.replace(/^www\./, '')) fail();
+    if (source.publisher !== reference.publisher || source.endpoint !== reference.discovery.endpoint || !publisherHosts[source.id].includes(new URL(reference.source_url).hostname)) fail();
     ids.add(reference.id);
     urls.add(reference.source_url);
   }

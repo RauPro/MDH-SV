@@ -6,9 +6,21 @@ import fixture from '../__fixtures__/newsArchive.json';
 import catalog from '../__fixtures__/catalog.json';
 import { formatDate, parseCatalog } from '../catalog';
 import { NewsArchive } from './NewsArchive';
+import type { NewsArchiveData } from '../newsArchive';
 
 beforeEach(() => { vi.restoreAllMocks(); vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => fixture })); });
 const ready = async () => { render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>); await screen.findByText('3 noticias localizadas'); };
+it('discloses a registered but restricted publisher without inventing available news', async () => {
+  const archive = structuredClone(fixture) as unknown as NewsArchiveData;
+  archive.coverage.sources.push({ id: 'la-prensa-grafica', publisher: 'La Prensa Gráfica', endpoint: 'https://www.laprensagrafica.com/sitemap.xml', status: 'partial', records: 0, first_published_date: null, last_published_date: null, months: [], collection: { method: 'html_article_metadata', phase: 'restricted', access: 'restricted', notice: 'Pendiente de un canal autorizado.', last_attempt_at: null } });
+  vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => archive } as Response);
+  render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('3 noticias localizadas');
+  expect(screen.getByText(/Acceso automatizado restringido: La Prensa Gráfica/)).toBeInTheDocument();
+  await userEvent.click(screen.getByText('Ver cobertura por medio y mes'));
+  await userEvent.click(screen.getByText('La Prensa Gráfica · 0 referencias · Acceso restringido'));
+  expect(screen.getByText('Pendiente de un canal autorizado.')).toBeInTheDocument();
+});
 it('loads only public news, communicates review limits and exposes source/month coverage', async () => {
   await ready();
   expect(fetch).toHaveBeenCalledWith('/archive/news.json', expect.objectContaining({ signal: expect.any(AbortSignal) }));

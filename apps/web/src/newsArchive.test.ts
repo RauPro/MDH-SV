@@ -2,10 +2,40 @@ import { expect, it } from 'vitest';
 import fixture from './__fixtures__/newsArchive.json';
 import catalog from './__fixtures__/catalog.json';
 import currentArchive from '../public/archive/news.json';
-import { filterNews, invalidArchiveRange, parseNewsArchive, relatedPublications } from './newsArchive';
+import { filterNews, invalidArchiveRange, parseNewsArchive, relatedPublications, type NewsArchiveData } from './newsArchive';
 import { parseCatalog } from './catalog';
 
 const filters = { query: '', publisher: '', topic: '', from: '', to: '', scope: '' };
+function htmlArchiveFixture() {
+  const value = structuredClone(fixture) as unknown as NewsArchiveData;
+  const reference = value.records[0];
+  const previousId = reference.source_id;
+  const source = value.coverage.sources.find(item => item.id === previousId)!;
+  source.id = reference.source_id = 'el-diario-de-hoy';
+  source.publisher = reference.publisher = 'El Diario de Hoy (archivo)';
+  source.endpoint = reference.discovery.endpoint = 'https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml';
+  reference.source_url = 'https://historico.elsalvador.com/historico/123/detenciones.html';
+  reference.discovery.method = 'html_article_metadata';
+  reference.discovery.source_post_id = null;
+  for (const month of value.coverage.months) for (const item of month.sources) if (item.source_id === previousId) item.source_id = source.id;
+  return value;
+}
+it('accepts historical HTML metadata without pretending it has a WordPress id', () => {
+  const value = htmlArchiveFixture();
+  expect(parseNewsArchive(value).records).toHaveLength(3);
+  value.records[0].source_url = 'https://www.elsalvador.com/h-noticias/h-nacional/detenciones/123/2024/';
+  expect(parseNewsArchive(value).records).toHaveLength(3);
+  value.records[0].source_url = 'https://evil.elsalvador.com/detenciones';
+  expect(() => parseNewsArchive(value)).toThrow();
+});
+it('rejects invented discovery methods and untrusted source identities', () => {
+  const value = htmlArchiveFixture();
+  value.records[0].discovery.method = 'wordpress_rest_title_screen';
+  expect(() => parseNewsArchive(value)).toThrow();
+  const wp = structuredClone(fixture) as unknown as NewsArchiveData;
+  wp.records[0].discovery.source_post_id = null;
+  expect(() => parseNewsArchive(wp)).toThrow();
+});
 it('accepts the actual generated archive snapshot', () => {
   expect(parseNewsArchive(currentArchive).records).toHaveLength(currentArchive.records.length);
 });
