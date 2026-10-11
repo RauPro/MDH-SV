@@ -1,6 +1,8 @@
 import copy
+from datetime import datetime, timedelta, timezone
 import hashlib
 import json
+from types import SimpleNamespace
 
 import pytest
 import requests
@@ -11,6 +13,7 @@ from mdh_pipeline.gemini_draft import (
 )
 from mdh_pipeline.publication import Publication
 from mdh_pipeline.news_dossier import FIELD_NAMES, validate_news_dossier
+from mdh_pipeline.gemini_budget import QuotaDeferred, QuotaStateError
 
 API_KEY = "unit-test-key-not-a-real-secret"
 MODEL = "gemini-3.8-flash"
@@ -859,3 +862,186 @@ def test_article_identity_and_integrity_fail_before_network(modify):
     with pytest.raises(GeminiDraftError, match="invalid_article_metadata"):
         extract_draft(candidate, article, api_key=API_KEY, model=MODEL, request_session=session)
     assert session.calls == []
+
+
+class RequestBudget:
+    """Only quota decisions are synthetic; the real extractor/HTTP loop is used."""
+    def __init__(self, trace, decisions=()):
+        self.config = SimpleNamespace(model=MODEL)
+        self.now = datetime(2026, 10, 11, 14, tzinfo=timezone.utc)
+        self.trace, self.decisions = trace, list(decisions)
+        self.reserved_payloads = []
+        self.dispatch_error = None
+        self.cooldown_error = None
+        self.quota_wait_until = None
+
+    def clock(self):
+        return self.now
+
+    def reserve(self, payload):
+        self.trace.append("reserve")
+        self.reserved_payloads.append(copy.deepcopy(payload))
+        if self.quota_wait_until is not None and self.now < self.quota_wait_until:
+            raise QuotaDeferred("minute_budget_exhausted", self.quota_wait_until)
+        if self.decisions:
+            outcome = self.decisions.pop(0)
+            if isinstance(outcome, BaseException):
+                raise outcome
+        return object()
+
+    def assert_dispatch_allowed(self, reservation):
+        self.trace.append("assert_dispatch")
+        if self.dispatch_error:
+            raise self.dispatch_error
+
+    def record_429(self):
+        self.trace.append("record_429")
+        if self.cooldown_error:
+            raise self.cooldown_error
+        return self.now + timedelta(hours=12)
+
+    def sleep(self, seconds):
+        self.trace.append(("sleep", seconds))
+        self.now += timedelta(seconds=seconds)
+
+
+class BudgetedSession(Session):
+    def __init__(self, responses, trace):
+        super().__init__(responses)
+        self.trace = trace
+
+    def post(self, url, **kwargs):
+        self.trace.append("post")
+        return super().post(url, **kwargs)
+
+
+def budgeted_run(budget, session):
+    candidate, article = inputs()
+    return extract_draft(candidate, article, api_key=API_KEY, model=MODEL,
+                         request_session=session, budget=budget)
+
+
+def test_every_transient_http_and_timeout_retry_has_its_own_prior_quota_reservation(monkeypatch):
+    trace = []
+    budget = RequestBudget(trace)
+    session = BudgetedSession([Response(status=503), requests.Timeout("sensitive-provider-body"), response()], trace)
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", budget.sleep)
+    assert budgeted_run(budget, session)["status"] == "draft"
+    assert trace == ["reserve", "assert_dispatch", "post", ("sleep", 2),
+                     "reserve", "assert_dispatch", "post", ("sleep", 4),
+                     "reserve", "assert_dispatch", "post"]
+    assert len(budget.reserved_payloads) == len(session.calls) == 3
+    assert all(budget.reserved_payloads[i] == session.calls[i][1]["json"] for i in range(3))
+
+
+@pytest.mark.parametrize("reason", ["daily_budget_exhausted", "provider_cooldown",
+                                  "payload_exceeds_tpm", "run_budget_exhausted"])
+def test_non_minute_deferral_makes_no_post_and_does_not_wait(monkeypatch, reason):
+    trace = []
+    budget = RequestBudget(trace)
+    failure = QuotaDeferred(reason, budget.now + timedelta(hours=1))
+    budget.decisions = [failure]
+    session = BudgetedSession([], trace)
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", budget.sleep)
+    with pytest.raises(QuotaDeferred) as error:
+        budgeted_run(budget, session)
+    assert error.value is failure
+    assert trace == ["reserve"] and not session.calls
+
+
+def test_retry_after_timeout_stops_when_next_request_cannot_be_reserved(monkeypatch):
+    trace = []
+    budget = RequestBudget(trace)
+    budget.decisions = [None, QuotaDeferred("daily_budget_exhausted", budget.now + timedelta(hours=1))]
+    session = BudgetedSession([requests.Timeout("sensitive-request-error")], trace)
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", budget.sleep)
+    with pytest.raises(QuotaDeferred, match="daily_budget_exhausted"):
+        budgeted_run(budget, session)
+    assert len(session.calls) == 1
+    assert trace == ["reserve", "assert_dispatch", "post", ("sleep", 2), "reserve"]
+
+
+def test_budgeted_429_is_persisted_once_without_retries_or_provider_body(monkeypatch):
+    trace = []
+    budget = RequestBudget(trace)
+    quota_response = Response(status=429, raw=b"private-provider-details", headers={"Retry-After": "1"})
+    session = BudgetedSession([quota_response], trace)
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", budget.sleep)
+    with pytest.raises(QuotaDeferred, match="provider_cooldown") as error:
+        budgeted_run(budget, session)
+    assert trace == ["reserve", "assert_dispatch", "post", "record_429"]
+    assert quota_response.closed is True
+    assert "private-provider-details" not in str(error.value)
+    assert error.value.retry_at == budget.now + timedelta(hours=12)
+
+
+def test_429_cooldown_storage_failure_aborts_without_retry(monkeypatch):
+    trace = []
+    budget = RequestBudget(trace)
+    budget.cooldown_error = QuotaStateError("budget_cooldown_write_failed")
+    session = BudgetedSession([Response(status=429)], trace)
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", budget.sleep)
+    with pytest.raises(QuotaStateError, match="cooldown_write_failed"):
+        budgeted_run(budget, session)
+    assert trace == ["reserve", "assert_dispatch", "post", "record_429"]
+
+
+def test_reservation_storage_failure_or_expired_permit_never_posts():
+    trace = []
+    budget = RequestBudget(trace, [QuotaStateError("budget_reservation_write_failed")])
+    session = BudgetedSession([], trace)
+    with pytest.raises(QuotaStateError, match="reservation_write_failed"):
+        budgeted_run(budget, session)
+    assert trace == ["reserve"] and not session.calls
+    trace.clear()
+    budget.dispatch_error = QuotaDeferred("reservation_expired", budget.now + timedelta(seconds=1))
+    with pytest.raises(QuotaDeferred, match="reservation_expired"):
+        budgeted_run(budget, session)
+    assert trace == ["reserve", "assert_dispatch"] and not session.calls
+
+
+def test_minute_budget_wait_is_split_into_bounded_sleeps_then_reserved(monkeypatch):
+    trace = []
+    budget = RequestBudget(trace)
+    budget.quota_wait_until = budget.now + timedelta(seconds=120)
+    session = BudgetedSession([response()], trace)
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", budget.sleep)
+    assert budgeted_run(budget, session)["status"] == "draft"
+    assert trace == ["reserve", ("sleep", 60), "reserve", ("sleep", 60),
+                     "reserve", "assert_dispatch", "post"]
+
+
+def test_competing_minute_reservations_cannot_cause_unbounded_wait(monkeypatch):
+    trace = []
+    budget = RequestBudget(trace)
+    budget.quota_wait_until = budget.now + timedelta(seconds=180)
+    session = BudgetedSession([], trace)
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", budget.sleep)
+    with pytest.raises(QuotaDeferred, match="minute_budget_exhausted"):
+        budgeted_run(budget, session)
+    waits = [event[1] for event in trace if isinstance(event, tuple)]
+    assert all(delay <= 60 for delay in waits) and sum(waits) <= 125
+    assert not session.calls
+
+
+def test_minute_wait_and_http_backoffs_share_total_wait_bound(monkeypatch):
+    trace = []
+    budget = RequestBudget(trace)
+    budget.quota_wait_until = budget.now + timedelta(seconds=120)
+    session = BudgetedSession([Response(status=503, headers={"Retry-After": "15"})], trace)
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", budget.sleep)
+    with pytest.raises(GeminiDraftError, match="provider_http_error"):
+        budgeted_run(budget, session)
+    waits = [event[1] for event in trace if isinstance(event, tuple)]
+    assert waits == [60, 60]
+    assert len(session.calls) == 1
+
+
+def test_mismatching_budget_model_stops_before_reservation_or_http():
+    trace = []
+    budget = RequestBudget(trace)
+    budget.config.model = "gemini-3.5-flash-lite"
+    session = BudgetedSession([], trace)
+    with pytest.raises(QuotaStateError, match="budget_model_mismatch"):
+        budgeted_run(budget, session)
+    assert trace == [] and not session.calls

@@ -7,8 +7,20 @@ on:
       batch_size:
         description: Máximo de noticias por lote (1 a 50)
         type: number
-        default: 20
+        default: 50
         required: true
+      scheduled_hour:
+        description: Hora UTC solicitada por el planificador (YYYY-MM-DDTHH:00:00Z; vacía para manual)
+        type: string
+        required: false
+      trigger_source:
+        description: Origen del disparo; todos comparten una única ejecución por hora UTC
+        type: choice
+        options:
+          - manual
+          - vercel_cron
+        default: manual
+        required: false
       retry_failed:
         description: Reintentar errores pendientes aunque hayan agotado los intentos ordinarios
         type: boolean
@@ -56,15 +68,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 25 --include-international
+        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 50 --include-international
       - name: Preparar fichas de noticia y migrar borradores previos sin publicarlos
         env:
           GH_TOKEN: ${{ github.token }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           MDH_CODE_REF: MDH_PUBLIC_CODE_REF
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
-          MDH_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.batch_size) || '20' }}
+          MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
+          MDH_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.batch_size) || '50' }}
           MDH_RETRY_FAILED: ${{ inputs.retry_failed || false }}
+          MDH_SCHEDULED_HOUR: ${{ inputs.scheduled_hour || '' }}
+          MDH_TRIGGER_SOURCE: ${{ inputs.trigger_source || 'manual' }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: |
           args=(--archive bibliography/apps/web/public/archive/news.json --limit "$MDH_BATCH_SIZE")

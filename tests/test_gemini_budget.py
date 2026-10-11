@@ -417,3 +417,29 @@ def test_dispatch_with_backwards_clock_fails_closed():
     clock.advance(-1)
     with pytest.raises(QuotaStateError, match="clock_moved_backwards"):
         budget.assert_dispatch_allowed(reservation)
+
+
+def test_per_run_allocation_caps_http_retries_as_separate_requests():
+    budget, inbox, clock = ready()
+    budget.set_request_limit(2)
+    budget.reserve(PAYLOAD)
+    budget.reserve(PAYLOAD)
+    before = len(inbox.writes)
+    with pytest.raises(QuotaDeferred, match="run_budget_exhausted") as error:
+        budget.reserve(PAYLOAD)
+    assert error.value.retry_at == clock.now.replace(minute=0, second=0) + timedelta(hours=1)
+    assert budget.requests_this_run == 2 and inbox.document()["used_requests"] == 2
+    assert len(inbox.writes) == before
+    assert set(budget.snapshot()) == {"day", "used_requests", "remaining_requests", "cooldown_until"}
+
+
+def test_per_run_allocation_cannot_reset_or_expand_budget():
+    budget, _, _ = ready()
+    budget.set_request_limit(2)
+    budget.reserve(PAYLOAD)
+    budget.set_request_limit(2)
+    assert budget.requests_this_run == 1
+    with pytest.raises(QuotaStateError, match="already_allocated"):
+        budget.set_request_limit(3)
+    with pytest.raises(QuotaStateError, match="ceiling"):
+        budget.set_request_limit(51)

@@ -9,8 +9,10 @@ import json
 import os
 import re
 import time
+import math
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from .review_queue import GitHubInbox, canonical_url
 
@@ -320,7 +322,7 @@ def safe_validation_issues(error):
     return result
 
 def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seconds=4,
-                  retry_failed=False, archive=None, fetch=None, extract=None, now=None, sleep=time.sleep):
+                  retry_failed=False, archive=None, fetch=None, extract=None, now=None, sleep=time.sleep, budget=None):
     if not api_key or not isinstance(model, str) or not re.fullmatch(r"gemini-[a-zA-Z0-9.-]+", model):
         raise ValueError("missing_or_invalid_gemini_configuration")
     if not 1 <= limit <= 50 or not 1 <= max_attempts <= 5 or not 0 <= pause_seconds <= 60:
@@ -340,6 +342,30 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
               "scope_review": 0, "privacy_review": 0, "errors": 0, "skipped_existing": 0,
               "deferred": 0, "invalid_metadata": 0, "migrated": 0, "news_dossiers": 0,
               "partial_dossiers": 0, "privacy_reprocessed": 0, "stopped_reason": None, "publications": 0}
+    if budget is not None:
+        snapshot = budget.snapshot()
+        # Reserve a fair share for later arrivals instead of exhausting the
+        # whole free daily allowance during the first backlog batches.
+        pacific = now.astimezone(ZoneInfo("America/Los_Angeles"))
+        reset_local = (pacific + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+        remaining_hours = max(1, math.ceil((reset_local.astimezone(timezone.utc) - now).total_seconds() / 3600))
+        hourly_allowance = math.ceil(snapshot["remaining_requests"] / remaining_hours)
+        limit = min(limit, budget.config.batch_ceiling, snapshot["remaining_requests"], hourly_allowance)
+        report["effective_limit"] = limit
+        report["remaining_hourly_slots"] = remaining_hours
+        report["budget"] = snapshot
+        if snapshot["cooldown_until"] is not None:
+            report.update(stopped_reason="budget_deferred", quota_reason="provider_cooldown",
+                          quota_retry_at=snapshot["cooldown_until"], github_write_calls=0,
+                          offline_candidates=0, http_requests=0)
+            return report
+        if limit == 0:
+            report.update(stopped_reason="budget_deferred", quota_reason="daily_budget_exhausted",
+                          github_write_calls=0, offline_candidates=0, http_requests=0)
+            return report
+        # This is an HTTP-attempt allowance, not merely a successful-news cap:
+        # retries and timeouts must consume the same hour's share.
+        budget.set_request_limit(limit)
     ensure_ai_labels(inbox)
     candidates = []
     for issue in pending_issues(inbox):
@@ -528,13 +554,31 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             # Each destination uses its own client: GitHub auth never reaches a publisher or Google.
             article = fetch(metadata)
             stage = "model"
-            document = extract(candidate, article, api_key=api_key, model=model)
+            kwargs = {"api_key": api_key, "model": model}
+            if budget is not None:
+                kwargs["budget"] = budget
+            document = extract(candidate, article, **kwargs)
             validate_envelope(document, candidate)
             if not complete_document(document):
                 raise ValueError("incomplete_news_dossier")
             if privacy_reprocessing and document.get("extraction", {}).get("privacy_policy_version") != PRIVACY_POLICY_VERSION:
                 raise ValueError("outdated_privacy_policy")
         except Exception as error:
+            if budget is not None:
+                from .gemini_budget import QuotaDeferred, QuotaStateError
+                if isinstance(error, QuotaDeferred):
+                    # Exhausted scheduling capacity is not a failed news item.
+                    # Retain any former draft and its candidate retry state.
+                    report["attempted"] -= 1
+                    report["deferred"] += 1
+                    report["stopped_reason"] = "budget_deferred"
+                    report["quota_reason"] = error.reason
+                    report["quota_retry_at"] = error.retry_at.isoformat()
+                    break
+                if isinstance(error, QuotaStateError):
+                    # A missing/corrupt/racing budget must never be downgraded
+                    # to an ordinary candidate failure or another model attempt.
+                    raise
             code, stop = error_category(error)
             if not current_pending(issue, candidate):
                 report["deferred"] += 1
@@ -589,33 +633,79 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         report[{"draft": "drafts", "needs_scope_review": "scope_review", "needs_privacy_review": "privacy_review"}[document["status"]]] += 1
     report["github_write_calls"] = inbox.write_calls
     report["offline_candidates"] = len(offline_candidates)
+    if budget is not None:
+        report["budget"] = budget.snapshot()
+        report["http_requests"] = budget.requests_this_run
     return report
+
+
+def failed_report(report):
+    return (report["stopped_reason"] not in (None, "budget_deferred")
+            or bool(report["attempted"] and report["errors"] == report["attempted"]))
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path)
-    parser.add_argument("--limit", type=int, default=20)
+    parser.add_argument("--limit", type=int, default=50)
     parser.add_argument("--retry-failed", action="store_true")
     args = parser.parse_args()
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         raise SystemExit("GEMINI_API_KEY secret is not configured; no extraction attempted.")
+    claim = None
+    slots = None
     try:
+        from .gemini_budget import BudgetConfig, GeminiBudget, QuotaStateError
+        from .hourly_slot import HourlySlots
+        raw_config = os.environ.get("MDH_GEMINI_BUDGET_CONFIG")
+        if not raw_config:
+            raise QuotaStateError("gemini_budget_configuration_required")
+        config = BudgetConfig(**json.loads(raw_config))
+        model = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
+        if model != config.model:
+            raise QuotaStateError("gemini_budget_model_mismatch")
+        if not 1 <= args.limit <= 50:
+            raise QuotaStateError("invalid_requested_batch_size")
         inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
+        budget = GeminiBudget(inbox, config)
+        budget.snapshot()  # Missing budget state fails closed before claiming work.
+        slots = HourlySlots(inbox)
+        source = ("github_schedule" if os.environ.get("GITHUB_EVENT_NAME") == "schedule"
+                  else os.environ.get("MDH_TRIGGER_SOURCE") or "manual")
+        claim = slots.claim(run_id=os.environ.get("GITHUB_RUN_ID", ""), trigger_source=source,
+                            requested_hour=os.environ.get("MDH_SCHEDULED_HOUR") or None)
+        if claim is None:
+            print(json.dumps({"status": "hour_already_claimed", "attempted": 0, "publications": 0}))
+            return
         archive = json.loads(args.archive.read_text()) if args.archive else None
-        report = process_queue(inbox, api_key=key, model=os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite"),
-                               limit=args.limit, retry_failed=args.retry_failed, archive=archive)
+        report = process_queue(inbox, api_key=key, model=model, budget=budget,
+                               limit=min(args.limit, config.batch_ceiling), retry_failed=args.retry_failed, archive=archive)
+        status = ("failed" if failed_report(report) else
+                  "deferred" if report["stopped_reason"] == "budget_deferred" else "completed")
+        slots.finish(claim, status=status,
+                     counts={name: report[name] for name in ("attempted", "news_dossiers", "errors", "migrated", "http_requests")})
+        report["hourly_slot"] = claim["hour"]
     except Exception as error:
+        if claim is not None and slots is not None:
+            try:
+                slots.finish(claim, status="failed")
+            except Exception:
+                pass  # An unfinished claim still prevents duplicate work this hour.
         # Do not print traceback chains from private metadata or third-party libraries.
-        print(json.dumps({"status": "failed", "error_type": type(error).__name__, "publications": 0}))
+        failure = {"status": "failed", "error_type": type(error).__name__, "publications": 0}
+        if not os.environ.get("MDH_GEMINI_BUDGET_CONFIG"):
+            failure["error_code"] = "gemini_budget_configuration_required"
+        elif type(error).__name__ in {"QuotaStateError", "HourlySlotError"} and re.fullmatch(r"[a-z][a-z0-9_]{0,80}", str(error)):
+            failure["error_code"] = str(error)
+        print(json.dumps(failure))
         raise SystemExit(1) from None
     serialized = json.dumps(report, ensure_ascii=False, indent=2)
     print(serialized)
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as stream:
             stream.write("## Extracción privada con Gemini\n\n```json\n" + serialized + "\n```\n\nNo se publicaron fichas. Revise Issues y drafts/ en este repositorio privado.\n")
-    if report["stopped_reason"] or (report["attempted"] and report["errors"] == report["attempted"]):
+    if failed_report(report):
         raise SystemExit(1)
 
 

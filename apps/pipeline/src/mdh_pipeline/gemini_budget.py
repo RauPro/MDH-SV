@@ -205,6 +205,20 @@ class GeminiBudget:
     def __init__(self, inbox, config: BudgetConfig, *, clock=utcnow):
         self.inbox, self.config, self.clock = inbox, config, clock
         self.path = inbox.base + "/contents/" + STATE_PATH
+        self.request_limit = None
+        self.requests_this_run = 0
+
+    def set_request_limit(self, limit):
+        """Cap actual request reservations in this run, including HTTP retries.
+
+        The runner supplies its hourly allocation after claiming its UTC slot.
+        Setting the same limit again is harmless; changing it cannot reset or
+        expand an already allocated run budget.
+        """
+        self.config.validate_batch(limit)
+        if self.request_limit is not None and self.request_limit != limit:
+            raise QuotaStateError("run_budget_already_allocated")
+        self.request_limit = limit
 
     def _read(self):
         try:
@@ -276,6 +290,9 @@ class GeminiBudget:
 
     def reserve(self, payload):
         tokens = estimate_input_tokens(payload)
+        if self.request_limit is not None and self.requests_this_run >= self.request_limit:
+            now = _utc(self.clock())
+            raise QuotaDeferred("run_budget_exhausted", now.replace(minute=0, second=0, microsecond=0) + timedelta(hours=1))
         for _ in range(MAX_CAS_ATTEMPTS):
             state, sha = self._read()
             now = _utc(self.clock())
@@ -306,6 +323,7 @@ class GeminiBudget:
                 if isinstance(error, QuotaStateError):
                     raise
                 raise QuotaStateError("budget_reservation_write_failed") from None
+            self.requests_this_run += 1
             reservation = Reservation(now, state["day"], state["used_requests"], tokens,
                 min(now + timedelta(seconds=DISPATCH_LIFETIME_SECONDS), next_pacific_midnight(now)))
             self.assert_dispatch_allowed(reservation)
