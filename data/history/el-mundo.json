@@ -24,12 +24,12 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 3,
-      "pages_fetched": 3,
+      "posts_scanned": 4,
+      "pages_fetched": 4,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-10T18:51:40.454311+00:00",
+      "last_attempt_at": "2026-10-11T06:23:56.793447+00:00",
       "error": null
     }
   },
@@ -106,6 +106,32 @@
       }
     },
     {
+      "id": "85df1492b123ae82197f538f8cea3288d8f2b13f5f726bbb8d0d13b2fa453368",
+      "title": "Bukele asistiría a inauguración de megacárcel en Costa Rica",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/politica/bukele-asistiria-a-inauguracion-de-megacarcel-en-costa-rica",
+      "published_date": "2026-10-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "costa rica"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-11T06:23:56.793447+00:00"
+      }
+    },
+    {
       "id": "24239b9320bfa3f8461ba8045276efab869b57a41cc56b1ba8d0260f8dfd95ec",
       "title": "Más del 30 % de salvadoreños aprueba tortura y ejecuciones extrajudiciales",
       "title_truncated": false,
@@ -160,7 +186,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-10T22:01:25.074778+00:00",
+    "last_attempt_at": "2026-10-11T06:23:56.793447+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -171,9 +197,10 @@
       "https://diario.elmundo.sv/nacionales/mas-del-30-de-salvadorenos-aprueba-tortura-y-ejecuciones-extrajudiciales",
       "https://diario.elmundo.sv/nacionales/capturan-en-morazan-sur-a-presunto-miembro-de-la-ms-13-con-tres-ordenes-judiciales-por-homicidio",
       "https://diario.elmundo.sv/nacionales/capturan-en-morazan-sur-a-presunto-miembro-de-la-ms-13-con-orden-judicial-por-homicidio",
-      "https://diario.elmundo.sv/nacionales/instalan-juicio-contra-exalcaldesa-de-soyapango-nercy-montano-por-despidos-de-trabajadores-municipales"
+      "https://diario.elmundo.sv/nacionales/instalan-juicio-contra-exalcaldesa-de-soyapango-nercy-montano-por-despidos-de-trabajadores-municipales",
+      "https://diario.elmundo.sv/politica/bukele-asistiria-a-inauguracion-de-megacarcel-en-costa-rica"
     ],
-    "article_cursor": 5,
+    "article_cursor": 6,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -204,6 +231,12 @@
         "published_date": "2026-10-10",
         "last_attempt_at": "2026-10-10T18:51:40.454311+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/politica/bukele-asistiria-a-inauguracion-de-megacarcel-en-costa-rica": {
+        "status": "selected",
+        "published_date": "2026-10-07",
+        "last_attempt_at": "2026-10-11T06:23:56.793447+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -212,19 +245,19 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
+        "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-10T22:01:25.074778+00:00"
+        "article_urls_selected": 4,
+        "last_attempt_at": "2026-10-11T06:23:56.793447+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 0,
+        "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
-        "article_urls_selected": 0,
-        "last_attempt_at": "2026-10-10T22:01:25.074778+00:00"
+        "article_urls_selected": 1,
+        "last_attempt_at": "2026-10-11T06:23:56.793447+00:00"
       }
     },
     "index_screen_version": 3
