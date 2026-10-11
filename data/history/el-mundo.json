@@ -24,16 +24,39 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 4,
-      "pages_fetched": 4,
+      "posts_scanned": 5,
+      "pages_fetched": 5,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-11T06:23:56.793447+00:00",
+      "last_attempt_at": "2026-10-11T22:26:01.940627+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "ffff4e66141145a3ebcc8ad914d58a2c1077dae6ccc47ef88853dff29ea6336a",
+      "title": "Mujer es condenada a 30 años de prisión por asfixiar a su hijo recién nacido en La Unión",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/mujer-es-condenada-a-30-anos-de-prision-por-asfixiar-a-su-hijo-recien-nacido-en-la-union",
+      "published_date": "2026-10-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-11T22:26:01.940627+00:00"
+      }
+    },
     {
       "id": "bd5ac9f33c0518e5dc89c1aa3f2c25dbe4aba4bc6f2e6ab5fd54368c3b238d49",
       "title": "Capturan en Morazán Sur a presunto miembro de la MS-13 con tres órdenes judiciales por homicidio",
@@ -186,7 +209,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-11T13:28:34.933643+00:00",
+    "last_attempt_at": "2026-10-11T22:26:01.940627+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -198,9 +221,10 @@
       "https://diario.elmundo.sv/nacionales/capturan-en-morazan-sur-a-presunto-miembro-de-la-ms-13-con-tres-ordenes-judiciales-por-homicidio",
       "https://diario.elmundo.sv/nacionales/capturan-en-morazan-sur-a-presunto-miembro-de-la-ms-13-con-orden-judicial-por-homicidio",
       "https://diario.elmundo.sv/nacionales/instalan-juicio-contra-exalcaldesa-de-soyapango-nercy-montano-por-despidos-de-trabajadores-municipales",
-      "https://diario.elmundo.sv/politica/bukele-asistiria-a-inauguracion-de-megacarcel-en-costa-rica"
+      "https://diario.elmundo.sv/politica/bukele-asistiria-a-inauguracion-de-megacarcel-en-costa-rica",
+      "https://diario.elmundo.sv/nacionales/mujer-es-condenada-a-30-anos-de-prision-por-asfixiar-a-su-hijo-recien-nacido-en-la-union"
     ],
-    "article_cursor": 6,
+    "article_cursor": 7,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -237,6 +261,12 @@
         "published_date": "2026-10-07",
         "last_attempt_at": "2026-10-11T06:23:56.793447+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/mujer-es-condenada-a-30-anos-de-prision-por-asfixiar-a-su-hijo-recien-nacido-en-la-union": {
+        "status": "selected",
+        "published_date": "2026-10-11",
+        "last_attempt_at": "2026-10-11T22:26:01.940627+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -245,10 +275,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 4,
+        "article_urls_matching_anchor": 2,
         "article_urls_observed": 20,
-        "article_urls_selected": 4,
-        "last_attempt_at": "2026-10-11T13:28:34.933643+00:00"
+        "article_urls_selected": 2,
+        "last_attempt_at": "2026-10-11T22:26:01.940627+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -257,7 +287,7 @@
         "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
         "article_urls_selected": 1,
-        "last_attempt_at": "2026-10-11T13:28:34.933643+00:00"
+        "last_attempt_at": "2026-10-11T22:26:01.940627+00:00"
       }
     },
     "index_screen_version": 3
