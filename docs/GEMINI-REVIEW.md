@@ -12,13 +12,20 @@ al modelo cuando una persona consulta el monitor.
 - Variable de Actions: `GEMINI_MODEL=gemini-3.5-flash-lite`. La prueba de integración
   del 10/10/2026 mostró que Google rechazaba `gemini-2.5-flash` para esta cuenta
   aunque apareciera en el listado. Se seleccionó Flash Lite después de comprobar su disponibilidad y menor latencia para la extracción por lotes.
-- Workflow: **Preparar fichas con Gemini**, programado cada hora al minuto 23 UTC
-  (también al minuto 23 de cada hora en El Salvador). GitHub puede retrasar un job.
-- Cada ejecución recoge RSS, incorpora hasta 25 referencias antiguas a la cola
-  y procesa hasta 20 noticias con Gemini. La ejecución manual admite de 1 a 50.
-- Se reservan los primeros cinco intentos disponibles para noticias RSS nuevas;
+- Planificador principal preparado: Vercel Cron, cada hora al minuto 07 UTC
+  (también al minuto 07 en El Salvador), que solicita el workflow privado
+  **Preparar fichas con Gemini**. Su activación requiere instalar la GitHub App
+  y configurar sus credenciales según [el procedimiento operativo](HOURLY-INGESTION.md).
+  El cron de GitHub al minuto 23 permanece como respaldo. Ambos servicios pueden
+  retrasarse; un HTTP 202 sólo acredita que GitHub aceptó la solicitud.
+- Cada ejecución recoge RSS e incorpora hasta 50 referencias antiguas a la cola.
+  El máximo solicitado es 50 noticias; el límite efectivo se reduce según la
+  cuota verificada y las horas que faltan hasta su reinicio. Cada solicitud HTTP,
+  incluso un reintento, consume ese presupuesto. Todos los disparos comparten
+  una sola ejecución por hora UTC, registrada en el repositorio privado.
+- Se reservan hasta cinco intentos disponibles para noticias RSS nuevas;
   después se procesa el backlog priorizando indicios de El Salvador. Las
-  todos los ámbitos territoriales entran en el ingreso histórico ordinario, con
+  referencias de todos los ámbitos territoriales entran en el ingreso histórico ordinario, con
   turnos para referencias salvadoreñas, indeterminadas e internacionales. No se promete una fecha de finalización: depende de cuotas, fuentes,
   revisiones pendientes y disponibilidad de los servicios.
 
@@ -77,7 +84,9 @@ si existe una ficha. El modelo no aprueba ni publica noticias o casos.
 | `ai/error` | Revisar código de error y fuente. La estructura pendiente no inventa datos ni afirma una extracción terminada. |
 
 Las respuestas tienen un máximo de 4.096 tokens y 192 KiB. El cliente limita
-reintentos de red, 429 y 5xx a tres; el lote se detiene ante cuota, autenticación o configuración
+los intentos de red y 5xx a tres, reservando cuota antes de cada llamada. Un 429
+detiene las llamadas hasta el siguiente día del Pacífico, sin reintento inmediato.
+El lote se detiene ante cuota, autenticación o configuración
 inválida del proveedor. Los fallos ordinarios se reintentan con espera y un máximo de tres
 intentos por candidata. `retry_failed` en la ejecución manual permite intentar
 otra vez tras corregir la causa. No regenera fichas ya procesadas con el contrato actual. Los borradores anteriores
@@ -118,7 +127,7 @@ llama al importador.
 Referencias: [salidas estructuradas de Gemini](https://ai.google.dev/gemini-api/docs/structured-output)
 y [límites de la API](https://ai.google.dev/gemini-api/docs/rate-limits).
 
-El protocolo de [fichas para todas las noticias](NEWS-DOSSIERS.md) describe los estados y la importación con `--kind news_dossier`. El horario configurado debe comprobarse en Actions con el evento `schedule`; las ejecuciones manuales no demuestran que el disparo automático esté funcionando.
+El protocolo de [fichas para todas las noticias](NEWS-DOSSIERS.md) describe los estados y la importación con `--kind news_dossier`. El horario debe comprobarse con las invocaciones Cron de Vercel y `runtime/gemini-hourly.json`; una ejecución manual no demuestra que el disparo automático funcione. El respaldo de GitHub se identifica por el evento `schedule`.
 
 ## Privacidad por campo y recuperación de fichas anteriores
 
@@ -131,7 +140,7 @@ La proyección geográfica sólo puede aprovechar departamentos y municipios seg
 el resto de la ficha continúa privado.
 
 Los borradores antiguos que tienen las 18 casillas protegidas se reextraen
-progresivamente, con hasta 5 de los 20 intentos de cada lote (2 de un lote de 10).
+progresivamente, con hasta 5 intentos de cada lote (2 de un lote de 10).
 Se mantiene una reserva independiente para noticias nuevas. No aumenta el máximo
 total de llamadas. Las decisiones humanas se respetan, las versiones anteriores
 permanecen en Git y los errores conservan un presupuesto y espera de reintento

@@ -7,6 +7,9 @@
   "functions": {
     "api/**/*.mjs": { "includeFiles": "apps/web/public/**/*.json", "maxDuration": 15 }
   },
+  "crons": [
+    { "path": "/api/internal/hourly-ingestion", "schedule": "7 * * * *" }
+  ],
   "rewrites": [
     { "source": "/mcp", "destination": "/api/mcp" },
     { "source": "/api/v1/openapi.json", "destination": "/api/v1/openapi" }

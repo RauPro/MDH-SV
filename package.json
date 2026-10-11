@@ -8,7 +8,8 @@
   "scripts": {
     "build": "npm --prefix apps/web run build",
     "test": "npm run test:api && npm --prefix apps/web test",
-    "test:api": "node --test --test-timeout=15000 tests/public-api.test.mjs",
+    "test:api": "node --test --test-timeout=15000 tests/public-api.test.mjs tests/hourly-dispatch.test.mjs",
+    "test:scheduler": "node --test --test-timeout=15000 tests/hourly-dispatch.test.mjs",
     "dev:api": "node server/dev.mjs",
     "dev": "npm --prefix apps/web run dev"
   },
