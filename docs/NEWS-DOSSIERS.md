@@ -40,7 +40,7 @@ Los límites de lote, cuotas, restricciones de fuentes y reintentos siguen vigen
 
 Cada borrador privado guarda `news_dossier`. Puede conservar además `record` como
 propuesta opcional de caso; ese formato mantiene sus requisitos más estrictos.
-Los problemas de privacidad producen campos protegidos, no una ficha inexistente.
+La privacidad se aplica por campo: conserva descripciones anónimas, fechas y geografía administrativa respaldada, y protege identidades sensibles, contactos, domicilios o datos clínicos. Una alerta no vacía las 18 casillas.
 Los errores de lectura o del proveedor dejan una estructura pendiente y su
 diagnóstico, sin afirmar que la extracción haya terminado.
 

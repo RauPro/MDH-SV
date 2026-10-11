@@ -68,6 +68,20 @@ def test_only_minimal_department_and_provenance_cross_the_public_boundary():
     assert validate_collection(document, archive={"schema_version": 1, "records": [reference]}) == document
 
 
+def test_previous_v1_locations_are_revalidated_once_before_becoming_v2_cache():
+    reference, draft, article = sample()
+    old, _ = project(draft, reference, article)
+    old["schema_version"] = 1
+    checked = []
+    current, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
+        previous=old, fetch=lambda row: checked.append(row["id"]) or article, now=NOW)
+    assert checked == [reference["id"]]
+    assert current["schema_version"] == 2 and stats["cached"] == 0
+    unchanged, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
+        previous=current, fetch=forbidden_fetch, now=NOW)
+    assert unchanged == current and stats["cached"] == 1
+
+
 @pytest.mark.parametrize("department,paragraph", [
     ("Cabañas", "El informe cita el DEPARTAMENTO DE CABANAS en un análisis."),
     ("La Paz", "En el departamento   de\nLa\t Paz la fuente presenta cifras."),
@@ -107,7 +121,6 @@ def test_place_homonyms_and_nonexplicit_geography_are_never_projected(paragraph)
     lambda d: d["news_dossier"]["fields"]["department"].update(value="Quetzaltenango"),
     lambda d: d["news_dossier"]["fields"]["department"].update(value=None, status="pending", evidence_refs=[]),
     lambda d: d["news_dossier"]["fields"]["department"].update(value=None, status="not_applicable", evidence_refs=[], note="No corresponde este campo."),
-    lambda d: d["news_dossier"]["fields"]["affected_persons"].update(value=None, status="withheld", evidence_refs=[], note="Información privada protegida."),
     lambda d: d["news_dossier"]["fields"]["department"].update(evidence_refs=["primary"]),
     lambda d: d["news_dossier"]["evidence"][1].update(locator="No se conserva el hash del párrafo."),
     lambda d: d["extraction"].update(provider="none"),

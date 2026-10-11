@@ -68,6 +68,7 @@ class PrivateInbox:
         self.session = SimpleNamespace(headers={"Authorization": "Bearer github-token-never-forward"})
         self.issue_read_hook = None
         self.fail_processing_write = False
+        self.fail_draft_write = False
         self.tree_response = None
         for number, item in enumerate(candidates, 1):
             self.issues[number] = {"number": number, "state": "open", "body": issue_body(item),
@@ -124,6 +125,9 @@ class PrivateInbox:
             if folder == "processing" and self.fail_processing_write:
                 self.fail_processing_write = False
                 raise RuntimeError("simulated GitHub interruption after draft persistence")
+            if folder == "drafts" and self.fail_draft_write:
+                self.fail_draft_write = False
+                raise RuntimeError("simulated GitHub interruption before draft persistence")
             previous = self.files.get(path)
             if previous:
                 assert kwargs["json"].get("sha") == previous["sha"], "Update must be revision guarded"
@@ -311,6 +315,10 @@ def test_completed_first_five_rss_do_not_starve_the_next_rss_behind_historical_b
     lambda state: state.update(attempts=-1),
     lambda state: state.update(next_retry_at="not-a-date"),
     lambda state: state.update(next_retry_at="2026-10-11T00:00:00"),
+    lambda state: state.update(privacy_reprocessing_version=2),
+    lambda state: state.update(privacy_reprocessing_version=2, privacy_reprocessing_attempts=True),
+    lambda state: state.update(privacy_reprocessing_version=2, privacy_reprocessing_attempts=-1),
+    lambda state: state.update(privacy_reprocessing_version=1, privacy_reprocessing_attempts=0),
 ])
 def test_mismatched_or_malformed_processing_state_is_rejected_before_ai(change):
     item = candidate(); inbox = PrivateInbox([item]); workers = Extractors()
@@ -549,7 +557,7 @@ def test_unmarked_completed_dossier_repairs_share_offline_budget_and_resume():
         assert report["offline_candidates"] == 1
         assert report["attempted"] == 0
         assert report["deferred"] == 3 - count
-        assert sum("<!-- mdh-news-dossier:v1:" in issue["body"] for issue in inbox.issues.values()) == count
+        assert sum("<!-- mdh-news-dossier:v2:" in issue["body"] for issue in inbox.issues.values()) == count
     assert not workers.model_calls and not workers.fetch_calls
     assert not [path for method, path, _ in inbox.calls if method == "PUT" and "/drafts/" in path]
 
@@ -647,3 +655,217 @@ def test_error_skeleton_does_not_bypass_attempt_limit_and_is_preserved():
     assert not workers.model_calls
     assert inbox.document("drafts", item["id"])["news_dossier"]["extraction_status"] == "source_unavailable"
     assert run(inbox, workers)["skipped_existing"] == 0
+
+
+def blanket_privacy_draft(item, *, new_policy=False):
+    value = draft(item, status="needs_privacy_review")
+    value["extraction"]["prompt_version"] = ("mdh-universal-news-grounded-7-field-privacy" if new_policy
+                                             else "mdh-universal-news-grounded-6")
+    if new_policy:
+        value["extraction"]["privacy_policy_version"] = 2
+    for field in value["news_dossier"]["fields"].values():
+        field.update(value=None, status="withheld", evidence_refs=[],
+                     note="Dato omitido por protección de datos sensibles.")
+    return value
+
+
+def store_marked_draft(inbox, number, item, value, *, attempts=3, marker_version=1):
+    inbox.store("drafts", item["id"], value)
+    state = processing(item, status="completed", attempts=attempts)
+    state["dossier_schema_version"] = 1
+    inbox.store("processing", item["id"], state)
+    sha = inbox.files[inbox.path("drafts", item["id"])]["sha"]
+    label = "ai/privacy-review" if value["status"] == "needs_privacy_review" else "ai/ready"
+    inbox.issues[number]["labels"].append({"name": label})
+    inbox.issues[number]["body"] += ("\n<!-- mdh-ai:start -->\n"
+        f"<!-- mdh-news-dossier:v{marker_version}:{sha} -->\n<!-- mdh-ai:end -->\n")
+
+
+class FieldPrivacyExtractors(Extractors):
+    def extract(self, item, article, *, api_key, model):
+        value = super().extract(item, article, api_key=api_key, model=model)
+        value.update(status="needs_privacy_review", record=None)
+        value["extraction"].update(privacy_policy_version=2,
+                                  prompt_version="mdh-universal-news-grounded-7-field-privacy")
+        return value
+
+
+def test_blanket_privacy_reprocesses_once_and_preserves_cumulative_attempts():
+    item = candidate(); inbox = PrivateInbox([item]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, item, blanket_privacy_draft(item), attempts=3)
+    report = run(inbox, workers, limit=1)
+    assert report["attempted"] == report["privacy_reprocessed"] == report["news_dossiers"] == 1
+    assert report["offline_candidates"] == 0
+    value = inbox.document("drafts", item["id"])
+    assert any(field["status"] == "reported" for field in value["news_dossier"]["fields"].values())
+    assert value["human_reviewed"] is False and value["publishable"] is False
+    state = inbox.document("processing", item["id"])
+    assert state["attempts"] == 4 and state["privacy_reprocessing_attempts"] == 1
+    assert state["privacy_reprocessing_version"] == 2
+    reads = len(inbox.reads)
+    rerun = run(inbox, workers)
+    assert rerun["skipped_existing"] == 1 and rerun["attempted"] == 0
+    assert len(inbox.reads) == reads and len(workers.model_calls) == 1
+    assert_private_minimal(inbox, report)
+
+
+def test_new_policy_fully_protected_dossier_is_not_reprocessed():
+    item = candidate(); inbox = PrivateInbox([item]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, item, blanket_privacy_draft(item, new_policy=True))
+    report = run(inbox, workers)
+    assert report["attempted"] == 0 and report["skipped_existing"] == 1
+    assert not workers.model_calls
+    assert "mdh-news-dossier:v2:" in inbox.issues[1]["body"]
+    reads = len(inbox.reads)
+    run(inbox, workers)
+    assert len(inbox.reads) == reads
+
+
+def test_safe_old_v1_marker_is_preserved_without_reads_or_model_work():
+    item = candidate(); inbox = PrivateInbox([item]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, item, draft(item))
+    originals = deepcopy(inbox.files)
+    report = run(inbox, workers)
+    assert report["skipped_existing"] == 1 and report["attempted"] == 0
+    assert not inbox.reads and not workers.model_calls
+    assert inbox.files == originals
+
+
+def test_privacy_reprocessing_errors_keep_backoff_and_exhaust_new_budget_only_once():
+    item = candidate(); inbox = PrivateInbox([item]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, item, blanket_privacy_draft(item), attempts=3)
+    workers.error = RuntimeError(FULL_BODY + KEY)
+    for count in range(1, 4):
+        report = process_queue(inbox, api_key=KEY, model="gemini-2.5-flash", fetch=workers.fetch,
+            extract=workers.extract, now=NOW + timedelta(hours=(count - 1) * 2), sleep=lambda _: None)
+        assert report["attempted"] == report["errors"] == 1
+        state = inbox.document("processing", item["id"])
+        assert state["attempts"] == 3 + count
+        assert state["privacy_reprocessing_attempts"] == count
+        assert state["privacy_reprocessing_version"] == 2
+        assert inbox.document("drafts", item["id"])["extraction"]["privacy_reprocessing_version"] == 2
+        assert "mdh-news-dossier:" not in inbox.issues[1]["body"]
+        # Repeated cron invocations during the cooldown must not reset its budget.
+        immediate = run(inbox, workers)
+        assert immediate["attempted"] == 0 and immediate["deferred"] == 1
+    final = process_queue(inbox, api_key=KEY, model="gemini-2.5-flash", fetch=workers.fetch,
+        extract=workers.extract, now=NOW + timedelta(days=1), sleep=lambda _: None)
+    assert final["attempted"] == 0 and final["deferred"] == 1
+    assert len(workers.model_calls) == 3
+    assert_private_minimal(inbox, final)
+
+
+def test_privacy_reprocessing_quota_failure_keeps_six_hour_cooldown():
+    item = candidate(); inbox = PrivateInbox([item]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, item, blanket_privacy_draft(item), attempts=3)
+    workers.error = RuntimeError(KEY); workers.error.status_code = 429
+    report = run(inbox, workers)
+    state = inbox.document("processing", item["id"])
+    assert report["stopped_reason"] == "quota_or_rate_limit"
+    assert state["attempts"] == 3 and state["privacy_reprocessing_attempts"] == 0
+    assert datetime.fromisoformat(state["next_retry_at"]) == NOW + timedelta(hours=6)
+    assert run(inbox, workers)["attempted"] == 0
+    assert len(workers.model_calls) == 1
+
+
+@pytest.mark.parametrize("decision", ["review/approved", "review/rejected"])
+@pytest.mark.parametrize("during_extraction", [False, True])
+def test_privacy_reprocessing_cannot_overwrite_human_decisions(decision, during_extraction):
+    item = candidate(); inbox = PrivateInbox([item]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, item, blanket_privacy_draft(item))
+    originals = deepcopy(inbox.files)
+    def decide():
+        inbox.issues[1]["labels"].append({"name": decision})
+    if during_extraction:
+        workers.on_extract = decide
+    else:
+        decide()
+    report = run(inbox, workers)
+    assert inbox.files == originals
+    assert report["privacy_reprocessed"] == 0
+    assert not [method for method, _, _ in inbox.calls if method in ("PUT", "PATCH")]
+
+
+def test_privacy_reprocessing_and_fresh_news_share_the_normal_batch_budget():
+    items = [candidate(number) for number in range(1, 6)]
+    inbox = PrivateInbox(items); workers = FieldPrivacyExtractors()
+    for number, item in enumerate(items[:4], 1):
+        store_marked_draft(inbox, number, item, blanket_privacy_draft(item))
+    report = run(inbox, workers, limit=2)
+    assert report["attempted"] == 2 and report["privacy_reprocessed"] == 1
+    assert report["deferred"] == 3 and report["offline_candidates"] == 0
+    assert workers.model_calls == [items[0]["id"], items[4]["id"]]
+    assert inbox.document("drafts", items[2]["id"])["extraction"]["prompt_version"] == "mdh-universal-news-grounded-6"
+
+
+def test_privacy_reprocessing_does_not_accept_an_old_policy_model_result():
+    item = candidate(); inbox = PrivateInbox([item]); workers = Extractors()
+    store_marked_draft(inbox, 1, item, blanket_privacy_draft(item))
+    report = run(inbox, workers)
+    assert report["errors"] == 1 and report["privacy_reprocessed"] == 0
+    assert inbox.document("processing", item["id"])["privacy_reprocessing_attempts"] == 1
+    assert "mdh-news-dossier:" not in inbox.issues[1]["body"]
+
+
+def test_privacy_failure_draft_write_interruption_does_not_reset_persisted_retry_budget():
+    item = candidate(); inbox = PrivateInbox([item]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, item, blanket_privacy_draft(item), attempts=3)
+    inbox.fail_draft_write = True
+    workers.error = RuntimeError(KEY)
+    with pytest.raises(RuntimeError, match="before draft persistence"):
+        run(inbox, workers)
+    # The prior draft and old marker can still exist, but the failure state now
+    # guarantees that neither the new-policy allowance nor its cooldown resets.
+    state = inbox.document("processing", item["id"])
+    assert state["privacy_reprocessing_attempts"] == 1 and state["attempts"] == 4
+    assert inbox.document("drafts", item["id"])["extraction"]["prompt_version"] == "mdh-universal-news-grounded-6"
+    report = run(inbox, workers)
+    assert report["attempted"] == 0 and report["deferred"] == 1
+    assert len(workers.model_calls) == 1
+
+
+@pytest.mark.parametrize("limit,privacy_quota,rss_quota", [(10, 2, 2), (20, 5, 5)])
+def test_privacy_reservation_keeps_rss_and_historical_shares_without_duplicate_ai(limit, privacy_quota, rss_quota):
+    protected = [candidate(number, historical=True, published_date="2026-01-01") for number in range(1, 9)]
+    older = [candidate(number, historical=True, published_date="2014-01-01") for number in range(20, 40)]
+    fresh = [candidate(number) for number in range(50, 60)]
+    inbox = PrivateInbox([*protected, *older, *fresh]); workers = FieldPrivacyExtractors()
+    for number, item in enumerate(protected, 1):
+        store_marked_draft(inbox, number, item, blanket_privacy_draft(item))
+    report = run(inbox, workers, limit=limit)
+    assert report["attempted"] == limit and report["privacy_reprocessed"] == privacy_quota
+    assert len(workers.model_calls) == len(set(workers.model_calls)) == limit
+    assert set(workers.model_calls[:privacy_quota]).issubset({item["id"] for item in protected})
+    assert workers.model_calls[privacy_quota:privacy_quota + rss_quota] == [item["id"] for item in fresh[:rss_quota]]
+    assert len(set(workers.model_calls).intersection(item["id"] for item in older)) == limit - privacy_quota - rss_quota
+
+
+def test_privacy_budget_exhaustion_does_not_consume_fresh_news_reservation():
+    protected, fresh = candidate(1), candidate(2)
+    inbox = PrivateInbox([protected, fresh]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, protected, blanket_privacy_draft(protected))
+    state = processing(protected, status="error", attempts=6)
+    state.update(dossier_schema_version=1, privacy_reprocessing_version=2, privacy_reprocessing_attempts=3)
+    inbox.store("processing", protected["id"], state)
+    report = run(inbox, workers, limit=1)
+    assert report["attempted"] == 1 and report["deferred"] == 1
+    assert report["privacy_reprocessed"] == 0
+    assert workers.model_calls == [fresh["id"]]
+
+
+def test_privacy_retry_retains_migration_share_after_error_badge_replaces_privacy_badge():
+    protected = candidate(1, historical=True, published_date="2026-01-01")
+    older = candidate(2, historical=True, published_date="2014-01-01")
+    inbox = PrivateInbox([protected, older]); workers = FieldPrivacyExtractors()
+    store_marked_draft(inbox, 1, protected, blanket_privacy_draft(protected))
+    workers.error = RuntimeError(KEY)
+    report = run(inbox, workers, limit=1)
+    assert report["attempted"] == report["errors"] == 1
+    assert "ai/error" in {label["name"] for label in inbox.issues[1]["labels"]}
+    assert "mdh-field-privacy-retry:v2" in inbox.issues[1]["body"]
+    workers.error = None
+    later = process_queue(inbox, api_key=KEY, model="gemini-2.5-flash", fetch=workers.fetch,
+        extract=workers.extract, limit=1, now=NOW + timedelta(hours=2), sleep=lambda _: None)
+    assert later["privacy_reprocessed"] == later["attempted"] == 1
+    assert workers.model_calls == [protected["id"], protected["id"]]
+    assert "mdh-field-privacy-retry:v2" not in inbox.issues[1]["body"]

@@ -82,3 +82,10 @@ retiran la proyección automática. Consulte el protocolo de ubicaciones automá
 No hagas público este repositorio. Desactivar el workflow de Gemini detiene las
 llamadas nuevas sin eliminar los borradores. No se notifican ni asignan terceras
 personas automáticamente. [Protocolo de fichas](https://github.com/RauPro/MDH-SV/blob/main/docs/NEWS-DOSSIERS.md).
+
+La privacidad actual protege casillas concretas y conserva los campos seguros.
+Los borradores antiguos totalmente ocultados se reextraen por lotes, reservando
+hasta 5 de los 20 intentos, sin superar el límite total ni repetir una decisión
+humana. El publicador admite municipios o distritos citados y resueltos mediante
+la referencia administrativa oficial, con procedencia explícita; no recupera
+geografías protegidas ni convierte sedes o nombres ambiguos en lugares de hechos.

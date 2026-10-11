@@ -1,7 +1,8 @@
 import type { BibliographicReference } from './news-dossier.mjs';
 export interface NewsLocation {
   candidate_id: string; source_url: string; publisher: string; published_date: string; department: string;
-  review_status: 'automated_unreviewed'; human_reviewed: false; method: 'gemini_explicit_department';
+  review_status: 'automated_unreviewed'; human_reviewed: false; method: 'gemini_explicit_department' | 'gemini_municipality_reference';
+  resolution?: { type: 'municipality_to_department'; municipality: string; municipality_kind: 'district' | 'municipality'; reference_version: string; source_url: string };
   extracted_at: string; source_checked_at: string; evidence: { paragraph_id: string; content_sha256: string };
 }
 export const NEWS_LOCATION_DEPARTMENTS: readonly string[];

@@ -21,6 +21,7 @@ from .article_source import fetch_article
 from .history import SOURCES, validate_reference
 from .news_dossier import validate_news_dossier
 from .review_queue import canonical_url, normalize
+from .municipalities import resolve_municipality, REFERENCE_VERSION
 
 HEX = re.compile(r"^[a-f0-9]{64}$")
 PARAGRAPH = re.compile(r"^article-(p[1-9][0-9]{0,2})$")
@@ -30,6 +31,14 @@ ENTRY_KEYS = {"candidate_id", "source_url", "publisher", "published_date", "depa
 MAX_DRAFT_BYTES = 512_000
 MAX_ARCHIVE_BYTES = 30_000_000
 MAX_ENTRIES = 100_000
+MUNICIPAL_METHOD = "gemini_municipality_reference"
+RESOLUTION_KEYS = {"type", "municipality", "municipality_kind", "reference_version", "source_url"}
+
+
+def _resolution(place):
+    return {"type": "municipality_to_department", "municipality": place["name"],
+            "municipality_kind": place["kind"], "reference_version": REFERENCE_VERSION,
+            "source_url": place["source_url"]}
 
 
 class AutomaticLocationError(ValueError):
@@ -80,14 +89,15 @@ def validate_collection(document, *, archive=None):
     """Validate the exact public allowlist; neither private wrapper nor quotes fit it."""
     try:
         if (not isinstance(document, dict) or set(document) != {"schema_version", "generated_at", "locations"}
-                or type(document["schema_version"]) is not int or document["schema_version"] != 1
+                or type(document["schema_version"]) is not int or document["schema_version"] not in {1, 2}
                 or not isinstance(document["locations"], list) or len(document["locations"]) > MAX_ENTRIES):
             raise ValueError()
         _timestamp(document["generated_at"])
         references = _references(archive) if archive is not None else None
         identifiers, urls = set(), set()
         for entry in document["locations"]:
-            if (not isinstance(entry, dict) or set(entry) != ENTRY_KEYS
+            municipal = isinstance(entry, dict) and entry.get("method") == MUNICIPAL_METHOD
+            if (not isinstance(entry, dict) or set(entry) != ENTRY_KEYS | ({"resolution"} if municipal else set())
                     or not isinstance(entry["candidate_id"], str) or not HEX.fullmatch(entry["candidate_id"])
                     or not isinstance(entry["source_url"], str) or len(entry["source_url"]) > 4096
                     or hashlib.sha256(entry["source_url"].encode()).hexdigest() != entry["candidate_id"]
@@ -95,9 +105,16 @@ def validate_collection(document, *, archive=None):
                     or not _calendar_date(entry["published_date"])
                     or entry["department"] not in DEPARTMENTS
                     or entry["review_status"] != "automated_unreviewed" or entry["human_reviewed"] is not False
-                    or entry["method"] != "gemini_explicit_department"
+                    or entry["method"] not in {"gemini_explicit_department", MUNICIPAL_METHOD}
                     or entry["candidate_id"] in identifiers or entry["source_url"] in urls):
                 raise ValueError()
+            if municipal:
+                resolution = entry["resolution"]
+                if not isinstance(resolution, dict) or set(resolution) != RESOLUTION_KEYS:
+                    raise ValueError()
+                place = resolve_municipality(resolution["municipality"], entry["department"])
+                if place is None or resolution != _resolution(place):
+                    raise ValueError()
             _timestamp(entry["extracted_at"])
             _timestamp(entry["source_checked_at"])
             source = next((value for value in SOURCES if urlsplit(entry["source_url"]).hostname in value["hosts"]), None)
@@ -116,7 +133,7 @@ def validate_collection(document, *, archive=None):
                     raise ValueError()
             identifiers.add(entry["candidate_id"])
             urls.add(entry["source_url"])
-        return {"schema_version": 1, "generated_at": document["generated_at"],
+        return {"schema_version": document["schema_version"], "generated_at": document["generated_at"],
                 "locations": sorted(document["locations"], key=lambda value: value["candidate_id"])}
     except (ValueError, TypeError, KeyError, AttributeError):
         raise AutomaticLocationError() from None
@@ -127,48 +144,115 @@ def _eligible(draft, references):
     if (not isinstance(draft, dict) or type(draft.get("schema_version")) is not int
             or draft["schema_version"] != 1 or draft.get("publishable") is not False
             or draft.get("human_reviewed") is not False
-            or draft.get("status") not in {"draft", "needs_scope_review"}
-            or draft.get("privacy_flags", []) != []):
+            or draft.get("status") not in {"draft", "needs_scope_review", "needs_privacy_review"}):
+        return None
+    extraction = draft.get("extraction", {})
+    flags = draft.get("privacy_flags", [])
+    if not isinstance(flags, list) or any(flag not in {"minor_identifiers", "clinical_details", "precise_address", "private_contact"} for flag in flags):
+        return None
+    # Old blanket-redaction drafts must first be processed with field-level privacy.
+    if (flags or draft.get("status") == "needs_privacy_review") and (type(extraction.get("privacy_policy_version")) is not int or extraction["privacy_policy_version"] != 2):
+        return None
+    protected = extraction.get("protected_fields", [])
+    if not isinstance(protected, list) or any(not isinstance(name, str) or name not in {*draft.get("news_dossier", {}).get("fields", {}), "title", "penitentiary_related"} for name in protected):
         return None
     dossier = validate_news_dossier(draft.get("news_dossier"))
     if (dossier["human_reviewed"] is not False or dossier["extraction_status"] != "processed"
             or dossier["classification"]["jurisdiction"] != "SV"
-            or draft.get("classification") != dossier["classification"]
-            or any(field["status"] == "withheld" for field in dossier["fields"].values())):
+            or draft.get("classification") != dossier["classification"]):
+        return None
+    country = dossier["fields"]["country"]
+    if country["status"] == "reported" and normalize(country["value"]).strip() not in {"el salvador", "republica de el salvador"}:
         return None
     identifier = dossier["candidate_id"]
     reference = references.get(identifier)
     if (reference is None or draft.get("candidate_id") != identifier or draft.get("source_url") != dossier["source_url"]
             or any(reference[key] != dossier[key] for key in ("source_url", "publisher", "published_date"))):
         return None
-    field = dossier["fields"]["department"]
-    if field["status"] != "reported" or field["value"] not in DEPARTMENTS:
+    department = dossier["fields"]["department"]
+    municipality = dossier["fields"]["municipality"]
+    if department["status"] == "withheld" or "department" in protected:
         return None
-    extraction = draft.get("extraction", {})
     digest = extraction.get("content_sha256")
     if extraction.get("provider") != "gemini" or not isinstance(digest, str) or not HEX.fullmatch(digest):
         return None
     extracted_at = _timestamp(extraction.get("prepared_at"))
     evidence = {item["id"]: item for item in dossier["evidence"]}
-    paragraphs = []
-    for ref in field["evidence_refs"]:
-        match = PARAGRAPH.fullmatch(ref)
-        if match and evidence[ref]["url"] == reference["source_url"] and digest in evidence[ref]["locator"]:
-            paragraphs.append(match[1])
-    if not paragraphs:
+    def cited(field):
+        paragraphs = []
+        for ref in field["evidence_refs"]:
+            match = PARAGRAPH.fullmatch(ref)
+            if match and evidence[ref]["url"] == reference["source_url"] and digest in evidence[ref]["locator"]:
+                paragraphs.append(match[1])
+        return paragraphs
+    declared = department["value"] if department["status"] == "reported" and department["value"] in DEPARTMENTS else None
+    department_paragraphs = cited(department) if declared else []
+    municipal_place = None
+    municipal_paragraphs = []
+    if municipality["status"] == "reported" and "municipality" not in protected:
+        municipal_place = resolve_municipality(municipality["value"], declared)
+        if municipal_place:
+            municipal_paragraphs = cited(municipality)
+    if not department_paragraphs and not municipal_paragraphs:
         return None
-    return {"reference": reference, "department": field["value"], "digest": digest,
-            "extracted_at": extracted_at, "paragraphs": paragraphs}
+    # A unique locality contradicted by the model's department remains unresolved.
+    if municipality["status"] == "reported" and declared:
+        unique = resolve_municipality(municipality["value"])
+        if unique and unique["department"] != declared:
+            return None
+    return {"reference": reference, "department": declared, "digest": digest,
+            "extracted_at": extracted_at, "department_paragraphs": department_paragraphs,
+            "municipal_place": municipal_place, "municipal_paragraphs": municipal_paragraphs,
+            "municipality": municipality["value"] if municipal_place else None,
+            "ambiguous_municipality": bool(municipal_place and resolve_municipality(municipality["value"]) is None)}
 
 
-def _entry(candidate, paragraph, checked_at):
+def _entry(candidate, selection, checked_at):
     reference = candidate["reference"]
-    return {"candidate_id": reference["id"],
+    method, paragraph, department = selection
+    result = {"candidate_id": reference["id"],
             **{key: reference[key] for key in ("source_url", "publisher", "published_date")},
-            "department": candidate["department"], "review_status": "automated_unreviewed",
-            "human_reviewed": False, "method": "gemini_explicit_department",
+            "department": department, "review_status": "automated_unreviewed",
+            "human_reviewed": False, "method": method,
             "extracted_at": candidate["extracted_at"], "source_checked_at": checked_at,
             "evidence": {"paragraph_id": paragraph, "content_sha256": candidate["digest"]}}
+    if method == MUNICIPAL_METHOD:
+        result["resolution"] = _resolution(candidate["municipal_place"])
+    return result
+
+
+def _negated_location(source, name):
+    # A literal place name is not evidence when the article denies that location.
+    verb = r"(?:ocurri\w*|sucedi\w*|aconteci\w*|produj\w*|registr\w*|ubic\w*|tuvo lugar|tuvieron lugar|fue|fueron|era|eran|estaba|estaban)"
+    return bool(re.search(rf"\b(?:no|nunca)\s+(?:(?:se|ha|han|habia|habian|habria)\s+)*{verb}[^.;!?]{{0,60}}\ben\s+(?:el\s+|la\s+)?(?:(?:municipio|distrito|ciudad|departamento)\s+de\s+)?{name}\b", source))
+
+
+def _municipal_context(text, candidate):
+    """Require cited locality context, not an author dateline, route or institution seat."""
+    source = " ".join(normalize(text).split())
+    place = candidate["municipal_place"]
+    name, department = re.escape(normalize(place["name"])), re.escape(normalize(place["department"]))
+    foreign = r"(?:california|texas|florida|nueva york|jujuy|estados unidos|ee\.?\s?uu\.?|mexico|guatemala|honduras|nicaragua|costa rica|panama|colombia|ecuador|peru|bolivia|argentina|chile|espana|canada|australia|cuba|venezuela|uruguay|brasil|republica dominicana|puerto rico)"
+    if re.search(rf"\b{name}\s*(?:,|\(|\ben\b|\bde\b)\s*{foreign}\b", source):
+        return False
+    if _negated_location(source, name):
+        return False
+    # These ambiguous roles do not locate the event/topic. No fuzzy geocoding.
+    if re.search(r"\b(?:sala de redaccion|sede(?: editorial| (?:de|del))|oficinas (?:de|del)|carretera (?:que conduce )?a|tribunal|juzgado)\b", source):
+        return False
+    if re.search(rf"\b{name}\s+(?:norte|sur|este|oeste|centro|oriental|occidental)\b", source):
+        return False
+    context = (rf"\b(?:municipio|distrito|ciudad|localidad)\s+(?:de\s+)?{name}\b",
+               rf"\b(?:alcaldia|concejo municipal)\s+(?:municipal\s+)?de\s+{name}\b",
+               rf"\ben\s+{name}\b",
+               rf"\b{name}\s*,\s*(?:departamento\s+(?:de\s+)?)?{department}\b")
+    if not any(re.search(pattern, source) for pattern in context):
+        return False
+    if candidate["ambiguous_municipality"]:
+        # A model hint alone cannot disambiguate repeated municipality names.
+        return bool(re.search(rf"\b{name}\s*,\s*(?:departamento\s+(?:de\s+)?)?{department}\b", source)
+                    or re.search(rf"\bdepartamento\s+de\s+{department}\b", source))
+    return True
 
 
 def _source_paragraph(candidate, article):
@@ -188,9 +272,17 @@ def _source_paragraph(candidate, article):
         paragraphs[paragraph["id"]] = paragraph["text"]
     if "\n\n".join(paragraphs.values()) != article["text"]:
         return None
-    explicit_department = re.compile(r"\bdepartamento\s+de\s+" + re.escape(normalize(candidate["department"])) + r"\b")
-    return next((identifier for identifier in candidate["paragraphs"]
-                 if identifier in paragraphs and explicit_department.search(" ".join(normalize(paragraphs[identifier]).split()))), None)
+    if candidate["department"]:
+        explicit = re.compile(r"\bdepartamento\s+de\s+" + re.escape(normalize(candidate["department"])) + r"\b")
+        for identifier in candidate["department_paragraphs"]:
+            normalized = " ".join(normalize(paragraphs.get(identifier, "")).split())
+            if explicit.search(normalized) and not _negated_location(normalized, re.escape(normalize(candidate["department"]))):
+                return "gemini_explicit_department", identifier, candidate["department"]
+    if candidate["municipal_place"]:
+        for identifier in candidate["municipal_paragraphs"]:
+            if identifier in paragraphs and _municipal_context(paragraphs[identifier], candidate):
+                return MUNICIPAL_METHOD, identifier, candidate["municipal_place"]["department"]
+    return None
 
 
 def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_article,
@@ -213,7 +305,9 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
     stamp = _timestamp(moment.isoformat())
     references = _references(archive)
     previous = validate_collection(previous) if previous is not None else {"locations": []}
-    cache = {item["candidate_id"]: item for item in previous["locations"]}
+    # A v1 positive predates context/negation and municipality checks. Revalidate
+    # it once rather than carrying an old acceptance across changed rules.
+    cache = {item["candidate_id"]: item for item in previous["locations"]} if previous.get("schema_version") == 2 else {}
     candidates, identifiers = [], set()
     stats = {"drafts": len(drafts), "eligible": 0, "excluded": 0, "invalid": 0, "cached": 0,
              "sources_checked": 0, "source_failures": 0, "unsupported": 0, "deferred": 0,
@@ -246,8 +340,11 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
     cached_ids = set()
     for candidate in ordered:
         cached = cache.get(candidate["reference"]["id"])
-        if cached and cached["evidence"]["paragraph_id"] in candidate["paragraphs"] and cached == _entry(
-                candidate, cached["evidence"]["paragraph_id"], cached["source_checked_at"]):
+        method = cached["method"] if cached else None
+        eligible_paragraphs = candidate["municipal_paragraphs"] if method == MUNICIPAL_METHOD else candidate["department_paragraphs"]
+        expected_department = candidate["municipal_place"]["department"] if method == MUNICIPAL_METHOD and candidate["municipal_place"] else candidate["department"]
+        if cached and cached["evidence"]["paragraph_id"] in eligible_paragraphs and cached == _entry(
+                candidate, (method, cached["evidence"]["paragraph_id"], expected_department), cached["source_checked_at"]):
             locations.append(cached)
             cached_ids.add(candidate["reference"]["id"])
             stats["cached"] += 1
@@ -284,11 +381,11 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
         checked_at = stamp if now is not None else datetime.now(timezone.utc).isoformat()
         locations.append(_entry(candidate, paragraph, checked_at))
     generated_at = stamp if now is not None else datetime.now(timezone.utc).isoformat()
-    document = validate_collection({"schema_version": 1, "generated_at": generated_at, "locations": locations}, archive=archive)
+    document = validate_collection({"schema_version": 2, "generated_at": generated_at, "locations": locations}, archive=archive)
     stats["locations"] = len(locations)
-    stats["withdrawn"] = len(set(cache) - {item["candidate_id"] for item in locations})
+    stats["withdrawn"] = len({item["candidate_id"] for item in previous["locations"]} - {item["candidate_id"] for item in locations})
     # A stable snapshot avoids deploying on an unchanged extraction run.
-    if previous.get("generated_at") and document["locations"] == previous["locations"]:
+    if previous.get("schema_version") == 2 and previous.get("generated_at") and document["locations"] == previous["locations"]:
         document["generated_at"] = previous["generated_at"]
     return document, stats
 

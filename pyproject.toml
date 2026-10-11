@@ -16,6 +16,9 @@ authors = [
 [tool.setuptools.packages.find]
 where = ["packages/schema/src", "apps/pipeline/src", "apps/mcp/src"]
 
+[tool.setuptools.package-data]
+mdh_pipeline = ["data/*.json"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = [
