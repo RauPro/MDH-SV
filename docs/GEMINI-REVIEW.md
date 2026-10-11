@@ -119,3 +119,21 @@ Referencias: [salidas estructuradas de Gemini](https://ai.google.dev/gemini-api/
 y [límites de la API](https://ai.google.dev/gemini-api/docs/rate-limits).
 
 El protocolo de [fichas para todas las noticias](NEWS-DOSSIERS.md) describe los estados y la importación con `--kind news_dossier`. El horario configurado debe comprobarse en Actions con el evento `schedule`; las ejecuciones manuales no demuestran que el disparo automático esté funcionando.
+
+## Privacidad por campo y recuperación de fichas anteriores
+
+El prompt `mdh-universal-news-grounded-7-field-privacy` declara `protected_fields`
+y el código añade comprobaciones locales por campo. La extracción registra
+`privacy_policy_version: 2`. No se conserva el valor ni la cita de un campo
+protegido. Las descripciones anónimas se conservan; las menciones generales de
+niños o salud no vacían la ficha. Las alertas siguen requiriendo revisión editorial.
+La proyección geográfica sólo puede aprovechar departamentos y municipios seguros;
+el resto de la ficha continúa privado.
+
+Los borradores antiguos que tienen las 18 casillas protegidas se reextraen
+progresivamente, con hasta 5 de los 20 intentos de cada lote (2 de un lote de 10).
+Se mantiene una reserva independiente para noticias nuevas. No aumenta el máximo
+total de llamadas. Las decisiones humanas se respetan, las versiones anteriores
+permanecen en Git y los errores conservan un presupuesto y espera de reintento
+propios: una interrupción no abre intentos ilimitados. Los marcadores de finalización
+v2 evitan volver a procesar una ficha ya evaluada con la nueva política.

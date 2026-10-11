@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { NEWS_LOCATION_DEPARTMENTS, newsLocationFor, parsePublishedNewsLocations, validateLocationBindings, validatePublishedNewsLocation, type NewsLocation } from '../../../shared/news-location.mjs';
 import { DEPARTMENTS } from './geography/elSalvador';
 import fixture from './__fixtures__/newsArchive.json';
+import municipalityReference from '../../../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json';
 
 const reference = fixture.records[0];
 const locationFixture = (reference = fixture.records[0]): NewsLocation => ({
@@ -12,6 +13,28 @@ const locationFixture = (reference = fixture.records[0]): NewsLocation => ({
 const collection = (locations: unknown[] = [locationFixture()]) => ({ schema_version: 1, generated_at: '2026-10-10T10:03:00Z', locations });
 
 describe('public automatic location contract', () => {
+  const municipal = (): NewsLocation => ({ ...locationFixture(), department: 'Ahuachapán', method: 'gemini_municipality_reference', resolution: {
+    type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
+    reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6`,
+  } });
+  it('validates municipality-to-department provenance against the bundled official reference', () => {
+    expect(validatePublishedNewsLocation(municipal())).toEqual(municipal());
+    const wrong = municipal(); wrong.department = 'San Salvador';
+    expect(() => validatePublishedNewsLocation(wrong)).toThrow();
+  });
+  it.each([
+    { municipality: 'Lugar inventado' }, { municipality_kind: 'municipality' },
+    { reference_version: 'unverified' }, { source_url: 'https://example.com/geography' },
+    { source_url: `${municipalityReference.source.url}#page=13` }, { private_quote: 'SENSITIVE' },
+  ])('rejects a forged municipal reference: %j', patch => {
+    const location = municipal();
+    expect(() => validatePublishedNewsLocation({ ...location, resolution: { ...location.resolution, ...patch } })).toThrow();
+  });
+  it('requires resolution only for the municipal method and does not add it to legacy department entries', () => {
+    const location = municipal(); delete location.resolution;
+    expect(() => validatePublishedNewsLocation(location)).toThrow();
+    expect(() => validatePublishedNewsLocation({ ...municipal(), method: 'gemini_explicit_department' })).toThrow();
+  });
   it('accepts only the narrow unreviewed contract and matches map departments', () => {
     const index = parsePublishedNewsLocations(collection());
     expect(newsLocationFor(reference, validateLocationBindings(index, fixture.records))).toEqual(locationFixture());

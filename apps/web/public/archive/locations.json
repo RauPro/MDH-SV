@@ -1,7 +1,99 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-10-11T18:15:42.791753+00:00",
+  "schema_version": 2,
+  "generated_at": "2026-10-11T18:56:37.372707+00:00",
   "locations": [
+    {
+      "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
+      "source_url": "https://www.diariocolatino.com/nayib-bukele-pide-se-detenga-la-campana-sucia-en-su-contra/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-23",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T07:03:14.427311-06:00",
+      "source_checked_at": "2026-10-11T18:56:26.786379+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "455473d54ecd2c083835c4e3425056213ba3292d1af0f43bbc78163305372c00"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "2992802b0cfd66cb2a9f69ac14ffda2bd03cf5419a9db7ad6d47f4daccf47a3c",
+      "source_url": "https://www.diariocolatino.com/denuncian-alcaldia-san-salvador-violacion-derechos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2025-03-29",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-10T10:59:06.856801-06:00",
+      "source_checked_at": "2026-10-11T18:56:34.287361+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "443bd82e1af35fe9704b4a9c5338f9a901fe7aa8f8a15e31e014606556891d4b"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador Centro",
+        "municipality_kind": "municipality",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "299c4787e7fe5b7dbf71d6fcf0c770e5302a95700912b805c8f2f5e31240256d",
+      "source_url": "https://www.diariocolatino.com/disminuir-homicidios-y-extorsiones-prioridad-para-formula-presidencial-del-fmln/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-08",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-10T14:37:30.880700-06:00",
+      "source_checked_at": "2026-10-11T18:56:37.372700+00:00",
+      "evidence": {
+        "paragraph_id": "p6",
+        "content_sha256": "75e9decbd53e2dc131909d8817ddc825ebd0644329862572a1a8d4e7408644dc"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "32246586a45b875f70ce2c17fff7ed79d0118a0803d7aadda8dfdebbfa123fe4",
+      "source_url": "https://www.diariocolatino.com/trabajadores-de-la-alcaldia-de-san-salvador-denuncian-violaciones-a-sus-derechos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-10-22",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-10T18:18:14.352427-06:00",
+      "source_checked_at": "2026-10-11T18:56:22.481736+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "6897908e8fa411f00a65622fb2f0aabaa13608faaeb61463efc8301174086430"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
     {
       "candidate_id": "5caf5eb2940d2b1c03eaaa95b832624dd2a1da0b5e24616d3be952508df516e4",
       "source_url": "https://www.diariocolatino.com/homicidios-en-zacatecoluca-ligados-a-pugna-interna-de-pandilla-18/",
@@ -12,10 +104,79 @@
       "human_reviewed": false,
       "method": "gemini_explicit_department",
       "extracted_at": "2026-10-10T12:55:05.643580-06:00",
-      "source_checked_at": "2026-10-10T21:11:54.064645+00:00",
+      "source_checked_at": "2026-10-11T18:56:20.313365+00:00",
       "evidence": {
         "paragraph_id": "p3",
         "content_sha256": "2a0a953cff1e774fddc8cc2583c978a7fbe6284576b7bca3f8fe5a83f8a5a367"
+      }
+    },
+    {
+      "candidate_id": "6b04d36e855adc92cc6103e4af124342193bb56c2445f87105b364c04e83b0e4",
+      "source_url": "https://www.diariocolatino.com/lamentan-que-hijo-de-asesino-intelectual-de-romero-sea-edil-de-santa-tecla/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-06",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T07:03:27.138601-06:00",
+      "source_checked_at": "2026-10-11T18:56:27.493274+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "656fd3df4a425f816ae112554ca05ab66e1d36c94b235b40338ce5b8699bd316"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "806b08abb388f6e89968a5ae05739bb9e9bfe493a6dfbad3753a7076d061e000",
+      "source_url": "https://www.diariocolatino.com/aumentan-los-despidos-injustificados-en-la-alcaldia-de-santa-tecla/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-15",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T07:05:52.909057-06:00",
+      "source_checked_at": "2026-10-11T18:56:28.225670+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "afb4719b1fd90bb329656bc1bdcc416591b5da49f79e7f5e35b97cba2e701717"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "875949fe84bc33521946904c777cabb3e8af7a6e7fd269b8ab3d8cc3906474d4",
+      "source_url": "https://www.diariocolatino.com/juntas-de-agua-enfrentan-amenazas-de-contaminacion-y-servidumbre-de-paso/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-02",
+      "department": "Ahuachapán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-10T14:02:08.245138-06:00",
+      "source_checked_at": "2026-10-11T18:56:36.565804+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "3694ae7765569d80a0b69999e674ae16841bdf82746d54b059a0ed82d2d2f20a"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Jujutla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -28,10 +189,33 @@
       "human_reviewed": false,
       "method": "gemini_explicit_department",
       "extracted_at": "2026-10-11T07:02:48.001529-06:00",
-      "source_checked_at": "2026-10-11T13:06:39.011079+00:00",
+      "source_checked_at": "2026-10-11T18:56:25.927337+00:00",
       "evidence": {
         "paragraph_id": "p10",
         "content_sha256": "173edfa39264badced371fab8e6ed76a5ec376d5268631a237d2cc2cd10e9a66"
+      }
+    },
+    {
+      "candidate_id": "a9e511d1a20a13f5f126765147b228f604ab422f0ba7bb32a5c68107a7a7eb5f",
+      "source_url": "https://www.diariocolatino.com/nayib-bukele-se-compromete-a-trabajar-de-la-mano-con-sindicalistas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-25",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-10T23:59:15.865180-06:00",
+      "source_checked_at": "2026-10-11T18:56:24.190674+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "448cf4a01e8ba7b68c7976141ed41082579a45479f3e43af00021319fefb100a"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -44,7 +228,7 @@
       "human_reviewed": false,
       "method": "gemini_explicit_department",
       "extracted_at": "2026-10-10T12:56:16.376790-06:00",
-      "source_checked_at": "2026-10-10T21:11:46.456863+00:00",
+      "source_checked_at": "2026-10-11T18:56:20.979450+00:00",
       "evidence": {
         "paragraph_id": "p5",
         "content_sha256": "5441a948aa7b69b5861949fd77ac03ad0ad1b04a7ec27ab88dc41763db0bffff"
@@ -60,7 +244,7 @@
       "human_reviewed": false,
       "method": "gemini_explicit_department",
       "extracted_at": "2026-10-11T12:11:18.923800-06:00",
-      "source_checked_at": "2026-10-11T18:15:30.302647+00:00",
+      "source_checked_at": "2026-10-11T18:56:32.905856+00:00",
       "evidence": {
         "paragraph_id": "p2",
         "content_sha256": "ada1b94b3fff8f35a4c5169a716264b24693f3f07af1dc4a8ea148f92da7fe02"

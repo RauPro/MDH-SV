@@ -172,7 +172,7 @@ export function searchNews(filters = {}, archive = loadNews(), dossierPayload, l
   result.meta = { ...result.meta, coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
     news_dossiers_status: snapshot.status,
     automatic_locations_status: locations.status,
-    automatic_location_notice: 'Departamento mencionado en la fuente, extraído automáticamente y sin revisión humana. No confirma ubicación de una violación ni completa la ficha revisada. null no implica ausencia de ubicación en la fuente.',
+    automatic_location_notice: 'Departamento explícito o derivado de un municipio/distrito citado mediante referencia administrativa oficial, sin revisión humana. No confirma ubicación de una violación ni completa la ficha revisada. null no implica ausencia de ubicación en la fuente.',
     review_notice: 'Noticias con ficha estructurada; no constituyen casos validados. Sin ficha pública revisada, los campos quedan pendientes de extracción o revisión. Esto no informa del estado de la cola privada, que nunca se consulta.' };
   return result;
 }

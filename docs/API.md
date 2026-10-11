@@ -137,3 +137,9 @@ El servidor local escucha sólo en `127.0.0.1:3001`. Las pruebas ejercitan una c
 Implementación contrastada con las referencias oficiales: [SDK MCP](https://ts.sdk.modelcontextprotocol.io/server), [transporte Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) y [configuración de funciones Vercel](https://vercel.com/docs/project-configuration/vercel-json).
 
 `GET /api/v1/news` y MCP `search_news` incluyen `automatic_location` separado de `news_dossier`. Su estado es siempre `automated_unreviewed`, con `human_reviewed: false`. Sólo expone un departamento mencionado explícitamente y su procedencia; no implica ubicación de una violación ni aprobación de los otros campos. Una ficha revisada prevalece y suprime esta proyección. `null` puede significar datos aún no extraídos, descartados o no publicables; no demuestra ausencia de ubicación. El snapshot completo está en `/archive/locations.json`.
+
+Para una ubicación derivada de municipio, `automatic_location.method` vale
+`gemini_municipality_reference`; `resolution` identifica el municipio/distrito,
+la versión de la referencia administrativa y la página oficial que sustenta su
+departamento. `gemini_explicit_department` conserva la modalidad directa. Ambas
+siguen `automated_unreviewed` y no alteran los campos de `news_dossier`.

@@ -1,4 +1,5 @@
 import { safeSource } from './news-dossier.mjs';
+import municipalityReference from '../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json' with { type: 'json' };
 
 export const NEWS_LOCATION_DEPARTMENTS = Object.freeze(['Ahuachapán', 'Santa Ana', 'Sonsonate', 'Chalatenango', 'La Libertad', 'San Salvador', 'Cuscatlán', 'La Paz', 'Cabañas', 'San Vicente', 'Usulután', 'San Miguel', 'Morazán', 'La Unión']);
 const object = value => Boolean(value && typeof value === 'object' && !Array.isArray(value));
@@ -7,13 +8,26 @@ const sha = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const date = value => typeof value === 'string' && !value.startsWith('0000-') && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
 const instant = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})$/.test(value) && date(value.slice(0, 10)) && Number.isFinite(Date.parse(value));
 const fail = () => { throw new Error('Capa pública de ubicaciones automáticas inválida'); };
+const municipalityEntries = municipalityReference.municipalities.flatMap(municipality => [
+  { ...municipality, kind: 'municipality' },
+  ...municipality.districts.map(district => ({ ...district, department: municipality.department, kind: 'district' })),
+]);
+function validResolution(value) {
+  const r = value.resolution;
+  if (!exact(r, ['type', 'municipality', 'municipality_kind', 'reference_version', 'source_url'])
+    || r.type !== 'municipality_to_department' || r.reference_version !== municipalityReference.reference_version) return false;
+  return municipalityEntries.some(entry => entry.name === r.municipality && entry.department === value.department
+    && entry.kind === r.municipality_kind && r.source_url === `${municipalityReference.source.url}#page=${entry.source_page}`);
+}
 
 export function validatePublishedNewsLocation(value) {
-  if (!exact(value, ['candidate_id', 'source_url', 'publisher', 'published_date', 'department', 'review_status', 'human_reviewed', 'method', 'extracted_at', 'source_checked_at', 'evidence'])
+  const municipal = object(value) && value.method === 'gemini_municipality_reference';
+  if (!exact(value, ['candidate_id', 'source_url', 'publisher', 'published_date', 'department', 'review_status', 'human_reviewed', 'method', 'extracted_at', 'source_checked_at', 'evidence', ...(municipal ? ['resolution'] : [])])
     || !sha(value.candidate_id) || !safeSource(value.source_url) || value.source_url.length > 4096 || new URL(value.source_url).pathname.length < 5
     || typeof value.publisher !== 'string' || value.publisher.trim().length < 3 || value.publisher.length > 200
     || !date(value.published_date) || !NEWS_LOCATION_DEPARTMENTS.includes(value.department)
-    || value.review_status !== 'automated_unreviewed' || value.human_reviewed !== false || value.method !== 'gemini_explicit_department'
+    || value.review_status !== 'automated_unreviewed' || value.human_reviewed !== false || !['gemini_explicit_department','gemini_municipality_reference'].includes(value.method)
+    || (municipal && !validResolution(value))
     || !instant(value.extracted_at) || !instant(value.source_checked_at)
     || !exact(value.evidence, ['paragraph_id', 'content_sha256']) || typeof value.evidence.paragraph_id !== 'string'
     || !/^p[1-9]\d{0,2}$/.test(value.evidence.paragraph_id) || !sha(value.evidence.content_sha256)) fail();
@@ -21,7 +35,7 @@ export function validatePublishedNewsLocation(value) {
 }
 
 export function parsePublishedNewsLocations(payload) {
-  if (!exact(payload, ['schema_version', 'generated_at', 'locations']) || payload.schema_version !== 1 || !instant(payload.generated_at) || !Array.isArray(payload.locations) || payload.locations.length > 100000) fail();
+  if (!exact(payload, ['schema_version', 'generated_at', 'locations']) || ![1, 2].includes(payload.schema_version) || !instant(payload.generated_at) || !Array.isArray(payload.locations) || payload.locations.length > 100000) fail();
   const index = new Map();
   const urls = new Set();
   for (const raw of payload.locations) {

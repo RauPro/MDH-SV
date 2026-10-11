@@ -8,6 +8,7 @@ import { validMcpRequest } from '../api/mcp.mjs';
 import recordHandler from '../api/v1/records/[id].mjs';
 import unknownV1Handler from '../api/v1/[...path].mjs';
 import { NEWS_DOSSIER_FIELDS, pendingNewsDossier } from '../shared/news-dossier.mjs';
+import municipalityReference from '../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json' with { type: 'json' };
 
 let server, base;
 before(async () => {
@@ -195,6 +196,15 @@ test('automatic locations are a separate unreviewed projection and never overrid
   assert.equal(result.data[0].news_dossier.fields.department.value, null);
   assert.equal(result.data[0].news_dossier.human_reviewed, false);
   assert.equal(result.meta.automatic_locations_status, 'available');
+  const municipal = { ...location, department: 'Ahuachapán', method: 'gemini_municipality_reference', resolution: {
+    type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
+    reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6`,
+  } };
+  const fromMunicipality = searchNews({}, archive, empty, { ...payload, schema_version: 2, locations: [municipal] });
+  assert.deepEqual(fromMunicipality.data[0].automatic_location, municipal);
+  assert.equal(fromMunicipality.data[0].news_dossier.fields.department.value, null);
+  const wrongDepartment = { ...municipal, department: 'San Salvador' };
+  assert.equal(searchNews({}, archive, empty, { ...payload, schema_version: 2, locations: [wrongDepartment] }).data[0].automatic_location, null);
   const approved = pendingNewsDossier(source);
   Object.assign(approved, { extraction_status: 'processed', human_reviewed: true, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture: ubicación deliberadamente omitida tras revisión editorial.' });
   approved.fields.department = { value: null, status: 'withheld', evidence_refs: [], note: 'Ubicación protegida tras revisión editorial explícita.' };

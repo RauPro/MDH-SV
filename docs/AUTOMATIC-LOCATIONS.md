@@ -14,11 +14,31 @@ ubicación o determina que no corresponde a El Salvador.
 ## Condiciones de extracción
 
 El exportador exige un borrador procesado por Gemini, jurisdicción salvadoreña,
-departamento explícitamente extraído con evidencia, identidad y bibliografía
-coincidentes y ausencia de alertas de privacidad. Relee la fuente pública y exige
-que su hash coincida con el texto analizado. El párrafo citado debe mencionar
-literalmente «departamento de [nombre]». No deduce departamentos sólo a partir de nombres de ciudades homónimas, sedes,
-municipios, áreas metropolitanas o etiquetas de descubrimiento.
+identidad y bibliografía coincidentes. Relee la fuente y comprueba el hash y el
+párrafo citado. Acepta dos métodos, que no deben confundirse:
+
+- `gemini_explicit_department`: departamento mencionado explícitamente.
+- `gemini_municipality_reference`: municipio o distrito citado en contexto
+  geográfico, vinculado al departamento mediante la [referencia oficial versionada](MUNICIPALITY-REFERENCE.md).
+  `resolution` conserva la localidad, categoría de referencia, versión y enlace
+  a la página del decreto. No se afirma que el departamento estuviera escrito
+  en la noticia ni se infiere la fecha del hecho a partir de la reforma.
+
+No usa títulos, URL ni etiquetas como ubicaciones. Los homónimos requieren una
+pista departamental compatible en el mismo párrafo; las contradicciones, nombres
+parciales, negaciones de ubicación y referencias de sedes/rutas quedan pendientes.
+Una señal explícita de país extranjero incompatible también impide la asignación.
+No se generan coordenadas personales ni se afirma una ubicación exacta.
+
+Las alertas de privacidad no excluyen toda la ficha. Con la política de privacidad
+por campo (`privacy_policy_version=2`), una localidad administrativa segura puede
+proyectarse aunque otra casilla esté protegida. Un departamento o municipio
+protegido no se reconstruye mediante otro campo. Los borradores antiguos con
+alertas necesitan la nueva extracción; no basta con cambiarles una etiqueta.
+
+El snapshot nuevo usa `schema_version=2`; los clientes también pueden leer la
+versión anterior. Las ubicaciones v1 se comprueban de nuevo antes de reutilizar
+su caché con las reglas actuales.
 
 Ese control comprueba una **mención departamental**, no que sea el lugar de una
 violación. La fuente puede contener errores o referencias secundarias. La capa

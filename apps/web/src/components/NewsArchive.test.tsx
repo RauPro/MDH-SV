@@ -7,6 +7,7 @@ import catalog from '../__fixtures__/catalog.json';
 import { formatDate, parseCatalog } from '../catalog';
 import { NewsArchive } from './NewsArchive';
 import type { NewsArchiveData } from '../newsArchive';
+import municipalityReference from '../../../../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json';
 import { NEWS_DOSSIER_FIELDS, NEWS_DOSSIER_PENDING, pendingNewsDossier, type NewsDossier } from '../../../../shared/news-dossier.mjs';
 
 const EMPTY = { schema_version: 1, dossiers: [] };
@@ -22,6 +23,22 @@ function approved(): NewsDossier {
 }
 beforeEach(() => { vi.restoreAllMocks(); serve(); });
 const ready = async () => { render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>); await screen.findByText('3 noticias localizadas'); };
+it('explains a department resolved from a cited municipality without pretending it was explicit or reviewed', async () => {
+  const location = { ...automatic(), department: 'Ahuachapán', method: 'gemini_municipality_reference', resolution: {
+    type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
+    reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6`,
+  } };
+  serve(fixture, EMPTY, { ...EMPTY_LOCATIONS, locations: [location] });
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByRole('button', { name: 'Ahuachapán: 1 noticia' });
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  const panel = screen.getByRole('region', { name: 'Ubicación automática sin revisar' });
+  expect(panel).toHaveTextContent('Departamento obtenido del municipio o distrito citado: Ahuachapán');
+  expect(panel).toHaveTextContent('Localidad citada: Jujutla');
+  expect(within(panel).getByRole('link', { name: 'referencia oficial de municipios y distritos' })).toHaveAttribute('href', location.resolution.source_url);
+  const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
+  expect(sheet).toHaveTextContent(NEWS_DOSSIER_PENDING);
+});
 it('discloses a registered but restricted publisher without inventing available news', async () => {
   const archive = structuredClone(fixture) as unknown as NewsArchiveData;
   archive.coverage.sources.push({ id: 'la-prensa-grafica', publisher: 'La Prensa Gráfica', endpoint: 'https://www.laprensagrafica.com/sitemap.xml', status: 'partial', records: 0, first_published_date: null, last_published_date: null, months: [], collection: { method: 'html_article_metadata', phase: 'restricted', access: 'restricted', notice: 'Pendiente de un canal autorizado.', last_attempt_at: null } });
