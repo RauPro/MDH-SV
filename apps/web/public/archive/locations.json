@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-11T19:08:25.659193+00:00",
+  "generated_at": "2026-10-11T22:10:34.370961+00:00",
   "locations": [
     {
       "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
@@ -23,6 +23,75 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "1ae4f97fa5ec196999deae0627d67301a17f54a5592a97a79f662b56fb9681a4",
+      "source_url": "https://www.diariocolatino.com/prision-a-insurgentes-salvadorenos-y-deportacion-en-el-siglo-xix/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-03",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T16:07:07.657482-06:00",
+      "source_checked_at": "2026-10-11T22:10:25.682193+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "3568e579e1a357f0890812a2c62ff5702028bd997ad4af8afec125f96bba9359"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "1fd4a81674ec4008e88bc9bbd45a521c081617d08962463ff4ce86a5aba8a93e",
+      "source_url": "https://www.diariocolatino.com/una-marcha-antiderechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-06",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T16:05:15.572430-06:00",
+      "source_checked_at": "2026-10-11T22:10:33.749463+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "7dc6bcf2464251b8eb2a9e77d42c537e0021ab553a26b65747cb3318f951aea6"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "20d8ef2d22072ec6790bfc830a8c64c88f4b165bbeffcc445ceb6f0dd0e03973",
+      "source_url": "https://www.diariocolatino.com/un-no-contundente-contra-la-mineria-metalica-en-arcatao-chalatenango/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-10",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T16:08:29.703864-06:00",
+      "source_checked_at": "2026-10-11T22:10:29.565436+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "3c70914a807aad2b9ac829496e9b426f002cd93938c904e82c74cecbf6451d5c"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Arcatao",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
     },
     {
@@ -131,6 +200,29 @@
       "evidence": {
         "paragraph_id": "p3",
         "content_sha256": "2a0a953cff1e774fddc8cc2583c978a7fbe6284576b7bca3f8fe5a83f8a5a367"
+      }
+    },
+    {
+      "candidate_id": "6abd025437a411138034f8b2b8aa883f68126ef998e6b9c8cef3595aa669e74f",
+      "source_url": "https://www.diariocolatino.com/agente-de-la-pnc-fue-asesinado-en-santa-tecla/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-24",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T16:08:15.588143-06:00",
+      "source_checked_at": "2026-10-11T22:10:28.465431+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "85eddb9c220cf7b01aecdf42049ce74617b3cdb82a2819d149b5be4ea758e949"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
     },
     {
