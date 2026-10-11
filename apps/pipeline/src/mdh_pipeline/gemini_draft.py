@@ -20,9 +20,10 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_valida
 from .draft import prepare_draft
 from .news_dossier import FIELD_NAMES as NEWS_FIELDS, empty_news_dossier, validate_news_dossier
 from .publication import Publication
+from .privacy import PRIVACY_POLICY_VERSION, minimize_fields, privacy_flags as _privacy_flags
 from .review_queue import canonical_url, normalize
 
-PROMPT_VERSION = "mdh-universal-news-grounded-6"
+PROMPT_VERSION = "mdh-universal-news-grounded-7-field-privacy"
 MAX_TEXT_CHARS = 32_000
 MAX_RESPONSE_BYTES = 196_608
 MAX_OUTPUT_TOKENS = 4096
@@ -116,6 +117,7 @@ class ExtractionOutput(BaseModel):
     record: ExtractedRecord | None
     discarded_fields: list[str] = Field(default_factory=list, exclude=True)
     not_reported_fields: list[str] = Field(default_factory=list, exclude=True)
+    protected_fields: list[str] = Field(default_factory=list, exclude=True)
 
 
 class WireScopeEvidence(BaseModel):
@@ -142,6 +144,7 @@ class WireOutput(BaseModel):
     date_precision: Literal["day", "unknown", "month_range", "year_range"]
     record: list[WireClaim] = Field(max_length=25)
     not_reported_fields: list[str] = Field(default_factory=list, max_length=25)
+    protected_fields: list[str] = Field(default_factory=list, max_length=25)
 
 
 def _source_anchors(paragraphs):
@@ -180,18 +183,28 @@ def _decode_wire(document, anchors):
     discarded = []
     fields = set(ExtractedRecord.model_fields) - {"date_precision"}
     absent = set(wire.not_reported_fields)
+    protected = set(wire.protected_fields)
     if len(absent) != len(wire.not_reported_fields) or not absent <= fields:
         raise GeminiDraftError("invalid_absent_field_status")
-    if absent & {item.field for item in wire.record if any(value.strip() for value in item.values)}:
+    if len(protected) != len(wire.protected_fields) or not protected <= fields:
+        raise GeminiDraftError("invalid_protected_field_status")
+    # Protection wins over a contradictory generated value or absence claim.
+    # The contradiction never permits the sensitive value to reach an artifact.
+    absent -= protected
+    if (absent - protected) & {item.field for item in wire.record if any(value.strip() for value in item.values)}:
         raise GeminiDraftError("contradictory_field_status")
     if wire.record:
-        record = {name: {"value": None, "status": "not_reported" if name in absent else "pending", "citations": []} for name in fields}
+        record = {name: {"value": None, "status": "withheld" if name in protected else "not_reported" if name in absent else "pending", "citations": []} for name in fields}
         record["date_precision"] = wire.date_precision
         seen = set()
         for field in wire.record:
             if field.field not in fields or field.field in seen:
                 raise GeminiDraftError("invalid_or_duplicate_extraction_field")
             seen.add(field.field)
+            if field.field in protected:
+                # Validate supplied IDs even though their contents are discarded.
+                resolve(field.evidence_refs)
+                continue
             values = [value for value in field.values if value.strip()]
             if not values:
                 # Some provider responses spell an unknown field as empty arrays
@@ -228,7 +241,7 @@ def _decode_wire(document, anchors):
         "record_type": None if wire.record_type == "unknown" else wire.record_type,
         "scope_evidence": {name: resolve(getattr(wire.scope_evidence, name)) for name in ScopeEvidence.model_fields},
         "privacy_flags": wire.privacy_flags, "record": record, "discarded_fields": discarded,
-        "not_reported_fields": wire.not_reported_fields,
+        "not_reported_fields": sorted(absent), "protected_fields": sorted(protected),
     })
 
 
@@ -262,12 +275,24 @@ sin esa declaración quedan pendientes, no se consideran ausentes. No marques co
 dato protegido, ambiguo o que no pudiste evaluar. El código conserva todos los campos de la ficha.
 No escribas entradas vacías ni marcadores como "N/A". privacy_flags determina revisión de datos protegidos.
 No expongas identidades de menores, datos clínicos, direcciones particulares, contactos privados,
-números de documentos ni coordenadas residenciales. Si hay riesgo usa privacy_flags y record=[].
+números de documentos ni coordenadas residenciales. Si hay riesgo usa privacy_flags y señala en
+protected_fields los campos concretos omitidos para proteger a las personas; conserva en record
+los campos seguros. NUNCA vacíes toda la ficha sólo porque el artículo mencione niños o salud.
+Redacta narrativas sin nombres o iniciales de menores, diagnósticos individuales, domicilios o
+contactos: si no puedes minimizar un campo con fidelidad, omítelo y decláralo protegido. Protegido
+no equivale a not_reported_fields. Un departamento o municipio respaldado puede conservarse como
+geografía administrativa general aunque otro campo sea protegido; nunca una dirección residencial.
 Personas afectadas: descripción general minimizada; actores: instituciones mencionadas, sin inferir
-responsabilidad. No inferir municipio por departamento, ocupación por nombre, arma por violencia,
+responsabilidad. Conserva descripciones anónimas respaldadas como "estudiantes" o "grupo de niñas
+y niños": mencionar menores no convierte esa descripción general en un identificador protegido.
+No inferir municipio por departamento, ocupación por nombre, arma por violencia,
 fecha del hecho por publicación o motivación por contexto. Hipótesis sólo atribuida a la fuente.
 Para departamento, municipio, lugar público, instituciones, actores e instrumentos, usa la forma
 literal presente en los párrafos citados (sin expandir siglas o completar nombres por conocimiento externo).
+Las ubicaciones deben referirse al hecho o asunto de la noticia: nunca a la firma del periodista,
+sede del medio o ubicación de un tribunal como sustituto de un hecho ocurrido en otro lugar.
+Extrae un municipio mencionado aunque no se indique el departamento. No completes el departamento
+a partir de ese municipio ni conviertas una mención ambigua en ubicación del hecho.
 Usa prosa neutral en español y atribución a la fuente. No califiques nada como confirmado.
 No copies titulares sensacionalistas como título; title y summary también requieren evidencia.
 event_date/event_date_end: ISO YYYY-MM-DD sólo con respaldo. Para precisión mensual/anual usa límites
@@ -310,6 +335,8 @@ def response_schema():
     schema["properties"]["record"]["items"]["properties"]["field"]["enum"] = [
         field for field in ExtractedRecord.model_fields if field != "date_precision"]
     schema["properties"]["not_reported_fields"]["items"]["enum"] = [
+        field for field in ExtractedRecord.model_fields if field != "date_precision"]
+    schema["properties"]["protected_fields"]["items"]["enum"] = [
         field for field in ExtractedRecord.model_fields if field != "date_precision"]
     return schema
 
@@ -571,18 +598,6 @@ def _normalize_record_scope(record, record_type, published_date):
     return discarded
 
 
-def _privacy_flags(text):
-    # Conservative triage, not identity inference. Ambiguous sensitive articles go to
-    # manual review without retaining model prose or quotations. No automatic rejection.
-    patterns = {
-        "minor_identifiers": r"\b(?:niñ[oa]s?|adolescentes?|menor(?:es)? de edad|(?:[1-9]|1[0-7]) años)\b",
-        "clinical_details": r"\b(?:diagn[oó]stic\w*|c[aá]ncer|VIH|diab[eé]t\w*|historial m[eé]dico|historia cl[ií]nica|embaraz\w*)\b",
-        "precise_address": r"\b(?:domicilio|direcci[oó]n particular|reside en|residente en|casa\s*(?:n[uú]mero|#)|pasaje\s+\w+)\b|[-+]?\d{1,2}\.\d{4,}\s*,\s*[-+]?\d{1,3}\.\d{4,}",
-        "private_contact": r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\b(?:tel[eé]fono|celular|DUI)\s*[:#]?\s*[+\d][\d -]{6,}|(?<!\d)(?:\+503[ -]?)?[267]\d{3}[- ]?\d{4}(?!\d)",
-    }
-    return sorted(key for key, pattern in patterns.items() if re.search(pattern, text, re.I))
-
-
 def _claim(claim):
     notes = {
         "reported": "Extracción automatizada atribuida a la fuente; requiere revisión humana del respaldo.",
@@ -615,7 +630,7 @@ def _usage(response):
             for name, provider_name in mapping.items()}
 
 
-def _universal_news_document(prepared, article, output, extracted=None, *, protected=False, rejected=()):
+def _universal_news_document(prepared, article, output, extracted=None, *, protected_fields=(), rejected=()):
     document = empty_news_dossier(prepared, extraction_status="processed")
     document["classification"] = {name: getattr(output, name) for name in ("jurisdiction", "relevance", "record_type")}
     notes = {
@@ -627,12 +642,12 @@ def _universal_news_document(prepared, article, output, extracted=None, *, prote
     }
     for name in NEWS_FIELDS:
         field = getattr(extracted, name) if extracted is not None else None
-        status = ("withheld" if protected else "pending" if name in rejected else field.status if field is not None
+        status = ("withheld" if name in protected_fields else "pending" if name in rejected else field.status if field is not None
                   else "not_reported" if name in output.not_reported_fields else "pending")
         note = notes[status]
         if status == "not_reported" and article.get("truncated"):
             note += " El texto consultado está recortado; la ausencia se refiere sólo a ese fragmento."
-        if name in rejected and not protected:
+        if name in rejected and name not in protected_fields:
             note = "Campo pendiente de evaluación: la extracción no superó los controles de evidencia o coherencia."
         document["fields"][name] = {
             "value": field.value if status == "reported" else None,
@@ -723,6 +738,7 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None):
         "grounding": {}, "completion_required": ["Revisión humana de alcance, privacidad y hechos antes de preparar la publicación."],
         "notice": "Extracción automatizada privada. Citas literales no equivalen a hechos verificados; no publicar sin revisión humana.",
         "extraction": {"provider": "gemini", "model": model, "prompt_version": PROMPT_VERSION,
+                       "privacy_policy_version": PRIVACY_POLICY_VERSION, "protected_fields": [],
                        "response_mode": "json_schema_with_local_validation",
                        "content_sha256": article["content_sha256"], "fetched_at": article["fetched_at"],
                        "extraction_method": article["extraction_method"], "truncated": bool(article.get("truncated", False)),
@@ -737,28 +753,43 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None):
     source_title = prepared.get("source_title") or prepared.get("title") or ""
     flags = sorted(set(output.privacy_flags) | set(_privacy_flags(article["text"]))
                    | set(_privacy_flags(source_title)) | set(_privacy_flags(generated_values)))
-    if flags:
+    if flags or output.protected_fields:
         result.update(status="needs_privacy_review", privacy_flags=flags)
-        result["news_dossier"] = _universal_news_document(prepared, article, output, protected=True)
-        return result
     if extracted is None:
-        result["news_dossier"] = _universal_news_document(prepared, article, output)
+        protected = minimize_fields(None, paragraphs=paragraphs, source_title=source_title,
+                                    flags=flags, protected_fields=output.protected_fields)
+        result["extraction"]["protected_fields"] = protected
+        result["news_dossier"] = _universal_news_document(prepared, article, output, protected_fields=protected)
         return result
-    if any(isinstance(value, str) and value.strip() == article["text"].strip() for value in values):
-        raise GeminiDraftError("article_body_in_output")
-    if re.search(r"\b(?:confirmad[oa]s?|verificad[oa]s?|culpable)\b", generated_values, re.I):
-        raise GeminiDraftError("unreviewed_certainty_claim")
     for key in ExtractedRecord.model_fields:
         if key != "date_precision":
             _ground(getattr(extracted, key).citations, paragraphs)
     rejected_fields = sorted(set(output.discarded_fields + _ground_named_values(extracted, paragraphs)
                                  + _ground_dates(extracted) + _normalize_news_extraction(extracted, output.jurisdiction)))
-    result["news_dossier"] = _universal_news_document(prepared, article, output, extracted, rejected=rejected_fields)
+    protected = minimize_fields(extracted, paragraphs=paragraphs, source_title=source_title,
+                                flags=flags, protected_fields=output.protected_fields)
+    result["extraction"]["protected_fields"] = protected
+    if protected:
+        result.update(status="needs_privacy_review", privacy_flags=flags)
+    # Validate surviving prose only: protected values and their citations have
+    # already been removed from the per-field record in memory.
+    values = [getattr(extracted, key).value for key in ExtractedRecord.model_fields if key != "date_precision"]
+    generated_values = json.dumps(values, ensure_ascii=False)
+    if any(isinstance(value, str) and value.strip() == article["text"].strip() for value in values):
+        raise GeminiDraftError("article_body_in_output")
+    if re.search(r"\b(?:confirmad[oa]s?|verificad[oa]s?|culpable)\b", generated_values, re.I):
+        raise GeminiDraftError("unreviewed_certainty_claim")
+    result["news_dossier"] = _universal_news_document(prepared, article, output, extracted,
+                                                    protected_fields=protected, rejected=rejected_fields)
     result["extraction"]["rejected_fields"] = rejected_fields
     result["grounding"] = {field: [_private_locator(c) for c in getattr(extracted, field).citations]
                            for field in ExtractedRecord.model_fields if field != "date_precision"}
     result["grounding"]["classification"] = {
         field: [_private_locator(c) for c in getattr(output.scope_evidence, field)] for field in ScopeEvidence.model_fields}
+    if flags or protected:
+        # Safe fields remain useful in the private news worksheet, but the
+        # stricter case projection still requires an editorial privacy decision.
+        return result
     if output.jurisdiction != "SV" or output.relevance != "relevant" or not output.record_type or not prepared["published_date"]:
         return result
     # The case catalogue keeps its narrower semantics without deleting the

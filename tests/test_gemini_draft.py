@@ -225,10 +225,14 @@ def test_out_of_scope_or_unclear_does_not_invent_or_auto_reject_cases(scope, val
     "Su domicilio se encuentra cerca del centro.",
     "El número de contacto es 7777-1234.",
 ])
-def test_sensitive_source_fails_closed_to_manual_privacy_review(sensitive):
+def test_sensitive_source_requires_privacy_review_without_erasing_safe_fields(sensitive):
     result = run(article_extra=sensitive)
     assert result["status"] == "needs_privacy_review"
-    assert result["record"] is None and result["grounding"] == {}
+    assert result["record"] is None
+    assert result["news_dossier"]["fields"]["summary"]["status"] == "reported"
+    assert result["news_dossier"]["fields"]["department"]["value"] == "San Salvador"
+    assert result["grounding"]["department"]
+    assert result["extraction"]["privacy_policy_version"] == 2
     assert sensitive not in json.dumps(result)
 
 
@@ -248,6 +252,185 @@ def test_sensitive_title_is_checked_even_when_body_omits_that_detail():
     candidate["source_title"] = "Reporte sobre una adolescente"
     result = extract_draft(candidate, article, api_key=API_KEY, model=MODEL, request_session=Session([response()]))
     assert result["status"] == "needs_privacy_review" and result["record"] is None
+
+
+def privacy_run(extra, fields, *, protected=None, absent=None, flags=None):
+    candidate, article = inputs(extra)
+    envelope = json.loads(response().body)
+    part = envelope["candidates"][0]["content"]["parts"][0]
+    wire = json.loads(part["text"])
+    wire["record"] = [entry for entry in wire["record"] if entry["field"] not in fields]
+    wire["record"] += [{"field": name, "values": value if isinstance(value, list) else [value],
+                        "evidence_refs": ["e4"]} for name, value in fields.items()]
+    wire["protected_fields"] = protected or []
+    wire["not_reported_fields"] = absent or []
+    wire["privacy_flags"] = flags or []
+    if "event_date" in fields:
+        wire["date_precision"] = "day"
+    part["text"] = json.dumps(wire)
+    return extract_draft(candidate, article, api_key=API_KEY, model=MODEL,
+                         request_session=Session([Response(envelope)]))
+
+
+@pytest.mark.parametrize("detail, field, value", [
+    ("El contacto particular es persona@example.org.", "summary", "El contacto es persona@example.org."),
+    ("El teléfono privado es 7777-1234.", "facts", "Se puede contactar a través de 7777-1234."),
+    ("El domicilio está en el pasaje Robles, casa número 14.", "public_place", "pasaje Robles"),
+    ("La persona tiene un diagnóstico de VIH.", "summary", "La persona tiene un diagnóstico de VIH."),
+    ("La adolescente Ana Martínez sufrió una detención.", "facts", "La fuente denuncia la detención de Ana Martínez."),
+    ("La niña llamada Ana sufrió una detención.", "summary", "Ana sufrió una detención según la fuente."),
+    ("La niña A. M. sufrió una detención.", "facts", "La fuente describe la detención de A. M."),
+    ("La adolescente Ana Martínez sufrió una detención.", "summary", "La fuente describe la detención de Martínez."),
+    ("El número de identidad es 00123456-7.", "facts", "La identidad aparece como 00123456-7."),
+    ("La residencia se sitúa en 13.71, -89.22.", "public_place", "13.71, -89.22"),
+])
+def test_local_field_guards_remove_sensitive_values_when_model_omits_flags(detail, field, value):
+    result = privacy_run(detail, {field: value})
+    protected = result["news_dossier"]["fields"][field]
+    assert protected["status"] == "withheld" and protected["value"] is None
+    assert protected["evidence_refs"] == [] and result["grounding"][field] == []
+    assert field in result["extraction"]["protected_fields"]
+    assert value not in json.dumps(result, ensure_ascii=False)
+    assert result["status"] == "needs_privacy_review" and result["record"] is None
+    assert result["news_dossier"]["fields"]["department"]["value"] == "San Salvador"
+    assert result["news_dossier"]["fields"]["themes"]["status"] == "reported"
+
+
+def test_explicit_protected_fields_override_model_values_and_absence_without_erasing_others():
+    result = privacy_run("La información requiere protección por contexto específico.",
+                         {"facts": "Valor que debe desaparecer."}, protected=["facts"], absent=["facts"])
+    fields = result["news_dossier"]["fields"]
+    assert fields["facts"]["status"] == "withheld" and fields["facts"]["value"] is None
+    assert fields["summary"]["status"] == "reported"
+    assert result["grounding"]["facts"] == []
+    assert "Valor que debe desaparecer" not in json.dumps(result)
+    assert result["status"] == "needs_privacy_review"
+    assert result["extraction"]["protected_fields"] == ["facts"]
+
+
+def test_declared_protection_without_record_is_not_falsely_described_as_absent():
+    document = extraction()
+    document.update(record=None, privacy_flags=["private_contact"], protected_fields=["affected_persons"])
+    result = run(document)
+    assert result["news_dossier"]["fields"]["affected_persons"]["status"] == "withheld"
+    assert result["news_dossier"]["fields"]["department"]["status"] == "pending"
+    assert result["extraction"]["protected_fields"] == ["affected_persons"]
+
+
+@pytest.mark.parametrize("protected", [["invented_field"], ["summary", "summary"]])
+def test_protected_field_names_are_bounded_known_and_unique(protected):
+    document = extraction()
+    document["protected_fields"] = protected
+    with pytest.raises(GeminiDraftError, match="invalid_protected_field_status"):
+        run(document)
+
+
+def test_privacy_triage_keeps_cited_coarse_municipality_and_date_from_a_sensitive_article():
+    result = privacy_run("La fuente sitúa la detención de la adolescente Ana Martínez en Suchitoto el 27 de agosto de 2025.",
+                         {"municipality": "Suchitoto", "event_date": "2025-08-27", "affected_persons": ["Ana Martínez"]})
+    fields = result["news_dossier"]["fields"]
+    assert fields["municipality"]["value"] == "Suchitoto"
+    assert fields["event_date"]["value"] == "2025-08-27"
+    assert fields["affected_persons"]["status"] == "withheld"
+    assert fields["summary"]["status"] == "reported"
+    assert result["status"] == "needs_privacy_review" and result["record"] is None
+
+
+def test_precise_place_is_protected_without_erasing_its_coarse_municipality():
+    result = privacy_run("La adolescente reside en Suchitoto, en la casa número 14 del pasaje Robles.",
+                         {"municipality": "Suchitoto", "public_place": "pasaje Robles"})
+    fields = result["news_dossier"]["fields"]
+    assert fields["municipality"]["value"] == "Suchitoto"
+    assert fields["public_place"]["status"] == "withheld"
+    assert fields["public_place"]["evidence_refs"] == []
+
+
+def test_ambiguous_but_known_coarse_municipality_is_not_mislabeled_private():
+    result = privacy_run("La fuente denuncia la detención de una adolescente en San Isidro.",
+                         {"municipality": "San Isidro"})
+    field = result["news_dossier"]["fields"]["municipality"]
+    assert field["status"] == "reported" and field["value"] == "San Isidro"
+    assert "municipality" not in result["extraction"]["protected_fields"]
+    # The privacy guard must not resolve this homonym or change its department.
+    assert result["news_dossier"]["fields"]["department"]["value"] == "San Salvador"
+
+
+def test_noncanonical_municipality_cannot_retain_an_identity_under_privacy_triage():
+    result = privacy_run("La adolescente Ana Martínez denunció una detención.", {"municipality": "Ana Martínez"})
+    assert result["news_dossier"]["fields"]["municipality"]["status"] == "withheld"
+    assert "Ana Martínez" not in json.dumps(result, ensure_ascii=False)
+
+
+def test_minor_birth_date_is_protected_even_if_model_puts_it_in_event_date():
+    result = privacy_run("La adolescente nació el 27 de agosto de 2012.", {"event_date": "2012-08-27"})
+    assert result["news_dossier"]["fields"]["event_date"]["status"] == "withheld"
+    assert result["news_dossier"]["date_precision"] == "unknown"
+
+
+def test_safe_public_health_topic_does_not_protect_the_entire_record():
+    result = privacy_run("La noticia trata programas de prevención del VIH dirigidos a personas adultas.",
+                         {"themes": ["VIH"], "facts": "La fuente describe programas de prevención."})
+    fields = result["news_dossier"]["fields"]
+    assert fields["themes"]["value"] == ["VIH"]
+    assert fields["facts"]["status"] == "reported"
+    assert fields["department"]["value"] == "San Salvador"
+    assert result["extraction"]["privacy_policy_version"] == 2
+    assert result["status"] == "needs_privacy_review"
+
+
+@pytest.mark.parametrize("description", ["Grupo de niñas y niños", "Estudiantes", "Una adolescente"])
+def test_anonymous_minor_descriptions_remain_useful_without_automatic_publication(description):
+    result = privacy_run("La fuente describe denuncias sobre un grupo de niñas y niños y estudiantes en Suchitoto.",
+                         {"affected_persons": [description]})
+    field = result["news_dossier"]["fields"]["affected_persons"]
+    assert field["status"] == "reported" and field["value"] == [description]
+    assert result["grounding"]["affected_persons"]
+    assert "affected_persons" not in result["extraction"]["protected_fields"]
+    assert result["status"] == "needs_privacy_review"
+    assert result["record"] is None and result["publishable"] is False and result["human_reviewed"] is False
+
+
+@pytest.mark.parametrize("description", ["Ana Martínez", "Ana", "Martínez", "A. M."])
+def test_identified_minor_people_are_protected_when_model_omits_privacy_flags(description):
+    result = privacy_run("La adolescente Ana Martínez, identificada también como A. M., sufrió una detención.",
+                         {"affected_persons": [description]})
+    field = result["news_dossier"]["fields"]["affected_persons"]
+    assert field["status"] == "withheld" and field["value"] is None
+    assert field["evidence_refs"] == [] and result["grounding"]["affected_persons"] == []
+    assert "affected_persons" in result["extraction"]["protected_fields"]
+    assert result["status"] == "needs_privacy_review" and result["record"] is None
+    assert result["news_dossier"]["fields"]["summary"]["status"] == "reported"
+
+
+def test_anonymous_description_is_not_discarded_because_source_names_the_minor():
+    result = privacy_run("La adolescente Ana Martínez sufrió una detención según una organización.",
+                         {"affected_persons": ["Una adolescente"]})
+    assert result["news_dossier"]["fields"]["affected_persons"]["value"] == ["Una adolescente"]
+    assert "Ana Martínez" not in json.dumps(result, ensure_ascii=False)
+    assert result["status"] == "needs_privacy_review" and result["publishable"] is False
+
+
+@pytest.mark.parametrize("source_name", ["Ana, de 15 años", "Ana de 15 años", "Ana (15 años)"])
+def test_single_name_next_to_minor_age_is_protected_in_every_reused_field(source_name):
+    result = privacy_run(f"{source_name} fue detenida en Suchitoto según la fuente.",
+                         {"affected_persons": ["Ana"], "facts": "La fuente denuncia la detención de Ana.",
+                          "municipality": "Suchitoto"})
+    for name in ("affected_persons", "facts"):
+        field = result["news_dossier"]["fields"][name]
+        assert field["status"] == "withheld" and field["value"] is None
+        assert field["evidence_refs"] == [] and result["grounding"][name] == []
+        assert name in result["extraction"]["protected_fields"]
+    assert "Ana" not in json.dumps(result, ensure_ascii=False)
+    assert result["news_dossier"]["fields"]["municipality"]["value"] == "Suchitoto"
+    assert result["news_dossier"]["fields"]["summary"]["status"] == "reported"
+    assert result["status"] == "needs_privacy_review" and result["record"] is None
+    assert result["publishable"] is False
+
+
+def test_public_institution_mentioned_in_sensitive_paragraph_is_not_a_private_identity():
+    result = privacy_run("El Hospital Nacional Rosales informó sobre programas contra el cáncer.",
+                         {"institutional_sources": ["Hospital Nacional Rosales"]})
+    assert result["news_dossier"]["fields"]["institutional_sources"]["value"] == ["Hospital Nacional Rosales"]
 
 
 @pytest.mark.parametrize("mutate", [
@@ -517,16 +700,21 @@ def test_empty_model_record_still_has_a_dossier_and_absence_requires_an_explicit
     assert result["record"] is None
 
 
-def test_privacy_produces_protected_fields_even_for_foreign_news_without_retaining_generated_details():
+def test_minor_privacy_protects_people_in_foreign_news_while_preserving_safe_fields():
     document = extraction()
     document["jurisdiction"] = "other"
-    result = run(document, article_extra="La adolescente fue identificada en la publicación original.")
+    document["record"]["affected_persons"]["value"] = ["Ana Martínez"]
+    result = run(document, article_extra="La adolescente Ana Martínez fue identificada en la publicación original.")
     assert result["status"] == "needs_privacy_review" and result["record"] is None
     news = validate_news_dossier(result["news_dossier"])
-    assert all(field["status"] == "withheld" and field["value"] is None for field in news["fields"].values())
-    assert result["grounding"] == {}
+    assert news["fields"]["affected_persons"]["status"] == "withheld"
+    assert news["fields"]["affected_persons"]["value"] is None
+    assert result["grounding"]["affected_persons"] == []
+    assert news["fields"]["summary"]["status"] == "reported"
+    assert news["fields"]["facts"]["status"] == "reported"
+    assert result["grounding"]["facts"]
     assert '"quote"' not in json.dumps(news)
-    assert extraction()["record"]["summary"]["value"] not in json.dumps(news)
+    assert news["fields"]["summary"]["value"] == extraction()["record"]["summary"]["value"]
 
 
 def test_readable_news_without_a_publication_date_can_be_processed_without_inventing_one():

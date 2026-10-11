@@ -18,7 +18,9 @@ AI_LABELS = {"ai/ready": "16815D", "ai/scope-review": "D97706",
              "ai/privacy-review": "9333EA", "ai/error": "B91C1C", "ai/pending": "D97706"}
 MAX_FILE_BYTES = 180_000
 DOSSIER_VERSION = 1
-COMPLETE_MARKER = re.compile(r"<!-- mdh-news-dossier:v1:([a-f0-9]{40,64}) -->")
+PRIVACY_POLICY_VERSION = 2
+COMPLETE_MARKER = re.compile(r"<!-- mdh-news-dossier:v([12]):([a-f0-9]{40,64}) -->")
+PRIVACY_RETRY_MARKER = "<!-- mdh-field-privacy-retry:v2 -->"
 MIN_WRITE_INTERVAL = 2.0
 
 
@@ -133,6 +135,12 @@ def validate_state(state, candidate):
             or state.get("status") not in ("error", "completed")
             or type(state.get("attempts")) is not int or state["attempts"] < 0):
         raise ValueError("invalid_processing_state")
+    if "privacy_reprocessing_version" in state or "privacy_reprocessing_attempts" in state:
+        if (type(state.get("privacy_reprocessing_version")) is not int
+                or state["privacy_reprocessing_version"] != PRIVACY_POLICY_VERSION
+                or type(state.get("privacy_reprocessing_attempts")) is not int
+                or state["privacy_reprocessing_attempts"] < 0):
+            raise ValueError("invalid_privacy_reprocessing_state")
     for key in ("updated_at", "next_retry_at"):
         if state.get(key) is not None:
             try:
@@ -200,6 +208,20 @@ def complete_document(document):
     return document.get("news_dossier", {}).get("extraction_status") == "processed"
 
 
+def needs_field_privacy_reprocessing(document):
+    """Only the former blanket redaction warrants a new bounded model budget.
+
+    A valid new-policy dossier may legitimately protect every field. It must not
+    be repeatedly extracted, and older safe dossiers need no model call either.
+    """
+    from .news_dossier import FIELD_NAMES
+    fields = document.get("news_dossier", {}).get("fields", {})
+    return (complete_document(document) and document.get("status") == "needs_privacy_review"
+            and document.get("extraction", {}).get("privacy_policy_version") != PRIVACY_POLICY_VERSION
+            and set(fields) == set(FIELD_NAMES)
+            and all(field.get("status") == "withheld" for field in fields.values()))
+
+
 def skeleton_envelope(candidate, status="pending", *, error_code=None, model=None):
     from .news_dossier import empty_news_dossier
     result = {"schema_version": 1, "candidate_id": candidate["id"], "source_url": candidate["source_url"],
@@ -243,7 +265,9 @@ def update_issue(inbox, issue_number, candidate, document=None, error_code=None,
         if error_code:
             detail += f"\n\nCódigo de diagnóstico: `{error_code}`. El reintento conserva sus límites."
         if complete_document(document) and isinstance(draft_sha, str) and re.fullmatch(r"[a-f0-9]{40,64}", draft_sha):
-            detail += f"\n<!-- mdh-news-dossier:v1:{draft_sha} -->"
+            detail += f"\n<!-- mdh-news-dossier:v2:{draft_sha} -->"
+        elif document.get("extraction", {}).get("privacy_reprocessing_version") == PRIVACY_POLICY_VERSION:
+            detail += f"\n{PRIVACY_RETRY_MARKER}"
     else:
         label, notice = "ai/error", "La extracción no se completó. No se inventó una ficha ni se publicó contenido."
         detail = f"Código de diagnóstico: `{error_code}`. Consulte el estado privado de procesamiento."
@@ -315,7 +339,7 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
     report = {"started_at": now.isoformat(), "model": model, "pending": 0, "attempted": 0, "drafts": 0,
               "scope_review": 0, "privacy_review": 0, "errors": 0, "skipped_existing": 0,
               "deferred": 0, "invalid_metadata": 0, "migrated": 0, "news_dossiers": 0,
-              "partial_dossiers": 0, "stopped_reason": None, "publications": 0}
+              "partial_dossiers": 0, "privacy_reprocessed": 0, "stopped_reason": None, "publications": 0}
     ensure_ai_labels(inbox)
     candidates = []
     for issue in pending_issues(inbox):
@@ -334,16 +358,40 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         scope=lambda row: row[1].get("scope_hint"),
         key=lambda row: (row[1].get("published_date") or "", row[1]["id"]),
         offset=len(draft_index)))
+    # Give the former blanket policy a small migration share without waiting
+    # behind years of untouched historical news. A v1 badge is only a hint:
+    # the actual dossier is validated before any model work or budget reset.
+    privacy_candidates = []
+    for row in [*new, *old]:
+        issue, candidate = row
+        marker = COMPLETE_MARKER.search(issue.get("body") or "")
+        if (candidate["id"] in draft_index
+                and ("ai/privacy-review" in {label["name"] for label in issue.get("labels", [])}
+                     or PRIVACY_RETRY_MARKER in (issue.get("body") or ""))
+                and not (marker and marker.group(1) == "2" and marker.group(2) == draft_index[candidate["id"]])):
+            privacy_candidates.append(row)
+    privacy_issue_numbers = {row[0]["number"] for row in privacy_candidates}
+    new = [row for row in new if row[0]["number"] not in privacy_issue_numbers]
+    old = [row for row in old if row[0]["number"] not in privacy_issue_numbers]
     def schedule():
+        privacy_remainder = []
+        privacy_quota = min(5, max(1, limit // 4))
+        for index, item in enumerate(privacy_candidates):
+            if report["attempted"] >= privacy_quota:
+                privacy_remainder = privacy_candidates[index:]
+                break
+            yield item
         remainder = []
         new_quota = min(5, max(1, limit // 4)) if old else limit
+        rss_start_attempts = report["attempted"]
         for index, item in enumerate(new):
-            if report["attempted"] >= new_quota:
+            if report["attempted"] - rss_start_attempts >= new_quota or report["attempted"] >= limit:
                 remainder = new[index:]
                 break
             yield item
         yield from old
         yield from remainder
+        yield from privacy_remainder
     def current_pending(issue, candidate):
         current = inbox.call("GET", inbox.base + f"/issues/{issue['number']}")
         if not is_pending(current):
@@ -363,23 +411,31 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         offline_candidates.add(identifier)
         return True
 
-    def done_state(candidate, attempts, document):
-        return {"candidate_id": candidate["id"], "source_url": candidate["source_url"],
+    def done_state(candidate, attempts, document, *, privacy_attempts=None):
+        result = {"candidate_id": candidate["id"], "source_url": candidate["source_url"],
                 "status": "completed", "attempts": attempts, "updated_at": utcnow().isoformat(),
                 "model": document.get("extraction", {}).get("model", model),
                 "content_sha256": document.get("extraction", {}).get("content_sha256"),
                 "draft_status": document["status"], "dossier_schema_version": DOSSIER_VERSION}
+        if privacy_attempts is not None:
+            result.update(privacy_reprocessing_version=PRIVACY_POLICY_VERSION,
+                          privacy_reprocessing_attempts=privacy_attempts)
+        return result
 
     for issue, candidate in schedule():
         identifier = candidate["id"]
         marker = COMPLETE_MARKER.search(issue.get("body") or "")
-        if (marker and identifier in draft_index and marker.group(1) == draft_index[identifier]
-                and {"ai/ready", "ai/scope-review", "ai/privacy-review"}.intersection(label["name"] for label in issue.get("labels", []))):
-            # This marker is written only after validating a processed v1 news
-            # dossier, and is tied to its exact Git blob. Old ai/* badges do not qualify.
+        labels = {label["name"] for label in issue.get("labels", [])}
+        if (marker and identifier in draft_index and marker.group(2) == draft_index[identifier]
+                and {"ai/ready", "ai/scope-review", "ai/privacy-review"}.intersection(labels)
+                and (marker.group(1) == "2" or "ai/privacy-review" not in labels)):
+            # Existing safe v1 dossiers keep their fast path. Only old privacy
+            # markers require reading once to detect the blanket-redaction policy.
+            # Both marker versions bind the decision to the exact Git blob.
             report["skipped_existing"] += 1
             continue
         existing_document, draft_sha = None, None
+        privacy_reprocessing = False
         if identifier in draft_index:
             existing = read_private_file(inbox, "drafts", identifier)
             if existing is None:
@@ -406,7 +462,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                 draft_sha = put_private_file(inbox, "drafts", identifier, existing_document, draft_sha)
                 draft_index[identifier] = draft_sha
                 report["migrated"] += 1
-            if complete_document(existing_document):
+            privacy_reprocessing = needs_field_privacy_reprocessing(existing_document)
+            if complete_document(existing_document) and not privacy_reprocessing:
                 if not begin_offline_work(issue, candidate):
                     report["deferred"] += 1
                     continue
@@ -415,7 +472,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                 if previous:
                     validate_state(previous_state, candidate)
                 put_private_file(inbox, "processing", identifier,
-                    done_state(candidate, previous_state.get("attempts", 0), existing_document), previous_sha)
+                    done_state(candidate, previous_state.get("attempts", 0), existing_document,
+                               privacy_attempts=previous_state.get("privacy_reprocessing_attempts")), previous_sha)
                 update_issue(inbox, issue["number"], candidate, document=existing_document, draft_sha=draft_sha)
                 report["skipped_existing"] += 1
                 continue
@@ -428,7 +486,16 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             validate_state(state, candidate)
         attempts = state.get("attempts", 0)
         retry_at = state.get("next_retry_at")
-        if state.get("status") == "completed" and state.get("dossier_schema_version") != DOSSIER_VERSION:
+        privacy_reprocessing = (privacy_reprocessing
+            or state.get("privacy_reprocessing_version") == PRIVACY_POLICY_VERSION
+            or (existing_document or {}).get("extraction", {}).get("privacy_reprocessing_version") == PRIVACY_POLICY_VERSION)
+        privacy_attempts = None
+        if privacy_reprocessing:
+            # The policy change gets one separate budget, without erasing prior
+            # attempts. Persist it on both success and failure so reruns cannot
+            # reopen a fresh budget or bypass the recorded retry timestamp.
+            privacy_attempts = state.get("privacy_reprocessing_attempts", 0)
+        elif state.get("status") == "completed" and state.get("dossier_schema_version") != DOSSIER_VERSION:
             # A legacy triage completion did not extract the news fields. Give
             # the new prompt its own bounded attempt budget once, preserving Git history.
             attempts, retry_at = 0, None
@@ -442,7 +509,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             draft_index[identifier] = draft_sha
             update_issue(inbox, issue["number"], candidate, document=existing_document, error_code=state.get("error_code"))
             report["partial_dossiers"] += 1
-        if not retry_failed and (attempts >= max_attempts or (retry_at and datetime.fromisoformat(retry_at) > now)):
+        budget_attempts = privacy_attempts if privacy_reprocessing else attempts
+        if not retry_failed and (budget_attempts >= max_attempts or (retry_at and datetime.fromisoformat(retry_at) > now)):
             report["deferred"] += 1
             continue
         if not current_pending(issue, candidate):
@@ -464,6 +532,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             validate_envelope(document, candidate)
             if not complete_document(document):
                 raise ValueError("incomplete_news_dossier")
+            if privacy_reprocessing and document.get("extraction", {}).get("privacy_policy_version") != PRIVACY_POLICY_VERSION:
+                raise ValueError("outdated_privacy_policy")
         except Exception as error:
             code, stop = error_category(error)
             if not current_pending(issue, candidate):
@@ -471,16 +541,23 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                 continue
             document = skeleton_envelope(candidate, "source_unavailable" if stage == "source" else "error",
                                          error_code=code, model=model)
-            draft_sha = put_private_file(inbox, "drafts", identifier, document, draft_sha)
-            draft_index[identifier] = draft_sha
+            if privacy_reprocessing:
+                document["extraction"]["privacy_reprocessing_version"] = PRIVACY_POLICY_VERSION
             next_retry = now + timedelta(hours=6 if stop else 1)
             failed = {"candidate_id": identifier, "source_url": candidate["source_url"], "status": "error",
                       "attempts": attempts if stop else attempts + 1, "error_code": code,
                       "next_retry_at": next_retry.isoformat(), "updated_at": utcnow().isoformat(), "model": model,
                       "dossier_schema_version": DOSSIER_VERSION}
+            if privacy_reprocessing:
+                failed.update(privacy_reprocessing_version=PRIVACY_POLICY_VERSION,
+                              privacy_reprocessing_attempts=privacy_attempts if stop else privacy_attempts + 1)
             if code == "invalid_extraction_schema":
                 failed["validation_issues"] = safe_validation_issues(error)
+            # Persist cooldown/budget before replacing the old blanket draft.
+            # A failed subsequent draft write must not reopen a fresh budget.
             put_private_file(inbox, "processing", identifier, failed, state_sha)
+            draft_sha = put_private_file(inbox, "drafts", identifier, document, draft_sha)
+            draft_index[identifier] = draft_sha
             update_issue(inbox, issue["number"], candidate, document=document, error_code=code)
             report["partial_dossiers"] += 1
             report["errors"] += 1
@@ -502,10 +579,13 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         document.setdefault("extraction", {}).update(provenance)
         draft_sha = put_private_file(inbox, "drafts", identifier, document, draft_sha)
         draft_index[identifier] = draft_sha
-        done = done_state(candidate, attempts + 1, document)
+        done = done_state(candidate, attempts + 1, document,
+                          privacy_attempts=privacy_attempts + 1 if privacy_reprocessing else None)
         put_private_file(inbox, "processing", identifier, done, state_sha)
         update_issue(inbox, issue["number"], candidate, document=document, draft_sha=draft_sha)
         report["news_dossiers"] += 1
+        if privacy_reprocessing:
+            report["privacy_reprocessed"] += 1
         report[{"draft": "drafts", "needs_scope_review": "scope_review", "needs_privacy_review": "privacy_review"}[document["status"]]] += 1
     report["github_write_calls"] = inbox.write_calls
     report["offline_candidates"] = len(offline_candidates)
