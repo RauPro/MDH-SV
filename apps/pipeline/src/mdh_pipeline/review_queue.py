@@ -352,12 +352,33 @@ def review(inbox, event):
     return {'decision':'approved_for_proposal','issue':issue_number,'publications':0}
 
 
+def require_human_review_trigger(event, triggering_actor):
+    """Reject a bot replay of a human event before opening the private inbox.
+
+    GitHub reruns preserve the original event and actor. The runtime's triggering
+    actor must therefore agree with the human who submitted this review.
+    """
+    sender = event.get('sender') if isinstance(event, dict) else None
+    if not isinstance(sender, dict) or sender.get('type') != 'User':
+        raise ValueError('Approval requires a human GitHub account')
+    username = sender.get('login')
+    if (not isinstance(username, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9-]{0,38}', username)
+            or not isinstance(triggering_actor, str) or triggering_actor != username):
+        raise ValueError('Review must be initiated by its original human reviewer; submit a new review instead')
+
+
 def main():
     import sys
     from pathlib import Path
+    review_event = None
+    if sys.argv[1:] == ['review']:
+        review_event = json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
+        # Required on every CLI review, including local invocations: never fall
+        # back to the original event when the runtime actor is unavailable.
+        require_human_review_trigger(review_event, os.environ.get('GITHUB_TRIGGERING_ACTOR'))
     inbox = GitHubInbox(os.environ['GITHUB_REPOSITORY'], os.environ['GH_TOKEN'])
     if sys.argv[1:] == ['review']:
-        report = review(inbox, json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text()))
+        report = review(inbox, review_event)
     else:
         report = collect(inbox)
     print(json.dumps(report, ensure_ascii=False, indent=2))

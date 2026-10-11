@@ -96,12 +96,16 @@ sin acumular lotes atrasados. Solicitudes más antiguas o futuras se rechazan.
 
 ## Instalación y comprobación
 
-1. Ejecutar pruebas, revisar el commit público y fijar su SHA en los workflows
-   privados. No entregar secretos a código de pull requests.
+1. Ejecutar pruebas y revisar el commit público. Antes de instalar la App,
+   actualizar `review.yml` privado y su SHA fijado: debe comprobar también
+   `GITHUB_TRIGGERING_ACTOR`, porque un reintento de Actions conserva el evento
+   humano original. Revisar ejecuciones humanas antiguas, que conservarían el
+   código anterior al reintentarse. No entregar secretos a código de pull requests.
 2. Autorizar e instalar la GitHub App. Verificar por API que selecciona solamente
    el repositorio privado y que el token no tiene permisos adicionales.
 3. Configurar Vercel y la cuota privada; provisionar el contador con consumo
-   previo explícito. Actualizar el workflow privado y desplegar producción.
+   previo explícito. Fijar el mismo SHA revisado en los demás workflows privados
+   y desplegar producción.
 4. Comprobar una invocación **Cron** en Vercel y su ejecución privada asociada.
    HTTP 202 significa solicitud aceptada; no demuestra una extracción terminada.
    Comparar `requested_hour`, `claimed_at`, `trigger_source` y el resultado del
