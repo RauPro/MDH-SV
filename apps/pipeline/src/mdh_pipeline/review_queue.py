@@ -8,6 +8,7 @@ import logging
 import os
 import re
 import socket
+import time
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from urllib.parse import urlsplit, urlunsplit, parse_qsl
@@ -120,28 +121,95 @@ def issue_body(candidate):
         f"### Metadatos de captura\n```json\n{safe}\n```\n")
 
 
+class GitHubRequestError(RuntimeError):
+    """Safe status codes only; never include provider bodies or credentials."""
+    def __init__(self, status_code=None, code=None):
+        self.status_code = status_code
+        self.code = code or (f'github_http_{status_code}' if status_code is not None else 'github_transport_error')
+        super().__init__(self.code)
+
+
 class GitHubInbox:
-    def __init__(self, repository, token, session=None):
+    def __init__(self, repository, token, session=None, *, sleep=time.sleep):
         if not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', repository):
             raise ValueError('Invalid review repository')
         self.repository = repository
         self.base = '/repos/' + repository
+        self.sleep = sleep
         self.session = session or requests.Session()
         self.session.headers.update({'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
         repo = self.call('GET', self.base)
         if repo.get('private') is not True or repo.get('full_name', '').lower() != repository.lower():
             raise ValueError('The review inbox MUST be a private repository')
 
+    def _response(self, method, path, *, file_get=False, **kwargs):
+        transient = {500, 502, 503, 504}
+        for attempt in range(3):
+            try:
+                response = (self.session.get('https://api.github.com' + path, timeout=(8, 30), **kwargs)
+                            if file_get else self.session.request(method, 'https://api.github.com' + path, timeout=(8, 30), **kwargs))
+            except requests.RequestException:
+                raise GitHubRequestError() from None
+            status = response.status_code
+            if status not in transient:
+                return response
+            if method == 'PUT' and path.startswith(self.base + '/contents/'):
+                receipt = self._reconcile_content(path, kwargs.get('json'), status)
+                if receipt is not None:
+                    return receipt
+            elif method != 'GET':
+                # An uncertain POST may already have created an Issue. Never
+                # duplicate it by retrying a mutation without an idempotency key.
+                raise GitHubRequestError(status)
+            if attempt == 2:
+                raise GitHubRequestError(status)
+            self.sleep(attempt + 1)
+        raise GitHubRequestError(code='github_retry_exhausted')
+
+    def _reconcile_content(self, path, payload, original_status):
+        import base64
+        import binascii
+        if not isinstance(payload, dict) or not isinstance(payload.get('content'), str):
+            raise GitHubRequestError(original_status)
+        try:
+            desired = base64.b64decode(payload['content'], validate=True)
+        except (ValueError, binascii.Error):
+            raise GitHubRequestError(original_status) from None
+        params = {'ref': payload['branch']} if isinstance(payload.get('branch'), str) else {}
+        current = self._response('GET', path, file_get=True, **({'params': params} if params else {}))
+        if current.status_code == 404:
+            return None  # Retry the original payload/SHA; never invent a new SHA.
+        if current.status_code >= 400:
+            raise GitHubRequestError(current.status_code)
+        try:
+            file = current.json()
+            if (file.get('type') != 'file' or file.get('encoding') != 'base64'
+                    or not re.fullmatch(r'[a-f0-9]{40,64}', file.get('sha', ''))):
+                raise ValueError()
+            actual = base64.b64decode(file['content'].replace('\n', ''), validate=True)
+            if type(file.get('size')) is not int or file['size'] != len(actual):
+                raise ValueError()
+        except (ValueError, TypeError, KeyError, AttributeError, binascii.Error):
+            raise GitHubRequestError(code='github_reconciliation_failed') from None
+        if actual == desired:
+            return {'content': {'sha': file['sha']}}
+        if file['sha'] != payload.get('sha'):
+            raise GitHubRequestError(409)  # Preserve a concurrent writer's new state.
+        return None
+
     def call(self, method, path, **kwargs):
-        response = self.session.request(method, 'https://api.github.com' + path, timeout=(8, 30), **kwargs)
+        response = self._response(method, path, **kwargs)
+        if isinstance(response, dict):
+            return response  # A transient Contents write was already applied.
         if response.status_code >= 400:
-            raise RuntimeError(f'GitHub request failed ({response.status_code}); candidate content withheld')
+            raise GitHubRequestError(response.status_code)
         return response.json() if response.content else None
 
     def get_file(self, path):
-        response = self.session.get("https://api.github.com" + path, timeout=(8, 30))
+        response = self._response('GET', path, file_get=True)
         if response.status_code == 404: return None
-        response.raise_for_status()
+        if response.status_code >= 400:
+            raise GitHubRequestError(response.status_code)
         return response.json()
 
     def ensure_labels(self):

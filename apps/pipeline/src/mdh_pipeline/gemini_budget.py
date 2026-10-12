@@ -199,7 +199,9 @@ def _advance(state, now):
 
 
 def _is_conflict(error):
-    status = getattr(getattr(error, "response", None), "status_code", None)
+    status = getattr(error, "status_code", None)
+    if status is None:
+        status = getattr(getattr(error, "response", None), "status_code", None)
     # GitHubInbox deliberately exposes only the HTTP status, never response data.
     return status in (409, 422) or (
         isinstance(error, RuntimeError)

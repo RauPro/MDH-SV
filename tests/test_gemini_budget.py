@@ -292,6 +292,23 @@ def test_cas_retries_are_bounded():
     assert len(inbox.writes) - before == 3
 
 
+def test_safe_github_error_reloads_a_real_competing_reservation():
+    from mdh_pipeline.review_queue import GitHubRequestError
+    budget, inbox, clock = ready()
+    competitor = GeminiBudget(inbox, configuration(), clock=clock)
+
+    def competing_write():
+        inbox.before_write = None
+        competitor.reserve(PAYLOAD)
+        raise GitHubRequestError(409)
+
+    inbox.before_write = competing_write
+    reservation = budget.reserve(PAYLOAD)
+    assert reservation.used_requests == 2
+    assert inbox.document()["used_requests"] == 2
+    assert len(inbox.document()["reservations"]) == 2
+
+
 def test_unacknowledged_write_fails_closed_even_if_reservation_reached_server():
     budget, inbox, _ = ready()
     inbox.receipt = False
