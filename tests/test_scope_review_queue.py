@@ -168,9 +168,151 @@ def test_incomplete_sixteen_item_result_persists_no_partial_private_decisions():
         assert len(items) == 16
         kwargs["budget"].requests_this_run += 1
         raise GeminiDraftError("incomplete_model_response")
-    result = run(inbox, Budget(), [], data, classify=incomplete)
+    result = run(inbox, Budget(), [], data, classify=incomplete, max_requests=1)
     assert result["stopped_reason"] == "model_error" and result["error_code"] == "incomplete_model_response"
     assert result["classified"] == 0 and result["http_requests"] == 1 and inbox.puts == []
+    assert result["model_errors"] == 1 and result["model_deferred_articles"] == 16
+
+
+def test_identity_failure_recovers_only_after_both_halves_pass_all_checks():
+    refs, _, data = fixtures(16)
+    inbox, sizes = Inbox(), []
+    def mismatched_parent(items, **kwargs):
+        sizes.append(len(items))
+        if len(items) == 16:
+            kwargs["budget"].requests_this_run += 1
+            raise GeminiDraftError("scope_identity_mismatch")
+        return classify(items, **kwargs)
+    result = run(inbox, Budget(), [], data, classify=mismatched_parent, max_requests=3)
+    assert sizes == [16, 8, 8] and result["http_requests"] == 3
+    assert result["classified"] == 16 and len(inbox.puts) == 16
+    assert result["selected_ids"] == sorted(ref["id"] for ref in refs)
+    assert result["model_errors"] == result["model_recovery_splits"] == 1
+    assert result["model_recovered_articles"] == 16
+    assert result["model_failed_articles"] == result["model_deferred_articles"] == 0
+    assert result["stopped_reason"] is None
+
+
+def test_successful_first_batch_is_preserved_when_next_batch_needs_recovery():
+    refs, _, data = fixtures(32)
+    inbox, sizes = Inbox(), []
+    def one_bad_batch(items, **kwargs):
+        sizes.append(len(items))
+        if len(sizes) == 2:
+            assert len(inbox.puts) == 16
+            kwargs["budget"].requests_this_run += 1
+            raise GeminiDraftError("scope_identity_mismatch")
+        return classify(items, **kwargs)
+    result = run(inbox, Budget(), [], data, classify=one_bad_batch, max_requests=4)
+    assert sizes == [16, 16, 8, 8]
+    assert result["classified"] == len(inbox.puts) == 32
+    assert result["http_requests"] == 4 and result["model_recovered_articles"] == 16
+    assert result["selected_ids"] == sorted(ref["id"] for ref in refs)
+
+
+def test_recursive_split_reaches_singletons_without_exceeding_shared_allocation():
+    _, _, data = fixtures(16)
+    sizes = []
+    def only_singletons(items, **kwargs):
+        sizes.append(len(items))
+        if len(items) > 1:
+            kwargs["budget"].requests_this_run += 1
+            raise GeminiDraftError("invalid_scope_response")
+        return classify(items, **kwargs)
+    result = run(Inbox(), Budget(), [], data, classify=only_singletons, max_requests=31)
+    assert set(sizes) == {16, 8, 4, 2, 1}
+    assert len(sizes) == result["http_requests"] == 31
+    assert result["classified"] == result["model_recovered_articles"] == 16
+    assert result["model_errors"] == result["model_recovery_splits"] == 15
+    assert result["stopped_reason"] is None
+
+
+def test_singleton_failure_stays_visible_while_unaffected_halves_and_later_news_continue():
+    refs, _, data = fixtures(17)
+    bad = sorted(refs, key=lambda ref: (ref["published_date"], ref["id"]))[0]["id"]
+    inbox = Inbox()
+    def one_bad_article(items, **kwargs):
+        if any(item["reference"]["id"] == bad for item in items):
+            kwargs["budget"].requests_this_run += 1
+            raise GeminiDraftError("ungrounded_scope_evidence")
+        return classify(items, **kwargs)
+    result = run(inbox, Budget(), [], data, classify=one_bad_article, max_requests=20)
+    assert result["classified"] == 16 and len(inbox.puts) == 16
+    assert bad not in result["selected_ids"] and len(result["selected_ids"]) == 16
+    assert result["model_failed_articles"] == 1 and result["model_deferred_articles"] == 0
+    assert result["model_recovered_articles"] == 15
+    assert result["stopped_reason"] == "model_error" and result["error_code"] == "ungrounded_scope_evidence"
+
+
+def test_recovery_preserves_valid_half_and_defers_the_other_at_request_ceiling():
+    _, _, data = fixtures(16)
+    sizes = []
+    def broken_parent(items, **kwargs):
+        sizes.append(len(items))
+        if len(items) == 16:
+            kwargs["budget"].requests_this_run += 1
+            raise GeminiDraftError("scope_identity_mismatch")
+        return classify(items, **kwargs)
+    result = run(Inbox(), Budget(), [], data, classify=broken_parent, max_requests=2)
+    assert sizes == [16, 8] and result["http_requests"] == 2
+    assert result["classified"] == result["model_recovered_articles"] == 8
+    assert result["model_failed_articles"] == 0 and result["model_deferred_articles"] == 8
+    assert result["stopped_reason"] == "model_error"
+
+
+def test_model_recovery_checks_the_same_deadline_before_splitting():
+    _, _, data = fixtures(16)
+    tick = [0]
+    def late_failure(items, **kwargs):
+        kwargs["budget"].requests_this_run += 1
+        tick[0] = 721
+        raise GeminiDraftError("scope_identity_mismatch")
+    result = run(Inbox(), Budget(), [], data, classify=late_failure, max_requests=20, clock=lambda: tick[0])
+    assert result["http_requests"] == 1 and result["model_recovery_splits"] == 0
+    assert result["model_deferred_articles"] == 16 and result["classified"] == 0
+    assert result["stopped_reason"] == "model_error"
+
+
+def test_global_quota_pause_during_recovery_never_attempts_the_second_half():
+    _, _, data = fixtures(16)
+    sizes = []
+    def quota_after_parent(items, **kwargs):
+        sizes.append(len(items))
+        kwargs["budget"].requests_this_run += 1
+        if len(items) == 16:
+            raise GeminiDraftError("scope_identity_mismatch")
+        raise QuotaDeferred("provider_cooldown", NOW)
+    result = run(Inbox(), Budget(), [], data, classify=quota_after_parent, max_requests=20)
+    assert sizes == [16, 8] and result["http_requests"] == 2
+    assert result["quota_reason"] == "provider_cooldown" and result["halt_reason"] == "budget_deferred"
+    assert result["stopped_reason"] == "model_error" and result["model_deferred_articles"] == 16
+
+
+@pytest.mark.parametrize("code", ["provider_http_error", "provider_blocked", "provider_unavailable", "invalid_provider_configuration"])
+def test_provider_failures_are_not_retried_by_splitting(code):
+    _, _, data = fixtures(16)
+    sizes = []
+    def provider_failure(items, **kwargs):
+        sizes.append(len(items))
+        kwargs["budget"].requests_this_run += 1
+        raise GeminiDraftError(code)
+    result = run(Inbox(), Budget(), [], data, classify=provider_failure, max_requests=20)
+    assert sizes == [16] and result["http_requests"] == 1
+    assert result["stopped_reason"] == "model_error" and result["error_code"] == code
+    assert result["model_recovery_splits"] == result["classified"] == 0
+
+
+def test_storage_validation_failure_is_not_repaired_or_salvaged_as_a_model_split():
+    _, _, data = fixtures(16)
+    inbox, calls = Inbox(), []
+    def mutated_envelope(items, **kwargs):
+        calls.append(len(items))
+        results = classify(items, **kwargs)
+        results[-1]["source_read"]["truncated"] = True
+        return results
+    with pytest.raises(ValueError, match="scope_source_receipt_mismatch"):
+        run(inbox, Budget(), [], data, classify=mutated_envelope, max_requests=20)
+    assert calls == [16] and inbox.puts == []
 
 
 def test_negative_or_missing_old_drafts_do_not_exclude_raw_archive_references():

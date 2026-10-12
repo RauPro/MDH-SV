@@ -25,6 +25,11 @@ SOURCE_ERRORS = {"source_access_restricted", "source_not_found", "source_network
                  "source_input_too_large", "unsupported_source_content_type", "invalid_source_document",
                  "invalid_source_url", "redirect_outside_source", "unsafe_source_dns", "too_many_redirects"}
 MAX_CACHE_ITEMS = 100_000
+RECOVERABLE_SCOPE_ERRORS = {
+    "scope_identity_mismatch", "invalid_scope_response", "ungrounded_scope_evidence",
+    "invalid_json_response", "duplicate_json_key", "invalid_json_number",
+    "invalid_candidate_count", "invalid_response_parts", "incomplete_model_response", "response_too_large",
+}
 
 
 def _instant(value):
@@ -138,8 +143,11 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
     report = dict(candidates=len(references) - sum(identifier in references for identifier in excluded),
                   cached=0, retry_deferred=0, sources_checked=0, source_unavailable=0,
                   source_changed=0, reviewed=0, classified=0, relevant_sv=0, accepted=0,
-                  http_requests=0, stopped_reason=None, selected_ids=[])
+                  http_requests=0, stopped_reason=None, selected_ids=[], model_errors=0,
+                  model_recovery_splits=0, model_recovered_articles=0,
+                  model_failed_articles=0, model_deferred_articles=0)
     selected, pending = set(), []
+    recovery_ids, recovered_ids, singleton_failures = set(), set(), set()
     for identifier, reference in references.items():
         if identifier in excluded:
             continue
@@ -179,15 +187,36 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
         _put_private(inbox, "scope-attempts", document, before_write=pace_write)
         report["source_unavailable"] += 1
 
-    def submit():
-        nonlocal batch
-        if not batch:
+    def classify_and_store(items):
+        # Retries use the same object and remaining allocation. A malformed
+        # parent response contributes no saved rows and is never repaired.
+        if not available():
             return
-        results = classify(batch, api_key=api_key, model=model, budget=budget)
-        if not isinstance(results, list) or len(results) != len(batch):
+        try:
+            results = classify(items, api_key=api_key, model=model, budget=budget)
+        except GeminiDraftError as error:
+            if error.code not in RECOVERABLE_SCOPE_ERRORS:
+                # HTTP/provider/configuration failures are not grounds for more
+                # model calls. QuotaDeferred is deliberately never caught here.
+                raise
+            report["model_errors"] += 1
+            report["last_model_error_code"] = error.code
+            identities = {item["reference"]["id"] for item in items}
+            recovery_ids.update(identities)
+            if len(items) == 1:
+                singleton_failures.update(identities)
+                return
+            if not available():
+                return
+            report["model_recovery_splits"] += 1
+            middle = len(items) // 2
+            classify_and_store(items[:middle])
+            classify_and_store(items[middle:])
+            return
+        if not isinstance(results, list) or len(results) != len(items):
             raise ValueError("invalid_scope_batch_results")
         # Validate all results before storing any prefix of a malformed batch.
-        for result, item in zip(results, batch, strict=True):
+        for result, item in zip(results, items, strict=True):
             validate_scope_review(result, reference=item["reference"],
                 content_sha256=item["article"]["content_sha256"], now=now)
             receipt = {key: item["article"][key] for key in ("fetched_at", "extraction_method", "truncated", "content_sha256")}
@@ -198,11 +227,20 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
             _put_private(inbox, "scope-reviews", result, before_write=pace_write)
             report["reviewed"] += 1
             report["classified"] += 1
+            if result["candidate_id"] in recovery_ids:
+                recovered_ids.add(result["candidate_id"])
             if _positive(result):
                 selected.add(result["candidate_id"])
                 report["relevant_sv"] += 1
                 report["accepted"] += 1
+
+    def submit():
+        nonlocal batch
+        if not batch:
+            return
+        current = batch
         batch = []
+        classify_and_store(current)
 
     try:
         # Revisit every finite older-policy decision, including positives,
@@ -260,6 +298,15 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
     except GeminiDraftError as error:
         report["stopped_reason"] = "model_error"
         report["error_code"] = error.code
+    unresolved = recovery_ids - recovered_ids
+    report["model_recovered_articles"] = len(recovered_ids)
+    report["model_failed_articles"] = len(unresolved & singleton_failures)
+    report["model_deferred_articles"] = len(unresolved - singleton_failures)
+    if unresolved:
+        if report["stopped_reason"] not in {None, "model_error"}:
+            report["halt_reason"] = report["stopped_reason"]
+        report["stopped_reason"] = "model_error"
+        report.setdefault("error_code", report["last_model_error_code"])
     report["http_requests"] = budget.requests_this_run - starting_requests
     report["selected_ids"] = sorted(selected)
     report["classified_total"] = report["cached"] + report["classified"]
