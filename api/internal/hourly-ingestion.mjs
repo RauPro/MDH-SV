@@ -3,6 +3,7 @@ import { createHash, createPrivateKey, sign, timingSafeEqual } from 'node:crypto
 const GITHUB_API = 'https://api.github.com';
 const DISPATCH_PATH = '/repos/RauPro/MDH-SV-review/actions/workflows/extract.yml/dispatches';
 const ENDPOINT_PATH = '/api/internal/hourly-ingestion';
+const CRON_SCHEDULE = '7 * * * *';
 const NETWORK_TIMEOUT_MS = 8_000;
 
 function reply(response, status, body) {
@@ -89,6 +90,9 @@ export function createHourlyIngestionHandler({
       return reply(response, 405, { error: 'method_not_allowed' });
     }
     if (!emptyRequest(request)) return reply(response, 400, { error: 'invalid_request' });
+    // Provider metadata distinguishes ordinary manual probes after authentication;
+    // it is an attribution hint, not a separate signature or authorization check.
+    const triggerSource = request.headers?.['x-vercel-cron-schedule'] === CRON_SCHEDULE ? 'vercel_cron' : 'manual';
 
     let config;
     let jwt;
@@ -132,13 +136,13 @@ export function createHourlyIngestionHandler({
             batch_size: '50',
             retry_failed: 'false',
             scheduled_hour: scheduledHour,
-            trigger_source: 'vercel_cron',
+            trigger_source: triggerSource,
           },
         }),
       });
       if (dispatchResponse.status !== 204) throw new Error('dispatch_failed');
       // Acknowledgement is not evidence that the queued workflow has executed.
-      return reply(response, 202, { accepted: true, trigger_source: 'vercel_cron', scheduled_hour: scheduledHour });
+      return reply(response, 202, { accepted: true, trigger_source: triggerSource, scheduled_hour: scheduledHour });
     } catch {
       return reply(response, 502, { error: 'dispatch_failed' });
     } finally {

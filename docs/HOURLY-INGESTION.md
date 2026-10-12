@@ -35,6 +35,12 @@ Genera un token de instalación efímero limitado a ese ID de repositorio y
 Gemini ni la deploy key del publicador de ubicaciones se copian a Vercel.
 Revocar la instalación o la clave detiene este acceso.
 
+El disparador registra `vercel_cron` cuando recibe la cabecera de Vercel
+`x-vercel-cron-schedule: 7 * * * *`. Las llamadas autenticadas sin esa cabecera
+se registran como `manual`. La cabecera describe el origen declarado; la
+autenticación sigue dependiendo de `CRON_SECRET`. Contrastar también horario,
+actor y ejecuciones conocidas para acreditar una invocación automática.
+
 ## Definir el presupuesto y su procedencia
 
 Comprobar en AI Studio el **nivel gratuito** del proyecto dueño de la clave y
@@ -143,7 +149,8 @@ sin acumular lotes atrasados. Solicitudes más antiguas o futuras se rechazan.
    HTTP 202 significa solicitud aceptada; no demuestra una extracción terminada.
    Comparar `requested_hour`, `claimed_at`, `trigger_source` y el resultado del
    registro horario. Un segundo disparo debe registrar `hour_already_claimed`
-   sin llamadas nuevas a Gemini.
+   sin llamadas nuevas a Gemini. Guardar las horas y Run IDs de las pruebas
+   manuales para no confundirlas con los disparos del planificador.
 5. Verificar borradores privados y la publicación independiente de ubicaciones.
    Una ficha sigue necesitando revisión humana antes de publicar su contenido.
 
