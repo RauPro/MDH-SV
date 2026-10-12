@@ -38,6 +38,13 @@ console.log(`Validated ${catalog.records.length} public records and all download
 const approvedNews = JSON.parse(readFileSync(new URL('../../../data/reviewed/news_dossiers.json', import.meta.url)));
 const publicNews = JSON.parse(readFileSync(new URL('../public/archive/dossiers.json', import.meta.url)));
 const newsArchive = JSON.parse(readFileSync(new URL('../public/archive/news.json', import.meta.url)));
+// Verify discovery coverage independently of classification or publication.
+const candidateIds = new Set();
+for (const id of ['co-latino', 'gatoencerrado', 'factum', 'el-faro', 'el-mundo', 'la-prensa-grafica', 'el-diario-de-hoy']) {
+  const checkpoint = JSON.parse(readFileSync(new URL(`../../../data/history/${id}.json`, import.meta.url)));
+  for (const item of checkpoint.records) if (item.published_date >= newsArchive.coverage.start_date && item.published_date <= newsArchive.coverage.end_date) candidateIds.add(item.id);
+}
+assert.equal(newsArchive.policy.selection_gate.candidates, candidateIds.size, 'Discovery denominator must match the candidate checkpoints');
 assertSelectedNewsArchive(newsArchive);
 const allApproved = parsePublishedNewsDossiers(approvedNews);
 const selectionManifest = JSON.parse(readFileSync(new URL('../../../data/selection/news.json', import.meta.url)));

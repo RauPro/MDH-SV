@@ -58,22 +58,22 @@ jobs:
           import json, os, re
           from pathlib import Path
           from mdh_pipeline.review_queue import GitHubInbox
-          from mdh_pipeline.gemini_review import pending_issues, candidate_from_issue
+          from mdh_pipeline.gemini_review import editorial_excluded_ids
           inbox = GitHubInbox(os.environ['GITHUB_REPOSITORY'], os.environ['GH_TOKEN'])
-          pending = {candidate_from_issue(issue)['id'] for issue in pending_issues(inbox)}
-          saved = {p.stem for p in Path('inbox/drafts').glob('*.json') if re.fullmatch(r'[a-f0-9]{64}', p.stem)}
-          approved = json.loads(Path('publication/apps/web/public/archive/dossiers.json').read_text())
-          excluded = saved - pending | {d['candidate_id'] for d in approved['dossiers']}
-          Path('excluded-locations.json').write_text(json.dumps(sorted(excluded)))
-          print(json.dumps({'pending_candidates': len(pending), 'excluded_candidates': len(excluded)}))
+          reviewed = json.loads(Path('publication/data/reviewed/news_dossiers.json').read_text())
+          reviewed_ids = {d['candidate_id'] for d in reviewed['dossiers']}
+          excluded = editorial_excluded_ids(inbox, imported_ids=reviewed_ids)
+          Path('excluded-news.json').write_text(json.dumps(sorted(excluded)))
+          Path('excluded-locations.json').write_text(json.dumps(sorted(excluded | reviewed_ids)))
+          print(json.dumps({'editorial_withdrawals': len(excluded), 'human_decisions': len(reviewed_ids)}))
           PY
       - name: Seleccionar noticias pertinentes y actualizar el archivo público
         env:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: |
           python -m mdh_pipeline.history --export-only --candidates-only --data-dir publication/data/history --output candidates.json
-          python -m mdh_pipeline.news_selection --drafts inbox/drafts --scope-reviews inbox/scope-reviews --archive candidates.json --output publication/data/selection/news.json --excluded-ids excluded-locations.json
-          python -m mdh_pipeline.history --export-only --data-dir publication/data/history --selection publication/data/selection/news.json --reviewed-news publication/data/reviewed/news_dossiers.json --output publication/apps/web/public/archive/news.json
+          python -m mdh_pipeline.news_selection --drafts inbox/drafts --scope-reviews inbox/scope-reviews --archive candidates.json --output publication/data/selection/news.json --reviewed-dossiers publication/data/reviewed/news_dossiers.json --excluded-ids excluded-news.json
+          python -m mdh_pipeline.history --export-only --data-dir publication/data/history --selection publication/data/selection/news.json --reviewed-news publication/data/reviewed/news_dossiers.json --output publication/apps/web/public/archive/news.json --excluded-ids excluded-news.json
           python -m mdh_pipeline.news_publication --source publication/data/reviewed/news_dossiers.json --archive publication/apps/web/public/archive/news.json --destination publication/apps/web/public/archive/dossiers.json
       - name: Proyectar únicamente ubicaciones administrativas con evidencia
         env:

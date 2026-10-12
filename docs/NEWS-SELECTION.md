@@ -36,22 +36,49 @@ los candidatos. Los campos faltantes no impiden por sí solos seleccionar una
 noticia: pertinencia, privacidad, ficha completa y validación de un caso son
 controles diferentes.
 
-## Reevaluación y cuota
+## Clasificación antes de las fichas
 
-`mdh-universal-news-grounded-8-relevance-scope` se aplica a nuevas extracciones.
-Los positivos antiguos necesitan la reevaluación `mdh-news-scope-1`, vinculada al
-mismo artículo y hash; no se promociona una etiqueta cambiándole la versión.
+La política inclusiva `mdh-news-scope-2-inclusive-context` clasifica directamente
+cualquier referencia tras leer su fuente: no exige ficha, issue ni etiqueta
+positiva anterior. Incluye hacinamiento y reinserción como contexto cuando el
+artículo trata sustantivamente esas cuestiones, sin convertir una política
+pública en una denuncia de violación. Las fichas nuevas usan
+`mdh-universal-news-grounded-9-inclusive-context`. La evaluación de alcance v2
+prevalece sobre la clasificación auxiliar de una ficha del mismo texto.
 
-El workflow privado `Reevaluar pertinencia de noticias` relee artículos y agrupa
-hasta ocho por solicitud, con límites de texto y tiempo. Guarda sólo decisiones
-y procedencia en `scope-reviews/`, sin regenerar fichas. Se ejecuta después de la
-extracción y admite inicio manual. Por defecto usa como máximo dos solicitudes.
-Comparte el contador persistente de Gemini: cada intento consume presupuesto y
-un 429 activa la pausa común. No modifica el tope diario ni habilita facturación.
-Los límites del operador no garantizan evitar límites no publicados por Google.
+El job horario clasifica primero y completa fichas después, bajo una única
+reserva horaria. Asigna aproximadamente el 70% de las solicitudes a clasificación
+(máximo ocho); el resto, incluidos recursos no usados por esa fase, a fichas.
+Con diez solicitudes disponibles, el reparto inicial es siete y tres. Cada
+solicitud clasifica hasta ocho artículos, reduciendo el lote según el tamaño
+del JSON completo. Se preserva un intento para RSS nuevo antes del backlog
+positivo. Los reintentos también consumen presupuesto.
 
-Las reevaluaciones válidas se reutilizan. Si el contenido cambió desde la
-extracción, la noticia queda pendiente. Una nueva versión del criterio requiere
-migración explícita; versiones desconocidas no se admiten automáticamente.
-El publicador aplica decisiones nuevas y humanas, actualiza la selección y
-retira las ubicaciones de noticias que ya no pertenecen a ella.
+Las decisiones quedan en `scope-reviews/`; v2 conserva un recibo de lectura con
+fecha, método, truncamiento y hash, sin cuerpo. Los positivos v1 siguen válidos;
+sus exclusiones necesitan reevaluación bajo el criterio inclusivo. Una ficha
+puede conservar otro snapshot: no bloquea la clasificación de una lectura nueva
+ni convierte los datos antiguos en campos aprobados.
+
+Las cachés se cargan una vez por ejecución, sin miles de consultas individuales
+a GitHub. Las fuentes inaccesibles tienen reintentos diferidos: 24 horas para
+fallos ordinarios y siete días para acceso restringido, sin eludirlo. Los hashes
+describen lo consultado; una caché no demuestra que la página no haya cambiado.
+
+`review-scope.yml` queda para pruebas manuales; no duplica automáticamente el
+presupuesto del job horario. Todos comparten el contador persistente de Gemini y
+la pausa global ante 429. No se eleva el tope diario ni se habilita facturación.
+
+## Interpretar los recuentos
+
+El manifiesto v2 conserva `assessment_counts`. `evaluated` es la suma de
+`relevant`, `excluded` y `uncertain`; `pending = candidates - evaluated`.
+Las noticias sin evaluación nunca se suman a descartes. Las negativas antiguas
+pendientes de reevaluar son inciertas. Las decisiones humanas prevalecen.
+
+El archivo público expone esos recuentos en `policy.selection_gate`, con la fecha
+del snapshot `evaluated_at`. `selected` cuenta lo disponible tras decisiones
+editoriales, que pueden ser posteriores al snapshot de análisis. La recolección
+añade nuevas referencias sólo a pendientes; reducir la base exige conciliación.
+Los recuentos describen el archivo procesado, no la cantidad total de noticias
+de derechos humanos que existen en El Salvador.

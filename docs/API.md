@@ -33,7 +33,13 @@ curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2010-01-01&limit=25'
 `scope_hint` acepta `el_salvador`, `international_context` o `undetermined`. Es un indicio histórico basado en título y URL, no una confirmación de jurisdicción. Omitirlo devuelve todo el archivo **seleccionado** de derechos humanos en El Salvador; nunca candidatas sin clasificación. `scope_terms` conserva los términos de descubrimiento, que no autorizan publicación.
 
 Cada referencia incluye `selection`: clasificación automática con evidencia o
-decisión editorial. `policy.selection_gate` distingue candidatas y seleccionadas.
+decisión editorial. `policy.selection_gate` v2 distingue candidatas, analizadas
+(`evaluated`), pertinentes (`relevant`), fuera de alcance (`excluded`), inciertas
+(`uncertain`) y pendientes (`pending`); `selected` cuenta las referencias públicas.
+`evaluated = relevant + excluded + uncertain` y `candidates = evaluated + pending`.
+Las pendientes no son descartes. `evaluated_at` fecha el snapshot de análisis;
+una decisión editorial posterior puede cambiar `selected` sin inventar progreso.
+Los snapshots v1 siguen legibles, pero no permiten deducir cuántas se analizaron.
 Sólo se admiten los criterios actuales y las decisiones humanas prevalecen; un
 archivo inválido devuelve 503. JSON descargable, REST, MCP, listado y mapa aplican
 la misma regla. Véase [el protocolo de selección](NEWS-SELECTION.md).

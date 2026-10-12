@@ -1,7 +1,42 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-10-12T17:06:08.484749+00:00",
+  "schema_version": 2,
+  "generated_at": "2026-10-12T18:27:55.643796+00:00",
+  "assessment_counts": {
+    "candidates": 6199,
+    "evaluated": 102,
+    "relevant": 76,
+    "excluded": 16,
+    "uncertain": 10,
+    "pending": 6097
+  },
   "selections": [
+    {
+      "candidate_id": "0cb8f713d1a34bae63c3d37ff87e33f4b66105c6bd86aeeaa631077f2f996861",
+      "source_url": "https://www.diariocolatino.com/mandatario-revela-que-investigan-involucramiento-de-arena-en-reciente-alza-de-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:10:03.003294-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "67bf48c8059f9c73a293317c1ad97672a6a7b18526cf9d73aaf56e47fcfa33cc",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p10"
+          ]
+        }
+      }
+    },
     {
       "candidate_id": "18448b76dae68903ff7ff53e7aec88b87be67d1dcb214c6e8dcfbc4fc049ee65",
       "source_url": "https://www.diariocolatino.com/juzgado-espanol-reitera-orden-de-captura-contra-ex-militares-salvadorenos-caso-jesuitas/",
@@ -361,6 +396,111 @@
       }
     },
     {
+      "candidate_id": "377bee8813e497c71871d8b27d069ba75750aa9b7c9b796371717c511c8cb3c8",
+      "source_url": "https://historico.elsalvador.com/historico/179407/capturan-en-panama-a-salvadorenos-vinculados-a-trata-de-personas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-02-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:12:56.305235-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "6c7eb66e634c0faf3777c02feceace406e26b149c2116e38a1f10fe9dfa4cccc",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "38cadb92aae392c5611ecbed35e65b3598037d90a7eb7b8b596a4d6d5f37ff4d",
+      "source_url": "https://www.diariocolatino.com/gobierno-invierte-mas-de-20-millones-en-complejo-penitenciario-de-izalco/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:08:02.786626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "1bb3217d237485a5dbda2c3243f913d4abcadec4f764cff041202b834e968116",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "44ebf9def65fb72da10e9c92e686a40765ec0f21670a6f364be077a1b35f3d76",
+      "source_url": "https://www.diariocolatino.com/expresidente-guatemalteco-portillo-condenado-a-prision-en-estados-unidos-por-intentar-lavar-dinero-proveniente-de-taiwan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:13:16.899717-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "d024a9352c12c01c20878c58955f95bb0ae7c1a65f703b7cdd00a57c0f90e950",
+          "jurisdiction_paragraph_ids": [
+            "p20",
+            "p21"
+          ],
+          "relevance_paragraph_ids": [
+            "p21"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "45be2c414ff825f36759bdbe29a4adc99b34928f850a42ef2994db6a2e796f82",
+      "source_url": "https://www.diariocolatino.com/mas-denuncias-de-irrespeto-a-los-derechos-sindicales-en-alcaldias-del-gran-san-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:08:02.786626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "1149d6bec5c02cebf034a5c31fae5e1b336c7babfa6bac56b58cd3b9f22b718b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "46cae34e658d0f0a029e00a9bb15fe6d3a1b72bc39908654a833e9e5532d3df3",
       "source_url": "https://www.diariocolatino.com/los-desaparecidos-siempre-dicen-la-verdad-escuadrones-de-la-muerte-en-el-salvador-3/",
       "publisher": "Diario Co Latino",
@@ -389,6 +529,33 @@
       }
     },
     {
+      "candidate_id": "4a1fe11411794880a5c663549bbcfa7328ceb610551c2f2791ee1ad1c3c98f63",
+      "source_url": "https://www.diariocolatino.com/sala-dice-que-existio-violacion-al-nombrar-fuera-de-tiempo-a-miembros-del-iaip/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:10:03.003294-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "b3e735263f1dd194badf93ffcb9350fefa4f1ec2338ade193389181827f0d845",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "4c784312cd702db80fa98d3c0c8584445654b6b903dfd8590339e879cd5072dd",
       "source_url": "https://gatoencerrado.news/2014/09/21/los-pueblos-que-dijeron-no-a-la-mineria-en-el-salvador/",
       "publisher": "GatoEncerrado",
@@ -412,6 +579,60 @@
             "p4",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4db2e25191fe9069f6a9bbba94faa34ec9197c7eb9cbe4f3c53b4d11a8dc482c",
+      "source_url": "https://www.diariocolatino.com/fundaungo-presenta-estudio-sobre-la-evolucion-de-las-cifras-de-homicidios-en-el-salvador-durante-los-ultimos-anos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:08:56.504828-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "2c6b9f0307324303f07f42d71631a061f3d677e0aca31d1bcd88b8d7e9f9bbc5",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "556862861e31b90eac07a0f86283560443c15e57761fc46207e995152c531f5f",
+      "source_url": "https://www.diariocolatino.com/administracion-dabuisson-desaloja-a-mas-vendedores-en-santa-tecla/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-04-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:21:17.624354-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "1541e24ba48897992503794fd9f244a03212c33d22fed5b3d82837dc383ff791",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8"
           ]
         }
       }
@@ -502,6 +723,32 @@
       }
     },
     {
+      "candidate_id": "5eaff40875c92603a05e6e9bf24cc463b48adcb9d79e5e8abe5de68b51def2e2",
+      "source_url": "https://www.diariocolatino.com/secretaria-de-inclusion-social-condena-asesinato-de-funcionaria-de-ciudad-mujer-usulutan-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:04:02.153275-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "e36cc4053ce49fd3b36e3a3004e2111858e6bee6911ff936e997177844c87671",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5fe9f2188a8397b9e920e6295cda2edf2d1709d99e3aec57807b784414e620ff",
       "source_url": "https://gatoencerrado.news/2015/08/13/cicies-divide-a-derechos-humanos-y-partidos-politicos-salvadorenos/",
       "publisher": "GatoEncerrado",
@@ -587,6 +834,41 @@
             "p3",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "70691b59506c3841e9ad1be0b38c9f1fd49dbe8a9e23b0c90e7cc3ddf5dca192",
+      "source_url": "https://historico.elsalvador.com/historico/189217/grupos-defensores-de-inmigrantes-preocupados-tras-muerte-de-indocumentado-salvadoreno.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-05-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:21:17.624354-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "50de6c1acc7790e56f62da9e595820fe0da6a689b2aaf680ef80878c8c6d668f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p10",
+            "p11",
+            "p12"
           ]
         }
       }
@@ -758,6 +1040,40 @@
       }
     },
     {
+      "candidate_id": "8424473edc593fe52c9168342464cb4fd966b36d7820245fa1f7ba8c8113f964",
+      "source_url": "https://gatoencerrado.news/2016/12/27/el-salvador-15-mil-denuncias-por-violacion-a-los-derechos-humanos-en-2016/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-12-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:21:17.624354-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "8f3ab3aa44f1715272c20417b8fc4f68444a2cfb5952da7373921ba81dfc3a50",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p8",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5",
+            "p7",
+            "p8",
+            "p9",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "875949fe84bc33521946904c777cabb3e8af7a6e7fd269b8ab3d8cc3906474d4",
       "source_url": "https://www.diariocolatino.com/juntas-de-agua-enfrentan-amenazas-de-contaminacion-y-servidumbre-de-paso/",
       "publisher": "Diario Co Latino",
@@ -897,6 +1213,73 @@
       }
     },
     {
+      "candidate_id": "9e1547ab68ba2c76ca458a9433a7ea2b0a4334ac192966f577ee1aed23f76d35",
+      "source_url": "https://www.diariocolatino.com/sindicalismo-base-las-transformaciones-sociales-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:21:17.624354-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "aef65aa79630a437efa0ccd2c329feabe333d869e47736ad47332eef38433866",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "9f7e4780a0485804eec265ff234a0b843a0fc3e07ac88d99be9a562fc8f9aa2e",
+      "source_url": "https://www.diariocolatino.com/el-salvador-y-la-eleccion-de-jueces-de-la-corte-interamericana-de-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-04-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:21:17.624354-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "d5879f8b3970502628b6ca70fd2fe7e3805febf79471d67625705ee82acfdfcd",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p10",
+            "p11",
+            "p14",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a9e511d1a20a13f5f126765147b228f604ab422f0ba7bb32a5c68107a7a7eb5f",
       "source_url": "https://www.diariocolatino.com/nayib-bukele-se-compromete-a-trabajar-de-la-mano-con-sindicalistas/",
       "publisher": "Diario Co Latino",
@@ -923,6 +1306,38 @@
             "p7",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ada436c3b055402e43071940f27ff2a983c325baff7061da4e4f1e6581cc6097",
+      "source_url": "https://historico.elsalvador.com/historico/192328/onu-urge-a-el-salvador-a-garantizar-seguridad-y-respetar-los-derechos-humanos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-06-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:21:17.624354-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "3bd712371e23de9a36f674d2c0f77ec611f4fc89b5e6debc6df6a665ea7f85d0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -1016,6 +1431,59 @@
       }
     },
     {
+      "candidate_id": "b812068301485c5064e2aa47871ed0a36347fd89b5cd8d7b7f4a5d72a6b95e43",
+      "source_url": "https://www.diariocolatino.com/sicarios-estarian-siendo-contratados-para-incrementar-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:11:49.551273-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "8783a1c84fd0d50d118306ff3b88cf7ccd2ee8f70c35615c44838f22ce4da110",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b8e167f1cdd62bfbd81b49aa33035c359913dd7120a3ba4a194aff3cc855802f",
+      "source_url": "https://www.diariocolatino.com/censura-al-gobierno-en-medios-busca-privilegiar-candidatura-de-quijano/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:17:55.234593-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "2d7c5551e9e8df6094640a4dec0fd2777eb9a283485bfed334729d2d7a454698",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "ba4e966665fb6b08392f41df249f8eb2c521ed5b4d5fb6e94274a20e78314f08",
       "source_url": "https://www.diariocolatino.com/penal-de-mariona-en-emergencia-por-15-dias/",
       "publisher": "Diario Co Latino",
@@ -1039,6 +1507,33 @@
             "p2",
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "bacd95e1e236e8bd89283dc1b10539f19618d00aae3559c8c3a9065f336aa98b",
+      "source_url": "https://www.diariocolatino.com/gobierno-reinicia-construccion-de-complejo-penitenciario-de-izalco-fase-iii/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:06:02.278398-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "0fbca64e6df99bd9a0b5065351cff9032c01f0738767e0628a20c94b240a63c7",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p18"
           ]
         }
       }
@@ -1072,6 +1567,32 @@
       }
     },
     {
+      "candidate_id": "c22a3e970f3ba43b67f99596d61ee9a92fe2f1c07833a3b4b90f3bf356050ba3",
+      "source_url": "https://www.diariocolatino.com/san-salvador-registra-mas-de-500-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:06:02.278398-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "5441a948aa7b69b5861949fd77ac03ad0ad1b04a7ec27ab88dc41763db0bffff",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p20",
+            "p21"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c387278d3c5c225d66caedf2f934a5cd5ce55486e838093ceab9303b7024fbe7",
       "source_url": "https://www.diariocolatino.com/cristosal-denuncia-campana-de-desprestigio-contra-ruth-lopez/",
       "publisher": "Diario Co Latino",
@@ -1099,6 +1620,69 @@
       }
     },
     {
+      "candidate_id": "c5f6c5c79bbcbb52b3ad90bcbe10f4e37708bad225eab6841a0e061185f7c7e3",
+      "source_url": "https://gatoencerrado.news/2016/05/08/policias-y-soldados-salvadorenos-cometen-abusos-porque-no-han-sido-formados-en-ddhh/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-05-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:21:17.624354-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "e3ee608e16312895d391a4db0fa331bd3922cef6ac4aa8bfd83e411023360eb6",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p7",
+            "p8",
+            "p9",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "cb73615c8fb21421532af13e40b00d92dcee4da1d07a2d2fd3f363960e8b0055",
+      "source_url": "https://gatoencerrado.news/2016/06/15/salvadorenos-exigen-justicia-por-violaciones-a-derechos-humanos-en-honduras/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-06-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:21:17.624354-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "fd8e2bc47e38bc80cce0f9a301cfb73751a307f072806211cddf41d136e31143",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p8",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p7",
+            "p8",
+            "p9",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "d18b61a74d084d347d69a711c2df9747d43bb121c2d3badb7f1aa686dfcf7601",
       "source_url": "https://www.diariocolatino.com/apes-condena-ataque-contra-periodista-radial-en-oriente-salvadoreno/",
       "publisher": "Diario Co Latino",
@@ -1121,6 +1705,60 @@
             "p2",
             "p4",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d5f96219e4122ffdc7d20fce5d726601251c718132a4b0060fce09841c9dcda3",
+      "source_url": "https://www.diariocolatino.com/apes-monitoreara-agresiones-en-contra-de-periodistas-en-eleccion-presidencial/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-20",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:11:49.551273-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "c0fc8db9182d9282c8fc55a163680e888cef56765cf8463330fd15eddede67db",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8",
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "da8f069293ef432e922220fc840f0cef0a949f3962991919221d3e989596a504",
+      "source_url": "https://www.diariocolatino.com/yo-si-creo-en-la-lucha-sindical-yo-si-creo-en-la-lucha-reivindicativa-sindicalistas-salvadorenas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:07:48.893296-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "006b26dbabc9c1ce245ad36df69dcb092cfa4ded57045e9386aca9ce09cbe4a4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
@@ -1212,6 +1850,35 @@
       }
     },
     {
+      "candidate_id": "e34d2c3c259f5b7a77248c115f324d0c8acd9af5e6df0d22be2b0f82e2b7f606",
+      "source_url": "https://www.diariocolatino.com/pandilleros-asesinan-a-agente-de-la-pnc/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:11:49.551273-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "2ef5bf0555ed785a6152269d98cc28fa6994d80cea4fa39370ab6364a25dc624",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7",
+            "p9",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "e7b9151e85f64b150206d9fad2037f7beefa6f0e07f07f5e354f3a9dc32d8e6d",
       "source_url": "https://gatoencerrado.news/2015/09/08/piden-respaldo-legislativo-a-comision-que-busca-ninez-desaparecida-en-guerra-salvadorena/",
       "publisher": "GatoEncerrado",
@@ -1242,6 +1909,60 @@
       }
     },
     {
+      "candidate_id": "eeba0be4475bd97cdd4d4bba1ad7e1437ee13654b91a05479802b9009931a761",
+      "source_url": "https://www.diariocolatino.com/fgr-presentara-acusacion-contra-dos-pandilleros-por-homicidio-de-madre-de-subinspector-del-911/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:10:03.003294-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "f4a97ac3215168ca58efc0ba1474e9f39af2903eac6f1839ed544166a099fcec",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f068e4a059aed077bf2af8766cc373eb9c3cbfa5935e58b36fba36e4d9a3700e",
+      "source_url": "https://www.diariocolatino.com/ministro-de-seguridad-dice-que-hay-sectores-interesados-en-incrementar-homicidios-antes-de-elecciones/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:10:03.003294-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "53ab9c2380e9f44389d6d86d5f5b779e1cc08757129a9e4500f8761e5d91855a",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f1444e2abf2ac07b30523f4c2d57c94b0ee9e17802d1994f0789162fa1089907",
       "source_url": "https://www.diariocolatino.com/brp-recurso-inconstitucionalidad-venezolanos-cecot/",
       "publisher": "Diario Co Latino",
@@ -1265,6 +1986,86 @@
             "p3",
             "p5",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f316851492ea4711140f966ec371468d978836ac5c23d21cae3ee45137a41dd7",
+      "source_url": "https://historico.elsalvador.com/historico/175263/el-salvador-es-la-capital-mundial-de-los-asesinatos-segun-usa-today.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-01-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:08:02.786626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "76c210d173d3a69f3cfb69cf53f2eb50bf75b9cd3961b616905836eaf32ef152",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f9bd533dc9922d38de72ecba67d445df993cd45398450a6e3b5d93ef94cf7eac",
+      "source_url": "https://www.diariocolatino.com/sigue-la-discriminacion-de-mujeres-indigenas-en-nahuizalco/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:10:03.003294-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "evidence": {
+          "content_sha256": "c3275f4f668f4ecaac6a327118ff349ddb7d3085c21842dbac8168345da7f1ce",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fab91838fa384d7142ed865e4f2f4d94b6508bb88780355a9a74107056ba327d",
+      "source_url": "https://www.diariocolatino.com/secretaria-de-inclusion-social-condena-asesinato-de-funcionaria-de-ciudad-mujer-usulutan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:09:10.735551-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "ea83df3a701cd3eec041a383b1f4db512c6d6033a5666eef60fb641b88b993d1",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }

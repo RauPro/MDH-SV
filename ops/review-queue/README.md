@@ -2,8 +2,10 @@
 
 La consulta pública aplica el [protocolo de selección temática](https://github.com/RauPro/MDH-SV/blob/main/docs/NEWS-SELECTION.md).
 Las candidatas se reconstruyen desde los checkpoints, no desde el archivo público
-filtrado. Instala también `review-scope.yml`: reevalúa clasificaciones antiguas con
-el mismo presupuesto de Gemini y guarda decisiones mínimas en `scope-reviews/`.
+filtrado. `extract.yml` clasifica todo el archivo antes de completar fichas, con
+un único presupuesto horario compartido. `review-scope.yml` queda para pruebas
+manuales, sin otro disparo automático. Conserva evaluaciones en `scope-reviews/`
+y reintentos diferidos en `scope-attempts/`.
 El publicador usa esas decisiones para actualizar selección, noticias y mapa.
 
 Este repositorio es privado. Todas las noticias recogidas tienen una estructura

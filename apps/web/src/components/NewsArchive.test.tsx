@@ -85,7 +85,7 @@ it.each(['2010-01-01', '2014-06-01'])('shows the configured search start %s inde
   await screen.findByText('3 noticias seleccionadas');
   expect(screen.getByText(`Periodo de búsqueda: del ${formatDate(start)} al ${formatDate(archive.coverage.end_date)}.`)).toBeInTheDocument();
   expect(screen.getByText(/Este intervalo indica el alcance solicitado/)).toBeInTheDocument();
-  expect(screen.getByText('3 noticias seleccionadas · 3 medios · cobertura parcial.')).toBeInTheDocument();
+  expect(screen.getByText('Cobertura en construcción · 3 medios · fuentes abiertas.')).toBeInTheDocument();
   expect(screen.queryByText(/Noticias localizadas desde la incorporación del paper/)).not.toBeInTheDocument();
   await userEvent.click(screen.getByText('Ver cobertura por medio y mes'));
   expect(screen.getByText(/La fecha del paper no determina el inicio del archivo histórico/)).toHaveTextContent(formatDate(archive.paper.publication_date));
@@ -112,9 +112,9 @@ it('shows all selected references regardless of keyword hints and separates cand
   serve(archive);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('3 noticias seleccionadas');
-  expect(screen.getByText('3 noticias seleccionadas · 3 medios · cobertura parcial.')).toBeInTheDocument();
+  expect(screen.getByText('Cobertura en construcción · 3 medios · fuentes abiertas.')).toBeInTheDocument();
   expect(screen.queryByLabelText('Vínculo territorial')).not.toBeInTheDocument();
-  expect(screen.getByText(/3 noticias seleccionadas de 12 candidatas localizadas/)).toBeInTheDocument();
+  expect(screen.getByText(/no representan el total de noticias pertinentes en El Salvador/)).toBeInTheDocument();
   expect(screen.getAllByText('Pertinencia automática · Sin revisar')).toHaveLength(3);
   expect(screen.getByRole('button', { name: fixture.records[1].title })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: fixture.records[2].title })).toBeInTheDocument();
