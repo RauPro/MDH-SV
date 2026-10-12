@@ -8,11 +8,20 @@ documentos personales.
 
 ## Generación y estados
 
-**Preparar fichas con Gemini** está programado cada hora al minuto 23. Recoge RSS,
-incorpora hasta 25 referencias históricas y procesa hasta 20 noticias por lote.
+**Preparar fichas con Gemini** tiene un respaldo de GitHub cada hora al minuto 23.
+El disparador principal preparado en Vercel lo solicita al minuto 07; requiere la
+instalación y configuración descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
+Recoge RSS, incorpora hasta 50 referencias históricas y solicita hasta 50 noticias
+por lote. El presupuesto configurado reduce ese máximo y cuenta cada solicitud
+y reintento. Si las cuotas de Google no son visibles, `operator_cap` identifica
+topes propios preventivos; un 429 pausa las llamadas hasta el siguiente día del
+Pacífico. Estos topes no son cuotas confirmadas del proveedor.
+`runtime/gemini-hourly.json` evita lotes duplicados en la misma hora UTC, incluso
+entre ejecuciones manuales y automáticas.
 Los RSS de Co Latino, GatoEncerrado y Factum y el ingreso histórico independiente
 también tienen horarios cada seis horas. Comprueba en Actions los eventos
-`schedule`: una ejecución manual exitosa no verifica el disparo del horario.
+`schedule` y los registros Cron de Vercel: una ejecución manual exitosa no verifica
+el disparo del horario.
 
 El histórico incluye por defecto todos los ámbitos territoriales y reserva turnos
 para que las referencias internacionales o por determinar puedan avanzar. Las
@@ -71,8 +80,13 @@ incorpora casos. Las fichas de noticias nunca se suman automáticamente a ese ca
 ## Código, credenciales y publicación
 
 Los workflows usan un commit fijo del código público revisado. `GEMINI_API_KEY`
-permanece en Actions Secrets y `GEMINI_MODEL` selecciona el modelo. No se guardan
-claves en Issues, fichas, archivos públicos o Vercel. Ninguna llamada al modelo aprueba una ficha. El workflow Publicar ubicaciones
+permanece en Actions Secrets y `GEMINI_MODEL` selecciona el modelo. La variable
+`MDH_GEMINI_BUDGET_CONFIG` contiene los límites y su procedencia, sin secretos;
+`runtime/gemini-budget.json` registra reservas de solicitudes sin contenido periodístico.
+Sin configuración o registro válidos, el procesador no llama a Google.
+La clave Gemini no se guarda en Issues, fichas, archivos públicos ni Vercel.
+El disparador Vercel utiliza una credencial separada de GitHub App con Actions:write
+para este repositorio. Ninguna llamada al modelo aprueba una ficha. El workflow Publicar ubicaciones
 automáticas puede actualizar únicamente la proyección geográfica pública
 `archive/locations.json`, marcada Sin revisar, mediante una deploy key del repositorio
 público. No exporta cuerpos, otros campos, comentarios ni identidades personales.
@@ -85,7 +99,7 @@ personas automáticamente. [Protocolo de fichas](https://github.com/RauPro/MDH-S
 
 La privacidad actual protege casillas concretas y conserva los campos seguros.
 Los borradores antiguos totalmente ocultados se reextraen por lotes, reservando
-hasta 5 de los 20 intentos, sin superar el límite total ni repetir una decisión
+hasta 5 intentos por lote, sin superar el límite total ni repetir una decisión
 humana. El publicador admite municipios o distritos citados y resueltos mediante
 la referencia administrativa oficial, con procedencia explícita; no recupera
 geografías protegidas ni convierte sedes o nombres ambiguos en lugares de hechos.

@@ -233,6 +233,65 @@ def test_bot_and_unauthorized_approvals_fail(change):
     with pytest.raises(ValueError):review(inbox,ev)
     assert not any(method in ('PATCH','PUT') for method,_,_ in inbox.calls)
 
+
+@pytest.mark.parametrize('decision', ['approve', 'reject'])
+@pytest.mark.parametrize(('triggering_actor', 'sender'), [
+    (None, {'type': 'User', 'login': 'RauPro'}),
+    ('', {'type': 'User', 'login': 'RauPro'}),
+    ('mdh-hourly-dispatch[bot]', {'type': 'User', 'login': 'RauPro'}),
+    ('AnotherReviewer', {'type': 'User', 'login': 'RauPro'}),
+    ('RauPro', {'type': 'Bot', 'login': 'RauPro'}),
+    ('mdh-hourly-dispatch[bot]', {'type': 'User', 'login': 'mdh-hourly-dispatch[bot]'}),
+    ('RauPro', None),
+])
+def test_review_cli_rejects_bot_replays_and_missing_runtime_actor_before_inbox_access(
+        decision, triggering_actor, sender, tmp_path, monkeypatch):
+    from mdh_pipeline import review_queue
+    ev = event(decision)
+    ev['sender'] = sender
+    path = tmp_path / 'event.json'
+    path.write_text(json.dumps(ev))
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr('sys.argv', ['review_queue', 'review'])
+    monkeypatch.setenv('GITHUB_EVENT_PATH', str(path))
+    if triggering_actor is None:
+        monkeypatch.delenv('GITHUB_TRIGGERING_ACTOR', raising=False)
+    else:
+        monkeypatch.setenv('GITHUB_TRIGGERING_ACTOR', triggering_actor)
+    # These would be required for any private read or mutation. Actor rejection
+    # must happen first, including outside Actions where no default env exists.
+    monkeypatch.delenv('GITHUB_REPOSITORY', raising=False)
+    monkeypatch.delenv('GH_TOKEN', raising=False)
+    inbox_factory = MagicMock()
+    monkeypatch.setattr(review_queue, 'GitHubInbox', inbox_factory)
+    with pytest.raises(ValueError, match='human'):
+        review_queue.main()
+    inbox_factory.assert_not_called()
+    assert not (tmp_path / 'proposal.json').exists()
+
+
+@pytest.mark.parametrize('decision', ['approve', 'reject'])
+def test_review_cli_preserves_explicit_reviews_started_by_the_original_human(
+        decision, tmp_path, monkeypatch, capsys):
+    from mdh_pipeline import review_queue
+    inbox = Inbox()
+    inbox.enqueue(candidate_from_entry(entry(), FEEDS[1], NOW))
+    path = tmp_path / 'event.json'
+    path.write_text(json.dumps(event(decision)))
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr('sys.argv', ['review_queue', 'review'])
+    monkeypatch.setenv('GITHUB_EVENT_PATH', str(path))
+    monkeypatch.setenv('GITHUB_TRIGGERING_ACTOR', 'RauPro')
+    monkeypatch.setenv('GITHUB_REPOSITORY', inbox.repository)
+    monkeypatch.setenv('GH_TOKEN', 'test-token')
+    monkeypatch.delenv('GITHUB_STEP_SUMMARY', raising=False)
+    monkeypatch.setattr(review_queue, 'GitHubInbox', lambda *_: inbox)
+    review_queue.main()
+    report = json.loads(capsys.readouterr().out)
+    assert report['decision'] == ('approved_for_proposal' if decision == 'approve' else 'rejected')
+    assert (tmp_path / 'proposal.json').exists() is (decision == 'approve')
+    assert any(method in ('PATCH', 'PUT') for method, _, _ in inbox.calls)
+
 def test_missing_privacy_or_changed_source_fails():
     inbox=Inbox();inbox.enqueue(candidate_from_entry(entry(),FEEDS[1],NOW))
     ev=event();ev['inputs']['privacy_reviewed']='false'

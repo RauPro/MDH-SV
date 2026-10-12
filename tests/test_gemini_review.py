@@ -798,6 +798,162 @@ def test_privacy_reprocessing_and_fresh_news_share_the_normal_batch_budget():
     assert inbox.document("drafts", items[2]["id"])["extraction"]["prompt_version"] == "mdh-universal-news-grounded-6"
 
 
+class Budget:
+    def __init__(self, remaining=480, ceiling=50, cooldown=None):
+        self.remaining = remaining
+        self.config = SimpleNamespace(batch_ceiling=ceiling)
+        self.cooldown = cooldown
+        self.requests_this_run = 0
+        self.request_limit = None
+
+    def set_request_limit(self, limit):
+        self.request_limit = limit
+
+    def snapshot(self):
+        return {"day": "2026-10-09", "used_requests": 480 - self.remaining,
+                "remaining_requests": self.remaining, "cooldown_until": self.cooldown}
+
+
+class BudgetWorkers(Extractors):
+    def __init__(self, budget):
+        super().__init__()
+        self.budget = budget
+
+    def extract(self, item, article, *, api_key, model, budget):
+        assert budget is self.budget
+        budget.requests_this_run += 1
+        value = super().extract(item, article, api_key=api_key, model=model)
+        budget.remaining -= 1
+        return value
+
+
+def test_budget_passes_to_each_extractor_and_caps_batch_by_verified_ceiling():
+    budget = Budget(remaining=8, ceiling=3); workers = BudgetWorkers(budget)
+    inbox = PrivateInbox([candidate(n) for n in range(1, 9)])
+    report = run(inbox, workers, limit=50, budget=budget)
+    assert report["effective_limit"] == report["news_dossiers"] == report["attempted"] == 3
+    assert report["budget"]["remaining_requests"] == 5
+    assert report["http_requests"] == budget.request_limit == 3
+    assert len(workers.model_calls) == 3
+
+
+def test_daily_budget_is_distributed_across_remaining_pacific_hours():
+    budget = Budget(remaining=480); workers = BudgetWorkers(budget)
+    inbox = PrivateInbox([candidate(n) for n in range(1, 51)])
+    # 07:00 Pacific daylight time leaves 17 hourly slots until the daily reset.
+    now = datetime(2026, 10, 10, 14, 0, tzinfo=timezone.utc)
+    report = process_queue(inbox, api_key=KEY, model="gemini-2.5-flash", fetch=workers.fetch,
+                           extract=workers.extract, now=now, sleep=lambda _: None, limit=50, budget=budget)
+    assert report["remaining_hourly_slots"] == 17
+    assert report["effective_limit"] == report["news_dossiers"] == 29
+    assert budget.request_limit == report["http_requests"] == 29
+
+
+def test_zero_daily_allowance_does_not_fetch_news_or_change_private_records():
+    budget = Budget(remaining=0); workers = BudgetWorkers(budget); inbox = PrivateInbox([candidate()])
+    report = run(inbox, workers, budget=budget)
+    assert report["attempted"] == report["errors"] == report["effective_limit"] == 0
+    assert report["stopped_reason"] == "budget_deferred"
+    assert not workers.fetch_calls and not inbox.calls and not inbox.files
+    assert budget.request_limit is None and report["http_requests"] == 0
+
+
+def test_active_provider_cooldown_does_not_scan_or_modify_any_news_state():
+    budget = Budget(cooldown=(NOW + timedelta(hours=1)).isoformat())
+    workers = BudgetWorkers(budget); inbox = PrivateInbox([candidate()])
+    report = run(inbox, workers, budget=budget)
+    assert report["stopped_reason"] == "budget_deferred" and report["quota_reason"] == "provider_cooldown"
+    assert report["quota_retry_at"] == budget.cooldown
+    assert report["attempted"] == report["errors"] == report["http_requests"] == 0
+    assert not workers.fetch_calls and not inbox.calls and not inbox.files
+    assert budget.request_limit is None
+
+
+@pytest.mark.parametrize("existing", [False, True])
+def test_quota_deferral_preserves_candidate_draft_and_attempt_state(existing):
+    from mdh_pipeline.gemini_budget import QuotaDeferred
+    item = candidate(); inbox = PrivateInbox([item]); budget = Budget(); workers = BudgetWorkers(budget)
+    if existing:
+        inbox.store("processing", item["id"], processing(item, attempts=1))
+        from mdh_pipeline.gemini_review import skeleton_envelope
+        inbox.store("drafts", item["id"], skeleton_envelope(item, "error", error_code="previous_error"))
+    original = deepcopy(inbox.files)
+    workers.error = QuotaDeferred("minute_budget_exhausted", NOW + timedelta(seconds=60))
+    report = run(inbox, workers, budget=budget)
+    assert report["stopped_reason"] == "budget_deferred" and report["quota_reason"] == "minute_budget_exhausted"
+    assert report["attempted"] == report["errors"] == report["partial_dossiers"] == 0
+    assert inbox.files == original
+    assert not [method for method, _, _ in inbox.calls if method in ("PUT", "PATCH")]
+
+
+def test_invalid_budget_state_is_never_converted_to_candidate_error():
+    from mdh_pipeline.gemini_budget import QuotaStateError
+    item = candidate(); inbox = PrivateInbox([item]); budget = Budget(); workers = BudgetWorkers(budget)
+    workers.error = QuotaStateError("budget_cas_failed")
+    with pytest.raises(QuotaStateError, match="budget_cas_failed"):
+        run(inbox, workers, budget=budget)
+    assert not inbox.files
+
+
+def test_cli_requires_explicit_quota_configuration_before_any_network(monkeypatch, capsys):
+    from mdh_pipeline import gemini_review
+    monkeypatch.setattr("sys.argv", ["gemini_review"])
+    monkeypatch.setenv("GEMINI_API_KEY", KEY)
+    monkeypatch.delenv("MDH_GEMINI_BUDGET_CONFIG", raising=False)
+    monkeypatch.setattr(gemini_review, "GitHubInbox", lambda *args: pytest.fail("must not reach network"))
+    with pytest.raises(SystemExit) as error:
+        gemini_review.main()
+    assert error.value.code == 1
+    output = json.loads(capsys.readouterr().out)
+    assert output["error_code"] == "gemini_budget_configuration_required" and KEY not in json.dumps(output)
+
+
+@pytest.mark.parametrize("outcome", ["quota", "duplicate", "all_failed"])
+def test_cli_hourly_status_matches_exit_and_claim_precedes_extraction(monkeypatch, capsys, outcome):
+    from mdh_pipeline import gemini_review, gemini_budget, hourly_slot
+    already_claimed = outcome == "duplicate"
+    monkeypatch.setattr("sys.argv", ["gemini_review", "--limit", "50"])
+    for name, value in {"GEMINI_API_KEY": KEY, "MDH_GEMINI_BUDGET_CONFIG": "{}", "GEMINI_MODEL": "gemini-2.5-flash",
+                        "GITHUB_REPOSITORY": "RauPro/MDH-SV-review", "GH_TOKEN": "test", "GITHUB_RUN_ID": "123",
+                        "GITHUB_EVENT_NAME": "workflow_dispatch", "MDH_TRIGGER_SOURCE": "vercel_cron",
+                        "MDH_SCHEDULED_HOUR": "2026-10-10T06:00:00Z"}.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.delenv("GITHUB_STEP_SUMMARY", raising=False)
+    config = SimpleNamespace(model="gemini-2.5-flash", batch_ceiling=30)
+    budget = Budget(remaining=0)
+    monkeypatch.setattr(gemini_budget, "BudgetConfig", lambda **kwargs: config)
+    monkeypatch.setattr(gemini_budget, "GeminiBudget", lambda inbox, passed: budget)
+    monkeypatch.setattr(gemini_review, "GitHubInbox", lambda *args: PrivateInbox())
+    events = []
+    class Slots:
+        def __init__(self, inbox):
+            pass
+        def claim(self, **kwargs):
+            events.append("claim")
+            assert kwargs == {"run_id": "123", "trigger_source": "vercel_cron", "requested_hour": "2026-10-10T06:00:00Z"}
+            return None if already_claimed else {"hour": "2026-10-10T06:00:00Z"}
+        def finish(self, claim, **kwargs):
+            events.append("finish")
+            assert kwargs["status"] == ("failed" if outcome == "all_failed" else "deferred")
+            assert kwargs["counts"]["errors"] == (2 if outcome == "all_failed" else 0)
+    monkeypatch.setattr(hourly_slot, "HourlySlots", Slots)
+    if already_claimed:
+        monkeypatch.setattr(gemini_review, "process_queue", lambda *args, **kwargs: pytest.fail("duplicate hour must not process"))
+    if outcome == "all_failed":
+        monkeypatch.setattr(gemini_review, "process_queue", lambda *args, **kwargs: {
+            "attempted": 2, "errors": 2, "news_dossiers": 0, "migrated": 0, "http_requests": 0,
+            "stopped_reason": None, "publications": 0})
+        with pytest.raises(SystemExit) as error:
+            gemini_review.main()
+        assert error.value.code == 1
+    else:
+        gemini_review.main()
+    output = json.loads(capsys.readouterr().out)
+    assert output["attempted"] == (2 if outcome == "all_failed" else 0)
+    assert events == (["claim"] if already_claimed else ["claim", "finish"])
+    assert output.get("status") == ("hour_already_claimed" if already_claimed else None)
+
+
 def test_privacy_reprocessing_does_not_accept_an_old_policy_model_result():
     item = candidate(); inbox = PrivateInbox([item]); workers = Extractors()
     store_marked_draft(inbox, 1, item, blanket_privacy_draft(item))

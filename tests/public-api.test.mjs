@@ -149,7 +149,7 @@ test('every news result has a worksheet, including international or unclassified
 });
 
 test('public news enrichment uses only approved dossiers bound to the exact bibliography and never changes case counts', () => {
-  const source = loadNews().records[0];
+  const source = { ...loadNews().records[0], published_date: '2026-09-01' };
   const archive = { ...loadNews(), records: [source] };
   const dossier = pendingNewsDossier(source);
   Object.assign(dossier, { extraction_status: 'processed', human_reviewed: true, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture de revisión editorial explícita de fuente y privacidad.', source_title: 'Título ficticio minimizado por privacidad' });
@@ -180,7 +180,7 @@ test('public news enrichment uses only approved dossiers bound to the exact bibl
 });
 
 test('automatic locations are a separate unreviewed projection and never override a reviewed dossier', () => {
-  const source = loadNews().records[0];
+  const source = { ...loadNews().records[0], published_date: '2026-09-01' };
   const archive = { ...loadNews(), records: [source] };
   const location = {
     candidate_id: source.id, source_url: source.source_url, publisher: source.publisher,

@@ -18,6 +18,7 @@ import requests
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 from .draft import prepare_draft
+from .gemini_budget import QuotaDeferred, QuotaStateError
 from .news_dossier import FIELD_NAMES as NEWS_FIELDS, empty_news_dossier, validate_news_dossier
 from .publication import Publication
 from .privacy import PRIVACY_POLICY_VERSION, minimize_fields, privacy_flags as _privacy_flags
@@ -30,6 +31,7 @@ MAX_OUTPUT_TOKENS = 4096
 MAX_ATTEMPTS = 3
 MAX_USAGE_TOKENS = 2_000_000
 API_TIMEOUT = (10, 90)
+MAX_BUDGET_WAIT_SECONDS = 125
 T = TypeVar("T")
 
 
@@ -405,14 +407,43 @@ def _input(candidate, article):
         raise GeminiDraftError("invalid_article_metadata") from None
 
 
-def _request(payload, *, api_key, model, session):
+def _reserve_with_bounded_wait(budget, payload, *, remaining_wait):
+    """Wait only for minute capacity; all other quota decisions stop the batch."""
+    waited = 0.0
+    while True:
+        try:
+            reservation = budget.reserve(payload)
+            return reservation, waited
+        except QuotaDeferred as error:
+            if error.reason != "minute_budget_exhausted":
+                raise
+            delay = max(0.01, (error.retry_at - budget.clock()).total_seconds())
+            delay = min(60.0, delay)
+            if delay > remaining_wait - waited:
+                raise
+            time.sleep(delay)
+            waited += delay
+
+
+def _request(payload, *, api_key, model, session, budget=None):
     endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+    budget_waited = 0.0
     for attempt in range(MAX_ATTEMPTS):
         response = None
         try:
+            if budget is not None:
+                reservation, waited = _reserve_with_bounded_wait(budget, payload,
+                    remaining_wait=MAX_BUDGET_WAIT_SECONDS - budget_waited)
+                budget_waited += waited
+                budget.assert_dispatch_allowed(reservation)
             response = session.post(endpoint, headers={"X-goog-api-key": api_key, "Content-Type": "application/json"},
                                     json=payload, timeout=API_TIMEOUT, allow_redirects=False, stream=True)
             status = response.status_code
+            if status == 429 and budget is not None:
+                # Persist a project-wide cooldown before surfacing the deferral.
+                # Each retry consumes quota; a 429 must never trigger a retry loop.
+                retry_at = budget.record_429()
+                raise QuotaDeferred("provider_cooldown", retry_at)
             retryable = status == 429 or 500 <= status < 600
             if status != 200:
                 if retryable and attempt < MAX_ATTEMPTS - 1:
@@ -420,8 +451,11 @@ def _request(payload, *, api_key, model, session):
                     retry_after = response.headers.get("Retry-After", "")
                     if str(retry_after).isdigit():
                         delay = min(15, max(delay, int(retry_after)))
+                    if budget is not None and budget_waited + delay > MAX_BUDGET_WAIT_SECONDS:
+                        raise GeminiDraftError("provider_http_error", retryable=True, status_code=status)
                     response.close()
                     time.sleep(delay)
+                    budget_waited += delay
                     continue
                 raise GeminiDraftError("provider_http_error", retryable=retryable, status_code=status)
             size = response.headers.get("Content-Length")
@@ -435,7 +469,11 @@ def _request(payload, *, api_key, model, session):
             return _single_json(bytes(content))
         except (requests.Timeout, requests.ConnectionError):
             if attempt < MAX_ATTEMPTS - 1:
-                time.sleep(2 ** (attempt + 1))
+                delay = 2 ** (attempt + 1)
+                if budget is not None and budget_waited + delay > MAX_BUDGET_WAIT_SECONDS:
+                    raise GeminiDraftError("provider_unavailable", retryable=True) from None
+                time.sleep(delay)
+                budget_waited += delay
                 continue
             raise GeminiDraftError("provider_unavailable", retryable=True) from None
         except requests.RequestException:
@@ -687,8 +725,8 @@ def _normalize_news_extraction(extracted, jurisdiction):
     return rejected
 
 
-def extract_draft(candidate, article, *, api_key, model, request_session=None):
-    """Extract a private draft; all errors have safe .code/.retryable/.status_code.
+def extract_draft(candidate, article, *, api_key, model, request_session=None, budget=None):
+    """Extract a private draft with safe provider or explicit quota failures.
 
     Exact quotation validation proves text membership, not factual truth or semantic
     support. Human approval remains mandatory. Full article text stays in memory only.
@@ -696,6 +734,8 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None):
     if (not isinstance(api_key, str) or not 10 <= len(api_key) <= 512 or re.search(r"\s", api_key)
             or not isinstance(model, str) or not re.fullmatch(r"gemini-[a-zA-Z0-9_.-]{1,90}", model)):
         raise GeminiDraftError("invalid_provider_configuration")
+    if budget is not None and model != budget.config.model:
+        raise QuotaStateError("budget_model_mismatch")
     prepared, paragraphs = _input(candidate, article)
     anchors = _source_anchors(paragraphs)
     payload = {
@@ -720,7 +760,7 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None):
     owned_session = request_session is None
     session = request_session or requests.Session()
     try:
-        raw = _request(payload, api_key=api_key, model=model, session=session)
+        raw = _request(payload, api_key=api_key, model=model, session=session, budget=budget)
         output = _response_body(raw, anchors)
     finally:
         if owned_session:
