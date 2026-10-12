@@ -5,6 +5,12 @@ on:
     types: [completed]
     branches: [main]
   workflow_dispatch:
+    inputs:
+      source_check_limit:
+        description: 'Fuentes ya procesadas que se comprobarán; no llama a Gemini'
+        type: choice
+        default: '20'
+        options: ['20', '50']
 permissions:
   contents: read
   issues: read
@@ -61,10 +67,11 @@ jobs:
           Path('excluded-locations.json').write_text(json.dumps(sorted(excluded)))
           print(json.dumps({'pending_candidates': len(pending), 'excluded_candidates': len(excluded)}))
           PY
-      - name: Proyectar únicamente departamentos con evidencia explícita
+      - name: Proyectar únicamente ubicaciones administrativas con evidencia
         env:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.automatic_locations --drafts inbox/drafts --archive publication/apps/web/public/archive/news.json --output publication/apps/web/public/archive/locations.json --excluded-ids excluded-locations.json --limit 20
+          SOURCE_CHECK_LIMIT: ${{ inputs.source_check_limit || '20' }}
+        run: python -m mdh_pipeline.automatic_locations --drafts inbox/drafts --archive publication/apps/web/public/archive/news.json --output publication/apps/web/public/archive/locations.json --excluded-ids excluded-locations.json --limit "$SOURCE_CHECK_LIMIT"
       - name: Validar frontera pública y publicar solamente la capa geográfica
         working-directory: publication
         run: |
