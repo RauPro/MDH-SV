@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T20:20:16.466682+00:00",
+  "generated_at": "2026-10-12T20:22:29.342797+00:00",
   "assessment_counts": {
     "candidates": 6199,
-    "evaluated": 153,
-    "relevant": 93,
-    "excluded": 53,
+    "evaluated": 169,
+    "relevant": 98,
+    "excluded": 64,
     "uncertain": 7,
-    "pending": 6046
+    "pending": 6030
   },
   "selections": [
     {
@@ -499,6 +499,35 @@
       }
     },
     {
+      "candidate_id": "2d7da159bb4c769cca821469bc7a74da1a253a3bc3aae24bc95f2e53e6f81153",
+      "source_url": "https://www.diariocolatino.com/sala-censuradora/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T14:21:30.143383-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b74b45f4a14c6946ea44b92a642a67a5713d4875f49934041a40ce007395a4d3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2f525a62ded0fb15e17131ffb94ecd98b30790a85a021a48ce97637335be25ea",
       "source_url": "https://www.diariocolatino.com/diputados-dan-garras-a-policia-para-investigar-de-inmediato-desapariciones-forzadas-de-personas/",
       "publisher": "Diario Co Latino",
@@ -640,6 +669,33 @@
             "p4",
             "p7",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4390bf4e0e13763c0c5f7c60638598b43473412a22bc7ca70e22a52f8f57f92e",
+      "source_url": "https://www.diariocolatino.com/organizaciones-sociales-aseguran-que-pozo-de-norman-quijano-es-un-ejemplo-de-violacion-del-derecho-al-agua/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T14:21:30.143383-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f5e32cd4822629b5ef7d964419044731b142e6b647267ee058d8856c0ccadd3b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
           ]
         }
       }
@@ -1319,6 +1375,37 @@
             "p6",
             "p7",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7efed631dfa96555c1f25ae14a82434bc9c61e03becebd2798b24e163c1ca852",
+      "source_url": "https://www.diariocolatino.com/denuncian-inestabilidad-laboral-y-violaciones-de-la-ley/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T14:21:30.143383-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "eb2d9b2ee7c765f3c894f281e4f2b19bfacc6d75598bc0fbadc853dae6d95d73",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p8"
           ]
         }
       }
@@ -2074,6 +2161,36 @@
       }
     },
     {
+      "candidate_id": "c5a58609da89010d9d09354d59329b2b369bd4a788cf99df2a64e17e483cff40",
+      "source_url": "https://www.diariocolatino.com/denuncian-violaciones-a-la-ley-de-la-carrera-administrativa-municipal/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T14:21:30.143383-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "751359887cf0c2d48cdd4c1107d9352ccf6502a9e7b4aa447a77a2bd231a355a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c5f6c5c79bbcbb52b3ad90bcbe10f4e37708bad225eab6841a0e061185f7c7e3",
       "source_url": "https://gatoencerrado.news/2016/05/08/policias-y-soldados-salvadorenos-cometen-abusos-porque-no-han-sido-formados-en-ddhh/",
       "publisher": "GatoEncerrado",
@@ -2186,6 +2303,34 @@
             "p6",
             "p8",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d774d49b99861fa8151c78ed39dad393a9182acf458937d1d87ef415948114a1",
+      "source_url": "https://www.diariocolatino.com/distinguen-a-mujeres-destacadas-en-favor-de-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T14:21:30.143383-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ca84a9a814e7d670f3f07391687e5b69a74885a7f16eef34b3770b0ca01745fd",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p10"
           ]
         }
       }
