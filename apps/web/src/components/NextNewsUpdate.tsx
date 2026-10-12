@@ -27,7 +27,7 @@ export function NextNewsUpdate() {
   }, []);
 
   return <p className="classification-schedule">
-    <strong>Próxima actualización:</strong> análisis programado para <time dateTime={next}>{archiveInstant(next)}</time> (El Salvador).
+    <strong>Próximo análisis programado:</strong> <time dateTime={next}>{archiveInstant(next)}</time> (El Salvador).
     <span>Los resultados se publican al terminar; pueden retrasarse por la cuota o la disponibilidad de las fuentes.</span>
   </p>;
 }
