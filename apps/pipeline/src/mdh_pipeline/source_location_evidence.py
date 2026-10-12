@@ -54,6 +54,7 @@ def _patterns():
         re.compile(rf"\s*(?:,|\by\b|\be\b)\s*(?:de\s+)?(?P<place>{departments})\b"),
         re.compile(rf"^(?:(?:municipio|distrito|ciudad|localidad|departamento)\s+(?:de\s+)?)?"
                    rf"(?:{alternatives}|{departments})(?:\s*\([^)]{{0,40}}\))?\s*(?:[:—–-]|,\s*\d{{1,2}}\b)"),
+        re.compile(rf"\b(?P<place>{alternatives})\b"),
     )
 
 
@@ -128,6 +129,28 @@ def _resolution(place):
             "source_url": place["source_url"]}
 
 
+def _department_chain_conflict(clause, department_match, names):
+    """Reject contradictory or damaged adjacent locality-to-department claims.
+
+    This check also sees names that cannot independently support a projection,
+    such as a bare locality without an explicit Salvadoran country context.
+    Unknown intervening words are not silently deleted to repair a source.
+    """
+    prefix = clause[:department_match.start()]
+    for locality in reversed(list(names.finditer(prefix))):
+        connector = prefix[locality.end():]
+        if len(connector) > 100:
+            break
+        if not re.match(r"^\s*(?:$|,|\(|\b(?:en|del|de|ubicad[oa]|situad[oa]|localizad[oa])\b)", connector):
+            continue
+        if not re.fullmatch(r"\s*,?\s*(?:(?:ubicad[oa]|situad[oa]|localizad[oa])\s+)?"
+                            r"(?:(?:en|de|del)\s+(?:el\s+)?)?", connector):
+            return True
+        department = _DEPARTMENTS[department_match["place"]]
+        return resolve_municipality(locality["place"], department) is None
+    return False
+
+
 def extract_administrative_mention(article, *, allow_municipality=True):
     """Return one conservative administrative mention, or None for ambiguity.
 
@@ -146,7 +169,7 @@ def extract_administrative_mention(article, *, allow_municipality=True):
     if _FOREIGN.search(country_context):
         return None
     explicit_sv = bool(_SALVADORAN.search(country_context))
-    department_pattern, municipality_pattern, bare_pattern, place_tail, department_tail, dateline = _patterns()
+    department_pattern, municipality_pattern, bare_pattern, place_tail, department_tail, dateline, names = _patterns()
     candidates, ambiguous, observed_departments = [], False, set()
     for index, paragraph in enumerate(paragraphs, 1):
         normalized = _clean(paragraph["text"])
@@ -157,6 +180,11 @@ def extract_administrative_mention(article, *, allow_municipality=True):
         for clause_number, clause in enumerate(re.split(r"[.!?;]+", normalized)):
             typed_departments = []
             for match in department_pattern.finditer(clause):
+                # Always validate an adjacent administrative chain before the
+                # ordinary context path can accept its explicit department.
+                if _department_chain_conflict(clause, match, names):
+                    ambiguous = True
+                    continue
                 context = _typed_context(clause, match.start(), match.end())
                 if not context:
                     pair = re.search(r"\ben\s+(?:(?:el|la)\s+)?(?:(?:municipio|distrito|ciudad|localidad)\s+de\s+)?"

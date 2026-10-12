@@ -35,7 +35,8 @@ it.each(['source_explicit_department', 'source_municipality_reference'])('explai
   await screen.findByRole('button', { name: `${location.department}: 1 noticia` });
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   const panel = screen.getByRole('region', { name: 'Ubicación automática sin revisar' });
-  expect(panel).toHaveTextContent('sin usar Gemini ni esperar a que se genere la ficha completa');
+  expect(panel).toHaveTextContent('su identificación no depende de que la ficha esté completa');
+  expect(panel).toHaveTextContent('Puede corresponder a una referencia secundaria del artículo');
   expect(panel).not.toHaveTextContent('Departamento corroborado');
   expect(panel).toHaveTextContent('no confirma el lugar de una violación');
   if (municipal) {

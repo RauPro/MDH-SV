@@ -80,6 +80,30 @@ def test_administrative_chain_requires_an_exact_compatible_pair():
     assert extract_administrative_mention(article("La comunidad está en Lugar Inventado, departamento de Cabañas.")) is None
 
 
+@pytest.mark.parametrize("text", [
+    "El humedal de Metapán, en el departamento de Ahuachapán, requiere protección.",
+    "El humedal de Metapán, ubicado en el departamento de Ahuachapán, requiere protección.",
+    "El humedal de Metapán, palabra intrusa en el departamento de Ahuachapán, requiere protección.",
+    "El humedal de Metapán, texto desconocido en el departamento de Santa Ana, requiere protección.",
+])
+def test_adjacent_city_department_contradictions_or_unknown_insertions_suppress_explicit_department(text):
+    assert extract_administrative_mention(article(text)) is None
+    assert extract_administrative_mention(article(text), allow_municipality=False) is None
+
+
+@pytest.mark.parametrize("connector", [", en el", ", ubicado en el", " en el"])
+def test_correct_adjacent_city_department_pair_preserves_explicit_source_claim(connector):
+    result = extract_administrative_mention(article(
+        f"El humedal de Metapán{connector} departamento de Santa Ana requiere protección."))
+    assert result == {"method": "source_explicit_department", "department": "Santa Ana", "paragraph_id": "p1"}
+
+
+def test_administrative_contradiction_is_not_relocated_or_overridden_by_another_valid_mention():
+    value = article("El humedal de Metapán, en el departamento de Ahuachapán, requiere protección.",
+                    "El informe también contiene denuncias en el departamento de Santa Ana.")
+    assert extract_administrative_mention(value) is None
+
+
 def test_all_source_locations_are_examined_and_multiple_departments_are_never_reduced_to_first():
     value = article("Las denuncias se registraron en el municipio de Nahuizalco.",
                     "Otras denuncias ocurrieron en el municipio de San Miguel.")

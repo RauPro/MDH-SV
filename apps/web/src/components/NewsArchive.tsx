@@ -159,10 +159,10 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
       {selectedLocation && <section className="news-automatic-location" aria-label="Ubicación automática sin revisar">
         <h3>Ubicación automática · Sin revisar</h3>
         <p>{selectedLocation.resolution ? 'Departamento obtenido del municipio o distrito citado:' : selectedLocation.method === 'gemini_department_corroborated' ? 'Departamento corroborado automáticamente en la misma fuente:' : 'Departamento mencionado en la fuente:'} <strong>{selectedLocation.department}</strong>.</p>
-        {selectedLocationFromSource && <p>Esta ubicación se obtuvo con reglas de lectura de la fuente, sin usar Gemini ni esperar a que se genere la ficha completa.</p>}
+        {selectedLocationFromSource && <p>Esta mención se comprobó directamente en el texto de la fuente; su identificación no depende de que la ficha esté completa.</p>}
         {selectedLocation.resolution && <p>Localidad citada: <strong>{selectedLocation.resolution.municipality}</strong>. Correspondencia administrativa según la <a href={selectedLocation.resolution.source_url} target="_blank" rel="noopener noreferrer">referencia oficial de municipios y distritos</a>. Se conserva el nombre de la fuente; no se asignan coordenadas personales.</p>}
         {selectedLocation.corroboration && <p>Se comprobó que otro párrafo de la misma noticia menciona expresamente este departamento. La corroboración automática no equivale a revisión humana.</p>}
-        <p>Esta extracción automática no confirma el lugar de una violación ni ha sido revisada por una persona. La ficha estructurada mantiene su propio estado de revisión.</p>
+        <p>Esta extracción automática no confirma el lugar de una violación ni ha sido revisada por una persona. Puede corresponder a una referencia secundaria del artículo. La ficha estructurada mantiene su propio estado de revisión.</p>
         <dl><dt>Fuente</dt><dd><a href={selectedLocation.source_url} target="_blank" rel="noopener noreferrer">{selectedLocation.publisher}<ArrowUpRight size={13} aria-label="abre en otra pestaña"/></a></dd><dt>Extracción</dt><dd>{archiveInstant(selectedLocation.extracted_at)} (El Salvador)</dd><dt>Fuente comprobada</dt><dd>{archiveInstant(selectedLocation.source_checked_at)} (El Salvador)</dd></dl>
       </section>}
       <NewsDossier dossier={selectedDossier}/>
