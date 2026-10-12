@@ -71,9 +71,8 @@ aumentar solicitudes. El máximo de salida sigue en 4.096 tokens; una respuesta
 incompleta no publica evaluaciones parciales. Se preserva un intento para RSS nuevo antes del backlog
 positivo. Los reintentos también consumen presupuesto.
 
-El esquema enviado a Gemini limita los identificadores a los del lote y exige
-su cantidad exacta; la validación local sigue comprobando identidad, duplicados
-y evidencia. Si una respuesta tiene errores estructurales, el trabajador puede
+La validación local exige la cantidad y los identificadores exactos del lote,
+rechaza duplicados y comprueba la evidencia. Si una respuesta tiene errores estructurales, el trabajador puede
 dividir el lote y reevaluar sus mitades con la misma reserva y plazo. Nunca
 repara identificadores ni aprovecha filas de la respuesta inválida. Un 429,
 una pausa de presupuesto o un error del proveedor no dispara esta subdivisión.

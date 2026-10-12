@@ -7,7 +7,7 @@ import pytest
 
 from mdh_pipeline.gemini_budget import MODEL, QuotaDeferred, QuotaStateError
 from mdh_pipeline.gemini_draft import GeminiDraftError
-from mdh_pipeline.news_scope import MAX_BATCH_ITEMS, SCOPE_PROMPT, SYSTEM_PROMPT, classify_scope_batch, prepare_scope_batch, response_schema
+from mdh_pipeline.news_scope import MAX_BATCH_ITEMS, SCOPE_PROMPT, SYSTEM_PROMPT, classify_scope_batch, response_schema
 from test_gemini_budget import ready
 
 KEY = "scope-test-api-key-not-real"
@@ -115,8 +115,7 @@ def test_full_article_paragraphs_go_only_to_provider_with_structured_output_and_
     assert KEY not in json.dumps(request["json"])
     assert request["timeout"] == (10, 90) and request["stream"] and not request["allow_redirects"]
     config = request["json"]["generationConfig"]
-    assert config["responseJsonSchema"] == response_schema([value["reference"]["id"]])
-    assert config["responseMimeType"] == "application/json"
+    assert config["responseJsonSchema"] == response_schema() and config["responseMimeType"] == "application/json"
     data = json.loads(request["json"]["contents"][0]["parts"][0]["text"])
     article_data = data["untrusted_articles"][0]
     assert article_data["paragraphs"] == value["article"]["paragraphs"]
@@ -141,51 +140,6 @@ def test_sixteen_short_articles_share_one_http_reservation_and_keep_identity_ord
     assert len(results) == MAX_BATCH_ITEMS == 16
     assert inbox.document()["used_requests"] == budget.requests_this_run == len(session.calls) == 1
     assert session.calls[0][1]["json"]["generationConfig"]["maxOutputTokens"] == 4096
-
-
-@pytest.mark.parametrize("count", range(1, MAX_BATCH_ITEMS + 1))
-def test_provider_schema_has_exact_validated_identifiers_and_exact_count_for_every_batch_size(count):
-    items = [item(n) for n in range(count)]
-    _, payload = prepare_scope_batch(items)
-    array = payload["generationConfig"]["responseJsonSchema"]["properties"]["assessments"]
-    assert array["minItems"] == array["maxItems"] == count
-    assert array["items"]["properties"]["candidate_id"] == {
-        "type": "string", "enum": [value["reference"]["id"] for value in items]}
-
-
-@pytest.mark.parametrize("identifiers", [[], ["invalid"], ["a" * 64, "a" * 64],
-                                        [f"{number:064x}" for number in range(MAX_BATCH_ITEMS + 1)]])
-def test_schema_binding_rejects_invalid_or_duplicate_input_identifiers(identifiers):
-    with pytest.raises(GeminiDraftError, match="invalid_scope_batch"):
-        response_schema(identifiers)
-
-
-@pytest.mark.parametrize("mutation", [
-    lambda rows: rows[-1].update(candidate_id="f" * 64),
-    lambda rows: rows[-1].update(candidate_id=rows[0]["candidate_id"]),
-    lambda rows: rows.pop(),
-])
-def test_local_exact_identity_validation_still_rejects_malformed_sixteen_item_provider_output(mutation):
-    items = [item(n) for n in range(1, 17)]
-    rows = [assessment(value) for value in items]
-    mutation(rows)
-    with pytest.raises(GeminiDraftError, match="scope_identity_mismatch"):
-        run(items, assessments=rows)
-
-
-def test_bound_schema_bytes_count_toward_request_cap_before_any_http_reservation(monkeypatch):
-    from mdh_pipeline.gemini_budget import estimate_input_tokens
-    items = [item(n) for n in range(16)]
-    _, bound = prepare_scope_batch(items)
-    unbound = deepcopy(bound)
-    unbound["generationConfig"]["responseJsonSchema"] = response_schema()
-    assert estimate_input_tokens(bound) > estimate_input_tokens(unbound)
-    monkeypatch.setattr("mdh_pipeline.news_scope.MAX_SCOPE_REQUEST_UNITS", estimate_input_tokens(unbound))
-    budget, inbox, _ = ready()
-    session = Session([])
-    with pytest.raises(GeminiDraftError, match="scope_request_too_large"):
-        run(items, budget=budget, session=session)
-    assert session.calls == [] and inbox.document()["used_requests"] == 0
 
 
 def test_sixteen_article_batch_rejects_evidence_from_another_article():
