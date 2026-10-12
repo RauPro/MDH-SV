@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T20:22:30.022998+00:00",
+  "generated_at": "2026-10-12T21:20:03.349130+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 6199,
-      "selected": 98,
-      "evaluated": 169,
-      "relevant": 98,
-      "excluded": 64,
+      "selected": 103,
+      "evaluated": 185,
+      "relevant": 103,
+      "excluded": 75,
       "uncertain": 7,
-      "pending": 6030,
-      "evaluated_at": "2026-10-12T20:22:29.342797+00:00"
+      "pending": 6014,
+      "evaluated_at": "2026-10-12T21:20:02.649958+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-12",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 98,
+    "records": 103,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 85,
+        "records": 90,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -665,7 +665,7 @@
           {
             "month": "2014-03",
             "status": "enumerated",
-            "records": 11,
+            "records": 16,
             "screen_version": 3,
             "posts_scanned": 1028,
             "source_total_posts": 1028,
@@ -19282,12 +19282,12 @@
         "month": "2014-03",
         "start_date": "2014-03-01",
         "end_date": "2014-03-31",
-        "records": 11,
+        "records": 16,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 11
+            "records": 16
           },
           {
             "source_id": "gatoencerrado",
@@ -28386,6 +28386,229 @@
           ],
           "relevance_paragraph_ids": [
             "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "673fde0e1c1425100e1c37766986ec8b887b5d9f069133683fd84fffea86968b",
+      "title": "“No permitamos que quienes asesinaron a monseñor Romero, asesinen su legado y su palabra”: Presidente Funes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/no-permitamos-que-quienes-asesinaron-a-monsenor-romero-asesinen-su-legado-y-su-palabra-presidente-funes/",
+      "published_date": "2014-03-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 10018,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "906716c13fece1830a9154c811bd09e5cb711fd00ba88c4845c5fb40d8209879",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p13",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3e079c67e160325c7c49b85e219e3b79c9cc6bbacfee34f28a01110085214bc6",
+      "title": "Organizaciones para la Defensa de los Derechos Humanos exigen pronta justicia",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-para-la-defensa-de-los-derechos-humanos-exigen-pronta-justicia/",
+      "published_date": "2014-03-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 10012,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "be7996545c603e4a690ed4cf928cc28bd27f9a7241b5fa228ce69aebb05e713a",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3e49bb3044cec125d466be774efddc446309bf73f6253e957c16d858c12021bb",
+      "title": "“La Sangre de Romero sigue derramada clamando justicia por los inocentes”, David Morales",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/la-sangre-de-romero-sigue-derramada-clamando-justicia-por-los-inocentes-david-morales/",
+      "published_date": "2014-03-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 9889,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6362273d1472aced590ca99ac35876397dc0a850116cd7a34fb25acb48660244",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f607d5d5817b42fcc95c0ed7e6e3f31ed37bf6c6a95a6bdfcf5c48cc89da2f5b",
+      "title": "Fiscalía allana Dirección de Penal de Mariona",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fiscalia-allana-direccion-de-penal-de-mariona/",
+      "published_date": "2014-03-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "penal de mariona"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 9539,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cf5344226c72771e18f366a424d52cf801590b4009b2015cc7f80626869f9a6b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d813d1579edd4b6820d4bf6b0c0e8e363ec70549ad2a132a880d8748149e2168",
+      "title": "MINEC y Defensoría del Consumidor firman convenio de cooperación",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/minec-y-defensoria-del-consumidor-firman-convenio-de-cooperacion/",
+      "published_date": "2014-03-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 9298,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "bcce5b3a2864080aa60fe2f879e6197081be78e1f9aabcaac79fc79e57ee9e37",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
             "p6"
           ]
         }

@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T20:22:29.342797+00:00",
+  "generated_at": "2026-10-12T21:20:02.649958+00:00",
   "assessment_counts": {
     "candidates": 6199,
-    "evaluated": 169,
-    "relevant": 98,
-    "excluded": 64,
+    "evaluated": 185,
+    "relevant": 103,
+    "excluded": 75,
     "uncertain": 7,
-    "pending": 6030
+    "pending": 6014
   },
   "selections": [
     {
@@ -674,6 +674,61 @@
       }
     },
     {
+      "candidate_id": "3e079c67e160325c7c49b85e219e3b79c9cc6bbacfee34f28a01110085214bc6",
+      "source_url": "https://www.diariocolatino.com/organizaciones-para-la-defensa-de-los-derechos-humanos-exigen-pronta-justicia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "be7996545c603e4a690ed4cf928cc28bd27f9a7241b5fa228ce69aebb05e713a",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "3e49bb3044cec125d466be774efddc446309bf73f6253e957c16d858c12021bb",
+      "source_url": "https://www.diariocolatino.com/la-sangre-de-romero-sigue-derramada-clamando-justicia-por-los-inocentes-david-morales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6362273d1472aced590ca99ac35876397dc0a850116cd7a34fb25acb48660244",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "4390bf4e0e13763c0c5f7c60638598b43473412a22bc7ca70e22a52f8f57f92e",
       "source_url": "https://www.diariocolatino.com/organizaciones-sociales-aseguran-que-pozo-de-norman-quijano-es-un-ejemplo-de-violacion-del-derecho-al-agua/",
       "publisher": "Diario Co Latino",
@@ -1096,6 +1151,33 @@
             "p15",
             "p16",
             "p19"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "673fde0e1c1425100e1c37766986ec8b887b5d9f069133683fd84fffea86968b",
+      "source_url": "https://www.diariocolatino.com/no-permitamos-que-quienes-asesinaron-a-monsenor-romero-asesinen-su-legado-y-su-palabra-presidente-funes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "906716c13fece1830a9154c811bd09e5cb711fd00ba88c4845c5fb40d8209879",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p13",
+            "p14"
           ]
         }
       }
@@ -2336,6 +2418,33 @@
       }
     },
     {
+      "candidate_id": "d813d1579edd4b6820d4bf6b0c0e8e363ec70549ad2a132a880d8748149e2168",
+      "source_url": "https://www.diariocolatino.com/minec-y-defensoria-del-consumidor-firman-convenio-de-cooperacion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "bcce5b3a2864080aa60fe2f879e6197081be78e1f9aabcaac79fc79e57ee9e37",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "d8decca79af5fe2a4e7d16d1571fb854f095e771e0feb553618812d5642d47cb",
       "source_url": "https://www.diariocolatino.com/flores-podria-ser-demandado-internacionalmente-por-violar-derechos-humanos-de-familias-pobres/",
       "publisher": "Diario Co Latino",
@@ -2658,6 +2767,33 @@
             "p7",
             "p10",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f607d5d5817b42fcc95c0ed7e6e3f31ed37bf6c6a95a6bdfcf5c48cc89da2f5b",
+      "source_url": "https://www.diariocolatino.com/fiscalia-allana-direccion-de-penal-de-mariona/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-20",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:09:08.869501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cf5344226c72771e18f366a424d52cf801590b4009b2015cc7f80626869f9a6b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }

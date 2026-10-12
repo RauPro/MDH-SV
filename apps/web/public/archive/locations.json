@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-10-12T19:18:54.423403+00:00",
+  "generated_at": "2026-10-12T21:20:30.523033+00:00",
   "locations": [
     {
       "candidate_id": "1ae4f97fa5ec196999deae0627d67301a17f54a5592a97a79f662b56fb9681a4",
@@ -160,6 +160,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
+    },
+    {
+      "candidate_id": "2cb582a9197fe7db8440ea714722b510218a36c77988fc1544f2e7b5323bea26",
+      "source_url": "https://www.diariocolatino.com/continua-campana-para-prevenir-violencia-contra-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-25",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-12T15:13:07.660461-06:00",
+      "source_checked_at": "2026-10-12T21:20:07.055202+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "8b32aaeb212ba3883d14d3bfe8d9b533a23fa13fb2d5fc8abcf67c1f200968c1"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
