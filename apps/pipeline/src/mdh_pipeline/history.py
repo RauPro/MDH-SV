@@ -28,7 +28,7 @@ from .publishers import SOURCES
 ROOT = Path(__file__).resolve().parents[4]
 START_DATE = date(2010, 1, 1)
 SCREEN_VERSION = 3
-SCOPE_VERSION = 1
+SCOPE_VERSION = 2
 TOPICS = {
     "detencion_y_debido_proceso": ("regimen de excepcion", "regimen-de-excepcion", "deten", "detencion", "captur", "habeas", "inocente", "debido proceso", "debido-proceso", "defensa publica"),
     "condiciones_de_reclusion": ("carcel", "prision", "penitenciari", "custodia", "bartolina", "tortura", "cecot", "mariona", "apanteos"),
@@ -66,7 +66,7 @@ POLICY = {
     "record_type": "news_reference",
     "screen_version": SCREEN_VERSION,
     "scope_version": SCOPE_VERSION,
-    "scope_method": "Indicio conservador de relación territorial basado en términos explícitos del título y URL. El Salvador tiene prioridad cuando aparecen ambos contextos. scope_terms conserva los fragmentos detectados normalizados (sin tildes, en minúsculas y con separadores de URL convertidos en espacios). No confirma jurisdicción. Las referencias históricas anteriores a este filtro usan el título abreviado guardado y su URL; las nuevas capturas usan el título completo antes de abreviarlo.",
+    "scope_method": "Indicio conservador de relación territorial basado en términos explícitos del título y URL. Se excluye el sufijo editorial de El Diario de Hoy y la forma verbal «irán a/al». El Salvador tiene prioridad cuando aparecen ambos contextos. scope_terms conserva los fragmentos detectados normalizados (sin tildes, en minúsculas y con separadores de URL convertidos en espacios). No confirma jurisdicción. Las referencias históricas anteriores a este filtro usan el título abreviado guardado y su URL; las nuevas capturas usan el título completo antes de abreviarlo.",
     "selection_method": "Coincidencia automática de términos en título y URL. Se conservan metadatos públicos; no cuerpos periodísticos.",
     "review_status": "not_reviewed",
     "notice": "Archivo bibliográfico parcial de noticias candidatas. No acredita violaciones, víctimas, jurisdicción salvadoreña ni hechos verificados. No forma parte del recuento de casos. La revisión editorial y de privacidad es un proceso separado.",
@@ -82,11 +82,30 @@ POLICY = {
 }
 
 
+def clean_publisher_title(title, url, *, truncated=False):
+    """Remove only the known EDH page suffix, including a saved cut-off suffix."""
+    if urlsplit(url).hostname != "historico.elsalvador.com":
+        return title
+    heading, separator, suffix = title.rpartition("|")
+    expected = "noticias de el salvador - elsalvador.com"
+    suffix = " ".join(suffix.casefold().split())
+    if (separator and heading.strip() and suffix and
+            (suffix == expected or (truncated and expected.startswith(suffix)))):
+        return heading.strip()
+    return title
+
+
+def _scope_text(title, url):
+    text = normalize(clean_publisher_title(title, url) + " " + unquote(urlsplit(url).path))
+    return " ".join(re.sub(r"[-_/]+", " ", text).replace(".", "").split())
+
+
 def scope_hint(title, url):
     """A discoverability hint, never an assertion of the incident's jurisdiction."""
-    text = normalize(title + " " + unquote(urlsplit(url).path))
-    text = re.sub(r"[-_/]+", " ", text).replace(".", "")
-    text = " ".join(text.split())
+    text = _scope_text(title, url)
+    # Accent folding otherwise turns the future verb in "irán a la cárcel"
+    # into a country mention. Ambiguous phrasing contributes no country hint.
+    text = re.sub(r"\biran\s+(?:a|al)\b", " ", text)
     domestic = sorted({match.group(0) for pattern in SALVADOR_SCOPE_PATTERNS for match in re.finditer(pattern, text)})
     international = sorted({match.group(0) for pattern in INTERNATIONAL_SCOPE_PATTERNS for match in re.finditer(pattern, text)})
     return {"scope_hint": "el_salvador" if domestic else "international_context" if international else "undetermined",
@@ -94,15 +113,23 @@ def scope_hint(title, url):
 
 
 def migrate_scope_hints(folder, sources=SOURCES):
-    """Enrich old metadata only; preserve dates, collection counters and review state."""
+    """Repair affected hints without losing candidates or full-title scope evidence."""
     for source in sources:
         path = folder / (source["id"] + ".json")
         if not path.exists():
             continue
         state = read_json(path, {})
         for reference in state.get("records", []):
-            if "scope_hint" not in reference or "scope_terms" not in reference:
+            title = clean_publisher_title(reference["title"], reference["source_url"],
+                                          truncated=reference.get("title_truncated") is True)
+            changed_title = title != reference["title"]
+            if changed_title:
+                reference["title"] = title
+            verbal_iran = re.search(r"\biran\s+(?:a|al)\b", _scope_text(title, reference["source_url"]))
+            if (changed_title or verbal_iran or "scope_hint" not in reference
+                    or "scope_terms" not in reference):
                 reference.update(scope_hint(reference["title"], reference["source_url"]))
+        state["scope_version"] = SCOPE_VERSION
         atomic_json(path, state)
 
 
@@ -159,6 +186,7 @@ def reference_from_metadata(title, url, published_date, source, start, end,
     if not isinstance(raw_title, str):
         raise ValueError("Invalid publisher title")
     title = " ".join(html.unescape(re.sub(r"<[^>]*>", " ", raw_title)).split())
+    title = clean_publisher_title(title, url)
     if not title:
         raise ValueError("Missing publisher title")
     screened = normalize(title + " " + urlsplit(url).path)

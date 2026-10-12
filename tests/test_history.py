@@ -1,5 +1,6 @@
 """Historical bibliography must preserve evidence and the editorial boundary."""
 import json
+from copy import deepcopy
 from datetime import date
 from urllib.parse import parse_qs, urlsplit
 
@@ -64,6 +65,29 @@ def test_html_archive_metadata_preserves_html_urls_and_does_not_invent_a_post_id
         validate_reference(result, source)
 
 
+def test_edh_publisher_suffix_is_removed_before_scope_and_public_title():
+    from mdh_pipeline.history import reference_from_metadata
+    source = next(s for s in SOURCES if s["id"] == "el-diario-de-hoy")
+    reference = reference_from_metadata(
+        "Detenciones en Guatemala | Noticias de El Salvador - elsalvador.com",
+        "https://historico.elsalvador.com/historico/123/detenciones-en-guatemala.html",
+        START.isoformat(), source, START, END, NOW)
+    assert reference["title"] == "Detenciones en Guatemala"
+    assert reference["title_truncated"] is False
+    assert reference["scope_hint"] == "international_context"
+    assert reference["scope_terms"] == ["guatemala"]
+    validate_reference(reference, source)
+
+
+@pytest.mark.parametrize("title,url", [
+    ("Detenciones | Noticias de El Salvador - elsalvador.com", "https://www.diariocolatino.com/noticia/"),
+    ("Detenciones | Noticias de El Salvador y Honduras", "https://historico.elsalvador.com/historico/123/detenciones.html"),
+])
+def test_title_cleanup_does_not_remove_real_headings_or_other_publishers(title, url):
+    from mdh_pipeline.history import clean_publisher_title
+    assert clean_publisher_title(title, url) == title
+
+
 def test_html_metadata_requires_a_full_publisher_date_and_rejects_unapproved_hosts():
     from mdh_pipeline.history import reference_from_metadata
     source = next(s for s in SOURCES if s["id"] == "el-mundo")
@@ -104,6 +128,12 @@ def test_keyword_screen_and_quote_minimization():
     ("José Rubén Zamora permanece preso en Guatemala", "https://www.diariocolatino.com/noticia/", "international_context", ["guatemala"]),
     ("Denuncian detenciones", "https://www.diariocolatino.com/detenciones-en-el-salvador/", "el_salvador", ["el salvador"]),
     ("Denuncian detenciones", "https://www.diariocolatino.com/detenciones-en-san-miguel/", "undetermined", []),
+    ("Los responsables irán a la cárcel", "https://www.diariocolatino.com/responsables-iran-a-la-carcel/", "undetermined", []),
+    ("Empleados irán al tribunal", "https://www.diariocolatino.com/empleados-iran-al-tribunal/", "undetermined", []),
+    ("Irán a la cárcel en Guatemala", "https://www.diariocolatino.com/iran-a-la-carcel-en-guatemala/", "international_context", ["guatemala"]),
+    ("Irán cierra escuelas por contaminación", "https://www.diariocolatino.com/iran-cierra-escuelas/", "international_context", ["iran"]),
+    ("Periodistas irán a Irán", "https://www.diariocolatino.com/periodistas-iran-a-iran/", "international_context", ["iran"]),
+    ("Detenciones en Guatemala | Noticias de El Salvador - elsalvador.com", "https://historico.elsalvador.com/historico/123/detenciones-en-guatemala.html", "international_context", ["guatemala"]),
 ])
 def test_scope_hints_are_conservative_traceable_and_prioritize_salvador(title, url, expected, terms):
     assert scope_hint(title, url) == {"scope_hint": expected, "scope_terms": terms}
@@ -135,6 +165,48 @@ def test_scope_migration_preserves_source_coverage_and_never_claims_review(tmp_p
     assert after["records"][0]["jurisdiction_status"] == "not_reviewed"
     migrate_scope_hints(tmp_path, [SOURCE])
     assert json.loads(path.read_text()) == after
+
+
+@pytest.mark.parametrize("suffix,truncated", [
+    ("Noticias de El Salvador - elsalvador.com", False),
+    ("Noticias de El Salvador -", True),
+    ("Noticias de El Salvador", True),
+    ("Noticias de El", True),
+    ("Noticias de", True),
+])
+def test_scope_migration_repairs_existing_edh_branding_without_deleting_candidates(tmp_path, suffix, truncated):
+    from mdh_pipeline.history import reference_from_metadata, SCOPE_VERSION
+    source = next(s for s in SOURCES if s["id"] == "el-diario-de-hoy")
+    reference = reference_from_metadata("Detenciones en Guatemala",
+        "https://historico.elsalvador.com/historico/123/detenciones-en-guatemala.html",
+        START.isoformat(), source, START, END, NOW)
+    reference.update(title="Detenciones en Guatemala | " + suffix, title_truncated=truncated,
+                     scope_hint="el_salvador", scope_terms=["el salvador", "guatemala"])
+    before = {"records": [deepcopy(reference)], "months": {"2025-03": {"posts_scanned": 42}},
+              "collection": {"phase": "complete"}, "scope_version": 1}
+    path = tmp_path / (source["id"] + ".json")
+    path.write_text(json.dumps(before))
+    migrate_scope_hints(tmp_path, [source])
+    after = json.loads(path.read_text())
+    reference.update(title="Detenciones en Guatemala", scope_hint="international_context", scope_terms=["guatemala"])
+    assert after == {**before, "scope_version": SCOPE_VERSION, "records": [reference]}
+    migrate_scope_hints(tmp_path, [source])
+    assert json.loads(path.read_text()) == after
+
+
+def test_scope_migration_repairs_verbal_iran_but_preserves_unaffected_full_title_hints(tmp_path):
+    references = [
+        reference_from_post(post(1, "Responsables irán a la cárcel"), SOURCE, START, END, NOW),
+        reference_from_post(post(2, "Detenciones " + "palabra " * 30 + "en El Salvador"), SOURCE, START, END, NOW),
+    ]
+    references[0].update(scope_hint="international_context", scope_terms=["iran"])
+    assert "Salvador" not in references[1]["title"]
+    path = tmp_path / (SOURCE["id"] + ".json")
+    path.write_text(json.dumps({"records": references, "scope_version": 1}))
+    migrate_scope_hints(tmp_path, [SOURCE])
+    after = json.loads(path.read_text())["records"]
+    assert after[0] == {**references[0], "scope_hint": "undetermined", "scope_terms": []}
+    assert after[1] == references[1]
 
 
 @pytest.mark.parametrize("published", [None, "", "invalid", "2025-03-25T23:59:59", "2025-04-01T00:00:00", "2027-01-01T00:00:00"])
