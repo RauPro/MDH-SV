@@ -1,5 +1,6 @@
 import type { NewsSelectionGate } from '../../../../shared/news-selection.mjs';
 import { archiveInstant } from '../newsArchive';
+import { NextNewsUpdate } from './NextNewsUpdate';
 
 const number = (value: number) => new Intl.NumberFormat('es-SV').format(value);
 
@@ -17,5 +18,6 @@ export function NewsClassificationProgress({ gate }: { gate: NewsSelectionGate }
       <div><dt>Necesitan resolver dudas</dt><dd>{number(gate.uncertain)}</dd></div>
     </dl>
     <p className="classification-note">Se incluyen reportes y contexto de derechos humanos vinculados a El Salvador. Este avance describe nuestro archivo, no la totalidad de noticias del país. Actualizado: {archiveInstant(gate.evaluated_at)} (El Salvador).</p>
+    <NextNewsUpdate/>
   </section>;
 }
