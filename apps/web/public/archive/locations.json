@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T07:17:55.104685+00:00",
+  "generated_at": "2026-10-12T07:30:48.168070+00:00",
   "locations": [
     {
       "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
@@ -409,6 +409,29 @@
       "evidence": {
         "paragraph_id": "p5",
         "content_sha256": "5441a948aa7b69b5861949fd77ac03ad0ad1b04a7ec27ab88dc41763db0bffff"
+      }
+    },
+    {
+      "candidate_id": "cd9ae3d9848ffac516bfea0400f0957d0bb5ed0abc3d7d768e2f30a3373ccf75",
+      "source_url": "https://www.diariocolatino.com/fgr-de-sonsonate-gira-orden-de-captura-para-37-pandilleros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-12",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-12T01:08:50.243552-06:00",
+      "source_checked_at": "2026-10-12T07:30:47.322921+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "ff0e47f71dc2fecd417aababf35fd990f97457957baaddaf4b3213294644d59c"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Izalco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
     },
     {
