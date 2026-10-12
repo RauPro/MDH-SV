@@ -128,16 +128,25 @@ class ScopeResponse(BaseModel):
     assessments: list[ScopeAssessment] = Field(min_length=1, max_length=MAX_BATCH_ITEMS)
 
 
-def response_schema():
-    """Provider-compatible flat schema; strict local bounds remain authoritative."""
+def response_schema(candidate_ids=None):
+    """Bind provider output to this batch; local identity/evidence checks still apply."""
+    if candidate_ids is not None and (
+            not isinstance(candidate_ids, (list, tuple)) or not 1 <= len(candidate_ids) <= MAX_BATCH_ITEMS
+            or any(not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value) for value in candidate_ids)
+            or len(set(candidate_ids)) != len(candidate_ids)):
+        raise GeminiDraftError("invalid_scope_batch")
+    candidate_schema = {"type": "string"}
+    if candidate_ids is not None:
+        candidate_schema["enum"] = list(candidate_ids)
     properties = {
-        "candidate_id": {"type": "string"},
+        "candidate_id": candidate_schema,
         "jurisdiction": {"type": "string", "enum": ["SV", "other", "unclear"]},
         "relevance": {"type": "string", "enum": ["relevant", "not_relevant", "unclear"]},
         "jurisdiction_paragraph_ids": {"type": "array", "items": {"type": "string"}},
         "relevance_paragraph_ids": {"type": "array", "items": {"type": "string"}},
     }
-    return {"type": "object", "properties": {"assessments": {"type": "array", "items": {
+    minimum, maximum = (len(candidate_ids), len(candidate_ids)) if candidate_ids is not None else (1, MAX_BATCH_ITEMS)
+    return {"type": "object", "properties": {"assessments": {"type": "array", "minItems": minimum, "maxItems": maximum, "items": {
         "type": "object", "properties": properties, "required": list(properties)}}}, "required": ["assessments"]}
 
 
@@ -203,7 +212,8 @@ def prepare_scope_batch(items):
             raise GeminiDraftError("invalid_scope_input") from None
     payload = {"systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
         "contents": [{"role": "user", "parts": [{"text": json.dumps({"untrusted_articles": payload_items}, ensure_ascii=False)}]}],
-        "generationConfig": {"responseMimeType": "application/json", "responseJsonSchema": response_schema(),
+        "generationConfig": {"responseMimeType": "application/json", "responseJsonSchema": response_schema(
+                                [reference["id"] for reference, _, _, _ in prepared_items]),
                              "candidateCount": 1, "temperature": 0, "maxOutputTokens": MAX_SCOPE_OUTPUT_TOKENS}}
     if estimate_input_tokens(payload) > MAX_SCOPE_REQUEST_UNITS:
         raise GeminiDraftError("scope_request_too_large")
