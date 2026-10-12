@@ -37,7 +37,7 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
         <p>{isNews ? 'Selecciona un departamento para consultar sus noticias por ubicación revisada o automática sin revisar.' : 'Selecciona un departamento para consultar sus reportes individuales.'}</p></div>
       {selected && <button className="map-clear" onClick={() => onSelect('')}><X size={14} aria-hidden="true"/> Quitar filtro del mapa</button>}
     </div>
-    <p className="map-scope">{isNews ? 'El mapa distingue departamentos con revisión humana y menciones extraídas automáticamente, sin revisar. Una mención no confirma el lugar de una violación. Los recuentos respetan los filtros; las fechas corresponden a la publicación.' : 'Los recuentos respetan la búsqueda, la temática y las fechas. No incluyen reportes colectivos ni informes.'}</p>
+    <p className="map-scope">{isNews ? 'El mapa distingue departamentos con revisión humana y menciones extraídas automáticamente, sin revisar. Pueden ser referencias secundarias del artículo; no confirman el lugar de una violación. Los recuentos respetan los filtros; las fechas corresponden a la publicación.' : 'Los recuentos respetan la búsqueda, la temática y las fechas. No incluyen reportes colectivos ni informes.'}</p>
     <div className="map-layout">
       {/* Equivalent native buttons expose every action to keyboard and assistive technology. */}
       <svg viewBox="0 0 1000 547" className="map-canvas" aria-hidden="true" focusable="false" onMouseLeave={() => setHovered(null)}>

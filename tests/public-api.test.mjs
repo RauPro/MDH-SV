@@ -223,7 +223,7 @@ test('automatic locations are a separate unreviewed projection and never overrid
     published_date: source.published_date, department: 'San Salvador',
     review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department',
     extracted_at: '2026-10-10T12:00:00Z', source_checked_at: '2026-10-10T12:00:00Z',
-    evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) },
+    evidence: { paragraph_id: 'p1', content_sha256: source.selection.evidence.content_sha256 },
   };
   const payload = { schema_version: 1, generated_at: '2026-10-10T12:00:00Z', locations: [location] };
   const empty = { schema_version: 1, dossiers: [] };
@@ -249,6 +249,34 @@ test('automatic locations are a separate unreviewed projection and never overrid
   assert.deepEqual(fromCorroboration.data[0].automatic_location, corroborated);
   assert.equal(fromCorroboration.data[0].news_dossier.fields.department.value, null);
   assert.equal(fromCorroboration.data[0].news_dossier.human_reviewed, false);
+  const sourceLocations = [
+    { ...location, method: 'source_explicit_department', rule_version: 1 },
+    { ...municipal, method: 'source_municipality_reference', rule_version: 1 },
+  ];
+  for (const sourceLocation of sourceLocations) {
+    const sourcePayload = { ...payload, schema_version: 4, locations: [sourceLocation] };
+    const response = searchNews({}, archive, empty, sourcePayload);
+    assert.deepEqual(response.data[0].automatic_location, sourceLocation);
+    assert.equal(response.data[0].automatic_location.human_reviewed, false);
+    assert.equal(response.data[0].automatic_location.corroboration, undefined);
+    assert.equal(response.data[0].news_dossier.fields.department.value, null);
+    assert.equal(response.data[0].news_dossier.human_reviewed, false);
+    for (const schema_version of [1, 2, 3]) {
+      const incompatible = searchNews({}, archive, empty, { ...sourcePayload, schema_version });
+      assert.equal(incompatible.data[0].automatic_location, null);
+      assert.equal(incompatible.meta.automatic_locations_status, 'unavailable');
+    }
+    for (const patch of [
+      { rule_version: undefined }, { rule_version: true }, { rule_version: 2 },
+      { corroboration: corroborated.corroboration }, { source_body: 'PRIVATE_SOURCE_VALUE' },
+      { evidence: { ...sourceLocation.evidence, content_sha256: 'f'.repeat(64) } },
+    ]) {
+      const unsafe = searchNews({}, archive, empty, { ...sourcePayload, locations: [{ ...sourceLocation, ...patch }] });
+      assert.equal(unsafe.data[0].automatic_location, null);
+      assert.ok(!JSON.stringify(unsafe).includes('PRIVATE_SOURCE_VALUE'));
+    }
+  }
+  assert.deepEqual(searchNews({}, archive, empty, { ...corroboratedPayload, schema_version: 4 }).data[0].automatic_location, corroborated);
   for (const schema_version of [1, 2]) {
     const response = searchNews({}, archive, empty, { ...corroboratedPayload, schema_version });
     assert.equal(response.data[0].automatic_location, null);
@@ -273,11 +301,15 @@ test('automatic locations are a separate unreviewed projection and never overrid
   assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, payload).data[0].automatic_location, null);
   assert.equal(searchNews({}, archive, null, payload).data[0].automatic_location, null);
   assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, corroboratedPayload).data[0].automatic_location, null);
+  for (const sourceLocation of sourceLocations) {
+    assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, { ...payload, schema_version: 4, locations: [sourceLocation] }).data[0].automatic_location, null);
+  }
   for (const change of [
     value => { value.human_reviewed = true; },
     value => { value.raw_article = 'PRIVATE_TEST_VALUE'; },
     value => { value.publisher = 'Medio equivocado'; },
     value => { value.department = 'Otra región'; },
+    value => { value.evidence.content_sha256 = 'f'.repeat(64); },
   ]) {
     const unsafe = structuredClone(payload); change(unsafe.locations[0]);
     const response = searchNews({}, archive, empty, unsafe);
@@ -296,7 +328,17 @@ test('OpenAPI is a public, versioned executable contract', async () => {
   assert.deepEqual(locationSchema.properties.corroboration.required, ['strategy', 'model_paragraph_id', 'explicit_paragraph_id', 'rule_version']);
   assert.equal(locationSchema.properties.corroboration.properties.rule_version.const, 1);
   assert.ok(locationSchema.allOf.some(rule => rule.if.properties.method.const === 'gemini_department_corroborated' && rule.then.required.includes('corroboration')));
-  assert.deepEqual(body.components.schemas.AutomaticNewsLocationCollection.properties.schema_version.enum, [1, 2, 3]);
+  assert.ok(locationSchema.properties.method.enum.includes('source_explicit_department'));
+  assert.ok(locationSchema.properties.method.enum.includes('source_municipality_reference'));
+  assert.equal(locationSchema.properties.rule_version.const, 1);
+  assert.equal(locationSchema.properties.rule_version.type, 'integer');
+  assert.ok(locationSchema.allOf.some(rule => rule.if.properties.method.enum?.includes('source_municipality_reference') && rule.then.required.includes('resolution')));
+  assert.ok(locationSchema.allOf.some(rule => rule.if.properties.method.enum?.includes('source_explicit_department') && rule.then.required.includes('rule_version')));
+  const locationCollection = body.components.schemas.AutomaticNewsLocationCollection;
+  assert.deepEqual(locationCollection.properties.schema_version.enum, [1, 2, 3, 4]);
+  assert.equal(locationCollection.additionalProperties, false);
+  assert.ok(locationCollection.allOf.some(rule => JSON.stringify(rule.if.properties.schema_version.enum) === '[1,2,3]'
+    && rule.then.properties.locations.items.not.properties.method.enum.includes('source_explicit_department')));
 
   assert.deepEqual(body.security, []);
   assert.ok(body.paths['/api/v1/records/{id}']);

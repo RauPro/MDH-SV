@@ -18,3 +18,17 @@ administrativa oficial, distinguiendo el término de la noticia del departamento
 resuelto. El validador JS usa el mismo JSON canónico que Python; no hay una segunda
 tabla manual ni geocodificación aproximada. Los datos geográficos protegidos y las
 decisiones editoriales prevalecen.
+
+El snapshot de ubicaciones v4 admite además `source_explicit_department` y
+`source_municipality_reference`, con `rule_version: 1`. Estos métodos comprueban
+el texto mediante reglas y, cuando corresponde, la misma referencia municipal
+oficial. No usan Gemini para localizar la noticia ni requieren una ficha
+completa; mantienen el rótulo Sin revisar. No admiten `corroboration`, datos
+personales, cuerpos periodísticos, contadores internos ni cachés privadas.
+Las versiones 1–3 y sus métodos anteriores siguen siendo compatibles; los
+métodos de lectura directa sólo se admiten en la versión 4.
+
+Cuando la referencia fue seleccionada con `gemini_grounded_scope`, el hash del
+texto de la ubicación debe coincidir con el de esa selección. Una coincidencia
+de URL y fecha por sí sola no permite mezclar lecturas distintas de la fuente.
+Los datos humanos revisados siguen prevaleciendo sobre cualquier capa automática.

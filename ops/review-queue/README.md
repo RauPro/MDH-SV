@@ -7,6 +7,10 @@ un único presupuesto horario compartido. `review-scope.yml` queda para pruebas
 manuales, sin otro disparo automático. Conserva evaluaciones en `scope-reviews/`
 y reintentos diferidos en `scope-attempts/`.
 El publicador usa esas decisiones para actualizar selección, noticias y mapa.
+La ubicación se comprueba también directamente en las fuentes seleccionadas,
+sin esperar una ficha completa ni llamar de nuevo a Gemini. Comprueba hasta
+50 fuentes por ejecución y conserva recibos mínimos de reintento en una caché
+privada de Actions; no almacena allí cuerpos, citas ni campos personales.
 
 Este repositorio es privado. Todas las noticias recogidas tienen una estructura
 de ficha, aunque falten datos, el ámbito territorial sea incierto o la noticia no
@@ -99,7 +103,10 @@ actualiza el manifiesto `data/selection/news.json`, el archivo seleccionado y la
 ubicaciones sin revisar. También mantiene el snapshot de fichas humanas ya aprobadas.
 La lista de archivos permitidos es explícita; no exporta cuerpos, borradores,
 comentarios ni campos personales sin revisión. Se ejecuta después de extracción,
-reevaluación de pertinencia o revisión exitosa. Las decisiones humanas prevalecen.
+reevaluación de pertinencia o revisión exitosa. Puede recuperar resultados ya
+validados de un extractor fallido de `main` del mismo repositorio; la alerta
+permanece y nunca se aplica esa excepción a una revisión humana fallida.
+Las decisiones humanas prevalecen.
 
 No hagas público este repositorio. Desactivar el workflow de Gemini detiene las
 llamadas nuevas sin eliminar los borradores. No se notifican ni asignan terceras
