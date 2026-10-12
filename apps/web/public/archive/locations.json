@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-10-12T16:55:01.210521+00:00",
+  "generated_at": "2026-10-12T18:20:33.389212+00:00",
   "locations": [
     {
       "candidate_id": "1ae4f97fa5ec196999deae0627d67301a17f54a5592a97a79f662b56fb9681a4",
@@ -176,6 +176,29 @@
       "evidence": {
         "paragraph_id": "p2",
         "content_sha256": "6897908e8fa411f00a65622fb2f0aabaa13608faaeb61463efc8301174086430"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "44ebf9def65fb72da10e9c92e686a40765ec0f21670a6f364be077a1b35f3d76",
+      "source_url": "https://www.diariocolatino.com/expresidente-guatemalteco-portillo-condenado-a-prision-en-estados-unidos-por-intentar-lavar-dinero-proveniente-de-taiwan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-23",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-12T11:13:16.899717-06:00",
+      "source_checked_at": "2026-10-12T18:20:22.488457+00:00",
+      "evidence": {
+        "paragraph_id": "p22",
+        "content_sha256": "d024a9352c12c01c20878c58955f95bb0ae7c1a65f703b7cdd00a57c0f90e950"
       },
       "resolution": {
         "type": "municipality_to_department",
