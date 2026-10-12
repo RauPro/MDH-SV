@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "generated_at": "2026-10-12T21:20:30.523033+00:00",
+  "schema_version": 4,
+  "generated_at": "2026-10-12T23:24:54.379678+00:00",
   "locations": [
     {
       "candidate_id": "1ae4f97fa5ec196999deae0627d67301a17f54a5592a97a79f662b56fb9681a4",
@@ -23,6 +23,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "1be8ab40c77b819ee9d2f67c659b4257b80d109aee5b9327279f80adc5bd40f2",
+      "source_url": "https://www.diariocolatino.com/labor-de-periodistas-es-obstaculizada-por-correligionarios-y-la-umo-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-02",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:12.792754+00:00",
+      "source_checked_at": "2026-10-12T23:24:12.792754+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "318220c63c9fb615cee09b5591fb4dcf41329e726353a86c8b490ea920469e99"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santo Tomás",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
     },
     {
@@ -91,6 +115,23 @@
         "model_paragraph_id": "p1",
         "explicit_paragraph_id": "p3",
         "rule_version": 1
+      }
+    },
+    {
+      "candidate_id": "283f0a4d6f95b76b8eb4f7976970072bbab03ca7ff5ba1377d4c8638fa29f94c",
+      "source_url": "https://www.diariocolatino.com/exigen-al-fiscal-investigar-autores-intelectuales-de-asesinatos-de-ambientalistas-en-cabanas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-23",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:07.407241+00:00",
+      "source_checked_at": "2026-10-12T23:24:07.407241+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "5e7964f822dbd2a59fb31d3bbf5fc5ed09fcab7780972fc1311e8e224c08cb63"
       }
     },
     {
@@ -278,6 +319,30 @@
       }
     },
     {
+      "candidate_id": "7b05fef65d6304278004f576800a31fa766c05dd62e243df7705a9cbfd199ac1",
+      "source_url": "https://www.diariocolatino.com/municipio-de-san-jose-las-flores-realizara-consulta-popular-por-mineria/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-16",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:23:56.287092+00:00",
+      "source_checked_at": "2026-10-12T23:23:56.287092+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "03eff88854cbaf22bbaaaa1869e9ecfdc041ed1a9b2bf591d824406548ad811b"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Chalatenango",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
       "candidate_id": "806b08abb388f6e89968a5ae05739bb9e9bfe493a6dfbad3753a7076d061e000",
       "source_url": "https://www.diariocolatino.com/aumentan-los-despidos-injustificados-en-la-alcaldia-de-santa-tecla/",
       "publisher": "Diario Co Latino",
@@ -346,6 +411,47 @@
       }
     },
     {
+      "candidate_id": "93e439fc6fa5bc38f4afc9df219ef91e5398c1868ca19a31b7eb1e37b792c2ee",
+      "source_url": "https://www.diariocolatino.com/interponen-habeas-corpus-riesgo-vida-fidel-zavala/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2025-03-28",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:10.483715+00:00",
+      "source_checked_at": "2026-10-12T23:24:10.483715+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "85b799c3c655654965706b250292438dac98cdf9178b5beaf8a6235cfb96e6f0"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Juan Opico",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "98abaf9f0db2c084d95de5067bc43abd974f9b478410277af7b330572981d395",
+      "source_url": "https://www.diariocolatino.com/pddh-y-sspas-firman-convenio-contra-violacion-de-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-23",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:18.103035+00:00",
+      "source_checked_at": "2026-10-12T23:24:18.103035+00:00",
+      "evidence": {
+        "paragraph_id": "p8",
+        "content_sha256": "5e55715d295d34d77bdb49d6508a589fa7100cc53114d04b40025b95a7cc54c3"
+      }
+    },
+    {
       "candidate_id": "a9e511d1a20a13f5f126765147b228f604ab422f0ba7bb32a5c68107a7a7eb5f",
       "source_url": "https://www.diariocolatino.com/nayib-bukele-se-compromete-a-trabajar-de-la-mano-con-sindicalistas/",
       "publisher": "Diario Co Latino",
@@ -366,6 +472,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "b619e4cb8145736ed4363fbb061c605bd560ff281c6af8d0114a856b27f759ea",
+      "source_url": "https://www.diariocolatino.com/madre-fidel-zavala-interpone-habeas-corpus-vida-alto-riesgo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2025-03-29",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:11.174443+00:00",
+      "source_checked_at": "2026-10-12T23:24:11.174443+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "d4c42a7c019a4797d1293385264f8a683318f99df71d2de8856b913b4e5413cc"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Juan Opico",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
     },
     {
@@ -392,6 +522,54 @@
       }
     },
     {
+      "candidate_id": "c314993af89e430bf8995c758fd27b0644fb9b82eb9d45ab3fd0efeada38900d",
+      "source_url": "https://www.diariocolatino.com/presidente-reitera-compromiso-por-continuar-busqueda-de-ninos-desaparecidos-en-conflicto-armado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-11",
+      "department": "San Vicente",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:54.376694+00:00",
+      "source_checked_at": "2026-10-12T23:24:54.376694+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "79c7c4a416e9c8a181bc13648114564c5aad21d6f0dd3745bb8a42a5b197fa4a"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Vicente",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
+      "candidate_id": "c737d41a03273931ce05e46732e0eae3f983bc5f822780ea4288b56c8c6227e8",
+      "source_url": "https://www.diariocolatino.com/ministra-exige-investigacion-por-contaminacion-ambiental-en-loma-del-gallo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-11",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:16.082048+00:00",
+      "source_checked_at": "2026-10-12T23:24:16.082048+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "be268372893fd12d6afdeaa40ef0a9d98e1aa626534b4b6f268ffa511a20ebeb"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Luis Talpa",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
+      }
+    },
+    {
       "candidate_id": "d18b61a74d084d347d69a711c2df9747d43bb121c2d3badb7f1aa686dfcf7601",
       "source_url": "https://www.diariocolatino.com/apes-condena-ataque-contra-periodista-radial-en-oriente-salvadoreno/",
       "publisher": "Diario Co Latino",
@@ -405,6 +583,102 @@
       "evidence": {
         "paragraph_id": "p2",
         "content_sha256": "ada1b94b3fff8f35a4c5169a716264b24693f3f07af1dc4a8ea148f92da7fe02"
+      }
+    },
+    {
+      "candidate_id": "dcd43455b7f51a077dabe562cd0c807a747f1a60c973323be02234e7d0a1f946",
+      "source_url": "https://www.diariocolatino.com/perdomo-supervisa-trabajos-de-instalacion-de-bloqueadores-en-centros-penitenciarios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-20",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:14.383473+00:00",
+      "source_checked_at": "2026-10-12T23:24:14.383473+00:00",
+      "evidence": {
+        "paragraph_id": "p9",
+        "content_sha256": "ec046ae2f5f42074ebcced445d18a444f34ea51c8299994d58b7074a5ab645f8"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Sonsonate",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
+    },
+    {
+      "candidate_id": "f1984c354028f05456308d0e063ca04513fd1954b4b8de9aa39762140f7375d1",
+      "source_url": "https://www.diariocolatino.com/labor-de-periodistas-es-obstaculizada-por-correligionarios-y-la-umo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-02",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:13.692956+00:00",
+      "source_checked_at": "2026-10-12T23:24:13.692956+00:00",
+      "evidence": {
+        "paragraph_id": "p8",
+        "content_sha256": "6ef5ecbc4b0cb047f428b87be86b24679867956e9248f709f30ed24461f89b08"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santo Tomás",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "f2021ac3428380b8d8c477530c057e9f8d9d3251fad4642d596a02848b6b491c",
+      "source_url": "https://www.diariocolatino.com/calle-13-llama-a-terminar-violencia-contra-la-ninez/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-21",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:15.298785+00:00",
+      "source_checked_at": "2026-10-12T23:24:15.298785+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "d0632b359d0b4743de490b15e0b77046b7a0f2936a11b403a1146378c543b710"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "f9bd533dc9922d38de72ecba67d445df993cd45398450a6e3b5d93ef94cf7eac",
+      "source_url": "https://www.diariocolatino.com/sigue-la-discriminacion-de-mujeres-indigenas-en-nahuizalco/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-09",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 1,
+      "extracted_at": "2026-10-12T23:24:11.915165+00:00",
+      "source_checked_at": "2026-10-12T23:24:11.915165+00:00",
+      "evidence": {
+        "paragraph_id": "p8",
+        "content_sha256": "c3275f4f668f4ecaac6a327118ff349ddb7d3085c21842dbac8168345da7f1ce"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Nahuizalco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
     },
     {
