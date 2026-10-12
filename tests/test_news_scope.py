@@ -82,7 +82,10 @@ def test_one_batch_retains_minimal_private_provenance_and_input_order_without_ch
     assert [value["candidate_id"] for value in results] == [value["reference"]["id"] for value in items]
     assert results[1]["classification"] == {"jurisdiction": "other", "relevance": "not_relevant"}
     for source, result in zip(items, results):
-        assert set(result) == {"schema_version", "candidate_id", "source_url", "publisher", "published_date", "classification", "evidence", "extraction"}
+        assert set(result) == {"schema_version", "candidate_id", "source_url", "publisher", "published_date", "classification", "evidence", "extraction", "source_read"}
+        assert result["schema_version"] == 2
+        assert result["source_read"] == {key: source["article"][key]
+            for key in ("fetched_at", "extraction_method", "truncated", "content_sha256")}
         assert result["evidence"] == {"content_sha256": source["article"]["content_sha256"],
             "jurisdiction_paragraph_ids": ["p1"], "relevance_paragraph_ids": ["p2"]}
         assert result["extraction"]["prompt_version"] == SCOPE_PROMPT
@@ -175,6 +178,29 @@ def test_batch_utf8_byte_budget_is_enforced_before_reserving():
     session = Session([])
     with pytest.raises(GeminiDraftError, match="invalid_scope_input"):
         run(items, session=session)
+    assert session.calls == []
+
+
+def test_full_request_budget_includes_all_article_parameters_and_metadata():
+    items = [item(n, texts=["a" * 3990] * 4) for n in range(8)]
+    budget, inbox, _ = ready()
+    session = Session([])
+    with pytest.raises(GeminiDraftError, match="scope_request_too_large"):
+        run(items, session=session, budget=budget)
+    assert session.calls == [] and inbox.document()["used_requests"] == 0
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda article: article.update(extraction_method="wordpress_rest"),
+    lambda article: article.update(extraction_method="html"),
+    lambda article: article.update(fetched_at="2026-10-12T12:00:00"),
+])
+def test_v2_source_receipt_requires_actual_extractor_method_and_timezone(mutation):
+    value = item()
+    mutation(value["article"])
+    session = Session([])
+    with pytest.raises(GeminiDraftError, match="invalid_scope_input"):
+        run([value], session=session)
     assert session.calls == []
 
 

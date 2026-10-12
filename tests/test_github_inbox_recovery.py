@@ -69,6 +69,15 @@ def test_new_file_can_retry_after_confirmed_absence():
     assert all(call.kwargs['json'] == payload for call in writes(session))
 
 
+def test_concurrent_deletion_is_not_resurrected_by_recovery():
+    value, session, pauses = inbox(response(500), files=[response(404)])
+    with pytest.raises(GitHubRequestError) as caught:
+        value.call('PUT', value.base + '/contents/processing/example.json',
+                   json={'content': base64.b64encode(b'ours').decode(), 'sha': 'a' * 40})
+    assert caught.value.status_code == 409
+    assert len(writes(session)) == 1 and pauses == []
+
+
 @pytest.mark.parametrize('old_sha', [None, 'a' * 40])
 def test_concurrent_contents_change_is_never_overwritten(old_sha):
     value, session, pauses = inbox(response(500), files=[response(200, file(b'concurrent', 'c' * 40))])

@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .review_queue import GitHubInbox, canonical_url
+from .review_queue import GitHubInbox, GitHubRequestError, canonical_url
 
 AI_LABELS = {"ai/ready": "16815D", "ai/scope-review": "D97706",
              "ai/privacy-review": "9333EA", "ai/error": "B91C1C", "ai/pending": "D97706"}
@@ -24,6 +24,7 @@ PRIVACY_POLICY_VERSION = 2
 COMPLETE_MARKER = re.compile(r"<!-- mdh-news-dossier:v([12]):([a-f0-9]{40,64}) -->")
 PRIVACY_RETRY_MARKER = "<!-- mdh-field-privacy-retry:v2 -->"
 MIN_WRITE_INTERVAL = 2.0
+MAX_RUN_SECONDS = 720
 
 
 class _PacedInbox:
@@ -321,12 +322,32 @@ def safe_validation_issues(error):
         result.append({"field": field, "type": kind if isinstance(kind, str) and kind in types else "validation_error"})
     return result
 
+def hourly_request_allowance(snapshot, config, requested_limit, now):
+    pacific = now.astimezone(ZoneInfo("America/Los_Angeles"))
+    reset_local = (pacific + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+    remaining_hours = max(1, math.ceil((reset_local.astimezone(timezone.utc) - now).total_seconds() / 3600))
+    share = math.ceil(snapshot["remaining_requests"] / remaining_hours)
+    return min(requested_limit, config.batch_ceiling, snapshot["remaining_requests"], share), remaining_hours
+
+
 def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seconds=4,
-                  retry_failed=False, archive=None, fetch=None, extract=None, now=None, sleep=time.sleep, budget=None):
+                  retry_failed=False, archive=None, fetch=None, extract=None, now=None, sleep=time.sleep,
+                  budget=None, phase_http_limit=None, priority_ids=(), max_seconds=MAX_RUN_SECONDS,
+                  run_clock=time.monotonic):
     if not api_key or not isinstance(model, str) or not re.fullmatch(r"gemini-[a-zA-Z0-9.-]+", model):
         raise ValueError("missing_or_invalid_gemini_configuration")
     if not 1 <= limit <= 50 or not 1 <= max_attempts <= 5 or not 0 <= pause_seconds <= 60:
         raise ValueError("invalid_processing_budget")
+    if type(max_seconds) is not int or not 1 <= max_seconds <= 1800:
+        raise ValueError("invalid_processing_time_limit")
+    deadline = run_clock() + max_seconds
+    if phase_http_limit is not None and (budget is None or type(phase_http_limit) is not int
+                                       or not 0 <= phase_http_limit <= limit):
+        raise ValueError("invalid_phase_budget")
+    if (not isinstance(priority_ids, (list, tuple, set, frozenset)) or len(priority_ids) > 50_000
+            or any(not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value) for value in priority_ids)):
+        raise ValueError("invalid_priority_candidates")
+    priority_ids = set(priority_ids)
     inbox = _PacedInbox(inbox, sleep)
     offline_budget = min(limit, 20)
     offline_candidates = set()
@@ -346,11 +367,9 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         snapshot = budget.snapshot()
         # Reserve a fair share for later arrivals instead of exhausting the
         # whole free daily allowance during the first backlog batches.
-        pacific = now.astimezone(ZoneInfo("America/Los_Angeles"))
-        reset_local = (pacific + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-        remaining_hours = max(1, math.ceil((reset_local.astimezone(timezone.utc) - now).total_seconds() / 3600))
-        hourly_allowance = math.ceil(snapshot["remaining_requests"] / remaining_hours)
-        limit = min(limit, budget.config.batch_ceiling, snapshot["remaining_requests"], hourly_allowance)
+        hourly_allowance, remaining_hours = hourly_request_allowance(snapshot, budget.config, limit, now)
+        limit = (hourly_allowance if phase_http_limit is None else
+                 min(limit, budget.config.batch_ceiling, snapshot["remaining_requests"], phase_http_limit))
         report["effective_limit"] = limit
         report["remaining_hourly_slots"] = remaining_hours
         report["budget"] = snapshot
@@ -360,7 +379,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                           offline_candidates=0, http_requests=0)
             return report
         if limit == 0:
-            report.update(stopped_reason="budget_deferred", quota_reason="daily_budget_exhausted",
+            reason = "run_budget_exhausted" if phase_http_limit == 0 and snapshot["remaining_requests"] else "daily_budget_exhausted"
+            report.update(stopped_reason="budget_deferred", quota_reason=reason,
                           github_write_calls=0, offline_candidates=0, http_requests=0)
             return report
         # This is an HTTP-attempt allowance, not merely a successful-news cap:
@@ -399,7 +419,14 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
     privacy_issue_numbers = {row[0]["number"] for row in privacy_candidates}
     new = [row for row in new if row[0]["number"] not in privacy_issue_numbers]
     old = [row for row in old if row[0]["number"] not in privacy_issue_numbers]
+    priority_candidates = sorted((row for row in candidates if row[1]["id"] in priority_ids),
+                                 key=lambda row: (row[1].get("published_date") or "", row[1]["id"]))
+    prioritized = {row[0]["number"] for row in priority_candidates}
+    new = [row for row in new if row[0]["number"] not in prioritized]
+    old = [row for row in old if row[0]["number"] not in prioritized]
+    privacy_candidates = [row for row in privacy_candidates if row[0]["number"] not in prioritized]
     def schedule():
+        yield from priority_candidates
         privacy_remainder = []
         privacy_quota = min(5, max(1, limit // 4))
         for index, item in enumerate(privacy_candidates):
@@ -449,6 +476,9 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         return result
 
     for issue, candidate in schedule():
+        if run_clock() >= deadline:
+            report["stopped_reason"] = "run_time_limit"
+            break
         identifier = candidate["id"]
         marker = COMPLETE_MARKER.search(issue.get("body") or "")
         labels = {label["name"] for label in issue.get("labels", [])}
@@ -639,8 +669,139 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
     return report
 
 
+def editorial_excluded_ids(inbox, *, imported_ids=()):
+    """Only explicit human decisions exclude unqueued archive candidates."""
+    excluded = set()
+    imported_ids = set(imported_ids)
+    for label in ("review/approved", "review/rejected"):
+        for page in range(1, 201):
+            rows = inbox.call("GET", inbox.base + "/issues", params={
+                "state": "all", "labels": label, "per_page": 100, "page": page})
+            if not isinstance(rows, list):
+                raise ValueError("invalid_editorial_decisions")
+            for row in rows:
+                if "pull_request" in row:
+                    continue
+                match = re.search(r"<!-- mdh-candidate:([a-f0-9]{64}) -->", row.get("body") or "")
+                if match:
+                    identifier = match.group(1)
+                    if label == "review/rejected" or identifier not in imported_ids:
+                        excluded.add(identifier)
+            if len(rows) < 100:
+                break
+        else:
+            raise ValueError("incomplete_editorial_decisions")
+    return excluded
+
+
+def _load_phase_documents(inbox_dir, folder, *, maximum_bytes=512_000):
+    if inbox_dir.is_symlink() or not inbox_dir.is_dir():
+        raise ValueError("invalid_private_checkout")
+    directory = inbox_dir / folder
+    if directory.is_symlink() or (directory.exists() and not directory.is_dir()):
+        raise ValueError("invalid_phase_cache")
+    paths = sorted(directory.glob("*.json"))
+    if len(paths) > 50_000:
+        raise ValueError("oversized_phase_cache")
+    values, total = [], 0
+    for path in paths:
+        if path.is_symlink() or not path.is_file() or not re.fullmatch(r"[a-f0-9]{64}\.json", path.name):
+            raise ValueError("invalid_phase_cache_file")
+        size = path.stat().st_size
+        total += size
+        if not 0 < size <= maximum_bytes or total > 256 * 1024 * 1024:
+            raise ValueError("oversized_phase_cache_file")
+        value = json.loads(path.read_text())
+        if not isinstance(value, dict) or value.get("candidate_id") != path.stem:
+            raise ValueError("invalid_phase_cache_identity")
+        values.append(value)
+    return values
+
+
+def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox_dir,
+                        limit, retry_failed=False, now=None, scope_worker=None, budget_factory=None):
+    """Share one hourly grant between bulk classification and complete dossiers."""
+    from .gemini_budget import GeminiBudget, QuotaStateError
+    from .scope_review_queue import recheck_scope
+    from .history_review import enqueue_history
+    now = now or utcnow()
+    snapshot = budget.snapshot()
+    allowance, _ = hourly_request_allowance(snapshot, config, limit, now)
+    scope_limit = min(8, allowance - 1, math.ceil(allowance * 0.7)) if allowance >= 2 else allowance
+    scope_worker = scope_worker or recheck_scope
+    budget_factory = budget_factory or GeminiBudget
+    scope_report = {"http_requests": 0, "classified": 0, "accepted": 0, "stopped_reason": None}
+    selected = []
+    excluded = set()
+    if scope_limit and snapshot["cooldown_until"] is None:
+        if archive is None:
+            raise ValueError("scope_archive_required")
+        drafts = _load_phase_documents(inbox_dir, "drafts")
+        cached = _load_phase_documents(inbox_dir, "scope-reviews", maximum_bytes=30_000)
+        attempts = _load_phase_documents(inbox_dir, "scope-attempts", maximum_bytes=30_000)
+        excluded = editorial_excluded_ids(inbox)
+        budget.set_request_limit(scope_limit)
+        try:
+            scope_report = scope_worker(inbox, drafts, archive, api_key=api_key, model=model,
+                budget=budget, max_requests=scope_limit, max_seconds=480,
+                scope_reviews=cached, attempts=attempts, excluded_ids=excluded)
+            selected = scope_report.get("selected_ids", [])
+        except QuotaStateError:
+            raise  # Uncertain accounting must fail closed for both stages.
+        except Exception as error:
+            scope_report = {"http_requests": budget.requests_this_run, "stopped_reason": "scope_failed",
+                            "error_type": type(error).__name__}
+            if isinstance(error, GitHubRequestError):
+                scope_report["error_code"] = error.code
+        if (not isinstance(selected, list) or len(selected) > 50_000
+                or any(not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value) for value in selected)):
+            raise ValueError("invalid_scope_selection_ids")
+        selected = sorted(set(selected) - excluded)
+    scope_used = budget.requests_this_run
+    if type(scope_used) is not int or not 0 <= scope_used <= scope_limit:
+        raise QuotaStateError("scope_phase_limit_exceeded")
+    # Source failures release unused scope capacity. Failed/retried HTTP
+    # attempts remain consumed and can never be released to the next stage.
+    dossier_limit = allowance - scope_used
+    prioritized = 0
+    enqueue_error = None
+    full_budget = budget_factory(inbox, config)
+    full_snapshot = full_budget.snapshot()
+    if selected and dossier_limit and full_snapshot["cooldown_until"] is None:
+        references = {row["id"]: row for row in archive["records"]}
+        if any(identifier not in references for identifier in selected):
+            raise ValueError("unknown_scope_selection_id")
+        try:
+            queued = enqueue_history(_PacedInbox(inbox, time.sleep),
+                {"schema_version": 1, "records": [references[identifier] for identifier in selected]},
+                limit=min(dossier_limit, 100), include_international=True)
+            prioritized = queued["added"]
+        except GitHubRequestError as error:
+            enqueue_error = error.code  # Existing eligible queue items can still progress.
+    report = process_queue(inbox, api_key=api_key, model=model,
+        limit=max(1, dossier_limit), phase_http_limit=dossier_limit,
+        retry_failed=retry_failed, archive=archive, budget=full_budget,
+        priority_ids=selected, now=now)
+    full_used = full_budget.requests_this_run
+    if type(full_used) is not int or not 0 <= full_used <= dossier_limit:
+        raise QuotaStateError("dossier_phase_limit_exceeded")
+    safe_scope_keys = {"candidates", "cached", "sources_checked", "source_unavailable", "source_changed",
+                       "reviewed", "relevant_sv", "classified", "accepted", "http_requests", "stopped_reason",
+                       "quota_reason", "error_code", "error_type", "deferred", "excluded", "attempts_saved",
+                       "classified_total", "accepted_total", "remaining", "retry_deferred"}
+    report["scope_phase"] = {key: value for key, value in scope_report.items() if key in safe_scope_keys}
+    report["scope_phase"]["http_requests"] = scope_used
+    report.update(hourly_request_limit=allowance, scope_request_limit=scope_limit,
+                  dossier_request_limit=dossier_limit, dossier_http_requests=full_used,
+                  http_requests=scope_used + full_used, prioritized_candidates=prioritized)
+    if enqueue_error:
+        report["priority_enqueue_error"] = enqueue_error
+    return report
+
+
 def failed_report(report):
-    return (report["stopped_reason"] not in (None, "budget_deferred")
+    return (report["stopped_reason"] not in (None, "budget_deferred", "run_time_limit")
+            or report.get("scope_phase", {}).get("stopped_reason") in {"scope_failed", "model_error"}
             or bool(report["attempted"] and report["errors"] == report["attempted"]))
 
 
@@ -649,6 +810,8 @@ def main():
     parser.add_argument("--archive", type=Path)
     parser.add_argument("--limit", type=int, default=50)
     parser.add_argument("--retry-failed", action="store_true")
+    parser.add_argument("--scope-first", action="store_true", help="Classify raw candidates before generating complete dossiers")
+    parser.add_argument("--inbox-dir", type=Path, help="Current private checkout containing draft and scope caches")
     args = parser.parse_args()
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
@@ -679,10 +842,17 @@ def main():
             print(json.dumps({"status": "hour_already_claimed", "attempted": 0, "publications": 0}))
             return
         archive = json.loads(args.archive.read_text()) if args.archive else None
-        report = process_queue(inbox, api_key=key, model=model, budget=budget,
-                               limit=min(args.limit, config.batch_ceiling), retry_failed=args.retry_failed, archive=archive)
+        if args.scope_first:
+            if args.inbox_dir is None:
+                raise ValueError("scope_private_checkout_required")
+            report = process_scope_first(inbox, api_key=key, model=model, config=config, budget=budget,
+                archive=archive, inbox_dir=args.inbox_dir, limit=min(args.limit, config.batch_ceiling),
+                retry_failed=args.retry_failed)
+        else:
+            report = process_queue(inbox, api_key=key, model=model, budget=budget,
+                                   limit=min(args.limit, config.batch_ceiling), retry_failed=args.retry_failed, archive=archive)
         status = ("failed" if failed_report(report) else
-                  "deferred" if report["stopped_reason"] == "budget_deferred" else "completed")
+                  "deferred" if report["stopped_reason"] in {"budget_deferred", "run_time_limit"} else "completed")
         slots.finish(claim, status=status,
                      counts={name: report[name] for name in ("attempted", "news_dossiers", "errors", "migrated", "http_requests")})
         report["hourly_slot"] = claim["hour"]
@@ -698,6 +868,8 @@ def main():
             failure["error_code"] = "gemini_budget_configuration_required"
         elif type(error).__name__ in {"QuotaStateError", "HourlySlotError"} and re.fullmatch(r"[a-z][a-z0-9_]{0,80}", str(error)):
             failure["error_code"] = str(error)
+        elif isinstance(error, GitHubRequestError):
+            failure["error_code"] = error.code
         print(json.dumps(failure))
         raise SystemExit(1) from None
     serialized = json.dumps(report, ensure_ascii=False, indent=2)

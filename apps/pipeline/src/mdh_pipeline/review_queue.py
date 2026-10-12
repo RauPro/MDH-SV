@@ -178,6 +178,8 @@ class GitHubInbox:
         params = {'ref': payload['branch']} if isinstance(payload.get('branch'), str) else {}
         current = self._response('GET', path, file_get=True, **({'params': params} if params else {}))
         if current.status_code == 404:
+            if payload.get('sha'):
+                raise GitHubRequestError(409)  # A previously existing file was deleted concurrently.
             return None  # Retry the original payload/SHA; never invent a new SHA.
         if current.status_code >= 400:
             raise GitHubRequestError(current.status_code)

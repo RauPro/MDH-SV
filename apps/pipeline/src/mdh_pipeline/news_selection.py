@@ -15,9 +15,8 @@ _PARAGRAPH = r"p[1-9][0-9]{0,2}"
 _MODEL = r"gemini-[A-Za-z0-9_.-]{1,90}"
 FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-8-relevance-scope"
 SCOPE_REVIEW_PROMPT = "mdh-news-scope-1"
-_SELECTION_PROMPTS = {FULL_SCOPE_PROMPT, SCOPE_REVIEW_PROMPT}
-_DOSSIER_PROMPTS = {FULL_SCOPE_PROMPT, "mdh-private-grounded-5", "mdh-universal-news-grounded-6",
-                    "mdh-universal-news-grounded-7-field-privacy"}
+INCLUSIVE_SCOPE_PROMPT = "mdh-news-scope-2-inclusive-context"
+_SELECTION_PROMPTS = {FULL_SCOPE_PROMPT, SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT}
 _STAMP = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})"
 _COMMON = {"method", "review_status", "human_reviewed", "jurisdiction", "relevance"}
 _AUTOMATIC = _COMMON | {"classified_at", "model", "prompt_version", "evidence"}
@@ -122,15 +121,35 @@ def _bound(document, reference):
                     for key in ("source_url", "publisher", "published_date")))
 
 
+def _assessment_counts(value):
+    if (not isinstance(value, dict) or set(value) != {
+            "candidates", "evaluated", "relevant", "excluded", "uncertain", "pending"}
+            or any(type(number) is not int or not 0 <= number <= 9_007_199_254_740_991 for number in value.values())
+            or value["evaluated"] != value["relevant"] + value["excluded"] + value["uncertain"]
+            or value["pending"] != value["candidates"] - value["evaluated"]):
+        _fail()
+    return value
+
+
 def validate_manifest(document, archive=None):
     """A stale or malformed manifest fails as a unit, without echoing its content."""
     from .review_queue import canonical_url
-    if (not isinstance(document, dict) or set(document) != {"schema_version", "generated_at", "selections"}
-            or type(document["schema_version"]) is not int or document["schema_version"] != 1
-            or not isinstance(document["selections"], list) or len(document["selections"]) > MAX_SELECTIONS):
+    if (not isinstance(document, dict) or type(document.get("schema_version")) is not int
+            or document["schema_version"] not in {1, 2}
+            or not isinstance(document.get("selections"), list) or len(document["selections"]) > MAX_SELECTIONS):
+        _fail()
+    expected = {"schema_version", "generated_at", "selections"}
+    if document["schema_version"] == 2:
+        expected.add("assessment_counts")
+    if set(document) != expected:
         _fail()
     generated = _timestamp(document["generated_at"])
     references = _archive_index(archive) if archive is not None else None
+    if document["schema_version"] == 2:
+        counts = _assessment_counts(document["assessment_counts"])
+        if (counts["relevant"] < len(document["selections"])
+                or references is not None and counts["candidates"] > len(references)):
+            _fail()
     identifiers = set()
     for entry in document["selections"]:
         if not isinstance(entry, dict) or set(entry) != _ENTRY:
@@ -175,10 +194,15 @@ def _scope_paragraphs(value):
 
 
 def _validate_scope_review_shape(document):
-    if (not isinstance(document, dict) or set(document) != {
+    required = {
             "schema_version", "candidate_id", "source_url", "publisher", "published_date",
             "classification", "evidence", "extraction"}
-            or type(document["schema_version"]) is not int or document["schema_version"] != 1):
+    if (not isinstance(document, dict) or type(document.get("schema_version")) is not int
+            or document["schema_version"] not in {1, 2}):
+        _fail()
+    if document["schema_version"] == 2 or "source_read" in document:
+        required.add("source_read")
+    if set(document) != required:
         _fail()
     scope, evidence, extraction = document["classification"], document["evidence"], document["extraction"]
     if (not isinstance(scope, dict) or set(scope) != {"jurisdiction", "relevance"}
@@ -189,9 +213,20 @@ def _validate_scope_review_shape(document):
             or not _matches(_HEX, evidence["content_sha256"])
             or not isinstance(extraction, dict) or set(extraction) != {"provider", "model", "prompt_version", "prepared_at"}
             or extraction["provider"] != "gemini" or not _matches(_MODEL, extraction["model"])
-            or extraction["prompt_version"] != SCOPE_REVIEW_PROMPT):
+            or extraction["prompt_version"] != (
+                INCLUSIVE_SCOPE_PROMPT if document["schema_version"] == 2 else SCOPE_REVIEW_PROMPT)):
         _fail()
-    _timestamp(extraction["prepared_at"])
+    prepared = _timestamp(extraction["prepared_at"])
+    if "source_read" in document:
+        receipt = document["source_read"]
+        if (not isinstance(receipt, dict) or set(receipt) != {
+                "fetched_at", "extraction_method", "truncated", "content_sha256"}
+                or receipt["extraction_method"] not in {"wordpress_rest_content", "html_article_content"}
+                or type(receipt["truncated"]) is not bool
+                or receipt["content_sha256"] != evidence["content_sha256"]
+                or _timestamp(receipt["fetched_at"]) > prepared
+                or _timestamp(receipt["fetched_at"]).date() < _day(document["published_date"])):
+            _fail()
     for field in ("jurisdiction", "relevance"):
         ids = evidence[field + "_paragraph_ids"]
         # A private exclusion can describe absence of qualifying evidence; it
@@ -223,107 +258,155 @@ def validate_scope_review(document, *, reference, content_sha256, now=None):
     return deepcopy(document)
 
 
-def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_reviews=None):
-    """Project cited positive classifications; invalid/private-only drafts stay out.
+def _excluded_set(values):
+    if isinstance(values, (str, bytes)):
+        _fail()
+    try:
+        result = set(values)
+    except TypeError:
+        _fail()
+    if any(not _matches(_HEX, identifier) for identifier in result):
+        _fail()
+    return result
 
-    Eligibility is not approval of the dossier, corroboration of an allegation or
-    semantic verification of the model. Classification hashes prove provenance.
-    """
+
+def _category(scope, *, legacy=False):
+    positive = scope["jurisdiction"] == "SV" and scope["relevance"] == "relevant"
+    if positive:
+        return "relevant"
+    if legacy:
+        return "uncertain"  # The narrower v1 exclusions require inclusive reassessment.
+    if scope["jurisdiction"] == "other" or scope["relevance"] == "not_relevant":
+        return "excluded"
+    return "uncertain"
+
+
+def _decision(scope, extraction, evidence, *, fetched_at=None, legacy=False):
+    category = _category(scope, legacy=legacy)
+    prepared = _timestamp(extraction["prepared_at"])
+    selection = None
+    if category == "relevant":
+        selection = validate_selection({
+            "method": "gemini_grounded_scope", "review_status": "automated_unreviewed",
+            "human_reviewed": False, "jurisdiction": "SV", "relevance": "relevant",
+            "classified_at": extraction["prepared_at"], "model": extraction["model"],
+            "prompt_version": extraction["prompt_version"], "evidence": evidence,
+        })
+    return {"category": category, "selection": selection, "scope": (scope["jurisdiction"], scope["relevance"]),
+            "hash": evidence["content_sha256"],
+            "timestamp": (_timestamp(fetched_at) if fetched_at else prepared, prepared)}
+
+
+def _dossier_decision(original, reference, instant):
     from .gemini_review import validate_envelope
-    from .review_queue import normalize
+    document = deepcopy(original)
+    validate_envelope(document, reference)
+    news, extraction = document["news_dossier"], document["extraction"]
+    scope = news["classification"]
+    fetched, prepared = _timestamp(extraction["fetched_at"]), _timestamp(extraction["prepared_at"])
+    if (news["extraction_status"] != "processed" or not _bound(news, reference)
+            or scope != document.get("classification") or extraction.get("provider") != "gemini"
+            or extraction.get("prompt_version") != FULL_SCOPE_PROMPT
+            or not _matches(_MODEL, extraction.get("model"))
+            or not _matches(_HEX, extraction.get("content_sha256"))
+            or not _day(news["published_date"]) <= fetched.date()
+            or not fetched <= prepared <= instant):
+        _fail()
+    grounding = document.get("grounding", {}).get("classification", {})
+    evidence = {"content_sha256": extraction["content_sha256"]}
+    for field, positive in (("jurisdiction", "SV"), ("relevance", "relevant")):
+        citations = grounding.get(field, [])
+        evidence[field + "_paragraph_ids"] = (_scope_paragraphs(citations)
+            if citations or scope[field] == positive else [])
+    return _decision(scope, extraction, evidence, fetched_at=extraction["fetched_at"])
+
+
+def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_reviews=None, reviewed_dossiers=None):
+    """Classify bibliography directly from source-bound private scope snapshots.
+
+    A dossier or queue issue is never a prerequisite. The source reader validates
+    the digest and paragraph membership when storing the assessment; this export
+    validates its trusted artifact's shape, bibliographic identity and receipt.
+    It does not reread the web or claim that a digest proves semantic correctness.
+    """
     references = _archive_index(archive)
-    if isinstance(excluded_ids, (str, bytes)):
-        _fail()
-    excluded = set(excluded_ids)
-    if any(not _matches(_HEX, identifier) for identifier in excluded):
-        _fail()
+    excluded = _excluded_set(excluded_ids)
     now = now or datetime.now(timezone.utc)
     generated = now.isoformat() if isinstance(now, datetime) else now
     instant = _timestamp(generated)
-    assessments = {}
-    for assessment in scope_reviews if scope_reviews is not None else ():
-        identifier = assessment.get("candidate_id") if isinstance(assessment, dict) else None
-        if not _matches(_HEX, identifier) or identifier in assessments:
-            _fail()
-        assessments[identifier] = assessment
-    selections, seen = [], set()
+    decisions = {}
+    seen = set()
     for original in drafts:
         if not isinstance(original, dict):
             continue
         identifier = original.get("candidate_id")
-        if not isinstance(identifier, str) or identifier in excluded or identifier not in references:
+        if not isinstance(identifier, str) or identifier not in references:
             continue
         if identifier in seen:
-            _fail()  # Do not choose an arbitrary duplicate decision.
+            _fail()
         seen.add(identifier)
-        document = deepcopy(original)
-        reference = references[identifier]
         try:
-            validate_envelope(document, reference)
-            news = document["news_dossier"]
-            scope = news["classification"]
-            if (news["extraction_status"] != "processed" or not _bound(news, reference)
-                    or scope != document.get("classification")):
-                continue
-            country = news["fields"]["country"]
-            if country["status"] == "reported" and normalize(country["value"]).strip() not in {
-                    "el salvador", "republica de el salvador"}:
-                continue
-            extraction = document["extraction"]
-            classified = _timestamp(extraction["prepared_at"])
-            fetched = _timestamp(extraction["fetched_at"])
-            if (extraction.get("provider") != "gemini"
-                    or extraction.get("prompt_version") not in _DOSSIER_PROMPTS
-                    or not _matches(_HEX, extraction.get("content_sha256"))
-                    or not fetched <= classified <= instant):
-                continue
-            direct = extraction["prompt_version"] == FULL_SCOPE_PROMPT
-            assessment = assessments.get(identifier)
-            if assessment is not None:
-                assessment = validate_scope_review(assessment, reference=reference,
-                    content_sha256=extraction["content_sha256"], now=instant)
-                reevaluated = _timestamp(assessment["extraction"]["prepared_at"])
-                if not fetched <= reevaluated:
-                    continue
-                if direct and reevaluated == classified and any(
-                        assessment["classification"][key] != scope[key] for key in ("jurisdiction", "relevance")):
-                    continue  # Conflicting simultaneous decisions need review.
-                if not direct or reevaluated >= classified:
-                    scope = assessment["classification"]
-                    extraction = assessment["extraction"]
-                    evidence = assessment["evidence"]
-                    direct = False
-                else:
-                    assessment = None  # A newer v8 decision supersedes a stale reassessment.
-            if assessment is None and not direct:
-                continue  # Legacy relevance definitions cannot authorize publication.
-            if scope["jurisdiction"] != "SV" or scope["relevance"] != "relevant":
-                continue
-            if direct:
-                grounding = document["grounding"]["classification"]
-                evidence = {"content_sha256": extraction["content_sha256"],
-                            "jurisdiction_paragraph_ids": _scope_paragraphs(grounding["jurisdiction"]),
-                            "relevance_paragraph_ids": _scope_paragraphs(grounding["relevance"])}
-            selection = validate_selection({
-                "method": "gemini_grounded_scope", "review_status": "automated_unreviewed",
-                "human_reviewed": False, "jurisdiction": "SV", "relevance": "relevant",
-                "classified_at": extraction["prepared_at"], "model": extraction["model"],
-                "prompt_version": extraction["prompt_version"], "evidence": evidence,
-            })
-            entry = {"candidate_id": identifier, **{key: reference[key] for key in
-                     ("source_url", "publisher", "published_date")}, "selection": selection}
-            # This also validates publication/classification temporal consistency.
-            validate_manifest({"schema_version": 1, "generated_at": generated, "selections": [entry]})
-            selections.append(entry)
+            decisions.setdefault(identifier, []).append(_dossier_decision(original, references[identifier], instant))
         except (ValueError, TypeError, KeyError, AttributeError):
-            continue  # No source fields or error values may leak to output/logs.
-    return validate_manifest({"schema_version": 1, "generated_at": generated,
+            continue
+    seen = set()
+    for original in scope_reviews if scope_reviews is not None else ():
+        identifier = original.get("candidate_id") if isinstance(original, dict) else None
+        if not _matches(_HEX, identifier) or identifier in seen:
+            _fail()
+        seen.add(identifier)
+        if identifier not in references:
+            continue
+        try:
+            assessment = validate_scope_review(original, reference=references[identifier],
+                content_sha256=original["evidence"]["content_sha256"], now=instant)
+            receipt = assessment.get("source_read", {})
+            decisions.setdefault(identifier, []).append(_decision(
+                assessment["classification"], assessment["extraction"], assessment["evidence"],
+                fetched_at=receipt.get("fetched_at"), legacy=assessment["schema_version"] == 1))
+        except (ValueError, TypeError, KeyError, AttributeError):
+            continue
+    latest = {}
+    for identifier, options in decisions.items():
+        if not options:
+            continue
+        # The same text can be classified again later without another source read.
+        # For different text snapshots, the actual observation time takes priority.
+        same_text = len({item["hash"] for item in options}) == 1
+        decision_time = lambda item: item["timestamp"][1] if same_text else item["timestamp"]
+        stamp = max(decision_time(item) for item in options)
+        newest = [item for item in options if decision_time(item) == stamp]
+        if len({(item["scope"], item["hash"]) for item in newest}) > 1:
+            latest[identifier] = {"category": "uncertain", "selection": None}
+        else:
+            latest[identifier] = newest[-1]
+    if reviewed_dossiers is not None:
+        from .news_publication import validate_collection
+        for dossier in validate_collection(reviewed_dossiers, archive=archive)["dossiers"]:
+            identifier = dossier["candidate_id"]
+            category = _category(dossier["classification"])
+            automatic = latest.get(identifier, {}).get("selection") if category == "relevant" else None
+            latest[identifier] = {"category": category, "selection": automatic}
+    for identifier in excluded & references.keys():
+        # A human withheld the reference, without necessarily finding it irrelevant.
+        latest[identifier] = {"category": "uncertain", "selection": None}
+    selections = []
+    for identifier, decision in latest.items():
+        if decision["selection"] is not None:
+            selections.append({"candidate_id": identifier, **{key: references[identifier][key]
+                for key in ("source_url", "publisher", "published_date")}, "selection": decision["selection"]})
+    categories = Counter(item["category"] for item in latest.values())
+    counts = {"candidates": len(references), "evaluated": len(latest),
+              **{key: categories[key] for key in ("relevant", "excluded", "uncertain")},
+              "pending": len(references) - len(latest)}
+    return validate_manifest({"schema_version": 2, "generated_at": generated, "assessment_counts": counts,
                               "selections": sorted(selections, key=lambda item: item["candidate_id"])}, archive)
 
 
-def select_archive(archive, manifest, reviewed_dossiers=None):
+def select_archive(archive, manifest, reviewed_dossiers=None, *, excluded_ids=()):
     """Filter bibliographic references and recount them; preserve crawl telemetry."""
     references = _archive_index(archive)
+    excluded = _excluded_set(excluded_ids)
     selected = {entry["candidate_id"]: entry["selection"]
                 for entry in validate_manifest(manifest, archive)["selections"]}
     if reviewed_dossiers is not None:
@@ -340,6 +423,8 @@ def select_archive(archive, manifest, reviewed_dossiers=None):
                 "jurisdiction": "SV", "relevance": "relevant", "reviewed_by": dossier["reviewed_by"],
                 "reviewed_at": dossier["reviewed_at"],
             })
+    for identifier in excluded:
+        selected.pop(identifier, None)
     result = deepcopy(archive)
     result["records"] = [{**references[item["id"]], "selection": selected[item["id"]]}
                          for item in archive["records"] if item["id"] in selected]
@@ -368,9 +453,18 @@ def select_archive(archive, manifest, reviewed_dossiers=None):
             row["records"] = sum(counts[source, row["month"]] for source in source_ids)
             for source in row["sources"]:
                 source["records"] = counts[source["source_id"], row["month"]]
+        gate = {"version": 1, "scope": "human_rights_el_salvador",
+                "candidates": len(references), "selected": len(result["records"])}
+        if manifest["schema_version"] == 2:
+            gate.update(manifest["assessment_counts"], version=2, evaluated_at=manifest["generated_at"])
+            # The collector only appends references. New discoveries have never
+            # been assessed; preserve the snapshot and count the growth as pending.
+            growth = len(references) - manifest["assessment_counts"]["candidates"]
+            gate.update(candidates=len(references), pending=gate["pending"] + growth)
+        # Imported human decisions may be newer than this classification snapshot.
+        # Keep selected live; never invent per-category adjustments without a ledger.
         result["policy"].update(
-            selection_gate={"version": 1, "scope": "human_rights_el_salvador",
-                            "candidates": len(references), "selected": len(result["records"])},
+            selection_gate=gate,
             selection_method="Selección de pertinencia en derechos humanos y alcance en El Salvador a partir del texto, con evidencia localizada; las decisiones editoriales prevalecen.",
             notice="Archivo bibliográfico parcial seleccionado por pertinencia en derechos humanos y alcance en El Salvador. La selección automatizada no equivale a revisión humana ni acredita violaciones o hechos verificados. Las fichas y el recuento de casos mantienen su revisión editorial y de privacidad separada.",
         )
@@ -411,16 +505,19 @@ def _read_drafts(paths):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--drafts", type=Path, required=True)
+    parser.add_argument("--drafts", type=Path, help="Optional full-dossier decisions; standalone scope reviews suffice")
     parser.add_argument("--archive", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--excluded-ids", type=Path, help="JSON list of candidate IDs rejected by human review")
-    parser.add_argument("--scope-reviews", type=Path, help="Private reassessments bound to each draft's exact source hash")
+    parser.add_argument("--scope-reviews", type=Path, help="Independent private source snapshots; a dossier is not required")
+    parser.add_argument("--reviewed-dossiers", type=Path, help="Approved human scope decisions included in snapshot counts")
     args = parser.parse_args()
     try:
-        if args.drafts.is_symlink() or not args.drafts.is_dir():
-            _fail()
-        paths = sorted(args.drafts.glob("*.json"))
+        paths = []
+        if args.drafts is not None:
+            if args.drafts.is_symlink() or not args.drafts.is_dir():
+                _fail()
+            paths = sorted(args.drafts.glob("*.json"))
         if len(paths) > MAX_SELECTIONS:
             _fail()
         archive = _read_json(args.archive, MAX_JSON_BYTES)
@@ -435,7 +532,8 @@ def main():
             if len(scope_paths) > MAX_SELECTIONS:
                 _fail()
         document = project_news_selection(_read_drafts(paths), archive, excluded,
-                                          scope_reviews=_read_drafts(scope_paths))
+            scope_reviews=_read_drafts(scope_paths), reviewed_dossiers=(
+                _read_json(args.reviewed_dossiers, MAX_JSON_BYTES) if args.reviewed_dossiers else None))
         if args.output.exists():
             try:
                 previous = validate_manifest(_read_json(args.output, MAX_JSON_BYTES))
