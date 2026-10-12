@@ -71,6 +71,23 @@ aumentar solicitudes. El máximo de salida sigue en 4.096 tokens; una respuesta
 incompleta no publica evaluaciones parciales. Se preserva un intento para RSS nuevo antes del backlog
 positivo. Los reintentos también consumen presupuesto.
 
+El esquema enviado a Gemini limita los identificadores a los del lote y exige
+su cantidad exacta; la validación local sigue comprobando identidad, duplicados
+y evidencia. Si una respuesta tiene errores estructurales, el trabajador puede
+dividir el lote y reevaluar sus mitades con la misma reserva y plazo. Nunca
+repara identificadores ni aprovecha filas de la respuesta inválida. Un 429,
+una pausa de presupuesto o un error del proveedor no dispara esta subdivisión.
+Los errores no recuperados mantienen la ejecución en fallo y los contadores
+indican cuántos artículos se recuperaron o siguen pendientes.
+
+Un fallo del extractor no impide proyectar los lotes válidos ya guardados: el
+publicador vuelve a validar los documentos de `main` con código fijado, revisa
+las fuentes de las ubicaciones y conserva todos los controles editoriales y de
+privacidad antes de publicar. Esta excepción exige que la ejecución fallida sea
+`extract.yml` del mismo repositorio privado y de `main`; no se aplica a revisiones
+editoriales fallidas, cancelaciones ni ejecuciones agotadas por tiempo. No se
+descargan código, logs ni artefactos de la ejecución fallida y su alerta permanece.
+
 Las decisiones quedan en `scope-reviews/`; v2 conserva un recibo de lectura con
 fecha, método, truncamiento y hash, sin cuerpo. Las evaluaciones con políticas
 v1/v2 se reanalizan una vez antes de continuar con referencias nuevas, sin

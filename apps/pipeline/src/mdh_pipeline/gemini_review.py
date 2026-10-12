@@ -803,6 +803,8 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
                        "reviewed", "relevant_sv", "classified", "accepted", "http_requests", "stopped_reason",
                        "quota_reason", "error_code", "error_type", "deferred", "excluded", "attempts_saved",
                        "classified_total", "accepted_total", "remaining", "retry_deferred"}
+    safe_scope_keys.update({"model_errors", "model_recovery_splits", "model_recovered_articles",
+                            "model_failed_articles", "model_deferred_articles", "last_model_error_code", "halt_reason"})
     report["scope_phase"] = {key: value for key, value in scope_report.items() if key in safe_scope_keys}
     report["scope_phase"]["http_requests"] = scope_used
     report.update(hourly_request_limit=allowance, scope_request_limit=scope_limit,
