@@ -49,7 +49,7 @@ jobs:
           repository: RauPro/MDH-SV
           ref: main
           path: bibliography
-          sparse-checkout: apps/web/public/archive
+          sparse-checkout: data/history
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
@@ -58,17 +58,22 @@ jobs:
           cache-dependency-path: monitor/ops/review-queue/requirements.txt
       - name: Instalar entorno fijado
         run: pip install -r monitor/ops/review-queue/requirements.txt
+      - name: Preparar candidatos fuera del archivo público seleccionado
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.history --export-only --candidates-only --data-dir bibliography/data/history --output candidates.json
       - name: Recoger las noticias nuevas
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: python -m mdh_pipeline.review_queue collect
-      - name: Incorporar noticias de todos los ámbitos con cuotas de revisión
+      - name: Incorporar candidatas locales e inciertas a la cola de revisión
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 50 --include-international
+        run: python -m mdh_pipeline.history_review --archive candidates.json --limit 50 --exclude-international
       - name: Preparar fichas de noticia y migrar borradores previos sin publicarlos
         env:
           GH_TOKEN: ${{ github.token }}
@@ -82,6 +87,6 @@ jobs:
           MDH_TRIGGER_SOURCE: ${{ inputs.trigger_source || 'manual' }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: |
-          args=(--archive bibliography/apps/web/public/archive/news.json --limit "$MDH_BATCH_SIZE")
+          args=(--archive candidates.json --limit "$MDH_BATCH_SIZE")
           if [ "$MDH_RETRY_FAILED" = 'true' ]; then args+=(--retry-failed); fi
           python -m mdh_pipeline.gemini_review "${args[@]}"

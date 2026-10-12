@@ -218,7 +218,9 @@ def test_out_of_scope_or_unclear_does_not_invent_or_auto_reject_cases(scope, val
     result = run(document)
     assert result["status"] == "needs_scope_review"
     assert result["record"] is None and result["relevant"] is False
-    assert result["grounding"] == {} and result["publishable"] is False
+    assert set(result["grounding"]) == {"classification"} and result["publishable"] is False
+    assert result["grounding"]["classification"][scope]
+    assert '"quote"' not in json.dumps(result["grounding"])
 
 
 @pytest.mark.parametrize("sensitive", [
@@ -701,6 +703,10 @@ def test_empty_model_record_still_has_a_dossier_and_absence_requires_an_explicit
     assert news["fields"]["facts"]["status"] == "pending"
     assert news["fields"]["facts"]["value"] is None
     assert result["record"] is None
+    # Thematic selection must retain grounded scope even when no safe field
+    # survives. It must never reinterpret a missing case record as irrelevance.
+    assert result["grounding"]["classification"]["jurisdiction"][0]["paragraph_id"] == "p1"
+    assert result["grounding"]["classification"]["relevance"][0]["paragraph_id"] == "p1"
 
 
 def test_minor_privacy_protects_people_in_foreign_news_while_preserving_safe_fields():

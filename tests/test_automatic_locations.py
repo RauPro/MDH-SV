@@ -144,6 +144,21 @@ def test_scope_review_partial_dossier_is_allowed_only_with_explicit_sv_classific
     assert project(draft, reference, article)[1]["locations"] == 1
 
 
+@pytest.mark.parametrize("relevance", ["not_relevant", "unclear"])
+def test_nonpertinent_or_uncertain_news_never_publish_a_location_and_withdraw_cached_ones(relevance):
+    reference, draft, article = sample()
+    previous, _ = project(draft, reference, article)
+    assert len(previous["locations"]) == 1
+    draft["classification"]["relevance"] = relevance
+    draft["news_dossier"]["classification"]["relevance"] = relevance
+    for cache in (None, previous):
+        current, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
+            previous=cache, fetch=forbidden_fetch, now=NOW)
+        assert current["locations"] == []
+        assert stats["sources_checked"] == 0 and stats["eligible"] == 0
+        assert stats["withdrawn"] == (1 if cache else 0)
+
+
 @pytest.mark.parametrize("mutation", [
     lambda a: a.update(content_sha256="f" * 64),
     lambda a: a.update(text="Changed source body"),

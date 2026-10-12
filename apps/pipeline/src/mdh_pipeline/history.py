@@ -28,7 +28,7 @@ from .publishers import SOURCES
 ROOT = Path(__file__).resolve().parents[4]
 START_DATE = date(2010, 1, 1)
 SCREEN_VERSION = 3
-SCOPE_VERSION = 1
+SCOPE_VERSION = 2
 TOPICS = {
     "detencion_y_debido_proceso": ("regimen de excepcion", "regimen-de-excepcion", "deten", "detencion", "captur", "habeas", "inocente", "debido proceso", "debido-proceso", "defensa publica"),
     "condiciones_de_reclusion": ("carcel", "prision", "penitenciari", "custodia", "bartolina", "tortura", "cecot", "mariona", "apanteos"),
@@ -66,7 +66,7 @@ POLICY = {
     "record_type": "news_reference",
     "screen_version": SCREEN_VERSION,
     "scope_version": SCOPE_VERSION,
-    "scope_method": "Indicio conservador de relación territorial basado en términos explícitos del título y URL. El Salvador tiene prioridad cuando aparecen ambos contextos. scope_terms conserva los fragmentos detectados normalizados (sin tildes, en minúsculas y con separadores de URL convertidos en espacios). No confirma jurisdicción. Las referencias históricas anteriores a este filtro usan el título abreviado guardado y su URL; las nuevas capturas usan el título completo antes de abreviarlo.",
+    "scope_method": "Indicio conservador de relación territorial basado en términos explícitos del título y URL. Se excluye el sufijo editorial de El Diario de Hoy y la forma verbal «irán a/al». El Salvador tiene prioridad cuando aparecen ambos contextos. scope_terms conserva los fragmentos detectados normalizados (sin tildes, en minúsculas y con separadores de URL convertidos en espacios). No confirma jurisdicción. Las referencias históricas anteriores a este filtro usan el título abreviado guardado y su URL; las nuevas capturas usan el título completo antes de abreviarlo.",
     "selection_method": "Coincidencia automática de términos en título y URL. Se conservan metadatos públicos; no cuerpos periodísticos.",
     "review_status": "not_reviewed",
     "notice": "Archivo bibliográfico parcial de noticias candidatas. No acredita violaciones, víctimas, jurisdicción salvadoreña ni hechos verificados. No forma parte del recuento de casos. La revisión editorial y de privacidad es un proceso separado.",
@@ -82,11 +82,30 @@ POLICY = {
 }
 
 
+def clean_publisher_title(title, url, *, truncated=False):
+    """Remove only the known EDH page suffix, including a saved cut-off suffix."""
+    if urlsplit(url).hostname != "historico.elsalvador.com":
+        return title
+    heading, separator, suffix = title.rpartition("|")
+    expected = "noticias de el salvador - elsalvador.com"
+    suffix = " ".join(suffix.casefold().split())
+    if (separator and heading.strip() and suffix and
+            (suffix == expected or (truncated and expected.startswith(suffix)))):
+        return heading.strip()
+    return title
+
+
+def _scope_text(title, url):
+    text = normalize(clean_publisher_title(title, url) + " " + unquote(urlsplit(url).path))
+    return " ".join(re.sub(r"[-_/]+", " ", text).replace(".", "").split())
+
+
 def scope_hint(title, url):
     """A discoverability hint, never an assertion of the incident's jurisdiction."""
-    text = normalize(title + " " + unquote(urlsplit(url).path))
-    text = re.sub(r"[-_/]+", " ", text).replace(".", "")
-    text = " ".join(text.split())
+    text = _scope_text(title, url)
+    # Accent folding otherwise turns the future verb in "irán a la cárcel"
+    # into a country mention. Ambiguous phrasing contributes no country hint.
+    text = re.sub(r"\biran\s+(?:a|al)\b", " ", text)
     domestic = sorted({match.group(0) for pattern in SALVADOR_SCOPE_PATTERNS for match in re.finditer(pattern, text)})
     international = sorted({match.group(0) for pattern in INTERNATIONAL_SCOPE_PATTERNS for match in re.finditer(pattern, text)})
     return {"scope_hint": "el_salvador" if domestic else "international_context" if international else "undetermined",
@@ -94,15 +113,23 @@ def scope_hint(title, url):
 
 
 def migrate_scope_hints(folder, sources=SOURCES):
-    """Enrich old metadata only; preserve dates, collection counters and review state."""
+    """Repair affected hints without losing candidates or full-title scope evidence."""
     for source in sources:
         path = folder / (source["id"] + ".json")
         if not path.exists():
             continue
         state = read_json(path, {})
         for reference in state.get("records", []):
-            if "scope_hint" not in reference or "scope_terms" not in reference:
+            title = clean_publisher_title(reference["title"], reference["source_url"],
+                                          truncated=reference.get("title_truncated") is True)
+            changed_title = title != reference["title"]
+            if changed_title:
+                reference["title"] = title
+            verbal_iran = re.search(r"\biran\s+(?:a|al)\b", _scope_text(title, reference["source_url"]))
+            if (changed_title or verbal_iran or "scope_hint" not in reference
+                    or "scope_terms" not in reference):
                 reference.update(scope_hint(reference["title"], reference["source_url"]))
+        state["scope_version"] = SCOPE_VERSION
         atomic_json(path, state)
 
 
@@ -159,6 +186,7 @@ def reference_from_metadata(title, url, published_date, source, start, end,
     if not isinstance(raw_title, str):
         raise ValueError("Invalid publisher title")
     title = " ".join(html.unescape(re.sub(r"<[^>]*>", " ", raw_title)).split())
+    title = clean_publisher_title(title, url)
     if not title:
         raise ValueError("Missing publisher title")
     screened = normalize(title + " " + urlsplit(url).path)
@@ -346,7 +374,7 @@ def collect_source(source, start, end, folder, *, max_pages=300, refresh=False,
             "references": len(references), "enumerated_months": sum(m.get("status") == "enumerated" for m in state["months"].values())}
 
 
-def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=None):
+def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=None, write=True):
     generated_at = generated_at or datetime.now(timezone.utc).isoformat()
     records, source_coverage, month_coverage = {}, [], {}
     for month, first, last in month_windows(start, end):
@@ -391,12 +419,17 @@ def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=
         "coverage": {"start_date": start.isoformat(), "end_date": end.isoformat(), "timezone": "America/El_Salvador",
             "status": "partial", "records": len(records), "sources": source_coverage, "months": list(month_coverage.values())},
         "records": sorted(records.values(), key=lambda r: (r["published_date"], r["id"]), reverse=True)}
-    atomic_json(output, document)
+    if write:
+        atomic_json(output, document)
     return document
 
 
 def validate_reference(reference, source):
     required = {"id", "title", "title_truncated", "publisher", "source_id", "source_url", "published_date", "review_status", "jurisdiction_status", "record_type", "topics", "scope_hint", "scope_terms", "discovery"}
+    if "selection" in reference:
+        from .news_selection import validate_selection
+        validate_selection(reference["selection"])
+        required.add("selection")
     if set(reference) != required:
         raise ValueError("Unexpected fields in public bibliography")
     url = canonical_url(reference["source_url"], set(source["hosts"]))
@@ -435,12 +468,17 @@ def main():
     parser.add_argument("--end", type=date.fromisoformat, default=datetime.now(ZoneInfo("America/El_Salvador")).date())
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data/history")
     parser.add_argument("--output", type=Path, default=ROOT / "apps/web/public/archive/news.json")
+    parser.add_argument("--selection", type=Path, default=ROOT / "data/selection/news.json")
+    parser.add_argument("--reviewed-news", type=Path, default=ROOT / "data/reviewed/news_dossiers.json")
+    parser.add_argument("--candidates-only", action="store_true", help="Export discovery metadata for the private queue, outside the public website")
     parser.add_argument("--max-pages", type=int, default=300, help="Maximum page fetch attempts (including failures) per source per run; stop after 3 consecutive failures and resume checkpoints next run")
     parser.add_argument("--refresh", action="store_true", help="Re-enumerate completed historical months")
     parser.add_argument("--export-only", action="store_true", help="Validate and export existing metadata; no network")
     args = parser.parse_args()
     if args.start > args.end or not 1 <= args.max_pages <= 1000:
         parser.error("Invalid date range or page budget")
+    if args.candidates_only and args.output.resolve().is_relative_to(ROOT / "apps/web/public"):
+        parser.error("Candidate archives must be written outside the public website")
     migrate_scope_hints(args.data_dir)
     results = []
     if not args.export_only:
@@ -448,7 +486,21 @@ def main():
             futures = [pool.submit(collect_source, source, args.start, args.end, args.data_dir,
                 max_pages=args.max_pages, refresh=args.refresh) for source in SOURCES]
             results = [future.result() for future in futures]
-    document = export_archive(args.data_dir, args.output, args.start, args.end)
+    # Never replace the public file with raw candidates, even temporarily or
+    # when a selection input is unavailable. The final write is atomic.
+    candidates = export_archive(args.data_dir, args.output, args.start, args.end, write=False)
+    if args.candidates_only:
+        document = candidates
+    else:
+        from .news_selection import select_archive
+        document = select_archive(candidates, json.loads(args.selection.read_text()),
+                                  reviewed_dossiers=json.loads(args.reviewed_news.read_text()))
+    if args.output.exists():
+        previous = read_json(args.output, {})
+        if ({k: v for k, v in previous.items() if k != "generated_at"}
+                == {k: v for k, v in document.items() if k != "generated_at"}):
+            document["generated_at"] = previous["generated_at"]
+    atomic_json(args.output, document)
     report = {"records": len(document["records"]), "start_date": args.start.isoformat(), "end_date": args.end.isoformat(),
         "coverage": "partial", "collection": results, "reviewed_cases_published": 0}
     print(json.dumps(report, ensure_ascii=False, indent=2))

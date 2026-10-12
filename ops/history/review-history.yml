@@ -26,14 +26,18 @@ jobs:
           repository: RauPro/MDH-SV
           ref: main
           path: bibliography
-          sparse-checkout: apps/web/public/archive
+          sparse-checkout: data/history
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
       - run: pip install -r monitor/ops/review-queue/requirements.txt
-      - name: Añadir veinte referencias de todos los ámbitos a la cola privada
+      - name: Preparar candidatos fuera del archivo público seleccionado
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.history --export-only --candidates-only --data-dir bibliography/data/history --output candidates.json
+      - name: Añadir veinte candidatas locales e inciertas a la cola privada
         env:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.history_review --archive bibliography/apps/web/public/archive/news.json --limit 20 --include-international
+        run: python -m mdh_pipeline.history_review --archive candidates.json --limit 20 --exclude-international

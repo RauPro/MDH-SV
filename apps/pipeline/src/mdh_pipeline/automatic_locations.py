@@ -175,6 +175,7 @@ def _eligible(draft, references):
     dossier = validate_news_dossier(draft.get("news_dossier"))
     if (dossier["human_reviewed"] is not False or dossier["extraction_status"] != "processed"
             or dossier["classification"]["jurisdiction"] != "SV"
+            or dossier["classification"]["relevance"] != "relevant"
             or draft.get("classification") != dossier["classification"]):
         return None
     country = dossier["fields"]["country"]

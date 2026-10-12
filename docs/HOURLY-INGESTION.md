@@ -85,6 +85,10 @@ La variable de Actions privada `MDH_GEMINI_BUDGET_CONFIG` es un objeto JSON con:
 Ejemplo de **topes propios**, sin afirmar que estos números sean la cuota del
 proveedor ni que estén instalados en producción: `daily_budget: 240`, `rpm: 2`
 e `input_tpm: 200000`, con `limits_source: "operator_cap"` y `rpd: null`.
+El mismo registro se comparte con la reevaluación de pertinencia de las noticias
+antiguas: hasta ocho artículos por solicitud y dos solicitudes por ejecución
+automática. Las decisiones guardadas se reutilizan. Véase [selección temática](NEWS-SELECTION.md).
+
 Los 240 son solicitudes reservadas al día, incluidos reintentos, y no 240 fichas
 garantizadas. Deben completarse el proyecto, modelo, techo por lote y fecha
 comprobados antes de configurar la variable privada.

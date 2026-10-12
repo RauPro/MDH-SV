@@ -91,15 +91,18 @@ no acreditan cobertura completa ni validación editorial.
 
 ## Interpretación y límites
 
-`apps/web/public/archive/news.json` es un índice de referencias, **no una colección
-de casos acreditados**. Todas tienen `review_status: not_reviewed`,
+`apps/web/public/archive/news.json` es un índice seleccionado de referencias, **no una colección
+de casos acreditados**. Todas mantienen los estados bibliográficos `review_status: not_reviewed`,
 `jurisdiction_status: not_reviewed` y `record_type: news_reference`. Sus temas son
-el resultado de un filtro automático de títulos y URLs; pueden incluir asuntos de
-otros países, opinión y noticias sin una violación. Las fechas son las declaradas
+el resultado de un filtro de descubrimiento, que por sí solo no permite publicar.
+El campo `selection` exige pertinencia DDHH y relación con El Salvador a partir
+del contenido, según el [protocolo vigente](../../docs/NEWS-SELECTION.md).
+El contexto de derechos puede ser pertinente sin denunciar una violación concreta.
+Las fechas son las declaradas
 por el medio y no se sustituyen con la fecha actual cuando faltan.
 
 `scope_hint` distingue `el_salvador`, `international_context` y `undetermined` como
-**indicios para explorar el archivo**, sin modificar `jurisdiction_status`.
+**indicios de descubrimiento**, sin autorizar publicación ni modificar `jurisdiction_status`.
 `scope_terms` conserva los fragmentos explícitos detectados en título y URL,
 normalizados sin tildes, en minúsculas y con separadores de URL como espacios.
 Referencias a El Salvador, salvadoreños, Bukele, CECOT o nombres inequívocos como

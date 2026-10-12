@@ -65,7 +65,7 @@ El monitor amplía la implementación del artículo [Generative AI-based tool fo
 - **Fichas estructuradas:** hechos, personas afectadas, lugar, fechas, actores, fuentes, temas, grupos, hipótesis atribuida e instrumentos. Cada valor tiene estado y evidencia; los datos protegidos o no consignados quedan explícitos. [Esquema](docs/DOSSIER-SCHEMA.md).
 - **Reutilización:** API REST y MCP remoto de solo lectura con filtros, paginación, atribución y estado editorial, para proyectos externos.
 
-El archivo tiene una actualización programada cada seis horas. El procesador horario incorpora hasta cincuenta referencias históricas por ejecución para revisión privada, además de las candidatas RSS. No publica fichas automáticamente. [Colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
+La búsqueda se actualiza cada seis horas. El procesador horario incorpora hasta cincuenta candidatas locales o de ámbito incierto para revisión privada, además de las RSS. El archivo público sólo muestra noticias seleccionadas por pertinencia en derechos humanos y vínculo con El Salvador, con evidencia del contenido. Las clasificaciones antiguas requieren reevaluación; una coincidencia de palabras no permite publicar. No publica fichas completas automáticamente. [Selección temática](docs/NEWS-SELECTION.md), [colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
 
 ## Gemini en el flujo privado de producción
 
