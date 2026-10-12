@@ -1,6 +1,6 @@
 """Relevance selection projects provenance, never private prose or approval."""
 from copy import deepcopy
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 import json
 
 import pytest
@@ -8,7 +8,8 @@ import pytest
 from mdh_pipeline.history import SOURCES, reference_from_post
 from mdh_pipeline.news_dossier import empty_news_dossier
 from mdh_pipeline.news_selection import (
-    FULL_SCOPE_PROMPT, SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT, project_news_selection, select_archive,
+    FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT,
+    project_news_selection, select_archive,
     validate_manifest, validate_scope_review, validate_selection,
 )
 
@@ -172,7 +173,7 @@ def test_invalid_standalone_assessment_is_ignored_while_valid_v8_remains_usable(
 @pytest.mark.parametrize("new_relevance,old_relevance,expected", [
     ("relevant", "not_relevant", 1), ("not_relevant", "relevant", 0),
 ])
-def test_newer_full_v8_decision_supersedes_stale_same_text_reassessment(new_relevance, old_relevance, expected):
+def test_newer_inclusive_full_decision_supersedes_legacy_v1_reassessment(new_relevance, old_relevance, expected):
     value = draft(); value["extraction"]["prepared_at"] = "2026-10-12T14:03:00Z"
     for classification in (value["classification"], value["news_dossier"]["classification"]):
         classification["relevance"] = new_relevance
@@ -280,6 +281,58 @@ def test_later_classification_of_older_different_text_cannot_supersede_newer_sou
     outdated["extraction"]["prepared_at"] = "2026-10-12T14:07:00Z"
     manifest = project_news_selection([current], archive(), now=NOW, scope_reviews=[outdated])
     assert manifest["selections"][0]["selection"]["prompt_version"] == FULL_SCOPE_PROMPT
+
+
+@pytest.mark.parametrize("full_prompt", [LEGACY_FULL_SCOPE_PROMPT, FULL_SCOPE_PROMPT])
+@pytest.mark.parametrize("scope_relevance,dossier_relevance,expected", [
+    ("relevant", "not_relevant", 1), ("not_relevant", "relevant", 0),
+])
+def test_dedicated_inclusive_scope_owns_same_text_despite_later_dossier_enrichment(
+        full_prompt, scope_relevance, dossier_relevance, expected):
+    value = draft()
+    value["extraction"].update(prompt_version=full_prompt, prepared_at="2026-10-12T14:05:00Z")
+    for classification in (value["classification"], value["news_dossier"]["classification"]):
+        classification["relevance"] = dossier_relevance
+    manifest = project_news_selection([value], archive(), now=NOW,
+                                      scope_reviews=[inclusive_review(relevance=scope_relevance)])
+    assert len(manifest["selections"]) == expected
+    assert manifest["assessment_counts"]["relevant" if expected else "excluded"] == 1
+    if expected:
+        assert manifest["selections"][0]["selection"]["prompt_version"] == INCLUSIVE_SCOPE_PROMPT
+
+
+@pytest.mark.parametrize("relevance,category", [("relevant", "relevant"), ("not_relevant", "uncertain"),
+                                               ("unclear", "uncertain")])
+def test_v8_positives_remain_compatible_but_narrow_negatives_need_inclusive_reassessment(relevance, category):
+    value = draft(); value["extraction"]["prompt_version"] = LEGACY_FULL_SCOPE_PROMPT
+    for classification in (value["classification"], value["news_dossier"]["classification"]):
+        classification["relevance"] = relevance
+    manifest = project(value)
+    assert manifest["assessment_counts"][category] == 1
+    assert len(manifest["selections"]) == (1 if category == "relevant" else 0)
+
+
+@pytest.mark.parametrize("new_relevance,expected", [("relevant", 1), ("not_relevant", 0)])
+def test_newer_different_source_read_classified_with_full_v9_can_supersede_old_scope(new_relevance, expected):
+    value = draft()
+    value["extraction"].update(content_sha256="d" * 64, fetched_at="2026-10-12T14:04:00Z",
+                               prepared_at="2026-10-12T14:05:00Z")
+    for classification in (value["classification"], value["news_dossier"]["classification"]):
+        classification["relevance"] = new_relevance
+    assessment = inclusive_review(relevance="not_relevant" if expected else "relevant")
+    manifest = project_news_selection([value], archive(), now=NOW, scope_reviews=[assessment])
+    assert len(manifest["selections"]) == expected
+    if expected:
+        assert manifest["selections"][0]["selection"]["prompt_version"] == FULL_SCOPE_PROMPT
+        assert manifest["selections"][0]["selection"]["evidence"]["content_sha256"] == "d" * 64
+
+
+def test_newer_different_text_with_only_old_v8_policy_requires_inclusive_reassessment():
+    value = draft()
+    value["extraction"].update(prompt_version=LEGACY_FULL_SCOPE_PROMPT, content_sha256="d" * 64,
+                               fetched_at="2026-10-12T14:04:00Z", prepared_at="2026-10-12T14:05:00Z")
+    manifest = project_news_selection([value], archive(), now=NOW, scope_reviews=[inclusive_review()])
+    assert manifest["selections"] == [] and manifest["assessment_counts"]["uncertain"] == 1
 
 
 def test_projection_counts_human_overrides_with_complete_private_inputs():
@@ -688,3 +741,35 @@ def test_cli_human_scope_decisions_update_snapshot_counts_without_creating_autom
     manifest = json.loads(cli_files["output"].read_text())
     assert manifest["assessment_counts"]["excluded"] == 1
     assert manifest["assessment_counts"]["relevant"] == 0 and manifest["selections"] == []
+
+
+def test_cli_snapshot_timestamp_tracks_new_negative_assessment_and_stays_stable_when_unchanged(tmp_path, monkeypatch):
+    import mdh_pipeline.news_selection as module
+    first, second = reference(1), reference(2)
+    scopes = tmp_path / "scope-reviews"; scopes.mkdir()
+    (scopes / (first["id"] + ".json")).write_text(json.dumps(inclusive_review(first)))
+    bibliography = tmp_path / "archive.json"; bibliography.write_text(json.dumps(archive(first, second)))
+    output = tmp_path / "manifest.json"
+    monkeypatch.setattr("sys.argv", ["news_selection", "--archive", str(bibliography),
+                                     "--scope-reviews", str(scopes), "--output", str(output)])
+    clock = [NOW]
+    original_project = module.project_news_selection
+    monkeypatch.setattr(module, "project_news_selection", lambda *args, **kwargs:
+                        original_project(*args, **kwargs, now=clock[0]))
+    module.main()
+    initial = json.loads(output.read_text())
+    assert initial["generated_at"] == NOW.isoformat()
+    clock[0] += timedelta(minutes=1)
+    module.main()
+    assert json.loads(output.read_text()) == initial
+
+    (scopes / (second["id"] + ".json")).write_text(json.dumps(inclusive_review(second, relevance="not_relevant")))
+    clock[0] += timedelta(minutes=1)
+    module.main()
+    updated = json.loads(output.read_text())
+    assert updated["selections"] == initial["selections"]
+    assert updated["assessment_counts"]["excluded"] == 1 and updated["assessment_counts"]["pending"] == 0
+    assert updated["generated_at"] == clock[0].isoformat() != initial["generated_at"]
+    clock[0] += timedelta(minutes=1)
+    module.main()
+    assert json.loads(output.read_text()) == updated

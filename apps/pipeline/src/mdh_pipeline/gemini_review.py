@@ -426,7 +426,19 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
     old = [row for row in old if row[0]["number"] not in prioritized]
     privacy_candidates = [row for row in privacy_candidates if row[0]["number"] not in prioritized]
     def schedule():
-        yield from priority_candidates
+        visited_rss = set()
+        if priority_candidates:
+            rss_candidates = sorted((row for row in [*new, *priority_candidates]
+                if row[1].get("discovery_method") != "historical_bibliography"),
+                key=lambda row: row[0].get("created_at", ""))
+            # Reserve an actual attempt, not just one already-completed row.
+            # Fresh RSS arrivals must still progress during a positive backlog.
+            for item in rss_candidates:
+                if report["attempted"] >= 1:
+                    break
+                visited_rss.add(item[0]["number"])
+                yield item
+        yield from (item for item in priority_candidates if item[0]["number"] not in visited_rss)
         privacy_remainder = []
         privacy_quota = min(5, max(1, limit // 4))
         for index, item in enumerate(privacy_candidates):
@@ -438,6 +450,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         new_quota = min(5, max(1, limit // 4)) if old else limit
         rss_start_attempts = report["attempted"]
         for index, item in enumerate(new):
+            if item[0]["number"] in visited_rss:
+                continue
             if report["attempted"] - rss_start_attempts >= new_quota or report["attempted"] >= limit:
                 remainder = new[index:]
                 break

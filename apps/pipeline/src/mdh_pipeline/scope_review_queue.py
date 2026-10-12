@@ -15,7 +15,7 @@ from .gemini_budget import BudgetConfig, GeminiBudget, QuotaDeferred, estimate_i
 from .gemini_draft import GeminiDraftError
 from .news_selection import _archive_index, validate_scope_review
 from .news_scope import SCOPE_PROMPT, classify_scope_batch, prepare_scope_batch
-from .review_queue import GitHubInbox
+from .review_queue import GitHubInbox, GitHubRequestError
 
 HEX = re.compile(r"^[a-f0-9]{64}$")
 ATTEMPT_KEYS = {"schema_version", "candidate_id", "source_url", "status", "error_code", "attempted_at", "next_retry_at"}
@@ -318,7 +318,10 @@ def main():
             max_requests=args.max_requests, batch_size=args.batch_size, max_seconds=args.max_seconds,
             excluded_ids=excluded, scope_reviews=reviews, attempts=attempts)
     except Exception as error:
-        print(json.dumps({"status": "failed", "error_type": type(error).__name__, "publications": 0}))
+        failure = {"status": "failed", "error_type": type(error).__name__, "publications": 0}
+        if isinstance(error, GitHubRequestError):
+            failure["error_code"] = error.code
+        print(json.dumps(failure))
         raise SystemExit(1) from None
     print(json.dumps({key: value for key, value in report.items() if key != "selected_ids"}))
     if report["stopped_reason"] == "model_error":

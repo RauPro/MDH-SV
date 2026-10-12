@@ -875,12 +875,40 @@ def test_zero_phase_grant_and_elapsed_wall_time_never_call_the_model():
 
 
 def test_positive_scope_priority_precedes_the_older_unclassified_queue():
-    older, selected = candidate(1), candidate(2)
+    older, selected = candidate(1, historical=True), candidate(2, historical=True)
     inbox = PrivateInbox([older, selected])
     workers = Extractors()
     report = run(inbox, workers, limit=1, priority_ids=[selected['id']])
     assert report['news_dossiers'] == 1
     assert workers.model_calls == [selected['id']]
+
+
+def test_positive_backlog_reserves_one_fresh_rss_attempt_without_visiting_it_twice():
+    old_unselected = candidate(1, historical=True)
+    positives = [candidate(number, historical=True) for number in range(2, 5)]
+    fresh = candidate(5)
+    inbox = PrivateInbox([old_unselected, *positives, fresh])
+    workers = Extractors()
+    report = run(inbox, workers, limit=3, priority_ids=[item['id'] for item in positives])
+    assert report['attempted'] == report['news_dossiers'] == 3
+    assert workers.model_calls[0] == fresh['id']
+    assert set(workers.model_calls[1:]) <= {item['id'] for item in positives}
+    assert len(set(workers.model_calls)) == 3
+    assert old_unselected['id'] not in workers.model_calls
+
+
+def test_rss_reservation_skips_completed_items_and_deduplicates_positive_rss():
+    completed, fresh = candidate(1), candidate(2)
+    positives = [candidate(number, historical=True) for number in range(3, 6)]
+    inbox = PrivateInbox([completed, fresh, *positives])
+    store_marked_draft(inbox, 1, completed, draft(completed))
+    workers = Extractors()
+    report = run(inbox, workers, limit=3, priority_ids=[fresh['id'], *[item['id'] for item in positives]])
+    assert report['attempted'] == report['news_dossiers'] == 3
+    assert workers.model_calls[0] == fresh['id']
+    assert completed['id'] not in workers.model_calls
+    assert workers.model_calls.count(fresh['id']) == 1
+    assert set(workers.model_calls[1:]) <= {item['id'] for item in positives}
 
 
 def test_zero_daily_allowance_does_not_fetch_news_or_change_private_records():

@@ -24,7 +24,7 @@ from .publication import Publication
 from .privacy import PRIVACY_POLICY_VERSION, minimize_fields, privacy_flags as _privacy_flags
 from .review_queue import canonical_url, normalize
 
-PROMPT_VERSION = "mdh-universal-news-grounded-8-relevance-scope"
+PROMPT_VERSION = "mdh-universal-news-grounded-9-inclusive-context"
 MAX_TEXT_CHARS = 32_000
 MAX_RESPONSE_BYTES = 196_608
 MAX_OUTPUT_TOKENS = 4096
@@ -261,6 +261,9 @@ violencia de género, derechos de la niñez, trabajo, salud, educación, agua, a
 si el artículo explica ese vínculo. No limites la selección a responsables estatales.
 También puede ser relevante una ley, política, investigación o actividad de defensa de derechos;
 no exige una víctima identificada ni afirmar que ya se ha probado una violación.
+Incluye información sustantiva sobre hacinamiento, condiciones penitenciarias, reinserción,
+rehabilitación, madres y niños en prisión, o infraestructura que cambie esas condiciones.
+Una noticia de contexto no necesita denunciar una vulneración para ser pertinente.
 Un delito común, una captura o condena, una evacuación, una disputa electoral, una noticia deportiva
 o una mención de periodistas NO bastan por sí solos: sin un vínculo sustantivo con derechos usa
 not_relevant; si el texto no permite decidir, unclear. No conviertas toda muerte en una violación
