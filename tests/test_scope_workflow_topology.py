@@ -41,6 +41,27 @@ def test_publisher_separates_news_withdrawals_from_automatic_location_overrides(
     assert '--output publication/apps/web/public/archive/news.json --excluded-ids excluded-news.json' in text
 
 
+def test_geographic_source_checks_have_a_private_bounded_cache_without_gemini_or_more_permissions():
+    value = workflow('publish-locations.yml')
+    assert value['permissions'] == {'contents': 'read', 'issues': 'read'}
+    steps = value['jobs']['publish']['steps']
+    restore = next(s for s in steps if s.get('uses') == 'actions/cache/restore@v4')
+    save = next(s for s in steps if s.get('uses') == 'actions/cache/save@v4')
+    assert restore['with']['path'] == save['with']['path'] == '.source-location-cache/source-checks.json'
+    assert restore['with']['key'] == save['with']['key']
+    assert 'github.run_attempt' in save['with']['key']
+    assert restore['continue-on-error'] == save['continue-on-error'] == 'true'
+    check = next(s for s in steps if 'mdh_pipeline.automatic_locations' in s.get('run', ''))
+    assert '--drafts inbox/drafts' in check['run']
+    assert '--cache-file .source-location-cache/source-checks.json' in check['run']
+    assert "inputs.source_check_limit || '50'" in check['env']['SOURCE_CHECK_LIMIT']
+    assert not any('GEMINI_API_KEY' in s.get('env', {}) for s in steps)
+    assert steps.index(restore) < steps.index(check) < steps.index(save)
+    publication = next(s for s in steps if 'git push' in s.get('run', ''))
+    assert steps.index(publication) < steps.index(save)
+    assert '.source-location-cache' not in publication['run']
+
+
 def publisher_allowed(*, conclusion='success', name='Preparar fichas con Gemini',
                       path='.github/workflows/extract.yml', head_branch='main',
                       head_repository='RauPro/MDH-SV-review', private=True,

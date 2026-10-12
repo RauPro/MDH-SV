@@ -481,7 +481,7 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
     private_cache = validate_negative_cache(negative_cache, now=moment) if negative_cache is not None else {"schema_version": 1, "entries": []}
     previous = validate_collection(previous) if previous is not None else {"locations": []}
     positives = {item["candidate_id"]: item for item in previous["locations"]} if previous.get("schema_version") in {2, 3, 4} else {}
-    stats = {"drafts": len(drafts), "eligible": 0, "excluded": 0, "invalid": 0, "cached": 0,
+    stats = {"drafts": len(drafts), "selected_references": len(references), "eligible": 0, "excluded": 0, "invalid": 0, "cached": 0,
              "sources_checked": 0, "source_failures": 0, "unsupported": 0, "deferred": 0,
              "rotation_offset": 0, "rotation_candidates": 0, "ready_without_dossier": 0,
              "negative_cached": 0, "negative_cache_discarded": 0,
@@ -704,7 +704,8 @@ def export_automatic_locations(drafts_dir, archive_path, output_path, *, limit=2
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--drafts", type=Path, help="Optional private dossiers; selected sources can be inspected independently")
+    parser.add_argument("--drafts", type=Path, required=True,
+                        help="Private directory for privacy controls; individual sources do not require a dossier")
     parser.add_argument("--archive", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--limit", type=int, default=20)

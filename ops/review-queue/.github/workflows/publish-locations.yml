@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       source_check_limit:
-        description: 'Fuentes ya procesadas que se comprobarán; no llama a Gemini'
+        description: 'Fuentes seleccionadas que se comprobarán para el mapa; no llama a Gemini'
         type: choice
-        default: '20'
+        default: '50'
         options: ['20', '50']
 permissions:
   contents: read
@@ -86,11 +86,21 @@ jobs:
           python -m mdh_pipeline.news_selection --drafts inbox/drafts --scope-reviews inbox/scope-reviews --archive candidates.json --output publication/data/selection/news.json --reviewed-dossiers publication/data/reviewed/news_dossiers.json --scope-audits publication/data/selection/scope_audits.json --excluded-ids excluded-news.json
           python -m mdh_pipeline.history --export-only --data-dir publication/data/history --selection publication/data/selection/news.json --reviewed-news publication/data/reviewed/news_dossiers.json --output publication/apps/web/public/archive/news.json --excluded-ids excluded-news.json
           python -m mdh_pipeline.news_publication --source publication/data/reviewed/news_dossiers.json --archive publication/apps/web/public/archive/news.json --destination publication/apps/web/public/archive/dossiers.json
-      - name: Proyectar únicamente ubicaciones administrativas con evidencia
+      - name: Recuperar comprobaciones geográficas anteriores
+        # Only bounded source-check receipts are cached in this private workflow.
+        # No source bodies, quotations, personal fields or full drafts enter it.
+        uses: actions/cache/restore@v4
+        id: source-location-cache
+        continue-on-error: true
+        with:
+          path: .source-location-cache/source-checks.json
+          key: source-location-checks-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: source-location-checks-v1-${{ runner.os }}-
+      - name: Comprobar ubicaciones en las fuentes sin exigir una ficha completa
         env:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-          SOURCE_CHECK_LIMIT: ${{ inputs.source_check_limit || '20' }}
-        run: python -m mdh_pipeline.automatic_locations --drafts inbox/drafts --archive publication/apps/web/public/archive/news.json --output publication/apps/web/public/archive/locations.json --excluded-ids excluded-locations.json --limit "$SOURCE_CHECK_LIMIT"
+          SOURCE_CHECK_LIMIT: ${{ inputs.source_check_limit || '50' }}
+        run: python -m mdh_pipeline.automatic_locations --drafts inbox/drafts --archive publication/apps/web/public/archive/news.json --output publication/apps/web/public/archive/locations.json --excluded-ids excluded-locations.json --limit "$SOURCE_CHECK_LIMIT" --cache-file .source-location-cache/source-checks.json
       - name: Validar frontera pública y publicar solamente la capa geográfica
         working-directory: publication
         run: |
@@ -110,3 +120,9 @@ jobs:
           git pull --rebase origin main
           node apps/web/scripts/check-data.mjs
           git push origin HEAD:main
+      - name: Conservar comprobaciones de fuentes sin cuerpos ni datos personales
+        uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: .source-location-cache/source-checks.json
+          key: source-location-checks-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
