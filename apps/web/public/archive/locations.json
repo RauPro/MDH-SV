@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T03:28:38.578462+00:00",
+  "generated_at": "2026-10-12T07:17:55.104685+00:00",
   "locations": [
     {
       "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
@@ -138,6 +138,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "2bdec0b3904f2cdde37aa7e2ad9f08a668cbc10e2f6c7f0a983b251a117a3011",
+      "source_url": "https://www.diariocolatino.com/firman-contrato-para-readecuacion-de-granja-penitenciaria-de-izalco-parara-un-mil-privados-de-libertad/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-12-22",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-12T01:15:04.369534-06:00",
+      "source_checked_at": "2026-10-12T07:17:42.522631+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "66ffe724fcacff723057c08d199440fc56cdc75f63e581b4a020adee93466647"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Izalco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
     },
     {
@@ -308,6 +331,22 @@
       "evidence": {
         "paragraph_id": "p10",
         "content_sha256": "173edfa39264badced371fab8e6ed76a5ec376d5268631a237d2cc2cd10e9a66"
+      }
+    },
+    {
+      "candidate_id": "a480c8a116bc834364179a9986cf9cc9492dcfd5bd85ab8ed8ae09fef9210af1",
+      "source_url": "https://www.diariocolatino.com/capturan-a-implicado-en-homicidio-de-agente-de-pnc-en-santa-tecla/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-19",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-12T01:11:04.721560-06:00",
+      "source_checked_at": "2026-10-12T07:17:39.960868+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "1a4652a743c21f221963815976bbb928d3d2bcf6b19090f5f4c95b024a55a2e7"
       }
     },
     {
