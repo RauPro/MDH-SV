@@ -8,7 +8,7 @@ import pytest
 from mdh_pipeline.gemini_budget import MODEL, QuotaDeferred, QuotaStateError
 from mdh_pipeline.gemini_draft import GeminiDraftError
 from mdh_pipeline.news_scope import SCOPE_PROMPT, classify_scope_batch, response_schema
-from test_gemini_budget import configuration, ready
+from test_gemini_budget import ready
 
 KEY = "scope-test-api-key-not-real"
 PRIVATE = "PRIVATE_QUOTE_OR_IDENTITY_SENTINEL"
@@ -118,6 +118,14 @@ def test_eight_articles_share_one_request_and_one_ledger_reservation():
     assert inbox.document()["used_requests"] == len(session.calls) == 1
 
 
+def test_classification_envelope_matches_the_publication_gate_private_review_contract():
+    from mdh_pipeline.news_selection import validate_scope_review
+    value = item()
+    result = run([value])[0]
+    assert validate_scope_review(result, reference=value["reference"],
+        content_sha256=value["article"]["content_sha256"]) == result
+
+
 @pytest.mark.parametrize("size", [0, 9])
 def test_out_of_bounds_batch_never_reserves_or_dispatches(size):
     budget, inbox, _ = ready()
@@ -191,14 +199,36 @@ def test_batch_output_requires_exact_ids_valid_existing_evidence_and_no_extras(m
         run(items, assessments=rows)
 
 
-def test_unclear_may_have_empty_evidence_but_defined_negative_still_requires_evidence():
+@pytest.mark.parametrize("jurisdiction,relevance", [("unclear", "unclear"), ("other", "not_relevant"), ("other", "unclear"), ("unclear", "not_relevant")])
+def test_nonpositive_classifications_may_have_empty_evidence_only_for_exclusion(jurisdiction, relevance):
     value = item()
-    result = assessment(value, "unclear", "unclear")
+    result = assessment(value, jurisdiction, relevance)
     result.update(jurisdiction_paragraph_ids=[], relevance_paragraph_ids=[])
-    assert run([value], assessments=[result])[0]["classification"] == {"jurisdiction": "unclear", "relevance": "unclear"}
-    result["relevance"] = "not_relevant"
+    output = run([value], assessments=[result])[0]
+    assert output["classification"] == {"jurisdiction": jurisdiction, "relevance": relevance}
+    from mdh_pipeline.news_selection import validate_scope_review
+    assert validate_scope_review(output, reference=value["reference"],
+        content_sha256=value["article"]["content_sha256"]) == output
+    result["relevance"] = "relevant"
     with pytest.raises(GeminiDraftError, match="invalid_scope_response"):
         run([value], assessments=[result])
+
+
+@pytest.mark.parametrize("mutation,code", [
+    (lambda row: row.update(jurisdiction_paragraph_ids=[]), "scope_positive_evidence_required"),
+    (lambda row: row.update(relevance_paragraph_ids=["p1", "p1"]), "scope_duplicate_evidence_anchor"),
+    (lambda row: row.update(relevance_paragraph_ids=["not-a-paragraph"]), "scope_invalid_evidence_anchor"),
+])
+def test_evidence_validation_diagnostics_distinguish_safe_failure_codes(mutation, code):
+    from pydantic import ValidationError
+    from mdh_pipeline.news_scope import ScopeAssessment
+    row = assessment(item())
+    mutation(row)
+    with pytest.raises(ValidationError) as caught:
+        ScopeAssessment.model_validate(row)
+    issues = caught.value.errors(include_input=False, include_context=False, include_url=False)
+    assert issues[0]["msg"] == "Value error, " + code
+    assert PRIVATE not in json.dumps(issues)
 
 
 def test_unclear_cannot_smuggle_unknown_evidence_anchor():

@@ -56,9 +56,11 @@ un grupo vulnerable o un patrón documentado. No inventes esa dimensión porque 
 Usa not_relevant para asuntos sin esa dimensión sustantiva; unclear si el fragmento disponible
 no permite decidir. Una noticia puede ser relevante para derechos y tener jurisdiction=other.
 
-Para cada decisión definida (SV, other, relevant, not_relevant) cita al menos un paragraph_id
-existente del mismo artículo que respalde la decisión. Cada lista admite como máximo25 IDs
-distintos. unclear puede tener listas vacías. No uses el título como sustituto de un párrafo.
+Para cada decisión positiva (jurisdiction=SV o relevance=relevant) cita al menos un paragraph_id
+existente del mismo artículo que respalde esa decisión. Cada lista admite como máximo25 IDs
+distintos. other, not_relevant y unclear pueden tener listas vacías: esas decisiones sólo excluyen
+la noticia, no permiten publicarla. No inventes evidencia para una ausencia temática inferida al
+examinar el artículo completo. No uses el título como sustituto de un párrafo.
 La presencia de un ID válido no basta: su contenido debe respaldar la clasificación.
 Considera todos los párrafos suministrados, incluyendo los que desmientan un indicio inicial.
 Si truncated=true, evalúa sólo el fragmento disponible y usa unclear cuando su omisión impida
@@ -80,9 +82,12 @@ class ScopeAssessment(BaseModel):
     def bounded_evidence(self):
         for classification in ("jurisdiction", "relevance"):
             ids = getattr(self, classification + "_paragraph_ids")
-            if (len(ids) != len(set(ids)) or any(not re.fullmatch(r"p[1-9][0-9]{0,2}", value) for value in ids)
-                    or (getattr(self, classification) != "unclear" and not ids)):
-                raise ValueError("Invalid scope evidence")
+            if len(ids) != len(set(ids)):
+                raise ValueError("scope_duplicate_evidence_anchor")
+            if any(not re.fullmatch(r"p[1-9][0-9]{0,2}", value) for value in ids):
+                raise ValueError("scope_invalid_evidence_anchor")
+            if getattr(self, classification) in {"SV", "relevant"} and not ids:
+                raise ValueError("scope_positive_evidence_required")
         return self
 
 
