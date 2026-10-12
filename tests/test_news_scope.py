@@ -7,7 +7,7 @@ import pytest
 
 from mdh_pipeline.gemini_budget import MODEL, QuotaDeferred, QuotaStateError
 from mdh_pipeline.gemini_draft import GeminiDraftError
-from mdh_pipeline.news_scope import SCOPE_PROMPT, SYSTEM_PROMPT, classify_scope_batch, response_schema
+from mdh_pipeline.news_scope import MAX_BATCH_ITEMS, SCOPE_PROMPT, SYSTEM_PROMPT, classify_scope_batch, response_schema
 from test_gemini_budget import ready
 
 KEY = "scope-test-api-key-not-real"
@@ -131,6 +131,40 @@ def test_eight_articles_share_one_request_and_one_ledger_reservation():
     assert inbox.document()["used_requests"] == len(session.calls) == 1
 
 
+def test_sixteen_short_articles_share_one_http_reservation_and_keep_identity_order():
+    items = [item(n) for n in range(1, 17)]
+    budget, inbox, _ = ready()
+    session = Session([response([assessment(value) for value in reversed(items)])])
+    results = run(items, budget=budget, session=session)
+    assert [result["candidate_id"] for result in results] == [value["reference"]["id"] for value in items]
+    assert len(results) == MAX_BATCH_ITEMS == 16
+    assert inbox.document()["used_requests"] == budget.requests_this_run == len(session.calls) == 1
+    assert session.calls[0][1]["json"]["generationConfig"]["maxOutputTokens"] == 4096
+
+
+def test_sixteen_article_batch_rejects_evidence_from_another_article():
+    items = [item(n) for n in range(1, 17)]
+    article = items[0]["article"]
+    article["paragraphs"].append({"id": "p3", "text": "Este párrafo pertenece únicamente a la primera fuente ficticia."})
+    article["text"] = "\n\n".join(p["text"] for p in article["paragraphs"])
+    article["content_sha256"] = hashlib.sha256(article["text"].encode()).hexdigest()
+    rows = [assessment(value) for value in items]
+    rows[-1]["relevance_paragraph_ids"] = ["p3"]
+    with pytest.raises(GeminiDraftError, match="ungrounded_scope_evidence"):
+        run(items, assessments=rows)
+
+
+def test_truncated_sixteen_article_response_returns_no_partial_classifications():
+    items = [item(n) for n in range(1, 17)]
+    payload = json.loads(response([assessment(value) for value in items[:8]]).raw)
+    payload["candidates"][0]["finishReason"] = "MAX_TOKENS"
+    budget, inbox, _ = ready()
+    session = Session([Response(payload)])
+    with pytest.raises(GeminiDraftError, match="incomplete_model_response"):
+        run(items, budget=budget, session=session)
+    assert inbox.document()["used_requests"] == len(session.calls) == 1
+
+
 def test_classification_envelope_matches_the_publication_gate_private_review_contract():
     from mdh_pipeline.news_selection import validate_scope_review
     value = item()
@@ -139,7 +173,7 @@ def test_classification_envelope_matches_the_publication_gate_private_review_con
         content_sha256=value["article"]["content_sha256"]) == result
 
 
-@pytest.mark.parametrize("size", [0, 9])
+@pytest.mark.parametrize("size", [0, 17])
 def test_out_of_bounds_batch_never_reserves_or_dispatches(size):
     budget, inbox, _ = ready()
     session = Session([])
@@ -183,16 +217,18 @@ def test_oversized_paragraph_or_article_is_not_silently_truncated(texts):
     assert session.calls == []
 
 
-def test_batch_utf8_byte_budget_is_enforced_before_reserving():
-    items = [item(n, texts=["á" * 3990] * 6) for n in range(8)]
+@pytest.mark.parametrize("count", [8, 16])
+def test_batch_utf8_byte_budget_is_enforced_before_reserving(count):
+    items = [item(n, texts=["á" * 3990] * 6) for n in range(count)]
     session = Session([])
     with pytest.raises(GeminiDraftError, match="invalid_scope_input"):
         run(items, session=session)
     assert session.calls == []
 
 
-def test_full_request_budget_includes_all_article_parameters_and_metadata():
-    items = [item(n, texts=["a" * 3990] * 4) for n in range(8)]
+@pytest.mark.parametrize("count", [8, 16])
+def test_full_request_budget_includes_all_article_parameters_and_metadata(count):
+    items = [item(n, texts=["a" * 3990] * (32 // count)) for n in range(count)]
     budget, inbox, _ = ready()
     session = Session([])
     with pytest.raises(GeminiDraftError, match="scope_request_too_large"):
