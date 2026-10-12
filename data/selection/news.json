@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T16:55:00.138185+00:00",
+  "generated_at": "2026-10-12T17:06:08.484749+00:00",
   "selections": [
     {
       "candidate_id": "18448b76dae68903ff7ff53e7aec88b87be67d1dcb214c6e8dcfbc4fc049ee65",
@@ -444,6 +444,36 @@
       }
     },
     {
+      "candidate_id": "59786a3f50b1b717c6fadb3abaaed7e33106a555a286dcfb72f7cb07ae1b6862",
+      "source_url": "https://www.diariocolatino.com/reformas-a-la-ley-penitenciaria-serian-de-beneficio-a-la-poblacion-salvadorena/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "a731f2e9232a147c94852017467dfe9deda8fb0d534f2e487a55625ab3862052",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5ce385f90846750a930f3bf528d0a6f0e6e47e0c46bef63876d30ae0d54d73c6",
       "source_url": "https://historico.elsalvador.com/historico/172723/juez-espanol-pide-detener-a-17-militares-salvadorenos-por-caso-jesuitas.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -467,6 +497,41 @@
             "p1",
             "p7",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "5fe9f2188a8397b9e920e6295cda2edf2d1709d99e3aec57807b784414e620ff",
+      "source_url": "https://gatoencerrado.news/2015/08/13/cicies-divide-a-derechos-humanos-y-partidos-politicos-salvadorenos/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2015-08-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "2772ec0feadd08b4286e5293f5e94ed6f1d5f7d940e0602904763d0d0d25ec8f",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p15",
+            "p16",
+            "p19"
           ]
         }
       }
@@ -527,6 +592,36 @@
       }
     },
     {
+      "candidate_id": "737f19242286e9e65a7976ebca099e7186aff5942a4373167737f943de11632b",
+      "source_url": "https://www.diariocolatino.com/sistema-de-video-vigilancia-permite-captura-de-delincuentes-en-san-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "f6107ce936bd1b45490ef3f1e28f8b373616af4b3a1f69d38a7ef659cdf05968",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "75346f7d41120488432449bbe5c8974b4891f4298d1e02838c673eb0bcaa0f09",
       "source_url": "https://www.diariocolatino.com/el-salvador-registra-altos-niveles-de-contaminacion-en-la-atmosfera-ricardo-navarro/",
       "publisher": "Diario Co Latino",
@@ -547,6 +642,35 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "75b191ea58b3d405b2cbadee383de832b61a0aec60e281ca848851fdd2db6160",
+      "source_url": "https://www.diariocolatino.com/penal-de-mariona-en-estado-de-emergencia-por-intento-de-amotinamiento/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "0c7aec8fafaafe2e1fe7c32671999ee5836e907b842e71d3275110dd8c768aee",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p9",
+            "p12"
           ]
         }
       }
@@ -741,6 +865,38 @@
       }
     },
     {
+      "candidate_id": "9afc96e37b6e2234befbf608dc205ef6927da63dfa2d09038dacc262bf186638",
+      "source_url": "https://www.diariocolatino.com/los-desaparecidos-siempre-dicen-la-verdad-escuadrones-de-la-muerte-en-el-salvador-1/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "c0c6d896499c1d4d57ccac6eb7e6c8eea6a460b4de0408182d2b2f9b30432d52",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a9e511d1a20a13f5f126765147b228f604ab422f0ba7bb32a5c68107a7a7eb5f",
       "source_url": "https://www.diariocolatino.com/nayib-bukele-se-compromete-a-trabajar-de-la-mano-con-sindicalistas/",
       "publisher": "Diario Co Latino",
@@ -772,6 +928,66 @@
       }
     },
     {
+      "candidate_id": "b058feeb6b9efbd1b8fdc580b3513d8763bebc66a36f26948c503efe1d0da9fa",
+      "source_url": "https://www.diariocolatino.com/los-desaparecidos-siempre-dicen-la-verdad-escuadrones-de-la-muerte-en-el-salvador-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "515edeada9558d436755f24f5c75219d5c3597f5eab7d926bea7781ba5fd650d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b24ba23e2026f0512d68299c7eb551a5d2a2d886870eaa75f55f43302349281d",
+      "source_url": "https://www.diariocolatino.com/el-salvador-no-se-detiene-ni-se-detendra-nunca-sanchez-ceren/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "c819708789b0ef5725542644a5de430b932529c76e7c691b6c3aa2db3a18e82d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b619e4cb8145736ed4363fbb061c605bd560ff281c6af8d0114a856b27f759ea",
       "source_url": "https://www.diariocolatino.com/madre-fidel-zavala-interpone-habeas-corpus-vida-alto-riesgo/",
       "publisher": "Diario Co Latino",
@@ -795,6 +1011,34 @@
             "p3",
             "p7",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ba4e966665fb6b08392f41df249f8eb2c521ed5b4d5fb6e94274a20e78314f08",
+      "source_url": "https://www.diariocolatino.com/penal-de-mariona-en-emergencia-por-15-dias/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "1b7283ae5b33a6805cacae4faeb045f2d79155b01d49f49e4ab33173014305f4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }

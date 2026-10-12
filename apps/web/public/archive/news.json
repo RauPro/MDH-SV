@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T16:58:19.927372+00:00",
+  "generated_at": "2026-10-12T17:06:09.019070+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,7 +23,7 @@
       "version": 1,
       "scope": "human_rights_el_salvador",
       "candidates": 6199,
-      "selected": 40
+      "selected": 48
     }
   },
   "paper": {
@@ -45,14 +45,14 @@
     "end_date": "2026-10-12",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 40,
+    "records": 48,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 34,
+        "records": 41,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -851,7 +851,7 @@
           {
             "month": "2015-07",
             "status": "enumerated",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 1116,
             "source_total_posts": 1116,
@@ -863,7 +863,7 @@
           {
             "month": "2015-08",
             "status": "enumerated",
-            "records": 0,
+            "records": 6,
             "screen_version": 3,
             "posts_scanned": 1004,
             "source_total_posts": 1004,
@@ -2487,7 +2487,7 @@
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 4,
+        "records": 5,
         "first_published_date": "2014-09-21",
         "last_published_date": "2015-11-30",
         "months": [
@@ -3298,7 +3298,7 @@
           {
             "month": "2015-08",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 7,
             "source_total_posts": 7,
@@ -19964,12 +19964,12 @@
         "month": "2015-07",
         "start_date": "2015-07-01",
         "end_date": "2015-07-31",
-        "records": 1,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 2
           },
           {
             "source_id": "gatoencerrado",
@@ -20007,17 +20007,17 @@
         "month": "2015-08",
         "start_date": "2015-08-01",
         "end_date": "2015-08-31",
-        "records": 0,
+        "records": 7,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 6
           },
           {
             "source_id": "gatoencerrado",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "factum",
@@ -27072,6 +27072,355 @@
       }
     },
     {
+      "id": "b058feeb6b9efbd1b8fdc580b3513d8763bebc66a36f26948c503efe1d0da9fa",
+      "title": "Los desaparecidos siempre dicen la verdad: Escuadrones de la Muerte en El Salvador (2)",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/los-desaparecidos-siempre-dicen-la-verdad-escuadrones-de-la-muerte-en-el-salvador-2/",
+      "published_date": "2015-08-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78261,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "515edeada9558d436755f24f5c75219d5c3597f5eab7d926bea7781ba5fd650d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "75b191ea58b3d405b2cbadee383de832b61a0aec60e281ca848851fdd2db6160",
+      "title": "Penal de Mariona en estado de emergencia por intento de amotinamiento",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/penal-de-mariona-en-estado-de-emergencia-por-intento-de-amotinamiento/",
+      "published_date": "2015-08-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "penal de mariona"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78302,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "0c7aec8fafaafe2e1fe7c32671999ee5836e907b842e71d3275110dd8c768aee",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p9",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "59786a3f50b1b717c6fadb3abaaed7e33106a555a286dcfb72f7cb07ae1b6862",
+      "title": "Reformas a la ley penitenciaria serían de beneficio a la población salvadoreña",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/reformas-a-la-ley-penitenciaria-serian-de-beneficio-a-la-poblacion-salvadorena/",
+      "published_date": "2015-08-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 77947,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "a731f2e9232a147c94852017467dfe9deda8fb0d534f2e487a55625ab3862052",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9afc96e37b6e2234befbf608dc205ef6927da63dfa2d09038dacc262bf186638",
+      "title": "Los desaparecidos siempre dicen la verdad: Escuadrones de la Muerte en El Salvador (1)",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/los-desaparecidos-siempre-dicen-la-verdad-escuadrones-de-la-muerte-en-el-salvador-1/",
+      "published_date": "2015-08-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 77501,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "c0c6d896499c1d4d57ccac6eb7e6c8eea6a460b4de0408182d2b2f9b30432d52",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b24ba23e2026f0512d68299c7eb551a5d2a2d886870eaa75f55f43302349281d",
+      "title": "“El Salvador no se detiene, ni se detendrá nunca”, Sánchez Cerén",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-salvador-no-se-detiene-ni-se-detendra-nunca-sanchez-ceren/",
+      "published_date": "2015-08-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 77467,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "c819708789b0ef5725542644a5de430b932529c76e7c691b6c3aa2db3a18e82d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5fe9f2188a8397b9e920e6295cda2edf2d1709d99e3aec57807b784414e620ff",
+      "title": "CICIES divide a Derechos Humanos y partidos políticos salvadoreños",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2015/08/13/cicies-divide-a-derechos-humanos-y-partidos-politicos-salvadorenos/",
+      "published_date": "2015-08-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 1775,
+        "retrieved_at": "2026-10-10T18:02:39.731848+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "2772ec0feadd08b4286e5293f5e94ed6f1d5f7d940e0602904763d0d0d25ec8f",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p15",
+            "p16",
+            "p19"
+          ]
+        }
+      }
+    },
+    {
+      "id": "737f19242286e9e65a7976ebca099e7186aff5942a4373167737f943de11632b",
+      "title": "Sistema de video vigilancia permite captura de delincuentes en San Salvador",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sistema-de-video-vigilancia-permite-captura-de-delincuentes-en-san-salvador/",
+      "published_date": "2015-08-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76475,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "f6107ce936bd1b45490ef3f1e28f8b373616af4b3a1f69d38a7ef659cdf05968",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "id": "ffc4c70bd381f60e13da114ea52b67ab7df81717b5a4868e266fcb1413985bbb",
       "title": "Chalatenango, al filo de una sequía por la contaminación en sus ríos",
       "title_truncated": false,
@@ -27113,6 +27462,53 @@
             "p21",
             "p23",
             "p27"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ba4e966665fb6b08392f41df249f8eb2c521ed5b4d5fb6e94274a20e78314f08",
+      "title": "Penal de Mariona en emergencia por 15 días",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/penal-de-mariona-en-emergencia-por-15-dias/",
+      "published_date": "2015-07-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "penal de mariona"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75268,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:05:26.600214-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-1",
+        "evidence": {
+          "content_sha256": "1b7283ae5b33a6805cacae4faeb045f2d79155b01d49f49e4ab33173014305f4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }
