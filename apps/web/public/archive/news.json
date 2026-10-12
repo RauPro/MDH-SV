@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T21:20:03.349130+00:00",
+  "generated_at": "2026-10-12T21:33:52.516445+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 6199,
-      "selected": 103,
-      "evaluated": 185,
-      "relevant": 103,
-      "excluded": 75,
+      "selected": 125,
+      "evaluated": 233,
+      "relevant": 125,
+      "excluded": 101,
       "uncertain": 7,
-      "pending": 6014,
-      "evaluated_at": "2026-10-12T21:20:02.649958+00:00"
+      "pending": 5966,
+      "evaluated_at": "2026-10-12T21:33:51.358645+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-12",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 103,
+    "records": 125,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 90,
+        "records": 112,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -665,7 +665,7 @@
           {
             "month": "2014-03",
             "status": "enumerated",
-            "records": 16,
+            "records": 17,
             "screen_version": 3,
             "posts_scanned": 1028,
             "source_total_posts": 1028,
@@ -677,7 +677,7 @@
           {
             "month": "2014-04",
             "status": "enumerated",
-            "records": 0,
+            "records": 20,
             "screen_version": 3,
             "posts_scanned": 937,
             "source_total_posts": 937,
@@ -689,7 +689,7 @@
           {
             "month": "2014-05",
             "status": "enumerated",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 1083,
             "source_total_posts": 1083,
@@ -19282,12 +19282,12 @@
         "month": "2014-03",
         "start_date": "2014-03-01",
         "end_date": "2014-03-31",
-        "records": 16,
+        "records": 17,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 16
+            "records": 17
           },
           {
             "source_id": "gatoencerrado",
@@ -19325,12 +19325,12 @@
         "month": "2014-04",
         "start_date": "2014-04-01",
         "end_date": "2014-04-30",
-        "records": 0,
+        "records": 20,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 20
           },
           {
             "source_id": "gatoencerrado",
@@ -19368,12 +19368,12 @@
         "month": "2014-05",
         "start_date": "2014-05-01",
         "end_date": "2014-05-31",
-        "records": 1,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 2
           },
           {
             "source_id": "gatoencerrado",
@@ -28387,6 +28387,1003 @@
           "relevance_paragraph_ids": [
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3735af5d2d571d9a742becb6e5d1a1a0cf6006aa4e3dcc653c14e226041e5945",
+      "title": "Movimiento sindical llama a la unidad de la clase trabajadora",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/movimiento-sindical-llama-a-la-unidad-de-la-clase-trabajadora/",
+      "published_date": "2014-05-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 14019,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:31:55.414728-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "694532ac108c348891aba1efbb5f661428c6cc70a3c05a4f317fd7dc2aa120f0",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "732c0a6bf6c80645da359714a25c36be0de8e00a2455fe7e759feea276993413",
+      "title": "Organizaciones sindicales esperan un gobierno dialogante",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-sindicales-esperan-un-gobierno-dialogante/",
+      "published_date": "2014-04-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13703,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:31:55.414728-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "39b3a3e9acffa854fc57f6cc31c05d4ae0a14cb7a6090dd8db2e26eb7338640a",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "03e9b23f8e5105bce345dbf957565ec9547378f808f03f7564ad1f81cae3aed9",
+      "title": "Pignato vincula aumentos de feminicidios con ineficacia del sistema judicial",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pignato-vincula-aumentos-de-feminicidios-con-ineficacia-del-sistema-judicial/",
+      "published_date": "2014-04-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13716,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:31:55.414728-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9547ecee01f58296693f868240497ebab25aab832af9eea0e577a669476ef878",
+          "jurisdiction_paragraph_ids": [
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "880a770c88577ddab48f238f5f576382e2feb32a4a64b943bb080fd495e55519",
+      "title": "En defensa del lenguaje no sexista y la novedad del DRAE: feminicidio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/en-defensa-del-lenguaje-no-sexista-y-la-novedad-del-drae-feminicidio/",
+      "published_date": "2014-04-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13548,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:31:55.414728-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7ffed5ac9ce862b6269295950b88b3e2a6d7b6912e5d2b31cc6cef60935aab28",
+          "jurisdiction_paragraph_ids": [
+            "p10",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0b4374e7718e721f53f0871bb585df27ebc9db2b9fc89ad02a61c9a9013f13d2",
+      "title": "Fundación “Katya Miranda” se encargará de velar por los derechos de la niñez salvadoreña",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fundacion-katya-miranda-se-encargara-de-velar-por-los-derechos-de-la-ninez-salvadorena/",
+      "published_date": "2014-04-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13601,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:31:55.414728-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e330b80cc03499a8f38fda5c2166dbe6f9969e6b34556ae570274078e7c61529",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7e60ec181c7d2c509464153c7b9320083aa724c8f563a6fc0b0f5a8cac09c7c8",
+      "title": "Gobierno electo inicia mesa de diálogo con sindicalistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/gobierno-electo-inicia-mesa-de-dialogo-con-sindicalistas/",
+      "published_date": "2014-04-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13377,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:31:55.414728-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "31f78e2552804d5a0b7c1505cb618911a7fa80df10c6da1c041740af208d9a9c",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6636f51b66283ec3fb4eddf5efc661f02d5f5f7933dc47b67d4a439eafb79be0",
+      "title": "Gobierno electo inicia mesa permanente de diálogo con sindicalistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/gobierno-electo-inicia-mesa-permanente-de-dialogo-con-sindicalistas/",
+      "published_date": "2014-04-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13393,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:31:55.414728-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a3d7de3ee4e2928331b7c125dc62ff9bb1982660c0c3c7243070892e0614aea9",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b58ee067f340dcdcba9a0da014f3f1cf56a17d8b7203093ec9dca9c266a4b68e",
+      "title": "La minería metálica, el conflicto socio – ambiental por el agua",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/la-mineria-metalica-el-conflicto-socio-ambiental-por-el-agua/",
+      "published_date": "2014-04-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12933,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:30:15.158423-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a2f32885600f4cd457ddd5d22c0a788f492582e4832c03f7893b3748ec485a5f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p8",
+            "p11",
+            "p16",
+            "p20"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f2021ac3428380b8d8c477530c057e9f8d9d3251fad4642d596a02848b6b491c",
+      "title": "Calle 13 llama a terminar violencia contra la niñez",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/calle-13-llama-a-terminar-violencia-contra-la-ninez/",
+      "published_date": "2014-04-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12783,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:30:15.158423-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d0632b359d0b4743de490b15e0b77046b7a0f2936a11b403a1146378c543b710",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "166cdb58864302e25bc5a39018287e78a0fbe5e7e26f8ea58fe12791110432d0",
+      "title": "Defensoría detecta más de mil productos vencidos en restaurantes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-detecta-mas-de-mil-productos-vencidos-en-restaurantes/",
+      "published_date": "2014-04-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12610,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:30:15.158423-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9de2420d47503918a4ad538edf17dfcb504107ad409496f491040feeda101b60",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "73a98c5e4e591094bf1ae8c85ca5f19fb05c003b221289a505b0f4b5bab9159b",
+      "title": "Asesinatos y cruz",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asesinatos-y-cruz/",
+      "published_date": "2014-04-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12428,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:30:15.158423-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5b6427275eb045504835d76d58298b45b0f3f387a6676d5066caad13419ba793",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4490c751d34b8495db8ffe17d78fc0225265cd0d17b525ee6f86067f15c63935",
+      "title": "“Nuestra vida está en riesgo si permitimos los proyectos mineros”: Mesa Frente a la Minería",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/nuestra-vida-esta-en-riesgo-si-permitimos-los-proyectos-mineros-mesa-frente-a-la-mineria/",
+      "published_date": "2014-04-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12344,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:30:15.158423-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c6214f37dca557af8ef56b8d46d7f1c2d174f3d9e104109bd9a7c630e73ecdca",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p8",
+            "p13",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5cca7fd62c26c6169d6df757b07acc82924ca12a115cc5339657684a16c6136b",
+      "title": "Pro Búsqueda señala que Fiscalía tiene poco interés de investigar desapariciones forzadas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pro-busqueda-senala-que-fiscalia-tiene-poco-interes-de-investigar-desapariciones-forzadas/",
+      "published_date": "2014-04-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 11454,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:30:15.158423-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "76bec0fd994bdbc6e2232a89e86c728c97409be4b940626dbdc60b76f9542c3c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1b09e60f5b48e11f46832e0fa9d52dd0ce52fa0d3e9944bded798065c99219b9",
+      "title": "Mijango advierte de que si tregua no continúa, homicidios podrían incrementar",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mijango-advierte-de-que-si-tregua-no-continua-homicidios-podrian-incrementar/",
+      "published_date": "2014-04-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 11436,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2a5a218c9eaf5ed28aebb94fa7bf457b92565dde6c8ca5bd1184e7b9c5c52141",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p18"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p19"
+          ]
+        }
+      }
+    },
+    {
+      "id": "18dbe33cdae43749de01a8a2546445444ca31e5dfcde2d304d2702e68cdfae87",
+      "title": "Conmemoran el 31 aniversario del asesinato de Mélida Anaya Montes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/conmemoran-el-31-aniversario-del-asesinato-de-melida-anaya-montes/",
+      "published_date": "2014-04-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 11335,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a78dbc7310f19deb8781a072235f798e2ae9af9666457fd1d3f30825f65063ce",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "79db7443fb0af14a7a1dce8585f3609fea0bc815a49c503008e0aa98eeb8751f",
+      "title": "Defensoría pide no adquirir muñeca “My Sweet Love” por riesgo de quemaduras",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-pide-no-adquirir-muneca-my-sweet-love-por-riesgo-de-quemaduras/",
+      "published_date": "2014-04-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 11061,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5f2a269cba48664ab38fe426eb71657c5355f3330c52e2b94fe8c384b897e4de",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p6",
+            "p7",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "642d049a8a6d18bb88a2a9e3b0e60ebeb72028da03ee63ce6977e4c4a7a08949",
+      "title": "Celebran misa de conmemoración asesinato de Katya Miranda",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/celebran-misa-de-conmemoracion-asesinato-de-katya-miranda/",
+      "published_date": "2014-04-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 11078,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8e64b926bae40b5082f482095ba57b2ee3f3cdacb8352ac40ab691009299b841",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p13",
+            "p22"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p16",
+            "p18"
+          ]
+        }
+      }
+    },
+    {
+      "id": "73f0f2da11f03f1c9c3d9f38ec17557e3cdfcd1d3eb5182df9e00e0f030fffbe",
+      "title": "Los deberes de los periodistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/los-deberes-de-los-periodistas/",
+      "published_date": "2014-04-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 10852,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8080f688d6c3aa26e13908fc3e7b73ab250cc2955ea9494f58aa89d9b09a5ab8",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p11",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p15",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a75d9bd114d0fef5c332460b9be1138f13d390e1536f681b227834e6f18d59b8",
+      "title": "Juez español continuará juicio contra ex militares salvadoreños por asesinato de padres jesuitas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juez-espanol-continuara-juicio-contra-ex-militares-salvadorenos-por-asesinato-de-padres-jesuitas/",
+      "published_date": "2014-04-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 10790,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1baa05f9d91c953ca2e30de615c5589858d8896b0b55dfadbdb6279411f16ed1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1c76ea0ca00c799d1ca797cd92d86cdb495b841d27caede337a5cb40d8ce998b",
+      "title": "Ex policía asesina a su esposa al interior de penal en Metapán",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ex-policia-asesina-a-su-esposa-al-interior-de-penal-en-metapan/",
+      "published_date": "2014-04-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 10786,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "076eb562133b7a8e4e032988baf96389dc8b4a637b75cd97135d0116e219aa1b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e2d4dc78b0a7aa674c55c12fa139fe6ed6cc7f7238847389eaf2b593713b6df4",
+      "title": "Desarrollan planes para erradicar la violencia de género",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/desarrollan-planes-para-erradicar-la-violencia-de-genero/",
+      "published_date": "2014-04-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 10620,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9ddbc875f6f2a0bda144cdb8ec4c558cc2e073b83a5215d66ae80abdf9533bb1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9f63e2444425c22be976f26fc125dd1f69cc39a7396315329d2ecca1c31701c8",
+      "title": "Con música y expresiones artísticas piden cumplimiento a los derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/con-musica-y-expresiones-artisticas-piden-cumplimiento-a-los-derechos-humanos/",
+      "published_date": "2014-03-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 10567,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T15:29:16.394556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b8e945ae16b8872a05b19acca9eab310c9deed457a6b722a46018af57ef19266",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
           ]
         }
       }
