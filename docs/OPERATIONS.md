@@ -2,7 +2,7 @@
 
 ## Producción
 
-Vercel importa `RauPro/MDH-SV`, rama `main`, raíz `.` y `vercel.json`. Ejecuta `npm ci && npm --prefix apps/web ci`, el build del portal y las funciones Node de `api/`. Node 22.x. Sirve los archivos estáticos de `apps/web/dist` y la API REST/MCP de solo lectura. No requiere secretos, base de datos, autenticación ni servicios de IA en cada consulta.
+Vercel importa `RauPro/MDH-SV`, rama `main`, raíz `.` y `vercel.json`. Ejecuta `npm ci && npm --prefix apps/web ci`, el build del portal y las funciones Node de `api/`. Node 22.x. Sirve los archivos estáticos de `apps/web/dist` y la API REST/MCP de solo lectura. La consulta pública no requiere secretos, base de datos, autenticación ni servicios de IA. El disparador horario utiliza las credenciales separadas descritas en [HOURLY-INGESTION.md](HOURLY-INGESTION.md).
 
 La web consume JSON del mismo origen. Tiene CSP, bloqueo de iframes, `nosniff`, política sin referrer y permisos de cámara/micrófono/geolocalización deshabilitados. El portal no incorpora analítica ni tipografías externas. El alojamiento conserva las políticas y registros técnicos propios de Vercel.
 
@@ -64,13 +64,23 @@ Comprobar REST `/api/v1/records`, `/api/v1/records/{id}`, `/api/v1/news` y `/api
 
 ## Procesamiento asistido de candidatas
 
-La extracción corre cada hora en **Preparar fichas con Gemini**, dentro del
-repositorio privado. El modelo y el secreto se configuran en Actions, no en Vercel.
-La plantilla usa un SHA público fijo y un token limitado a la cola. Procesa hasta
-20 noticias por ejecución programada; una ejecución manual puede ajustar el lote
-entre 1 y 50. Los archivos privados conservan estado y evitan repetir extracciones
-ya terminadas. Ante cuotas, autenticación o configuración del proveedor inválidas,
-se detiene el lote y el resumen identifica el motivo sin revelar secretos.
+La extracción está programada para ejecutarse cada hora en **Preparar fichas con
+Gemini**, dentro del repositorio privado. Vercel tiene preparado el disparo
+principal al minuto 07 y GitHub conserva el respaldo al minuto 23. Comprobar las
+invocaciones reales después de instalar las credenciales: el horario configurado
+no demuestra que ya se esté cumpliendo. El modelo y la clave Gemini se configuran
+en Actions, no en Vercel. La plantilla usa un SHA público fijo y un token limitado
+a la cola. Solicita hasta 50 noticias por lote; el límite efectivo se reduce según
+el saldo y las horas restantes del día del Pacífico. Cada intento HTTP, incluidos
+los reintentos, consume ese presupuesto.
+
+La configuración privada utiliza `operator_cap`, con un tope propio de 240
+solicitudes al día. El límite diario de Google no está visible (`rpd: null`);
+estos topes no se presentan como cuotas confirmadas del proveedor. Un 429 pausa
+las llamadas hasta la siguiente medianoche del Pacífico. No se activa facturación
+ni se cambia automáticamente de modelo. Los archivos privados conservan estado
+y evitan repetir extracciones ya terminadas. Ante autenticación o configuración
+inválidas, se detiene el lote y el resumen identifica el motivo sin revelar secretos.
 
 Los errores, revisiones de alcance y revisiones de privacidad requieren atención
 del operador. Ningún estado de extracción aprueba una publicación. Véase el

@@ -48,7 +48,7 @@ npm --prefix apps/web run build
 npm --prefix apps/web run dev
 ```
 
-Vercel usa la raíz del repositorio y `vercel.json`. No necesita variables de entorno. El build verifica que todas las descargas correspondan al conjunto canónico. Más detalles en [operación](docs/OPERATIONS.md), [metodología](docs/METHODOLOGY.md) y [seguridad](SECURITY.md).
+Vercel usa la raíz del repositorio y `vercel.json`. La consulta pública no necesita variables de entorno; el disparador horario requiere las credenciales separadas descritas en [ingreso horario](docs/HOURLY-INGESTION.md). El build verifica que todas las descargas correspondan al conjunto canónico. Más detalles en [operación](docs/OPERATIONS.md), [metodología](docs/METHODOLOGY.md) y [seguridad](SECURITY.md).
 
 
 ## Recolección y revisión editorial
@@ -65,12 +65,17 @@ El monitor amplía la implementación del artículo [Generative AI-based tool fo
 - **Fichas estructuradas:** hechos, personas afectadas, lugar, fechas, actores, fuentes, temas, grupos, hipótesis atribuida e instrumentos. Cada valor tiene estado y evidencia; los datos protegidos o no consignados quedan explícitos. [Esquema](docs/DOSSIER-SCHEMA.md).
 - **Reutilización:** API REST y MCP remoto de solo lectura con filtros, paginación, atribución y estado editorial, para proyectos externos.
 
-El archivo se actualiza cada seis horas. La cola histórica incorpora hasta veinte referencias por ejecución para revisión privada, además de las candidatas RSS. No publica fichas automáticamente. [Colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
+El archivo tiene una actualización programada cada seis horas. El procesador horario incorpora hasta cincuenta referencias históricas por ejecución para revisión privada, además de las candidatas RSS. No publica fichas automáticamente. [Colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
 
 ## Gemini en el flujo privado de producción
 
 El workflow **Preparar fichas con Gemini**, instalado en `RauPro/MDH-SV-review`,
-recoge las noticias nuevas y procesa el backlog por lotes cada hora. Utiliza el
+está programado para recoger noticias nuevas y procesar el backlog cada hora,
+según el presupuesto disponible. Vercel tiene preparado el disparo principal al
+minuto 07 y GitHub conserva el respaldo al minuto 23; la ejecución automática
+debe comprobarse después de instalar las credenciales. El tope propio configurado
+es de 240 solicitudes diarias, incluidos reintentos; no es una cuota confirmada
+de Google, cuyo límite diario sigue sin estar visible. Utiliza el
 secreto de Actions `GEMINI_API_KEY` y la variable `GEMINI_MODEL` (Gemini 3.5 Flash Lite).
 La clave nunca llega a Vercel, al navegador, al MCP ni a este repositorio público.
 

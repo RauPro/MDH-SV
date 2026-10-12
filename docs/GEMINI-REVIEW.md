@@ -19,7 +19,7 @@ al modelo cuando una persona consulta el monitor.
   El cron de GitHub al minuto 23 permanece como respaldo. Ambos servicios pueden
   retrasarse; un HTTP 202 sólo acredita que GitHub aceptó la solicitud.
 - Cada ejecución recoge RSS e incorpora hasta 50 referencias antiguas a la cola.
-  El máximo solicitado es 50 noticias; el límite efectivo se reduce según la
+  El máximo solicitado es 50 noticias; el límite efectivo se reduce según el
   presupuesto configurado y las horas que faltan hasta su reinicio. Cada solicitud HTTP,
   incluso un reintento, consume ese presupuesto. Todos los disparos comparten
   una sola ejecución por hora UTC, registrada en el repositorio privado.
