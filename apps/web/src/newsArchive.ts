@@ -1,8 +1,10 @@
+import { assertSelectedNewsArchive, isSelectedNewsReference, type NewsSelection, type NewsSelectionGate } from '../../../shared/news-selection.mjs';
 import { normalize, safeSource, type Publication } from './catalog';
 
 export type CollectionStatus = 'enumerated' | 'partial' | 'failed' | 'not_started';
 export type ScopeHint = 'el_salvador' | 'international_context' | 'undetermined';
 export interface NewsReference {
+  selection: NewsSelection;
   id: string;
   title: string;
   title_truncated: boolean;
@@ -41,7 +43,7 @@ export interface ArchiveSource {
 export interface NewsArchiveData {
   schema_version: 1;
   generated_at: string;
-  policy: { record_type: 'news_reference'; review_status: 'not_reviewed'; selection_method: string; notice: string; coverage_limitations: string[]; rights: string };
+  policy: { selection_gate: NewsSelectionGate; record_type: 'news_reference'; review_status: 'not_reviewed'; selection_method: string; notice: string; coverage_limitations: string[]; rights: string };
   paper: { title: string; publication_date: string; publication_date_basis: string; url: string };
   coverage: {
     start_date: string;
@@ -77,6 +79,7 @@ export const validArchiveDate = (value: unknown): value is string => typeof valu
 /** Validate the public metadata boundary before rendering any publisher links or counts. */
 export function parseNewsArchive(value: unknown): NewsArchiveData {
   if (!object(value) || value.schema_version !== 1 || !instant(value.generated_at) || !object(value.coverage) || !object(value.policy) || !object(value.paper) || !Array.isArray(value.records)) fail();
+  assertSelectedNewsArchive(value);
   const data = value as unknown as NewsArchiveData;
   const coverage = data.coverage;
   if (!validArchiveDate(coverage.start_date) || !validArchiveDate(coverage.end_date) || coverage.start_date > coverage.end_date || coverage.status !== 'partial' || coverage.timezone !== 'America/El_Salvador' || !count(coverage.records) || coverage.records !== data.records.length || !Array.isArray(coverage.sources) || !Array.isArray(coverage.months)) fail();
@@ -140,7 +143,7 @@ export function invalidArchiveRange(from: string, to: string) {
 export function filterNews(records: NewsReference[], filters: NewsFilters) {
   if (invalidArchiveRange(filters.from, filters.to)) return [];
   const terms = normalize(filters.query).split(/\s+/).filter(Boolean);
-  return records.filter(record => (!filters.scope || record.scope_hint === filters.scope) && (!filters.publisher || record.publisher === filters.publisher) && (!filters.topic || record.topics.includes(filters.topic)) && (!filters.from || record.published_date >= filters.from) && (!filters.to || record.published_date <= filters.to) && terms.every(term => normalize([record.title, record.publisher, ...record.topics.map(topicLabel)].join(' ')).includes(term)));
+  return records.filter(record => isSelectedNewsReference(record) && (!filters.scope || record.scope_hint === filters.scope) && (!filters.publisher || record.publisher === filters.publisher) && (!filters.topic || record.topics.includes(filters.topic)) && (!filters.from || record.published_date >= filters.from) && (!filters.to || record.published_date <= filters.to) && terms.every(term => normalize([record.title, record.publisher, ...record.topics.map(topicLabel)].join(' ')).includes(term)));
 }
 
 function canonicalSource(value: string) {

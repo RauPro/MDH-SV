@@ -1,0 +1,60 @@
+name: Reevaluar pertinencia de noticias
+on:
+  workflow_run:
+    workflows: [Preparar fichas con Gemini]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      max_requests:
+        description: Máximo de solicitudes compartidas de Gemini (hasta 8 noticias por solicitud)
+        type: choice
+        default: '2'
+        options: ['1', '2', '4']
+permissions:
+  contents: write
+  issues: read
+concurrency:
+  group: editorial-inbox
+  cancel-in-progress: false
+  queue: max
+jobs:
+  scope:
+    if: github.event.repository.private == true && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: main
+          path: bibliography
+          sparse-checkout: data/history
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: inbox
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install -r monitor/ops/review-queue/requirements.txt
+      - name: Preparar candidatos sin publicarlos
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.history --export-only --candidates-only --data-dir bibliography/data/history --output candidates.json
+      - name: Reevaluar clasificaciones antiguas con cuota compartida
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
+          MDH_SCOPE_REQUESTS: ${{ inputs.max_requests || '2' }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.scope_review_queue --drafts inbox/drafts --archive candidates.json --max-requests "$MDH_SCOPE_REQUESTS"

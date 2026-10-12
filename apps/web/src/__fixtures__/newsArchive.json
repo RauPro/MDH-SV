@@ -4,9 +4,9 @@
   "policy": {
     "record_type": "news_reference",
     "screen_version": 2,
-    "selection_method": "Coincidencia automática de términos en título y URL; sin lectura del cuerpo.",
+    "selection_method": "Clasificación de pertinencia en derechos humanos de El Salvador respaldada en el texto de la fuente; pendiente de revisión humana.",
     "review_status": "not_reviewed",
-    "notice": "Archivo bibliográfico parcial de noticias candidatas. No acredita violaciones, víctimas, jurisdicción salvadoreña ni hechos verificados. No forma parte del recuento de casos. La revisión editorial y de privacidad es un proceso separado.",
+    "notice": "Noticias seleccionadas por pertinencia en derechos humanos de El Salvador. No equivalen a casos verificados.",
     "coverage_limitations": [
       "Tres medios configurados; no representa toda la prensa ni todas las violaciones.",
       "El filtro de títulos y URL puede omitir noticias pertinentes y seleccionar noticias de otros países o sin una violación.",
@@ -14,7 +14,13 @@
       "La enumeración de un mes solo acredita que se recorrió su API pública; no la integridad del archivo del medio.",
       "Las fichas requieren revisión humana antes de incorporarse a la colección de casos."
     ],
-    "rights": "Se redistribuyen referencias bibliográficas y títulos abreviados. El contenido periodístico permanece en su fuente y conserva sus propios derechos."
+    "rights": "Se redistribuyen referencias bibliográficas y títulos abreviados. El contenido periodístico permanece en su fuente y conserva sus propios derechos.",
+    "selection_gate": {
+      "version": 1,
+      "scope": "human_rights_el_salvador",
+      "candidates": 12,
+      "selected": 3
+    }
   },
   "paper": {
     "title": "Generative AI-based tool for efficient processing of Human Rights violations-related news",
@@ -275,7 +281,26 @@
       "scope_hint": "el_salvador",
       "scope_terms": [
         "el salvador"
-      ]
+      ],
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-10T10:00:00Z",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
     },
     {
       "id": "b000c547de9062e9cfa07a2b204e91618dad8da3e6c7745c5d0478119b5cdccb",
@@ -300,7 +325,26 @@
       "scope_hint": "el_salvador",
       "scope_terms": [
         "el salvador"
-      ]
+      ],
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-10T10:00:00Z",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
     },
     {
       "id": "2a80c29d5f49c644099a36689ec48329beeae0efb921f7109fbedac66bcc47be",
@@ -325,7 +369,26 @@
       "scope_hint": "el_salvador",
       "scope_terms": [
         "el salvador"
-      ]
+      ],
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-10T10:00:00Z",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
     }
   ]
 }

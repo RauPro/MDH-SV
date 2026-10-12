@@ -1,5 +1,11 @@
 # Cola editorial privada de MDH-SV
 
+La consulta pública aplica el [protocolo de selección temática](../../docs/NEWS-SELECTION.md).
+Las candidatas se reconstruyen desde los checkpoints, no desde el archivo público
+filtrado. Instala también `review-scope.yml`: reevalúa clasificaciones antiguas con
+el mismo presupuesto de Gemini y guarda decisiones mínimas en `scope-reviews/`.
+El publicador usa esas decisiones para actualizar selección, noticias y mapa.
+
 Este repositorio es privado. Todas las noticias recogidas tienen una estructura
 de ficha, aunque falten datos, el ámbito territorial sea incierto o la noticia no
 describa una violación. Una ficha no acredita los hechos ni se publica por sí sola.
@@ -86,12 +92,12 @@ permanece en Actions Secrets y `GEMINI_MODEL` selecciona el modelo. La variable
 Sin configuración o registro válidos, el procesador no llama a Google.
 La clave Gemini no se guarda en Issues, fichas, archivos públicos ni Vercel.
 El disparador Vercel utiliza una credencial separada de GitHub App con Actions:write
-para este repositorio. Ninguna llamada al modelo aprueba una ficha. El workflow Publicar ubicaciones
-automáticas puede actualizar únicamente la proyección geográfica pública
-`archive/locations.json`, marcada Sin revisar, mediante una deploy key del repositorio
-público. No exporta cuerpos, otros campos, comentarios ni identidades personales.
-Se ejecuta después de la extracción o revisión exitosa; las decisiones humanas
-retiran la proyección automática. Consulte el protocolo de ubicaciones automáticas.
+para este repositorio. Ninguna llamada al modelo aprueba una ficha. El publicador
+actualiza el manifiesto `data/selection/news.json`, el archivo seleccionado y las
+ubicaciones sin revisar. También mantiene el snapshot de fichas humanas ya aprobadas.
+La lista de archivos permitidos es explícita; no exporta cuerpos, borradores,
+comentarios ni campos personales sin revisión. Se ejecuta después de extracción,
+reevaluación de pertinencia o revisión exitosa. Las decisiones humanas prevalecen.
 
 No hagas público este repositorio. Desactivar el workflow de Gemini detiene las
 llamadas nuevas sin eliminar los borradores. No se notifican ni asignan terceras

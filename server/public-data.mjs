@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
 import { newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
+import { assertSelectedNewsArchive, isSelectedNewsReference } from '../shared/news-selection.mjs';
 import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
 
 export const PUBLIC_URL = 'https://mdh-sv.vercel.app';
@@ -74,11 +75,11 @@ export function loadNews() {
   if (!newsCache) {
     try {
       const news = JSON.parse(readFileSync(new URL('../apps/web/public/archive/news.json', import.meta.url), 'utf8'));
-      if (!Array.isArray(news.records)) throw new Error('Invalid public news archive');
+      assertSelectedNewsArchive(news);
       newsCache = news;
     } catch (error) {
       if (error.code === 'ENOENT') throw new ApiError(503, 'archive_unavailable', 'El archivo de noticias no está disponible en este despliegue.');
-      throw error;
+      throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.');
     }
   }
   return newsCache;
@@ -161,19 +162,21 @@ export function getRecord(id, catalog = loadCatalog()) {
   return { data: record, meta: metadata(catalog) };
 }
 export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload) {
-  const result = paginated(archive.records, newsSearchSchema.parse(filters), archive, '/api/v1/news');
+  try { assertSelectedNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
   const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
+  const eligible = archive.records.filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index)));
+  const result = paginated(eligible, newsSearchSchema.parse(filters), archive, '/api/v1/news');
   const locations = locationPayload === undefined ? loadNewsLocations() : locationSnapshot(locationPayload);
   result.data = result.data.map(reference => {
     const dossier = newsDossierFor(reference, snapshot.index);
     return { ...reference, news_dossier: dossier,
       automatic_location: snapshot.status === 'available' && !dossier.human_reviewed ? newsLocationFor(reference, locations.index) : null };
   });
-  result.meta = { ...result.meta, coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
+  result.meta = { ...result.meta, selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador', coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
     news_dossiers_status: snapshot.status,
     automatic_locations_status: locations.status,
     automatic_location_notice: 'Departamento explícito o derivado de un municipio/distrito citado mediante referencia administrativa oficial, sin revisión humana. No confirma ubicación de una violación ni completa la ficha revisada. null no implica ausencia de ubicación en la fuente.',
-    review_notice: 'Noticias con ficha estructurada; no constituyen casos validados. Sin ficha pública revisada, los campos quedan pendientes de extracción o revisión. Esto no informa del estado de la cola privada, que nunca se consulta.' };
+    review_notice: 'Noticias seleccionadas por pertinencia en derechos humanos de El Salvador con evidencia de la fuente o revisión editorial; no constituyen casos validados. La clasificación automática de pertinencia permanece sin revisión humana. Sin ficha pública revisada, los campos quedan pendientes de extracción o revisión. Esto no informa del estado de la cola privada, que nunca se consulta.' };
   return result;
 }
 export function getStats(filters = {}, catalog = loadCatalog()) {

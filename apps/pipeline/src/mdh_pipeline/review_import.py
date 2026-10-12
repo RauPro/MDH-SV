@@ -6,12 +6,16 @@ import json
 import os
 import re
 import subprocess
-from datetime import datetime
+import tempfile
+from datetime import date, datetime
 from zoneinfo import ZoneInfo
 from pathlib import Path
 from .publication import CATALOG, Catalog, Publication, export_catalog
 from .review_queue import GitHubInbox
-from .news_publication import SOURCE as NEWS_SOURCE, PUBLIC as NEWS_PUBLIC, ARCHIVE as NEWS_ARCHIVE
+from .news_publication import ROOT, SOURCE as NEWS_SOURCE, PUBLIC as NEWS_PUBLIC, ARCHIVE as NEWS_ARCHIVE
+
+NEWS_SELECTION = ROOT / "data/selection/news.json"
+HISTORY_SOURCE = ROOT / "data/history"
 
 
 def github_token():
@@ -48,11 +52,60 @@ def import_approved(inbox, candidate_id, source=CATALOG, export=True):
     return True
 
 
+def _json_document(value):
+    return json.loads(Path(value).read_text()) if isinstance(value, (str, Path)) else value
+
+
+def _write_news_outputs(outputs):
+    """Stage every validated document, then replace files atomically with rollback on IO failure."""
+    destinations = [Path(path) for path, _ in outputs]
+    if len({path.resolve() for path in destinations}) != len(destinations):
+        raise ValueError('News import destinations must be distinct')
+    encoded = [(Path(path), (json.dumps(document, ensure_ascii=False, indent=2) + '\n').encode())
+               for path, document in outputs]
+    staged, replaced = [], []
+    try:
+        for target, content in encoded:
+            if target.is_symlink():
+                raise ValueError('News import destinations cannot be symlinks')
+            target.parent.mkdir(parents=True, exist_ok=True)
+            old = target.read_bytes() if target.exists() else None
+            mode = target.stat().st_mode & 0o777 if target.exists() else 0o644
+            with tempfile.NamedTemporaryFile(dir=target.parent, prefix='.' + target.name + '.', delete=False) as stream:
+                temporary = Path(stream.name)
+                staged.append((target, temporary, old, mode))
+                stream.write(content)
+                stream.flush()
+                os.fsync(stream.fileno())
+            temporary.chmod(mode)
+        for target, temporary, old, mode in staged:
+            temporary.replace(target)
+            replaced.append((target, old, mode))
+    except OSError:
+        for target, old, mode in reversed(replaced):
+            if old is None:
+                target.unlink(missing_ok=True)
+            else:
+                with tempfile.NamedTemporaryFile(dir=target.parent, prefix='.' + target.name + '.restore.', delete=False) as stream:
+                    backup = Path(stream.name)
+                    stream.write(old)
+                backup.chmod(mode)
+                backup.replace(target)
+        raise
+    finally:
+        for _, temporary, _, _ in staged:
+            temporary.unlink(missing_ok=True)
+
+
 def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEWS_ARCHIVE,
-                         destination=NEWS_PUBLIC, export=True):
-    """Import only an approved news dossier; never turn it into a case or copy its wrapper."""
+                         destination=NEWS_PUBLIC, export=True, candidates=None,
+                         selection=NEWS_SELECTION, locations=None, history_folder=HISTORY_SOURCE):
+    """Import a human decision against all candidates and regenerate selected public snapshots."""
     from .news_dossier import validate_news_dossier
-    from .news_publication import validate_collection, export_news_dossiers
+    from .news_publication import validate_collection
+    from .news_selection import select_archive
+    from .automatic_locations import validate_collection as validate_locations
+    from .history import export_archive
     if not re.fullmatch(r'[a-f0-9]{64}', candidate_id):
         raise ValueError('Invalid candidate ID')
     relative = 'approved-news/' + candidate_id + '.json'
@@ -83,8 +136,16 @@ def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEW
     if ('review/approved' not in labels or 'review/rejected' in labels
             or f'<!-- mdh-candidate:{candidate_id} -->' not in (issue.get('body') or '')):
         raise ValueError('Approval withdrawn, missing or mismatched')
-    bibliography = json.loads(Path(archive).read_text())
-    document = validate_collection(json.loads(Path(source).read_text()), archive=bibliography)
+    if candidates is None:
+        # The public archive intentionally excludes candidates with no positive scope
+        # decision. Human review must still be able to admit or reject those candidates.
+        current = _json_document(archive)
+        start = date.fromisoformat(current['coverage']['start_date'])
+        end = date.fromisoformat(current['coverage']['end_date'])
+        bibliography = export_archive(Path(history_folder), Path(archive), start, end, write=False)
+    else:
+        bibliography = _json_document(candidates)
+    document = validate_collection(_json_document(source), archive=bibliography)
     existing = next((item for item in document['dossiers'] if item['candidate_id'] == candidate_id), None)
     if existing is not None:
         if existing == dossier:
@@ -92,12 +153,28 @@ def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEW
         raise ValueError('Conflicting news dossier; review the update explicitly')
     document['dossiers'].append(dossier)
     document = validate_collection(document, archive=bibliography)
-    path = Path(source)
-    temporary = path.with_suffix(path.suffix + '.tmp')
-    temporary.write_text(json.dumps(document, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    temporary.replace(path)
+    outputs = []
     if export:
-        export_news_dossiers(source=path, destination=destination, archive=archive)
+        selected = select_archive(bibliography, _json_document(selection), reviewed_dossiers=document)
+        eligible = {'schema_version': 1, 'dossiers': [item for item in document['dossiers']
+            if item['classification']['jurisdiction'] == 'SV' and item['classification']['relevance'] == 'relevant']}
+        public_dossiers = validate_collection(eligible, archive=selected)
+        locations = Path(locations) if locations is not None else Path(archive).with_name('locations.json')
+        previous_locations = (_json_document(locations) if locations.exists() else
+            {'schema_version': 3, 'generated_at': bibliography['generated_at'], 'locations': []})
+        # Validate against the complete bibliography before pruning. A malformed or
+        # unrelated entry must fail, not silently disappear during an approval import.
+        projected = validate_locations(previous_locations, archive=bibliography)
+        selected_ids = {reference['id'] for reference in selected['records']}
+        reviewed_ids = {item['candidate_id'] for item in document['dossiers']}
+        projected['locations'] = [item for item in projected['locations']
+            if item['candidate_id'] in selected_ids and item['candidate_id'] not in reviewed_ids]
+        projected = validate_locations(projected, archive=selected)
+        outputs.extend([(Path(archive), selected), (Path(destination), public_dossiers), (locations, projected)])
+    # All sources, scope decisions, dossiers and remaining locations are validated
+    # before any destination changes. Keep the authoritative approved source last.
+    outputs.append((Path(source), document))
+    _write_news_outputs(outputs)
     return True
 
 

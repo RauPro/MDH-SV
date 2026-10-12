@@ -44,7 +44,12 @@ def validate_collection(document, *, archive=None):
 
 def export_news_dossiers(source=SOURCE, destination=PUBLIC, archive=ARCHIVE):
     source, destination, archive = Path(source), Path(destination), Path(archive)
-    document = validate_collection(json.loads(source.read_text()), archive=json.loads(archive.read_text()))
+    approved = validate_collection(json.loads(source.read_text()))
+    # An editorial decision can validly document that an article is outside
+    # scope; retain that decision in the source, not in the public monitor.
+    eligible = {"schema_version": 1, "dossiers": [d for d in approved["dossiers"]
+        if d["classification"]["jurisdiction"] == "SV" and d["classification"]["relevance"] == "relevant"]}
+    document = validate_collection(eligible, archive=json.loads(archive.read_text()))
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination.with_suffix(destination.suffix + ".tmp")
     temporary.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -1,7 +1,7 @@
 name: Publicar ubicaciones automáticas
 on:
   workflow_run:
-    workflows: [Preparar fichas con Gemini, Revisar noticia]
+    workflows: [Preparar fichas con Gemini, Reevaluar pertinencia de noticias, Revisar noticia]
     types: [completed]
     branches: [main]
   workflow_dispatch:
@@ -67,6 +67,14 @@ jobs:
           Path('excluded-locations.json').write_text(json.dumps(sorted(excluded)))
           print(json.dumps({'pending_candidates': len(pending), 'excluded_candidates': len(excluded)}))
           PY
+      - name: Seleccionar noticias pertinentes y actualizar el archivo público
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: |
+          python -m mdh_pipeline.history --export-only --candidates-only --data-dir publication/data/history --output candidates.json
+          python -m mdh_pipeline.news_selection --drafts inbox/drafts --scope-reviews inbox/scope-reviews --archive candidates.json --output publication/data/selection/news.json --excluded-ids excluded-locations.json
+          python -m mdh_pipeline.history --export-only --data-dir publication/data/history --selection publication/data/selection/news.json --reviewed-news publication/data/reviewed/news_dossiers.json --output publication/apps/web/public/archive/news.json
+          python -m mdh_pipeline.news_publication --source publication/data/reviewed/news_dossiers.json --archive publication/apps/web/public/archive/news.json --destination publication/apps/web/public/archive/dossiers.json
       - name: Proyectar únicamente ubicaciones administrativas con evidencia
         env:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
@@ -80,10 +88,14 @@ jobs:
           python ../monitor/scripts/audit_release.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- apps/web/public/archive/locations.json
+          git add -- data/selection/news.json apps/web/public/archive/news.json apps/web/public/archive/locations.json apps/web/public/archive/dossiers.json
           if git diff --cached --quiet; then exit 0; fi
-          test "$(git diff --cached --name-only)" = 'apps/web/public/archive/locations.json'
-          git commit -m 'chore: refresh unreviewed automatic news locations'
+          python - <<'PYTHON'
+          import subprocess
+          allowed = {'data/selection/news.json', 'apps/web/public/archive/news.json', 'apps/web/public/archive/locations.json', 'apps/web/public/archive/dossiers.json'}
+          assert set(subprocess.check_output(['git', 'diff', '--cached', '--name-only'], text=True).splitlines()) <= allowed
+          PYTHON
+          git commit -m 'chore: refresh selected human-rights news and unreviewed locations'
           git pull --rebase origin main
           node apps/web/scripts/check-data.mjs
           git push origin HEAD:main

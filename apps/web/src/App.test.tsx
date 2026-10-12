@@ -157,11 +157,12 @@ it('opens the linked archive and returns to news in the main map while retaining
   render(<App/>);
   await screen.findByRole('region',{name:'Archivo de noticias'});
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-  expect(screen.getByLabelText('Vínculo territorial')).toHaveValue('el_salvador');
+  expect(screen.queryByLabelText('Vínculo territorial')).not.toBeInTheDocument();
+  expect(screen.getByText('3 noticias seleccionadas')).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button',{name:'Fichas y mapa'}));
   await screen.findByRole('region',{name:'Mapa de El Salvador'});
   expect(screen.getByRole('button', {name:'Noticias'})).toHaveAttribute('aria-pressed','true');
-  expect(screen.getByLabelText('Vínculo territorial')).toHaveValue('');
+  expect(screen.queryByLabelText('Vínculo territorial')).not.toBeInTheDocument();
   expect(screen.getByText('3 fichas de noticias')).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
   expect(screen.getByText('4 resultados')).toBeInTheDocument();

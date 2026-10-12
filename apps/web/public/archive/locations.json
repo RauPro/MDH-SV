@@ -1,30 +1,7 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-10-12T16:08:47.485290+00:00",
+  "generated_at": "2026-10-12T16:55:01.210521+00:00",
   "locations": [
-    {
-      "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
-      "source_url": "https://www.diariocolatino.com/nayib-bukele-pide-se-detenga-la-campana-sucia-en-su-contra/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-02-23",
-      "department": "San Salvador",
-      "review_status": "automated_unreviewed",
-      "human_reviewed": false,
-      "method": "gemini_municipality_reference",
-      "extracted_at": "2026-10-11T07:03:14.427311-06:00",
-      "source_checked_at": "2026-10-11T18:56:26.786379+00:00",
-      "evidence": {
-        "paragraph_id": "p2",
-        "content_sha256": "455473d54ecd2c083835c4e3425056213ba3292d1af0f43bbc78163305372c00"
-      },
-      "resolution": {
-        "type": "municipality_to_department",
-        "municipality": "San Salvador",
-        "municipality_kind": "district",
-        "reference_version": "sv-decree-762-2023-v1",
-        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
-      }
-    },
     {
       "candidate_id": "1ae4f97fa5ec196999deae0627d67301a17f54a5592a97a79f662b56fb9681a4",
       "source_url": "https://www.diariocolatino.com/prision-a-insurgentes-salvadorenos-y-deportacion-en-el-siglo-xix/",
@@ -255,45 +232,6 @@
       }
     },
     {
-      "candidate_id": "5caf5eb2940d2b1c03eaaa95b832624dd2a1da0b5e24616d3be952508df516e4",
-      "source_url": "https://www.diariocolatino.com/homicidios-en-zacatecoluca-ligados-a-pugna-interna-de-pandilla-18/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2014-04-26",
-      "department": "La Paz",
-      "review_status": "automated_unreviewed",
-      "human_reviewed": false,
-      "method": "gemini_explicit_department",
-      "extracted_at": "2026-10-10T12:55:05.643580-06:00",
-      "source_checked_at": "2026-10-11T18:56:20.313365+00:00",
-      "evidence": {
-        "paragraph_id": "p3",
-        "content_sha256": "2a0a953cff1e774fddc8cc2583c978a7fbe6284576b7bca3f8fe5a83f8a5a367"
-      }
-    },
-    {
-      "candidate_id": "6abd025437a411138034f8b2b8aa883f68126ef998e6b9c8cef3595aa669e74f",
-      "source_url": "https://www.diariocolatino.com/agente-de-la-pnc-fue-asesinado-en-santa-tecla/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-10-24",
-      "department": "La Libertad",
-      "review_status": "automated_unreviewed",
-      "human_reviewed": false,
-      "method": "gemini_municipality_reference",
-      "extracted_at": "2026-10-11T16:08:15.588143-06:00",
-      "source_checked_at": "2026-10-11T22:10:28.465431+00:00",
-      "evidence": {
-        "paragraph_id": "p2",
-        "content_sha256": "85eddb9c220cf7b01aecdf42049ce74617b3cdb82a2819d149b5be4ea758e949"
-      },
-      "resolution": {
-        "type": "municipality_to_department",
-        "municipality": "Santa Tecla",
-        "municipality_kind": "district",
-        "reference_version": "sv-decree-762-2023-v1",
-        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
-      }
-    },
-    {
       "candidate_id": "6b04d36e855adc92cc6103e4af124342193bb56c2445f87105b364c04e83b0e4",
       "source_url": "https://www.diariocolatino.com/lamentan-que-hijo-de-asesino-intelectual-de-romero-sea-edil-de-santa-tecla/",
       "publisher": "Diario Co Latino",
@@ -385,38 +323,6 @@
       }
     },
     {
-      "candidate_id": "9a1f530ea7aa1ff54bf65a543c4eae1af50ab7d85aaa541d34b1f30e141bd5d1",
-      "source_url": "https://www.diariocolatino.com/asesinan-a-hombre-en-cercanias-de-centro-gobierno-en-zacatecoluca/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-02-09",
-      "department": "La Paz",
-      "review_status": "automated_unreviewed",
-      "human_reviewed": false,
-      "method": "gemini_explicit_department",
-      "extracted_at": "2026-10-11T07:02:48.001529-06:00",
-      "source_checked_at": "2026-10-11T18:56:25.927337+00:00",
-      "evidence": {
-        "paragraph_id": "p10",
-        "content_sha256": "173edfa39264badced371fab8e6ed76a5ec376d5268631a237d2cc2cd10e9a66"
-      }
-    },
-    {
-      "candidate_id": "a480c8a116bc834364179a9986cf9cc9492dcfd5bd85ab8ed8ae09fef9210af1",
-      "source_url": "https://www.diariocolatino.com/capturan-a-implicado-en-homicidio-de-agente-de-pnc-en-santa-tecla/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-11-19",
-      "department": "La Libertad",
-      "review_status": "automated_unreviewed",
-      "human_reviewed": false,
-      "method": "gemini_explicit_department",
-      "extracted_at": "2026-10-12T01:11:04.721560-06:00",
-      "source_checked_at": "2026-10-12T07:17:39.960868+00:00",
-      "evidence": {
-        "paragraph_id": "p4",
-        "content_sha256": "1a4652a743c21f221963815976bbb928d3d2bcf6b19090f5f4c95b024a55a2e7"
-      }
-    },
-    {
       "candidate_id": "a9e511d1a20a13f5f126765147b228f604ab422f0ba7bb32a5c68107a7a7eb5f",
       "source_url": "https://www.diariocolatino.com/nayib-bukele-se-compromete-a-trabajar-de-la-mano-con-sindicalistas/",
       "publisher": "Diario Co Latino",
@@ -437,68 +343,6 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
-      }
-    },
-    {
-      "candidate_id": "bacd95e1e236e8bd89283dc1b10539f19618d00aae3559c8c3a9065f336aa98b",
-      "source_url": "https://www.diariocolatino.com/gobierno-reinicia-construccion-de-complejo-penitenciario-de-izalco-fase-iii/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-08-21",
-      "department": "Sonsonate",
-      "review_status": "automated_unreviewed",
-      "human_reviewed": false,
-      "method": "gemini_municipality_reference",
-      "extracted_at": "2026-10-11T13:05:36.520474-06:00",
-      "source_checked_at": "2026-10-11T19:08:23.292411+00:00",
-      "evidence": {
-        "paragraph_id": "p5",
-        "content_sha256": "0fbca64e6df99bd9a0b5065351cff9032c01f0738767e0628a20c94b240a63c7"
-      },
-      "resolution": {
-        "type": "municipality_to_department",
-        "municipality": "Izalco",
-        "municipality_kind": "district",
-        "reference_version": "sv-decree-762-2023-v1",
-        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
-      }
-    },
-    {
-      "candidate_id": "c22a3e970f3ba43b67f99596d61ee9a92fe2f1c07833a3b4b90f3bf356050ba3",
-      "source_url": "https://www.diariocolatino.com/san-salvador-registra-mas-de-500-homicidios/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2014-07-10",
-      "department": "San Salvador",
-      "review_status": "automated_unreviewed",
-      "human_reviewed": false,
-      "method": "gemini_explicit_department",
-      "extracted_at": "2026-10-10T12:56:16.376790-06:00",
-      "source_checked_at": "2026-10-11T18:56:20.979450+00:00",
-      "evidence": {
-        "paragraph_id": "p5",
-        "content_sha256": "5441a948aa7b69b5861949fd77ac03ad0ad1b04a7ec27ab88dc41763db0bffff"
-      }
-    },
-    {
-      "candidate_id": "cd9ae3d9848ffac516bfea0400f0957d0bb5ed0abc3d7d768e2f30a3373ccf75",
-      "source_url": "https://www.diariocolatino.com/fgr-de-sonsonate-gira-orden-de-captura-para-37-pandilleros/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2014-06-12",
-      "department": "Sonsonate",
-      "review_status": "automated_unreviewed",
-      "human_reviewed": false,
-      "method": "gemini_municipality_reference",
-      "extracted_at": "2026-10-12T01:08:50.243552-06:00",
-      "source_checked_at": "2026-10-12T07:30:47.322921+00:00",
-      "evidence": {
-        "paragraph_id": "p2",
-        "content_sha256": "ff0e47f71dc2fecd417aababf35fd990f97457957baaddaf4b3213294644d59c"
-      },
-      "resolution": {
-        "type": "municipality_to_department",
-        "municipality": "Izalco",
-        "municipality_kind": "district",
-        "reference_version": "sv-decree-762-2023-v1",
-        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
     },
     {

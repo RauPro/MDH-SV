@@ -8,6 +8,8 @@ import { validMcpRequest } from '../api/mcp.mjs';
 import recordHandler from '../api/v1/records/[id].mjs';
 import unknownV1Handler from '../api/v1/[...path].mjs';
 import { NEWS_DOSSIER_FIELDS, pendingNewsDossier } from '../shared/news-dossier.mjs';
+import fixtureArchive from '../apps/web/src/__fixtures__/newsArchive.json' with { type: 'json' };
+import { assertSelectedNewsArchive, validateNewsSelection } from '../shared/news-selection.mjs';
 import municipalityReference from '../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json' with { type: 'json' };
 
 let server, base;
@@ -17,6 +19,7 @@ before(async () => {
   base = `http://127.0.0.1:${server.address().port}`;
 });
 after(async () => { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); });
+const selectedArchive = (records, base = fixtureArchive) => ({ ...base, coverage: { ...base.coverage, records: records.length }, policy: { ...base.policy, selection_gate: { ...base.policy.selection_gate, selected: records.length, candidates: Math.max(base.policy.selection_gate.candidates, records.length) } }, records });
 const get = async path => { const response = await fetch(`${base}${path}`); return { response, body: await response.json() }; };
 
 async function vercelRequest(handler, url, query = {}) {
@@ -119,9 +122,7 @@ test('stats preserve record units and disclose documentary review', async () => 
 });
 
 test('news is a separate metadata archive with coverage and explicit unreviewed state', () => {
-  const archive = { schema_version: 1, coverage: { start_date: '2025-03-24', end_date: '2026-10-09', status: 'partial' }, records: [
-    { id: 'news-1', title: 'Noticia encontrada', publisher: 'Medio', source_url: 'https://example.org/news', published_date: '2026-10-01', review_status: 'not_reviewed', topics: ['detención'] },
-  ] };
+  const archive = selectedArchive([{ ...fixtureArchive.records[0], topics: ['detención'] }]);
   const result = searchNews({ q: 'detencion' }, archive);
   assert.equal(result.data[0].review_status, 'not_reviewed');
   assert.equal(result.meta.coverage.status, 'partial');
@@ -130,8 +131,8 @@ test('news is a separate metadata archive with coverage and explicit unreviewed 
   assert.ok(Object.values(result.data[0].news_dossier.fields).every(field => field.status === 'pending' && field.value === null));
 });
 
-test('every news result has a worksheet, including international or unclassified items, without inferring country or private processing', () => {
-  const current = loadNews();
+test('every selected news result has a worksheet regardless of discovery hint, without inferring public dossier fields', () => {
+  const current = selectedArchive(fixtureArchive.records.map((reference, index) => ({ ...reference, scope_hint: ['el_salvador', 'international_context', 'undetermined'][index] })));
   for (const scope of ['el_salvador', 'international_context', 'undetermined']) {
     const response = searchNews({ scope_hint: scope, limit: 2 }, current, { schema_version: 1, dossiers: [] });
     assert.ok(response.data.length > 0);
@@ -149,18 +150,18 @@ test('every news result has a worksheet, including international or unclassified
 });
 
 test('public news enrichment uses only approved dossiers bound to the exact bibliography and never changes case counts', () => {
-  const source = { ...loadNews().records[0], published_date: '2026-09-01' };
-  const archive = { ...loadNews(), records: [source] };
+  const source = { ...fixtureArchive.records[0], published_date: '2026-09-01' };
+  const archive = selectedArchive([source]);
   const dossier = pendingNewsDossier(source);
   Object.assign(dossier, { extraction_status: 'processed', human_reviewed: true, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture de revisión editorial explícita de fuente y privacidad.', source_title: 'Título ficticio minimizado por privacidad' });
-  dossier.classification = { jurisdiction: 'other', relevance: 'not_relevant', record_type: null };
+  dossier.classification = { jurisdiction: 'SV', relevance: 'relevant', record_type: null };
   dossier.fields.summary = { value: 'APPROVED_TEST_VALUE', status: 'reported', evidence_refs: ['bibliography'], note: null };
   const baseline = getStats();
   const approved = searchNews({}, archive, { schema_version: 1, dossiers: [dossier] });
   assert.equal(approved.data[0].review_status, 'not_reviewed');
   assert.equal(approved.data[0].news_dossier.human_reviewed, true);
   assert.equal(approved.data[0].news_dossier.fields.summary.value, 'APPROVED_TEST_VALUE');
-  assert.equal(approved.data[0].news_dossier.classification.relevance, 'not_relevant');
+  assert.equal(approved.data[0].news_dossier.classification.relevance, 'relevant');
   assert.deepEqual(getStats(), baseline);
   for (const change of [
     value => { value.human_reviewed = false; },
@@ -179,9 +180,44 @@ test('public news enrichment uses only approved dossiers bound to the exact bibl
   }
 });
 
+test('public API rejects unselected candidates and never uses title hints as relevance evidence', () => {
+  const archive = selectedArchive([fixtureArchive.records[0]]);
+  assert.equal(assertSelectedNewsArchive(archive), archive);
+  for (const mutate of [
+    value => { delete value.policy.selection_gate; },
+    value => { delete value.records[0].selection; },
+    value => { value.records[0].selection.relevance = 'not_relevant'; },
+    value => { value.records[0].selection.jurisdiction = 'other'; },
+    value => { value.records[0].selection.evidence.relevance_paragraph_ids = []; },
+    value => { value.records[0].selection.private_article = 'PRIVATE_TEST_VALUE'; },
+    value => { value.policy.selection_gate.selected = 999; },
+  ]) {
+    const unsafe = structuredClone(archive); mutate(unsafe);
+    unsafe.records[0].title = 'Derechos humanos en El Salvador';
+    unsafe.records[0].scope_hint = 'el_salvador';
+    assert.throws(() => searchNews({}, unsafe, { schema_version: 1, dossiers: [] }), error => error.status === 503 && error.code === 'archive_selection_invalid' && !error.message.includes('PRIVATE_TEST_VALUE'));
+  }
+});
+
+test('a later human decision excluding Salvadoran human-rights relevance takes precedence over automatic selection', () => {
+  const source = fixtureArchive.records[0];
+  const archive = selectedArchive([source]);
+  for (const classification of [
+    { jurisdiction: 'other', relevance: 'relevant', record_type: null },
+    { jurisdiction: 'SV', relevance: 'not_relevant', record_type: null },
+    { jurisdiction: 'unclear', relevance: 'relevant', record_type: null },
+  ]) {
+    const dossier = pendingNewsDossier(source);
+    Object.assign(dossier, { extraction_status: 'processed', human_reviewed: true, classification, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture: revisión editorial excluye la referencia del alcance público.' });
+    const response = searchNews({}, archive, { schema_version: 1, dossiers: [dossier] });
+    assert.deepEqual(response.data, []);
+    assert.equal(response.pagination.total, 0);
+  }
+});
+
 test('automatic locations are a separate unreviewed projection and never override a reviewed dossier', () => {
-  const source = { ...loadNews().records[0], published_date: '2026-09-01' };
-  const archive = { ...loadNews(), records: [source] };
+  const source = { ...fixtureArchive.records[0], published_date: '2026-09-01' };
+  const archive = selectedArchive([source]);
   const location = {
     candidate_id: source.id, source_url: source.source_url, publisher: source.publisher,
     published_date: source.published_date, department: 'San Salvador',
@@ -232,6 +268,7 @@ test('automatic locations are a separate unreviewed projection and never overrid
   }
   const approved = pendingNewsDossier(source);
   Object.assign(approved, { extraction_status: 'processed', human_reviewed: true, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture: ubicación deliberadamente omitida tras revisión editorial.' });
+  approved.classification = { jurisdiction: 'SV', relevance: 'relevant', record_type: null };
   approved.fields.department = { value: null, status: 'withheld', evidence_refs: [], note: 'Ubicación protegida tras revisión editorial explícita.' };
   assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, payload).data[0].automatic_location, null);
   assert.equal(searchNews({}, archive, null, payload).data[0].automatic_location, null);
@@ -265,6 +302,10 @@ test('OpenAPI is a public, versioned executable contract', async () => {
   assert.ok(body.paths['/api/v1/records/{id}']);
   assert.ok(body.paths['/api/v1/news']);
   assert.ok(body.components.schemas.News.required.includes('news_dossier'));
+  assert.ok(body.components.schemas.News.required.includes('selection'));
+  assert.equal(body.components.schemas.NewsSelection.oneOf.length, 2);
+  assert.ok(body.components.schemas.NewsSelection.oneOf.every(schema => schema.additionalProperties === false && schema.properties.jurisdiction.const === 'SV' && schema.properties.relevance.const === 'relevant'));
+  assert.equal(body.components.schemas.NewsSelectionGate.additionalProperties, false);
   assert.deepEqual(body.components.schemas.NewsDossier.properties.fields.required, NEWS_DOSSIER_FIELDS);
   assert.equal(body.components.schemas.Record.properties.review_status.enum.includes('not_reviewed'), false);
 });
@@ -304,6 +345,8 @@ test('MCP officially connects, discovers read-only tools, calls and reads resour
     assert.equal(bad.isError, true);
     const news = await client.callTool({ name: 'search_news', arguments: { limit: 1, scope_hint: 'el_salvador' } });
     assert.equal(news.structuredContent.data[0].review_status, 'not_reviewed');
+    assert.equal(validateNewsSelection(news.structuredContent.data[0].selection).jurisdiction, 'SV');
+    assert.equal(news.structuredContent.meta.public_scope, 'human_rights_el_salvador');
     assert.equal(news.structuredContent.data[0].scope_hint, 'el_salvador');
     assert.ok(Array.isArray(news.structuredContent.data[0].scope_terms));
     assert.ok(news.structuredContent.meta.policy.notice);

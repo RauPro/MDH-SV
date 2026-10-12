@@ -374,7 +374,7 @@ def collect_source(source, start, end, folder, *, max_pages=300, refresh=False,
             "references": len(references), "enumerated_months": sum(m.get("status") == "enumerated" for m in state["months"].values())}
 
 
-def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=None):
+def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=None, write=True):
     generated_at = generated_at or datetime.now(timezone.utc).isoformat()
     records, source_coverage, month_coverage = {}, [], {}
     for month, first, last in month_windows(start, end):
@@ -419,12 +419,17 @@ def export_archive(folder, output, start, end, *, sources=SOURCES, generated_at=
         "coverage": {"start_date": start.isoformat(), "end_date": end.isoformat(), "timezone": "America/El_Salvador",
             "status": "partial", "records": len(records), "sources": source_coverage, "months": list(month_coverage.values())},
         "records": sorted(records.values(), key=lambda r: (r["published_date"], r["id"]), reverse=True)}
-    atomic_json(output, document)
+    if write:
+        atomic_json(output, document)
     return document
 
 
 def validate_reference(reference, source):
     required = {"id", "title", "title_truncated", "publisher", "source_id", "source_url", "published_date", "review_status", "jurisdiction_status", "record_type", "topics", "scope_hint", "scope_terms", "discovery"}
+    if "selection" in reference:
+        from .news_selection import validate_selection
+        validate_selection(reference["selection"])
+        required.add("selection")
     if set(reference) != required:
         raise ValueError("Unexpected fields in public bibliography")
     url = canonical_url(reference["source_url"], set(source["hosts"]))
@@ -463,12 +468,17 @@ def main():
     parser.add_argument("--end", type=date.fromisoformat, default=datetime.now(ZoneInfo("America/El_Salvador")).date())
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data/history")
     parser.add_argument("--output", type=Path, default=ROOT / "apps/web/public/archive/news.json")
+    parser.add_argument("--selection", type=Path, default=ROOT / "data/selection/news.json")
+    parser.add_argument("--reviewed-news", type=Path, default=ROOT / "data/reviewed/news_dossiers.json")
+    parser.add_argument("--candidates-only", action="store_true", help="Export discovery metadata for the private queue, outside the public website")
     parser.add_argument("--max-pages", type=int, default=300, help="Maximum page fetch attempts (including failures) per source per run; stop after 3 consecutive failures and resume checkpoints next run")
     parser.add_argument("--refresh", action="store_true", help="Re-enumerate completed historical months")
     parser.add_argument("--export-only", action="store_true", help="Validate and export existing metadata; no network")
     args = parser.parse_args()
     if args.start > args.end or not 1 <= args.max_pages <= 1000:
         parser.error("Invalid date range or page budget")
+    if args.candidates_only and args.output.resolve().is_relative_to(ROOT / "apps/web/public"):
+        parser.error("Candidate archives must be written outside the public website")
     migrate_scope_hints(args.data_dir)
     results = []
     if not args.export_only:
@@ -476,7 +486,21 @@ def main():
             futures = [pool.submit(collect_source, source, args.start, args.end, args.data_dir,
                 max_pages=args.max_pages, refresh=args.refresh) for source in SOURCES]
             results = [future.result() for future in futures]
-    document = export_archive(args.data_dir, args.output, args.start, args.end)
+    # Never replace the public file with raw candidates, even temporarily or
+    # when a selection input is unavailable. The final write is atomic.
+    candidates = export_archive(args.data_dir, args.output, args.start, args.end, write=False)
+    if args.candidates_only:
+        document = candidates
+    else:
+        from .news_selection import select_archive
+        document = select_archive(candidates, json.loads(args.selection.read_text()),
+                                  reviewed_dossiers=json.loads(args.reviewed_news.read_text()))
+    if args.output.exists():
+        previous = read_json(args.output, {})
+        if ({k: v for k, v in previous.items() if k != "generated_at"}
+                == {k: v for k, v in document.items() if k != "generated_at"}):
+            document["generated_at"] = previous["generated_at"]
+    atomic_json(args.output, document)
     report = {"records": len(document["records"]), "start_date": args.start.isoformat(), "end_date": args.end.isoformat(),
         "coverage": "partial", "collection": results, "reviewed_cases_published": 0}
     print(json.dumps(report, ensure_ascii=False, indent=2))

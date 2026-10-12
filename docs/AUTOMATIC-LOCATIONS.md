@@ -13,7 +13,8 @@ ubicación o determina que no corresponde a El Salvador.
 
 ## Condiciones de extracción
 
-El exportador exige un borrador procesado por Gemini, jurisdicción salvadoreña,
+El exportador exige un borrador procesado por Gemini, pertinencia en derechos
+humanos, jurisdicción salvadoreña y pertenencia al [archivo seleccionado](NEWS-SELECTION.md),
 identidad y bibliografía coincidentes. Relee la fuente y comprueba el hash y el
 párrafo citado. Acepta tres métodos, que no deben confundirse:
 
@@ -59,7 +60,7 @@ como noticias sin ubicación. Las fuentes restringidas no se eluden.
 ## Actualización periódica
 
 En el repositorio privado, `Publicar ubicaciones automáticas` sigue las ejecuciones
-exitosas de extracción y revisión, y admite inicio manual. Usa código público
+exitosas de extracción, reevaluación de pertinencia y revisión, y admite inicio manual. Usa código público
 fijado a un SHA revisado, lee los borradores privados y excluye candidatas que ya
 no están pendientes o tienen una ficha pública revisada.
 
@@ -74,7 +75,9 @@ permitida; no solicita otra extracción a Gemini ni consume su cuota.
 
 Una deploy key permite escribir únicamente en el repositorio público MDH-SV;
 GitHub no restringe esa clave por archivo. El workflow y las validaciones limitan
-el commit a `apps/web/public/archive/locations.json`. La clave privada reside en
+el commit al manifiesto `data/selection/news.json` y a los archivos públicos
+`archive/news.json`, `archive/locations.json` y `archive/dossiers.json`. El último
+sólo contiene fichas con aprobación humana previa. La clave privada reside en
 el secreto `NEWS_LOCATION_PUBLISH_KEY` del repositorio editorial; no se copia un
 token personal ni la clave Gemini al repositorio público. No hay publicación de
 fichas completas, aprobación editorial automática ni suma al catálogo de casos.

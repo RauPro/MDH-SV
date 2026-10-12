@@ -1,6 +1,8 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
+import { assertSelectionProvenance } from './selection-provenance.mjs';
+import { assertSelectedNewsArchive, isSelectedNewsReference } from '../../../shared/news-selection.mjs';
 import { parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
 import { parsePublishedNewsLocations, validateLocationBindings } from '../../../shared/news-location.mjs';
 
@@ -36,9 +38,15 @@ console.log(`Validated ${catalog.records.length} public records and all download
 const approvedNews = JSON.parse(readFileSync(new URL('../../../data/reviewed/news_dossiers.json', import.meta.url)));
 const publicNews = JSON.parse(readFileSync(new URL('../public/archive/dossiers.json', import.meta.url)));
 const newsArchive = JSON.parse(readFileSync(new URL('../public/archive/news.json', import.meta.url)));
-const approvedIndex = validateDossierBindings(parsePublishedNewsDossiers(approvedNews), newsArchive.records);
+assertSelectedNewsArchive(newsArchive);
+const allApproved = parsePublishedNewsDossiers(approvedNews);
+const selectionManifest = JSON.parse(readFileSync(new URL('../../../data/selection/news.json', import.meta.url)));
+assertSelectionProvenance(newsArchive, selectionManifest, allApproved);
+const approvedIndex = validateDossierBindings(new Map([...allApproved].filter(([, dossier]) => dossier.classification.jurisdiction === 'SV' && dossier.classification.relevance === 'relevant')), newsArchive.records);
 const publicIndex = validateDossierBindings(parsePublishedNewsDossiers(publicNews), newsArchive.records);
 assert.deepEqual([...publicIndex].sort(), [...approvedIndex].sort(), 'Regenerate public news dossiers after changing reviewed source');
+for (const reference of newsArchive.records) assert.ok(isSelectedNewsReference(reference, allApproved.get(reference.id)), 'Human scope decisions must remove out-of-scope public references');
+console.log(`Validated ${newsArchive.records.length} selected news references from ${newsArchive.policy.selection_gate.candidates} discovery candidates.`);
 for (const dossier of publicIndex.values()) {
   assert.equal(hash(dossier.source_url), dossier.candidate_id, 'News dossier identity must match its source URL');
   assert.ok(dossier.reviewed_at <= new Date().toISOString().slice(0, 10), 'News dossier review cannot be in the future');

@@ -30,7 +30,13 @@ curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2010-01-01&limit=25'
 | `/news` | Referencias y una `news_dossier` completa por noticia: `q`, `publisher`, `scope_hint`, `date_from`, `date_to`, `limit`, `offset`. La respuesta incluye cobertura y referencia del paper. |
 | `/openapi.json` | Contrato con parámetros, respuestas, dossier y errores para generar un cliente. |
 
-`scope_hint` en noticias acepta `el_salvador`, `international_context` o `undetermined`. Es una señal automática basada en título y URL, no una confirmación de jurisdicción. Omitir el filtro conserva todo el archivo; el sitio web comienza con `el_salvador`. `scope_terms` declara los términos que produjeron la señal.
+`scope_hint` acepta `el_salvador`, `international_context` o `undetermined`. Es un indicio histórico basado en título y URL, no una confirmación de jurisdicción. Omitirlo devuelve todo el archivo **seleccionado** de derechos humanos en El Salvador; nunca candidatas sin clasificación. `scope_terms` conserva los términos de descubrimiento, que no autorizan publicación.
+
+Cada referencia incluye `selection`: clasificación automática con evidencia o
+decisión editorial. `policy.selection_gate` distingue candidatas y seleccionadas.
+Sólo se admiten los criterios actuales y las decisiones humanas prevalecen; un
+archivo inválido devuelve 503. JSON descargable, REST, MCP, listado y mapa aplican
+la misma regla. Véase [el protocolo de selección](NEWS-SELECTION.md).
 
 El objetivo histórico es recuperar noticias desde 2010. Lea `meta.coverage.start_date` y `meta.coverage.end_date` para conocer el intervalo solicitado por la versión consultada, junto con los estados por medio y mes para evaluar su avance. Un intervalo amplio no acredita cobertura completa ni la disponibilidad de noticias en todos sus meses. La referencia IEEE se conserva como antecedente independiente de ese inicio.
 
