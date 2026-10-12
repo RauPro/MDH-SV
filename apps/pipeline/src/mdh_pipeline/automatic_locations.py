@@ -1,4 +1,4 @@
-"""Project explicitly sourced departments from private AI drafts, without publishing dossiers.
+"""Project coarse administrative source evidence without publishing private dossiers.
 
 This is an unreviewed department-mention layer, never an incident or victim count.
 Only the minimal bibliographic/provenance allowlist below may leave the private
@@ -11,7 +11,7 @@ import hashlib
 import json
 import re
 import tempfile
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -19,7 +19,7 @@ from mdh_schema import DepartmentEnum
 
 from .article_source import fetch_article
 from .history import SOURCES, validate_reference
-from .news_dossier import validate_news_dossier
+from .news_dossier import FIELD_NAMES, validate_news_dossier
 from .review_queue import canonical_url, normalize
 from .municipalities import resolve_municipality, REFERENCE_VERSION
 
@@ -33,6 +33,8 @@ MAX_ARCHIVE_BYTES = 30_000_000
 MAX_ENTRIES = 100_000
 MUNICIPAL_METHOD = "gemini_municipality_reference"
 CORROBORATED_METHOD = "gemini_department_corroborated"
+SOURCE_METHODS = {"source_explicit_department", "source_municipality_reference"}
+SOURCE_LOCATION_RULE_VERSION = 1
 CORROBORATION_KEYS = {"strategy", "model_paragraph_id", "explicit_paragraph_id", "rule_version"}
 RESOLUTION_KEYS = {"type", "municipality", "municipality_kind", "reference_version", "source_url"}
 
@@ -91,16 +93,19 @@ def validate_collection(document, *, archive=None):
     """Validate the exact public allowlist; neither private wrapper nor quotes fit it."""
     try:
         if (not isinstance(document, dict) or set(document) != {"schema_version", "generated_at", "locations"}
-                or type(document["schema_version"]) is not int or document["schema_version"] not in {1, 2, 3}
+                or type(document["schema_version"]) is not int or document["schema_version"] not in {1, 2, 3, 4}
                 or not isinstance(document["locations"], list) or len(document["locations"]) > MAX_ENTRIES):
             raise ValueError()
         _timestamp(document["generated_at"])
         references = _references(archive) if archive is not None else None
         identifiers, urls = set(), set()
         for entry in document["locations"]:
-            municipal = isinstance(entry, dict) and entry.get("method") == MUNICIPAL_METHOD
+            municipal = isinstance(entry, dict) and entry.get("method") in {MUNICIPAL_METHOD, "source_municipality_reference"}
             corroborated = isinstance(entry, dict) and entry.get("method") == CORROBORATED_METHOD
+            source_based = isinstance(entry, dict) and entry.get("method") in SOURCE_METHODS
             extra_keys = {"resolution"} if municipal else {"corroboration"} if corroborated else set()
+            if source_based:
+                extra_keys |= {"rule_version"}
             if (not isinstance(entry, dict) or set(entry) != ENTRY_KEYS | extra_keys
                     or not isinstance(entry["candidate_id"], str) or not HEX.fullmatch(entry["candidate_id"])
                     or not isinstance(entry["source_url"], str) or len(entry["source_url"]) > 4096
@@ -109,8 +114,11 @@ def validate_collection(document, *, archive=None):
                     or not _calendar_date(entry["published_date"])
                     or entry["department"] not in DEPARTMENTS
                     or entry["review_status"] != "automated_unreviewed" or entry["human_reviewed"] is not False
-                    or entry["method"] not in {"gemini_explicit_department", MUNICIPAL_METHOD, CORROBORATED_METHOD}
+                    or entry["method"] not in {"gemini_explicit_department", MUNICIPAL_METHOD, CORROBORATED_METHOD} | SOURCE_METHODS
                     or entry["candidate_id"] in identifiers or entry["source_url"] in urls):
+                raise ValueError()
+            if source_based and (document["schema_version"] != 4 or type(entry["rule_version"]) is not int
+                                 or entry["rule_version"] != SOURCE_LOCATION_RULE_VERSION):
                 raise ValueError()
             if municipal:
                 resolution = entry["resolution"]
@@ -121,7 +129,7 @@ def validate_collection(document, *, archive=None):
                     raise ValueError()
             if corroborated:
                 proof = entry["corroboration"]
-                if (document["schema_version"] != 3 or not isinstance(proof, dict)
+                if (document["schema_version"] not in {3, 4} or not isinstance(proof, dict)
                         or set(proof) != CORROBORATION_KEYS
                         or proof["strategy"] != "same_article_explicit_department"
                         or type(proof["rule_version"]) is not int or proof["rule_version"] != 1
@@ -146,6 +154,8 @@ def validate_collection(document, *, archive=None):
             if references is not None:
                 reference = references.get(entry["candidate_id"])
                 if reference is None or any(reference[key] != entry[key] for key in ("source_url", "publisher", "published_date")):
+                    raise ValueError()
+                if "selection" in reference and _selection_hash(reference) != evidence["content_sha256"]:
                     raise ValueError()
             identifiers.add(entry["candidate_id"])
             urls.add(entry["source_url"])
@@ -319,7 +329,7 @@ def _department_context(text, department, *, explicit=False):
     return False
 
 
-def _source_paragraph(candidate, article):
+def _checked_paragraphs(candidate, article):
     reference = candidate["reference"]
     if (not isinstance(article, dict) or article.get("source_url") != reference["source_url"]
             or article.get("published_date") != reference["published_date"]
@@ -335,6 +345,13 @@ def _source_paragraph(candidate, article):
             return None
         paragraphs[paragraph["id"]] = paragraph["text"]
     if "\n\n".join(paragraphs.values()) != article["text"]:
+        return None
+    return paragraphs
+
+
+def _source_paragraph(candidate, article):
+    paragraphs = _checked_paragraphs(candidate, article)
+    if paragraphs is None:
         return None
     if candidate["department"]:
         explicit = re.compile(r"\bdepartamento\s+de\s+" + re.escape(normalize(candidate["department"])) + r"\b")
@@ -356,13 +373,99 @@ def _source_paragraph(candidate, article):
     return None
 
 
-def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_article,
-                                limit=20, now=None, excluded_ids=()):
-    """Return a minimal snapshot and aggregate counters; fetch at most ``limit`` sources.
+def _selection_hash(reference):
+    from .news_selection import validate_selection
+    if "selection" not in reference:
+        return None
+    selection = validate_selection(reference["selection"])
+    if selection["method"] != "gemini_grounded_scope":
+        return None  # Human geography is managed by the editorial projection.
+    return selection["evidence"]["content_sha256"]
 
-    A prior source check is reusable only while the current private draft still
-    qualifies and its exact department, source hash, citation and metadata match.
-    Removed/changed/private-protected drafts are withdrawn, even with no fetch budget.
+
+def _independent_draft_allowed(draft, reference):
+    """A full dossier is optional; an explicit privacy/foreign-country block is not."""
+    if draft is None:
+        return True
+    if (type(draft.get("schema_version")) is not int or draft["schema_version"] != 1
+            or draft.get("candidate_id") != reference["id"] or draft.get("source_url") != reference["source_url"]
+            or draft.get("status") not in {"draft", "needs_scope_review", "needs_privacy_review", "pending", "source_unavailable", "error"}
+            or draft.get("human_reviewed") is not False or draft.get("publishable") is not False):
+        return False
+    extraction = draft.get("extraction", {})
+    protected = extraction.get("protected_fields", [])
+    flags = draft.get("privacy_flags", [])
+    if (not isinstance(protected, list) or any(not isinstance(value, str) or value not in {*FIELD_NAMES, "title", "penitentiary_related"} for value in protected)
+            or not isinstance(flags, list) or any(value not in {
+                "minor_identifiers", "clinical_details", "precise_address", "private_contact"} for value in flags)):
+        return False
+    if (flags or draft.get("status") == "needs_privacy_review") and (
+            type(extraction.get("privacy_policy_version")) is not int or extraction["privacy_policy_version"] != 2):
+        return False
+    if "department" in protected:
+        return False
+    if draft.get("news_dossier") is None:
+        return True
+    news = validate_news_dossier(draft["news_dossier"])
+    if (news["human_reviewed"] or news["candidate_id"] != reference["id"]
+            or draft.get("classification") != news["classification"]
+            or any(news[key] != reference[key] for key in ("source_url", "publisher", "published_date"))):
+        return False
+    if news["fields"]["department"]["status"] == "withheld":
+        return False
+    country = news["fields"]["country"]
+    return country["status"] != "reported" or normalize(country["value"]).strip() in {"el salvador", "republica de el salvador"}
+
+
+def _source_entry(candidate, mention, checked_at):
+    reference = candidate["reference"]
+    result = {"candidate_id": reference["id"],
+        **{key: reference[key] for key in ("source_url", "publisher", "published_date")},
+        "department": mention["department"], "review_status": "automated_unreviewed", "human_reviewed": False,
+        "method": mention["method"], "rule_version": SOURCE_LOCATION_RULE_VERSION,
+        "extracted_at": checked_at, "source_checked_at": checked_at,
+        "evidence": {"paragraph_id": mention["paragraph_id"], "content_sha256": candidate["digest"]}}
+    if "resolution" in mention:
+        result["resolution"] = mention["resolution"]
+    return result
+
+
+def validate_negative_cache(document, *, now=None):
+    """Private cache stores only identity, source hash, a bounded retry and status."""
+    try:
+        if (not isinstance(document, dict) or set(document) != {"schema_version", "entries"}
+                or type(document["schema_version"]) is not int or document["schema_version"] != 1
+                or not isinstance(document["entries"], list) or len(document["entries"]) > MAX_ENTRIES):
+            raise ValueError()
+        instant = now or datetime.now(timezone.utc)
+        seen = set()
+        for entry in document["entries"]:
+            if (not isinstance(entry, dict) or set(entry) != {
+                    "id", "selectionhash", "checked_at", "next_retry_at", "status", "rule_version"}
+                    or not isinstance(entry["id"], str) or not HEX.fullmatch(entry["id"])
+                    or not isinstance(entry["selectionhash"], str) or not HEX.fullmatch(entry["selectionhash"])
+                    or entry["status"] not in {"unresolved", "source_unavailable"}
+                    or type(entry["rule_version"]) is not int or not 1 <= entry["rule_version"] <= 1000
+                    or entry["id"] in seen):
+                raise ValueError()
+            checked = datetime.fromisoformat(_timestamp(entry["checked_at"]).replace("Z", "+00:00"))
+            retry = datetime.fromisoformat(_timestamp(entry["next_retry_at"]).replace("Z", "+00:00"))
+            durations = {timedelta(days=1)} if entry["status"] == "unresolved" else {timedelta(days=1), timedelta(days=7)}
+            if checked > instant or retry - checked not in durations:
+                raise ValueError()
+            seen.add(entry["id"])
+        return {"schema_version": 1, "entries": [dict(entry) for entry in document["entries"]]}
+    except (ValueError, TypeError, KeyError, AttributeError):
+        raise AutomaticLocationError("invalid_negative_location_cache") from None
+
+
+def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_article,
+                                limit=20, now=None, excluded_ids=(), negative_cache=None):
+    """Project coarse source evidence with one shared read budget, never dossiers.
+
+    Current automatic selection authorizes independent source inspection. Legacy
+    references without selection retain the existing dossier-based route. A caller
+    may provide a mutable, private negative-cache document; it never enters output.
     """
     if type(limit) is not int or not 1 <= limit <= 100:
         raise AutomaticLocationError("invalid_location_limit")
@@ -375,95 +478,161 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
     moment = now or datetime.now(timezone.utc)
     stamp = _timestamp(moment.isoformat())
     references = _references(archive)
+    private_cache = validate_negative_cache(negative_cache, now=moment) if negative_cache is not None else {"schema_version": 1, "entries": []}
     previous = validate_collection(previous) if previous is not None else {"locations": []}
-    # A v1 positive predates context/negation and municipality checks. Revalidate
-    # it once rather than carrying an old acceptance across changed rules.
-    cache = {item["candidate_id"]: item for item in previous["locations"]} if previous.get("schema_version") in {2, 3} else {}
-    candidates, identifiers = [], set()
+    positives = {item["candidate_id"]: item for item in previous["locations"]} if previous.get("schema_version") in {2, 3, 4} else {}
     stats = {"drafts": len(drafts), "eligible": 0, "excluded": 0, "invalid": 0, "cached": 0,
              "sources_checked": 0, "source_failures": 0, "unsupported": 0, "deferred": 0,
-             "rotation_offset": 0, "rotation_candidates": 0,
+             "rotation_offset": 0, "rotation_candidates": 0, "ready_without_dossier": 0,
+             "negative_cached": 0, "negative_cache_discarded": 0,
+             "source_methods": {method: 0 for method in sorted(SOURCE_METHODS)},
              "locations": 0, "withdrawn": 0, "case_publications": 0, "dossier_publications": 0}
+    by_id = {}
     for draft in drafts:
         identifier = draft.get("candidate_id") if isinstance(draft, dict) else None
-        if identifier is not None and (not isinstance(identifier, str) or not HEX.fullmatch(identifier)):
+        if not isinstance(identifier, str) or not HEX.fullmatch(identifier):
             stats["invalid"] += 1
             continue
-        if identifier in identifiers:
+        if identifier in by_id:
             raise AutomaticLocationError("duplicate_location_draft")
-        if identifier is not None:
-            identifiers.add(identifier)
+        by_id[identifier] = draft
+        if identifier not in references:
+            stats["excluded"] += 1
+    candidates = []
+    for identifier, reference in references.items():
+        draft = by_id.get(identifier)
         if identifier in excluded_ids:
             stats["excluded"] += 1
             continue
         try:
-            candidate = _eligible(draft, references)
+            if "selection" in reference:
+                digest = _selection_hash(reference)
+                if digest is None or not _independent_draft_allowed(draft, reference):
+                    stats["excluded"] += 1
+                    continue
+                try:
+                    model = _eligible(draft, references) if draft is not None else None
+                except (ValueError, TypeError, KeyError, AttributeError):
+                    model = None
+                if model and model["digest"] != digest:
+                    model = None
+                candidate = model or {"reference": reference, "department": None, "digest": digest,
+                    "extracted_at": reference["selection"]["classified_at"], "department_paragraphs": [],
+                    "municipal_place": None, "municipal_paragraphs": [], "municipality": None,
+                    "ambiguous_municipality": False}
+                candidate.update(independent=True, has_model=model is not None)
+                candidate["municipality_protected"] = bool(draft and (
+                    "municipality" in draft.get("extraction", {}).get("protected_fields", [])
+                    or draft.get("news_dossier", {}).get("fields", {}).get("municipality", {}).get("status") == "withheld"))
+                if draft is None or draft.get("news_dossier", {}).get("extraction_status") != "processed":
+                    stats["ready_without_dossier"] += 1
+            else:
+                candidate = _eligible(draft, references) if draft is not None else None
+                if candidate:
+                    candidate.update(independent=False, has_model=True)
+            if candidate is None:
+                if draft is not None:
+                    stats["excluded"] += 1
+                continue
+            candidates.append(candidate)
         except (ValueError, TypeError, KeyError, AttributeError):
             stats["invalid"] += 1
-            continue
-        if candidate is None:
-            stats["excluded"] += 1
-        else:
-            candidates.append(candidate)
     stats["eligible"] = len(candidates)
-    locations = []
+    current = {item["reference"]["id"]: item for item in candidates}
+    negatives = {item["id"]: item for item in private_cache["entries"]
+                 if item["id"] in current and item["selectionhash"] == current[item["id"]]["digest"]
+                 and item["rule_version"] == SOURCE_LOCATION_RULE_VERSION}
+    locations, cached_ids = [], set()
     ordered = sorted(candidates, key=lambda value: (value["reference"]["published_date"], value["reference"]["id"]))
-    cached_ids = set()
     for candidate in ordered:
-        cached = cache.get(candidate["reference"]["id"])
-        method = cached["method"] if cached else None
-        eligible_paragraphs = candidate["municipal_paragraphs"] if method == MUNICIPAL_METHOD else candidate["department_paragraphs"]
-        expected_department = candidate["municipal_place"]["department"] if method == MUNICIPAL_METHOD and candidate["municipal_place"] else candidate["department"]
-        selection = (method, cached["evidence"]["paragraph_id"], expected_department) if cached else None
-        if method == CORROBORATED_METHOD:
-            model_id = cached["corroboration"]["model_paragraph_id"]
-            belongs_to_model = model_id in eligible_paragraphs
-            selection += (model_id,)
-        else:
-            belongs_to_model = cached and cached["evidence"]["paragraph_id"] in eligible_paragraphs
-        if cached and belongs_to_model and cached == _entry(candidate, selection, cached["source_checked_at"]):
+        identifier = candidate["reference"]["id"]
+        cached = positives.get(identifier)
+        if not cached or cached["evidence"]["content_sha256"] != candidate["digest"]:
+            continue
+        if any(cached[key] != candidate["reference"][key] for key in ("source_url", "publisher", "published_date")):
+            continue
+        method = cached["method"]
+        reusable = False
+        if method in SOURCE_METHODS:
+            reusable = candidate["independent"] and cached["rule_version"] == SOURCE_LOCATION_RULE_VERSION
+            if method == "source_municipality_reference" and candidate.get("municipality_protected"):
+                reusable = False
+        elif candidate["has_model"]:
+            paragraphs = candidate["municipal_paragraphs"] if method == MUNICIPAL_METHOD else candidate["department_paragraphs"]
+            department = candidate["municipal_place"]["department"] if method == MUNICIPAL_METHOD and candidate["municipal_place"] else candidate["department"]
+            selection = (method, cached["evidence"]["paragraph_id"], department)
+            if method == CORROBORATED_METHOD:
+                model_id = cached["corroboration"]["model_paragraph_id"]
+                belongs = model_id in paragraphs
+                selection += (model_id,)
+            else:
+                belongs = cached["evidence"]["paragraph_id"] in paragraphs
+            reusable = belongs and cached == _entry(candidate, selection, cached["source_checked_at"])
+        if reusable:
             locations.append(cached)
-            cached_ids.add(candidate["reference"]["id"])
+            cached_ids.add(identifier)
+            negatives.pop(identifier, None)
             stats["cached"] += 1
-    # Persist only positive public projections, but do not let an old permanently
-    # inaccessible/unsupported source consume the same first slots every hour.
-    # Consecutive hourly blocks cover the unresolved candidates without storing
-    # article text or private failure metadata in the public snapshot.
-    # Use all eligible candidates for the index, including cached positives: a
-    # new positive must not shift the modulus and skip a later unvisited block.
-    # Manual reruns in the same hour use the same block. With a stable eligible
-    # set, consecutive hourly blocks cover every candidate in ceil(N/limit) runs.
+    # Rotate all eligible references, so new positives cannot starve the tail.
     if ordered:
         offset = (int(moment.timestamp() // 3600) * limit) % len(ordered)
         stats.update(rotation_offset=offset, rotation_candidates=len(ordered))
         ordered = ordered[offset:] + ordered[:offset]
-    unchecked = [candidate for candidate in ordered if candidate["reference"]["id"] not in cached_ids]
-    for candidate in unchecked:
+    for candidate in ordered:
+        identifier = candidate["reference"]["id"]
+        if identifier in cached_ids:
+            continue
+        negative = negatives.get(identifier)
+        if negative and datetime.fromisoformat(negative["next_retry_at"].replace("Z", "+00:00")) > moment:
+            stats["negative_cached"] += 1
+            continue
         if stats["sources_checked"] >= limit:
             stats["deferred"] += 1
             continue
         stats["sources_checked"] += 1
+        failure = None
+        location = None
+        checked = moment if now is not None else datetime.now(timezone.utc)
         try:
             reference = candidate["reference"]
             article = fetch({**reference, "source_title": reference["title"]})
-            paragraph = _source_paragraph(candidate, article)
-        except Exception:
-            # Network/parsing exceptions can carry publisher HTML or private paths.
-            # This projection only emits an aggregate count, never that exception.
+            checked = moment if now is not None else datetime.now(timezone.utc)
+            paragraphs = _checked_paragraphs(candidate, article)
+            if paragraphs is not None:
+                match = _source_paragraph(candidate, article) if candidate["has_model"] else None
+                if match:
+                    location = _entry(candidate, match, checked.isoformat())
+                elif candidate["independent"]:
+                    from .source_location_evidence import extract_administrative_mention
+                    mention = extract_administrative_mention(article, allow_municipality=not candidate.get("municipality_protected", False))
+                    if (mention is not None and mention.get("paragraph_id") in paragraphs
+                            and not (candidate.get("municipality_protected") and mention.get("method") == "source_municipality_reference")):
+                        location = _source_entry(candidate, mention, checked.isoformat())
+        except Exception as error:
+            # Exceptions can carry private source text. Only this enum affects retry.
+            failure = "restricted" if getattr(error, "code", None) == "source_access_restricted" else "unavailable"
             stats["source_failures"] += 1
-            continue
-        if paragraph is None:
-            stats["unsupported"] += 1
-            continue
-        checked_at = stamp if now is not None else datetime.now(timezone.utc).isoformat()
-        locations.append(_entry(candidate, paragraph, checked_at))
+        if location is not None:
+            locations.append(location)
+            negatives.pop(identifier, None)
+            if location["method"] in SOURCE_METHODS:
+                stats["source_methods"][location["method"]] += 1
+        else:
+            if failure is None:
+                stats["unsupported"] += 1
+            negatives[identifier] = {"id": identifier, "selectionhash": candidate["digest"],
+                "checked_at": checked.isoformat(), "next_retry_at": (checked + timedelta(days=7 if failure == "restricted" else 1)).isoformat(),
+                "status": "source_unavailable" if failure else "unresolved", "rule_version": SOURCE_LOCATION_RULE_VERSION}
     generated_at = stamp if now is not None else datetime.now(timezone.utc).isoformat()
-    document = validate_collection({"schema_version": 3, "generated_at": generated_at, "locations": locations}, archive=archive)
+    document = validate_collection({"schema_version": 4, "generated_at": generated_at, "locations": locations}, archive=archive)
     stats["locations"] = len(locations)
     stats["withdrawn"] = len({item["candidate_id"] for item in previous["locations"]} - {item["candidate_id"] for item in locations})
-    # A stable snapshot avoids deploying on an unchanged extraction run.
-    if previous.get("schema_version") in {2, 3} and previous.get("generated_at") and document["locations"] == previous["locations"]:
+    if previous.get("schema_version") in {2, 3, 4} and previous.get("generated_at") and document["locations"] == previous["locations"]:
         document["generated_at"] = previous["generated_at"]
+    if negative_cache is not None:
+        clean = validate_negative_cache({"schema_version": 1, "entries": sorted(negatives.values(), key=lambda item: item["id"])}, now=now)
+        negative_cache.clear()
+        negative_cache.update(clean)
     return document, stats
 
 
@@ -473,16 +642,31 @@ def _read_json(path, maximum):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _atomic_json(path, document):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                         prefix=".locations-", suffix=".tmp", delete=False) as stream:
+            temporary = Path(stream.name)
+            stream.write(json.dumps(document, ensure_ascii=False, indent=2) + "\n")
+        temporary.replace(path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
 def export_automatic_locations(drafts_dir, archive_path, output_path, *, limit=20,
-                               fetch=fetch_article, now=None, excluded_ids=()):
+                               fetch=fetch_article, now=None, excluded_ids=(), cache_file=None):
     """Atomic local export; source bodies and private envelopes are never copied."""
     try:
-        drafts_dir, archive_path, output_path = Path(drafts_dir), Path(archive_path), Path(output_path)
-        if not drafts_dir.is_dir() or drafts_dir.is_symlink():
+        drafts_dir = Path(drafts_dir) if drafts_dir is not None else None
+        archive_path, output_path = Path(archive_path), Path(output_path)
+        if drafts_dir is not None and (not drafts_dir.is_dir() or drafts_dir.is_symlink()):
             raise AutomaticLocationError("invalid_location_drafts_directory")
         archive = _read_json(archive_path, MAX_ARCHIVE_BYTES)
         previous = _read_json(output_path, MAX_ARCHIVE_BYTES) if output_path.exists() else None
-        files = sorted(drafts_dir.glob("*.json"))
+        files = sorted(drafts_dir.glob("*.json")) if drafts_dir is not None else []
         if len(files) > MAX_ENTRIES:
             raise AutomaticLocationError("invalid_location_drafts")
         drafts = []
@@ -493,19 +677,26 @@ def export_automatic_locations(drafts_dir, archive_path, output_path, *, limit=2
             if not isinstance(draft, dict) or draft.get("candidate_id") != path.stem:
                 raise AutomaticLocationError("invalid_location_draft_identity")
             drafts.append(draft)
+        private_cache, discarded = None, 0
+        cache_path = Path(cache_file) if cache_file is not None else None
+        if cache_path is not None:
+            if cache_path.resolve() == output_path.resolve() or "public" in cache_path.resolve().parts:
+                raise AutomaticLocationError("location_cache_must_be_private")
+            private_cache = {"schema_version": 1, "entries": []}
+            if cache_path.exists() or cache_path.is_symlink():
+                try:
+                    private_cache = validate_negative_cache(_read_json(cache_path, MAX_ARCHIVE_BYTES), now=now)
+                except (ValueError, TypeError, KeyError, OSError):
+                    discarded = 1  # A corrupt performance cache is not publication authority.
         document, stats = project_automatic_locations(drafts, archive, previous=previous, fetch=fetch,
-                                                      limit=limit, now=now, excluded_ids=excluded_ids)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        temporary = None
-        try:
-            with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=output_path.parent,
-                                             prefix=".locations-", suffix=".tmp", delete=False) as stream:
-                temporary = Path(stream.name)
-                stream.write(json.dumps(document, ensure_ascii=False, indent=2) + "\n")
-            temporary.replace(output_path)
-        finally:
-            if temporary is not None:
-                temporary.unlink(missing_ok=True)
+            limit=limit, now=now, excluded_ids=excluded_ids, negative_cache=private_cache)
+        stats["negative_cache_discarded"] = discarded
+        _atomic_json(output_path, document)
+        if cache_path is not None:
+            try:
+                _atomic_json(cache_path, private_cache)
+            except OSError:
+                stats["negative_cache_discarded"] = 1
         return stats
     except (ValueError, TypeError, KeyError, OSError):
         raise AutomaticLocationError("automatic_location_export_failed") from None
@@ -513,17 +704,19 @@ def export_automatic_locations(drafts_dir, archive_path, output_path, *, limit=2
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--drafts", type=Path, required=True)
+    parser.add_argument("--drafts", type=Path, help="Optional private dossiers; selected sources can be inspected independently")
     parser.add_argument("--archive", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--limit", type=int, default=20)
     parser.add_argument("--excluded-ids", type=Path, help="Private JSON array of approved/rejected candidate identities to withdraw")
+    parser.add_argument("--cache-file", type=Path, help="Optional PRIVATE cache of unresolved or unavailable source checks")
     args = parser.parse_args()
     try:
         excluded = _read_json(args.excluded_ids, MAX_ARCHIVE_BYTES) if args.excluded_ids else []
         if not isinstance(excluded, list):
             raise AutomaticLocationError("invalid_location_exclusions")
-        report = export_automatic_locations(args.drafts, args.archive, args.output, limit=args.limit, excluded_ids=excluded)
+        report = export_automatic_locations(args.drafts, args.archive, args.output, limit=args.limit,
+                                            excluded_ids=excluded, cache_file=args.cache_file)
     except (ValueError, TypeError, KeyError, OSError):
         raise SystemExit("No se exportaron ubicaciones: entrada o proyección inválida; revise los archivos privados.") from None
     print(json.dumps(report, ensure_ascii=False))
