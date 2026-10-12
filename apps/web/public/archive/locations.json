@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-11T22:10:34.370961+00:00",
+  "generated_at": "2026-10-12T03:28:38.578462+00:00",
   "locations": [
     {
       "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
@@ -386,6 +386,29 @@
       "evidence": {
         "paragraph_id": "p2",
         "content_sha256": "ada1b94b3fff8f35a4c5169a716264b24693f3f07af1dc4a8ea148f92da7fe02"
+      }
+    },
+    {
+      "candidate_id": "fb03abd8d9765abf1e88b8ec23bf296199e15d8c539163ea2c290ede4992658e",
+      "source_url": "https://www.diariocolatino.com/experto-dice-hay-poca-informacion-sobre-la-mineria-en-el-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-22",
+      "department": "Morazán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T16:06:08.929042-06:00",
+      "source_checked_at": "2026-10-12T03:28:28.365084+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "fe0da36bcbaa0a5ab95f08f5e185508e39a74a0d10323d608441e8c7ddc76851"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "El Divisadero",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
       }
     }
   ]
