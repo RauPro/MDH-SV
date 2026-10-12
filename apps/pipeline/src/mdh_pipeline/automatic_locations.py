@@ -32,6 +32,8 @@ MAX_DRAFT_BYTES = 512_000
 MAX_ARCHIVE_BYTES = 30_000_000
 MAX_ENTRIES = 100_000
 MUNICIPAL_METHOD = "gemini_municipality_reference"
+CORROBORATED_METHOD = "gemini_department_corroborated"
+CORROBORATION_KEYS = {"strategy", "model_paragraph_id", "explicit_paragraph_id", "rule_version"}
 RESOLUTION_KEYS = {"type", "municipality", "municipality_kind", "reference_version", "source_url"}
 
 
@@ -89,7 +91,7 @@ def validate_collection(document, *, archive=None):
     """Validate the exact public allowlist; neither private wrapper nor quotes fit it."""
     try:
         if (not isinstance(document, dict) or set(document) != {"schema_version", "generated_at", "locations"}
-                or type(document["schema_version"]) is not int or document["schema_version"] not in {1, 2}
+                or type(document["schema_version"]) is not int or document["schema_version"] not in {1, 2, 3}
                 or not isinstance(document["locations"], list) or len(document["locations"]) > MAX_ENTRIES):
             raise ValueError()
         _timestamp(document["generated_at"])
@@ -97,7 +99,9 @@ def validate_collection(document, *, archive=None):
         identifiers, urls = set(), set()
         for entry in document["locations"]:
             municipal = isinstance(entry, dict) and entry.get("method") == MUNICIPAL_METHOD
-            if (not isinstance(entry, dict) or set(entry) != ENTRY_KEYS | ({"resolution"} if municipal else set())
+            corroborated = isinstance(entry, dict) and entry.get("method") == CORROBORATED_METHOD
+            extra_keys = {"resolution"} if municipal else {"corroboration"} if corroborated else set()
+            if (not isinstance(entry, dict) or set(entry) != ENTRY_KEYS | extra_keys
                     or not isinstance(entry["candidate_id"], str) or not HEX.fullmatch(entry["candidate_id"])
                     or not isinstance(entry["source_url"], str) or len(entry["source_url"]) > 4096
                     or hashlib.sha256(entry["source_url"].encode()).hexdigest() != entry["candidate_id"]
@@ -105,7 +109,7 @@ def validate_collection(document, *, archive=None):
                     or not _calendar_date(entry["published_date"])
                     or entry["department"] not in DEPARTMENTS
                     or entry["review_status"] != "automated_unreviewed" or entry["human_reviewed"] is not False
-                    or entry["method"] not in {"gemini_explicit_department", MUNICIPAL_METHOD}
+                    or entry["method"] not in {"gemini_explicit_department", MUNICIPAL_METHOD, CORROBORATED_METHOD}
                     or entry["candidate_id"] in identifiers or entry["source_url"] in urls):
                 raise ValueError()
             if municipal:
@@ -114,6 +118,16 @@ def validate_collection(document, *, archive=None):
                     raise ValueError()
                 place = resolve_municipality(resolution["municipality"], entry["department"])
                 if place is None or resolution != _resolution(place):
+                    raise ValueError()
+            if corroborated:
+                proof = entry["corroboration"]
+                if (document["schema_version"] != 3 or not isinstance(proof, dict)
+                        or set(proof) != CORROBORATION_KEYS
+                        or proof["strategy"] != "same_article_explicit_department"
+                        or type(proof["rule_version"]) is not int or proof["rule_version"] != 1
+                        or any(not isinstance(proof[key], str) or not re.fullmatch(r"p[1-9][0-9]{0,2}", proof[key])
+                               for key in ("model_paragraph_id", "explicit_paragraph_id"))
+                        or proof["model_paragraph_id"] == proof["explicit_paragraph_id"]):
                     raise ValueError()
             _timestamp(entry["extracted_at"])
             _timestamp(entry["source_checked_at"])
@@ -126,6 +140,8 @@ def validate_collection(document, *, archive=None):
                     or not isinstance(evidence["paragraph_id"], str)
                     or not re.fullmatch(r"p[1-9][0-9]{0,2}", evidence["paragraph_id"])
                     or not isinstance(evidence["content_sha256"], str) or not HEX.fullmatch(evidence["content_sha256"])):
+                raise ValueError()
+            if corroborated and evidence["paragraph_id"] != entry["corroboration"]["explicit_paragraph_id"]:
                 raise ValueError()
             if references is not None:
                 reference = references.get(entry["candidate_id"])
@@ -209,7 +225,7 @@ def _eligible(draft, references):
 
 def _entry(candidate, selection, checked_at):
     reference = candidate["reference"]
-    method, paragraph, department = selection
+    method, paragraph, department = selection[:3]
     result = {"candidate_id": reference["id"],
             **{key: reference[key] for key in ("source_url", "publisher", "published_date")},
             "department": department, "review_status": "automated_unreviewed",
@@ -218,6 +234,10 @@ def _entry(candidate, selection, checked_at):
             "evidence": {"paragraph_id": paragraph, "content_sha256": candidate["digest"]}}
     if method == MUNICIPAL_METHOD:
         result["resolution"] = _resolution(candidate["municipal_place"])
+    if method == CORROBORATED_METHOD:
+        result["corroboration"] = {"strategy": "same_article_explicit_department",
+                                   "model_paragraph_id": selection[3], "explicit_paragraph_id": paragraph,
+                                   "rule_version": 1}
     return result
 
 
@@ -255,6 +275,49 @@ def _municipal_context(text, candidate):
     return True
 
 
+def _department_context(text, department, *, explicit=False):
+    """Positive geographic context for two-paragraph support, never a bare mention.
+
+    This supplements an existing model value; it neither repairs that model's
+    stored citations nor claims that Gemini supplied the additional paragraph.
+    Both original and supplemental paragraphs must pass these context guards.
+    """
+    source = " ".join(normalize(text).split())
+    name = re.escape(normalize(department))
+    foreign = r"(?:california|texas|florida|nueva york|jujuy|estados unidos|ee\.?\s?uu\.?|mexico|guatemala|honduras|nicaragua|costa rica|panama|colombia|ecuador|peru|bolivia|argentina|chile|espana|canada|australia|cuba|venezuela|uruguay|brasil|republica dominicana|puerto rico)"
+    operation = r"(?:cerco|asedio|operativo|despliegue|incursion)(?:\s+(?:militar|policial))?"
+    qualified_name = rf"(?:(?:el\s+)?departamento\s+de\s+)?{name}\b"
+    if (re.search(rf"\b{name}\s*(?:,|\(|\ben\b|\bde\b)\s*(?:en\s+)?(?:(?:el|la|los|las)\s+)?{foreign}\b", source)
+            or re.search(r"\b(?:sala de redaccion|sede|oficinas|carretera|tribunal|juzgado)\b", source)
+            or re.search(rf"^{name}\s*[:—–-]", source)
+            or _negated_location(source, name)
+            or re.search(rf"\b(?:no|nunca)\s+en\s+{qualified_name}", source)
+            or re.search(rf"\b(?:no|nunca|sin)\b[^.;!?]{{0,55}}\b{operation}\s+(?:a|en|sobre)\s+{qualified_name}", source)):
+        return False
+    explicit_name = rf"\bdepartamento\s+de\s+{name}\b"
+    if explicit and not re.search(explicit_name, source):
+        return False
+    if re.search(rf"\ben\s+{qualified_name}", source):
+        return True
+    if re.search(rf"\b{operation}\s+(?:a|en|sobre)\s+{qualified_name}", source):
+        return True
+    # A locative administrative chain, with or without an explicit place type:
+    # "en Victoria, departamento de Cabañas". Require the exact official pair;
+    # arbitrary words and municipalities from a different department fail.
+    if explicit:
+        chain = (rf"\ben\s+(?:el\s+|la\s+)?(?:(?:municipio|distrito|ciudad|localidad)\s+de\s+)?"
+                 rf"(?P<place>[a-z]+(?:\s+[a-z]+){{0,5}})\s*,\s*(?:en\s+)?(?:el\s+)?{explicit_name}")
+        for match in re.finditer(chain, source):
+            place = match.group("place")
+            named_place = re.escape(place)
+            if (resolve_municipality(place, department) is not None
+                    and not _negated_location(source, named_place)
+                    and not re.search(rf"\b(?:no|nunca)\s+en\s+{named_place}\b", source)
+                    and not re.search(rf"\b(?:no|nunca|sin)\b[^.;!?]{{0,55}}\b{operation}\s+(?:a|en|sobre)\s+{named_place}\b", source)):
+                return True
+    return False
+
+
 def _source_paragraph(candidate, article):
     reference = candidate["reference"]
     if (not isinstance(article, dict) or article.get("source_url") != reference["source_url"]
@@ -282,6 +345,13 @@ def _source_paragraph(candidate, article):
         for identifier in candidate["municipal_paragraphs"]:
             if identifier in paragraphs and _municipal_context(paragraphs[identifier], candidate):
                 return MUNICIPAL_METHOD, identifier, candidate["municipal_place"]["department"]
+    if candidate["department"]:
+        for model_id in candidate["department_paragraphs"]:
+            if not _department_context(paragraphs.get(model_id, ""), candidate["department"]):
+                continue
+            for explicit_id, text in paragraphs.items():
+                if explicit_id != model_id and _department_context(text, candidate["department"], explicit=True):
+                    return CORROBORATED_METHOD, explicit_id, candidate["department"], model_id
     return None
 
 
@@ -307,7 +377,7 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
     previous = validate_collection(previous) if previous is not None else {"locations": []}
     # A v1 positive predates context/negation and municipality checks. Revalidate
     # it once rather than carrying an old acceptance across changed rules.
-    cache = {item["candidate_id"]: item for item in previous["locations"]} if previous.get("schema_version") == 2 else {}
+    cache = {item["candidate_id"]: item for item in previous["locations"]} if previous.get("schema_version") in {2, 3} else {}
     candidates, identifiers = [], set()
     stats = {"drafts": len(drafts), "eligible": 0, "excluded": 0, "invalid": 0, "cached": 0,
              "sources_checked": 0, "source_failures": 0, "unsupported": 0, "deferred": 0,
@@ -343,8 +413,14 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
         method = cached["method"] if cached else None
         eligible_paragraphs = candidate["municipal_paragraphs"] if method == MUNICIPAL_METHOD else candidate["department_paragraphs"]
         expected_department = candidate["municipal_place"]["department"] if method == MUNICIPAL_METHOD and candidate["municipal_place"] else candidate["department"]
-        if cached and cached["evidence"]["paragraph_id"] in eligible_paragraphs and cached == _entry(
-                candidate, (method, cached["evidence"]["paragraph_id"], expected_department), cached["source_checked_at"]):
+        selection = (method, cached["evidence"]["paragraph_id"], expected_department) if cached else None
+        if method == CORROBORATED_METHOD:
+            model_id = cached["corroboration"]["model_paragraph_id"]
+            belongs_to_model = model_id in eligible_paragraphs
+            selection += (model_id,)
+        else:
+            belongs_to_model = cached and cached["evidence"]["paragraph_id"] in eligible_paragraphs
+        if cached and belongs_to_model and cached == _entry(candidate, selection, cached["source_checked_at"]):
             locations.append(cached)
             cached_ids.add(candidate["reference"]["id"])
             stats["cached"] += 1
@@ -381,11 +457,11 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
         checked_at = stamp if now is not None else datetime.now(timezone.utc).isoformat()
         locations.append(_entry(candidate, paragraph, checked_at))
     generated_at = stamp if now is not None else datetime.now(timezone.utc).isoformat()
-    document = validate_collection({"schema_version": 2, "generated_at": generated_at, "locations": locations}, archive=archive)
+    document = validate_collection({"schema_version": 3, "generated_at": generated_at, "locations": locations}, archive=archive)
     stats["locations"] = len(locations)
     stats["withdrawn"] = len({item["candidate_id"] for item in previous["locations"]} - {item["candidate_id"] for item in locations})
     # A stable snapshot avoids deploying on an unchanged extraction run.
-    if previous.get("schema_version") == 2 and previous.get("generated_at") and document["locations"] == previous["locations"]:
+    if previous.get("schema_version") in {2, 3} and previous.get("generated_at") and document["locations"] == previous["locations"]:
         document["generated_at"] = previous["generated_at"]
     return document, stats
 

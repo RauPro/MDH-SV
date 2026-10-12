@@ -7,7 +7,7 @@ import json
 import pytest
 
 from mdh_pipeline.automatic_locations import (
-    AutomaticLocationError, ENTRY_KEYS, export_automatic_locations,
+    AutomaticLocationError, CORROBORATED_METHOD, ENTRY_KEYS, export_automatic_locations,
     project_automatic_locations, validate_collection,
 )
 from mdh_pipeline.history import SOURCES, reference_from_post
@@ -68,7 +68,7 @@ def test_only_minimal_department_and_provenance_cross_the_public_boundary():
     assert validate_collection(document, archive={"schema_version": 1, "records": [reference]}) == document
 
 
-def test_previous_v1_locations_are_revalidated_once_before_becoming_v2_cache():
+def test_previous_v1_locations_are_revalidated_once_before_becoming_current_cache():
     reference, draft, article = sample()
     old, _ = project(draft, reference, article)
     old["schema_version"] = 1
@@ -76,7 +76,7 @@ def test_previous_v1_locations_are_revalidated_once_before_becoming_v2_cache():
     current, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
         previous=old, fetch=lambda row: checked.append(row["id"]) or article, now=NOW)
     assert checked == [reference["id"]]
-    assert current["schema_version"] == 2 and stats["cached"] == 0
+    assert current["schema_version"] == 3 and stats["cached"] == 0
     unchanged, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
         previous=current, fetch=forbidden_fetch, now=NOW)
     assert unchanged == current and stats["cached"] == 1
@@ -327,3 +327,177 @@ def test_corrupt_private_file_cannot_replace_preexisting_public_snapshot(tmp_pat
     with pytest.raises(AutomaticLocationError, match="^automatic_location_export_failed$"):
         export_automatic_locations(drafts, archive, output, now=NOW, fetch=forbidden_fetch)
     assert json.loads(output.read_text()) == prior
+
+
+def corroborated_sample(model_text="El gobierno anunció un cerco militar a Cabañas.",
+                        support="La comunidad está en el distrito de Victoria, departamento de Cabañas."):
+    reference, draft, article = sample(department="Cabañas", paragraph=model_text)
+    article["paragraphs"] += [{"id": "p2", "text": "La publicación recoge testimonios sobre el operativo."},
+                              {"id": "p3", "text": support}]
+    article["text"] = "\n\n".join(p["text"] for p in article["paragraphs"])
+    digest = hashlib.sha256(article["text"].encode()).hexdigest()
+    article["content_sha256"] = draft["extraction"]["content_sha256"] = digest
+    draft["news_dossier"]["evidence"][1]["locator"] = f"Párrafo p1; SHA-256 {digest}."
+    return reference, draft, article
+
+
+def test_same_article_geographic_corroboration_keeps_model_citations_unchanged():
+    reference, draft, article = corroborated_sample()
+    original = deepcopy(draft)
+    result, stats = project(draft, reference, article)
+    assert stats["locations"] == 1 and result["schema_version"] == 3
+    location = result["locations"][0]
+    assert location["method"] == CORROBORATED_METHOD
+    assert location["department"] == "Cabañas"
+    assert location["evidence"] == {"paragraph_id": "p3", "content_sha256": article["content_sha256"]}
+    assert location["corroboration"] == {"strategy": "same_article_explicit_department",
+        "model_paragraph_id": "p1", "explicit_paragraph_id": "p3", "rule_version": 1}
+    assert set(location) == ENTRY_KEYS | {"corroboration"}
+    assert draft == original
+    assert PRIVATE not in json.dumps(result) and "testimonios" not in json.dumps(result)
+
+
+@pytest.mark.parametrize("model_text", [
+    "El informe describe detenciones en Cabañas.",
+    "Se anunció un asedio policial a Cabañas.",
+    "Se anunció un operativo en Cabañas.",
+    "El informe describe un despliegue militar sobre Cabañas.",
+    "Se anunció una incursión policial en Cabañas.",
+])
+def test_corroboration_accepts_explicit_positive_geographic_context(model_text):
+    reference, draft, article = corroborated_sample(model_text=model_text)
+    assert project(draft, reference, article)[0]["locations"][0]["method"] == CORROBORATED_METHOD
+
+
+@pytest.mark.parametrize("support", [
+    "La comunidad se encuentra en Victoria, departamento de Cabañas.",
+    "La comunidad se encuentra en Victoria, departamento de Cabañas. El artículo también menciona Honduras.",
+    "La comunidad se encuentra en el distrito de Victoria, departamento de Cabañas.",
+])
+def test_corroboration_accepts_exact_official_municipality_department_locative_pair(support):
+    reference, draft, article = corroborated_sample(support=support)
+    result, _ = project(draft, reference, article)
+    assert result["locations"][0]["method"] == CORROBORATED_METHOD
+    assert result["locations"][0]["evidence"]["paragraph_id"] == "p3"
+
+
+@pytest.mark.parametrize("support", [
+    "La comunidad se encuentra en Lugar Inventado, departamento de Cabañas.",
+    "La comunidad se encuentra en San Salvador, departamento de Cabañas.",
+    "La comunidad se encuentra en el distrito de San Salvador, departamento de Cabañas.",
+    "La comunidad se encuentra en Victoria, Guatemala, departamento de Cabañas.",
+    "La comunidad se encuentra en Victoria, departamento de Cabañas, Honduras.",
+    "El operativo no ocurrió en Victoria, departamento de Cabañas.",
+    "El hecho no ocurrió en el distrito de Victoria, departamento de Cabañas; ocurrió en San Miguel.",
+    "El operativo ocurrió fuera del lugar, no en Victoria, departamento de Cabañas.",
+    "No hubo un operativo militar en Victoria, departamento de Cabañas.",
+    "Victoria, departamento de Cabañas, aparece en una lista sin contexto geográfico.",
+])
+def test_corroboration_rejects_invalid_administrative_pairs_and_denied_locations(support):
+    reference, draft, article = corroborated_sample(support=support)
+    assert project(draft, reference, article)[0]["locations"] == []
+
+
+@pytest.mark.parametrize("foreign_suffix", [", Perú", ", en Perú", ", en el Perú", " en Perú", " (en el Perú)"])
+@pytest.mark.parametrize("foreign_paragraph", ["model", "support", "both"])
+def test_corroboration_rejects_foreign_links_with_prepositions_in_either_paragraph(foreign_suffix, foreign_paragraph):
+    model = "El operativo ocurrió en La Libertad" + (foreign_suffix if foreign_paragraph in {"model", "both"} else "") + "."
+    support = "El operativo se desplegó en el departamento de La Libertad" + (foreign_suffix if foreign_paragraph in {"support", "both"} else "") + "."
+    reference, draft, article = corroborated_sample(model_text=model, support=support)
+    draft["news_dossier"]["fields"]["department"]["value"] = "La Libertad"
+    assert project(draft, reference, article)[0]["locations"] == []
+
+
+@pytest.mark.parametrize("model_text,support", [
+    ("La publicación incluye la palabra Cabañas.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("Se mencionan Cabañas y otros lugares.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("El tribunal de Cabañas examinó el informe.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("El juzgado en Cabañas recibió el documento.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("La sede editorial está en Cabañas.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("La carretera a Cabañas quedó cerrada.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("Cabañas: se anunciaron medidas en Cabañas.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("El operativo no ocurrió en Cabañas.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("No hubo un cerco militar a Cabañas.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("La localidad quedó sin cerco militar a Cabañas.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("El operativo ocurrió en Cabañas, Guatemala.", "El operativo ocurrió en el departamento de Cabañas."),
+    ("El gobierno anunció un cerco militar a Cabañas.", "La publicación menciona el departamento de Cabañas."),
+    ("El gobierno anunció un cerco militar a Cabañas.", "La sede está en el departamento de Cabañas."),
+    ("El gobierno anunció un cerco militar a Cabañas.", "El tribunal en el departamento de Cabañas emitió un comunicado."),
+    ("El gobierno anunció un cerco militar a Cabañas.", "La carretera en el departamento de Cabañas fue ampliada."),
+    ("El gobierno anunció un cerco militar a Cabañas.", "El operativo no ocurrió en el departamento de Cabañas."),
+    ("El gobierno anunció un cerco militar a Cabañas.", "El operativo ocurrió en el departamento de Cabañas, Guatemala."),
+    ("El gobierno anunció un cerco militar a Cabañas.", "El operativo ocurrió en el departamento de San Salvador."),
+])
+def test_corroboration_rejects_bare_mentions_negations_foreign_places_and_ambiguous_roles(model_text, support):
+    reference, draft, article = corroborated_sample(model_text, support)
+    result, stats = project(draft, reference, article)
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda a: a.update(content_sha256="a" * 64),
+    lambda a: a.update(source_url="https://www.diariocolatino.com/other-source/"),
+    lambda a: a["paragraphs"][2].update(text="A different paragraph with a different hash."),
+])
+def test_corroboration_never_uses_different_or_changed_source(mutation):
+    reference, draft, article = corroborated_sample()
+    mutation(article)
+    assert project(draft, reference, article)[0]["locations"] == []
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda d: d.update(schema_version=1),
+    lambda d: d.update(schema_version=2),
+    lambda d: d["locations"][0].pop("corroboration"),
+    lambda d: d["locations"][0]["corroboration"].update(quote=PRIVATE),
+    lambda d: d["locations"][0]["corroboration"].update(rule_version=True),
+    lambda d: d["locations"][0]["corroboration"].update(rule_version=2),
+    lambda d: d["locations"][0]["corroboration"].update(strategy="human_review"),
+    lambda d: d["locations"][0]["corroboration"].update(model_paragraph_id="p3"),
+    lambda d: d["locations"][0]["corroboration"].update(model_paragraph_id="p0"),
+    lambda d: d["locations"][0]["corroboration"].update(explicit_paragraph_id="p2"),
+    lambda d: d["locations"][0]["evidence"].update(paragraph_id="p1"),
+])
+def test_corroboration_requires_v3_exact_provenance_and_distinct_bound_paragraphs(mutation):
+    reference, draft, article = corroborated_sample()
+    result, _ = project(draft, reference, article)
+    mutation(result)
+    with pytest.raises(AutomaticLocationError, match="invalid_automatic_locations"):
+        validate_collection(result)
+
+
+@pytest.mark.parametrize("version", [1, 2, 3])
+def test_existing_direct_locations_remain_valid_in_all_supported_collection_versions(version):
+    reference, draft, article = sample()
+    result, _ = project(draft, reference, article)
+    result["schema_version"] = version
+    assert validate_collection(result)["schema_version"] == version
+
+
+@pytest.mark.parametrize("version", [2, 3])
+def test_upgrade_preserves_all_19_existing_positive_caches_without_fetches(version):
+    samples = [sample(number) for number in range(1, 20)]
+    articles = {r["source_url"]: a for r, _, a in samples}
+    archive = {"schema_version": 1, "records": [r for r, _, _ in samples]}
+    drafts = [d for _, d, _ in samples]
+    previous, _ = project_automatic_locations(drafts, archive, fetch=lambda r: articles[r["source_url"]], now=NOW)
+    previous["schema_version"] = version
+    current, stats = project_automatic_locations(drafts, archive, previous=previous, fetch=forbidden_fetch,
+                                                now=NOW + timedelta(hours=1))
+    assert current["schema_version"] == 3 and current["locations"] == previous["locations"]
+    assert current["generated_at"] == previous["generated_at"]
+    assert stats["cached"] == stats["locations"] == 19 and stats["sources_checked"] == 0
+
+
+def test_corroborated_cache_keeps_timestamp_without_refetch_and_withdraws_changed_model_anchor():
+    reference, draft, article = corroborated_sample()
+    previous, _ = project(draft, reference, article)
+    current, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
+                                                previous=previous, fetch=forbidden_fetch, now=NOW + timedelta(hours=1))
+    assert current == previous and stats["cached"] == 1
+    draft["news_dossier"]["evidence"].append({"id": "article-p2", "url": reference["source_url"],
+                                            "locator": f'Párrafo p2; SHA-256 {article["content_sha256"]}.'})
+    draft["news_dossier"]["fields"]["department"]["evidence_refs"] = ["article-p2"]
+    current, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
+        previous=previous, fetch=lambda _: article, now=NOW + timedelta(hours=2))
+    assert current["locations"] == [] and stats["cached"] == 0 and stats["withdrawn"] == 1

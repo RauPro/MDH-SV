@@ -5,7 +5,7 @@ import fixture from './__fixtures__/newsArchive.json';
 import municipalityReference from '../../../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json';
 
 const reference = fixture.records[0];
-const locationFixture = (reference = fixture.records[0]): NewsLocation => ({
+const locationFixture = (reference = fixture.records[0]): Extract<NewsLocation, { method: 'gemini_explicit_department' }> => ({
   candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date,
   department: 'San Salvador', review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department',
   extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00+00:00', evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) },
@@ -13,6 +13,37 @@ const locationFixture = (reference = fixture.records[0]): NewsLocation => ({
 const collection = (locations: unknown[] = [locationFixture()]) => ({ schema_version: 1, generated_at: '2026-10-10T10:03:00Z', locations });
 
 describe('public automatic location contract', () => {
+  const corroborated = (): Extract<NewsLocation, { method: 'gemini_department_corroborated' }> => ({
+    ...locationFixture(), method: 'gemini_department_corroborated', evidence: { paragraph_id: 'p3', content_sha256: 'a'.repeat(64) },
+    corroboration: { strategy: 'same_article_explicit_department', model_paragraph_id: 'p1', explicit_paragraph_id: 'p3', rule_version: 1 },
+  });
+  it('accepts a corroborated department only in schema 3 with distinct and bound paragraph IDs', () => {
+    const location = corroborated();
+    const index = parsePublishedNewsLocations({ ...collection([location]), schema_version: 3 });
+    expect(newsLocationFor(reference, validateLocationBindings(index, fixture.records))).toEqual(location);
+    expect(location.human_reviewed).toBe(false);
+    for (const schema_version of [1, 2]) expect(() => parsePublishedNewsLocations({ ...collection([location]), schema_version })).toThrow();
+  });
+  it.each([1, 2, 3])('keeps direct and municipal locations compatible with schema %i', schema_version => {
+    expect(parsePublishedNewsLocations({ ...collection(), schema_version }).size).toBe(1);
+    expect(parsePublishedNewsLocations({ ...collection([municipal()]), schema_version }).size).toBe(1);
+  });
+  it.each([
+    { strategy: 'other_article' }, { rule_version: 2 }, { rule_version: true }, { model_paragraph_id: 'p0' },
+    { explicit_paragraph_id: 'p1000' }, { model_paragraph_id: 'p3' }, { model_paragraph_id: null },
+    { explicit_paragraph_id: 'p4' }, { quote: 'PRIVATE VALUE' },
+  ])('rejects invalid corroboration provenance: %j', patch => {
+    const location = corroborated();
+    expect(() => validatePublishedNewsLocation({ ...location, corroboration: { ...location.corroboration, ...patch } })).toThrow();
+  });
+  it('requires corroboration only on its own method and rejects mixed provenance', () => {
+    const { corroboration, ...withoutProof } = corroborated();
+    expect(() => validatePublishedNewsLocation(withoutProof)).toThrow();
+    expect(() => validatePublishedNewsLocation({ ...locationFixture(), corroboration })).toThrow();
+    expect(() => validatePublishedNewsLocation({ ...municipal(), corroboration })).toThrow();
+    expect(() => validatePublishedNewsLocation({ ...corroborated(), resolution: municipal().resolution })).toThrow();
+    expect(() => validatePublishedNewsLocation({ ...corroborated(), evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) } })).toThrow();
+  });
   const municipal = (): NewsLocation => ({ ...locationFixture(), department: 'Ahuachapán', method: 'gemini_municipality_reference', resolution: {
     type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
     reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6`,

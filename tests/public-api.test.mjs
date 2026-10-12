@@ -205,11 +205,37 @@ test('automatic locations are a separate unreviewed projection and never overrid
   assert.equal(fromMunicipality.data[0].news_dossier.fields.department.value, null);
   const wrongDepartment = { ...municipal, department: 'San Salvador' };
   assert.equal(searchNews({}, archive, empty, { ...payload, schema_version: 2, locations: [wrongDepartment] }).data[0].automatic_location, null);
+  const corroborated = { ...location, method: 'gemini_department_corroborated', evidence: { paragraph_id: 'p3', content_sha256: 'a'.repeat(64) },
+    corroboration: { strategy: 'same_article_explicit_department', model_paragraph_id: 'p1', explicit_paragraph_id: 'p3', rule_version: 1 },
+  };
+  const corroboratedPayload = { ...payload, schema_version: 3, locations: [corroborated] };
+  const fromCorroboration = searchNews({}, archive, empty, corroboratedPayload);
+  assert.deepEqual(fromCorroboration.data[0].automatic_location, corroborated);
+  assert.equal(fromCorroboration.data[0].news_dossier.fields.department.value, null);
+  assert.equal(fromCorroboration.data[0].news_dossier.human_reviewed, false);
+  for (const schema_version of [1, 2]) {
+    const response = searchNews({}, archive, empty, { ...corroboratedPayload, schema_version });
+    assert.equal(response.data[0].automatic_location, null);
+    assert.equal(response.meta.automatic_locations_status, 'unavailable');
+  }
+  for (const change of [
+    value => { value.corroboration.model_paragraph_id = 'p3'; },
+    value => { value.evidence.paragraph_id = 'p1'; },
+    value => { value.corroboration.article_body = 'PRIVATE_TEST_VALUE'; },
+    value => { delete value.corroboration; },
+    value => { value.method = 'gemini_explicit_department'; },
+  ]) {
+    const unsafe = structuredClone(corroboratedPayload); change(unsafe.locations[0]);
+    const response = searchNews({}, archive, empty, unsafe);
+    assert.equal(response.data[0].automatic_location, null);
+    assert.ok(!JSON.stringify(response).includes('PRIVATE_TEST_VALUE'));
+  }
   const approved = pendingNewsDossier(source);
   Object.assign(approved, { extraction_status: 'processed', human_reviewed: true, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture: ubicación deliberadamente omitida tras revisión editorial.' });
   approved.fields.department = { value: null, status: 'withheld', evidence_refs: [], note: 'Ubicación protegida tras revisión editorial explícita.' };
   assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, payload).data[0].automatic_location, null);
   assert.equal(searchNews({}, archive, null, payload).data[0].automatic_location, null);
+  assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, corroboratedPayload).data[0].automatic_location, null);
   for (const change of [
     value => { value.human_reviewed = true; },
     value => { value.raw_article = 'PRIVATE_TEST_VALUE'; },
@@ -227,6 +253,14 @@ test('OpenAPI is a public, versioned executable contract', async () => {
   const { response, body } = await get('/api/v1/openapi.json');
   assert.equal(response.status, 200);
   assert.equal(body.openapi, '3.1.0');
+  const locationSchema = body.components.schemas.AutomaticNewsLocation;
+  assert.ok(locationSchema.properties.method.enum.includes('gemini_department_corroborated'));
+  assert.equal(locationSchema.properties.corroboration.additionalProperties, false);
+  assert.deepEqual(locationSchema.properties.corroboration.required, ['strategy', 'model_paragraph_id', 'explicit_paragraph_id', 'rule_version']);
+  assert.equal(locationSchema.properties.corroboration.properties.rule_version.const, 1);
+  assert.ok(locationSchema.allOf.some(rule => rule.if.properties.method.const === 'gemini_department_corroborated' && rule.then.required.includes('corroboration')));
+  assert.deepEqual(body.components.schemas.AutomaticNewsLocationCollection.properties.schema_version.enum, [1, 2, 3]);
+
   assert.deepEqual(body.security, []);
   assert.ok(body.paths['/api/v1/records/{id}']);
   assert.ok(body.paths['/api/v1/news']);

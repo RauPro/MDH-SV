@@ -136,10 +136,20 @@ El servidor local escucha sólo en `127.0.0.1:3001`. Las pruebas ejercitan una c
 
 Implementación contrastada con las referencias oficiales: [SDK MCP](https://ts.sdk.modelcontextprotocol.io/server), [transporte Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) y [configuración de funciones Vercel](https://vercel.com/docs/project-configuration/vercel-json).
 
-`GET /api/v1/news` y MCP `search_news` incluyen `automatic_location` separado de `news_dossier`. Su estado es siempre `automated_unreviewed`, con `human_reviewed: false`. Sólo expone un departamento mencionado explícitamente y su procedencia; no implica ubicación de una violación ni aprobación de los otros campos. Una ficha revisada prevalece y suprime esta proyección. `null` puede significar datos aún no extraídos, descartados o no publicables; no demuestra ausencia de ubicación. El snapshot completo está en `/archive/locations.json`.
+`GET /api/v1/news` y MCP `search_news` incluyen `automatic_location` separado de `news_dossier`. Su estado es siempre `automated_unreviewed`, con `human_reviewed: false`. Expone únicamente la ubicación administrativa y su procedencia verificable; no implica ubicación de una violación ni aprobación de los otros campos. Una ficha revisada prevalece y suprime esta proyección. `null` puede significar datos aún no extraídos, descartados o no publicables; no demuestra ausencia de ubicación. El snapshot completo está en `/archive/locations.json`.
 
 Para una ubicación derivada de municipio, `automatic_location.method` vale
 `gemini_municipality_reference`; `resolution` identifica el municipio/distrito,
 la versión de la referencia administrativa y la página oficial que sustenta su
-departamento. `gemini_explicit_department` conserva la modalidad directa. Ambas
-siguen `automated_unreviewed` y no alteran los campos de `news_dossier`.
+departamento. `gemini_explicit_department` conserva la modalidad directa.
+
+`gemini_department_corroborated` identifica un departamento citado por el modelo
+con contexto geográfico y confirmado como tal en otro párrafo del mismo artículo.
+Su objeto `corroboration` contiene `strategy: same_article_explicit_department`,
+`model_paragraph_id`, `explicit_paragraph_id` y `rule_version: 1`. Los dos párrafos
+son distintos; `evidence.paragraph_id` coincide con `explicit_paragraph_id`, y el
+hash corresponde al cuerpo original usado por Gemini. La corroboración es una
+comprobación automática dentro de una sola fuente, no verificación independiente.
+Este método requiere la versión 3 del snapshot; los clientes aceptan también
+las versiones 1 y 2. Los tres métodos siguen `automated_unreviewed` y no alteran
+los campos ni las citas de `news_dossier`.

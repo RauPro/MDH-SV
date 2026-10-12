@@ -39,6 +39,23 @@ it('explains a department resolved from a cited municipality without pretending 
   const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
   expect(sheet).toHaveTextContent(NEWS_DOSSIER_PENDING);
 });
+it('labels same-source department corroboration as automatic and retains the pending dossier', async () => {
+  const location = { ...automatic(), method: 'gemini_department_corroborated', evidence: { paragraph_id: 'p3', content_sha256: 'a'.repeat(64) },
+    corroboration: { strategy: 'same_article_explicit_department', model_paragraph_id: 'p1', explicit_paragraph_id: 'p3', rule_version: 1 },
+  };
+  serve(fixture, EMPTY, { ...EMPTY_LOCATIONS, schema_version: 3, locations: [location] });
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  const panel = screen.getByRole('region', { name: 'Ubicación automática sin revisar' });
+  expect(panel).toHaveTextContent('Departamento corroborado automáticamente en la misma fuente: San Salvador');
+  expect(panel).toHaveTextContent('otro párrafo de la misma noticia menciona expresamente este departamento');
+  expect(panel).toHaveTextContent('Sin revisar');
+  expect(panel).toHaveTextContent('no confirma el lugar de una violación');
+  const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
+  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(sheet).getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(18);
+});
 it('discloses a registered but restricted publisher without inventing available news', async () => {
   const archive = structuredClone(fixture) as unknown as NewsArchiveData;
   archive.coverage.sources.push({ id: 'la-prensa-grafica', publisher: 'La Prensa Gráfica', endpoint: 'https://www.laprensagrafica.com/sitemap.xml', status: 'partial', records: 0, first_published_date: null, last_published_date: null, months: [], collection: { method: 'html_article_metadata', phase: 'restricted', access: 'restricted', notice: 'Pendiente de un canal autorizado.', last_attempt_at: null } });
