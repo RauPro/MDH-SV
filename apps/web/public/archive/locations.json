@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T07:30:48.168070+00:00",
+  "generated_at": "2026-10-12T09:20:03.192517+00:00",
   "locations": [
     {
       "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
@@ -207,6 +207,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
+    },
+    {
+      "candidate_id": "4c784312cd702db80fa98d3c0c8584445654b6b903dfd8590339e879cd5072dd",
+      "source_url": "https://gatoencerrado.news/2014/09/21/los-pueblos-que-dijeron-no-a-la-mineria-en-el-salvador/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2014-09-21",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-12T03:08:50.444762-06:00",
+      "source_checked_at": "2026-10-12T09:20:01.803732+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "777db32e83f5e3ed0b5143c87c90c5bf5abed0ff460e7f29be3fa39b4ae46f3d"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San José Las Flores",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
     },
     {
