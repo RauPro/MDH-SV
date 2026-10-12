@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "generated_at": "2026-10-12T14:20:18.331492+00:00",
+  "schema_version": 3,
+  "generated_at": "2026-10-12T16:08:47.485290+00:00",
   "locations": [
     {
       "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
@@ -92,6 +92,28 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "20eab78c146d0349fb888f11ec8abd2ad4f86c2e3983029a87d010c84377af21",
+      "source_url": "https://www.revistafactum.com/el-cerco-militar-revive-los-viejos-fantasmas-de-cabanas/",
+      "publisher": "Revista Factum",
+      "published_date": "2024-11-28",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_department_corroborated",
+      "extracted_at": "2026-10-11T22:57:53.972039-06:00",
+      "source_checked_at": "2026-10-12T16:08:46.558552+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "b0e97a67d5632097f765d1f6b5a2ee42ba1e4ca57ad1d01db9b13fa2b7091c47"
+      },
+      "corroboration": {
+        "strategy": "same_article_explicit_department",
+        "model_paragraph_id": "p1",
+        "explicit_paragraph_id": "p3",
+        "rule_version": 1
       }
     },
     {
@@ -341,6 +363,28 @@
       }
     },
     {
+      "candidate_id": "92346e622ab6a3809e4d79e4a7f00425f55696d7fa30b7457d715153fa9851bb",
+      "source_url": "https://gatoencerrado.news/2015/05/27/solicitan-decreto-presidencial-para-prohibir-la-mineria-en-el-salvador/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2015-05-27",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_department_corroborated",
+      "extracted_at": "2026-10-10T18:19:38.190102-06:00",
+      "source_checked_at": "2026-10-12T16:08:31.005442+00:00",
+      "evidence": {
+        "paragraph_id": "p12",
+        "content_sha256": "4a0b67f309741fd607c9811a50d11089bfe10397f4f7c21c1a5aed63e14c1099"
+      },
+      "corroboration": {
+        "strategy": "same_article_explicit_department",
+        "model_paragraph_id": "p6",
+        "explicit_paragraph_id": "p12",
+        "rule_version": 1
+      }
+    },
+    {
       "candidate_id": "9a1f530ea7aa1ff54bf65a543c4eae1af50ab7d85aaa541d34b1f30e141bd5d1",
       "source_url": "https://www.diariocolatino.com/asesinan-a-hombre-en-cercanias-de-centro-gobierno-en-zacatecoluca/",
       "publisher": "Diario Co Latino",
@@ -517,6 +561,28 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "ffc4c70bd381f60e13da114ea52b67ab7df81717b5a4868e266fcb1413985bbb",
+      "source_url": "https://www.diariocolatino.com/chalatenango-al-filo-de-una-sequia-por-la-contaminacion-en-sus-rios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-30",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_department_corroborated",
+      "extracted_at": "2026-10-11T16:06:37.671921-06:00",
+      "source_checked_at": "2026-10-12T16:08:34.396602+00:00",
+      "evidence": {
+        "paragraph_id": "p24",
+        "content_sha256": "95187550715a651a0969b300c9a36912623c7bf84c23319722b58be96d341051"
+      },
+      "corroboration": {
+        "strategy": "same_article_explicit_department",
+        "model_paragraph_id": "p6",
+        "explicit_paragraph_id": "p24",
+        "rule_version": 1
       }
     }
   ]
