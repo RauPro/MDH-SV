@@ -12,7 +12,7 @@ import { NEWS_DOSSIER_FIELDS, NEWS_DOSSIER_PENDING, pendingNewsDossier, type New
 
 const EMPTY = { schema_version: 1, dossiers: [] };
 const EMPTY_LOCATIONS = { schema_version: 1, generated_at: '2026-10-10T10:00:00Z', locations: [] };
-const automatic = (reference = fixture.records[0]) => ({ candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date, department: 'San Salvador', review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department', extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00Z', evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) } });
+const automatic = (reference = fixture.records[0]) => ({ candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date, department: 'San Salvador', review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department', extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00Z', evidence: { paragraph_id: 'p1', content_sha256: reference.selection.evidence.content_sha256 } });
 function serve(archive: unknown = fixture, dossiers: unknown = EMPTY, locations: unknown = EMPTY_LOCATIONS) {
   vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: true, json: async () => url === '/archive/dossiers.json' ? dossiers : url === '/archive/locations.json' ? locations : archive })));
 }
@@ -24,6 +24,27 @@ function approved(): NewsDossier {
 }
 beforeEach(() => { vi.restoreAllMocks(); serve(); });
 const ready = async () => { render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>); await screen.findByText('3 noticias seleccionadas'); };
+it.each(['source_explicit_department', 'source_municipality_reference'])('explains %s independently of Gemini and pending dossier fields', async method => {
+  const municipal = method === 'source_municipality_reference';
+  const location = { ...automatic(), method, rule_version: 1, department: municipal ? 'Ahuachapán' : 'San Salvador',
+    ...(municipal ? { resolution: { type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
+      reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6` } } : {}),
+  };
+  serve(fixture, EMPTY, { ...EMPTY_LOCATIONS, schema_version: 4, locations: [location] });
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByRole('button', { name: `${location.department}: 1 noticia` });
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  const panel = screen.getByRole('region', { name: 'Ubicación automática sin revisar' });
+  expect(panel).toHaveTextContent('sin usar Gemini ni esperar a que se genere la ficha completa');
+  expect(panel).not.toHaveTextContent('Departamento corroborado');
+  expect(panel).toHaveTextContent('no confirma el lugar de una violación');
+  if (municipal) {
+    expect(panel).toHaveTextContent('Departamento obtenido del municipio o distrito citado: Ahuachapán');
+    expect(within(panel).getByRole('link', { name: 'referencia oficial de municipios y distritos' })).toHaveAttribute('href', location.resolution?.source_url);
+  }
+  const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
+  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+});
 it('explains a department resolved from a cited municipality without pretending it was explicit or reviewed', async () => {
   const location = { ...automatic(), department: 'Ahuachapán', method: 'gemini_municipality_reference', resolution: {
     type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
@@ -392,10 +413,11 @@ it('maps automatic locations in a separate layer without publishing draft dossie
   expect(screen.queryByRole('region', { name: 'Ubicación automática sin revisar' })).not.toBeInTheDocument();
 });
 
-it.each(['unavailable', 'private_extra', 'wrong_binding'])('keeps the list and suppresses misleading zeroes when automatic locations are %s', async kind => {
+it.each(['unavailable', 'private_extra', 'wrong_binding', 'stale_source'])('keeps the list and suppresses misleading zeroes when automatic locations are %s', async kind => {
   const location = automatic();
   if (kind === 'private_extra') Object.assign(location, { private_summary: 'PRIVATE VALUE' });
   if (kind === 'wrong_binding') location.publisher = 'Otra editorial';
+  if (kind === 'stale_source') location.evidence.content_sha256 = 'f'.repeat(64);
   let retried = false;
   vi.mocked(fetch).mockImplementation(async url => ({
     ok: String(url) !== '/archive/locations.json' || kind !== 'unavailable' || retried,

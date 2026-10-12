@@ -50,10 +50,57 @@ export const openapi = {
     '/api/v1/openapi.json': { get: operation('getOpenApi', 'Contrato OpenAPI 3.1', [], { type: 'object' }) },
   },
   components: { schemas: {
-    AutomaticNewsLocation: { type: 'object', additionalProperties: false, allOf: [{ if: { properties: { method: { const: 'gemini_municipality_reference' } }, required: ['method'] }, then: { required: ['resolution'] }, else: { not: { required: ['resolution'] } } }, { if: { properties: { method: { const: 'gemini_department_corroborated' } }, required: ['method'] }, then: { required: ['corroboration'] }, else: { not: { required: ['corroboration'] } } }], description: 'Departamento explícito, corroborado mediante otro párrafo de la misma fuente o resuelto desde un municipio/distrito citado mediante referencia administrativa oficial; extracción automática SIN REVISAR. No confirma el lugar de una violación. Separado de la ficha y de sus aprobaciones.', required: ['candidate_id','source_url','publisher','published_date','department','review_status','human_reviewed','method','extracted_at','source_checked_at','evidence'], properties: {
-      candidate_id: { type: 'string', pattern: '^[a-f0-9]{64}$' }, source_url: { type: 'string', format: 'uri' }, publisher: { type: 'string' }, published_date: { type: 'string', format: 'date' }, department: { type: 'string' }, review_status: { type: 'string', const: 'automated_unreviewed' }, human_reviewed: { type: 'boolean', const: false }, method: { type: 'string', enum: ['gemini_explicit_department','gemini_municipality_reference','gemini_department_corroborated'] }, resolution: { type: 'object', additionalProperties: false, required: ['type','municipality','municipality_kind','reference_version','source_url'], properties: { type: { type: 'string', const: 'municipality_to_department' }, municipality: { type: 'string' }, municipality_kind: { type: 'string', enum: ['district','municipality'] }, reference_version: { type: 'string' }, source_url: { type: 'string', format: 'uri' } } }, corroboration: { type: 'object', additionalProperties: false, required: ['strategy','model_paragraph_id','explicit_paragraph_id','rule_version'], description: 'Sólo para gemini_department_corroborated, disponible en colecciones schema_version 3. Los IDs de párrafo deben ser distintos; evidence.paragraph_id debe coincidir con explicit_paragraph_id. El validador de publicación exige estas relaciones. No publica texto de la noticia.', properties: { strategy: { type: 'string', const: 'same_article_explicit_department' }, model_paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' }, explicit_paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' }, rule_version: { type: 'integer', const: 1 } } }, extracted_at: { type: 'string', format: 'date-time' }, source_checked_at: { type: 'string', format: 'date-time' }, evidence: { type: 'object', additionalProperties: false, required: ['paragraph_id','content_sha256'], properties: { paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' }, content_sha256: { type: 'string', pattern: '^[a-f0-9]{64}$' } } },
-    } },
-    AutomaticNewsLocationCollection: { type: 'object', additionalProperties: false, description: 'Snapshot público de /archive/locations.json. Las versiones 1 y 2 permanecen compatibles; el método corroborado sólo se admite en la versión 3.', required: ['schema_version','generated_at','locations'], properties: { schema_version: { type: 'integer', enum: [1, 2, 3] }, generated_at: { type: 'string', format: 'date-time' }, locations: { type: 'array', maxItems: 100000, items: ref('AutomaticNewsLocation') } }, allOf: [{ if: { properties: { schema_version: { enum: [1, 2] } }, required: ['schema_version'] }, then: { properties: { locations: { items: { not: { properties: { method: { const: 'gemini_department_corroborated' } }, required: ['method'] } } } } } }] },
+    AutomaticNewsLocation: {
+      type: 'object', additionalProperties: false,
+      description: 'Ubicación administrativa automática SIN REVISAR, separada de la ficha. Los métodos source_* leen directamente el texto mediante reglas sin llamar a Gemini ni exigir una ficha completa. Los métodos gemini_* conservan su procedencia anterior. No confirma el lugar de una violación. Para una referencia con selección gemini_grounded_scope, evidence.content_sha256 debe coincidir con el hash de esa selección; las decisiones humanas prevalecen.',
+      required: ['candidate_id','source_url','publisher','published_date','department','review_status','human_reviewed','method','extracted_at','source_checked_at','evidence'],
+      allOf: [
+        { if: { properties: { method: { enum: ['gemini_municipality_reference', 'source_municipality_reference'] } }, required: ['method'] }, then: { required: ['resolution'] }, else: { not: { required: ['resolution'] } } },
+        { if: { properties: { method: { const: 'gemini_department_corroborated' } }, required: ['method'] }, then: { required: ['corroboration'] }, else: { not: { required: ['corroboration'] } } },
+        { if: { properties: { method: { enum: ['source_explicit_department', 'source_municipality_reference'] } }, required: ['method'] }, then: { required: ['rule_version'] }, else: { not: { required: ['rule_version'] } } },
+      ],
+      properties: {
+        candidate_id: { type: 'string', pattern: '^[a-f0-9]{64}$' },
+        source_url: { type: 'string', format: 'uri', maxLength: 4096 },
+        publisher: { type: 'string', minLength: 3, maxLength: 200 },
+        published_date: { type: 'string', format: 'date' }, department: { type: 'string' },
+        review_status: { type: 'string', const: 'automated_unreviewed' }, human_reviewed: { type: 'boolean', const: false },
+        method: { type: 'string', enum: ['gemini_explicit_department','gemini_municipality_reference','gemini_department_corroborated','source_explicit_department','source_municipality_reference'] },
+        rule_version: { type: 'integer', const: 1, description: 'Obligatoria sólo para métodos source_* en colecciones schema_version 4.' },
+        resolution: { type: 'object', additionalProperties: false, required: ['type','municipality','municipality_kind','reference_version','source_url'], properties: {
+          type: { type: 'string', const: 'municipality_to_department' }, municipality: { type: 'string' },
+          municipality_kind: { type: 'string', enum: ['district','municipality'] }, reference_version: { type: 'string' }, source_url: { type: 'string', format: 'uri' },
+        } },
+        corroboration: {
+          type: 'object', additionalProperties: false,
+          required: ['strategy','model_paragraph_id','explicit_paragraph_id','rule_version'],
+          description: 'Sólo para gemini_department_corroborated en colecciones schema_version 3 o 4. Los IDs de párrafo deben ser distintos y evidence.paragraph_id coincide con explicit_paragraph_id. No publica el texto de la noticia.',
+          properties: {
+            strategy: { type: 'string', const: 'same_article_explicit_department' },
+            model_paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' },
+            explicit_paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' },
+            rule_version: { type: 'integer', const: 1 },
+          },
+        },
+        extracted_at: { type: 'string', format: 'date-time' }, source_checked_at: { type: 'string', format: 'date-time' },
+        evidence: { type: 'object', additionalProperties: false, required: ['paragraph_id','content_sha256'], properties: {
+          paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' }, content_sha256: { type: 'string', pattern: '^[a-f0-9]{64}$' },
+        } },
+      },
+    },
+    AutomaticNewsLocationCollection: {
+      type: 'object', additionalProperties: false,
+      description: 'Snapshot público de /archive/locations.json, sin cachés o contadores privados. Los métodos source_* sólo aparecen en la versión 4; el método corroborado se admite desde la versión 3. Las versiones anteriores siguen siendo compatibles.',
+      required: ['schema_version','generated_at','locations'],
+      properties: {
+        schema_version: { type: 'integer', enum: [1, 2, 3, 4] }, generated_at: { type: 'string', format: 'date-time' },
+        locations: { type: 'array', maxItems: 100000, items: ref('AutomaticNewsLocation') },
+      },
+      allOf: [
+        { if: { properties: { schema_version: { enum: [1, 2] } }, required: ['schema_version'] }, then: { properties: { locations: { items: { not: { properties: { method: { const: 'gemini_department_corroborated' } }, required: ['method'] } } } } } },
+        { if: { properties: { schema_version: { enum: [1, 2, 3] } }, required: ['schema_version'] }, then: { properties: { locations: { items: { not: { properties: { method: { enum: ['source_explicit_department', 'source_municipality_reference'] } }, required: ['method'] } } } } } },
+      ],
+    },
     NewsSelection: { description: 'Selección de pertinencia en derechos humanos de El Salvador. El indicio por palabras del título no basta. La selección automática permanece sin revisión humana y no aprueba la ficha ni confirma una violación.', oneOf: [
       { type: 'object', additionalProperties: false, required: ['method', 'review_status', 'human_reviewed', 'jurisdiction', 'relevance', 'classified_at', 'model', 'prompt_version', 'evidence'], properties: {
         method: { type: 'string', const: 'gemini_grounded_scope' }, review_status: { type: 'string', const: 'automated_unreviewed' }, human_reviewed: { type: 'boolean', const: false }, jurisdiction: { type: 'string', const: 'SV' }, relevance: { type: 'string', const: 'relevant' }, classified_at: { type: 'string', format: 'date-time' }, model: { type: 'string', pattern: '^gemini-[A-Za-z0-9_.-]{1,90}$' }, prompt_version: { type: 'string', enum: NEWS_SELECTION_PROMPTS }, evidence: { type: 'object', additionalProperties: false, required: ['content_sha256', 'jurisdiction_paragraph_ids', 'relevance_paragraph_ids'], properties: { content_sha256: { type: 'string', pattern: '^[a-f0-9]{64}$' }, ...Object.fromEntries(['jurisdiction_paragraph_ids', 'relevance_paragraph_ids'].map(key => [key, { type: 'array', minItems: 1, maxItems: 25, uniqueItems: true, items: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' } }])) } },

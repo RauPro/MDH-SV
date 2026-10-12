@@ -8,7 +8,7 @@ const reference = fixture.records[0];
 const locationFixture = (reference = fixture.records[0]): Extract<NewsLocation, { method: 'gemini_explicit_department' }> => ({
   candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date,
   department: 'San Salvador', review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department',
-  extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00+00:00', evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) },
+  extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00+00:00', evidence: { paragraph_id: 'p1', content_sha256: reference.selection.evidence.content_sha256 },
 });
 const collection = (locations: unknown[] = [locationFixture()]) => ({ schema_version: 1, generated_at: '2026-10-10T10:03:00Z', locations });
 
@@ -17,14 +17,14 @@ describe('public automatic location contract', () => {
     ...locationFixture(), method: 'gemini_department_corroborated', evidence: { paragraph_id: 'p3', content_sha256: 'a'.repeat(64) },
     corroboration: { strategy: 'same_article_explicit_department', model_paragraph_id: 'p1', explicit_paragraph_id: 'p3', rule_version: 1 },
   });
-  it('accepts a corroborated department only in schema 3 with distinct and bound paragraph IDs', () => {
+  it.each([3, 4])('accepts a corroborated department in schema %i with distinct and bound paragraph IDs', schema_version => {
     const location = corroborated();
-    const index = parsePublishedNewsLocations({ ...collection([location]), schema_version: 3 });
+    const index = parsePublishedNewsLocations({ ...collection([location]), schema_version });
     expect(newsLocationFor(reference, validateLocationBindings(index, fixture.records))).toEqual(location);
     expect(location.human_reviewed).toBe(false);
     for (const schema_version of [1, 2]) expect(() => parsePublishedNewsLocations({ ...collection([location]), schema_version })).toThrow();
   });
-  it.each([1, 2, 3])('keeps direct and municipal locations compatible with schema %i', schema_version => {
+  it.each([1, 2, 3, 4])('keeps direct and municipal locations compatible with schema %i', schema_version => {
     expect(parsePublishedNewsLocations({ ...collection(), schema_version }).size).toBe(1);
     expect(parsePublishedNewsLocations({ ...collection([municipal()]), schema_version }).size).toBe(1);
   });
@@ -48,6 +48,63 @@ describe('public automatic location contract', () => {
     type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
     reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6`,
   } });
+  const sourceDepartment = (): Extract<NewsLocation, { method: 'source_explicit_department' }> => ({
+    ...locationFixture(), method: 'source_explicit_department', rule_version: 1,
+  });
+  const sourceMunicipality = (): Extract<NewsLocation, { method: 'source_municipality_reference' }> => ({
+    ...locationFixture(), department: 'Ahuachapán', method: 'source_municipality_reference', rule_version: 1,
+    resolution: { type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
+      reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6` },
+  });
+  it('accepts source-only locations only in schema 4 without attributing them to a model', () => {
+    for (const location of [sourceDepartment(), sourceMunicipality()]) {
+      const index = parsePublishedNewsLocations({ ...collection([location]), schema_version: 4 });
+      expect(newsLocationFor(reference, validateLocationBindings(index, fixture.records))).toEqual(location);
+      expect(location.rule_version).toBe(1);
+      expect(location.human_reviewed).toBe(false);
+      expect(location).not.toHaveProperty('corroboration');
+      for (const schema_version of [1, 2, 3]) {
+        expect(() => parsePublishedNewsLocations({ ...collection([location]), schema_version })).toThrow();
+      }
+    }
+  });
+  it.each([undefined, null, 0, 2, true, '1'])('requires source rule_version to be exactly integer 1, rejecting %j', rule_version => {
+    for (const location of [sourceDepartment(), sourceMunicipality()]) {
+      expect(() => validatePublishedNewsLocation({ ...location, rule_version })).toThrow();
+    }
+  });
+  it('rejects mixed provenance and private cache fields on source-only locations', () => {
+    for (const location of [sourceDepartment(), sourceMunicipality()]) {
+      const { rule_version, ...missingRule } = location;
+      expect(rule_version).toBe(1);
+      expect(() => validatePublishedNewsLocation(missingRule)).toThrow();
+      expect(() => validatePublishedNewsLocation({ ...location, corroboration: corroborated().corroboration })).toThrow();
+      expect(() => validatePublishedNewsLocation({ ...location, full_text: 'PRIVATE' })).toThrow();
+    }
+    expect(() => validatePublishedNewsLocation({ ...locationFixture(), rule_version: 1 })).toThrow();
+    expect(() => validatePublishedNewsLocation({ ...sourceDepartment(), resolution: sourceMunicipality().resolution })).toThrow();
+    const { resolution, ...missingResolution } = sourceMunicipality();
+    expect(resolution.municipality).toBe('Jujutla');
+    expect(() => validatePublishedNewsLocation(missingResolution)).toThrow();
+    expect(() => validatePublishedNewsLocation({ ...sourceMunicipality(), department: 'San Salvador' })).toThrow();
+    for (const field of ['source_cache', 'counters', 'source_attempts']) {
+      expect(() => parsePublishedNewsLocations({ ...collection([sourceDepartment()]), schema_version: 4, [field]: {} })).toThrow();
+    }
+  });
+  it('requires every automatic method to use the same source text as automatic selection', () => {
+    for (const location of [locationFixture(), municipal(), corroborated(), sourceDepartment(), sourceMunicipality()]) {
+      const stale = { ...location, evidence: { ...location.evidence, content_sha256: 'f'.repeat(64) } };
+      const index = parsePublishedNewsLocations({ ...collection([stale]), schema_version: 4 });
+      expect(() => validateLocationBindings(index, fixture.records)).toThrow();
+      expect(newsLocationFor(reference, index)).toBeNull();
+    }
+    const reviewedReference = { ...reference, selection: { method: 'editorial_scope', human_reviewed: true,
+      review_status: 'editorially_reviewed', jurisdiction: 'SV', relevance: 'relevant', reviewed_by: 'reviewer', reviewed_at: '2026-10-10' } };
+    const location = sourceDepartment();
+    const index = parsePublishedNewsLocations({ ...collection([location]), schema_version: 4 });
+    expect(validateLocationBindings(index, [reviewedReference])).toBe(index);
+    expect(newsLocationFor(reviewedReference, index)).toEqual(location);
+  });
   it('validates municipality-to-department provenance against the bundled official reference', () => {
     expect(validatePublishedNewsLocation(municipal())).toEqual(municipal());
     const wrong = municipal(); wrong.department = 'San Salvador';
