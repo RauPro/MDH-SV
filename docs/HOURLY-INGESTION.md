@@ -35,13 +35,33 @@ Genera un token de instalación efímero limitado a ese ID de repositorio y
 Gemini ni la deploy key del publicador de ubicaciones se copian a Vercel.
 Revocar la instalación o la clave detiene este acceso.
 
-## Configurar la cuota real
+## Definir el presupuesto y su procedencia
 
-Comprobar el nivel gratuito y los límites **RPM**, **TPM de entrada** y **RPD**
-del modelo `gemini-3.5-flash-lite` en AI Studio para el proyecto dueño de la clave.
-No usar la cuota de otro modelo, una tabla antigua ni un panel vacío como dato.
-Los límites son por proyecto, no por clave. El proyecto debe estar dedicado a
-este procesador o su presupuesto debe descontar también el uso externo.
+Comprobar en AI Studio el **nivel gratuito** del proyecto dueño de la clave y
+el modelo `gemini-3.5-flash-lite`. Cuando sean visibles, comprobar también sus
+límites **RPM**, **TPM de entrada** y **RPD**. No usar la cuota de otro modelo,
+una tabla antigua ni un panel vacío como dato. Los límites del proveedor se
+aplican por proyecto, no por clave. El proyecto debe estar dedicado a este
+procesador o su presupuesto debe descontar también el uso externo.
+
+La configuración distingue dos procedencias explícitas:
+
+- `project_quota`: límites verificados del proyecto. Es el modo de las
+  configuraciones anteriores y exige conocer `rpd`, con un presupuesto propio
+  inferior a ese límite.
+- `operator_cap`: topes preventivos elegidos por el operador después de
+  comprobar el nivel gratuito, cuando Google no muestra todas las cuotas.
+  `rpd: null` expresa que el límite diario del proveedor es desconocido.
+  Los demás números son restricciones propias del procesador; **no representan
+  cuotas confirmadas de Google**. Si se proporciona un `rpd` conocido, el
+  presupuesto propio también debe ser menor.
+
+El sistema no cambia a `operator_cap` por sí solo. No se puede garantizar la
+ausencia de respuestas 429 cuando las cuotas reales no son visibles. Este modo
+limita las solicitudes, detiene el procesamiento ante un 429 y no habilita
+facturación ni cambia automáticamente de modelo o proyecto. Confirmar el nivel
+gratuito es una comprobación operativa; el registro de solicitudes no consulta
+ni modifica la configuración de facturación de Google.
 
 La variable de Actions privada `MDH_GEMINI_BUDGET_CONFIG` es un objeto JSON con:
 
@@ -49,10 +69,19 @@ La variable de Actions privada `MDH_GEMINI_BUDGET_CONFIG` es un objeto JSON con:
 | --- | --- |
 | `project_id` | Proyecto verificado de Google. |
 | `model` | `gemini-3.5-flash-lite`. |
-| `rpm`, `rpd`, `input_tpm` | Enteros positivos verificados en AI Studio. |
-| `daily_budget` | Presupuesto propio menor que `rpd`, con margen para otros usos. |
+| `limits_source` | `project_quota` por defecto; `operator_cap` sólo si se elige explícitamente. |
+| `rpm`, `input_tpm` | Límites verificados en `project_quota`; topes propios explícitos en `operator_cap`. |
+| `rpd` | Límite diario verificado; puede ser `null` únicamente en `operator_cap`. El campo no se omite. |
+| `daily_budget` | Presupuesto propio entre 1 y 20.000; menor que `rpd` siempre que éste se conozca. |
 | `batch_ceiling` | Entero entre 1 y 50. |
-| `verified_at` | Fecha y hora UTC de la comprobación, con zona horaria. |
+| `verified_at` | Fecha y hora UTC de la comprobación del nivel y la configuración, con zona horaria. |
+
+Ejemplo de **topes propios**, sin afirmar que estos números sean la cuota del
+proveedor ni que estén instalados en producción: `daily_budget: 240`, `rpm: 2`
+e `input_tpm: 200000`, con `limits_source: "operator_cap"` y `rpd: null`.
+Los 240 son solicitudes reservadas al día, incluidos reintentos, y no 240 fichas
+garantizadas. Deben completarse el proyecto, modelo, techo por lote y fecha
+comprobados antes de configurar la variable privada.
 
 No hay valores de producción predeterminados. El runner falla antes de llamar
 al modelo cuando falta la configuración, no coincide el modelo o el registro
@@ -60,6 +89,8 @@ privado no es válido. Debe provisionarse `runtime/gemini-budget.json` mediante
 `GeminiBudget.bootstrap(used_requests=...)`, usando la misma configuración y un
 cliente autenticado del repositorio privado. Esta operación sólo crea un registro
 ausente; no reinicia un contador existente.
+Cambiar la procedencia de los límites conserva los contadores existentes del
+mismo proyecto y modelo; no concede un presupuesto diario nuevo.
 
 Al instalar por primera vez, detener temporalmente la extracción anterior.
 Contabilizar todas las solicitudes del día del Pacífico, incluidos reintentos
@@ -84,7 +115,9 @@ reducir el rendimiento. No se persisten texto, hashes de artículos ni claves.
 
 Un 429 detiene llamadas hasta la siguiente medianoche de
 `America/Los_Angeles`. La fecha de reinicio sigue el horario de verano del
-Pacífico; no se codifica una hora fija de El Salvador. La cuota agotada no marca
+Pacífico; no se codifica una hora fija de El Salvador. La pausa se aplica también
+en `operator_cap`, aunque quede saldo del tope propio. No hay reintentos
+automáticos de ese 429 ni cambio a otro modelo o nivel de pago. La cuota agotada no marca
 la noticia como error ni modifica sus intentos o su borrador. Faltas de datos,
 revisión humana y publicación conservan sus reglas anteriores.
 
@@ -103,7 +136,7 @@ sin acumular lotes atrasados. Solicitudes más antiguas o futuras se rechazan.
    código anterior al reintentarse. No entregar secretos a código de pull requests.
 2. Autorizar e instalar la GitHub App. Verificar por API que selecciona solamente
    el repositorio privado y que el token no tiene permisos adicionales.
-3. Configurar Vercel y la cuota privada; provisionar el contador con consumo
+3. Configurar Vercel y el presupuesto privado con su procedencia explícita; provisionar el contador con consumo
    previo explícito. Fijar el mismo SHA revisado en los demás workflows privados
    y desplegar producción.
 4. Comprobar una invocación **Cron** en Vercel y su ejecución privada asociada.

@@ -443,3 +443,77 @@ def test_per_run_allocation_cannot_reset_or_expand_budget():
         budget.set_request_limit(3)
     with pytest.raises(QuotaStateError, match="ceiling"):
         budget.set_request_limit(51)
+
+
+def test_unknown_provider_daily_limit_requires_explicit_operator_cap_mode():
+    with pytest.raises(QuotaStateError, match="invalid_explicit_budget_configuration"):
+        configuration(rpd=None)
+    # Omitting the field is also disallowed; null explicitly denotes unknown.
+    args = vars(configuration()).copy()
+    del args["rpd"]
+    with pytest.raises(TypeError):
+        BudgetConfig(**args)
+    cap = configuration(limits_source="operator_cap", rpd=None, daily_budget=240,
+                        rpm=2, input_tpm=200_000)
+    assert cap.rpd is None and cap.daily_budget == 240
+    assert cap.limits_source == "operator_cap"
+
+
+@pytest.mark.parametrize("changes", [
+    {"limits_source": None}, {"limits_source": ""}, {"limits_source": "inferred_free_tier"},
+    {"limits_source": "operator_cap", "rpd": None, "daily_budget": 0},
+    {"limits_source": "operator_cap", "rpd": None, "daily_budget": True},
+    {"limits_source": "operator_cap", "rpd": None, "daily_budget": 20_001},
+    {"limits_source": "operator_cap", "rpd": "unknown"},
+    {"limits_source": "operator_cap", "rpd": 90, "daily_budget": 100},
+])
+def test_operator_cap_is_bounded_and_cannot_ignore_a_known_provider_limit(changes):
+    with pytest.raises(QuotaStateError):
+        configuration(**changes)
+
+
+def test_operator_cap_counts_each_retry_exhausts_and_resumes_next_pacific_day():
+    config = configuration(limits_source="operator_cap", rpd=None, daily_budget=2)
+    budget, inbox, clock = ready(config)
+    # Model retry is another request reservation; provider RPD is never fabricated.
+    assert budget.reserve(PAYLOAD).used_requests == 1
+    assert budget.reserve(PAYLOAD).used_requests == 2
+    with pytest.raises(QuotaDeferred, match="daily_budget_exhausted"):
+        budget.reserve(PAYLOAD)
+    assert inbox.document()["used_requests"] == 2
+    assert "rpd" not in inbox.document()
+    clock.now = next_pacific_midnight(clock.now)
+    assert budget.reserve(PAYLOAD).used_requests == 1
+
+
+def test_operator_cap_honors_provider_429_without_automatic_fallback():
+    budget, inbox, clock = ready(configuration(limits_source="operator_cap", rpd=None, daily_budget=240))
+    budget.reserve(PAYLOAD)
+    deadline = budget.record_429()
+    with pytest.raises(QuotaDeferred, match="provider_cooldown"):
+        budget.reserve(PAYLOAD)
+    assert budget.snapshot()["remaining_requests"] == 239
+    assert inbox.document()["model"] == MODEL
+    clock.now = deadline
+    assert budget.reserve(PAYLOAD).used_requests == 1
+
+
+def test_switching_limit_source_preserves_existing_ledger_and_consumption():
+    budget, inbox, clock = ready(used_requests=70)
+    budget.reserve(PAYLOAD)
+    existing = deepcopy(inbox.document())
+    cap = GeminiBudget(inbox, configuration(limits_source="operator_cap", rpd=None, daily_budget=80), clock=clock)
+    assert cap.snapshot()["used_requests"] == 71
+    assert inbox.document() == existing
+    assert cap.reserve(PAYLOAD).used_requests == 72
+    known = GeminiBudget(inbox, configuration(), clock=clock)
+    assert known.snapshot()["used_requests"] == 72
+    assert known.reserve(PAYLOAD).used_requests == 73
+
+
+def test_older_configuration_omitting_limits_source_still_uses_verified_quota_mode():
+    values = vars(configuration()).copy()
+    values.pop("limits_source")
+    compatible = BudgetConfig(**values)
+    assert compatible.limits_source == "project_quota"
+    assert compatible.rpd == 101 and compatible.daily_budget == 100

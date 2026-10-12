@@ -20,9 +20,13 @@ al modelo cuando una persona consulta el monitor.
   retrasarse; un HTTP 202 sólo acredita que GitHub aceptó la solicitud.
 - Cada ejecución recoge RSS e incorpora hasta 50 referencias antiguas a la cola.
   El máximo solicitado es 50 noticias; el límite efectivo se reduce según la
-  cuota verificada y las horas que faltan hasta su reinicio. Cada solicitud HTTP,
+  presupuesto configurado y las horas que faltan hasta su reinicio. Cada solicitud HTTP,
   incluso un reintento, consume ese presupuesto. Todos los disparos comparten
   una sola ejecución por hora UTC, registrada en el repositorio privado.
+- Si Google no muestra la cuota, el modo explícito `operator_cap` permite fijar
+  topes propios tras comprobar el nivel gratuito. No presenta esos topes como
+  límites de Google; un 429 pausa el procesamiento hasta el siguiente día del
+  Pacífico. No activa facturación ni cambia de modelo automáticamente.
 - Se reservan hasta cinco intentos disponibles para noticias RSS nuevas;
   después se procesa el backlog priorizando indicios de El Salvador. Las
   referencias de todos los ámbitos territoriales entran en el ingreso histórico ordinario, con

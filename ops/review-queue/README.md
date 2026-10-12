@@ -12,7 +12,10 @@ documentos personales.
 El disparador principal preparado en Vercel lo solicita al minuto 07; requiere la
 instalación y configuración descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
 Recoge RSS, incorpora hasta 50 referencias históricas y solicita hasta 50 noticias
-por lote. La cuota verificada reduce ese máximo y cuenta cada solicitud y reintento.
+por lote. El presupuesto configurado reduce ese máximo y cuenta cada solicitud
+y reintento. Si las cuotas de Google no son visibles, `operator_cap` identifica
+topes propios preventivos; un 429 pausa las llamadas hasta el siguiente día del
+Pacífico. Estos topes no son cuotas confirmadas del proveedor.
 `runtime/gemini-hourly.json` evita lotes duplicados en la misma hora UTC, incluso
 entre ejecuciones manuales y automáticas.
 Los RSS de Co Latino, GatoEncerrado y Factum y el ingreso histórico independiente
@@ -78,7 +81,7 @@ incorpora casos. Las fichas de noticias nunca se suman automáticamente a ese ca
 
 Los workflows usan un commit fijo del código público revisado. `GEMINI_API_KEY`
 permanece en Actions Secrets y `GEMINI_MODEL` selecciona el modelo. La variable
-`MDH_GEMINI_BUDGET_CONFIG` contiene los límites verificados, sin secretos;
+`MDH_GEMINI_BUDGET_CONFIG` contiene los límites y su procedencia, sin secretos;
 `runtime/gemini-budget.json` registra reservas de solicitudes sin contenido periodístico.
 Sin configuración o registro válidos, el procesador no llama a Google.
 La clave Gemini no se guarda en Issues, fichas, archivos públicos ni Vercel.

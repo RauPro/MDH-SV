@@ -9,7 +9,9 @@ Input accounting uses the UTF-8 size of the *entire serialized JSON request* plu
 1024 units for framing. It is an intentionally conservative admission bound, not
 an exact Gemini tokenizer or a quota lookup. No countTokens request is made and
 no payload, payload hash, article, credential or provider response is persisted.
-All quota values must come from explicitly verified project limits.
+Limits are explicitly sourced: verified project quotas, or deliberately selected
+operator caps after checking the project's free tier. Operator caps are not
+claims about Google's unpublished limits and do not guarantee avoiding a 429.
 """
 from __future__ import annotations
 
@@ -84,22 +86,26 @@ class BudgetConfig:
     project_id: str
     model: str
     rpm: int
-    rpd: int
+    rpd: int | None
     input_tpm: int
     daily_budget: int
     batch_ceiling: int
     verified_at: str
+    limits_source: str = "project_quota"
 
     def __post_init__(self):
         if (not isinstance(self.project_id, str)
                 or not re.fullmatch(r"[a-z][a-z0-9-]{4,62}", self.project_id)
                 or self.model != MODEL
                 or not _integer(self.rpm, 1, MAX_REQUESTS)
-                or not _integer(self.rpd, 2, MAX_REQUESTS)
                 or not _integer(self.input_tpm, TOKEN_FRAMING_ALLOWANCE + 1, 100_000_000)
-                or not _integer(self.daily_budget, 1, self.rpd - 1)
+                or not _integer(self.daily_budget, 1, MAX_REQUESTS)
+                or self.limits_source not in ("project_quota", "operator_cap")
                 or not _integer(self.batch_ceiling, 1, 50)):
             raise QuotaStateError("invalid_explicit_budget_configuration")
+        if self.limits_source == "project_quota" or self.rpd is not None:
+            if not _integer(self.rpd, 2, MAX_REQUESTS) or self.daily_budget >= self.rpd:
+                raise QuotaStateError("invalid_explicit_budget_configuration")
         _timestamp(self.verified_at)
 
     def validate_batch(self, limit):
