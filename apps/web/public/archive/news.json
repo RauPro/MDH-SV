@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T18:41:13.471519+00:00",
+  "generated_at": "2026-10-12T18:46:04.760719+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 6199,
-      "selected": 72,
+      "selected": 71,
       "evaluated": 102,
-      "relevant": 72,
-      "excluded": 20,
+      "relevant": 71,
+      "excluded": 21,
       "uncertain": 10,
       "pending": 6097,
-      "evaluated_at": "2026-10-12T18:41:13.144413+00:00"
+      "evaluated_at": "2026-10-12T18:46:04.387066+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-12",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 72,
+    "records": 71,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 58,
+        "records": 57,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -881,7 +881,7 @@
           {
             "month": "2015-09",
             "status": "enumerated",
-            "records": 2,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 1045,
             "source_total_posts": 1045,
@@ -20056,12 +20056,12 @@
         "month": "2015-09",
         "start_date": "2015-09-01",
         "end_date": "2015-09-30",
-        "records": 3,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 2
+            "records": 1
           },
           {
             "source_id": "gatoencerrado",
@@ -27531,51 +27531,6 @@
           ],
           "relevance_paragraph_ids": [
             "p5"
-          ]
-        }
-      }
-    },
-    {
-      "id": "7c37244bab38c5b43cd6fce3c6fa3285d22dee162f699d24a8dc1626714ed2bf",
-      "title": "Prisión preventiva por tráfico de objetos prohibidos en penal de Usulután",
-      "title_truncated": false,
-      "publisher": "Diario Co Latino",
-      "source_id": "co-latino",
-      "source_url": "https://www.diariocolatino.com/prision-preventiva-por-trafico-de-objetos-prohibidos-en-penal-de-usulutan/",
-      "published_date": "2015-09-11",
-      "review_status": "not_reviewed",
-      "jurisdiction_status": "not_reviewed",
-      "record_type": "news_reference",
-      "topics": [
-        "condiciones_de_reclusion"
-      ],
-      "scope_hint": "el_salvador",
-      "scope_terms": [
-        "usulutan"
-      ],
-      "discovery": {
-        "method": "wordpress_rest_title_screen",
-        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
-        "source_post_id": 79942,
-        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
-      },
-      "selection": {
-        "method": "gemini_grounded_scope",
-        "review_status": "automated_unreviewed",
-        "human_reviewed": false,
-        "jurisdiction": "SV",
-        "relevance": "relevant",
-        "classified_at": "2026-10-12T12:40:33.165371-06:00",
-        "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
-        "evidence": {
-          "content_sha256": "1751dce5726300d6b3140a9cef957034e73a7bcebd6f9a66b90afe28b9fd2628",
-          "jurisdiction_paragraph_ids": [
-            "p2"
-          ],
-          "relevance_paragraph_ids": [
-            "p2",
-            "p10"
           ]
         }
       }

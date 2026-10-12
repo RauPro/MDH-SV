@@ -69,8 +69,9 @@ del JSON completo. Se preserva un intento para RSS nuevo antes del backlog
 positivo. Los reintentos también consumen presupuesto.
 
 Las decisiones quedan en `scope-reviews/`; v2 conserva un recibo de lectura con
-fecha, método, truncamiento y hash, sin cuerpo. Las evaluaciones con políticas v1/v2 se reanalizan una vez antes de continuar
-con referencias nuevas, sin reiniciar el contador de uso. Una ficha
+fecha, método, truncamiento y hash, sin cuerpo. Las evaluaciones con políticas
+v1/v2 se reanalizan una vez antes de continuar con referencias nuevas, sin
+reiniciar el contador de uso. Una ficha
 puede conservar otro snapshot: no bloquea la clasificación de una lectura nueva
 ni convierte los datos antiguos en campos aprobados.
 
@@ -82,6 +83,17 @@ describen lo consultado; una caché no demuestra que la página no haya cambiado
 `review-scope.yml` queda para pruebas manuales; no duplica automáticamente el
 presupuesto del job horario. Todos comparten el contador persistente de Gemini y
 la pausa global ante 429. No se eleva el tope diario ni se habilita facturación.
+
+## Correcciones automáticas trazables
+
+`data/selection/scope_audits.json` conserva exclusiones tras comprobar una fuente
+que el clasificador interpretó incorrectamente. Son decisiones automáticas, con
+`human_reviewed: false`, identidad bibliográfica, fecha, motivo acotado y hash
+del texto; nunca contienen fichas, citas ni identidades extraídas. Una corrección
+sólo prevalece sobre una evaluación automática del mismo contenido. Un texto
+nuevo requiere otra evaluación y las decisiones humanas conservan prioridad.
+El publicador aplica este registro al regenerar los recuentos, para impedir que
+un lote posterior reincorpore silenciosamente el mismo falso positivo.
 
 ## Interpretar los recuentos
 

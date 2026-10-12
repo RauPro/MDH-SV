@@ -72,7 +72,7 @@ jobs:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: |
           python -m mdh_pipeline.history --export-only --candidates-only --data-dir publication/data/history --output candidates.json
-          python -m mdh_pipeline.news_selection --drafts inbox/drafts --scope-reviews inbox/scope-reviews --archive candidates.json --output publication/data/selection/news.json --reviewed-dossiers publication/data/reviewed/news_dossiers.json --excluded-ids excluded-news.json
+          python -m mdh_pipeline.news_selection --drafts inbox/drafts --scope-reviews inbox/scope-reviews --archive candidates.json --output publication/data/selection/news.json --reviewed-dossiers publication/data/reviewed/news_dossiers.json --scope-audits publication/data/selection/scope_audits.json --excluded-ids excluded-news.json
           python -m mdh_pipeline.history --export-only --data-dir publication/data/history --selection publication/data/selection/news.json --reviewed-news publication/data/reviewed/news_dossiers.json --output publication/apps/web/public/archive/news.json --excluded-ids excluded-news.json
           python -m mdh_pipeline.news_publication --source publication/data/reviewed/news_dossiers.json --archive publication/apps/web/public/archive/news.json --destination publication/apps/web/public/archive/dossiers.json
       - name: Proyectar únicamente ubicaciones administrativas con evidencia

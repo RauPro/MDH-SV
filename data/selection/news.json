@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T18:41:13.144413+00:00",
+  "generated_at": "2026-10-12T18:46:04.387066+00:00",
   "assessment_counts": {
     "candidates": 6199,
     "evaluated": 102,
-    "relevant": 72,
-    "excluded": 20,
+    "relevant": 71,
+    "excluded": 21,
     "uncertain": 10,
     "pending": 6097
   },
@@ -870,32 +870,6 @@
             "p2",
             "p9",
             "p12"
-          ]
-        }
-      }
-    },
-    {
-      "candidate_id": "7c37244bab38c5b43cd6fce3c6fa3285d22dee162f699d24a8dc1626714ed2bf",
-      "source_url": "https://www.diariocolatino.com/prision-preventiva-por-trafico-de-objetos-prohibidos-en-penal-de-usulutan/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-09-11",
-      "selection": {
-        "method": "gemini_grounded_scope",
-        "review_status": "automated_unreviewed",
-        "human_reviewed": false,
-        "jurisdiction": "SV",
-        "relevance": "relevant",
-        "classified_at": "2026-10-12T12:40:33.165371-06:00",
-        "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
-        "evidence": {
-          "content_sha256": "1751dce5726300d6b3140a9cef957034e73a7bcebd6f9a66b90afe28b9fd2628",
-          "jurisdiction_paragraph_ids": [
-            "p2"
-          ],
-          "relevance_paragraph_ids": [
-            "p2",
-            "p10"
           ]
         }
       }

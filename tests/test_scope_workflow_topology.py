@@ -34,5 +34,5 @@ def test_publisher_separates_news_withdrawals_from_automatic_location_overrides(
     text = '\n'.join(s.get('run', '') for s in value['jobs']['publish']['steps'])
     assert 'editorial_excluded_ids(inbox, imported_ids=reviewed_ids)' in text
     assert 'excluded | reviewed_ids' in text
-    assert '--reviewed-dossiers publication/data/reviewed/news_dossiers.json --excluded-ids excluded-news.json' in text
+    assert '--reviewed-dossiers publication/data/reviewed/news_dossiers.json --scope-audits publication/data/selection/scope_audits.json --excluded-ids excluded-news.json' in text
     assert '--output publication/apps/web/public/archive/news.json --excluded-ids excluded-news.json' in text

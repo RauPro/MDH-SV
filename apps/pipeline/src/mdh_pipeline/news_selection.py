@@ -29,6 +29,7 @@ _ENTRY = {"candidate_id", "source_url", "publisher", "published_date", "selectio
 MAX_SELECTIONS = 50_000
 MAX_DRAFT_BYTES = 512_000
 MAX_JSON_BYTES = 30_000_000
+DEFAULT_SCOPE_AUDITS = Path(__file__).resolve().parents[4] / "data/selection/scope_audits.json"
 
 
 def _fail():
@@ -262,6 +263,46 @@ def validate_scope_review(document, *, reference, content_sha256, now=None):
     return deepcopy(document)
 
 
+def validate_scope_audits(document, archive=None, *, now=None):
+    """Validate minimal source-audit provenance; no source text or human attribution."""
+    from .review_queue import canonical_url
+    required = {"candidate_id", "source_url", "publisher", "published_date", "content_sha256",
+                "decision", "method", "human_reviewed", "checked_at", "reason"}
+    if (not isinstance(document, dict) or set(document) != {"schema_version", "audits"}
+            or type(document["schema_version"]) is not int or document["schema_version"] != 1
+            or not isinstance(document["audits"], list) or len(document["audits"]) > MAX_SELECTIONS):
+        _fail()
+    references = _archive_index(archive) if archive is not None else None
+    instant = now or datetime.now(timezone.utc)
+    instant = _timestamp(instant.isoformat() if isinstance(instant, datetime) else instant)
+    seen = set()
+    for entry in document["audits"]:
+        if (not isinstance(entry, dict) or set(entry) != required
+                or not _matches(_HEX, entry["candidate_id"]) or not _matches(_HEX, entry["content_sha256"])
+                or entry["method"] != "automated_source_audit" or entry["human_reviewed"] is not False
+                or entry["decision"] != "not_relevant" or entry["reason"] != "no_substantive_human_rights_nexus"
+                or not isinstance(entry["source_url"], str) or len(entry["source_url"]) > 4096
+                or not isinstance(entry["publisher"], str) or not 3 <= len(entry["publisher"].strip()) <= 200):
+            _fail()
+        try:
+            if (canonical_url(entry["source_url"]) != entry["source_url"]
+                    or hashlib.sha256(entry["source_url"].encode()).hexdigest() != entry["candidate_id"]
+                    or not _day(entry["published_date"]) <= _timestamp(entry["checked_at"]).date()
+                    or _timestamp(entry["checked_at"]) > instant):
+                _fail()
+        except (ValueError, TypeError):
+            _fail()
+        identity = (entry["candidate_id"], entry["content_sha256"])
+        if identity in seen:
+            _fail()
+        seen.add(identity)
+        # A collection may contain historical audits outside this archive slice.
+        # Present references must match exactly; absent references are not selected.
+        if references is not None and entry["candidate_id"] in references and not _bound(entry, references[entry["candidate_id"]]):
+            _fail()
+    return deepcopy(document)
+
+
 def _excluded_set(values):
     if isinstance(values, (str, bytes)):
         _fail()
@@ -326,7 +367,8 @@ def _dossier_decision(original, reference, instant):
                      legacy=extraction["prompt_version"] == LEGACY_FULL_SCOPE_PROMPT)
 
 
-def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_reviews=None, reviewed_dossiers=None):
+def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_reviews=None,
+                           reviewed_dossiers=None, scope_audits=None):
     """Classify bibliography directly from source-bound private scope snapshots.
 
     A dossier or queue issue is never a prerequisite. The source reader validates
@@ -339,6 +381,8 @@ def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_
     now = now or datetime.now(timezone.utc)
     generated = now.isoformat() if isinstance(now, datetime) else now
     instant = _timestamp(generated)
+    audits = validate_scope_audits(scope_audits if scope_audits is not None else
+                                  {"schema_version": 1, "audits": []}, archive, now=instant)["audits"]
     decisions = {}
     seen = set()
     for original in drafts:
@@ -393,6 +437,12 @@ def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_
             latest[identifier] = {"category": "uncertain", "selection": None}
         else:
             latest[identifier] = newest[-1]
+    for audit in audits:
+        decision = latest.get(audit["candidate_id"])
+        if decision is not None and decision.get("hash") == audit["content_sha256"]:
+            # The audited bytes alone are excluded. A new source hash remains
+            # eligible for classification, and an explicit human decision follows.
+            latest[audit["candidate_id"]] = {**decision, "category": "excluded", "selection": None}
     if reviewed_dossiers is not None:
         from .news_publication import validate_collection
         for dossier in validate_collection(reviewed_dossiers, archive=archive)["dossiers"]:
@@ -524,6 +574,7 @@ def main():
     parser.add_argument("--excluded-ids", type=Path, help="JSON list of candidate IDs rejected by human review")
     parser.add_argument("--scope-reviews", type=Path, help="Independent private source snapshots; a dossier is not required")
     parser.add_argument("--reviewed-dossiers", type=Path, help="Approved human scope decisions included in snapshot counts")
+    parser.add_argument("--scope-audits", type=Path, help="Source-bound automated exclusions; defaults to repository audit collection")
     args = parser.parse_args()
     try:
         paths = []
@@ -544,9 +595,12 @@ def main():
             scope_paths = sorted(args.scope_reviews.glob("*.json"))
             if len(scope_paths) > MAX_SELECTIONS:
                 _fail()
+        audit_path = args.scope_audits if args.scope_audits is not None else DEFAULT_SCOPE_AUDITS
+        audits = (_read_json(audit_path, MAX_JSON_BYTES)
+                  if args.scope_audits is not None or audit_path.exists() else {"schema_version": 1, "audits": []})
         document = project_news_selection(_read_drafts(paths), archive, excluded,
             scope_reviews=_read_drafts(scope_paths), reviewed_dossiers=(
-                _read_json(args.reviewed_dossiers, MAX_JSON_BYTES) if args.reviewed_dossiers else None))
+                _read_json(args.reviewed_dossiers, MAX_JSON_BYTES) if args.reviewed_dossiers else None), scope_audits=audits)
         if args.output.exists():
             try:
                 previous = validate_manifest(_read_json(args.output, MAX_JSON_BYTES))

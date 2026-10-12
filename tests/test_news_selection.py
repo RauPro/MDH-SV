@@ -2,6 +2,7 @@
 from copy import deepcopy
 from datetime import date, datetime, timedelta, timezone
 import json
+from pathlib import Path
 
 import pytest
 
@@ -11,7 +12,7 @@ from mdh_pipeline.news_selection import (
     FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT,
     SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT,
     project_news_selection, select_archive,
-    validate_manifest, validate_scope_review, validate_selection,
+    validate_manifest, validate_scope_review, validate_scope_audits, validate_selection,
 )
 
 NOW = datetime(2026, 10, 12, 16, 0, tzinfo=timezone.utc)
@@ -98,6 +99,67 @@ def rights_review(item=None, **classification):
     value = inclusive_review(item, **classification)
     value["extraction"]["prompt_version"] = RIGHTS_SCOPE_PROMPT
     return value
+
+
+def source_audit(item=None):
+    item = item or reference()
+    return {"schema_version": 1, "audits": [{"candidate_id": item["id"],
+        **{key: item[key] for key in ("source_url", "publisher", "published_date")},
+        "content_sha256": "c" * 64, "decision": "not_relevant", "method": "automated_source_audit",
+        "human_reviewed": False, "checked_at": "2026-10-12T15:00:00Z",
+        "reason": "no_substantive_human_rights_nexus"}]}
+
+
+def test_source_audit_suppresses_repeated_model_positives_only_for_the_audited_text():
+    audit = source_audit()
+    for prepared_at in ("2026-10-12T14:02:00Z", "2026-10-12T15:01:00Z"):
+        assessment = rights_review(); assessment["extraction"]["prepared_at"] = prepared_at
+        manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[assessment], scope_audits=audit)
+        assert manifest["selections"] == []
+        assert manifest["assessment_counts"]["excluded"] == 1 and manifest["assessment_counts"]["pending"] == 0
+        assert "automated_source_audit" not in json.dumps(manifest)
+        assert "no_substantive_human_rights_nexus" not in json.dumps(manifest)
+
+    changed = rights_review()
+    changed["evidence"]["content_sha256"] = changed["source_read"]["content_sha256"] = "d" * 64
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[changed], scope_audits=audit)
+    assert len(manifest["selections"]) == 1 and manifest["assessment_counts"]["excluded"] == 0
+
+
+def test_human_editorial_approval_precedes_an_automated_source_audit():
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[rights_review()],
+                                      scope_audits=source_audit(), reviewed_dossiers=reviewed())
+    assert manifest["assessment_counts"]["relevant"] == 1 and manifest["assessment_counts"]["excluded"] == 0
+    selection = select_archive(archive(), manifest, reviewed())["records"][0]["selection"]
+    assert selection["method"] == "editorial_scope" and selection["human_reviewed"] is True
+
+
+@pytest.mark.parametrize("mutate", [
+    lambda a: a.update(private_note="PRIVATE_SENTINEL"),
+    lambda a: a["audits"][0].update(quote="PRIVATE_SENTINEL"),
+    lambda a: a["audits"][0].update(human_reviewed=True),
+    lambda a: a["audits"][0].update(publisher="Otro medio"),
+    lambda a: a["audits"][0].update(candidate_id="a" * 64),
+    lambda a: a["audits"][0].update(reason="freeform private identity"),
+    lambda a: a["audits"][0].update(content_sha256="invalid"),
+    lambda a: a["audits"].append(deepcopy(a["audits"][0])),
+])
+def test_source_audit_is_strict_minimal_provenance_bound_to_the_bibliography(mutate):
+    audit = source_audit(); mutate(audit)
+    with pytest.raises(ValueError) as error:
+        validate_scope_audits(audit, archive(), now=NOW)
+    assert "PRIVATE_SENTINEL" not in str(error.value)
+
+
+def test_committed_source_audits_validate_against_collected_metadata_without_publishing_them():
+    root = Path(__file__).resolve().parents[1]
+    audit = json.loads((root / "data/selection/scope_audits.json").read_text())
+    references = {}
+    for path in (root / "data/history").glob("*.json"):
+        for item in json.loads(path.read_text()).get("records", []):
+            references[item["id"]] = item
+    assert all(entry["candidate_id"] in references for entry in audit["audits"])
+    assert validate_scope_audits(audit, {"schema_version": 1, "records": list(references.values())}) == audit
 
 
 @pytest.mark.parametrize("prompt", ["mdh-private-grounded-5", "mdh-universal-news-grounded-6",
@@ -790,6 +852,7 @@ def test_cli_human_scope_decisions_update_snapshot_counts_without_creating_autom
 
 def test_cli_snapshot_timestamp_tracks_new_negative_assessment_and_stays_stable_when_unchanged(tmp_path, monkeypatch):
     import mdh_pipeline.news_selection as module
+    monkeypatch.setattr(module, "DEFAULT_SCOPE_AUDITS", tmp_path / "no-default-audit.json")
     first, second = reference(1), reference(2)
     scopes = tmp_path / "scope-reviews"; scopes.mkdir()
     (scopes / (first["id"] + ".json")).write_text(json.dumps(inclusive_review(first)))
@@ -818,3 +881,19 @@ def test_cli_snapshot_timestamp_tracks_new_negative_assessment_and_stays_stable_
     clock[0] += timedelta(minutes=1)
     module.main()
     assert json.loads(output.read_text()) == updated
+
+
+def test_cli_uses_default_audit_collection_and_explicit_missing_audit_fails(cli_files, monkeypatch):
+    import sys
+    import mdh_pipeline.news_selection as module
+    audits = cli_files["drafts"].parent / "scope-audits.json"
+    audits.write_text(json.dumps(source_audit()))
+    monkeypatch.setattr(module, "DEFAULT_SCOPE_AUDITS", audits)
+    module.main()
+    document = json.loads(cli_files["output"].read_text())
+    assert document["selections"] == [] and document["assessment_counts"]["excluded"] == 1
+    previous = cli_files["output"].read_bytes()
+    monkeypatch.setattr("sys.argv", sys.argv + ["--scope-audits", str(audits.with_name("missing.json"))])
+    with pytest.raises(SystemExit):
+        module.main()
+    assert cli_files["output"].read_bytes() == previous
