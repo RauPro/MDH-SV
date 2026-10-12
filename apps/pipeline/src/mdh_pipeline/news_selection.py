@@ -374,6 +374,12 @@ def select_archive(archive, manifest, reviewed_dossiers=None):
             selection_method="Selección de pertinencia en derechos humanos y alcance en El Salvador a partir del texto, con evidencia localizada; las decisiones editoriales prevalecen.",
             notice="Archivo bibliográfico parcial seleccionado por pertinencia en derechos humanos y alcance en El Salvador. La selección automatizada no equivale a revisión humana ni acredita violaciones o hechos verificados. Las fichas y el recuento de casos mantienen su revisión editorial y de privacidad separada.",
         )
+        result["policy"]["coverage_limitations"] = [
+            "La clasificación temática automática puede equivocarse; las decisiones humanas prevalecen.",
+            "Las candidatas sin evaluación vigente quedan fuera de esta consulta; el archivo seleccionado no mide la totalidad de noticias pertinentes.",
+            *[line for line in result["policy"].get("coverage_limitations", [])
+              if not line.startswith("El filtro de títulos y URL")],
+        ]
     except (KeyError, TypeError, AttributeError):
         _fail()
     return result

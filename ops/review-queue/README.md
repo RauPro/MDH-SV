@@ -1,6 +1,6 @@
 # Cola editorial privada de MDH-SV
 
-La consulta pública aplica el [protocolo de selección temática](../../docs/NEWS-SELECTION.md).
+La consulta pública aplica el [protocolo de selección temática](https://github.com/RauPro/MDH-SV/blob/main/docs/NEWS-SELECTION.md).
 Las candidatas se reconstruyen desde los checkpoints, no desde el archivo público
 filtrado. Instala también `review-scope.yml`: reevalúa clasificaciones antiguas con
 el mismo presupuesto de Gemini y guarda decisiones mínimas en `scope-reviews/`.
