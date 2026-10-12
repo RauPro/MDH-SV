@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T17:06:08.484749+00:00",
+  "generated_at": "2026-10-12T18:20:19.308473+00:00",
   "selections": [
     {
       "candidate_id": "18448b76dae68903ff7ff53e7aec88b87be67d1dcb214c6e8dcfbc4fc049ee65",
@@ -361,6 +361,32 @@
       }
     },
     {
+      "candidate_id": "44ebf9def65fb72da10e9c92e686a40765ec0f21670a6f364be077a1b35f3d76",
+      "source_url": "https://www.diariocolatino.com/expresidente-guatemalteco-portillo-condenado-a-prision-en-estados-unidos-por-intentar-lavar-dinero-proveniente-de-taiwan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:13:16.899717-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "d024a9352c12c01c20878c58955f95bb0ae7c1a65f703b7cdd00a57c0f90e950",
+          "jurisdiction_paragraph_ids": [
+            "p20",
+            "p21"
+          ],
+          "relevance_paragraph_ids": [
+            "p21"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "46cae34e658d0f0a029e00a9bb15fe6d3a1b72bc39908654a833e9e5532d3df3",
       "source_url": "https://www.diariocolatino.com/los-desaparecidos-siempre-dicen-la-verdad-escuadrones-de-la-muerte-en-el-salvador-3/",
       "publisher": "Diario Co Latino",
@@ -412,6 +438,31 @@
             "p4",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4db2e25191fe9069f6a9bbba94faa34ec9197c7eb9cbe4f3c53b4d11a8dc482c",
+      "source_url": "https://www.diariocolatino.com/fundaungo-presenta-estudio-sobre-la-evolucion-de-las-cifras-de-homicidios-en-el-salvador-durante-los-ultimos-anos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:08:56.504828-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "2c6b9f0307324303f07f42d71631a061f3d677e0aca31d1bcd88b8d7e9f9bbc5",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }
@@ -497,6 +548,32 @@
             "p1",
             "p7",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "5eaff40875c92603a05e6e9bf24cc463b48adcb9d79e5e8abe5de68b51def2e2",
+      "source_url": "https://www.diariocolatino.com/secretaria-de-inclusion-social-condena-asesinato-de-funcionaria-de-ciudad-mujer-usulutan-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:04:02.153275-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "e36cc4053ce49fd3b36e3a3004e2111858e6bee6911ff936e997177844c87671",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
           ]
         }
       }
@@ -1016,6 +1093,31 @@
       }
     },
     {
+      "candidate_id": "b8e167f1cdd62bfbd81b49aa33035c359913dd7120a3ba4a194aff3cc855802f",
+      "source_url": "https://www.diariocolatino.com/censura-al-gobierno-en-medios-busca-privilegiar-candidatura-de-quijano/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:17:55.234593-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "2d7c5551e9e8df6094640a4dec0fd2777eb9a283485bfed334729d2d7a454698",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "ba4e966665fb6b08392f41df249f8eb2c521ed5b4d5fb6e94274a20e78314f08",
       "source_url": "https://www.diariocolatino.com/penal-de-mariona-en-emergencia-por-15-dias/",
       "publisher": "Diario Co Latino",
@@ -1121,6 +1223,31 @@
             "p2",
             "p4",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "da8f069293ef432e922220fc840f0cef0a949f3962991919221d3e989596a504",
+      "source_url": "https://www.diariocolatino.com/yo-si-creo-en-la-lucha-sindical-yo-si-creo-en-la-lucha-reivindicativa-sindicalistas-salvadorenas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:07:48.893296-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "006b26dbabc9c1ce245ad36df69dcb092cfa4ded57045e9386aca9ce09cbe4a4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
@@ -1265,6 +1392,31 @@
             "p3",
             "p5",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fab91838fa384d7142ed865e4f2f4d94b6508bb88780355a9a74107056ba327d",
+      "source_url": "https://www.diariocolatino.com/secretaria-de-inclusion-social-condena-asesinato-de-funcionaria-de-ciudad-mujer-usulutan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:09:10.735551-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "ea83df3a701cd3eec041a383b1f4db512c6d6033a5666eef60fb641b88b993d1",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }

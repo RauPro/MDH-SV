@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T17:06:09.019070+00:00",
+  "generated_at": "2026-10-12T18:20:20.170879+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,7 +23,7 @@
       "version": 1,
       "scope": "human_rights_el_salvador",
       "candidates": 6199,
-      "selected": 48
+      "selected": 54
     }
   },
   "paper": {
@@ -45,14 +45,14 @@
     "end_date": "2026-10-12",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 48,
+    "records": 54,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 41,
+        "records": 47,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -647,7 +647,7 @@
           {
             "month": "2014-02",
             "status": "enumerated",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 967,
             "source_total_posts": 967,
@@ -683,7 +683,7 @@
           {
             "month": "2014-05",
             "status": "enumerated",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 1083,
             "source_total_posts": 1083,
@@ -755,7 +755,7 @@
           {
             "month": "2014-11",
             "status": "enumerated",
-            "records": 1,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 985,
             "source_total_posts": 985,
@@ -935,7 +935,7 @@
           {
             "month": "2016-02",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 1076,
             "source_total_posts": 1076,
@@ -19233,12 +19233,12 @@
         "month": "2014-02",
         "start_date": "2014-02-01",
         "end_date": "2014-02-28",
-        "records": 1,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 2
           },
           {
             "source_id": "gatoencerrado",
@@ -19362,12 +19362,12 @@
         "month": "2014-05",
         "start_date": "2014-05-01",
         "end_date": "2014-05-31",
-        "records": 1,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 2
           },
           {
             "source_id": "gatoencerrado",
@@ -19620,12 +19620,12 @@
         "month": "2014-11",
         "start_date": "2014-11-01",
         "end_date": "2014-11-30",
-        "records": 1,
+        "records": 4,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 4
           },
           {
             "source_id": "gatoencerrado",
@@ -20265,12 +20265,12 @@
         "month": "2016-02",
         "start_date": "2016-02-01",
         "end_date": "2016-02-29",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "gatoencerrado",
@@ -26327,6 +26327,50 @@
       }
     },
     {
+      "id": "da8f069293ef432e922220fc840f0cef0a949f3962991919221d3e989596a504",
+      "title": "“Yo si creo en la lucha sindical, yo sí creo en la lucha reivindicativa”: sindicalistas salvadoreñas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/yo-si-creo-en-la-lucha-sindical-yo-si-creo-en-la-lucha-reivindicativa-sindicalistas-salvadorenas/",
+      "published_date": "2016-02-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorenas"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 93956,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:07:48.893296-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "006b26dbabc9c1ce245ad36df69dcb092cfa4ded57045e9386aca9ce09cbe4a4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "id": "5ce385f90846750a930f3bf528d0a6f0e6e47e0c46bef63876d30ae0d54d73c6",
       "title": "Juez espaþol pide detener a 17 militares salvadoreþos por caso jesuitas",
       "title_truncated": false,
@@ -27748,6 +27792,139 @@
       }
     },
     {
+      "id": "5eaff40875c92603a05e6e9bf24cc463b48adcb9d79e5e8abe5de68b51def2e2",
+      "title": "Secretaría de Inclusión Social condena asesinato de funcionaria de Ciudad Mujer Usulután",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/secretaria-de-inclusion-social-condena-asesinato-de-funcionaria-de-ciudad-mujer-usulutan-2/",
+      "published_date": "2014-11-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "usulutan"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 34104,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:04:02.153275-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "e36cc4053ce49fd3b36e3a3004e2111858e6bee6911ff936e997177844c87671",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fab91838fa384d7142ed865e4f2f4d94b6508bb88780355a9a74107056ba327d",
+      "title": "Secretaria de Inclusión Social condena asesinato de funcionaria de Ciudad Mujer Usulután",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/secretaria-de-inclusion-social-condena-asesinato-de-funcionaria-de-ciudad-mujer-usulutan/",
+      "published_date": "2014-11-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "usulutan"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 33993,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:09:10.735551-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "ea83df3a701cd3eec041a383b1f4db512c6d6033a5666eef60fb641b88b993d1",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4db2e25191fe9069f6a9bbba94faa34ec9197c7eb9cbe4f3c53b4d11a8dc482c",
+      "title": "FUNDAUNGO presenta estudio sobre la evolución de las cifras de homicidios en El Salvador durante los últimos años",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fundaungo-presenta-estudio-sobre-la-evolucion-de-las-cifras-de-homicidios-en-el-salvador-durante-los-ultimos-anos/",
+      "published_date": "2014-11-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 33956,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:08:56.504828-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "2c6b9f0307324303f07f42d71631a061f3d677e0aca31d1bcd88b8d7e9f9bbc5",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "id": "32246586a45b875f70ce2c17fff7ed79d0118a0803d7aadda8dfdebbfa123fe4",
       "title": "Trabajadores de la alcaldía de San Salvador denuncian violaciones a sus derechos",
       "title_truncated": false,
@@ -27843,6 +28020,52 @@
       }
     },
     {
+      "id": "44ebf9def65fb72da10e9c92e686a40765ec0f21670a6f364be077a1b35f3d76",
+      "title": "Expresidente guatemalteco Portillo condenado a prisión en Estados Unidos por intentar lavar dinero proveniente de Taiwán",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/expresidente-guatemalteco-portillo-condenado-a-prision-en-estados-unidos-por-intentar-lavar-dinero-proveniente-de-taiwan/",
+      "published_date": "2014-05-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "estados unidos",
+        "taiwan"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 16063,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T11:13:16.899717-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "d024a9352c12c01c20878c58955f95bb0ae7c1a65f703b7cdd00a57c0f90e950",
+          "jurisdiction_paragraph_ids": [
+            "p20",
+            "p21"
+          ],
+          "relevance_paragraph_ids": [
+            "p21"
+          ]
+        }
+      }
+    },
+    {
       "id": "fb03abd8d9765abf1e88b8ec23bf296199e15d8c539163ea2c290ede4992658e",
       "title": "Experto dice. Hay poca información sobre la Minería en El Salvador",
       "title_truncated": false,
@@ -27886,6 +28109,48 @@
             "p3",
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b8e167f1cdd62bfbd81b49aa33035c359913dd7120a3ba4a194aff3cc855802f",
+      "title": "Censura al Gobierno en medios, busca privilegiar candidatura de Quijano",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/censura-al-gobierno-en-medios-busca-privilegiar-candidatura-de-quijano/",
+      "published_date": "2014-02-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 6163,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T12:17:55.234593-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "2d7c5551e9e8df6094640a4dec0fd2777eb9a283485bfed334729d2d7a454698",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p8"
           ]
         }
       }
