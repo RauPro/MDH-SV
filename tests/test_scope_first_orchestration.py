@@ -41,7 +41,7 @@ def arrange(monkeypatch, *, remaining=240, consumed=None, selected=(), scope_err
 
     def classify(inbox, drafts, archive, **kwargs):
         calls.append(('scope', kwargs))
-        assert kwargs['max_seconds'] == 480
+        assert kwargs['max_seconds'] == 720
         budget = kwargs['budget']
         for _ in range(kwargs['max_requests'] if consumed is None else consumed):
             budget.charge()

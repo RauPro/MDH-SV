@@ -64,8 +64,11 @@ El job horario clasifica primero y completa fichas después, bajo una única
 reserva horaria. Asigna aproximadamente el 70% de las solicitudes a clasificación
 (máximo ocho); el resto, incluidos recursos no usados por esa fase, a fichas.
 Con diez solicitudes disponibles, el reparto inicial es siete y tres. Cada
-solicitud clasifica hasta ocho artículos, reduciendo el lote según el tamaño
-del JSON completo. Se preserva un intento para RSS nuevo antes del backlog
+solicitud clasifica hasta dieciséis artículos, reduciendo el lote según el tamaño
+del JSON completo, con el mismo máximo de 100.000 unidades conservadoras de
+entrada. La fase tiene hasta 720 segundos para aprovechar su asignación sin
+aumentar solicitudes. El máximo de salida sigue en 4.096 tokens; una respuesta
+incompleta no publica evaluaciones parciales. Se preserva un intento para RSS nuevo antes del backlog
 positivo. Los reintentos también consumen presupuesto.
 
 Las decisiones quedan en `scope-reviews/`; v2 conserva un recibo de lectura con

@@ -21,7 +21,7 @@ from .gemini_draft import GeminiDraftError, _input, _request, _single_json
 from .publishers import SOURCES
 
 SCOPE_PROMPT = "mdh-news-scope-3-rights-nexus"
-MAX_BATCH_ITEMS = 8
+MAX_BATCH_ITEMS = 16
 MAX_ARTICLE_CHARS = 24_000
 MAX_BATCH_ARTICLE_BYTES = 192_000
 MAX_SCOPE_OUTPUT_TOKENS = 4096

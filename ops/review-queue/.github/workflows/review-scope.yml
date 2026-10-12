@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       max_requests:
-        description: Máximo de solicitudes compartidas de Gemini (hasta 8 noticias por solicitud)
+        description: Máximo de solicitudes compartidas de Gemini (hasta 16 noticias por solicitud; se reduce según tamaño)
         type: choice
         default: '2'
         options: ['1', '2', '4']

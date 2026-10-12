@@ -14,7 +14,7 @@ from .article_source import fetch_article
 from .gemini_budget import BudgetConfig, GeminiBudget, QuotaDeferred, estimate_input_tokens
 from .gemini_draft import GeminiDraftError
 from .news_selection import _archive_index, validate_scope_review
-from .news_scope import SCOPE_PROMPT, classify_scope_batch, prepare_scope_batch
+from .news_scope import MAX_BATCH_ITEMS, SCOPE_PROMPT, classify_scope_batch, prepare_scope_batch
 from .review_queue import GitHubInbox, GitHubRequestError
 
 HEX = re.compile(r"^[a-f0-9]{64}$")
@@ -103,7 +103,7 @@ def _put_private(inbox, folder, document, *, before_write):
 
 
 def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_requests=2,
-                  batch_size=8, max_seconds=720, excluded_ids=(), scope_reviews=(), attempts=(),
+                  batch_size=MAX_BATCH_ITEMS, max_seconds=720, excluded_ids=(), scope_reviews=(), attempts=(),
                   fetch=fetch_article, classify=classify_scope_batch, clock=time.monotonic,
                   sleep=time.sleep, now=None):
     """Classify all bibliography references independently of drafts or issues.
@@ -113,7 +113,7 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
     selected_ids is internal orchestration data and must be omitted from logs.
     """
     if (type(max_requests) is not int or not 1 <= max_requests <= 50
-            or type(batch_size) is not int or not 1 <= batch_size <= 8):
+            or type(batch_size) is not int or not 1 <= batch_size <= MAX_BATCH_ITEMS):
         raise ValueError("invalid_scope_batch_limit")
     if type(max_seconds) is not int or not 60 <= max_seconds <= 720:
         raise ValueError("invalid_scope_time_limit")
@@ -300,7 +300,7 @@ def main():
     parser.add_argument("--attempts", type=Path)
     parser.add_argument("--excluded-ids", type=Path, help="JSON array of explicit human exclusions only")
     parser.add_argument("--max-requests", type=int, default=2)
-    parser.add_argument("--batch-size", type=int, default=8)
+    parser.add_argument("--batch-size", type=int, default=MAX_BATCH_ITEMS)
     parser.add_argument("--max-seconds", type=int, default=720)
     args = parser.parse_args()
     try:

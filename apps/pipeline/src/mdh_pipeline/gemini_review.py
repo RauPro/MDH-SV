@@ -757,7 +757,7 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
         budget.set_request_limit(scope_limit)
         try:
             scope_report = scope_worker(inbox, drafts, archive, api_key=api_key, model=model,
-                budget=budget, max_requests=scope_limit, max_seconds=480,
+                budget=budget, max_requests=scope_limit, max_seconds=720,
                 scope_reviews=cached, attempts=attempts, excluded_ids=excluded)
             selected = scope_report.get("selected_ids", [])
         except QuotaStateError:

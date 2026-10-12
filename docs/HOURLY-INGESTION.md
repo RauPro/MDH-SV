@@ -87,7 +87,7 @@ proveedor ni que estén instalados en producción: `daily_budget: 240`, `rpm: 2`
 e `input_tpm: 200000`, con `limits_source: "operator_cap"` y `rpd: null`.
 El mismo registro cubre la clasificación de todo el archivo y las fichas.
 El job usa una única reserva horaria: aproximadamente 70% para clasificar primero
-(hasta ocho artículos por solicitud) y el resto para fichas. El trabajo de
+(hasta dieciséis artículos por solicitud) y el resto para fichas. El trabajo de
 clasificación ya no depende de fichas previas. Véase [selección temática](NEWS-SELECTION.md).
 
 Los 240 son solicitudes reservadas al día, incluidos reintentos, y no 240 fichas

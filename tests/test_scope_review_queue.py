@@ -11,7 +11,7 @@ import pytest
 from mdh_pipeline.article_source import SourceFetchError
 from mdh_pipeline.gemini_budget import QuotaDeferred
 from mdh_pipeline.gemini_draft import GeminiDraftError
-from mdh_pipeline.news_scope import SCOPE_PROMPT, prepare_scope_batch
+from mdh_pipeline.news_scope import MAX_BATCH_ITEMS, SCOPE_PROMPT, prepare_scope_batch
 from mdh_pipeline.scope_review_queue import recheck_scope, load_scope_cache, validate_scope_attempt
 from test_news_selection import archive, draft, reference, scope_review, inclusive_review
 
@@ -120,6 +120,59 @@ def test_eight_archive_articles_without_dossiers_or_issues_share_one_request():
     assert all("hacinamiento" not in base64.b64decode(value["content"]).decode() for value in inbox.files.values())
 
 
+def test_default_sixteen_item_batch_respects_single_request_budget_and_leaves_seventeenth_pending():
+    _, _, data = fixtures(17)
+    result = run(Inbox(), Budget(), [], data, max_requests=1)
+    assert result["classified"] == result["sources_checked"] == MAX_BATCH_ITEMS == 16
+    assert result["http_requests"] == 1 and result["remaining"] == 1
+    assert result["stopped_reason"] == "run_limit"
+
+
+def test_seventeenth_short_article_spills_into_a_second_request_without_mixing_identities():
+    refs, _, data = fixtures(17)
+    batches, inbox = [], Inbox()
+    def checked(items, **kwargs):
+        batches.append([value["reference"]["id"] for value in items])
+        return classify(items, **kwargs)
+    result = run(inbox, Budget(), [], data, classify=checked)
+    assert [len(batch) for batch in batches] == [16, 1]
+    assert result["classified"] == 17 and result["http_requests"] == 2 and result["remaining"] == 0
+    assert {identifier for batch in batches for identifier in batch} == {r["id"] for r in refs}
+    assert {value["candidate_id"] for value in inbox.documents("scope-reviews")} == {r["id"] for r in refs}
+
+
+def test_sixteen_long_articles_adapt_to_all_existing_payload_and_source_caps():
+    refs, _, data = fixtures(16)
+    batches = []
+    def checked(items, **kwargs):
+        from mdh_pipeline.gemini_budget import estimate_input_tokens
+        _, payload = prepare_scope_batch(items)
+        assert estimate_input_tokens(payload) <= 100_000
+        assert sum(len(value["article"]["text"].encode()) for value in items) <= 192_000
+        assert all(len(value["article"]["text"]) <= 24_000 for value in items)
+        assert payload["generationConfig"]["maxOutputTokens"] == 4096
+        batches.append([value["reference"]["id"] for value in items])
+        return classify(items, **kwargs)
+    result = run(Inbox(), Budget(), [], data, max_requests=8,
+                 fetch=lambda r: fetched(r, length=23_000), classify=checked)
+    assert result["classified"] == 16 and result["remaining"] == 0
+    assert result["http_requests"] == len(batches) > 1
+    assert all(len(batch) < MAX_BATCH_ITEMS for batch in batches)
+    assert sorted(identifier for batch in batches for identifier in batch) == sorted(r["id"] for r in refs)
+
+
+def test_incomplete_sixteen_item_result_persists_no_partial_private_decisions():
+    _, _, data = fixtures(16)
+    inbox = Inbox()
+    def incomplete(items, **kwargs):
+        assert len(items) == 16
+        kwargs["budget"].requests_this_run += 1
+        raise GeminiDraftError("incomplete_model_response")
+    result = run(inbox, Budget(), [], data, classify=incomplete)
+    assert result["stopped_reason"] == "model_error" and result["error_code"] == "incomplete_model_response"
+    assert result["classified"] == 0 and result["http_requests"] == 1 and inbox.puts == []
+
+
 def test_negative_or_missing_old_drafts_do_not_exclude_raw_archive_references():
     refs, drafts, data = fixtures(3)
     drafts[0]["news_dossier"]["classification"]["relevance"] = "not_relevant"
@@ -201,7 +254,7 @@ def test_only_explicit_human_excluded_ids_skip_classification():
 
 def test_request_limit_keeps_remaining_archive_for_a_later_batch():
     _, _, data = fixtures(16)
-    result = run(Inbox(), Budget(), [], data, max_requests=1)
+    result = run(Inbox(), Budget(), [], data, max_requests=1, batch_size=8)
     assert result["classified"] == result["sources_checked"] == 8 and result["http_requests"] == 1
     assert result["remaining"] == 8 and result["stopped_reason"] == "run_limit"
 
@@ -254,7 +307,7 @@ def test_failed_sources_cannot_exhaust_unbounded_reads_or_starve_next_batch():
     first = run(inbox, Budget(), [], data, max_requests=1, batch_size=8, fetch=unavailable)
     assert first["sources_checked"] == first["source_unavailable"] == 16
     assert first["stopped_reason"] == "source_check_limit" and first["http_requests"] == 0
-    second = run(inbox, Budget(), [], data, max_requests=1, attempts=inbox.documents("scope-attempts"))
+    second = run(inbox, Budget(), [], data, max_requests=1, batch_size=8, attempts=inbox.documents("scope-attempts"))
     assert second["retry_deferred"] == 16 and second["classified"] == 8
     failed = {value["candidate_id"] for value in inbox.documents("scope-attempts")}
     assert not failed.intersection(second["selected_ids"])
@@ -307,7 +360,7 @@ def test_preallocated_shared_budget_is_not_reset_and_http_report_is_a_delta():
     _, _, data = fixtures(16)
     budget = Budget()
     budget.requests_this_run, budget.request_limit = 3, 4
-    result = run(Inbox(), budget, [], data, max_requests=20)
+    result = run(Inbox(), budget, [], data, max_requests=20, batch_size=8)
     assert budget.request_limit == budget.requests_this_run == 4
     assert result["http_requests"] == 1 and result["classified"] == 8
 
@@ -384,7 +437,7 @@ def test_load_scope_cache_reads_valid_private_files_once_and_rejects_filename_mi
         load_scope_cache(tmp_path)
 
 
-@pytest.mark.parametrize("arguments", [{"batch_size": 9}, {"batch_size": True}, {"max_requests": 51}, {"max_seconds": 721}])
+@pytest.mark.parametrize("arguments", [{"batch_size": 17}, {"batch_size": True}, {"max_requests": 51}, {"max_seconds": 721}])
 def test_invalid_worker_limits_fail_before_source_access(arguments):
     _, _, data = fixtures()
     with pytest.raises(ValueError):
