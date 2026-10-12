@@ -12,8 +12,20 @@ const bound = (entry, reference) => entry.candidate_id === reference.id && ['sou
 /** Build-time check; only approved dossiers can authorize a human selection. */
 export function assertSelectionProvenance(archive, manifest, allApproved = new Map()) {
   assertSelectedNewsArchive(archive);
-  if (!exact(manifest, ['schema_version', 'generated_at', 'selections']) || manifest.schema_version !== 1 || !instant(manifest.generated_at)
+  if (!exact(manifest, ['schema_version', 'generated_at', 'selections', ...(manifest?.schema_version === 2 ? ['assessment_counts'] : [])]) || ![1, 2].includes(manifest.schema_version) || !instant(manifest.generated_at)
     || !Array.isArray(manifest.selections) || manifest.selections.length > 100000) fail();
+  if (manifest.schema_version === 2) {
+    const counts = manifest.assessment_counts;
+    const keys = ['candidates', 'evaluated', 'relevant', 'excluded', 'uncertain', 'pending'];
+    if (!exact(counts, keys) || keys.some(key => !Number.isSafeInteger(counts[key]) || counts[key] < 0)
+      || counts.evaluated !== counts.relevant + counts.excluded + counts.uncertain
+      || counts.candidates !== counts.evaluated + counts.pending) fail();
+    const gate = archive.policy.selection_gate;
+    const newlyDiscovered = gate.candidates - counts.candidates;
+    if (gate.version !== 2 || gate.evaluated_at !== manifest.generated_at || newlyDiscovered < 0
+      || gate.pending !== counts.pending + newlyDiscovered
+      || ['evaluated', 'relevant', 'excluded', 'uncertain'].some(key => gate[key] !== counts[key])) fail();
+  } else if (archive.policy.selection_gate.version === 2) fail();
   const selections = new Map();
   for (const entry of manifest.selections) {
     if (!exact(entry, ['candidate_id', 'source_url', 'publisher', 'published_date', 'selection'])

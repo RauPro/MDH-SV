@@ -21,6 +21,18 @@ const setup = () => {
 };
 
 describe('build-time selection provenance', () => {
+  it('binds evaluation counts to their snapshot and counts new discoveries only as pending', () => {
+    const { archive, manifest } = setup();
+    const counts = { candidates: 12, evaluated: 4, relevant: 1, excluded: 2, uncertain: 1, pending: 8 };
+    const current = { ...manifest, schema_version: 2, assessment_counts: counts };
+    const progress = { ...archive, policy: { ...archive.policy, selection_gate: { ...archive.policy.selection_gate, version: 2, ...counts, evaluated_at: manifest.generated_at } } };
+    expect(assertSelectionProvenance(progress, current)).toBe(progress);
+    const grown = structuredClone(progress);
+    grown.policy.selection_gate.candidates += 3; grown.policy.selection_gate.pending += 3;
+    expect(assertSelectionProvenance(grown, current)).toBe(grown);
+    grown.policy.selection_gate.evaluated += 1; grown.policy.selection_gate.excluded += 1; grown.policy.selection_gate.pending -= 1;
+    expect(() => assertSelectionProvenance(grown, current)).toThrow();
+  });
   it('accepts an inline automatic selection only when every provenance field and identity matches the manifest', () => {
     const { archive, manifest } = setup();
     expect(assertSelectionProvenance(archive, manifest)).toBe(archive);

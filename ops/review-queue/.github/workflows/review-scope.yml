@@ -1,9 +1,5 @@
 name: Reevaluar pertinencia de noticias
 on:
-  workflow_run:
-    workflows: [Preparar fichas con Gemini]
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
     inputs:
       max_requests:
@@ -20,7 +16,7 @@ concurrency:
   queue: max
 jobs:
   scope:
-    if: github.event.repository.private == true && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
+    if: github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -50,6 +46,19 @@ jobs:
         env:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: python -m mdh_pipeline.history --export-only --candidates-only --data-dir bibliography/data/history --output candidates.json
+      - name: Respetar decisiones editoriales
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: |
+          python - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          from mdh_pipeline.review_queue import GitHubInbox
+          from mdh_pipeline.gemini_review import editorial_excluded_ids
+          inbox = GitHubInbox(os.environ['GITHUB_REPOSITORY'], os.environ['GH_TOKEN'])
+          Path('scope-exclusions.json').write_text(json.dumps(sorted(editorial_excluded_ids(inbox))))
+          PYTHON
       - name: Reevaluar clasificaciones antiguas con cuota compartida
         env:
           GH_TOKEN: ${{ github.token }}
@@ -57,4 +66,4 @@ jobs:
           MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
           MDH_SCOPE_REQUESTS: ${{ inputs.max_requests || '2' }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.scope_review_queue --drafts inbox/drafts --archive candidates.json --max-requests "$MDH_SCOPE_REQUESTS"
+        run: python -m mdh_pipeline.scope_review_queue --drafts inbox/drafts --scope-reviews inbox/scope-reviews --attempts inbox/scope-attempts --archive candidates.json --excluded-ids scope-exclusions.json --max-requests "$MDH_SCOPE_REQUESTS"

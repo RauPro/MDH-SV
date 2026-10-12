@@ -1,4 +1,4 @@
-export const NEWS_SELECTION_PROMPTS = Object.freeze(['mdh-universal-news-grounded-8-relevance-scope', 'mdh-news-scope-1']);
+export const NEWS_SELECTION_PROMPTS = Object.freeze(['mdh-universal-news-grounded-8-relevance-scope', 'mdh-universal-news-grounded-9-inclusive-context', 'mdh-news-scope-1', 'mdh-news-scope-2-inclusive-context', 'mdh-news-scope-3-rights-nexus', 'mdh-universal-news-grounded-10-rights-nexus']);
 
 // Public relevance gate: keyword discovery is never evidence for publishing a reference.
 const object = value => Boolean(value && typeof value === 'object' && !Array.isArray(value));
@@ -36,9 +36,14 @@ export function isSelectedNewsReference(reference, dossier) {
 export function assertSelectedNewsArchive(payload) {
   if (!object(payload) || payload.schema_version !== 1 || !Array.isArray(payload.records) || !object(payload.policy) || !object(payload.coverage)) fail();
   const gate = payload.policy.selection_gate;
-  if (!exact(gate, ['version', 'scope', 'candidates', 'selected']) || gate.version !== 1 || gate.scope !== 'human_rights_el_salvador'
+  const progressKeys = ['evaluated', 'relevant', 'excluded', 'uncertain', 'pending', 'evaluated_at'];
+  if (!exact(gate, ['version', 'scope', 'candidates', 'selected', ...(gate?.version === 2 ? progressKeys : [])]) || ![1, 2].includes(gate.version) || gate.scope !== 'human_rights_el_salvador'
     || !count(gate.candidates) || !count(gate.selected) || gate.candidates < gate.selected || gate.selected !== payload.records.length
     || payload.coverage.records !== payload.records.length) fail();
+  if (gate.version === 2 && (!instant(gate.evaluated_at)
+    || progressKeys.slice(0, -1).some(key => !count(gate[key]))
+    || gate.evaluated !== gate.relevant + gate.excluded + gate.uncertain
+    || gate.candidates !== gate.evaluated + gate.pending)) fail();
   for (const reference of payload.records) if (!isSelectedNewsReference(reference)) fail();
   return payload;
 }

@@ -849,6 +849,68 @@ def test_daily_budget_is_distributed_across_remaining_pacific_hours():
     assert budget.request_limit == report["http_requests"] == 29
 
 
+def test_explicit_phase_grant_does_not_recalculate_a_second_hourly_share():
+    budget = Budget(remaining=10)
+    workers = BudgetWorkers(budget)
+    inbox = PrivateInbox([candidate(number) for number in range(1, 8)])
+    now = datetime(2026, 10, 10, 15, tzinfo=timezone.utc)
+    report = process_queue(inbox, api_key=KEY, model='gemini-2.5-flash',
+        fetch=workers.fetch, extract=workers.extract, now=now, sleep=lambda _: None,
+        limit=5, phase_http_limit=5, budget=budget)
+    assert report['effective_limit'] == report['http_requests'] == 5
+    assert budget.request_limit == 5
+
+
+def test_zero_phase_grant_and_elapsed_wall_time_never_call_the_model():
+    budget = Budget(remaining=10)
+    workers = BudgetWorkers(budget)
+    inbox = PrivateInbox([candidate()])
+    report = run(inbox, workers, budget=budget, phase_http_limit=0)
+    assert report['http_requests'] == 0 and report['quota_reason'] == 'run_budget_exhausted'
+    assert not workers.model_calls
+    times = iter([0, 721])
+    report = run(inbox, workers, budget=budget, run_clock=lambda: next(times))
+    assert report['stopped_reason'] == 'run_time_limit' and report['http_requests'] == 0
+    assert not workers.model_calls
+
+
+def test_positive_scope_priority_precedes_the_older_unclassified_queue():
+    older, selected = candidate(1, historical=True), candidate(2, historical=True)
+    inbox = PrivateInbox([older, selected])
+    workers = Extractors()
+    report = run(inbox, workers, limit=1, priority_ids=[selected['id']])
+    assert report['news_dossiers'] == 1
+    assert workers.model_calls == [selected['id']]
+
+
+def test_positive_backlog_reserves_one_fresh_rss_attempt_without_visiting_it_twice():
+    old_unselected = candidate(1, historical=True)
+    positives = [candidate(number, historical=True) for number in range(2, 5)]
+    fresh = candidate(5)
+    inbox = PrivateInbox([old_unselected, *positives, fresh])
+    workers = Extractors()
+    report = run(inbox, workers, limit=3, priority_ids=[item['id'] for item in positives])
+    assert report['attempted'] == report['news_dossiers'] == 3
+    assert workers.model_calls[0] == fresh['id']
+    assert set(workers.model_calls[1:]) <= {item['id'] for item in positives}
+    assert len(set(workers.model_calls)) == 3
+    assert old_unselected['id'] not in workers.model_calls
+
+
+def test_rss_reservation_skips_completed_items_and_deduplicates_positive_rss():
+    completed, fresh = candidate(1), candidate(2)
+    positives = [candidate(number, historical=True) for number in range(3, 6)]
+    inbox = PrivateInbox([completed, fresh, *positives])
+    store_marked_draft(inbox, 1, completed, draft(completed))
+    workers = Extractors()
+    report = run(inbox, workers, limit=3, priority_ids=[fresh['id'], *[item['id'] for item in positives]])
+    assert report['attempted'] == report['news_dossiers'] == 3
+    assert workers.model_calls[0] == fresh['id']
+    assert completed['id'] not in workers.model_calls
+    assert workers.model_calls.count(fresh['id']) == 1
+    assert set(workers.model_calls[1:]) <= {item['id'] for item in positives}
+
+
 def test_zero_daily_allowance_does_not_fetch_news_or_change_private_records():
     budget = Budget(remaining=0); workers = BudgetWorkers(budget); inbox = PrivateInbox([candidate()])
     report = run(inbox, workers, budget=budget)
