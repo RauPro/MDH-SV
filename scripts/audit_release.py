@@ -8,7 +8,7 @@ files = subprocess.check_output(['git', 'ls-files', '-z']).decode().split('\0')
 failures = []
 for name in filter(None, files):
     path = Path(name)
-    if (name.startswith(('legacy/', '.local-quarantine/', 'data/ngo_reports/', 'apps/web/src/data/')) or
+    if (name.startswith(('legacy/', '.local-quarantine/', '.source-location-cache/', 'data/ngo_reports/', 'apps/web/src/data/')) or
         path.suffix in ('.sqlite', '.db') or
         path.name.startswith('.env') and path.name != '.env.example' or
         'node_modules' in path.parts):
