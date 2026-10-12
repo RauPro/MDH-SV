@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T18:27:55.643796+00:00",
+  "generated_at": "2026-10-12T18:41:13.144413+00:00",
   "assessment_counts": {
     "candidates": 6199,
     "evaluated": 102,
-    "relevant": 76,
-    "excluded": 16,
+    "relevant": 72,
+    "excluded": 20,
     "uncertain": 10,
     "pending": 6097
   },
@@ -321,20 +321,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T10:53:34.172792-06:00",
+        "classified_at": "2026-10-12T12:40:11.167071-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-1",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "75e9decbd53e2dc131909d8817ddc825ebd0644329862572a1a8d4e7408644dc",
           "jurisdiction_paragraph_ids": [
             "p2",
-            "p3",
-            "p7"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p10",
-            "p11",
-            "p12"
+            "p11"
           ]
         }
       }
@@ -406,16 +404,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T11:12:56.305235-06:00",
+        "classified_at": "2026-10-12T12:40:33.165371-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "6c7eb66e634c0faf3777c02feceace406e26b149c2116e38a1f10fe9dfa4cccc",
           "jurisdiction_paragraph_ids": [
-            "p1"
+            "p1",
+            "p9"
           ],
           "relevance_paragraph_ids": [
-            "p1"
+            "p1",
+            "p9"
           ]
         }
       }
@@ -431,9 +431,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T12:08:02.786626-06:00",
+        "classified_at": "2026-10-12T12:40:33.165371-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "1bb3217d237485a5dbda2c3243f913d4abcadec4f764cff041202b834e968116",
           "jurisdiction_paragraph_ids": [
@@ -441,36 +441,8 @@
             "p10"
           ],
           "relevance_paragraph_ids": [
-            "p2",
             "p4",
-            "p7",
-            "p11"
-          ]
-        }
-      }
-    },
-    {
-      "candidate_id": "44ebf9def65fb72da10e9c92e686a40765ec0f21670a6f364be077a1b35f3d76",
-      "source_url": "https://www.diariocolatino.com/expresidente-guatemalteco-portillo-condenado-a-prision-en-estados-unidos-por-intentar-lavar-dinero-proveniente-de-taiwan/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2014-05-23",
-      "selection": {
-        "method": "gemini_grounded_scope",
-        "review_status": "automated_unreviewed",
-        "human_reviewed": false,
-        "jurisdiction": "SV",
-        "relevance": "relevant",
-        "classified_at": "2026-10-12T11:13:16.899717-06:00",
-        "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
-        "evidence": {
-          "content_sha256": "d024a9352c12c01c20878c58955f95bb0ae7c1a65f703b7cdd00a57c0f90e950",
-          "jurisdiction_paragraph_ids": [
-            "p20",
-            "p21"
-          ],
-          "relevance_paragraph_ids": [
-            "p21"
+            "p7"
           ]
         }
       }
@@ -579,31 +551,6 @@
             "p4",
             "p9",
             "p10"
-          ]
-        }
-      }
-    },
-    {
-      "candidate_id": "4db2e25191fe9069f6a9bbba94faa34ec9197c7eb9cbe4f3c53b4d11a8dc482c",
-      "source_url": "https://www.diariocolatino.com/fundaungo-presenta-estudio-sobre-la-evolucion-de-las-cifras-de-homicidios-en-el-salvador-durante-los-ultimos-anos/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2014-11-13",
-      "selection": {
-        "method": "gemini_grounded_scope",
-        "review_status": "automated_unreviewed",
-        "human_reviewed": false,
-        "jurisdiction": "SV",
-        "relevance": "relevant",
-        "classified_at": "2026-10-12T11:08:56.504828-06:00",
-        "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
-        "evidence": {
-          "content_sha256": "2c6b9f0307324303f07f42d71631a061f3d677e0aca31d1bcd88b8d7e9f9bbc5",
-          "jurisdiction_paragraph_ids": [
-            "p2"
-          ],
-          "relevance_paragraph_ids": [
-            "p3"
           ]
         }
       }
@@ -733,17 +680,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T12:04:02.153275-06:00",
+        "classified_at": "2026-10-12T12:40:11.167071-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "e36cc4053ce49fd3b36e3a3004e2111858e6bee6911ff936e997177844c87671",
           "jurisdiction_paragraph_ids": [
+            "p2",
             "p4"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3"
+            "p4"
           ]
         }
       }
@@ -874,36 +821,6 @@
       }
     },
     {
-      "candidate_id": "737f19242286e9e65a7976ebca099e7186aff5942a4373167737f943de11632b",
-      "source_url": "https://www.diariocolatino.com/sistema-de-video-vigilancia-permite-captura-de-delincuentes-en-san-salvador/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-08-08",
-      "selection": {
-        "method": "gemini_grounded_scope",
-        "review_status": "automated_unreviewed",
-        "human_reviewed": false,
-        "jurisdiction": "SV",
-        "relevance": "relevant",
-        "classified_at": "2026-10-12T11:05:26.600214-06:00",
-        "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-1",
-        "evidence": {
-          "content_sha256": "f6107ce936bd1b45490ef3f1e28f8b373616af4b3a1f69d38a7ef659cdf05968",
-          "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8",
-            "p9"
-          ],
-          "relevance_paragraph_ids": [
-            "p2",
-            "p8",
-            "p9",
-            "p12"
-          ]
-        }
-      }
-    },
-    {
       "candidate_id": "75346f7d41120488432449bbe5c8974b4891f4298d1e02838c673eb0bcaa0f09",
       "source_url": "https://www.diariocolatino.com/el-salvador-registra-altos-niveles-de-contaminacion-en-la-atmosfera-ricardo-navarro/",
       "publisher": "Diario Co Latino",
@@ -968,18 +885,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T10:49:06.332333-06:00",
+        "classified_at": "2026-10-12T12:40:33.165371-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-1",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "1751dce5726300d6b3140a9cef957034e73a7bcebd6f9a66b90afe28b9fd2628",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3"
+            "p10"
           ]
         }
       }
@@ -1469,15 +1385,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T12:17:55.234593-06:00",
+        "classified_at": "2026-10-12T12:40:11.167071-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "2d7c5551e9e8df6094640a4dec0fd2777eb9a283485bfed334729d2d7a454698",
           "jurisdiction_paragraph_ids": [
+            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
+            "p6",
             "p8"
           ]
         }
@@ -1522,18 +1440,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T12:06:02.278398-06:00",
+        "classified_at": "2026-10-12T12:40:33.165371-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-2-inclusive-context",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "0fbca64e6df99bd9a0b5065351cff9032c01f0738767e0628a20c94b240a63c7",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p7"
           ],
           "relevance_paragraph_ids": [
             "p3",
-            "p4",
-            "p18"
+            "p4"
           ]
         }
       }
@@ -1749,16 +1666,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T12:07:48.893296-06:00",
+        "classified_at": "2026-10-12T12:40:33.165371-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "006b26dbabc9c1ce245ad36df69dcb092cfa4ded57045e9386aca9ce09cbe4a4",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2"
+            "p2",
+            "p5"
           ]
         }
       }
@@ -1909,33 +1827,6 @@
       }
     },
     {
-      "candidate_id": "eeba0be4475bd97cdd4d4bba1ad7e1437ee13654b91a05479802b9009931a761",
-      "source_url": "https://www.diariocolatino.com/fgr-presentara-acusacion-contra-dos-pandilleros-por-homicidio-de-madre-de-subinspector-del-911/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2014-01-11",
-      "selection": {
-        "method": "gemini_grounded_scope",
-        "review_status": "automated_unreviewed",
-        "human_reviewed": false,
-        "jurisdiction": "SV",
-        "relevance": "relevant",
-        "classified_at": "2026-10-12T12:10:03.003294-06:00",
-        "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-2-inclusive-context",
-        "evidence": {
-          "content_sha256": "f4a97ac3215168ca58efc0ba1474e9f39af2903eac6f1839ed544166a099fcec",
-          "jurisdiction_paragraph_ids": [
-            "p2"
-          ],
-          "relevance_paragraph_ids": [
-            "p2",
-            "p6",
-            "p7"
-          ]
-        }
-      }
-    },
-    {
       "candidate_id": "f068e4a059aed077bf2af8766cc373eb9c3cbfa5935e58b36fba36e4d9a3700e",
       "source_url": "https://www.diariocolatino.com/ministro-de-seguridad-dice-que-hay-sectores-interesados-en-incrementar-homicidios-antes-de-elecciones/",
       "publisher": "Diario Co Latino",
@@ -2056,9 +1947,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T11:09:10.735551-06:00",
+        "classified_at": "2026-10-12T12:40:11.167071-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "ea83df3a701cd3eec041a383b1f4db512c6d6033a5666eef60fb641b88b993d1",
           "jurisdiction_paragraph_ids": [

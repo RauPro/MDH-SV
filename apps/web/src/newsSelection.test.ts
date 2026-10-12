@@ -18,6 +18,8 @@ describe('public news selection boundary', () => {
   const progress = () => ({ ...fixture.policy.selection_gate, version: 2, evaluated: 6, relevant: 3, excluded: 2, uncertain: 1, pending: 6, evaluated_at: '2026-10-12T17:00:00Z' });
   it('accepts complete progress and the inclusive-context policy without confusing unevaluated and excluded', () => {
     expect(validateNewsSelection({ ...auto(), prompt_version: 'mdh-news-scope-2-inclusive-context' })).toMatchObject({ relevance: 'relevant' });
+    expect(validateNewsSelection({ ...auto(), prompt_version: 'mdh-news-scope-3-rights-nexus' })).toMatchObject({ relevance: 'relevant' });
+    expect(validateNewsSelection({ ...auto(), prompt_version: 'mdh-universal-news-grounded-10-rights-nexus' })).toMatchObject({ relevance: 'relevant' });
     expect(assertSelectedNewsArchive({ ...fixture, policy: { ...fixture.policy, selection_gate: progress() } })).toBeTruthy();
   });
   it.each([{ evaluated: 48 }, { excluded: 8 }, { pending: 12 }, { relevant: -1 }, { uncertain: true }, { evaluated_at: 'invalid' }, { pending: undefined }])('rejects fabricated or non-partitioning progress: %j', patch => {

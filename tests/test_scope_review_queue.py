@@ -18,6 +18,12 @@ from test_news_selection import archive, draft, reference, scope_review, inclusi
 NOW = datetime(2026, 10, 12, 16, 0, tzinfo=timezone.utc)
 
 
+def current_review(ref, **classification):
+    value = inclusive_review(ref, **classification)
+    value["extraction"]["prompt_version"] = SCOPE_PROMPT
+    return value
+
+
 class Inbox:
     base = "/repos/example/private"
 
@@ -124,7 +130,7 @@ def test_negative_or_missing_old_drafts_do_not_exclude_raw_archive_references():
 
 def test_cache_loaded_once_skips_all_6000_records_without_a_single_github_get():
     refs = [reference(n) for n in range(1, 6001)]
-    reviews = [inclusive_review(r) for r in refs]
+    reviews = [current_review(r) for r in refs]
     inbox = Inbox()
     result = run(inbox, Budget(), [], archive(*refs), scope_reviews=reviews,
                  fetch=lambda _: pytest.fail("cache should not fetch sources"))
@@ -133,37 +139,58 @@ def test_cache_loaded_once_skips_all_6000_records_without_a_single_github_get():
     assert inbox.gets == inbox.puts == []
 
 
-def test_v1_positives_are_reused_but_negative_and_unclear_reviews_migrate_once_to_v2():
-    refs, _, data = fixtures(4)
+def test_all_prior_policy_decisions_including_positives_are_reclassified_only_once():
+    refs, _, data = fixtures(7)
     reviews = [scope_review(refs[0]), scope_review(refs[1], relevance="not_relevant"),
-               scope_review(refs[2], jurisdiction="unclear"), inclusive_review(refs[3], relevance="not_relevant")]
+               scope_review(refs[2], jurisdiction="unclear"), inclusive_review(refs[3]),
+               inclusive_review(refs[4], relevance="not_relevant"), inclusive_review(refs[5], jurisdiction="unclear"),
+               current_review(refs[6], relevance="not_relevant")]
     inbox = Inbox()
     result = run(inbox, Budget(), [], data, scope_reviews=reviews)
-    assert result["cached"] == 2 and result["classified"] == 2
+    assert result["cached"] == 1 and result["classified"] == 6
     stored = {review["candidate_id"]: review for review in inbox.documents("scope-reviews")}
-    assert set(stored) == {refs[1]["id"], refs[2]["id"]}
+    assert set(stored) == {ref["id"] for ref in refs[:6]}
+    assert all(value["extraction"]["prompt_version"] == SCOPE_PROMPT for value in stored.values())
     combined = [stored.get(value["candidate_id"], value) for value in reviews]
-    result = run(inbox, Budget(), [], data, scope_reviews=combined)
-    assert result["cached"] == 4 and result["http_requests"] == result["sources_checked"] == 0
+    result = run(inbox, Budget(), [], data, scope_reviews=combined,
+        fetch=lambda _: pytest.fail("updated decisions must be cached, including negatives"))
+    assert result["cached"] == 7 and result["http_requests"] == result["sources_checked"] == 0
 
 
-def test_legacy_exclusions_are_revisited_before_new_2010_news_and_human_exclusions_stay_skipped():
-    fresh, legacy, excluded, cached = [reference(n) for n in range(1, 5)]
+def test_prior_positive_policies_are_revisited_before_unseen_news_without_overriding_human_exclusions():
+    fresh, v1, v2, excluded, cached = [reference(n) for n in range(1, 6)]
     fresh["published_date"] = "2010-01-01"
-    legacy["published_date"] = "2016-01-01"
+    v1["published_date"] = "2016-01-01"
+    v2["published_date"] = "2020-01-01"
     excluded["published_date"] = "2015-01-01"
     cached["published_date"] = "2014-01-01"
-    reviews = [scope_review(legacy, relevance="not_relevant"),
-               scope_review(excluded, jurisdiction="unclear"), inclusive_review(cached)]
+    reviews = [scope_review(v1), inclusive_review(v2), scope_review(excluded), current_review(cached)]
     fetched_ids = []
     def read(ref):
         fetched_ids.append(ref["id"])
         return fetched(ref)
-    result = run(Inbox(), Budget(), [], archive(fresh, legacy, excluded, cached),
+    result = run(Inbox(), Budget(), [], archive(fresh, v1, v2, excluded, cached),
         scope_reviews=reviews, excluded_ids=[excluded["id"]], max_requests=1, batch_size=2, fetch=read)
-    assert fetched_ids == [legacy["id"], fresh["id"]]
+    assert fetched_ids == [v1["id"], v2["id"]]
     assert result["cached"] == 1 and result["classified"] == 2
+    assert result["remaining"] == 1
     assert excluded["id"] not in result["selected_ids"]
+
+
+def test_outdated_positive_with_failed_source_stays_pending_and_respects_backoff():
+    refs, _, data = fixtures()
+    prior = inclusive_review(refs[0])
+    inbox = Inbox()
+    def unavailable(_):
+        raise SourceFetchError("source_access_restricted")
+    result = run(inbox, Budget(), [], data, scope_reviews=[prior], fetch=unavailable)
+    assert result["cached"] == result["classified"] == result["http_requests"] == 0
+    assert result["source_unavailable"] == result["remaining"] == 1
+    assert result["selected_ids"] == []
+    result = run(inbox, Budget(), [], data, scope_reviews=[prior], attempts=inbox.documents("scope-attempts"),
+        fetch=lambda _: pytest.fail("source restriction must keep its backoff after a policy update"))
+    assert result["retry_deferred"] == 1 and result["sources_checked"] == result["http_requests"] == 0
+    assert result["selected_ids"] == []
 
 
 def test_only_explicit_human_excluded_ids_skip_classification():
@@ -250,7 +277,8 @@ def test_full_serialized_payload_limit_splits_batch_before_gemini():
         sizes.append((len(items), estimate_input_tokens(payload)))
         return classify(items, **kwargs)
     result = run(Inbox(), Budget(), [], data, fetch=lambda r: fetched(r, length=23_000), classify=checked)
-    assert result["classified"] == 8 and result["http_requests"] == 2
+    assert result["classified"] == 6 and result["http_requests"] == 2
+    assert result["remaining"] == 2  # The larger policy prompt still cannot exceed the request grant.
     assert len(sizes) == 2 and all(count <= 8 and size <= 100_000 for count, size in sizes)
 
 

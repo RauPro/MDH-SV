@@ -7,11 +7,21 @@ import pytest
 
 from mdh_pipeline.gemini_budget import MODEL, QuotaDeferred, QuotaStateError
 from mdh_pipeline.gemini_draft import GeminiDraftError
-from mdh_pipeline.news_scope import SCOPE_PROMPT, classify_scope_batch, response_schema
+from mdh_pipeline.news_scope import SCOPE_PROMPT, SYSTEM_PROMPT, classify_scope_batch, response_schema
 from test_gemini_budget import ready
 
 KEY = "scope-test-api-key-not-real"
 PRIVATE = "PRIVATE_QUOTE_OR_IDENTITY_SENTINEL"
+
+
+def test_scope_policy_requires_rights_nexus_without_excluding_substantive_prison_context():
+    assert SCOPE_PROMPT == "mdh-news-scope-3-rights-nexus"
+    assert "Exige un nexo sustantivo y concreto con derechos humanos" in SYSTEM_PROMPT
+    assert "Justicia general, anticorrupción" in SYSTEM_PROMPT
+    assert "Tampoco una pena de prisión demuestra hacinamiento" in SYSTEM_PROMPT
+    assert "el vínculo salvadoreño debe corresponder al asunto" in SYSTEM_PROMPT
+    assert "not_relevant; las políticas con análisis sustantivo de derechos sí son relevant" in SYSTEM_PROMPT
+    assert "relevant aunque no denuncie una violación" in SYSTEM_PROMPT
 
 
 def item(number=1, *, texts=None):

@@ -1,4 +1,4 @@
-export const NEWS_SELECTION_PROMPTS = Object.freeze(['mdh-universal-news-grounded-8-relevance-scope', 'mdh-universal-news-grounded-9-inclusive-context', 'mdh-news-scope-1', 'mdh-news-scope-2-inclusive-context']);
+export const NEWS_SELECTION_PROMPTS = Object.freeze(['mdh-universal-news-grounded-8-relevance-scope', 'mdh-universal-news-grounded-9-inclusive-context', 'mdh-news-scope-1', 'mdh-news-scope-2-inclusive-context', 'mdh-news-scope-3-rights-nexus', 'mdh-universal-news-grounded-10-rights-nexus']);
 
 // Public relevance gate: keyword discovery is never evidence for publishing a reference.
 const object = value => Boolean(value && typeof value === 'object' && !Array.isArray(value));

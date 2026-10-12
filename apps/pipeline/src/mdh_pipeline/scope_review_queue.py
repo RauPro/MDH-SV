@@ -144,7 +144,7 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
         if identifier in excluded:
             continue
         prior = reviews.get(identifier)
-        if prior and (prior["schema_version"] == 2 or _positive(prior)):
+        if prior and prior["extraction"]["prompt_version"] == SCOPE_PROMPT:
             report["cached"] += 1
             if _positive(prior):
                 selected.add(identifier)
@@ -205,13 +205,13 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
         batch = []
 
     try:
-        # Revisit the finite legacy exclusions first under the inclusive policy;
-        # then advance through never-classified articles in chronological order.
+        # Revisit every finite older-policy decision, including positives,
+        # before advancing through never-classified articles chronologically.
         # Failed reads get durable backoff and cannot starve the remaining tail.
         def priority(value):
             prior = reviews.get(value["id"])
-            legacy_exclusion = prior and prior["schema_version"] == 1 and not _positive(prior)
-            return (0 if legacy_exclusion else 1, value["published_date"], value["id"])
+            outdated = prior and prior["extraction"]["prompt_version"] != SCOPE_PROMPT
+            return (0 if outdated else 1, value["published_date"], value["id"])
         for reference in sorted(pending, key=priority):
             if not available():
                 report["stopped_reason"] = "run_limit"

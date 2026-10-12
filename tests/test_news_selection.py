@@ -8,7 +8,8 @@ import pytest
 from mdh_pipeline.history import SOURCES, reference_from_post
 from mdh_pipeline.news_dossier import empty_news_dossier
 from mdh_pipeline.news_selection import (
-    FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT,
+    FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT,
+    SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT,
     project_news_selection, select_archive,
     validate_manifest, validate_scope_review, validate_selection,
 )
@@ -90,6 +91,12 @@ def inclusive_review(item=None, **classification):
     value["extraction"]["prompt_version"] = INCLUSIVE_SCOPE_PROMPT
     value["source_read"] = {"fetched_at": "2026-10-12T14:01:30Z", "extraction_method": "html_article_content",
                             "truncated": False, "content_sha256": value["evidence"]["content_sha256"]}
+    return value
+
+
+def rights_review(item=None, **classification):
+    value = inclusive_review(item, **classification)
+    value["extraction"]["prompt_version"] = RIGHTS_SCOPE_PROMPT
     return value
 
 
@@ -299,6 +306,44 @@ def test_dedicated_inclusive_scope_owns_same_text_despite_later_dossier_enrichme
     assert manifest["assessment_counts"]["relevant" if expected else "excluded"] == 1
     if expected:
         assert manifest["selections"][0]["selection"]["prompt_version"] == INCLUSIVE_SCOPE_PROMPT
+
+
+@pytest.mark.parametrize("full_prompt", [LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT, FULL_SCOPE_PROMPT])
+@pytest.mark.parametrize("scope_relevance,dossier_relevance,expected", [
+    ("relevant", "not_relevant", 1), ("not_relevant", "relevant", 0),
+])
+def test_rights_nexus_classifier_v3_controls_same_text_against_every_dossier_policy(
+        full_prompt, scope_relevance, dossier_relevance, expected):
+    value = draft(); value["extraction"].update(prompt_version=full_prompt, prepared_at="2026-10-12T14:05:00Z")
+    for classification in (value["classification"], value["news_dossier"]["classification"]):
+        classification["relevance"] = dossier_relevance
+    assessment = rights_review(relevance=scope_relevance)
+    validate_scope_review(assessment, reference=reference(), content_sha256="c" * 64, now=NOW)
+    manifest = project_news_selection([value], archive(), now=NOW, scope_reviews=[assessment])
+    assert len(manifest["selections"]) == expected
+    assert manifest["assessment_counts"]["relevant" if expected else "excluded"] == 1
+    if expected:
+        assert manifest["selections"][0]["selection"]["prompt_version"] == RIGHTS_SCOPE_PROMPT
+
+
+def test_nexus_policy_rejects_a_foreign_topic_without_salvadoran_rights_connection():
+    assessment = rights_review(jurisdiction="other", relevance="not_relevant")
+    assessment["evidence"].update(jurisdiction_paragraph_ids=[], relevance_paragraph_ids=[])
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[assessment])
+    assert manifest["selections"] == [] and manifest["assessment_counts"]["excluded"] == 1
+
+
+def test_previous_inclusive_full_positive_remains_compatible_until_scope_reassessment():
+    value = draft(); value["extraction"]["prompt_version"] = PREVIOUS_FULL_SCOPE_PROMPT
+    assert project(value)["selections"][0]["selection"]["prompt_version"] == PREVIOUS_FULL_SCOPE_PROMPT
+
+
+def test_human_approval_overrides_even_a_new_nexus_classifier_negative():
+    manifest = project_news_selection([], archive(), now=NOW,
+        scope_reviews=[rights_review(relevance="not_relevant")], reviewed_dossiers=reviewed())
+    assert manifest["assessment_counts"]["relevant"] == 1
+    selection = select_archive(archive(), manifest, reviewed())["records"][0]["selection"]
+    assert selection["method"] == "editorial_scope" and selection["human_reviewed"] is True
 
 
 @pytest.mark.parametrize("relevance,category", [("relevant", "relevant"), ("not_relevant", "uncertain"),

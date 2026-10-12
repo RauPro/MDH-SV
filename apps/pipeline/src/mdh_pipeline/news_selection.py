@@ -14,10 +14,13 @@ _HEX = r"[a-f0-9]{64}"
 _PARAGRAPH = r"p[1-9][0-9]{0,2}"
 _MODEL = r"gemini-[A-Za-z0-9_.-]{1,90}"
 LEGACY_FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-8-relevance-scope"
-FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-9-inclusive-context"
+PREVIOUS_FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-9-inclusive-context"
+FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-10-rights-nexus"
 SCOPE_REVIEW_PROMPT = "mdh-news-scope-1"
 INCLUSIVE_SCOPE_PROMPT = "mdh-news-scope-2-inclusive-context"
-_SELECTION_PROMPTS = {FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT}
+RIGHTS_SCOPE_PROMPT = "mdh-news-scope-3-rights-nexus"
+_SELECTION_PROMPTS = {FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT,
+                      SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT}
 _STAMP = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})"
 _COMMON = {"method", "review_status", "human_reviewed", "jurisdiction", "relevance"}
 _AUTOMATIC = _COMMON | {"classified_at", "model", "prompt_version", "evidence"}
@@ -214,8 +217,8 @@ def _validate_scope_review_shape(document):
             or not _matches(_HEX, evidence["content_sha256"])
             or not isinstance(extraction, dict) or set(extraction) != {"provider", "model", "prompt_version", "prepared_at"}
             or extraction["provider"] != "gemini" or not _matches(_MODEL, extraction["model"])
-            or extraction["prompt_version"] != (
-                INCLUSIVE_SCOPE_PROMPT if document["schema_version"] == 2 else SCOPE_REVIEW_PROMPT)):
+            or extraction["prompt_version"] not in (
+                {INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT} if document["schema_version"] == 2 else {SCOPE_REVIEW_PROMPT})):
         _fail()
     prepared = _timestamp(extraction["prepared_at"])
     if "source_read" in document:
@@ -307,7 +310,7 @@ def _dossier_decision(original, reference, instant):
     fetched, prepared = _timestamp(extraction["fetched_at"]), _timestamp(extraction["prepared_at"])
     if (news["extraction_status"] != "processed" or not _bound(news, reference)
             or scope != document.get("classification") or extraction.get("provider") != "gemini"
-            or extraction.get("prompt_version") not in {FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT}
+            or extraction.get("prompt_version") not in {FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT}
             or not _matches(_MODEL, extraction.get("model"))
             or not _matches(_HEX, extraction.get("content_sha256"))
             or not _day(news["published_date"]) <= fetched.date()
@@ -375,16 +378,17 @@ def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_
         # The dedicated inclusive classifier owns scope for this exact text.
         # Later dossier enrichment must not silently re-decide its eligibility.
         same_text = len({item["hash"] for item in options}) == 1
-        dedicated = [item for item in options if item["policy"] == INCLUSIVE_SCOPE_PROMPT]
+        dedicated = [item for item in options if item["policy"] in {INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT}]
         if same_text and dedicated:
-            options = dedicated
+            rights_nexus = [item for item in dedicated if item["policy"] == RIGHTS_SCOPE_PROMPT]
+            options = rights_nexus or dedicated
         # A different body can supersede the old snapshot only after the newer
         # read is classified under the inclusive policy, never the old v8/v1 rules.
         decision_time = lambda item: item["timestamp"][1] if same_text else item["timestamp"]
         stamp = max(decision_time(item) for item in options)
         newest = [item for item in options if decision_time(item) == stamp]
         if (len({(item["scope"], item["hash"]) for item in newest}) > 1
-                or not same_text and any(item["policy"] not in {FULL_SCOPE_PROMPT, INCLUSIVE_SCOPE_PROMPT}
+                or not same_text and any(item["policy"] not in {FULL_SCOPE_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT}
                                          for item in newest)):
             latest[identifier] = {"category": "uncertain", "selection": None}
         else:

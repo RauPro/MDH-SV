@@ -30,6 +30,16 @@ No incluye cuerpos, citas literales ni campos personales del borrador.
 `editorial_scope` requiere una ficha aprobada y coincidente en identidad, revisor
 y fecha; una decisión humana negativa o incierta prevalece.
 
+Para retirar una ficha humana ya importada, registra la decisión en el workflow
+`Revisar noticia` y actualiza explícitamente `data/reviewed/news_dossiers.json`
+mediante un cambio editorial revisado, regenerando los snapshots y comprobando
+CI. Rechazarla sólo cierra y etiqueta el Issue privado: ese workflow no modifica
+la fuente pública revisada. El importador tampoco reemplaza una ficha existente
+con una propuesta distinta; exige resolver el cambio explícitamente. Si la fuente
+revisada todavía contiene una ficha positiva excluida del archivo, las
+comprobaciones de integridad detienen la publicación y permanece el snapshot
+anterior. Una etiqueta por sí sola no garantiza la retirada del sitio.
+
 Clasificaciones `not_relevant`, `other` o `unclear`, evidencia ausente y
 contradicciones quedan fuera. Un fallo de validación no vuelve a mostrar todos
 los candidatos. Los campos faltantes no impiden por sí solos seleccionar una
@@ -38,13 +48,17 @@ controles diferentes.
 
 ## Clasificación antes de las fichas
 
-La política inclusiva `mdh-news-scope-2-inclusive-context` clasifica directamente
+La política `mdh-news-scope-3-rights-nexus` clasifica directamente
 cualquier referencia tras leer su fuente: no exige ficha, issue ni etiqueta
 positiva anterior. Incluye hacinamiento y reinserción como contexto cuando el
 artículo trata sustantivamente esas cuestiones, sin convertir una política
 pública en una denuncia de violación. Las fichas nuevas usan
-`mdh-universal-news-grounded-9-inclusive-context`. La evaluación de alcance v2
+`mdh-universal-news-grounded-10-rights-nexus`. La evaluación de alcance v3
 prevalece sobre la clasificación auxiliar de una ficha del mismo texto.
+Una condena, una investigación por corrupción o la justicia ordinaria por sí
+solas no acreditan pertinencia: hace falta una afectación, riesgo o protección
+concreta de derechos. El vínculo con El Salvador debe corresponder a ese mismo
+asunto, no a una mención incidental separada.
 
 El job horario clasifica primero y completa fichas después, bajo una única
 reserva horaria. Asigna aproximadamente el 70% de las solicitudes a clasificación
@@ -55,8 +69,8 @@ del JSON completo. Se preserva un intento para RSS nuevo antes del backlog
 positivo. Los reintentos también consumen presupuesto.
 
 Las decisiones quedan en `scope-reviews/`; v2 conserva un recibo de lectura con
-fecha, método, truncamiento y hash, sin cuerpo. Los positivos v1 siguen válidos;
-sus exclusiones necesitan reevaluación bajo el criterio inclusivo. Una ficha
+fecha, método, truncamiento y hash, sin cuerpo. Las evaluaciones con políticas v1/v2 se reanalizan una vez antes de continuar
+con referencias nuevas, sin reiniciar el contador de uso. Una ficha
 puede conservar otro snapshot: no bloquea la clasificación de una lectura nueva
 ni convierte los datos antiguos en campos aprobados.
 
