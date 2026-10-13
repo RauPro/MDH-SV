@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { pendingNewsDossier, type NewsDossier, type NewsDossierFieldStatus } from '../../../../shared/news-dossier.mjs';
+import type { NewsLocation } from '../../../../shared/news-location.mjs';
 import fixture from '../__fixtures__/newsArchive.json';
 import { parseNewsArchive, type NewsReference } from '../newsArchive';
 import { DEPARTMENTS } from './elSalvador';
@@ -106,9 +107,47 @@ const automatic = (source = reference) => new Map([[source.id, {
   candidate_id: source.id, source_url: source.source_url, publisher: source.publisher, published_date: source.published_date, department: 'La Libertad',
   review_status: 'automated_unreviewed' as const, human_reviewed: false as const, method: 'gemini_explicit_department' as const, extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00Z', evidence: { paragraph_id: 'p1', content_sha256: 'a'.repeat(64) },
 }]]);
+const pluralAutomatic = (source = reference): Map<string, NewsLocation> => {
+  const entry = automatic(source).get(source.id)!;
+  const { department, evidence, ...common } = entry;
+  return new Map([[source.id, { ...common, method: 'source_administrative_mentions', rule_version: 2,
+    evidence: { content_sha256: evidence.content_sha256 }, mentions: [
+      { method: 'source_explicit_department', department, paragraph_id: 'p1' },
+      { method: 'source_explicit_department', department: 'San Salvador', paragraph_id: 'p2' },
+    ],
+  }]]);
+};
+it('maps one news item to all mentioned departments without choosing a principal or inflating unique counts', () => {
+  const item = newsTerritoryItem(reference, new Map(), pluralAutomatic());
+  expect(item.department).toBeNull();
+  expect(item.departments).toEqual(['La Libertad', 'San Salvador']);
+  expect(item.reason).toBe('located');
+  expect(matchesNewsTerritory(item, 'La Libertad')).toBe(true);
+  expect(matchesNewsTerritory(item, 'San Salvador')).toBe(true);
+  expect(matchesNewsTerritory(item, 'San Miguel')).toBe(false);
+  expect(matchesNewsTerritory(item, UNKNOWN_DEPARTMENT)).toBe(false);
+  const unlocated = newsTerritoryItem(parseNewsArchive(fixture).records[1]);
+  const summary = summarizeNewsTerritory([item, item, unlocated]);
+  expect(summary.located).toBe(1);
+  expect(summary.automated).toBe(1);
+  expect(summary.unlocated).toBe(1);
+  expect(summary.counts['San Salvador']).toBe(1);
+  expect(summary.counts['La Libertad']).toBe(1);
+  expect(summary.automaticCounts['San Salvador']).toBe(1);
+  expect(Object.values(summary.counts).reduce((sum, count) => sum + count, 0)).toBe(2);
+});
+it.each(['reported', 'withheld', 'not_reported'] as const)('keeps human %s data ahead of every automatic mention', status => {
+  const dossier = approved();
+  if (status !== 'reported') dossier.fields.department = { status, value: null, evidence_refs: [], note: 'Revisión humana de disponibilidad del departamento.' };
+  const item = newsTerritoryItem(reference, index(dossier), pluralAutomatic());
+  expect(item.departments).toEqual(status === 'reported' ? ['San Salvador'] : []);
+  expect(item.automaticLocation).toBeNull();
+  expect(summarizeNewsTerritory([item]).automated).toBe(0);
+});
 it('counts the separate automatic projection while all dossier fields remain pending', () => {
   const item = newsTerritoryItem(reference, new Map(), automatic());
   expect(item.department).toBe('La Libertad');
+  expect(item.departments).toEqual(['La Libertad']);
   expect(item.locationKind).toBe('automated_unreviewed');
   expect(item.dossier.fields.department.status).toBe('pending');
   expect(item.dossier.human_reviewed).toBe(false);

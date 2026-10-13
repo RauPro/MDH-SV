@@ -175,7 +175,7 @@ export function searchNews(filters = {}, archive = loadNews(), dossierPayload, l
   result.meta = { ...result.meta, selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador', coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
     news_dossiers_status: snapshot.status,
     automatic_locations_status: locations.status,
-    automatic_location_notice: 'Departamento explícito o derivado de un municipio/distrito citado mediante referencia administrativa oficial, sin revisión humana. No confirma ubicación de una violación ni completa la ficha revisada. null no implica ausencia de ubicación en la fuente.',
+    automatic_location_notice: 'Uno o más departamentos mencionados en la fuente o resueltos desde municipios/distritos mediante referencia administrativa oficial, sin revisión humana. Una noticia puede mencionar varios departamentos sin tener una ubicación principal. No confirma el lugar de una violación ni completa la ficha revisada. null no implica ausencia de ubicación en la fuente.',
     review_notice: 'Noticias seleccionadas por pertinencia en derechos humanos de El Salvador con evidencia de la fuente o revisión editorial; no constituyen casos validados. La clasificación automática de pertinencia permanece sin revisión humana. Sin ficha pública revisada, los campos quedan pendientes de extracción o revisión. Esto no informa del estado de la cola privada, que nunca se consulta.' };
   return result;
 }

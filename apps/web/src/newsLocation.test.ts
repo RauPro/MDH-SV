@@ -17,14 +17,14 @@ describe('public automatic location contract', () => {
     ...locationFixture(), method: 'gemini_department_corroborated', evidence: { paragraph_id: 'p3', content_sha256: 'a'.repeat(64) },
     corroboration: { strategy: 'same_article_explicit_department', model_paragraph_id: 'p1', explicit_paragraph_id: 'p3', rule_version: 1 },
   });
-  it.each([3, 4])('accepts a corroborated department in schema %i with distinct and bound paragraph IDs', schema_version => {
+  it.each([3, 4, 5])('accepts a corroborated department in schema %i with distinct and bound paragraph IDs', schema_version => {
     const location = corroborated();
     const index = parsePublishedNewsLocations({ ...collection([location]), schema_version });
     expect(newsLocationFor(reference, validateLocationBindings(index, fixture.records))).toEqual(location);
     expect(location.human_reviewed).toBe(false);
     for (const schema_version of [1, 2]) expect(() => parsePublishedNewsLocations({ ...collection([location]), schema_version })).toThrow();
   });
-  it.each([1, 2, 3, 4])('keeps direct and municipal locations compatible with schema %i', schema_version => {
+  it.each([1, 2, 3, 4, 5])('keeps direct and municipal locations compatible with schema %i', schema_version => {
     expect(parsePublishedNewsLocations({ ...collection(), schema_version }).size).toBe(1);
     expect(parsePublishedNewsLocations({ ...collection([municipal()]), schema_version }).size).toBe(1);
   });
@@ -56,9 +56,60 @@ describe('public automatic location contract', () => {
     resolution: { type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
       reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6` },
   });
-  it('accepts source-only locations only in schema 4 without attributing them to a model', () => {
+  const plural = (): Extract<NewsLocation, { method: 'source_administrative_mentions' }> => {
+    const { department, evidence, ...common } = locationFixture();
+    return { ...common, method: 'source_administrative_mentions', rule_version: 2,
+      evidence: { content_sha256: evidence.content_sha256 }, mentions: [
+        { method: 'source_explicit_department', department, paragraph_id: 'p1' },
+        { method: 'source_municipality_reference', department: 'Ahuachapán', paragraph_id: 'p2', resolution: sourceMunicipality().resolution },
+      ] };
+  };
+  it('accepts plural source mentions only in schema 5 without inventing a main department', () => {
+    const location = plural();
+    const index = parsePublishedNewsLocations({ ...collection([location]), schema_version: 5 });
+    expect(newsLocationFor(reference, validateLocationBindings(index, fixture.records))).toEqual(location);
+    expect(location).not.toHaveProperty('department');
+    expect(location.evidence).not.toHaveProperty('paragraph_id');
+    for (const schema_version of [1, 2, 3, 4]) {
+      expect(() => parsePublishedNewsLocations({ ...collection([location]), schema_version })).toThrow();
+    }
+    const allDepartments = { ...location, mentions: NEWS_LOCATION_DEPARTMENTS.map((department, index) => ({
+      method: 'source_explicit_department', department, paragraph_id: `p${index + 1}`,
+    })) };
+    expect(validatePublishedNewsLocation(allDepartments).mentions).toHaveLength(14);
+  });
+  it('requires the plural rule, unique canonical departments and exact nested provenance', () => {
+    for (const change of [
+      (value: Record<string, unknown>) => { value.rule_version = 1; },
+      (value: Record<string, unknown>) => { value.department = 'San Salvador'; },
+      (value: Record<string, unknown>) => { value.resolution = sourceMunicipality().resolution; },
+      (value: Record<string, unknown>) => { value.corroboration = corroborated().corroboration; },
+      (value: Record<string, unknown>) => { value.evidence = { content_sha256: 'a'.repeat(64), paragraph_id: 'p1' }; },
+      (value: Record<string, unknown>) => { value.mentions = []; },
+      (value: Record<string, unknown>) => { value.mentions = [plural().mentions[0]]; },
+      (value: Record<string, unknown>) => { value.mentions = Array(15).fill(plural().mentions[0]); },
+      (value: Record<string, unknown>) => { value.mentions = [plural().mentions[0], { ...plural().mentions[0], paragraph_id: 'p3' }]; },
+      (value: Record<string, unknown>) => { value.mentions = [plural().mentions[0], { ...plural().mentions[1], department: 'San Miguel' }]; },
+      (value: Record<string, unknown>) => { value.mentions = [plural().mentions[0], { ...plural().mentions[1], private_quote: 'PRIVATE' }]; },
+      (value: Record<string, unknown>) => { value.mentions = [plural().mentions[0], { ...plural().mentions[1], method: 'gemini_municipality_reference' }]; },
+    ]) {
+      const location: Record<string, unknown> = { ...structuredClone(plural()) };
+      change(location);
+      expect(() => validatePublishedNewsLocation(location)).toThrow();
+    }
+  });
+  it('allows source rule 2 for a single department only in schema 5', () => {
     for (const location of [sourceDepartment(), sourceMunicipality()]) {
-      const index = parsePublishedNewsLocations({ ...collection([location]), schema_version: 4 });
+      const current = { ...location, rule_version: 2 };
+      expect(parsePublishedNewsLocations({ ...collection([current]), schema_version: 5 }).size).toBe(1);
+      for (const schema_version of [1, 2, 3, 4]) {
+        expect(() => parsePublishedNewsLocations({ ...collection([current]), schema_version })).toThrow();
+      }
+    }
+  });
+  it.each([4, 5])('accepts source rule 1 in schema %i without attributing it to a model', schema_version => {
+    for (const location of [sourceDepartment(), sourceMunicipality()]) {
+      const index = parsePublishedNewsLocations({ ...collection([location]), schema_version });
       expect(newsLocationFor(reference, validateLocationBindings(index, fixture.records))).toEqual(location);
       expect(location.rule_version).toBe(1);
       expect(location.human_reviewed).toBe(false);
@@ -68,7 +119,7 @@ describe('public automatic location contract', () => {
       }
     }
   });
-  it.each([undefined, null, 0, 2, true, '1'])('requires source rule_version to be exactly integer 1, rejecting %j', rule_version => {
+  it.each([undefined, null, 0, 3, true, '1'])('requires an integer source rule_version of 1 or 2, rejecting %j', rule_version => {
     for (const location of [sourceDepartment(), sourceMunicipality()]) {
       expect(() => validatePublishedNewsLocation({ ...location, rule_version })).toThrow();
     }
@@ -92,9 +143,9 @@ describe('public automatic location contract', () => {
     }
   });
   it('requires every automatic method to use the same source text as automatic selection', () => {
-    for (const location of [locationFixture(), municipal(), corroborated(), sourceDepartment(), sourceMunicipality()]) {
+    for (const location of [locationFixture(), municipal(), corroborated(), sourceDepartment(), sourceMunicipality(), plural()]) {
       const stale = { ...location, evidence: { ...location.evidence, content_sha256: 'f'.repeat(64) } };
-      const index = parsePublishedNewsLocations({ ...collection([stale]), schema_version: 4 });
+      const index = parsePublishedNewsLocations({ ...collection([stale]), schema_version: 5 });
       expect(() => validateLocationBindings(index, fixture.records)).toThrow();
       expect(newsLocationFor(reference, index)).toBeNull();
     }

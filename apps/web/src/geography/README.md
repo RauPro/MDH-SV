@@ -26,7 +26,21 @@ oficial. No usan Gemini para localizar la noticia ni requieren una ficha
 completa; mantienen el rótulo Sin revisar. No admiten `corroboration`, datos
 personales, cuerpos periodísticos, contadores internos ni cachés privadas.
 Las versiones 1–3 y sus métodos anteriores siguen siendo compatibles; los
-métodos de lectura directa sólo se admiten en la versión 4.
+métodos de lectura directa se admiten a partir de la versión 4.
+
+La versión 5 incorpora la regla 2 y `source_administrative_mentions` para noticias
+con dos a catorce departamentos distintos. Conserva un único objeto por noticia,
+un hash común del texto y una lista `mentions` con el párrafo y, cuando corresponde,
+la resolución municipal de cada departamento. No elige un departamento principal
+ni publica `department` en el nivel superior. Los métodos de un solo departamento
+siguen disponibles; sus entradas con regla 2 también requieren la versión 5.
+
+`newsTerritory` expone `departments` y mantiene `department` sólo cuando existe
+uno. Una noticia puede pasar el filtro de cualquiera de sus departamentos, pero
+el total y los estados de revisión cuentan noticias únicas. Cada departamento
+cuenta la noticia una sola vez: sumar las columnas puede superar el total de
+noticias, y no representa una suma de casos o víctimas. El detalle muestra todas
+las menciones sin convertir una referencia secundaria en el lugar de una violación.
 
 Cuando la referencia fue seleccionada con `gemini_grounded_scope`, el hash del
 texto de la ubicación debe coincidir con el de esa selección. Una coincidencia

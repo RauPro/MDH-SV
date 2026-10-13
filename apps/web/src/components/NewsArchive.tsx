@@ -134,6 +134,7 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
     {isMonitor && <>
       <label className="news-location-filter">Capa de ubicaciones<select value={locationLayer} onChange={event => { setLocationLayer(event.target.value as typeof locationLayer); setDepartment(''); setPage(1); }}><option value="all">Todas las ubicaciones</option><option value="reviewed">Revisadas</option><option value="automated_unreviewed">Automáticas sin revisar</option></select></label>
       <SalvadorMap unit="news" available={mapAvailable} loading={mapLoading} reviewed={territorySummary.reviewed} automated={territorySummary.automated} reviewedCounts={territorySummary.reviewedCounts} automaticCounts={territorySummary.automaticCounts} selected={department} onSelect={value => { setDepartment(value); setPage(1); }} counts={territorySummary.counts} located={territorySummary.located} unlocated={territorySummary.unlocated} invalidDates={invalidDates}/>
+      <p className="filter-note">Una misma noticia puede aparecer en varios departamentos. El total cuenta noticias únicas; las menciones departamentales no se suman como casos.</p>
       {!invalidDates && mapAvailable && matchingReferences.length > 0 && territorySummary.located === 0 && <p className="notice news-map-pending">Ninguna noticia tiene un departamento disponible en la capa seleccionada. Puedes consultar todas las noticias al restablecer los filtros; una ubicación pendiente no implica ausencia de hechos.</p>}
       {!invalidDates && mapAvailable && territorySummary.unlocated > 0 && <div className="news-map-reasons"><p>Noticias sin ubicación publicable en este mapa:</p><ul>
         {territorySummary.reasons.pending_review > 0 && <li>{territorySummary.reasons.pending_review} sin ubicación automática disponible ni ubicación revisada.</li>}
@@ -160,8 +161,16 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
       <a className="primary" href={selected.source_url} target="_blank" rel="noopener noreferrer">Consultar noticia original <ArrowUpRight size={16} aria-label="abre en otra pestaña"/></a>
       {selectedLocation && <section className="news-automatic-location" aria-label="Ubicación automática sin revisar">
         <h3>Ubicación automática · Sin revisar</h3>
-        <p>{selectedLocation.resolution ? 'Departamento obtenido del municipio o distrito citado:' : selectedLocation.method === 'gemini_department_corroborated' ? 'Departamento corroborado automáticamente en la misma fuente:' : 'Departamento mencionado en la fuente:'} <strong>{selectedLocation.department}</strong>.</p>
-        {selectedLocationFromSource && <p>Esta mención se comprobó directamente en el texto de la fuente; su identificación no depende de que la ficha esté completa.</p>}
+        {selectedLocation.method === 'source_administrative_mentions' ? <>
+          <p>Departamentos mencionados en la fuente, sin asignar una ubicación principal:</p>
+          <ul>{selectedLocation.mentions.map(mention => <li key={mention.department}>
+            <strong>{mention.department}</strong>{mention.resolution
+              ? <> · {mention.resolution.municipality_kind === 'district' ? 'Distrito' : 'Municipio'} citado: {mention.resolution.municipality}. Correspondencia según la <a href={mention.resolution.source_url} target="_blank" rel="noopener noreferrer">referencia administrativa oficial de {mention.resolution.municipality}</a>.</>
+              : ' · Mención explícita del departamento en la fuente.'}
+          </li>)}</ul>
+          <p>Esta noticia puede consultarse en cada uno de esos departamentos, pero cuenta una sola vez en el total de noticias.</p>
+        </> : <p>{selectedLocation.resolution ? 'Departamento obtenido del municipio o distrito citado:' : selectedLocation.method === 'gemini_department_corroborated' ? 'Departamento corroborado automáticamente en la misma fuente:' : 'Departamento mencionado en la fuente:'} <strong>{selectedLocation.department}</strong>.</p>}
+        {selectedLocationFromSource && <p>{selectedLocation.method === 'source_administrative_mentions' ? 'Estas menciones se comprobaron' : 'Esta mención se comprobó'} directamente en el texto de la fuente; su identificación no depende de que la ficha esté completa.</p>}
         {selectedLocation.resolution && <p>Localidad citada: <strong>{selectedLocation.resolution.municipality}</strong>. Correspondencia administrativa según la <a href={selectedLocation.resolution.source_url} target="_blank" rel="noopener noreferrer">referencia oficial de municipios y distritos</a>. Se conserva el nombre de la fuente; no se asignan coordenadas personales.</p>}
         {selectedLocation.corroboration && <p>Se comprobó que otro párrafo de la misma noticia menciona expresamente este departamento. La corroboración automática no equivale a revisión humana.</p>}
         <p>Esta extracción automática no confirma el lugar de una violación ni ha sido revisada por una persona. Puede corresponder a una referencia secundaria del artículo. La ficha estructurada mantiene su propio estado de revisión.</p>

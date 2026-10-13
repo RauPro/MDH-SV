@@ -25,6 +25,42 @@ function approved(): NewsDossier {
 }
 beforeEach(() => { vi.restoreAllMocks(); serve(); });
 const ready = async () => { render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>); await screen.findByText('3 noticias seleccionadas'); };
+it('lists every department mentioned by one news item while counting and displaying the news only once', async () => {
+  const { department, evidence, ...common } = automatic();
+  const location = { ...common, method: 'source_administrative_mentions', rule_version: 2,
+    evidence: { content_sha256: evidence.content_sha256 }, mentions: [
+      { method: 'source_explicit_department', department, paragraph_id: 'p1' },
+      { method: 'source_municipality_reference', department: 'Ahuachapán', paragraph_id: 'p2', resolution: {
+        type: 'municipality_to_department', municipality: 'Jujutla', municipality_kind: 'district',
+        reference_version: municipalityReference.reference_version, source_url: `${municipalityReference.source.url}#page=6`,
+      } },
+    ],
+  };
+  serve(fixture, EMPTY, { ...EMPTY_LOCATIONS, schema_version: 5, locations: [location] });
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  const sanSalvador = await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
+  const ahuachapan = screen.getByRole('button', { name: 'Ahuachapán: 1 noticia' });
+  expect(screen.getByText('noticia con departamento disponible')).toHaveTextContent('1 noticia con departamento disponible');
+  expect(screen.getByText('noticia con menciones automáticas sin revisar')).toHaveTextContent('1 noticia con menciones automáticas sin revisar');
+  expect(screen.getByText(/El total cuenta noticias únicas/)).toBeInTheDocument();
+  await userEvent.click(sanSalvador);
+  expect(screen.getByText('1 ficha de noticia')).toBeInTheDocument();
+  await userEvent.click(ahuachapan);
+  expect(screen.getByText('1 ficha de noticia')).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
+  const panel = screen.getByRole('region', { name: 'Ubicación automática sin revisar' });
+  expect(panel).toHaveTextContent('sin asignar una ubicación principal');
+  expect(within(panel).getAllByRole('listitem')).toHaveLength(2);
+  expect(panel).toHaveTextContent('San Salvador');
+  expect(panel).toHaveTextContent('Ahuachapán');
+  expect(panel).toHaveTextContent('Distrito citado: Jujutla');
+  expect(panel).toHaveTextContent('cuenta una sola vez en el total');
+  expect(screen.getByText('Departamento').closest('.dossier-field')).toHaveTextContent(PUBLIC_FIELD_PENDING);
+  await userEvent.click(screen.getByRole('button', { name: 'Cerrar' }));
+  await userEvent.click(screen.getByRole('button', { name: /Sin ubicación pública en El Salvador/ }));
+  expect(screen.getByText('2 fichas de noticias')).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: fixture.records[0].title })).not.toBeInTheDocument();
+});
 it.each(['source_explicit_department', 'source_municipality_reference'])('explains %s independently of Gemini and pending dossier fields', async method => {
   const municipal = method === 'source_municipality_reference';
   const location = { ...automatic(), method, rule_version: 1, department: municipal ? 'Ahuachapán' : 'San Salvador',

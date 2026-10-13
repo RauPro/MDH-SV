@@ -253,6 +253,35 @@ test('automatic locations are a separate unreviewed projection and never overrid
     { ...location, method: 'source_explicit_department', rule_version: 1 },
     { ...municipal, method: 'source_municipality_reference', rule_version: 1 },
   ];
+  const { department: directDepartment, evidence: directEvidence, ...commonLocation } = location;
+  const pluralLocation = { ...commonLocation, method: 'source_administrative_mentions', rule_version: 2,
+    evidence: { content_sha256: directEvidence.content_sha256 }, mentions: [
+      { method: 'source_explicit_department', department: directDepartment, paragraph_id: 'p1' },
+      { method: 'source_municipality_reference', department: municipal.department, paragraph_id: 'p2', resolution: municipal.resolution },
+    ],
+  };
+  const pluralPayload = { ...payload, schema_version: 5, locations: [pluralLocation] };
+  const pluralResult = searchNews({}, archive, empty, pluralPayload);
+  assert.deepEqual(pluralResult.data[0].automatic_location, pluralLocation);
+  assert.equal(pluralResult.data.length, 1);
+  assert.equal(pluralResult.data[0].automatic_location.department, undefined);
+  assert.equal(pluralResult.data[0].news_dossier.fields.department.value, null);
+  for (const schema_version of [1, 2, 3, 4]) {
+    assert.equal(searchNews({}, archive, empty, { ...pluralPayload, schema_version }).data[0].automatic_location, null);
+  }
+  for (const change of [
+    value => { value.department = 'San Salvador'; },
+    value => { value.rule_version = 1; },
+    value => { value.evidence.paragraph_id = 'p1'; },
+    value => { value.evidence.content_sha256 = 'f'.repeat(64); },
+    value => { value.mentions[1].department = 'San Salvador'; },
+    value => { value.mentions[1].private_quote = 'PRIVATE_SOURCE_VALUE'; },
+  ]) {
+    const unsafe = structuredClone(pluralPayload); change(unsafe.locations[0]);
+    const response = searchNews({}, archive, empty, unsafe);
+    assert.equal(response.data[0].automatic_location, null);
+    assert.ok(!JSON.stringify(response).includes('PRIVATE_SOURCE_VALUE'));
+  }
   for (const sourceLocation of sourceLocations) {
     const sourcePayload = { ...payload, schema_version: 4, locations: [sourceLocation] };
     const response = searchNews({}, archive, empty, sourcePayload);
@@ -261,6 +290,8 @@ test('automatic locations are a separate unreviewed projection and never overrid
     assert.equal(response.data[0].automatic_location.corroboration, undefined);
     assert.equal(response.data[0].news_dossier.fields.department.value, null);
     assert.equal(response.data[0].news_dossier.human_reviewed, false);
+    assert.deepEqual(searchNews({}, archive, empty, { ...sourcePayload, schema_version: 5,
+      locations: [{ ...sourceLocation, rule_version: 2 }] }).data[0].automatic_location, { ...sourceLocation, rule_version: 2 });
     for (const schema_version of [1, 2, 3]) {
       const incompatible = searchNews({}, archive, empty, { ...sourcePayload, schema_version });
       assert.equal(incompatible.data[0].automatic_location, null);
@@ -301,6 +332,7 @@ test('automatic locations are a separate unreviewed projection and never overrid
   assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, payload).data[0].automatic_location, null);
   assert.equal(searchNews({}, archive, null, payload).data[0].automatic_location, null);
   assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, corroboratedPayload).data[0].automatic_location, null);
+  assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, pluralPayload).data[0].automatic_location, null);
   for (const sourceLocation of sourceLocations) {
     assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, { ...payload, schema_version: 4, locations: [sourceLocation] }).data[0].automatic_location, null);
   }
@@ -330,15 +362,24 @@ test('OpenAPI is a public, versioned executable contract', async () => {
   assert.ok(locationSchema.allOf.some(rule => rule.if.properties.method.const === 'gemini_department_corroborated' && rule.then.required.includes('corroboration')));
   assert.ok(locationSchema.properties.method.enum.includes('source_explicit_department'));
   assert.ok(locationSchema.properties.method.enum.includes('source_municipality_reference'));
-  assert.equal(locationSchema.properties.rule_version.const, 1);
+  assert.deepEqual(locationSchema.properties.rule_version.enum, [1, 2]);
   assert.equal(locationSchema.properties.rule_version.type, 'integer');
   assert.ok(locationSchema.allOf.some(rule => rule.if.properties.method.enum?.includes('source_municipality_reference') && rule.then.required.includes('resolution')));
   assert.ok(locationSchema.allOf.some(rule => rule.if.properties.method.enum?.includes('source_explicit_department') && rule.then.required.includes('rule_version')));
   const locationCollection = body.components.schemas.AutomaticNewsLocationCollection;
-  assert.deepEqual(locationCollection.properties.schema_version.enum, [1, 2, 3, 4]);
+  assert.deepEqual(locationCollection.properties.schema_version.enum, [1, 2, 3, 4, 5]);
   assert.equal(locationCollection.additionalProperties, false);
   assert.ok(locationCollection.allOf.some(rule => JSON.stringify(rule.if.properties.schema_version.enum) === '[1,2,3]'
     && rule.then.properties.locations.items.not.properties.method.enum.includes('source_explicit_department')));
+  assert.ok(locationSchema.properties.method.enum.includes('source_administrative_mentions'));
+  assert.equal(locationSchema.properties.mentions.minItems, 2);
+  assert.equal(locationSchema.properties.mentions.maxItems, 14);
+  assert.equal(locationSchema.properties.mentions.items.$ref, '#/components/schemas/AutomaticNewsLocationMention');
+  const pluralRule = locationSchema.allOf.find(rule => rule.if.properties.method.const === 'source_administrative_mentions');
+  assert.deepEqual(pluralRule.then.not.required, ['department']);
+  assert.deepEqual(pluralRule.then.properties.evidence.not.required, ['paragraph_id']);
+  assert.equal(pluralRule.then.properties.rule_version.const, 2);
+  assert.equal(body.components.schemas.AutomaticNewsLocationMention.additionalProperties, false);
 
   assert.deepEqual(body.security, []);
   assert.ok(body.paths['/api/v1/records/{id}']);
