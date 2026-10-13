@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-13T03:16:17.679140+00:00",
+  "generated_at": "2026-10-13T04:16:59.038892+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 7141,
-      "selected": 343,
-      "evaluated": 710,
-      "relevant": 343,
-      "excluded": 360,
+      "selected": 353,
+      "evaluated": 758,
+      "relevant": 353,
+      "excluded": 398,
       "uncertain": 7,
-      "pending": 6431,
-      "evaluated_at": "2026-10-13T03:16:16.933903+00:00"
+      "pending": 6383,
+      "evaluated_at": "2026-10-13T04:16:57.862408+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-12",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 343,
+    "records": 353,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 325,
+        "records": 335,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -785,7 +785,7 @@
           {
             "month": "2015-01",
             "status": "enumerated",
-            "records": 14,
+            "records": 18,
             "screen_version": 3,
             "posts_scanned": 973,
             "source_total_posts": 973,
@@ -797,7 +797,7 @@
           {
             "month": "2015-02",
             "status": "enumerated",
-            "records": 0,
+            "records": 6,
             "screen_version": 3,
             "posts_scanned": 849,
             "source_total_posts": 849,
@@ -19712,12 +19712,12 @@
         "month": "2015-01",
         "start_date": "2015-01-01",
         "end_date": "2015-01-31",
-        "records": 14,
+        "records": 18,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 14
+            "records": 18
           },
           {
             "source_id": "gatoencerrado",
@@ -19755,12 +19755,12 @@
         "month": "2015-02",
         "start_date": "2015-02-01",
         "end_date": "2015-02-28",
-        "records": 0,
+        "records": 6,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 6
           },
           {
             "source_id": "gatoencerrado",
@@ -28108,6 +28108,463 @@
           "relevance_paragraph_ids": [
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6dd67d4a4c2782c35a43ffdaa851ee088713489d3adadac234a63079ae547647",
+      "title": "Juez estaba incurriendo en violaciones a la Constitución: PDDH",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juez-estaba-incurriendo-en-violaciones-a-la-constitucion-pddh-2/",
+      "published_date": "2015-02-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 41702,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:15:29.734943-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "49040de14a5a99dd63ec051733c6ad94709dcfd00fd53f160fa16e8380a1a4d5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p9",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bfb9e235df80ff5a2a9c3c05383d06971a54a3505d9063ec11c96e0766001f29",
+      "title": "Juez estaba incurriendo en violaciones a la Constitución: PDDH",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juez-estaba-incurriendo-en-violaciones-a-la-constitucion-pddh/",
+      "published_date": "2015-02-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 41647,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d67b20a03fb462e0cc0142bddff04b1203c186bae9b34bff1f84f196e9f55658",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "52682c4ee8a06009d05b067f64f3913bb4e1beeedd66d4b3514d7afb1152ad39",
+      "title": "Joven desaparecido en la guerra salvadoreña se reencuentra con su madre biológica",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/joven-desaparecido-en-la-guerra-salvadorena-se-reencuentra-con-su-madre-biologica/",
+      "published_date": "2015-02-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 41627,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2459baac8bacebc8a5905c5daa5df835a5683b7a28d87ac48f5f4322692c9005",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p8",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3ff67160c2b32b289302ef24e4f9b3d0d33a510c9d4de033ae7bfa51e8bbfaab",
+      "title": "Organizaciones de Derechos Humanos denuncian represión y persecución del Estado hondureño a la coordinadora de Las Chonas Gladys Lanza",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-de-derechos-humanos-denuncian-represion-y-persecucion-del-estado-hondureno-a-la-coordinadora-de-las-chonas-gladys-lanza/",
+      "published_date": "2015-02-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 41609,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "828bbec623f022e1f97c7c28e0cefa083ef07f9a29f9c0ead9d0a7aa771865ab",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2749fb8d8a460a24bb5b18d63b826cbef7a974ca51de0936ac1e24c553432ad7",
+      "title": "Con el apellido del asesino de monseñor Romero a cuestas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/con-el-apellido-del-asesino-de-monsenor-romero-a-cuestas/",
+      "published_date": "2015-02-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 41505,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fd04a4c4d52ec08a8c88e68529ab1739672c6e8f314893ec4efd4a96b13103a1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9",
+            "p11",
+            "p21"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d411d442d73fec952f55189fdbf9c0308c201afe9d1c12c9fb59af37d3b576f3",
+      "title": "« Je suis Charlie »- sobre la libertad de expresión en FRANCIA",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/je-suis-charlie-sobre-la-libertad-de-expresion-en-francia/",
+      "published_date": "2015-02-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "francia"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 41179,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b60c469b4ec5dc6fc856a6967628dc241f6a0a6cf27a3a4536f4ec8c600aa218",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "97905d4bdefc8be53b40a5f24628d6ec7d1c1f1228149c88f8cb1904b49676da",
+      "title": "Querella denuncia ante PDDH a juez Orellana y fiscal general por violación al derecho de libre expresión y opinión",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/querella-denuncia-ante-pddh-a-juez-orellana-y-fiscal-general-por-violacion-al-derecho-de-libre-expresion-y-opinion/",
+      "published_date": "2015-01-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40599,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:13:26.760004-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d0588720f86f7e915a599eef3de58e30cef57e755c74582f869a39e4dc1cff2b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p6",
+            "p15",
+            "p19"
+          ]
+        }
+      }
+    },
+    {
+      "id": "72eddf63bf45cdafc305f31d7ad5bac4931f9ff2572a52455d1a5102c3cc87dd",
+      "title": "Censura y amenaza",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/censura-y-amenaza/",
+      "published_date": "2015-01-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40524,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:11:35.806848-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9940f12c32e079d7d5341360cd0661f5439ff647fa0332ea184426a67978d7fc",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f5e8c43255fa22cf15558d2761ba682f44c3413ababc21b16b1d778f3a33d4f7",
+      "title": "Reducción de homicidios se debe a “nuevo entendimiento”: Mijango",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/reduccion-de-homicidios-se-debe-%e2%80%a8-a-nuevo-entendimiento-mijango/",
+      "published_date": "2015-01-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40427,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:11:35.806848-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "89c1d8a61b28598df149707635c9d75d912e7b3d7a458813a13dc818b7570f9e",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3a56fb1646a16f4657c06976139e3cf4fc825bcc44ff1ad752563441b9492ac3",
+      "title": "Intolerancia y libertad de expresión",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/intolerancia-y-libertad-de-expresion/",
+      "published_date": "2015-01-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40393,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T22:11:25.681697-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6e9a95485306b8e3b5219f04d56e530be11200127cd955f49a8c9e25ccbe14c5",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }
