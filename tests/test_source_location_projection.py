@@ -209,6 +209,91 @@ def test_model_corroboration_cannot_borrow_an_explicit_department_from_a_foreign
     assert result["locations"] == [] and stats["unsupported"] == 1
 
 
+@pytest.mark.parametrize("quote", [
+    "“Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?”",
+    '"Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?"',
+    "«Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?»",
+])
+def test_quoted_counterfactual_country_does_not_relocate_an_independent_model_anchor(quote):
+    reference, draft, article = selected_sample(text=(quote +
+        ". El partido inaugura sus campañas electorales en Izalco, ciudad donde se organiza el acto."))
+    draft["news_dossier"]["fields"]["department"].update(value=None, status="pending", evidence_refs=[])
+    draft["news_dossier"]["fields"]["municipality"].update(value="Izalco", status="reported", evidence_refs=["article-p1"])
+    result, stats = project_source(reference, article, drafts=[draft])
+    location = result["locations"][0]
+    assert location["method"] == "gemini_municipality_reference"
+    assert location["department"] == "Sonsonate" and location["resolution"]["municipality"] == "Izalco"
+    assert location["evidence"]["paragraph_id"] == "p1" and stats["sources_checked"] == 1
+    assert quote not in json.dumps(result, ensure_ascii=False)
+
+
+@pytest.mark.parametrize("prefix", [
+    "“En Perú hubo denuncias”.",
+    "“Si en Perú hubo denuncias, debemos investigarlas”.",
+    "“Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?” En Perú hubo denuncias.",
+    "“Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían? En Perú hubo denuncias”.",
+    "“Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?",
+])
+def test_asserted_or_unbounded_foreign_context_still_vetoes_the_model_anchor(prefix):
+    reference, draft, article = sample(department="La Libertad", paragraph=(
+        prefix + " El departamento de La Libertad registró casos."))
+    reference["selection"] = selected_sample()[0]["selection"]
+    reference["selection"]["evidence"]["content_sha256"] = article["content_sha256"]
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+def test_counterfactual_quote_itself_cannot_supply_a_model_location():
+    reference, draft, article = selected_sample(text=(
+        "“Si ustedes estuvieran en Izalco y tuvieran grupos políticos en los EE.UU, ¿qué harían?”"))
+    draft["news_dossier"]["fields"]["department"].update(value=None, status="pending", evidence_refs=[])
+    draft["news_dossier"]["fields"]["municipality"].update(value="Izalco", status="reported", evidence_refs=["article-p1"])
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+@pytest.mark.parametrize("anchor", [
+    "La comunidad se encuentra en Victoria, departamento de Cabañas.",
+    "La comunidad se encuentra en el distrito de Victoria, departamento de Cabañas.",
+])
+def test_model_official_pair_survives_a_later_temporary_refugee_stay_and_return(anchor):
+    reference, draft, article = selected_sample(text="La comunidad denunció abusos en Cabañas.")
+    article["paragraphs"].append({"id": "p2", "text": (anchor +
+        " Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras,"
+        " y regresó a su comunidad natal en 1992.")})
+    article["text"] = "\n\n".join(p["text"] for p in article["paragraphs"])
+    digest = hashlib.sha256(article["text"].encode()).hexdigest()
+    article["content_sha256"] = draft["extraction"]["content_sha256"] = reference["selection"]["evidence"]["content_sha256"] = digest
+    draft["news_dossier"]["evidence"][1]["locator"] = f"Párrafo p1 consultado; SHA-256 {digest}."
+    result, stats = project_source(reference, article, drafts=[draft])
+    location = result["locations"][0]
+    assert location["method"] == "gemini_department_corroborated" and location["department"] == "Cabañas"
+    assert location["evidence"]["paragraph_id"] == "p2" and stats["sources_checked"] == 1
+
+
+@pytest.mark.parametrize("paragraph", [
+    "Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras, y regresó a su comunidad natal en 1992. La comunidad se encuentra en Victoria, departamento de Cabañas.",
+    "La comunidad se encuentra en Victoria, departamento de Cabañas. Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras.",
+    "La comunidad se encuentra en Victoria, departamento de Cabañas. El texto indica que sucedió en Honduras.",
+    "La comunidad se encuentra en Victoria, departamento de Cabañas. Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras, y regresó a su comunidad natal en 1992. En Perú hubo denuncias.",
+    "El operativo se realizó en el departamento de Cabañas. Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras, y regresó a su comunidad natal en 1992.",
+])
+def test_historical_return_exception_requires_local_official_pair_and_only_later_bounded_context(paragraph):
+    reference, draft, article = selected_sample(text=paragraph)
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+def test_model_cannot_revive_a_narrative_link_that_does_not_establish_administrative_membership():
+    reference, draft, article = sample(department="La Unión", paragraph=(
+        "Se denunció el ataque contra una persona de la ciudad de San Miguel, "
+        "texto intruso, perpetrado en el departamento de La Unión."))
+    reference["selection"] = selected_sample()[0]["selection"]
+    reference["selection"]["evidence"]["content_sha256"] = article["content_sha256"]
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
 @pytest.mark.parametrize("cause", ["excluded", "protected_department", "withheld_department", "foreign_country",
                                   "legacy_privacy", "malformed_privacy", "contradictory_envelope"])
 def test_independent_route_never_bypasses_explicit_exclusion_or_private_geography_guard(cause):

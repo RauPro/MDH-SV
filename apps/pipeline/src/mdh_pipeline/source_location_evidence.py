@@ -33,6 +33,10 @@ _ORIGIN_RESIDENCE = re.compile(
     r"residencia|domicilio|domiciliad[oa]|vive|vivia|vecin[oa]|natal|natural de|nativ[oa])\b[^,;.!?]{0,80}$")
 _DIRECTION = re.compile(r"^\s+(?:norte|sur|este|oeste|centro|oriental|occidental)\b")
 _BARE_AMBIGUOUS_NAMES = {"la union", "la libertad", "victoria", "el triunfo", "armenia"}
+_ADMINISTRATIVE_CONNECTOR = re.compile(
+    r"\s*,?\s*(?:(?:ubicad[oa]|situad[oa]|localizad[oa])\s+)?"
+    r"(?:(?:en|de|del)\s+(?:el\s+)?)?"
+    r"(?:(?:norte|sur|este|oeste|centro)\s+del\s+)?")
 
 
 def _clean(text):
@@ -163,6 +167,27 @@ def _labelled_list_excluded(clause, match):
                 or re.search(r"\b(?:no|nunca)\s+(?:son|han\s+sido|fueron|estan)\s*:?\s*$", clause[:match.start("place")]))
 
 
+def _narrative_location_connector(connector):
+    # A separate event predicate does not assert administrative containment of
+    # an earlier city/person name. Its intervening prose remains unsupported;
+    # do not silently delete it to obtain a clean geographical proof.
+    return bool(re.search(r"\b(?:perpetrad[oa]s?|ocurrid[oa]s?|sucedid[oa]s?|registrad[oa]s?)\b", connector))
+
+
+def _unresolved_narrative_department_link(clause):
+    """Quarantine this clause without inventing a contradictory territorial pair."""
+    departments, _, _, _, _, _, names = _patterns()
+    for department in departments.finditer(clause):
+        prefix = clause[:department.start()]
+        for locality in reversed(list(names.finditer(prefix))):
+            connector = prefix[locality.end():]
+            if len(connector) > 100:
+                break
+            if re.match(r"^\s*,", connector) and _narrative_location_connector(connector):
+                return True
+    return False
+
+
 def _department_chain_conflict(clause, department_match, names):
     """Reject contradictory or damaged adjacent locality-to-department claims.
 
@@ -181,8 +206,9 @@ def _department_chain_conflict(clause, department_match, names):
         # assertion that the preceding municipality belongs to that department.
         if re.fullmatch(r"\s*,?\s*(?:que\s+)?(?:colinda|limita)\s+con\s+(?:el\s+)?", connector):
             return False
-        if not re.fullmatch(r"\s*,?\s*(?:(?:ubicad[oa]|situad[oa]|localizad[oa])\s+)?"
-                            r"(?:(?:en|de|del)\s+(?:el\s+)?)?", connector):
+        if _narrative_location_connector(connector):
+            return False
+        if not _ADMINISTRATIVE_CONNECTOR.fullmatch(connector):
             return True
         department = _DEPARTMENTS[department_match["place"]]
         return resolve_municipality(locality["place"], department) is None
@@ -216,6 +242,36 @@ def has_administrative_conflict(article):
                for paragraph in paragraphs for clause in re.split(r"[.!?;]+", _clean(paragraph["text"])))
 
 
+def _paragraph_has_bound_administrative_pair(paragraph):
+    """A local exact pair can distinguish a foreign comparison elsewhere.
+
+    The caller still requires Salvadoran article context and no foreign country
+    in this paragraph. Personal origins and institutional roles remain excluded.
+    """
+    departments, _, _, _, _, _, names = _patterns()
+    for clause in re.split(r"[.!?;]+", paragraph):
+        if (_unresolved_narrative_department_link(clause)
+                or _clause_has_administrative_conflict(clause)):
+            continue
+        for department in departments.finditer(clause):
+            prefix = clause[:department.start()]
+            for locality in reversed(list(names.finditer(prefix))):
+                connector = prefix[locality.end():]
+                if len(connector) > 100:
+                    break
+                if not _ADMINISTRATIVE_CONNECTOR.fullmatch(connector):
+                    continue
+                if (resolve_municipality(locality["place"], _DEPARTMENTS[department["place"]]) is None
+                        or _excluded_context(clause, locality.start(), locality.end(), locality["place"])
+                        or _excluded_context(clause, department.start(), department.end(), department["place"])):
+                    continue
+                before_place = clause[:locality.start()]
+                if (_typed_context(clause, department.start(), department.end())
+                        or re.search(r"\ben\s+(?:(?:el|la)\s+)?(?:(?:municipio|distrito|ciudad|localidad)\s+de\s+)?$", before_place)):
+                    return True
+    return False
+
+
 def extract_administrative_mentions(article, *, allow_municipality=True):
     """Return distinct supported departments without selecting a primary location.
 
@@ -242,13 +298,16 @@ def extract_administrative_mentions(article, *, allow_municipality=True):
         # Salvadoran paragraph. Conversely, nationality or an article-level
         # country name cannot transfer a foreign town into El Salvador.
         if has_foreign_context and (_FOREIGN.search(normalized)
-                or not re.search(r"\b(?:en|dentro de)\s+el salvador\b", normalized)):
+                or not (re.search(r"\b(?:en|dentro de)\s+el salvador\b", normalized)
+                        or (explicit_sv and _paragraph_has_bound_administrative_pair(normalized)))):
             continue
         # A place followed by a colon/dash at paragraph start is a dateline,
         # including a typed administrative label. Never use its trailing prose.
         if dateline.match(normalized):
             continue
         for clause_number, clause in enumerate(re.split(r"[.!?;]+", normalized)):
+            if _unresolved_narrative_department_link(clause):
+                continue
             if _clause_has_administrative_conflict(clause):
                 ambiguous = True
                 continue

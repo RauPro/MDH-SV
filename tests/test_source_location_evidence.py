@@ -98,6 +98,17 @@ def test_correct_adjacent_city_department_pair_preserves_explicit_source_claim(c
     assert result == {"method": "source_explicit_department", "department": "Santa Ana", "paragraph_id": "p1"}
 
 
+@pytest.mark.parametrize("direction", ["norte", "sur", "este", "oeste", "centro"])
+def test_internal_department_direction_preserves_the_official_administrative_pair(direction):
+    value = article(f"El hecho ocurrió en el municipio de Santa Rosa de Lima, en el {direction} del departamento de La Unión.")
+    assert not has_administrative_conflict(value)
+    result = extract_administrative_mention(value)
+    assert result["department"] == "La Unión" and result["paragraph_id"] == "p1"
+    mismatch = article(f"El hecho ocurrió en el municipio de Santa Rosa de Lima, en el {direction} del departamento de San Miguel.")
+    assert has_administrative_conflict(mismatch)
+    assert extract_administrative_mentions(mismatch) == []
+
+
 def test_administrative_contradiction_is_not_relocated_or_overridden_by_another_valid_mention():
     value = article("El humedal de Metapán, en el departamento de Ahuachapán, requiere protección.",
                     "El informe también contiene denuncias en el departamento de Santa Ana.")
@@ -201,6 +212,47 @@ def test_neighboring_department_is_not_a_false_administrative_containment_contra
 def test_distinct_city_and_department_in_same_clause_are_not_forced_into_a_false_pair():
     value = article("Hay denuncias en el municipio de Nahuizalco y en el departamento de San Miguel.")
     assert {m["department"] for m in extract_administrative_mentions(value)} == {"Sonsonate", "San Miguel"}
+
+
+def test_separate_event_predicate_does_not_assert_that_a_previous_city_belongs_to_its_department():
+    narrative = "Se denunció el ataque contra una persona de la ciudad de San Miguel, texto intruso, perpetrado en el departamento de La Unión."
+    isolated = article(narrative)
+    assert not has_administrative_conflict(isolated)
+    # The unresolved intervening prose is not repaired or published as proof.
+    assert extract_administrative_mentions(isolated) == []
+    value = article(narrative, "El hecho ocurrió en el municipio de Santa Rosa de Lima, en el norte del departamento de La Unión.")
+    result = extract_administrative_mention(value)
+    assert not has_administrative_conflict(value)
+    assert result["department"] == "La Unión" and result["paragraph_id"] == "p2"
+
+
+def test_a_later_narrative_clause_cannot_erase_an_explicit_contradictory_pair():
+    value = article("El hecho ocurrió en el municipio de Metapán, en el departamento de Ahuachapán.",
+                    "Se denunció un ataque contra una persona de San Miguel, perpetrado en el departamento de La Unión.")
+    assert has_administrative_conflict(value)
+    assert extract_administrative_mentions(value) == []
+
+
+def test_exact_local_administrative_pair_can_distinguish_a_foreign_comparison_elsewhere():
+    context = "El informe documenta la libertad de expresión en El Salvador y compara las políticas de California."
+    local = "El hecho ocurrió en el municipio de Santa Rosa de Lima, en el norte del departamento de La Unión."
+    result = extract_administrative_mention(article(context, local))
+    assert result["department"] == "La Unión" and result["paragraph_id"] == "p2"
+    # A country name in the same paragraph, a mismatched pair or nationality
+    # alone cannot be repaired through the administrative reference.
+    assert extract_administrative_mentions(article(context, local + " El hecho sucedió en Honduras.")) == []
+    assert extract_administrative_mentions(article(context, local.replace("La Unión", "San Miguel"))) == []
+    assert extract_administrative_mentions(article("Una persona salvadoreña compara las políticas de California.", local)) == []
+
+
+@pytest.mark.parametrize("local", [
+    "La persona nació en el municipio de Santa Rosa de Lima, en el norte del departamento de La Unión.",
+    "La oficina está en el municipio de Santa Rosa de Lima, en el norte del departamento de La Unión.",
+    "El informe nombra Santa Rosa de Lima y el departamento de La Unión.",
+])
+def test_local_pair_does_not_override_personal_institutional_or_unbound_roles(local):
+    context = "El informe menciona El Salvador y compara California."
+    assert extract_administrative_mentions(article(context, local)) == []
 
 
 def test_foreign_comparison_does_not_suppress_an_independently_located_salvadoran_paragraph():

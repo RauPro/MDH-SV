@@ -385,20 +385,62 @@ def _checked_paragraphs(candidate, article):
     return paragraphs
 
 
+def _without_quoted_counterfactuals(text):
+    """A complete quoted counterfactual supplies neither a place nor its context."""
+    quotes = r'“[^”\n]+”|«[^»\n]+»|"[^"\n]+"|‘[^’\n]+’'
+    def mask(match):
+        content = match[0][1:-1].strip().lstrip("¿¡").strip()
+        # Do not hide an asserted sentence that happens to share a quotation
+        # with a hypothesis. Periods inside the country abbreviation are not
+        # sentence boundaries.
+        sentences = re.sub(r"\bee\.?\s?uu\.?", "eeuu", content)
+        conditional = re.match(
+            r"si\b[^.!?;]{0,120}\b(?:tuviera[n]?|hubiera[n]?|fuera[n]?|"
+            r"estuviera[n]?|existiera[n]?|ocurriera[n]?|sucediera[n]?)\b", content)
+        if conditional and not re.search(r"[.!?;].*\w", sentences):
+            return " " * len(match[0])
+        return match[0]
+    return re.sub(quotes, mask, text)
+
+
+def _official_pair_at_anchor(clause, name, end):
+    """Only the exact administrative occurrence can establish a local pair."""
+    pair = re.search(
+        r"\ben\s+(?:el\s+|la\s+)?(?:(?:municipio|distrito|ciudad|localidad)\s+de\s+)?"
+        r"(?P<place>[a-z]+(?:\s+[a-z]+){0,5})\s*,\s*(?:en\s+)?(?:el\s+)?"
+        r"departamento\s+de\s+" + re.escape(normalize(name)) + r"$", clause[:end])
+    return bool(pair and resolve_municipality(pair["place"], name) is not None
+                and _department_context(clause, name, explicit=True))
+
+
+def _temporary_refugee_return(clause):
+    """A bounded past stay with an explicit return is not a relocation claim."""
+    from .source_location_evidence import _FOREIGN
+    return bool(re.fullmatch(
+        r"\s*(?:vivio|vivieron|estuvo|estuvieron)\s+(?:un tiempo|temporalmente)\s+en\s+"
+        r"[^.!?;]{1,180}\brefugiados\s+en\s+" + _FOREIGN.pattern +
+        r"\s*,?\s+y\s+(?:regreso|regresaron|retorno|retornaron)\s+a\s+(?:su|la)\s+"
+        r"comunidad(?:\s+[a-z]+){0,3}(?:\s+en\s+\d{4})?\s*", clause))
+
+
 def _model_anchor_allowed(text, name, *, explicit_department=False, municipality=None):
     """An old model proposal cannot override an explicit source-context veto.
 
     Check only the cited paragraph: a foreign comparison elsewhere in the article
     does not relocate an otherwise supported Salvadoran administrative mention.
     """
-    from .source_location_evidence import _FOREIGN, _clean, _excluded_context
-    normalized, place = _clean(text), normalize(name)
+    from .source_location_evidence import (
+        _FOREIGN, _clean, _excluded_context, _unresolved_narrative_department_link,
+    )
+    normalized, place = _without_quoted_counterfactuals(_clean(text)), normalize(name)
     # A locative country statement can govern the next clause in this paragraph.
     # A mere comparison ("the article also mentions Honduras") cannot do so.
-    if re.search(r"\b(?:en|dentro de)\s+(?:(?:el|la|los|las)\s+)?(?:pais de\s+)?" + _FOREIGN.pattern, normalized):
-        return False
-    for clause in re.split(r"[.!?;]+", normalized):
-        if _FOREIGN.search(clause):
+    foreign_locations = list(re.finditer(
+        r"\b(?:en|dentro de)\s+(?:(?:el|la|los|las)\s+)?(?:pais de\s+)?" + _FOREIGN.pattern, normalized))
+    clauses = list(re.finditer(r"[^.!?;]+", normalized))
+    for section in clauses:
+        clause = section[0]
+        if _FOREIGN.search(clause) or _unresolved_narrative_department_link(clause):
             continue
         matches = list(re.finditer(r"\b" + re.escape(place) + r"\b", clause))
         for match in matches:
@@ -406,6 +448,18 @@ def _model_anchor_allowed(text, name, *, explicit_department=False, municipality
                 continue
             if _excluded_context(clause, match.start(), match.end(), place):
                 continue
+            if foreign_locations:
+                # A named official pair followed by a separate temporary
+                # refugee stay and return remains anchored to El Salvador.
+                # Earlier foreign context or any other asserted foreign event
+                # still governs/vetoes the paragraph, including "sucedió en".
+                if not explicit_department or not _official_pair_at_anchor(clause, name, match.end()):
+                    continue
+                if any(not any(other.start() > section.end()
+                               and other.start() <= foreign.start() < foreign.end() <= other.end()
+                               and _temporary_refugee_return(other[0]) for other in clauses)
+                       for foreign in foreign_locations):
+                    continue
             if explicit_department:
                 return True
             # Evaluate this occurrence's context only. An unrelated repetition
