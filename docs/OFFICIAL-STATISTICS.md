@@ -56,7 +56,7 @@ La actualización de fuentes no implica aprobación de fichas de noticias ni mod
 
 ## Publicación y reutilización
 
-La pestaña **Estadísticas oficiales** (`/#estadisticas`) carga un snapshot validado, con filtros por año y departamento. La consulta de esta edición no consume Gemini ni depende de la cola de noticias. La actualización de estas cifras es documental y revisada; el cron de noticias no refresca esta colección automáticamente.
+La pestaña **Estadísticas oficiales** (`/#estadisticas`) carga un snapshot validado, con filtros por año y departamento. La consulta de esta edición no consume Gemini ni depende de la cola de noticias. Un proceso privado independiente consulta diariamente las fuentes a las 06:37 de El Salvador y deja cambios y alertas en revisión. No actualiza las cifras públicas automáticamente; una aprobación humana todavía requiere PR y CI para publicar. Véase el [procedimiento de consulta y revisión](../ops/official-statistics-review/README.md).
 
 Después de incorporar y comprobar una nueva edición en el archivo canónico:
 
@@ -74,3 +74,14 @@ Se versionan conjuntamente el canónico, sus notas metodológicas y las tres des
 - `/statistics/homicides.csv`: una fila nacional y catorce departamentales por período, con fuente, unidad, localizador y estado. Los datos ausentes quedan vacíos; cero sigue siendo cero. `territory_level` distingue ámbitos solapados, que no deben sumarse. Los meses se consultan en JSON. Los textos con prefijos de fórmula reciben un apóstrofo para abrirlos de forma segura en una hoja de cálculo.
 - `/api/v1/official-statistics`: colección de sólo lectura con filtros `year` y `department` (`national` o nombre canónico del departamento).
 - MCP `get_official_statistics`: la misma colección y filtros para otros proyectos. Las cifras oficiales no alteran `/api/v1/stats`, que sigue describiendo los registros documentales del monitor.
+
+## Comprobación del desglose departamental de 2026
+
+En la consulta del 12 de octubre de 2026 no se localizó una publicación accesible y verificable que permita completar ese desglose. Esto **no demuestra que las instituciones no tengan registros territoriales**: la guía metodológica MJSP de 2021 citada arriba describe la conciliación por departamento y municipio. «Sin datos» describe una brecha de cobertura de esta colección.
+
+- La tabla FGR utilizada presenta meses y categorías de homicidio, sin distribución territorial. El catálogo IML consultado no contiene documentos de 2026; lista mensuales hasta marzo de 2022.
+- Los [reportes de PNC](https://transparencia.pnc.gob.sv/reportes) y su [página de homicidios](https://transparencia.pnc.gob.sv/archivos/1052) devolvieron HTTP403. Un encabezado indexado por un buscador no permite verificar cifras o fechas de un archivo inaccesible.
+- El [Informe FGR 2025–2026](https://www.fiscalia.gob.sv/wp-content/uploads/2026/07/informe-de-labores-2026.pdf), páginas 3 y 123 del PDF, publica 78 homicidios intencionales nacionales durante junio de 2025–mayo de 2026, sin departamentos. No es el año calendario 2026 ni sustituye el total enero–agosto. Los cuadros por etapa judicial de la página 129 tienen otro universo y no se importan como incidencia anual.
+- El antiguo repositorio DIA enlazado por la guía devuelve404, y su ruta raíz redirige a una noticia de 2022. Una respuesta HTTP200 de otro contenido no acredita acceso a una serie estadística.
+
+Las nuevas fuentes o cambios detectados por el monitor periódico quedan para revisión antes de incorporar cifras. Nunca se distribuye un total nacional entre departamentos ni se usa el número de noticias para completar estadísticas oficiales.

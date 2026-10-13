@@ -33,6 +33,7 @@ it('shows all 14 missing departments without inventing zeroes or a geographic di
   expect(within(table).getAllByRole('row')).toHaveLength(15);
   expect(within(table).getAllByText('Sin datos')).toHaveLength(14);
   expect(within(table).queryByText('0')).not.toBeInTheDocument();
+  expect(screen.getByText(/esto no demuestra que no existan registros oficiales por departamento/)).toBeInTheDocument();
   await userEvent.selectOptions(screen.getByLabelText('Departamento'), 'Sonsonate');
   const summary = screen.getByRole('region', { name: 'Resumen de la consulta' });
   expect(summary).toHaveTextContent('Sin datos');

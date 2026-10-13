@@ -1,0 +1,88 @@
+name: Consultar estadísticas oficiales
+on:
+  schedule:
+    - cron: '37 12 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: official-statistics-review
+  cancel-in-progress: false
+  queue: max
+jobs:
+  monitor:
+    if: github.repository == 'RauPro/MDH-SV-review' && github.event.repository.private == true && github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: main
+          path: baseline
+          sparse-checkout: data/official-statistics
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Instalar dependencias fijadas
+        run: pip install -r monitor/ops/review-queue/requirements.txt
+      - name: Recuperar inventario privado anterior
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.official_statistics_review export-state --output "$RUNNER_TEMP/official-statistics-previous.json"
+      - name: Consultar originales sin modificar cifras públicas
+        id: collect
+        continue-on-error: true
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: >-
+          python -m mdh_pipeline.official_statistics_refresh
+          --baseline baseline/data/official-statistics/homicides.json
+          --previous-state "$RUNNER_TEMP/official-statistics-previous.json"
+          --output-dir "$RUNNER_TEMP/official-statistics-refresh"
+      - name: Validar estructura de cualquier propuesta antes de encolarla
+        env:
+          REPORT_DIR: ${{ runner.temp }}/official-statistics-refresh
+        run: |
+          node --input-type=module <<'JS'
+          import { readFileSync, existsSync } from 'node:fs';
+          import { join } from 'node:path';
+          import { parseOfficialStatistics } from './monitor/shared/official-statistics.mjs';
+          const file = join(process.env.REPORT_DIR, 'proposed-homicides.json');
+          if (existsSync(file)) parseOfficialStatistics(JSON.parse(readFileSync(file, 'utf8')));
+          JSON.parse(readFileSync(join(process.env.REPORT_DIR, 'report.json'), 'utf8'));
+          JS
+      - name: Guardar cambios y alertas en revisión privada
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+          REPORT_DIR: ${{ runner.temp }}/official-statistics-refresh
+        run: |
+          args=(--report "$REPORT_DIR/report.json" --source-state "$REPORT_DIR/source-state.json")
+          if test -f "$REPORT_DIR/proposed-homicides.json"; then
+            args+=(--proposal "$REPORT_DIR/proposed-homicides.json")
+          fi
+          python -m mdh_pipeline.official_statistics_review enqueue "${args[@]}"
+          cat "$REPORT_DIR/review.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: estadisticas-oficiales-consulta
+          path: ${{ runner.temp }}/official-statistics-refresh/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Mantener visibles los fallos de acceso o validación de fuentes
+        if: steps.collect.outcome == 'failure'
+        run: exit 1
