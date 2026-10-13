@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T22:23:32.125437+00:00",
+  "generated_at": "2026-10-13T23:22:19.336119+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -78,6 +78,30 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "03dfc6ca70d63dd1f0c14c4cc7db50e82bc42f768172740bba24cbe79c9b930a",
+      "source_url": "https://www.diariocolatino.com/esperamos-tener-un-sistema-penitenciario-capaz-de-cumplir-penas-y-la-correcta-rehabilitacion-oscar-ortiz/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-06-20",
+      "department": "Cuscatlán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T23:22:03.964999+00:00",
+      "source_checked_at": "2026-10-13T23:22:03.964999+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "53d3ee2ca8d5b7dacd717914862a5758f24ad967e3456ec572ede9e75a4ce6d8"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Cojutepeque",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
     },
     {
       "candidate_id": "03e9b23f8e5105bce345dbf957565ec9547378f808f03f7564ad1f81cae3aed9",
@@ -1452,6 +1476,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "6833654d37ef0b51dba3d23fcc4bb06cbccb8e8906699e413718f99c43cc25d6",
+      "source_url": "https://www.diariocolatino.com/procurador-reporta-mas-de-14-mil-acciones-en-defensa-de-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-07-04",
+      "department": "Usulután",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T23:22:16.374755+00:00",
+      "source_checked_at": "2026-10-13T23:22:16.374755+00:00",
+      "evidence": {
+        "paragraph_id": "p6",
+        "content_sha256": "34064b1938ff173eb770eae94af9d368b5d091de99a94145f44ef4b92cdbb512"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Dionisio",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
     },
     {
