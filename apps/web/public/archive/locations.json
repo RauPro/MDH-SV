@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T08:19:45.372683+00:00",
+  "generated_at": "2026-10-13T09:21:10.924844+00:00",
   "locations": [
     {
       "candidate_id": "02cc1855779ba26856160a00bfdfef81d590a9917582885384fa6769f111a1e0",
@@ -512,6 +512,59 @@
       }
     },
     {
+      "candidate_id": "2ccdcc811da6662e72e13da192480fa810ff0226c5d54ed4e66765fcb6763cf8",
+      "source_url": "https://www.diariocolatino.com/procurador-condena-asesinatos-de-ninos-y-adolescentes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-31",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T09:20:56.679277+00:00",
+      "source_checked_at": "2026-10-13T09:20:56.679277+00:00",
+      "evidence": {
+        "content_sha256": "e1a35a802e984133c79a9b24d56085479a2687bd45df4d3f5eade0cefde54722"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Ahuachapán",
+          "paragraph_id": "p7",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Tacuba",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "La Paz",
+          "paragraph_id": "p5",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Zacatecoluca",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Vicente",
+          "paragraph_id": "p6",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Cayetano Istepeque",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "2f74393b66bda7d14b76cca480ce930cc1d668475522daf80d55f54bd87400c2",
       "source_url": "https://www.diariocolatino.com/fgr-confirmo-asesinato-de-voluntario-de-cruz-roja/",
       "publisher": "Diario Co Latino",
@@ -719,6 +772,71 @@
       }
     },
     {
+      "candidate_id": "49ae907c65e231e2c8fd1b8bcd389b9145ee446f6ea56e8ce047b992756b5abd",
+      "source_url": "https://www.diariocolatino.com/denuncia-despidos-en-diferentes-alcaldias-del-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-22",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T09:20:43.982474+00:00",
+      "source_checked_at": "2026-10-13T09:20:43.982474+00:00",
+      "evidence": {
+        "content_sha256": "ba5b29aa8032a5d1a0951803c1726d88685aa2e798a5c44ec914ad68e429211f"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "La Libertad",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Santa Tecla",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Salvador",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Santa Ana",
+          "paragraph_id": "p6",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Candelaria de la Frontera",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Sonsonate",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Sonsonate",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "4c784312cd702db80fa98d3c0c8584445654b6b903dfd8590339e879cd5072dd",
       "source_url": "https://gatoencerrado.news/2014/09/21/los-pueblos-que-dijeron-no-a-la-mineria-en-el-salvador/",
       "publisher": "GatoEncerrado",
@@ -740,6 +858,59 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
+    },
+    {
+      "candidate_id": "4dae238b5657a9aad925996f78740ee8cfe9fba656002ba9de0c4d9a7b3db695",
+      "source_url": "https://www.diariocolatino.com/procurador-condena-asesinatos-de-ninos-y-adolescentes-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-03",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T09:21:01.109096+00:00",
+      "source_checked_at": "2026-10-13T09:21:01.109096+00:00",
+      "evidence": {
+        "content_sha256": "6baf84502abcfedad0282c79983e8bbac7236c481137d36b8d3658b86b042655"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Ahuachapán",
+          "paragraph_id": "p7",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Tacuba",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "La Paz",
+          "paragraph_id": "p5",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Zacatecoluca",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Vicente",
+          "paragraph_id": "p6",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Cayetano Istepeque",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "4f5a6e7f2566f48b3f614c50f9111a956cc7231d64f51d6abe3a8ada1ccea500",
@@ -1007,6 +1178,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "723d539f867532b5fd35124274a4ffd533a4f9599c648847c48878349fe3ed7b",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-45-pandilleros-en-san-pedro-perulapan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-28",
+      "department": "Cuscatlán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T09:20:53.929898+00:00",
+      "source_checked_at": "2026-10-13T09:20:53.929898+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "c600bb69ea0d75b37b670c3930995969419538c35fe7901622541556ac66e545"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Pedro Perulapán",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
     },
     {
@@ -1400,6 +1595,64 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "a402a8ebe85abac3d90149696900c77e646b86fe748ca2100c2911011042fb9f",
+      "source_url": "https://gatoencerrado.news/2015/11/10/los-4-fantasticos-que-se-enfrentaron-a-la-mineria-y-ganaron/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2015-11-10",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T09:21:07.864859+00:00",
+      "source_checked_at": "2026-10-13T09:21:07.864859+00:00",
+      "evidence": {
+        "content_sha256": "311e356e7f7f3733d052d0b28a990929a3691fe95ab6c71bcea2953149cbab72"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Chalatenango",
+          "paragraph_id": "p8"
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p21",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Salvador",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        }
+      ]
+    },
+    {
+      "candidate_id": "a71caeaac0c631218229c98cfa633a5430281546fcd44a9dffbefb6409eeef85",
+      "source_url": "https://gatoencerrado.news/2015/10/27/arcatao-llama-a-referendum-municipal-por-mineria-metalica/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2015-10-27",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T09:20:52.559480+00:00",
+      "source_checked_at": "2026-10-13T09:20:52.559480+00:00",
+      "evidence": {
+        "paragraph_id": "p6",
+        "content_sha256": "1089637ddc1f258d3dba673778171f69d6f03d9b93c1142a485395484aaf478c"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Arcatao",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
     },
     {
