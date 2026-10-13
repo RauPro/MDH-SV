@@ -1,0 +1,78 @@
+name: Revisar estadísticas oficiales
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Número de la propuesta privada en Issues
+        type: string
+        required: true
+      revision:
+        description: Identificador completo de revisión indicado en la issue
+        type: string
+        required: true
+      decision:
+        description: Decisión sobre las cifras propuestas; no publica datos
+        type: choice
+        options: [reject, approve]
+        default: reject
+        required: true
+      confirm_source:
+        description: He contrastado originales, cifras, períodos, unidades y ausencias
+        type: boolean
+        default: false
+        required: true
+      review_notes:
+        description: Comprobaciones humanas y tratamiento de discrepancias (mínimo 20 caracteres)
+        type: string
+        required: true
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: official-statistics-review
+  cancel-in-progress: false
+  queue: max
+jobs:
+  review:
+    if: github.repository == 'RauPro/MDH-SV-review' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.event.sender.type == 'User' && github.triggering_actor == github.event.sender.login
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: main
+          path: baseline
+          sparse-checkout: data/official-statistics
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Instalar dependencias fijadas
+        run: pip install -r monitor/ops/review-queue/requirements.txt
+      - name: Validar identidad, fuente y decisión humana
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: >-
+          python -m mdh_pipeline.official_statistics_review review
+          --event "$GITHUB_EVENT_PATH"
+          --output "$RUNNER_TEMP/official-statistics-approved"
+          --schema-validator monitor/shared/official-statistics.mjs
+          --baseline baseline/data/official-statistics/homicides.json
+      - uses: actions/upload-artifact@v4
+        if: github.event.inputs.decision == 'approve'
+        with:
+          name: estadisticas-oficiales-aprobadas
+          path: ${{ runner.temp }}/official-statistics-approved/
+          if-no-files-found: error
+          retention-days: 30
