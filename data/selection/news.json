@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T02:18:23.001354+00:00",
+  "generated_at": "2026-10-13T03:16:16.933903+00:00",
   "assessment_counts": {
     "candidates": 7141,
-    "evaluated": 658,
-    "relevant": 331,
-    "excluded": 320,
+    "evaluated": 710,
+    "relevant": 343,
+    "excluded": 360,
     "uncertain": 7,
-    "pending": 6483
+    "pending": 6431
   },
   "selections": [
     {
@@ -1935,6 +1935,37 @@
       }
     },
     {
+      "candidate_id": "2e1bc85666412aab78fda5632aad712e18e5936a061ab828f1b1366ae450a1d3",
+      "source_url": "https://www.diariocolatino.com/votar-contra-la-mineria/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:10:25.432018-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0e2b991173cce295f74c88d7aff9c8e98804d5c877b7624fde9b8d427521988e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2ecc5d0084a23421a903533f5b570404154c6fdf600ce7717598ecb83497c38f",
       "source_url": "https://www.diariocolatino.com/fiscalia-ordena-captura-de-dos-personas-con-armas-y-prendas-de-uso-militar/",
       "publisher": "Diario Co Latino",
@@ -3581,6 +3612,33 @@
       }
     },
     {
+      "candidate_id": "5ae11ba88a8a87e8c964f3cebad2f74310126e4275d466a9d999c5ff4e484358",
+      "source_url": "https://www.diariocolatino.com/carceles-y-hospitales-llenos-corazones-y-almas-vacios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:10:25.432018-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4e8802e9a8e0d3c7a74e8c85bb4eca8aa84c5f2d3ca50e727f40de2cdc5d2ff8",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5ae5fa773ee51ebefa72d348733236f982794716c44625cac571e9e3cf42693a",
       "source_url": "https://www.diariocolatino.com/apes-y-arpas-demandan-una-investigacion-por-captura-de-francisco-valencia/",
       "publisher": "Diario Co Latino",
@@ -3608,6 +3666,36 @@
             "p7",
             "p11",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "5bdf12b01a57482a6c9c493cdb763b8f12a1fdd7010d6954a4fc120ae3d86459",
+      "source_url": "https://www.diariocolatino.com/el-fmln-seguira-trabajando-por-garantizar-los-derechos-de-las-mujeres-cristina-cornejo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:10:25.432018-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4d0c7d1d47e21bd4c287cd2f1d35a1951ecad92c286518f2d47ce24496538975",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p5",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p8",
+            "p9"
           ]
         }
       }
@@ -3979,6 +4067,34 @@
       }
     },
     {
+      "candidate_id": "62e97bf4528c6450ca25b8c659cc6d67b3b36b47968dc36e2a8bffbfd5f7a9a5",
+      "source_url": "https://www.diariocolatino.com/monsenor-romero-icono-de-la-justicia-y-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:11:28.413758-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "33ce2772f8d3a49d17090208d8f4e74018d74e770d82d7b3cf4d4946062013cd",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "63be7d8b08599a4db2c38b36ed52b614475a07968bcd1a579580fe57e1bf8474",
       "source_url": "https://www.diariocolatino.com/sindicalistas-acusan-a-quijano-de-abastecerles-de-agua-contaminada/",
       "publisher": "Diario Co Latino",
@@ -4119,6 +4235,34 @@
             "p3",
             "p5",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "65b1c42d7b7a24179aaaa9367c8d2baee05debb958bd2ad0e64fb9682b4443ca",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-exigen-se-pronuncie-ante-acoso-laboral-en-la-alcaldia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:10:25.432018-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b90beba5b1aa10999d5cf2124f9c2214111d22690a682c028622a6aa87ccf7a0",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p7"
           ]
         }
       }
@@ -5024,6 +5168,34 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "744375f5a690ad01d6a12e7976480826049168565c60ad05cd752ccab0f6510f",
+      "source_url": "https://www.diariocolatino.com/piden-a-congreso-acortar-proceso-penal-contra-asesinos-de-policias/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:11:28.413758-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b754f929266347cf3d4afbc8f09796bd3e5c379d7330cb6432aece9260123836",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
           ]
         }
       }
@@ -7475,6 +7647,36 @@
       }
     },
     {
+      "candidate_id": "be1047985a2553ba4625b4846cc3cc15b04eb364c826be31e3747b7e778c3516",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-sospechoso-de-participar-en-privacion-de-libertad-de-soldados/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:10:25.432018-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "11d3cd9786f49d60e7d4765cbbdadf44a3ef88b87b164c5704d3f173259562f3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "bee3f4e9670545171e2716eb050f9e176b25dbe813a580bc9c9cb2550840e341",
       "source_url": "https://www.diariocolatino.com/san-isidro-labrador-sometera-a-consulta-ciudadana-tema-de-mineria-metalica/",
       "publisher": "Diario Co Latino",
@@ -7834,6 +8036,33 @@
             "p2",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c9c74687250f6cb619fa1d6714bdf37d774662dc4eabff2a50b2f56bd3243844",
+      "source_url": "https://www.diariocolatino.com/seis-anos-de-carcel-a-empresario/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:09:27.085734-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "451307403bfbeab387ea80cfb4fb16d7265ce7bcea3dcc6efb7516a5d44cc3aa",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -8791,6 +9020,62 @@
       }
     },
     {
+      "candidate_id": "ee813296137889c105e6ac26a03921704805badd81b955a137da8f806dd1973c",
+      "source_url": "https://www.diariocolatino.com/congreso-concede-indulto-a-mujer-acusada-de-homicidio-agravado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:14:15.018452-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f54c1b01d85e223818fcfd793f190f2b761a371e4fb1e0fc8460fb7ad921fb63",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p19"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ef333102265097fbbb6b5dbd02d79235ab3f6458635b1ea09b9dd50b4a44add9",
+      "source_url": "https://www.diariocolatino.com/operativo-y-detenciones-por-crimenes-de-agentes-policiales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:09:27.085734-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8975e2e82d50137b41bb36641021d253c391c72a8b208b3cfadd2e7a58aedab8",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p10",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f068e4a059aed077bf2af8766cc373eb9c3cbfa5935e58b36fba36e4d9a3700e",
       "source_url": "https://www.diariocolatino.com/ministro-de-seguridad-dice-que-hay-sectores-interesados-en-incrementar-homicidios-antes-de-elecciones/",
       "publisher": "Diario Co Latino",
@@ -9187,6 +9472,62 @@
             "p6",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f9ec1f1b45e7d78088eaa9ae5974cb2bf7f1cf67992881ddca5e0b75b0e91525",
+      "source_url": "https://www.diariocolatino.com/gallegos-propone-que-menores-de-18-anos-puedan-ser-detenidos-por-orden-de-la-fiscalia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:11:28.413758-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6884ab7657ac2622f505ba16f8dd4b3d69d23447bc7462668ba6c2feb13f7a37",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fa8062b1af8d93e414c01f618d6594eca7a92dd2023d7bbb2bb62ee2f5a4746d",
+      "source_url": "https://www.diariocolatino.com/secretario-de-la-onu-anuncia-apertura-de-oficina-de-ddhh-en-honduras/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T21:11:28.413758-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "731ce5591332b851c673fa2edba95d8599969614de194d19b695bcea3f65e9e3",
+          "jurisdiction_paragraph_ids": [
+            "p6",
+            "p10",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
