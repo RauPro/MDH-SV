@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T23:19:02.986424+00:00",
+  "generated_at": "2026-10-13T00:17:54.303176+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 6199,
-      "selected": 235,
-      "evaluated": 455,
-      "relevant": 235,
-      "excluded": 215,
+      "selected": 242,
+      "evaluated": 471,
+      "relevant": 242,
+      "excluded": 224,
       "uncertain": 5,
-      "pending": 5744,
-      "evaluated_at": "2026-10-12T23:19:02.035047+00:00"
+      "pending": 5728,
+      "evaluated_at": "2026-10-13T00:17:53.080120+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-12",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 235,
+    "records": 242,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 222,
+        "records": 229,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -737,7 +737,7 @@
           {
             "month": "2014-09",
             "status": "enumerated",
-            "records": 34,
+            "records": 36,
             "screen_version": 3,
             "posts_scanned": 1085,
             "source_total_posts": 1085,
@@ -749,7 +749,7 @@
           {
             "month": "2014-10",
             "status": "enumerated",
-            "records": 1,
+            "records": 6,
             "screen_version": 3,
             "posts_scanned": 1071,
             "source_total_posts": 1071,
@@ -19540,12 +19540,12 @@
         "month": "2014-09",
         "start_date": "2014-09-01",
         "end_date": "2014-09-30",
-        "records": 35,
+        "records": 37,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 34
+            "records": 36
           },
           {
             "source_id": "gatoencerrado",
@@ -19583,12 +19583,12 @@
         "month": "2014-10",
         "start_date": "2014-10-01",
         "end_date": "2014-10-31",
-        "records": 1,
+        "records": 6,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 6
           },
           {
             "source_id": "gatoencerrado",
@@ -28294,6 +28294,332 @@
             "p5",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9fb9a9c91aa102ec13d2045286a6b978a4a3a33cf58456951e060d321abc84b6",
+      "title": "Comisión Nacional de Búsqueda resuelve 39 casos de niños desaparecidos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/comision-nacional-de-busqueda-resuelve-39-casos-de-ninos-desaparecidos/",
+      "published_date": "2014-10-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 30024,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T18:15:17.122741-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7559409662a809ecc1ab695c7f086519577da76b63447b8d71da1821d918f2a3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "25b3e98e840e2a404f02b8cf7cfd2cf905c3e067a91fbb37a2c6ca45727c103b",
+      "title": "España seguirá con investigación del asesinato de los jesuitas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/espana-seguira-con-investigacion-del-asesinato-de-los-jesuitas-2/",
+      "published_date": "2014-10-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "espana"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 30077,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T18:15:17.122741-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "dca9446bed8a0a341609471fba76e0fd358870c5a05a49100589994e83650706",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d78de53b25b0b133a516f23fc6fde34dd56ac86ad17e1545fb15752531117b96",
+      "title": "España seguirá con investigación del asesinato de los jesuitas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/espana-seguira-con-investigacion-del-asesinato-de-los-jesuitas/",
+      "published_date": "2014-10-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "espana"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 29984,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T18:15:17.122741-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f3537a4c8cc876bc08d5f831a8cedad8c29167ee4466595814a921b7cc1eef86",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0df212e06713c1ab7205227ab4735b7d0c7024c06afad0eae47b14f2254b3de8",
+      "title": "San Salvador con más alertas de niños desaparecidos según FGR",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/san-salvador-con-mas-alertas-de-ninos-desaparecidos-segun-fgr/",
+      "published_date": "2014-10-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 29803,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T18:15:17.122741-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6bbaa3be7edb025a2ea400977dbc2368def49e5d202788d93253c764b4b5f018",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "780b134eaba8002cd1168dab843f986b5d0e2314f04610521ee0dc83c29d1cfd",
+      "title": "El 43% de los nombres del Libro Amarillo coinciden con las denuncias registradas contra los derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-43-de-los-nombres-del-libro-amarillo-coinciden-con-las-denuncias-registradas-contra-los-derechos-humanos/",
+      "published_date": "2014-10-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 29686,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T18:13:21.441303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ff85d3226be4a7cd092a30a530757fdcf334aa5e6ec35d42c188f2625c2f299e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p6",
+            "p7",
+            "p10",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
+      "id": "714d44a0c2848e37e45425f62e4bc84c2a6b3d324ebce10bae01daa5cc070c45",
+      "title": "Familiares y víctimas de violaciones a derechos humanos exigen entrega de documentos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/familiares-y-victimas-de-violaciones-a-derechos-humanos-exigen-entrega-de-documentos/",
+      "published_date": "2014-09-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion",
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 29600,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T18:13:21.441303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0cc23ccb29c76a87fcc35d448303918e544f674744ad8342293eb1237698f678",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p7",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0882a3318084c4cadb23b4aa03851310c23ae9a6ae51c9ab4097f182fe78e977",
+      "title": "Cuando la madre del desaparecido habló",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cuando-la-madre-del-desaparecido-hablo/",
+      "published_date": "2014-09-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 29365,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-12T18:11:20.013027-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "77efc8d8aa311fe6100eaae1eb0f8bcbc334189ed3e20145cae4d26f1aee32d5",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }
