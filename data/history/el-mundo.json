@@ -24,16 +24,39 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 6,
-      "pages_fetched": 6,
+      "posts_scanned": 7,
+      "pages_fetched": 7,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-13T00:57:43.803790+00:00",
+      "last_attempt_at": "2026-10-13T14:32:49.444482+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "ae92c69a8d82d3fbc49287bdc84d1f0d4f0579f0c568128bc93e67d17089f00a",
+      "title": "Ulloa dice fue fácil capturar a los pandilleros porque exministro del FMLN los tenía en lista para crear un partido",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/politica/ulloa-dice-fue-facil-capturar-a-los-pandilleros-porque-exministro-del-fmln-los-tenia-en-lista-para-crear-un-partido",
+      "published_date": "2026-10-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.444482+00:00"
+      }
+    },
     {
       "id": "57f160b17339ecd478833bd95f5dac8362e3a25d376287935ccd232e877871ae",
       "title": "Agente policial ebrio es capturado por causar accidente de tránsito",
@@ -232,7 +255,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-13T00:57:43.803790+00:00",
+    "last_attempt_at": "2026-10-13T14:32:49.444482+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -246,9 +269,10 @@
       "https://diario.elmundo.sv/nacionales/instalan-juicio-contra-exalcaldesa-de-soyapango-nercy-montano-por-despidos-de-trabajadores-municipales",
       "https://diario.elmundo.sv/politica/bukele-asistiria-a-inauguracion-de-megacarcel-en-costa-rica",
       "https://diario.elmundo.sv/nacionales/mujer-es-condenada-a-30-anos-de-prision-por-asfixiar-a-su-hijo-recien-nacido-en-la-union",
-      "https://diario.elmundo.sv/nacionales/agente-policial-ebrio-es-capturado-por-causar-accidente-de-transito"
+      "https://diario.elmundo.sv/nacionales/agente-policial-ebrio-es-capturado-por-causar-accidente-de-transito",
+      "https://diario.elmundo.sv/politica/ulloa-dice-fue-facil-capturar-a-los-pandilleros-porque-exministro-del-fmln-los-tenia-en-lista-para-crear-un-partido"
     ],
-    "article_cursor": 8,
+    "article_cursor": 9,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -297,6 +321,12 @@
         "published_date": "2026-10-12",
         "last_attempt_at": "2026-10-13T00:57:43.803790+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/politica/ulloa-dice-fue-facil-capturar-a-los-pandilleros-porque-exministro-del-fmln-los-tenia-en-lista-para-crear-un-partido": {
+        "status": "selected",
+        "published_date": "2026-10-13",
+        "last_attempt_at": "2026-10-13T14:32:49.444482+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -305,10 +335,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 2,
+        "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
-        "article_urls_selected": 2,
-        "last_attempt_at": "2026-10-13T00:57:43.803790+00:00"
+        "article_urls_selected": 1,
+        "last_attempt_at": "2026-10-13T14:32:49.444482+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -317,7 +347,7 @@
         "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
         "article_urls_selected": 1,
-        "last_attempt_at": "2026-10-13T00:57:43.803790+00:00"
+        "last_attempt_at": "2026-10-13T14:32:49.444482+00:00"
       }
     },
     "index_screen_version": 3
