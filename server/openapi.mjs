@@ -1,6 +1,8 @@
 import { LICENSE, LIMITATION, PUBLIC_URL } from './public-data.mjs';
 import { NEWS_SELECTION_PROMPTS } from '../shared/news-selection.mjs';
 import { NEWS_DOSSIER_FIELDS, NEWS_DOSSIER_LIST_FIELDS } from '../shared/news-dossier.mjs';
+import { OFFICIAL_STATISTICS_DEPARTMENTS } from '../shared/official-statistics.mjs';
+import { OFFICIAL_STATISTICS_NOTICE } from './official-statistics.mjs';
 
 const parameter = (name, description, schema = { type: 'string', maxLength: 200 }) => ({ name, in: 'query', description, schema });
 const common = [
@@ -36,6 +38,16 @@ const json = schema => ({ 'application/json': { schema } });
 const errors = Object.fromEntries([400, 404, 405, 414, 500, 503].map(status => [status, { description: 'Error explícito; nunca devuelve HTML ni datos privados.', content: json(ref('Error')) }]));
 const operation = (id, summary, parameters, schema) => ({ operationId: id, summary, parameters, responses: { 200: { description: 'Lectura correcta del snapshot público.', content: json(schema) }, ...errors } });
 const paged = name => ({ type: 'object', required: ['data', 'pagination', 'meta'], properties: { data: { type: 'array', items: ref(name) }, pagination: ref('Pagination'), meta: ref('Metadata') } });
+const officialValue = {
+  value: { type: ['integer', 'null'], minimum: 0 },
+  status: { type: 'string', enum: ['available', 'not_available'] },
+  locator: { type: ['string', 'null'], maxLength: 1200 },
+};
+const officialAvailability = {
+  if: { properties: { status: { const: 'available' } }, required: ['status'] },
+  then: { properties: { value: { type: 'integer', minimum: 0 }, locator: { type: 'string', minLength: 1 } } },
+  else: { properties: { value: { type: 'null' }, locator: { type: 'null' } } },
+};
 
 export const openapi = {
   openapi: '3.1.0',
@@ -46,10 +58,67 @@ export const openapi = {
     '/api/v1/records': { get: operation('searchRecords', 'Buscar fichas documentadas', [...recordFilters, ...pagination], paged('Record')) },
     '/api/v1/records/{id}': { get: operation('getRecord', 'Consultar ficha completa y evidencia', [{ name: 'id', in: 'path', required: true, schema: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]{0,149}$' } }], { type: 'object', properties: { data: ref('Record'), meta: ref('Metadata') }, required: ['data', 'meta'] }) },
     '/api/v1/stats': { get: operation('getStatistics', 'Conteos documentales separados por unidad y revisión', recordFilters, { type: 'object', required: ['data', 'meta'], properties: { data: { type: 'object', required: ['total_records', 'by_record_type', 'by_review_status', 'human_reviewed'], properties: { total_records: { type: 'integer' }, human_reviewed: { type: 'integer' }, ...Object.fromEntries(['by_record_type', 'by_department', 'by_category', 'by_review_status'].map(key => [key, { type: 'object', additionalProperties: { type: 'integer' } }])) } }, meta: ref('Metadata') } }) },
+    '/api/v1/official-statistics': { get: { ...operation('getOfficialStatistics', 'Consultar agregados oficiales de homicidios con su fuente y período', [
+      parameter('year', 'Año exacto, desde 2010 hasta el año de meta.as_of; años posteriores al corte se rechazan.', { type: 'integer', minimum: 2010, maximum: 9999 }),
+      parameter('department', 'national o uno de los 14 departamentos canónicos. Omitirlo devuelve todos los ámbitos, incluidos datos no disponibles.', { type: 'string', enum: ['national', ...OFFICIAL_STATISTICS_DEPARTMENTS] }),
+    ], ref('OfficialStatisticsResponse')), description: `${OFFICIAL_STATISTICS_NOTICE} Sin paginación. Una fila nacional y 14 departamentales por año: 255 filas para el corte 2026. Las filas departamentales no heredan meses nacionales. Un snapshot inválido o ausente devuelve 503.` } },
     '/api/v1/news': { get: operation('searchNews', 'Consultar noticias seleccionadas por pertinencia en derechos humanos de El Salvador', [...common, parameter('scope_hint', 'Indicio de búsqueda por título y URL, conservado como metadato; no determina la selección. Todos los resultados ya pasan el filtro de pertinencia en derechos humanos de El Salvador.', { type: 'string', enum: ['el_salvador', 'international_context', 'undetermined'] }), ...pagination], paged('News')) },
     '/api/v1/openapi.json': { get: operation('getOpenApi', 'Contrato OpenAPI 3.1', [], { type: 'object' }) },
   },
   components: { schemas: {
+    OfficialStatisticsSource: {
+      type: 'object', additionalProperties: false,
+      required: ['id', 'institution', 'title', 'url', 'format', 'retrieved_at', 'content_sha256', 'edition_note'],
+      properties: {
+        id: { type: 'string', pattern: '^[a-z][a-z0-9_-]{0,99}$' }, institution: { type: 'string', minLength: 1, maxLength: 200 },
+        title: { type: 'string', minLength: 1, maxLength: 600 },
+        url: { type: 'string', format: 'uri', maxLength: 4096, pattern: '^https://(?:transparencia\\.oj\\.gob\\.sv|(?:www\\.)?fiscalia\\.gob\\.sv|data\\.unodc\\.org)/.+' },
+        format: { type: 'string', enum: ['pdf', 'html', 'xlsx'] }, retrieved_at: { type: 'string', format: 'date-time' },
+        content_sha256: { type: 'string', pattern: '^[a-f0-9]{64}$' }, edition_note: { type: 'string', minLength: 1, maxLength: 4000 },
+      },
+    },
+    OfficialStatisticsMonth: {
+      type: 'object', additionalProperties: false, required: ['month', 'value', 'status', 'locator'],
+      description: 'Dato mensual nacional, no departamental. Doce meses por período cuando existe esta desagregación. outside_cutoff identifica meses posteriores a as_of; not_available puede identificar meses pasados aún no publicados. Ninguno significa cero.',
+      properties: { ...officialValue, month: { type: 'integer', minimum: 1, maximum: 12 }, status: { type: 'string', enum: ['available', 'not_available', 'outside_cutoff'] } },
+      allOf: [officialAvailability],
+    },
+    OfficialStatisticsRow: {
+      type: 'object', additionalProperties: false,
+      required: ['year', 'start_date', 'end_date', 'completeness', 'indicator', 'unit', 'methodology', 'notes', 'territory_level', 'department', 'value', 'status', 'locator', 'months', 'source'],
+      description: 'Agregado oficial independiente de noticias y fichas. Conservar unidad, fuente y versión; no sumar filas nacionales con departamentos ni mezclar instituciones/años. null es ausencia de un valor verificado, no cero.',
+      properties: {
+        ...officialValue, year: { type: 'integer', minimum: 2010, maximum: 9999 },
+        start_date: { type: 'string', format: 'date' }, end_date: { type: 'string', format: 'date' },
+        completeness: { type: 'string', enum: ['complete', 'partial', 'unavailable'] },
+        indicator: { type: 'string', enum: ['homicides', 'intentional_homicides'] },
+        unit: { type: 'string', enum: ['persons', 'source_reported_homicides'] },
+        methodology: { type: 'string', minLength: 1, maxLength: 8000 },
+        notes: { type: 'array', maxItems: 30, items: { type: 'string', minLength: 1, maxLength: 4000 } },
+        department: { type: 'string', enum: ['national', ...OFFICIAL_STATISTICS_DEPARTMENTS] },
+        territory_level: { type: 'string', enum: ['national', 'department'], description: 'Las filas nacionales y departamentales se solapan. No sumar ambos niveles.' },
+        months: { anyOf: [{ type: 'null' }, { type: 'array', minItems: 12, maxItems: 12, items: ref('OfficialStatisticsMonth') }] },
+        source: ref('OfficialStatisticsSource'),
+      },
+      allOf: [officialAvailability, { if: { properties: { department: { const: 'national' } }, required: ['department'] },
+        then: { properties: { territory_level: { const: 'national' } } },
+        else: { properties: { months: { type: 'null' }, territory_level: { const: 'department' } } } }],
+    },
+    OfficialStatisticsMetadata: {
+      type: 'object', additionalProperties: false,
+      required: ['api_version', 'schema_version', 'dataset_id', 'title', 'as_of', 'generated_at', 'coverage_start_year', 'returned_rows', 'comparability_note', 'limitations'],
+      properties: {
+        api_version: { type: 'string', const: '1' }, schema_version: { type: 'integer', const: 1 },
+        dataset_id: { type: 'string', const: 'sv-official-homicides' }, title: { type: 'string' },
+        as_of: { type: 'string', format: 'date' }, generated_at: { type: 'string', format: 'date-time' },
+        coverage_start_year: { type: 'integer', const: 2010 }, returned_rows: { type: 'integer', minimum: 0 },
+        comparability_note: { type: 'string' }, limitations: { type: 'string' },
+      },
+    },
+    OfficialStatisticsResponse: {
+      type: 'object', additionalProperties: false, required: ['data', 'meta'],
+      properties: { data: { type: 'array', items: ref('OfficialStatisticsRow') }, meta: ref('OfficialStatisticsMetadata') },
+    },
     AutomaticNewsLocationMention: {
       type: 'object', additionalProperties: false,
       required: ['method', 'department', 'paragraph_id'],
