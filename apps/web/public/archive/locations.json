@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T17:19:33.683576+00:00",
+  "generated_at": "2026-10-13T18:24:05.441647+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -811,6 +811,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "4490c751d34b8495db8ffe17d78fc0225265cd0d17b525ee6f86067f15c63935",
+      "source_url": "https://www.diariocolatino.com/nuestra-vida-esta-en-riesgo-si-permitimos-los-proyectos-mineros-mesa-frente-a-la-mineria/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-14",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-13T12:21:30.760271-06:00",
+      "source_checked_at": "2026-10-13T18:24:03.309263+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "c6214f37dca557af8ef56b8d46d7f1c2d174f3d9e104109bd9a7c630e73ecdca"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Isidro",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
       }
     },
     {
