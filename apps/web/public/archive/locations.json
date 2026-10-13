@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T03:17:15.101631+00:00",
+  "generated_at": "2026-10-13T05:19:33.487287+00:00",
   "locations": [
     {
       "candidate_id": "02cc1855779ba26856160a00bfdfef81d590a9917582885384fa6769f111a1e0",
@@ -230,6 +230,47 @@
         "explicit_paragraph_id": "p3",
         "rule_version": 1
       }
+    },
+    {
+      "candidate_id": "2749fb8d8a460a24bb5b18d63b826cbef7a974ca51de0936ac1e24c553432ad7",
+      "source_url": "https://www.diariocolatino.com/con-el-apellido-del-asesino-de-monsenor-romero-a-cuestas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-05",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T05:19:24.673433+00:00",
+      "source_checked_at": "2026-10-13T05:19:24.673433+00:00",
+      "evidence": {
+        "content_sha256": "fd04a4c4d52ec08a8c88e68529ab1739672c6e8f314893ec4efd4a96b13103a1"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "San Miguel",
+          "paragraph_id": "p17",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Miguel",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p5",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Salvador",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "283f0a4d6f95b76b8eb4f7976970072bbab03ca7ff5ba1377d4c8638fa29f94c",
@@ -636,6 +677,30 @@
       }
     },
     {
+      "candidate_id": "55e4ea4d2104af6acf94ff1cd304668a5f7ee5536343e4ed8be74093f8f8ddee",
+      "source_url": "https://www.diariocolatino.com/candidato-del-fmln-armando-flores-reconoce-el-derecho-al-agua-de-los-teclenos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-13",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T05:19:29.053874+00:00",
+      "source_checked_at": "2026-10-13T05:19:29.053874+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "97de11121c57c0f7d84e9e3609188e3840bd869e097bdbcb5b35b96b3410b487"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "5eaff40875c92603a05e6e9bf24cc463b48adcb9d79e5e8abe5de68b51def2e2",
       "source_url": "https://www.diariocolatino.com/secretaria-de-inclusion-social-condena-asesinato-de-funcionaria-de-ciudad-mujer-usulutan-2/",
       "publisher": "Diario Co Latino",
@@ -654,6 +719,30 @@
       "resolution": {
         "type": "municipality_to_department",
         "municipality": "Apopa",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "65b1c42d7b7a24179aaaa9367c8d2baee05debb958bd2ad0e64fb9682b4443ca",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-exigen-se-pronuncie-ante-acoso-laboral-en-la-alcaldia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-15",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T05:19:12.877887+00:00",
+      "source_checked_at": "2026-10-13T05:19:12.877887+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "b90beba5b1aa10999d5cf2124f9c2214111d22690a682c028622a6aa87ccf7a0"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
@@ -888,6 +977,30 @@
       "evidence": {
         "paragraph_id": "p8",
         "content_sha256": "5e55715d295d34d77bdb49d6508a589fa7100cc53114d04b40025b95a7cc54c3"
+      }
+    },
+    {
+      "candidate_id": "9adbbc1e48d5790bf729e0eb9c5b7fab77e28117ad08d536874961972fe74ac4",
+      "source_url": "https://www.diariocolatino.com/gobierno-busca-reducir-hacinamiento-carcelario-con-liberacion-de-2-mil-400-reos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-17",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T05:19:30.049704+00:00",
+      "source_checked_at": "2026-10-13T05:19:30.049704+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "94961287ca23e4f220eda7bf721ea2480d247eb5fda5bcab85940ee0e7546f65"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ilopango",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -1142,6 +1255,30 @@
       }
     },
     {
+      "candidate_id": "cb35f4b31ca233d15e9894a76765e780192472ab07191b51df309c88948c7ae9",
+      "source_url": "https://www.diariocolatino.com/sis-en-feria-de-logros-de-granja-penitenciaria/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-17",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T05:18:54.301509+00:00",
+      "source_checked_at": "2026-10-13T05:18:54.301509+00:00",
+      "evidence": {
+        "paragraph_id": "p8",
+        "content_sha256": "934631bf31e3feb8b09af85323e523a80a18689b32574e351c3a7b19ec8445c4"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Izalco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
+    },
+    {
       "candidate_id": "d18b61a74d084d347d69a711c2df9747d43bb121c2d3badb7f1aa686dfcf7601",
       "source_url": "https://www.diariocolatino.com/apes-condena-ataque-contra-periodista-radial-en-oriente-salvadoreno/",
       "publisher": "Diario Co Latino",
@@ -1276,6 +1413,23 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "ed96358689372c89fcedc954d59b501eed9706e8581eb59563120d74fadb93b8",
+      "source_url": "https://www.diariocolatino.com/carcel-para-mujer-acusada-de-lavar-18-millones-de-dolares/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-20",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T05:18:57.900591+00:00",
+      "source_checked_at": "2026-10-13T05:18:57.900591+00:00",
+      "evidence": {
+        "paragraph_id": "p9",
+        "content_sha256": "39d9e91cd0e14bb7b51297663e15e2b66b254bf0a1a45106185a795ab6820bc8"
+      }
     },
     {
       "candidate_id": "f1984c354028f05456308d0e063ca04513fd1954b4b8de9aa39762140f7375d1",
