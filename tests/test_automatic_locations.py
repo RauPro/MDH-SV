@@ -76,7 +76,7 @@ def test_previous_v1_locations_are_revalidated_once_before_becoming_current_cach
     current, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
         previous=old, fetch=lambda row: checked.append(row["id"]) or article, now=NOW)
     assert checked == [reference["id"]]
-    assert current["schema_version"] == 4 and stats["cached"] == 0
+    assert current["schema_version"] == 5 and stats["cached"] == 0
     unchanged, stats = project_automatic_locations([draft], {"schema_version": 1, "records": [reference]},
         previous=current, fetch=forbidden_fetch, now=NOW)
     assert unchanged == current and stats["cached"] == 1
@@ -360,7 +360,7 @@ def test_same_article_geographic_corroboration_keeps_model_citations_unchanged()
     reference, draft, article = corroborated_sample()
     original = deepcopy(draft)
     result, stats = project(draft, reference, article)
-    assert stats["locations"] == 1 and result["schema_version"] == 4
+    assert stats["locations"] == 1 and result["schema_version"] == 5
     location = result["locations"][0]
     assert location["method"] == CORROBORATED_METHOD
     assert location["department"] == "Cabañas"
@@ -499,7 +499,7 @@ def test_upgrade_preserves_all_19_existing_positive_caches_without_fetches(versi
     previous["schema_version"] = version
     current, stats = project_automatic_locations(drafts, archive, previous=previous, fetch=forbidden_fetch,
                                                 now=NOW + timedelta(hours=1))
-    assert current["schema_version"] == 4 and current["locations"] == previous["locations"]
+    assert current["schema_version"] == 5 and current["locations"] == previous["locations"]
     assert current["generated_at"] == previous["generated_at"]
     assert stats["cached"] == stats["locations"] == 19 and stats["sources_checked"] == 0
 

@@ -5,7 +5,7 @@ humana previa. Esta excepción se limita a la ubicación y su procedencia: no ap
 ni publica las fichas privadas, identidades, hechos, citas o cuerpos de artículos.
 
 `apps/web/public/archive/locations.json` contiene el identificador y bibliografía
-ya públicos, un departamento canónico, fechas y un localizador de párrafo con hash.
+ya públicos, departamentos canónicos, fechas y localizadores de párrafo con hash.
 Todas las entradas conservan `review_status: automated_unreviewed` y
 `human_reviewed: false`. La web, REST y MCP mantienen esos datos separados de la
 ficha revisada. Una decisión humana siempre prevalece, incluso cuando protege la
@@ -38,8 +38,14 @@ Los métodos conservan su procedencia:
   explícito en contexto geográfico dentro del texto comprobado.
 - `source_municipality_reference`: la regla identifica un municipio o distrito
   en contexto geográfico y utiliza la misma referencia administrativa oficial.
-  Estos dos métodos requieren `rule_version: 1`, no se atribuyen a Gemini ni
+  Estos dos métodos conservan `rule_version` (1 en documentos antiguos; 2 en los
+  nuevos), no se atribuyen a Gemini ni
   necesitan una ficha previa. El método municipal conserva `resolution`.
+- `source_administrative_mentions`: varias menciones administrativas respaldadas
+  por el mismo texto. Usa `rule_version: 2` y `mentions`, con un párrafo y, cuando
+  corresponde, una referencia municipal por departamento. No elige un departamento
+  principal: el objeto no contiene `department` ni una resolución única.
+  `evidence.content_sha256` vincula todas las menciones con la selección vigente.
 
 No usa títulos, URL ni etiquetas como ubicaciones. Los homónimos requieren una
 pista departamental compatible en el mismo párrafo; las contradicciones, nombres
@@ -47,8 +53,11 @@ parciales, negaciones de ubicación y referencias de sedes/rutas quedan pendient
 Una señal explícita de país extranjero incompatible también impide la asignación.
 No se generan coordenadas personales ni se afirma una ubicación exacta.
 La comprobación directa tampoco transforma el nombre de una prisión, el lugar
-de nacimiento de una persona o una mención ambigua en una ubicación. Si aparecen
-varios departamentos sin poder establecer uno, deja la noticia sin resolver.
+de nacimiento de una persona o una mención ambigua en una ubicación. Si hay varios
+departamentos con evidencia válida, conserva todos por separado; una contradicción
+administrativa no se resuelve eligiendo el primero. Cada noticia cuenta una sola
+vez en el total con ubicación, aunque aparezca en varios departamentos. La suma
+de los departamentos puede superar ese total y no mide casos ni víctimas.
 
 Las alertas de privacidad no excluyen toda la ficha. Con la política de privacidad
 por campo (`privacy_policy_version=2`), una localidad administrativa segura puede
@@ -56,12 +65,14 @@ proyectarse aunque otra casilla esté protegida. Un departamento o municipio
 protegido no se reconstruye mediante otro campo. Los borradores antiguos con
 alertas necesitan la nueva extracción; no basta con cambiarles una etiqueta.
 
-El snapshot nuevo usa `schema_version=4`; los clientes también pueden leer las
-versiones 1, 2 y 3. Los métodos directos de fuente requieren la versión 4 y la
-corroboración se admite desde la versión 3. Las ubicaciones
+El snapshot nuevo usa `schema_version=5`; los clientes también pueden leer las
+versiones 1 a 4. Los métodos directos de fuente con regla 1 se admiten desde la
+versión 4; la regla 2 y las menciones múltiples requieren la versión 5.
+La corroboración se admite desde la versión 3. Las ubicaciones
 v1 se comprueban de nuevo antes de reutilizar su caché con las reglas actuales;
 las comprobaciones positivas posteriores conservan su procedencia y fecha mientras
-sigan coincidiendo con la selección vigente y los controles de privacidad.
+sigan coincidiendo con la selección vigente y los controles de privacidad. Un
+cambio de reglas vuelve a comprobar las ubicaciones directas de fuente anteriores.
 
 Ese control comprueba una **mención departamental**, no que sea el lugar de una
 violación. La fuente puede contener errores o referencias secundarias. La capa

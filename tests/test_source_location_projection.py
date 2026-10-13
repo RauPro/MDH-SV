@@ -39,9 +39,9 @@ def protect(draft, field):
 def test_selected_source_without_any_dossier_emits_minimal_department_evidence():
     reference, _, article = selected_sample()
     result, stats = project_source(reference, article)
-    assert result["schema_version"] == 4 and stats["ready_without_dossier"] == 1
+    assert result["schema_version"] == 5 and stats["ready_without_dossier"] == 1
     location = result["locations"][0]
-    assert location["method"] == "source_explicit_department" and location["rule_version"] == 1
+    assert location["method"] == "source_explicit_department" and location["rule_version"] == 2
     assert location["department"] == "Cabañas" and location["human_reviewed"] is False
     assert location["evidence"] == {"paragraph_id": "p1", "content_sha256": article["content_sha256"]}
     assert stats["source_methods"]["source_explicit_department"] == 1
@@ -60,11 +60,90 @@ def test_source_municipality_uses_official_resolution_without_a_private_model_cl
     assert stats["source_methods"]["source_municipality_reference"] == 1
 
 
+def multiple_sample():
+    return selected_sample(text="Las denuncias se registraron en los departamentos de Cabañas y La Paz.")
+
+
+def test_multiple_source_departments_keep_each_proof_without_inventing_a_primary_place():
+    reference, _, article = multiple_sample()
+    result, stats = project_source(reference, article)
+    location = result["locations"][0]
+    assert location["method"] == "source_administrative_mentions"
+    assert location["rule_version"] == 2 and "department" not in location
+    assert location["evidence"] == {"content_sha256": article["content_sha256"]}
+    assert [item["department"] for item in location["mentions"]] == ["Cabañas", "La Paz"]
+    assert all(item["paragraph_id"] == "p1" for item in location["mentions"])
+    assert stats["locations"] == 1 and stats["source_methods"]["source_administrative_mentions"] == 1
+    cached, stats = project_source(reference, article, previous=result, fetch=forbidden_fetch)
+    assert cached == result and stats["cached"] == 1
+
+
+@pytest.mark.parametrize("cause", ["private_field", "duplicate", "single", "wrong_resolution", "wrong_paragraph", "primary_place", "schema", "rule", "hash"])
+def test_multiple_source_allowlist_rejects_ambiguity_and_private_data(cause):
+    reference, _, article = multiple_sample()
+    result, _ = project_source(reference, article)
+    value = result["locations"][0]
+    if cause == "private_field": value["mentions"][0]["quote"] = PRIVATE
+    if cause == "duplicate": value["mentions"][1] = deepcopy(value["mentions"][0])
+    if cause == "single": value["mentions"].pop()
+    if cause == "wrong_resolution": value["mentions"][0]["resolution"] = {"municipality": "Lugar inventado"}
+    if cause == "wrong_paragraph": value["mentions"][0]["paragraph_id"] = "p0"
+    if cause == "primary_place": value["department"] = "Cabañas"
+    if cause == "schema": result["schema_version"] = 4
+    if cause == "rule": value["rule_version"] = 1
+    if cause == "hash": value["evidence"]["content_sha256"] = "d" * 64
+    with pytest.raises(AutomaticLocationError):
+        validate_collection(result, archive={"schema_version": 1, "records": [reference]})
+
+
+def test_privacy_recheck_removes_municipal_parts_but_retains_safe_explicit_department():
+    reference, draft, article = selected_sample(text=(
+        "Las denuncias se registraron en el municipio de Nahuizalco. "
+        "El informe también documenta denuncias en el departamento de Cabañas."))
+    previous, _ = project_source(reference, article)
+    assert len(previous["locations"][0]["mentions"]) == 2
+    protect(draft, "municipality")
+    draft["news_dossier"]["fields"]["department"].update(value=None, status="pending", evidence_refs=[])
+    result, stats = project_source(reference, article, drafts=[draft], previous=previous)
+    assert stats["sources_checked"] == 1 and stats["cached"] == 0
+    assert result["locations"][0]["department"] == "Cabañas"
+    assert "resolution" not in result["locations"][0]
+
+
+def test_legacy_source_rule_is_readable_but_rechecked_after_rule_change():
+    reference, _, article = selected_sample()
+    previous, _ = project_source(reference, article)
+    previous["schema_version"] = 4
+    previous["locations"][0]["rule_version"] = 1
+    assert validate_collection(previous, archive={"schema_version": 1, "records": [reference]})
+    result, stats = project_source(reference, article, previous=previous)
+    assert stats["cached"] == 0 and stats["sources_checked"] == 1
+    assert result["locations"][0]["rule_version"] == 2
+
+
 def test_existing_supported_model_projection_is_preferred_with_no_extra_read():
     reference, draft, article = selected_sample()
     result, stats = project_source(reference, article, drafts=[draft])
     assert result["locations"][0]["method"] == "gemini_explicit_department"
     assert stats["sources_checked"] == 1 and not any(stats["source_methods"].values())
+
+
+def test_one_supported_model_department_does_not_hide_other_supported_departments():
+    reference, draft, article = multiple_sample()
+    reads = []
+    result, stats = project_source(reference, article, drafts=[draft], fetch=lambda r: reads.append(r["id"]) or article)
+    assert result["locations"][0]["method"] == "source_administrative_mentions"
+    assert {item["department"] for item in result["locations"][0]["mentions"]} == {"Cabañas", "La Paz"}
+    assert len(reads) == stats["sources_checked"] == 1
+
+
+def test_model_department_alone_cannot_restore_a_contradictory_administrative_claim():
+    reference, draft, article = selected_sample(text="El informe sitúa Metapán, en el departamento de Cabañas.")
+    # The model only filled the department; the article's municipality still
+    # contradicts that assignment and must prevent publication.
+    assert draft["news_dossier"]["fields"]["municipality"]["status"] != "reported"
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
 
 
 def test_unsupported_model_citation_falls_back_to_literal_evidence_in_the_same_read():
@@ -79,6 +158,140 @@ def test_unsupported_model_citation_falls_back_to_literal_evidence_in_the_same_r
     assert result["locations"][0]["method"] == "source_explicit_department"
     assert result["locations"][0]["evidence"]["paragraph_id"] == "p2"
     assert len(reads) == stats["sources_checked"] == 1 and draft == original
+
+
+@pytest.mark.parametrize("department,text", [
+    ("La Libertad", "Personas salvadoreñas denunciaron detenciones arbitrarias en el departamento de La Libertad, Perú."),
+    ("San Salvador", "El departamento de San Salvador del Ministerio de Trabajo emitió un documento."),
+    ("San Salvador", "La persona es originaria del departamento de San Salvador."),
+    ("San Salvador", "La sede de la asociación está en el departamento de San Salvador."),
+    ("San Salvador", "El departamento de San Salvador del Ministerio emitió un texto. El documento menciona San Salvador."),
+    ("La Libertad", "En Perú hubo denuncias. El departamento de La Libertad registró casos."),
+])
+def test_model_department_cannot_revive_an_explicit_foreign_or_nonterritorial_source_context(department, text):
+    reference, draft, article = sample(department=department, paragraph=text)
+    reference["selection"] = selected_sample()[0]["selection"]
+    reference["selection"]["evidence"]["content_sha256"] = article["content_sha256"]
+    assert draft["news_dossier"]["fields"]["country"]["status"] == "pending"
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["sources_checked"] == 1 and stats["unsupported"] == 1
+
+
+def test_unrelated_repeated_municipality_cannot_legitimize_an_institutional_anchor():
+    reference, draft, article = selected_sample(text="El foro fue en Nahuizalco de la universidad. El informe menciona Nahuizalco.")
+    draft["news_dossier"]["fields"]["department"].update(value=None, status="pending", evidence_refs=[])
+    draft["news_dossier"]["fields"]["municipality"].update(value="Nahuizalco", status="reported", evidence_refs=["article-p1"])
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+def test_foreign_comparison_in_another_paragraph_does_not_veto_valid_model_department_anchor():
+    reference, draft, article = selected_sample()
+    article["paragraphs"].append({"id": "p2", "text": "En Perú existe otra iniciativa usada como comparación."})
+    article["text"] = "\n\n".join(p["text"] for p in article["paragraphs"])
+    digest = hashlib.sha256(article["text"].encode()).hexdigest()
+    article["content_sha256"] = draft["extraction"]["content_sha256"] = reference["selection"]["evidence"]["content_sha256"] = digest
+    draft["news_dossier"]["evidence"][1]["locator"] = f"Párrafo p1 consultado; SHA-256 {digest}."
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"][0]["department"] == "Cabañas"
+    assert result["locations"][0]["method"] == "gemini_explicit_department"
+    assert result["locations"][0]["evidence"]["paragraph_id"] == "p1" and stats["sources_checked"] == 1
+
+
+def test_model_corroboration_cannot_borrow_an_explicit_department_from_a_foreign_paragraph():
+    reference, draft, article = selected_sample(text="La comunidad denunció abusos en Cabañas.")
+    article["paragraphs"].append({"id": "p2", "text": "El operativo se realizó en el departamento de Cabañas. El texto indica que sucedió en Honduras."})
+    article["text"] = "\n\n".join(p["text"] for p in article["paragraphs"])
+    digest = hashlib.sha256(article["text"].encode()).hexdigest()
+    article["content_sha256"] = draft["extraction"]["content_sha256"] = reference["selection"]["evidence"]["content_sha256"] = digest
+    draft["news_dossier"]["evidence"][1]["locator"] = f"Párrafo p1 consultado; SHA-256 {digest}."
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+@pytest.mark.parametrize("quote", [
+    "“Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?”",
+    '"Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?"',
+    "«Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?»",
+])
+def test_quoted_counterfactual_country_does_not_relocate_an_independent_model_anchor(quote):
+    reference, draft, article = selected_sample(text=(quote +
+        ". El partido inaugura sus campañas electorales en Izalco, ciudad donde se organiza el acto."))
+    draft["news_dossier"]["fields"]["department"].update(value=None, status="pending", evidence_refs=[])
+    draft["news_dossier"]["fields"]["municipality"].update(value="Izalco", status="reported", evidence_refs=["article-p1"])
+    result, stats = project_source(reference, article, drafts=[draft])
+    location = result["locations"][0]
+    assert location["method"] == "gemini_municipality_reference"
+    assert location["department"] == "Sonsonate" and location["resolution"]["municipality"] == "Izalco"
+    assert location["evidence"]["paragraph_id"] == "p1" and stats["sources_checked"] == 1
+    assert quote not in json.dumps(result, ensure_ascii=False)
+
+
+@pytest.mark.parametrize("prefix", [
+    "“En Perú hubo denuncias”.",
+    "“Si en Perú hubo denuncias, debemos investigarlas”.",
+    "“Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?” En Perú hubo denuncias.",
+    "“Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían? En Perú hubo denuncias”.",
+    "“Si ustedes tuvieran grupos políticos en los EE.UU, ¿qué harían?",
+])
+def test_asserted_or_unbounded_foreign_context_still_vetoes_the_model_anchor(prefix):
+    reference, draft, article = sample(department="La Libertad", paragraph=(
+        prefix + " El departamento de La Libertad registró casos."))
+    reference["selection"] = selected_sample()[0]["selection"]
+    reference["selection"]["evidence"]["content_sha256"] = article["content_sha256"]
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+def test_counterfactual_quote_itself_cannot_supply_a_model_location():
+    reference, draft, article = selected_sample(text=(
+        "“Si ustedes estuvieran en Izalco y tuvieran grupos políticos en los EE.UU, ¿qué harían?”"))
+    draft["news_dossier"]["fields"]["department"].update(value=None, status="pending", evidence_refs=[])
+    draft["news_dossier"]["fields"]["municipality"].update(value="Izalco", status="reported", evidence_refs=["article-p1"])
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+@pytest.mark.parametrize("anchor", [
+    "La comunidad se encuentra en Victoria, departamento de Cabañas.",
+    "La comunidad se encuentra en el distrito de Victoria, departamento de Cabañas.",
+])
+def test_model_official_pair_survives_a_later_temporary_refugee_stay_and_return(anchor):
+    reference, draft, article = selected_sample(text="La comunidad denunció abusos en Cabañas.")
+    article["paragraphs"].append({"id": "p2", "text": (anchor +
+        " Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras,"
+        " y regresó a su comunidad natal en 1992.")})
+    article["text"] = "\n\n".join(p["text"] for p in article["paragraphs"])
+    digest = hashlib.sha256(article["text"].encode()).hexdigest()
+    article["content_sha256"] = draft["extraction"]["content_sha256"] = reference["selection"]["evidence"]["content_sha256"] = digest
+    draft["news_dossier"]["evidence"][1]["locator"] = f"Párrafo p1 consultado; SHA-256 {digest}."
+    result, stats = project_source(reference, article, drafts=[draft])
+    location = result["locations"][0]
+    assert location["method"] == "gemini_department_corroborated" and location["department"] == "Cabañas"
+    assert location["evidence"]["paragraph_id"] == "p2" and stats["sources_checked"] == 1
+
+
+@pytest.mark.parametrize("paragraph", [
+    "Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras, y regresó a su comunidad natal en 1992. La comunidad se encuentra en Victoria, departamento de Cabañas.",
+    "La comunidad se encuentra en Victoria, departamento de Cabañas. Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras.",
+    "La comunidad se encuentra en Victoria, departamento de Cabañas. El texto indica que sucedió en Honduras.",
+    "La comunidad se encuentra en Victoria, departamento de Cabañas. Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras, y regresó a su comunidad natal en 1992. En Perú hubo denuncias.",
+    "El operativo se realizó en el departamento de Cabañas. Vivió un tiempo en Lugar X, un asentamiento de refugiados en Honduras, y regresó a su comunidad natal en 1992.",
+])
+def test_historical_return_exception_requires_local_official_pair_and_only_later_bounded_context(paragraph):
+    reference, draft, article = selected_sample(text=paragraph)
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
+
+
+def test_model_cannot_revive_a_narrative_link_that_does_not_establish_administrative_membership():
+    reference, draft, article = sample(department="La Unión", paragraph=(
+        "Se denunció el ataque contra una persona de la ciudad de San Miguel, "
+        "texto intruso, perpetrado en el departamento de La Unión."))
+    reference["selection"] = selected_sample()[0]["selection"]
+    reference["selection"]["evidence"]["content_sha256"] = article["content_sha256"]
+    result, stats = project_source(reference, article, drafts=[draft])
+    assert result["locations"] == [] and stats["unsupported"] == 1
 
 
 @pytest.mark.parametrize("cause", ["excluded", "protected_department", "withheld_department", "foreign_country",
@@ -166,11 +379,11 @@ def test_negative_cache_is_invalidated_by_new_selection_hash_or_rule(cause):
     reference, _, article = selected_sample(text="El informe no identifica una ubicación administrativa concreta.")
     cache = {"schema_version": 1, "entries": []}
     project_source(reference, article, negative_cache=cache)
-    if cause == "rule": cache["entries"][0]["rule_version"] = 2
+    if cause == "rule": cache["entries"][0]["rule_version"] = 1
     else: cache["entries"][0]["selectionhash"] = "d" * 64
     _, stats = project_source(reference, article, negative_cache=cache)
     assert stats["sources_checked"] == 1 and stats["negative_cached"] == 0
-    assert cache["entries"][0]["rule_version"] == 1
+    assert cache["entries"][0]["rule_version"] == 2
 
 
 @pytest.mark.parametrize("code,days", [("source_access_restricted", 7), ("source_network_error", 1)])

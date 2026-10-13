@@ -30,31 +30,45 @@ function validCorroboration(value) {
     && value.evidence?.paragraph_id === proof.explicit_paragraph_id;
 }
 
+function validMention(value) {
+  const municipal = object(value) && value.method === 'source_municipality_reference';
+  return exact(value, ['method', 'department', 'paragraph_id', ...(municipal ? ['resolution'] : [])])
+    && ['source_explicit_department', 'source_municipality_reference'].includes(value.method)
+    && NEWS_LOCATION_DEPARTMENTS.includes(value.department)
+    && typeof value.paragraph_id === 'string' && /^p[1-9]\d{0,2}$/.test(value.paragraph_id)
+    && (!municipal || validResolution(value));
+}
+
 export function validatePublishedNewsLocation(value) {
+  const plural = object(value) && value.method === 'source_administrative_mentions';
   const sourceOnly = object(value) && ['source_explicit_department', 'source_municipality_reference'].includes(value.method);
   const municipal = object(value) && ['gemini_municipality_reference', 'source_municipality_reference'].includes(value.method);
   const corroborated = object(value) && value.method === 'gemini_department_corroborated';
-  if (!exact(value, ['candidate_id', 'source_url', 'publisher', 'published_date', 'department', 'review_status', 'human_reviewed', 'method', 'extracted_at', 'source_checked_at', 'evidence', ...(sourceOnly ? ['rule_version'] : []), ...(municipal ? ['resolution'] : corroborated ? ['corroboration'] : [])])
+  if (!exact(value, ['candidate_id', 'source_url', 'publisher', 'published_date', 'review_status', 'human_reviewed', 'method', 'extracted_at', 'source_checked_at', 'evidence', ...(plural ? ['rule_version', 'mentions'] : ['department', ...(sourceOnly ? ['rule_version'] : []), ...(municipal ? ['resolution'] : corroborated ? ['corroboration'] : [])])])
     || !sha(value.candidate_id) || !safeSource(value.source_url) || value.source_url.length > 4096 || new URL(value.source_url).pathname.length < 5
     || typeof value.publisher !== 'string' || value.publisher.trim().length < 3 || value.publisher.length > 200
-    || !date(value.published_date) || !NEWS_LOCATION_DEPARTMENTS.includes(value.department)
-    || value.review_status !== 'automated_unreviewed' || value.human_reviewed !== false || !['gemini_explicit_department','gemini_municipality_reference','gemini_department_corroborated','source_explicit_department','source_municipality_reference'].includes(value.method)
-    || (sourceOnly && value.rule_version !== 1)
+    || !date(value.published_date) || (!plural && !NEWS_LOCATION_DEPARTMENTS.includes(value.department))
+    || value.review_status !== 'automated_unreviewed' || value.human_reviewed !== false || !['gemini_explicit_department','gemini_municipality_reference','gemini_department_corroborated','source_explicit_department','source_municipality_reference','source_administrative_mentions'].includes(value.method)
+    || (sourceOnly && ![1, 2].includes(value.rule_version))
+    || (plural && (value.rule_version !== 2 || !Array.isArray(value.mentions) || value.mentions.length < 2 || value.mentions.length > 14
+      || !value.mentions.every(validMention) || new Set(value.mentions.map(mention => mention.department)).size !== value.mentions.length))
     || (municipal && !validResolution(value)) || (corroborated && !validCorroboration(value))
     || !instant(value.extracted_at) || !instant(value.source_checked_at)
-    || !exact(value.evidence, ['paragraph_id', 'content_sha256']) || typeof value.evidence.paragraph_id !== 'string'
-    || !/^p[1-9]\d{0,2}$/.test(value.evidence.paragraph_id) || !sha(value.evidence.content_sha256)) fail();
+    || !exact(value.evidence, plural ? ['content_sha256'] : ['paragraph_id', 'content_sha256'])
+    || (!plural && (typeof value.evidence.paragraph_id !== 'string' || !/^p[1-9]\d{0,2}$/.test(value.evidence.paragraph_id)))
+    || !sha(value.evidence.content_sha256)) fail();
   return structuredClone(value);
 }
 
 export function parsePublishedNewsLocations(payload) {
-  if (!exact(payload, ['schema_version', 'generated_at', 'locations']) || ![1, 2, 3, 4].includes(payload.schema_version) || !instant(payload.generated_at) || !Array.isArray(payload.locations) || payload.locations.length > 100000) fail();
+  if (!exact(payload, ['schema_version', 'generated_at', 'locations']) || ![1, 2, 3, 4, 5].includes(payload.schema_version) || !instant(payload.generated_at) || !Array.isArray(payload.locations) || payload.locations.length > 100000) fail();
   const index = new Map();
   const urls = new Set();
   for (const raw of payload.locations) {
     const location = validatePublishedNewsLocation(raw);
     if (location.method === 'gemini_department_corroborated' && payload.schema_version < 3) fail();
-    if (location.method.startsWith('source_') && payload.schema_version !== 4) fail();
+    if (location.method.startsWith('source_') && payload.schema_version < 4) fail();
+    if ((location.method === 'source_administrative_mentions' || location.rule_version === 2) && payload.schema_version !== 5) fail();
     if (index.has(location.candidate_id) || urls.has(location.source_url)) fail();
     index.set(location.candidate_id, location);
     urls.add(location.source_url);

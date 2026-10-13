@@ -42,7 +42,7 @@ it('identifies automatic and reviewed map values with text as well as distinct s
   expect(screen.getByRole('button', { name: 'San Salvador: 3 noticias' })).toHaveTextContent('1 revisadas2 automáticas');
   expect(screen.getByTestId('map-region-SVSS')).toHaveClass('mixed-location');
   expect(screen.getByText('Ambas capas')).toBeInTheDocument();
-  expect(screen.getByText('automáticas sin revisar')).toHaveTextContent('2 automáticas sin revisar');
+  expect(screen.getByText('noticias con menciones automáticas sin revisar')).toHaveTextContent('2 noticias con menciones automáticas sin revisar');
 });
 
 it('uses unavailable counts rather than zero for a failed public location load', () => {

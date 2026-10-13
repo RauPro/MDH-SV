@@ -6,7 +6,7 @@ import json
 import pytest
 
 from mdh_pipeline.municipalities import REFERENCE_VERSION, resolve_municipality
-from mdh_pipeline.source_location_evidence import SOURCE_LOCATION_RULE_VERSION, extract_administrative_mention
+from mdh_pipeline.source_location_evidence import SOURCE_LOCATION_RULE_VERSION, extract_administrative_mention, extract_administrative_mentions, has_administrative_conflict
 
 
 def article(*paragraphs):
@@ -20,7 +20,7 @@ def test_explicit_department_is_a_minimal_literal_source_projection():
     original = deepcopy(value)
     assert extract_administrative_mention(value) == {
         "method": "source_explicit_department", "department": "Cabañas", "paragraph_id": "p1"}
-    assert SOURCE_LOCATION_RULE_VERSION == 1 and value == original
+    assert SOURCE_LOCATION_RULE_VERSION == 2 and value == original
 
 
 @pytest.mark.parametrize("phrase", [
@@ -98,6 +98,17 @@ def test_correct_adjacent_city_department_pair_preserves_explicit_source_claim(c
     assert result == {"method": "source_explicit_department", "department": "Santa Ana", "paragraph_id": "p1"}
 
 
+@pytest.mark.parametrize("direction", ["norte", "sur", "este", "oeste", "centro"])
+def test_internal_department_direction_preserves_the_official_administrative_pair(direction):
+    value = article(f"El hecho ocurrió en el municipio de Santa Rosa de Lima, en el {direction} del departamento de La Unión.")
+    assert not has_administrative_conflict(value)
+    result = extract_administrative_mention(value)
+    assert result["department"] == "La Unión" and result["paragraph_id"] == "p1"
+    mismatch = article(f"El hecho ocurrió en el municipio de Santa Rosa de Lima, en el {direction} del departamento de San Miguel.")
+    assert has_administrative_conflict(mismatch)
+    assert extract_administrative_mentions(mismatch) == []
+
+
 def test_administrative_contradiction_is_not_relocated_or_overridden_by_another_valid_mention():
     value = article("El humedal de Metapán, en el departamento de Ahuachapán, requiere protección.",
                     "El informe también contiene denuncias en el departamento de Santa Ana.")
@@ -108,6 +119,9 @@ def test_all_source_locations_are_examined_and_multiple_departments_are_never_re
     value = article("Las denuncias se registraron en el municipio de Nahuizalco.",
                     "Otras denuncias ocurrieron en el municipio de San Miguel.")
     assert extract_administrative_mention(value) is None
+    mentions = extract_administrative_mentions(value)
+    assert {item["department"] for item in mentions} == {"Sonsonate", "San Miguel"}
+    assert len(mentions) == 2
     assert extract_administrative_mention(article(
         "Se registraron denuncias en los departamentos de Sonsonate y San Miguel.")) is None
     assert extract_administrative_mention(article(
@@ -124,6 +138,152 @@ def test_multiple_municipalities_in_same_department_are_allowed_with_stable_proo
     assert result["department"] == "Sonsonate"
     assert result["resolution"]["municipality"] == "Nahuizalco"
     assert result["paragraph_id"] == "p1"
+    assert len(extract_administrative_mentions(article(
+        "Se registraron denuncias en los municipios de Nahuizalco y Sonsonate."))) == 1
+
+
+def test_plural_administrative_lists_keep_all_distinct_departments_without_a_primary():
+    value = article("Las organizaciones trabajan en los departamentos de La Paz, Cuscatlán y Cabañas.")
+    mentions = extract_administrative_mentions(value)
+    assert {item["department"] for item in mentions} == {"La Paz", "Cuscatlán", "Cabañas"}
+    assert all(item["paragraph_id"] == "p1" and item["method"] == "source_explicit_department" for item in mentions)
+    assert extract_administrative_mention(value) is None
+
+
+def test_plural_still_rejects_conflicting_chains_and_homonyms_instead_of_partial_salvage():
+    value = article("El humedal de Metapán, en el departamento de Ahuachapán, requiere protección.",
+                    "El informe también documenta denuncias en el departamento de Cabañas.")
+    assert extract_administrative_mentions(value) == []
+    assert extract_administrative_mentions(article("Hay denuncias en el municipio de El Rosario.",
+                                                   "Otras se registraron en el departamento de Sonsonate.")) == []
+
+
+def test_conflict_helper_distinguishes_contradiction_from_homonyms_and_valid_plurality():
+    assert has_administrative_conflict(article("El humedal de Metapán, en el departamento de Ahuachapán, requiere protección."))
+    assert has_administrative_conflict(article("El humedal de Metapán, palabra intrusa en el departamento de Santa Ana, requiere protección."))
+    assert not has_administrative_conflict(article("Se documentan denuncias en los departamentos de La Paz y Cabañas."))
+    assert not has_administrative_conflict(article("Se documentan denuncias en el municipio de El Rosario."))
+
+
+def test_explicit_department_examples_and_predicate_lists_keep_all_named_departments():
+    examples = article("Las denuncias se concentran en departamentos como San Salvador, La Libertad, Sonsonate y Santa Ana.")
+    assert {m["department"] for m in extract_administrative_mentions(examples)} == {"San Salvador", "La Libertad", "Sonsonate", "Santa Ana"}
+    predicate = article("Los departamentos con mayor índice de denuncias han sido Usulután y San Salvador.")
+    assert {m["department"] for m in extract_administrative_mentions(predicate)} == {"Usulután", "San Salvador"}
+
+
+def test_explicit_municipalities_predicate_list_maps_jurisdictions_and_deduplicates_department():
+    value = article("Entre las municipalidades donde se realiza el programa están: Santa Tecla, San Marcos y San Martín.")
+    results = extract_administrative_mentions(value)
+    assert {m["department"] for m in results} == {"La Libertad", "San Salvador"}
+    assert {m["resolution"]["municipality"] for m in results} == {"Santa Tecla", "San Marcos"}
+
+
+def test_administrative_apposition_after_locative_canton_validates_explicit_department_suffix():
+    value = article("El hecho ocurrió en el cantón El Ejemplo, municipio Concepción Batres, Usulután.")
+    result = extract_administrative_mention(value)
+    assert result["department"] == "Usulután" and result["resolution"]["municipality"] == "Concepción Batres"
+    mismatch = article("El hecho ocurrió en el cantón El Ejemplo, municipio Concepción Batres, San Miguel.")
+    assert extract_administrative_mentions(mismatch) == [] and has_administrative_conflict(mismatch)
+    private = article("La persona residía en el cantón El Ejemplo, municipio Concepción Batres, Usulután.")
+    assert extract_administrative_mentions(private) == []
+
+
+def test_limited_attested_adjective_preserves_literal_municipal_reference():
+    result = extract_administrative_mention(article("El hecho ocurrió en el populoso municipio de Apopa."))
+    assert result["department"] == "San Salvador" and result["resolution"]["municipality"] == "Apopa"
+    assert extract_administrative_mentions(article("La persona nació en el populoso municipio de Apopa.")) == []
+
+
+def test_municipal_government_jurisdiction_is_recognized_but_an_office_address_is_not():
+    result = extract_administrative_mention(article("Trabajadores de la alcaldía municipal de San Martín denuncian violaciones laborales."))
+    assert result["department"] == "San Salvador" and result["resolution"]["municipality"] == "San Martín"
+    assert extract_administrative_mentions(article("La oficina de la alcaldía municipal de San Martín recibió una carta.")) == []
+    assert extract_administrative_mentions(article("Trabajadores de la alcaldía de San Martín denuncian violaciones laborales."), allow_municipality=False) == []
+
+
+def test_neighboring_department_is_not_a_false_administrative_containment_contradiction():
+    value = article("El informe documenta denuncias en el municipio de Nombre de Jesús, que colinda con el departamento de Cabañas.")
+    assert not has_administrative_conflict(value)
+    result = extract_administrative_mention(value)
+    assert result["department"] == "Chalatenango"
+
+
+def test_distinct_city_and_department_in_same_clause_are_not_forced_into_a_false_pair():
+    value = article("Hay denuncias en el municipio de Nahuizalco y en el departamento de San Miguel.")
+    assert {m["department"] for m in extract_administrative_mentions(value)} == {"Sonsonate", "San Miguel"}
+
+
+def test_separate_event_predicate_does_not_assert_that_a_previous_city_belongs_to_its_department():
+    narrative = "Se denunció el ataque contra una persona de la ciudad de San Miguel, texto intruso, perpetrado en el departamento de La Unión."
+    isolated = article(narrative)
+    assert not has_administrative_conflict(isolated)
+    # The unresolved intervening prose is not repaired or published as proof.
+    assert extract_administrative_mentions(isolated) == []
+    value = article(narrative, "El hecho ocurrió en el municipio de Santa Rosa de Lima, en el norte del departamento de La Unión.")
+    result = extract_administrative_mention(value)
+    assert not has_administrative_conflict(value)
+    assert result["department"] == "La Unión" and result["paragraph_id"] == "p2"
+
+
+def test_a_later_narrative_clause_cannot_erase_an_explicit_contradictory_pair():
+    value = article("El hecho ocurrió en el municipio de Metapán, en el departamento de Ahuachapán.",
+                    "Se denunció un ataque contra una persona de San Miguel, perpetrado en el departamento de La Unión.")
+    assert has_administrative_conflict(value)
+    assert extract_administrative_mentions(value) == []
+
+
+def test_exact_local_administrative_pair_can_distinguish_a_foreign_comparison_elsewhere():
+    context = "El informe documenta la libertad de expresión en El Salvador y compara las políticas de California."
+    local = "El hecho ocurrió en el municipio de Santa Rosa de Lima, en el norte del departamento de La Unión."
+    result = extract_administrative_mention(article(context, local))
+    assert result["department"] == "La Unión" and result["paragraph_id"] == "p2"
+    # A country name in the same paragraph, a mismatched pair or nationality
+    # alone cannot be repaired through the administrative reference.
+    assert extract_administrative_mentions(article(context, local + " El hecho sucedió en Honduras.")) == []
+    assert extract_administrative_mentions(article(context, local.replace("La Unión", "San Miguel"))) == []
+    assert extract_administrative_mentions(article("Una persona salvadoreña compara las políticas de California.", local)) == []
+
+
+@pytest.mark.parametrize("local", [
+    "La persona nació en el municipio de Santa Rosa de Lima, en el norte del departamento de La Unión.",
+    "La oficina está en el municipio de Santa Rosa de Lima, en el norte del departamento de La Unión.",
+    "El informe nombra Santa Rosa de Lima y el departamento de La Unión.",
+])
+def test_local_pair_does_not_override_personal_institutional_or_unbound_roles(local):
+    context = "El informe menciona El Salvador y compara California."
+    assert extract_administrative_mentions(article(context, local)) == []
+
+
+def test_foreign_comparison_does_not_suppress_an_independently_located_salvadoran_paragraph():
+    value = article("En El Salvador, el municipio de Nahuizalco registra denuncias.",
+                    "Otra parte del informe compara las políticas de Honduras.")
+    assert extract_administrative_mention(value)["department"] == "Sonsonate"
+    # A country name or nationality elsewhere does not locate a homonymous city.
+    assert extract_administrative_mentions(article("El migrante salió de El Salvador.",
+        "Vivió en California.", "Se registró la denuncia en el municipio de Santa Ana.")) == []
+    assert extract_administrative_mentions(article("El Salvador analiza el asunto.",
+        "Otra denuncia ocurrió en Honduras.", "Hay denuncias en el municipio de San Marcos.")) == []
+
+
+@pytest.mark.parametrize("text", [
+    "El hecho no ocurrió en los municipios de Nahuizalco y San Miguel.",
+    "El hecho no ocurrió en los departamentos de Sonsonate y San Miguel.",
+    "Los departamentos considerados no son Sonsonate y San Miguel.",
+    "Las municipalidades consideradas no están: Santa Tecla y San Marcos.",
+])
+def test_plural_negated_location_lists_are_not_salvaged_as_positive_members(text):
+    assert extract_administrative_mentions(article(text)) == []
+
+
+@pytest.mark.parametrize("text", [
+    "Los departamentos de la empresa son Santa Ana y San Miguel.",
+    "Los departamentos de origen de las víctimas son Santa Ana y San Miguel.",
+    "Las municipalidades de residencia de las personas son Santa Tecla y San Marcos.",
+    "El asunto ocurrió en el municipio de San Miguel, Filipinas.",
+])
+def test_administrative_wording_does_not_override_organizational_personal_or_foreign_context(text):
+    assert extract_administrative_mentions(article(text)) == []
 
 
 def test_explicit_department_is_preferred_over_earlier_same_department_municipality():

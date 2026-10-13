@@ -50,14 +50,31 @@ export const openapi = {
     '/api/v1/openapi.json': { get: operation('getOpenApi', 'Contrato OpenAPI 3.1', [], { type: 'object' }) },
   },
   components: { schemas: {
+    AutomaticNewsLocationMention: {
+      type: 'object', additionalProperties: false,
+      required: ['method', 'department', 'paragraph_id'],
+      allOf: [{ if: { properties: { method: { const: 'source_municipality_reference' } }, required: ['method'] },
+        then: { required: ['resolution'] }, else: { not: { required: ['resolution'] } } }],
+      properties: {
+        method: { type: 'string', enum: ['source_explicit_department', 'source_municipality_reference'] },
+        department: { type: 'string' }, paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' },
+        resolution: { type: 'object', additionalProperties: false, required: ['type','municipality','municipality_kind','reference_version','source_url'], properties: {
+          type: { type: 'string', const: 'municipality_to_department' }, municipality: { type: 'string' },
+          municipality_kind: { type: 'string', enum: ['district','municipality'] }, reference_version: { type: 'string' }, source_url: { type: 'string', format: 'uri' },
+        } },
+      },
+    },
     AutomaticNewsLocation: {
       type: 'object', additionalProperties: false,
       description: 'Ubicación administrativa automática SIN REVISAR, separada de la ficha. Los métodos source_* leen directamente el texto mediante reglas sin llamar a Gemini ni exigir una ficha completa. Los métodos gemini_* conservan su procedencia anterior. No confirma el lugar de una violación. Para una referencia con selección gemini_grounded_scope, evidence.content_sha256 debe coincidir con el hash de esa selección; las decisiones humanas prevalecen.',
-      required: ['candidate_id','source_url','publisher','published_date','department','review_status','human_reviewed','method','extracted_at','source_checked_at','evidence'],
+      required: ['candidate_id','source_url','publisher','published_date','review_status','human_reviewed','method','extracted_at','source_checked_at','evidence'],
       allOf: [
         { if: { properties: { method: { enum: ['gemini_municipality_reference', 'source_municipality_reference'] } }, required: ['method'] }, then: { required: ['resolution'] }, else: { not: { required: ['resolution'] } } },
         { if: { properties: { method: { const: 'gemini_department_corroborated' } }, required: ['method'] }, then: { required: ['corroboration'] }, else: { not: { required: ['corroboration'] } } },
-        { if: { properties: { method: { enum: ['source_explicit_department', 'source_municipality_reference'] } }, required: ['method'] }, then: { required: ['rule_version'] }, else: { not: { required: ['rule_version'] } } },
+        { if: { properties: { method: { enum: ['source_explicit_department', 'source_municipality_reference', 'source_administrative_mentions'] } }, required: ['method'] }, then: { required: ['rule_version'] }, else: { not: { required: ['rule_version'] } } },
+        { if: { properties: { method: { const: 'source_administrative_mentions' } }, required: ['method'] },
+          then: { required: ['mentions'], properties: { rule_version: { const: 2 }, evidence: { not: { required: ['paragraph_id'] } } }, not: { required: ['department'] } },
+          else: { required: ['department'], not: { required: ['mentions'] }, properties: { evidence: { required: ['paragraph_id'] } } } },
       ],
       properties: {
         candidate_id: { type: 'string', pattern: '^[a-f0-9]{64}$' },
@@ -65,8 +82,9 @@ export const openapi = {
         publisher: { type: 'string', minLength: 3, maxLength: 200 },
         published_date: { type: 'string', format: 'date' }, department: { type: 'string' },
         review_status: { type: 'string', const: 'automated_unreviewed' }, human_reviewed: { type: 'boolean', const: false },
-        method: { type: 'string', enum: ['gemini_explicit_department','gemini_municipality_reference','gemini_department_corroborated','source_explicit_department','source_municipality_reference'] },
-        rule_version: { type: 'integer', const: 1, description: 'Obligatoria sólo para métodos source_* en colecciones schema_version 4.' },
+        method: { type: 'string', enum: ['gemini_explicit_department','gemini_municipality_reference','gemini_department_corroborated','source_explicit_department','source_municipality_reference','source_administrative_mentions'] },
+        rule_version: { type: 'integer', enum: [1, 2], description: 'Obligatoria sólo para métodos source_*. La regla 2 se admite únicamente en colecciones schema_version 5 y es obligatoria para menciones múltiples.' },
+        mentions: { type: 'array', minItems: 2, maxItems: 14, items: ref('AutomaticNewsLocationMention'), description: 'Una mención por departamento distinto; el validador impide duplicados y comprueba la correspondencia municipal oficial. No establece un departamento principal. Una noticia puede contarse en varios departamentos y una sola vez en el total de noticias.' },
         resolution: { type: 'object', additionalProperties: false, required: ['type','municipality','municipality_kind','reference_version','source_url'], properties: {
           type: { type: 'string', const: 'municipality_to_department' }, municipality: { type: 'string' },
           municipality_kind: { type: 'string', enum: ['district','municipality'] }, reference_version: { type: 'string' }, source_url: { type: 'string', format: 'uri' },
@@ -74,7 +92,7 @@ export const openapi = {
         corroboration: {
           type: 'object', additionalProperties: false,
           required: ['strategy','model_paragraph_id','explicit_paragraph_id','rule_version'],
-          description: 'Sólo para gemini_department_corroborated en colecciones schema_version 3 o 4. Los IDs de párrafo deben ser distintos y evidence.paragraph_id coincide con explicit_paragraph_id. No publica el texto de la noticia.',
+          description: 'Sólo para gemini_department_corroborated en colecciones schema_version 3 o posterior. Los IDs de párrafo deben ser distintos y evidence.paragraph_id coincide con explicit_paragraph_id. No publica el texto de la noticia.',
           properties: {
             strategy: { type: 'string', const: 'same_article_explicit_department' },
             model_paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' },
@@ -83,22 +101,26 @@ export const openapi = {
           },
         },
         extracted_at: { type: 'string', format: 'date-time' }, source_checked_at: { type: 'string', format: 'date-time' },
-        evidence: { type: 'object', additionalProperties: false, required: ['paragraph_id','content_sha256'], properties: {
+        evidence: { type: 'object', additionalProperties: false, required: ['content_sha256'], properties: {
           paragraph_id: { type: 'string', pattern: '^p[1-9][0-9]{0,2}$' }, content_sha256: { type: 'string', pattern: '^[a-f0-9]{64}$' },
         } },
       },
     },
     AutomaticNewsLocationCollection: {
       type: 'object', additionalProperties: false,
-      description: 'Snapshot público de /archive/locations.json, sin cachés o contadores privados. Los métodos source_* sólo aparecen en la versión 4; el método corroborado se admite desde la versión 3. Las versiones anteriores siguen siendo compatibles.',
+      description: 'Snapshot público de /archive/locations.json, sin cachés o contadores privados. Los métodos source_* se admiten desde la versión 4; las menciones múltiples y la regla 2 sólo en la versión 5. El método corroborado se admite desde la versión 3. Las versiones anteriores siguen siendo compatibles.',
       required: ['schema_version','generated_at','locations'],
       properties: {
-        schema_version: { type: 'integer', enum: [1, 2, 3, 4] }, generated_at: { type: 'string', format: 'date-time' },
+        schema_version: { type: 'integer', enum: [1, 2, 3, 4, 5] }, generated_at: { type: 'string', format: 'date-time' },
         locations: { type: 'array', maxItems: 100000, items: ref('AutomaticNewsLocation') },
       },
       allOf: [
         { if: { properties: { schema_version: { enum: [1, 2] } }, required: ['schema_version'] }, then: { properties: { locations: { items: { not: { properties: { method: { const: 'gemini_department_corroborated' } }, required: ['method'] } } } } } },
-        { if: { properties: { schema_version: { enum: [1, 2, 3] } }, required: ['schema_version'] }, then: { properties: { locations: { items: { not: { properties: { method: { enum: ['source_explicit_department', 'source_municipality_reference'] } }, required: ['method'] } } } } } },
+        { if: { properties: { schema_version: { enum: [1, 2, 3] } }, required: ['schema_version'] }, then: { properties: { locations: { items: { not: { properties: { method: { enum: ['source_explicit_department', 'source_municipality_reference', 'source_administrative_mentions'] } }, required: ['method'] } } } } } },
+        { if: { properties: { schema_version: { enum: [1, 2, 3, 4] } }, required: ['schema_version'] }, then: { properties: { locations: { items: { not: { anyOf: [
+          { properties: { method: { const: 'source_administrative_mentions' } }, required: ['method'] },
+          { properties: { rule_version: { const: 2 } }, required: ['rule_version'] },
+        ] } } } } } },
       ],
     },
     NewsSelection: { description: 'Selección de pertinencia en derechos humanos de El Salvador. El indicio por palabras del título no basta. La selección automática permanece sin revisión humana y no aprueba la ficha ni confirma una violación.', oneOf: [
