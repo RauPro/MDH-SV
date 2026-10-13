@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-13T07:26:30.084747+00:00",
+  "generated_at": "2026-10-13T08:18:57.209878+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 7141,
-      "selected": 476,
-      "evaluated": 1034,
-      "relevant": 476,
-      "excluded": 551,
+      "selected": 531,
+      "evaluated": 1162,
+      "relevant": 531,
+      "excluded": 624,
       "uncertain": 7,
-      "pending": 6107,
-      "evaluated_at": "2026-10-13T07:26:28.793849+00:00"
+      "pending": 5979,
+      "evaluated_at": "2026-10-13T08:18:55.724902+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-13",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 476,
+    "records": 531,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 452,
+        "records": 507,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -845,7 +845,7 @@
           {
             "month": "2015-06",
             "status": "enumerated",
-            "records": 27,
+            "records": 32,
             "screen_version": 3,
             "posts_scanned": 1067,
             "source_total_posts": 1067,
@@ -857,7 +857,7 @@
           {
             "month": "2015-07",
             "status": "enumerated",
-            "records": 2,
+            "records": 18,
             "screen_version": 3,
             "posts_scanned": 1116,
             "source_total_posts": 1116,
@@ -869,7 +869,7 @@
           {
             "month": "2015-08",
             "status": "enumerated",
-            "records": 6,
+            "records": 27,
             "screen_version": 3,
             "posts_scanned": 1004,
             "source_total_posts": 1004,
@@ -881,7 +881,7 @@
           {
             "month": "2015-09",
             "status": "enumerated",
-            "records": 1,
+            "records": 14,
             "screen_version": 3,
             "posts_scanned": 1045,
             "source_total_posts": 1045,
@@ -19927,12 +19927,12 @@
         "month": "2015-06",
         "start_date": "2015-06-01",
         "end_date": "2015-06-30",
-        "records": 27,
+        "records": 32,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 27
+            "records": 32
           },
           {
             "source_id": "gatoencerrado",
@@ -19970,12 +19970,12 @@
         "month": "2015-07",
         "start_date": "2015-07-01",
         "end_date": "2015-07-31",
-        "records": 2,
+        "records": 18,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 2
+            "records": 18
           },
           {
             "source_id": "gatoencerrado",
@@ -20013,12 +20013,12 @@
         "month": "2015-08",
         "start_date": "2015-08-01",
         "end_date": "2015-08-31",
-        "records": 7,
+        "records": 28,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 6
+            "records": 27
           },
           {
             "source_id": "gatoencerrado",
@@ -20056,12 +20056,12 @@
         "month": "2015-09",
         "start_date": "2015-09-01",
         "end_date": "2015-09-30",
-        "records": 2,
+        "records": 15,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 14
           },
           {
             "source_id": "gatoencerrado",
@@ -27397,6 +27397,143 @@
       }
     },
     {
+      "id": "bc96cdfb8dba01436bcf92c6e51eb4d7741aa9afd1d3d0aa2b49f9360c9f042c",
+      "title": "Ministerio de Trabajo reitera respeto a la libertad sindical",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ministerio-de-trabajo-reitera-respeto-a-la-libertad-sindical/",
+      "published_date": "2015-09-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 80363,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:16:22.103820-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6ee3456d6ea410ec240060434f119fc453d9c13d3fa3295f9305109d4aa71593",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a5c3e78bc6d4df0be780823b0839e518b2b7cc7ad29d13f094865ad2b15e6e88",
+      "title": "PNC confirma captura de sujetos involucrados con artefactos explosivos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-confirma-captura-de-sujetos-involucrados-con-artefactos-explosivos/",
+      "published_date": "2015-09-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 80027,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:16:22.103820-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e21015f53fba4e07430fd745bda0d6ee47b3971944bd0dc68aafab15a6e516b5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p12",
+            "p13",
+            "p15",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ea51b47ef48613bcc95acc9a5ffad81481794c374ce6820859f245615bee11fe",
+      "title": "Doctora asesinada por pandillas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/doctora-asesinada-por-pandillas/",
+      "published_date": "2015-09-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 79773,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:16:22.103820-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "377bd9c992e93c020da820340a1dfefe659053fdf556a138a0aa2d87dda4923b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "id": "e7b9151e85f64b150206d9fad2037f7beefa6f0e07f07f5e354f3a9dc32d8e6d",
       "title": "Piden respaldo legislativo a comisión que busca niñez desaparecida en guerra salvadoreña",
       "title_truncated": false,
@@ -27451,6 +27588,429 @@
       }
     },
     {
+      "id": "9ac5d9a8f9837820f27f2b3f32024fb8c081074580e2e0d6b5a460b725a29c87",
+      "title": "Defensoría denuncia posible cobro indebido de CrediQ",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-denuncia-posible-cobro-indebido-de-crediq/",
+      "published_date": "2015-09-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 79611,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:16:22.103820-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "57079551332b712cdeefeeabbb8413d47593e52200c3169f9fbd2cd3030279d8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "61204f7eab34f052547260b4728a64d1e5b11534b5d044ddd36b89dc0146d1d5",
+      "title": "Juzgado envía a prisión a militar retirado por tenencia de armas de guerra",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-envia-a-prision-a-militar-retirado-por-tenencia-de-armas-de-guerra/",
+      "published_date": "2015-09-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 79594,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:16:22.103820-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b28b839e0bca610212d95b948acc2f3a53d44605fe45a14e9e7af8c3df9fae78",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "94f716f9c6a9d24b81f80622a8a7083437ab043cb485c5fff2df34dd9cacd6c1",
+      "title": "“Pretendemos tener un sistema penitenciario moderno, seguro y rehabilitante”: Rodil Hernández",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pretendemos-tener-un-sistema-penitenciario-moderno-seguro-y-rehabilitante-rodil-hernandez/",
+      "published_date": "2015-09-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 79498,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:16:22.103820-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c677c92c105aceb730ef8d88d05e4e6a9ace4638abb8a2373c235f1bf43eb596",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p6",
+            "p7",
+            "p13",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8181bd062fffdd97cacfed363711953711048b76d068133a93f8c867839e5a68",
+      "title": "“Ciudad Mujer” una alternativa contra la violencia y la discriminación",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ciudad-mujer-una-alternativa-contra-la-violencia-y-la-discriminacion/",
+      "published_date": "2015-09-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 79218,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:16:22.103820-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7766f28f4b19cd91e4ab6c388d242e19c69a51ddad93896cc70e12960b8b6489",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p7",
+            "p8",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9ef6ad66714d513c07cf880dee5032bae46917cd1f11d988563139c67773dab9",
+      "title": "FISDL y municipalidad cumplen con el compromiso de garantizar el derecho al agua",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fisdl-y-municipalidad-cumplen-con-el-compromiso-de-garantizar-el-derecho-al-agua/",
+      "published_date": "2015-09-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 79022,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:16:22.103820-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3b4e96f0cf61b29e254985064ba7cfb88a12ab978c088a5c95775495d5b17d73",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5fda165daab3a17482488b914df894ba535363282dfcfd6909d6f7d81398d23d",
+      "title": "ISDEMU: La violencia de género continúa siendo invisibilizada en esta sociedad",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/isdemu-la-violencia-de-genero-continua-siendo-invisibilizada-en-esta-sociedad/",
+      "published_date": "2015-09-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 79082,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d8426d06d986ef81bc7c573430b6cf65dc6facb9a18c5705e49ac9386d992618",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a402616b8cc2c3fa533832e69d80ec1f9bfe2dc023cb2ee2ae4b159a58184dbf",
+      "title": "Iglesia Católica demanda a nivel mundial el cese de la violencia contra migrantes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/iglesia-catolica-demanda-a-nivel-mundial-el-cese-de-la-violencia-contra-migrantes/",
+      "published_date": "2015-09-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78990,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c4049d25cba5af79bf3e642c22c506a08251e77e45f788268c5eccec434afc57",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p10",
+            "p12",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a21bb44717c6a2f4208c8a9eb9717c04a4c20c18515cd2baf7ffe7f3de2a8362",
+      "title": "Habeas Corpus de procesados por actos terroristas es rechazada por Sala",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/habeas-corpus-de-procesados-por-actos-terroristas-es-rechazada-por-sala/",
+      "published_date": "2015-09-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78997,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "561f5ebe49fb07fa023015da95eb20164b82f8989f47d5cc9be60353778dcb81",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6ae19afe13fe94dab8e7ea7658b268c0fc66cf33eab036b7ef73c099e096e99d",
+      "title": "El Estado no debe caer en abusos: David Morales, Procurador Derechos Humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-estado-no-debe-caer-en-abusos-david-morales-procurador-derechos-humanos/",
+      "published_date": "2015-09-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78957,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6c4b2561403fc9878eb18e02fcb81e53a86ce24fa56c6ffd06d761b5c5fb72ab",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "id": "46cae34e658d0f0a029e00a9bb15fe6d3a1b72bc39908654a833e9e5532d3df3",
       "title": "Los desaparecidos siempre dicen la verdad: Escuadrones de la Muerte en El Salvador (3)",
       "title_truncated": false,
@@ -27494,6 +28054,389 @@
           "relevance_paragraph_ids": [
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2a4cbe0fba49a671a1c01e7e6183080d3699dc80f8e4489fe2952b186c74a8e9",
+      "title": "Sala de lo Constitucional rechaza Hábeas Corpus de procesados por actos de terrorismo",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-de-lo-constitucional-rechaza-habeas-corpus-de-procesados-por-actos-de-terrorismo/",
+      "published_date": "2015-09-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78992,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0ff470a6d24e6220c4df83ef3a02e64b91c87cf89833b04f160336e1ec5b0e3d",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a178e0e4227b6610557bdd5f29f1cd5ccf826af61cd913daa805e6940662ef98",
+      "title": "Defensoria capacita en Derecho y Consumo Sostenible",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-capacita-en-derecho-y-consumo-sostenible/",
+      "published_date": "2015-08-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78790,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0e8fb51c58e9c14faa1107bc521e85f49b4279f3efc80b6fd921776257ad6f5b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0f99c957cda921ef47c75b16dc4f09af60ebdc969101d4fb2c66a2a30f0f6575",
+      "title": "PROBÚSQUEDA: 21 años de reencuentros de niñez desaparecida en el conflicto armado",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/probusqueda-21-anos-de-reencuentros-de-ninez-desaparecida-en-el-conflicto-armado/",
+      "published_date": "2015-08-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78615,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4ad7666dd7bd91963f3645e65ee84949187c43ceff9dea836d47a5e16b48d728",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8",
+            "p10",
+            "p12",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0f1b542408ef29c22294dd1d68f8663f4fa74f9a8583101217252c68de98bdf6",
+      "title": "IDHUCA comprometida en la defensa de los derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/idhuca-comprometida-en-la-defensa-de-los-derechos-humanos/",
+      "published_date": "2015-08-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78626,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "650c329c4812d6e606a5c5f990ef5d3dffa5a2ba9497967485da0c4392dadac6",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p9",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6382fe584bd45c4718e461b68ac923cef6af6fe7c7a6029b61afb329450ace60",
+      "title": "Tribunal Condena a custodio penitenciario por tráfico de drogas en penal",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/tribunal-condena-a-custodio-penitenciario-por-trafico-de-drogas-en-penal/",
+      "published_date": "2015-08-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78522,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "73e0ab013d543febf55d061327f9cedcfe0bab2801c5dc998083340d7afa3da1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c7811af2b65c153ff0942cf72cb557e5305f6b040ddb5269a16b061ee74ce366",
+      "title": "Pro Memoria Histórica demanda fecha para conmemorar la desaparición forzada",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pro-memoria-historica-demanda-fecha-para-conmemorar-la-desaparicion-forzada/",
+      "published_date": "2015-08-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78425,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ea61997305215b1c5e9e1d567b7157605450f22d0d3fbebeba33d3de96f1b031",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "659fb07e6ec32db616c9987c413e78840fc95949795eda96b13e54b0b62b702c",
+      "title": "Denuncian desalojo de plaza comercial por parte de alcaldía",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/denuncian-desalojo-de-plaza-comercial-por-parte-de-alcaldia/",
+      "published_date": "2015-08-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78350,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e73036859a2c9c6eecd319f0b0d1d388d5386e5511c0a3f3c3a51e6806b4c8e7",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1456e1e1e2afd7d076d35749a14c7c9dbd7cd06646be7e9f26a7c43202f7bb5d",
+      "title": "DÍA INTERNACIONAL DE LAS PERSONAS DESAPARECIDAS",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/dia-internacional-de-las-personas-desaparecidas-2/",
+      "published_date": "2015-08-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78378,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:15:28.608956-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4a2c97370eefbc4b13397f09dfe0353ce3d14f92165f66698116fffd8866de3b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -27591,6 +28534,145 @@
             "p9",
             "p10",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7270d73c7c96fab32497690c3bcbf82b5f1f0daa7efd135e3ceca6d3cefd1175",
+      "title": "Alertas de difusión roja de INTERPOL equivalen a una orden de captura: Sala de lo Constitucional",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/alertas-de-difusion-roja-de-interpol-equivalen-a-una-orden-de-captura-sala-de-lo-constitucional/",
+      "published_date": "2015-08-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78310,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:14:22.067864-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "801a89d142fe5b8ad41094dc75903b1bc9f75309b81a77588bc016cc32b97876",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2937dc48af34a4b6af46cb344e096e7f3f114a3b7658a56997996624c6c33340",
+      "title": "“La verdad es que deformaron el sistema penitenciario”: Benito Lara",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/la-verdad-es-que-deformaron-el-sistema-penitenciario-benito-lara/",
+      "published_date": "2015-08-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78165,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:14:22.067864-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b0363c486c8fc7852c8480941fc84aa2985e70bbf6361581bc121d8e02b6c598",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p13",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "61cd704966bbedc2e72a16222bcb9e0d603d4c1501f62eaa517c07837260e3f0",
+      "title": "IDHUCA: treinta años en la promoción y defensa de los derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/idhuca-treinta-anos-en-la-promocion-y-defensa-de-los-derechos-humanos/",
+      "published_date": "2015-08-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 78110,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:14:22.067864-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "050e79c733b52924a7611df3b8dd19bade4e2513393e575b9eed70ea51bea92d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p8"
           ]
         }
       }
@@ -27737,6 +28819,50 @@
       }
     },
     {
+      "id": "09ccd8895f1d90bd287ef42caf518667dbc3ccced58abbb3144b695014a7b3dc",
+      "title": "El río que murió por la minería",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-rio-que-murio-por-la-mineria/",
+      "published_date": "2015-08-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 77575,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:14:22.067864-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c502b450b5b16bb74c357a9d6d234e27048acf0329fc0e33f776b0c0d5cff28b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "id": "b24ba23e2026f0512d68299c7eb551a5d2a2d886870eaa75f55f43302349281d",
       "title": "“El Salvador no se detiene, ni se detendrá nunca”, Sánchez Cerén",
       "title_truncated": false,
@@ -27779,6 +28905,98 @@
             "p5",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e535466d17263b9fc1cd761f64ee64dba673379be908be6e9936fbfa40b74989",
+      "title": "Sala decreta “exhibición personal” a favor de militares detenidos por marchar armados",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-decreta-exhibicion-personal-a-favor-de-militares-detenidos-por-marchar-armados/",
+      "published_date": "2015-08-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 77205,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "339ed1d8025c1fa7ad8d5279d306dc53c962f17356288bcd981c576ad441f3f7",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "486210ac30d7ea19131e727fe4daae65431bed6e3ca936ef29936c11ffcf86b1",
+      "title": "Jaime Suárez: tortura y muerte de un poeta",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/jaime-suarez-tortura-y-muerte-de-un-poeta/",
+      "published_date": "2015-08-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 77161,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "aaae04c399f75efa424a63537b01095c72bd89667b511aa29e7c90cba4394cd1",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p27"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p27",
+            "p28"
           ]
         }
       }
@@ -27831,6 +29049,374 @@
       }
     },
     {
+      "id": "b4737c907ce26c86a34873ecac74fee1138d9c24dc0e18d6f243a58ef664f2c9",
+      "title": "Alcalde d’Abuisson acusa de desestabilizadores a sindicalistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/alcalde-dabuisson-acusa-de-desestabilizadores-a-sindicalistas/",
+      "published_date": "2015-08-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76722,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9b7ceaf64d6864b593d02432d87663bafaf9b5987bb61540d7ab340882ecbb27",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "457721f08cbcaf7daefede581c79b75e499361c5852006599b1d408522ca706b",
+      "title": "Concejal de ARENA pasará proceso judicial en prisión",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/concejal-de-arena-pasara-proceso-judicial-en-prision/",
+      "published_date": "2015-08-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76392,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a200f3c71c423598edca78e1b0f8b608689cf5d50b34477ed60a099feff3e59c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f7d4728f25ff94397f5aebff33d7e344794b637add04e40d9a4cffe79e8bd110",
+      "title": "Pandilleros recapturados a juicio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pandilleros-recapturados-a-juicio/",
+      "published_date": "2015-08-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76149,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "50c765da666212c131bb158058b2ffcb8fb13a2a0b4a9ec7596b3812826b3eb6",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b6daa2e3fcf645f8bdb09444250d94e07571d79731a04829c1aa72f2df62774c",
+      "title": "Las diversas formas de racismo",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/las-diversas-formas-de-racismo/",
+      "published_date": "2015-08-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76095,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "116f14036f5c3d1afa0fe29c1228cd6a9baa89a6531af3919ea00b7e74f6ecd5",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3a89cc768a2d8465e954a6354875c356e944f2b74ad14afbd38115ebfbe39364",
+      "title": "Defensoría del Consumidor en alerta ante abusos al consumidor",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-del-consumidor-en-alerta-ante-abusos-al-consumidor/",
+      "published_date": "2015-08-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76109,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5ff62e5363d6a149f25ebd87d00f88bf01663422feed5db69632fe9b8ab4383a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "16c6f99ab3f6ad2144bc6810e3b58418cf4820cb9d25a412265623505132afb9",
+      "title": "Recapturan a cuatro reos fugados de las bartolinas de San Miguel",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/recapturan-a-cuatro-reos-fugados-de-las-bartolinas-de-san-miguel/",
+      "published_date": "2015-08-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76031,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5a8f8e464053b9112ae7e277b256c80c1d87770e4ab3f1a259a207f0e8418b34",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ecc5704d76fa779361f14fcdff110103fd46c1ce4e2c3d6319d549042f3054ab",
+      "title": "Cinco pandilleros se fugan de Bartolinas de PNC",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/rrcinco-pandilleros-se-fugan-de-bartolinas-de-pnc/",
+      "published_date": "2015-08-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75935,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2e835913bf13827615ef571fc1a8c4c992929e0ae0c040c2d9d079a405e4c124",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5beb2b8e9062a54281719fe01aa4f5e1e661cc8f84daa3460cf510f7288a8291",
+      "title": "SIS ejecuta jornadas de sensibilización sobre discriminación y derechos de la mujer",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sis-ejecuta-jornadas-de-sensibilizacion-sobre-discriminacion-y-derechos-de-la-mujer/",
+      "published_date": "2015-08-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75875,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "df5c42d82edf5c73c385e8c6a55cdee628c854084c44e82a4f8d4f2019e6350a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "id": "ffc4c70bd381f60e13da114ea52b67ab7df81717b5a4868e266fcb1413985bbb",
       "title": "Chalatenango, al filo de una sequía por la contaminación en sus ríos",
       "title_truncated": false,
@@ -27878,6 +29464,98 @@
       }
     },
     {
+      "id": "e0f7f90e9b0d383b7553098438515876d44d4c497adb979ee5f536430de58cde",
+      "title": "RedCo: Sentencia de la Sala de lo Constitucional va en contra de la Libertad de Expresión",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/redco-sentencia-de-la-sala-de-lo-constitucional-va-en-contra-de-la-libertad-de-expresion/",
+      "published_date": "2015-07-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75700,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:12:19.562322-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e08417a9bfda26579bbd7ebc4efa43f59f3075cc6c7920861b6b3e49f4c80ea7",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d447f2f2ffb7b56aa5ee0a52e1e546faa6c52022e3ec96effc80e35f4736977c",
+      "title": "OIM promueve derechos humanos de migrantes a través del arte y la cultura",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/oim-promueve-derechos-humanos-de-migrantes-a-traves-del-arte-y-la-cultura/",
+      "published_date": "2015-07-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75361,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:12:19.562322-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "302088c77987d97edeca7cb0450d66997412c233736d1934bac2a44419fa3a1b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "id": "ba4e966665fb6b08392f41df249f8eb2c521ed5b4d5fb6e94274a20e78314f08",
       "title": "Penal de Mariona en emergencia por 15 días",
       "title_truncated": false,
@@ -27920,6 +29598,856 @@
             "p2",
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "52f0d21793ceba2eca038bbebf142e7b6d65e31c823aac0b1e92dac71b9deff2",
+      "title": "“La primera víctima de la minería es el agua”: Andres Mckinley",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/la-primera-victima-de-la-mineria-es-el-agua-andres-mckinley/",
+      "published_date": "2015-07-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75235,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:12:19.562322-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "370e63004809da7cd71cb0da329eeeab8f1fceb33dac9fc0926442358a09a3b5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "df18506d9d9f9ec367c099dbf0a01d7bdd1cb4cae77895920da01d83ce2c944a",
+      "title": "Instalan audiencia contra militares por desaparición forzada",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/instalan-audiencia-contra-militares-por-desaparicion-forzada/",
+      "published_date": "2015-07-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75140,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:12:19.562322-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "722d59e07a9bb2c02d397cf56a835fc1194fe65d693202f7c26366add9b88ccc",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e3354e478cd3b645dd98cb3090be545e53b8e7f35b64e709d58435853bea6d14",
+      "title": "A consulta nacional la efectividad de servicios legales en VIH y derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/a-consulta-nacional-la-efectividad-de-servicios-legales-en-vih-y-derechos-humanos/",
+      "published_date": "2015-07-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75004,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a5d3d21a78b77c00354e9fd0c4f7ea8f91bc9cabb56dbabe82fce8b3c2cb73f6",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0ade50f7884bb6be7cf4d619407a6d14f7e015734d8714520f4157287748932a",
+      "title": "Sala de lo Constitucional ordena reinstalo de sindicalista de LIDO",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-de-lo-constitucional-ordena-reinstalo-de-sindicalista-de-lido/",
+      "published_date": "2015-07-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74775,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9a412ba3cb6e4a6f594bde73f911aed85ae663e1905cad144d06acb355f667eb",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3b6d9a38c45cbb2739daabcea67c1a2315526379e9f81bb92daf3c241b3a2c1b",
+      "title": "Juzgado ordena detención provisional contra militares por homicidio de cadete",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-detencion-provisional-contra-militares-por-homicidio-de-cadete/",
+      "published_date": "2015-07-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74552,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "05c88a4d25b5e01e20c7b85dc6f109a9cfff77ebf5af2e5cdcd62a59b89eb324",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f933d6ef639b9a34772344d28d019f8511398009a099b201fa0558b9ef82e011",
+      "title": "FISDL condena falta de ética periodística y humanidad de “Mi Chero”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fisdl-condena-falta-de-etica-periodistica-y-humanidad-de-mi-chero/",
+      "published_date": "2015-07-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74464,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6ebb66fd3788dcca67149962450d1f5533cf5c3a61f38a72ef734d351a86120d",
+          "jurisdiction_paragraph_ids": [
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "257cfefd830a7d97aedd3c3a2ea196c03506299a902814301e3464ae4dbc3193",
+      "title": "“El 77% de la población dice que en El Salvador debe prohibirse la minería metálica”: IUDOP",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-77-de-la-poblacion-dice-que-en-el-salvador-debe-prohibirse-la-mineria-metalica-iudop/",
+      "published_date": "2015-07-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74358,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2313a492175c9037861c2e5e74faae1f15bc9ce348031c7ffa669f4bb16d9dae",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7131c18c6e103ae932ae72d19b38cfdef6628064a9dda1c2300f7e467ec111ce",
+      "title": "ONU avala gestión penitenciaria salvadoreña orientada a mujeres",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/onu-avala-gestion-penitenciaria-salvadorena-orientada-a-mujeres/",
+      "published_date": "2015-07-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74249,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "85e4058dd242b3821e7da4aca9b9c991ade183dec93f548ddf1ed9f10c6783ff",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1f50dac094be65723e2e5afd130befc2d2f2586fd16261f355a0da0a357ed3b4",
+      "title": "Sala de lo Constitucional avala regulación de permisos sindicales",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-de-lo-constitucional-avala-regulacion-de-permisos-sindicales/",
+      "published_date": "2015-07-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74194,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b647ec81f707a5632ff10f62ca6034d05972257d155b01b531fde02ee128e67b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3f0b3d956640847220a0ffa18c36f7ef12e972949008220b89fb752789381daf",
+      "title": "Sala establece responsabilidad de FAES en desapariciones forzadas “Guindas de mayo”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-establece-responsabilidad-de-faes-en-desapariciones-forzadas-guindas-de-mayo/",
+      "published_date": "2015-07-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 73875,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b988b7e8dafbb722fc0ebff3329e4b57f1f5594956d22ad63a70f99561f11f54",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b8087e53c47caac2356cbc5a0f6aea7c99e5926f1ba6c8efe238e55c612b750b",
+      "title": "IUDOP analiza el sistema penitenciario de la región",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/iudop-analiza-el-sistema-penitenciario-de-la-region/",
+      "published_date": "2015-07-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 73633,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cffcafa0dbaf7ad837ac081c317a648f12727587a949c9a318b719fdb5e301cd",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p11",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "809ac89f40a151c245c6c05c6d0310b6fd5b7c9d779fa952500f8862b96dd524",
+      "title": "Un periodismo social con poblaciones vulnerables en emergencias: UNFPA",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/un-periodismo-social-con-poblaciones-vulnerables-en-emergencias-unfpa/",
+      "published_date": "2015-07-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 73567,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9ebc2e8ae5f759429c3be096a1316a3ff52d80bbcd23d7596592d9c169aaa445",
+          "jurisdiction_paragraph_ids": [
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3de8d2f3d4fe155165b3d0016a54ac9334ec67ec63b8105ae0e04df94b0fa746",
+      "title": "FGR deficiente en la investigación de feminicidios: Las Dignas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-deficiente-en-la-investigacion-de-feminicidios-las-dignas/",
+      "published_date": "2015-07-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 73126,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cf45d60a5a2e3380780cb2b77abf468775dc6cf31b5aee562f37b3f33f6ac6f4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "12967e1ab1d9bd4377a612fd95412b5bc41ac61f844d3ca940e6b79a734a2652",
+      "title": "Organizaciones denuncian “persecución y agresión” contra defensores de DH",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-denuncian-persecucion-y-agresion-contra-defensores-de-dh/",
+      "published_date": "2015-07-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 72900,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f6ea659707584a6fe012ab4b3d7a17a95ca1f9e4eac04eb19c3a8a6a41f3ff0b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f6f489b7d12f4c7b0c5a5dde9d870434f4a564b798db5998f7766a6b6b52be2c",
+      "title": "PGR y UTE realizan foro de acceso a la Justicia en casos de violencia de género",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pgr-y-ute-realizan-foro-de-acceso-a-la-justicia-en-casos-de-violencia-de-genero/",
+      "published_date": "2015-06-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 72361,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9d4cb2c0e761edd05dfcddde3d5da1bbed6ca3b777a9a88d35970216521de46d",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "44be3f927ed015392a3cdb07d6397c5c5f26a1c5c17765a5bc914b971efb198b",
+      "title": "“Mi compromiso es erradicar la discriminación hacia las mujeres”: Lorena Peña",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mi-compromiso-es-erradicar-la-discriminacion-hacia-las-mujeres-lorena-pena/",
+      "published_date": "2015-06-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 72267,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "de03dd8675198a5afa5013aff5d4c5cbc4f345b1e732da966871250b151bac87",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c741c89c118655968e10c8aa5e6c49c949cd5a37006d797a3146bc5debeb1ad2",
+      "title": "Ambientalistas censuran labor de Fiscal General en caso de ambientalistas asesinados",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ambientalistas-censuran-labor-de-fiscal-general-en-caso-de-ambientalistas-asesinados/",
+      "published_date": "2015-06-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 72142,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2ac9ae37e06f2c3fc23025b8b984b0e1cb0f92e068f6b28fff2123e8ad8e56c8",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cadd18bb43e5b72d1afc90cae20d5b575d2cb8b1e2f2cc5583a46f22045e2967",
+      "title": "Sala admite demanda de amparo y detiene desalojo",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-admite-demanda-de-amparo-y-detiene-desalojo/",
+      "published_date": "2015-06-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 71997,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f783e26a2c87aef2a91e78af71b119710a5d2de47caf70e239e89f7510b9fd9a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c3b4cdc1946ebbd7923581434b0e2498baa4fa4ba28b2e9b5ed65ec0b0928b97",
+      "title": "Comunidad LGBTI en prisión cuenta con Protocolo de Atención",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/comunidad-lgbti-en-prision-cuenta-con-protocolo-de-atencion/",
+      "published_date": "2015-06-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 71907,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8f3dec6b1ff47ee99d9adf6b010885c41622cec34e037dc8384dd5a15ea39e45",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7",
+            "p8"
           ]
         }
       }

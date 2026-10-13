@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T07:51:57.006571+00:00",
+  "generated_at": "2026-10-13T08:19:45.372683+00:00",
   "locations": [
     {
       "candidate_id": "02cc1855779ba26856160a00bfdfef81d590a9917582885384fa6769f111a1e0",
@@ -114,6 +114,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+      }
+    },
+    {
+      "candidate_id": "0ade50f7884bb6be7cf4d619407a6d14f7e015734d8714520f4157287748932a",
+      "source_url": "https://www.diariocolatino.com/sala-de-lo-constitucional-ordena-reinstalo-de-sindicalista-de-lido/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-21",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:15.701598+00:00",
+      "source_checked_at": "2026-10-13T08:19:15.701598+00:00",
+      "evidence": {
+        "paragraph_id": "p7",
+        "content_sha256": "9a412ba3cb6e4a6f594bde73f911aed85ae663e1905cad144d06acb355f667eb"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Soyapango",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -600,6 +624,30 @@
       }
     },
     {
+      "candidate_id": "3f0b3d956640847220a0ffa18c36f7ef12e972949008220b89fb752789381daf",
+      "source_url": "https://www.diariocolatino.com/sala-establece-responsabilidad-de-faes-en-desapariciones-forzadas-guindas-de-mayo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-11",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:10.858555+00:00",
+      "source_checked_at": "2026-10-13T08:19:10.858555+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "b988b7e8dafbb722fc0ebff3329e4b57f1f5594956d22ad63a70f99561f11f54"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Chalatenango",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
       "candidate_id": "45be2c414ff825f36759bdbe29a4adc99b34928f850a42ef2994db6a2e796f82",
       "source_url": "https://www.diariocolatino.com/mas-denuncias-de-irrespeto-a-los-derechos-sindicales-en-alcaldias-del-gran-san-salvador/",
       "publisher": "Diario Co Latino",
@@ -811,6 +859,83 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "6382fe584bd45c4718e461b68ac923cef6af6fe7c7a6029b61afb329450ace60",
+      "source_url": "https://www.diariocolatino.com/tribunal-condena-a-custodio-penitenciario-por-trafico-de-drogas-en-penal/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-28",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:34.607196+00:00",
+      "source_checked_at": "2026-10-13T08:19:34.607196+00:00",
+      "evidence": {
+        "content_sha256": "73e0ab013d543febf55d061327f9cedcfe0bab2801c5dc998083340d7afa3da1"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "La Libertad",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Colón",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p9",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Guazapa",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Sonsonate",
+          "paragraph_id": "p11",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Nahuizalco",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
+        }
+      ]
+    },
+    {
+      "candidate_id": "659fb07e6ec32db616c9987c413e78840fc95949795eda96b13e54b0b62b702c",
+      "source_url": "https://www.diariocolatino.com/denuncian-desalojo-de-plaza-comercial-por-parte-de-alcaldia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-27",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:32.771485+00:00",
+      "source_checked_at": "2026-10-13T08:19:32.771485+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "e73036859a2c9c6eecd319f0b0d1d388d5386e5511c0a3f3c3a51e6806b4c8e7"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
     },
     {
@@ -1254,6 +1379,30 @@
       }
     },
     {
+      "candidate_id": "9ef6ad66714d513c07cf880dee5032bae46917cd1f11d988563139c67773dab9",
+      "source_url": "https://www.diariocolatino.com/fisdl-y-municipalidad-cumplen-con-el-compromiso-de-garantizar-el-derecho-al-agua/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-09-03",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:42.118248+00:00",
+      "source_checked_at": "2026-10-13T08:19:42.118248+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "3b4e96f0cf61b29e254985064ba7cfb88a12ab978c088a5c95775495d5b17d73"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Pablo Tacachico",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "a9e511d1a20a13f5f126765147b228f604ab422f0ba7bb32a5c68107a7a7eb5f",
       "source_url": "https://www.diariocolatino.com/nayib-bukele-se-compromete-a-trabajar-de-la-mano-con-sindicalistas/",
       "publisher": "Diario Co Latino",
@@ -1295,6 +1444,30 @@
       "resolution": {
         "type": "municipality_to_department",
         "municipality": "San Juan Opico",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "b4737c907ce26c86a34873ecac74fee1138d9c24dc0e18d6f243a58ef664f2c9",
+      "source_url": "https://www.diariocolatino.com/alcalde-dabuisson-acusa-de-desestabilizadores-a-sindicalistas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-11",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:26.079299+00:00",
+      "source_checked_at": "2026-10-13T08:19:26.079299+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "9b7ceaf64d6864b593d02432d87663bafaf9b5987bb61540d7ab340882ecbb27"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
@@ -1529,6 +1702,30 @@
       }
     },
     {
+      "candidate_id": "c741c89c118655968e10c8aa5e6c49c949cd5a37006d797a3146bc5debeb1ad2",
+      "source_url": "https://www.diariocolatino.com/ambientalistas-censuran-labor-de-fiscal-general-en-caso-de-ambientalistas-asesinados/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-06-25",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:03.360105+00:00",
+      "source_checked_at": "2026-10-13T08:19:03.360105+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "2ac9ae37e06f2c3fc23025b8b984b0e1cb0f92e068f6b28fff2123e8ad8e56c8"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "cb35f4b31ca233d15e9894a76765e780192472ab07191b51df309c88948c7ae9",
       "source_url": "https://www.diariocolatino.com/sis-en-feria-de-logros-de-granja-penitenciaria/",
       "publisher": "Diario Co Latino",
@@ -1573,6 +1770,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
+      "candidate_id": "d447f2f2ffb7b56aa5ee0a52e1e546faa6c52022e3ec96effc80e35f4736977c",
+      "source_url": "https://www.diariocolatino.com/oim-promueve-derechos-humanos-de-migrantes-a-traves-del-arte-y-la-cultura/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-27",
+      "department": "San Miguel",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:19.161963+00:00",
+      "source_checked_at": "2026-10-13T08:19:19.161963+00:00",
+      "evidence": {
+        "paragraph_id": "p6",
+        "content_sha256": "302088c77987d97edeca7cb0450d66997412c233736d1934bac2a44419fa3a1b"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Miguel",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
       }
     },
     {
@@ -1796,6 +2017,30 @@
       "resolution": {
         "type": "municipality_to_department",
         "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "f933d6ef639b9a34772344d28d019f8511398009a099b201fa0558b9ef82e011",
+      "source_url": "https://www.diariocolatino.com/fisdl-condena-falta-de-etica-periodistica-y-humanidad-de-mi-chero/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-17",
+      "department": "Ahuachapán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T08:19:13.747000+00:00",
+      "source_checked_at": "2026-10-13T08:19:13.747000+00:00",
+      "evidence": {
+        "paragraph_id": "p11",
+        "content_sha256": "6ebb66fd3788dcca67149962450d1f5533cf5c3a61f38a72ef734d351a86120d"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ahuachapán",
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
