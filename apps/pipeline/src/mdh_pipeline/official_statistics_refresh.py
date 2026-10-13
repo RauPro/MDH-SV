@@ -36,6 +36,8 @@ ALLOWED_HOSTS = frozenset({"www.fiscalia.gob.sv", "fiscalia.gob.sv",
 MAX_BYTES = {"html": 2_000_000, "pdf": 25_000_000, "xlsx": 40_000_000}
 MONTHS = ("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO",
           "SEP", "OCT", "NOV", "DIC")
+MONTH_NAMES = ("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+               "agosto", "septiembre", "octubre", "noviembre", "diciembre")
 FGR_LABELS = {"Total de Homicidios": "homicides",
               "Total Homicidios Intencionales": "intentional_homicides"}
 CATEGORIES = {"Delincuencia General", "Intolerancia Social", "Intolerancia Familiar"}
@@ -255,6 +257,24 @@ def _observation(value, locator):
             "locator": locator if value is not None else None}
 
 
+def _refresh_coverage_note(period: dict, as_of: date) -> None:
+    """Replace only generated coverage prose; preserve reviewed methodology notes."""
+    known = [m for m in period["months"] if m["value"] is not None]
+    missing = [MONTH_NAMES[m["month"] - 1] for m in period["months"] if m["status"] == "not_available"]
+    future = [MONTH_NAMES[m["month"] - 1] for m in period["months"] if m["status"] == "outside_cutoff"]
+    coverage = (f"Cobertura numérica: {len(known)} meses publicados para {period['year']}"
+                + (f", hasta {period['end_date']}" if known else "; sin valores publicados")
+                + f". Consulta: {as_of.isoformat()}. ")
+    if missing:
+        coverage += "Meses sin datos publicados: " + ", ".join(missing) + ". "
+    if future:
+        coverage += "Meses fuera del corte: " + ", ".join(future) + ". "
+    coverage += ("Las celdas vacías no se convierten en cero; la fecha de consulta "
+                 "no certifica una fecha de cierre de la fuente.")
+    period["notes"] = [note for note in period["notes"] if not note.startswith("Cobertura numérica:")]
+    period["notes"].append(coverage)
+
+
 def _period_from_fgr(row: dict, previous: dict, as_of: date) -> dict:
     period = copy.deepcopy(previous)
     year = row["year"]
@@ -272,10 +292,7 @@ def _period_from_fgr(row: dict, previous: dict, as_of: date) -> dict:
                                 and end.month == 12 and end.day == 31 else "partial"),
                   indicator=row["indicator"], unit=row["unit"], months=months,
                   national=_observation(row["total"], f"HTML, tabla del año {year}, fila «{row['label']}», columna TOTAL."))
-    period["notes"] = [note for note in period["notes"] if not note.startswith("Cobertura numérica:")]
-    period["notes"].append(f"Cobertura numérica: {len(known)} meses publicados para {year}, hasta {end.isoformat()} "
-                           f"en la consulta del {as_of.isoformat()}. Las celdas vacías no se convierten en cero; "
-                           "la fecha de consulta no certifica una fecha de cierre de la fuente.")
+    _refresh_coverage_note(period, as_of)
     return period
 
 
@@ -295,7 +312,7 @@ def propose_fgr(baseline: dict, rows: dict[int, dict], as_of: date, checked_at: 
     if not periods or any(p["months"] is None or p["unit"] != "source_reported_homicides"
                           or any(d["value"] is not None for d in p["departments"]) for p in periods):
         raise RefreshError("baseline_fgr_contract_changed")
-    if not {p["year"] for p in periods}.issubset(rows):
+    if not {p["year"] for p in periods if p["completeness"] != "unavailable"}.issubset(rows):
         raise RefreshError("fgr_existing_year_removed")
     updated = copy.deepcopy(baseline)
     by_year = {p["year"]: p for p in updated["periods"]}
@@ -321,6 +338,24 @@ def propose_fgr(baseline: dict, rows: dict[int, dict], as_of: date, checked_at: 
         changes.append({"id": stable_id(["fgr_values", source["id"], details]),
                         "kind": "fgr_values", "source_id": source["id"], "source_url": source["url"],
                         "content_sha256": raw_sha, "details": details})
+    previous_last_year = int(baseline["as_of"][:4])
+    before_statuses, after_statuses = [], []
+    for period in periods:
+        for month in sorted(period["months"], key=lambda item: item["month"]):
+            if month["value"] is None:
+                expected = ("outside_cutoff" if period["year"] == as_of.year
+                            and month["month"] > as_of.month else "not_available")
+                if expected != month["status"]:
+                    before_statuses.append({"year": period["year"], "month": month["month"], "status": month["status"]})
+                    after_statuses.append({"year": period["year"], "month": month["month"], "status": expected})
+    if as_of.year > previous_last_year or before_statuses:
+        details = {"before": {"last_year": previous_last_year, "monthly_statuses": before_statuses},
+                   "after": {"last_year": as_of.year,
+                             "added_years": list(range(previous_last_year + 1, as_of.year + 1)),
+                             "monthly_statuses": after_statuses}}
+        changes.append({"id": stable_id(["coverage_period", source["id"], details]),
+                        "kind": "coverage_period", "source_id": source["id"], "source_url": source["url"],
+                        "content_sha256": raw_sha, "details": details})
     if not changes:
         return None, []
     # New calendar years absent from a source stay explicitly unavailable.
@@ -340,6 +375,9 @@ def propose_fgr(baseline: dict, rows: dict[int, dict], as_of: date, checked_at: 
                 if month["value"] is None:
                     month["status"] = ("outside_cutoff" if period["year"] == as_of.year
                                        and month["month"] > as_of.month else "not_available")
+            if (period["source_id"] == source["id"] and baseline["as_of"] != as_of.isoformat()
+                    and any(note.startswith("Cobertura numérica:") for note in period["notes"])):
+                _refresh_coverage_note(period, as_of)
     updated["comparability_note"] = updated["comparability_note"].replace(
         "2026 sólo llega a agosto.", "Consulte el período y los meses disponibles de cada año.")
     updated["as_of"] = as_of.isoformat()

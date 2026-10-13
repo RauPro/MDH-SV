@@ -209,7 +209,7 @@ def test_new_year_source_table_preserves_14_unavailable_departments():
     rows[2027] = {'year': 2027, 'indicator': 'intentional_homicides', 'unit': 'source_reported_homicides',
                   'label': 'Total Homicidios Intencionales', 'months': [3] + [None] * 11, 'total': 3}
     proposal, changes = monitor.propose_fgr(baseline(), rows, date(2027, 2, 1), '2027-02-02T02:00:00+00:00', 'a' * 64)
-    assert changes[-1]['details']['before'] is None
+    assert next(change for change in changes if change['kind'] == 'fgr_values')['details']['before'] is None
     assert len(proposal['periods'][-1]['departments']) == 14
     assert all(d['value'] is None for d in proposal['periods'][-1]['departments'])
 
@@ -401,3 +401,69 @@ def test_semantic_comparison_uses_month_numbers_not_incidental_json_order():
             period['months'].reverse()
     candidate, changes = monitor.propose_fgr(document, rows, CUTOFF, CHECKED, 'a' * 64)
     assert candidate is None and changes == []
+
+
+def test_year_rollover_alone_proposes_missing_year_and_reclassifies_old_future_months():
+    document = baseline()
+    rows = monitor.parse_fgr(fgr_html(document), date(2027, 1, 1))
+    proposal, changes = monitor.propose_fgr(document, rows, date(2027, 1, 1), '2027-01-02T02:00:00+00:00', 'a' * 64)
+    assert [c['kind'] for c in changes] == ['coverage_period']
+    assert changes[0]['details']['before']['last_year'] == 2026
+    assert changes[0]['details']['after']['added_years'] == [2027]
+    assert len(proposal['periods']) == 18
+    current = proposal['periods'][-1]
+    assert current['year'] == 2027 and current['completeness'] == 'unavailable'
+    assert current['national']['value'] is None and len(current['departments']) == 14
+    assert all(d['value'] is None for d in current['departments'])
+    assert current['months'][0]['status'] == 'not_available'
+    assert all(m['status'] == 'outside_cutoff' for m in current['months'][1:])
+    previous = proposal['periods'][-2]
+    assert previous['national']['value'] == 49
+    assert all(m['status'] == 'not_available' for m in previous['months'][8:])
+    note = next(n for n in previous['notes'] if n.startswith('Cobertura numérica:'))
+    assert 'fuera del corte' not in note
+    assert 'Meses sin datos publicados: septiembre, octubre, noviembre, diciembre.' in note
+    assert previous['notes'][:-1] == document['periods'][-1]['notes'][:-1]
+    js = """const D=Date;globalThis.Date=class extends D{constructor(...a){super(...(a.length?a:['2027-01-03T00:00:00Z']))}static now(){return D.parse('2027-01-03T00:00:00Z')}};
+const {parseOfficialStatistics}=await import('./shared/official-statistics.mjs');let s='';for await(const c of process.stdin)s+=c;parseOfficialStatistics(JSON.parse(s));"""
+    subprocess.run(['node', '--input-type=module', '-e', js], cwd=ROOT,
+                   input=monitor.json_bytes(proposal), check=True, capture_output=True)
+    # Approval of an explicit missing year does not make the next fetch report
+    # its still-absent table as a deletion, nor create a new proposal every day.
+    again, repeated = monitor.propose_fgr(proposal, rows, date(2027, 1, 2), '2027-01-03T02:00:00+00:00', 'b' * 64)
+    assert again is None and repeated == []
+
+
+def test_historical_revision_refreshes_stale_coverage_note_on_unchanged_recent_year():
+    document = baseline()
+    rows = monitor.parse_fgr(fgr_html(document), date(2027, 1, 1))
+    rows[2024]['months'][0] += 1
+    rows[2024]['total'] += 1
+    proposal, changes = monitor.propose_fgr(document, rows, date(2027, 1, 1), '2027-01-02T02:00:00+00:00', 'a' * 64)
+    assert {c['kind'] for c in changes} == {'fgr_values', 'coverage_period'}
+    recent = next(p for p in proposal['periods'] if p['year'] == 2026)
+    assert recent['national']['value'] == 49
+    assert 'fuera del corte' not in ' '.join(recent['notes'])
+    assert recent['notes'][:-1] == document['periods'][-1]['notes'][:-1]
+
+
+def test_month_rollover_only_proposes_when_a_missing_month_changes_cutoff_status():
+    document = baseline()
+    rows = monitor.parse_fgr(fgr_html(document), date(2026, 11, 1))
+    proposal, changes = monitor.propose_fgr(document, rows, date(2026, 11, 1), '2026-11-02T02:00:00+00:00', 'a' * 64)
+    assert [c['kind'] for c in changes] == ['coverage_period']
+    assert changes[0]['details']['after']['added_years'] == []
+    assert changes[0]['details']['after']['monthly_statuses'] == [{'year': 2026, 'month': 11, 'status': 'not_available'}]
+    assert proposal['periods'][-1]['months'][10]['status'] == 'not_available'
+    assert proposal['periods'][-1]['months'][11]['status'] == 'outside_cutoff'
+    assert 'Meses fuera del corte: diciembre.' in proposal['periods'][-1]['notes'][-1]
+    again, repeated = monitor.propose_fgr(proposal, rows, date(2026, 11, 2), '2026-11-03T02:00:00+00:00', 'b' * 64)
+    assert again is None and repeated == []
+
+
+def test_unapproved_rollover_event_id_does_not_change_with_the_query_day():
+    document = baseline()
+    rows = monitor.parse_fgr(fgr_html(document), date(2027, 1, 1))
+    _, changes = monitor.propose_fgr(document, rows, date(2027, 1, 1), '2027-01-02T02:00:00+00:00', 'a' * 64)
+    _, later = monitor.propose_fgr(document, rows, date(2027, 1, 7), '2027-01-08T02:00:00+00:00', 'b' * 64)
+    assert [c['id'] for c in changes] == [c['id'] for c in later]

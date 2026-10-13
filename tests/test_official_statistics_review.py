@@ -235,6 +235,9 @@ def test_error_reports_are_deduplicated_without_numeric_proposals():
     {"schema_version": 1, "catalogs": {"iml-homicides": [SOURCE_URL]}},
     {"schema_version": 1, "catalogs": {"iml-homicides": ["https://transparencia.oj.gob.sv/es/documentos/248"]}},
     {"schema_version": 1, "catalogs": {"iml-homicides": ["https://transparencia.oj.gob.sv/es/descargar/x?token=secret"]}},
+    {"schema_version": 1, "catalogs": {"pnc-reports": ["https://transparencia.oj.gob.sv/es/descargar/x"]}},
+    {"schema_version": 1, "catalogs": {"fgr-memorias": [SOURCE_URL]}},
+    {"schema_version": 1, "catalogs": {"fgr-memorias": ["https://www.fiscalia.gob.sv/informe-de-labores-2025-2026/?download=1"]}},
 ])
 def test_catalog_state_allows_only_expected_document_urls(bad):
     with pytest.raises(ValueError, match="source_state"):
@@ -245,6 +248,32 @@ def test_missing_catalog_state_bootstraps_empty_without_write():
     inbox = Inbox()
     assert export_source_state(inbox) == {"schema_version": 1, "catalogs": {}}
     assert not inbox.mutations
+
+
+def test_fgr_memorias_and_pnc_catalog_state_round_trip_without_news_writes():
+    inbox = Inbox()
+    catalogs = state()
+    catalogs["catalogs"].update({
+        "fgr-memorias": ["https://www.fiscalia.gob.sv/informe-de-labores-2025-2026/",
+                         "https://fiscalia.gob.sv/memoria-de-labores-2024-2025/"],
+        "pnc-reports": ["https://transparencia.pnc.gob.sv/reportes", "https://transparencia.pnc.gob.sv/homicidios.pdf"],
+    })
+    enqueue_report(inbox, report(changed=False), source_state=catalogs)
+    assert export_source_state(inbox) == catalogs
+    assert all("/contents/official-statistics/" in path for method, path, _ in inbox.calls if method == "PUT")
+
+
+def test_live_fgr_inventory_contract_includes_both_report_path_families():
+    # Public URLs observed during the 2026-10-13 integration check, not a
+    # simplified fixture containing only the current year's "informe" path.
+    urls = ["https://www.fiscalia.gob.sv/" + slug + "/" for slug in [
+        "informe-de-labores-2019-2020", "informe-de-labores-2020-2021",
+        "informe-de-labores-2023-2024", "informe-de-labores-2024-2025",
+        "informe-de-labores-2025-2026", "memoria-de-labores-2018-2019",
+        "memoria-de-labores-2021-2022", "memoria-de-labores-2022-2023",
+    ]]
+    catalogs = {"schema_version": 1, "catalogs": {"fgr-memorias": urls}}
+    assert validate_source_state(catalogs) == catalogs
 
 
 def test_approval_is_human_hash_bound_and_produces_only_a_private_artifact():
@@ -272,6 +301,32 @@ def test_unrelated_fetch_errors_stay_explicit_after_narrow_proposal_approval():
     artifact = review_revision(inbox, event(result["revision"]), baseline=BASELINE, validate_candidate=lambda raw: None)
     assert artifact["review"]["unresolved_errors"] == document["errors"]
     assert "siguen sin resolverse" in inbox.issues[0]["body"]
+
+
+def test_coverage_only_revision_requires_the_same_human_gate_and_proposal_hash():
+    inbox, document = Inbox(), report()
+    document["changes"][0].update(kind="coverage_period", details={
+        "before": {"last_year": 2026}, "after": {"last_year": 2027, "added_years": [2027]}})
+    queued = enqueue_report(inbox, document, proposal=PROPOSAL)
+    assert queued["created"] and queued["publications"] == 0
+    assert f"{ROOT}/state/{queued['revision']}.json" not in inbox.files
+    validated = []
+    artifact = review_revision(inbox, event(queued["revision"]), baseline=BASELINE,
+                               validate_candidate=validated.append)
+    assert validated == [PROPOSAL] and artifact["review"]["proposal_sha256"] == PROPOSAL_SHA
+    assert artifact["publications"] == 0
+
+
+def test_coverage_revision_cannot_approve_failed_candidate_source():
+    inbox, document = Inbox(), report()
+    document["changes"][0]["kind"] = "coverage_period"
+    document["sources"][0].update(status="error", error_code="source_http_503")
+    document.update(status="error", errors=[{"source_id": "fgr-homicides", "code": "source_http_503"}])
+    queued = enqueue_report(inbox, document, proposal=PROPOSAL)
+    previous = len(inbox.mutations)
+    with pytest.raises(ValueError, match="proposal_source_has_errors"):
+        review_revision(inbox, event(queued["revision"]), baseline=BASELINE, validate_candidate=lambda raw: None)
+    assert len(inbox.mutations) == previous
 
 
 def test_pnc_access_failure_is_a_review_alert_not_missing_to_zero():

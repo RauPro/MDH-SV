@@ -109,7 +109,7 @@ def validate_report(report):
         changed_ids = set()
         for change in report["changes"]:
             if (not isinstance(change, dict) or set(change) != CHANGE_KEYS or not _hash(change["id"])
-                    or change["id"] in changed_ids or change["kind"] not in {"fgr_values", "source_revision", "catalog_document"}
+                    or change["id"] in changed_ids or change["kind"] not in {"fgr_values", "coverage_period", "source_revision", "catalog_document"}
                     or change["source_id"] not in seen or not _url(change["source_url"])
                     or not _hash(change["content_sha256"]) or not isinstance(change["details"], dict)
                     or len(_bytes(change["details"])) > 100_000):
@@ -131,7 +131,7 @@ def validate_report(report):
             if report["proposal_sha256"] is not None:
                 raise ValueError()
         elif (report["proposal_file"] != "proposed-homicides.json" or not _hash(report["proposal_sha256"])
-              or not any(change["kind"] == "fgr_values" for change in report["changes"])):
+              or not any(change["kind"] in {"fgr_values", "coverage_period"} for change in report["changes"])):
             raise ValueError()
         if len(_bytes(report)) > MAX_BYTES:
             raise ValueError()
@@ -164,12 +164,19 @@ def validate_proposal(raw, report):
 def validate_source_state(state):
     if (not isinstance(state, dict) or set(state) != {"schema_version", "catalogs"}
             or type(state["schema_version"]) is not int or state["schema_version"] != 1
-            or not isinstance(state["catalogs"], dict) or set(state["catalogs"]) - {"iml-homicides"}):
+            or not isinstance(state["catalogs"], dict)
+            or set(state["catalogs"]) - {"iml-homicides", "pnc-reports", "fgr-memorias"}):
         raise ValueError("invalid_statistics_source_state")
-    for urls in state["catalogs"].values():
-        if (not isinstance(urls, list) or len(urls) > 10_000 or any(not _url(url)
-                or urlsplit(url).hostname != "transparencia.oj.gob.sv"
-                or not urlsplit(url).path.startswith("/es/descargar/") for url in urls)
+    for catalog, urls in state["catalogs"].items():
+        hosts = ({"transparencia.oj.gob.sv"} if catalog == "iml-homicides"
+                 else {"transparencia.pnc.gob.sv"} if catalog == "pnc-reports"
+                 else {"www.fiscalia.gob.sv", "fiscalia.gob.sv"})
+        if (not isinstance(urls, list) or len(urls) > 1000 or any(not _url(url)
+                or urlsplit(url).hostname not in hosts
+                or catalog == "iml-homicides" and not urlsplit(url).path.startswith("/es/descargar/")
+                or catalog == "fgr-memorias" and not re.fullmatch(
+                    r"/(?:informe|memoria)-de-labores-20\d{2}-20\d{2}/?", urlsplit(url).path)
+                for url in urls)
                 or len(urls) != len(set(urls))):
             raise ValueError("invalid_statistics_source_state")
     return state
@@ -364,7 +371,8 @@ def review_revision(inbox, event, *, now=None, validate_candidate=None, baseline
         if not isinstance(baseline, bytes) or hashlib.sha256(baseline).hexdigest() != record["report"]["baseline_sha256"]:
             raise ValueError("statistics_public_baseline_changed")
         failed_sources = {error["source_id"] for error in record["report"]["errors"]}
-        if any(change["source_id"] in failed_sources for change in record["report"]["changes"] if change["kind"] == "fgr_values"):
+        if any(change["source_id"] in failed_sources for change in record["report"]["changes"]
+               if change["kind"] in {"fgr_values", "coverage_period"}):
             raise ValueError("statistics_proposal_source_has_errors")
         if validate_candidate is None:
             raise ValueError("statistics_schema_validator_required")
