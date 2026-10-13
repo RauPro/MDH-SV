@@ -1,7 +1,31 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T09:21:10.924844+00:00",
+  "generated_at": "2026-10-13T10:21:03.673372+00:00",
   "locations": [
+    {
+      "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
+      "source_url": "https://www.diariocolatino.com/exigen-detener-arbitrariedades-contra-empleados/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-12-08",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T10:20:50.750895+00:00",
+      "source_checked_at": "2026-10-13T10:20:50.750895+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "ce706c810acd0a20cd1c01a6b32126d74764a3cfe0985701a2da4b68cdb0ad7a"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Ana",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
     {
       "candidate_id": "02cc1855779ba26856160a00bfdfef81d590a9917582885384fa6769f111a1e0",
       "source_url": "https://www.diariocolatino.com/cabo-policial-y-una-nina-de-dos-anos-entre-victimas-de-homicidios/",
@@ -677,6 +701,30 @@
       }
     },
     {
+      "candidate_id": "3b621bdb34cf9cd02dd48cc3e143bb57494242027759051b706f21e2f4f905c0",
+      "source_url": "https://www.diariocolatino.com/operativo-de-la-pnc-deja-15-capturas-en-la-libertad/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-21",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T10:20:26.143022+00:00",
+      "source_checked_at": "2026-10-13T10:20:26.143022+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "5b0123c25a9e9ec7faceb43f1e664e9efabcf24648fd1135ca83278de58c8a95"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Matías",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "3f0b3d956640847220a0ffa18c36f7ef12e972949008220b89fb752789381daf",
       "source_url": "https://www.diariocolatino.com/sala-establece-responsabilidad-de-faes-en-desapariciones-forzadas-guindas-de-mayo/",
       "publisher": "Diario Co Latino",
@@ -835,6 +883,30 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "49b065ebc70712ff97b8560e8c23a2331b50e0d4750a24945acf63144607a630",
+      "source_url": "https://www.diariocolatino.com/ipaz-adjudica-a-trabajo-pastoral-la-reduccion-de-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-19",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T10:20:22.948132+00:00",
+      "source_checked_at": "2026-10-13T10:20:22.948132+00:00",
+      "evidence": {
+        "paragraph_id": "p14",
+        "content_sha256": "30b3e77ecb6541e3c99bde403c5dbbe1cf2e3688cdd3b0c648ea9976df307346"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Matías",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
     },
     {
       "candidate_id": "4c784312cd702db80fa98d3c0c8584445654b6b903dfd8590339e879cd5072dd",
@@ -1509,6 +1581,47 @@
       }
     },
     {
+      "candidate_id": "9603d801ffc4f6ff9d977c12da1a90c4c6db7fd430f1c7f3a04b5c7cad3f36c1",
+      "source_url": "https://www.diariocolatino.com/operativo-policial-deja-mas-de-90-pandilleros-capturados/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-27",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T10:20:35.696533+00:00",
+      "source_checked_at": "2026-10-13T10:20:35.696533+00:00",
+      "evidence": {
+        "content_sha256": "bfcbcbe5cd368f14cb16e9c192b176545516141281cf20776c978d480c859fd9"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Apopa",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Sonsonate",
+          "paragraph_id": "p6",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Izalco",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "98abaf9f0db2c084d95de5067bc43abd974f9b478410277af7b330572981d395",
       "source_url": "https://www.diariocolatino.com/pddh-y-sspas-firman-convenio-contra-violacion-de-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -2047,6 +2160,23 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+      }
+    },
+    {
+      "candidate_id": "d9ac918ac182f906ee124e82c3d668c906de1aedc8ffdfd9cf18501766ef7c47",
+      "source_url": "https://www.diariocolatino.com/denuncian-mas-contaminacion-en-el-rio-titihuapa/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-28",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T10:20:38.917424+00:00",
+      "source_checked_at": "2026-10-13T10:20:38.917424+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "781076ec722fffbd014dd77d35461353d3a7a64a67c3521efdae59408320f1e9"
       }
     },
     {
