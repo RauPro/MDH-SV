@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T06:24:18.910894+00:00",
+  "generated_at": "2026-10-13T07:27:28.196433+00:00",
   "locations": [
     {
       "candidate_id": "02cc1855779ba26856160a00bfdfef81d590a9917582885384fa6769f111a1e0",
@@ -114,6 +114,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+      }
+    },
+    {
+      "candidate_id": "0ccba306664d733156e0ab44c569911283866c73ab515d6095a4b7273cc746da",
+      "source_url": "https://www.diariocolatino.com/fmln-condena-asesinato-de-sindicalista-de-alcaldia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-06-16",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T07:27:26.925654+00:00",
+      "source_checked_at": "2026-10-13T07:27:26.925654+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "ef51b22bf0c9725f00779653774f970491e3222e3db59223abf388319b7a1b30"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -956,6 +980,47 @@
       }
     },
     {
+      "candidate_id": "82a8cdd9f6122a2fedcbf33839244d3c65c6e03ac8a27d58c2ec74e91d9851b5",
+      "source_url": "https://www.diariocolatino.com/probusqueda-presenta-siete-habeas-corpus-de-victimas-de-guinda-de-mayo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-27",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T07:27:04.493997+00:00",
+      "source_checked_at": "2026-10-13T07:27:04.493997+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "b3003c516e0c0a3c1aeda028f27147eee05728240eea8963dda84984983e282c"
+      }
+    },
+    {
+      "candidate_id": "859fb4e70ff6cebcabd589602585117c59df5510f3ad9d46a16388e45a32f4fd",
+      "source_url": "https://www.diariocolatino.com/procurador-condena-hechos-de-violencia-contra-poblacion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-22",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T07:26:57.147307+00:00",
+      "source_checked_at": "2026-10-13T07:26:57.147307+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "54b33d3d00bee0ed46868240d5d680f71652b61ec808b1846dc380ae7e101e15"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Panchimalco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "86b3f90206e98e2710e56b09ae41200486cfc353b403beffeb43c3075ace60f7",
       "source_url": "https://www.revistafactum.com/factum-una-esquina-nueva-para-el-periodismo-en-el-salvador/",
       "publisher": "Revista Factum",
@@ -1598,6 +1663,30 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "eb083a7c43b9ecdf29bd39a79ce9ec642b1756bc3caf9311a4a761f2b8d525c1",
+      "source_url": "https://www.diariocolatino.com/sspas-presento-informe-de-violaciones-a-los-derechos-humanos-durante-2014/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-28",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T07:27:09.498233+00:00",
+      "source_checked_at": "2026-10-13T07:27:09.498233+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "86542d7ae2d38562f7c36003657424fe264a4de31eab15a57d31b5c310a21095"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Mejicanos",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
     },
     {
       "candidate_id": "ed96358689372c89fcedc954d59b501eed9706e8581eb59563120d74fadb93b8",
