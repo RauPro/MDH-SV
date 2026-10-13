@@ -53,3 +53,24 @@ Las tablas territoriales IML se refieren al lugar de agresión u ocurrencia. No 
 Para actualizar la capa se debe consultar nuevamente el original, registrar su hash y fecha, comprobar la etiqueta del período y su unidad, revisar visualmente las tablas e incorporar sólo valores respaldados. Las sumas departamentales completas deben coincidir con el agregado nacional del mismo universo y edición. Las sumas mensuales disponibles deben coincidir con el total del intervalo publicado. Si aparecen revisiones, discrepancias o una nueva metodología, deben explicarse antes de sustituir cifras.
 
 La actualización de fuentes no implica aprobación de fichas de noticias ni modifica su revisión humana. Las cifras oficiales tampoco atribuyen responsabilidad penal o institucional a personas concretas.
+
+## Publicación y reutilización
+
+La pestaña **Estadísticas oficiales** (`/#estadisticas`) carga un snapshot validado, con filtros por año y departamento. La consulta de esta edición no consume Gemini ni depende de la cola de noticias. La actualización de estas cifras es documental y revisada; el cron de noticias no refresca esta colección automáticamente.
+
+Después de incorporar y comprobar una nueva edición en el archivo canónico:
+
+```sh
+node apps/web/scripts/export-official-statistics.mjs
+node apps/web/scripts/export-official-statistics.mjs --check
+node --test tests/official-statistics-parser.test.mjs tests/official-statistics-export.test.mjs
+.venv/bin/pytest -q tests/test_official_statistics_data.py
+npm --prefix apps/web run build
+```
+
+Se versionan conjuntamente el canónico, sus notas metodológicas y las tres descargas en `apps/web/public/statistics/`. El build compara todos los bytes de las descargas con su exportación determinista; cualquier diferencia o archivo adicional detiene el despliegue. `manifest.json` contiene el SHA-256 del canónico y los hashes y tamaños de las descargas.
+
+- `/statistics/homicides.json`: conjunto completo, incluidas las observaciones mensuales disponibles.
+- `/statistics/homicides.csv`: una fila nacional y catorce departamentales por período, con fuente, unidad, localizador y estado. Los datos ausentes quedan vacíos; cero sigue siendo cero. `territory_level` distingue ámbitos solapados, que no deben sumarse. Los meses se consultan en JSON. Los textos con prefijos de fórmula reciben un apóstrofo para abrirlos de forma segura en una hoja de cálculo.
+- `/api/v1/official-statistics`: colección de sólo lectura con filtros `year` y `department` (`national` o nombre canónico del departamento).
+- MCP `get_official_statistics`: la misma colección y filtros para otros proyectos. Las cifras oficiales no alteran `/api/v1/stats`, que sigue describiendo los registros documentales del monitor.
