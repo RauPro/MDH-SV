@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-13T15:23:17.871513+00:00",
+  "generated_at": "2026-10-13T17:19:28.881786+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 8269,
-      "selected": 651,
-      "evaluated": 1501,
-      "relevant": 651,
-      "excluded": 848,
+      "selected": 652,
+      "evaluated": 1517,
+      "relevant": 652,
+      "excluded": 863,
       "uncertain": 2,
-      "pending": 6768,
-      "evaluated_at": "2026-10-13T15:23:16.143418+00:00"
+      "pending": 6752,
+      "evaluated_at": "2026-10-13T17:19:27.204937+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-13",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 651,
+    "records": 652,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,8 +14689,8 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 9,
-        "first_published_date": "2016-01-04",
+        "records": 10,
+        "first_published_date": "2015-05-28",
         "last_published_date": "2016-06-13",
         "months": [
           {
@@ -15464,7 +15464,7 @@
           {
             "month": "2015-05",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 38,
             "source_total_posts": null,
@@ -19884,7 +19884,7 @@
         "month": "2015-05",
         "start_date": "2015-05-01",
         "end_date": "2015-05-31",
-        "records": 37,
+        "records": 38,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19919,7 +19919,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -37325,6 +37325,53 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e76c8bcb48965e28822adca353686a7a1716bd27de909e57464be8d938195adb",
+      "title": "Detenidos miembros de red que secuestraba a jóvenes salvadoreńos en Guatemala",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+      "published_date": "2015-05-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "guatemala",
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T11:10:04.299720-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p6"
           ]
         }
       }

@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T13:21:29.072045+00:00",
+  "generated_at": "2026-10-13T17:19:33.683576+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1950,6 +1950,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "b58ee067f340dcdcba9a0da014f3f1cf56a17d8b7203093ec9dca9c266a4b68e",
+      "source_url": "https://www.diariocolatino.com/la-mineria-metalica-el-conflicto-socio-ambiental-por-el-agua/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-22",
+      "department": "La Unión",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-13T11:15:31.499276-06:00",
+      "source_checked_at": "2026-10-13T17:19:33.672417+00:00",
+      "evidence": {
+        "paragraph_id": "p12",
+        "content_sha256": "a2f32885600f4cd457ddd5d22c0a788f492582e4832c03f7893b3748ec485a5f"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Rosa de Lima",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
       }
     },
     {

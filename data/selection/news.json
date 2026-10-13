@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T15:23:16.143418+00:00",
+  "generated_at": "2026-10-13T17:19:27.204937+00:00",
   "assessment_counts": {
     "candidates": 8269,
-    "evaluated": 1501,
-    "relevant": 651,
-    "excluded": 848,
+    "evaluated": 1517,
+    "relevant": 652,
+    "excluded": 863,
     "uncertain": 2,
-    "pending": 6768
+    "pending": 6752
   },
   "selections": [
     {
@@ -16614,6 +16614,33 @@
             "p2",
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e76c8bcb48965e28822adca353686a7a1716bd27de909e57464be8d938195adb",
+      "source_url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-05-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T11:10:04.299720-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p6"
           ]
         }
       }
