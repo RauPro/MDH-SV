@@ -51,6 +51,38 @@ test('consistent zero breakdowns remain zero while incomplete breakdowns are not
   assert.deepEqual(parseOfficialStatistics(incomplete), incomplete);
 });
 
+test('known components in an incomplete breakdown cannot exceed their own national total', () => {
+  const singleDepartment = officialStatisticsFixture();
+  singleDepartment.periods.at(-1).departments[0].value = 9;
+  assert.throws(() => parseOfficialStatistics(singleDepartment), /Estadísticas oficiales inválidas/);
+  const departments = officialStatisticsFixture();
+  Object.assign(departments.periods.at(-1).departments[0], { value: 6, status: 'available', locator: 'Synthetic department table' });
+  Object.assign(departments.periods.at(-1).departments[1], { value: 3, status: 'available', locator: 'Synthetic department table' });
+  assert.throws(() => parseOfficialStatistics(departments), /Estadísticas oficiales inválidas/);
+  const months = officialStatisticsFixture();
+  months.periods.at(-1).national.value = 6;
+  Object.assign(months.periods.at(-1).months[0], { value: null, status: 'not_available', locator: null });
+  assert.throws(() => parseOfficialStatistics(months), /Estadísticas oficiales inválidas/);
+});
+
+test('a source with available figures must have been read on or after its period ends in El Salvador', () => {
+  const fixture = officialStatisticsFixture();
+  fixture.sources[0].retrieved_at = '2026-08-30T18:00:00Z';
+  assert.throws(() => parseOfficialStatistics(fixture), /Estadísticas oficiales inválidas/);
+  // UTC has already crossed midnight, but the Salvadoran civil date has not.
+  fixture.sources[0].retrieved_at = '2026-08-31T05:59:59Z';
+  assert.throws(() => parseOfficialStatistics(fixture), /Estadísticas oficiales inválidas/);
+  fixture.sources[0].retrieved_at = '2026-08-31T06:00:00Z';
+  assert.deepEqual(parseOfficialStatistics(fixture), fixture);
+});
+
+test('an entirely unavailable period does not claim that an older consulted source covers its end date', () => {
+  const fixture = officialStatisticsFixture();
+  fixture.sources.push({ ...fixture.sources[0], id: 'earlier-source', retrieved_at: '2011-01-02T18:00:00Z' });
+  fixture.periods.find(period => period.year === 2012).source_id = 'earlier-source';
+  assert.deepEqual(parseOfficialStatistics(fixture), fixture);
+});
+
 const invalid = [
   ['unknown top-level field', v => { v.private_output = 'unexpected'; }],
   ['unsupported version', v => { v.schema_version = 2; }],

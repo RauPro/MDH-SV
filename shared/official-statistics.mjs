@@ -50,10 +50,12 @@ export function parseOfficialStatistics(value) {
   const cutoffMonth = Number(value.as_of.slice(5, 7));
   if (lastYear < 2010 || lastYear > new Date().getUTCFullYear() || value.periods.length !== lastYear - 2009) fail();
   const sourceIds = new Set();
+  const sourceDates = new Map();
   for (const entry of value.sources) {
     source(entry, value.generated_at);
     if (sourceIds.has(entry.id)) fail();
     sourceIds.add(entry.id);
+    sourceDates.set(entry.id, localDate(new Date(entry.retrieved_at)));
   }
   const years = new Set();
   for (const period of value.periods) {
@@ -89,18 +91,25 @@ export function parseOfficialStatistics(value) {
     }
     if (period.completeness === 'unavailable' && [period.national, ...period.departments, ...(period.months ?? [])].some(row => row.value !== null)) fail();
     if (period.completeness !== 'unavailable' && period.national.status !== 'available') fail();
-    // Compare complete components within this same source and period only.
-    // Incomplete breakdowns remain incomplete; never fill or replace a value.
-    if (period.national.status === 'available' && period.departments.every(row => row.status === 'available')
-        && period.departments.reduce((sum, row) => sum + row.value, 0) !== period.national.value) fail();
+    // Known components cannot exceed their own source's total, even when the
+    // breakdown is incomplete. Missing cells remain missing, never imputed.
+    if (period.national.status === 'available') {
+      if (sourceDates.get(period.source_id) < period.end_date) fail();
+      const knownDepartments = period.departments.filter(row => row.status === 'available');
+      const knownTotal = knownDepartments.reduce((sum, row) => sum + row.value, 0);
+      if (knownTotal > period.national.value
+          || (knownDepartments.length === 14 && knownTotal !== period.national.value)) fail();
+    }
     if (period.months !== null && period.national.status === 'available') {
       const firstMonth = Number(period.start_date.slice(5, 7));
       const lastMonth = Number(period.end_date.slice(5, 7));
       const lastDay = new Date(Date.UTC(period.year, lastMonth, 0)).getUTCDate();
       const wholeMonths = period.start_date.endsWith('-01') && Number(period.end_date.slice(8, 10)) === lastDay;
       const coveredMonths = period.months.filter(row => row.month >= firstMonth && row.month <= lastMonth);
-      if (wholeMonths && coveredMonths.every(row => row.status === 'available')
-          && coveredMonths.reduce((sum, row) => sum + row.value, 0) !== period.national.value) fail();
+      const knownMonths = coveredMonths.filter(row => row.status === 'available');
+      const knownTotal = knownMonths.reduce((sum, row) => sum + row.value, 0);
+      if (knownTotal > period.national.value
+          || (wholeMonths && knownMonths.length === coveredMonths.length && knownTotal !== period.national.value)) fail();
     }
   }
   return structuredClone(value);
