@@ -87,7 +87,7 @@ export function OfficialStatistics() {
             <div className="official-statistics-context"><span className="official-statistics-badge" data-coverage={selected.status === 'available' ? period.completeness : 'unavailable'}>{selected.status === 'available' ? completenessLabel(period) : 'Sin datos disponibles'}</span>
               <p><strong>Período de la fuente:</strong> {periodLabel(period)}.</p>
               <p><SourceLink source={source} locator={selected.locator}/></p>
-              {selected.status !== 'available' && <p>No hay una cifra verificada para este territorio y período en las fuentes incorporadas. La ausencia de datos no equivale a cero.</p>}
+              {selected.status !== 'available' && <p>No hemos incorporado una cifra verificada para este territorio y período. Esto no significa que no existan registros oficiales territoriales. La ausencia de datos no equivale a cero.</p>}
             </div>
           </section>
           <aside className="official-statistics-note"><strong>Lee cada serie con su metodología.</strong> {data.comparability_note} Los períodos parciales no representan un año completo.</aside>
@@ -100,7 +100,7 @@ export function OfficialStatistics() {
           </section>
 
           <section className="official-statistics-section" aria-labelledby="official-departments-title"><h3 id="official-departments-title">Departamentos · {year}</h3>
-            <p>{departmentsAvailable ? 'Desglose publicado para el período seleccionado. El dato nacional se consulta por separado y no se añade al desglose.' : 'La fuente incorporada no ofrece un desglose verificado por departamento para este período. Se conserva «Sin datos» en los 14 departamentos; no se distribuye el total nacional.'}</p>
+            <p>{departmentsAvailable ? 'Desglose publicado para el período seleccionado. El dato nacional se consulta por separado y no se añade al desglose.' : 'No hemos incorporado un desglose departamental verificado para este período. La fuente utilizada no aporta esas cifras: esto no demuestra que no existan registros oficiales por departamento. «Sin datos» señala una brecha en la información disponible aquí; nunca significa cero ni se completa repartiendo el total nacional.'}</p>
             <div className="official-statistics-table-wrap"><table><caption>14 departamentos · {periodLabel(period)} · {unitLabel(period)}</caption><thead><tr><th scope="col">Departamento</th><th scope="col">Cifra</th><th scope="col">Localizador</th></tr></thead><tbody>
               {period.departments.map(row => <tr key={row.department} data-selected={row.department === territory}><th scope="row"><button className="official-statistics-link" onClick={() => setTerritory(row.department)}>{row.department}</button></th><td data-numeric="true">{valueLabel(row)}</td><td>{row.locator ?? 'Sin desglose disponible'}</td></tr>)}
             </tbody></table></div>
