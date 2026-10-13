@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T20:21:43.950652+00:00",
+  "generated_at": "2026-10-13T21:22:14.555855+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -790,6 +790,30 @@
       }
     },
     {
+      "candidate_id": "3a2b5d8bac7006159dda2d663c26c604bb1f6b4a42711296da931acd67ad07b9",
+      "source_url": "https://www.diariocolatino.com/procurador-condena-asesinato-de-alcalde-de-san-dionisio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-04-15",
+      "department": "Usulután",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T21:21:49.104812+00:00",
+      "source_checked_at": "2026-10-13T21:21:49.104812+00:00",
+      "evidence": {
+        "paragraph_id": "p14",
+        "content_sha256": "d4be12c17cf2987ece4ae1b897e197987936c0b2ad1a6efbdaadbcdcb98f2f5e"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Usulután",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
       "candidate_id": "3b621bdb34cf9cd02dd48cc3e143bb57494242027759051b706f21e2f4f905c0",
       "source_url": "https://www.diariocolatino.com/operativo-de-la-pnc-deja-15-capturas-en-la-libertad/",
       "publisher": "Diario Co Latino",
@@ -1318,6 +1342,30 @@
       }
     },
     {
+      "candidate_id": "66fd094bb63f482cefe8404e63d794671ac49c639af6e7a71de59ccebd13a3d1",
+      "source_url": "https://www.diariocolatino.com/comuna-sigue-con-acoso-y-desalojo-de-comerciantes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-04-28",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T21:22:04.645510+00:00",
+      "source_checked_at": "2026-10-13T21:22:04.645510+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "6a88d87123572d801b99953295af75e774bd71b2625d6829a077b014387afeb7"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "69690c50dcace766aafe3fa7249598a9c3ae023ed5bc3d4f762f1bfad9e7bcb1",
       "source_url": "https://www.diariocolatino.com/fiscal-general-condena-asesinato-de-colaborador-de-la-fgr-2/",
       "publisher": "Diario Co Latino",
@@ -1404,6 +1452,33 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
+    },
+    {
+      "candidate_id": "792b5765889e3ba26404c767c83f61d0ef33e1bc945fbd24a0be49e3c870df6f",
+      "source_url": "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales",
+      "publisher": "Diario El Mundo",
+      "published_date": "2016-04-25",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T21:21:59.448493+00:00",
+      "source_checked_at": "2026-10-13T21:21:59.448493+00:00",
+      "evidence": {
+        "content_sha256": "cd400f455b66860ad8fb1bed5255ba03d5dcac9449aef5f315ee11bd83cb22fb"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p2"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p5"
+        }
+      ]
     },
     {
       "candidate_id": "7a7619d1985a3608865b084da9f308d29376bc919996b8f160634853dd4950b9",
@@ -1564,6 +1639,47 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
+    },
+    {
+      "candidate_id": "862f3a60176f5bde47800a07bad63e4c870811af40cfb789e4c702ea239b5d3f",
+      "source_url": "https://www.diariocolatino.com/reduce-homicidios-en-sectores-priorizados-en-plan-el-salvador-seguro/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-05-03",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T21:22:09.674672+00:00",
+      "source_checked_at": "2026-10-13T21:22:09.674672+00:00",
+      "evidence": {
+        "content_sha256": "afe0528ca7314acec078401a058d4d739290a06611a7c1316acc342095d4965d"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Ahuachapán",
+          "paragraph_id": "p14",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Tacuba",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "La Libertad",
+          "paragraph_id": "p13",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Quezaltepeque",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "86b3f90206e98e2710e56b09ae41200486cfc353b403beffeb43c3075ace60f7",
@@ -1797,6 +1913,23 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "97930387995ce943a1571b6f4059dab403d9b7054235b9b29c8c46dc0d421382",
+      "source_url": "https://www.diariocolatino.com/organizaciones-sindicales-exigen-a-la-sala-desbloquee-los-900-millones/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-04-09",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T21:21:40.230742+00:00",
+      "source_checked_at": "2026-10-13T21:21:40.230742+00:00",
+      "evidence": {
+        "paragraph_id": "p11",
+        "content_sha256": "dd5e8926a70a51dc5b1872dda3da933b46b9fc6d3c64393bc69ee66471c9e3e6"
+      }
     },
     {
       "candidate_id": "98abaf9f0db2c084d95de5067bc43abd974f9b478410277af7b330572981d395",
@@ -2132,6 +2265,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "c04858928dfe20da47e9884f66f4d7b0b4c39fdad4e51ec2b9d59ea431a14552",
+      "source_url": "https://www.diariocolatino.com/juzgado-decreta-detencion-contra-alcalde-y-ex-alcaldesa-de-arena/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-04-30",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T21:22:07.643735+00:00",
+      "source_checked_at": "2026-10-13T21:22:07.643735+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "497cc6e44bc4a451e518c1b42203b03cd6b8c37892fd1da089cd23b5291823ee"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "El Congo",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
       }
     },
     {
