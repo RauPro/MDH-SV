@@ -7,6 +7,11 @@ un único presupuesto horario compartido. `review-scope.yml` queda para pruebas
 manuales, sin otro disparo automático. Conserva evaluaciones en `scope-reviews/`
 y reintentos diferidos en `scope-attempts/`.
 El publicador usa esas decisiones para actualizar selección, noticias y mapa.
+Las referencias ya seleccionadas se sincronizan con la cola privada en lotes de
+hasta 50 altas por ejecución, con pausas entre escrituras. Esa sincronización no
+consume llamadas a Gemini ni aumenta el cupo de extracción de fichas. Una noticia
+seleccionada puede tener todavía su extracción pendiente; una ficha extraída
+necesita revisión editorial antes de publicar sus campos.
 La ubicación se comprueba también directamente en las fuentes seleccionadas,
 sin esperar una ficha completa ni llamar de nuevo a Gemini. Comprueba hasta
 50 fuentes por ejecución y conserva recibos mínimos de reintento en una caché

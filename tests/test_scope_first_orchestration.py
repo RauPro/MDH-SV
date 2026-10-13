@@ -1,6 +1,7 @@
 """Shared hourly grants are HTTP attempt limits, not successful article counts."""
 from datetime import datetime, timezone
 import json
+import re
 from types import SimpleNamespace
 
 import pytest
@@ -67,8 +68,8 @@ def arrange(monkeypatch, *, remaining=240, consumed=None, selected=(), scope_err
     return config, scope_budget, state, calls, classify
 
 
-def execute(tmp_path, config, budget, classify, *, now=NOW, archive=None):
-    return gemini_review.process_scope_first(SimpleNamespace(), api_key='fake-test-key', model='gemini-3.5-flash-lite',
+def execute(tmp_path, config, budget, classify, *, now=NOW, archive=None, inbox=None):
+    return gemini_review.process_scope_first(inbox if inbox is not None else SimpleNamespace(), api_key='fake-test-key', model='gemini-3.5-flash-lite',
         config=config, budget=budget, archive=archive or {'schema_version': 1, 'records': []},
         inbox_dir=tmp_path, limit=50, now=now, scope_worker=classify,
         budget_factory=lambda inbox, conf: Budget(budget.state, conf))
@@ -140,10 +141,94 @@ def test_selected_candidates_are_enqueued_and_prioritized_without_exposing_ids(m
         return {'added': 1}
     monkeypatch.setattr(history_review, 'enqueue_history', enqueue)
     report = execute(tmp_path, config, budget, classify, archive={'schema_version': 1, 'records': [{'id': identifier}]})
-    assert enqueued[0][1] == {'limit': 3, 'include_international': True}
+    assert enqueued[0][1] == {'limit': 50, 'include_international': True}
     assert calls[1][1]['priority_ids'] == [identifier]
     assert report['prioritized_candidates'] == 1
     assert identifier not in json.dumps(report)
+
+
+class MetadataInbox:
+    """Use the actual GitHub helpers over a recording transport, never the network."""
+    from mdh_pipeline.review_queue import GitHubInbox
+    base = '/repos/example/private'
+    enqueue = GitHubInbox.enqueue
+    ensure_labels = GitHubInbox.ensure_labels
+
+    def __init__(self):
+        self.seen, self.created = set(), []
+
+    def existing_ids(self):
+        return self.seen.copy()
+
+    def call(self, method, path, **kwargs):
+        from mdh_pipeline.review_queue import LABELS
+        if method == 'GET' and path.endswith('/labels'):
+            return [{'name': name} for name in LABELS]
+        assert method == 'POST' and path.endswith('/issues')
+        identifier = re.search(r'<!-- mdh-candidate:([a-f0-9]{64}) -->', kwargs['json']['body']).group(1)
+        self.seen.add(identifier)
+        self.created.append(identifier)
+        return {'number': len(self.created)}
+
+
+@pytest.mark.parametrize('remaining,expected_full', [(240, 3), (1, 0)])
+def test_classified_unknown_title_hints_are_synchronized_beyond_small_dossier_grant(
+        monkeypatch, tmp_path, remaining, expected_full):
+    from test_history_review import reference
+    refs = [reference(n) for n in range(1, 15)]
+    assert all(row['scope_hint'] == 'undetermined' for row in refs)
+    selected = [row['id'] for row in refs]
+    config, budget, state, calls, classify = arrange(monkeypatch, remaining=remaining, selected=selected)
+    monkeypatch.setattr(gemini_review.time, 'sleep', lambda _: None)
+    inbox = MetadataInbox()
+    report = execute(tmp_path, config, budget, classify, inbox=inbox,
+                     archive={'schema_version': 1, 'records': refs})
+    assert len(inbox.created) == report['prioritized_candidates'] == 14
+    assert set(inbox.created) == set(selected)
+    assert calls[-1][1]['priority_ids'] == sorted(selected)
+    assert report['dossier_request_limit'] == report['dossier_http_requests'] == expected_full
+    assert report['http_requests'] == (10 if remaining == 240 else 1)
+    assert state['remaining'] == remaining - report['http_requests']
+
+
+def test_selected_sync_is_idempotent_excludes_human_withdrawals_and_never_adds_unselected_ids(monkeypatch, tmp_path):
+    from test_history_review import reference
+    refs = [reference(n) for n in range(1, 17)]
+    selected = [row['id'] for row in refs[:14]]
+    excluded = {selected[-1]}
+    inbox = MetadataInbox()
+    monkeypatch.setattr(gemini_review.time, 'sleep', lambda _: None)
+    for iteration in range(2):
+        config, budget, _, calls, classify = arrange(monkeypatch, selected=selected)
+        monkeypatch.setattr(gemini_review, 'editorial_excluded_ids', lambda _: excluded)
+        report = execute(tmp_path, config, budget, classify, inbox=inbox,
+                         archive={'schema_version': 1, 'records': refs})
+        assert report['prioritized_candidates'] == (13 if iteration == 0 else 0)
+        assert set(calls[-1][1]['priority_ids']) == set(selected) - excluded
+    assert len(inbox.created) == 13 and set(inbox.created) == set(selected) - excluded
+
+
+def test_selected_metadata_sync_is_capped_at_fifty_without_increasing_http_grant(monkeypatch, tmp_path):
+    from test_news_selection import reference
+    refs = [reference(n) for n in range(1, 56)]
+    config, budget, state, _, classify = arrange(monkeypatch, selected=[row['id'] for row in refs])
+    monkeypatch.setattr(gemini_review.time, 'sleep', lambda _: None)
+    inbox = MetadataInbox()
+    report = execute(tmp_path, config, budget, classify, inbox=inbox,
+                     archive={'schema_version': 1, 'records': refs})
+    assert len(inbox.created) == report['prioritized_candidates'] == gemini_review.SELECTED_QUEUE_SYNC_LIMIT == 50
+    assert report['http_requests'] == 10 and state['remaining'] == 230
+
+
+def test_real_enqueue_helper_cannot_bypass_the_proxy_write_pacing():
+    from mdh_pipeline.history_review import enqueue_history
+    from test_history_review import reference
+    refs = [reference(n) for n in range(1, 15)]
+    inbox, waits = MetadataInbox(), []
+    paced = gemini_review._PacedInbox(inbox, waits.append, clock=lambda: 0)
+    enqueue_history(paced, {'schema_version': 1, 'records': refs}, limit=50, include_international=True)
+    assert len(inbox.created) == paced.write_calls == 14
+    assert waits == [gemini_review.MIN_WRITE_INTERVAL] * 13
 
 
 def test_human_exclusions_cannot_be_reintroduced_by_cached_positive_scope(monkeypatch, tmp_path):

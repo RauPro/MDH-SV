@@ -25,6 +25,7 @@ COMPLETE_MARKER = re.compile(r"<!-- mdh-news-dossier:v([12]):([a-f0-9]{40,64}) -
 PRIVACY_RETRY_MARKER = "<!-- mdh-field-privacy-retry:v2 -->"
 MIN_WRITE_INTERVAL = 2.0
 MAX_RUN_SECONDS = 720
+SELECTED_QUEUE_SYNC_LIMIT = 50
 
 
 class _PacedInbox:
@@ -41,6 +42,14 @@ class _PacedInbox:
 
     def __getattr__(self, name):
         return getattr(self._inbox, name)
+
+    def ensure_labels(self):
+        # Bind helpers to the proxy: delegating a bound method would call the
+        # original inbox's unpaced self.call for every write inside that helper.
+        return GitHubInbox.ensure_labels(self)
+
+    def enqueue(self, candidate):
+        return GitHubInbox.enqueue(self, candidate)
 
     def call(self, method, path, **kwargs):
         if method.upper() in {"POST", "PUT", "PATCH", "DELETE"}:
@@ -781,14 +790,17 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
     enqueue_error = None
     full_budget = budget_factory(inbox, config)
     full_snapshot = full_budget.snapshot()
-    if selected and dossier_limit and full_snapshot["cooldown_until"] is None:
+    if selected and full_snapshot["cooldown_until"] is None:
         references = {row["id"]: row for row in archive["records"]}
         if any(identifier not in references for identifier in selected):
             raise ValueError("unknown_scope_selection_id")
         try:
             queued = enqueue_history(_PacedInbox(inbox, time.sleep),
                 {"schema_version": 1, "records": [references[identifier] for identifier in selected]},
-                limit=min(dossier_limit, 100), include_international=True)
+                # Queue synchronization is bounded GitHub metadata work, not a
+                # Gemini request. A small dossier grant must not leave already
+                # classified positives without an issue for many more hours.
+                limit=SELECTED_QUEUE_SYNC_LIMIT, include_international=True)
             prioritized = queued["added"]
         except GitHubRequestError as error:
             enqueue_error = error.code  # Existing eligible queue items can still progress.
