@@ -467,3 +467,12 @@ def test_unapproved_rollover_event_id_does_not_change_with_the_query_day():
     _, changes = monitor.propose_fgr(document, rows, date(2027, 1, 1), '2027-01-02T02:00:00+00:00', 'a' * 64)
     _, later = monitor.propose_fgr(document, rows, date(2027, 1, 7), '2027-01-08T02:00:00+00:00', 'b' * 64)
     assert [c['id'] for c in changes] == [c['id'] for c in later]
+
+
+def test_new_source_value_is_not_also_reported_as_a_missing_month_reclassification():
+    document = baseline()
+    values = [6, 5, 8, 5, 10, 3, 5, 7, 4, 2, 3, None]
+    rows = monitor.parse_fgr(fgr_html(changes={2026: values}), date(2026, 11, 15))
+    proposal, changes = monitor.propose_fgr(document, rows, date(2026, 11, 15), '2026-11-16T02:00:00+00:00', 'a' * 64)
+    assert [c['kind'] for c in changes] == ['fgr_values']
+    assert proposal['periods'][-1]['months'][10]['status'] == 'available'

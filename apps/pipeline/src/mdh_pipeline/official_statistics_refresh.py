@@ -342,7 +342,9 @@ def propose_fgr(baseline: dict, rows: dict[int, dict], as_of: date, checked_at: 
     before_statuses, after_statuses = [], []
     for period in periods:
         for month in sorted(period["months"], key=lambda item: item["month"]):
-            if month["value"] is None:
+            proposed_month = next(item for item in by_year[period["year"]]["months"]
+                                  if item["month"] == month["month"])
+            if month["value"] is None and proposed_month["value"] is None:
                 expected = ("outside_cutoff" if period["year"] == as_of.year
                             and month["month"] > as_of.month else "not_available")
                 if expected != month["status"]:
