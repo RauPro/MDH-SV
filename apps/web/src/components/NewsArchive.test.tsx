@@ -8,8 +8,9 @@ import { formatDate, parseCatalog } from '../catalog';
 import { NewsArchive } from './NewsArchive';
 import type { NewsArchiveData } from '../newsArchive';
 import municipalityReference from '../../../../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json';
-import { NEWS_DOSSIER_FIELDS, NEWS_DOSSIER_PENDING, pendingNewsDossier, type NewsDossier } from '../../../../shared/news-dossier.mjs';
+import { NEWS_DOSSIER_FIELDS, pendingNewsDossier, type NewsDossier } from '../../../../shared/news-dossier.mjs';
 
+const PUBLIC_FIELD_PENDING = 'Sin dato revisado disponible';
 const EMPTY = { schema_version: 1, dossiers: [] };
 const EMPTY_LOCATIONS = { schema_version: 1, generated_at: '2026-10-10T10:00:00Z', locations: [] };
 const automatic = (reference = fixture.records[0]) => ({ candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date, department: 'San Salvador', review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department', extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00Z', evidence: { paragraph_id: 'p1', content_sha256: reference.selection.evidence.content_sha256 } });
@@ -44,7 +45,7 @@ it.each(['source_explicit_department', 'source_municipality_reference'])('explai
     expect(within(panel).getByRole('link', { name: 'referencia oficial de municipios y distritos' })).toHaveAttribute('href', location.resolution?.source_url);
   }
   const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
-  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(PUBLIC_FIELD_PENDING);
 });
 it('explains a department resolved from a cited municipality without pretending it was explicit or reviewed', async () => {
   const location = { ...automatic(), department: 'Ahuachapán', method: 'gemini_municipality_reference', resolution: {
@@ -60,7 +61,7 @@ it('explains a department resolved from a cited municipality without pretending 
   expect(panel).toHaveTextContent('Localidad citada: Jujutla');
   expect(within(panel).getByRole('link', { name: 'referencia oficial de municipios y distritos' })).toHaveAttribute('href', location.resolution.source_url);
   const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
-  expect(sheet).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(sheet).toHaveTextContent(PUBLIC_FIELD_PENDING);
 });
 it('labels same-source department corroboration as automatic and retains the pending dossier', async () => {
   const location = { ...automatic(), method: 'gemini_department_corroborated', evidence: { paragraph_id: 'p3', content_sha256: 'a'.repeat(64) },
@@ -76,8 +77,8 @@ it('labels same-source department corroboration as automatic and retains the pen
   expect(panel).toHaveTextContent('Sin revisar');
   expect(panel).toHaveTextContent('no confirma el lugar de una violación');
   const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
-  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
-  expect(within(sheet).getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(18);
+  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(PUBLIC_FIELD_PENDING);
+  expect(within(sheet).getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(18);
 });
 it('discloses a registered but restricted publisher without inventing available news', async () => {
   const archive = structuredClone(fixture) as unknown as NewsArchiveData;
@@ -138,20 +139,28 @@ it('shows all selected references regardless of keyword hints and separates cand
   expect(screen.queryByLabelText('Vínculo territorial')).not.toBeInTheDocument();
   expect(screen.getByText(/no representan el total de noticias pertinentes en El Salvador/)).toBeInTheDocument();
   expect(screen.getAllByText('Pertinencia automática · Sin revisar')).toHaveLength(3);
+  expect(screen.getAllByText('Ficha pendiente de revisión pública')).toHaveLength(3);
+  expect(screen.queryByText('Campos pendientes')).not.toBeInTheDocument();
   expect(screen.getByRole('button', { name: fixture.records[1].title })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: fixture.records[2].title })).toBeInTheDocument();
 });
-it('opens bibliographic metadata, distinguishes unextracted fields and closes with restored focus', async () => {
+it('opens bibliographic metadata, distinguishes publicly unavailable fields and closes with restored focus', async () => {
   await ready();
   const trigger = screen.getByRole('button', { name: fixture.records[0].title });
   await userEvent.click(trigger);
   const dialog = screen.getByRole('dialog');
-  expect(within(dialog).getByText(/No hay una ficha pública revisada asociada/)).toBeInTheDocument();
+  expect(within(dialog).getByText(/Los campos estructurados todavía no tienen una versión revisada publicada/)).toBeInTheDocument();
   const sheet = within(dialog).getByRole('region', { name: 'Ficha estructurada de la noticia' });
   expect(within(sheet).getAllByRole('definition')).toHaveLength(NEWS_DOSSIER_FIELDS.length + 3);
-  expect(within(sheet).getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(NEWS_DOSSIER_FIELDS.length);
-  expect(within(sheet).getByText('País').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(sheet).getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(NEWS_DOSSIER_FIELDS.length);
+  expect(within(sheet).getByText('País').closest('.dossier-field')).toHaveTextContent(PUBLIC_FIELD_PENDING);
   expect(within(sheet).queryByText('Dato no mencionado en el texto analizado')).not.toBeInTheDocument();
+  const pertinence = within(sheet).getByRole('region', { name: 'Selección por pertinencia' });
+  expect(pertinence).toHaveTextContent('Vínculo con El Salvador identificado en la fuente');
+  expect(pertinence).toHaveTextContent('Seleccionada para seguimiento de derechos humanos');
+  expect(pertinence).not.toHaveTextContent(PUBLIC_FIELD_PENDING);
+  expect(within(dialog).queryByText('Extracción o revisión pendiente')).not.toBeInTheDocument();
+  expect(within(dialog).getByText(/La selección por pertinencia no indica que estos campos/)).toBeInTheDocument();
   expect(within(dialog).getByRole('link', { name: /Consultar noticia original/ })).toHaveAttribute('href', fixture.records[0].source_url);
   await userEvent.click(within(dialog).getByRole('button', { name: 'Cerrar' }));
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -212,7 +221,7 @@ it('keeps a full pending dossier for international news without inferring a coun
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
   expect(within(sheet).getAllByRole('definition')).toHaveLength(21);
-  expect(within(sheet).getByText('País').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(sheet).getByText('País').closest('.dossier-field')).toHaveTextContent(PUBLIC_FIELD_PENDING);
   expect(within(sheet).queryByText('Guatemala')).not.toBeInTheDocument();
 });
 
@@ -240,7 +249,7 @@ it.each(['unreviewed', 'wrong_url', 'wrong_publisher', 'wrong_date', 'private_ex
   await screen.findByText('3 noticias seleccionadas');
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
-  expect(within(sheet).getByText('Descripción de los hechos').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
+  expect(within(sheet).getByText('Descripción de los hechos').closest('.dossier-field')).toHaveTextContent(PUBLIC_FIELD_PENDING);
   expect(screen.queryByText('PRIVATE_VALUE_MUST_NOT_RENDER')).not.toBeInTheDocument();
 });
 
@@ -249,9 +258,12 @@ it('keeps the complete pending sheet when the public overlay is unavailable, and
   vi.mocked(fetch).mockImplementation(async url => ({ ok: String(url) !== '/archive/dossiers.json' || available, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? EMPTY_LOCATIONS : fixture }) as Response);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
+  expect(screen.getAllByText('Revisión pública no disponible')).toHaveLength(3);
+  expect(screen.queryByText('Ficha pendiente de revisión pública')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.getByRole('region', { name: 'Ficha estructurada de la noticia' })).toBeInTheDocument();
-  expect(screen.getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThan(18);
+  expect(screen.getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThan(18);
+  expect(screen.getByText(/No se pudo comprobar si hay una ficha pública revisada disponible/)).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: 'Cerrar' }));
   available = true;
   await userEvent.click(screen.getByRole('button', { name: 'Reintentar fichas públicas' }));
@@ -278,7 +290,7 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   await userEvent.click(screen.getByRole('button', { name: fixture.records[1].title }));
   const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
   expect(within(sheet).getAllByRole('definition')).toHaveLength(21);
-  expect(within(sheet).getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(18);
+  expect(within(sheet).getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(18);
   expect(within(sheet).queryByText('Dato no mencionado en el texto analizado')).not.toBeInTheDocument();
 });
 
@@ -339,7 +351,7 @@ it('retains every news reference and its pending sheet in the monitor when appro
   expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.getByRole('region', { name: 'Ficha estructurada de la noticia' })).toBeInTheDocument();
-  expect(screen.getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(18);
+  expect(screen.getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(18);
 });
 
 it('keeps a valid result page when a late public dossier response changes which news have reviewed locations', async () => {
@@ -403,8 +415,8 @@ it('maps automatic locations in a separate layer without publishing draft dossie
   expect(locationPanel).toHaveTextContent('Fuente comprobada');
   expect(within(locationPanel).getByRole('link')).toHaveAttribute('href', second.source_url);
   const sheet = within(dialog).getByRole('region', { name: 'Ficha estructurada de la noticia' });
-  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(NEWS_DOSSIER_PENDING);
-  expect(within(sheet).getAllByText(NEWS_DOSSIER_PENDING).length).toBeGreaterThanOrEqual(18);
+  expect(within(sheet).getByText('Departamento').closest('.dossier-field')).toHaveTextContent(PUBLIC_FIELD_PENDING);
+  expect(within(sheet).getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(18);
   await userEvent.click(within(dialog).getByRole('button', { name: 'Cerrar' }));
   await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'reviewed');
   expect(screen.getByText('1 ficha de noticia')).toBeInTheDocument();
