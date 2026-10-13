@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-13T11:19:17.498884+00:00",
+  "generated_at": "2026-10-13T13:21:29.072045+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -723,6 +723,23 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "31a5be78866e507e908d5b045027120a5c824626bbc231e5bb7003468533cffb",
+      "source_url": "https://www.diariocolatino.com/continuan-denuncias-por-contaminacion-del-rio-titihuapa/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-23",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T13:21:28.404142+00:00",
+      "source_checked_at": "2026-10-13T13:21:28.404142+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "4e0ac3d6baf7b740f222ea4cbda1eeaeb12b4dcfd2a84aa2dc227fbf81276976"
       }
     },
     {
@@ -1557,6 +1574,30 @@
           "paragraph_id": "p15"
         }
       ]
+    },
+    {
+      "candidate_id": "922e991df80b645249fd910b8d1e1ed6ebe87cd075a797e11f230f3188b02a3b",
+      "source_url": "https://www.diariocolatino.com/desarticulan-red-de-corrupcion-en-mariona/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-20",
+      "department": "Usulután",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-13T13:21:27.365133+00:00",
+      "source_checked_at": "2026-10-13T13:21:27.365133+00:00",
+      "evidence": {
+        "paragraph_id": "p16",
+        "content_sha256": "c683c3e78dd6925a8ba9b6724460cda99ac0295df9e17c69cff4de7920da5de7"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ozatlán",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
     },
     {
       "candidate_id": "92346e622ab6a3809e4d79e4a7f00425f55696d7fa30b7457d715153fa9851bb",

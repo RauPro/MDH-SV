@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-13T11:18:34.994341+00:00",
+  "generated_at": "2026-10-13T13:21:20.735984+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 7141,
-      "selected": 646,
-      "evaluated": 1421,
-      "relevant": 646,
-      "excluded": 773,
+      "selected": 651,
+      "evaluated": 1453,
+      "relevant": 651,
+      "excluded": 800,
       "uncertain": 2,
-      "pending": 5720,
-      "evaluated_at": "2026-10-13T11:18:33.390876+00:00"
+      "pending": 5688,
+      "evaluated_at": "2026-10-13T13:21:18.640963+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-13",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 646,
+    "records": 651,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 607,
+        "records": 611,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -941,7 +941,7 @@
           {
             "month": "2016-02",
             "status": "enumerated",
-            "records": 17,
+            "records": 21,
             "screen_version": 3,
             "posts_scanned": 1076,
             "source_total_posts": 1076,
@@ -4928,7 +4928,7 @@
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 6,
+        "records": 7,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
         "months": [
@@ -5811,7 +5811,7 @@
           {
             "month": "2016-02",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 38,
             "source_total_posts": 38,
@@ -20271,12 +20271,12 @@
         "month": "2016-02",
         "start_date": "2016-02-01",
         "end_date": "2016-02-29",
-        "records": 21,
+        "records": 26,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 17
+            "records": 21
           },
           {
             "source_id": "gatoencerrado",
@@ -20286,7 +20286,7 @@
           {
             "source_id": "factum",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "el-faro",
@@ -26688,6 +26688,233 @@
             "p2",
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "737c0062fe05e24fbdb8ebe99bf5be788fdf7c81274b7a413bf32747df8013bb",
+      "title": "Iglesia católica denuncia más casos de abuso sexual",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/iglesia-catolica-denuncia-mas-casos-de-abuso-sexual/",
+      "published_date": "2016-02-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 96558,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:13:34.152588-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "44ed325b424905c1dfc32383e2135a652dec61f8b19424afe0e35d63fe548194",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "31a5be78866e507e908d5b045027120a5c824626bbc231e5bb7003468533cffb",
+      "title": "Continúan denuncias por contaminación del río Titihuapa",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/continuan-denuncias-por-contaminacion-del-rio-titihuapa/",
+      "published_date": "2016-02-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 95998,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:10:03.702390-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4e0ac3d6baf7b740f222ea4cbda1eeaeb12b4dcfd2a84aa2dc227fbf81276976",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "922e991df80b645249fd910b8d1e1ed6ebe87cd075a797e11f230f3188b02a3b",
+      "title": "Desarticulan red de corrupción en Mariona",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/desarticulan-red-de-corrupcion-en-mariona/",
+      "published_date": "2016-02-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 95798,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:10:03.702390-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c683c3e78dd6925a8ba9b6724460cda99ac0295df9e17c69cff4de7920da5de7",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7cd3e7ea88e59b92e30dba274d578703cf21adeff89d7cc23e4d8006b1078150",
+      "title": "SIS recibirá cooperación de Fiscalía en atención a violencia de género",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sis-recibira-cooperacion-de-fiscalia-en-atencion-a-violencia-de-genero/",
+      "published_date": "2016-02-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 95696,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:10:03.702390-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "68eff1e12127d0c9cea71a03b87720fa25e3ee0f7d97e6c1650e241776f78602",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "63bf8bfdb66550101171b13c7f9736362a2c7b0f1cb3f23bc9d45e02d9e8d2c3",
+      "title": "Top 7: las mejores películas sobre periodismo",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/top-5-las-mejores-peliculas-sobre-periodismo/",
+      "published_date": "2016-02-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 9378,
+        "retrieved_at": "2026-10-10T18:02:39.732033+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:10:03.702390-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4afd5dc4e1d67b3114bed162ba3edcae26dbd6ca1ca297aa3b1e48c400425a32",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
           ]
         }
       }

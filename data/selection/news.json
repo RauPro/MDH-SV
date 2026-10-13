@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T11:18:33.390876+00:00",
+  "generated_at": "2026-10-13T13:21:18.640963+00:00",
   "assessment_counts": {
     "candidates": 7141,
-    "evaluated": 1421,
-    "relevant": 646,
-    "excluded": 773,
+    "evaluated": 1453,
+    "relevant": 651,
+    "excluded": 800,
     "uncertain": 2,
-    "pending": 5720
+    "pending": 5688
   },
   "selections": [
     {
@@ -3522,6 +3522,36 @@
             "p3",
             "p4",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "31a5be78866e507e908d5b045027120a5c824626bbc231e5bb7003468533cffb",
+      "source_url": "https://www.diariocolatino.com/continuan-denuncias-por-contaminacion-del-rio-titihuapa/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:10:03.702390-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4e0ac3d6baf7b740f222ea4cbda1eeaeb12b4dcfd2a84aa2dc227fbf81276976",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p8"
           ]
         }
       }
@@ -7154,6 +7184,34 @@
       }
     },
     {
+      "candidate_id": "63bf8bfdb66550101171b13c7f9736362a2c7b0f1cb3f23bc9d45e02d9e8d2c3",
+      "source_url": "https://www.revistafactum.com/top-5-las-mejores-peliculas-sobre-periodismo/",
+      "publisher": "Revista Factum",
+      "published_date": "2016-02-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:10:03.702390-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4afd5dc4e1d67b3114bed162ba3edcae26dbd6ca1ca297aa3b1e48c400425a32",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "63c4f31051718867f4336adb0bda830aeff154509fc5a252bd261c8346fa49a1",
       "source_url": "https://www.diariocolatino.com/racismo-y-exclusion/",
       "publisher": "Diario Co Latino",
@@ -8774,6 +8832,34 @@
       }
     },
     {
+      "candidate_id": "737c0062fe05e24fbdb8ebe99bf5be788fdf7c81274b7a413bf32747df8013bb",
+      "source_url": "https://www.diariocolatino.com/iglesia-catolica-denuncia-mas-casos-de-abuso-sexual/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:13:34.152588-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "44ed325b424905c1dfc32383e2135a652dec61f8b19424afe0e35d63fe548194",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "73a98c5e4e591094bf1ae8c85ca5f19fb05c003b221289a505b0f4b5bab9159b",
       "source_url": "https://www.diariocolatino.com/asesinatos-y-cruz/",
       "publisher": "Diario Co Latino",
@@ -9455,6 +9541,34 @@
             "p2",
             "p7",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7cd3e7ea88e59b92e30dba274d578703cf21adeff89d7cc23e4d8006b1078150",
+      "source_url": "https://www.diariocolatino.com/sis-recibira-cooperacion-de-fiscalia-en-atencion-a-violencia-de-genero/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:10:03.702390-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "68eff1e12127d0c9cea71a03b87720fa25e3ee0f7d97e6c1650e241776f78602",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -10915,6 +11029,34 @@
             "p4",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "922e991df80b645249fd910b8d1e1ed6ebe87cd075a797e11f230f3188b02a3b",
+      "source_url": "https://www.diariocolatino.com/desarticulan-red-de-corrupcion-en-mariona/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-20",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T07:10:03.702390-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c683c3e78dd6925a8ba9b6724460cda99ac0295df9e17c69cff4de7920da5de7",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7",
+            "p10"
           ]
         }
       }
