@@ -24,12 +24,12 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 7,
-      "pages_fetched": 7,
+      "posts_scanned": 9,
+      "pages_fetched": 9,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-13T14:32:49.444482+00:00",
+      "last_attempt_at": "2026-10-13T23:06:26.789023+00:00",
       "error": null
     }
   },
@@ -55,6 +55,56 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-10-13T14:32:49.444482+00:00"
+      }
+    },
+    {
+      "id": "3c40124143e1fc96aba2553e55a6e3c2a8597305266b1d0b72833fb69e5d22ad",
+      "title": "Hombre señalado de causar un incendio e intentar matar a una persona en Santa Tecla seguirá detenido",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/hombre-senalado-de-causar-un-incendio-e-intentar-matar-a-una-persona-en-santa-tecla-seguira-detenido",
+      "published_date": "2026-10-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "santa tecla"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T23:06:26.789023+00:00"
+      }
+    },
+    {
+      "id": "3707a54711b560542706229cf0949731e8e426c037931e6a05fc1020786eaa99",
+      "title": "Envían a prisión provisional a acusado de traficar cocaína en la avenida Olímpica de San Salvador",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-acusado-de-traficar-cocaina-en-la-avenida-olimpica-de-san-salvador",
+      "published_date": "2026-10-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T23:06:26.789023+00:00"
       }
     },
     {
@@ -255,7 +305,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-13T14:32:49.444482+00:00",
+    "last_attempt_at": "2026-10-13T23:06:26.789023+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -270,9 +320,11 @@
       "https://diario.elmundo.sv/politica/bukele-asistiria-a-inauguracion-de-megacarcel-en-costa-rica",
       "https://diario.elmundo.sv/nacionales/mujer-es-condenada-a-30-anos-de-prision-por-asfixiar-a-su-hijo-recien-nacido-en-la-union",
       "https://diario.elmundo.sv/nacionales/agente-policial-ebrio-es-capturado-por-causar-accidente-de-transito",
-      "https://diario.elmundo.sv/politica/ulloa-dice-fue-facil-capturar-a-los-pandilleros-porque-exministro-del-fmln-los-tenia-en-lista-para-crear-un-partido"
+      "https://diario.elmundo.sv/politica/ulloa-dice-fue-facil-capturar-a-los-pandilleros-porque-exministro-del-fmln-los-tenia-en-lista-para-crear-un-partido",
+      "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-acusado-de-traficar-cocaina-en-la-avenida-olimpica-de-san-salvador",
+      "https://diario.elmundo.sv/nacionales/hombre-senalado-de-causar-un-incendio-e-intentar-matar-a-una-persona-en-santa-tecla-seguira-detenido"
     ],
-    "article_cursor": 9,
+    "article_cursor": 11,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -327,6 +379,18 @@
         "published_date": "2026-10-13",
         "last_attempt_at": "2026-10-13T14:32:49.444482+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-acusado-de-traficar-cocaina-en-la-avenida-olimpica-de-san-salvador": {
+        "status": "selected",
+        "published_date": "2026-10-13",
+        "last_attempt_at": "2026-10-13T23:06:26.789023+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/hombre-senalado-de-causar-un-incendio-e-intentar-matar-a-una-persona-en-santa-tecla-seguira-detenido": {
+        "status": "selected",
+        "published_date": "2026-10-13",
+        "last_attempt_at": "2026-10-13T23:06:26.789023+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -335,10 +399,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 1,
+        "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
-        "article_urls_selected": 1,
-        "last_attempt_at": "2026-10-13T14:32:49.444482+00:00"
+        "article_urls_selected": 3,
+        "last_attempt_at": "2026-10-13T23:06:26.789023+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -347,7 +411,7 @@
         "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
         "article_urls_selected": 1,
-        "last_attempt_at": "2026-10-13T14:32:49.444482+00:00"
+        "last_attempt_at": "2026-10-13T23:06:26.789023+00:00"
       }
     },
     "index_screen_version": 3
