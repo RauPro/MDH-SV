@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T10:20:14.774326+00:00",
+  "generated_at": "2026-10-13T11:18:33.390876+00:00",
   "assessment_counts": {
     "candidates": 7141,
-    "evaluated": 1346,
-    "relevant": 615,
-    "excluded": 724,
-    "uncertain": 7,
-    "pending": 5795
+    "evaluated": 1421,
+    "relevant": 646,
+    "excluded": 773,
+    "uncertain": 2,
+    "pending": 5720
   },
   "selections": [
     {
@@ -384,6 +384,34 @@
       }
     },
     {
+      "candidate_id": "07833ba03725cd471a121714737807574173d6d880b5e98f600c73190957ecf1",
+      "source_url": "https://www.diariocolatino.com/periodistas-cuestionan-etica-y-falta-de-transparencia-por-portada-falsa-de-matutinos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2d58bdae1a377b1dd174fda6924bda4be58f2683801230878e90b4a9773e60fe",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p9",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "07f4c69a12cab756bb4d5691016f91671eb53cde1f6fb21652492b0883816b45",
       "source_url": "https://www.diariocolatino.com/celebran-primer-aniversario-del-modelo-penitenciario-yo-cambio/",
       "publisher": "Diario Co Latino",
@@ -597,6 +625,33 @@
             "p2",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "0a2e5f8f6fa56f0aa27ffa6b8012b533a2e2bf5ee3992eb6c80020a921546677",
+      "source_url": "https://www.diariocolatino.com/parlamento-podria-pedir-a-alcaldias-respeto-a-derechos-laborales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:09:44.882734-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9bb7d78119bc4857020a9920f18cf9cc0ed7af6f53e759ccaaffd6e82313eb40",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10"
           ]
         }
       }
@@ -973,6 +1028,34 @@
       }
     },
     {
+      "candidate_id": "10634f289be233de7fdcaedb3f95222ff5dc42fb11243c370155a56a4542fbca",
+      "source_url": "https://www.diariocolatino.com/el-asesinato-de-los-jesuitas-es-un-crimen-contra-la-humanidad/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:15:52.681574-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "485a92d16cbf7cef351afe4d8ee0628fb65a00de427658d6a0c86d4fa4017208",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "10950038036b9a10c64d6f291a82c831443ad60dbb9ea76d7f2b3f129b6e0c1b",
       "source_url": "https://www.diariocolatino.com/diputados-aprobaran-ley-contra-trata-de-personas-que-impone-hasta-18-anos-de-prision-a-rufianes-y-clientes/",
       "publisher": "Diario Co Latino",
@@ -1024,6 +1107,33 @@
             "p4",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "1131f48e8d707c579f4601e9ea3167e969887e85092c4256def36915f6d68a18",
+      "source_url": "https://www.diariocolatino.com/pcn-pide-crear-comision-especial-por-captura-de-militares-en-caso-jesuitas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "37ec60eb65bd9aa7351049beb7cfaced59985303be02a0e4a34fd8e462aa7960",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
           ]
         }
       }
@@ -1473,6 +1583,36 @@
           "relevance_paragraph_ids": [
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "184c30935836997b4700dbd6bab8ba41f663edd5b0ccb1d2e34334a525e55054",
+      "source_url": "https://gatoencerrado.news/2016/02/17/ong-proaborto-pide-al-estado-enfrentar-zika-con-enfoque-de-derechos-humanos/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-02-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:15:52.681574-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "10af54a8f2c1c9a3cc92b84b166b88005498cd2f5d7aeed3c8061008e4590920",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p13",
+            "p16"
           ]
         }
       }
@@ -2168,6 +2308,34 @@
             "p7",
             "p10",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2306dbdfc7e546199ab559c464ee021352b2820e99b895ce11057196800f5a5c",
+      "source_url": "https://www.diariocolatino.com/pediran-explicacion-a-alcalde-por-despidos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:09:44.882734-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "77c1ac49b0ba66594cc145342ee18accd61c1d5747102d0d3ed867d8a1c687d6",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p11"
           ]
         }
       }
@@ -4510,6 +4678,33 @@
       }
     },
     {
+      "candidate_id": "438cd84e72d8584088b85bf9a17704207e6d7941a784fd1eb5db4c97a92d42d6",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-cuatro-militares-involucrados-en-asesinato-de-jesuitas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c770696dccd0ef3cf81c946254c100afd39721e80c4905c3b1ea758628ef2e3b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "4390bf4e0e13763c0c5f7c60638598b43473412a22bc7ca70e22a52f8f57f92e",
       "source_url": "https://www.diariocolatino.com/organizaciones-sociales-aseguran-que-pozo-de-norman-quijano-es-un-ejemplo-de-violacion-del-derecho-al-agua/",
       "publisher": "Diario Co Latino",
@@ -5101,6 +5296,34 @@
       }
     },
     {
+      "candidate_id": "4abeb468d5077ea949964017e3e97f25851100d8f3dc99d1d09007a12616522b",
+      "source_url": "https://gatoencerrado.news/2016/01/25/pddh-exdirector-de-pnc-violo-ley-de-derechos-humanos-al-dilatar-captura-de-exmilitares/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-01-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:10:53.762452-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c41f9dc26eb2c107fe01ccf61007185af912975c55eda9da839441a6a7210d87",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "4b9e74ed94dd76c4afdd16ebe572b8bd9713baa9597d1059c24345a3763eab40",
       "source_url": "https://www.diariocolatino.com/se-reportan-10-800-abusos-contra-menores-en-2014-en-el-salvador%e2%80%a8rufianes-intermediarios-y-clientes-iran-a-la-carcel-por-25-anos/",
       "publisher": "Diario Co Latino",
@@ -5236,6 +5459,34 @@
           "relevance_paragraph_ids": [
             "p6",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4d1ca515293a2e8f2fd595da4b224dfc4c39fd90338c7411871c696d89905000",
+      "source_url": "https://gatoencerrado.news/2016/02/17/gobierno-salvadoreno-reitera-que-captura-de-exmilitares-es-apegada-a-la-ley/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-02-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:15:52.681574-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "dc1b1375327d147b67560a2555f49e522598d6d9e4194e19658a350fcf42a1fd",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p8",
+            "p18"
           ]
         }
       }
@@ -5520,6 +5771,33 @@
           "relevance_paragraph_ids": [
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "52cdd1de239d87d9bf177b61c102c868ba8c83d4703a9a1ee8c284b4c02c376d",
+      "source_url": "https://www.diariocolatino.com/no-es-un-asesinato-comun-lo-realizo-una-institucion-del-estado-padre-oliva/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4c31fcaf6a326f747fc70d363fa5c46500cabd430ff34e10b72c63b075a01ab2",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
           ]
         }
       }
@@ -7191,6 +7469,63 @@
       }
     },
     {
+      "candidate_id": "66e07fa45080f0995957522cdb5c3bb3fc4293f5fe5edda82a2bfc33b3310ca7",
+      "source_url": "https://www.diariocolatino.com/procurador-pide-a-director-de-pnc-capturar-a-militares/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:12:54.860410-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ec222c3be1b9d049a7342a2e7eaf7396a4bae618b86a01ecf371c6d98678b9ce",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "66e95315fd021df134cdf5e344599c2798f4f8d0acb6bb3dd550d931eaf780d5",
+      "source_url": "https://www.diariocolatino.com/fmln-propone-encarcelar-a-usureros-abusivos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:13:46.861950-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8d29519feac1091ab227c0cd7b8839b52826bdcee9727c47be171e90f54b0f8d",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "673fde0e1c1425100e1c37766986ec8b887b5d9f069133683fd84fffea86968b",
       "source_url": "https://www.diariocolatino.com/no-permitamos-que-quienes-asesinaron-a-monsenor-romero-asesinen-su-legado-y-su-palabra-presidente-funes/",
       "publisher": "Diario Co Latino",
@@ -7241,6 +7576,32 @@
             "p3",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "689128880080a7a9abadd1d5909414a5c832ee8c511db0c329ead009fbaa6962",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-piden-se-detengan-las-redadas-de-inmigrantes-de-estados-unidos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:09:44.882734-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "df7698425ba0653b269d63c92fe6ffdb3ce78e615b89ed48b1f54c8f22228fdc",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -7990,6 +8351,32 @@
       }
     },
     {
+      "candidate_id": "70d4f1190aa4dd5ff8d3ad8aa8d642306af2d46a9144153f12c09c546dd64a6c",
+      "source_url": "https://www.diariocolatino.com/que-pena-y-para-eso-querian-dirigir-la-fedetenis/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:09:44.882734-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c485c57af1cfb361dc71298b5e8ef6b162faad664bedfa6d74f6e9ff03e5ab0c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7111527b9e6cef5b0f847bf14dae6cc344146f072e2b23626206558a2919e2ae",
       "source_url": "https://www.diariocolatino.com/periodismo-basura/",
       "publisher": "Diario Co Latino",
@@ -8555,6 +8942,33 @@
       }
     },
     {
+      "candidate_id": "744e080223dd8c591aa0ced71057b220be5db33dbffe8d0e51bbfc0021f10b35",
+      "source_url": "https://historico.elsalvador.com/historico/176087/juez-espanol-pide-entrega-de-militares-salvadorenos-detenidos-por-orden-suya.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-02-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7c081d30ddef6a8f49484870fefde702ef56372785dbbafe0644e7d90052f093",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "75346f7d41120488432449bbe5c8974b4891f4298d1e02838c673eb0bcaa0f09",
       "source_url": "https://www.diariocolatino.com/el-salvador-registra-altos-niveles-de-contaminacion-en-la-atmosfera-ricardo-navarro/",
       "publisher": "Diario Co Latino",
@@ -8603,6 +9017,34 @@
             "p9",
             "p10",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "75d9001cb048f8595c3c94eeae6732337afb1a1d7dfe31eae6b0ffaf442ea8d7",
+      "source_url": "https://historico.elsalvador.com/historico/174908/salvadorenos-detenidos-en-ee-uu-ya-contaban-con-una-orden-final-de-deportacion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-01-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:09:44.882734-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1b5c3832c6aae5c34aa233e7a0f072224c5f7a53f9396052f4985c5a3cdb2bb9",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p10"
           ]
         }
       }
@@ -10052,6 +10494,32 @@
       }
     },
     {
+      "candidate_id": "8c88f1fbddeed5672289ea1e7835c90522f7631b808f6659119e40b27f8e8a51",
+      "source_url": "https://www.diariocolatino.com/bcr-pide-que-defensoria-del-consumidor-supervise-casas-comerciales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "923cc2107c34cccd0d8d10081804f1b876a7de16ad6536d05c7ba8a4b6baa702",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "8cdc667e76f34bfab2c9d9ebcbfa946fddce0ffb100b02056561b2a3ae245cbc",
       "source_url": "https://historico.elsalvador.com/historico/175654/22-salvadorenos-detenidos-en-redadas-en-estados-unidos.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -10533,6 +11001,36 @@
             "p2",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "92c9ac0087c09b47e3789649df642d1b1109255c347431ae741ceeec9f5668a2",
+      "source_url": "https://www.diariocolatino.com/pddh-demanda-una-ley-que-prohiba-totalmente-la-mineria-en-el-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:12:54.860410-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "540349aacddb5174668135d4b0c8922b56b69f4cfbba48dca33eedb195b40d8c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p11"
           ]
         }
       }
@@ -11848,6 +12346,33 @@
       }
     },
     {
+      "candidate_id": "a29604d6050daa59ba1083e1134fe3438f15f6144e4c07d586e6f9d8b7412a5a",
+      "source_url": "https://www.diariocolatino.com/el-asesinato-de-padres-jesuitas-es-un-crimen-de-lesa-humanidad-morales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4296be4bf6bb13c630392c66d16ed1da0b137ba1524292b460c484d9ba01b7b3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a38aec1e5fdce2e2d697d450665488ebc14c9e03bc8ca0df7102dd4ff6cc7b2a",
       "source_url": "https://www.diariocolatino.com/los-desaparecidos-fueron-ayer-pero-siguen-siendo-en-nosotras-como-un-ahora-madre-guadalupe-mejia/",
       "publisher": "Diario Co Latino",
@@ -12128,6 +12653,31 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a5b142e7426b952b37a0b980bb9bf450f6d02438df85a044cc752b66548036c0",
+      "source_url": "https://www.diariocolatino.com/cesta-apoya-propuesta-de-multar-vehiculos-por-contaminacion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:13:46.861950-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ca1c2406688f7032a427b50e170735623d7e243c824525b420ccdda454334745",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
@@ -13124,6 +13674,33 @@
       }
     },
     {
+      "candidate_id": "b738e128094a9ec059faa12e15e74987e39876921b108a8098332375ec5175f5",
+      "source_url": "https://www.diariocolatino.com/anteproyecto-de-ley-vih-tiene-enfoque-de-derechos-humanos-ministra-menjivar/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a91185bd9bb442d54ab78822f68fd36495914b503d4db6c8275ae81231c2b7da",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b75fe0e923785a702fb7e3829d4bc81fd96128fb3e36445a4ca9e78ad4be58af",
       "source_url": "https://www.diariocolatino.com/el-estado-y-su-compromiso-con-los-derechos-humanos-el-epu-2014/",
       "publisher": "Diario Co Latino",
@@ -13262,6 +13839,33 @@
             "p2",
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "baba7ee4b7822e6945406dbe235eafe415afda12ae3d85d8e2498d380820c41e",
+      "source_url": "https://www.diariocolatino.com/periodismo-falso/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7a6bceba0e493c35aa658141b4b751b83e43d61643686851a9ca9f1c88179f77",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p9"
           ]
         }
       }
@@ -13662,6 +14266,31 @@
             "p3",
             "p7",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c116a7d60031705df68eca1af4eea2be792ac86fbf3a421373100b45c0619986",
+      "source_url": "https://www.diariocolatino.com/pnc-hace-efectiva-captura-de-militares-por-caso-jesuitas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1f9a7beba713c849363722ead9703cb121f3061a497d1d5f0863a116fa070f4b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
@@ -14289,6 +14918,34 @@
       }
     },
     {
+      "candidate_id": "c81bc4a8b6c48231928b4315a7d00dc18f4137265c1963dcfc7cb66882ee9ca5",
+      "source_url": "https://www.diariocolatino.com/poblacion-lgbti-cuenta-con-call-center-para-atencion-y-denuncias/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:10:53.762452-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7687c930b04ad8af26b2498eb1262bc3ae769d5fa78b0cb17c2077b1ec3ec275",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c93ab9ec6cd42f4b5e0394831771290ee62f85e5377244c5bb2cc7c12513f431",
       "source_url": "https://www.diariocolatino.com/un-pais-sin-discriminaciones-y-solidario-con-la-poblacion-portadora-del-vih/",
       "publisher": "Diario Co Latino",
@@ -14589,6 +15246,34 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d1341fe75188789c8b78c3b05dbc644e3e50a67c983c1907d196c14cbdeff073",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-prision-para-60-pandilleros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:13:46.861950-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "52e31b5fe2d6c6501c09322c9ba2f7800deb34e220df69def95a6079230ff99b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6"
           ]
         }
       }
@@ -15071,6 +15756,36 @@
             "p6",
             "p7",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "da406400b653fad59ac6efc1596c899850cb45dc0e7c2a220c1c27d89e4d290d",
+      "source_url": "https://www.diariocolatino.com/sindicatos-municipales-condenan-despidos-injustificados-de-trabajadores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:12:54.860410-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4fdeca87f9d688048b0559aef9839a4e8e782e9a404cd2f3dd60ab93fc99c4da",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p7"
           ]
         }
       }
@@ -16080,6 +16795,33 @@
       }
     },
     {
+      "candidate_id": "eca9602653e7f24b82a6556d1bec1d91e3e7e1e36782c980e8c870635e6fbc44",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-del-sistema-penitenciario-descontentos-por-nuevo-regimen-disciplinario/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:15:52.681574-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "681b4b7e51f051eba4f8ce002c0f3f504c7d045ae2c1dabdb249b8133a4f91fd",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "ecc5704d76fa779361f14fcdff110103fd46c1ce4e2c3d6319d549042f3054ab",
       "source_url": "https://www.diariocolatino.com/rrcinco-pandilleros-se-fugan-de-bartolinas-de-pnc/",
       "publisher": "Diario Co Latino",
@@ -16513,6 +17255,33 @@
       }
     },
     {
+      "candidate_id": "f1842c88ebfab0ea1550ab8d46e880a6d37d0fa8da531c293cab82e984313f37",
+      "source_url": "https://www.diariocolatino.com/coronel-inocente-montano-sera-extraditado-a-espana/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:14:53.010994-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cb5b1858b6dd8e3b56bd4b28b876edf2fa840598b9a7d93e16aba367b56baf39",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f1984c354028f05456308d0e063ca04513fd1954b4b8de9aa39762140f7375d1",
       "source_url": "https://www.diariocolatino.com/labor-de-periodistas-es-obstaculizada-por-correligionarios-y-la-umo/",
       "publisher": "Diario Co Latino",
@@ -16622,6 +17391,34 @@
             "p3",
             "p4",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f24d1e9199cdaa43280bb4782bd670204d155e7c4e636637a962a5446884be2f",
+      "source_url": "https://gatoencerrado.news/2016/01/18/seis-miembros-de-comunidad-lgbti-han-sido-asesinados-en-primeras-dos-semanas-de-2016/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-01-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:10:53.762452-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "720c31580eabef69c039a35f0b3d0bf58309b60cab9f0a1965df397e0240c0d3",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p7"
           ]
         }
       }
@@ -17270,6 +18067,35 @@
       }
     },
     {
+      "candidate_id": "fc62cdfc358a4a9cd0fd34b91140bd58492626960a32d9f40cbf862d22ce2562",
+      "source_url": "https://www.diariocolatino.com/familiares-dicen-que-los-militares-son-inocentes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:15:52.681574-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "07239f044e0819be41b3890b4f5d89aabca5784076896a936cca3dfb2169bcad",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "fd8c63a2e206de2eacfe4238349759c045247a48bd2dd545ca0be82cdb99db7f",
       "source_url": "https://www.diariocolatino.com/denuncian-despidos-en-la-comuna-por-no-simpatizar-con-el-partido-arena/",
       "publisher": "Diario Co Latino",
@@ -17319,6 +18145,34 @@
             "p2",
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fe5dd8a34c721ec8087a7cc27c4d1da0b7cdaffa47fe7db18739e04043f5c17b",
+      "source_url": "https://www.diariocolatino.com/un-nuevo-concepto-penitenciario/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T05:10:53.762452-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2c4f77a25d53464bec8ed026264c584cab160ee794dc304be80f12e879779b2d",
+          "jurisdiction_paragraph_ids": [
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7"
           ]
         }
       }
