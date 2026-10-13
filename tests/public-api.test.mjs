@@ -417,7 +417,7 @@ test('MCP officially connects, discovers read-only tools, calls and reads resour
   await client.connect(new StreamableHTTPClientTransport(new URL(`${base}/mcp`)));
   try {
     const listed = await client.listTools();
-    assert.deepEqual(listed.tools.map(tool => tool.name).sort(), ['get_record', 'get_statistics', 'search_news', 'search_records']);
+    assert.deepEqual(listed.tools.map(tool => tool.name).sort(), ['get_official_statistics', 'get_record', 'get_statistics', 'search_news', 'search_records']);
     assert.ok(listed.tools.every(tool => tool.annotations.readOnlyHint && !tool.annotations.destructiveHint));
     const result = await client.callTool({ name: 'search_records', arguments: { limit: 1, record_type: 'incident' } });
     assert.equal(result.isError, undefined);

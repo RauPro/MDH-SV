@@ -4,11 +4,12 @@ import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import data from './__fixtures__/catalog.json';
 import archive from './__fixtures__/newsArchive.json';
+import { officialStatistics } from './__fixtures__/officialStatistics';
 import App from './App';
 
 const publicResponse = (input: unknown, catalog = data) => ({ ok: true, json: async () =>
   String(input).endsWith('/archive/dossiers.json') ? { schema_version: 1, dossiers: [] }
-    : String(input).endsWith('/archive/news.json') ? archive : catalog }) as Response;
+    : String(input).endsWith('/archive/news.json') ? archive : String(input).endsWith('/statistics/homicides.json') ? officialStatistics : catalog }) as Response;
 beforeEach(() => { vi.restoreAllMocks(); localStorage.clear(); vi.stubGlobal('fetch', vi.fn().mockImplementation(async input => publicResponse(input))); });
 async function ready() {
   render(<App/>);
@@ -81,6 +82,10 @@ it('offers same-origin downloads and describes MCP accurately', async () => {
   expect(within(dialog).getByRole('link',{name:'CSV'})).toHaveAttribute('href','/data/records.csv');
   expect(dialog).toHaveTextContent('MCP remoto');
   expect(dialog).toHaveTextContent('/api/v1/news?limit=20');
+  expect(dialog).toHaveTextContent('/api/v1/official-statistics?year=2026&department=national');
+  expect(dialog).toHaveTextContent('get_official_statistics');
+  expect(dialog).toHaveTextContent('get_statistics describe el catálogo documental');
+  expect(within(dialog).getByRole('link', { name: 'Estadísticas oficiales · CSV' })).toHaveAttribute('href', '/statistics/homicides.csv');
   expect(dialog).not.toHaveTextContent('date_from=2025-03-26');
   expect(within(dialog).getByRole('link',{name:'Especificación OpenAPI'})).toHaveAttribute('href','/api/v1/openapi.json');
 });
@@ -220,4 +225,62 @@ it('has no detectable structural accessibility violations on the news landing vi
   await screen.findByText('3 fichas de noticias');
   const result = await axe.run(document.body, { rules: { 'color-contrast': { enabled:false } } });
   expect(result.violations.map(v => v.id)).toEqual([]);
+});
+
+it('opens the official statistics route without treating it as a dossier', async () => {
+  history.replaceState(null, '', '/#estadisticas');
+  render(<App/>);
+  expect(screen.getByRole('region', { name: 'Estadísticas oficiales de homicidios' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Estadísticas oficiales' })).toHaveAttribute('aria-pressed', 'true');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(screen.queryByRole('region', { name: 'Fichas de noticias' })).not.toBeInTheDocument();
+  expect(screen.queryByRole('region', { name: 'Mapa de El Salvador' })).not.toBeInTheDocument();
+  await screen.findByRole('region', { name: 'Resumen de la consulta' });
+});
+
+it('keeps official statistics available when the reports catalogue is unavailable', async () => {
+  vi.mocked(fetch).mockImplementation(async input => {
+    if (String(input) === '/data/catalog.json') throw new Error('catalogue offline');
+    return publicResponse(input);
+  });
+  history.replaceState(null, '', '/#estadisticas');
+  render(<App/>);
+  await screen.findByRole('region', { name: 'Resumen de la consulta' });
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  expect(fetch).not.toHaveBeenCalledWith('/archive/news.json', expect.anything());
+  await userEvent.click(screen.getByRole('button', { name: 'Fichas y mapa' }));
+  await screen.findByText('3 fichas de noticias');
+  await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
+  expect(await screen.findByRole('alert')).toHaveTextContent('No pudimos cargar los datos');
+});
+
+it('preserves the statistics route when an information dialog is closed', async () => {
+  history.replaceState(null, '', '/#estadisticas');
+  render(<App/>);
+  await userEvent.click(screen.getByRole('button', { name: 'Datos y API' }));
+  const dialog = await screen.findByRole('dialog');
+  await userEvent.click(within(dialog).getByRole('button', { name: 'Cerrar' }));
+  expect(location.hash).toBe('#estadisticas');
+  expect(screen.getByRole('button', { name: 'Estadísticas oficiales' })).toHaveAttribute('aria-pressed', 'true');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+});
+
+it('navigates between official statistics, news and reports with independent state', async () => {
+  await ready();
+  await userEvent.click(screen.getByRole('button', { name: 'Estadísticas oficiales' }));
+  expect(location.hash).toBe('#estadisticas');
+  expect(screen.getByRole('region', { name: 'Estadísticas oficiales de homicidios' })).toBeInTheDocument();
+  expect(screen.queryByText('4 resultados')).not.toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: 'Archivo de noticias' }));
+  expect(location.hash).toBe('#archivo');
+  await screen.findByText('3 noticias seleccionadas');
+  expect(screen.queryByRole('region', { name: 'Estadísticas oficiales de homicidios' })).not.toBeInTheDocument();
+  history.replaceState(null, '', '/#estadisticas');
+  fireEvent(window, new HashChangeEvent('hashchange'));
+  expect(screen.getByRole('button', { name: 'Estadísticas oficiales' })).toHaveAttribute('aria-pressed', 'true');
+  history.replaceState(null, '', '/#reportes');
+  fireEvent(window, new HashChangeEvent('hashchange'));
+  expect(screen.getByRole('button', { name: /^Reportes documentados/ })).toHaveAttribute('aria-pressed', 'true');
+  expect(screen.getByText('4 resultados')).toBeInTheDocument();
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });

@@ -1,0 +1,2328 @@
+{
+  "schema_version": 1,
+  "dataset_id": "sv-official-homicides",
+  "title": "Homicidios: estadísticas oficiales de El Salvador",
+  "as_of": "2026-10-12",
+  "generated_at": "2026-10-13T03:38:05.017656+00:00",
+  "coverage_start_year": 2010,
+  "comparability_note": "Capa estadística separada de las noticias y de los casos documentados de derechos humanos. Conserva instituciones, ediciones y unidades de cada fuente; no presupone una serie metodológicamente homogénea. IML 2021 separa 68 homicidios/osamentas del total principal de 1,147. El PDF IML 2018 contiene una errata mensual y no se importa su tabla de meses. El total nacional de 2012 procede de UNODC, edición julio de 2026, con departamentos no disponibles; no se reconstruye sumando categorías parciales del IML. Desde 2022, FGR publica totales nacionales sin desglose departamental; 2026 sólo llega a agosto. No disponible no significa cero.",
+  "sources": [
+    {
+      "id": "iml-2010",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2010",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/9384/HOMICIDIOS%20A%C3%91O%202010/31-08-2018",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:41.050852+00:00",
+      "content_sha256": "e8d06deb3dedea67e84b29a98b6d9fc6bac1152e8043963ad31854c1ca5b5e42",
+      "edition_note": "Documento anual 2010; fecha de actualización del portal: 31-08-2018. Esta fecha describe la edición consultada, no el período de los hechos. El encabezado del documento indica elaboración en 2012."
+    },
+    {
+      "id": "iml-2011",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2011",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/9385/HOMICIDIOS%20A%C3%91O%202011/31-08-2018",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:41.070385+00:00",
+      "content_sha256": "bdde1f33bb87d9c3490850eff4db6c56d284c5cf79bfec974031eaeed5e87e4b",
+      "edition_note": "Documento anual 2011; fecha de actualización del portal: 31-08-2018. Esta fecha describe la edición consultada, no el período de los hechos. El encabezado del documento indica elaboración en 2012."
+    },
+    {
+      "id": "iml-2012",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2012",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/9390/HOMICIDIOS%20A%C3%91O%202012/31-08-2018",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:40.997733+00:00",
+      "content_sha256": "e30bb6c08c3afebb45df3e4b6d0f59cc2991513a6ca01fc1f653bc8c308097ff",
+      "edition_note": "Documento anual 2012; fecha de actualización del portal: 31-08-2018. Esta fecha describe la edición consultada, no el período de los hechos."
+    },
+    {
+      "id": "iml-2013",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2013",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/3802/HOMICIDIOS%20A%C3%91O%202013/23-08-2018",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:41.309582+00:00",
+      "content_sha256": "37e76e3cddba9d1584bc83f4d5d0ba9bd56dd2eeca2fc3a96c23b82379677b99",
+      "edition_note": "Documento anual 2013; fecha de actualización del portal: 23-08-2018. Esta fecha describe la edición consultada, no el período de los hechos. El documento declara actualización al 3 de septiembre de 2014."
+    },
+    {
+      "id": "iml-2014",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2014",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/3848/HOMICIDIOS%20A%C3%91O%202014/23-08-2018",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:41.327387+00:00",
+      "content_sha256": "49b555d616b1d26e156a820252e235528a570b0ee9a1dd10e5934bc86ea36f82",
+      "edition_note": "Documento anual 2014; fecha de actualización del portal: 23-08-2018. Esta fecha describe la edición consultada, no el período de los hechos."
+    },
+    {
+      "id": "iml-2015",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2015",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/3889/HOMICIDIOS%20A%C3%91O%202015/23-08-2018",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:41.592283+00:00",
+      "content_sha256": "6dcf3a8def9a0d0faddc3fb1087c8a7d46c0af5b360830e65e071d06c744b668",
+      "edition_note": "Documento anual 2015; fecha de actualización del portal: 23-08-2018. Esta fecha describe la edición consultada, no el período de los hechos."
+    },
+    {
+      "id": "iml-2016",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2016",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/3901/HOMICIDIOS%20A%C3%91O%202016/23-08-2018",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:41.736028+00:00",
+      "content_sha256": "0dfdd97c39c88f2a17f918af51230b156061508764417b0cfc3759bca9912d55",
+      "edition_note": "Documento anual 2016; fecha de actualización del portal: 23-08-2018. Esta fecha describe la edición consultada, no el período de los hechos."
+    },
+    {
+      "id": "iml-2017",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2017",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/3930/HOMICIDIOS%20A%C3%91O%202017/23-08-2018",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:41.742202+00:00",
+      "content_sha256": "452e3901f821950fbb75582eab0d182443b37854772bfe1c0ce5ab7104dfd54a",
+      "edition_note": "Documento anual 2017; fecha de actualización del portal: 23-08-2018. Esta fecha describe la edición consultada, no el período de los hechos."
+    },
+    {
+      "id": "iml-2018",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2018",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/13360/HOMICIDIOS%20A%C3%91O%202018/26-03-2019",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:42.184306+00:00",
+      "content_sha256": "12dd169b72c7a3c394c35e51a4747c62aa04553e06034024de5a000adf2257f4",
+      "edition_note": "Documento anual 2018; fecha de actualización del portal: 26-03-2019. Esta fecha describe la edición consultada, no el período de los hechos."
+    },
+    {
+      "id": "iml-2019",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2019",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/15931/HOMICIDIOS%20A%C3%91O%202019/02-03-2020",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:42.150719+00:00",
+      "content_sha256": "245ae202f683cebd9ad7edad5af35abc0c4ca16c38bd9fd5096c0a0ea927c656",
+      "edition_note": "Documento anual 2019; fecha de actualización del portal: 02-03-2020. Esta fecha describe la edición consultada, no el período de los hechos."
+    },
+    {
+      "id": "iml-2020",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2020",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/18119/HOMICIDIOS%20A%C3%91O%202020/21-04-2021",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:42.179823+00:00",
+      "content_sha256": "9a2efceb84ac1dd10c48b77b56d4da0c64e2637d9f2235b0772646fc937cc489",
+      "edition_note": "Documento anual 2020; fecha de actualización del portal: 21-04-2021. Esta fecha describe la edición consultada, no el período de los hechos."
+    },
+    {
+      "id": "iml-2021",
+      "institution": "Instituto de Medicina Legal / Órgano Judicial de El Salvador",
+      "title": "Homicidios año 2021",
+      "url": "https://transparencia.oj.gob.sv/es/descargar/3/20791/HOMICIDIOS%20A%C3%91O%202021/11-01-2023",
+      "format": "pdf",
+      "retrieved_at": "2026-10-13T03:27:42.476317+00:00",
+      "content_sha256": "fe0d8ddeba9865b8b0cb1186909eb690fca8d460d864a23225271ee78bbb2981",
+      "edition_note": "Documento anual 2021; fecha de actualización del portal: 11-01-2023. Esta fecha describe la edición consultada, no el período de los hechos. Revisión anual que separa los hallazgos de osamentas y documenta cambios respecto de publicaciones mensuales."
+    },
+    {
+      "id": "unodc-cts-2026-07",
+      "institution": "Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC)",
+      "title": "Victims of intentional homicide — edición julio de 2026",
+      "url": "https://data.unodc.org/sites/dataportal.unodc.org/files/2026-07/data_cts_intentional_homicide.xlsx",
+      "format": "xlsx",
+      "retrieved_at": "2026-10-13T03:34:27.478576+00:00",
+      "content_sha256": "126c1b5282f2872d5197bcd130c0d2d4adf3b820230651f402ec3c0918c423bb",
+      "edition_note": "Archivo oficial de julio de 2026. Se utiliza la hoja data_cts_intentional_homicide, no la hoja de estimaciones regionales. La fila de El Salvador para 2012 identifica como fuente OAS/CTS/SDG."
+    },
+    {
+      "id": "fgr-monthly-2022-2026",
+      "institution": "Fiscalía General de la República de El Salvador / Equipo Operativo de Homicidios",
+      "title": "Estadísticas de homicidios: tablas anuales 2022–2026",
+      "url": "https://www.fiscalia.gob.sv/estadisticas-de-homicidios/",
+      "format": "html",
+      "retrieved_at": "2026-10-13T03:26:30.744789+00:00",
+      "content_sha256": "ef7bbcee52b1b5c831088f0061456cc68bc2f0675ea84ab92bc4299419ab6375",
+      "edition_note": "Instantánea consultada al corte del 12 de octubre de 2026, hora de El Salvador. La página no muestra una fecha de actualización ni publica una tabla departamental; 2026 contiene valores de enero a agosto y celdas posteriores vacías."
+    }
+  ],
+  "periods": [
+    {
+      "year": 2010,
+      "start_date": "2010-01-01",
+      "end_date": "2010-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2010",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses de víctimas de homicidio del IML, cotejados o consensuados con FGR y PNC según el encabezado de esta edición. Las tablas territoriales se refieren al departamento de agresión u ocurrencia; no a la residencia de la víctima.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero.",
+        "El documento sólo presenta un ranking de 35 municipios. No se deducen ceros ni una cobertura municipal completa a partir de ese ranking."
+      ],
+      "national": {
+        "value": 4004,
+        "status": "available",
+        "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 151,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 73,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 91,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 121,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 579,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 190,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 121,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 37,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 290,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 1350,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 66,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 392,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 404,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 139,
+          "status": "available",
+          "locator": "PDF, página 2: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2011,
+      "start_date": "2011-01-01",
+      "end_date": "2011-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2011",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses de víctimas de homicidio del IML, cotejados o consensuados con FGR y PNC según el encabezado de esta edición. Las tablas territoriales se refieren al departamento de agresión u ocurrencia; no a la residencia de la víctima.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero.",
+        "El documento sólo presenta un ranking de 35 municipios. No se deducen ceros ni una cobertura municipal completa a partir de ese ranking."
+      ],
+      "national": {
+        "value": 4366,
+        "status": "available",
+        "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 141,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 82,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 66,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 111,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 525,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 221,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 164,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 59,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 293,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 1447,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 138,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 445,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 503,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 171,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2012,
+      "start_date": "2012-01-01",
+      "end_date": "2012-12-31",
+      "completeness": "complete",
+      "source_id": "unodc-cts-2026-07",
+      "indicator": "intentional_homicides",
+      "unit": "persons",
+      "methodology": "Conteo nacional de víctimas de homicidio intencional publicado por UNODC en su edición de julio de 2026. La fila total de El Salvador para 2012 es única con los filtros Total y Counts, y atribuye la fuente a OAS/CTS/SDG. Se conserva este productor y edición distintos del IML; no se reconstruye el total sumando categorías de otro documento.",
+      "notes": [
+        "El total nacional 2,594 procede de UNODC. No se mezcla con las categorías parciales del PDF IML 2012 ni se distribuye entre departamentos.",
+        "El PDF IML 2012 informa 2,246 hombres (página 1) y 321 mujeres (página 8), pero no presenta un total general consolidado ni el tratamiento de sexo indeterminado. No se publica ese subtotal como total nacional.",
+        "Los 281 menores del PDF IML 2012 (página 10) son un subconjunto de las categorías por sexo, no una categoría adicional. Su tabla territorial no completa la distribución departamental de mujeres ausente en el PDF.",
+        "Los 14 departamentos y la serie mensual quedan no disponibles en esta capa; no disponible no significa cero."
+      ],
+      "national": {
+        "value": 2594,
+        "status": "available",
+        "locator": "XLSX, hoja data_cts_intentional_homicide, fila 3321, A:M: SLV, indicador Victims of intentional homicide, cuatro categorías Total, año 2012, unidad Counts; L3321 = 2594."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cabañas",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Chalatenango",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cuscatlán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Libertad",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Paz",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Unión",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Morazán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Miguel",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Salvador",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Vicente",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Santa Ana",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Sonsonate",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Usulután",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2013,
+      "start_date": "2013-01-01",
+      "end_date": "2013-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2013",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses de víctimas de homicidio del IML, cotejados o consensuados con FGR y PNC según el encabezado de esta edición. Las tablas territoriales se refieren al departamento de agresión u ocurrencia; no a la residencia de la víctima.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero."
+      ],
+      "national": {
+        "value": 2513,
+        "status": "available",
+        "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 95,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 85,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 54,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 146,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 235,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 191,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 120,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 41,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 147,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 785,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 77,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 180,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 180,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 177,
+          "status": "available",
+          "locator": "PDF, página 3: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2014,
+      "start_date": "2014-01-01",
+      "end_date": "2014-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2014",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses de víctimas de homicidio del IML, cotejados o consensuados con FGR y PNC según el encabezado de esta edición. Las tablas territoriales se refieren al departamento de agresión u ocurrencia; no a la residencia de la víctima.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero."
+      ],
+      "national": {
+        "value": 3912,
+        "status": "available",
+        "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 130,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 126,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 94,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 293,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 366,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 294,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 127,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 46,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 217,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 1236,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 82,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 262,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 299,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 340,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2015,
+      "start_date": "2015-01-01",
+      "end_date": "2015-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2015",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses del IML practicados a personas fallecidas en hechos de violencia clasificados en el documento como homicidios. Se conserva el universo de la edición y su tabla territorial; la publicación por sí sola no identifica cada muerte como una violación de derechos humanos.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero."
+      ],
+      "national": {
+        "value": 6656,
+        "status": "available",
+        "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 199,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 143,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 101,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 465,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 678,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 470,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 236,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 121,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 439,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 2156,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 196,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 439,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 486,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 527,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2016,
+      "start_date": "2016-01-01",
+      "end_date": "2016-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2016",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses del IML practicados a personas fallecidas en hechos de violencia clasificados en el documento como homicidios. Se conserva el universo de la edición y su tabla territorial; la publicación por sí sola no identifica cada muerte como una violación de derechos humanos.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero."
+      ],
+      "national": {
+        "value": 5280,
+        "status": "available",
+        "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 201,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 116,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 69,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 344,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 541,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 278,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 192,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 122,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 448,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 1598,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 187,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 341,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 395,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 448,
+          "status": "available",
+          "locator": "PDF, página 6: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2017,
+      "start_date": "2017-01-01",
+      "end_date": "2017-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2017",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses del IML practicados a personas fallecidas en hechos de violencia clasificados en el documento como homicidios. Se conserva el universo de la edición y su tabla territorial; la publicación por sí sola no identifica cada muerte como una violación de derechos humanos.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero."
+      ],
+      "national": {
+        "value": 3962,
+        "status": "available",
+        "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 222,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 97,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 60,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 161,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 396,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 171,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 139,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 119,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 423,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 1210,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 87,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 330,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 290,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 257,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2018,
+      "start_date": "2018-01-01",
+      "end_date": "2018-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2018",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses del IML practicados a personas fallecidas en hechos de violencia clasificados en el documento como homicidios. Se conserva el universo de la edición y su tabla territorial; la publicación por sí sola no identifica cada muerte como una violación de derechos humanos.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero.",
+        "Errata visible en PDF, página 1: septiembre muestra 173 hombres + 23 mujeres + 0 indeterminados, pero la columna Total imprime 296. Las filas de esa columna suman 3,446 frente al total anual de 3,346. No se importa ni corrige silenciosamente la serie mensual; los 14 departamentos sí suman 3,346."
+      ],
+      "national": {
+        "value": 3346,
+        "status": "available",
+        "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 174,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 79,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 80,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 128,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 404,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 218,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 87,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 94,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 279,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 982,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 83,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 265,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 263,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 210,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2019,
+      "start_date": "2019-01-01",
+      "end_date": "2019-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2019",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses del IML practicados a personas fallecidas en hechos de violencia clasificados en el documento como homicidios. Se conserva el universo de la edición y su tabla territorial; la publicación por sí sola no identifica cada muerte como una violación de derechos humanos.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero."
+      ],
+      "national": {
+        "value": 2398,
+        "status": "available",
+        "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 150,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 53,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 41,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 92,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 259,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 153,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 91,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 81,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 291,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 625,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 45,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 183,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 173,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 161,
+          "status": "available",
+          "locator": "PDF, páginas 7–8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2020,
+      "start_date": "2020-01-01",
+      "end_date": "2020-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2020",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Reconocimientos forenses del IML practicados a personas fallecidas en hechos de violencia clasificados en el documento como homicidios. Se conserva el universo de la edición y su tabla territorial; la publicación por sí sola no identifica cada muerte como una violación de derechos humanos. El encabezado utiliza hechos registrados en el año, sin equiparar automáticamente registro y fecha de agresión.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero."
+      ],
+      "national": {
+        "value": 1341,
+        "status": "available",
+        "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 86,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 26,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 28,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 63,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 135,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 46,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 68,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 45,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 107,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 385,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 32,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 134,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 108,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 78,
+          "status": "available",
+          "locator": "PDF, página 8: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2021,
+      "start_date": "2021-01-01",
+      "end_date": "2021-12-31",
+      "completeness": "complete",
+      "source_id": "iml-2021",
+      "indicator": "homicides",
+      "unit": "persons",
+      "methodology": "Datos homologados en la Mesa tripartita IML, FGR y PNC. El universo principal y el desglose departamental son 1,147 homicidios; se excluyen de ese total los 68 homicidios/osamentas que el documento presenta por separado.",
+      "notes": [
+        "Se conservan los valores de esta edición oficial; no se sustituyen por cifras de otras ediciones o instituciones.",
+        "No se importan meses de los anuarios IML en esta versión. No disponible no significa cero.",
+        "PDF, página 3: 1,147 homicidios + 68 homicidios/osamentas = 1,215 víctimas. Los 68 hallazgos no se suman a esta serie ni se distribuyen entre departamentos."
+      ],
+      "national": {
+        "value": 1147,
+        "status": "available",
+        "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila total, cotejada con el total nacional del documento."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": 68,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cabañas",
+          "value": 29,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Chalatenango",
+          "value": 19,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Cuscatlán",
+          "value": 44,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Libertad",
+          "value": 144,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Paz",
+          "value": 66,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "La Unión",
+          "value": 40,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Morazán",
+          "value": 40,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Miguel",
+          "value": 64,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Salvador",
+          "value": 334,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "San Vicente",
+          "value": 23,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Santa Ana",
+          "value": 104,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Sonsonate",
+          "value": 106,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        },
+        {
+          "department": "Usulután",
+          "value": 66,
+          "status": "available",
+          "locator": "PDF, página 7: tabla de homicidios por departamento de agresión u ocurrencia; fila del departamento."
+        }
+      ],
+      "months": null
+    },
+    {
+      "year": 2022,
+      "start_date": "2022-01-01",
+      "end_date": "2022-12-31",
+      "completeness": "complete",
+      "source_id": "fgr-monthly-2022-2026",
+      "indicator": "homicides",
+      "unit": "source_reported_homicides",
+      "methodology": "Conteos mensuales publicados por FGR, atribuidos en la página al Equipo Operativo de Homicidios. Se importa únicamente la fila total del año; las categorías de motivación no se suman otra vez ni se tratan como desagregación territorial.",
+      "notes": [
+        "La fuente consultada no ofrece desglose por departamento; los 14 valores quedan no disponibles, sin distribuir el total nacional.",
+        "La unidad conserva el rótulo de la fuente: no se transforma en conteo de expedientes, hechos únicos o víctimas identificadas.",
+        "Se conserva el total 496 de la tabla vigente de FGR. El balance del Ministerio de Seguridad publicado el 4 de enero de 2023 informó 495; son versiones distintas y no se promedian ni se fusionan."
+      ],
+      "national": {
+        "value": 496,
+        "status": "available",
+        "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna TOTAL."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cabañas",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Chalatenango",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cuscatlán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Libertad",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Paz",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Unión",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Morazán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Miguel",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Salvador",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Vicente",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Santa Ana",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Sonsonate",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Usulután",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "value": 82,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 1."
+        },
+        {
+          "month": 2,
+          "value": 76,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 2."
+        },
+        {
+          "month": 3,
+          "value": 165,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 3."
+        },
+        {
+          "month": 4,
+          "value": 23,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 4."
+        },
+        {
+          "month": 5,
+          "value": 18,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 5."
+        },
+        {
+          "month": 6,
+          "value": 26,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 6."
+        },
+        {
+          "month": 7,
+          "value": 17,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 7."
+        },
+        {
+          "month": 8,
+          "value": 19,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 8."
+        },
+        {
+          "month": 9,
+          "value": 19,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 9."
+        },
+        {
+          "month": 10,
+          "value": 22,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 10."
+        },
+        {
+          "month": 11,
+          "value": 15,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 11."
+        },
+        {
+          "month": 12,
+          "value": 14,
+          "status": "available",
+          "locator": "HTML, tabla del año 2022, fila «Total de Homicidios», columna del mes 12."
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "start_date": "2023-01-01",
+      "end_date": "2023-12-31",
+      "completeness": "complete",
+      "source_id": "fgr-monthly-2022-2026",
+      "indicator": "intentional_homicides",
+      "unit": "source_reported_homicides",
+      "methodology": "Conteos mensuales publicados por FGR, atribuidos en la página al Equipo Operativo de Homicidios. Se importa únicamente la fila total del año; las categorías de motivación no se suman otra vez ni se tratan como desagregación territorial.",
+      "notes": [
+        "La fuente consultada no ofrece desglose por departamento; los 14 valores quedan no disponibles, sin distribuir el total nacional.",
+        "La unidad conserva el rótulo de la fuente: no se transforma en conteo de expedientes, hechos únicos o víctimas identificadas."
+      ],
+      "national": {
+        "value": 154,
+        "status": "available",
+        "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna TOTAL."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cabañas",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Chalatenango",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cuscatlán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Libertad",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Paz",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Unión",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Morazán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Miguel",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Salvador",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Vicente",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Santa Ana",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Sonsonate",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Usulután",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "value": 13,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 1."
+        },
+        {
+          "month": 2,
+          "value": 13,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 2."
+        },
+        {
+          "month": 3,
+          "value": 11,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 3."
+        },
+        {
+          "month": 4,
+          "value": 9,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 4."
+        },
+        {
+          "month": 5,
+          "value": 17,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 5."
+        },
+        {
+          "month": 6,
+          "value": 12,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 6."
+        },
+        {
+          "month": 7,
+          "value": 9,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 7."
+        },
+        {
+          "month": 8,
+          "value": 16,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 8."
+        },
+        {
+          "month": 9,
+          "value": 10,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 9."
+        },
+        {
+          "month": 10,
+          "value": 21,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 10."
+        },
+        {
+          "month": 11,
+          "value": 7,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 11."
+        },
+        {
+          "month": 12,
+          "value": 16,
+          "status": "available",
+          "locator": "HTML, tabla del año 2023, fila «Total Homicidios Intencionales», columna del mes 12."
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "start_date": "2024-01-01",
+      "end_date": "2024-12-31",
+      "completeness": "complete",
+      "source_id": "fgr-monthly-2022-2026",
+      "indicator": "intentional_homicides",
+      "unit": "source_reported_homicides",
+      "methodology": "Conteos mensuales publicados por FGR, atribuidos en la página al Equipo Operativo de Homicidios. Se importa únicamente la fila total del año; las categorías de motivación no se suman otra vez ni se tratan como desagregación territorial.",
+      "notes": [
+        "La fuente consultada no ofrece desglose por departamento; los 14 valores quedan no disponibles, sin distribuir el total nacional.",
+        "La unidad conserva el rótulo de la fuente: no se transforma en conteo de expedientes, hechos únicos o víctimas identificadas."
+      ],
+      "national": {
+        "value": 114,
+        "status": "available",
+        "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna TOTAL."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cabañas",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Chalatenango",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cuscatlán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Libertad",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Paz",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Unión",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Morazán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Miguel",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Salvador",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Vicente",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Santa Ana",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Sonsonate",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Usulután",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "value": 9,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 1."
+        },
+        {
+          "month": 2,
+          "value": 7,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 2."
+        },
+        {
+          "month": 3,
+          "value": 13,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 3."
+        },
+        {
+          "month": 4,
+          "value": 7,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 4."
+        },
+        {
+          "month": 5,
+          "value": 17,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 5."
+        },
+        {
+          "month": 6,
+          "value": 5,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 6."
+        },
+        {
+          "month": 7,
+          "value": 15,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 7."
+        },
+        {
+          "month": 8,
+          "value": 20,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 8."
+        },
+        {
+          "month": 9,
+          "value": 9,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 9."
+        },
+        {
+          "month": 10,
+          "value": 5,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 10."
+        },
+        {
+          "month": 11,
+          "value": 6,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 11."
+        },
+        {
+          "month": 12,
+          "value": 1,
+          "status": "available",
+          "locator": "HTML, tabla del año 2024, fila «Total Homicidios Intencionales», columna del mes 12."
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "start_date": "2025-01-01",
+      "end_date": "2025-12-31",
+      "completeness": "complete",
+      "source_id": "fgr-monthly-2022-2026",
+      "indicator": "intentional_homicides",
+      "unit": "source_reported_homicides",
+      "methodology": "Conteos mensuales publicados por FGR, atribuidos en la página al Equipo Operativo de Homicidios. Se importa únicamente la fila total del año; las categorías de motivación no se suman otra vez ni se tratan como desagregación territorial.",
+      "notes": [
+        "La fuente consultada no ofrece desglose por departamento; los 14 valores quedan no disponibles, sin distribuir el total nacional.",
+        "La unidad conserva el rótulo de la fuente: no se transforma en conteo de expedientes, hechos únicos o víctimas identificadas."
+      ],
+      "national": {
+        "value": 82,
+        "status": "available",
+        "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna TOTAL."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cabañas",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Chalatenango",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cuscatlán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Libertad",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Paz",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Unión",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Morazán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Miguel",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Salvador",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Vicente",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Santa Ana",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Sonsonate",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Usulután",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "value": 7,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 1."
+        },
+        {
+          "month": 2,
+          "value": 5,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 2."
+        },
+        {
+          "month": 3,
+          "value": 13,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 3."
+        },
+        {
+          "month": 4,
+          "value": 6,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 4."
+        },
+        {
+          "month": 5,
+          "value": 7,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 5."
+        },
+        {
+          "month": 6,
+          "value": 5,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 6."
+        },
+        {
+          "month": 7,
+          "value": 4,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 7."
+        },
+        {
+          "month": 8,
+          "value": 7,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 8."
+        },
+        {
+          "month": 9,
+          "value": 9,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 9."
+        },
+        {
+          "month": 10,
+          "value": 8,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 10."
+        },
+        {
+          "month": 11,
+          "value": 6,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 11."
+        },
+        {
+          "month": 12,
+          "value": 5,
+          "status": "available",
+          "locator": "HTML, tabla del año 2025, fila «Total Homicidios Intencionales», columna del mes 12."
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "start_date": "2026-01-01",
+      "end_date": "2026-08-31",
+      "completeness": "partial",
+      "source_id": "fgr-monthly-2022-2026",
+      "indicator": "intentional_homicides",
+      "unit": "source_reported_homicides",
+      "methodology": "Conteos mensuales publicados por FGR, atribuidos en la página al Equipo Operativo de Homicidios. Se importa únicamente la fila total del año; las categorías de motivación no se suman otra vez ni se tratan como desagregación territorial.",
+      "notes": [
+        "La fuente consultada no ofrece desglose por departamento; los 14 valores quedan no disponibles, sin distribuir el total nacional.",
+        "La unidad conserva el rótulo de la fuente: no se transforma en conteo de expedientes, hechos únicos o víctimas identificadas.",
+        "Cobertura numérica: enero–agosto de 2026. Septiembre y octubre no están publicados en la tabla consultada al corte; noviembre y diciembre están fuera del corte. Las celdas vacías no se convierten en cero."
+      ],
+      "national": {
+        "value": 49,
+        "status": "available",
+        "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna TOTAL."
+      },
+      "departments": [
+        {
+          "department": "Ahuachapán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cabañas",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Chalatenango",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Cuscatlán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Libertad",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Paz",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "La Unión",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Morazán",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Miguel",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Salvador",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "San Vicente",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Santa Ana",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Sonsonate",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "department": "Usulután",
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        }
+      ],
+      "months": [
+        {
+          "month": 1,
+          "value": 6,
+          "status": "available",
+          "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna del mes 1."
+        },
+        {
+          "month": 2,
+          "value": 5,
+          "status": "available",
+          "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna del mes 2."
+        },
+        {
+          "month": 3,
+          "value": 8,
+          "status": "available",
+          "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna del mes 3."
+        },
+        {
+          "month": 4,
+          "value": 5,
+          "status": "available",
+          "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna del mes 4."
+        },
+        {
+          "month": 5,
+          "value": 10,
+          "status": "available",
+          "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna del mes 5."
+        },
+        {
+          "month": 6,
+          "value": 3,
+          "status": "available",
+          "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna del mes 6."
+        },
+        {
+          "month": 7,
+          "value": 5,
+          "status": "available",
+          "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna del mes 7."
+        },
+        {
+          "month": 8,
+          "value": 7,
+          "status": "available",
+          "locator": "HTML, tabla del año 2026, fila «Total Homicidios Intencionales», columna del mes 8."
+        },
+        {
+          "month": 9,
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "month": 10,
+          "value": null,
+          "status": "not_available",
+          "locator": null
+        },
+        {
+          "month": 11,
+          "value": null,
+          "status": "outside_cutoff",
+          "locator": null
+        },
+        {
+          "month": 12,
+          "value": null,
+          "status": "outside_cutoff",
+          "locator": null
+        }
+      ]
+    }
+  ]
+}

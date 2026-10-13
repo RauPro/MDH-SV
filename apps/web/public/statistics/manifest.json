@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "dataset_id": "sv-official-homicides",
+  "as_of": "2026-10-12",
+  "generated_at": "2026-10-13T03:38:05.017656+00:00",
+  "source_sha256": "862192de1c28b9a055a3931088756eb1493d43fc805e2c257ee4d2233da879d0",
+  "period_count": 17,
+  "csv_rows_count": 255,
+  "csv_scope": "Una fila nacional y 14 departamentales por período. No sumar ambos ámbitos. Detalle mensual disponible en JSON. Los valores ausentes quedan vacíos y conservan status=not_available.",
+  "files": {
+    "homicides.json": {
+      "sha256": "862192de1c28b9a055a3931088756eb1493d43fc805e2c257ee4d2233da879d0",
+      "bytes": 91800
+    },
+    "homicides.csv": {
+      "sha256": "50700475993570513ac886509a6037eb498be784181af3a72c8abca4aa19a7cc",
+      "bytes": 276354
+    }
+  }
+}

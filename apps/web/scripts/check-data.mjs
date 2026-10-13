@@ -5,6 +5,7 @@ import { assertSelectionProvenance } from './selection-provenance.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference } from '../../../shared/news-selection.mjs';
 import { parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
 import { parsePublishedNewsLocations, validateLocationBindings } from '../../../shared/news-location.mjs';
+import { checkOfficialStatisticsExports } from './export-official-statistics.mjs';
 
 const source = new URL('../../../data/reviewed/publications.json', import.meta.url);
 const publicDir = new URL('../public/data/', import.meta.url);
@@ -68,3 +69,6 @@ for (const location of locationsIndex.values()) {
   assert.equal(location.review_status, 'automated_unreviewed');
 }
 console.log(`Validated ${locationsIndex.size} unreviewed automatic news locations; no dossier approvals implied.`);
+
+const officialStatistics = checkOfficialStatisticsExports();
+console.log(`Validated ${officialStatistics.period_count} separate official statistical periods, provenance and download checksums.`);

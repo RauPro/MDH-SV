@@ -10,10 +10,11 @@ La API REST y el servidor MCP remoto permiten consultar MDH-SV desde aplicacione
 | Descarga completa de fichas | [catalog.json](https://mdh-sv.vercel.app/data/catalog.json) |
 | Descarga del archivo de noticias | [news.json](https://mdh-sv.vercel.app/archive/news.json) |
 | Fichas de noticias publicadas con revisión humana | [dossiers.json](https://mdh-sv.vercel.app/archive/dossiers.json) |
+| Estadísticas oficiales de homicidios | [homicides.json](https://mdh-sv.vercel.app/statistics/homicides.json) |
 
 ## REST
 
-Los endpoints aceptan `GET`, `HEAD` y `OPTIONS`. Las respuestas son JSON con CORS abierto (`Access-Control-Allow-Origin: *`). No envíe credenciales. Se permiten páginas de 1 a 100 resultados, con 25 por defecto; siga `pagination.next` o use `next_offset`. El orden es fecha de publicación descendente e identificador ascendente. Los filtros se combinan con AND. No se aceptan parámetros desconocidos, repetidos o fechas inexistentes.
+Los endpoints aceptan `GET`, `HEAD` y `OPTIONS`. Las respuestas son JSON con CORS abierto (`Access-Control-Allow-Origin: *`). No envíe credenciales. Las búsquedas de fichas y noticias permiten páginas de 1 a 100 resultados, con 25 por defecto; siga `pagination.next` o use `next_offset`. Su orden es fecha de publicación descendente e identificador ascendente. Los filtros se combinan con AND. No se aceptan parámetros desconocidos, repetidos o fechas inexistentes.
 
 ```bash
 curl 'https://mdh-sv.vercel.app/api/v1/records?record_type=incident&limit=25'
@@ -27,6 +28,7 @@ curl 'https://mdh-sv.vercel.app/api/v1/news?date_from=2010-01-01&limit=25'
 | `/records` | Fichas completas: `q`, `publisher`, `record_type`, `department`, `category`, `review_status`, `date_from`, `date_to`, `incident_date_from`, `incident_date_to`, `limit`, `offset`. |
 | `/records/{id}` | Ficha completa y fuentes por identificador estable. Sin filtros. |
 | `/stats` | Conteos por tipo, categoría, departamento y revisión; los filtros de `/records`, sin paginación. |
+| `/official-statistics` | Agregados oficiales de homicidios: `year` y `department`. Conserva procedencia y valores faltantes; sin paginación. |
 | `/news` | Referencias y una `news_dossier` completa por noticia: `q`, `publisher`, `scope_hint`, `date_from`, `date_to`, `limit`, `offset`. La respuesta incluye cobertura y referencia del paper. |
 | `/openapi.json` | Contrato con parámetros, respuestas, dossier y errores para generar un cliente. |
 
@@ -56,7 +58,7 @@ equivale a una fuente recolectada satisfactoriamente.
 
 **Las fechas tienen significados distintos.** `date_from` y `date_to` filtran la publicación de la fuente. `incident_date_from` y `incident_date_to` filtran el período del hecho, incluyendo intervalos que se solapan; excluyen hechos de fecha desconocida. Los límites son inclusivos. La precisión mensual/anual de una ficha no se convierte en certeza sobre un día: conserve `date_precision` y `date_note`.
 
-Las listas responden `{data: [...], pagination: {total, limit, offset, next_offset, next}, meta: {...}}`; las consultas individuales responden `{data: {...}, meta: {...}}`. `meta` declara versión del esquema, fecha del snapshot, licencia y límites. Los errores usan `{error: {code, message}}` y estados HTTP 400 (entrada inválida), 404 (no encontrado), 405 (método no permitido), 414 (URL mayor de 4 KiB), 500 (fallo interno) o 503 (archivo no disponible en el despliegue). Una ausencia del archivo no se presenta como cero noticias.
+Las listas de fichas y noticias responden `{data: [...], pagination: {total, limit, offset, next_offset, next}, meta: {...}}`; las consultas individuales responden `{data: {...}, meta: {...}}`. `meta` declara versión del esquema, fecha del snapshot, licencia y límites. Los errores usan `{error: {code, message}}` y estados HTTP 400 (entrada inválida), 404 (no encontrado), 405 (método no permitido), 414 (URL mayor de 4 KiB), 500 (fallo interno) o 503 (archivo no disponible en el despliegue). Una ausencia del archivo no se presenta como cero noticias.
 
 Ejemplo de consumo sin dependencias:
 
@@ -74,6 +76,42 @@ while (url) {
 ```
 
 Para reproducibilidad estricta, descargue el snapshot y registre su versión/commit y fecha. Las páginas de la API reflejan el despliegue activo; una actualización entre peticiones puede cambiar la paginación. La caché de la API puede conservar respuestas durante cinco minutos. No se promete cobertura exhaustiva, disponibilidad contractual ni un límite dedicado por consumidor. Use las descargas completas para trabajos masivos y evite sondeos continuos.
+
+## Estadísticas oficiales de homicidios
+
+`GET /api/v1/official-statistics` consulta una colección independiente de las
+noticias y las fichas. `/api/v1/stats` sigue contando documentos del monitor.
+Las cifras oficiales son agregados publicados por instituciones; no son casos
+individuales documentados por MDH-SV ni una estimación derivada de sus noticias.
+
+```bash
+curl 'https://mdh-sv.vercel.app/api/v1/official-statistics?year=2021'
+curl 'https://mdh-sv.vercel.app/api/v1/official-statistics?year=2021&department=San%20Salvador'
+```
+
+Los filtros son opcionales y se combinan con AND. `year` debe ser un entero desde
+2010 hasta el año de corte del snapshot. `department` admite `national` o uno de
+los 14 nombres oficiales, con sus tildes; omitirlo conserva todos los ámbitos.
+No se admiten parámetros desconocidos, duplicados, búsquedas libres o paginación.
+El endpoint conserva también las filas cuyo valor es `null`: una cifra no
+publicada o no verificable no se convierte en cero.
+
+La respuesta es `{data: [...], meta: {...}}`, sin agregados calculados ni
+paginación: una fila nacional y 14 departamentales por año. `territory_level`
+distingue ambos niveles. `source` conserva institución, URL original, hash,
+fecha de consulta y nota de edición; `locator` localiza el dato dentro de esa
+fuente. Los meses nacionales sólo aparecen en la fila nacional; nunca se
+atribuyen a un departamento sin datos. `meta.as_of` fecha el corte de consulta,
+que puede ser posterior al último período publicado.
+
+Cada fila conserva su período, unidad y fuente. Un año parcial no representa un
+cierre anual; las celdas futuras y las pendientes de publicación no son ceros.
+No sume series de instituciones distintas, totales nacionales con sus
+departamentos, ni años diferentes para producir una cifra atribuida a una sola
+fuente. Mantenga las diferencias entre homicidios, víctimas, osamentas y tasas,
+así como las revisiones y discrepancias publicadas. Si el snapshot falta o no
+supera la validación, la consulta devuelve HTTP503, nunca una colección vacía
+presentada como ausencia de homicidios.
 
 ## Una ficha para cada noticia
 
@@ -119,6 +157,7 @@ try {
 | `search_records` | Las mismas fichas, filtros y paginación que REST. |
 | `get_record` | Ficha por `{id}`, incluido dossier y referencias. |
 | `get_statistics` | Conteos por unidad documental y estado de revisión. |
+| `get_official_statistics` | Agregados oficiales independientes, con filtros `year`/`department`, períodos, fuentes y valores nulos conservados. |
 | `search_news` | Archivo bibliográfico con una ficha universal `news_dossier` por referencia, cobertura y revisión pública explícita. |
 
 Los recursos `mdh-sv://catalog/metadata` y `mdh-sv://api/openapi` exponen metadatos y el contrato REST. Las herramientas declaran lectura, ausencia de destrucción e idempotencia. No aceptan URL arbitrarias ni realizan búsquedas en fuentes externas durante la consulta. Títulos, resúmenes y documentos son datos, nunca instrucciones para el asistente. Las respuestas incluyen JSON como texto y `structuredContent` para clientes que lo soportan.
