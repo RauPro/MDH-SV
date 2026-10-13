@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-13T18:23:58.900897+00:00",
+  "generated_at": "2026-10-13T19:20:28.210374+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 8269,
-      "selected": 653,
-      "evaluated": 1581,
-      "relevant": 653,
-      "excluded": 926,
+      "selected": 659,
+      "evaluated": 1613,
+      "relevant": 659,
+      "excluded": 952,
       "uncertain": 2,
-      "pending": 6688,
-      "evaluated_at": "2026-10-13T18:23:57.257186+00:00"
+      "pending": 6656,
+      "evaluated_at": "2026-10-13T19:20:26.492236+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-13",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 653,
+    "records": 659,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 611,
+        "records": 613,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -941,7 +941,7 @@
           {
             "month": "2016-02",
             "status": "enumerated",
-            "records": 21,
+            "records": 22,
             "screen_version": 3,
             "posts_scanned": 1076,
             "source_total_posts": 1076,
@@ -953,7 +953,7 @@
           {
             "month": "2016-03",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 1065,
             "source_total_posts": 1065,
@@ -2493,7 +2493,7 @@
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 24,
+        "records": 25,
         "first_published_date": "2014-09-21",
         "last_published_date": "2016-12-27",
         "months": [
@@ -3388,7 +3388,7 @@
           {
             "month": "2016-03",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 17,
             "source_total_posts": 17,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 11,
+        "records": 14,
         "first_published_date": "2015-05-28",
         "last_published_date": "2016-06-13",
         "months": [
@@ -15488,7 +15488,7 @@
           {
             "month": "2015-07",
             "status": "partial",
-            "records": 0,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 33,
             "source_total_posts": null,
@@ -15572,7 +15572,7 @@
           {
             "month": "2016-02",
             "status": "partial",
-            "records": 2,
+            "records": 3,
             "screen_version": 3,
             "posts_scanned": 31,
             "source_total_posts": null,
@@ -19970,7 +19970,7 @@
         "month": "2015-07",
         "start_date": "2015-07-01",
         "end_date": "2015-07-31",
-        "records": 18,
+        "records": 20,
         "sources": [
           {
             "source_id": "co-latino",
@@ -20005,7 +20005,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 2
           }
         ]
       },
@@ -20271,12 +20271,12 @@
         "month": "2016-02",
         "start_date": "2016-02-01",
         "end_date": "2016-02-29",
-        "records": 26,
+        "records": 28,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 21
+            "records": 22
           },
           {
             "source_id": "gatoencerrado",
@@ -20306,7 +20306,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 3
           }
         ]
       },
@@ -20314,17 +20314,17 @@
         "month": "2016-03",
         "start_date": "2016-03-01",
         "end_date": "2016-03-31",
-        "records": 0,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "gatoencerrado",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "factum",
@@ -26688,6 +26688,189 @@
             "p2",
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c412e35a27b95c244658935c2d8304c2265f016e9609b0df4e274b151f536da6",
+      "title": "El Salvador se suma a duelo y exige justicia por asesinato de Berta Cáceres",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2016/03/04/el-salvador-se-suma-a-duelo-y-exige-justicia-por-asesinato-de-berta-caceres/",
+      "published_date": "2016-03-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 3168,
+        "retrieved_at": "2026-10-10T18:02:39.731848+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:16:12.715288-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0226138b2a9b72a3eff37e2ac470feedd4ed8fd07c4c77071ef7c9e9f3346b6c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ff75c182788b4c1f2a43477868de080cdbe786d4fc8cb67f098c6fd5ac19d456",
+      "title": "Cárceles, penas e instituciones",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/carceles-penas-e-instituciones/",
+      "published_date": "2016-03-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 96714,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:16:12.715288-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a71a10971c76e28a6f51d41fb0b574010424d3fc345bb5d0142c6a72dd392975",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "894e2f10a10d81bb2cc14b4c108562ebf097d3226a7fb7f6e0d872886f9ddb35",
+      "title": "Iglesia católica admite más casos de abuso sexual a menores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/iglesia-catolica-admite-mas-casos-de-abuso-sexual-a-menores/",
+      "published_date": "2016-02-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 96658,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:16:12.715288-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "44cefb7ae53b90fe6ad9beae93232fd20c1b4ec95c77d3af9f5d1dfc7665c17c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5406c624eacfa5923505d602666faa75bb7ecba7ff041e895a597998417c49bb",
+      "title": "Honduras: Envían a prisión formal a 12 pandilleros detenidos en Operación Avalancha",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/176233/honduras-envian-a-prision-formal-a-12-pandilleros-detenidos-en-operacion-avalancha.html",
+      "published_date": "2016-02-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "honduras"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-11T22:26:03.406696+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:16:12.715288-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fbc43504aff61a5c5ff5e281fb0ec80f66a5fe1bc12e3f3134ae6c22bba69444",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
           ]
         }
       }
@@ -34900,6 +35083,109 @@
             "p3",
             "p5",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "85f7e5f3f6c3edd8f70c41be2f2ae9e816f0ed83cca5f23f87a20ae35a3a01d8",
+      "title": "Salvadoreþa pide cierre de centros de detenciµn familiar en EE.UU.",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/155156/salvadorena-pide-cierre-de-centros-de-detencion-familiar-en-ee-uu.html",
+      "published_date": "2015-07-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "eeuu",
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:15:33.712488-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a737086ce215bb75b6047e4d686cb54a4abed62fb71d0d243132f168ce34feee",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p4",
+            "p6",
+            "p7",
+            "p8",
+            "p9",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7af5b2f6b1d75cd48d3d883a9d36341e36e94e5e73eafbcf23e26ce6a6cb5e49",
+      "title": "Abren posgrado sobre violencia de genero",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/155119/abren-posgrado-sobre-violencia-de-genero.html",
+      "published_date": "2015-07-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:15:33.712488-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "262d82935db52eb1fce7d83ad8b707709934c42893fd2ca2b1f2af8673c7198c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p9"
           ]
         }
       }

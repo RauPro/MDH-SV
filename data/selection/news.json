@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T18:23:57.257186+00:00",
+  "generated_at": "2026-10-13T19:20:26.492236+00:00",
   "assessment_counts": {
     "candidates": 8269,
-    "evaluated": 1581,
-    "relevant": 653,
-    "excluded": 926,
+    "evaluated": 1613,
+    "relevant": 659,
+    "excluded": 952,
     "uncertain": 2,
-    "pending": 6688
+    "pending": 6656
   },
   "selections": [
     {
@@ -5890,6 +5890,32 @@
       }
     },
     {
+      "candidate_id": "5406c624eacfa5923505d602666faa75bb7ecba7ff041e895a597998417c49bb",
+      "source_url": "https://historico.elsalvador.com/historico/176233/honduras-envian-a-prision-formal-a-12-pandilleros-detenidos-en-operacion-avalancha.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-02-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:16:12.715288-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fbc43504aff61a5c5ff5e281fb0ec80f66a5fe1bc12e3f3134ae6c22bba69444",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "54989cb183f61b7a726113817efac5ead20e6d28ed8e43ec8ef0f6ef8b655399",
       "source_url": "https://www.diariocolatino.com/cam-intenta-desalojar-a-sindicalistas-en-huelga-de-hambre/",
       "publisher": "Diario Co Latino",
@@ -9462,6 +9488,38 @@
       }
     },
     {
+      "candidate_id": "7af5b2f6b1d75cd48d3d883a9d36341e36e94e5e73eafbcf23e26ce6a6cb5e49",
+      "source_url": "https://historico.elsalvador.com/historico/155119/abren-posgrado-sobre-violencia-de-genero.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-07-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:15:33.712488-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "262d82935db52eb1fce7d83ad8b707709934c42893fd2ca2b1f2af8673c7198c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7b05fef65d6304278004f576800a31fa766c05dd62e243df7705a9cbfd199ac1",
       "source_url": "https://www.diariocolatino.com/municipio-de-san-jose-las-flores-realizara-consulta-popular-por-mineria/",
       "publisher": "Diario Co Latino",
@@ -10163,6 +10221,40 @@
       }
     },
     {
+      "candidate_id": "85f7e5f3f6c3edd8f70c41be2f2ae9e816f0ed83cca5f23f87a20ae35a3a01d8",
+      "source_url": "https://historico.elsalvador.com/historico/155156/salvadorena-pide-cierre-de-centros-de-detencion-familiar-en-ee-uu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-07-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:15:33.712488-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a737086ce215bb75b6047e4d686cb54a4abed62fb71d0d243132f168ce34feee",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p4",
+            "p6",
+            "p7",
+            "p8",
+            "p9",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "8610fc3b6657f7bf6ce39e17a95fd85a2546e45eb18095dc0159a5c3c9facb47",
       "source_url": "https://www.diariocolatino.com/la-union-entre-actores-sociales-contribuye-al-cumplimiento-del-derecho-al-agua/",
       "publisher": "Diario Co Latino",
@@ -10409,6 +10501,34 @@
             "p11",
             "p13",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "894e2f10a10d81bb2cc14b4c108562ebf097d3226a7fb7f6e0d872886f9ddb35",
+      "source_url": "https://www.diariocolatino.com/iglesia-catolica-admite-mas-casos-de-abuso-sexual-a-menores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:16:12.715288-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "44cefb7ae53b90fe6ad9beae93232fd20c1b4ec95c77d3af9f5d1dfc7665c17c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p8"
           ]
         }
       }
@@ -14635,6 +14755,36 @@
       }
     },
     {
+      "candidate_id": "c412e35a27b95c244658935c2d8304c2265f016e9609b0df4e274b151f536da6",
+      "source_url": "https://gatoencerrado.news/2016/03/04/el-salvador-se-suma-a-duelo-y-exige-justicia-por-asesinato-de-berta-caceres/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-03-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:16:12.715288-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0226138b2a9b72a3eff37e2ac470feedd4ed8fd07c4c77071ef7c9e9f3346b6c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c48ecf73b447be06e5de2ddb5150c851f6de596b5fe761d30e60c712daa5359f",
       "source_url": "https://www.diariocolatino.com/sitramss-se-constituye-en-el-primer-y-unico-transporte-libre-de-violencia-contra-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -18480,6 +18630,32 @@
             "p2",
             "p4",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ff75c182788b4c1f2a43477868de080cdbe786d4fc8cb67f098c6fd5ac19d456",
+      "source_url": "https://www.diariocolatino.com/carceles-penas-e-instituciones/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-03-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T13:16:12.715288-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a71a10971c76e28a6f51d41fb0b574010424d3fc345bb5d0142c6a72dd392975",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
           ]
         }
       }
