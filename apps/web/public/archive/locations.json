@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T15:21:02.432818+00:00",
+  "generated_at": "2026-10-14T16:22:38.025540+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1368,6 +1368,30 @@
       "evidence": {
         "paragraph_id": "p2",
         "content_sha256": "92f26d6414f1ab27c7f54f83b97dbbee9c28e26a25099da76412a612343f79e0"
+      }
+    },
+    {
+      "candidate_id": "43d2c9bd870471acde73fb93753ba0dedab8bbd533bcb466503689e348049225",
+      "source_url": "https://www.diariocolatino.com/defensoria-del-consumidor-lista-ejercer-feria-ganadera-consuma-2017/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-07-15",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T16:22:34.177113+00:00",
+      "source_checked_at": "2026-10-14T16:22:34.177113+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "119b6b2c3c7e0538fc2f76bd0182a7101a2a3a0079bc742c19f8e1841a509b3d"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Ana",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
       }
     },
     {
@@ -4596,6 +4620,23 @@
           "paragraph_id": "p9"
         }
       ]
+    },
+    {
+      "candidate_id": "f4c21167a010ec919e0acaa4641dd5fd3c334681c4d821dcd52e0b8acd85197e",
+      "source_url": "https://www.diariocolatino.com/mesa-nacional-frente-la-mineria-oceana-gold-abandonar-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-07-14",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T16:22:33.425603+00:00",
+      "source_checked_at": "2026-10-14T16:22:33.425603+00:00",
+      "evidence": {
+        "paragraph_id": "p6",
+        "content_sha256": "3f20bc84bb48b738cb025ca6bcf30f2688d30ee08e69c00526850515f43a4838"
+      }
     },
     {
       "candidate_id": "f63f3caec3e83c192feaa4d6fbae1a4566f37a7d0d9899234c8b47c404e56941",
