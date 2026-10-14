@@ -260,22 +260,23 @@
     "2026-08": {
       "start_date": "2026-08-01",
       "end_date": "2026-08-31",
-      "status": "partial",
-      "last_attempt_at": "2026-10-14T12:20:03.754783+00:00",
+      "status": "enumerated",
+      "last_attempt_at": "2026-10-14T17:35:12.767449+00:00",
       "screen_version": 3,
-      "next_page": 2,
-      "pages_fetched": 1,
-      "posts_scanned": 100,
+      "next_page": 5,
+      "pages_fetched": 4,
+      "posts_scanned": 323,
       "invalid_posts": 0,
       "source_total_posts": 323,
       "source_total_pages": 4,
-      "error": null
+      "error": null,
+      "completed_at": "2026-10-14T17:35:12.767449+00:00"
     },
     "2026-09": {
       "start_date": "2026-09-01",
       "end_date": "2026-09-30",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-14T12:20:03.754783+00:00",
+      "last_attempt_at": "2026-10-14T17:35:12.767449+00:00",
       "screen_version": 3,
       "next_page": 5,
       "pages_fetched": 4,
@@ -284,22 +285,22 @@
       "source_total_posts": 351,
       "source_total_pages": 4,
       "error": null,
-      "completed_at": "2026-10-14T12:20:03.754783+00:00"
+      "completed_at": "2026-10-14T17:35:12.767449+00:00"
     },
     "2026-10": {
       "start_date": "2026-10-01",
       "end_date": "2026-10-14",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-14T12:20:03.754783+00:00",
+      "last_attempt_at": "2026-10-14T17:35:12.767449+00:00",
       "screen_version": 3,
       "next_page": 3,
       "pages_fetched": 2,
-      "posts_scanned": 147,
+      "posts_scanned": 148,
       "invalid_posts": 0,
-      "source_total_posts": 147,
+      "source_total_posts": 148,
       "source_total_pages": 2,
       "error": null,
-      "completed_at": "2026-10-14T12:20:03.754783+00:00"
+      "completed_at": "2026-10-14T17:35:12.767449+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -4004,17 +4005,17 @@
       "topics": [
         "condiciones_de_reclusion"
       ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "maduro",
+        "nueva york"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418698,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "international_context",
-      "scope_terms": [
-        "maduro",
-        "nueva york"
-      ]
+      }
     },
     {
       "id": "2fcd76a22deb02bfee5bfd6e9bd00ff3cdafad69f1ee92c042e6c5ebb0c0ab13",
@@ -4031,14 +4032,14 @@
         "detencion_y_debido_proceso",
         "violencia_y_desapariciones"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418680,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "783d311a1a18c1a6253d0fd85ecbea5f55008ec8d1e3ef43fac535f207a0dda5",
@@ -4054,16 +4055,16 @@
       "topics": [
         "violencia_y_desapariciones"
       ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "china"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418621,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "international_context",
-      "scope_terms": [
-        "china"
-      ]
+      }
     },
     {
       "id": "95b1ccb8892eed7f5a767833fcab9b8fe89b19007a8fc15f0bd7ad2362840160",
@@ -4079,14 +4080,14 @@
       "topics": [
         "libertad_de_expresion"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418513,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "91dd8fe14db3264ce1390bd6bd0a2cc39f4566fddbea1b3cc9b131190435328f",
@@ -4102,14 +4103,14 @@
       "topics": [
         "detencion_y_debido_proceso"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418511,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "dfc6e4154dcfd00a6e0c44fbf4b9ed1ff8a9e3dc3b3b7dc1d30df4a0ca623d1d",
@@ -4125,14 +4126,14 @@
       "topics": [
         "violencia_y_desapariciones"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418475,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "930af0808d3d22a630d7ed375924c23be30770040bcbcee85a0bab48c733433f",
@@ -4148,14 +4149,14 @@
       "topics": [
         "detencion_y_debido_proceso"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418478,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "61d774195c8501c22306090f20e0cdcda4fbc87952e8302457388dbeb370141c",
@@ -4172,16 +4173,16 @@
         "defensores_y_sociedad_civil",
         "derechos_sociales_y_ambientales"
       ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418420,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "el_salvador",
-      "scope_terms": [
-        "el salvador"
-      ]
+      }
     },
     {
       "id": "33de720681d4617860cb418af42a687747fe205f8daee7748d5971fdeebb8f69",
@@ -4197,16 +4198,16 @@
       "topics": [
         "violencia_y_desapariciones"
       ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "bolivia"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418441,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "international_context",
-      "scope_terms": [
-        "bolivia"
-      ]
+      }
     },
     {
       "id": "211a89a5f0b9719660d0646f749c5d24e9b9c7e8f974e623b7f9d2aeda76dc4f",
@@ -4222,14 +4223,14 @@
       "topics": [
         "derechos_sociales_y_ambientales"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418397,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "9f1fea728fa9820f165d865ebbb5cd17579a1a392005c27f09210d21878c9645",
@@ -4246,16 +4247,16 @@
         "detencion_y_debido_proceso",
         "defensores_y_sociedad_civil"
       ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "movir"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418277,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "el_salvador",
-      "scope_terms": [
-        "movir"
-      ]
+      }
     },
     {
       "id": "b2da45be9daedeedbc1becc8ab19605b814f84e033acf4b2b5bf02add55f2496",
@@ -4271,16 +4272,16 @@
       "topics": [
         "derechos_sociales_y_ambientales"
       ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418230,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "el_salvador",
-      "scope_terms": [
-        "san salvador"
-      ]
+      }
     },
     {
       "id": "a9510edac254c86bac92d7038686c1af4e3e4cd5177137c62a7f3e34882c8d33",
@@ -4296,14 +4297,14 @@
       "topics": [
         "defensores_y_sociedad_civil"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418223,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "bdf819b5bf904fd8a05198d64403255ce1187540760e7b0ba2240a837c1ac3ce",
@@ -4319,14 +4320,14 @@
       "topics": [
         "derechos_sociales_y_ambientales"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418130,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "b7acd31f320c9f0f967650a1d93977b7613f744cc09812705f5a848e47fc64f3",
@@ -4342,16 +4343,16 @@
       "topics": [
         "detencion_y_debido_proceso"
       ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "ruth lopez"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418110,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "el_salvador",
-      "scope_terms": [
-        "ruth lopez"
-      ]
+      }
     },
     {
       "id": "d7f9c45431d5dd44cc68c589e93e1baf9db413755393325e93afdfe34e833310",
@@ -4367,14 +4368,14 @@
       "topics": [
         "detencion_y_debido_proceso"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418058,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "674c45f05e9bb793135dcae289d53ff6ca34aca0381402a911ff0104b00981f3",
@@ -4390,14 +4391,14 @@
       "topics": [
         "derechos_humanos"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418032,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "45e411c97225730dabad4663df20321e34810e35934aece9a4e686df6ee6f6f1",
@@ -4414,16 +4415,16 @@
         "detencion_y_debido_proceso",
         "defensores_y_sociedad_civil"
       ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "movir"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 418035,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "el_salvador",
-      "scope_terms": [
-        "movir"
-      ]
+      }
     },
     {
       "id": "74b5269f67a3467f9aeb2ed07f6300c9f0e70f5b4a9a22d8377cabcf2f92ec55",
@@ -4440,16 +4441,16 @@
         "detencion_y_debido_proceso",
         "defensores_y_sociedad_civil"
       ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "movir"
+      ],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 417871,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "el_salvador",
-      "scope_terms": [
-        "movir"
-      ]
+      }
     },
     {
       "id": "67976767dda7172919e3e9176a7992cba3230d6c6b9ab655c71af81e210ad64e",
@@ -4465,14 +4466,14 @@
       "topics": [
         "derechos_sociales_y_ambientales"
       ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
       "discovery": {
         "method": "wordpress_rest_title_screen",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 417877,
         "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
-      },
-      "scope_hint": "undetermined",
-      "scope_terms": []
+      }
     },
     {
       "id": "04d391beaf6f35a0ffe857b2f912cb37a86d8c225b4947514b73cde713404ce2",
