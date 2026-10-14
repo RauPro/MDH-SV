@@ -315,6 +315,44 @@ def test_receipt_cannot_add_fields_from_model_or_ignore_privacy():
         project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference))
 
 
+@pytest.mark.parametrize("mutation", [
+    lambda d: d.update(source_title="Private arbitrary title inserted into a cached receipt"),
+    lambda d: d["fields"]["summary"].update(note="Private arbitrary note inserted into a cached receipt"),
+    lambda d: d["evidence"][0].update(locator="Private original quotation inserted into a cached receipt"),
+    lambda d: d["evidence"][0].update(url="https://www.diariocolatino.com/different-private-record/"),
+])
+def test_cached_receipt_cannot_publish_arbitrary_metadata_prose(mutation):
+    document, reference, _ = inputs()
+    value = receipt(document, reference)
+    mutation(value["dossier"])
+    with pytest.raises(AutomaticNewsError):
+        project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference))
+
+
+def test_local_privacy_decision_is_recorded_and_reconstructed_without_source_prose():
+    document, reference, article = inputs(extra="María López, de 12 años, sufrió una detención cerca de su escuela.")
+    document["news_dossier"]["fields"]["summary"]["value"] = "La organización denunció la detención de María López."
+    document["news_dossier"]["source_title"] = "Detención de María López"
+    evaluated = evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(), now=NOW)
+    value = _receipt(document, reference, 0, now=NOW)
+    value.update(status="evaluated", attempts=1, **evaluated)
+    assert {"summary", "source_title"} <= set(value["judgment"]["protected_fields"])
+    automatic, _ = project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference))
+    assert len(automatic["dossiers"]) == 1
+    assert "María" not in json.dumps(automatic, ensure_ascii=False)
+
+
+def test_protected_date_interval_remains_withheld_in_public_projection():
+    document, reference, article = inputs()
+    for name in ("event_date", "event_date_end"):
+        document["news_dossier"]["fields"][name] = {"value": None, "status": "withheld", "evidence_refs": [], "note": "Fecha protegida por privacidad."}
+    evaluated = evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(), now=NOW)
+    assert evaluated["dossier"]["fields"]["event_date_end"]["status"] == "withheld"
+    value = _receipt(document, reference, 0, now=NOW)
+    value.update(status="evaluated", attempts=1, **evaluated)
+    assert len(project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference))[0]["dossiers"]) == 1
+
+
 def test_human_override_and_removal_request_take_precedence():
     document, reference, _ = inputs()
     value = receipt(document, reference)
