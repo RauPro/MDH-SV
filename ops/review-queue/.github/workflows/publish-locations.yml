@@ -112,6 +112,8 @@ jobs:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: python -m mdh_pipeline.news_requests sync --archive publication/apps/web/public/archive/news.json --exceptions publication/data/selection/news_exceptions.json --output request-generations.json
       - name: Validar fichas automáticamente con el presupuesto compartido
+        id: automatic_validation
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -171,3 +173,6 @@ jobs:
         with:
           path: .source-location-cache/source-checks.json
           key: source-location-checks-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Informar fallos de evaluación después de conservar publicaciones válidas
+        if: always() && steps.automatic_validation.outcome == 'failure'
+        run: exit 1

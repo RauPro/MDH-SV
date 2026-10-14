@@ -11,11 +11,12 @@ import pytest
 
 from mdh_pipeline.automatic_news import (
     AutomaticNewsError, POLICY_VERSION, _hash, _privacy_projection, _receipt,
-    evaluate_draft, evaluate_queue, export_collection, fingerprint, project_collection,
-    project_dossier, validate_receipt,
+    evaluate_draft, evaluate_queue, export_collection, failed_report, fingerprint, project_collection,
+    project_dossier, response_schema, validate_receipt,
 )
 from mdh_pipeline.article_source import SourceFetchError
 from mdh_pipeline.gemini_budget import QuotaDeferred, QuotaStateError
+from mdh_pipeline.gemini_draft import GeminiDraftError
 from mdh_pipeline.history import SOURCES, reference_from_post
 from mdh_pipeline.news_dossier import FIELD_NAMES, NewsDossierError, empty_news_dossier, validate_news_dossier, validate_published_news_dossier
 from mdh_pipeline.news_publication import validate_collection
@@ -127,6 +128,17 @@ class Session:
         return Response(self.verdict)
 
 
+class PartsSession(Session):
+    def __init__(self, parts):
+        super().__init__()
+        self.parts = parts
+    def post(self, endpoint, **kwargs):
+        self.calls.append(kwargs)
+        response = Response(self.verdict)
+        response.body = json.dumps({"candidates": [{"finishReason": "STOP", "content": {"parts": self.parts}}]}).encode()
+        return response
+
+
 class Inbox:
     repository = "RauPro/MDH-SV-review"
     base = "/repos/RauPro/MDH-SV-review"
@@ -194,6 +206,67 @@ def test_v2_is_automatic_never_human_and_raw_extraction_stays_private():
         validate_published_news_dossier(document["news_dossier"])
 
 
+def test_provider_schema_uses_tested_flat_subset_but_local_keys_are_strict():
+    schema = response_schema()
+    forbidden = {"additionalProperties", "minItems", "maxItems", "minLength", "maxLength", "pattern", "$ref", "$defs"}
+    def walk(node):
+        if isinstance(node, dict):
+            assert not set(node).intersection(forbidden)
+            for child in node.values():
+                walk(child)
+        elif isinstance(node, list):
+            for child in node:
+                walk(child)
+    walk(schema)
+    assert set(schema["required"]) == {"jurisdiction", "relevance", "fields", "protected_fields"}
+    assert schema["properties"]["fields"]["items"]["properties"]["field"]["enum"] == list(FIELD_NAMES)
+    document, reference, article = inputs()
+    verdict = judgment()
+    verdict["unexpected"] = "extra field must fail locally"
+    with pytest.raises(AutomaticNewsError):
+        evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
+
+
+def test_thought_signature_and_thoughts_are_accepted_then_discarded():
+    document, reference, article = inputs()
+    parts = [{"text": "PRIVATE_THOUGHT_CANARY", "thought": True},
+             {"text": json.dumps(judgment()), "thoughtSignature": "OPAQUE_SIGNATURE_CANARY"}]
+    result = evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=PartsSession(parts))
+    assert result["dossier"] is not None
+    assert "CANARY" not in json.dumps(result)
+
+
+@pytest.mark.parametrize("parts", [
+    [],
+    [{"text": "{}", "thought": "true"}],
+    [{"text": "{}", "thoughtSignature": 123}],
+    [{"text": "{}", "functionCall": {"name": "unsafe"}}],
+    [{"text": "{}"}, {"text": "{}"}],
+    [{"text": "{}", "thought": True}],
+    [{"text": "{}", "thought": True}] * 9,
+])
+def test_invalid_transport_metadata_or_multiple_visible_parts_fail_closed(parts):
+    document, reference, article = inputs()
+    with pytest.raises(AutomaticNewsError):
+        evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=PartsSession(parts))
+
+
+def test_supported_absence_reason_only_applies_to_explicit_absent_fields():
+    document, reference, article = inputs()
+    verdict = judgment()
+    check(verdict, "event_time").update(reason_code="not_in_source", paragraph_ids=[])
+    check(verdict, "summary").update(reason_code="not_in_source", paragraph_ids=[])
+    check(verdict, "facts").update(reason_code="not_in_source", paragraph_ids=[])
+    result = evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))["dossier"]
+    assert result["fields"]["event_time"]["status"] == "not_reported"
+    assert result["fields"]["summary"]["status"] == "pending"
+    assert result["fields"]["facts"]["status"] == "pending"
+    assert result["fields"]["department"]["value"] == "San Salvador"
+    verdict["jurisdiction"]["reason_code"] = "not_in_source"
+    with pytest.raises(AutomaticNewsError):
+        evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
+
+
 @pytest.mark.parametrize("mutation", [
     lambda d: d.update(human_reviewed=True),
     lambda d: d.update(reviewed_by="automation-bot"),
@@ -224,7 +297,6 @@ def test_refetch_hash_mismatch_never_calls_evaluator():
 
 
 @pytest.mark.parametrize("mutation", [
-    lambda j: j["fields"].pop(),
     lambda j: j["fields"].append(deepcopy(j["fields"][0])),
     lambda j: check(j, "summary").update(paragraph_ids=["p999"]),
     lambda j: check(j, "summary").update(verdict="looks_good"),
@@ -235,6 +307,69 @@ def test_invalid_model_verdict_never_becomes_public(mutation):
     document, reference, article = inputs()
     verdict = judgment()
     mutation(verdict)
+    with pytest.raises(AutomaticNewsError):
+        evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
+
+
+def test_sparse_provider_verdicts_preserve_missing_fields_as_unresolved():
+    document, reference, article = inputs()
+    verdict = judgment()
+    verdict["fields"] = [check(verdict, name) for name in ("summary", "department", "event_time")]
+    result = evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
+    assert len(result["judgment"]["fields"]) == len(FIELD_NAMES)
+    assert result["dossier"]["fields"]["facts"]["status"] == "pending"
+    assert result["dossier"]["fields"]["summary"]["status"] == "reported"
+    assert check(result["judgment"], "facts")["verdict"] == "insufficient_evidence"
+    assert check(result["judgment"], "facts")["paragraph_ids"] == []
+
+
+def test_omitted_reported_or_absent_fields_cannot_be_published_as_approved():
+    document, reference, article = inputs()
+    verdict = judgment()
+    verdict["fields"] = [check(verdict, "department")]
+    result = evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
+    assert result["dossier"]["fields"]["summary"]["status"] == "pending"
+    assert result["dossier"]["fields"]["event_time"]["status"] == "pending"
+    assert result["dossier"]["fields"]["department"]["value"] == "San Salvador"
+
+
+def test_empty_verdict_list_publishes_no_dossier_and_keeps_privacy_holds():
+    document, reference, article = inputs()
+    document["news_dossier"]["fields"]["summary"] = {"value": None, "status": "withheld", "evidence_refs": [], "note": "Identidad protegida por privacidad."}
+    verdict = judgment()
+    verdict["fields"] = []
+    result = evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
+    assert result["dossier"] is None
+    assert "summary" in result["judgment"]["protected_fields"]
+    assert len(result["judgment"]["fields"]) == len(FIELD_NAMES)
+
+
+@pytest.mark.parametrize("fields", [
+    [{"field": "unknown_field"}],
+    [{"field": "summary"}, {"field": "summary"}],
+    [{"field": "summary"}],
+    [None],
+])
+def test_sparse_verdicts_still_reject_unknown_duplicate_or_malformed_fields(fields):
+    document, reference, article = inputs()
+    verdict = judgment()
+    verdict["fields"] = fields
+    with pytest.raises(AutomaticNewsError):
+        evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
+
+
+@pytest.mark.parametrize("privacy", ["safe", "withhold"])
+def test_privacy_risk_verdict_withholds_only_affected_field(privacy):
+    document, reference, article = inputs()
+    verdict = judgment()
+    check(verdict, "summary").update(verdict="supported", reason_code="privacy_risk", privacy=privacy)
+    result = evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
+    assert result["dossier"]["fields"]["summary"]["status"] == "withheld"
+    assert result["dossier"]["fields"]["department"]["value"] == "San Salvador"
+    value = _receipt(document, reference, 0, now=NOW)
+    value.update(status="evaluated", attempts=1, **result)
+    assert len(project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference))[0]["dossiers"]) == 1
+    verdict["jurisdiction"]["reason_code"] = "privacy_risk"
     with pytest.raises(AutomaticNewsError):
         evaluate_draft(document, reference, article, api_key=KEY, model=MODEL, budget=Budget(), session=Session(verdict))
 
@@ -476,6 +611,81 @@ def test_uncertain_budget_state_stops_worker(tmp_path):
     with pytest.raises(QuotaStateError):
         evaluate_queue(inbox, folder, archive(reference), api_key=KEY, model=MODEL, budget=Budget(), fetch=lambda _: article, evaluate=evaluate)
     assert inbox.writes[-1][1]["status"] == "evaluating"
+
+
+@pytest.mark.parametrize("status", [400, 401, 403, 404, 500])
+def test_provider_http_failure_records_only_bounded_status_code(tmp_path, status):
+    _, reference, article = inputs()
+    inbox, folder = setup_queue(tmp_path)
+    def evaluate(*args, **kwargs):
+        error = GeminiDraftError("provider_http_error", status_code=status)
+        error.args = ("PRIVATE_PROVIDER_RESPONSE_CANARY",)
+        raise error
+    result = evaluate_queue(inbox, folder, archive(reference), api_key=KEY, model=MODEL, budget=Budget(),
+                            fetch=lambda _: article, evaluate=evaluate)
+    assert result["errors"] == 1
+    assert inbox.writes[-1][1]["error_code"] == f"provider_http_{status}"
+    assert "CANARY" not in json.dumps(inbox.writes)
+
+
+@pytest.mark.parametrize("status,reason", [(400, "provider_configuration"), (404, "provider_configuration"),
+                                         (401, "provider_authentication"), (403, "provider_authentication")])
+def test_provider_configuration_or_auth_error_stops_entire_batch(tmp_path, status, reason):
+    first, first_ref, first_article = inputs(1)
+    second, second_ref, second_article = inputs(2)
+    inbox, folder = setup_queue(tmp_path, first, first_ref)
+    second_path = "drafts/" + second_ref["id"] + ".json"
+    (folder / second_path).write_text(json.dumps(second))
+    inbox.files[second_path] = (second, inbox.sha(second))
+    articles = {first_ref["id"]: first_article, second_ref["id"]: second_article}
+    def evaluate(*args, budget, **kwargs):
+        budget.reserve({})
+        raise GeminiDraftError("provider_http_error", status_code=status)
+    result = evaluate_queue(inbox, folder, archive(first_ref, second_ref), api_key=KEY, model=MODEL,
+                            budget=Budget(), fetch=lambda ref: articles[ref["id"]], evaluate=evaluate, limit=3)
+    assert result["attempted"] == result["http_requests"] == result["errors"] == 1
+    assert result["stopped_reason"] == reason
+    assert result["last_error_code"] == f"provider_http_{status}"
+    assert len(inbox.writes) == 2
+
+
+@pytest.mark.parametrize("changes,expected", [
+    ({"stopped_reason": "provider_configuration", "attempted": 1, "errors": 1}, True),
+    ({"stopped_reason": "provider_authentication", "attempted": 1, "errors": 1}, True),
+    ({"attempted": 3, "errors": 3}, True),
+    ({"attempted": 3, "errors": 2, "evaluated": 1}, False),
+    ({"attempted": 1, "evaluated": 1, "publishable": 0}, False),
+    ({"attempted": 1, "source_refreshed": 1}, False),
+    ({"attempted": 1, "source_unavailable": 1}, False),
+    ({"stopped_reason": "budget_deferred", "attempted": 1, "errors": 1}, False),
+    ({}, False),
+])
+def test_worker_report_distinguishes_failure_from_quota_or_abstention(changes, expected):
+    report = {"attempted": 0, "evaluated": 0, "source_refreshed": 0, "errors": 0, "stopped_reason": None, **changes}
+    assert failed_report(report) is expected
+
+
+def test_cli_prints_safe_failure_report_then_exits_nonzero(tmp_path, monkeypatch, capsys):
+    import mdh_pipeline.automatic_news as module
+    _, reference, _ = inputs()
+    inbox, folder = setup_queue(tmp_path)
+    archive_path = tmp_path / "archive.json"
+    archive_path.write_text(json.dumps(archive(reference)))
+    report = {"attempted": 1, "errors": 1, "evaluated": 0, "source_refreshed": 0,
+              "stopped_reason": "provider_configuration", "last_error_code": "provider_http_400"}
+    monkeypatch.setenv("MDH_GEMINI_BUDGET_CONFIG", "{}")
+    monkeypatch.setenv("GITHUB_REPOSITORY", inbox.repository)
+    monkeypatch.setenv("GH_TOKEN", "unit-test-token")
+    monkeypatch.setenv("GEMINI_API_KEY", KEY)
+    monkeypatch.setattr(module, "BudgetConfig", lambda **kw: SimpleNamespace(model=MODEL))
+    monkeypatch.setattr(module, "GitHubInbox", lambda *a: inbox)
+    monkeypatch.setattr(module, "GeminiBudget", lambda *a: Budget())
+    monkeypatch.setattr(module, "evaluate_queue", lambda *a, **kw: report)
+    monkeypatch.setattr("sys.argv", ["automatic_news", "evaluate", "--inbox-dir", str(folder), "--archive", str(archive_path)])
+    with pytest.raises(SystemExit) as error:
+        module.main()
+    assert error.value.code == 1
+    assert json.loads(capsys.readouterr().out) == report
 
 
 def test_export_only_safe_fields_to_both_sources_and_rejects_symlinks(tmp_path):
