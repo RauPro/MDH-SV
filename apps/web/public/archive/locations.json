@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T19:20:59.111680+00:00",
+  "generated_at": "2026-10-14T20:21:11.124573+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -551,6 +551,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "1ec48d239d63fbb223cd41d577395e2b69f3dad5ceb5641fc6018c3fdc1b774a",
+      "source_url": "https://www.diariocolatino.com/estamos-construyendo-sistema-penitenciario-humano-marco-tulio-lima/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-07",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T20:20:57.888841+00:00",
+      "source_checked_at": "2026-10-14T20:20:57.888841+00:00",
+      "evidence": {
+        "paragraph_id": "p6",
+        "content_sha256": "298fed037462a356d8c773dfb3e0521974eb87256e1253d89cbe72505b18f0e5"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Izalco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
     },
     {
@@ -2408,6 +2432,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "739b47eea8d13b00469052db7c24acfd3661dddf3e108e3562114cd4e8d14fa0",
+      "source_url": "https://www.revistafactum.com/onu-impunidad-pnc/",
+      "publisher": "Revista Factum",
+      "published_date": "2018-02-06",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T20:20:55.968119+00:00",
+      "source_checked_at": "2026-10-14T20:20:55.968119+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "43dd7c6568d7c1d61c81630ebf5f753f1fcba46eb12570c6018a2ea0d56497f2"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -4336,6 +4384,47 @@
       }
     },
     {
+      "candidate_id": "cc4ccb1de67db524cb4d6f4cd6587761cab6a30aaf2663ae57126329861e87ec",
+      "source_url": "https://gatoencerrado.news/2018/02/03/el-drama-de-ser-minero-artesanal-en-el-pais-que-prohibio-la-mineria/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-02-03",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T20:20:50.569766+00:00",
+      "source_checked_at": "2026-10-14T20:20:50.569766+00:00",
+      "evidence": {
+        "content_sha256": "ac720aed9b3c17198bf62524ec92d13a889f040d705eb3b17489751aecc76d08"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "La Unión",
+          "paragraph_id": "p3",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Santa Rosa de Lima",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Vicente",
+          "paragraph_id": "p17",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Sebastián",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "d18b61a74d084d347d69a711c2df9747d43bb121c2d3badb7f1aa686dfcf7601",
       "source_url": "https://www.diariocolatino.com/apes-condena-ataque-contra-periodista-radial-en-oriente-salvadoreno/",
       "publisher": "Diario Co Latino",
@@ -4599,6 +4688,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
+    },
+    {
+      "candidate_id": "df36edd9401e8b7eda1ea973d620f7cfffd45b4e72b81fc41836345deef3d0a8",
+      "source_url": "https://historico.elsalvador.com/historico/446545/san-juan-opico-despide-al-agente-asesinado-por-pandilla.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-04",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T20:20:50.720213+00:00",
+      "source_checked_at": "2026-10-14T20:20:50.720213+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "b32869f46a0b75b40819735101712f5cf6c5810400921b8ca4fae50c1c688b1a"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Juan Opico",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
     },
     {

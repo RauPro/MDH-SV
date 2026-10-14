@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T19:19:55.497413+00:00",
+  "generated_at": "2026-10-14T20:20:34.174361+00:00",
   "assessment_counts": {
     "candidates": 10792,
-    "evaluated": 3898,
-    "relevant": 1341,
-    "excluded": 2555,
+    "evaluated": 3978,
+    "relevant": 1366,
+    "excluded": 2610,
     "uncertain": 2,
-    "pending": 6894
+    "pending": 6814
   },
   "selections": [
     {
@@ -317,6 +317,33 @@
       }
     },
     {
+      "candidate_id": "02226ca881b6fecbffd3738573843a1b64e5c3820574f5038373cfe4aa5f0da4",
+      "source_url": "https://www.diariocolatino.com/firman-iniciativa-garantizar-derechos-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:05.705455-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a74a5f307e4252257ede0e8192c20b3e18aab11bee6e85f395491a4e7d02ffdd",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "025102c7d0e1cb2782e9d30d25f710ca9d3400254142c46ad51617fcc67906b0",
       "source_url": "https://www.diariocolatino.com/excombatientes-dirigentes-sindicales-exigen-al-gobierno-satisfacer-demandas/",
       "publisher": "Diario Co Latino",
@@ -369,6 +396,35 @@
             "p5",
             "p8",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "027b90d08547513e0baeb88aabf5c73d92b14228a5bca18a876be7b8da3811e6",
+      "source_url": "https://historico.elsalvador.com/historico/445240/diputada-cristina-lopez-exige-a-director-de-policia-informacion-sobre-agente-desaparecida.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:10:08.689126-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6df3c56e05a3c7b961b8dde6b81cc19d72372294e2b2279860df158a72034222",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p7",
+            "p8"
           ]
         }
       }
@@ -764,6 +820,35 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "05ff793eadc8bd99dcdfa5d40972ce95c3f512be6b961db547037c553d8e28cd",
+      "source_url": "https://historico.elsalvador.com/historico/448777/pandilleros-le-asesinan-tres-hijos-a-una-madre-y-los-encuentran-semisepultados-en-santa-ana.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:16:03.192715-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "58d0d2f3a3bb48b1b0e40bc33b26b700ab3df39dc6a38c008c5e4b9bda58c0ac",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p16",
+            "p17",
+            "p21"
           ]
         }
       }
@@ -3104,6 +3189,35 @@
       }
     },
     {
+      "candidate_id": "1759986b5f902f630ea18765f95166e61a3cff76d10086214d0af84efba1023d",
+      "source_url": "https://historico.elsalvador.com/historico/446937/relatora-de-la-onu-cuestiona-medidas-extraordinarias-y-tilda-de-espantosa-situacion-de-carceles.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:12:58.668751-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a3d15a1e3b3e413cf2824bebd96b3581eb5ddbc300a11aaa9d9127c0de8177e9",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p18",
+            "p20"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "17782a3d8822547b65d140303f81644f1d7dd0e0778876b1b75dbcf8549b4c12",
       "source_url": "https://www.diariocolatino.com/alza-homicidios-responde-pugna-estructuras-la-ms/",
       "publisher": "Diario Co Latino",
@@ -4359,6 +4473,37 @@
       }
     },
     {
+      "candidate_id": "1ec48d239d63fbb223cd41d577395e2b69f3dad5ceb5641fc6018c3fdc1b774a",
+      "source_url": "https://www.diariocolatino.com/estamos-construyendo-sistema-penitenciario-humano-marco-tulio-lima/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:05.705455-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "298fed037462a356d8c773dfb3e0521974eb87256e1253d89cbe72505b18f0e5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "1f13551d1cd15e498b3d540d38f83e752d23e6ce9fe7b220fdc49e557409f863",
       "source_url": "https://www.diariocolatino.com/unidad-de-justicia-juvenil-realiza-taller-con-periodistas/",
       "publisher": "Diario Co Latino",
@@ -4782,6 +4927,39 @@
             "p7",
             "p10",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "226d86d47ea17d07241411189686913127dc159ae1c7f4d96f990d83362dc9f3",
+      "source_url": "https://historico.elsalvador.com/historico/446845/defensores-del-tps-tras-estatus-definitivo-para-los-salvadorenos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:05.705455-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "671a6082f94b308cde116ba9eba7763f5a801c2482bef3d2c77fd15cbcee3d08",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p5",
+            "p8",
+            "p16"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6",
+            "p8",
+            "p16"
           ]
         }
       }
@@ -6287,6 +6465,34 @@
             "p1",
             "p5",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2d4e621cbf3923f9854e4e9cf416491cc074516f216dea03e44467347719e238",
+      "source_url": "https://www.diariocolatino.com/salvador-avanza-garantizar-derechos-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:54.382142-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1f4263e067aca91e221d03bc9f990d8b577fa95109d70565e02d07f0f81e5193",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p8"
           ]
         }
       }
@@ -8087,6 +8293,36 @@
             "p3",
             "p9",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "389a3cb9c3c88bb9155ad9494258955710b4d40faef4ab5b59ffa0ae6ece8bbd",
+      "source_url": "https://www.diariocolatino.com/empresa-privada-representa-60-violaciones-derechos-laborales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:10:08.689126-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d6ecf89c284f6f79653137afbaf534eb65e313a3ebcf7e2f3743364f3bd6457a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p10"
           ]
         }
       }
@@ -9987,6 +10223,31 @@
             "p9",
             "p11",
             "p19"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "46574cbd841328d442a49cd5f2ccea6eb9cd19c5938a929742e27ec1b37c840c",
+      "source_url": "https://www.diariocolatino.com/fiscalia-solicitara-colaboracion-internacional-ubicar-agente-desaparecida/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:54.382142-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8b6c8ccfe08e863f3b11564e92e337a5474f027b337357c4e9e8cac5d5530d5f",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
@@ -15743,6 +16004,37 @@
       }
     },
     {
+      "candidate_id": "6bbc04c607438ff177c9f8c457c22270f689dde973732c1d07ee569a23cc1c5b",
+      "source_url": "https://www.diariocolatino.com/sistema-penitenciario-no-esta-deshumanizado-marco-tulio-lima/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:05.705455-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7091773a59a3d49f7f4439dbc412d635417dd20c06122b71fd2edcd21d388c69",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "6bf3861a600152dbca9b3b870239d39962e095526a25a7926809767cab4552f4",
       "source_url": "https://www.diariocolatino.com/muere-defensora-de-los-derechos-de-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -17470,6 +17762,42 @@
             "p4",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "739b47eea8d13b00469052db7c24acfd3661dddf3e108e3562114cd4e8d14fa0",
+      "source_url": "https://www.revistafactum.com/onu-impunidad-pnc/",
+      "publisher": "Revista Factum",
+      "published_date": "2018-02-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:05.705455-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "43dd7c6568d7c1d61c81630ebf5f753f1fcba46eb12570c6018a2ea0d56497f2",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p5",
+            "p7",
+            "p21"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p9",
+            "p21",
+            "p29",
+            "p30",
+            "p32"
           ]
         }
       }
@@ -19733,6 +20061,35 @@
       }
     },
     {
+      "candidate_id": "82687642c51ae06015153724d227bfb3bb2789cd8128f1bfbf9fea1f793b06c7",
+      "source_url": "https://www.diariocolatino.com/relator-defiende-rol-los-defensores-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:16:03.192715-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c958e008dd247bb94e16cc6f1cfe059a53697edf573bcb8b04254916c4a0b83b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "82a8cdd9f6122a2fedcbf33839244d3c65c6e03ac8a27d58c2ec74e91d9851b5",
       "source_url": "https://www.diariocolatino.com/probusqueda-presenta-siete-habeas-corpus-de-victimas-de-guinda-de-mayo/",
       "publisher": "Diario Co Latino",
@@ -21184,6 +21541,37 @@
       }
     },
     {
+      "candidate_id": "8b54940e39362a528998ec135c46ac5499d769ec486b9ce5b9e6573a49312132",
+      "source_url": "https://www.diariocolatino.com/sanchez-ceren-reitera-compromiso-respeto-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:10:08.689126-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "48a4dd526b0a90345f6d906f27bb425c2d4bd3b59ac22925c69730e6fe25582e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "8b564037bdca149f685a8f08df79e81a8ffdd8e7bab4751ab1f2898cac822d6f",
       "source_url": "https://www.diariocolatino.com/sindicalistas-comuna-revisaran-incremento-del-escalafon/",
       "publisher": "Diario Co Latino",
@@ -22447,6 +22835,33 @@
             "p7",
             "p13",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "950c4689ae1925a74b333ff70ddb33edc0a2e48a01f200fa918bb80cca3029ea",
+      "source_url": "https://historico.elsalvador.com/historico/446624/105-anos-han-pasado-del-asesinato-de-un-presidente-salvadoreno.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:12:58.668751-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3cd8b154965ca480e0f99044510a98e16d6c5c0796ed7f32583dc39cff3b6f32",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p8",
+            "p13"
           ]
         }
       }
@@ -25304,6 +25719,33 @@
       }
     },
     {
+      "candidate_id": "a544581481b03bf06504d5b126d57b221c3cc588c6d7360bb21fbfa6863c20bc",
+      "source_url": "https://historico.elsalvador.com/historico/448556/familias-de-desaparecidos-en-mexico-se-quejan-de-que-nadie-pregunte-por-ellos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:16:03.192715-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "74a654393d0528f0dd7effd80e6a9d800cf6eacfaf87f1a1d505f0daa3ea3259",
+          "jurisdiction_paragraph_ids": [
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p11",
+            "p12",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a55bbdcfb7c4cfe0fc37eb13faba666a942e1e4b9ef94c96b212e1fed621c4d7",
       "source_url": "https://www.diariocolatino.com/sindicalistas-exigen-destitucion-procuradora-la-defensa-los-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -25352,6 +25794,34 @@
           "relevance_paragraph_ids": [
             "p2",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a58524166aae239ef7fa444fc75f372e48a370a645b7324b7abb5d97795105ab",
+      "source_url": "https://historico.elsalvador.com/historico/446534/otro-policia-asesinado-en-una-emboscada-de-pandillas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:12:58.668751-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cdede23d813ea61aea320e0b90a05456bc98a60efd90deb7643d70ea48acdba3",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p12"
           ]
         }
       }
@@ -27632,6 +28102,36 @@
       }
     },
     {
+      "candidate_id": "b76a24d8dd51e6faf6ad4b4f0e9a5d527220a5211a7bf063cf476167ecf45712",
+      "source_url": "https://www.diariocolatino.com/comunidad-las-neblinas-exige-fgr-detener-proceso-desalojo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:10:08.689126-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "042f3ffc9785c0a6a73b3cbbb87fb8b26b1e8bc0c4117d06cebb4966eca65c22",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b773ae6f57e7049fc3386dffde4cf1221e578ae94a18321f69359d4fc38d6703",
       "source_url": "https://www.diariocolatino.com/una-censura-del-comite-tan-escandalosa-como-el-doping/",
       "publisher": "Diario Co Latino",
@@ -29754,6 +30254,37 @@
       }
     },
     {
+      "candidate_id": "c46f7bb5ed1432914c4459c0130293f6a659062ef5f9abf688e151dd8a1bd5d5",
+      "source_url": "https://historico.elsalvador.com/historico/445937/sindicalistas-de-economia-reclaman-un-bono-de-1000-vales-de-transporte-y-utiles-escolares.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:10:08.689126-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ec8c45c7bf05154508000663e796e72175b2ad261938435fbaa7e4004c17c9ee",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p7",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c4823104b5239c0ceccfbe64d6c3a222345cd81eff3218030d9a90e0bcead6db",
       "source_url": "https://www.diariocolatino.com/comunidad-lgbti-exige-justicia-por-homicidios-de-algunos-de-sus-miembros/",
       "publisher": "Diario Co Latino",
@@ -30945,6 +31476,39 @@
       }
     },
     {
+      "candidate_id": "cc4ccb1de67db524cb4d6f4cd6587761cab6a30aaf2663ae57126329861e87ec",
+      "source_url": "https://gatoencerrado.news/2018/02/03/el-drama-de-ser-minero-artesanal-en-el-pais-que-prohibio-la-mineria/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:10:08.689126-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ac720aed9b3c17198bf62524ec92d13a889f040d705eb3b17489751aecc76d08",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p10",
+            "p11",
+            "p21",
+            "p26",
+            "p28"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "cc67330bec5de69f67d225087964111759115ea04a7ac7103cfa5b5b7469e895",
       "source_url": "https://historico.elsalvador.com/historico/169887/unos-6210-ninos-migrantes-salvadorenos-fueron-detenidos-en-mexico.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -31815,6 +32379,34 @@
       }
     },
     {
+      "candidate_id": "d4cc941f9acebfa324af89d2cf75c2eabce7b3e379afa8945a2cb4b6e5a344a8",
+      "source_url": "https://historico.elsalvador.com/historico/448151/relator-de-onu-pide-proteger-a-defensores-dd-hh.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:54.382142-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a1bcb22765ad42ea4b6c2183de4d600b94af6c323527d8a6393527ac6eeb1638",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "d50e5ab1d86be6719489a2716503b2b13a3c64df78a3b77421da9d16d4842ac5",
       "source_url": "https://www.diariocolatino.com/juzgado-decreta-detencion-para-implicados-en-desordenes-en-alcaldia-2/",
       "publisher": "Diario Co Latino",
@@ -32627,6 +33219,32 @@
       }
     },
     {
+      "candidate_id": "db19c7bfaf4649223de8f6b808f7a2010be2fb21f5755f21e8504035466495f0",
+      "source_url": "https://historico.elsalvador.com/historico/447238/35-anos-de-carcel-para-hombre-que-mato-a-su-pareja-a-punaladas-en-mejicanos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:05.705455-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "07058d981d67578fe88a72eed81801523d078a1e74e127eb4ff24bada556c4f4",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "db304117ff6dd5dd09a9dda7ea11d423de8fadde0adbccdc7cb6fdb8e736e4ca",
       "source_url": "https://www.diariocolatino.com/feligreses-participan-en-acto-religioso-en-capilla-donde-asesinaron-a-romero-2/",
       "publisher": "Diario Co Latino",
@@ -33049,6 +33667,33 @@
       }
     },
     {
+      "candidate_id": "df36edd9401e8b7eda1ea973d620f7cfffd45b4e72b81fc41836345deef3d0a8",
+      "source_url": "https://historico.elsalvador.com/historico/446545/san-juan-opico-despide-al-agente-asesinado-por-pandilla.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:12:58.668751-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b32869f46a0b75b40819735101712f5cf6c5810400921b8ca4fae50c1c688b1a",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p14",
+            "p17"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "df6b68b6455e8a7a8cb4eeb919e6d3bfcd213e086cc0f5d8dd5392bdcb121f44",
       "source_url": "https://www.diariocolatino.com/dia-internacional-de-las-personas-desaparecidas/",
       "publisher": "Diario Co Latino",
@@ -33104,6 +33749,35 @@
             "p4",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "df9f9bc47359d3bf1dfbdae2b4e8640e03bed991415f0ba55e25f48e101c6b58",
+      "source_url": "https://historico.elsalvador.com/historico/447749/fiscalia-indaga-muertes-en-carceles-por-regimen-de-seguridad.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:54.382142-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6f3307d782db9f37a215806baf88be1f24f70f41071d325ec67ad1421bbc3c66",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p11",
+            "p12"
           ]
         }
       }
@@ -33903,6 +34577,34 @@
             "p2",
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e59674d6ecaadbe555c3a382b9a22b6762c80842d02693c0bd4ec38e909b3e56",
+      "source_url": "https://www.diariocolatino.com/reingenieria-del-sistema-penitenciario-enfoque-del-pess-oscar-ortiz/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:54.382142-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "35f5c0f6bd786fb74ee4eac2301cc4323ac5065eb3de28acbf7560864a1b5cef",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p8"
           ]
         }
       }
@@ -35335,6 +36037,35 @@
             "p14",
             "p15",
             "p16"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f12f0a2f8752872bde989af612aa7e435cec8e907c54cc97a9a9ce4c39dbba3d",
+      "source_url": "https://historico.elsalvador.com/historico/448011/agresor-de-agente-desaparecida-en-la-lista-de-los-100-mas-buscados-de-la-pnc.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T14:14:54.382142-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "205c1258351ea15ba999570e3aea8a1961b53d926c3476966384a9e5fefba4d7",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p8",
+            "p9"
           ]
         }
       }
