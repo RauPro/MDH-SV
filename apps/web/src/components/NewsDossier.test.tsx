@@ -4,6 +4,7 @@ import { pendingNewsDossier } from '../../../../shared/news-dossier.mjs';
 import { validateNewsSelection } from '../../../../shared/news-selection.mjs';
 import fixture from '../__fixtures__/newsArchive.json';
 import { NewsDossier } from './NewsDossier';
+import type { NewsProcessingEntryStatus } from '../../../../shared/news-processing.mjs';
 
 const reference = fixture.records[0];
 const selection = validateNewsSelection(reference.selection);
@@ -36,6 +37,7 @@ describe('public pertinence and editorial dossier state remain distinct', () => 
   it.each(['loading', 'unavailable'] as const)('does not assert absence of public approval when its state is %s', reviewState => {
     render(<NewsDossier dossier={pendingNewsDossier(reference)} selection={selection} reviewState={reviewState}/>);
     expect(screen.queryByText(/Ficha pendiente de revisión pública/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/todavía no tienen una versión revisada publicada/)).not.toBeInTheDocument();
     expect(screen.getByText(reviewState === 'loading' ? /Estamos comprobando si hay una ficha/ : /No se pudo comprobar si hay una ficha/)).toBeInTheDocument();
     expect(screen.getByRole('region', { name: 'Selección por pertinencia' })).toHaveTextContent('Seleccionada');
   });
@@ -59,5 +61,56 @@ describe('public pertinence and editorial dossier state remain distinct', () => 
     expect(screen.getByText('Víctima o personas afectadas').closest('.dossier-field')).toHaveTextContent('Dato no mencionado en el texto analizado');
     expect(screen.getByRole('region', { name: 'Selección por pertinencia' })).toHaveTextContent('ficha revisada editorialmente');
     expect(screen.queryByText(/La selección por pertinencia no indica que estos campos/)).not.toBeInTheDocument();
+  });
+});
+
+
+describe('public extraction progress', () => {
+  it.each([
+    ['pending', 'Pendiente de extracción', 'La ficha todavía no se ha generado.'],
+    ['generated', 'Ficha generada · Pendiente de revisión', 'Ya se generó una ficha, que puede ser parcial.'],
+    ['source_unavailable', 'Fuente no accesible para extracción', 'No se pudo acceder a la fuente'],
+    ['error', 'Extracción con error', 'no se completó correctamente'],
+    ['unknown', 'Estado de extracción sin confirmar', 'No hay un estado de extracción confirmado'],
+  ] as const)('distinguishes %s without exposing a private field', (status, label, explanation) => {
+    render(<NewsDossier dossier={pendingNewsDossier(reference)} selection={selection} processingState="ready" processingStatus={status}/>);
+    const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
+    expect(within(sheet).getAllByText(label)).toHaveLength(1);
+    expect(sheet).toHaveTextContent(explanation);
+    const summary = screen.getByText('Resumen').closest('.dossier-field')! as HTMLElement;
+    expect(within(summary).getAllByText('Sin dato revisado disponible')).toHaveLength(1);
+    expect(within(summary).getByRole('term')).toHaveTextContent(/^Resumen$/);
+  });
+
+  it.each(['loading', 'unavailable'] as const)('never calls an unconfirmed %s load pending', processingState => {
+    render(<NewsDossier dossier={pendingNewsDossier(reference)} processingState={processingState} processingStatus="pending"/>);
+    expect(screen.queryByText('Pendiente de extracción')).not.toBeInTheDocument();
+    expect(screen.getByText(processingState === 'loading' ? 'Comprobando extracción' : 'Estado de extracción no disponible')).toBeInTheDocument();
+  });
+
+  it('does not infer pending when the feed has no entry', () => {
+    render(<NewsDossier dossier={pendingNewsDossier(reference)} processingState="ready"/>);
+    expect(screen.getByText('Estado de extracción sin confirmar')).toBeInTheDocument();
+    expect(screen.queryByText('Pendiente de extracción')).not.toBeInTheDocument();
+  });
+
+  it('keeps private values protected even when the public metadata confirms generation', () => {
+    const dossier = pendingNewsDossier(reference);
+    dossier.extraction_status = 'processed';
+    dossier.fields.summary = { status: 'reported', value: 'PRIVATE_SUMMARY_SENTINEL', evidence_refs: [], note: null };
+    render(<NewsDossier dossier={dossier} processingState="ready" processingStatus="generated"/>);
+    expect(screen.getByText('Ficha generada · Pendiente de revisión')).toBeInTheDocument();
+    expect(document.body.textContent).not.toContain('PRIVATE_SUMMARY_SENTINEL');
+  });
+
+  it.each(['pending', 'generated', 'error', 'unknown'] as NewsProcessingEntryStatus[])('gives a reviewed dossier priority over %s metadata', processingStatus => {
+    const dossier = pendingNewsDossier(reference);
+    Object.assign(dossier, { human_reviewed: true, extraction_status: 'processed', reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fuente y datos contrastados en revisión editorial.' });
+    dossier.fields.summary = { status: 'reported', value: 'Resumen revisado y aprobado.', evidence_refs: ['bibliography'], note: null };
+    render(<NewsDossier dossier={dossier} processingState="ready" processingStatus={processingStatus}/>);
+    expect(screen.getByText('Resumen revisado y aprobado.')).toBeInTheDocument();
+    expect(screen.getByText(/Ficha revisada por reviewer/)).toBeInTheDocument();
+    expect(screen.queryByText('Ficha generada · Pendiente de revisión')).not.toBeInTheDocument();
+    expect(screen.queryByText('Pendiente de extracción')).not.toBeInTheDocument();
   });
 });

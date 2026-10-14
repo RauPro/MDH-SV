@@ -13,6 +13,8 @@ import { newsDossierFor, parsePublishedNewsDossiers, type NewsDossier as Dossier
 import { parsePublishedNewsLocations, validateLocationBindings, type NewsLocation } from '../../../../shared/news-location.mjs';
 
 import { isSelectedNewsReference } from '../../../../shared/news-selection.mjs';
+import { newsProcessingFor, parseNewsProcessing, type NewsProcessingEntry } from '../../../../shared/news-processing.mjs';
+import { newsProcessingPresentation, type PublicLoadState } from '../newsProcessingPresentation';
 
 const PAGE_SIZE = 30;
 const emptyFilters: NewsFilters = { query: '', publisher: '', topic: '', from: '', to: '', scope: '' };
@@ -34,6 +36,10 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
   const [dossiers, setDossiers] = useState<Map<string, Dossier>>(new Map());
   const [dossierState, setDossierState] = useState<'loading' | 'ready' | 'unavailable'>('loading');
   const [dossierAttempt, setDossierAttempt] = useState(0);
+  const [processing, setProcessing] = useState<Map<string, NewsProcessingEntry>>(new Map());
+  const [processingState, setProcessingState] = useState<PublicLoadState>('loading');
+  const [processingAttempt, setProcessingAttempt] = useState(0);
+  const [processingGeneratedAt, setProcessingGeneratedAt] = useState<string | null>(null);
   const [locations, setLocations] = useState<Map<string, NewsLocation>>(new Map());
   const [locationState, setLocationState] = useState<'loading' | 'ready' | 'unavailable'>('loading');
   const [locationAttempt, setLocationAttempt] = useState(0);
@@ -72,6 +78,20 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
       .finally(() => window.clearTimeout(timer));
     return () => { active = false; controller.abort(); window.clearTimeout(timer); };
   }, [locationAttempt]);
+  useEffect(() => {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 12000);
+    let active = true;
+    fetch('/archive/processing.json', { signal: controller.signal }).then(async response => {
+      if (!response.ok) throw new Error('Public extraction status unavailable');
+      const payload = await response.json();
+      const index = parseNewsProcessing(payload);
+      return { index, generatedAt: payload.generated_at as string };
+    }).then(({ index, generatedAt }) => { if (active) { setProcessing(index); setProcessingGeneratedAt(generatedAt); setProcessingState('ready'); } })
+      .catch(() => { if (active) { setProcessing(new Map()); setProcessingGeneratedAt(null); setProcessingState('unavailable'); } })
+      .finally(() => window.clearTimeout(timer));
+    return () => { active = false; controller.abort(); window.clearTimeout(timer); };
+  }, [processingAttempt]);
   const boundLocations = useMemo(() => {
     if (!archive || locationState !== 'ready') return null;
     try { return validateLocationBindings(locations, archive.records); } catch { return null; }
@@ -101,9 +121,11 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
   const selectedDossier = selected ? newsDossierFor(selected, dossiers) : null;
   const selectedLocation = selected ? newsTerritoryItem(selected, dossiers, usableLocations).automaticLocation : null;
   const selectedLocationFromSource = selectedLocation?.method.startsWith('source_') ?? false;
-  const reviewLabel = (reviewed: boolean) => reviewed ? 'Ficha revisada editorialmente'
-    : dossierState === 'ready' ? 'Ficha pendiente de revisión pública'
-      : dossierState === 'loading' ? 'Comprobando revisión pública' : 'Revisión pública no disponible';
+  const processingLabel = (reference: NewsReference) => {
+    const dossier = newsDossierFor(reference, dossiers);
+    return newsProcessingPresentation({ humanReviewed: dossier.human_reviewed, reviewState: dossierState,
+      processingState, status: newsProcessingFor(reference, processingState === 'ready' ? processing : undefined, dossier) }).label;
+  };
   const openRecord = (id: string) => {
     flushSync(() => setSelected(null));
     onOpenRecord(id);
@@ -117,9 +139,12 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
     <NewsClassificationProgress gate={archive.policy.selection_gate}/>
     {isMonitor && <button className="text-button news-results-link" onClick={() => { resultsRef.current?.focus({ preventScroll: true }); resultsRef.current?.scrollIntoView?.({ block: 'start', behavior: 'smooth' }); }}>Ver las fichas de noticias</button>}
     {archive.coverage.sources.some(source => source.collection?.access === 'restricted') && <p className="filter-note">Acceso automatizado restringido: {archive.coverage.sources.filter(source => source.collection?.access === 'restricted').map(source => source.publisher).join(', ')}. Sus noticias no se incorporan automáticamente.</p>}
-    <aside className="notice archive-detail-note"><div><strong>Cada noticia tiene una ficha para consultar.</strong> Los campos estructurados se publican tras la revisión editorial de la ficha. La referencia bibliográfica y la selección por pertinencia pueden consultarse antes. Una selección automática no confirma los hechos ni una violación. Estas noticias no se suman a los casos del monitor.</div></aside>
+    <aside className="notice archive-detail-note"><div><strong>Cada noticia muestra el estado de su ficha.</strong> Se distingue si está pendiente de extracción o ya fue generada y espera revisión. Los campos estructurados se publican tras la revisión editorial de la ficha. La referencia bibliográfica y la selección por pertinencia pueden consultarse antes. Una selección automática no confirma los hechos ni una violación. Estas noticias no se suman a los casos del monitor.</div></aside>
     {dossierState === 'loading' && <p className="filter-note" role="status">Comprobando fichas públicas revisadas…</p>}
-    {dossierState === 'unavailable' && <p className="filter-note" role="status">No se pudieron comprobar las fichas públicas revisadas. Se muestran los datos bibliográficos y campos pendientes. <button className="text-button" onClick={() => { setDossierState('loading'); setDossierAttempt(value => value + 1); }}>Reintentar fichas públicas</button></p>}
+    {dossierState === 'unavailable' && <p className="filter-note" role="status">No se pudieron comprobar las fichas públicas revisadas. Se mantienen disponibles los datos bibliográficos. <button className="text-button" onClick={() => { setDossierState('loading'); setDossierAttempt(value => value + 1); }}>Reintentar fichas públicas</button></p>}
+    {processingState === 'ready' && processingGeneratedAt && <p className="filter-note">Estado de fichas actualizado: {archiveInstant(processingGeneratedAt)} (El Salvador).</p>}
+    {processingState === 'loading' && <p className="filter-note" role="status">Comprobando estados de extracción…</p>}
+    {processingState === 'unavailable' && <p className="filter-note" role="status">No se pudieron comprobar los estados de extracción. Esto no indica que las fichas estén sin procesar. <button className="text-button" onClick={() => { setProcessingState('loading'); setProcessingAttempt(value => value + 1); }}>Reintentar estados de extracción</button></p>}
     {locationState === 'loading' && <p className="filter-note" role="status">Comprobando ubicaciones automáticas…</p>}
     {(locationState === 'unavailable' || (locationState === 'ready' && archive && !boundLocations)) && <p className="filter-note" role="status">No se pudieron comprobar las ubicaciones automáticas. Las noticias siguen disponibles. <button className="text-button" onClick={() => { setLocationState('loading'); setLocationAttempt(value => value + 1); }}>Reintentar ubicaciones</button></p>}
     {!isMonitor && <details className="archive-coverage"><summary>Ver cobertura por medio y mes</summary><p>{archive.policy.selection_method} «API recorrida» indica que se consultaron las páginas disponibles del medio; no acredita un archivo exhaustivo ni una revisión del contenido.</p><p>Archivo generado: {archiveInstant(archive.generated_at)} (El Salvador). Antecedente de investigación: artículo incorporado a IEEE Xplore el {formatDate(archive.paper.publication_date)}. {archive.paper.publication_date_basis} La fecha del paper no determina el inicio del archivo histórico.</p>
@@ -144,10 +169,10 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
       </ul></div>}
       {department && mapAvailable && <p className="filter-note" role="status">Filtro del mapa: {department === UNKNOWN_DEPARTMENT ? 'sin ubicación pública en El Salvador' : department}.</p>}
     </>}
-    <div className="results-heading archive-results" ref={resultsRef} tabIndex={-1} aria-label="Resultados de noticias"><span role="status">{filtered.length} {isMonitor ? (filtered.length === 1 ? 'ficha de noticia' : 'fichas de noticias') : (filtered.length === 1 ? 'noticia seleccionada' : 'noticias seleccionadas')}</span><span>Más recientes primero · por fecha de publicación</span></div>
-    {filtered.length > 0 ? <><div className="record-list">{filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE).map(reference => <article className="record archive-record" key={reference.id}><div className="record-top"><span className="tag">Referencia de prensa</span><span className="tag">{reference.selection.human_reviewed ? 'Pertinencia revisada' : 'Pertinencia automática · Sin revisar'}</span>{newsTerritoryItem(reference, dossiers, usableLocations).locationKind === 'automated_unreviewed' && <span className="news-location-badge automatic">Ubicación automática · Sin revisar</span>}{newsTerritoryItem(reference, dossiers, usableLocations).locationKind === 'reviewed' && <span className="news-location-badge reviewed">Ubicación revisada</span>}<span className="record-id">{reviewLabel(newsDossierFor(reference, dossiers).human_reviewed)}</span></div><div className="record-body"><div><p className="record-category">{reference.publisher}</p><h3><button onClick={() => setSelected(reference)}>{reference.title}{reference.title_truncated ? '…' : ''}</button></h3><p className="archive-topics">{reference.topics.map(topicLabel).join(' · ')}</p></div><button className="open-record" aria-label={`Consultar noticia: ${reference.title}`} onClick={() => setSelected(reference)}><ArrowUpRight size={22} aria-hidden="true"/></button></div><div className="record-footer"><span>Publicación: {formatDate(reference.published_date)}</span><a href={reference.source_url} target="_blank" rel="noopener noreferrer">Leer en {reference.publisher}<ArrowUpRight size={13} aria-label="abre en otra pestaña"/></a></div></article>)}</div><nav className="archive-pagination" aria-label="Paginación de noticias"><button disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>Anterior</button><span>Página {currentPage} de {pages}</span><button disabled={currentPage === pages} onClick={() => changePage(currentPage + 1)}>Siguiente</button></nav></> : <div className="empty"><h3>{invalidDates ? 'Revisa el rango de fechas' : 'No hay noticias con estos filtros'}</h3><p>La ausencia de referencias no implica ausencia de violaciones ni cobertura completa.</p><button onClick={reset}>Restablecer búsqueda de noticias</button></div>}
+    <div className="results-heading archive-results" ref={resultsRef} tabIndex={-1} aria-label="Resultados de noticias"><span role="status">{filtered.length} {filtered.length === 1 ? 'noticia seleccionada' : 'noticias seleccionadas'}</span><span>Más recientes primero · por fecha de publicación</span></div>
+    {filtered.length > 0 ? <><div className="record-list">{filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE).map(reference => <article className="record archive-record" key={reference.id}><div className="record-top"><span className="tag">Referencia de prensa</span><span className="tag">{reference.selection.human_reviewed ? 'Pertinencia revisada' : 'Pertinencia automática · Sin revisar'}</span>{newsTerritoryItem(reference, dossiers, usableLocations).locationKind === 'automated_unreviewed' && <span className="news-location-badge automatic">Ubicación automática · Sin revisar</span>}{newsTerritoryItem(reference, dossiers, usableLocations).locationKind === 'reviewed' && <span className="news-location-badge reviewed">Ubicación revisada</span>}<span className="record-id">{processingLabel(reference)}</span></div><div className="record-body"><div><p className="record-category">{reference.publisher}</p><h3><button onClick={() => setSelected(reference)}>{reference.title}{reference.title_truncated ? '…' : ''}</button></h3><p className="archive-topics">{reference.topics.map(topicLabel).join(' · ')}</p></div><button className="open-record" aria-label={`Consultar noticia: ${reference.title}`} onClick={() => setSelected(reference)}><ArrowUpRight size={22} aria-hidden="true"/></button></div><div className="record-footer"><span>Publicación: {formatDate(reference.published_date)}</span><a href={reference.source_url} target="_blank" rel="noopener noreferrer">Leer en {reference.publisher}<ArrowUpRight size={13} aria-label="abre en otra pestaña"/></a></div></article>)}</div><nav className="archive-pagination" aria-label="Paginación de noticias"><button disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>Anterior</button><span>Página {currentPage} de {pages}</span><button disabled={currentPage === pages} onClick={() => changePage(currentPage + 1)}>Siguiente</button></nav></> : <div className="empty"><h3>{invalidDates ? 'Revisa el rango de fechas' : 'No hay noticias con estos filtros'}</h3><p>La ausencia de referencias no implica ausencia de violaciones ni cobertura completa.</p><button onClick={reset}>Restablecer búsqueda de noticias</button></div>}
     {selected && selectedDossier && <Dialog title={selectedDossier.source_title} onClose={() => setSelected(null)}>
-      <div className="dossier-meta"><span className="tag">Ficha de noticia</span><span className="tag">{reviewLabel(selectedDossier.human_reviewed)}</span></div>
+      <div className="dossier-meta"><span className="tag">Ficha de noticia</span></div>
       <h3>Referencia bibliográfica</h3><dl>
         <dt>Medio</dt><dd>{selected.publisher}</dd>
         <dt>Título de la fuente</dt><dd>{selectedDossier.source_title}</dd>
@@ -176,7 +201,7 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
         <p>Esta extracción automática no confirma el lugar de una violación ni ha sido revisada por una persona. Puede corresponder a una referencia secundaria del artículo. La ficha estructurada mantiene su propio estado de revisión.</p>
         <dl><dt>Fuente</dt><dd><a href={selectedLocation.source_url} target="_blank" rel="noopener noreferrer">{selectedLocation.publisher}<ArrowUpRight size={13} aria-label="abre en otra pestaña"/></a></dd><dt>Extracción</dt><dd>{archiveInstant(selectedLocation.extracted_at)} (El Salvador)</dd><dt>Fuente comprobada</dt><dd>{archiveInstant(selectedLocation.source_checked_at)} (El Salvador)</dd></dl>
       </section>}
-      <NewsDossier dossier={selectedDossier} selection={selected.selection} reviewState={dossierState}/>
+      <NewsDossier dossier={selectedDossier} selection={selected.selection} reviewState={dossierState} processingState={processingState} processingStatus={newsProcessingFor(selected, processingState === 'ready' ? processing : undefined, selectedDossier)}/>
       {linked.length > 0 && <><h3>Fichas de casos relacionadas</h3><p>La misma fuente está citada en estas fichas públicas. Su estado de revisión se muestra por separado; el enlace no valida automáticamente esta noticia.</p><div className="archive-linked-records">{linked.map(record => <button key={record.id} onClick={() => openRecord(record.id)}>{record.title} <ArrowUpRight size={14} aria-hidden="true"/></button>)}</div></>}
       <p className="filter-note">{archive.policy.rights}</p>
     </Dialog>}

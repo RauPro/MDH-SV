@@ -1,6 +1,8 @@
 import { pendingNewsDossier, type NewsDossier as Dossier, type NewsDossierFieldName } from '../../../../shared/news-dossier.mjs';
 import type { NewsSelection } from '../../../../shared/news-selection.mjs';
 import { formatDate } from '../catalog';
+import type { NewsProcessingStatus } from '../../../../shared/news-processing.mjs';
+import { newsProcessingPresentation, type PublicLoadState } from '../newsProcessingPresentation';
 
 const fieldLabels: Record<NewsDossierFieldName, string> = {
   summary: 'Resumen', category: 'Clasificación temática', alleged_violation: 'Presunto hecho violatorio',
@@ -17,14 +19,15 @@ const jurisdictionLabels = { SV: 'El Salvador según revisión', other: 'Fuera d
 const relevanceLabels = { relevant: 'Pertinente para seguimiento', not_relevant: 'Fuera del ámbito de seguimiento', unclear: 'Por determinar' };
 const typeLabels = { incident: 'Hecho individual reportado', aggregate: 'Reporte colectivo', publication: 'Informe de contexto' };
 
-export function NewsDossier({ dossier: supplied, selection, reviewState = 'ready' }: {
-  dossier: Dossier; selection?: NewsSelection; reviewState?: 'loading' | 'ready' | 'unavailable';
+export function NewsDossier({ dossier: supplied, selection, reviewState = 'ready', processingState = 'unavailable', processingStatus }: {
+  dossier: Dossier; selection?: NewsSelection; reviewState?: PublicLoadState; processingState?: PublicLoadState; processingStatus?: NewsProcessingStatus;
 }) {
   // A public selection can explain pertinence, but never unlock private fields.
   const dossier = supplied.human_reviewed ? supplied : pendingNewsDossier({
     id: supplied.candidate_id, source_url: supplied.source_url, title: supplied.source_title,
     publisher: supplied.publisher, published_date: supplied.published_date,
   });
+  const processing = newsProcessingPresentation({ humanReviewed: dossier.human_reviewed, reviewState, processingState, status: processingStatus });
   const jurisdiction = dossier.human_reviewed ? jurisdictionLabels[dossier.classification.jurisdiction]
     : selection ? 'Vínculo con El Salvador identificado en la fuente' : 'Sin evaluación pública disponible';
   const relevance = dossier.human_reviewed ? relevanceLabels[dossier.classification.relevance]
@@ -38,7 +41,7 @@ export function NewsDossier({ dossier: supplied, selection, reviewState = 'ready
           : formatDate(value.value);
     }
     return <div className={`dossier-field dossier-${value.status}`} key={name}>
-      <dt>{fieldLabels[name]}<span>{statusLabels[value.status]}</span></dt>
+      <dt>{fieldLabels[name]}{value.status === 'reported' && <span>{statusLabels.reported}</span>}</dt>
       <dd>{value.status === 'reported' ? display : statusLabels[value.status]}
         {value.note && <small>{value.note}</small>}
         {value.evidence_refs.length > 0 && <span className="field-evidence">{value.evidence_refs.map(id => {
@@ -51,9 +54,7 @@ export function NewsDossier({ dossier: supplied, selection, reviewState = 'ready
   return <section aria-label="Ficha estructurada de la noticia">
     <h3>Ficha estructurada de la noticia</h3>
     {dossier.human_reviewed ? <><p>Ficha revisada por {dossier.reviewed_by} el {formatDate(dossier.reviewed_at!)}. {extractionLabels[dossier.extraction_status]}.</p><p>{dossier.review_notes}</p></>
-      : <p>{reviewState === 'ready' ? 'Ficha pendiente de revisión pública. Los campos estructurados todavía no tienen una versión revisada publicada.'
-        : reviewState === 'loading' ? 'Estamos comprobando si hay una ficha pública revisada disponible.'
-          : 'No se pudo comprobar si hay una ficha pública revisada disponible.'} La selección por pertinencia no indica que estos campos hayan sido extraídos o revisados. Un campo sin dato publicado no significa que la noticia carezca de esa información.</p>}
+      : <div className="dossier-review"><p><strong>{processing.label}</strong></p><p>{processing.explanation}</p><p>{reviewState === 'ready' ? 'Los campos estructurados todavía no tienen una versión revisada publicada.' : 'No se mostrarán campos estructurados sin comprobar su versión pública.'} La selección por pertinencia no indica que estos campos hayan sido extraídos o revisados. Un campo sin dato publicado no significa que la noticia carezca de esa información.</p></div>}
     <section aria-label="Selección por pertinencia">
       <h4>Pertinencia de la noticia</h4>
       <p>{dossier.human_reviewed ? 'Evaluación de pertinencia de la ficha revisada editorialmente.'
