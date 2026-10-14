@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T06:24:49.933792+00:00",
+  "generated_at": "2026-10-14T07:19:32.776689+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 9816,
-      "selected": 972,
-      "evaluated": 2744,
-      "relevant": 972,
-      "excluded": 1770,
+      "selected": 1008,
+      "evaluated": 2856,
+      "relevant": 1008,
+      "excluded": 1846,
       "uncertain": 2,
-      "pending": 7072,
-      "evaluated_at": "2026-10-14T06:24:47.820161+00:00"
+      "pending": 6960,
+      "evaluated_at": "2026-10-14T07:19:31.544488+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-14",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 972,
+    "records": 1008,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 876,
+        "records": 906,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -1085,7 +1085,7 @@
           {
             "month": "2017-02",
             "status": "enumerated",
-            "records": 0,
+            "records": 23,
             "screen_version": 3,
             "posts_scanned": 856,
             "source_total_posts": 856,
@@ -1097,7 +1097,7 @@
           {
             "month": "2017-03",
             "status": "enumerated",
-            "records": 0,
+            "records": 7,
             "screen_version": 3,
             "posts_scanned": 1006,
             "source_total_posts": 1006,
@@ -2493,9 +2493,9 @@
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 33,
+        "records": 35,
         "first_published_date": "2014-09-21",
-        "last_published_date": "2016-12-27",
+        "last_published_date": "2017-02-10",
         "months": [
           {
             "month": "2010-01",
@@ -3520,7 +3520,7 @@
           {
             "month": "2017-02",
             "status": "enumerated",
-            "records": 0,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 5,
             "source_total_posts": 5,
@@ -4928,7 +4928,7 @@
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 21,
+        "records": 23,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
         "months": [
@@ -5955,7 +5955,7 @@
           {
             "month": "2017-02",
             "status": "enumerated",
-            "records": 0,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 26,
             "source_total_posts": 26,
@@ -14689,9 +14689,9 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 41,
+        "records": 43,
         "first_published_date": "2015-05-28",
-        "last_published_date": "2016-12-28",
+        "last_published_date": "2017-03-02",
         "months": [
           {
             "month": "2010-01",
@@ -15716,7 +15716,7 @@
           {
             "month": "2017-02",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 39,
             "source_total_posts": null,
@@ -15728,7 +15728,7 @@
           {
             "month": "2017-03",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 17,
             "source_total_posts": null,
@@ -20787,22 +20787,22 @@
         "month": "2017-02",
         "start_date": "2017-02-01",
         "end_date": "2017-02-28",
-        "records": 0,
+        "records": 28,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 23
           },
           {
             "source_id": "gatoencerrado",
             "status": "enumerated",
-            "records": 0
+            "records": 2
           },
           {
             "source_id": "factum",
             "status": "enumerated",
-            "records": 0
+            "records": 2
           },
           {
             "source_id": "el-faro",
@@ -20822,7 +20822,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -20830,12 +20830,12 @@
         "month": "2017-03",
         "start_date": "2017-03-01",
         "end_date": "2017-03-31",
-        "records": 0,
+        "records": 8,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 7
           },
           {
             "source_id": "gatoencerrado",
@@ -20865,7 +20865,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -26295,6 +26295,1636 @@
             "p18",
             "p32",
             "p33"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b681e67d8004fdc0ea96e1ae74b35ad1283f74897e311d2a861e1aa8076ca5fd",
+      "title": "“Hay otras personas que están detenidas y no le han hecho lo mismo que a mi”: Cardoza",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/otras-personas-estan-detenidas-no-le-hecho-lo-cardoza/",
+      "published_date": "2017-03-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131863,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:15:28.104706-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fef78a4646f80ec9d9444d84288217e4f57fb21b254eb202fb49c22375712983",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "eb641bea4c4b0326ac4a8d81921bd74131c86fa9b2e6578fd99fa4c9b791b56a",
+      "title": "Reynaldo Vásquez condenado a ocho años de cárcel",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/reynaldo-vasquez-condenado-ocho-anos-carcel/",
+      "published_date": "2017-03-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131781,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:15:28.104706-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ee0fb64afdf6d7cd100a40d8f000e3aa7557bdabc2da9bec9a3c016ce8a26eb8",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8191b207e44d9d78fa620d23279a00ecd221da892526688acdacfedd25b9522c",
+      "title": "Familias de colonia Las Nieblinas protestan por amenaza de desalojo",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/familias-colonia-las-nieblinas-protestan-amenaza-desalojo/",
+      "published_date": "2017-03-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131812,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:15:28.104706-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a4ba0c1dd25b465594e257533146053ab5ee79d05f7c9d27cfeae146eea9257c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6aff1c6c6ce07a0fa8a020463d5d8edbf072e8a28a8600a8a8ea028d20f0271a",
+      "title": "No a la minería",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/no-la-mineria/",
+      "published_date": "2017-03-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131746,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:15:28.104706-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b58841b0aacc26c30a3d6a7d2891c9873678384ce43256409f17b6407b56bd8d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e2f53ebb03d39eb03fb301c896158bb0b1d9f1ceadd494ce3ef1b3daf30320f0",
+      "title": "Pandilleros salvadoreńos en Texas son acusados de asesinato en rito satánico",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/318320/pandilleros-salvadorenos-en-texas-son-acusados-de-asesinato-en-rito-satanico.html",
+      "published_date": "2017-03-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-11T06:23:57.563217+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:14:17.108047-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "615ecf68711379b67ca030298b0a15f638382d46954e546fc2b32978801323f2",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "85ea8d85c3eb1e1ffcdaec37e7ec05f0029c4ca9f2dd13fea649cc01ba1e9926",
+      "title": "San Sebastián quiere resurgir de su herencia dejada por la minería industrializada",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/san-sebastian-quiere-resurgir-herencia-dejada-la-mineria-industrializada/",
+      "published_date": "2017-03-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131294,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:14:17.108047-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7c73d4b549059e1ad38350b19626f4c382152121be24fe42e570314bfedbc597",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p12",
+            "p14",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bd491d6c4f3d16af2ea649bd4d01c8e3f6cf513f0724814bc306bd878bdc9d72",
+      "title": "Frente Social Sindical Salvadoreño se pronuncia contra propuesta de pensiones de ICP",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/frente-social-sindical-salvadoreno-se-pronuncia-propuesta-pensiones-icp/",
+      "published_date": "2017-03-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131178,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:14:17.108047-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "71bf91268fd0aba531192fa6ef342c1fb8d6ff86ab65788ef93fffc416746205",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "09bee23712a63e53dd0a6deffbb6e9da4d5938fb88833e768dbffd6cdf890963",
+      "title": "ALTO A LA MINERÍA: “Los intereses públicos y sociales deben prevalecer sobre los intereses y particulares”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/alto-la-mineria-los-intereses-publicos-sociales-deben-prevalecer-los-intereses-particulares/",
+      "published_date": "2017-03-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131147,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:14:17.108047-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b80cd0e85856a766984a70c741e93e42eede82cb7da48f24d29f72a43c6e66cd",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5e93ddb6db52300bdec6c68fed66a283482dc3bf7cacd1fd0f56f385d393a9f6",
+      "title": "Consulta Popular ratifica voluntad de vivir sin minería metálica",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/consulta-popular-ratifica-voluntad-vivir-sin-mineria-metalica/",
+      "published_date": "2017-02-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131076,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:14:17.108047-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d082907b087f2b17fb7c3970307f8a795784717eee82d0baefc583ae1614e9e3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a943eee6b5081c715c93512d6d373596d275e476bc7ea9c4e36b815aebd85bc1",
+      "title": "Magistrados de la Sala no respetan el debido proceso: Ulises Rivas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/magistrados-la-sala-no-respetan-debido-proceso-ulises-rivas/",
+      "published_date": "2017-02-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 130983,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:14:17.108047-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cafcfe61d1be9be214d8624fbb59a9df8f01c1bdd5c735f04c5cee1bf40ae38c",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p6",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "86e156f2ea90cdf5de96455f79a690762e1f2054448d5a5d4fa2a71f3fb4b839",
+      "title": "Cinquera cierra filas contra la minería metálica en su territorio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cinquera-cierra-filas-la-mineria-metalica-territorio/",
+      "published_date": "2017-02-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 131019,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:14:17.108047-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "654d41a3436a0b6d8437698f4c70a07f1152ac1ec22422ce5622467aeb57d80e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p6",
+            "p11",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
+      "id": "baae30ce7d72c47c00c87e04157aac9f2da689599a57bc74861a18c1461bf4bf",
+      "title": "Municipio de Cinquera en la búsqueda de un territorio sin minería metálica",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/municipio-cinquera-la-busqueda-territorio-sin-mineria-metalica/",
+      "published_date": "2017-02-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 130751,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:14:17.108047-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "57407eee30ad6712347a243339e4b2069e1e19ec72745234bb1c24d8946c9a36",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "796d92ce97348c3c9b00c345bf637d78f2a1c5cb43c6dfb1259ad6e51c582aed",
+      "title": "El joven que fue capturado una vez en dos lugares distintos",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/el-joven-que-fue-capturado-una-vez-en-dos-lugares-distintos/",
+      "published_date": "2017-02-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 16443,
+        "retrieved_at": "2026-10-10T18:02:39.732033+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:13:27.947958-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "68f0e05c4d9b80ee154f48c2d6e272e584253a6cd65ee185a3a8bed5942d8bdc",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p14",
+            "p22"
+          ]
+        }
+      }
+    },
+    {
+      "id": "92a8797bb92c8ec96165756d960c9120707994c354336f56fec7f2302e854e47",
+      "title": "El sector justicia dice “NO” a la discriminación de personas con VIH",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sector-justicia-dice-no-la-discriminacion-personas-vih/",
+      "published_date": "2017-02-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 130548,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:13:27.947958-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "98022e5d07b806f15414735026765dfda771d97b5f24cba92ee1d5352ad26345",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "75ba3031dbf0582987acc4405e439d5735b661c06f84809558f679948bd84c56",
+      "title": "ASGOJU adosa apoyo a Anteproyecto de Ley contra la Minería Metálica",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asgoju-adosa-apoyo-anteproyecto-ley-la-mineria-metalica/",
+      "published_date": "2017-02-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 130446,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:13:27.947958-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4bef36cf446e939b604137d353af50a0299b64cb26c1917457a25f2ca9e4d96d",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "44aca0f2d91522b41f628783b4458641d95473d09bc1d38ac306fb2c48c5b595",
+      "title": "Más voces piden prohibir minería",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mas-voces-piden-prohibir-mineria/",
+      "published_date": "2017-02-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 130389,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:13:27.947958-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2a53d9cba0ce9bfbe54783f42b16a6000cbae4d1b4cf6672ca3d7a2cdc10302f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b4246d1904c85cc902a5ad2e9d33cd99333c767e7f95bf0d821bd9659df74aa9",
+      "title": "El asesinato desapercibido de una defensora de derechos humanos",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/el-asesinato-desapercibido-de-una-defensora-de-derechos-humanos/",
+      "published_date": "2017-02-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil",
+        "violencia_y_desapariciones",
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 16415,
+        "retrieved_at": "2026-10-10T18:02:39.732033+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:13:27.947958-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a9b369b3f19fd8a20f969c94d586f26b65a57a5f5b38d01aedf4e3c567844702",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p32",
+            "p80"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f7cd7deb8045b0289f805b2ef88a0ca2990d23d6f0b392fdc2cfd2b9e9ddad9b",
+      "title": "Gobierno inicia proceso para erradicar hacinamiento carcelario",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/gobierno-inicia-proceso-erradicar-hacinamiento-carcelario/",
+      "published_date": "2017-02-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 130170,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:12:21.824403-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b92eae4098e583216110f6666e29308b532be56a476a18202eba7aa2ce5e7596",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8b07091201c646ac2775a8e4e6c7324e886265adbe6fb390a77bfe6410690df3",
+      "title": "Desarticulan en Virginia clica que asesinˇ a joven que huyˇ de El Salvador",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/313150/desarticulan-en-virginia-clica-que-asesino-a-joven-que-huyo-de-el-salvador.html",
+      "published_date": "2017-02-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-11T06:23:57.563217+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:12:21.824403-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b2073c8791f9052e0fb20a02683645c748dfdf08f01e6e694904adcfe35f06cf",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p6",
+            "p21",
+            "p22"
+          ]
+        }
+      }
+    },
+    {
+      "id": "60435b11a517cbefe6eb688eaece8eca76bcf11450b8f969d9a54fd97ce4f5c0",
+      "title": "Palestinos y movimientos sociales exigen detener acciones sionistas en el país árabe",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/palestinos-movimientos-sociales-exigen-detener-acciones-sionistas-pais-arabe/",
+      "published_date": "2017-02-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 130089,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:12:21.824403-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "091230fa1c86aef5db8eac7f2d1d85a0078e135d14661d971e89757951a4f799",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6045080854d9b203d145ef33a85d512f33417e428223279bfe3b9081605cd758",
+      "title": "Anteproyecto de Ley contra la minería ingresa a discusión en el Legislativo",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/anteproyecto-ley-la-mineria-ingresa-discusion-legislativo/",
+      "published_date": "2017-02-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129956,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:12:21.824403-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d3654d59c9a9e06a1d426cac6338b8ea45ab8e7a3be896c8b6f9d6c0d5c100b1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b674afc8c31f920c3f79336a0bf25fb7959da4224df55d4bc3a003ed7fda4ef3",
+      "title": "Defensoría del Consumidor previene sobre incumplimiento en venta de motocicletas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-del-consumidor-previene-incumplimiento-venta-motocicletas/",
+      "published_date": "2017-02-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129854,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:12:21.824403-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "37e517387ada850bea7dbb2903737e31a9f376e9fb8ce805bb75a6df53e35686",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1b7bcbfb9a5e526cee963a69a7f5da631095589820fc31dc2c953820240a8763",
+      "title": "PGR e IDHUCA unidos para erradicar violación de los Derechos Humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pgr-e-idhuca-unidos-erradicar-violacion-los-derechos-humanos/",
+      "published_date": "2017-02-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion",
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129831,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:12:21.824403-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d2d331db6e48a0e2314c1e82700475d621e4071510c9f6bd13669961c61282aa",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8b564037bdca149f685a8f08df79e81a8ffdd8e7bab4751ab1f2898cac822d6f",
+      "title": "Sindicalistas y comuna revisarán incremento del “escalafón”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-comuna-revisaran-incremento-del-escalafon/",
+      "published_date": "2017-02-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129703,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:11:26.977348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "764f87749e75429ce50af942dee7442b1fab64414f4cae10a9b137b611885b25",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6f7a0b38039719a9a11e646ba40244948dd7894125160e3bc35fa08ff12b086d",
+      "title": "Empresa privada señalada por vulnerar derechos laborales",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/empresa-privada-senalada-vulnerar-derechos-laborales/",
+      "published_date": "2017-02-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129739,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:11:26.977348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a0aa8822f2917b2fe36a462f121ba380f4ec24a50fb60e45762e7796ec395260",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0b5f1971785743955e627291b951055d4bd0d0e703641c094c27cddb73a8c39d",
+      "title": "Organizaciones sociales demandan contundencia para prohibir la minería en el país",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-sociales-demandan-contundencia-prohibir-la-mineria-pais/",
+      "published_date": "2017-02-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129756,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:11:26.977348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f6b5e68b496f017062347882fa2f7584cd2c8b2d5dae7b4e81316652d617f22c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f31c3daba36ec26bb8a08d0de998d15eb21bd30d2543e92fd89d39e956db2895",
+      "title": "ISDEMU y Corte de Cuentas firman convenio para garantizar espacios libres de violencia contra la mujer",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/isdemu-corte-cuentas-firman-convenio-garantizar-espacios-libres-violencia-la-mujer/",
+      "published_date": "2017-02-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129642,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:11:26.977348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cc75289bd6716c3fb9364fa39d24a86b600e57c628eb2becefdf493b87b00162",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0ad8e3af43fc1d08ff1f27be991ba60f92820b3ed082d39f13961a41b436d55d",
+      "title": "Prisión preventiva para supuestos colaboradores del Cartel de Sinaloa",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/prision-preventiva-supuestos-colaborares-del-cartel-sinaloa/",
+      "published_date": "2017-02-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129650,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:11:26.977348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a0522cfc29922031ab4048d47eecc3474b7eaa88b0be855bade25abbc81ba066",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "884a657961b8f37ba2613e13eea998dc25883ea5e6916dd991dbc8ce8b7dc9f1",
+      "title": "Comunidad Emmanuel podría ser desalojada ante resolución de Sala de lo Constitucional",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/comunidad-emmanuel-podria-desalojada-ante-resolucion-sala-lo-constitucional/",
+      "published_date": "2017-02-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129431,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:11:26.977348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "acf0f8d2b2ce9a4a25cb2254576fd69627b82c7e3c8b8f4c89381d3a90c13670",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "53db4571ce6ef0f2f3125f493498f70003d1549913e1708a969a480eedfe6f82",
+      "title": "La extraña captura de Daniel, el joven panadero acusado de narco",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2017/02/10/la-extrana-captura-de-daniel-el-joven-panadero-acusado-de-narco/",
+      "published_date": "2017-02-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 4430,
+        "retrieved_at": "2026-10-10T18:02:39.731848+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:10:16.484072-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "efd6c8c2ce1f03a25c20cbf111328c00b7602bdf139ce7e72429280124d2eb72",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p13",
+            "p22"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2707b8a4e5dc3c565fed64300af10c56aa1629301fc923fbd63731a816a9582d",
+      "title": "GOES en contra de la minería metálica",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/goes-la-mineria-metalica/",
+      "published_date": "2017-02-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129138,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:10:16.484072-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "50445b6cdc3ca568358cfed228f0fa1bd44f7618f48ca97c8737e3936a1ba6ac",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d78e8cc3ac9b383947717e85dfbf8f36da860c68632ccc9950c0e1cba2f5845b",
+      "title": "Piden institucionalizar Comisión Nacional de Búsqueda de desaparecidos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/piden-institucionalizar-comision-nacional-busqueda-desaparecidos/",
+      "published_date": "2017-02-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 129034,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:10:16.484072-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7d77725057f4e8575980f452d3ea0e0419a899eeaaaa8c3f21efc2fc4c336cd9",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "67a4913e6a724114089c8b4bc0bb0fb944d58ea022b3a6fd66720b14a823ec49",
+      "title": "Ahora sí: prohibir la minería",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ahora-prohibir-la-mineria/",
+      "published_date": "2017-02-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 128979,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:10:16.484072-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fdbde84634f61286bda8673854cb94dbfa325ca54927fe6344ce4191780def85",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e301961fc34ce539e6775c96a0898b028f639e4aeebcaff8790947bb44d2e756",
+      "title": "Gobierno proyecta reducir en más de 200% hacinamiento carcelario",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/gobierno-proyecta-reducir-mas-200-hacinamiento-carcelario/",
+      "published_date": "2017-02-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 128493,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:09:27.925283-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5394e998b07b0fef58de1e3451d17d06e02816160da354f2493d117e7afed07a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "78a51aa3b02ee9ab85e87f5265e6f1946ef64c695abbb089975d09abc473e3a5",
+      "title": "“Si existe voluntad se puede lograr la búsqueda de Los Desaparecidos”: Leonor Arteaga",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/existe-voluntad-se-puede-lograr-la-busqueda-los-desaparecidos-leonor-arteaga/",
+      "published_date": "2017-02-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 128451,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:09:27.925283-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "09cd27697c663ab4d13b7c00d7e322633af2b833a040ffb6a3c5c0dcd0b6d934",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p11",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4ac93d994d04adcd36859ee56015d98207548f327389f7351c25af05f9edf4ac",
+      "title": "Cinquera quiere ser el primer municipio de Cabañas en decir no a la minería",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2017/02/01/cinquera-otro-municipio-que-quiere-decir-no-a-la-mineria/",
+      "published_date": "2017-02-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 4405,
+        "retrieved_at": "2026-10-10T18:02:39.731848+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T01:09:27.925283-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8c64e4ad4c456de32ed80d4de96097ead854d56087b1e477d68d2dd9f3954708",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p22"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p10",
+            "p16",
+            "p22"
           ]
         }
       }

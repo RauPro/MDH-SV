@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T06:26:01.952186+00:00",
+  "generated_at": "2026-10-14T07:20:37.385223+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -162,6 +162,23 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+      }
+    },
+    {
+      "candidate_id": "09bee23712a63e53dd0a6deffbb6e9da4d5938fb88833e768dbffd6cdf890963",
+      "source_url": "https://www.diariocolatino.com/alto-la-mineria-los-intereses-publicos-sociales-deben-prevalecer-los-intereses-particulares/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-03-01",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T07:20:15.286194+00:00",
+      "source_checked_at": "2026-10-14T07:20:15.286194+00:00",
+      "evidence": {
+        "paragraph_id": "p7",
+        "content_sha256": "b80cd0e85856a766984a70c741e93e42eede82cb7da48f24d29f72a43c6e66cd"
       }
     },
     {
@@ -1398,6 +1415,30 @@
       }
     },
     {
+      "candidate_id": "53db4571ce6ef0f2f3125f493498f70003d1549913e1708a969a480eedfe6f82",
+      "source_url": "https://gatoencerrado.news/2017/02/10/la-extrana-captura-de-daniel-el-joven-panadero-acusado-de-narco/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2017-02-10",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T07:19:49.620740+00:00",
+      "source_checked_at": "2026-10-14T07:19:49.620740+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "efd6c8c2ce1f03a25c20cbf111328c00b7602bdf139ce7e72429280124d2eb72"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ilopango",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "54989cb183f61b7a726113817efac5ead20e6d28ed8e43ec8ef0f6ef8b655399",
       "source_url": "https://www.diariocolatino.com/cam-intenta-desalojar-a-sindicalistas-en-huelga-de-hambre/",
       "publisher": "Diario Co Latino",
@@ -1468,6 +1509,47 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
+    },
+    {
+      "candidate_id": "6045080854d9b203d145ef33a85d512f33417e428223279bfe3b9081605cd758",
+      "source_url": "https://www.diariocolatino.com/anteproyecto-ley-la-mineria-ingresa-discusion-legislativo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-02-16",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T07:19:58.420904+00:00",
+      "source_checked_at": "2026-10-14T07:19:58.420904+00:00",
+      "evidence": {
+        "content_sha256": "d3654d59c9a9e06a1d426cac6338b8ea45ab8e7a3be896c8b6f9d6c0d5c100b1"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Cabañas",
+          "paragraph_id": "p5",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Isidro",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "La Unión",
+          "paragraph_id": "p5",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Santa Rosa de Lima",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "61618add1bb20843b19a6bf5afbdaa77e69b07adcb4768e9bf98ed18bc6c8dff",
@@ -1809,6 +1891,47 @@
       ]
     },
     {
+      "candidate_id": "796d92ce97348c3c9b00c345bf637d78f2a1c5cb43c6dfb1259ad6e51c582aed",
+      "source_url": "https://www.revistafactum.com/el-joven-que-fue-capturado-una-vez-en-dos-lugares-distintos/",
+      "publisher": "Revista Factum",
+      "published_date": "2017-02-23",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T07:20:09.896366+00:00",
+      "source_checked_at": "2026-10-14T07:20:09.896366+00:00",
+      "evidence": {
+        "content_sha256": "68f0e05c4d9b80ee154f48c2d6e272e584253a6cd65ee185a3a8bed5942d8bdc"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "La Libertad",
+          "paragraph_id": "p33",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Juan Opico",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p9",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Ilopango",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "7a7619d1985a3608865b084da9f308d29376bc919996b8f160634853dd4950b9",
       "source_url": "https://www.diariocolatino.com/sala-ampara-a-personas-afectadas-por-contaminacion-por-plomo/",
       "publisher": "Diario Co Latino",
@@ -2099,6 +2222,23 @@
       }
     },
     {
+      "candidate_id": "86e156f2ea90cdf5de96455f79a690762e1f2054448d5a5d4fa2a71f3fb4b839",
+      "source_url": "https://www.diariocolatino.com/cinquera-cierra-filas-la-mineria-metalica-territorio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-02-27",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T07:20:12.129893+00:00",
+      "source_checked_at": "2026-10-14T07:20:12.129893+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "654d41a3436a0b6d8437698f4c70a07f1152ac1ec22422ce5622467aeb57d80e"
+      }
+    },
+    {
       "candidate_id": "875949fe84bc33521946904c777cabb3e8af7a6e7fd269b8ab3d8cc3906474d4",
       "source_url": "https://www.diariocolatino.com/juntas-de-agua-enfrentan-amenazas-de-contaminacion-y-servidumbre-de-paso/",
       "publisher": "Diario Co Latino",
@@ -2116,6 +2256,30 @@
       "resolution": {
         "type": "municipality_to_department",
         "municipality": "Jujutla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "8b564037bdca149f685a8f08df79e81a8ffdd8e7bab4751ab1f2898cac822d6f",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-comuna-revisaran-incremento-del-escalafon/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-02-14",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T07:19:55.526059+00:00",
+      "source_checked_at": "2026-10-14T07:19:55.526059+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "764f87749e75429ce50af942dee7442b1fab64414f4cae10a9b137b611885b25"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Cuscatancingo",
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
@@ -2766,6 +2930,33 @@
       }
     },
     {
+      "candidate_id": "baae30ce7d72c47c00c87e04157aac9f2da689599a57bc74861a18c1461bf4bf",
+      "source_url": "https://www.diariocolatino.com/municipio-cinquera-la-busqueda-territorio-sin-mineria-metalica/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-02-24",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T07:20:11.035980+00:00",
+      "source_checked_at": "2026-10-14T07:20:11.035980+00:00",
+      "evidence": {
+        "content_sha256": "57407eee30ad6712347a243339e4b2069e1e19ec72745234bb1c24d8946c9a36"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cabañas",
+          "paragraph_id": "p2"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Chalatenango",
+          "paragraph_id": "p4"
+        }
+      ]
+    },
+    {
       "candidate_id": "bacd95e1e236e8bd89283dc1b10539f19618d00aae3559c8c3a9065f336aa98b",
       "source_url": "https://www.diariocolatino.com/gobierno-reinicia-construccion-de-complejo-penitenciario-de-izalco-fase-iii/",
       "publisher": "Diario Co Latino",
@@ -3124,6 +3315,29 @@
       "evidence": {
         "paragraph_id": "p3",
         "content_sha256": "2ac9ae37e06f2c3fc23025b8b984b0e1cb0f92e068f6b28fff2123e8ad8e56c8"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "c93ab9ec6cd42f4b5e0394831771290ee62f85e5377244c5bb2cc7c12513f431",
+      "source_url": "https://www.diariocolatino.com/un-pais-sin-discriminaciones-y-solidario-con-la-poblacion-portadora-del-vih/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-19",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-13T18:18:20.748074-06:00",
+      "source_checked_at": "2026-10-14T07:20:36.076118+00:00",
+      "evidence": {
+        "paragraph_id": "p12",
+        "content_sha256": "677fcd43a7b1a4d78112697eeae3de443536ed186248ca2bf1abbcd3c27463b7"
       },
       "resolution": {
         "type": "municipality_to_department",
