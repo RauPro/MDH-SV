@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T16:22:05.014866+00:00",
+  "generated_at": "2026-10-14T17:21:09.367970+00:00",
   "assessment_counts": {
     "candidates": 10642,
-    "evaluated": 3562,
-    "relevant": 1269,
-    "excluded": 2291,
+    "evaluated": 3674,
+    "relevant": 1301,
+    "excluded": 2371,
     "uncertain": 2,
-    "pending": 7080
+    "pending": 6968
   },
   "selections": [
     {
@@ -881,6 +881,33 @@
             "p12",
             "p13",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "077f0beb2da43e03cd692651a1529ae97afe75e73cdd4113360ac90b9b4301bc",
+      "source_url": "https://historico.elsalvador.com/historico/437477/capturan-a-futbolista-marco-pappa-por-violencia-contra-la-mujer-en-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:00.974550-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b82003d50912909aa4fd7486e5e2414d44cc58df479258542c0f5402702385d0",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p8"
           ]
         }
       }
@@ -4104,6 +4131,34 @@
       }
     },
     {
+      "candidate_id": "1df498e7d3a043d797b6fcc3a4d9b67a42e6ad1f0b7e7e1f7b0d9e58ed73eaa1",
+      "source_url": "https://www.diariocolatino.com/sala-ordena-investigar-la-desaparicion-forzada-hermanos-rivas-climaco/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:50.300487-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c522117099269c1a78d1cc2aef1f2482a3253c86583be4193b6231187a3053e0",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "1e235bcbf8b54d7e2f01a6336cf008d6eb8a484c088d1ba12ac76ab4eac5ac40",
       "source_url": "https://www.diariocolatino.com/justicia-de-eeuu-ordena-deportar-a-exministro-de-el-salvador-acusado-de-violaciones-de-ddhh/",
       "publisher": "Diario Co Latino",
@@ -4525,6 +4580,36 @@
             "p10",
             "p11",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "213bf32658d51684da1b78b06fdf14f063b359c939c99497e261f537a14a5abf",
+      "source_url": "https://historico.elsalvador.com/historico/442549/mayoria-de-periodistas-salvadorenas-son-acosadas-por-colegas-y-funcionarios-segun-procuraduria.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "201c705b98c839f38a3d5ab7976d515458e94bcec2a5b9e69d6dfd815794bb49",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p7",
+            "p11",
+            "p12"
           ]
         }
       }
@@ -7055,6 +7140,32 @@
       }
     },
     {
+      "candidate_id": "32b052c1ff0273537f312bf929cd4f6948e537a6aad631a5b3663099d7cdb4a7",
+      "source_url": "https://historico.elsalvador.com/historico/435328/prision-preventiva-para-cuatro-agentes-por-el-caso-grp.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:09:59.808421-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "942fcbc788fcefef74bc092ba8ba1ef6223b841a01c1186146e767ddf72ca3ee",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "32b9ebdcfdab61db9d93d3e20e69029743966df80e54740bf3df9d9efc302305",
       "source_url": "https://www.diariocolatino.com/tribunales-deberan-de-decretar-detencion-provisional-si-hay-certeca-de-delito/",
       "publisher": "Diario Co Latino",
@@ -7282,6 +7393,33 @@
             "p4",
             "p11",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "36091f84ff7721117a3165fd13d9fa549c8c374b58fa28936f6ec6b2d6044b49",
+      "source_url": "https://historico.elsalvador.com/historico/437763/fiscalia-investiga-a-sacerdote-acusado-de-violacion-de-menores.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:00.974550-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4ba662d704ec3378fa2ea3e101172e04f549f70ab0410aa3048a83d85886ec9e",
+          "jurisdiction_paragraph_ids": [
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12"
           ]
         }
       }
@@ -7584,6 +7722,33 @@
             "p5",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "37ca625d2f3605d7648d71d0ae818e050094edcfafe804b0610937e937b362c7",
+      "source_url": "https://historico.elsalvador.com/historico/435171/fiscalia-investigara-si-hubo-delito-de-violacion-en-agente-desaparecida.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:09:59.808421-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c30a6333a51c8cad18dc322210a01b39eae8f041343c760ea278632a3c27340c",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p5"
           ]
         }
       }
@@ -10766,6 +10931,38 @@
       }
     },
     {
+      "candidate_id": "508d7e7fe186e6e145a23a354affe7a1c8685c74202c5e60b54d3aaa2f6d4183",
+      "source_url": "https://www.diariocolatino.com/pnc-reitera-respeto-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2069a3150575245b24bd7df4516f8e6b13b3bb7f0ec4af6068f7f88b679945fa",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "50ce07167b07e3205c3d41300a5800fa0a2b68b63aa9c80c59b0a164198e4108",
       "source_url": "https://www.diariocolatino.com/trasladan-privados-libertad-centros-penitenciarios/",
       "publisher": "Diario Co Latino",
@@ -10789,6 +10986,34 @@
             "p4",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "516e057a31262ba9a25fb63f04298a27ffd25211463eb56f2802edee43c3a90e",
+      "source_url": "https://www.diariocolatino.com/relatora-la-onu-evaluara-violencia-homicidios-arbitrarios-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:14:49.437177-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "71091cab8509f704d7eb07856bfc2be3793fe67758f4681276a78245eeeffceb",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -11582,6 +11807,33 @@
       }
     },
     {
+      "candidate_id": "581ba6366059467b1941eb19b4b4d217a25e035cd1f46884f6e04abe55a7b73f",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-continuan-la-lucha/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:00.974550-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "254b4723c0fdf6f22347fd585a4720d16e4fda991909761dc34172722e018381",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5891192eb91304c7933047ffb113e9ebdf9eb264569e6f727774aaa56076b932",
       "source_url": "https://www.diariocolatino.com/oceana-gold-busca-evitar-aprobacion-ley-la-mineria/",
       "publisher": "Diario Co Latino",
@@ -11604,6 +11856,33 @@
             "p3",
             "p6",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "58e23c9439dfadd22d0e09ae8239d835d5376f20f9be0ec7b49604cb3be251e5",
+      "source_url": "https://historico.elsalvador.com/historico/440069/defensor-senor-testigo-en-cuantos-homicidios-ha-participado-usted.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:13:59.531307-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "eb394f713fb6fce9955947d91a5978406820fc4b7493b5b0515ab7c39e62bdfd",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p15",
+            "p29"
           ]
         }
       }
@@ -12448,6 +12727,35 @@
       }
     },
     {
+      "candidate_id": "5d7b9379fa737e0203bf2087d90741ea4a3a64ace874c58aba2dadc8f4f8e529",
+      "source_url": "https://historico.elsalvador.com/historico/442955/tres-custodios-heridos-tras-intento-de-revuelta-en-penal-de-apanteos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "67606f1420dcbf315fb5169e0743a20cc78472dd93c0f808e6e97fd597a87cf8",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5e421e8091fec6e16e9d37ca2d67fba9d4dab9cff8abf4cc630ef6fd0fe31cd7",
       "source_url": "https://www.diariocolatino.com/tres-dias-de-emergencia-para-sector-tres-del-penal-de-mariona/",
       "publisher": "Diario Co Latino",
@@ -13066,6 +13374,31 @@
             "p7",
             "p8",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "617bec3ebfc1456356eb363fa3296d9bddc3cb09e62a206cba6366b94251db57",
+      "source_url": "https://www.diariocolatino.com/feligreses-piden-cese-las-injusticias-violaciones-los-derechos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:10:49.303478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4e9114f1716a8680bdef9171301d1c9c0ea983dff7b1b33fba3364682ef27152",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }
@@ -14545,6 +14878,36 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "69d30647785cb4b742359d80e6d6da50e2e3327a2fd2ae9e2c7021af4b9a8997",
+      "source_url": "https://www.diariocolatino.com/comunidades-demandan-juzgado-ambiental-suspender-proyecto-urbanistico-contaminacion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "345a4a0033b91457c573fb74dcf2c15c3d37c75c75b2a998be6b1d168d7cdae6",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p10"
           ]
         }
       }
@@ -16565,6 +16928,33 @@
       }
     },
     {
+      "candidate_id": "73a40d3380076a886990075cdf3c59d9550ce85288adff9ad5391110016c5e5b",
+      "source_url": "https://historico.elsalvador.com/historico/437665/policia-sin-pistas-de-agente-herida-y-desaparecida.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:00.974550-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d96636f1ca5522198184903a41398377747e057fa39c25430975a438a9b58e45",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p19"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "73a4a170afc758c58d58d97654f2c4953c91ccbe75d3b1af0df63c4385ab160b",
       "source_url": "https://www.diariocolatino.com/conmemoran-la-gesta-heroica-los-defensores-defensoras-ddhh/",
       "publisher": "Diario Co Latino",
@@ -17143,6 +17533,32 @@
             "p7",
             "p9",
             "p17"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "76e446535c4ff97b75a211b29cd40c0afc2abd29e0c88e15960d3ae288ebd0bf",
+      "source_url": "https://historico.elsalvador.com/historico/439286/defensores-intentan-anular-a-testigo-en-caso-grupo-de-exterminio.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:50.300487-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "24a472e471a6f985058e858ebf3d9870e16135b397d6f7491f2ec0a10be6d3b2",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
           ]
         }
       }
@@ -17732,6 +18148,32 @@
       }
     },
     {
+      "candidate_id": "79ef23ec2a5cbe6fc547b53d13d826dbee13aae73bc58c61456dd9fc7a2d314a",
+      "source_url": "https://historico.elsalvador.com/historico/437621/policias-que-capturaron-a-daniel-aleman-se-contradicen-en-juicio.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:00.974550-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f694541551a56bfd593c5f3a8fad6b3dba569ff042e611098bfa0fe3970b4343",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7a16abb202d22957dec49bab0866e9acbb643e8838a228875c5371fb9f259c8d",
       "source_url": "https://www.diariocolatino.com/canal-tvx-denuncia-ataque-al-ejercicio-periodistico/",
       "publisher": "Diario Co Latino",
@@ -18099,6 +18541,33 @@
       }
     },
     {
+      "candidate_id": "7e88936c77298cf21655e311f3ca49e03951e40ea33ac6a3911480b2db869c17",
+      "source_url": "https://historico.elsalvador.com/historico/436896/condenan-a-hombre-a-12-anos-de-carcel-por-violar-a-su-hija-de-7-en-ahuachapan.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:00.974550-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8babea8bdd7a317b5b7c990c08b77cecb49944be27d13ca982eee51f07c52f13",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7ec61310d07ef2bcb925c984ebbbc153b75d3096a5b98856361cf904d9f7ee12",
       "source_url": "https://www.diariocolatino.com/desa-agua-zarca-y-el-estado-son-los-culpables-del-asesinato-gustavo-caceres/",
       "publisher": "Diario Co Latino",
@@ -18205,6 +18674,35 @@
           "relevance_paragraph_ids": [
             "p6",
             "p11",
+            "p13",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7f853ba016f21b68bb21aa4109780f57dfa681ee21c93db48fec9963613fd927",
+      "source_url": "https://historico.elsalvador.com/historico/442361/sospechoso-de-asesinar-a-doctora-habria-alterado-la-escena-del-crimen.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "aa5fe2bba93f190edf4ec00d9519cb00cb54026197a832fe99e1671f5e23bc9f",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p8",
             "p13",
             "p14"
           ]
@@ -18815,6 +19313,33 @@
           ],
           "relevance_paragraph_ids": [
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8450d14eadbaa1098fec3cb54ae7dae1f5262e69c2ae2264ea769b061ba355d2",
+      "source_url": "https://www.diariocolatino.com/tutela-legal-legado-historico-defensa-los-derechos-humanos-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:13:59.531307-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b95407ec165219decb8a65c9ada29b769a2f6d50618a28ab80a12d8956aae699",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10",
+            "p21"
           ]
         }
       }
@@ -20393,6 +20918,35 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8ef4e4684d989c7d3e5b99d1766571a69ca58557cd520349637d87cb1b1b9ed2",
+      "source_url": "https://www.diariocolatino.com/organizaciones-sociales-se-preparan-impulsar-una-ley-proteccion-defensores-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:14:49.437177-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2fdc401d4d0520b288d80232ea78d856d57df73f03c4e8944b1ab6241ce0e7e8",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p9",
             "p10"
           ]
         }
@@ -24035,6 +24589,32 @@
       }
     },
     {
+      "candidate_id": "a55bbdcfb7c4cfe0fc37eb13faba666a942e1e4b9ef94c96b212e1fed621c4d7",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-exigen-destitucion-procuradora-la-defensa-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:10:49.303478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "51fd4ce8b31b6fbeba990cd2a5ab808087dd973cef603b1f25a2368a5f63b98c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a57ab3516f149a73b1c28f129b059b80decc3db0ecc035d4920d1927679eba90",
       "source_url": "https://www.diariocolatino.com/ejecutan-programas-para-prevenir-la-violencia-contra-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -25668,6 +26248,33 @@
       }
     },
     {
+      "candidate_id": "b4379b0ee8c4cdaaf2c6bd6629d6b8ed1b11a27804dbace1049b4e18c3f4f6d7",
+      "source_url": "https://www.diariocolatino.com/pnc-sensibilizara-elementos-policiales-la-violencia-la-ninez/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:14:49.437177-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "db5cfaa015f933b16f3ff20cc90c9f640ec43bf23d85df902d82b0c65ebd3e2d",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b4737c907ce26c86a34873ecac74fee1138d9c24dc0e18d6f243a58ef664f2c9",
       "source_url": "https://www.diariocolatino.com/alcalde-dabuisson-acusa-de-desestabilizadores-a-sindicalistas/",
       "publisher": "Diario Co Latino",
@@ -26755,6 +27362,34 @@
       }
     },
     {
+      "candidate_id": "bb0ac61ffa29bbb03e999d2f56503ff05e831e91ed420f7fbc100c76dbddfa02",
+      "source_url": "https://historico.elsalvador.com/historico/442380/ministra-de-salud-condena-asesinato-de-doctora.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "72a745b279fb1dee1b7e124c64385440a75d79e5118c52d89f0df0f918b2e9bc",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "bb2bd21ae703f0471dcf6996d9f551246010080af8f2909c385df3512bf10da9",
       "source_url": "https://www.diariocolatino.com/diputados-aplauden-encarcelamiento-de-ex-presidente-francisco-flores/",
       "publisher": "Diario Co Latino",
@@ -27666,6 +28301,36 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c19721b659499656ec6cd6c6bbf8be6c7c726716880a8ea4895e24c93743a541",
+      "source_url": "https://historico.elsalvador.com/historico/442458/la-reduccion-de-homicidios-que-ha-tendido-el-salvador-es-adecuada-pero-no-sostenible-segun-analista-para-el-triangulo-norte.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e1d95b6b2379885636813fd5f4f93ce804dc740f9d5eacb1b1df49c7387725e0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6",
+            "p7",
+            "p11"
           ]
         }
       }
@@ -29226,6 +29891,36 @@
       }
     },
     {
+      "candidate_id": "cbbeb62e56e2cb2f67da5e42d6b25cfdd37a8bd63d3f07795e61ab4c56ea3dab",
+      "source_url": "https://www.diariocolatino.com/defensores-sociales-del-agua-tacuba-riesgo-encarcelados/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:10:49.303478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "31136332d9edeea3d91ef563c48738189e2d9873853f0fcaf210afb0e006d53f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p11",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p14",
+            "p15",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "cc01bd7e4c3cc739cfb4002880a70bbd0f09f6f22021ee3a0546f5d2c3bf7ab9",
       "source_url": "https://www.diariocolatino.com/padre-tono-se-instala-en-espana-tras-recibir-medidas-alternas-a-la-detencion/",
       "publisher": "Diario Co Latino",
@@ -29742,6 +30437,34 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d086c0a48f0d5735a79b11381b4ba0ae6d9eb7a52ff513034d14dfcb41c1a783",
+      "source_url": "https://historico.elsalvador.com/historico/442476/pedir-anular-el-voto-podria-ser-pagado-con-carcel-segun-propuesta-de-decide.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d1c7d71fc24b4501a501b19c5152d8254d6b15530d459ff7234cfa008b6a6410",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p5",
+            "p9"
           ]
         }
       }
@@ -32478,6 +33201,33 @@
       }
     },
     {
+      "candidate_id": "e97f7095211fc246c55757d6c5e85484c9b2a40f5705455db997b0c548c7ac0c",
+      "source_url": "https://historico.elsalvador.com/historico/442383/rosa-maria-bonilla-la-doctora-del-ministerio-de-salud-que-habria-sido-asesinada.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6ee8012e26916e3e2b82966ab765a84be32814c9ae110b9f50f8d53804266b2b",
+          "jurisdiction_paragraph_ids": [
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "e98215d89cf622e03852e81df4303354432129dab89dcd7588f2fcabc9a85f80",
       "source_url": "https://www.diariocolatino.com/justicia-prepara-protocolo-abogados-defensores-pandilleros-penales/",
       "publisher": "Diario Co Latino",
@@ -32717,6 +33467,33 @@
           "relevance_paragraph_ids": [
             "p2",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ebdecccf3bae67d25e24653ec6e32ad0bd4c84ff1e1391264d93c9bf990a9ec8",
+      "source_url": "https://historico.elsalvador.com/historico/438062/no-a-la-injerencia-de-la-corte-interamericana-de-ddhh.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:12:50.300487-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8af80bc4ae8b9c3e5e8870527cef74755dde7b73b8588814c790a69958ae1887",
+          "jurisdiction_paragraph_ids": [
+            "p6",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
           ]
         }
       }
@@ -34397,6 +35174,33 @@
       }
     },
     {
+      "candidate_id": "f7303dd16f4f70037bdae63c17b4b7cf04b54283cf43c4622868b5259684f2ac",
+      "source_url": "https://historico.elsalvador.com/historico/435358/autopsia-revela-que-policia-de-mejicanos-fue-asesinada.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:09:59.808421-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "33e7e6879cc8d82b5fd4bf470bdc57e663c6b0b830b60912d2f50f782a803d33",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f7428a4163d39b7b3ebbd9abceb0dd92a7b542530b3796e76b8763f914a4b397",
       "source_url": "https://www.diariocolatino.com/asamblea-legislativa-elige-magistrados-del-cnj-y-procuradora-de-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -34512,6 +35316,34 @@
       }
     },
     {
+      "candidate_id": "f7d2fa98f3a2172508b4cae1219acdca60598eb68ea43452552651a1baa6c9e7",
+      "source_url": "https://historico.elsalvador.com/historico/442047/violo-a-nina-de-cinco-anos-y-pasara-42-anos-en-la-carcel.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5b84f4446a5560129cd27ce4ec60d20c28ec028ce71d589fe62b1c7f7a5719a6",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f7d4728f25ff94397f5aebff33d7e344794b637add04e40d9a4cffe79e8bd110",
       "source_url": "https://www.diariocolatino.com/pandilleros-recapturados-a-juicio/",
       "publisher": "Diario Co Latino",
@@ -34589,6 +35421,31 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f839e95d6fd6cee96dc45305f624e9ed60eb7b239f0ef19188566cdaac99778f",
+      "source_url": "https://historico.elsalvador.com/historico/442124/asi-sufre-una-madre-salvadorena-por-su-hijo-desaparecido.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:16:01.514615-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5942d5c23bfbead6e166b24f9d53c71f37b3684035d69493423b5ae1cfa4d1cd",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }
@@ -35418,6 +36275,33 @@
             "p3",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fd5775a70eea2ab068a19884c041213ddb29ba2256e4a6878dcc2c0e709250bc",
+      "source_url": "https://historico.elsalvador.com/historico/440436/policia-analiza-continuidad-del-grp-tras-desaparicion-de-agente.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T11:14:49.437177-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0418de60bb6dd14843a5fcf1ebafec2d5bcef930effbfe720302f1df087db015",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6"
           ]
         }
       }
