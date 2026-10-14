@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T02:25:01.991806+00:00",
+  "generated_at": "2026-10-14T03:21:02.335021+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1330,6 +1330,33 @@
       }
     },
     {
+      "candidate_id": "61618add1bb20843b19a6bf5afbdaa77e69b07adcb4768e9bf98ed18bc6c8dff",
+      "source_url": "https://www.diariocolatino.com/bloquean-uso-de-wi-fi-a-reos-en-carceles/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-09-09",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T03:20:36.742386+00:00",
+      "source_checked_at": "2026-10-14T03:20:36.742386+00:00",
+      "evidence": {
+        "content_sha256": "2de2779fb00645b759cde974b412ef4f287bf0531eb18f23c8afa541e24e5b37"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cabañas",
+          "paragraph_id": "p13"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Chalatenango",
+          "paragraph_id": "p18"
+        }
+      ]
+    },
+    {
       "candidate_id": "6382fe584bd45c4718e461b68ac923cef6af6fe7c7a6029b61afb329450ace60",
       "source_url": "https://www.diariocolatino.com/tribunal-condena-a-custodio-penitenciario-por-trafico-de-drogas-en-penal/",
       "publisher": "Diario Co Latino",
@@ -1735,6 +1762,47 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
+    },
+    {
+      "candidate_id": "80d04eb8be4a6965339833fcceea699d9225e8c3dc20e0149d38f001dae1c614",
+      "source_url": "https://www.diariocolatino.com/tenemos-una-reduccion-de-homicidios-y-eso-es-irrefutable-cotto/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-09-26",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T03:20:45.277289+00:00",
+      "source_checked_at": "2026-10-14T03:20:45.277289+00:00",
+      "evidence": {
+        "content_sha256": "f8e09c409ced5c11ce139d626b6013963c948e46c613a494743b13c281417de4"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "San Miguel",
+          "paragraph_id": "p5",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Jorge",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Sonsonate",
+          "paragraph_id": "p3",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Caluco",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "82a8cdd9f6122a2fedcbf33839244d3c65c6e03ac8a27d58c2ec74e91d9851b5",
@@ -2151,6 +2219,52 @@
       }
     },
     {
+      "candidate_id": "9bc3daa44390dabb028bb61ac150d2591b109b0d7fd6d985cec953dec7a196c9",
+      "source_url": "https://www.diariocolatino.com/pddh-se-debe-repensar-y-sustituir-practicas-agricolas-que-afectan-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-30",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T03:20:23.367501+00:00",
+      "source_checked_at": "2026-10-14T03:20:23.367501+00:00",
+      "evidence": {
+        "content_sha256": "c71087b2230efd171b555e0a17eb82796cfd276761690e037e992fa141a4f20f"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Ahuachapán",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Ahuachapán",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Paz",
+          "paragraph_id": "p8"
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Vicente",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Vicente",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "9dd3a5938ec0175828db8eabf7c1973bb3588fb047bcbe11a09cc6a315c48a95",
       "source_url": "https://www.diariocolatino.com/mas-de-medio-centenar-de-capturas-en-operativos-de-pnc/",
       "publisher": "Diario Co Latino",
@@ -2352,6 +2466,47 @@
       }
     },
     {
+      "candidate_id": "b551cc7ef5dbeeda05869c48a6b51fddc6e050f7885eb5dbb3d33520c952ad0b",
+      "source_url": "https://www.diariocolatino.com/capturan-a-71-miembros-de-estructura-criminal-por-extorsion-y-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-31",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T03:20:26.091322+00:00",
+      "source_checked_at": "2026-10-14T03:20:26.091322+00:00",
+      "evidence": {
+        "content_sha256": "5f52833961087e756b11019ca732176e396821deb95d88cbb998e7318548dbcb"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "La Unión",
+          "paragraph_id": "p3",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "La Unión",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Miguel",
+          "paragraph_id": "p3",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Miguel",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "b58ee067f340dcdcba9a0da014f3f1cf56a17d8b7203093ec9dca9c266a4b68e",
       "source_url": "https://www.diariocolatino.com/la-mineria-metalica-el-conflicto-socio-ambiental-por-el-agua/",
       "publisher": "Diario Co Latino",
@@ -2468,6 +2623,40 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
       }
+    },
+    {
+      "candidate_id": "c238ecacb5efcef55964b99bd22e9efdf400b9f7227d670e3a58183ef66b73d8",
+      "source_url": "https://www.diariocolatino.com/promedio-de-homicidios-en-sectores-priorizados-es-de-dos-al-mes-howard-cotto/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-09-20",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T03:20:41.562340+00:00",
+      "source_checked_at": "2026-10-14T03:20:41.562340+00:00",
+      "evidence": {
+        "content_sha256": "826ab0eb6eecaba32646f43463fb54dd146792c98534f1de82c6597cca1cb518"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Panchimalco",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+          }
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Sonsonate",
+          "paragraph_id": "p7"
+        }
+      ]
     },
     {
       "candidate_id": "c23f36690676ccf45f3acc843fb53c85c1d3605b5fe204be2a64d9f7c20832ba",
@@ -3248,6 +3437,30 @@
       "resolution": {
         "type": "municipality_to_department",
         "municipality": "Ilopango",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "fde90455d1595589c66ea79213a75d4e36976a23903a1083f0df0e7b4d309914",
+      "source_url": "https://historico.elsalvador.com/historico/203105/defensoria-del-consumidor-pide-que-devuelvan-entradas-de-megadeth.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-08-31",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T03:20:26.313286+00:00",
+      "source_checked_at": "2026-10-14T03:20:26.313286+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "feaf21115959dbdb4d9d0a596d6737af81c907efc207d468fd420a3f9fc88828"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
