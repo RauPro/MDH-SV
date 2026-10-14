@@ -1,8 +1,10 @@
 from copy import deepcopy
+import base64
+import json
 import pytest
 
 from mdh_pipeline.news_requests import (
-    apply_exception, candidate_from_request, public_rechecks, validate_exceptions,
+    apply_exception, candidate_from_request, public_rechecks, validate_exceptions, sync_requests, STATE_PATH,
 )
 
 ID = "a" * 64
@@ -81,3 +83,36 @@ def test_invalid_private_state_never_resets_to_empty():
     for previous in ({}, {"schema_version": 1, "generations": {ID: -1}}, {"schema_version": 1, "generations": {ID: True}}):
         with pytest.raises(ValueError):
             public_rechecks([issue()], {ID}, previous, EMPTY)
+
+
+def test_large_request_backlog_advances_persisted_cursor_without_blocking_publication(tmp_path):
+    class Inbox:
+        repository = 'RauPro/MDH-SV-review'
+        base = '/repos/' + repository
+        state = {'schema_version': 2, 'generations': {}, 'next_page': 11}
+        pages = []
+        def get_file(self, path):
+            raw = json.dumps(self.state).encode()
+            return {'type': 'file', 'path': STATE_PATH, 'encoding': 'base64', 'size': len(raw),
+                    'content': base64.b64encode(raw).decode(), 'sha': 'b' * 40}
+        def call(self, method, path, **kwargs):
+            if method == 'GET':
+                page = kwargs['params']['page']
+                self.pages.append(page)
+                return [issue(page * 100 + n) for n in range(100)] if page <= 12 else []
+            self.state = json.loads(base64.b64decode(kwargs['json']['content']))
+            return {'content': {'sha': 'c' * 40}}
+    inbox = Inbox()
+    output = tmp_path / 'requests.json'
+    result = sync_requests(inbox, {'records': [{'id': ID}]}, EMPTY, output=output)
+    assert result['requests'] == 200 and inbox.pages == [11, 12]
+    assert inbox.state['next_page'] == 13
+    assert json.loads(output.read_text()) == {ID: 1100}
+    sync_requests(inbox, {'records': [{'id': ID}]}, EMPTY, output=output)
+    assert inbox.pages == [11, 12, 13] and inbox.state['next_page'] == 1
+
+
+def test_old_event_does_not_restore_or_withdraw_newer_decision():
+    withdrawn = apply()
+    restored = apply_exception(event('news/restore'), withdrawn, permission='admin', actor='RauPro', generation=3000, known_ids={ID})
+    assert apply_exception(event(), restored, permission='admin', actor='RauPro', generation=2000, known_ids={ID}) == restored

@@ -127,19 +127,8 @@ def public_rechecks(issues, known_ids, previous, exceptions):
 def sync_requests(inbox, archive, exceptions, *, output):
     if inbox.repository != PRIVATE_REPO:
         raise ValueError("wrong_request_repository")
-    rows = []
-    for page in range(1, 11):
-        batch = inbox.call("GET", f"/repos/{PUBLIC_REPO}/issues", params={
-            "state": "all", "labels": "news-correction", "sort": "created", "direction": "asc", "per_page": 100, "page": page})
-        if not isinstance(batch, list):
-            raise ValueError("invalid_request_listing")
-        rows.extend(batch)
-        if len(batch) < 100:
-            break
-    else:
-        raise ValueError("incomplete_request_listing")
     stored = inbox.get_file(inbox.base + "/contents/" + STATE_PATH)
-    previous = {"schema_version": 1, "generations": {}}
+    previous = {"schema_version": 2, "generations": {}, "next_page": 1}
     sha = None
     if stored is not None:
         if (stored.get("type") != "file" or stored.get("path") != STATE_PATH
@@ -150,7 +139,27 @@ def sync_requests(inbox, archive, exceptions, *, output):
         if len(raw) != stored["size"]:
             raise ValueError("invalid_request_state_size")
         previous, sha = json.loads(raw), stored["sha"]
-    state = public_rechecks(rows, {row["id"] for row in archive["records"]}, previous, exceptions)
+    if (not isinstance(previous, dict) or set(previous) != {"schema_version", "generations", "next_page"}
+            or type(previous["schema_version"]) is not int or previous["schema_version"] != 2
+            or not _integer(previous["next_page"], 1)):
+        raise ValueError("invalid_request_scan_state")
+    rows, next_page = [], previous["next_page"]
+    # Two pages per run with a persistent cursor, not an ever-growing all-issues
+    # scan. Wrap at the end so deletions or later labels cannot permanently skip
+    # a request. A large public issue backlog never blocks news publication.
+    for page in range(next_page, next_page + 2):
+        batch = inbox.call("GET", f"/repos/{PUBLIC_REPO}/issues", params={
+            "state": "all", "labels": "news-correction", "sort": "created", "direction": "asc", "per_page": 100, "page": page})
+        if not isinstance(batch, list) or len(batch) > 100:
+            raise ValueError("invalid_request_listing")
+        rows.extend(batch)
+        next_page = page + 1
+        if len(batch) < 100:
+            next_page = 1
+            break
+    state = public_rechecks(rows, {row["id"] for row in archive["records"]},
+        {"schema_version": 1, "generations": previous["generations"]}, exceptions)
+    state.update(schema_version=2, next_page=next_page)
     if state != previous:
         payload = {"message": "Record bounded news correction requests", "branch": "main",
                    "content": base64.b64encode((json.dumps(state) + "\n").encode()).decode()}
