@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T08:20:01.425079+00:00",
+  "generated_at": "2026-10-14T10:21:22.558840+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -326,6 +326,30 @@
       }
     },
     {
+      "candidate_id": "11949c89e2f241297d19fa972b5b19afc15f70eabc7292144d49e4eb9a0d6b09",
+      "source_url": "https://www.diariocolatino.com/derecho-al-agua-la-proxima-revolucion-social/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-03-20",
+      "department": "La Unión",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T10:20:54.116259+00:00",
+      "source_checked_at": "2026-10-14T10:20:54.116259+00:00",
+      "evidence": {
+        "paragraph_id": "p10",
+        "content_sha256": "cd3b4ed072d9cfacee546e4f48c0a7bff12e2058fb3f1dc459cd41ed2081b3b4"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Rosa de Lima",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
       "candidate_id": "13654ac92c37e949319f6134791deaf207e10980e851b78518ac8b0d676fb13d",
       "source_url": "https://www.diariocolatino.com/mnfm-entrega-propuesta-decreto-prohibir-la-mineria-pais/",
       "publisher": "Diario Co Latino",
@@ -404,6 +428,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "1ccf1e1abf5b0d55dcf673e0294a8adc058f064ae6257c6ed8ed66db71aa0d61",
+      "source_url": "https://www.diariocolatino.com/tacuba-criminalizar-comunitarios-la-lucha-del-agua-retroceder-derechos-humanos-xenia-marroquin/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-03-09",
+      "department": "Ahuachapán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T10:20:32.939317+00:00",
+      "source_checked_at": "2026-10-14T10:20:32.939317+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "ddd76c9029a9dcfe754c1600cbeccec62e9ec411ffcd13e3807e1641392534fa"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Tacuba",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -497,6 +545,33 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
       }
+    },
+    {
+      "candidate_id": "23ccd11528c5a1c59de16065a0ef06403ebbf53122d4452927e220c8c7f15496",
+      "source_url": "https://gatoencerrado.news/2017/03/12/ley-antimineria-el-regalo-de-semana-santa-de-los-diputados-para-el-salvador/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2017-03-12",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T10:20:40.425842+00:00",
+      "source_checked_at": "2026-10-14T10:20:40.425842+00:00",
+      "evidence": {
+        "content_sha256": "1d6a7972153e96eeb0ff11d7a2ffb14c0a33e312c34290a3c5a7c015701bf81c"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cabañas",
+          "paragraph_id": "p15"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Unión",
+          "paragraph_id": "p27"
+        }
+      ]
     },
     {
       "candidate_id": "2749fb8d8a460a24bb5b18d63b826cbef7a974ca51de0936ac1e24c553432ad7",
@@ -808,6 +883,47 @@
       ]
     },
     {
+      "candidate_id": "2e5b44a7fc80d42e48b35dd717f7c2030037c57dd3db6cd59df3796abccef1c2",
+      "source_url": "https://www.diariocolatino.com/procuradora-asegura-existe-apertura-la-pnc-investigaciones-ejecuciones-extrajudiciales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-03-24",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T10:21:01.751663+00:00",
+      "source_checked_at": "2026-10-14T10:21:01.751663+00:00",
+      "evidence": {
+        "content_sha256": "2a62be99b4c4cd94721dc7febacc531eb70b8c3fdf3ccf8473bbdda0b63e1993"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Cabañas",
+          "paragraph_id": "p7",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Ilobasco",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Miguel",
+          "paragraph_id": "p6",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Miguel",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "2ecf33a908911b1d812ed30fb23ee36f271921426c3b359c99c7d23810e578e5",
       "source_url": "https://www.diariocolatino.com/juzgado-ordena-medidas-alternas-la-detencion-concejo-municipal-san-martin/",
       "publisher": "Diario Co Latino",
@@ -1112,6 +1228,23 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "40a949486fbaed23bf6cbf01af7e8db76990b3287d6fc14d2ed22bca55334836",
+      "source_url": "https://www.diariocolatino.com/salvador-libre-mineria-metalica/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-04-18",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T10:21:19.621460+00:00",
+      "source_checked_at": "2026-10-14T10:21:19.621460+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "af9086474453ff6f955aac300dc592bbc9b980a0667fc8e772c8989f5dd992bd"
       }
     },
     {
@@ -2585,6 +2718,30 @@
       ]
     },
     {
+      "candidate_id": "96586e351871a1908d1597cd8c4bfd40a84e804baa611766c9c447a9424c1ed1",
+      "source_url": "https://www.diariocolatino.com/comuna-conna-presentan-comite-velara-los-derechos-la-ninez-adolescencia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-04-04",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T10:21:16.142724+00:00",
+      "source_checked_at": "2026-10-14T10:21:16.142724+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "ef311d058221d3ef6593f9f74f3aeccb90d4e667d02a88bbcff3068f08d40a86"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Panchimalco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "97930387995ce943a1571b6f4059dab403d9b7054235b9b29c8c46dc0d421382",
       "source_url": "https://www.diariocolatino.com/organizaciones-sindicales-exigen-a-la-sala-desbloquee-los-900-millones/",
       "publisher": "Diario Co Latino",
@@ -2857,6 +3014,33 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
+    },
+    {
+      "candidate_id": "afea85e16a7e323164875cee35208ace61924e553628bcafad70b75409c8fb11",
+      "source_url": "https://www.diariocolatino.com/no-podemos-decir-la-mineria-nos-hariamos-dano-mismos-fmln/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-03-14",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T10:20:46.312084+00:00",
+      "source_checked_at": "2026-10-14T10:20:46.312084+00:00",
+      "evidence": {
+        "content_sha256": "b9beff1ebf994966b2a2bd991f59b83e62d6c809177c2106bed7ff9f31a56215"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cabañas",
+          "paragraph_id": "p5"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Chalatenango",
+          "paragraph_id": "p5"
+        }
+      ]
     },
     {
       "candidate_id": "b4296fce9d804dd6135337af66a21b416884f728a48a839df29f2ecb2ab4538a",
