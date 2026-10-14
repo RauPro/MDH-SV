@@ -144,6 +144,7 @@ test('only a bound validated automatic dossier grants automatically_published, i
     value => { value.automation.source_content_sha256 = 'f'.repeat(64); },
     value => { value.automation.source_content_sha256 = 'invalid'; },
     value => { value.automation.evaluator_model = ''; },
+    value => { value.automation.evaluator_model = ' gemini-test '; },
     value => { value.automation.evaluator_model = 'x'.repeat(101); },
     value => { value.automation.evaluator_model = 'gemini\nsecret'; },
     value => { value.automation.validated_at = '2999-01-01T00:00:00Z'; },

@@ -18,6 +18,7 @@ export interface BibliographicReference { id: string; source_url: string; title:
 export const NEWS_DOSSIER_FIELDS: readonly NewsDossierFieldName[];
 export const NEWS_DOSSIER_LIST_FIELDS: readonly NewsDossierFieldName[];
 export const NEWS_DOSSIER_PENDING: string;
+export const NEWS_DOSSIER_PROTECTED_TITLE: string;
 export function safeSource(value: unknown): boolean;
 export function pendingNewsDossier(reference: BibliographicReference): NewsDossier;
 export function validatePublishedNewsDossier(value: unknown): NewsDossier;

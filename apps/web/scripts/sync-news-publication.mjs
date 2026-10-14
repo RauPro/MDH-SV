@@ -1,7 +1,7 @@
 import { lstatSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
-import { newsDossierFor, parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
+import { NEWS_DOSSIER_PROTECTED_TITLE, newsDossierFor, parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
 import { newsLocationFor, parsePublishedNewsLocations, validateLocationBindings } from '../../../shared/news-location.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference } from '../../../shared/news-selection.mjs';
 import { parseNewsExceptions } from '../../../shared/news-exceptions.mjs';
@@ -45,8 +45,17 @@ export function reconcileNewsPublication({ archive, automated, reviewed, locatio
   // Preserve the timestamp on a no-op, including an ordering-only normalization.
   if (locationKept.size !== geographic.size) afterLocations.generated_at = now;
   parsePublishedNewsLocations(afterLocations);
+  const safeArchive = structuredClone(archive);
+  for (const reference of safeArchive.records) {
+    const dossier = merged.get(reference.id);
+    if (dossier?.schema_version === 2 && dossier.source_title === NEWS_DOSSIER_PROTECTED_TITLE) {
+      reference.title = NEWS_DOSSIER_PROTECTED_TITLE;
+      reference.title_truncated = false;
+    }
+  }
+  assertSelectedNewsArchive(safeArchive);
   return { automated: { schema_version: 1, dossiers: sorted(autoKept) },
-    published: { schema_version: 1, dossiers: sorted(merged) }, locations: afterLocations };
+    published: { schema_version: 1, dossiers: sorted(merged) }, locations: afterLocations, archive: safeArchive };
 }
 
 function readSafe(path) {
@@ -79,6 +88,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const after = reconcileNewsPublication(input);
   // Validate everything before the first write. Each file replacement is atomic;
   // the workflow publishes all related replacements in a single Git commit.
-  for (const name of ['automated', 'published', 'locations']) writeAtomically(paths[name], after[name]);
+  for (const name of ['automated', 'published', 'locations', 'archive']) writeAtomically(paths[name], after[name]);
   console.log(`Retained ${after.automated.dossiers.length} automatic dossiers, ${after.published.dossiers.length} public dossiers and ${after.locations.locations.length} locations.`);
 }

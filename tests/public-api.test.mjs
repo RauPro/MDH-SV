@@ -7,7 +7,7 @@ import { getStats, loadCatalog, loadNews, searchNews, searchRecords } from '../s
 import { validMcpRequest } from '../api/mcp.mjs';
 import recordHandler from '../api/v1/records/[id].mjs';
 import unknownV1Handler from '../api/v1/[...path].mjs';
-import { NEWS_DOSSIER_FIELDS, pendingNewsDossier, parsePublishedNewsDossiers, validateDossierBindings } from '../shared/news-dossier.mjs';
+import { NEWS_DOSSIER_FIELDS, NEWS_DOSSIER_PROTECTED_TITLE, pendingNewsDossier, parsePublishedNewsDossiers, validateDossierBindings } from '../shared/news-dossier.mjs';
 import fixtureArchive from '../apps/web/src/__fixtures__/newsArchive.json' with { type: 'json' };
 import { assertSelectedNewsArchive, validateNewsSelection } from '../shared/news-selection.mjs';
 import { NEWS_PROCESSING_STATUSES } from '../shared/news-processing.mjs';
@@ -540,6 +540,14 @@ test('automatic public dossiers expose attributed fields without asserting human
   assert.equal(protectedResponse.data[0].processing_status, 'automatically_published');
   assert.equal(protectedResponse.data[0].automatic_location, null);
   assert.equal(protectedResponse.data[0].news_dossier.fields.summary.value, 'AUTOMATIC_PUBLIC_TEST_VALUE');
+  protectedDossier.source_title = NEWS_DOSSIER_PROTECTED_TITLE;
+  const titleArchive = selectedArchive([{ ...source, title: 'PRIVATE_TITLE_SENTINEL', title_truncated: true }]);
+  const titlePayload = { schema_version: 1, dossiers: [protectedDossier] };
+  const titleResponse = searchNews({}, titleArchive, titlePayload, null, null);
+  assert.equal(titleResponse.data[0].title, NEWS_DOSSIER_PROTECTED_TITLE);
+  assert.equal(titleResponse.data[0].title_truncated, false);
+  assert.ok(!JSON.stringify(titleResponse).includes('PRIVATE_TITLE_SENTINEL'));
+  assert.equal(searchNews({ q: 'PRIVATE_TITLE_SENTINEL' }, titleArchive, titlePayload, null, null).pagination.total, 0);
   assert.equal(validateDossierBindings(parsePublishedNewsDossiers(payload), [source]).size, 1);
   const stale = { ...source, selection: { ...source.selection, evidence: { ...source.selection.evidence, content_sha256: 'f'.repeat(64) } } };
   assert.throws(() => validateDossierBindings(parsePublishedNewsDossiers(payload), [stale]));

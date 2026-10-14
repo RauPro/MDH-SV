@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
-import { newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
+import { NEWS_DOSSIER_PROTECTED_TITLE, newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference } from '../shared/news-selection.mjs';
 import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
 import { newsProcessingFor, parseNewsProcessing } from '../shared/news-processing.mjs';
@@ -178,7 +178,13 @@ export function getRecord(id, catalog = loadCatalog()) {
 export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload, processingPayload) {
   try { assertSelectedNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
   const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
-  const eligible = archive.records.filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index)));
+  const eligible = archive.records.filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index))).map(reference => {
+    const dossier = newsDossierFor(reference, snapshot.index);
+    // Minimize before search/pagination as well as output, so a protected title
+    // cannot be recovered indirectly from keyword matches in a stale snapshot.
+    return dossier.schema_version === 2 && dossier.source_title === NEWS_DOSSIER_PROTECTED_TITLE
+      ? { ...reference, title: NEWS_DOSSIER_PROTECTED_TITLE, title_truncated: false } : reference;
+  });
   const result = paginated(eligible, newsSearchSchema.parse(filters), archive, '/api/v1/news');
   const locations = locationPayload === undefined ? loadNewsLocations() : locationSnapshot(locationPayload);
   const processing = processingPayload === undefined ? loadNewsProcessing() : processingSnapshot(processingPayload);

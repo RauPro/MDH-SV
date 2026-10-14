@@ -5,6 +5,7 @@ export const NEWS_DOSSIER_FIELDS = Object.freeze([
   'reported_actors', 'institutional_sources', 'vulnerable_groups', 'themes', 'hypothesis', 'instrument',
 ]);
 export const NEWS_DOSSIER_PENDING = 'Pendiente de extracción o revisión';
+export const NEWS_DOSSIER_PROTECTED_TITLE = 'Noticia con título protegido; consulte la fuente original';
 export const NEWS_DOSSIER_LIST_FIELDS = Object.freeze(['affected_persons', 'reported_actors', 'institutional_sources', 'vulnerable_groups', 'themes', 'instrument']);
 const listFields = new Set(NEWS_DOSSIER_LIST_FIELDS);
 const sourceHosts = new Set(['www.hrw.org', 'www.oas.org', 'www.amnesty.org', 'citizenlab.ca', 'www.corteidh.or.cr', 'spcommreports.ohchr.org', 'www.ohchr.org', 'www.diariocolatino.com', 'diariocolatino.com', 'gatoencerrado.news', 'www.revistafactum.com', 'revistafactum.com', 'elfaro.net', 'www.elfaro.net', 'beta.elfaro.net', 'diario.elmundo.sv', 'www.laprensagrafica.com', 'laprensagrafica.com', 'historico.elsalvador.com', 'www.elsalvador.com', 'elsalvador.com']);
@@ -68,7 +69,8 @@ export function validatePublishedNewsDossier(value) {
       || !sha(receipt.source_content_sha256) || !utcInstant(receipt.validated_at)
       || Date.parse(receipt.validated_at) > Date.now() + 300000
       || (value.published_date && receipt.validated_at.slice(0, 10) < value.published_date)
-      || !text(receipt.evaluator_model) || receipt.evaluator_model.length > 100 || /[\u0000-\u001f\u007f]/.test(receipt.evaluator_model)
+      || !text(receipt.evaluator_model) || receipt.evaluator_model.trim() !== receipt.evaluator_model
+      || receipt.evaluator_model.length > 100 || /[\u0000-\u001f\u007f]/.test(receipt.evaluator_model)
       || value.classification?.jurisdiction !== 'SV' || value.classification?.relevance !== 'relevant') fail();
   }
   if (!exactKeys(value.classification, ['jurisdiction', 'relevance', 'record_type'])

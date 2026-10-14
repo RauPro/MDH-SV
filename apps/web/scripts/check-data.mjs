@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { assertSelectionProvenance } from './selection-provenance.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference } from '../../../shared/news-selection.mjs';
-import { parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
+import { NEWS_DOSSIER_PROTECTED_TITLE, parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
 import { parsePublishedNewsLocations, validateLocationBindings } from '../../../shared/news-location.mjs';
 import { checkOfficialStatisticsExports } from './export-official-statistics.mjs';
 import { parseNewsProcessing, validateProcessingBindings } from '../../../shared/news-processing.mjs';
@@ -69,6 +69,11 @@ for (const reference of newsArchive.records) assert.ok(isSelectedNewsReference(r
 console.log(`Validated ${newsArchive.records.length} selected news references from ${newsArchive.policy.selection_gate.candidates} discovery candidates.`);
 for (const dossier of publicIndex.values()) {
   assert.ok(!withdrawn(dossier.candidate_id), 'Withdrawn news must not retain a public dossier');
+  if (dossier.schema_version === 2 && dossier.source_title === NEWS_DOSSIER_PROTECTED_TITLE) {
+    const reference = newsArchive.records.find(row => row.id === dossier.candidate_id);
+    assert.equal(reference.title, NEWS_DOSSIER_PROTECTED_TITLE, 'Protected dossier title must also be protected in the archive');
+    assert.equal(reference.title_truncated, false, 'Protected title is a complete public placeholder');
+  }
   assert.equal(hash(dossier.source_url), dossier.candidate_id, 'News dossier identity must match its source URL');
   if (dossier.human_reviewed) assert.ok(dossier.reviewed_at <= new Date().toISOString().slice(0, 10), 'News dossier review cannot be in the future');
 }
@@ -85,6 +90,7 @@ const automaticLocations = JSON.parse(readFileSync(new URL('../public/archive/lo
 const locationsIndex = validateLocationBindings(parsePublishedNewsLocations(automaticLocations), newsArchive.records);
 for (const location of locationsIndex.values()) {
   assert.ok(!withdrawn(location.candidate_id), 'Withdrawn news must not retain a public location');
+  assert.notEqual(publicIndex.get(location.candidate_id)?.fields.department.status, 'withheld', 'Protected department must not remain in location downloads');
   assert.equal(hash(location.source_url), location.candidate_id, 'Automatic location must match its source URL');
   assert.equal(location.human_reviewed, false);
   assert.equal(location.review_status, 'automated_unreviewed');

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { reconcileNewsPublication } from '../apps/web/scripts/sync-news-publication.mjs';
-import { pendingNewsDossier } from '../shared/news-dossier.mjs';
+import { NEWS_DOSSIER_PROTECTED_TITLE, pendingNewsDossier } from '../shared/news-dossier.mjs';
 import fixtureArchive from '../apps/web/src/__fixtures__/newsArchive.json' with { type: 'json' };
 
 const reference = fixtureArchive.records[0];
@@ -94,6 +94,24 @@ test('protected department cannot be re-exposed through an earlier location proj
   const result = reconcileNewsPublication(before);
   assert.equal(result.published.dossiers.length, 1);
   assert.equal(result.locations.locations.length, 0);
+});
+
+test('protected source titles are masked in archive metadata and remain masked after history refresh', () => {
+  const before = input();
+  before.archive.records[0].title = 'PRIVATE_TITLE_SENTINEL';
+  before.archive.records[0].title_truncated = true;
+  before.automated.dossiers[0].source_title = NEWS_DOSSIER_PROTECTED_TITLE;
+  const result = reconcileNewsPublication(before);
+  assert.equal(result.archive.records[0].title, NEWS_DOSSIER_PROTECTED_TITLE);
+  assert.equal(result.archive.records[0].title_truncated, false);
+  assert.ok(!JSON.stringify(result).includes('PRIVATE_TITLE_SENTINEL'));
+  assert.equal(before.archive.records[0].title, 'PRIVATE_TITLE_SENTINEL');
+  const refreshed = { ...before, automated: result.automated, locations: result.locations };
+  assert.equal(reconcileNewsPublication(refreshed).archive.records[0].title, NEWS_DOSSIER_PROTECTED_TITLE);
+  const unbound = input();
+  unbound.automated.dossiers[0].source_title = NEWS_DOSSIER_PROTECTED_TITLE;
+  unbound.automated.dossiers[0].automation.source_content_sha256 = 'f'.repeat(64);
+  assert.equal(reconcileNewsPublication(unbound).archive.records[0].title, reference.title);
 });
 
 test('invalid or private inputs fail before reconciliation rather than silently sanitizing unsafe data', () => {
