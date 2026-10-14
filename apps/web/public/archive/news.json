@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T22:20:08.630469+00:00",
+  "generated_at": "2026-10-14T23:20:11.539761+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 10943,
-      "selected": 1414,
-      "evaluated": 4202,
-      "relevant": 1414,
-      "excluded": 2785,
+      "selected": 1431,
+      "evaluated": 4274,
+      "relevant": 1431,
+      "excluded": 2840,
       "uncertain": 3,
-      "pending": 6741,
-      "evaluated_at": "2026-10-14T22:20:07.041909+00:00"
+      "pending": 6669,
+      "evaluated_at": "2026-10-14T23:20:09.011872+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-14",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1414,
+    "records": 1431,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1194,
+        "records": 1211,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -1253,7 +1253,7 @@
           {
             "month": "2018-04",
             "status": "enumerated",
-            "records": 1,
+            "records": 18,
             "screen_version": 3,
             "posts_scanned": 945,
             "source_total_posts": 945,
@@ -21389,12 +21389,12 @@
         "month": "2018-04",
         "start_date": "2018-04-01",
         "end_date": "2018-04-30",
-        "records": 1,
+        "records": 18,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 18
           },
           {
             "source_id": "gatoencerrado",
@@ -26295,6 +26295,782 @@
             "p18",
             "p32",
             "p33"
+          ]
+        }
+      }
+    },
+    {
+      "id": "55ded0f10fef0c2519246c41776b3fcff3dfb280014d54925d5eab1633971d49",
+      "title": "COOPESA condena asesinato de sacerdote Walter Vásquez",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/coopesa-condena-asesinato-de-sacerdote-walter-vasquez/",
+      "published_date": "2018-04-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172919,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:15:52.536287-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3682c5bd1e4b3d21702df565a333be5f8c7002d5e52595522043c533aa31f653",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "20039ed0b8ba0dff35b7ab180cdd613b32d54de99a22601e570110502b0b9efb",
+      "title": "Libertad de expresión no ampara obscenidades",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/libertad-de-expresion-no-ampara-obscenidades/",
+      "published_date": "2018-04-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172868,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:15:52.536287-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ca0cb8d08239982ac5d9874354ab05eb2b0c1ca4b7966207ee2096f113e86a41",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9005a80fad7e19b5dac778a1a2d91b87f42b5fe918e0c85eaef490ef2fc959fa",
+      "title": "El control de la criminalidad en el sistema penitenciario es lo que hemos cambiado",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-control-de-la-criminalidad-en-el-sistema-penitenciario-es-lo-que-hemos-cambiado/",
+      "published_date": "2018-04-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172768,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:15:52.536287-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1263b088b52c34628a1940695b518881dd0e7b150935333351fd3d844a55d3c2",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5bf1f8f327a8cf5d38850ad1d2958337c393c2b6fa9336d0542f40bb5f046c13",
+      "title": "Inauguraron Diplomado de Defensoría de los Derechos de las Mujeres",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/inauguraron-diplomado-de-defensoria-de-los-derechos-de-las-mujeres/",
+      "published_date": "2018-04-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil",
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172756,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:15:52.536287-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "97afbf174df206690746fdaac7f3775763bc118b62e3e7a03ef155226d71219f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "475b5fdbfe78b2fa000926b94e8e532d4f5275780492a2afb3ec712cd3c0e453",
+      "title": "Justicia Juvenil busca fortalecer enfoque social y derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/justicia-juvenil-busca-fortalecer-enfoque-social-y-derechos-humanos/",
+      "published_date": "2018-04-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172761,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:15:52.536287-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c24a6ba3bb2785ba2c819c5fe3a29dc552ad13659db89906fbf808c9461aea11",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ee55d7075db962c173a3e4682e0cb55507b4629dfdd67c18cbca06649abd9d8f",
+      "title": "MNFM denuncia intento de aplicar “minería verde” en el país",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mnfm-denuncia-intento-de-aplicar-mineria-verde-en-el-pais/",
+      "published_date": "2018-04-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172565,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:15:52.536287-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0bcc75152a6e6bcf8aef66a4f17756e3394c11576e960334d5cf6af0770ed6bb",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9c971e980c81e58c6ad2377fcb17a6934e4806c20e0799d0d9db2e5e20d7096f",
+      "title": "Han encarcelado a un INOCENTE",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/han-encarcelado-a-un-inocente/",
+      "published_date": "2018-04-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172639,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:12:53.822260-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3a62d96286e1b7b51f5c120204cf50e4e73b049136cc05c62a5a65e3c30019d5",
+          "jurisdiction_paragraph_ids": [
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "975b8a2773fe0b1bf9defa69341b3b2750668dda05cba51353f960a3e27b1587",
+      "title": "Comunidades centroamericanas denunciaron violación del derecho al agua",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/comunidades-centroamericanas-denunciaron-violacion-del-derecho-al-agua/",
+      "published_date": "2018-04-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion",
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172587,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:12:53.822260-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d8de7a8fedfa30c362a889b0d857d3c74b8f741bef1ea7c4f9c0d133e1e99827",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "61f21a3bb468125903f1cb46c1fd3426a5c4fe960c74b460cae55e60adee1a6f",
+      "title": "Hacinamiento carcelario, principal causa de las muertes en penales",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/hacinamiento-carcelario-principal-causa-de-las-muertes-en-penales/",
+      "published_date": "2018-04-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172563,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:12:53.822260-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5d501ad31a3a8ed4d7ca44189c7d9e1e43533d8ff581681e0f3b278b22530aea",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6",
+            "p7",
+            "p9",
+            "p10",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d7c2b8293458c09fdedd50044ede6e5c8a5db3d439bd228e5166d385379367fa",
+      "title": "Comunidades denuncian contaminación ambiental por la industria",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/comunidades-denuncian-contaminacion-ambiental-por-la-industria/",
+      "published_date": "2018-04-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172496,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:12:53.822260-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "35b96c926aa5b4c03fb2f5b060244f38f4f2f5a1e88c524605fe9fcaf62d79b0",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "afa88e11a8c076d2519c32ae05ad16fbc436c5797d0f8180b936edba94256fc6",
+      "title": "Conmemoran 36 aniversario de asesinato de periodistas holandeses",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/conmemoran-36-aniversario-de-asesinato-de-periodistas-holandeses/",
+      "published_date": "2018-04-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172483,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:12:53.822260-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "bb6d88c5e9e9f4e9e636699151b3327adfd3fa3b6f7fa15e206901daf7a401ba",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b52ed3e890f5e9d5b681059ded7dfc6ba37b282473e6bd4fe6ee94ce51db1450",
+      "title": "“Se llevaron a prisión a un gran líder para evitar que vuelva a ser presidente”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/se-llevaron-a-prision-a-un-gran-lider-para-evitar-que-vuelva-a-ser-presidente/",
+      "published_date": "2018-04-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172479,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:12:53.822260-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fa54214e33dbe0f802a1be386a990e3200c987f5e50bd7c44004efe15f9df8bf",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7b9b57cd5949b88913b7a9512d99f6ee333601f889f10da5be920b36f85ba7f4",
+      "title": "Organizaciones ambientalistas demandan rango constitucional a prohibición de minería",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-ambientalistas-demandan-rango-constitucional-a-prohibicion-de-mineria/",
+      "published_date": "2018-04-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172200,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:12:53.822260-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a2e7be2df5512f9d79494cbdba189e199d96b5c7f24bf146a4e3783f767d1c30",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8",
+            "p10",
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "72a2d362fd154dc166d2ac13ca0e9e0e89774789e19c87e1b6611b211f7db55d",
+      "title": "“Minería verde es simplemente materia de mercadeo”: Miguel Rivera (ADES)",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mineria-verde-es-simplemente-materia-de-mercadeo-miguel-rivera-ades/",
+      "published_date": "2018-04-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172109,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:12:53.822260-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "29acee206c2fa059c6ce0b9bad4ab6af17ab38ac617dd59f863ef211cc63c800",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p9",
+            "p13",
+            "p22"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "42fa125b56dcc31e3de0aab7cb8788e71c564fc14adaaef11279d5d6227a1cea",
+      "title": "Justicia no llega a las víctimas de violaciones sexuales: Zaira Navas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/justicia-no-llega-a-las-victimas-de-violaciones-sexuales-zaira-navas/",
+      "published_date": "2018-04-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172107,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:11:52.876414-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e46c842bacd162859e7d18ff7e54f423dd4dce0e47f3bf37fba5ece448ec2126",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4427c95e0ba053f3d65601bbf1d690ff4d439a8b2eee6232a953f9cfed522407",
+      "title": "Trump despliega militares en la frontera con México para detener la inmigración ilegal",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/trump-despliega-militares-en-la-frontera-con-mexico-para-detener-la-inmigracion-ilegal/",
+      "published_date": "2018-04-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "mexico",
+        "trump"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 172063,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:11:52.876414-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4830b78a9dcf490f1c35924c8390f9b97a1bb760dd9a7f29a6cff0f69ac984d7",
+          "jurisdiction_paragraph_ids": [
+            "p20"
+          ],
+          "relevance_paragraph_ids": [
+            "p21"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f5226cb6bab2155e066f0efd73544af947ce0433c0250971fc8884d43d8bfaac",
+      "title": "Iglesia pide verdad y justicia tras asesinato de sacerdote",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/iglesia-pide-verdad-y-justicia-tras-asesinato-de-sacerdote/",
+      "published_date": "2018-04-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 171810,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T17:11:52.876414-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "17b88cdbb4c61cae2e0775552461e287d13816e6eb2a918a4443c02b6bf20481",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p10"
           ]
         }
       }
