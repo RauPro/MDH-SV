@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T03:20:02.808182+00:00",
+  "generated_at": "2026-10-14T04:18:30.721124+00:00",
   "assessment_counts": {
     "candidates": 9816,
-    "evaluated": 2392,
-    "relevant": 864,
-    "excluded": 1526,
+    "evaluated": 2520,
+    "relevant": 897,
+    "excluded": 1621,
     "uncertain": 2,
-    "pending": 7424
+    "pending": 7296
   },
   "selections": [
     {
@@ -1650,6 +1650,34 @@
       }
     },
     {
+      "candidate_id": "13654ac92c37e949319f6134791deaf207e10980e851b78518ac8b0d676fb13d",
+      "source_url": "https://www.diariocolatino.com/mnfm-entrega-propuesta-decreto-prohibir-la-mineria-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:14:47.500429-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0d9b47fef30e3a8a886702b98c2f7c75268c8b1b0f1e767acd3c6bbf5e826143",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "13895ba0690c69dc2de97a04b7fbd715db4c15f210a93ba7d1b2c21a1df0cd99",
       "source_url": "https://www.diariocolatino.com/el-salvador-presentara-informe-sobre-avances-en-materia-de-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -1815,6 +1843,34 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "155834ffa45a217e83635f69763f8e7bd2657a5a8ea8af4c0bd1aba6a931791a",
+      "source_url": "https://www.diariocolatino.com/periodista-medios-de-comunicacion-son-armas-de-guerra/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:13:53.339479-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "681bdf9a89d9c3a24af5d6bc7632b9bbe648b01e15466d0413b2097511f0baaf",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p10"
           ]
         }
       }
@@ -2157,6 +2213,34 @@
             "p2",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "199f258df3db5f67431e3659bd693d823a83c5dbd34475e11995dfe10941810a",
+      "source_url": "https://www.revistafactum.com/periodismo-de-batman/",
+      "publisher": "Revista Factum",
+      "published_date": "2016-10-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:10:45.627179-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "edb605fab462dc12a73634f3e2e1621aa4f16ff0629c0a04f2744e98ac946c20",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
           ]
         }
       }
@@ -3452,6 +3536,34 @@
       }
     },
     {
+      "candidate_id": "275b34e8b24b867ae726ee1477235987f64569da742599b88ced7e1081b78bd4",
+      "source_url": "https://www.diariocolatino.com/organizaciones-demandan-investigacion-de-ambientalistas-asesinados/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:11:51.956348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "450fb34cf9d6a5fa102a6ae3bc6a324b6f7b729b9b803de196e78dd753fa9d97",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "283f0a4d6f95b76b8eb4f7976970072bbab03ca7ff5ba1377d4c8638fa29f94c",
       "source_url": "https://www.diariocolatino.com/exigen-al-fiscal-investigar-autores-intelectuales-de-asesinatos-de-ambientalistas-en-cabanas/",
       "publisher": "Diario Co Latino",
@@ -4220,6 +4332,34 @@
       }
     },
     {
+      "candidate_id": "2f1e7f8db4c4e596902a8509d774a223bf16993b5e8e833d48871ba1cdd36499",
+      "source_url": "https://www.diariocolatino.com/cac-asesinatos-de-ambientalistas-deuda-de-justicia-con-las-comunidades/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:11:51.956348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2796936821259ec8269e3a8c0207a36cca4386f0864a3c7a08a69719d6d9cb9b",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2f2423e2c038706599e7f900695e1d95d473b7fb208d07de2dad0db61e197d87",
       "source_url": "https://www.diariocolatino.com/minsal-y-defensoria-del-consumidor-hacen-recomendaciones-para-el-periodo-vacacional/",
       "publisher": "Diario Co Latino",
@@ -4791,6 +4931,34 @@
       }
     },
     {
+      "candidate_id": "3402e68e13d8bedccf05ce5c135f63fc791298b6d3e1e03be840bf5c5ae36103",
+      "source_url": "https://www.diariocolatino.com/mujeres-rurales-emblematicas-defensoras-los-recursos-naturales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:15:53.133583-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cdc576d4b57676e05ebb5de5c878f124083fd767f6bb1d28a882934187422ba1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "34af901b76152476c19ecdaac9da92e56a56d614d6f36e85cd5bbc4dc2c976cf",
       "source_url": "https://www.diariocolatino.com/comunidades-de-cabanas-denuncian-contaminacion-de-rio-que-sirve-para-pesca-y-agricultura-2/",
       "publisher": "Diario Co Latino",
@@ -5146,6 +5314,61 @@
             "p3",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "387d881a9cd50c3e59f163c0216338ebb23d639475088e5f1de4404c5b2ead52",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-esperan-un-voto-favorable-de-diputados-en-asamblea-legislativa/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:11:51.956348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "eeba751ca2a7809f1b61a7d7b9455cc5d5cde593ceccc0e3e6eb67f797d53cc4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "388b6065d56428db2d4260594c9eec66cfe9617732396d5e6a976bb8ddef88ab",
+      "source_url": "https://www.diariocolatino.com/la-mineria-no-cuestion-izquierda-derechas-sino-vida-muerte-monsenor-rauda/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:16:47.158368-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9151ca0c7624bf172e0ca3f249c9f899e3f4995e05102ccbf1817dc8758d1c88",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p9",
+            "p13"
           ]
         }
       }
@@ -5558,6 +5781,32 @@
             "p2",
             "p8",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "3bb5c9a118fe21ad5e64e078e612d15bd38f18d6b28e0488882a32bbfa95bfb5",
+      "source_url": "https://www.diariocolatino.com/familias-adquieren-escrituras-propiedad-apoyo-la-defensoria-del-consumidor/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:14:47.500429-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cd7f14b24fd21501ab650acb9bca41b88ad7495f17599a5bf533c0a09ca1c325",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
           ]
         }
       }
@@ -6234,6 +6483,34 @@
             "p4",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "44011f85a92542c15ea3a10c06cd9a77b7e30b76bb610bd5e675b13de395d1a9",
+      "source_url": "https://www.diariocolatino.com/ahora-si-hay-que-prohibir-la-mineria/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:14:47.500429-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "26c91c082156e550a5161bf69ebaae06418533943d0ac06b89aa20e3ab12f2e5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -7790,6 +8067,33 @@
           ],
           "relevance_paragraph_ids": [
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "56221451f892286c1e9d297932143a79ffbb7b0d588db96ba6e6786ae79cd388",
+      "source_url": "https://gatoencerrado.news/2016/11/05/saca-y-la-toma-de-posesion-de-las-bartolinas-de-la-dan/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-11-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:15:53.133583-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "55c67ba9d79edcace45d8b968aee24a8424765be9f2191f6050f64ae2e8baad0",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p23"
           ]
         }
       }
@@ -10604,6 +10908,36 @@
       }
     },
     {
+      "candidate_id": "6e2032b6040b61a648206f7c7a98a5cf3853f7853fe13aa49c43756ea3bd2bac",
+      "source_url": "https://www.diariocolatino.com/sis-y-aspidh-firman-convenio-de-apoyo-a-emprendimientos-productivos-de-poblacion-lgbti/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:13:53.339479-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f8abdea984e270d2385a12c5f160943b40e6529c272d2937dc9caf6efe6c7d8d",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "6ea423b85993dcd2534368fed34dd999f48b990ec966d2966b0a9435e2b5ec06",
       "source_url": "https://www.diariocolatino.com/escuela-penitenciaria-gradua-173-nuevos-agentes-de-seguridad-penitenciarios/",
       "publisher": "Diario Co Latino",
@@ -10912,6 +11246,32 @@
           "relevance_paragraph_ids": [
             "p2",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "70e73bf75f3ebc73ed7d9f8c5ea0a59e1b3885ca215af104941e9f3405d2a16f",
+      "source_url": "https://www.diariocolatino.com/la-laicidad-la-convencion-americana-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:15:53.133583-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9187ca4820e77b259554a8f3ebed0caf101af8ff895d41ce0f0b2bd1bf225580",
+          "jurisdiction_paragraph_ids": [
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
           ]
         }
       }
@@ -11667,6 +12027,36 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7588bc42b4f8490d1d078553136fc0e8369d1adb3425bb5d3ad4e16db93b66b8",
+      "source_url": "https://www.diariocolatino.com/torturadas-aun-luchamos-testimonios-vida-entorno-la-muerte/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:15:53.133583-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f0a95e660566b6fe1857cb044f0e2296fd4ecdcb6cf07d14ca219376bd9130bf",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p7",
+            "p11"
           ]
         }
       }
@@ -13717,6 +14107,32 @@
       }
     },
     {
+      "candidate_id": "8aad408131dff0e5bc649abd31107fb110b4f6725b343b66714c829f3273167b",
+      "source_url": "https://www.diariocolatino.com/procuradora-de-derechos-humanos-defiende-despidos-de-funcionarios-adjuntos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:09:52.213964-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8404ac05ebdf81c2c80c851594101b76c1a3e062010b1fc29b71e5307fdb6975",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "8aed1360aa48b8a4b6257231b69edbc56712918d6dd07ad9961af1dc92ec6ffc",
       "source_url": "https://www.diariocolatino.com/espero-que-el-juez-falle-para-que-flores-vaya-a-parar-a-la-carcel-claudia-ramirez/",
       "publisher": "Diario Co Latino",
@@ -14188,6 +14604,34 @@
             "p4",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "90b94e8d59de0ea23f204d87ecc7c472956765695c2c82408701b81dbe611d7a",
+      "source_url": "https://www.diariocolatino.com/soy-inocente-lo-dije-el-dia-de-mi-captura-y-hasta-hoy-lo-sostengo-agapito-ruano/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:09:52.213964-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "08bafd679a009525cb6a1d85ce5e9abd42e50fc3d5f7c2e42869559b459e9453",
+          "jurisdiction_paragraph_ids": [
+            "p6",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7",
+            "p8"
           ]
         }
       }
@@ -14670,6 +15114,35 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "95223e758b019f68eb467a1817de4bae80c6b2e25117476b6c9d3d9480bc4768",
+      "source_url": "https://www.diariocolatino.com/consul-salvadoreno-renuncia-por-supuestas-graves-violaciones-laborales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:12:47.279857-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7b02e046244b048e4f814740072ca5f02c32b90f2d4ef0593b73bb8efb0ed162",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p9",
+            "p11"
           ]
         }
       }
@@ -15717,6 +16190,35 @@
             "p2",
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "9f6c182bcb19be4c035aa732e2eaf1c030b6097b3fbeeba08b011b09d39eb22e",
+      "source_url": "https://www.diariocolatino.com/pnc-aplicara-la-fuerza-respetando-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:12:47.279857-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "bcbdec27d46401187851d12cb1a0c40354ec48b307ead8b39b11d6b77ef1a0ee",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -17190,6 +17692,33 @@
       }
     },
     {
+      "candidate_id": "adc4fdcf062f83a6912f2bb99ac2571812b54cb603e4f2e8b6742be100e522bf",
+      "source_url": "https://www.diariocolatino.com/mop-sitramss-capacitan-personal-tema-violencia-genero/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:16:47.158368-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b2f225b921141ae68a489d030e4f7f224ca1db204f746a5ecb7310f638a0f881",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "ade9e9288c68343a2bcf33600a1c068736fd29f6db3b4a0f47182b518d70f225",
       "source_url": "https://www.diariocolatino.com/sala-ampara-a-personas-afectadas-por-contaminacion-por-plomo-en-sitio-del-nino/",
       "publisher": "Diario Co Latino",
@@ -17278,6 +17807,32 @@
       }
     },
     {
+      "candidate_id": "aefc2fe61a666904f889168ed65fcf0acf1105b00f1f2bcdc4f93fe2b6b7e26c",
+      "source_url": "https://www.diariocolatino.com/camara-ratifica-medidas-alternas-la-detencion-ex-fiscal-general/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:16:47.158368-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "68fb2a9e56c0dd2dfe2d07574d0b4eee2a62b2e4966bd9af1eded5d848edf8dc",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "af01c1ea32e5e4ebbb43fef3ce76094aa608da66428b0c260b47793ba1ad5ec9",
       "source_url": "https://www.diariocolatino.com/violencia-institucional-obstruye-acceso-a-la-justicia-y-derechos-de-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -17358,6 +17913,34 @@
             "p2",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "aff29daef098aaedece34d996104ff5974dae3b874e42f563d34b9937ddcee66",
+      "source_url": "https://www.diariocolatino.com/pandilleros-asesinan-en-morazan-hija-de-ex-diputada-suplente-del-fmln/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:13:53.339479-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1f582defd9e8120880b5facdaee457f27a049e2090a14052343590b038e8ba5d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
           ]
         }
       }
@@ -17702,6 +18285,35 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b4c1cee46fc77fdefd64edcf48259e8ac5cee86c0efe360a126e3166027d9ded",
+      "source_url": "https://www.diariocolatino.com/en-15-meses-buscamos-reducir-el-40-de-hacinamiento-carcelario-oscar-ortiz/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:09:52.213964-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f74774042c608c133a7c77438ba2500169a724d711ce23968ed97c0b972ae0a4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8"
           ]
         }
       }
@@ -18121,6 +18733,31 @@
             "p3",
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b803d4ffd02b0f420058261c1f47e47f9d36cc402c58644e05354dce8974a110",
+      "source_url": "https://www.diariocolatino.com/sis-instala-mesa-acceso-seguridad-justicia-poblacion-lgbti/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:14:47.500429-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e5ae17fa9fcae74c6cb8b1089c291c3ec48213e8e6b4239fbf867706b6add9e0",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
@@ -19431,6 +20068,34 @@
       }
     },
     {
+      "candidate_id": "c41decccd7edefb6ffc1b5eb74d3a3270b38ac862cda9305a7ab5bfd83d3b9f4",
+      "source_url": "https://www.diariocolatino.com/36-aniversario-del-asesinato-enrique-alvarez-cordova-lideres-del-fdr/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:16:47.158368-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "72c9a95c5b4e31366ba74ca2c19d0c84b3057b2c468a02cf6d7999f5e1fc529a",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c48ecf73b447be06e5de2ddb5150c851f6de596b5fe761d30e60c712daa5359f",
       "source_url": "https://www.diariocolatino.com/sitramss-se-constituye-en-el-primer-y-unico-transporte-libre-de-violencia-contra-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -19453,6 +20118,35 @@
             "p5",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c52856d7fae8ad6db553e7677cb5ac4cde76e06eb0de1fa6989c35f52720ba5d",
+      "source_url": "https://www.diariocolatino.com/diputado-agrede-y-amenaza-a-periodista/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-09-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:09:52.213964-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a08ddc9c497c5fcbc07262094cef8883f59a00d2e971baeea7ebef1e7dc29a2d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p9",
+            "p10"
           ]
         }
       }
@@ -20331,6 +21025,34 @@
       }
     },
     {
+      "candidate_id": "cfc003b76e2b816290cccd2c16e9433187d4d1ce081abb2ca1e0f6288b800160",
+      "source_url": "https://www.diariocolatino.com/casos-desaparicion-forzada-no-deben-quedar-la-impunidad-fespad/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:14:47.500429-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "bcf705c9e4e1a04516f9653e98bd03840d8c59e6e8a73b505e2c348d13ec7311",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "d060c0eb4091b87c8de93b82b40c630e181f3348e1bc9d68ef1547750bfdad48",
       "source_url": "https://www.diariocolatino.com/el-culto-al-asesino/",
       "publisher": "Diario Co Latino",
@@ -20671,6 +21393,34 @@
       }
     },
     {
+      "candidate_id": "d5828f6ec48aa78addbda81cf85ef433453bc3aa5dd7d4d4623d1db2d5f003ed",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-denuncian-beneficio-a-activistas-de-arena-dentro-de-alcaldia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:12:47.279857-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ba5a1b0f52c45dbaeb5814177d7eebc8f0f00bd5d5eeaab7bdb0fc6c88e88995",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "d5f96219e4122ffdc7d20fce5d726601251c718132a4b0060fce09841c9dcda3",
       "source_url": "https://www.diariocolatino.com/apes-monitoreara-agresiones-en-contra-de-periodistas-en-eleccion-presidencial/",
       "publisher": "Diario Co Latino",
@@ -20861,6 +21611,33 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d85bb41ef7b40e892a37f37ef2674427bce48cb464671ffa4ed33835e4b24ce9",
+      "source_url": "https://www.diariocolatino.com/procuradora-presenta-nuevo-equipo-de-trabajo-en-defensa-de-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:09:52.213964-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2948e61b36b7190ae9dbb43b801b17471c5dcbf302d5546e10327953fb3a1f32",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5"
           ]
         }
       }
@@ -21254,6 +22031,33 @@
             "p5",
             "p6",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "dbb31455fba26ab7fea526161f9daf7f70102b6db2fadf25c48327f868bb7f7a",
+      "source_url": "https://www.diariocolatino.com/flexibilizacion-horario-maquila-construccion-viola-derechos-laborales-adquiridos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:16:47.158368-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3aaccdef262be18268c9d7e6e9fa823543ad64f05afda89c7568749ca995b85d",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p11",
+            "p21"
           ]
         }
       }
@@ -22146,6 +22950,33 @@
             "p5",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e98c4dc7d6812dd7cfc33ac2f5679eb8dd0b1e5db929af86b69b729377af79f8",
+      "source_url": "https://gatoencerrado.news/2016/10/04/videocambio-climatico-el-asesino-silencioso-de-el-salvador/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-10-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:09:52.213964-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6467fae13de2ddd2e33f76e8e5b6ae8e747ad9aee1f43aee3adc0516cd48d84d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
           ]
         }
       }
@@ -23280,6 +24111,34 @@
       }
     },
     {
+      "candidate_id": "f4fdd07d425ec1e6500a6db5db4aa2df3f3075902cae76be5e99a214991594b5",
+      "source_url": "https://www.diariocolatino.com/prohibir-la-mineria-metalica/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:10:45.627179-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "23075a264a63f335a34f9ba405ea2b1b48175cd55d9e58da9426d9ed5a6c1006",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f5ae6975f7b406d556112681361af85792de2c5caeecc8584936a6940c75cb40",
       "source_url": "https://www.revistafactum.com/ahora-no-se-manda-a-asesinar-a-nadie-porque-este-en-desacuerdo-con-la-ley-de-amnistia/",
       "publisher": "Revista Factum",
@@ -23386,6 +24245,35 @@
             "p2",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f63f3caec3e83c192feaa4d6fbae1a4566f37a7d0d9899234c8b47c404e56941",
+      "source_url": "https://historico.elsalvador.com/historico/204896/sip-conoce-ataques-contra-libertad-de-prensa-en-el-salvador.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-10-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:11:51.956348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7ed93b3fc023e32095dd255dd622ffb1a3dfb71f061a30ae7e16dd3600ea806f",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }
@@ -23640,6 +24528,32 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f9019975ddcc4fafebaf18c6050fc2e01c67197f5931044b70e512059cc38ba5",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-desafian-resolucion-judicial-para-continuar-en-paro-de-labores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-10-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T22:11:51.956348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1c9deccaa9033bc04eadc426a62708608eaf1e3c4900c451b2c22222ceaf34e0",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p6"
           ]
         }
       }
