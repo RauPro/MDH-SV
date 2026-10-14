@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T01:20:13.465447+00:00",
+  "generated_at": "2026-10-14T02:23:51.113721+00:00",
   "assessment_counts": {
     "candidates": 9816,
-    "evaluated": 2248,
-    "relevant": 818,
-    "excluded": 1428,
+    "evaluated": 2296,
+    "relevant": 840,
+    "excluded": 1454,
     "uncertain": 2,
-    "pending": 7568
+    "pending": 7520
   },
   "selections": [
     {
@@ -465,6 +465,37 @@
       }
     },
     {
+      "candidate_id": "0609ac35fdb72750470791daa27e1c2e5dbe0aba5b427f3b682161ca7d05d195",
+      "source_url": "https://www.diariocolatino.com/la-libertad-de-prensa/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "81d23c2f111ef77146e0792b32659152c925695c2c62ec1031272420304891ce",
+          "jurisdiction_paragraph_ids": [
+            "p7",
+            "p9",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p8",
+            "p13",
+            "p14",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "06e434269531c844c515a13c577abb228b4067cd770ad920bcc2ea0467eaa331",
       "source_url": "https://www.diariocolatino.com/los-43-estudiantes-mexicanos-desaparecidos-ayotzinapa-y-sus-luchas-y-lecciones-para-el-salvador/",
       "publisher": "Diario Co Latino",
@@ -771,6 +802,36 @@
             "p8",
             "p9",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "09ae53ae06bdaf99769acc60d6611daac025bb0c19c29a201d6e9637e5c52ff5",
+      "source_url": "https://www.diariocolatino.com/presidente-sanchez-ceren-reafirma-su-compromiso-de-lucha-por-los-derechos-de-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e4845546596ef25558ba81fa731a2fa3a5b107a8a0f2074048dec6d99d0cf80d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p10",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p6",
+            "p7",
+            "p8",
+            "p12"
           ]
         }
       }
@@ -2505,6 +2566,35 @@
       }
     },
     {
+      "candidate_id": "1d8387e4c9e8cbf25ff419c8c18ed757ce48ae79d9639daa90bb03d05f458daf",
+      "source_url": "https://www.diariocolatino.com/dia-internacional-de-las-personas-desaparecidas-3/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "51491008f4fcf2e85e93b71d96cadfc3cb7a555831193672fd7ac18339e9bbec",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "1de285e4d6f5d5c436046200c7609a9f0d07d351553ae5d96c534afc60a8444b",
       "source_url": "https://www.diariocolatino.com/agenda-de-derechos-laborales-presentada-por-empleadas-de-maquilas/",
       "publisher": "Diario Co Latino",
@@ -3603,6 +3693,35 @@
             "p4",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2b01e265b04a5727fe6f49ebcb5a657082fb736836c2ae7db992f6d9b45b1483",
+      "source_url": "https://historico.elsalvador.com/historico/197940/capturan-7-supuestos-secuestradores-de-inmigrantes-salvadorenos-en-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-08-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8dc5b2810bb20145b0332e0b53adbdb3d427f542929ece3a6ae8bfede40796fd",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p13",
+            "p14",
+            "p16"
           ]
         }
       }
@@ -5109,6 +5228,37 @@
       }
     },
     {
+      "candidate_id": "39e3146809bcd582114689b7df7a69ce955ea9cde09e9f37635411f0d6698d3b",
+      "source_url": "https://www.diariocolatino.com/militares-vinculados-al-asesinato-de-los-padres-jesuitas-quedan-en-libertad/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d51003f845f6b8eab44ab5e2b5b6a046364e0fa26534dba97c9f9c7e18acf6ad",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "3a079fe2069287fb680c735b35177d2ef15325b9ed957e379b45b3c14549faea",
       "source_url": "https://www.diariocolatino.com/fuerzas-especializadas-reportan-mas-de-30-capturas/",
       "publisher": "Diario Co Latino",
@@ -5691,6 +5841,62 @@
             "p2",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "41872f04a2b9e89ef9a5e07f6a281978cc2d4dcd65a95c94133d35acff800300",
+      "source_url": "https://www.diariocolatino.com/capturan-a-empresario-enrique-rais-y-otros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cd90283b1a73c36046bdbdcd01c63d3416e0f22d51f78792ab98b74788d29e9c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4187a038ca75e97a99b4a64cadb5f4c4b3a91f34721880ccb2bfe879021359e0",
+      "source_url": "https://www.diariocolatino.com/mesa-nacional-frente-a-la-mineria-metalica-retraso-en-laudo-arbitral-de-ciadi/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "913e378c687c64c4b69dbe8c2127c9138679467cbc8f00d8a56dfb3979940bf5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10",
+            "p11",
+            "p12"
           ]
         }
       }
@@ -7522,6 +7728,34 @@
       }
     },
     {
+      "candidate_id": "56a319df5ffa0f9431533d315da6936d710282a3afbf3f7381b4d2a34607b4e0",
+      "source_url": "https://www.diariocolatino.com/tiendas-penitenciarias-son-administradas-por-centros-penales-munguia-payes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "03eb72c42ddbfd64113215351ad32849a281771164bf67d68af57d8dbff28e44",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5710cd3fb2bac5a65a6e1e6e9ba2b7431e9a708fe31d9a000a616c8097a28972",
       "source_url": "https://www.diariocolatino.com/los-derechos-de-las-mujeres-deben-constituir-un-tema-de-concientizacion-para-todos/",
       "publisher": "Diario Co Latino",
@@ -7693,6 +7927,36 @@
             "p10",
             "p14",
             "p26"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "59fea217e8fbc7023d993a78994377503f18b7bc6990b595722482cc7b13443e",
+      "source_url": "https://www.revistafactum.com/estan-presos-ex-fiscal-martinez-enrique-rais/",
+      "publisher": "Revista Factum",
+      "published_date": "2016-08-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6414ea6a9246617cfc7f216816f514edaf003b68a729104dcd5b32a0a9a8aa50",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p19",
+            "p21",
+            "p27",
+            "p28"
           ]
         }
       }
@@ -9323,6 +9587,33 @@
             "p4",
             "p13",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "67b50199a396bca13ed9080722d09964105ce03718476bfeac97d125e057da78",
+      "source_url": "https://www.diariocolatino.com/exfiscal-general-luis-martinez-permanecera-en-prision/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ff80897f0e5b5177f7c0d591816eb69b0a25c09c0d57081ee80828210bc70933",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p8",
+            "p10"
           ]
         }
       }
@@ -13047,6 +13338,37 @@
       }
     },
     {
+      "candidate_id": "88b8356bef8709fd555ed678dcac032e13c8fe5f0ebeb38d543511584c967599",
+      "source_url": "https://historico.elsalvador.com/historico/197865/hasta-26-mil-ninos-migrantes-detenidos-en-frontera-ee-uu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-08-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5f4d58ce943fdc6997cfb76721fc486c64930ae592057f8ce85cd78501dcc94e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p9",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "894e2f10a10d81bb2cc14b4c108562ebf097d3226a7fb7f6e0d872886f9ddb35",
       "source_url": "https://www.diariocolatino.com/iglesia-catolica-admite-mas-casos-de-abuso-sexual-a-menores/",
       "publisher": "Diario Co Latino",
@@ -13492,6 +13814,35 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8e6fb8ffe53c7238171b9cf3f7398d49d6ce52826a8c0bc79135b4dafb5217ed",
+      "source_url": "https://www.diariocolatino.com/enrique-rais-y-demas-fueron-enganados-para-ser-capturados-hernan-cortez/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9016ed6d9ca3dd37cb2c01a808e1e395109d58d512c16081a919fa79d3a7284f",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
           ]
         }
       }
@@ -14403,6 +14754,36 @@
       }
     },
     {
+      "candidate_id": "98ce2c73b4805621f448e208ce9ae2677aed71c09cb543e0dd8848dce02d214f",
+      "source_url": "https://historico.elsalvador.com/historico/197744/madres-centroamericanas-detenidas-en-ee-uu-abandonan-huelga-de-hambre.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-08-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "dd5538640728f687b0313e4362820b014060610663405087447cdfac5b5ea26d",
+          "jurisdiction_paragraph_ids": [
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "9a3fbb3765a76156af0af482a384ea21c78100231a0a71a38565dd26c95e901b",
       "source_url": "https://www.diariocolatino.com/defensoria-del-consumidor-verifica-precios-y-publicidad-en-viernes-negro/",
       "publisher": "Diario Co Latino",
@@ -14539,6 +14920,34 @@
           "relevance_paragraph_ids": [
             "p2",
             "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "9bc3daa44390dabb028bb61ac150d2591b109b0d7fd6d985cec953dec7a196c9",
+      "source_url": "https://www.diariocolatino.com/pddh-se-debe-repensar-y-sustituir-practicas-agricolas-que-afectan-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c71087b2230efd171b555e0a17eb82796cfd276761690e037e992fa141a4f20f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
             "p6"
           ]
         }
@@ -15494,6 +15903,35 @@
             "p4",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a26626c17c1ff104d612e5d2705471df76a22e4fa435af18136cefe4cf1ee21b",
+      "source_url": "https://www.diariocolatino.com/grupo-parlamentario-del-fmln-se-pronuncia-ante-las-victimas-de-desaparicion-forzada/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3114390905fc161ab9762a6f7d4f55f7c2f53944b002b26670f3dca064b4798d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p7"
           ]
         }
       }
@@ -16604,6 +17042,36 @@
       }
     },
     {
+      "candidate_id": "af01c1ea32e5e4ebbb43fef3ce76094aa608da66428b0c260b47793ba1ad5ec9",
+      "source_url": "https://www.diariocolatino.com/violencia-institucional-obstruye-acceso-a-la-justicia-y-derechos-de-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1b87b49dbc863faf05a01608dae2b00f69af0cddeeb442d9652fb403fed5a6e5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "af5de62cb3c9bb1ff1b2c4915a5fee9f55eb01aa9f0a9ee27f84d1dfd572c79f",
       "source_url": "https://www.diariocolatino.com/comision-de-seguridad-presenta-cambios-al-sistema-penitenciario/",
       "publisher": "Diario Co Latino",
@@ -17032,6 +17500,33 @@
       }
     },
     {
+      "candidate_id": "b551cc7ef5dbeeda05869c48a6b51fddc6e050f7885eb5dbb3d33520c952ad0b",
+      "source_url": "https://www.diariocolatino.com/capturan-a-71-miembros-de-estructura-criminal-por-extorsion-y-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5f52833961087e756b11019ca732176e396821deb95d88cbb998e7318548dbcb",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b58ee067f340dcdcba9a0da014f3f1cf56a17d8b7203093ec9dca9c266a4b68e",
       "source_url": "https://www.diariocolatino.com/la-mineria-metalica-el-conflicto-socio-ambiental-por-el-agua/",
       "publisher": "Diario Co Latino",
@@ -17227,6 +17722,32 @@
       }
     },
     {
+      "candidate_id": "b7339c4753defbf36946ff9d2b5ed6fa9c28b733c59d91f86dda6056eb10fe11",
+      "source_url": "https://historico.elsalvador.com/historico/197273/capturan-a-dos-pandilleras-salvadorenas-por-tratar-de-prostituir-a-dos-menores.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-08-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1458d46bd56fcd8c7d4b4854728756cd0657c6d6776de9997483228fcd5b6cdb",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b738e128094a9ec059faa12e15e74987e39876921b108a8098332375ec5175f5",
       "source_url": "https://www.diariocolatino.com/anteproyecto-de-ley-vih-tiene-enfoque-de-derechos-humanos-ministra-menjivar/",
       "publisher": "Diario Co Latino",
@@ -17366,6 +17887,32 @@
             "p6",
             "p11",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b8231d77d07db69113fb916bc59c0a8cd9c5aa559c09326d2b6dc87a238d1f62",
+      "source_url": "https://www.diariocolatino.com/capturan-a-exfiscal-luis-martinez/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e4b54c6108a9ba9ac1aa5ea8e1ceda70d67b48183743b3b1c8e99b6a28c72989",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5"
           ]
         }
       }
@@ -20090,6 +20637,35 @@
       }
     },
     {
+      "candidate_id": "dad64d467b35a27934bc6e8327f26afc029529719d4be435a441ae00737a06a0",
+      "source_url": "https://www.diariocolatino.com/pro-busqueda-se-proclama-por-familiares-de-ninos-desaparecidos-durante-el-conflicto-armado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "61139b266298e94c6869395b33317a321c889338bf79f3a72f5fe78f5908c8e2",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "db304117ff6dd5dd09a9dda7ea11d423de8fadde0adbccdc7cb6fdb8e736e4ca",
       "source_url": "https://www.diariocolatino.com/feligreses-participan-en-acto-religioso-en-capilla-donde-asesinaron-a-romero-2/",
       "publisher": "Diario Co Latino",
@@ -20885,6 +21461,32 @@
             "p3",
             "p7",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e6d04497a2f5858a3a32824438168ae8b4541eb96422f8c8bc7bb928a05467cf",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-prision-preventiva-para-exfiscal/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2ae11965dc51e8a7ac16f43bed93f128eb027be1db04aa1d4ad5a2ac564f894e",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -22871,6 +23473,33 @@
             "p3",
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fd49d5aebacaf83cedaf84e6371317d547299ee82ca9099d55841f29e3b2ed3a",
+      "source_url": "https://www.diariocolatino.com/estudiante-sera-procesada-en-libertad-por-el-delito-de-homicidio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-08-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3811269ad194a9dab7bf7bf5ab190795e177e326afc1a05a3dddac8c4d129aa8",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p7"
           ]
         }
       }

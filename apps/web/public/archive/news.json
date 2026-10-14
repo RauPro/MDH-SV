@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T01:20:15.459820+00:00",
+  "generated_at": "2026-10-14T02:23:53.706102+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 9816,
-      "selected": 818,
-      "evaluated": 2248,
-      "relevant": 818,
-      "excluded": 1428,
+      "selected": 840,
+      "evaluated": 2296,
+      "relevant": 840,
+      "excluded": 1454,
       "uncertain": 2,
-      "pending": 7568,
-      "evaluated_at": "2026-10-14T01:20:13.465447+00:00"
+      "pending": 7520,
+      "evaluated_at": "2026-10-14T02:23:51.113721+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-13",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 818,
+    "records": 840,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 741,
+        "records": 758,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -1013,7 +1013,7 @@
           {
             "month": "2016-08",
             "status": "enumerated",
-            "records": 7,
+            "records": 24,
             "screen_version": 3,
             "posts_scanned": 966,
             "source_total_posts": 966,
@@ -4928,7 +4928,7 @@
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 16,
+        "records": 17,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
         "months": [
@@ -5883,7 +5883,7 @@
           {
             "month": "2016-08",
             "status": "enumerated",
-            "records": 3,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 30,
             "source_total_posts": 30,
@@ -14689,9 +14689,9 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 31,
+        "records": 35,
         "first_published_date": "2015-05-28",
-        "last_published_date": "2016-07-28",
+        "last_published_date": "2016-08-29",
         "months": [
           {
             "month": "2010-01",
@@ -15644,7 +15644,7 @@
           {
             "month": "2016-08",
             "status": "partial",
-            "records": 0,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 39,
             "source_total_posts": null,
@@ -20529,12 +20529,12 @@
         "month": "2016-08",
         "start_date": "2016-08-01",
         "end_date": "2016-08-31",
-        "records": 10,
+        "records": 32,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 7
+            "records": 24
           },
           {
             "source_id": "gatoencerrado",
@@ -20544,7 +20544,7 @@
           {
             "source_id": "factum",
             "status": "enumerated",
-            "records": 3
+            "records": 4
           },
           {
             "source_id": "el-faro",
@@ -20564,7 +20564,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 4
           }
         ]
       },
@@ -26396,6 +26396,1020 @@
             "p4",
             "p5",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b551cc7ef5dbeeda05869c48a6b51fddc6e050f7885eb5dbb3d33520c952ad0b",
+      "title": "Capturan a 71 miembros de estructura criminal por extorsión y homicidios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-a-71-miembros-de-estructura-criminal-por-extorsion-y-homicidios/",
+      "published_date": "2016-08-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 114506,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5f52833961087e756b11019ca732176e396821deb95d88cbb998e7318548dbcb",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "67b50199a396bca13ed9080722d09964105ce03718476bfeac97d125e057da78",
+      "title": "Exfiscal general Luis Martínez permanecerá en prisión",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/exfiscal-general-luis-martinez-permanecera-en-prision/",
+      "published_date": "2016-08-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 114463,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ff80897f0e5b5177f7c0d591816eb69b0a25c09c0d57081ee80828210bc70933",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e6d04497a2f5858a3a32824438168ae8b4541eb96422f8c8bc7bb928a05467cf",
+      "title": "Juzgado ordena prisión preventiva para exfiscal",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-prision-preventiva-para-exfiscal/",
+      "published_date": "2016-08-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 114425,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2ae11965dc51e8a7ac16f43bed93f128eb027be1db04aa1d4ad5a2ac564f894e",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9bc3daa44390dabb028bb61ac150d2591b109b0d7fd6d985cec953dec7a196c9",
+      "title": "PDDH: Se debe repensar y sustituir prácticas agrícolas que afectan los derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pddh-se-debe-repensar-y-sustituir-practicas-agricolas-que-afectan-los-derechos-humanos/",
+      "published_date": "2016-08-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 114366,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c71087b2230efd171b555e0a17eb82796cfd276761690e037e992fa141a4f20f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b7339c4753defbf36946ff9d2b5ed6fa9c28b733c59d91f86dda6056eb10fe11",
+      "title": "Capturan a dos pandilleras salvadoreńas por tratar de prostituir a dos menores",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/197273/capturan-a-dos-pandilleras-salvadorenas-por-tratar-de-prostituir-a-dos-menores.html",
+      "published_date": "2016-08-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorenas"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-12T06:28:35.440758+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1458d46bd56fcd8c7d4b4854728756cd0657c6d6776de9997483228fcd5b6cdb",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a26626c17c1ff104d612e5d2705471df76a22e4fa435af18136cefe4cf1ee21b",
+      "title": "Grupo parlamentario del FMLN se pronuncia ante las víctimas de desaparición forzada",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/grupo-parlamentario-del-fmln-se-pronuncia-ante-las-victimas-de-desaparicion-forzada/",
+      "published_date": "2016-08-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 114307,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:19:28.071572-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3114390905fc161ab9762a6f7d4f55f7c2f53944b002b26670f3dca064b4798d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "39e3146809bcd582114689b7df7a69ce955ea9cde09e9f37635411f0d6698d3b",
+      "title": "Militares vinculados al asesinato de los padres Jesuitas quedan en libertad",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/militares-vinculados-al-asesinato-de-los-padres-jesuitas-quedan-en-libertad/",
+      "published_date": "2016-08-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 114161,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d51003f845f6b8eab44ab5e2b5b6a046364e0fa26534dba97c9f9c7e18acf6ad",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "09ae53ae06bdaf99769acc60d6611daac025bb0c19c29a201d6e9637e5c52ff5",
+      "title": "Presidente Sánchez Cerén reafirma su compromiso de lucha por los derechos de las mujeres",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/presidente-sanchez-ceren-reafirma-su-compromiso-de-lucha-por-los-derechos-de-las-mujeres/",
+      "published_date": "2016-08-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 114156,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e4845546596ef25558ba81fa731a2fa3a5b107a8a0f2074048dec6d99d0cf80d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p10",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p6",
+            "p7",
+            "p8",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0609ac35fdb72750470791daa27e1c2e5dbe0aba5b427f3b682161ca7d05d195",
+      "title": "La Libertad de Prensa",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/la-libertad-de-prensa/",
+      "published_date": "2016-08-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 114001,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "81d23c2f111ef77146e0792b32659152c925695c2c62ec1031272420304891ce",
+          "jurisdiction_paragraph_ids": [
+            "p7",
+            "p9",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p8",
+            "p13",
+            "p14",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
+      "id": "dad64d467b35a27934bc6e8327f26afc029529719d4be435a441ae00737a06a0",
+      "title": "Pro-búsqueda se proclama por familiares de niños desaparecidos durante el conflicto armado",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pro-busqueda-se-proclama-por-familiares-de-ninos-desaparecidos-durante-el-conflicto-armado/",
+      "published_date": "2016-08-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113902,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "61139b266298e94c6869395b33317a321c889338bf79f3a72f5fe78f5908c8e2",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4187a038ca75e97a99b4a64cadb5f4c4b3a91f34721880ccb2bfe879021359e0",
+      "title": "Mesa Nacional frente a la Minería Metálica : Retraso en “laudo arbitral” de CIADI",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mesa-nacional-frente-a-la-mineria-metalica-retraso-en-laudo-arbitral-de-ciadi/",
+      "published_date": "2016-08-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113904,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "913e378c687c64c4b69dbe8c2127c9138679467cbc8f00d8a56dfb3979940bf5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10",
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1d8387e4c9e8cbf25ff419c8c18ed757ce48ae79d9639daa90bb03d05f458daf",
+      "title": "DÍA INTERNACIONAL DE LAS PERSONAS DESAPARECIDAS",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/dia-internacional-de-las-personas-desaparecidas-3/",
+      "published_date": "2016-08-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113843,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "51491008f4fcf2e85e93b71d96cadfc3cb7a555831193672fd7ac18339e9bbec",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "98ce2c73b4805621f448e208ce9ae2677aed71c09cb543e0dd8848dce02d214f",
+      "title": "Madres centroamericanas detenidas en EE.UU. abandonan huelga de hambre",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/197744/madres-centroamericanas-detenidas-en-ee-uu-abandonan-huelga-de-hambre.html",
+      "published_date": "2016-08-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "ee uu",
+        "eeuu"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-12T06:28:35.440758+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "dd5538640728f687b0313e4362820b014060610663405087447cdfac5b5ea26d",
+          "jurisdiction_paragraph_ids": [
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8e6fb8ffe53c7238171b9cf3f7398d49d6ce52826a8c0bc79135b4dafb5217ed",
+      "title": "Enrique Rais y demás fueron engañados para ser capturados: Hernán Cortez",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/enrique-rais-y-demas-fueron-enganados-para-ser-capturados-hernan-cortez/",
+      "published_date": "2016-08-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113821,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9016ed6d9ca3dd37cb2c01a808e1e395109d58d512c16081a919fa79d3a7284f",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "88b8356bef8709fd555ed678dcac032e13c8fe5f0ebeb38d543511584c967599",
+      "title": "Hasta 26 mil nińos migrantes detenidos en frontera EE.UU.",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/197865/hasta-26-mil-ninos-migrantes-detenidos-en-frontera-ee-uu.html",
+      "published_date": "2016-08-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "eeuu"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-12T06:28:35.440758+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:18:11.942571-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5f4d58ce943fdc6997cfb76721fc486c64930ae592057f8ce85cd78501dcc94e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p9",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "59fea217e8fbc7023d993a78994377503f18b7bc6990b595722482cc7b13443e",
+      "title": "¿Por qué están detenidos el exfiscal Martínez y Enrique Rais?",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/estan-presos-ex-fiscal-martinez-enrique-rais/",
+      "published_date": "2016-08-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 12902,
+        "retrieved_at": "2026-10-10T18:02:39.732033+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6414ea6a9246617cfc7f216816f514edaf003b68a729104dcd5b32a0a9a8aa50",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p19",
+            "p21",
+            "p27",
+            "p28"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2b01e265b04a5727fe6f49ebcb5a657082fb736836c2ae7db992f6d9b45b1483",
+      "title": "Capturan 7 supuestos secuestradores de inmigrantes salvadoreńos en Guatemala",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/197940/capturan-7-supuestos-secuestradores-de-inmigrantes-salvadorenos-en-guatemala.html",
+      "published_date": "2016-08-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "guatemala",
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-12T06:28:35.440758+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8dc5b2810bb20145b0332e0b53adbdb3d427f542929ece3a6ae8bfede40796fd",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p13",
+            "p14",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b8231d77d07db69113fb916bc59c0a8cd9c5aa559c09326d2b6dc87a238d1f62",
+      "title": "Capturan a exfiscal Luis Martínez",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-a-exfiscal-luis-martinez/",
+      "published_date": "2016-08-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113606,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e4b54c6108a9ba9ac1aa5ea8e1ceda70d67b48183743b3b1c8e99b6a28c72989",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "41872f04a2b9e89ef9a5e07f6a281978cc2d4dcd65a95c94133d35acff800300",
+      "title": "Capturan a empresario Enrique Rais y otros",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-a-empresario-enrique-rais-y-otros/",
+      "published_date": "2016-08-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113604,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "cd90283b1a73c36046bdbdcd01c63d3416e0f22d51f78792ab98b74788d29e9c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "56a319df5ffa0f9431533d315da6936d710282a3afbf3f7381b4d2a34607b4e0",
+      "title": "Tiendas Penitenciarias son administradas por Centros Penales: Munguía Payes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/tiendas-penitenciarias-son-administradas-por-centros-penales-munguia-payes/",
+      "published_date": "2016-08-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113363,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "03eb72c42ddbfd64113215351ad32849a281771164bf67d68af57d8dbff28e44",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "af01c1ea32e5e4ebbb43fef3ce76094aa608da66428b0c260b47793ba1ad5ec9",
+      "title": "Violencia institucional obstruye acceso a la justicia y derechos de las mujeres",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/violencia-institucional-obstruye-acceso-a-la-justicia-y-derechos-de-las-mujeres/",
+      "published_date": "2016-08-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113197,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1b87b49dbc863faf05a01608dae2b00f69af0cddeeb442d9652fb403fed5a6e5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fd49d5aebacaf83cedaf84e6371317d547299ee82ca9099d55841f29e3b2ed3a",
+      "title": "Estudiante será procesada en libertad por el delito de homicidio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/estudiante-sera-procesada-en-libertad-por-el-delito-de-homicidio/",
+      "published_date": "2016-08-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 113001,
+        "retrieved_at": "2026-10-11T13:28:28.149302+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T20:14:39.884899-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3811269ad194a9dab7bf7bf5ab190795e177e326afc1a05a3dddac8c4d129aa8",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p7"
           ]
         }
       }
