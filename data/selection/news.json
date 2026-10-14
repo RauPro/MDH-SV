@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T23:21:48.479398+00:00",
+  "generated_at": "2026-10-14T00:20:25.063570+00:00",
   "assessment_counts": {
     "candidates": 9816,
-    "evaluated": 1993,
-    "relevant": 783,
-    "excluded": 1208,
+    "evaluated": 2121,
+    "relevant": 791,
+    "excluded": 1328,
     "uncertain": 2,
-    "pending": 7823
+    "pending": 7695
   },
   "selections": [
     {
@@ -461,6 +461,33 @@
             "p4",
             "p6",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "073ada7f816cbea2274ec6c8827d7259721fd44fa0c5a9cfbaae3b598467f809",
+      "source_url": "https://historico.elsalvador.com/historico/158717/capturan-a-pandillero-salvadoreno-que-reclutaba-jovenes-en-honduras.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-08-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T18:11:37.557983-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f81eba6f9b3c88e122576af58d0d1de1561117876b920d130d7caead825cdc52",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -2308,6 +2335,36 @@
       }
     },
     {
+      "candidate_id": "1d1e8cad84b1a0ab367ce4a65a2a6d3e5ec8f8dd0ed316980a29a55abcb742a0",
+      "source_url": "https://historico.elsalvador.com/historico/158207/juez-ordena-liberar-familias-detenidas-ee-uu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-08-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T18:12:20.931590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c04545c8db6b0e50a565c88e3a14f57c4b230102431baad0ae23013e6999de9b",
+          "jurisdiction_paragraph_ids": [
+            "p8",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p5",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "1d368538a8787a442330745c4f57eee7f550015dd780000fc9ce62e6a42f3c44",
       "source_url": "https://www.diariocolatino.com/sis-aborda-migracion-y-poblacion-lgbti/",
       "publisher": "Diario Co Latino",
@@ -3520,6 +3577,34 @@
             "p4",
             "p6",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2c8687360dc86818c4abafb6802a2e361a7875375b2c8aebf8813e3509ca6bf0",
+      "source_url": "https://historico.elsalvador.com/historico/159854/seguiran-deteniendo-a-familias-que-crucen-ilegalmente-la-frontera.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-08-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T18:10:21.644430-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "689aa6eb3a710ba4e0a06e461f2a87b30e8d72b78a3497a99d2b9eddb340d68e",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -11843,6 +11928,33 @@
       }
     },
     {
+      "candidate_id": "840424671787f31faea920c4a3c339f8acd955759a3e1844979694bb73121917",
+      "source_url": "https://historico.elsalvador.com/historico/161313/ee-uu-acusa-de-homicidio-a-pandillero-arrestado-en-el-salvador.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-09-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T18:14:22.182556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "73dda39adaaadcb959b16ce12063042772ee380c3e6a1bae2e3e2252f8ab52de",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "8414fd5caf060d1e8777406cb831474e464f1a32d0ab488398fb4b9a73fac957",
       "source_url": "https://www.diariocolatino.com/los-periodistas-no-solo-enfrentan-problemas-por-la-delincuencia-apes/",
       "publisher": "Diario Co Latino",
@@ -15426,6 +15538,34 @@
       }
     },
     {
+      "candidate_id": "a8d4fa368031d15cc0ae958ee0585cf86ba7873dadae50cde9563cce9d12ae9a",
+      "source_url": "https://historico.elsalvador.com/historico/162856/capturan-a-guatemalteco-con-15-inmigrantes-salvadorenos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-09-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T18:13:38.078051-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7fccbbfddc624f5e27033f74f327f503cce8d2d5282223f5cc5b8e121f40aa65",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a8e0cedb2827d641f05470b924f0622d0b2f03ebf50fd9d71b8e510bd984ca1e",
       "source_url": "https://www.diariocolatino.com/preven-reduccion-de-hacinamiento-carcelario-para-2018/",
       "publisher": "Diario Co Latino",
@@ -16615,6 +16755,36 @@
             "p6",
             "p11",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b8794f996be5be82d429498f779af9232f8ab4f4cf40790676f5abf4318dd8b0",
+      "source_url": "https://historico.elsalvador.com/historico/159632/familia-salvadorena-que-huyo-de-pandilla-es-detenida-en-ee-uu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-08-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T18:10:21.644430-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9ddfe8c26b615dd1bf47e51829723238e565349be93af7f0bf35e136f8e841de",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4",
+            "p16"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p13",
+            "p14"
           ]
         }
       }
@@ -19424,6 +19594,33 @@
       }
     },
     {
+      "candidate_id": "dd1ea0ba2c920c21a5b160148dd223a800a89ecb4d33807b642010477a5d1212",
+      "source_url": "https://historico.elsalvador.com/historico/157298/capturan-a-coyote-salvadoreno-en-mexico.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-08-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T18:13:38.078051-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3ea28243ebc7f604d147903eb9f737653aa76228eedfda06d995d56504957464",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "dd32403d86f2b708f4357f037c4454558f2863efd054af7529b9dcf8495428ca",
       "source_url": "https://gatoencerrado.news/2015/11/30/piden-esclarecer-asesinato-de-cuatro-monjas-estadounidense-durante-conflicto-armado-salvadoreno/",
       "publisher": "GatoEncerrado",
@@ -22177,6 +22374,34 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ffb854a36d6a3498bd12a3547c981e6f7d82232eddc764939cd917ddc115c286",
+      "source_url": "https://historico.elsalvador.com/historico/161554/policia-captura-a-guatemalteco-acusado-de-secuestrar-a-migrantes-salvadorenos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-09-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T18:14:22.182556-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e28017c3b30954d6888a135b740afa642b93809d9daa30ddaa4a0b32a7d9aae8",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
             "p4"
           ]
         }
