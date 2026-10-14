@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T23:21:43.753404+00:00",
+  "generated_at": "2026-10-14T23:34:52.766637+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1924,6 +1924,30 @@
       }
     },
     {
+      "candidate_id": "55ded0f10fef0c2519246c41776b3fcff3dfb280014d54925d5eab1633971d49",
+      "source_url": "https://www.diariocolatino.com/coopesa-condena-asesinato-de-sacerdote-walter-vasquez/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-04-13",
+      "department": "San Miguel",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T23:34:06.983135+00:00",
+      "source_checked_at": "2026-10-14T23:34:06.983135+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "3682c5bd1e4b3d21702df565a333be5f8c7002d5e52595522043c533aa31f653"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Lolotique",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+      }
+    },
+    {
       "candidate_id": "55e4ea4d2104af6acf94ff1cd304668a5f7ee5536343e4ed8be74093f8f8ddee",
       "source_url": "https://www.diariocolatino.com/candidato-del-fmln-armando-flores-reconoce-el-derecho-al-agua-de-los-teclenos/",
       "publisher": "Diario Co Latino",
@@ -1994,6 +2018,38 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
+    },
+    {
+      "candidate_id": "5bf1f8f327a8cf5d38850ad1d2958337c393c2b6fa9336d0542f40bb5f046c13",
+      "source_url": "https://www.diariocolatino.com/inauguraron-diplomado-de-defensoria-de-los-derechos-de-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-04-12",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T23:33:55.281064+00:00",
+      "source_checked_at": "2026-10-14T23:33:55.281064+00:00",
+      "evidence": {
+        "content_sha256": "97afbf174df206690746fdaac7f3775763bc118b62e3e7a03ef155226d71219f"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cuscatlán",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p4"
+        }
+      ]
     },
     {
       "candidate_id": "5eaff40875c92603a05e6e9bf24cc463b48adcb9d79e5e8abe5de68b51def2e2",
