@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T18:20:32.539563+00:00",
+  "generated_at": "2026-10-14T19:20:59.111680+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1047,6 +1047,30 @@
       }
     },
     {
+      "candidate_id": "2f2bbb9ca26303c0c566f716b818292fcacd4e73e997a422a4369534032374be",
+      "source_url": "https://historico.elsalvador.com/historico/444074/sospechoso-de-asesinar-a-doctora-enfrenta-audiencia-por-fraude-procesal.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-29",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T19:20:45.043549+00:00",
+      "source_checked_at": "2026-10-14T19:20:45.043549+00:00",
+      "evidence": {
+        "paragraph_id": "p9",
+        "content_sha256": "8cda14fd5ad28095504a5d2b1df8c689fb359442f68cca92fd5513d704a7537d"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Ana",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
       "candidate_id": "2f74393b66bda7d14b76cca480ce930cc1d668475522daf80d55f54bd87400c2",
       "source_url": "https://www.diariocolatino.com/fgr-confirmo-asesinato-de-voluntario-de-cruz-roja/",
       "publisher": "Diario Co Latino",
@@ -1617,6 +1641,40 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
+    },
+    {
+      "candidate_id": "4a6f0d39b5883aa40bc89279ff99737e5598eee69869405d007578fd80dda83f",
+      "source_url": "https://historico.elsalvador.com/historico/443683/mujer-es-condenada-por-intentar-ingresar-droga-a-bartolinas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-27",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T19:20:44.154128+00:00",
+      "source_checked_at": "2026-10-14T19:20:44.154128+00:00",
+      "evidence": {
+        "content_sha256": "2e2f09ac09d452c5f619eac237ca97e85418707b3d55bac0a94ae06dbe9e30b9"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p1"
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Ilopango",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "4c784312cd702db80fa98d3c0c8584445654b6b903dfd8590339e879cd5072dd",
@@ -2302,6 +2360,30 @@
       "evidence": {
         "paragraph_id": "p4",
         "content_sha256": "bfddb317d63be94d625d898e37b908145dbac25aae926670b03ad792e41427d6"
+      }
+    },
+    {
+      "candidate_id": "7111239ac267ee18ad652c0198bb5cb89f24fafc583d5ed19af9aa49db1d198b",
+      "source_url": "https://historico.elsalvador.com/historico/445469/exalcalde-de-apopa-fue-absuelto-de-ordenar-el-asesinato-de-pandillero-en-el-municipio.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-02-01",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T19:20:57.930785+00:00",
+      "source_checked_at": "2026-10-14T19:20:57.930785+00:00",
+      "evidence": {
+        "paragraph_id": "p15",
+        "content_sha256": "c55255c9ab2de9ad321852f8aadec40054f2f7a1bca5f60ab97627f382612ccf"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Apopa",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -4600,6 +4682,23 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "e441e502795b9cd2a2f2d9267453b223e6b5cd8d196845fa5f5a589dcd697975",
+      "source_url": "https://www.diariocolatino.com/uno-los-principales-aciertos-fue-prohibir-la-mineria-omar-cuellar/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-01-31",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T19:20:54.896221+00:00",
+      "source_checked_at": "2026-10-14T19:20:54.896221+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "e6ab9114f8661bea43bee607501bbc04b0c5476062abd41997dfd8b194e0b5ff"
+      }
     },
     {
       "candidate_id": "e83e4dc432faf773029f562f10a5fd86e3800a9b5d61c018393596c9fa2b9042",
