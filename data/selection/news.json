@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T17:21:09.367970+00:00",
+  "generated_at": "2026-10-14T18:20:02.919523+00:00",
   "assessment_counts": {
-    "candidates": 10642,
-    "evaluated": 3674,
-    "relevant": 1301,
-    "excluded": 2371,
+    "candidates": 10792,
+    "evaluated": 3786,
+    "relevant": 1309,
+    "excluded": 2475,
     "uncertain": 2,
-    "pending": 6968
+    "pending": 7006
   },
   "selections": [
     {
@@ -681,6 +681,33 @@
           "relevance_paragraph_ids": [
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "051cdea4edcdc14bd2b017c78b252c28bd9d0b91d88d143a7aa0572a182ec518",
+      "source_url": "https://historico.elsalvador.com/historico/124708/pandillero-salvadoreno-se-declara-inocente-de-homicidio-en-ee-uu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-03-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T12:09:39.308827-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7b585fec91098a0123e28fbaab55dd8cb054bc446b363d8cd57e0ca383651b16",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
           ]
         }
       }
@@ -6971,6 +6998,33 @@
       }
     },
     {
+      "candidate_id": "316fae8a2a72a61c616a6fa5dde5078eae8494f2d4b7af8bf7874ab304ffc8ee",
+      "source_url": "https://historico.elsalvador.com/historico/132580/capturan-a-guatemalteca-por-intentar-vender-hija-de-salvadorena.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-07-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T12:14:21.415811-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "27492dc63f686266cf9fe7bf353526300137cab3d1923df58fa025334c84bd4c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "31844ee76e7e6737ab522c4b7684cb4091560762f0e227bd66714cd7b3766cfc",
       "source_url": "https://www.diariocolatino.com/dia-del-periodista/",
       "publisher": "Diario Co Latino",
@@ -11802,6 +11856,37 @@
             "p2",
             "p4",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "57e845c7d3fe2377ca4017060615030a6dd8cdbd53fbea4e785019b821bb3a7e",
+      "source_url": "https://historico.elsalvador.com/historico/129262/la-violencia-de-genero-es-estudiada-en-el-salvador.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-06-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T12:13:40.386257-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "db7ea73e99ec9801a7a9b6d2fa7ebda6f244a93fd2d8763af73e90c89e2e4040",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p5",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p8",
+            "p10"
           ]
         }
       }
@@ -18458,6 +18543,34 @@
       }
     },
     {
+      "candidate_id": "7d670ad33540722cbfaa5f8a19416ed9b3daef98a202fd5ac72c704df62fbe3d",
+      "source_url": "https://historico.elsalvador.com/historico/128849/ee-uu-baraja-cualquier-opcion-legal-para-detener-ola-de-ninos-inmigrantes.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-06-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T12:13:40.386257-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "272171dc3fb2f4a8390eb99ad3c28258703318e94674bfb3903d1983414360e2",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7da394d1780017c871978590dbd02d786978520a7e338c172862ba916ad689e2",
       "source_url": "https://www.diariocolatino.com/mayo-cierra-con-10-5-de-homicidios-al-dia/",
       "publisher": "Diario Co Latino",
@@ -24977,6 +25090,34 @@
       }
     },
     {
+      "candidate_id": "a7fe9342d3415b8dfe267faf30758dafb9846da09928994ad80eee0481185ab7",
+      "source_url": "https://historico.elsalvador.com/historico/127490/por-falta-de-espacio-liberan-a-inmigrantes-en-centros-de-detencion-de-estados-unidos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-05-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T12:11:40.412761-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "82c210e16a0460c3088eefef0d10b8feb212e105c64f1b4310671c52c0d88e6a",
+          "jurisdiction_paragraph_ids": [
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p12",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a8d4fa368031d15cc0ae958ee0585cf86ba7873dadae50cde9563cce9d12ae9a",
       "source_url": "https://historico.elsalvador.com/historico/162856/capturan-a-guatemalteco-con-15-inmigrantes-salvadorenos.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -26111,6 +26252,35 @@
       }
     },
     {
+      "candidate_id": "b39575161bbe8316953b7b435fcc78ecdced31c1c34a3483bcca5eb03cc576d6",
+      "source_url": "https://historico.elsalvador.com/historico/130143/piden-a-onu-el-estatus-de-refugiados-para-menores-ilegales-detenidos-en-eeuu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-06-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T12:12:21.146867-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9586e7588a1591ddfd967d37454a2df9a739f32342f1d1aec6579974cd8cf281",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p8",
+            "p9",
+            "p13",
+            "p20"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b39e114d2c4a2dd0be96a2b989bb0287cdba587ed3777779ad38b7b67ab69d19",
       "source_url": "https://www.diariocolatino.com/procuradores-de-derechos-humanos-de-c-a-reconocen-lucha-de-monsenor-romero/",
       "publisher": "Diario Co Latino",
@@ -26607,6 +26777,32 @@
           "relevance_paragraph_ids": [
             "p5",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b6ca75c9963be751f4ca715a8b42d5ac8c02ee5981ae1cec576b66d4bf441f63",
+      "source_url": "https://historico.elsalvador.com/historico/130665/unos-40-centroamericanos-detenidos-son-deportados.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-07-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T12:15:40.480761-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0024b77c7f6fcf9e510a1e9b1f517a247cd810832570970b7842c7ff4aefee94",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
           ]
         }
       }
@@ -28560,6 +28756,39 @@
             "p4",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c359a88149ce80910a0f0c5a06828285cb1cb59ba4ff08d73035e15c66d7d1c5",
+      "source_url": "https://historico.elsalvador.com/historico/126690/sip-hay-un-retroceso-en-la-libertad-de-expresion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-04-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T12:10:19.145616-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "78364b699acdbcc0917ac0de1d9d375123225d4b160a34c42c8e010ac349df54",
+          "jurisdiction_paragraph_ids": [
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p9",
+            "p10",
+            "p11"
           ]
         }
       }
