@@ -31,6 +31,9 @@ def test_processing_projection_requires_a_verified_full_private_inventory():
     assert evaluate['env']['MDH_GEMINI_BUDGET_CONFIG'] == '${{ vars.MDH_GEMINI_BUDGET_CONFIG }}'
     assert '--request-generations request-generations.json' in evaluate['run']
     assert '--excluded-ids excluded-locations.json' in evaluate['run']
+    assert evaluate['id'] == 'automatic_validation' and evaluate['continue-on-error'] == 'true'
+    failure_report = next(s for s in steps if "steps.automatic_validation.outcome == 'failure'" in s.get('if', ''))
+    assert steps.index(failure_report) > steps.index(publish)
     assert 'apps/web/public/archive/processing.json' in publish['run']
     assert 'inbox/drafts' not in publish['run']
     assert publish['run'].index('check-data.mjs') < publish['run'].index('git push')
