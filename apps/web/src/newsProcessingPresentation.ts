@@ -4,14 +4,14 @@ export type PublicLoadState = 'loading' | 'ready' | 'unavailable';
 
 type ProcessingPresentation = { label: string; explanation: string };
 
-const extractionPresentation: Record<Exclude<NewsProcessingStatus, 'reviewed'>, ProcessingPresentation> = {
+const extractionPresentation: Record<Exclude<NewsProcessingStatus, 'reviewed' | 'automatically_published'>, ProcessingPresentation> = {
   pending: {
     label: 'Pendiente de extracción',
-    explanation: 'La ficha todavía no se ha generado. Después de la extracción, sus campos deberán pasar por revisión editorial antes de publicarse.',
+    explanation: 'La ficha todavía no se ha generado. Sus campos se publicarán automáticamente cuando superen las comprobaciones de evidencia y privacidad.',
   },
   generated: {
-    label: 'Ficha generada · Pendiente de revisión',
-    explanation: 'Ya se generó una ficha, que puede ser parcial. Sus campos permanecen privados hasta que se complete la revisión editorial.',
+    label: 'Ficha generada · Pendiente de validación automática',
+    explanation: 'Ya se generó una ficha, que puede ser parcial. Sus campos se publicarán cuando superen las comprobaciones automáticas de evidencia y privacidad.',
   },
   source_unavailable: {
     label: 'Fuente no accesible para extracción',
@@ -27,16 +27,18 @@ const extractionPresentation: Record<Exclude<NewsProcessingStatus, 'reviewed'>, 
   },
 };
 
-export function newsProcessingPresentation({ humanReviewed, reviewState, processingState, status }: {
+export function newsProcessingPresentation({ humanReviewed, automaticallyPublished = false, reviewState, processingState, status }: {
   humanReviewed: boolean;
+  automaticallyPublished?: boolean;
   reviewState: PublicLoadState;
   processingState: PublicLoadState;
   status?: NewsProcessingStatus;
 }): ProcessingPresentation {
   if (humanReviewed) return { label: 'Ficha revisada editorialmente', explanation: 'Los campos publicados corresponden a la ficha aprobada en revisión editorial.' };
-  if (reviewState === 'loading') return { label: 'Comprobando revisión pública', explanation: 'Estamos comprobando si hay una ficha pública revisada disponible.' };
-  if (reviewState === 'unavailable') return { label: 'Revisión pública no disponible', explanation: 'No se pudo comprobar si hay una ficha pública revisada disponible.' };
+  if (automaticallyPublished) return { label: 'Ficha publicada automáticamente', explanation: 'Los campos publicados superaron comprobaciones automáticas de evidencia y privacidad. No han sido revisados por una persona.' };
+  if (reviewState === 'loading') return { label: 'Comprobando ficha pública', explanation: 'Estamos comprobando si hay una ficha pública disponible.' };
+  if (reviewState === 'unavailable') return { label: 'Ficha pública no disponible', explanation: 'No se pudo comprobar si hay una ficha pública disponible.' };
   if (processingState === 'loading') return { label: 'Comprobando extracción', explanation: 'Estamos consultando si la ficha está pendiente de extracción o ya fue generada.' };
   if (processingState === 'unavailable') return { label: 'Estado de extracción no disponible', explanation: 'No se pudo comprobar el estado de extracción. No podemos afirmar que la ficha esté pendiente o que ya haya sido generada.' };
-  return extractionPresentation[status === 'reviewed' ? 'unknown' : status ?? 'unknown'];
+  return extractionPresentation[status === 'reviewed' || status === 'automatically_published' ? 'unknown' : status ?? 'unknown'];
 }

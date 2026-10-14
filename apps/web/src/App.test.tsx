@@ -184,7 +184,7 @@ it('opens news and their full dossier directly from Fichas y mapa on the home pa
   const dialog = await screen.findByRole('dialog');
   expect(dialog).toHaveTextContent('Ficha estructurada de la noticia');
   expect(dialog).toHaveTextContent('Víctima o personas afectadas');
-  expect(within(dialog).getAllByText('Sin dato revisado disponible').length).toBeGreaterThanOrEqual(18);
+  expect(within(dialog).getAllByText('Dato aún no publicado').length).toBeGreaterThanOrEqual(18);
   await userEvent.click(within(dialog).getByRole('button', { name:'Cerrar' }));
   expect(screen.getByRole('button', { name:'Noticias' })).toHaveAttribute('aria-pressed','true');
 });

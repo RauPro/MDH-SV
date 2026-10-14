@@ -46,3 +46,11 @@ Cuando la referencia fue seleccionada con `gemini_grounded_scope`, el hash del
 texto de la ubicación debe coincidir con el de esa selección. Una coincidencia
 de URL y fecha por sí sola no permite mezclar lecturas distintas de la fuente.
 Los datos humanos revisados siguen prevaleciendo sobre cualquier capa automática.
+
+Las fichas publicadas automáticamente con contrato v2 conservan
+`human_reviewed: false`. Su publicación no convierte sus campos territoriales en
+coordenadas ni los incorpora por sí solos al mapa: la capa automática sigue
+utilizando `locations.json` y sus comprobaciones de evidencia y correspondencia
+administrativa. Si una ficha pública automática protege el departamento o no
+determina jurisdicción salvadoreña, no se muestra una ubicación automática que
+contradiga esa restricción. Las ubicaciones humanas revisadas mantienen prioridad.
