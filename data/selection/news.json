@@ -1,15 +1,46 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T21:21:11.969618+00:00",
+  "generated_at": "2026-10-14T22:20:07.041909+00:00",
   "assessment_counts": {
-    "candidates": 10792,
-    "evaluated": 4090,
-    "relevant": 1408,
-    "excluded": 2679,
+    "candidates": 10943,
+    "evaluated": 4202,
+    "relevant": 1414,
+    "excluded": 2785,
     "uncertain": 3,
-    "pending": 6702
+    "pending": 6741
   },
   "selections": [
+    {
+      "candidate_id": "000e1e361604170efb3c3c1e193cb67aae0636f5b8c56ed1d3bc6e421120a826",
+      "source_url": "https://historico.elsalvador.com/historico/137854/el-salvador-entra-a-organo-de-derechos-humanos-onu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-10-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:13:52.371907-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1915be1bdd174eaeb26d9971857c93ea57f64492fdb01f79e51fdc40c54d660e",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
     {
       "candidate_id": "00940adeb2830509c4ad32d58dbf10d1af74e8174566a7c55a656840a4c2c8ef",
       "source_url": "https://www.diariocolatino.com/fmln-condena-asesinato-pnc-descarta-movil-de-crimen-vinculado-a-pandillas/",
@@ -6614,6 +6645,40 @@
       }
     },
     {
+      "candidate_id": "2ccd5c82b0ae5f3fc970d61b7f42ad16b6b4516b3f6a3393b9f10f96888c9d66",
+      "source_url": "https://historico.elsalvador.com/historico/138000/el-salvador-nuevo-miembro-del-consejo-de-derechos-humanos-cdh-de-la-onu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-10-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:13:52.371907-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "95c95763f4ce5d8b64e1d61fd4afe28b3179a1745a9a7af71bd5baa9bcac306c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p7",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2ccdcc811da6662e72e13da192480fa810ff0226c5d54ed4e66765fcb6763cf8",
       "source_url": "https://www.diariocolatino.com/procurador-condena-asesinatos-de-ninos-y-adolescentes/",
       "publisher": "Diario Co Latino",
@@ -11016,6 +11081,36 @@
             "p10",
             "p16",
             "p22"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4aed9517e05099c1bf6a247e8fb0b534f7625d3ecebb32f8bbec0344afda59ba",
+      "source_url": "https://historico.elsalvador.com/historico/101923/brasil-ecuador-y-mexico-los-peores-para-el-periodismo.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:09:50.158836-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a362f48d16b84c522ef8af035d42a6b56671e17cabc3028213e137b349c882b1",
+          "jurisdiction_paragraph_ids": [
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p7",
+            "p10"
           ]
         }
       }
@@ -16059,6 +16154,32 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "6a5edb1c1a56732849b9c89b7be52c00022c363c35c3f7a97292c02555711512",
+      "source_url": "https://historico.elsalvador.com/historico/138474/capturan-a-sospechoso-de-asesinar-a-joven-salvadorena-en-ee-uu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-10-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:14:32.813515-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7654bcb33932a77915695cee26a771d81eb7d1b048a8218860af2a3ee732d50e",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p9",
+            "p12"
           ]
         }
       }
@@ -24114,6 +24235,35 @@
       }
     },
     {
+      "candidate_id": "9750ef2f4edbeb91ba69aed2e8e270e9afa04b5737d2393d0e8abacb512e4412",
+      "source_url": "https://historico.elsalvador.com/historico/103183/feminicidio-estigma-del-pais.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-03-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:10:30.534584-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6316942245da783a9942eba8b32f2301d53547ab84a9f2510894b050b5472781",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "97905d4bdefc8be53b40a5f24628d6ec7d1c1f1228149c88f8cb1904b49676da",
       "source_url": "https://www.diariocolatino.com/querella-denuncia-ante-pddh-a-juez-orellana-y-fiscal-general-por-violacion-al-derecho-de-libre-expresion-y-opinion/",
       "publisher": "Diario Co Latino",
@@ -30381,6 +30531,35 @@
             "p3",
             "p5",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "bfd94a924386f39c89e157b6730cf871efd7e44f2887d4f7165e045e9de26c0c",
+      "source_url": "https://historico.elsalvador.com/historico/138787/sip-deterioro-en-libertad-de-expresion-y-prensa.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-10-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:14:32.813515-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "faa1299dd1e63c395c5380cb54d2b693d8472da42674cffc614f41f0effba527",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6",
+            "p14"
           ]
         }
       }

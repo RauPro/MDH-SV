@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T21:56:30.752758+00:00",
+  "generated_at": "2026-10-14T22:20:08.630469+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 10943,
-      "selected": 1408,
-      "evaluated": 4090,
-      "relevant": 1408,
-      "excluded": 2679,
+      "selected": 1414,
+      "evaluated": 4202,
+      "relevant": 1414,
+      "excluded": 2785,
       "uncertain": 3,
-      "pending": 6853,
-      "evaluated_at": "2026-10-14T21:21:11.969618+00:00"
+      "pending": 6741,
+      "evaluated_at": "2026-10-14T22:20:07.041909+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-14",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1408,
+    "records": 1414,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,8 +14689,8 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 125,
-        "first_published_date": "2014-02-27",
+        "records": 131,
+        "first_published_date": "2013-02-14",
         "last_published_date": "2018-02-14",
         "months": [
           {
@@ -15140,7 +15140,7 @@
           {
             "month": "2013-02",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 10,
             "source_total_posts": null,
@@ -15152,7 +15152,7 @@
           {
             "month": "2013-03",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 18,
             "source_total_posts": null,
@@ -15380,7 +15380,7 @@
           {
             "month": "2014-10",
             "status": "partial",
-            "records": 0,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 31,
             "source_total_posts": null,
@@ -18723,7 +18723,7 @@
         "month": "2013-02",
         "start_date": "2013-02-01",
         "end_date": "2013-02-28",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18758,7 +18758,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -18766,7 +18766,7 @@
         "month": "2013-03",
         "start_date": "2013-03-01",
         "end_date": "2013-03-31",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18801,7 +18801,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -19583,7 +19583,7 @@
         "month": "2014-10",
         "start_date": "2014-10-01",
         "end_date": "2014-10-31",
-        "records": 36,
+        "records": 40,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19618,7 +19618,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 4
           }
         ]
       },
@@ -79564,6 +79564,53 @@
       }
     },
     {
+      "id": "6a5edb1c1a56732849b9c89b7be52c00022c363c35c3f7a97292c02555711512",
+      "title": "Capturan a sospechoso de asesinar a joven salvadoreña en EE. UU.",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/138474/capturan-a-sospechoso-de-asesinar-a-joven-salvadorena-en-ee-uu.html",
+      "published_date": "2014-10-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "ee uu",
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T21:55:35.230627+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:14:32.813515-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7654bcb33932a77915695cee26a771d81eb7d1b048a8218860af2a3ee732d50e",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p9",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "id": "2f6ec0c953467516454aa9ae63abd6793e843b85ace43f029665127c720a3ba7",
       "title": "El FMLN reitera su compromiso con derecho al agua",
       "title_truncated": false,
@@ -80498,6 +80545,52 @@
       }
     },
     {
+      "id": "bfd94a924386f39c89e157b6730cf871efd7e44f2887d4f7165e045e9de26c0c",
+      "title": "SIP: Deterioro en libertad de expresión y prensa",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/138787/sip-deterioro-en-libertad-de-expresion-y-prensa.html",
+      "published_date": "2014-10-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T21:55:35.230627+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:14:32.813515-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "faa1299dd1e63c395c5380cb54d2b693d8472da42674cffc614f41f0effba527",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "id": "ad12b9290dd8dc56b8b5cb4779b5f895477a250ff112505c7dc94aba8b536c75",
       "title": "Detiene a supuestos asesinos de agente especializado de la UMO",
       "title_truncated": false,
@@ -80537,6 +80630,59 @@
             "p2",
             "p4",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2ccd5c82b0ae5f3fc970d61b7f42ad16b6b4516b3f6a3393b9f10f96888c9d66",
+      "title": "El Salvador, nuevo miembro del Consejo de Derechos Humanos (CDH) de la ONU",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/138000/el-salvador-nuevo-miembro-del-consejo-de-derechos-humanos-cdh-de-la-onu.html",
+      "published_date": "2014-10-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T21:55:35.230627+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:13:52.371907-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "95c95763f4ce5d8b64e1d61fd4afe28b3179a1745a9a7af71bd5baa9bcac306c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p7",
+            "p12"
           ]
         }
       }
@@ -80583,6 +80729,56 @@
             "p2",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "000e1e361604170efb3c3c1e193cb67aae0636f5b8c56ed1d3bc6e421120a826",
+      "title": "El Salvador entra a órgano de derechos humanos ONU",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/137854/el-salvador-entra-a-organo-de-derechos-humanos-onu.html",
+      "published_date": "2014-10-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T21:55:35.230627+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:13:52.371907-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1915be1bdd174eaeb26d9971857c93ea57f64492fdb01f79e51fdc40c54d660e",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p6",
+            "p7"
           ]
         }
       }
@@ -90190,6 +90386,103 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9750ef2f4edbeb91ba69aed2e8e270e9afa04b5737d2393d0e8abacb512e4412",
+      "title": "Feminicidio, estigma del país",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/103183/feminicidio-estigma-del-pais.html",
+      "published_date": "2013-03-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T21:55:35.230627+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:10:30.534584-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6316942245da783a9942eba8b32f2301d53547ab84a9f2510894b050b5472781",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4aed9517e05099c1bf6a247e8fb0b534f7625d3ecebb32f8bbec0344afda59ba",
+      "title": "Brasil, Ecuador y México, los peores para el periodismo",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101923/brasil-ecuador-y-mexico-los-peores-para-el-periodismo.html",
+      "published_date": "2013-02-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "brasil",
+        "ecuador",
+        "mexico"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T21:55:35.230627+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T16:09:50.158836-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a362f48d16b84c522ef8af035d42a6b56671e17cabc3028213e137b349c882b1",
+          "jurisdiction_paragraph_ids": [
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p7",
+            "p10"
           ]
         }
       }
