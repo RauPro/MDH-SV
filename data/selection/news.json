@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T04:18:30.721124+00:00",
+  "generated_at": "2026-10-14T05:19:08.134534+00:00",
   "assessment_counts": {
     "candidates": 9816,
-    "evaluated": 2520,
-    "relevant": 897,
-    "excluded": 1621,
+    "evaluated": 2616,
+    "relevant": 939,
+    "excluded": 1675,
     "uncertain": 2,
-    "pending": 7296
+    "pending": 7200
   },
   "selections": [
     {
@@ -201,6 +201,37 @@
             "p10",
             "p12",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "01de57a1a9d0a6e6bf64059d49c843d85945eb7838ff84ba7170250143669902",
+      "source_url": "https://www.diariocolatino.com/tras-27-anos-asesinato-uca-recuerda-obra-martirio-sacerdotes-jesuitas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:09:54.438931-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "749f55fa5c7eeb28d0624205722e11d64030514956edf24cd3786dedcb0357c9",
+          "jurisdiction_paragraph_ids": [
+            "p8",
+            "p9",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p8",
+            "p10",
+            "p11",
+            "p13",
+            "p15"
           ]
         }
       }
@@ -496,6 +527,33 @@
       }
     },
     {
+      "candidate_id": "063964ec9e053c6d536f6c3f9670346a55aa2b0c10c22b4bd4c6667ef2f91605",
+      "source_url": "https://www.diariocolatino.com/toda-violencia-las-calles-origen-la-violencia-genero-vanda-pignato-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:17:27.946549-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5074337897c0a67ff89f70b481ff121252ed914a80a0e14a363c6fc670a7a3e1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "06e434269531c844c515a13c577abb228b4067cd770ad920bcc2ea0467eaa331",
       "source_url": "https://www.diariocolatino.com/los-43-estudiantes-mexicanos-desaparecidos-ayotzinapa-y-sus-luchas-y-lecciones-para-el-salvador/",
       "publisher": "Diario Co Latino",
@@ -632,6 +690,35 @@
             "p2",
             "p8",
             "p15"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "0812fc601070fb72836ed8cf627fe2922de2ba6beb478df7adbbbdbdab7d9378",
+      "source_url": "https://www.diariocolatino.com/la-laicidad-la-convencion-la-eliminacion-las-diversas-formas-discriminacion-la-mujer/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:09:54.438931-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4fd50c43b7d61ea66744c4cac42a43ca4b38a24bab12993842b738016f103879",
+          "jurisdiction_paragraph_ids": [
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -1904,6 +1991,31 @@
       }
     },
     {
+      "candidate_id": "1633a8d5eb84b8772d5e7d10f6503772fad5a6dd3bdd44aa8eb11e1b077aae63",
+      "source_url": "https://www.diariocolatino.com/alcalde-arena-medidas-alternas-la-detencion-corrupcion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:09:54.438931-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2273c60edbb5723f0c3b48895677ac46baccad575a9e4b50d1b8cff61748bbc8",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "166cdb58864302e25bc5a39018287e78a0fbe5e7e26f8ea58fe12791110432d0",
       "source_url": "https://www.diariocolatino.com/defensoria-detecta-mas-de-mil-productos-vencidos-en-restaurantes/",
       "publisher": "Diario Co Latino",
@@ -2796,6 +2908,32 @@
       }
     },
     {
+      "candidate_id": "1f2bc663be1fcbaad713d430b433387edfcfba67f2e17b4c9445dca85b6e7b9a",
+      "source_url": "https://www.diariocolatino.com/ratifican-detencion-provisional-embargos-expresidente-arenero-antonio-saca/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:17:27.946549-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2afc7d89608fa209a432aadbb6f2cce007e78dcdad8caab3827db61e4b89337f",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "1f35a928b8033006f49101da73f3a48da0e2b1c1aafbb5a158dc4dbeba55aba4",
       "source_url": "https://www.diariocolatino.com/fgr-confirma-cuadruple-homicidio-en-penal-de-izalco/",
       "publisher": "Diario Co Latino",
@@ -2820,6 +2958,34 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "1f3b22813ccc57c5e1bd3b509795fbaf0bbfb5877318c3c4ef1605b3b6498d50",
+      "source_url": "https://www.diariocolatino.com/fdr-fmln-una-alianza-estrategica-36-anos-del-secuestro-asesinato-la-dirigencia-del-fdr/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:12:50.346973-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "efab633c3bdb17aba52c352256180193d2224aff1c59e2efd4acff4511a67ef8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p18",
+            "p22",
+            "p25"
           ]
         }
       }
@@ -2990,6 +3156,36 @@
           ],
           "relevance_paragraph_ids": [
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "21361713d44db4fc22cd7796b373a0eb0dd45ed257e7f819ca1ca098e1fe4853",
+      "source_url": "https://www.diariocolatino.com/fiscalia-solo-recupera-28000-concepto-multas-violaciones-laborales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:09:54.438931-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9d0e93f5bd9640e78f70da1cfe960d538ee53ed181f12d0118872baeec888dc6",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p10",
+            "p11",
+            "p14"
           ]
         }
       }
@@ -3585,6 +3781,35 @@
           "relevance_paragraph_ids": [
             "p2",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "28625b88dcb92868986212f6bb29ea0bb7183187d825966f3608661f2d953fe2",
+      "source_url": "https://www.diariocolatino.com/fmln-asegura-oposicion-politica-ejerce-violencia-la-mujer/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:14:29.767750-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6307f6ccb1c4df382ee623e577e9b3031a4408660db290dcef672c82fb3af608",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -4332,6 +4557,35 @@
       }
     },
     {
+      "candidate_id": "2ecf33a908911b1d812ed30fb23ee36f271921426c3b359c99c7d23810e578e5",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-medidas-alternas-la-detencion-concejo-municipal-san-martin/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:17:27.946549-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5c9aa54441e5eba5db637b8db01e0d47d9b527cff699a33305f82ef6ff47ea7e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2f1e7f8db4c4e596902a8509d774a223bf16993b5e8e833d48871ba1cdd36499",
       "source_url": "https://www.diariocolatino.com/cac-asesinatos-de-ambientalistas-deuda-de-justicia-con-las-comunidades/",
       "publisher": "Diario Co Latino",
@@ -4410,6 +4664,33 @@
           "relevance_paragraph_ids": [
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2f468a5b8fa9cf0e41ee947ff6249101759a512894c0975370f148608349c4b5",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-satisfechos-la-representacion-electa-cnsm/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:16:31.780472-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "00a38b5a1836aca6dc67ea173d7e1e2e2f4046a4871a96e37273812771299266",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -4635,6 +4916,33 @@
             "p2",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "307937c371b05c8ca5cdec7769b96c054d118a5d89306acd6b0616479554aa29",
+      "source_url": "https://www.diariocolatino.com/fmln-condena-exige-investigacion-caso-asesinato-jefe-del-cam/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:09:54.438931-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "db1fa094540429f220b0b354923cc856ac8f842b9854809201126644320f5f98",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
           ]
         }
       }
@@ -4959,6 +5267,34 @@
       }
     },
     {
+      "candidate_id": "3467a8d243e7023faaedf8d78c2c23f078686392ae6d958ecf3c2ab57f5710a6",
+      "source_url": "https://www.diariocolatino.com/dia-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:16:31.780472-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7378bd35356bb82f9f01b409e63f87dcf1f0f6ff76e8d04d80629df2a9d6122a",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "34af901b76152476c19ecdaac9da92e56a56d614d6f36e85cd5bbc4dc2c976cf",
       "source_url": "https://www.diariocolatino.com/comunidades-de-cabanas-denuncian-contaminacion-de-rio-que-sirve-para-pesca-y-agricultura-2/",
       "publisher": "Diario Co Latino",
@@ -5012,6 +5348,33 @@
             "p4",
             "p7",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "35a0ac710980fa7eab9aae72c6ee9c36a9055307f9fd799a2eaa0abda73a681f",
+      "source_url": "https://www.diariocolatino.com/complejo-izalco-sera-nuevo-modelo-del-sistema-penitenciario-centroamerica-oscar-ortiz/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:12:50.346973-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "97f8c10318a412efae0cf3f4609337d0fc8eef23c9d13fd7521a51f58cd42e8e",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p11",
+            "p14"
           ]
         }
       }
@@ -5869,6 +6232,34 @@
       }
     },
     {
+      "candidate_id": "3d278ec8a991b61375f8bec19aaab43f152d9b26607695940aea59dee677e44e",
+      "source_url": "https://www.diariocolatino.com/docentes-una-educacion-enfoques-genero-inclusion-diversidad-derechos-humanos-posible-formacion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:10:52.249008-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4e718ddf031f5298cce4fa74e354f7198bc9c1a2830ae09199603f0b54c0ce7d",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "3d88a918a446c4e9c6cbf179c023189e8d9570baaf4007445aecb4fad0711ad6",
       "source_url": "https://www.diariocolatino.com/expresidente-flores-de-la-mansion-a-las-bartolinas/",
       "publisher": "Diario Co Latino",
@@ -6259,6 +6650,32 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "41d94fee4396aa8a8f93685ad740384b562dfa4ed452ef221e763fb775b3835a",
+      "source_url": "https://www.diariocolatino.com/cemujer-exige-mayor-combatividad-la-violencia-la-mujer/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-20",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:10:52.249008-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1f1e2cd8cd8481935b445f6b37de38f106a9fd47fec9a1ca1662bea18f472a40",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
             "p3",
             "p4"
           ]
@@ -6795,6 +7212,34 @@
       }
     },
     {
+      "candidate_id": "45dbb1e325e8e14975f4c5adf5fe7730794495925af6d3d36d203e5e719a6b86",
+      "source_url": "https://www.diariocolatino.com/organizaciones-buscan-cumplimiento-los-derechos-humanos-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:15:03.685972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "bc7047011dc5c6e935c6c5c457209d22338721680a68fd0a10ec6f57825a3b4d",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "460f2d374ac50bfbe4d38bc41266feb509340031c1a8a1f6705dbea710118623",
       "source_url": "https://www.diariocolatino.com/organizaciones-demanda-erradicacion-de-todo-tipo-de-violencia-contra-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -7305,6 +7750,33 @@
       }
     },
     {
+      "candidate_id": "4cb3c9532384a4c414c76ba1ca8f1fc0bda4ac0b712f73aa6ceb6a127e55a0bb",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-piden-la-anep-acepte-la-eleccion-del-sector-laboral/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:17:27.946549-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "12e265fec873d3a78cd86ac05474ae4f166892f186718abc46451687796e3914",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "4cc4845b57ee4cf9b4491cca2cfa52ac7ad82e0659f89df1abb8f055376e90f9",
       "source_url": "https://www.diariocolatino.com/la-libertad-de-expresion-no-es-un-derecho-absoluto/",
       "publisher": "Diario Co Latino",
@@ -7385,6 +7857,35 @@
             "p3",
             "p4",
             "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4e1a04fc73801dcf35f49e5cf03aca40f85bb471c6f3c27bad00d28adc81b0db",
+      "source_url": "https://www.diariocolatino.com/gpm-no-mas-violencia-las-mujeres-deben-denunciar-al-agresor/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:15:03.685972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c4d23338d44420af99ce412468ebf8085d3c955dc11624a7a4da4350c8c38b0a",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p9",
             "p10"
           ]
         }
@@ -9018,6 +9519,35 @@
       }
     },
     {
+      "candidate_id": "5ed7a2843a7963f3d4d406c8b32c00ce076d66d754751f5aba6007c80cda1b14",
+      "source_url": "https://gatoencerrado.news/2016/11/26/asesinatos-y-otras-violencias-contra-las-salvadorenas/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-11-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:14:29.767750-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0b54d30423d6bea4e92f23c34f901accfe43d8ad4df7b27358379bb6268ddb48",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p8",
+            "p10",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5f3e23cc12d2ff201118da6a2dc83deee1939f88d25c9dace9e96610071379a7",
       "source_url": "https://www.diariocolatino.com/penales-y-empresa-privada-impulsan-programa-de-cocina-escuela-en-carcel-de-mujeres/",
       "publisher": "Diario Co Latino",
@@ -9938,6 +10468,35 @@
       }
     },
     {
+      "candidate_id": "66b49fac852df6c18c242132697ec08557f0f060b1977a16769df676bf40ca36",
+      "source_url": "https://www.diariocolatino.com/trasladan-asesinos-agentes-policiales-al-penal-maxima-seguridad-zacatecoluca/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:09:54.438931-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fe701c74b141883024c768c00a68244cbacab845dae7a66e06016688583c0f04",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "66e07fa45080f0995957522cdb5c3bb3fc4293f5fe5edda82a2bfc33b3310ca7",
       "source_url": "https://www.diariocolatino.com/procurador-pide-a-director-de-pnc-capturar-a-militares/",
       "publisher": "Diario Co Latino",
@@ -10305,6 +10864,33 @@
       }
     },
     {
+      "candidate_id": "6a18f6dad09e83370c834c3f41cd9d9b030d9204f5214abbfa131b90d640043a",
+      "source_url": "https://gatoencerrado.news/2016/11/18/casi-4-mil-menores-de-18-anos-fueron-asesinados-entre-2011-y-2015-en-el-salvador/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-11-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:10:52.249008-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e1197815af393f241537a5c0c255ad9f9889f7602de9819a66b67dd7336e97d3",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p10",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "6a3ab84bd3492ce3b822679e1b10e340605f3b9e081c922cf9b40b263fe204de",
       "source_url": "https://www.diariocolatino.com/sis-e-isdemu-desarrollan-proyecto-regional-en-prevencion-de-la-violencia-contra-la-mujer/",
       "publisher": "Diario Co Latino",
@@ -10642,6 +11228,34 @@
             "p4",
             "p5",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "6c064b43875edf50fd8689c21a3a3aeb58c5e0ab006b75ef8a91557cdfe492a0",
+      "source_url": "https://www.diariocolatino.com/pddh-recibe-acreditacion-clase-institucion-nacional-defensa-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:16:31.780472-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "17c0e17de85dccb7b4287a003ae7cb35e7e946f1fc65f0b6ade04aebd7de0b67",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -11726,6 +12340,34 @@
       }
     },
     {
+      "candidate_id": "7347b0645d02439711ff5fb5e3a4a519c074ff7616b456c6b4f64069a79b7072",
+      "source_url": "https://www.diariocolatino.com/gobierno-destaca-avances-sistema-penitenciario/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:15:03.685972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3a732f722fbf922d3f74fce38363d0be3f4e59af2508b96fa864a7f585f32e55",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7365890031cd99cb1fad4481264f7482226d7ce17cc9d8adf0a4f536967d9730",
       "source_url": "https://www.diariocolatino.com/acredito-a-mujeres-como-defensoras-de-los-derechos-de-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -12323,6 +12965,63 @@
       }
     },
     {
+      "candidate_id": "77ec0e3ca5939d686e5b58876d9dfc61eb05621b71e307e41281ce340ba797de",
+      "source_url": "https://www.diariocolatino.com/la-violencia-las-mujeres-una-violacion-los-derechos-humanos-vanda-pignato/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:14:29.767750-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e07c4ffeef11600976ef73e37c73d3c39bcb3c4f7c34582c177aadd1326dcb6d",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "77f4859d79cdaba8c3c7118cea809ff52e9b50cc57ef75fdd35240ac2472b924",
+      "source_url": "https://www.diariocolatino.com/reporta-la-captura-696-pandilleros-involucrados-ataques-policias/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:15:03.685972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8949696369e2853cc4f16a3fd4b74f72436f53bf9c629eab8e6829cc499af37f",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "780b134eaba8002cd1168dab843f986b5d0e2314f04610521ee0dc83c29d1cfd",
       "source_url": "https://www.diariocolatino.com/el-43-de-los-nombres-del-libro-amarillo-coinciden-con-las-denuncias-registradas-contra-los-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -12436,6 +13135,34 @@
             "p6",
             "p7",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "78ef67ae15d6b128e66f9d983a6b3430de23d8c33358ed01a543cf42b5c71538",
+      "source_url": "https://www.revistafactum.com/la-defensoria-los-pobres-esta-ahogada/",
+      "publisher": "Revista Factum",
+      "published_date": "2016-11-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:10:52.249008-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8995638958ec75ceefd019f1edf4129ce6679b3b1d6380100f5cf495b684a130",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p18",
+            "p31"
           ]
         }
       }
@@ -14695,6 +15422,32 @@
       }
     },
     {
+      "candidate_id": "92031b673c36772793ed8f49dc5107af3cdc2d81dfc5b4258ebbcaeb880f160e",
+      "source_url": "https://www.diariocolatino.com/exigen-al-estado-mas-firmeza-ante-violaciones-los-derechos-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:10:52.249008-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f63c24f5c7d5c88985e32890bf738ac29daf539eb0a486194344f94d9b62b86c",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "9205672e5601f739a67e09e09c6cab19b6c5fca0f7fdefb802e467d020df71bf",
       "source_url": "https://www.diariocolatino.com/derechos-humanos-materia-de-conciencia-humana/",
       "publisher": "Diario Co Latino",
@@ -15404,6 +16157,31 @@
       }
     },
     {
+      "candidate_id": "988a4e370576d9a934115fd933692a99654489c3dec16bb6bdce251f29888690",
+      "source_url": "https://www.diariocolatino.com/gobierno-busca-fortalecer-sistema-penitenciario-la-carrera-custodios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:12:50.346973-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "17e64b52a383edc0d193740aa20c09d1eb98c5ead320081f051fd225646f2d06",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "98abaf9f0db2c084d95de5067bc43abd974f9b478410277af7b330572981d395",
       "source_url": "https://www.diariocolatino.com/pddh-y-sspas-firman-convenio-contra-violacion-de-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -15601,6 +16379,34 @@
             "p2",
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "9bb2a2961e03852d2e23de27641a26aff604eae40b308d1bd84fb583d109815d",
+      "source_url": "https://www.diariocolatino.com/organizaciones-buscan-cumplimiento-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:15:03.685972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d90d19180ef102a5e0ca96ebb4fbfe2a93c6ab9d121a8bef39220dd007ae6b19",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p8",
+            "p11"
           ]
         }
       }
@@ -16726,6 +17532,32 @@
           "relevance_paragraph_ids": [
             "p2",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a2dd570bb3c5bfe78ed30e7c2570c07406e2dd48152e583a4e3f973c2d61ad18",
+      "source_url": "https://www.diariocolatino.com/parlamentarias-buscan-concientizar-la-no-violencia-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:15:03.685972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a6f2216d0361db10c501dcc8e4e8a4c6145d4df769ee123ccf8750941981d82c",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -18738,6 +19570,31 @@
       }
     },
     {
+      "candidate_id": "b7df1ddc2978546467d910a7231f77c4d2aff472039392b70af8ae8e7a5b57a8",
+      "source_url": "https://www.diariocolatino.com/defensoria-activa-plan-proteger-consumidores-viernes-negro/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:12:50.346973-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "918cb69594939758178214f98923c2154eb6bd916643c1226db75f09112c832b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b803d4ffd02b0f420058261c1f47e47f9d36cc402c58644e05354dce8974a110",
       "source_url": "https://www.diariocolatino.com/sis-instala-mesa-acceso-seguridad-justicia-poblacion-lgbti/",
       "publisher": "Diario Co Latino",
@@ -19305,6 +20162,35 @@
             "p3",
             "p4",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "bcb064e13918f995258718729e42b46e2ac04bffbfc5ea549e0d2e6c612616c8",
+      "source_url": "https://www.diariocolatino.com/pddh-22-los-homicidios-ano-ninos-ninas-adolescentes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:15:03.685972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d9ec6ffb1124977319f604e14149db98aaad9b8ee2be000da67e4e0a0117e3c8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p12"
           ]
         }
       }
@@ -20775,6 +21661,33 @@
       }
     },
     {
+      "candidate_id": "ca44960ff70d5f79140edde49f4c12aa32c9dd9ab70ff09b2cbe238acbc7c5f9",
+      "source_url": "https://www.diariocolatino.com/pueblo-uso-libertad-expresion-dice-fmln/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:17:27.946549-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "28cf2189a87b825460ac9720531b1350cdf537ef220714242f2e81d50b0ab68b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "cadd18bb43e5b72d1afc90cae20d5b575d2cb8b1e2f2cc5583a46f22045e2967",
       "source_url": "https://www.diariocolatino.com/sala-admite-demanda-de-amparo-y-detiene-desalojo/",
       "publisher": "Diario Co Latino",
@@ -21000,6 +21913,34 @@
       }
     },
     {
+      "candidate_id": "ce80f2f95a3c6b25da061e6ce9279410945493d0629601432baf827749fc5d71",
+      "source_url": "https://www.diariocolatino.com/la-oscura-noche-los-desaparecidos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:14:29.767750-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d36498027aa9ba02aa028adf57b36efdbe98b0de48c7faed715d4d34fa8e9c4a",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "cf8d7ed419804fb35412537d5a1f361b79432a5521ec4fd7cb8e1222115d278b",
       "source_url": "https://www.diariocolatino.com/desaparecidos/",
       "publisher": "Diario Co Latino",
@@ -21048,6 +21989,32 @@
             "p2",
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "cffae7b773f571b42e33bf762e33c4c390963113f178e85687dd4334276d2631",
+      "source_url": "https://www.diariocolatino.com/instituto-estudios-la-mujer-norma-virginia-guirola-herrera-se-pone-alerta-roja-debido-la-indignacion-repudio-los-constantes-hechos-violencia-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:10:52.249008-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "84c75acb276dee6c50d3889aebd443f92f45a299cf778a641bc5ec17b71f690a",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p10"
           ]
         }
       }
@@ -22208,6 +23175,35 @@
       }
     },
     {
+      "candidate_id": "ddd309940d5e353a5de6b606323c26cd65fe7c18e9b17ff02ba7a6f74e07a706",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-cierran-alcaldias-violaciones-derechos-laborales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:17:27.946549-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "47ab464530010288a43fac2dc52db1e2c4121bfa0d08b35ff13f26ab361ad51b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p8",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "de031e0596780eff1433d965bc46d4d8edd80b94c5697a13261572a9e42cf062",
       "source_url": "https://www.diariocolatino.com/sc-inicia-actuaciones-para-buscar-posibles-violaciones-en-aplicacion-del-cesc/",
       "publisher": "Diario Co Latino",
@@ -22860,6 +23856,32 @@
       }
     },
     {
+      "candidate_id": "e784cce1138a193902c61aab83ab8efeb5cd09bc8e1e36a480e687d07bdfa6b8",
+      "source_url": "https://www.diariocolatino.com/2016-culmina-una-reduccion-18-5-homicidios-11-5-menos-violencia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:16:31.780472-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "017eeea4eb684f78d4659c42b3c9d4de24319a9ebff6d15b34eef40920fd8363",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "e7b9151e85f64b150206d9fad2037f7beefa6f0e07f07f5e354f3a9dc32d8e6d",
       "source_url": "https://gatoencerrado.news/2015/09/08/piden-respaldo-legislativo-a-comision-que-busca-ninez-desaparecida-en-guerra-salvadorena/",
       "publisher": "GatoEncerrado",
@@ -22950,6 +23972,34 @@
             "p5",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e98215d89cf622e03852e81df4303354432129dab89dcd7588f2fcabc9a85f80",
+      "source_url": "https://www.diariocolatino.com/justicia-prepara-protocolo-abogados-defensores-pandilleros-penales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-11-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:14:29.767750-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "79a6e33e676c51ff5a989b92adf9600a0fa8d51a1e700c2182b39451a88e9227",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p13"
           ]
         }
       }
@@ -23277,6 +24327,89 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ed2d3897281dfe176d021be6c009831246a8f5883b3ac160ac8d6890aae96349",
+      "source_url": "https://www.diariocolatino.com/abogados-defensores-deberan-estar-acreditados-ingresar-penales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:15:03.685972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "eea91b29b4b203b871d259e90f8963575bb16042f09d478fc37f1c116ee396dd",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ed32568d8cd50c9adefa4056cd56028a2b9935aafccfec381442a22bd1bd8d27",
+      "source_url": "https://www.diariocolatino.com/criticas-sala-parte-libertad-expresion-dice-eugenio-chicas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:17:27.946549-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d8ff0bae577b4dfec643bd77e5c2297231f1f67c96e520c4b9371784b1fd8f9e",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ed7ca2984a5bc50955566f6788398290f06aeae22aa1ad3d83b38d171dd0159e",
+      "source_url": "https://www.diariocolatino.com/modelo-penitenciario-cambio-celebra-segundo-aniversario/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:16:31.780472-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "731b77c7db5891625c1b5613d9d6e62c464af387251e9275847af13f7f9ee338",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p7"
           ]
         }
       }
@@ -23964,6 +25097,35 @@
           "relevance_paragraph_ids": [
             "p2",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f3a5b90ce069be6e32bdbf222d9df635abdcad23fd1a3b02c223c7d7b331346c",
+      "source_url": "https://www.diariocolatino.com/importancia-respetar-estado-laico-garantizar-los-derechos-humanos-la-democratizacion-del-estado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-12-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-13T23:16:31.780472-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "aacce358c329c4c07f17f03625f96d757ec830d364150594928ef533a655acd4",
+          "jurisdiction_paragraph_ids": [
+            "p7",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p8"
           ]
         }
       }
