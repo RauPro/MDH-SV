@@ -1,0 +1,58 @@
+name: Apply maintainer news request
+on:
+  issues:
+    types: [labeled]
+permissions:
+  contents: write
+  issues: read
+concurrency:
+  group: public-news-bibliography
+  cancel-in-progress: false
+jobs:
+  apply:
+    if: github.repository == 'RauPro/MDH-SV' && github.event.sender.type == 'User' && contains(fromJSON('["news/withdraw","news/restore","news/recheck"]'), github.event.label.name)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Install locked validation environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install -e . --no-deps
+          python -m pip check
+      - name: Authenticate request and reconcile public projections
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            # This isolated Actions checkout contains only our generated changes.
+            # Recompute against the newest main instead of merging stale JSON.
+            git fetch origin main
+            git reset --hard origin/main
+            python -m mdh_pipeline.history --export-only --candidates-only --output "$RUNNER_TEMP/news-exception-candidates.json"
+            python -m mdh_pipeline.news_requests apply-exception --candidates "$RUNNER_TEMP/news-exception-candidates.json"
+            python -m mdh_pipeline.history --export-only
+            node apps/web/scripts/sync-news-publication.mjs
+            node apps/web/scripts/sync-news-processing.mjs
+            node apps/web/scripts/check-data.mjs
+            git add -- data/selection/news_exceptions.json data/automated/news_dossiers.json apps/web/public/archive/news.json apps/web/public/archive/dossiers.json apps/web/public/archive/locations.json apps/web/public/archive/processing.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'fix: apply authenticated news request and reconcile publication'
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          echo 'Could not publish after three concurrent-update retries.' >&2
+          exit 1

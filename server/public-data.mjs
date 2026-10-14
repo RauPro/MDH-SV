@@ -186,7 +186,8 @@ export function searchNews(filters = {}, archive = loadNews(), dossierPayload, l
     const dossier = newsDossierFor(reference, snapshot.index);
     return { ...reference, news_dossier: dossier,
       processing_status: newsProcessingFor(reference, processing.index, dossier),
-      automatic_location: snapshot.status === 'available' && !dossier.human_reviewed ? newsLocationFor(reference, locations.index) : null };
+      automatic_location: snapshot.status === 'available' && !dossier.human_reviewed && dossier.fields.department.status !== 'withheld'
+        ? newsLocationFor(reference, locations.index) : null };
   });
   result.meta = { ...result.meta, selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador', coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
     news_dossiers_status: snapshot.status,

@@ -528,6 +528,18 @@ test('automatic public dossiers expose attributed fields without asserting human
   assert.equal(response.data[0].news_dossier.automation.corroboration, 'single_source');
   assert.match(response.meta.review_notice, /no implica corroboración independiente/);
   assert.deepEqual(getStats(), baseline);
+  const location = { candidate_id: source.id, source_url: source.source_url, publisher: source.publisher,
+    published_date: source.published_date, department: 'San Salvador', review_status: 'automated_unreviewed', human_reviewed: false,
+    method: 'gemini_explicit_department', extracted_at: '2026-10-10T12:00:00Z', source_checked_at: '2026-10-10T12:00:00Z',
+    evidence: { paragraph_id: 'p1', content_sha256: source.selection.evidence.content_sha256 } };
+  const locations = { schema_version: 1, generated_at: '2026-10-10T12:00:00Z', locations: [location] };
+  assert.deepEqual(searchNews({}, archive, payload, locations, null).data[0].automatic_location, location);
+  const protectedDossier = structuredClone(dossier);
+  protectedDossier.fields.department = { value: null, status: 'withheld', evidence_refs: [], note: 'Ubicación omitida por protección de personas.' };
+  const protectedResponse = searchNews({}, archive, { schema_version: 1, dossiers: [protectedDossier] }, locations, null);
+  assert.equal(protectedResponse.data[0].processing_status, 'automatically_published');
+  assert.equal(protectedResponse.data[0].automatic_location, null);
+  assert.equal(protectedResponse.data[0].news_dossier.fields.summary.value, 'AUTOMATIC_PUBLIC_TEST_VALUE');
   assert.equal(validateDossierBindings(parsePublishedNewsDossiers(payload), [source]).size, 1);
   const stale = { ...source, selection: { ...source.selection, evidence: { ...source.selection.evidence, content_sha256: 'f'.repeat(64) } } };
   assert.throws(() => validateDossierBindings(parsePublishedNewsDossiers(payload), [stale]));
