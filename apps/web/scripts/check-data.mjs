@@ -7,6 +7,7 @@ import { parsePublishedNewsDossiers, validateDossierBindings } from '../../../sh
 import { parsePublishedNewsLocations, validateLocationBindings } from '../../../shared/news-location.mjs';
 import { checkOfficialStatisticsExports } from './export-official-statistics.mjs';
 import { parseNewsProcessing, validateProcessingBindings } from '../../../shared/news-processing.mjs';
+import { parseNewsExceptions } from '../../../shared/news-exceptions.mjs';
 
 const source = new URL('../../../data/reviewed/publications.json', import.meta.url);
 const publicDir = new URL('../public/data/', import.meta.url);
@@ -38,8 +39,12 @@ for (const row of catalog.records) {
 console.log(`Validated ${catalog.records.length} public records and all download checksums.`);
 
 const approvedNews = JSON.parse(readFileSync(new URL('../../../data/reviewed/news_dossiers.json', import.meta.url)));
+const automatedNews = JSON.parse(readFileSync(new URL('../../../data/automated/news_dossiers.json', import.meta.url)));
 const publicNews = JSON.parse(readFileSync(new URL('../public/archive/dossiers.json', import.meta.url)));
 const newsArchive = JSON.parse(readFileSync(new URL('../public/archive/news.json', import.meta.url)));
+const exceptions = parseNewsExceptions(JSON.parse(readFileSync(new URL('../../../data/selection/news_exceptions.json', import.meta.url))));
+const withdrawn = id => exceptions.get(id)?.withdrawn === true;
+for (const reference of newsArchive.records) assert.ok(!withdrawn(reference.id), 'Withdrawn news must not remain in the public archive');
 // Verify discovery coverage independently of classification or publication.
 const candidateIds = new Set();
 for (const id of ['co-latino', 'gatoencerrado', 'factum', 'el-faro', 'el-mundo', 'la-prensa-grafica', 'el-diario-de-hoy']) {
@@ -49,18 +54,25 @@ for (const id of ['co-latino', 'gatoencerrado', 'factum', 'el-faro', 'el-mundo',
 assert.equal(newsArchive.policy.selection_gate.candidates, candidateIds.size, 'Discovery denominator must match the candidate checkpoints');
 assertSelectedNewsArchive(newsArchive);
 const allApproved = parsePublishedNewsDossiers(approvedNews);
+for (const dossier of allApproved.values()) assert.equal(dossier.human_reviewed, true, 'Reviewed source must contain only human decisions');
+const automaticIndex = parsePublishedNewsDossiers(automatedNews);
+for (const dossier of automaticIndex.values()) assert.equal(dossier.schema_version, 2, 'Automated source must contain only validated automatic publications');
 const selectionManifest = JSON.parse(readFileSync(new URL('../../../data/selection/news.json', import.meta.url)));
 assertSelectionProvenance(newsArchive, selectionManifest, allApproved);
-const approvedIndex = validateDossierBindings(new Map([...allApproved].filter(([, dossier]) => dossier.classification.jurisdiction === 'SV' && dossier.classification.relevance === 'relevant')), newsArchive.records);
+// Human decisions replace automatic content, including a decision to withhold
+// the reference from the public scope. Source stores remain separate.
+const mergedIndex = new Map([...automaticIndex, ...allApproved].filter(([id]) => !withdrawn(id)));
+const approvedIndex = validateDossierBindings(new Map([...mergedIndex].filter(([, dossier]) => dossier.classification.jurisdiction === 'SV' && dossier.classification.relevance === 'relevant')), newsArchive.records);
 const publicIndex = validateDossierBindings(parsePublishedNewsDossiers(publicNews), newsArchive.records);
-assert.deepEqual([...publicIndex].sort(), [...approvedIndex].sort(), 'Regenerate public news dossiers after changing reviewed source');
+assert.deepEqual([...publicIndex].sort(), [...approvedIndex].sort(), 'Regenerate public news dossiers after changing reviewed or automated source');
 for (const reference of newsArchive.records) assert.ok(isSelectedNewsReference(reference, allApproved.get(reference.id)), 'Human scope decisions must remove out-of-scope public references');
 console.log(`Validated ${newsArchive.records.length} selected news references from ${newsArchive.policy.selection_gate.candidates} discovery candidates.`);
 for (const dossier of publicIndex.values()) {
+  assert.ok(!withdrawn(dossier.candidate_id), 'Withdrawn news must not retain a public dossier');
   assert.equal(hash(dossier.source_url), dossier.candidate_id, 'News dossier identity must match its source URL');
-  assert.ok(dossier.reviewed_at <= new Date().toISOString().slice(0, 10), 'News dossier review cannot be in the future');
+  if (dossier.human_reviewed) assert.ok(dossier.reviewed_at <= new Date().toISOString().slice(0, 10), 'News dossier review cannot be in the future');
 }
-console.log(`Validated ${publicIndex.size} human-reviewed news dossiers and bibliography bindings.`);
+console.log(`Validated ${publicIndex.size} public news dossiers with explicit publication provenance and source bindings.`);
 
 const processing = JSON.parse(readFileSync(new URL('../public/archive/processing.json', import.meta.url)));
 const processingIndex = validateProcessingBindings(parseNewsProcessing(processing), newsArchive.records);
@@ -72,6 +84,7 @@ console.log(`Validated ${processingIndex.size} processing statuses without expos
 const automaticLocations = JSON.parse(readFileSync(new URL('../public/archive/locations.json', import.meta.url)));
 const locationsIndex = validateLocationBindings(parsePublishedNewsLocations(automaticLocations), newsArchive.records);
 for (const location of locationsIndex.values()) {
+  assert.ok(!withdrawn(location.candidate_id), 'Withdrawn news must not retain a public location');
   assert.equal(hash(location.source_url), location.candidate_id, 'Automatic location must match its source URL');
   assert.equal(location.human_reviewed, false);
   assert.equal(location.review_status, 'automated_unreviewed');

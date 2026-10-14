@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { NEWS_PROCESSING_STATUSES, newsProcessingFor, parseNewsProcessing, processingMatchesReference, validateNewsProcessingEntry, validateProcessingBindings } from '../shared/news-processing.mjs';
 import { pendingNewsDossier } from '../shared/news-dossier.mjs';
+import { parseNewsExceptions } from '../shared/news-exceptions.mjs';
 import fixtureArchive from '../apps/web/src/__fixtures__/newsArchive.json' with { type: 'json' };
 
 const reference = fixtureArchive.records[0];
@@ -117,4 +118,82 @@ test('validated metadata is copied and direct caller maps cannot smuggle private
   const unsafe = { ...entry(), raw_article: 'PRIVATE_SENTINEL' };
   assert.equal(newsProcessingFor(reference, new Map([[reference.id, unsafe]])), 'unknown');
   assert.throws(() => validateNewsProcessingEntry(unsafe));
+});
+
+function automaticallyPublished() {
+  const dossier = pendingNewsDossier(reference);
+  return { ...dossier, schema_version: 2, extraction_status: 'processed',
+    classification: { jurisdiction: 'SV', relevance: 'relevant', record_type: 'publication' },
+    fields: { ...dossier.fields, summary: { value: 'Según la fuente, se presentó un informe de derechos humanos.', status: 'reported', evidence_refs: ['bibliography'], note: null } },
+    automation: { policy_version: 'auto-news-v1', source_content_sha256: reference.selection.evidence.content_sha256,
+      validated_at: '2026-10-10T12:00:00Z', method: 'gemini_evidence_review', evaluator_model: 'gemini-test', corroboration: 'single_source' } };
+}
+
+test('only a bound validated automatic dossier grants automatically_published, independent of processing feed', () => {
+  const dossier = automaticallyPublished();
+  for (const status of NEWS_PROCESSING_STATUSES) {
+    assert.equal(newsProcessingFor(reference, parseNewsProcessing(collection([entry(status)])), dossier), 'automatically_published');
+  }
+  assert.equal(newsProcessingFor(reference, new Map(), dossier), 'automatically_published');
+  for (const mutate of [
+    value => { value.schema_version = 1; },
+    value => { delete value.automation; },
+    value => { value.automation.policy_version = 'invented-policy'; },
+    value => { value.automation.method = 'no_validation'; },
+    value => { value.automation.corroboration = 'independently_verified'; },
+    value => { value.automation.source_content_sha256 = 'f'.repeat(64); },
+    value => { value.automation.source_content_sha256 = 'invalid'; },
+    value => { value.automation.evaluator_model = ''; },
+    value => { value.automation.evaluator_model = 'x'.repeat(101); },
+    value => { value.automation.evaluator_model = 'gemini\nsecret'; },
+    value => { value.automation.validated_at = '2999-01-01T00:00:00Z'; },
+    value => { value.automation.validated_at = '2000-01-01T00:00:00Z'; },
+    value => { value.automation.validated_at = '2026-02-30T00:00:00Z'; },
+    value => { value.automation.validated_at = '2026-10-10T12:00:00-06:00'; },
+    value => { value.automation.validated_at = '2026-10-10'; },
+    value => { value.automation.private_reasoning = 'PRIVATE_SENTINEL'; },
+    value => { value.private_model_output = 'PRIVATE_SENTINEL'; },
+    value => { value.classification.jurisdiction = 'other'; },
+    value => { value.classification.relevance = 'unclear'; },
+    value => { value.extraction_status = 'pending'; },
+    value => { value.human_reviewed = true; },
+    value => { value.reviewed_by = 'reviewer'; },
+    value => { value.reviewed_at = '2026-10-10'; },
+    value => { value.review_notes = 'Invented human approval record.'; },
+    value => { value.fields.summary = { value: null, status: 'pending', evidence_refs: [], note: null }; },
+  ]) {
+    const invalid = structuredClone(dossier); mutate(invalid);
+    assert.equal(newsProcessingFor(reference, new Map(), invalid), 'unknown');
+  }
+  assert.equal(newsProcessingFor({ ...reference, selection: { method: 'editorial_scope' } }, new Map(), dossier), 'unknown');
+  assert.throws(() => parseNewsProcessing(collection([{ ...entry(), status: 'automatically_published' }])));
+});
+
+test('exception records bind maintainer decisions without public request text or private content', () => {
+  const decision = { candidate_id: reference.id, withdrawn: true, request_generation: 0, issue_number: 123, decided_by: 'maintainer', decided_at: '2026-10-14T12:00:00Z' };
+  const payload = { schema_version: 1, decisions: [decision] };
+  const index = parseNewsExceptions(payload);
+  assert.deepEqual(index.get(reference.id), decision);
+  decision.withdrawn = false;
+  assert.equal(index.get(reference.id).withdrawn, true);
+  assert.equal(parseNewsExceptions({ ...payload, decisions: [] }).size, 0);
+  for (const mutate of [
+    value => { value.schema_version = 2; },
+    value => { value.issue_body = 'PRIVATE_SENTINEL'; },
+    value => { value.decisions.push(structuredClone(value.decisions[0])); },
+    value => { value.decisions[0].candidate_id = 'bad'; },
+    value => { value.decisions[0].withdrawn = 'true'; },
+    value => { value.decisions[0].request_generation = -1; },
+    value => { value.decisions[0].request_generation = 1.5; },
+    value => { value.decisions[0].issue_number = 0; },
+    value => { value.decisions[0].issue_number = Number.MAX_SAFE_INTEGER + 1; },
+    value => { value.decisions[0].decided_by = 'invalid/name'; },
+    value => { value.decisions[0].decided_at = '2026-02-30T00:00:00Z'; },
+    value => { value.decisions[0].decided_at = '2999-01-01T00:00:00Z'; },
+    value => { value.decisions[0].decided_at = '2026-10-14T06:00:00-06:00'; },
+    value => { value.decisions[0].private_notes = 'PRIVATE_SENTINEL'; },
+  ]) {
+    const unsafe = structuredClone(payload); mutate(unsafe);
+    assert.throws(() => parseNewsExceptions(unsafe));
+  }
 });

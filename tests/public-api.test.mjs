@@ -7,7 +7,7 @@ import { getStats, loadCatalog, loadNews, searchNews, searchRecords } from '../s
 import { validMcpRequest } from '../api/mcp.mjs';
 import recordHandler from '../api/v1/records/[id].mjs';
 import unknownV1Handler from '../api/v1/[...path].mjs';
-import { NEWS_DOSSIER_FIELDS, pendingNewsDossier } from '../shared/news-dossier.mjs';
+import { NEWS_DOSSIER_FIELDS, pendingNewsDossier, parsePublishedNewsDossiers, validateDossierBindings } from '../shared/news-dossier.mjs';
 import fixtureArchive from '../apps/web/src/__fixtures__/newsArchive.json' with { type: 'json' };
 import { assertSelectedNewsArchive, validateNewsSelection } from '../shared/news-selection.mjs';
 import { NEWS_PROCESSING_STATUSES } from '../shared/news-processing.mjs';
@@ -422,7 +422,7 @@ test('OpenAPI is a public, versioned executable contract', async () => {
   assert.ok(body.components.schemas.News.required.includes('news_dossier'));
   assert.ok(body.components.schemas.News.required.includes('selection'));
   assert.ok(body.components.schemas.News.required.includes('processing_status'));
-  assert.deepEqual(body.components.schemas.NewsProcessingStatus.enum, [...NEWS_PROCESSING_STATUSES, 'reviewed']);
+  assert.deepEqual(body.components.schemas.NewsProcessingStatus.enum, [...NEWS_PROCESSING_STATUSES, 'reviewed', 'automatically_published']);
   assert.equal(body.components.schemas.NewsProcessingEntry.additionalProperties, false);
   assert.equal(body.components.schemas.NewsProcessingCollection.additionalProperties, false);
   assert.equal(body.components.schemas.NewsProcessingEntry.properties.status.enum.includes('reviewed'), false);
@@ -475,7 +475,7 @@ test('MCP officially connects, discovers read-only tools, calls and reads resour
     assert.ok(news.structuredContent.meta.policy.notice);
     assert.deepEqual(Object.keys(news.structuredContent.data[0].news_dossier.fields), NEWS_DOSSIER_FIELDS);
     assert.equal(news.structuredContent.data[0].news_dossier.kind, 'news_dossier');
-    assert.ok([...NEWS_PROCESSING_STATUSES, 'reviewed'].includes(news.structuredContent.data[0].processing_status));
+    assert.ok([...NEWS_PROCESSING_STATUSES, 'reviewed', 'automatically_published'].includes(news.structuredContent.data[0].processing_status));
     assert.ok(listed.tools.find(tool => tool.name === 'search_news').description.includes('processing_status'));
     const resources = await client.listResources();
     assert.equal(resources.resources.length, 2);
@@ -507,4 +507,45 @@ test('MCP rejects malformed, oversized, batched requests and unsupported methods
   assert.equal((await fetch(`${base}/mcp`, { method: 'POST', headers, body: '[]' })).status, 400);
   assert.equal((await fetch(`${base}/mcp`, { method: 'POST', headers, body: JSON.stringify({ payload: 'x'.repeat(33000) }) })).status, 413);
   assert.equal((await fetch(`${base}/mcp`, { method: 'POST', headers: { 'content-type': 'text/plain' }, body: '{}' })).status, 415);
+});
+
+test('automatic public dossiers expose attributed fields without asserting human approval or changing case counts', () => {
+  const source = fixtureArchive.records[0];
+  const archive = selectedArchive([source]);
+  const dossier = pendingNewsDossier(source);
+  Object.assign(dossier, { schema_version: 2, extraction_status: 'processed',
+    classification: { jurisdiction: 'SV', relevance: 'relevant', record_type: 'publication' },
+    automation: { policy_version: 'auto-news-v1', source_content_sha256: source.selection.evidence.content_sha256,
+      validated_at: '2026-10-10T12:00:00+00:00', method: 'gemini_evidence_review', evaluator_model: 'gemini-test', corroboration: 'single_source' } });
+  dossier.fields.summary = { value: 'AUTOMATIC_PUBLIC_TEST_VALUE', status: 'reported', evidence_refs: ['bibliography'], note: null };
+  const payload = { schema_version: 1, dossiers: [dossier] };
+  const baseline = getStats();
+  const response = searchNews({}, archive, payload, null, null);
+  assert.equal(response.data[0].processing_status, 'automatically_published');
+  assert.equal(response.data[0].news_dossier.fields.summary.value, 'AUTOMATIC_PUBLIC_TEST_VALUE');
+  assert.equal(response.data[0].news_dossier.human_reviewed, false);
+  assert.equal(response.data[0].news_dossier.reviewed_by, null);
+  assert.equal(response.data[0].news_dossier.automation.corroboration, 'single_source');
+  assert.match(response.meta.review_notice, /no implica corroboración independiente/);
+  assert.deepEqual(getStats(), baseline);
+  assert.equal(validateDossierBindings(parsePublishedNewsDossiers(payload), [source]).size, 1);
+  const stale = { ...source, selection: { ...source.selection, evidence: { ...source.selection.evidence, content_sha256: 'f'.repeat(64) } } };
+  assert.throws(() => validateDossierBindings(parsePublishedNewsDossiers(payload), [stale]));
+  const hidden = searchNews({}, selectedArchive([stale]), payload, null, null);
+  assert.equal(hidden.data[0].news_dossier.extraction_status, 'pending');
+  assert.equal(hidden.data[0].processing_status, 'unknown');
+  assert.ok(!JSON.stringify(hidden).includes('AUTOMATIC_PUBLIC_TEST_VALUE'));
+  for (const mutate of [
+    value => { delete value.automation; },
+    value => { value.automation.policy_version = 'unsafe-policy'; },
+    value => { value.automation.private_prompt = 'PRIVATE_SENTINEL'; },
+    value => { value.fields.summary.private_reasoning = 'PRIVATE_SENTINEL'; },
+    value => { value.human_reviewed = true; },
+  ]) {
+    const unsafe = structuredClone(dossier); mutate(unsafe);
+    const result = searchNews({}, archive, { schema_version: 1, dossiers: [unsafe] }, null, null);
+    assert.equal(result.meta.news_dossiers_status, 'unavailable');
+    assert.equal(result.data[0].news_dossier.fields.summary.value, null);
+    assert.ok(!JSON.stringify(result).includes('PRIVATE_SENTINEL'));
+  }
 });

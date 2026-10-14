@@ -1,7 +1,7 @@
 import type { BibliographicReference, NewsDossier } from './news-dossier.mjs';
 
 export type NewsProcessingEntryStatus = 'pending' | 'generated' | 'source_unavailable' | 'error' | 'unknown';
-export type NewsProcessingStatus = NewsProcessingEntryStatus | 'reviewed';
+export type NewsProcessingStatus = NewsProcessingEntryStatus | 'reviewed' | 'automatically_published';
 export interface NewsProcessingReference extends BibliographicReference {
   selection?: { method: string; evidence?: { content_sha256?: string } };
 }
