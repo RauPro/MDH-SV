@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T12:25:27.665150+00:00",
+  "generated_at": "2026-10-14T15:21:02.432818+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -24,6 +24,23 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
+      "candidate_id": "02b05ff7985dea12e3bc3bc56fd73fa94b6ecc9d966585d2fb8ce21f437438d9",
+      "source_url": "https://www.diariocolatino.com/pandilleros-atacado-policias-regimen-especial-penitenciario/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-08-21",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T15:20:20.547702+00:00",
+      "source_checked_at": "2026-10-14T15:20:20.547702+00:00",
+      "evidence": {
+        "paragraph_id": "p13",
+        "content_sha256": "2d4d80b7b70761aacb984d56c529cac1e673c62f344fba342765330aa9430093"
       }
     },
     {
@@ -302,6 +319,30 @@
       }
     },
     {
+      "candidate_id": "100b6cbc71cef9d1b5d22815d5dbccc1d6c3da8e591d151a74911b0e633d18f0",
+      "source_url": "https://gatoencerrado.news/2017/07/17/violada-y-condenada-la-historia-detras-de-evelyn-y-sus-30-anos-de-carcel/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2017-07-17",
+      "department": "Cuscatlán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T15:20:00.009503+00:00",
+      "source_checked_at": "2026-10-14T15:20:00.009503+00:00",
+      "evidence": {
+        "paragraph_id": "p11",
+        "content_sha256": "444dfc1278a4cd551d207ef5153d7eda846ab464cf319bdec2426482c3411b49"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Cojutepeque",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
       "candidate_id": "10179add97958a1eda5e7ec45e99198dcd7cf4192b6f4e1af47c3159ad471f5a",
       "source_url": "https://www.diariocolatino.com/foro-del-agua-exige-fgr-dejar-perseguir-defensores-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -405,6 +446,23 @@
       "evidence": {
         "paragraph_id": "p3",
         "content_sha256": "61dce153b1c4cee3d2d165e6f36f80d48de2bfcba1d4f8ab455b207f96bec383"
+      }
+    },
+    {
+      "candidate_id": "17782a3d8822547b65d140303f81644f1d7dd0e0778876b1b75dbcf8549b4c12",
+      "source_url": "https://www.diariocolatino.com/alza-homicidios-responde-pugna-estructuras-la-ms/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-09-25",
+      "department": "San Miguel",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T15:21:01.104975+00:00",
+      "source_checked_at": "2026-10-14T15:21:01.104975+00:00",
+      "evidence": {
+        "paragraph_id": "p11",
+        "content_sha256": "06734187a2a69c9871e24d52160c2c251ee70d87c30063a5f955fd356b42a1a9"
       }
     },
     {
@@ -2814,6 +2872,30 @@
       }
     },
     {
+      "candidate_id": "9740b7458e11e561a77eb38acc2ffea432917867d948bb40199be26061f88e88",
+      "source_url": "https://www.diariocolatino.com/mineria-transfronteriza-sera-factor-lucha-resistencia-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-07-24",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T15:20:06.139987+00:00",
+      "source_checked_at": "2026-10-14T15:20:06.139987+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "80392e508a483804f4d0df7355144445a7fcfc5236d1eec9d9e2260b40eae20c"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "La Laguna",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
       "candidate_id": "974c1505f0dab95ec8f94841cc6ef4de480f46ad5ca35a97431165664f845e43",
       "source_url": "https://www.diariocolatino.com/defensoria-del-consumidor-activa-plan-dia-la-madre/",
       "publisher": "Diario Co Latino",
@@ -4368,6 +4450,30 @@
       }
     },
     {
+      "candidate_id": "f1ebe65133c4a727dff9f9f754106128300b20da7814c39867ee2860baffbd68",
+      "source_url": "https://www.diariocolatino.com/detencion-provisional-medidas-alternas-policias-acusados-ilicitos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-09-05",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T15:20:46.023797+00:00",
+      "source_checked_at": "2026-10-14T15:20:46.023797+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "b179849665317fa8ebbfcfc438e9de60baa77b2799e9735334693ad1439192a8"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "f2021ac3428380b8d8c477530c057e9f8d9d3251fad4642d596a02848b6b491c",
       "source_url": "https://www.diariocolatino.com/calle-13-llama-a-terminar-violencia-contra-la-ninez/",
       "publisher": "Diario Co Latino",
@@ -4438,6 +4544,58 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
+    },
+    {
+      "candidate_id": "f4382da54639bad33afbc776e8a6bcd755ae67c133e47e9d86aa2180cacf0524",
+      "source_url": "https://www.diariocolatino.com/diferentes-sectores-del-pais-se-comprometen-eliminar-la-violencia-la-ninez/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-09-20",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-14T15:20:57.809798+00:00",
+      "source_checked_at": "2026-10-14T15:20:57.809798+00:00",
+      "evidence": {
+        "content_sha256": "01327ba57d0b47d8a33441597463f788673c0b8e53c77161000c8ef548c6e9bd"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Ahuachapán",
+          "paragraph_id": "p9"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Morazán",
+          "paragraph_id": "p9"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Miguel",
+          "paragraph_id": "p9"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p9"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Vicente",
+          "paragraph_id": "p9"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Sonsonate",
+          "paragraph_id": "p9"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Usulután",
+          "paragraph_id": "p9"
+        }
+      ]
     },
     {
       "candidate_id": "f63f3caec3e83c192feaa4d6fbae1a4566f37a7d0d9899234c8b47c404e56941",
