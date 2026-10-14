@@ -5,6 +5,7 @@ export const NEWS_DOSSIER_FIELDS = Object.freeze([
   'reported_actors', 'institutional_sources', 'vulnerable_groups', 'themes', 'hypothesis', 'instrument',
 ]);
 export const NEWS_DOSSIER_PENDING = 'Pendiente de extracción o revisión';
+export const NEWS_DOSSIER_PROTECTED_TITLE = 'Noticia con título protegido; consulte la fuente original';
 export const NEWS_DOSSIER_LIST_FIELDS = Object.freeze(['affected_persons', 'reported_actors', 'institutional_sources', 'vulnerable_groups', 'themes', 'instrument']);
 const listFields = new Set(NEWS_DOSSIER_LIST_FIELDS);
 const sourceHosts = new Set(['www.hrw.org', 'www.oas.org', 'www.amnesty.org', 'citizenlab.ca', 'www.corteidh.or.cr', 'spcommreports.ohchr.org', 'www.ohchr.org', 'www.diariocolatino.com', 'diariocolatino.com', 'gatoencerrado.news', 'www.revistafactum.com', 'revistafactum.com', 'elfaro.net', 'www.elfaro.net', 'beta.elfaro.net', 'diario.elmundo.sv', 'www.laprensagrafica.com', 'laprensagrafica.com', 'historico.elsalvador.com', 'www.elsalvador.com', 'elsalvador.com']);
@@ -17,9 +18,11 @@ export function safeSource(value) {
 }
 const object = value => Boolean(value && typeof value === 'object' && !Array.isArray(value));
 const text = value => typeof value === 'string' && Boolean(value.trim());
-const date = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
+const date = value => typeof value === 'string' && !value.startsWith('0000-') && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
+const sha = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+const utcInstant = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|\+00:00)$/.test(value) && date(value.slice(0, 10)) && Number.isFinite(Date.parse(value));
 const exactKeys = (value, keys) => object(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
-const fail = () => { throw new Error('Ficha de noticia pública inválida o sin revisión humana'); };
+const fail = () => { throw new Error('Ficha de noticia pública inválida o sin validación de publicación'); };
 const calendar = new Intl.DateTimeFormat('en', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'America/El_Salvador' });
 function today() {
   const parts = Object.fromEntries(calendar.formatToParts(new Date()).map(part => [part.type, part.value]));
@@ -44,20 +47,32 @@ export function validatePublishedNewsDossier(value) {
     if (new TextEncoder().encode(JSON.stringify(value)).byteLength > 180000) fail();
   } catch { fail(); }
   const keys = ['schema_version', 'kind', 'candidate_id', 'source_url', 'publisher', 'source_title', 'published_date',
-    'extraction_status', 'classification', 'fields', 'date_precision', 'evidence', 'human_reviewed', 'reviewed_by', 'reviewed_at', 'review_notes'];
-  if (!exactKeys(value, keys) || value.schema_version !== 1 || value.kind !== 'news_dossier'
+    'extraction_status', 'classification', 'fields', 'date_precision', 'evidence', 'human_reviewed', 'reviewed_by', 'reviewed_at', 'review_notes', ...(value?.schema_version === 2 ? ['automation'] : [])];
+  if (!exactKeys(value, keys) || ![1, 2].includes(value.schema_version) || value.kind !== 'news_dossier'
     || typeof value.candidate_id !== 'string' || !/^[a-f0-9]{64}$/.test(value.candidate_id)
     || !safeSource(value.source_url) || value.source_url.length > 4096 || new URL(value.source_url).pathname.length < 5
     || !text(value.publisher) || value.publisher.length < 3 || value.publisher.length > 200
     || !text(value.source_title) || value.source_title.length < 3 || value.source_title.length > 500
     || (value.published_date !== null && !date(value.published_date))
     || value.extraction_status !== 'processed'
-    || value.human_reviewed !== true || typeof value.reviewed_by !== 'string'
+    || (value.published_date && value.published_date > today())) fail();
+  if (value.schema_version === 1 && (value.human_reviewed !== true || typeof value.reviewed_by !== 'string'
     || !/^[A-Za-z0-9][A-Za-z0-9-]{0,38}$/.test(value.reviewed_by)
     || !date(value.reviewed_at) || value.reviewed_at > today()
     || (value.published_date && value.reviewed_at < value.published_date)
-    || (value.published_date && value.published_date > today())
-    || !text(value.review_notes) || value.review_notes.trim().length < 20 || value.review_notes.length > 4000) fail();
+    || !text(value.review_notes) || value.review_notes.trim().length < 20 || value.review_notes.length > 4000)) fail();
+  if (value.schema_version === 2) {
+    const receipt = value.automation;
+    if (value.human_reviewed !== false || value.reviewed_by !== null || value.reviewed_at !== null || value.review_notes !== null
+      || !exactKeys(receipt, ['policy_version', 'source_content_sha256', 'validated_at', 'method', 'evaluator_model', 'corroboration'])
+      || receipt.policy_version !== 'auto-news-v1' || receipt.method !== 'gemini_evidence_review' || receipt.corroboration !== 'single_source'
+      || !sha(receipt.source_content_sha256) || !utcInstant(receipt.validated_at)
+      || Date.parse(receipt.validated_at) > Date.now() + 300000
+      || (value.published_date && receipt.validated_at.slice(0, 10) < value.published_date)
+      || !text(receipt.evaluator_model) || receipt.evaluator_model.trim() !== receipt.evaluator_model
+      || receipt.evaluator_model.length > 100 || /[\u0000-\u001f\u007f]/.test(receipt.evaluator_model)
+      || value.classification?.jurisdiction !== 'SV' || value.classification?.relevance !== 'relevant') fail();
+  }
   if (!exactKeys(value.classification, ['jurisdiction', 'relevance', 'record_type'])
     || !['SV', 'other', 'unclear'].includes(value.classification.jurisdiction)
     || !['relevant', 'not_relevant', 'unclear'].includes(value.classification.relevance)
@@ -94,6 +109,7 @@ export function validatePublishedNewsDossier(value) {
     || (value.date_precision === 'unknown' && (start || end))
     || (value.date_precision !== 'unknown' && !start)
     || (['month_range', 'year_range'].includes(value.date_precision) && !end)) fail();
+  if (value.schema_version === 2 && !NEWS_DOSSIER_FIELDS.some(name => value.fields[name].status === 'reported')) fail();
   // Copy only the validated public contract, avoiding mutable shared references.
   return structuredClone(value);
 }
@@ -116,17 +132,23 @@ export function validateDossierBindings(index, references) {
   if (byId.size !== references.length) fail();
   for (const dossier of index.values()) {
     const reference = byId.get(dossier.candidate_id);
-    if (!reference || dossier.source_url !== reference.source_url || dossier.publisher !== reference.publisher
-      || dossier.published_date !== (reference.published_date ?? null)) fail();
+    validatePublishedNewsDossier(dossier);
+    if (!dossierMatchesReference(dossier, reference)) fail();
   }
   return index;
 }
 
+function dossierMatchesReference(value, reference) {
+  return Boolean(reference && value.candidate_id === reference.id && value.source_url === reference.source_url
+    && value.publisher === reference.publisher && value.published_date === (reference.published_date ?? null)
+    && (value.schema_version !== 2 || (reference.selection?.method === 'gemini_grounded_scope'
+      && sha(reference.selection.evidence?.content_sha256) && value.automation?.source_content_sha256 === reference.selection.evidence.content_sha256)));
+}
+
 export function newsDossierFor(reference, approved = new Map()) {
   const value = approved.get(reference.id);
-  if (value && value.candidate_id === reference.id && value.source_url === reference.source_url
-    && value.publisher === reference.publisher && value.published_date === (reference.published_date ?? null)) {
-    // Re-check the human boundary even if the caller supplied its own Map.
+  if (value && dossierMatchesReference(value, reference)) {
+    // Re-check the public contract even if the caller supplied its own Map.
     return validatePublishedNewsDossier(value);
   }
   return pendingNewsDossier(reference);

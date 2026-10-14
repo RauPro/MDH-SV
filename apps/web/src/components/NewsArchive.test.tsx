@@ -9,8 +9,9 @@ import { NewsArchive } from './NewsArchive';
 import { archiveInstant, type NewsArchiveData } from '../newsArchive';
 import municipalityReference from '../../../../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json';
 import { NEWS_DOSSIER_FIELDS, pendingNewsDossier, type NewsDossier } from '../../../../shared/news-dossier.mjs';
+import { automaticNewsDossier } from '../__fixtures__/automaticNewsDossier';
 
-const PUBLIC_FIELD_PENDING = 'Sin dato revisado disponible';
+const PUBLIC_FIELD_PENDING = 'Dato aún no publicado';
 const EMPTY = { schema_version: 1, dossiers: [] };
 const processingEntry = (reference = fixture.records[0], status = 'pending') => ({ candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date, selection_content_sha256: reference.selection.evidence.content_sha256, status });
 const processingFixture = (entries = fixture.records.map(reference => processingEntry(reference))) => ({ schema_version: 1, generated_at: '2026-10-10T10:00:00Z', entries });
@@ -187,12 +188,12 @@ it('opens bibliographic metadata, distinguishes publicly unavailable fields and 
   const trigger = screen.getByRole('button', { name: fixture.records[0].title });
   await userEvent.click(trigger);
   const dialog = screen.getByRole('dialog');
-  expect(within(dialog).getByText(/Los campos estructurados todavía no tienen una versión revisada publicada/)).toBeInTheDocument();
+  expect(within(dialog).getByText(/Los campos estructurados todavía no tienen una versión pública disponible/)).toBeInTheDocument();
   const sheet = within(dialog).getByRole('region', { name: 'Ficha estructurada de la noticia' });
   expect(within(sheet).getAllByRole('definition')).toHaveLength(NEWS_DOSSIER_FIELDS.length + 3);
   expect(within(sheet).getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(NEWS_DOSSIER_FIELDS.length);
   expect(within(sheet).getByText('País').closest('.dossier-field')).toHaveTextContent(PUBLIC_FIELD_PENDING);
-  expect(within(sheet).queryByText('Dato no mencionado en el texto analizado')).not.toBeInTheDocument();
+  expect(within(sheet).queryByText('Dato no mencionado')).not.toBeInTheDocument();
   const pertinence = within(sheet).getByRole('region', { name: 'Selección por pertinencia' });
   expect(pertinence).toHaveTextContent('Vínculo con El Salvador identificado en la fuente');
   expect(pertinence).toHaveTextContent('Seleccionada para seguimiento de derechos humanos');
@@ -296,12 +297,12 @@ it('keeps the complete pending sheet when the public overlay is unavailable, and
   vi.mocked(fetch).mockImplementation(async url => ({ ok: String(url) !== '/archive/dossiers.json' || available, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? EMPTY_LOCATIONS : fixture }) as Response);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
-  expect(screen.getAllByText('Revisión pública no disponible')).toHaveLength(3);
+  expect(screen.getAllByText('Ficha pública no disponible')).toHaveLength(3);
   expect(screen.queryByText('Ficha pendiente de revisión pública')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.getByRole('region', { name: 'Ficha estructurada de la noticia' })).toBeInTheDocument();
   expect(screen.getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThan(18);
-  expect(screen.getByText(/No se pudo comprobar si hay una ficha pública revisada disponible/)).toBeInTheDocument();
+  expect(screen.getByText(/No se pudo comprobar si hay una ficha pública disponible/)).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: 'Cerrar' }));
   available = true;
   await userEvent.click(screen.getByRole('button', { name: 'Reintentar fichas públicas' }));
@@ -329,7 +330,7 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   const sheet = screen.getByRole('region', { name: 'Ficha estructurada de la noticia' });
   expect(within(sheet).getAllByRole('definition')).toHaveLength(21);
   expect(within(sheet).getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(18);
-  expect(within(sheet).queryByText('Dato no mencionado en el texto analizado')).not.toBeInTheDocument();
+  expect(within(sheet).queryByText('Dato no mencionado')).not.toBeInTheDocument();
 });
 
 it('filters news with reviewed locations independently of the map counts and keeps unlocated news available', async () => {
@@ -541,18 +542,18 @@ it('shows extraction status per selected news item and only once in the opened s
     processingEntry(fixture.records[0], 'generated'), processingEntry(fixture.records[1], 'pending'), processingEntry(fixture.records[2], 'error'),
   ]));
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
-  await screen.findByText('Ficha generada · Pendiente de revisión');
+  await screen.findByText('Ficha generada · Pendiente de validación automática');
   expect(screen.getByText('3 noticias seleccionadas')).toBeInTheDocument();
   expect(screen.queryByText('3 fichas de noticias')).not.toBeInTheDocument();
-  expect(screen.getByRole('button', { name: fixture.records[0].title }).closest('article')).toHaveTextContent('Ficha generada · Pendiente de revisión');
+  expect(screen.getByRole('button', { name: fixture.records[0].title }).closest('article')).toHaveTextContent('Ficha generada · Pendiente de validación automática');
   expect(screen.getByRole('button', { name: fixture.records[1].title }).closest('article')).toHaveTextContent('Pendiente de extracción');
   expect(screen.getByRole('button', { name: fixture.records[2].title }).closest('article')).toHaveTextContent('Extracción con error');
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   const dialog = screen.getByRole('dialog');
-  expect(within(dialog).getAllByText('Ficha generada · Pendiente de revisión')).toHaveLength(1);
+  expect(within(dialog).getAllByText('Ficha generada · Pendiente de validación automática')).toHaveLength(1);
   const summary = within(dialog).getByText('Resumen').closest('.dossier-field')! as HTMLElement;
   expect(within(summary).getAllByText(PUBLIC_FIELD_PENDING)).toHaveLength(1);
-  expect(dialog).toHaveTextContent('Sus campos permanecen privados');
+  expect(dialog).toHaveTextContent('Sus campos se publicarán cuando superen las comprobaciones automáticas');
 });
 
 it.each(['missing', 'stale', 'different_source'])('does not infer pending for %s metadata or discard other matching statuses', async kind => {
@@ -564,7 +565,7 @@ it.each(['missing', 'stale', 'different_source'])('does not infer pending for %s
   ]));
   await ready();
   expect(screen.getByRole('button', { name: fixture.records[0].title }).closest('article')).toHaveTextContent('Estado de extracción sin confirmar');
-  expect(screen.getByRole('button', { name: fixture.records[1].title }).closest('article')).toHaveTextContent('Ficha generada · Pendiente de revisión');
+  expect(screen.getByRole('button', { name: fixture.records[1].title }).closest('article')).toHaveTextContent('Ficha generada · Pendiente de validación automática');
   expect(screen.getByRole('button', { name: fixture.records[2].title }).closest('article')).toHaveTextContent('Fuente no accesible para extracción');
 });
 
@@ -585,7 +586,7 @@ it.each(['http_error', 'malformed', 'private_field'])('keeps data private and re
   expect(document.body.textContent).not.toContain('PRIVATE_SUMMARY_SENTINEL');
   recovered = true;
   await userEvent.click(screen.getByRole('button', { name: 'Reintentar estados de extracción' }));
-  await screen.findByText('Ficha generada · Pendiente de revisión');
+  await screen.findByText('Ficha generada · Pendiente de validación automática');
   expect(vi.mocked(fetch).mock.calls.filter(call => call[0] === '/archive/news.json')).toHaveLength(1);
 });
 
@@ -602,7 +603,7 @@ it('does not confuse loading metadata with an unprocessed sheet and updates an o
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(within(screen.getByRole('dialog')).getByText('Comprobando extracción')).toBeInTheDocument();
   await act(async () => { finish(processingFixture([processingEntry(fixture.records[0], 'generated')])); });
-  expect(within(screen.getByRole('dialog')).getAllByText('Ficha generada · Pendiente de revisión')).toHaveLength(1);
+  expect(within(screen.getByRole('dialog')).getAllByText('Ficha generada · Pendiente de validación automática')).toHaveLength(1);
 });
 
 it('retains the approved sheet even when extraction metadata reports an earlier pending state', async () => {
@@ -615,6 +616,21 @@ it('retains the approved sheet even when extraction metadata reports an earlier 
   expect(record.closest('article')).not.toHaveTextContent('Pendiente de extracción');
   await userEvent.click(record);
   expect(within(screen.getByRole('dialog')).getByText('Resumen aprobado para publicar.')).toBeInTheDocument();
+});
+
+it('shows automatic publication in the news list and opens its public fields despite stale pending progress', async () => {
+  const dossier = automaticNewsDossier(fixture.records[0]);
+  serve(fixture, { schema_version: 1, dossiers: [dossier] });
+  await ready();
+  const record = screen.getByRole('button', { name: fixture.records[0].title });
+  expect(record.closest('article')).toHaveTextContent('Ficha publicada automáticamente');
+  expect(record.closest('article')).not.toHaveTextContent('Pendiente de extracción');
+  await userEvent.click(record);
+  const dialog = screen.getByRole('dialog');
+  expect(within(dialog).getByText('Resumen ficticio atribuido al medio para pruebas.')).toBeInTheDocument();
+  expect(within(dialog).getAllByText('Ficha publicada automáticamente')).toHaveLength(1);
+  expect(within(dialog).getByRole('link', { name: 'Reportar un problema' })).toHaveAttribute('href', expect.stringContaining(`candidate_id=${fixture.records[0].id}`));
+  expect(dialog).not.toHaveTextContent('Ficha revisada por');
 });
 
 

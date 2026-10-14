@@ -106,14 +106,14 @@ def candidate_from_entry(entry, feed, now=None):
 def issue_body(candidate):
     safe = json.dumps(candidate, ensure_ascii=False, indent=2).replace('`', '\\u0060').replace('<', '\\u003c').replace('@', '\\u0040')
     return (f"<!-- mdh-candidate:{candidate['id']} -->\n"
-        f"## Noticia pendiente de revisión\n\nFuente: {candidate['publisher']}\n\n"
+        f"## Noticia pendiente de procesamiento\n\nFuente: {candidate['publisher']}\n\n"
         f"Enlace original: <{candidate['source_url']}>\n\n"
-        "La selección por palabras clave no determina que exista una violación. No se publica automáticamente.\n\n"
+        "La selección por palabras clave no determina que exista una violación. La ficha puede publicarse automáticamente tras controles de evidencia y privacidad por campo.\n\n"
         "- [ ] Comprobar el texto original, alcance y jurisdicción.\n"
         "- [ ] Distinguir fecha de publicación y fecha del hecho.\n"
         "- [ ] Comprobar duplicados y actualizaciones de un caso existente.\n"
         "- [ ] Revisar atribución, minimización de datos y riesgo para personas.\n\n"
-        "Usa Actions → Revisar noticia para aprobar una ficha preparada o rechazar la noticia. "
+        "La intervención humana es excepcional: usa Actions → Revisar noticia para corregir una ficha o rechazar la noticia ante una solicitud. "
         "No pegues testimonios privados, credenciales ni documentos personales.\n\n"
         f"Si se ha generado un borrador asistido, está en `drafts/{candidate['id']}.json` "
         "dentro de este repositorio privado. Contrástalo y corrígelo antes de aprobar; "

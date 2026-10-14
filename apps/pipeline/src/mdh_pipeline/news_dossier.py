@@ -8,7 +8,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
 from typing import Generic, Literal, TypeVar
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
@@ -185,6 +185,58 @@ def validate_news_dossier(document, require_reviewed=False):
     if require_reviewed and not result.human_reviewed:
         raise NewsDossierError("news_dossier_review_required")
     return result.model_dump(mode="json")
+
+
+def validate_published_news_dossier(document, *, now=None):
+    """Validate a human-approved v1 or a source-bound automatic v2 projection.
+
+    Private extraction envelopes remain v1 and cannot satisfy the automatic
+    publication contract by merely dropping the human-review requirement.
+    """
+    if not isinstance(document, dict) or type(document.get("schema_version")) is not int:
+        raise NewsDossierError()
+    if document["schema_version"] == 1:
+        return validate_news_dossier(document, require_reviewed=True)
+    try:
+        if document["schema_version"] != 2:
+            raise ValueError()
+        automation = document["automation"]
+        if (not isinstance(automation, dict) or set(automation) != {
+                "policy_version", "source_content_sha256", "validated_at", "method",
+                "evaluator_model", "corroboration"}
+                or automation["policy_version"] != "auto-news-v1"
+                or automation["method"] != "gemini_evidence_review"
+                or automation["corroboration"] != "single_source"
+                or not isinstance(automation["source_content_sha256"], str)
+                or not re.fullmatch(r"[a-f0-9]{64}", automation["source_content_sha256"])
+                or not isinstance(automation["evaluator_model"], str)
+                or not 1 <= len(automation["evaluator_model"]) <= 100
+                or automation["evaluator_model"].strip() != automation["evaluator_model"]
+                or re.search(r"[\x00-\x1f\x7f]", automation["evaluator_model"])
+                or not isinstance(automation["validated_at"], str)
+                or not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|\+00:00)", automation["validated_at"])):
+            raise ValueError()
+        stamp = datetime.fromisoformat(automation["validated_at"].replace("Z", "+00:00"))
+        instant = now or datetime.now(timezone.utc)
+        if stamp > instant + timedelta(minutes=5):
+            raise ValueError()
+        base = {key: value for key, value in document.items() if key != "automation"}
+        base["schema_version"] = 1
+        clean = validate_news_dossier(base)
+        if (clean["human_reviewed"] is not False
+                or any(clean[key] is not None for key in ("reviewed_by", "reviewed_at", "review_notes"))
+                or clean["extraction_status"] != "processed"
+                or clean["classification"]["jurisdiction"] != "SV"
+                or clean["classification"]["relevance"] != "relevant"
+                or not any(field["status"] == "reported" for field in clean["fields"].values())
+                or (clean["published_date"] and stamp.date() < date.fromisoformat(clean["published_date"]))):
+            raise ValueError()
+        clean.update(schema_version=2, automation=dict(automation))
+        if len(json.dumps(clean, ensure_ascii=False).encode()) > MAX_DOCUMENT_BYTES:
+            raise ValueError()
+        return clean
+    except (ValueError, KeyError, TypeError, AttributeError):
+        raise NewsDossierError("invalid_automatic_news_projection") from None
 
 
 def empty_news_dossier(candidate, extraction_status="pending"):

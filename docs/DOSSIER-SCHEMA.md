@@ -59,7 +59,7 @@ Esta edición mantiene `review_status: source_checked` y `human_reviewed: false`
 
 JSON y GeoJSON conservan el objeto anidado. CSV y Parquet incluyen la columna `dossier` como JSON determinista con claves ordenadas, que se puede recuperar mediante `json.loads`. La geometría sigue siendo nula: no se inventan coordenadas a partir de un departamento.
 
-Las propuestas de publicación nuevas deben incluir el dossier. Al adaptar una ficha de ejemplo, hay que sustituir hechos, atribuciones y referencias, no sólo la URL principal: la validación rechaza referencias que no correspondan a las fuentes declaradas. El flujo de revisión humana de las noticias recolectadas permanece obligatorio antes de importar una propuesta.
+Las propuestas de publicación nuevas deben incluir el dossier. Al adaptar una ficha de ejemplo, hay que sustituir hechos, atribuciones y referencias, no sólo la URL principal: la validación rechaza referencias que no correspondan a las fuentes declaradas. Este esquema corresponde a propuestas de casos, cuya importación requiere revisión humana. Las fichas de noticias utilizan un contrato separado de publicación automática por campo; véase [NEWS-DOSSIERS.md](NEWS-DOSSIERS.md).
 
 ```bash
 .venv/bin/python -m mdh_pipeline.publication

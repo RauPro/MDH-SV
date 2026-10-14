@@ -1,14 +1,16 @@
 # Ubicaciones automáticas sin revisar
 
 El responsable autorizó una capa pública de departamentos automáticos sin revisión
-humana previa. Esta excepción se limita a la ubicación y su procedencia: no aprueba
-ni publica las fichas privadas, identidades, hechos, citas o cuerpos de artículos.
+humana previa. Esta proyección se limita a la ubicación y su procedencia; no
+aprueba los otros campos. Las fichas de noticias tienen ahora un [flujo automático
+separado](NEWS-DOSSIERS.md), con controles propios de evidencia y privacidad.
+Ninguna capa publica cuerpos de artículos ni citas privadas.
 
 `apps/web/public/archive/locations.json` contiene el identificador y bibliografía
 ya públicos, departamentos canónicos, fechas y localizadores de párrafo con hash.
 Todas las entradas conservan `review_status: automated_unreviewed` y
 `human_reviewed: false`. La web, REST y MCP mantienen esos datos separados de la
-ficha revisada. Una decisión humana siempre prevalece, incluso cuando protege la
+ficha publicada, ya sea automática o humana. Una decisión humana siempre prevalece, incluso cuando protege la
 ubicación o determina que no corresponde a El Salvador.
 
 ## Condiciones de extracción
@@ -105,16 +107,25 @@ sin ubicación o inaccesibles. No guarda cuerpos, citas ni datos personales. Dif
 un cambio de hash de selección o de reglas invalida esa espera. Una caché corrupta
 se descarta y se vuelven a comprobar las fuentes, sin relajar la validación pública.
 Ni la caché ni sus motivos por noticia se incluyen en el commit público. El token
-del publicador conserva sus permisos de sólo lectura sobre el repositorio privado.
+del publicador necesita escritura limitada al repositorio privado para persistir
+recibos de evaluación y presupuesto. La comprobación geográfica sigue sin llamar
+a Gemini; las llamadas pertenecen a la etapa separada de validación de fichas.
 
 Una deploy key permite escribir únicamente en el repositorio público MDH-SV;
 GitHub no restringe esa clave por archivo. El workflow y las validaciones limitan
-el commit al manifiesto `data/selection/news.json` y a los archivos públicos
-`archive/news.json`, `archive/locations.json` y `archive/dossiers.json`. El último
-sólo contiene fichas con aprobación humana previa. La clave privada reside en
-el secreto `NEWS_LOCATION_PUBLISH_KEY` del repositorio editorial; no se copia un
-token personal ni la clave Gemini al repositorio público. No hay publicación de
-fichas completas, aprobación editorial automática ni suma al catálogo de casos.
+el commit al manifiesto `data/selection/news.json`, la proyección segura
+`data/automated/news_dossiers.json` y los archivos públicos `archive/news.json`,
+`archive/locations.json`, `archive/dossiers.json` y `archive/processing.json`.
+El snapshot de fichas combina publicaciones automáticas v2 y decisiones humanas
+v1, con procedencia distinta. La clave privada reside en
+`NEWS_LOCATION_PUBLISH_KEY` del repositorio privado; la clave Gemini y los tokens
+no se copian al repositorio público. La validación automática no se presenta como
+aprobación editorial humana ni incorpora casos al catálogo.
+
+La conciliación retira del snapshot geográfico una noticia cuyo departamento
+esté protegido en la ficha pública. También preserva las decisiones humanas y
+las retiradas persistentes. Ocultar una ubicación sólo en la interfaz no basta:
+la descarga JSON debe respetar la misma restricción.
 
 Para detener esta capa, desactive el workflow privado. Para retirar datos ya
 publicados, vacíe `locations` en el snapshot mediante un cambio revisado y despliegue.

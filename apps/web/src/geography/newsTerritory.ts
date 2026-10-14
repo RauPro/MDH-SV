@@ -20,11 +20,16 @@ const departmentNames = new Set<string>(DEPARTMENTS.map(department => department
 /** Human decisions override the separate, explicitly unreviewed location projection. */
 export function newsTerritoryItem(reference: NewsReference, approved: Map<string, NewsDossier> = new Map(), automatic: Map<string, NewsLocation> = new Map()): NewsTerritoryItem {
   const dossier = newsDossierFor(reference, approved);
-  const automaticLocation = !dossier.human_reviewed ? newsLocationFor(reference, automatic) : null;
+  // Published automatic fields never create coordinates or override a geographic hold.
+  const automaticPublished = dossier.schema_version === 2;
+  const blockedAutomatic = automaticPublished && (dossier.fields.department.status === 'withheld' || dossier.classification.jurisdiction !== 'SV');
+  const automaticLocation = !dossier.human_reviewed && !blockedAutomatic ? newsLocationFor(reference, automatic) : null;
   let locationKind: NewsTerritoryItem['locationKind'] = null;
   let reason: NewsTerritoryReason;
   let departments: string[] = [];
-  if (!dossier.human_reviewed || dossier.extraction_status !== 'processed') {
+  if (blockedAutomatic) reason = dossier.classification.jurisdiction === 'other' ? 'outside_el_salvador'
+    : dossier.classification.jurisdiction !== 'SV' ? 'jurisdiction_unknown' : 'department_unknown';
+  else if (!dossier.human_reviewed || dossier.extraction_status !== 'processed') {
     departments = automaticLocation?.method === 'source_administrative_mentions'
       ? automaticLocation.mentions.map(mention => mention.department)
       : automaticLocation?.department ? [automaticLocation.department] : [];

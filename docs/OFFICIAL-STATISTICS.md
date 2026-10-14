@@ -52,7 +52,7 @@ Las tablas territoriales IML se refieren al lugar de agresión u ocurrencia. No 
 
 Para actualizar la capa se debe consultar nuevamente el original, registrar su hash y fecha, comprobar la etiqueta del período y su unidad, revisar visualmente las tablas e incorporar sólo valores respaldados. Las sumas departamentales completas deben coincidir con el agregado nacional del mismo universo y edición. Las sumas mensuales disponibles deben coincidir con el total del intervalo publicado. Si aparecen revisiones, discrepancias o una nueva metodología, deben explicarse antes de sustituir cifras.
 
-La actualización de fuentes no implica aprobación de fichas de noticias ni modifica su revisión humana. Las cifras oficiales tampoco atribuyen responsabilidad penal o institucional a personas concretas.
+La actualización de fuentes no valida fichas de noticias ni modifica su flujo automático. Las estadísticas oficiales conservan revisión humana previa y un proceso separado. Las cifras oficiales tampoco atribuyen responsabilidad penal o institucional a personas concretas.
 
 ## Publicación y reutilización
 

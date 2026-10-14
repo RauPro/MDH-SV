@@ -110,5 +110,8 @@ Sólo después de esa revisión se prepara un PR que incorpore los metadatos ace
 al histórico, preservando los checkpoints y las decisiones existentes. El código
 de recolección puede desplegarse antes; el lote sin revisar no se agrega a
 `data/history`, a las descargas públicas ni al manifiesto de selección.
-La extracción posterior de fichas conserva su propia aprobación humana antes
-de publicar campos. Nunca se identifica una ficha con una cantidad de víctimas.
+Una vez incorporados los metadatos aceptados al histórico, las fichas de noticias
+siguen el [flujo automático de evidencia y privacidad](NEWS-DOSSIERS.md), sin
+aprobación humana previa de cada ficha. Esto no incorpora ni aprueba el lote de
+descubrimiento pendiente: conserva su revisión independiente descrita arriba.
+Nunca se identifica una ficha con una cantidad de víctimas.

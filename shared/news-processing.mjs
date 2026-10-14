@@ -61,8 +61,10 @@ export function validateProcessingBindings(index, references) {
 export function newsProcessingFor(reference, index = new Map(), approvedDossier) {
   if (approvedDossier) {
     try {
-      if (newsDossierFor(reference, new Map([[reference.id, approvedDossier]])).human_reviewed) return 'reviewed';
-    } catch { /* An invalid dossier cannot grant review status. */ }
+      const published = newsDossierFor(reference, new Map([[reference.id, approvedDossier]]));
+      if (published.human_reviewed) return 'reviewed';
+      if (published.schema_version === 2) return 'automatically_published';
+    } catch { /* An invalid dossier cannot grant publication status. */ }
   }
   const entry = index.get(reference.id);
   if (!entry || !processingMatchesReference(entry, reference)) return 'unknown';

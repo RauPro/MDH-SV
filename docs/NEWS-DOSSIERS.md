@@ -15,7 +15,7 @@ cuando falta información y no se completan mediante suposiciones.
 
 | Estado | Presentación y significado |
 | --- | --- |
-| `pending` | Pendiente de extracción o revisión. No afirma que el documento omita el dato. |
+| `pending` | No se pudo determinar con respaldo suficiente, o todavía no se ha procesado. No afirma que el documento omita el dato. |
 | `reported` | Valor atribuido a la fuente, con evidencia. No equivale a un hecho corroborado. |
 | `not_reported` | Dato no mencionado en el texto analizado. La extracción debe señalar expresamente esa ausencia. |
 | `withheld` | Dato protegido; se omite su valor y se explica la decisión. |
@@ -45,9 +45,25 @@ Los errores de lectura o del proveedor dejan una estructura pendiente y su
 diagnóstico, sin afirmar que la extracción haya terminado.
 
 La web y `search_news`/`GET /api/v1/news` presentan una estructura para cada
-referencia. Los campos de una ficha sólo se publican tras revisión humana. Un
+referencia. Los campos se publican por defecto tras validación automática de
+evidencia y privacidad. La revisión humana se reserva para solicitudes en GitHub. Un
 registro independiente de progreso permite distinguir si la ficha ya se generó,
-sin consultar la cola privada desde el navegador ni exponer su contenido.
+sin consultar la cola privada desde el navegador ni exponer borradores sin validar.
+
+La publicación automática usa `schema_version: 2`, `human_reviewed: false` y
+un recibo `automation` con política, versión de fuente, fecha, modelo evaluador y
+`corroboration: single_source`. Una evaluación separada de Gemini contrasta cada
+campo con la misma versión del artículo; no constituye una fuente independiente.
+El código aplica el resultado por campo, vuelve a minimizar datos sensibles y
+no permite restaurar valores protegidos. No crea nuevos valores a partir de la
+respuesta del evaluador. Los estados de ausencia se retienen sólo cuando están
+respaldados y el texto no está recortado.
+
+Los recibos, diagnósticos y evidencia de evaluación permanecen en el repositorio
+privado. Sólo la proyección segura se guarda en `data/automated/news_dossiers.json`
+y se combina con las decisiones humanas en `/archive/dossiers.json`. Las decisiones
+humanas existentes prevalecen; una retirada persistente elimina la noticia de
+las vistas públicas. Los cuerpos de artículos y las citas privadas no se exportan.
 
 ## Estado de procesamiento público
 
@@ -58,14 +74,15 @@ uno de estos estados:
 | Estado | Significado |
 | --- | --- |
 | `pending` | Pendiente de extracción, confirmado con un inventario privado completo. |
-| `generated` | Ficha generada, posiblemente parcial; espera revisión antes de publicar campos. |
+| `generated` | Ficha generada, posiblemente parcial; espera validación automática antes de publicar campos. |
 | `source_unavailable` | El intento no pudo acceder a la fuente. |
 | `error` | La extracción no se completó correctamente. |
 | `unknown` | No se puede confirmar el progreso de esta referencia. |
 
-La API presenta el valor como `processing_status`. Una ficha pública aprobada
-prevalece y produce `reviewed`; el archivo de estados no puede conceder esa
-aprobación. Un campo pendiente de revisión conserva su propio estado `pending`,
+La API presenta el valor como `processing_status`. Una ficha pública con decisión
+humana produce `reviewed`; una ficha v2 válida y vinculada al hash seleccionado
+produce `automatically_published`. El archivo de estados no puede conceder ninguna
+de esas publicaciones. Un campo no resuelto conserva su propio estado `pending`,
 incluso cuando `processing_status` es `generated`. No se convierte en «Dato no
 mencionado», porque todavía no hay una afirmación revisada de ausencia.
 
@@ -118,7 +135,23 @@ pendiente, jurisdicción por determinar, noticias de otros países y departament
 no disponible. La falta de datos geográficos no significa que el archivo esté vacío. Aprobar una ubicación no convierte una noticia en un caso ni suma
 personas al recuento de víctimas.
 
-## Aprobar una ficha parcial
+## Solicitudes en GitHub y correcciones excepcionales
+
+El botón **Reportar un problema** abre una solicitud pública con identificador y
+versión, sin copiar los valores de la ficha. El publicador consulta las solicitudes
+en cada ejecución. La primera solicitud por noticia añade una reevaluación
+persistente; duplicados no reinician intentos ni consumen presupuesto adicional.
+El texto libre y sus enlaces no se ejecutan ni se incorporan como evidencia del
+modelo. No publicar datos sensibles en una issue; solicitar un canal privado.
+
+Un mantenedor con permiso de escritura puede aplicar las etiquetas
+`news/withdraw`, `news/restore` o `news/recheck`. El workflow verifica la identidad
+y permisos actuales del actor. Una retirada permanece hasta una restauración
+explícita; cerrar una issue o reextraer la noticia no la revierte. Las acciones
+quedan registradas en `data/selection/news_exceptions.json`. Una reevaluación no
+modifica automáticamente una corrección humana ya importada.
+
+### Corregir una ficha parcial mediante decisión humana
 
 1. En la cola privada, abra `drafts/<id>.json` y revise `news_dossier` con el texto
    original. Puede corregir los campos y mantener los datos no mencionados como
@@ -135,6 +168,8 @@ personas al recuento de víctimas.
 ```sh
 python -m mdh_pipeline.review_import --kind news_dossier --candidate IDENTIFICADOR
 python -m mdh_pipeline.news_publication
+node apps/web/scripts/sync-news-publication.mjs
+node apps/web/scripts/sync-news-processing.mjs
 ```
 
 El importador comprueba que la aprobación sigue vigente y que la identidad, URL,
@@ -146,3 +181,25 @@ diagnósticos, cuerpos de artículos ni credenciales. Los cambios pasan por Git 
 Para proponer un caso se mantiene `proposal_kind: case` y el importador anterior
 sin `--kind news_dossier`. No se debilitan las reglas del catálogo de casos para
 permitir fichas de noticias incompletas.
+
+## Operación y presupuesto
+
+Después del extractor horario, `publish-locations.yml` selecciona las noticias,
+sincroniza solicitudes, evalúa un lote de hasta tres llamadas adicionales y
+publica las proyecciones. Evaluación, reextracción por fuente cambiada y reintentos
+comparten `runtime/gemini-budget.json` con el extractor. No se amplía el tope
+diario ni se utiliza otro proveedor o una clave para eludirlo. Cada intento HTTP
+se reserva antes del envío; un 429 detiene los trabajadores hasta el siguiente
+día de cuota. El tope configurado es operativo, no una afirmación de los límites
+no publicados por Google. La cuota consumida fuera de estos trabajadores no
+puede medirse con este registro local.
+
+Las evaluaciones se reutilizan por hash de borrador, fuente, política y generación
+de solicitud. Las fuentes cambiadas se reextraen dentro del mismo presupuesto y
+esperan la siguiente selección antes de publicar. Los fallos tienen reintentos
+limitados, no un requisito de aprobación humana. La falta de cuota conserva el
+trabajo para otra ejecución. No hay garantía de puntualidad exacta del planificador.
+
+Para retirar la vía automática, detener el evaluador y vaciar la colección
+automática mediante el reconciliador, conservando las decisiones humanas y el
+historial privado. Retirar del sitio no elimina copias ya descargadas por terceros.

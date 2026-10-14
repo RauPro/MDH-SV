@@ -6,6 +6,7 @@ import { parseNewsArchive, type NewsReference } from '../newsArchive';
 import { DEPARTMENTS } from './elSalvador';
 import { buildNewsTerritoryItems, matchesNewsTerritory, newsTerritoryItem, summarizeNewsTerritory } from './newsTerritory';
 import { UNKNOWN_DEPARTMENT } from './territory';
+import { automaticNewsDossier } from '../__fixtures__/automaticNewsDossier';
 
 const reference = parseNewsArchive(fixture).records[0];
 function approved(source: NewsReference = reference): NewsDossier {
@@ -165,4 +166,24 @@ it.each(['located', 'foreign', 'withheld', 'missing'])('always gives human revie
   expect(item.automaticLocation).toBeNull();
   expect(item.locationKind).toBe(variant === 'located' ? 'reviewed' : null);
   expect(summarizeNewsTerritory([item]).automated).toBe(0);
+});
+
+it('uses the independently checked automatic projection, not the department field of an automatic dossier', () => {
+  const dossier = automaticNewsDossier(reference);
+  dossier.fields.department = { status: 'reported', value: 'San Salvador', evidence_refs: ['source-p1'], note: null };
+  const unlocated = newsTerritoryItem(reference, index(dossier));
+  expect(unlocated.department).toBeNull();
+  const item = newsTerritoryItem(reference, index(dossier), automatic());
+  expect(item.department).toBe('La Libertad');
+  expect(item.locationKind).toBe('automated_unreviewed');
+  expect(summarizeNewsTerritory([item]).reviewed).toBe(0);
+});
+
+it('does not reintroduce a protected department from the independent automatic projection', () => {
+  const dossier = automaticNewsDossier(reference);
+  dossier.fields.department = { status: 'withheld', value: null, evidence_refs: [], note: 'Dato geográfico omitido por privacidad.' };
+  const item = newsTerritoryItem(reference, index(dossier), automatic());
+  expect(item.department).toBeNull();
+  expect(item.automaticLocation).toBeNull();
+  expect(item.reason).toBe('department_unknown');
 });

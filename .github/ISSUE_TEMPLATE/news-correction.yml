@@ -1,0 +1,37 @@
+name: Reportar un problema con una ficha
+description: Solicitar una reevaluación, corrección o retirada de una noticia del monitor.
+title: "Revisión de ficha de noticia"
+labels: [news-correction]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Esta solicitud es pública. Incluye sólo el identificador y una explicación sin datos personales sensibles.
+        No adjuntes testimonios privados, documentos de identidad, teléfonos ni direcciones.
+        El sistema reevaluará automáticamente la primera solicitud por noticia. Un mantenedor puede solicitar nuevas comprobaciones o retirar la noticia.
+        Para detalles sensibles, solicita primero un canal privado sin publicarlos aquí.
+  - type: input
+    id: candidate_id
+    attributes:
+      label: Identificador de la noticia
+      description: Identificador de 64 caracteres incluido por el botón de la ficha.
+    validations:
+      required: true
+  - type: input
+    id: publication_version
+    attributes:
+      label: Versión de la ficha
+  - type: dropdown
+    id: request_kind
+    attributes:
+      label: Tipo de solicitud
+      options: [Reevaluar datos, Corregir atribución o ubicación, Privacidad o retirada, Otro problema]
+    validations:
+      required: true
+  - type: textarea
+    id: explanation
+    attributes:
+      label: Explicación sin datos sensibles
+      description: Indica el campo y el problema. La explicación no se ejecuta ni se incorpora automáticamente a la ficha.
+    validations:
+      required: true

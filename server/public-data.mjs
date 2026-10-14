@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
-import { newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
+import { NEWS_DOSSIER_PROTECTED_TITLE, newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference } from '../shared/news-selection.mjs';
 import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
 import { newsProcessingFor, parseNewsProcessing } from '../shared/news-processing.mjs';
@@ -178,7 +178,13 @@ export function getRecord(id, catalog = loadCatalog()) {
 export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload, processingPayload) {
   try { assertSelectedNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
   const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
-  const eligible = archive.records.filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index)));
+  const eligible = archive.records.filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index))).map(reference => {
+    const dossier = newsDossierFor(reference, snapshot.index);
+    // Minimize before search/pagination as well as output, so a protected title
+    // cannot be recovered indirectly from keyword matches in a stale snapshot.
+    return dossier.schema_version === 2 && dossier.source_title === NEWS_DOSSIER_PROTECTED_TITLE
+      ? { ...reference, title: NEWS_DOSSIER_PROTECTED_TITLE, title_truncated: false } : reference;
+  });
   const result = paginated(eligible, newsSearchSchema.parse(filters), archive, '/api/v1/news');
   const locations = locationPayload === undefined ? loadNewsLocations() : locationSnapshot(locationPayload);
   const processing = processingPayload === undefined ? loadNewsProcessing() : processingSnapshot(processingPayload);
@@ -186,7 +192,8 @@ export function searchNews(filters = {}, archive = loadNews(), dossierPayload, l
     const dossier = newsDossierFor(reference, snapshot.index);
     return { ...reference, news_dossier: dossier,
       processing_status: newsProcessingFor(reference, processing.index, dossier),
-      automatic_location: snapshot.status === 'available' && !dossier.human_reviewed ? newsLocationFor(reference, locations.index) : null };
+      automatic_location: snapshot.status === 'available' && !dossier.human_reviewed && dossier.fields.department.status !== 'withheld'
+        ? newsLocationFor(reference, locations.index) : null };
   });
   result.meta = { ...result.meta, selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador', coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
     news_dossiers_status: snapshot.status,
@@ -194,7 +201,7 @@ export function searchNews(filters = {}, archive = loadNews(), dossierPayload, l
     news_processing_status: processing.status,
     news_processing_updated_at: processing.generated_at,
     automatic_location_notice: 'Uno o más departamentos mencionados en la fuente o resueltos desde municipios/distritos mediante referencia administrativa oficial, sin revisión humana. Una noticia puede mencionar varios departamentos sin tener una ubicación principal. No confirma el lugar de una violación ni completa la ficha revisada. null no implica ausencia de ubicación en la fuente.',
-    review_notice: 'Noticias seleccionadas por pertinencia en derechos humanos de El Salvador con evidencia de la fuente o revisión editorial; no constituyen casos validados. La clasificación automática de pertinencia permanece sin revisión humana. processing_status distingue una ficha pendiente de procesar de una ya generada que espera revisión, según el snapshot público de estados. unknown significa que el estado no está disponible, no que esté pendiente. Los campos de news_dossier sólo se publican tras revisión humana; generated no concede aprobación ni expone borradores. La API nunca consulta la cola privada.' };
+    review_notice: 'Noticias seleccionadas por pertinencia en derechos humanos de El Salvador con evidencia de la fuente o revisión editorial; no constituyen casos validados. La clasificación automática de pertinencia permanece sin revisión humana. processing_status distingue pending, generated (generada pendiente de validación), automatically_published (publicada tras validación automática) y reviewed (revisión humana). unknown significa que el estado no está disponible, no que esté pendiente. Las fichas automáticas declaran human_reviewed=false y automation con evidencia vinculada a una versión de la fuente; single_source no implica corroboración independiente. Sólo se publican campos validados; generated por sí solo no concede publicación ni expone borradores. La API nunca consulta la cola privada.' };
   return result;
 }
 export function getStats(filters = {}, catalog = loadCatalog()) {

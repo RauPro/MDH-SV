@@ -75,7 +75,7 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
         {isNews ? 'Sin ubicación pública en El Salvador' : 'Sin departamento identificado'} <strong>{unavailable ? '—' : unlocated}</strong>
       </button>
     </div>
-    <p className="map-note">{isNews ? 'Las noticias sin ubicación pública siguen disponibles en la lista. Pueden tener revisión pendiente, ubicación no mencionada o corresponder a otros países. Las noticias no se suman al recuento de casos. ' : ''}Un departamento sin registros no implica ausencia de violaciones. Los contornos representan departamentos, no ubicaciones de personas.</p>
+    <p className="map-note">{isNews ? 'Las noticias sin ubicación pública siguen disponibles en la lista. Pueden tener extracción o validación pendiente, ubicación no determinada, datos protegidos o corresponder a otros países. Las noticias no se suman al recuento de casos. ' : ''}Un departamento sin registros no implica ausencia de violaciones. Los contornos representan departamentos, no ubicaciones de personas.</p>
     <p className="map-attribution">Cartografía simplificada adaptada de <a href="https://simplemaps.com/svg/country/sv" target="_blank" rel="noopener noreferrer">Simplemaps</a> · <a href="https://simplemaps.com/resources/svg-license" target="_blank" rel="noopener noreferrer">Licencia</a></p>
   </section>;
 }

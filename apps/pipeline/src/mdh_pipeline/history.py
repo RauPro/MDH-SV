@@ -474,6 +474,7 @@ def main():
     parser.add_argument("--selection", type=Path, default=ROOT / "data/selection/news.json")
     parser.add_argument("--reviewed-news", type=Path, default=ROOT / "data/reviewed/news_dossiers.json")
     parser.add_argument("--excluded-ids", type=Path, help="Explicit editorial withdrawals for this publication")
+    parser.add_argument("--exceptions", type=Path, default=ROOT / "data/selection/news_exceptions.json", help="Persistent GitHub maintainer withdrawal decisions")
     parser.add_argument("--candidates-only", action="store_true", help="Export discovery metadata for the private queue, outside the public website")
     parser.add_argument("--max-pages", type=int, default=300, help="Maximum page fetch attempts (including failures) per source per run; stop after 3 consecutive failures and resume checkpoints next run")
     parser.add_argument("--refresh", action="store_true", help="Re-enumerate completed historical months")
@@ -497,9 +498,13 @@ def main():
         document = candidates
     else:
         from .news_selection import select_archive
+        from .news_requests import withdrawn_ids
+        excluded = withdrawn_ids(args.exceptions)
+        if args.excluded_ids:
+            excluded.update(json.loads(args.excluded_ids.read_text()))
         document = select_archive(candidates, json.loads(args.selection.read_text()),
                                   reviewed_dossiers=json.loads(args.reviewed_news.read_text()),
-                                  excluded_ids=json.loads(args.excluded_ids.read_text()) if args.excluded_ids else ())
+                                  excluded_ids=excluded)
     if args.output.exists():
         previous = read_json(args.output, {})
         if ({k: v for k, v in previous.items() if k != "generated_at"}
