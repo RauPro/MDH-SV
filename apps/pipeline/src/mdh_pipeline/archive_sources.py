@@ -167,9 +167,34 @@ def _published_date(value):
         return None
 
 
+def _metadata_html(raw, url):
+    """Decode the verified EDH legacy archive without guessing Central European encodings.
+
+    Legacy /historico/ pages serve Latin-1/Windows-1252 bytes with neither an
+    HTTP charset nor an HTML charset. Generic detection can turn policías into
+    policÝas. Honor HTML declarations; otherwise prefer valid UTF-8, then the
+    archive's observed Windows-1252 encoding. Other publishers remain unchanged.
+    """
+    if not isinstance(raw, bytes):
+        return raw
+    parts = urlsplit(url)
+    if parts.hostname != "historico.elsalvador.com" or not parts.path.startswith("/historico/"):
+        return raw
+    declared = re.search(br"<meta\b[^>]*\bcharset\s*=\s*['\"]?\s*[a-z0-9._:-]+", raw[:16384], re.I)
+    if declared:
+        return raw
+    try:
+        return raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        try:
+            return raw.decode("windows-1252")
+        except UnicodeDecodeError as error:
+            raise ArchiveError("invalid_metadata_encoding") from error
+
+
 def parse_article_metadata(raw, url, source):
     """Read publisher metadata; no body text, lastmod, dateModified or URL dates."""
-    soup = BeautifulSoup(raw, "html.parser")
+    soup = BeautifulSoup(_metadata_html(raw, url), "html.parser")
     _blocked(soup)
     canonical = soup.find("link", rel="canonical")
     if canonical and canonical.get("href"):

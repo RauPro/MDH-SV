@@ -192,6 +192,41 @@ def test_no_date_from_url_lastmod_modified_or_migration_metadata():
     assert parse_article_metadata(raw, URL, SOURCE)["published_date"] == "2016-04-25"
 
 
+@pytest.mark.parametrize("title", ["62 policías asesinados en el año", "Niña y jóvenes: más víctimas", "“Víctimas” — año 2015"])
+def test_legacy_edh_metadata_uses_windows1252_without_guessing_cp852(title):
+    raw = article().replace("Denuncian violaciones de derechos humanos", title).encode("windows-1252")
+    metadata = parse_article_metadata(raw, URL, SOURCE)
+    assert metadata["title"] == title
+    assert metadata["published_date"] == "2013-03-13"
+
+
+def test_legacy_edh_metadata_prefers_valid_utf8_without_a_charset():
+    title = "Niña, policías y más información"
+    raw = article().replace("Denuncian violaciones de derechos humanos", title).encode("utf-8")
+    assert parse_article_metadata(raw, URL, SOURCE)["title"] == title
+
+
+@pytest.mark.parametrize("declaration", ['<meta charset="windows-1251">', '<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">'])
+def test_explicit_html_charset_is_respected_for_legacy_edh(declaration):
+    title = "Новости"
+    raw = article().replace("<head>", "<head>" + declaration).replace("Denuncian violaciones de derechos humanos", title).encode("windows-1251")
+    assert parse_article_metadata(raw, URL, SOURCE)["title"] == title
+
+
+def test_legacy_edh_undefined_bytes_fail_instead_of_corrupting_metadata():
+    raw = article().replace("Denuncian violaciones de derechos humanos", "Title").encode().replace(b'Title', b'Title\x81')
+    with pytest.raises(ArchiveError, match="invalid_metadata_encoding"):
+        parse_article_metadata(raw, URL, SOURCE)
+
+
+def test_metadata_encoding_rule_does_not_apply_to_other_publishers_or_paths():
+    from mdh_pipeline.archive_sources import _metadata_html
+    raw = b"polic\xeda"
+    assert _metadata_html(raw, "https://diario.elmundo.sv/nacionales/article") is raw
+    assert _metadata_html(raw, "https://historico.elsalvador.com/current/article") is raw
+    assert _metadata_html("Noticia", URL) == "Noticia"
+
+
 def test_jsonld_date_is_article_scoped_and_paywall_is_not_bypassed():
     raw = ('<script type="application/ld+json">' + json.dumps({"@type": "NewsArticle", "url": URL, "headline": "Noticia", "datePublished": "2013-01-02"}) + '</script>').encode()
     assert parse_article_metadata(raw, URL, SOURCE)["published_date"] == "2013-01-02"

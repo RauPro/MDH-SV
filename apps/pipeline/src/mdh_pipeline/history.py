@@ -168,7 +168,7 @@ def reference_from_post(post, source, start, end, retrieved_at):
 
 
 def reference_from_metadata(title, url, published_date, source, start, end,
-                            retrieved_at, source_post_id=None):
+                            retrieved_at, source_post_id=None, *, topic_terms=None):
     """A publisher-declared date is required; never derive it from sitemap lastmod."""
     published = date.fromisoformat(published_date)
     if not start <= published <= end:
@@ -190,7 +190,10 @@ def reference_from_metadata(title, url, published_date, source, start, end,
     if not title:
         raise ValueError("Missing publisher title")
     screened = normalize(title + " " + urlsplit(url).path)
-    topics = [topic for topic, terms in TOPICS.items() if any(term in screened for term in terms)]
+    # Private recovery jobs may supply a narrower, documented discovery screen.
+    # Ordinary collection retains TOPICS; this does not confer editorial approval.
+    topics = [topic for topic, terms in (TOPICS if topic_terms is None else topic_terms).items()
+              if any(term in screened for term in terms)]
     if not topics:
         return None
     limited_title = " ".join(title.split()[:24])[:180]
