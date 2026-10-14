@@ -529,7 +529,7 @@ def select_archive(archive, manifest, reviewed_dossiers=None, *, excluded_ids=()
         result["policy"].update(
             selection_gate=gate,
             selection_method="Selección de pertinencia en derechos humanos y alcance en El Salvador a partir del texto, con evidencia localizada; las decisiones editoriales prevalecen.",
-            notice="Archivo bibliográfico parcial seleccionado por pertinencia en derechos humanos y alcance en El Salvador. La selección automatizada no equivale a revisión humana ni acredita violaciones o hechos verificados. Las fichas y el recuento de casos mantienen su revisión editorial y de privacidad separada.",
+            notice="Archivo bibliográfico parcial seleccionado por pertinencia en derechos humanos y alcance en El Salvador. Las fichas se publican automáticamente por campo tras controles de evidencia y privacidad, atribuidas a su fuente. La selección y publicación automáticas no equivalen a revisión humana ni acreditan violaciones o corroboración independiente. Las solicitudes de corrección se tramitan en GitHub; el catálogo de casos conserva criterios separados.",
         )
         result["policy"]["coverage_limitations"] = [
             "La clasificación temática automática puede equivocarse; las decisiones humanas prevalecen.",

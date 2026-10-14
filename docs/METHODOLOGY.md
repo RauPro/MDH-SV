@@ -1,6 +1,6 @@
 # Metodología de MDH-SV
 
-Versión inicial · 9 de octubre de 2026.
+Edición inicial · 9 de octubre de 2026. Flujo automático de noticias actualizado el 14 de octubre de 2026.
 
 ## Objeto y unidad de registro
 
@@ -32,19 +32,21 @@ Se omiten identidades de menores, edades exactas, domicilios, coordenadas indivi
 
 Una solicitud de retiro puede señalar solo el ID de la ficha en un issue público. No existe todavía un canal confidencial; nunca se debe pedir a una persona que revele circunstancias privadas para solicitar una corrección. El sitio no recibe denuncias ni atiende emergencias.
 
-## Incorporación y corrección
+## Incorporación y corrección del catálogo de casos
+
+Este procedimiento corresponde al catálogo documental de casos, no al flujo automático de fichas de noticias descrito más abajo. Las estadísticas oficiales también conservan su proceso de revisión separado.
 
 1. Encontrar la fuente original y comprobar autoría, fecha, integridad y alcance. No basta una página de resultados ni un enlace a la portada de una ONG.
 2. Identificar una unidad de registro localizable; mantener separados informes y casos.
 3. Elaborar un resumen neutral atribuido, fechas fieles y localizador. No completar campos desconocidos con invenciones.
 4. Revisar riesgos para personas, posible solapamiento con registros existentes y condiciones de reutilización. La coincidencia de centro penal, día o palabras no identifica a una víctima ni autoriza una fusión.
-5. Antes de usar el conjunto para conclusiones institucionales, un revisor humano con competencia temática debe contrastar cada ficha. El estado `editorially_reviewed` exige `human_reviewed=true`, identificador del revisor, fecha y notas sustantivas. Las candidatas de la cola llevan `origin_candidate_id` y no pueden publicarse sin ese estado; una etiqueta manual en GitHub no sustituye la aprobación validada. La revisión editorial no certifica hechos ni culpabilidad.
+5. Antes de usar el conjunto para conclusiones institucionales, un revisor humano con competencia temática debe contrastar cada ficha. El estado `editorially_reviewed` exige `human_reviewed=true`, identificador del revisor, fecha y notas sustantivas. Las propuestas de casos de la cola llevan `origin_candidate_id` y no pueden publicarse sin ese estado; una etiqueta manual en GitHub no sustituye la aprobación validada. La revisión editorial no certifica hechos ni culpabilidad.
 6. Editar la fuente canónica, ejecutar `python -m mdh_pipeline.publication`, revisar todas las diferencias y correr las pruebas. Publicar un commit y conservar su identificador para reproducibilidad.
 7. Ante un error o riesgo, retirar temporalmente la ficha del conjunto público, regenerar descargas y desplegar. Registrar una nota sin exponer datos sensibles. Si alguna vez se publica información personal indebidamente, retirar el archivo actual no borra copias o historial: evaluar purga de historial y cachés con el responsable y la persona afectada.
 
 ## IA, deduplicación y preservación
 
-La recolección automática está separada de la publicación. Las noticias candidatas se conservan como issues en un repositorio privado. Solo se almacenan enlace, titular limitado y metadatos; nunca el cuerpo completo de la noticia. El workflow de recolección carece de permisos de escritura en el repositorio público. No se envía información a Gemini sin activar expresamente esa opción. La IA no aumenta el nivel de certeza; su salida requiere revisión.
+La recolección automática está separada de la publicación. Las noticias candidatas se conservan como issues en un repositorio privado. Solo se almacenan enlace, titular limitado y metadatos; nunca el cuerpo completo de la noticia. El workflow de recolección carece de permisos de escritura en el repositorio público. No se envía información a Gemini sin activar expresamente esa opción. La IA no aumenta el nivel de certeza. Las fichas de noticias se someten a una segunda evaluación de Gemini y comprobaciones locales antes de publicar sus campos; las propuestas de casos requieren revisión humana.
 
 La deduplicación automática solo evita reingestas idénticas. Dos medios pueden depender de una misma fuente, por lo que su número no demuestra independencia. La Wayback Machine es un respaldo de disponibilidad, no una garantía de inmutabilidad, veracidad o validez probatoria. No se fabrican URLs de archivo si una solicitud falla.
 
@@ -59,7 +61,30 @@ Código bajo MIT. Metadatos y resúmenes propios: [CC BY 4.0](https://creativeco
 
 `related_sources` conserva actualizaciones, como una liberación posterior, dentro del mismo expediente. No crea un segundo caso ni aumenta automáticamente la certeza. El conteo de documentos elimina URLs repetidas entre fuentes principales y complementarias. `year_range` expresa el año conocido; los límites del año se usan únicamente para filtrar y la interfaz muestra su precisión anual. No se presenta la fecha de una sentencia como fecha del hecho.
 
-Las ampliaciones documentales realizadas durante la preparación inicial siguen como `source_checked`, con revisión humana pendiente. Las incorporaciones futuras procedentes de la recolección tienen una aprobación editorial explícita antes de preparar su publicación.
+Las ampliaciones documentales realizadas durante la preparación inicial siguen como `source_checked`, con revisión humana pendiente. Las incorporaciones futuras al catálogo de casos tienen una aprobación editorial explícita. Las fichas de noticias siguen el contrato automático v2 y no requieren aprobación humana previa.
+
+## Publicación automática de noticias y solicitudes
+
+La extracción y el evaluador consultan la misma versión del artículo, vinculada
+por hash. El evaluador es una segunda pasada de Gemini, no una fuente independiente
+ni otro proveedor. Las reglas publican únicamente valores extraídos que conservan
+evidencia y superan los controles de privacidad. Los campos sin respaldo suficiente
+quedan sin resolver; una ausencia sólo se declara sobre texto completo analizado.
+Se admiten fichas parciales. La interfaz, REST y MCP conservan
+`human_reviewed: false` y `automation.corroboration: single_source`.
+
+Los títulos protegidos y las restricciones geográficas deben respetarse en todas
+las proyecciones públicas, incluida la bibliografía y las descargas, no sólo en el
+interior de la ficha. La conciliación y las comprobaciones de publicación impiden
+reintroducir un dato protegido a través de otra capa.
+
+«Reportar un problema» abre un issue con identificador y versión. La primera
+solicitud pública por noticia puede activar una reevaluación acotada; su texto y
+adjuntos no se ejecutan ni se envían a Gemini. Repetir reevaluaciones y retirar
+noticias exige un mantenedor autorizado. Las decisiones se conservan en Git y
+prevalecen sobre resultados automáticos. La clasificación, extracción, evaluación
+y reintentos comparten presupuesto y se detienen al agotarlo. El [protocolo de
+fichas](NEWS-DOSSIERS.md) detalla los contratos y estados.
 
 ## Consulta territorial
 

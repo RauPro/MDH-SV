@@ -12,7 +12,7 @@ El prototipo contenía registros sintéticos atribuidos a organizaciones reales.
 - Validador y exportador: `python -m mdh_pipeline.publication`.
 - Las geometrías públicas son nulas; el departamento no representa un lugar preciso.
 - El manifest SHA-256 comprueba los archivos exportados, no la veracidad de los hechos.
-- La recolección cada seis horas registra noticias en una cola privada de GitHub, sin publicar ni actualizar la web.
+- La recolección conserva candidatas en una cola privada. Las fichas de noticias se publican automáticamente por campo tras validación de evidencia y privacidad; los casos y las estadísticas oficiales mantienen su revisión humana.
 - La API REST y el MCP remoto consultan exclusivamente las fichas y el archivo bibliográfico públicos.
 
 ## Desarrollo y pruebas
@@ -51,39 +51,42 @@ npm --prefix apps/web run dev
 Vercel usa la raíz del repositorio y `vercel.json`. La consulta pública no necesita variables de entorno; el disparador horario requiere las credenciales separadas descritas en [ingreso horario](docs/HOURLY-INGESTION.md). El build verifica que todas las descargas correspondan al conjunto canónico. Más detalles en [operación](docs/OPERATIONS.md), [metodología](docs/METHODOLOGY.md) y [seguridad](SECURITY.md).
 
 
-## Recolección y revisión editorial
+## Recolección, publicación automática y correcciones
 
-La cola está en el repositorio privado `RauPro/MDH-SV-review`. Recoge Co Latino, GatoEncerrado y Revista Factum cada seis horas. Las candidatas se deduplican por URL y conservan su decisión editorial. La aprobación manual exige identidad de revisor, comprobación de privacidad y una ficha validada; genera una propuesta privada, nunca un despliegue automático.
+La cola está en el repositorio privado `RauPro/MDH-SV-review`. El procesamiento horario incorpora RSS y referencias históricas, deduplica por URL y conserva decisiones y reintentos. Gemini extrae una ficha y una segunda pasada del mismo proveedor evalúa sus campos contra la misma versión del artículo. Las reglas locales conservan sólo datos respaldados y publicables. La intervención humana se reserva para solicitudes en GitHub; la publicación de noticias no exige aprobación previa.
 
-Los workflows reproducibles y las instrucciones de revisión están en [ops/review-queue](ops/review-queue/README.md). Para importar una propuesta aprobada: `python -m mdh_pipeline.review_import --candidate IDENTIFICADOR --repository RauPro/MDH-SV-review`. El comando verifica la aprobación vigente y prepara cambios locales para revisión y CI.
+Los workflows reproducibles están en [ops/review-queue](ops/review-queue/README.md). El botón «Reportar un problema» abre una solicitud pública con identificador y versión, sin adjuntar contenido sensible. Las reevaluaciones usan el mismo presupuesto limitado; retiradas y cambios manuales requieren un mantenedor autorizado. El catálogo de casos conserva el importador de propuestas con aprobación humana y no recibe casos automáticamente de las noticias.
 
 ## Continuidad de la investigación WSDS
 
 El monitor amplía la implementación del artículo [Generative AI-based tool for efficient processing of Human Rights violations-related news](https://ieeexplore.ieee.org/document/10933836), DOI `10.1109/CONCAPAN63470.2024.10933836`. Se verificó el resumen y la fecha **Date Added to IEEE Xplore: 26 de marzo de 2025**; el texto completo requiere suscripción. La correspondencia de los campos de investigación se contrastó con el código original conservado localmente.
 
-- **Búsqueda histórica desde 2010:** el periodo solicitado abarca desde el 1 de enero de 2010 hasta la fecha de El Salvador de cada ejecución, con Co Latino, GatoEncerrado, Factum, El Faro, Diario El Mundo, el archivo de El Diario de Hoy y La Prensa Gráfica. Esta última tiene acceso automatizado restringido y no aporta noticias automáticamente; los índices de las demás fuentes pueden ser parciales. No garantiza referencias disponibles ni meses recorridos para todo ese intervalo: las fechas configuradas, cifras y estados por medio y mes se consultan en la cobertura del archivo. La fecha del paper es un antecedente, no el límite inicial. La clasificación territorial es automática y no confirma jurisdicción; las referencias aún requieren lectura, evaluación de pertinencia y revisión. No se cuentan como violaciones.
+- **Búsqueda histórica desde 2010:** el periodo solicitado abarca desde el 1 de enero de 2010 hasta la fecha de El Salvador de cada ejecución, con Co Latino, GatoEncerrado, Factum, El Faro, Diario El Mundo, el archivo de El Diario de Hoy y La Prensa Gráfica. Esta última tiene acceso automatizado restringido y no aporta noticias automáticamente; los índices de las demás fuentes pueden ser parciales. No garantiza referencias disponibles ni meses recorridos para todo ese intervalo: las fechas configuradas, cifras y estados por medio y mes se consultan en la cobertura del archivo. La fecha del paper es un antecedente, no el límite inicial. La clasificación territorial es automática y no confirma jurisdicción; las referencias aún requieren lectura y evaluación de pertinencia; los campos se publican después de la validación automática. No se cuentan como violaciones.
 - **Fichas estructuradas:** hechos, personas afectadas, lugar, fechas, actores, fuentes, temas, grupos, hipótesis atribuida e instrumentos. Cada valor tiene estado y evidencia; los datos protegidos o no consignados quedan explícitos. [Esquema](docs/DOSSIER-SCHEMA.md).
 - **Reutilización:** API REST y MCP remoto de solo lectura con filtros, paginación, atribución y estado editorial, para proyectos externos.
 
-La búsqueda se actualiza cada seis horas. El procesador horario incorpora hasta cincuenta candidatas locales o de ámbito incierto para revisión privada, además de las RSS. El archivo público sólo muestra noticias seleccionadas por pertinencia en derechos humanos y vínculo con El Salvador, con evidencia del contenido. Las clasificaciones antiguas requieren reevaluación; una coincidencia de palabras no permite publicar. No publica fichas completas automáticamente. [Selección temática](docs/NEWS-SELECTION.md), [colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
+La búsqueda se actualiza cada seis horas. El procesador horario incorpora hasta cincuenta candidatas locales o de ámbito incierto para procesamiento privado, además de las RSS. El archivo público sólo muestra noticias seleccionadas por pertinencia en derechos humanos y vínculo con El Salvador, con evidencia del contenido. Las clasificaciones antiguas requieren reevaluación; una coincidencia de palabras no permite publicar. Publica fichas completas o parciales cuando sus campos superan los controles automáticos, con atribución a una fuente única y sin afirmar revisión humana. [Selección temática](docs/NEWS-SELECTION.md), [colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
 
 ## Gemini en el flujo privado de producción
 
 El workflow **Preparar fichas con Gemini**, instalado en `RauPro/MDH-SV-review`,
 está programado para recoger noticias nuevas y procesar el backlog cada hora,
-según el presupuesto disponible. Vercel tiene preparado el disparo principal al
-minuto 07 y GitHub conserva el respaldo al minuto 23; la ejecución automática
-debe comprobarse después de instalar las credenciales. El tope propio configurado
-es de 240 solicitudes diarias, incluidos reintentos; no es una cuota confirmada
+según el presupuesto disponible. El disparo principal de Vercel está configurado
+al minuto 07 y GitHub conserva el respaldo al minuto 23; los eventos y recibos de
+ejecución deben comprobarse después de cada cambio de configuración. El tope propio configurado
+es de 240 solicitudes diarias, compartidas entre clasificación, extracción, evaluación y reintentos; no es una cuota confirmada
 de Google, cuyo límite diario sigue sin estar visible. Utiliza el
 secreto de Actions `GEMINI_API_KEY` y la variable `GEMINI_MODEL` (Gemini 3.5 Flash Lite).
 La clave nunca llega a Vercel, al navegador, al MCP ni a este repositorio público.
 
-Los borradores se guardan en `drafts/` del repositorio privado y se enlazan desde
-cada issue. Mantienen la revisión pendiente. Casos de alcance ambiguo, riesgos de
-privacidad o fallos de extracción se indican por separado; no se completan con
-supuestos. La aprobación humana exige contrastar la fuente, revisar privacidad y
-redactar notas; después prepara una propuesta, sin publicación automática.
+Los borradores se guardan en `drafts/` y las evaluaciones en `automatic-news/`,
+dentro del repositorio privado. El publicador prepara fichas v2 con
+`human_reviewed: false` y `automation.corroboration: single_source`: una segunda
+pasada de Gemini no es una fuente ni un proveedor independiente. Los campos
+dudosos quedan sin resolver y los sensibles se omiten; no se inventan datos.
+Los errores de acceso o cuota quedan en cola con reintentos acotados. El
+publicador conserva por separado los datos automáticos y las decisiones humanas,
+que prevalecen. [Contrato y publicación](docs/NEWS-DOSSIERS.md).
 
 [Funcionamiento, cuotas, reanudación y revisión](docs/GEMINI-REVIEW.md).
 

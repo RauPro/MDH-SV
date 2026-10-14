@@ -11,7 +11,9 @@ def workflow(path):
 
 def test_processing_projection_requires_a_verified_full_private_inventory():
     value = workflow('ops/review-queue/.github/workflows/publish-locations.yml')
-    assert value['permissions'] == {'contents': 'read', 'issues': 'read'}
+    # The evaluator persists receipts and quota reservations in the private repo;
+    # the processing projection itself remains credential-free.
+    assert value['permissions'] == {'contents': 'write', 'issues': 'read'}
     steps = value['jobs']['publish']['steps']
     checkout = next(s['with'] for s in steps if s.get('with', {}).get('path') == 'inbox')
     assert 'sparse-checkout' not in checkout
@@ -24,6 +26,11 @@ def test_processing_projection_requires_a_verified_full_private_inventory():
     assert '--output publication/apps/web/public/archive/processing.json' in step['run']
     publish = next(s for s in steps if 'git push' in s.get('run', ''))
     assert steps.index(step) < steps.index(publish)
+    evaluate = next(s for s in steps if 'mdh_pipeline.automatic_news evaluate' in s.get('run', ''))
+    assert steps.index(step) < steps.index(evaluate) < steps.index(publish)
+    assert evaluate['env']['MDH_GEMINI_BUDGET_CONFIG'] == '${{ vars.MDH_GEMINI_BUDGET_CONFIG }}'
+    assert '--request-generations request-generations.json' in evaluate['run']
+    assert '--excluded-ids excluded-locations.json' in evaluate['run']
     assert 'apps/web/public/archive/processing.json' in publish['run']
     assert 'inbox/drafts' not in publish['run']
     assert publish['run'].index('check-data.mjs') < publish['run'].index('git push')

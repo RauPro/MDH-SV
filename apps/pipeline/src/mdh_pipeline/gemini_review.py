@@ -264,9 +264,9 @@ def update_issue(inbox, issue_number, candidate, document=None, error_code=None,
         raise ValueError("changed_candidate_identity")
     body = re.sub(r"\n<!-- mdh-ai:start -->.*?<!-- mdh-ai:end -->\n?", "", issue.get("body") or "", flags=re.S)
     if document:
-        statuses = {"draft": ("ai/ready", "Ficha de noticia preparada; revisión editorial pendiente."),
-                    "needs_scope_review": ("ai/scope-review", "Ficha de noticia disponible; su pertinencia o jurisdicción requiere revisión. No equivale a un caso validado."),
-                    "needs_privacy_review": ("ai/privacy-review", "Ficha de noticia disponible con campos protegidos; requiere revisión de privacidad."),
+        statuses = {"draft": ("ai/ready", "Ficha preparada; pendiente de validación automática para publicación."),
+                    "needs_scope_review": ("ai/scope-review", "Ficha disponible; su pertinencia o jurisdicción requiere evaluación. No equivale a un caso validado."),
+                    "needs_privacy_review": ("ai/privacy-review", "Ficha disponible con campos protegidos; los campos seguros pueden publicarse tras validación automática."),
                     "pending": ("ai/pending", "Ficha de noticia pendiente de extracción; todavía no se ha evaluado el contenido."),
                     "source_unavailable": ("ai/error", "Ficha de noticia disponible; no fue posible consultar la fuente y sus campos siguen pendientes."),
                     "error": ("ai/error", "Ficha de noticia disponible; la extracción falló y sus campos siguen pendientes.")}
@@ -284,8 +284,8 @@ def update_issue(inbox, issue_number, candidate, document=None, error_code=None,
         label, notice = "ai/error", "La extracción no se completó. No se inventó una ficha ni se publicó contenido."
         detail = f"Código de diagnóstico: `{error_code}`. Consulte el estado privado de procesamiento."
     section = ("\n<!-- mdh-ai:start -->\n## Extracción asistida\n\n" + notice + "\n\n" + detail
-               + "\n\nEl borrador no acredita los hechos. Revise fuente, citas, personas y fechas antes de aprobar. "
-               "La ficha de noticia y una eventual propuesta de caso son unidades distintas; ningún resultado se publica automáticamente.\n<!-- mdh-ai:end -->\n")
+               + "\n\nEl borrador no acredita los hechos. El publicador automático contrasta los campos con la fuente y conserva las omisiones de privacidad. "
+               "La ficha de noticia y una eventual propuesta de caso son unidades distintas. Las correcciones humanas se tramitan por solicitud.\n<!-- mdh-ai:end -->\n")
     labels = [value["name"] for value in issue.get("labels", []) if not value["name"].startswith("ai/")]
     inbox.call("PATCH", inbox.base + f"/issues/{issue_number}", json={"body": body + section, "labels": [*labels, label]})
     return True
