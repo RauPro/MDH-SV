@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T12:23:54.463201+00:00",
+  "generated_at": "2026-10-14T13:20:12.391633+00:00",
   "assessment_counts": {
     "candidates": 10642,
-    "evaluated": 3098,
-    "relevant": 1118,
-    "excluded": 1978,
+    "evaluated": 3210,
+    "relevant": 1120,
+    "excluded": 2088,
     "uncertain": 2,
-    "pending": 7544
+    "pending": 7432
   },
   "selections": [
     {
@@ -7185,6 +7185,32 @@
             "p2",
             "p4",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "3aef9500ce165dd43eeded8a8a107d2b787b4ee798942919c952a806e02b8644",
+      "source_url": "https://historico.elsalvador.com/historico/122202/ee-uu-pone-a-cuba-venezuela-y-ecuador-en-su-lista-negra-de-derechos-humanos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-02-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T07:11:55.697051-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a9596dd745e1b6e533ec95da599a8794d3a924a637cfd4633b2142b1fb4b2b7a",
+          "jurisdiction_paragraph_ids": [
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p15"
           ]
         }
       }
@@ -15119,6 +15145,36 @@
             "p7",
             "p9",
             "p17"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "76ef725c370212c80f3a25cd6e364ef32969b743fc0d763436fb65aa838dd5b1",
+      "source_url": "https://historico.elsalvador.com/historico/122747/ee-uu-fustiga-a-el-salvador-por-violar-derechos-humanos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-02-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T07:12:39.817581-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8d4f9dda18cb83bf7e8654f7ba0344bc6c6e33bc573658034f3c213688bace15",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p8",
+            "p11",
+            "p25"
           ]
         }
       }

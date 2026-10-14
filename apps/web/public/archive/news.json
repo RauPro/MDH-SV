@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T12:23:56.751853+00:00",
+  "generated_at": "2026-10-14T13:20:14.769545+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 10642,
-      "selected": 1118,
-      "evaluated": 3098,
-      "relevant": 1118,
-      "excluded": 1978,
+      "selected": 1120,
+      "evaluated": 3210,
+      "relevant": 1120,
+      "excluded": 2088,
       "uncertain": 2,
-      "pending": 7544,
-      "evaluated_at": "2026-10-14T12:23:54.463201+00:00"
+      "pending": 7432,
+      "evaluated_at": "2026-10-14T13:20:12.391633+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-14",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1118,
+    "records": 1120,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,8 +14689,8 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 45,
-        "first_published_date": "2015-05-28",
+        "records": 47,
+        "first_published_date": "2014-02-27",
         "last_published_date": "2017-06-06",
         "months": [
           {
@@ -15284,7 +15284,7 @@
           {
             "month": "2014-02",
             "status": "partial",
-            "records": 0,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 41,
             "source_total_posts": null,
@@ -19239,7 +19239,7 @@
         "month": "2014-02",
         "start_date": "2014-02-01",
         "end_date": "2014-02-28",
-        "records": 21,
+        "records": 23,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19274,7 +19274,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 2
           }
         ]
       },
@@ -75430,6 +75430,56 @@
       }
     },
     {
+      "id": "76ef725c370212c80f3a25cd6e364ef32969b743fc0d763436fb65aa838dd5b1",
+      "title": "EE. UU. fustiga a El Salvador por violar derechos humanos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/122747/ee-uu-fustiga-a-el-salvador-por-violar-derechos-humanos.html",
+      "published_date": "2014-02-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "ee uu",
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T12:20:08.470685+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T07:12:39.817581-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8d4f9dda18cb83bf7e8654f7ba0344bc6c6e33bc573658034f3c213688bace15",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p8",
+            "p11",
+            "p25"
+          ]
+        }
+      }
+    },
+    {
       "id": "6ac6cdbd675409f9a13815efd7ba602d784d8af290c4685b9925d45a28172c63",
       "title": "PDDH condena violación de derechos políticos por resolución CSJ",
       "title_truncated": false,
@@ -75470,6 +75520,55 @@
             "p2",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3aef9500ce165dd43eeded8a8a107d2b787b4ee798942919c952a806e02b8644",
+      "title": "EE.UU. pone a Cuba, Venezuela y Ecuador en su “lista negra” de derechos humanos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/122202/ee-uu-pone-a-cuba-venezuela-y-ecuador-en-su-lista-negra-de-derechos-humanos.html",
+      "published_date": "2014-02-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "cuba",
+        "ecuador",
+        "ee uu",
+        "eeuu",
+        "venezuela"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T12:20:08.470685+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T07:11:55.697051-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a9596dd745e1b6e533ec95da599a8794d3a924a637cfd4633b2142b1fb4b2b7a",
+          "jurisdiction_paragraph_ids": [
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p15"
           ]
         }
       }
