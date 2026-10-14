@@ -10,6 +10,7 @@ import unknownV1Handler from '../api/v1/[...path].mjs';
 import { NEWS_DOSSIER_FIELDS, pendingNewsDossier } from '../shared/news-dossier.mjs';
 import fixtureArchive from '../apps/web/src/__fixtures__/newsArchive.json' with { type: 'json' };
 import { assertSelectedNewsArchive, validateNewsSelection } from '../shared/news-selection.mjs';
+import { NEWS_PROCESSING_STATUSES } from '../shared/news-processing.mjs';
 import municipalityReference from '../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json' with { type: 'json' };
 
 let server, base;
@@ -177,6 +178,40 @@ test('public news enrichment uses only approved dossiers bound to the exact bibl
     assert.equal(response.data[0].news_dossier.fields.summary.status, 'pending');
     assert.ok(!JSON.stringify(response).includes('APPROVED_TEST_VALUE'));
     assert.ok(!JSON.stringify(response).includes('PRIVATE_TEST_VALUE'));
+  }
+});
+
+test('news exposes processing status separately while keeping every unreviewed dossier field private', () => {
+  const source = fixtureArchive.records[0];
+  const archive = selectedArchive([source]);
+  const empty = { schema_version: 1, dossiers: [] };
+  const entry = { candidate_id: source.id, source_url: source.source_url, publisher: source.publisher,
+    published_date: source.published_date, selection_content_sha256: source.selection.evidence.content_sha256, status: 'generated' };
+  const payload = { schema_version: 1, generated_at: '2026-10-14T12:00:00Z', entries: [entry] };
+  for (const status of NEWS_PROCESSING_STATUSES) {
+    const response = searchNews({}, archive, empty, null, { ...payload, entries: [{ ...entry, status }] });
+    assert.equal(response.data[0].processing_status, status);
+    assert.equal(response.data[0].news_dossier.extraction_status, 'pending');
+    assert.ok(Object.values(response.data[0].news_dossier.fields).every(field => field.value === null && field.status === 'pending'));
+    assert.equal(response.meta.news_processing_status, 'available');
+    assert.equal(response.meta.news_processing_updated_at, payload.generated_at);
+  }
+  for (const unsafe of [null, { ...payload, private_draft: 'PRIVATE_TEST_VALUE' },
+    { ...payload, entries: [{ ...entry, fields: { summary: 'PRIVATE_TEST_VALUE' } }] }]) {
+    const response = searchNews({}, archive, empty, null, unsafe);
+    assert.equal(response.data[0].processing_status, 'unknown');
+    assert.equal(response.meta.news_processing_status, 'unavailable');
+    assert.equal(response.meta.news_processing_updated_at, null);
+    assert.ok(!JSON.stringify(response).includes('PRIVATE_TEST_VALUE'));
+  }
+  for (const entries of [[], [{ ...entry, selection_content_sha256: 'f'.repeat(64) }]]) {
+    assert.equal(searchNews({}, archive, empty, null, { ...payload, entries }).data[0].processing_status, 'unknown');
+  }
+  const approved = pendingNewsDossier(source);
+  Object.assign(approved, { extraction_status: 'processed', human_reviewed: true, reviewed_by: 'reviewer', reviewed_at: '2026-10-10', review_notes: 'Fixture de revisión pública explícita de fuente y privacidad.' });
+  approved.classification = { jurisdiction: 'SV', relevance: 'relevant', record_type: null };
+  for (const statusPayload of [payload, null]) {
+    assert.equal(searchNews({}, archive, { schema_version: 1, dossiers: [approved] }, null, statusPayload).data[0].processing_status, 'reviewed');
   }
 });
 
@@ -386,6 +421,11 @@ test('OpenAPI is a public, versioned executable contract', async () => {
   assert.ok(body.paths['/api/v1/news']);
   assert.ok(body.components.schemas.News.required.includes('news_dossier'));
   assert.ok(body.components.schemas.News.required.includes('selection'));
+  assert.ok(body.components.schemas.News.required.includes('processing_status'));
+  assert.deepEqual(body.components.schemas.NewsProcessingStatus.enum, [...NEWS_PROCESSING_STATUSES, 'reviewed']);
+  assert.equal(body.components.schemas.NewsProcessingEntry.additionalProperties, false);
+  assert.equal(body.components.schemas.NewsProcessingCollection.additionalProperties, false);
+  assert.equal(body.components.schemas.NewsProcessingEntry.properties.status.enum.includes('reviewed'), false);
   assert.equal(body.components.schemas.NewsSelection.oneOf.length, 2);
   assert.ok(body.components.schemas.NewsSelection.oneOf.every(schema => schema.additionalProperties === false && schema.properties.jurisdiction.const === 'SV' && schema.properties.relevance.const === 'relevant'));
   assert.equal(body.components.schemas.NewsSelectionGate.additionalProperties, false);
@@ -435,6 +475,8 @@ test('MCP officially connects, discovers read-only tools, calls and reads resour
     assert.ok(news.structuredContent.meta.policy.notice);
     assert.deepEqual(Object.keys(news.structuredContent.data[0].news_dossier.fields), NEWS_DOSSIER_FIELDS);
     assert.equal(news.structuredContent.data[0].news_dossier.kind, 'news_dossier');
+    assert.ok([...NEWS_PROCESSING_STATUSES, 'reviewed'].includes(news.structuredContent.data[0].processing_status));
+    assert.ok(listed.tools.find(tool => tool.name === 'search_news').description.includes('processing_status'));
     const resources = await client.listResources();
     assert.equal(resources.resources.length, 2);
     const resource = await client.readResource({ uri: 'mdh-sv://catalog/metadata' });

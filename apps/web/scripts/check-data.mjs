@@ -6,6 +6,7 @@ import { assertSelectedNewsArchive, isSelectedNewsReference } from '../../../sha
 import { parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
 import { parsePublishedNewsLocations, validateLocationBindings } from '../../../shared/news-location.mjs';
 import { checkOfficialStatisticsExports } from './export-official-statistics.mjs';
+import { parseNewsProcessing, validateProcessingBindings } from '../../../shared/news-processing.mjs';
 
 const source = new URL('../../../data/reviewed/publications.json', import.meta.url);
 const publicDir = new URL('../public/data/', import.meta.url);
@@ -60,6 +61,13 @@ for (const dossier of publicIndex.values()) {
   assert.ok(dossier.reviewed_at <= new Date().toISOString().slice(0, 10), 'News dossier review cannot be in the future');
 }
 console.log(`Validated ${publicIndex.size} human-reviewed news dossiers and bibliography bindings.`);
+
+const processing = JSON.parse(readFileSync(new URL('../public/archive/processing.json', import.meta.url)));
+const processingIndex = validateProcessingBindings(parseNewsProcessing(processing), newsArchive.records);
+for (const entry of processingIndex.values()) {
+  assert.equal(hash(entry.source_url), entry.candidate_id, 'Processing identity must match its public source URL');
+}
+console.log(`Validated ${processingIndex.size} processing statuses without exposing unreviewed fields.`);
 
 const automaticLocations = JSON.parse(readFileSync(new URL('../public/archive/locations.json', import.meta.url)));
 const locationsIndex = validateLocationBindings(parsePublishedNewsLocations(automaticLocations), newsArchive.records);

@@ -9,6 +9,7 @@ import App from './App';
 
 const publicResponse = (input: unknown, catalog = data) => ({ ok: true, json: async () =>
   String(input).endsWith('/archive/dossiers.json') ? { schema_version: 1, dossiers: [] }
+    : String(input).endsWith('/archive/processing.json') ? { schema_version: 1, generated_at: '2026-10-10T10:00:00Z', entries: archive.records.map(reference => ({ candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date, selection_content_sha256: reference.selection.evidence.content_sha256, status: 'pending' })) }
     : String(input).endsWith('/archive/news.json') ? archive : String(input).endsWith('/statistics/homicides.json') ? officialStatistics : catalog }) as Response;
 beforeEach(() => { vi.restoreAllMocks(); localStorage.clear(); vi.stubGlobal('fetch', vi.fn().mockImplementation(async input => publicResponse(input))); });
 async function ready() {
@@ -168,7 +169,7 @@ it('opens the linked archive and returns to news in the main map while retaining
   await screen.findByRole('region',{name:'Mapa de El Salvador'});
   expect(screen.getByRole('button', {name:'Noticias'})).toHaveAttribute('aria-pressed','true');
   expect(screen.queryByLabelText('Vínculo territorial')).not.toBeInTheDocument();
-  expect(screen.getByText('3 fichas de noticias')).toBeInTheDocument();
+  expect(screen.getByText('3 noticias seleccionadas')).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
   expect(screen.getByText('4 resultados')).toBeInTheDocument();
 });
@@ -177,7 +178,7 @@ it('opens news and their full dossier directly from Fichas y mapa on the home pa
   render(<App/>);
   await screen.findByRole('region', { name:'Fichas de noticias' });
   expect(screen.getByRole('button', { name:'Fichas y mapa' })).toHaveAttribute('aria-pressed','true');
-  expect(screen.getByText('3 fichas de noticias')).toBeInTheDocument();
+  expect(screen.getByText('3 noticias seleccionadas')).toBeInTheDocument();
   expect(screen.getByRole('region', { name:'Mapa de El Salvador' })).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name:archive.records[0].title }));
   const dialog = await screen.findByRole('dialog');
@@ -194,12 +195,12 @@ it('keeps news visible when the independent reports catalogue fails', async () =
     return publicResponse(input);
   });
   render(<App/>);
-  await screen.findByText('3 fichas de noticias');
+  await screen.findByText('3 noticias seleccionadas');
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
   expect(await screen.findByRole('alert')).toHaveTextContent('No pudimos cargar los datos');
   await userEvent.click(screen.getByRole('button', { name:'Noticias' }));
-  await screen.findByText('3 fichas de noticias');
+  await screen.findByText('3 noticias seleccionadas');
 });
 
 it('preserves report routes when closing a directly linked dossier', async () => {
@@ -222,7 +223,7 @@ it('restores the report collection from its URL without opening a missing-record
 
 it('has no detectable structural accessibility violations on the news landing view', async () => {
   render(<App/>);
-  await screen.findByText('3 fichas de noticias');
+  await screen.findByText('3 noticias seleccionadas');
   const result = await axe.run(document.body, { rules: { 'color-contrast': { enabled:false } } });
   expect(result.violations.map(v => v.id)).toEqual([]);
 });
@@ -249,7 +250,7 @@ it('keeps official statistics available when the reports catalogue is unavailabl
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   expect(fetch).not.toHaveBeenCalledWith('/archive/news.json', expect.anything());
   await userEvent.click(screen.getByRole('button', { name: 'Fichas y mapa' }));
-  await screen.findByText('3 fichas de noticias');
+  await screen.findByText('3 noticias seleccionadas');
   await userEvent.click(screen.getByRole('button', { name: /^Reportes documentados/ }));
   expect(await screen.findByRole('alert')).toHaveTextContent('No pudimos cargar los datos');
 });
