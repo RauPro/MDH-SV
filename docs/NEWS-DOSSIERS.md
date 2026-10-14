@@ -45,10 +45,57 @@ Los errores de lectura o del proveedor dejan una estructura pendiente y su
 diagnóstico, sin afirmar que la extracción haya terminado.
 
 La web y `search_news`/`GET /api/v1/news` presentan una estructura para cada
-referencia. Cuando aún no hay una ficha aprobada y publicada, muestran campos
-pendientes. No consultan el repositorio privado ni revelan su contenido o su
-estado individual. Por ello ese estado público no permite concluir si Gemini
-ya terminó una extracción privada.
+referencia. Los campos de una ficha sólo se publican tras revisión humana. Un
+registro independiente de progreso permite distinguir si la ficha ya se generó,
+sin consultar la cola privada desde el navegador ni exponer su contenido.
+
+## Estado de procesamiento público
+
+`apps/web/public/archive/processing.json` contiene únicamente el identificador,
+URL, medio y fecha públicos de la noticia, el hash ya público de su selección y
+uno de estos estados:
+
+| Estado | Significado |
+| --- | --- |
+| `pending` | Pendiente de extracción, confirmado con un inventario privado completo. |
+| `generated` | Ficha generada, posiblemente parcial; espera revisión antes de publicar campos. |
+| `source_unavailable` | El intento no pudo acceder a la fuente. |
+| `error` | La extracción no se completó correctamente. |
+| `unknown` | No se puede confirmar el progreso de esta referencia. |
+
+La API presenta el valor como `processing_status`. Una ficha pública aprobada
+prevalece y produce `reviewed`; el archivo de estados no puede conceder esa
+aprobación. Un campo pendiente de revisión conserva su propio estado `pending`,
+incluso cuando `processing_status` es `generated`. No se convierte en «Dato no
+mencionado», porque todavía no hay una afirmación revisada de ausencia.
+
+La proyección privada valida la ficha, identidad bibliográfica y hash de texto.
+Un borrador procesado sin correspondencia con la selección actual produce
+`unknown`, no `generated`. La clasificación temática, una ubicación automática
+o una plantilla vacía no acreditan generación de ficha. Si falta un estado o
+falla su carga, la web muestra que no puede confirmarlo; no supone que está pendiente.
+
+El workflow privado de publicación comprueba que el checkout de `drafts/` esté
+completo y sin alteraciones antes de usar `--snapshot-complete`. La ausencia de
+un borrador en un inventario parcial nunca se convierte en pendiente. No exporta
+resúmenes, personas, campos, notas, motivos de privacidad, modelos ni errores
+detallados. Usa las mismas credenciales y el mismo horario existentes, sin llamar
+a Gemini para preparar estos estados.
+
+```sh
+python -m mdh_pipeline.news_processing \
+  --drafts /ruta/privada/inbox/drafts \
+  --archive apps/web/public/archive/news.json \
+  --output apps/web/public/archive/processing.json \
+  --snapshot-complete
+```
+
+El refresco público de bibliografía sólo elimina estados huérfanos o desactualizados
+mediante `node apps/web/scripts/sync-news-processing.mjs`; no inventa estados para
+noticias nuevas ni accede a borradores. El build verifica la lista cerrada de campos
+y sus vínculos. La fecha de actualización se conserva si no cambia la proyección.
+En la interfaz, el mensaje de un campo vacío se muestra una sola vez y el contador
+describe «noticias seleccionadas», sin presentarlas como fichas ya generadas.
 
 ## Consulta en Fichas y mapa
 

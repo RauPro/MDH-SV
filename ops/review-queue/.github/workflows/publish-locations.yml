@@ -86,6 +86,21 @@ jobs:
           python -m mdh_pipeline.news_selection --drafts inbox/drafts --scope-reviews inbox/scope-reviews --archive candidates.json --output publication/data/selection/news.json --reviewed-dossiers publication/data/reviewed/news_dossiers.json --scope-audits publication/data/selection/scope_audits.json --excluded-ids excluded-news.json
           python -m mdh_pipeline.history --export-only --data-dir publication/data/history --selection publication/data/selection/news.json --reviewed-news publication/data/reviewed/news_dossiers.json --output publication/apps/web/public/archive/news.json --excluded-ids excluded-news.json
           python -m mdh_pipeline.news_publication --source publication/data/reviewed/news_dossiers.json --archive publication/apps/web/public/archive/news.json --destination publication/apps/web/public/archive/dossiers.json
+      - name: Verificar inventario completo y proyectar sólo estados de fichas
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          root = Path('inbox')
+          expected = set(filter(None, subprocess.check_output(['git', '-C', str(root), 'ls-files', '-z', '--', 'drafts/']).decode().split('\0')))
+          actual = {str(path.relative_to(root)) for path in (root / 'drafts').iterdir()}
+          assert expected == actual and all(re.fullmatch(r'drafts/[a-f0-9]{64}\.json', path) for path in actual), 'Incomplete private draft inventory'
+          assert all(not (root / path).is_symlink() for path in actual), 'Invalid private draft inventory'
+          subprocess.run(['git', '-C', str(root), 'diff', '--quiet', 'HEAD', '--', 'drafts/'], check=True)
+          PY
+          python -m mdh_pipeline.news_processing --drafts inbox/drafts --archive publication/apps/web/public/archive/news.json --output publication/apps/web/public/archive/processing.json --snapshot-complete
       - name: Recuperar comprobaciones geográficas anteriores
         # Only bounded source-check receipts are cached in this private workflow.
         # No source bodies, quotations, personal fields or full drafts enter it.
@@ -101,7 +116,7 @@ jobs:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
           SOURCE_CHECK_LIMIT: ${{ inputs.source_check_limit || '50' }}
         run: python -m mdh_pipeline.automatic_locations --drafts inbox/drafts --archive publication/apps/web/public/archive/news.json --output publication/apps/web/public/archive/locations.json --excluded-ids excluded-locations.json --limit "$SOURCE_CHECK_LIMIT" --cache-file .source-location-cache/source-checks.json
-      - name: Validar frontera pública y publicar solamente la capa geográfica
+      - name: Validar frontera pública y publicar metadatos y campos aprobados
         working-directory: publication
         run: |
           set -euo pipefail
@@ -109,14 +124,14 @@ jobs:
           python ../monitor/scripts/audit_release.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- data/selection/news.json apps/web/public/archive/news.json apps/web/public/archive/locations.json apps/web/public/archive/dossiers.json
+          git add -- data/selection/news.json apps/web/public/archive/news.json apps/web/public/archive/locations.json apps/web/public/archive/dossiers.json apps/web/public/archive/processing.json
           if git diff --cached --quiet; then exit 0; fi
           python - <<'PYTHON'
           import subprocess
-          allowed = {'data/selection/news.json', 'apps/web/public/archive/news.json', 'apps/web/public/archive/locations.json', 'apps/web/public/archive/dossiers.json'}
+          allowed = {'data/selection/news.json', 'apps/web/public/archive/news.json', 'apps/web/public/archive/locations.json', 'apps/web/public/archive/dossiers.json', 'apps/web/public/archive/processing.json'}
           assert set(subprocess.check_output(['git', 'diff', '--cached', '--name-only'], text=True).splitlines()) <= allowed
           PYTHON
-          git commit -m 'chore: refresh selected human-rights news and unreviewed locations'
+          git commit -m 'chore: refresh selected news, processing states and unreviewed locations'
           git pull --rebase origin main
           node apps/web/scripts/check-data.mjs
           git push origin HEAD:main

@@ -17,6 +17,14 @@ sin esperar una ficha completa ni llamar de nuevo a Gemini. Comprueba hasta
 50 fuentes por ejecución y conserva recibos mínimos de reintento en una caché
 privada de Actions; no almacena allí cuerpos, citas ni campos personales.
 
+El publicador también genera `/archive/processing.json` después de comprobar que
+el inventario privado de borradores esté completo y sin alteraciones. Sólo exporta
+la identidad bibliográfica pública y el estado `pending`, `generated`,
+`source_unavailable`, `error` o `unknown`; no copia campos, motivos de privacidad
+ni diagnósticos privados. Esto permite distinguir una ficha ya generada de una
+extracción pendiente en la web y API. Una ficha aprobada siempre prevalece.
+El estado `generated` no autoriza publicar sus campos ni elimina la revisión humana.
+
 Este repositorio es privado. Todas las noticias recogidas tienen una estructura
 de ficha, aunque falten datos, el ámbito territorial sea incierto o la noticia no
 describa una violación. Una ficha no acredita los hechos ni se publica por sí sola.
