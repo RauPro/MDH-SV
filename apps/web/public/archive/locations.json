@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T00:17:24.376896+00:00",
+  "generated_at": "2026-10-15T01:15:34.106153+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -2205,6 +2205,71 @@
           "method": "source_explicit_department",
           "department": "Chalatenango",
           "paragraph_id": "p18"
+        }
+      ]
+    },
+    {
+      "candidate_id": "6214ab41e7311c3b356481a007de1e376529a9e1bb97f3a33b1cefad2b0c22d2",
+      "source_url": "https://www.diariocolatino.com/conphas-denuncia-despidos-en-alcaldias-gobernadas-por-la-derecha/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-05-31",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T01:15:23.756268+00:00",
+      "source_checked_at": "2026-10-15T01:15:23.756268+00:00",
+      "evidence": {
+        "content_sha256": "5ba29f5bf26d6497f48e59993476c89aa6ea58a5e80bdffb90c818113a27e9b8"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "La Libertad",
+          "paragraph_id": "p2",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Quezaltepeque",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p2",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Soyapango",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Sonsonate",
+          "paragraph_id": "p2",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Acajutla",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Usulután",
+          "paragraph_id": "p2",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Jiquilisco",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
         }
       ]
     },
