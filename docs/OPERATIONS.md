@@ -75,15 +75,35 @@ el saldo y las horas restantes del día del Pacífico. Cada intento HTTP, inclui
 los reintentos, consume ese presupuesto compartido por clasificación, extracción y evaluación automática.
 
 La configuración privada utiliza `operator_cap`, con un tope propio de 240
-solicitudes al día. El límite diario de Google no está visible (`rpd: null`);
+solicitudes al día, 2 por minuto y 200 000 unidades conservadoras de entrada por
+minuto. El límite diario de Google no está visible (`rpd: null`);
 estos topes no se presentan como cuotas confirmadas del proveedor. Un 429 pausa
 las llamadas hasta la siguiente medianoche del Pacífico. No se activa facturación
 ni se cambia automáticamente de modelo. Los archivos privados conservan estado
 y evitan repetir extracciones ya terminadas. Ante autenticación o configuración
 inválidas, se detiene el lote y el resumen identifica el motivo sin revelar secretos.
 
-El publicador evalúa las fichas generadas mediante una segunda pasada de Gemini,
-sujeta al mismo registro de cuota. Publica sólo campos respaldados y seguros; la
+El publicador evalúa hasta cuatro fichas por llamada mediante una segunda pasada
+de Gemini, sujeta al mismo registro de cuota. `automatic_validation_limit=50` es
+un techo; el cupo efectivo viene de `runtime/news-allocation.json`, vinculado a la
+ejecución anterior y al mismo día de cuota, y sólo puede reclamarse una vez. El
+reparto considera trabajo elegible: con un cupo de 10 llamadas y tres colas con
+trabajo, asigna 2 a clasificación, 6 a extracción y 2 a validación; sin clasificación
+pendiente puede asignar 8 y 2 respectivamente. Los disparos manuales también
+reciben un cupo proporcional al saldo y las horas restantes, sin reiniciar cuotas.
+
+Las plantillas usan `VALIDATION_BATCH_SIZE=4`, `VALIDATION_LIMIT=50` y
+`MDH_ALLOCATION_SOURCE_RUN_ID` para enlazar el publicador con el extractor. El CLI
+equivalente es `automatic_news evaluate --batch-size 4 --limit 50`, junto con los
+argumentos de archivos y las credenciales privadas existentes. Reducir el tamaño
+de lote no modifica la cuota. Los textos se conservan completos dentro del límite
+de entrada; se usan grupos menores cuando no caben. Una respuesta cruzada entre
+artículos o incompleta invalida todo el grupo, y los reintentos consumen el cupo.
+
+El resumen separa llamadas, fichas evaluadas y publicables, tamaños de lote y
+divisiones de recuperación. Esas medidas permiten comprobar la mejora real; no
+se deduce el avance a partir de issues abiertas ni del máximo de cuatro artículos.
+Publica sólo campos respaldados y seguros; la
 generación por sí sola no autoriza publicar. Los fallos ordinarios conservan
 reintentos acotados y los fallos de configuración requieren intervención técnica.
 Las solicitudes de GitHub permiten reevaluar o corregir fichas; no se envía al

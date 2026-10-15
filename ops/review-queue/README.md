@@ -2,8 +2,10 @@
 
 La consulta pública aplica el [protocolo de selección temática](https://github.com/RauPro/MDH-SV/blob/main/docs/NEWS-SELECTION.md).
 Las candidatas se reconstruyen desde los checkpoints, no desde el archivo público
-filtrado. `extract.yml` clasifica todo el archivo antes de completar fichas, con
-un único presupuesto horario compartido. `review-scope.yml` queda para pruebas
+filtrado. `extract.yml` clasifica candidatas y completa fichas de las seleccionadas, con
+un único presupuesto horario repartido entre etapas según el trabajo elegible.
+La clasificación avanza a la vez que se extraen y validan noticias ya seleccionadas;
+no hace falta terminar el archivo completo para publicar fichas. `review-scope.yml` queda para pruebas
 manuales, sin otro disparo automático. Conserva evaluaciones en `scope-reviews/`
 y reintentos diferidos en `scope-attempts/`.
 El publicador usa esas decisiones para actualizar selección, noticias y mapa.
@@ -83,10 +85,43 @@ anteriores y se respetan las decisiones humanas existentes.
 6. Push al repositorio público, del que Vercel despliega web, REST y MCP.
 
 El límite de evaluación es un techo de llamadas por ejecución, no un presupuesto
-nuevo. Clasificación, extracción, evaluación y reintentos comparten
-`runtime/gemini-budget.json`, el tope propio de 240 solicitudes diarias y las pausas
+nuevo. `automatic_validation_limit` vale 50 por defecto; cada solicitud puede
+evaluar hasta cuatro fichas. La plantilla usa `VALIDATION_BATCH_SIZE=4` y
+`VALIDATION_LIMIT=50`, que pasan a `automatic_news evaluate --batch-size 4 --limit 50`.
+Clasificación, extracción, evaluación y reintentos comparten
+`runtime/gemini-budget.json`, el tope propio de 240 solicitudes diarias, 2 por minuto,
+200 000 unidades conservadoras de entrada por minuto y las pausas
 ante 429. Ese tope no es una cuota confirmada por Google. No se activa facturación,
 no se cambia de modelo al agotar saldo y los disparos manuales no reinician el contador.
+
+El extractor registra el reparto en `runtime/news-allocation.json`. Con un cupo
+horario de 10 y trabajo en las tres colas, el plan asigna 2 llamadas a clasificación,
+6 a extracción y 2 a validación de hasta 8 fichas. Sin clasificación pendiente,
+ese cupo puede pasar a 8 de extracción y 2 de validación. Si una etapa queda sin
+trabajo, el reparto se adapta, y la capacidad no utilizada confirmada de las
+etapas anteriores puede pasar a validación. No existe un límite fijo de 3 fichas
+por hora ni una garantía de publicar el máximo teórico.
+
+`MDH_ALLOCATION_SOURCE_RUN_ID` identifica la ejecución de extracción que generó
+la asignación. El publicador la reclama una sola vez y sólo dentro del mismo día
+de cuota; si falta, caducó o ya fue usada, no obtiene otra asignación como respaldo.
+Sin ejecución anterior asociada, se registra un cupo proporcional al saldo y
+las horas restantes una sola vez por `GITHUB_RUN_ID`. El registro de reparto
+no sustituye las reservas obligatorias antes de cada intento HTTP.
+
+El lote tiene una cota de entrada de `min(90_000, input_tpm - 1_024)`, calculada
+sobre todo el JSON serializado en UTF-8 más un margen de 1 024 unidades. No es
+una medición exacta de tokens. Se conservan todos los párrafos del texto recuperado
+y se reducen los grupos si no caben. Cada artículo usa referencias exclusivas
+como `n1-p1`; un hash incorrecto, identificador faltante o referencia cruzada
+rechaza la respuesta completa. Los errores de formato pueden dividir el grupo
+para reintentar, sin aumentar presupuesto, intentos permitidos ni tiempo máximo.
+Los recibos y las protecciones siguen siendo individuales; `usage` queda nulo
+para no inventar consumo por artículo a partir de tokens agregados del lote.
+
+Los resúmenes de ejecución exponen `validation_request_grant`, `http_requests`,
+`evaluated`, `publishable`, `batch_sizes` y `recovery_splits`. Comprobar esos valores
+y la posterior publicación antes de estimar la velocidad o el fin del backlog.
 
 Sólo se evalúa contra el mismo hash que extracción y selección. Un cambio de fuente
 requiere actualizar esos vínculos antes de publicar. Una ficha puede ser parcial;

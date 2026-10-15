@@ -27,13 +27,32 @@ oficiales conservan sus procesos de revisión humana separados.
   de fuente y reintentos comparten `runtime/gemini-budget.json`. Se reserva saldo
   antes de cada solicitud HTTP. Los recibos de evaluación no abren otra cuota.
 - La configuración `operator_cap` conserva un **tope propio de 240 solicitudes
-  diarias**. No es una cuota confirmada por Google; el límite diario de este
+  diarias**, 2 solicitudes por minuto y un límite de entrada de 200 000 unidades
+  conservadoras por minuto. No es una cuota confirmada por Google; el límite diario de este
   proyecto no aparece disponible. Un 429 detiene las llamadas hasta el siguiente
   día del Pacífico. No se activa facturación ni se cambia de modelo para continuar.
 - `automatic_validation_limit` en el publicador limita las llamadas adicionales
-  de cada ejecución, con valor predeterminado 3. Siempre se reduce al saldo
-  compartido. Una ejecución manual no reinicia el contador y una solicitud en
-  GitHub tampoco lo elude.
+  de cada ejecución, con valor predeterminado 50. Es sólo un techo: el reparto
+  horario y el saldo compartido determinan cuántas pueden ejecutarse. Cada llamada
+  puede evaluar hasta cuatro fichas. Una ejecución manual no reinicia el contador
+  y una solicitud en GitHub tampoco lo elude.
+
+El reparto se calcula con el trabajo elegible de clasificación, extracción y
+validación; no usa la cantidad de issues abiertas. Con las tres colas ocupadas
+y un cupo horario de 10 llamadas, reserva 2 para clasificación, 6 para extracción
+y 2 para evaluar hasta 8 fichas. Cuando termina la clasificación, ese mismo cupo
+puede repartir 8 para extracción y 2 para validación. Son ejemplos de asignación,
+no cantidades garantizadas de fichas publicadas. Si una etapa no tiene trabajo,
+el plan adapta el reparto; el saldo confirmado que no usan clasificación y
+extracción también queda disponible para validación.
+
+`runtime/news-allocation.json` guarda el reparto y su consumo. El publicador
+reclama una sola vez la asignación de la ejecución de extracción identificada
+por `MDH_ALLOCATION_SOURCE_RUN_ID`, dentro del mismo día de cuota. Un plan ausente,
+antiguo o ya reclamado no habilita un cupo alternativo. Los disparos sin ejecución
+de extracción asociada reciben un cupo proporcional al saldo y las horas restantes,
+registrado una sola vez por `GITHUB_RUN_ID`. Este registro coordina las etapas;
+`runtime/gemini-budget.json` sigue siendo quien autoriza y cuenta cada intento HTTP.
 
 Los workflows comparten la exclusión mutua `editorial-inbox`. Se usa `queue: max`
 para conservar ejecuciones pendientes sin que un nuevo disparo sustituya otro.
@@ -70,6 +89,29 @@ y la selección de pertinencia. Evalúa cada campo como respaldado, contradicho 
 insuficientemente sustentado, con localizadores y señales de privacidad. Los
 artículos y las fichas son datos no confiables, nunca instrucciones. El modelo
 no dispone de herramientas ni puede publicar directamente.
+
+### Validación por lotes
+
+`automatic_news evaluate --batch-size 4` agrupa hasta cuatro fichas por solicitud
+con el mismo modelo y la misma clave. `--limit` conserva su significado de techo
+de intentos HTTP; no cuenta artículos ni concede saldo adicional. La plantilla
+usa `VALIDATION_BATCH_SIZE=4` y `VALIDATION_LIMIT=50`, sujetos al reparto anterior.
+
+El lote incluye los párrafos completos de cada texto recuperado, sin recortarlos
+para hacer caber más noticias. La entrada total, incluidos instrucciones, esquema
+y fichas, se limita a `min(90_000, input_tpm - 1_024)` usando el tamaño UTF-8 del
+JSON completo más 1 024 unidades de margen. Es una cota conservadora de admisión,
+no un conteo exacto de tokens del proveedor. Cuando no cabe otra ficha, se envía
+un lote menor; si una ficha sola no cabe, queda pendiente con diagnóstico. Una
+fuente ya marcada como recortada no permite afirmar ausencia de información.
+
+Cada artículo tiene un espacio de referencias propio (`n1-p1`, `n2-p1`, etc.).
+La respuesta debe devolver exactamente sus identificadores y hashes, sin filas
+adicionales ni duplicadas. Una referencia a otro artículo, hash incorrecto, fila
+faltante o respuesta incompleta invalida el lote entero antes de proyectar datos.
+La recuperación puede dividirlo en lotes menores, siempre dentro del mismo cupo,
+plazo de ejecución y límite de intentos. Cada nuevo envío y reintento HTTP consume
+saldo. Los controles de privacidad y publicación siguen aplicándose por ficha.
 
 El motor de reglas no añade hechos provenientes de la respuesta del evaluador:
 conserva sólo un subconjunto de los valores ya extraídos, con evidencia válida.
@@ -116,7 +158,11 @@ El repositorio privado conserva:
 - `processing/<id>.json`: estado de extracción, intentos y código de error acotado.
 - `automatic-news/<id>.json`: juicio, proyección segura, huella del borrador y la
   fuente, versión de política, generación de solicitud, intentos y uso de tokens
-  cuando el proveedor lo informa. Estos recibos completos no se publican.
+  cuando corresponde a una evaluación individual. En los lotes, `usage` queda
+  nulo: no se inventa un reparto de los tokens agregados entre noticias. Estos
+  recibos completos no se publican.
+- `runtime/news-allocation.json`: asignaciones de llamadas entre etapas y su
+  reclamación por ejecución, sin textos de noticias.
 - `runtime/news-requests.json`: estado acotado de solicitudes, sin su prosa ni adjuntos.
 - Issues de la cola con enlaces y etiquetas de diagnóstico.
 
@@ -163,6 +209,12 @@ y el contrato se describen en [NEWS-DOSSIERS.md](NEWS-DOSSIERS.md).
 Para verificar producción, comprobar el resultado del workflow, su commit y el
 despliegue; después, los snapshots y REST/MCP. Una extracción exitosa no prueba
 por sí sola que los campos ya estén desplegados.
+
+Los resúmenes distinguen `http_requests`, `evaluated`, `publishable`, `batch_sizes`
+y `recovery_splits`, además del cupo `validation_request_grant`. Hay que medir esos
+resultados en ejecuciones reales antes de estimar el fin del backlog: cuatro
+fichas por llamada es un máximo de transporte, y los errores, fuentes cambiadas
+y decisiones de pertinencia pueden reducir la publicación efectiva.
 
 ## Solicitudes y correcciones humanas
 

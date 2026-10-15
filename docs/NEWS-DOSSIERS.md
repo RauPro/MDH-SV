@@ -185,14 +185,36 @@ permitir fichas de noticias incompletas.
 ## Operación y presupuesto
 
 Después del extractor horario, `publish-locations.yml` selecciona las noticias,
-sincroniza solicitudes, evalúa un lote de hasta tres llamadas adicionales y
-publica las proyecciones. Evaluación, reextracción por fuente cambiada y reintentos
+sincroniza solicitudes, evalúa fichas en lotes de hasta cuatro artículos por
+llamada y publica las proyecciones. El techo de ejecución es 50 llamadas; el cupo
+real depende del reparto compartido, del trabajo elegible y del saldo diario.
+Con un cupo horario de 10 y trabajo en las tres etapas, el plan reserva 2 llamadas
+para clasificación, 6 para extracción y 2 para validar hasta 8 fichas. Al agotarse
+la clasificación, ese cupo puede pasar a 8 de extracción y 2 de validación. Las
+cantidades son asignaciones, no una promesa de publicación o de plazo del backlog.
+
+`runtime/news-allocation.json` vincula la asignación con la ejecución de extracción
+y el día de cuota; el publicador sólo puede reclamarla una vez. Un disparo manual
+recibe un cupo proporcional al saldo y las horas restantes, registrado una vez
+por ejecución. El saldo no utilizado y confirmado de las etapas anteriores puede
+pasar al evaluador. Evaluación, reextracción por fuente cambiada y reintentos
 comparten `runtime/gemini-budget.json` con el extractor. No se amplía el tope
-diario ni se utiliza otro proveedor o una clave para eludirlo. Cada intento HTTP
+propio de 240 solicitudes diarias, 2 por minuto y 200 000 unidades conservadoras
+de entrada por minuto, ni se utiliza otro proveedor o una clave para eludirlo. Cada intento HTTP
 se reserva antes del envío; un 429 detiene los trabajadores hasta el siguiente
 día de cuota. El tope configurado es operativo, no una afirmación de los límites
 no publicados por Google. La cuota consumida fuera de estos trabajadores no
 puede medirse con este registro local.
+
+Los lotes mantienen párrafos y evidencias aislados por artículo y exigen los
+identificadores y hashes exactos en la respuesta. Una fila faltante, una referencia
+cruzada o un resultado inválido rechaza el lote completo; puede reintentarse con
+grupos menores dentro del mismo presupuesto y límite de intentos. La entrada
+completa tiene una cota conservadora de 90 000 unidades, también limitada por el
+presupuesto por minuto. Se reduce el grupo antes que recortar la fuente. Cada
+ficha conserva un recibo propio y los mismos controles de privacidad; los tokens
+agregados del lote no se atribuyen artificialmente a cada noticia. Véase el
+[protocolo de lotes y cuotas](GEMINI-REVIEW.md#validación-por-lotes).
 
 Las evaluaciones se reutilizan por hash de borrador, fuente, política y generación
 de solicitud. Las fuentes cambiadas se reextraen dentro del mismo presupuesto y

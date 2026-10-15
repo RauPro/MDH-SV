@@ -79,6 +79,19 @@ de Google, cuyo límite diario sigue sin estar visible. Utiliza el
 secreto de Actions `GEMINI_API_KEY` y la variable `GEMINI_MODEL` (Gemini 3.5 Flash Lite).
 La clave nunca llega a Vercel, al navegador, al MCP ni a este repositorio público.
 
+La evaluación agrupa hasta cuatro fichas por llamada, con evidencias y controles
+de privacidad separados por artículo. El reparto horario se adapta al trabajo
+pendiente: con un cupo de 10 llamadas y las tres etapas ocupadas, asigna 2 a
+clasificación, 6 a extracción y 2 a evaluar hasta 8 fichas; al terminar la
+clasificación puede asignar 8 a extracción y 2 a evaluación. El techo de 50
+llamadas por ejecución no concede saldo adicional: cada etapa recibe su parte
+del presupuesto compartido, y cada intento se reserva antes del envío.
+Los límites de 240 llamadas diarias, 2 por minuto y entrada de 200 000 unidades
+conservadoras por minuto se mantienen. Las fuentes largas se agrupan en lotes
+menores, sin recortar texto para acelerar; los fallos no autorizan publicación.
+El avance efectivo se mide en fichas evaluadas y publicadas, no en issues abiertas
+ni en el máximo teórico de artículos por llamada.
+
 Los borradores se guardan en `drafts/` y las evaluaciones en `automatic-news/`,
 dentro del repositorio privado. El publicador prepara fichas v2 con
 `human_reviewed: false` y `automation.corroboration: single_source`: una segunda
