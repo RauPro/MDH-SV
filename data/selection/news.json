@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T15:19:37.127228+00:00",
+  "generated_at": "2026-10-15T16:18:48.284922+00:00",
   "assessment_counts": {
     "candidates": 11251,
-    "evaluated": 4854,
-    "relevant": 1635,
-    "excluded": 3216,
+    "evaluated": 4886,
+    "relevant": 1640,
+    "excluded": 3243,
     "uncertain": 3,
-    "pending": 6397
+    "pending": 6365
   },
   "selections": [
     {
@@ -9626,6 +9626,36 @@
       }
     },
     {
+      "candidate_id": "370124af4c9f45fdf8661db88f5ac7ec9c5a116f7eefc5e4fc5a2f25c50fc8aa",
+      "source_url": "https://www.diariocolatino.com/organizaciones-sociales-exigen-aprobacion-de-dia-nacional-de-la-desaparicion-forzada/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T10:11:36.845826-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "11926ae720dd94a30a5f2cf77fdc962b74bfc86b6a2816be3c458090bbe32ee1",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "370b12496671cc8f8894468b96d07abe662df0a464995f0ebaa966da68229a9a",
       "source_url": "https://www.diariocolatino.com/entregan-carta-solicitando-detencion-de-subasta-de-siget-al-presidente-funes/",
       "publisher": "Diario Co Latino",
@@ -11708,6 +11738,35 @@
       }
     },
     {
+      "candidate_id": "44064e3c6b10150a5cd21acf3d9bf4f26232c844313fe9008ee223ae26011a0b",
+      "source_url": "https://www.diariocolatino.com/ues-exige-verdad-y-justicia-por-casos-de-desaparicion-forzada-de-universitarios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T10:11:36.845826-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8777be0f23390c8985389324ac04e4e111ba4f4c691885c91d623ce14ed82a1a",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "4427c95e0ba053f3d65601bbf1d690ff4d439a8b2eee6232a953f9cfed522407",
       "source_url": "https://www.diariocolatino.com/trump-despliega-militares-en-la-frontera-con-mexico-para-detener-la-inmigracion-ilegal/",
       "publisher": "Diario Co Latino",
@@ -13468,6 +13527,32 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4f2be8063e906a6fd141d95095475d075020b366184afbe164bd87259d830ab3",
+      "source_url": "https://gatoencerrado.news/2018/08/30/denuncian-a-procuradora-raquel-caballero-por-violar-derechos-laborales/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-08-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T10:11:36.845826-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5e42abe13fdb1465069e855d5b8bf741803b8f91ab44a34dad67e130e54b4af4",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
           ]
         }
       }
@@ -38413,6 +38498,33 @@
       }
     },
     {
+      "candidate_id": "d19d851885737c0acc0fe85296d19ce6a8a9a00288721618f1b25c94a3eb2ce9",
+      "source_url": "https://gatoencerrado.news/2018/09/03/carmen-aida-lazo-pone-en-duda-participacion-de-daubuisson-en-asesinato-de-romero/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-09-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T10:11:36.845826-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7a4db40f1fa82c82b77150d6723eb59a1cce42baf4485ed991371d27f7aa8b31",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "d1d95527f81a17ea2e908ce0847d09e5459500f06da11be23073e9dc58109e6b",
       "source_url": "https://www.diariocolatino.com/miembros-pandillas-se-fugan-bartolinas-gotera/",
       "publisher": "Diario Co Latino",
@@ -43470,6 +43582,33 @@
             "p3",
             "p4",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f2209b30c9355845774d4c16e1d434519ae235a9a76955655440378dbf24e4be",
+      "source_url": "https://historico.elsalvador.com/historico/118974/diplomatico-salvadoreno-arrestado-por-violencia-contra-su-novia-en-estados-unidos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-12-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T10:11:36.845826-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3f656845370604b29eb2fca1fa58d8844a16140b6a2363ed2d15c69fd5334ca8",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
           ]
         }
       }
