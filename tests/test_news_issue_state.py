@@ -416,7 +416,7 @@ def test_explicit_recheck_does_not_resolve_from_legacy_positive_or_pre_request_c
     from mdh_pipeline.news_exclusions import review_sha256
     proof["scope_verifications"][0]["first_review_sha256"] = review_sha256(proof["scope_reviews"][0])
     assert state(**proof, rechecks=request)[reference()["id"]]["status"] == "discarded"
-    assert reopening(**proof, rechecks=request) == {}
+    assert reopening(**proof, rechecks=request)[reference()["id"]]["recheck_requested_at"] == request["requests"][0]["requested_at"]
 
 
 def test_known_corrupt_body_never_resolves_recheck_even_with_two_new_agreeing_assessments():
@@ -433,3 +433,12 @@ def test_known_corrupt_body_never_resolves_recheck_even_with_two_new_agreeing_as
 def test_recheck_for_unknown_candidate_cannot_borrow_another_bibliographic_identity():
     assert reopening(rechecks=audit_recheck(reference(2))) == {}
     assert state(rechecks=audit_recheck(reference(2))) == {}
+
+
+def test_closure_reason_uses_the_agreed_second_check_axis_not_first_country_guess():
+    from test_news_selection import verification
+    first = current_review(jurisdiction='other', relevance='not_relevant')
+    second = current_review(jurisdiction='SV', relevance='not_relevant')
+    receipt = verification(first, second, reason='unrelated_subject')
+    result = state(scope_reviews=[first], scope_verifications=[receipt])
+    assert result[reference()['id']]['reason'] == 'not_relevant'

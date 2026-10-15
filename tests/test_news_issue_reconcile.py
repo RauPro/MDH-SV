@@ -520,6 +520,32 @@ def test_rejected_label_alone_is_enough_for_existing_editorial_rejection():
     assert value["status"] == "discarded" and value["reason"] == "editorial_rejection"
 
 
+def test_audit_reopens_old_closure_once_even_when_model_reevaluation_finished_first():
+    row = machine_closed()
+    row['closed_at'] = '2026-10-14T22:00:00Z'
+    request = {**pending(), 'reason': 'audit_recheck', 'recheck_requested_at': '2026-10-14T23:00:00Z'}
+    inbox = Inbox([row])
+    result = run(inbox, evidence(terminal()), reopen=evidence(request), apply=True)
+    assert result['changed']['pending'] == 1
+    reopened = inbox.rows[1]
+    assert reopened['state'] == 'open'
+    closing = lifecycle.desired_transition(reopened, evidence(terminal()), reopen=evidence(request))
+    assert closing['status'] == 'published'
+    payload = lifecycle.transition_payload(reopened, closing, private_revision=REVISION, now=NOW)
+    closed_again = {**reopened, **payload, 'labels': [{'name': x} for x in payload['labels']],
+                    'closed_at': NOW.isoformat()}
+    assert lifecycle.desired_transition(closed_again, evidence(terminal()), reopen=evidence(request)) is None
+
+
+def test_audit_timestamp_does_not_override_a_manual_or_newer_verified_closure():
+    request = {**pending(), 'recheck_requested_at': '2026-10-14T23:00:00Z'}
+    for stamp, actor in [('2026-10-14T22:00:00Z', 'maintainer'), ('2026-10-15T01:00:00Z', 'github-actions[bot]')]:
+        row = machine_closed()
+        row['closed_at'] = stamp
+        row['closed_by']['login'] = actor
+        assert lifecycle.desired_transition(row, evidence(terminal()), reopen=evidence(request)) is None
+
+
 def test_invalid_candidate_metadata_and_wrong_reopen_identity_stay_untouched():
     row = issue()
     row["body"] = row["body"].replace('"status": "pending"', '"status": "approved"')

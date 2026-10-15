@@ -196,8 +196,16 @@ def desired_transition(issue, terminals, *, excluded_ids=(), reopen=None):
             return None
     if "review/approved" in labels and (terminal is None or terminal["status"] != "published"):
         return None
+    pending = (reopen or {}).get(candidate["id"])
+    if (issue["state"] == "closed" and owned and pending is not None
+            and not labels.intersection({"review/approved", "review/rejected"})
+            and candidate_matches_terminal(candidate, pending) and pending.get("recheck_requested_at")):
+        try:
+            if _stamp(issue.get("closed_at")) < _stamp(pending["recheck_requested_at"]):
+                return {"candidate": candidate, **pending, "reason": "audit_recheck"}
+        except ValueError:
+            pass  # An absent/invalid closure timestamp is not proof of this race.
     if terminal is None:
-        pending = (reopen or {}).get(candidate["id"])
         if issue["state"] == "closed" and owned and pending is not None and candidate_matches_terminal(candidate, pending):
             return {"candidate": candidate, **pending}
         return None

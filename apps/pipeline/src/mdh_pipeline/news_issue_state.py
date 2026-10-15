@@ -219,7 +219,7 @@ def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
         if category == "excluded":
             if dossier is not None or identifier in public_selected or identifier in bibliography_selected:
                 continue
-            reason = ("outside_el_salvador" if assessment["classification"]["jurisdiction"] == "other"
+            reason = ("outside_el_salvador" if verification["reason_code"] == "unrelated_country"
                       else "not_relevant")
             result[identifier] = _evidence(reference, "discarded", reason,
                 scope_decision["hash"], assessment["extraction"]["prepared_at"])
@@ -233,4 +233,15 @@ def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
             reason = "awaiting_publication" if category == "relevant" else "scope_unclear"
             reopen[identifier] = _evidence(reference, "pending", reason,
                 scope_decision["hash"], assessment["extraction"]["prepared_at"])
+    # Source reevaluation and GitHub reconciliation are separate queued jobs.
+    # Even if fresh evidence already resolved the model request, the original
+    # machine closure must still be reopened once to acknowledge the audit.
+    # The issue layer compares its closure timestamp with this request, so a
+    # later legitimately verified closure is never reopened indefinitely.
+    for identifier, request in request_index.items():
+        if identifier in excluded or identifier not in references:
+            continue
+        pending = reopen.setdefault(identifier, _evidence(references[identifier], "pending", "audit_recheck",
+            request["source_content_sha256"], request["requested_at"]))
+        pending["recheck_requested_at"] = request["requested_at"]
     return result, reopen
