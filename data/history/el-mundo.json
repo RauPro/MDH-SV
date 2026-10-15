@@ -24,16 +24,42 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 11,
-      "pages_fetched": 11,
+      "posts_scanned": 13,
+      "pages_fetched": 13,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-14T21:55:33.231434+00:00",
+      "last_attempt_at": "2026-10-15T05:07:44.825398+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "ec67c58a7be44e0d728db2078b85a97edf91411990806d8ac505da1a81c53e47",
+      "title": "Presidenta de Costa Rica llegará el viernes al país para conocer CECOT",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/politica/presidenta-de-costa-rica-llegara-el-viernes-al-pais-para-conocer-cecot",
+      "published_date": "2026-10-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "cecot",
+        "costa rica"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:44.825398+00:00"
+      }
+    },
     {
       "id": "8147bc54523fc53768dae3e308cebcd649efddd40cd180e2bc4843daeb2f715f",
       "title": "Septiembre 2026 registró seis homicidios: PNC",
@@ -55,6 +81,29 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-10-14T12:20:07.583404+00:00"
+      }
+    },
+    {
+      "id": "67cf0896c058958359d5fa02bfbaa2519dab29fa65cfc19e0600bc0197b8a29e",
+      "title": "Dan 12 años de cárcel a adulto mayor que agredió sexualmente a una menor de cinco años en Ciudad Arce",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/dan-12-anos-de-carcel-a-adulto-mayor-que-agredio-sexualmente-a-una-menor-de-cinco-anos-en-ciudad-arce",
+      "published_date": "2026-10-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:44.825398+00:00"
       }
     },
     {
@@ -351,7 +400,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-14T21:55:33.231434+00:00",
+    "last_attempt_at": "2026-10-15T05:07:44.825398+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -370,9 +419,11 @@
       "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-acusado-de-traficar-cocaina-en-la-avenida-olimpica-de-san-salvador",
       "https://diario.elmundo.sv/nacionales/hombre-senalado-de-causar-un-incendio-e-intentar-matar-a-una-persona-en-santa-tecla-seguira-detenido",
       "https://diario.elmundo.sv/nacionales/septiembre-2026-registro-seis-homicidios-pnc",
-      "https://diario.elmundo.sv/politica/lira-pide-comision-para-evaluar-casos-de-personas-inocentes-capturadas-bajo-regimen"
+      "https://diario.elmundo.sv/politica/lira-pide-comision-para-evaluar-casos-de-personas-inocentes-capturadas-bajo-regimen",
+      "https://diario.elmundo.sv/politica/presidenta-de-costa-rica-llegara-el-viernes-al-pais-para-conocer-cecot",
+      "https://diario.elmundo.sv/nacionales/dan-12-anos-de-carcel-a-adulto-mayor-que-agredio-sexualmente-a-una-menor-de-cinco-anos-en-ciudad-arce"
     ],
-    "article_cursor": 13,
+    "article_cursor": 15,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -451,6 +502,18 @@
         "published_date": "2026-10-14",
         "last_attempt_at": "2026-10-14T21:55:33.231434+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/politica/presidenta-de-costa-rica-llegara-el-viernes-al-pais-para-conocer-cecot": {
+        "status": "selected",
+        "published_date": "2026-10-14",
+        "last_attempt_at": "2026-10-15T05:07:44.825398+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/dan-12-anos-de-carcel-a-adulto-mayor-que-agredio-sexualmente-a-una-menor-de-cinco-anos-en-ciudad-arce": {
+        "status": "selected",
+        "published_date": "2026-10-14",
+        "last_attempt_at": "2026-10-15T05:07:44.825398+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -458,11 +521,11 @@
       "https://diario.elmundo.sv/nacionales": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
-        "duplicate_article_urls": 12,
+        "duplicate_article_urls": 13,
         "article_urls_matching_anchor": 3,
-        "article_urls_observed": 20,
+        "article_urls_observed": 19,
         "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-14T21:55:33.231434+00:00"
+        "last_attempt_at": "2026-10-15T05:07:44.825398+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -471,7 +534,7 @@
         "article_urls_matching_anchor": 2,
         "article_urls_observed": 20,
         "article_urls_selected": 2,
-        "last_attempt_at": "2026-10-14T21:55:33.231434+00:00"
+        "last_attempt_at": "2026-10-15T05:07:44.825398+00:00"
       }
     },
     "index_screen_version": 3
