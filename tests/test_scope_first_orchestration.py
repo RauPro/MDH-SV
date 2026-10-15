@@ -66,7 +66,7 @@ def arrange(monkeypatch, *, remaining=240, consumed=None, selected=(), scope_err
     monkeypatch.setattr(gemini_review, 'editorial_excluded_ids', lambda _: set())
     monkeypatch.setattr(gemini_review, '_allocation_workload', lambda *_args, **kwargs: {
         'selected_ids': set(), 'excluded_ids': kwargs['excluded'],
-        'extraction_pending': 1000, 'validation_ready': 1000, 'scope_pending': 1000})
+        'extraction_pending': 1000, 'validation_ready': 1000, 'scope_pending': 1000, 'scope_reprocessing_ids': set(), 'scope_priority_ids': set()})
     def refresh(*args, **kwargs):
         prior = gemini_review._allocation_workload(*args[:5], **kwargs)
         return {**prior, 'selected_ids': (prior['selected_ids'] | set(selected)) - prior['excluded_ids']}
@@ -284,7 +284,7 @@ def test_cached_positives_are_synchronized_when_scope_grant_is_zero(monkeypatch,
     config, budget, _, calls, classify = arrange(monkeypatch)
     monkeypatch.setattr(gemini_review, '_allocation_workload', lambda *_args, **kwargs: {
         'selected_ids': selected, 'excluded_ids': set(), 'extraction_pending': 4,
-        'validation_ready': 20, 'scope_pending': 0})
+        'validation_ready': 20, 'scope_pending': 0, 'scope_reprocessing_ids': set(), 'scope_priority_ids': set()})
     monkeypatch.setattr(gemini_review.time, 'sleep', lambda _: None)
     inbox = MetadataInbox()
     report = execute(tmp_path, config, budget, classify, inbox=inbox,
@@ -322,9 +322,10 @@ def test_routing_uses_all_validated_positive_caches_not_title_hints():
     result = gemini_review._allocation_workload(inbox, {'schema_version': 1, 'records': refs}, [], reviews, [],
                                                excluded=set(), now=instant)
     assert result['selected_ids'] == {refs[0]['id']}
-    assert result['excluded_ids'] == {refs[1]['id'], refs[2]['id']}
+    assert result['excluded_ids'] == set()
+    assert result['scope_reprocessing_ids'] == set()
     assert result['extraction_pending'] == 1
-    assert result['scope_pending'] == 0
+    assert result['scope_pending'] == 3
 
 
 def test_routing_preserves_human_exclusions_and_rejects_stale_selected_hash():
@@ -369,44 +370,47 @@ def test_generated_and_cached_dossiers_are_not_counted_as_pending_extraction():
     assert result['validation_ready'] == 1
 
 
-def test_source_audit_with_matching_hash_blocks_extraction_without_relabeling_a_new_body():
+def test_old_source_audit_with_matching_hash_prioritizes_recheck_without_final_exclusion():
     from test_news_selection import reference, rights_review, source_audit, NOW as instant
     ref = reference()
     inbox = SimpleNamespace(base='/repos/private', call=lambda *args, **kwargs: [])
     review = rights_review(ref)
     result = gemini_review._allocation_workload(inbox, {'schema_version': 1, 'records': [ref]}, [], [review], [],
         excluded=set(), now=instant, scope_audits=source_audit(ref))
-    assert not result['selected_ids'] and result['excluded_ids'] == {ref['id']}
+    assert not result['selected_ids'] and not result['excluded_ids']
+    assert result['scope_priority_ids'] == {ref['id']}
+    assert result['scope_pending'] == 1
     review['evidence']['content_sha256'] = review['source_read']['content_sha256'] = 'd' * 64
     updated = gemini_review._allocation_workload(inbox, {'schema_version': 1, 'records': [ref]}, [], [review], [],
         excluded=set(), now=instant, scope_audits=source_audit(ref))
     assert updated['selected_ids'] == {ref['id']} and not updated['excluded_ids']
 
 
-def test_scope_worker_cannot_reintroduce_existing_source_audit(monkeypatch, tmp_path):
+def test_scope_worker_cannot_reintroduce_source_mismatch_or_human_block(monkeypatch, tmp_path):
     from test_history_review import reference
     ref = reference(1)
     config, budget, _, calls, classify = arrange(monkeypatch, selected=[ref['id']])
     monkeypatch.setattr(gemini_review, '_allocation_workload', lambda *_args, **kwargs: {
         'selected_ids': set(), 'excluded_ids': {ref['id']}, 'extraction_pending': 1000,
-        'validation_ready': 1000, 'scope_pending': 1000})
+        'validation_ready': 1000, 'scope_pending': 1000, 'scope_reprocessing_ids': set(), 'scope_priority_ids': set()})
     execute(tmp_path, config, budget, classify, archive={'schema_version': 1, 'records': [ref]})
     assert calls[-1][1]['eligible_ids'] == []
     assert calls[-1][1]['excluded_ids'] == {ref['id']}
 
 
 def test_new_scope_rejection_replaces_old_positive_draft_for_same_source():
-    from test_news_selection import reference, rights_review, draft, NOW as instant
+    from test_news_selection import reference, current_review, draft, NOW as instant
     ref = reference()
     inbox = SimpleNamespace(base='/repos/private', call=lambda *args, **kwargs: [])
     before = gemini_review._allocation_workload(inbox, {'schema_version': 1, 'records': [ref]},
         [draft(ref)], [], [], excluded=set(), now=instant)
     assert before['selected_ids'] == {ref['id']}
     updated = gemini_review._refresh_scope_workload(inbox, {'schema_version': 1, 'records': [ref]},
-        [draft(ref)], [], [], [rights_review(ref, relevance='not_relevant')], excluded=set(), now=instant,
+        [draft(ref)], [], [], [current_review(ref, relevance='not_relevant')], excluded=set(), now=instant,
         scope_audits=None)
     assert updated['selected_ids'] == set()
-    assert updated['excluded_ids'] == {ref['id']}
+    assert updated['excluded_ids'] == set()
+    assert updated['scope_pending'] == 1
 
 
 def test_new_source_positive_replaces_old_cached_negative_and_old_source_audit():
@@ -439,7 +443,7 @@ def test_explicit_current_exception_and_audit_paths_override_pinned_defaults(mon
     def workload(*args, **kwargs):
         seen.append(kwargs)
         return {'selected_ids': set(), 'excluded_ids': kwargs['excluded'], 'extraction_pending': 1000,
-                'validation_ready': 1000, 'scope_pending': 1000}
+                'validation_ready': 1000, 'scope_pending': 1000, 'scope_reprocessing_ids': set(), 'scope_priority_ids': set()}
     monkeypatch.setattr(gemini_review, '_allocation_workload', workload)
     monkeypatch.setattr(history_review, 'enqueue_history', lambda *_args, **_kwargs: pytest.fail('withdrawn'))
     gemini_review.process_scope_first(SimpleNamespace(), api_key='test', model='gemini-3.5-flash-lite',

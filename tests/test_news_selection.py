@@ -9,7 +9,8 @@ import pytest
 from mdh_pipeline.history import SOURCES, reference_from_post
 from mdh_pipeline.news_dossier import empty_news_dossier
 from mdh_pipeline.news_selection import (
-    FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT,
+    FULL_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT,
+    SCOPE_PROMPT, EXCLUSION_PROMPT,
     SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT,
     project_news_selection, select_archive,
     validate_manifest, validate_scope_review, validate_scope_audits, validate_selection,
@@ -101,6 +102,12 @@ def rights_review(item=None, **classification):
     return value
 
 
+def current_review(item=None, **classification):
+    value = inclusive_review(item, **classification)
+    value["extraction"]["prompt_version"] = SCOPE_PROMPT
+    return value
+
+
 def source_audit(item=None):
     item = item or reference()
     return {"schema_version": 1, "audits": [{"candidate_id": item["id"],
@@ -110,13 +117,13 @@ def source_audit(item=None):
         "reason": "no_substantive_human_rights_nexus"}]}
 
 
-def test_source_audit_suppresses_repeated_model_positives_only_for_the_audited_text():
+def test_obsolete_source_audit_keeps_old_text_pending_for_inclusive_reassessment():
     audit = source_audit()
     for prepared_at in ("2026-10-12T14:02:00Z", "2026-10-12T15:01:00Z"):
         assessment = rights_review(); assessment["extraction"]["prepared_at"] = prepared_at
         manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[assessment], scope_audits=audit)
         assert manifest["selections"] == []
-        assert manifest["assessment_counts"]["excluded"] == 1 and manifest["assessment_counts"]["pending"] == 0
+        assert manifest["assessment_counts"]["uncertain"] == 1 and manifest["assessment_counts"]["excluded"] == 0
         assert "automated_source_audit" not in json.dumps(manifest)
         assert "no_substantive_human_rights_nexus" not in json.dumps(manifest)
 
@@ -189,7 +196,7 @@ def test_bound_scope_reassessment_can_replace_legacy_negative_without_publishing
 @pytest.mark.parametrize("classification", [{"jurisdiction": "other"}, {"jurisdiction": "unclear"},
                                          {"relevance": "not_relevant"}, {"relevance": "unclear"}])
 def test_new_negative_or_uncertain_reassessment_overrides_an_older_positive(classification):
-    assessment = scope_review(**classification)
+    assessment = current_review(**classification)
     for field in classification:
         assessment["evidence"][field + "_paragraph_ids"] = []
     validated = validate_scope_review(assessment, reference=reference(), content_sha256="c" * 64, now=NOW)
@@ -198,7 +205,7 @@ def test_new_negative_or_uncertain_reassessment_overrides_an_older_positive(clas
 
 
 def test_negative_scope_without_paragraphs_stays_private_and_keeps_the_source_hash_guard():
-    assessment = scope_review(jurisdiction="other", relevance="not_relevant")
+    assessment = current_review(jurisdiction="other", relevance="not_relevant")
     assessment["evidence"].update(jurisdiction_paragraph_ids=[], relevance_paragraph_ids=[])
     assert validate_scope_review(assessment, reference=reference(), content_sha256="c" * 64, now=NOW) == assessment
     assert project_news_selection([draft()], archive(), now=NOW, scope_reviews=[assessment])["selections"] == []
@@ -255,7 +262,7 @@ def test_newer_inclusive_full_decision_supersedes_legacy_v1_reassessment(new_rel
 def test_same_time_conflicting_scope_decisions_require_review():
     value = draft(); value["extraction"]["prepared_at"] = "2026-10-12T14:02:00Z"
     assert project_news_selection([value], archive(), now=NOW,
-        scope_reviews=[scope_review(relevance="not_relevant")])["selections"] == []
+        scope_reviews=[current_review(relevance="not_relevant")])["selections"] == []
 
 
 @pytest.mark.parametrize("country", ["Guatemala", "El Salvador", "República de El Salvador"])
@@ -324,7 +331,7 @@ def test_all_candidate_counts_distinguish_legacy_uncertainty_and_unseen_news():
     manifest = project_news_selection([], archive(*refs), excluded_ids=[refs[5]["id"]], now=NOW,
                                       scope_reviews=assessments)
     assert manifest["assessment_counts"] == {
-        "candidates": 6, "evaluated": 5, "relevant": 1, "excluded": 1, "uncertain": 3, "pending": 1}
+        "candidates": 6, "evaluated": 5, "relevant": 1, "excluded": 0, "uncertain": 4, "pending": 1}
     assert len(manifest["selections"]) == 1
 
 
@@ -352,7 +359,7 @@ def test_later_classification_of_older_different_text_cannot_supersede_newer_sou
     assert manifest["selections"][0]["selection"]["prompt_version"] == FULL_SCOPE_PROMPT
 
 
-@pytest.mark.parametrize("full_prompt", [LEGACY_FULL_SCOPE_PROMPT, FULL_SCOPE_PROMPT])
+@pytest.mark.parametrize("full_prompt", [LEGACY_FULL_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT])
 @pytest.mark.parametrize("scope_relevance,dossier_relevance,expected", [
     ("relevant", "not_relevant", 1), ("not_relevant", "relevant", 0),
 ])
@@ -365,12 +372,12 @@ def test_dedicated_inclusive_scope_owns_same_text_despite_later_dossier_enrichme
     manifest = project_news_selection([value], archive(), now=NOW,
                                       scope_reviews=[inclusive_review(relevance=scope_relevance)])
     assert len(manifest["selections"]) == expected
-    assert manifest["assessment_counts"]["relevant" if expected else "excluded"] == 1
+    assert manifest["assessment_counts"]["relevant" if expected else "uncertain"] == 1
     if expected:
         assert manifest["selections"][0]["selection"]["prompt_version"] == INCLUSIVE_SCOPE_PROMPT
 
 
-@pytest.mark.parametrize("full_prompt", [LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT, FULL_SCOPE_PROMPT])
+@pytest.mark.parametrize("full_prompt", [LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT])
 @pytest.mark.parametrize("scope_relevance,dossier_relevance,expected", [
     ("relevant", "not_relevant", 1), ("not_relevant", "relevant", 0),
 ])
@@ -383,7 +390,7 @@ def test_rights_nexus_classifier_v3_controls_same_text_against_every_dossier_pol
     validate_scope_review(assessment, reference=reference(), content_sha256="c" * 64, now=NOW)
     manifest = project_news_selection([value], archive(), now=NOW, scope_reviews=[assessment])
     assert len(manifest["selections"]) == expected
-    assert manifest["assessment_counts"]["relevant" if expected else "excluded"] == 1
+    assert manifest["assessment_counts"]["relevant" if expected else "uncertain"] == 1
     if expected:
         assert manifest["selections"][0]["selection"]["prompt_version"] == RIGHTS_SCOPE_PROMPT
 
@@ -392,7 +399,7 @@ def test_nexus_policy_rejects_a_foreign_topic_without_salvadoran_rights_connecti
     assessment = rights_review(jurisdiction="other", relevance="not_relevant")
     assessment["evidence"].update(jurisdiction_paragraph_ids=[], relevance_paragraph_ids=[])
     manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[assessment])
-    assert manifest["selections"] == [] and manifest["assessment_counts"]["excluded"] == 1
+    assert manifest["selections"] == [] and manifest["assessment_counts"]["uncertain"] == 1
 
 
 def test_previous_inclusive_full_positive_remains_compatible_until_scope_reassessment():
@@ -876,7 +883,7 @@ def test_cli_snapshot_timestamp_tracks_new_negative_assessment_and_stays_stable_
     module.main()
     updated = json.loads(output.read_text())
     assert updated["selections"] == initial["selections"]
-    assert updated["assessment_counts"]["excluded"] == 1 and updated["assessment_counts"]["pending"] == 0
+    assert updated["assessment_counts"]["uncertain"] == 1 and updated["assessment_counts"]["pending"] == 0
     assert updated["generated_at"] == clock[0].isoformat() != initial["generated_at"]
     clock[0] += timedelta(minutes=1)
     module.main()
@@ -886,14 +893,227 @@ def test_cli_snapshot_timestamp_tracks_new_negative_assessment_and_stays_stable_
 def test_cli_uses_default_audit_collection_and_explicit_missing_audit_fails(cli_files, monkeypatch):
     import sys
     import mdh_pipeline.news_selection as module
+    old = json.loads(cli_files["document"].read_text())
+    old["extraction"]["prompt_version"] = RIGHTS_FULL_SCOPE_PROMPT
+    cli_files["document"].write_text(json.dumps(old))
     audits = cli_files["drafts"].parent / "scope-audits.json"
     audits.write_text(json.dumps(source_audit()))
     monkeypatch.setattr(module, "DEFAULT_SCOPE_AUDITS", audits)
     module.main()
     document = json.loads(cli_files["output"].read_text())
-    assert document["selections"] == [] and document["assessment_counts"]["excluded"] == 1
+    assert document["selections"] == [] and document["assessment_counts"]["uncertain"] == 1
     previous = cli_files["output"].read_bytes()
     monkeypatch.setattr("sys.argv", sys.argv + ["--scope-audits", str(audits.with_name("missing.json"))])
     with pytest.raises(SystemExit):
         module.main()
     assert cli_files["output"].read_bytes() == previous
+
+
+@pytest.mark.parametrize("review_factory", [scope_review, inclusive_review, rights_review, current_review])
+@pytest.mark.parametrize("classification", [{"relevance": "not_relevant"}, {"jurisdiction": "other"}])
+def test_every_first_negative_is_uncertain_until_a_bound_second_check(review_factory, classification):
+    first = review_factory(**classification)
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[first])
+    assert manifest["selections"] == []
+    assert manifest["assessment_counts"] == {
+        "candidates": 1, "evaluated": 1, "relevant": 0, "excluded": 0, "uncertain": 1, "pending": 0}
+
+
+@pytest.mark.parametrize("prompt", [RIGHTS_FULL_SCOPE_PROMPT, FULL_SCOPE_PROMPT])
+def test_full_dossier_negative_cannot_skip_independent_exclusion_check(prompt):
+    value = draft()
+    value["extraction"]["prompt_version"] = prompt
+    for scope in (value["classification"], value["news_dossier"]["classification"]):
+        scope["relevance"] = "not_relevant"
+    manifest = project(value)
+    assert manifest["assessment_counts"]["excluded"] == 0
+    assert manifest["assessment_counts"]["uncertain"] == 1
+
+
+@pytest.mark.parametrize("factory", [rights_review, current_review])
+def test_prior_and_current_positive_scope_stay_eligible_without_reclassification(factory):
+    first = factory()
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[first])
+    assert len(manifest["selections"]) == 1
+    assert manifest["selections"][0]["selection"]["prompt_version"] == first["extraction"]["prompt_version"]
+    assert manifest["selections"][0]["selection"]["human_reviewed"] is False
+
+
+def test_previous_v10_full_positive_remains_selectable_after_inclusive_policy_upgrade():
+    value = draft()
+    value["extraction"]["prompt_version"] = RIGHTS_FULL_SCOPE_PROMPT
+    assert project(value)["selections"][0]["selection"]["prompt_version"] == RIGHTS_FULL_SCOPE_PROMPT
+
+
+@pytest.mark.parametrize("prompt", [SCOPE_PROMPT, EXCLUSION_PROMPT])
+def test_current_positive_supersedes_old_audit_while_human_withdrawal_always_wins(prompt):
+    first = current_review()
+    first["extraction"]["prompt_version"] = prompt
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[first], scope_audits=source_audit())
+    assert len(manifest["selections"]) == 1
+    assert manifest["assessment_counts"]["excluded"] == 0
+    withheld = project_news_selection([], archive(), now=NOW, scope_reviews=[first],
+        scope_audits=source_audit(), excluded_ids=[reference()["id"]])
+    assert withheld["selections"] == []
+    assert withheld["assessment_counts"]["uncertain"] == 1
+
+
+def test_new_full_inclusive_positive_supersedes_old_same_body_restrictive_negative():
+    first = rights_review(relevance="not_relevant")
+    manifest = project_news_selection([draft()], archive(), now=NOW, scope_reviews=[first], scope_audits=source_audit())
+    assert len(manifest["selections"]) == 1
+    assert manifest["selections"][0]["selection"]["prompt_version"] == FULL_SCOPE_PROMPT
+
+
+def test_current_dedicated_initial_negative_remains_pending_despite_full_dossier_positive():
+    first = current_review(relevance="not_relevant")
+    manifest = project_news_selection([draft()], archive(), now=NOW, scope_reviews=[first])
+    assert manifest["selections"] == []
+    assert manifest["assessment_counts"]["excluded"] == 0
+    assert manifest["assessment_counts"]["uncertain"] == 1
+
+
+def verification(first, second=None, *, outcome="confirmed_excluded", reason="unrelated_subject"):
+    from mdh_pipeline.news_exclusions import review_sha256
+    from mdh_pipeline.news_scope_policy import POLICY_VERSION
+    second = deepcopy(second or first)
+    second["extraction"].update(prompt_version=EXCLUSION_PROMPT, prepared_at="2026-10-12T14:03:00Z")
+    return {"schema_version": 1,
+        **{key: first[key] for key in ("candidate_id", "source_url", "publisher", "published_date")},
+        "policy_version": POLICY_VERSION, "content_sha256": first["evidence"]["content_sha256"],
+        "first_review_sha256": review_sha256(first), "first_review": deepcopy(first), "second_review": second,
+        "outcome": outcome, "reason_code": reason, "reason_paragraph_ids": ["p3"],
+        "checked_at": second["extraction"]["prepared_at"],
+        "next_retry_at": "2026-10-19T14:03:00Z" if outcome == "uncertain" else None}
+
+
+def test_only_two_current_same_source_negative_assessments_count_as_excluded():
+    first = current_review(relevance="not_relevant")
+    checked = verification(first)
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[first], scope_verifications=[checked])
+    assert manifest["selections"] == []
+    assert manifest["assessment_counts"] == {
+        "candidates": 1, "evaluated": 1, "relevant": 0, "excluded": 1, "uncertain": 0, "pending": 0}
+    assert "first_review" not in json.dumps(manifest)
+    assert "reason_paragraph_ids" not in json.dumps(manifest)
+
+
+@pytest.mark.parametrize("mutate", [
+    lambda r: r.update(first_review_sha256="d" * 64),
+    lambda r: r.update(content_sha256="d" * 64),
+    lambda r: r["second_review"]["source_read"].update(truncated=True),
+    lambda r: r["second_review"]["extraction"].update(prompt_version=RIGHTS_SCOPE_PROMPT),
+    lambda r: r.update(reason_paragraph_ids=[]),
+    lambda r: r.update(reason_code="within_scope"),
+    lambda r: r.update(checked_at="2027-01-01T00:00:00Z"),
+    lambda r: r.update(private_note="PRIVATE_SENTINEL"),
+])
+def test_invalid_or_stale_exclusion_receipt_cannot_change_pending_assessment_into_discard(mutate):
+    first = current_review(relevance="not_relevant")
+    checked = verification(first)
+    mutate(checked)
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[first], scope_verifications=[checked])
+    assert manifest["assessment_counts"]["excluded"] == 0
+    assert manifest["assessment_counts"]["uncertain"] == 1
+    assert "PRIVATE_SENTINEL" not in json.dumps(manifest)
+
+
+def test_two_negatives_about_different_axes_are_a_disagreement_not_an_exclusion():
+    first = current_review(relevance="not_relevant")
+    second = current_review(jurisdiction="other", relevance="relevant")
+    checked = verification(first, second, outcome="uncertain", reason="unrelated_country")
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[first], scope_verifications=[checked])
+    assert manifest["assessment_counts"]["excluded"] == 0
+    assert manifest["assessment_counts"]["uncertain"] == 1
+
+
+def test_second_positive_replaces_first_negative_without_fabricating_human_review():
+    first = current_review(relevance="not_relevant")
+    checked = verification(first, current_review(), outcome="retained", reason="within_scope")
+    positive = checked["second_review"]
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[positive], scope_verifications=[checked])
+    selected = manifest["selections"][0]["selection"]
+    assert selected["prompt_version"] == EXCLUSION_PROMPT
+    assert selected["human_reviewed"] is False
+    assert manifest["assessment_counts"]["excluded"] == 0
+    assert manifest["assessment_counts"]["relevant"] == 1
+
+
+def test_cli_loads_private_second_checks_and_exports_only_aggregate_exclusion(tmp_path, monkeypatch):
+    from mdh_pipeline.news_selection import main
+    first = current_review(relevance="not_relevant")
+    scopes = tmp_path / "scope-reviews"; scopes.mkdir()
+    checks = tmp_path / "scope-verifications"; checks.mkdir()
+    (scopes / (reference()["id"] + ".json")).write_text(json.dumps(first))
+    (checks / (reference()["id"] + ".json")).write_text(json.dumps(verification(first)))
+    bibliography = tmp_path / "archive.json"; bibliography.write_text(json.dumps(archive()))
+    output = tmp_path / "manifest.json"
+    monkeypatch.setattr("sys.argv", ["news_selection", "--archive", str(bibliography), "--scope-reviews", str(scopes),
+        "--scope-verifications", str(checks), "--output", str(output)])
+    main()
+    manifest = json.loads(output.read_text())
+    assert manifest["assessment_counts"]["excluded"] == 1
+    assert "second_review" not in output.read_text()
+
+
+def source_mismatch_rechecks():
+    return {"schema_version": 1, "requests": [{"candidate_id": reference()["id"],
+        "source_content_sha256": "c" * 64, "issue_number": 1187,
+        "reason_code": "source_content_mismatch", "requested_at": "2026-10-12T15:00:00Z"}]}
+
+
+@pytest.mark.parametrize("full_only", [False, True])
+def test_audited_corrupt_body_cannot_publish_from_positive_scope_or_full_dossier(full_only):
+    manifest = project_news_selection([draft()] if full_only else [], archive(), now=NOW,
+        scope_reviews=[] if full_only else [current_review()], scope_rechecks=source_mismatch_rechecks())
+    assert manifest["selections"] == []
+    assert manifest["assessment_counts"]["uncertain"] == 1
+    assert manifest["assessment_counts"]["relevant"] == manifest["assessment_counts"]["excluded"] == 0
+    assert "source_content_mismatch" not in json.dumps(manifest)
+    assert "1187" not in json.dumps(manifest)
+
+
+def test_audited_corrupt_body_cannot_be_discarded_even_by_two_concordant_current_assessments():
+    first = current_review(relevance="not_relevant")
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[first],
+        scope_verifications=[verification(first)], scope_rechecks=source_mismatch_rechecks())
+    assert manifest["assessment_counts"]["excluded"] == 0
+    assert manifest["assessment_counts"]["uncertain"] == 1
+    assert manifest["selections"] == []
+
+
+def test_newer_different_body_is_not_blocked_by_corrupt_old_draft_and_withdrawal_still_wins():
+    fresh = current_review()
+    fresh["evidence"]["content_sha256"] = fresh["source_read"]["content_sha256"] = "d" * 64
+    fresh["source_read"]["fetched_at"] = "2026-10-12T15:20:00Z"
+    fresh["extraction"]["prepared_at"] = "2026-10-12T15:21:00Z"
+    options = dict(now=NOW, scope_reviews=[fresh], scope_rechecks=source_mismatch_rechecks())
+    manifest = project_news_selection([draft()], archive(), **options)
+    assert manifest["assessment_counts"]["relevant"] == 1
+    assert manifest["selections"][0]["selection"]["evidence"]["content_sha256"] == "d" * 64
+    withheld = project_news_selection([draft()], archive(), excluded_ids=[reference()["id"]], **options)
+    assert withheld["selections"] == [] and withheld["assessment_counts"]["uncertain"] == 1
+
+
+def test_invalid_audit_requests_fail_export_and_cli_honors_private_source_hold(tmp_path, monkeypatch):
+    from mdh_pipeline.news_selection import main
+    invalid = source_mismatch_rechecks()
+    invalid["requests"][0]["source_content_sha256"] = "bad"
+    with pytest.raises(ValueError, match="invalid_news_scope_rechecks"):
+        project_news_selection([], archive(), now=NOW, scope_reviews=[current_review()], scope_rechecks=invalid)
+    scopes = tmp_path / "scope-reviews"; scopes.mkdir()
+    (scopes / (reference()["id"] + ".json")).write_text(json.dumps(current_review()))
+    bibliography = tmp_path / "archive.json"; bibliography.write_text(json.dumps(archive()))
+    requests = tmp_path / "rechecks.json"; requests.write_text(json.dumps(source_mismatch_rechecks()))
+    output = tmp_path / "manifest.json"
+    monkeypatch.setattr("sys.argv", ["news_selection", "--archive", str(bibliography), "--scope-reviews", str(scopes),
+        "--scope-rechecks", str(requests), "--output", str(output)])
+    main()
+    assert json.loads(output.read_text())["assessment_counts"]["uncertain"] == 1
+    assert json.loads(output.read_text())["selections"] == []
+    assert "source_content_mismatch" not in output.read_text()
+    before = output.read_bytes()
+    requests.write_text(json.dumps(invalid))
+    with pytest.raises(SystemExit, match="No se exportó"):
+        main()
+    assert output.read_bytes() == before

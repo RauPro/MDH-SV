@@ -153,6 +153,12 @@ def validate_state(state, candidate):
                 or type(state.get("privacy_reprocessing_attempts")) is not int
                 or state["privacy_reprocessing_attempts"] < 0):
             raise ValueError("invalid_privacy_reprocessing_state")
+    if "scope_reprocessing_version" in state or "scope_reprocessing_attempts" in state:
+        from .gemini_draft import PROMPT_VERSION
+        if (state.get("scope_reprocessing_version") != PROMPT_VERSION
+                or type(state.get("scope_reprocessing_attempts")) is not int
+                or state["scope_reprocessing_attempts"] < 0):
+            raise ValueError("invalid_scope_reprocessing_state")
     for key in ("updated_at", "next_retry_at"):
         if state.get(key) is not None:
             try:
@@ -341,7 +347,8 @@ def hourly_request_allowance(snapshot, config, requested_limit, now):
 
 def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seconds=4,
                   retry_failed=False, archive=None, fetch=None, extract=None, now=None, sleep=time.sleep,
-                  budget=None, phase_http_limit=None, priority_ids=(), eligible_ids=None, excluded_ids=(), max_seconds=MAX_RUN_SECONDS,
+                  budget=None, phase_http_limit=None, priority_ids=(), eligible_ids=None, excluded_ids=(),
+                  scope_reprocessing_ids=(), max_seconds=MAX_RUN_SECONDS,
                   run_clock=time.monotonic):
     if not api_key or not isinstance(model, str) or not re.fullmatch(r"gemini-[a-zA-Z0-9.-]+", model):
         raise ValueError("missing_or_invalid_gemini_configuration")
@@ -357,12 +364,14 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             or any(not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value) for value in priority_ids)):
         raise ValueError("invalid_priority_candidates")
     priority_ids = set(priority_ids)
-    for values in (eligible_ids, excluded_ids):
+    for values in (eligible_ids, excluded_ids, scope_reprocessing_ids):
         if values is not None and (not isinstance(values, (list, tuple, set, frozenset)) or len(values) > 50_000
                 or any(not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value) for value in values)):
             raise ValueError("invalid_extraction_eligibility")
     eligible_ids = None if eligible_ids is None else set(eligible_ids)
     excluded_ids = set(excluded_ids)
+    scope_reprocessing_ids = set(scope_reprocessing_ids)
+    from .gemini_draft import PROMPT_VERSION
     inbox = _PacedInbox(inbox, sleep)
     offline_budget = min(limit, 20)
     offline_candidates = set()
@@ -377,7 +386,7 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
     report = {"started_at": now.isoformat(), "model": model, "pending": 0, "attempted": 0, "drafts": 0,
               "scope_review": 0, "privacy_review": 0, "errors": 0, "skipped_existing": 0,
               "deferred": 0, "invalid_metadata": 0, "migrated": 0, "news_dossiers": 0,
-              "partial_dossiers": 0, "privacy_reprocessed": 0, "ineligible": 0,
+              "partial_dossiers": 0, "privacy_reprocessed": 0, "scope_reprocessed": 0, "ineligible": 0,
               "unclassified_rss_attempts": 0, "stopped_reason": None, "publications": 0}
     if budget is not None:
         snapshot = budget.snapshot()
@@ -505,7 +514,7 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         offline_candidates.add(identifier)
         return True
 
-    def done_state(candidate, attempts, document, *, privacy_attempts=None):
+    def done_state(candidate, attempts, document, *, privacy_attempts=None, scope_attempts=None):
         result = {"candidate_id": candidate["id"], "source_url": candidate["source_url"],
                 "status": "completed", "attempts": attempts, "updated_at": utcnow().isoformat(),
                 "model": document.get("extraction", {}).get("model", model),
@@ -514,6 +523,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         if privacy_attempts is not None:
             result.update(privacy_reprocessing_version=PRIVACY_POLICY_VERSION,
                           privacy_reprocessing_attempts=privacy_attempts)
+        if scope_attempts is not None:
+            result.update(scope_reprocessing_version=PROMPT_VERSION, scope_reprocessing_attempts=scope_attempts)
         return result
 
     for issue, candidate in schedule():
@@ -528,7 +539,7 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             continue
         marker = COMPLETE_MARKER.search(issue.get("body") or "")
         labels = {label["name"] for label in issue.get("labels", [])}
-        if (marker and identifier in draft_index and marker.group(2) == draft_index[identifier]
+        if (identifier not in scope_reprocessing_ids and marker and identifier in draft_index and marker.group(2) == draft_index[identifier]
                 and {"ai/ready", "ai/scope-review", "ai/privacy-review"}.intersection(labels)
                 and (marker.group(1) == "2" or "ai/privacy-review" not in labels)):
             # Existing safe v1 dossiers keep their fast path. Only old privacy
@@ -538,6 +549,7 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             continue
         existing_document, draft_sha = None, None
         privacy_reprocessing = False
+        scope_reprocessing = False
         if identifier in draft_index:
             existing = read_private_file(inbox, "drafts", identifier)
             if existing is None:
@@ -565,7 +577,9 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                 draft_index[identifier] = draft_sha
                 report["migrated"] += 1
             privacy_reprocessing = needs_field_privacy_reprocessing(existing_document)
-            if complete_document(existing_document) and not privacy_reprocessing:
+            scope_reprocessing = (identifier in scope_reprocessing_ids
+                and existing_document.get("extraction", {}).get("prompt_version") != PROMPT_VERSION)
+            if complete_document(existing_document) and not privacy_reprocessing and not scope_reprocessing:
                 if not begin_offline_work(issue, candidate):
                     report["deferred"] += 1
                     continue
@@ -575,7 +589,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                     validate_state(previous_state, candidate)
                 put_private_file(inbox, "processing", identifier,
                     done_state(candidate, previous_state.get("attempts", 0), existing_document,
-                               privacy_attempts=previous_state.get("privacy_reprocessing_attempts")), previous_sha)
+                               privacy_attempts=previous_state.get("privacy_reprocessing_attempts"),
+                               scope_attempts=previous_state.get("scope_reprocessing_attempts")), previous_sha)
                 update_issue(inbox, issue["number"], candidate, document=existing_document, draft_sha=draft_sha)
                 report["skipped_existing"] += 1
                 continue
@@ -592,6 +607,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             or state.get("privacy_reprocessing_version") == PRIVACY_POLICY_VERSION
             or (existing_document or {}).get("extraction", {}).get("privacy_reprocessing_version") == PRIVACY_POLICY_VERSION)
         privacy_attempts = None
+        scope_reprocessing = (scope_reprocessing or state.get("scope_reprocessing_version") == PROMPT_VERSION)
+        scope_attempts = state.get("scope_reprocessing_attempts", 0) if scope_reprocessing else None
         if privacy_reprocessing:
             # The policy change gets one separate budget, without erasing prior
             # attempts. Persist it on both success and failure so reruns cannot
@@ -611,7 +628,7 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             draft_index[identifier] = draft_sha
             update_issue(inbox, issue["number"], candidate, document=existing_document, error_code=state.get("error_code"))
             report["partial_dossiers"] += 1
-        budget_attempts = privacy_attempts if privacy_reprocessing else attempts
+        budget_attempts = (scope_attempts if scope_reprocessing else privacy_attempts if privacy_reprocessing else attempts)
         if not retry_failed and (budget_attempts >= max_attempts or (retry_at and datetime.fromisoformat(retry_at) > now)):
             report["deferred"] += 1
             continue
@@ -640,6 +657,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                 raise ValueError("incomplete_news_dossier")
             if privacy_reprocessing and document.get("extraction", {}).get("privacy_policy_version") != PRIVACY_POLICY_VERSION:
                 raise ValueError("outdated_privacy_policy")
+            if scope_reprocessing and document.get("extraction", {}).get("prompt_version") != PROMPT_VERSION:
+                raise ValueError("outdated_scope_policy")
         except Exception as error:
             if budget is not None:
                 from .gemini_budget import QuotaDeferred, QuotaStateError
@@ -664,6 +683,8 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                                          error_code=code, model=model)
             if privacy_reprocessing:
                 document["extraction"]["privacy_reprocessing_version"] = PRIVACY_POLICY_VERSION
+            if scope_reprocessing:
+                document["extraction"]["scope_reprocessing_version"] = PROMPT_VERSION
             next_retry = now + timedelta(hours=6 if stop else 1)
             failed = {"candidate_id": identifier, "source_url": candidate["source_url"], "status": "error",
                       "attempts": attempts if stop else attempts + 1, "error_code": code,
@@ -672,6 +693,9 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
             if privacy_reprocessing:
                 failed.update(privacy_reprocessing_version=PRIVACY_POLICY_VERSION,
                               privacy_reprocessing_attempts=privacy_attempts if stop else privacy_attempts + 1)
+            if scope_reprocessing:
+                failed.update(scope_reprocessing_version=PROMPT_VERSION,
+                              scope_reprocessing_attempts=scope_attempts if stop else scope_attempts + 1)
             if code == "invalid_extraction_schema":
                 failed["validation_issues"] = safe_validation_issues(error)
             # Persist cooldown/budget before replacing the old blanket draft.
@@ -701,12 +725,15 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         draft_sha = put_private_file(inbox, "drafts", identifier, document, draft_sha)
         draft_index[identifier] = draft_sha
         done = done_state(candidate, attempts + 1, document,
-                          privacy_attempts=privacy_attempts + 1 if privacy_reprocessing else None)
+                          privacy_attempts=privacy_attempts + 1 if privacy_reprocessing else None,
+                          scope_attempts=scope_attempts + 1 if scope_reprocessing else None)
         put_private_file(inbox, "processing", identifier, done, state_sha)
         update_issue(inbox, issue["number"], candidate, document=document, draft_sha=draft_sha)
         report["news_dossiers"] += 1
         if privacy_reprocessing:
             report["privacy_reprocessed"] += 1
+        if scope_reprocessing:
+            report["scope_reprocessed"] += 1
         report[{"draft": "drafts", "needs_scope_review": "scope_review", "needs_privacy_review": "privacy_review"}[document["status"]]] += 1
     report["github_write_calls"] = inbox.write_calls
     report["offline_candidates"] = len(offline_candidates)
@@ -765,18 +792,29 @@ def _load_phase_documents(inbox_dir, folder, *, maximum_bytes=512_000):
     return values
 
 
-def _allocation_workload(inbox, archive, drafts, cached, receipts, *, excluded, now, scope_audits=None):
+def _allocation_workload(inbox, archive, drafts, cached, receipts, *, excluded, now, scope_audits=None,
+                         verifications=(), rechecks=None):
     """Derive routing from validated source-bound decisions, never title hints."""
     from .automatic_news import _bound_draft, _cached, fingerprint, validate_receipt
-    from .news_selection import _archive_index, project_news_selection, FULL_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT
+    from .news_selection import _archive_index, project_news_selection, FULL_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT
+    from .news_scope_policy import CURRENT_SCOPE_PROMPTS
+    from .news_scope_rechecks import pending_recheck_ids, blocked_source_hashes
+    from .news_exclusions import confirmed_exclusion, scope_needs_work
+    from .gemini_draft import PROMPT_VERSION
     from .scope_review_queue import _cache_index
     from .news_scope import SCOPE_PROMPT
     references = _archive_index(archive)
     reviews = _cache_index(cached, references, now=now)
+    verification_index = {row["candidate_id"]: row for row in verifications}
+    if len(verification_index) != len(verifications):
+        raise ValueError("duplicate_scope_verification")
+    rechecks = rechecks or {"schema_version": 1, "requests": []}
+    forced = pending_recheck_ids(rechecks, cached, now=now)
+    bad_hashes = blocked_source_hashes(rechecks, now=now)
     manifest = project_news_selection(drafts, archive, excluded_ids=excluded, scope_reviews=cached, now=now,
-                                      scope_audits=scope_audits)
+                                      scope_audits=scope_audits, scope_verifications=verifications)
     selections = {row["candidate_id"]: row["selection"] for row in manifest["selections"]
-                  if row["selection"]["prompt_version"] in {FULL_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT}}
+                  if row["selection"]["prompt_version"] in {FULL_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT} | CURRENT_SCOPE_PROMPTS}
     # A selected public reference may already carry a newer source version.
     # Do not route a stale positive against that known different version.
     for reference in archive["records"]:
@@ -784,17 +822,20 @@ def _allocation_workload(inbox, archive, drafts, cached, receipts, *, excluded, 
         prior = selections.get(reference["id"])
         if current and prior and current != prior["evidence"]["content_sha256"]:
             selections.pop(reference["id"])
-    selected = set(selections) - excluded
+    source_blocked = {identifier for identifier, digest in bad_hashes.items()
+                      if (identifier not in selections and identifier in reviews
+                          and reviews[identifier]["evidence"]["content_sha256"] == digest)
+                      or (identifier in selections and selections[identifier]["evidence"]["content_sha256"] == digest)}
+    selected = set(selections) - excluded - source_blocked
     blocked = excluded | {identifier for identifier, row in reviews.items()
-        if identifier not in selected and row["extraction"]["prompt_version"] == SCOPE_PROMPT
-        and (row["classification"]["jurisdiction"] == "other" or row["classification"]["relevance"] == "not_relevant")}
+        if identifier not in selected and confirmed_exclusion(verification_index.get(identifier), row, references[identifier], now=now)} | source_blocked
     for audit in (scope_audits or {}).get("audits", []):
         prior = reviews.get(audit["candidate_id"])
-        if (prior and audit["candidate_id"] not in selected
+        if (prior and prior["extraction"]["prompt_version"] not in CURRENT_SCOPE_PROMPTS
                 and prior["evidence"]["content_sha256"] == audit["content_sha256"]):
-            blocked.add(audit["candidate_id"])
+            forced.add(audit["candidate_id"])
     receipt_index = {row["candidate_id"]: validate_receipt(row) for row in receipts}
-    processed, ready = set(), 0
+    processed, reprocess, ready = set(), set(), 0
     for draft in drafts:
         identifier = draft.get("candidate_id")
         if identifier not in selected:
@@ -803,6 +844,12 @@ def _allocation_workload(inbox, archive, drafts, cached, receipts, *, excluded, 
         try:
             document = _bound_draft(draft, reference)
         except (ValueError, TypeError, KeyError):
+            continue
+        classification = document["news_dossier"]["classification"]
+        if (selections[identifier]["prompt_version"] in CURRENT_SCOPE_PROMPTS
+                and document.get("extraction", {}).get("prompt_version") != PROMPT_VERSION
+                and (classification.get("jurisdiction") != "SV" or classification.get("relevance") != "relevant")):
+            reprocess.add(identifier)
             continue
         processed.add(identifier)
         receipt = receipt_index.get(identifier)
@@ -819,15 +866,17 @@ def _allocation_workload(inbox, archive, drafts, cached, receipts, *, excluded, 
                 and candidate["id"] not in blocked | selected | processed):
             fresh = 1
             break
-    scope_pending = sum(identifier not in excluded and (identifier not in reviews
-                         or reviews[identifier]["extraction"]["prompt_version"] != SCOPE_PROMPT)
+    scope_pending = sum(identifier not in excluded and (identifier in forced
+                         or scope_needs_work(reviews.get(identifier), verification_index.get(identifier), references[identifier], now=now))
                         for identifier in references)
     return {"selected_ids": selected, "excluded_ids": blocked,
-            "extraction_pending": len(selected - processed) + fresh,
+            "extraction_pending": len(selected - processed) + fresh, "scope_reprocessing_ids": reprocess,
+            "scope_priority_ids": forced,
             "validation_ready": ready, "scope_pending": scope_pending}
 
 
-def _refresh_scope_workload(inbox, archive, drafts, cached, receipts, updated_reviews, *, excluded, now, scope_audits):
+def _refresh_scope_workload(inbox, archive, drafts, cached, receipts, updated_reviews, *, excluded, now, scope_audits,
+                            verifications=(), updated_verifications=(), rechecks=None):
     from .news_selection import _archive_index
     from .scope_review_queue import _cache_index
     if not isinstance(updated_reviews, list) or len(updated_reviews) > 200:
@@ -835,8 +884,13 @@ def _refresh_scope_workload(inbox, archive, drafts, cached, receipts, updated_re
     updated = _cache_index(updated_reviews, _archive_index(archive), now=now)
     combined = {row["candidate_id"]: row for row in cached}
     combined.update(updated)
+    if not isinstance(updated_verifications, (list, tuple)) or len(updated_verifications) > 200:
+        raise ValueError("invalid_updated_scope_verifications")
+    checks = {row["candidate_id"]: row for row in verifications}
+    checks.update({row["candidate_id"]: row for row in updated_verifications})
     return _allocation_workload(inbox, archive, drafts, list(combined.values()), receipts,
-                                excluded=excluded, now=now, scope_audits=scope_audits)
+                                excluded=excluded, now=now, scope_audits=scope_audits,
+                                verifications=list(checks.values()), rechecks=rechecks)
 
 
 def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox_dir,
@@ -849,6 +903,7 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
     from .pipeline_allocation import plan_pipeline_requests
     from .news_requests import withdrawn_ids, EXCEPTIONS
     from .news_selection import DEFAULT_SCOPE_AUDITS, _read_json
+    from .news_scope_rechecks import load_rechecks
     supplied_now = now
     now = now or utcnow()
     snapshot = budget.snapshot()
@@ -859,10 +914,12 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
     cached = _load_phase_documents(inbox_dir, "scope-reviews", maximum_bytes=30_000)
     attempts = _load_phase_documents(inbox_dir, "scope-attempts", maximum_bytes=30_000)
     receipts = _load_phase_documents(inbox_dir, "automatic-news")
+    verifications = _load_phase_documents(inbox_dir, "scope-verifications", maximum_bytes=60_000)
+    rechecks = load_rechecks(inbox_dir / "runtime/news-scope-rechecks.json", now=now)
     excluded = editorial_excluded_ids(inbox) | withdrawn_ids(exceptions_path or EXCEPTIONS)
     scope_audits = _read_json(scope_audits_path or DEFAULT_SCOPE_AUDITS, 30_000_000)
     workload = _allocation_workload(inbox, archive, drafts, cached, receipts, excluded=excluded, now=now,
-                                    scope_audits=scope_audits)
+                                    scope_audits=scope_audits, verifications=verifications, rechecks=rechecks)
     plan = plan_pipeline_requests(allowance, extraction_pending=workload["extraction_pending"],
         validation_ready=workload["validation_ready"], scope_pending=workload["scope_pending"])
     scope_limit = plan["scope_requests"]
@@ -874,20 +931,24 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
     scope_report = {"http_requests": 0, "classified": 0, "accepted": 0, "stopped_reason": None}
     selected = sorted(workload["selected_ids"])
     blocked = workload["excluded_ids"]
+    reprocess = workload["scope_reprocessing_ids"]
     if scope_limit and snapshot["cooldown_until"] is None:
         budget.set_request_limit(scope_limit)
         try:
             scope_report = scope_worker(inbox, drafts, archive, api_key=api_key, model=model,
                 budget=budget, max_requests=scope_limit, max_seconds=720,
-                scope_reviews=cached, attempts=attempts, excluded_ids=excluded)
+                scope_reviews=cached, attempts=attempts, excluded_ids=excluded, verifications=verifications,
+                rechecks=rechecks, priority_ids=sorted(workload["scope_priority_ids"]))
             new_selected = scope_report.get("selected_ids", [])
             if (not isinstance(new_selected, list) or len(new_selected) > 50_000
                     or any(not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value) for value in new_selected)):
                 raise ValueError("invalid_scope_selection_ids")
             refreshed = _refresh_scope_workload(inbox, archive, drafts, cached, receipts,
                 scope_report.get("updated_reviews"), excluded=excluded,
-                now=supplied_now or utcnow(), scope_audits=scope_audits)
+                now=supplied_now or utcnow(), scope_audits=scope_audits, verifications=verifications,
+                updated_verifications=scope_report.get("updated_verifications", []), rechecks=rechecks)
             selected, blocked = sorted(refreshed["selected_ids"]), refreshed["excluded_ids"]
+            reprocess = refreshed["scope_reprocessing_ids"]
         except QuotaStateError:
             raise  # Uncertain accounting must fail closed for both stages.
         except Exception as error:
@@ -930,7 +991,8 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
     report = process_queue(inbox, api_key=api_key, model=model,
         limit=max(1, dossier_limit), phase_http_limit=dossier_limit,
         retry_failed=retry_failed, archive=archive, budget=full_budget,
-        priority_ids=selected, eligible_ids=selected, excluded_ids=blocked, now=now)
+        priority_ids=selected, eligible_ids=selected, excluded_ids=blocked,
+        scope_reprocessing_ids=reprocess, now=now)
     full_used = full_budget.requests_this_run
     if type(full_used) is not int or not 0 <= full_used <= dossier_limit:
         raise QuotaStateError("dossier_phase_limit_exceeded")
@@ -941,7 +1003,8 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
                        "quota_reason", "error_code", "error_type", "deferred", "excluded", "attempts_saved",
                        "classified_total", "accepted_total", "remaining", "retry_deferred"}
     safe_scope_keys.update({"model_errors", "model_recovery_splits", "model_recovered_articles",
-                            "model_failed_articles", "model_deferred_articles", "last_model_error_code", "halt_reason"})
+                            "model_failed_articles", "model_deferred_articles", "last_model_error_code", "halt_reason",
+                            "verified", "confirmed_excluded", "retained", "uncertain_verifications"})
     report["scope_phase"] = {key: value for key, value in scope_report.items() if key in safe_scope_keys}
     report["scope_phase"]["http_requests"] = scope_used
     report.update(hourly_request_limit=allowance, scope_request_limit=scope_limit,

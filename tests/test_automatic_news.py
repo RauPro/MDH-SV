@@ -90,7 +90,7 @@ def archive(*references):
 
 class Budget:
     def __init__(self, remaining=10):
-        self.config = SimpleNamespace(model=MODEL, batch_ceiling=50)
+        self.config = SimpleNamespace(model=MODEL, batch_ceiling=50, input_tpm=200_000)
         self.requests_this_run = 0
         self.remaining = remaining
         self.limit = None
@@ -708,3 +708,135 @@ def test_export_only_safe_fields_to_both_sources_and_rejects_symlinks(tmp_path):
     public.symlink_to(automatic)
     with pytest.raises(AutomaticNewsError):
         export_collection(folder, archive_path, reviewed_path, public, automatic)
+
+
+def test_automatic_field_judge_uses_same_inclusive_scope_without_fabricating_legal_findings():
+    from mdh_pipeline.automatic_news import SYSTEM_PROMPT
+    from mdh_pipeline.news_scope_policy import SCOPE_POLICY
+    assert SCOPE_POLICY in SYSTEM_PROMPT
+    assert "Incluye TODOS los reportes de homicidios" in SYSTEM_PROMPT
+    assert "no exijas llenar alleged_violation ni inventes responsables" in SYSTEM_PROMPT
+    assert "violencia genérica sin nexo no basta" not in SYSTEM_PROMPT
+    assert "Las ubicaciones administrativas generales" in SYSTEM_PROMPT
+
+
+def rejected_before_inclusive_selection(document, reference, *, generation=0):
+    from mdh_pipeline.news_scope_policy import SCOPE_PROMPT
+    reference["selection"].update(prompt_version=SCOPE_PROMPT,
+        classified_at=(NOW - timedelta(minutes=5)).isoformat())
+    old = _receipt(document, reference, generation, now=NOW - timedelta(minutes=10))
+    rejected = judgment()
+    rejected["relevance"].update(verdict="contradicted", reason_code="insufficient_context")
+    old.update(status="scope_rejected", attempts=3, judgment=rejected)
+    return old
+
+
+def persist_receipt_fixture(inbox, folder, value):
+    path = "automatic-news/" + value["candidate_id"] + ".json"
+    inbox.files[path] = (deepcopy(value), inbox.sha(value))
+    (folder / "automatic-news").mkdir(exist_ok=True)
+    (folder / path).write_text(json.dumps(value))
+
+
+@pytest.mark.parametrize("prompt", ["mdh-news-scope-4-inclusive-violence",
+    "mdh-news-exclusion-1-inclusive-violence", "mdh-universal-news-grounded-11-inclusive-violence"])
+def test_new_inclusive_positive_releases_a_bound_scope_rejected_cache_only_once(prompt):
+    from mdh_pipeline.automatic_news import _cached, needs_scope_reassessment
+    document, reference, _ = inputs()
+    old = rejected_before_inclusive_selection(document, reference)
+    reference["selection"]["prompt_version"] = prompt
+    assert needs_scope_reassessment(old, reference)
+    assert not _cached(old, fingerprint(document), document, reference)
+    old["updated_at"] = NOW.isoformat()
+    assert not needs_scope_reassessment(old, reference)
+    assert _cached(old, fingerprint(document), document, reference)
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda old, ref: old.update(candidate_id="a" * 64),
+    lambda old, ref: old.update(source_content_sha256="a" * 64),
+    lambda old, ref: ref["selection"].update(prompt_version="mdh-news-scope-3-rights-nexus"),
+    lambda old, ref: ref["selection"].update(classified_at=old["updated_at"]),
+    lambda old, ref: ref["selection"].update(relevance="unclear"),
+])
+def test_scope_reassessment_requires_new_current_positive_same_candidate_and_source(mutation):
+    from mdh_pipeline.automatic_news import needs_scope_reassessment
+    document, reference, _ = inputs()
+    old = rejected_before_inclusive_selection(document, reference)
+    mutation(old, reference)
+    assert not needs_scope_reassessment(old, reference)
+
+
+@pytest.mark.parametrize("status", ["evaluated", "no_supported_fields"])
+def test_new_scope_policy_keeps_published_and_field_only_receipts_cached(status):
+    from mdh_pipeline.automatic_news import _cached, needs_scope_reassessment
+    document, reference, _ = inputs()
+    old = receipt(document, reference)
+    reference["selection"]["classified_at"] = (NOW + timedelta(minutes=1)).isoformat()
+    if status == "no_supported_fields":
+        old.update(status=status, dossier=None)
+    assert not needs_scope_reassessment(old, reference)
+    assert _cached(old, fingerprint(document), document, reference)
+    # Explicit request generations retain their existing separate invalidation.
+    assert not _cached(old, fingerprint(document, 1), document, reference)
+
+
+@pytest.mark.parametrize("batched", [False, True])
+def test_scope_rejected_is_reassessed_once_with_durable_attempt_and_original_request_generation(tmp_path, batched):
+    from mdh_pipeline.automatic_news import needs_scope_reassessment
+    document, reference, article = inputs()
+    inbox, folder = setup_queue(tmp_path)
+    old = rejected_before_inclusive_selection(document, reference, generation=7)
+    persist_receipt_fixture(inbox, folder, old)
+    budget = Budget()
+    def reject(*args, **kwargs):
+        pending = inbox.writes[-1][1]
+        assert pending["status"] == "evaluating" and pending["attempts"] == 1
+        assert pending["request_generation"] == 7
+        assert not needs_scope_reassessment(pending, reference)
+        kwargs["budget"].reserve({})
+        decision = deepcopy(old["judgment"])
+        result = {"judgment": decision, "dossier": None, "usage": None}
+        return {reference["id"]: result} if batched else result
+    options = {"batch_size": 4, "batch_evaluate": reject} if batched else {"evaluate": reject}
+    result = evaluate_queue(inbox, folder, archive(reference), api_key=KEY, model=MODEL, budget=budget,
+        limit=1, fetch=lambda _: article, request_generations={reference["id"]: 7}, now=NOW, **options)
+    assert result["http_requests"] == 1 and result["evaluated"] == 1
+    final = inbox.writes[-1][1]
+    assert final["status"] == "scope_rejected" and final["attempts"] == 1
+    assert final["fingerprint"] == old["fingerprint"] and final["request_generation"] == 7
+    again = evaluate_queue(inbox, folder, archive(reference), api_key=KEY, model=MODEL, budget=Budget(),
+        limit=1, fetch=lambda _: pytest.fail("already reassessed"), request_generations={reference["id"]: 7}, now=NOW, **options)
+    assert again["http_requests"] == 0 and again["attempted"] == 0
+
+
+@pytest.mark.parametrize("batched", [False, True])
+@pytest.mark.parametrize("first_failure", ["quota_before_reservation", "provider_error"])
+def test_reassessment_quota_deferral_or_failure_does_not_reset_candidate_budget_on_retry(tmp_path, batched, first_failure):
+    from mdh_pipeline.automatic_news import needs_scope_reassessment
+    document, reference, article = inputs()
+    inbox, folder = setup_queue(tmp_path)
+    old = rejected_before_inclusive_selection(document, reference)
+    persist_receipt_fixture(inbox, folder, old)
+    def failure(*args, **kwargs):
+        if first_failure == "quota_before_reservation":
+            raise QuotaDeferred("daily_budget_exhausted", NOW + timedelta(days=1))
+        kwargs["budget"].reserve({})
+        raise GeminiDraftError("invalid_provider_response")
+    options = {"batch_size": 4, "batch_evaluate": failure} if batched else {"evaluate": failure}
+    report = evaluate_queue(inbox, folder, archive(reference), api_key=KEY, model=MODEL, budget=Budget(),
+        limit=1, fetch=lambda _: article, now=NOW, **options)
+    expected = int(first_failure == "provider_error")
+    after = inbox.writes[-1][1]
+    assert report["http_requests"] == after["attempts"] == expected
+    assert not needs_scope_reassessment(after, reference)
+    def fail_after_reservation(*args, **kwargs):
+        assert inbox.writes[-1][1]["attempts"] == expected + 1
+        kwargs["budget"].reserve({})
+        raise GeminiDraftError("invalid_provider_response")
+    options = {"batch_size": 4, "batch_evaluate": fail_after_reservation} if batched else {"evaluate": fail_after_reservation}
+    second = evaluate_queue(inbox, folder, archive(reference), api_key=KEY, model=MODEL, budget=Budget(),
+        limit=1, fetch=lambda _: article, now=NOW + timedelta(minutes=1), **options)
+    assert second["http_requests"] == 1
+    assert inbox.writes[-1][1]["attempts"] == expected + 1
+    assert inbox.writes[-1][1]["fingerprint"] == old["fingerprint"]

@@ -14,14 +14,15 @@ KEY = "scope-test-api-key-not-real"
 PRIVATE = "PRIVATE_QUOTE_OR_IDENTITY_SENTINEL"
 
 
-def test_scope_policy_requires_rights_nexus_without_excluding_substantive_prison_context():
-    assert SCOPE_PROMPT == "mdh-news-scope-3-rights-nexus"
-    assert "Exige un nexo sustantivo y concreto con derechos humanos" in SYSTEM_PROMPT
-    assert "Justicia general, anticorrupción" in SYSTEM_PROMPT
-    assert "Tampoco una pena de prisión demuestra hacinamiento" in SYSTEM_PROMPT
-    assert "el vínculo salvadoreño debe corresponder al asunto" in SYSTEM_PROMPT
-    assert "not_relevant; las políticas con análisis sustantivo de derechos sí son relevant" in SYSTEM_PROMPT
-    assert "relevant aunque no denuncie una violación" in SYSTEM_PROMPT
+def test_scope_policy_includes_homicides_and_context_without_assuming_a_legal_violation():
+    assert SCOPE_PROMPT == "mdh-news-scope-4-inclusive-violence"
+    assert "TODOS los reportes de homicidios" in SYSTEM_PROMPT
+    assert "El homicidio y su contexto histórico son pertinentes por sí mismos" in SYSTEM_PROMPT
+    assert "NO exijas una denuncia adicional" in SYSTEM_PROMPT
+    assert "AL MENOS UNO" in SYSTEM_PROMPT
+    assert "La cobertura\nregional" in SYSTEM_PROMPT
+    assert "no atribuye" in SYSTEM_PROMPT or "ni atribuye responsabilidad" in SYSTEM_PROMPT
+    assert "usa unclear" in SYSTEM_PROMPT
 
 
 def item(number=1, *, texts=None):

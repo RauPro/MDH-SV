@@ -10,17 +10,21 @@ import json
 from pathlib import Path
 import re
 
+from .news_scope_policy import SCOPE_PROMPT, EXCLUSION_PROMPT
+
 _HEX = r"[a-f0-9]{64}"
 _PARAGRAPH = r"p[1-9][0-9]{0,2}"
 _MODEL = r"gemini-[A-Za-z0-9_.-]{1,90}"
 LEGACY_FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-8-relevance-scope"
 PREVIOUS_FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-9-inclusive-context"
-FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-10-rights-nexus"
+RIGHTS_FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-10-rights-nexus"
+FULL_SCOPE_PROMPT = "mdh-universal-news-grounded-11-inclusive-violence"
 SCOPE_REVIEW_PROMPT = "mdh-news-scope-1"
 INCLUSIVE_SCOPE_PROMPT = "mdh-news-scope-2-inclusive-context"
 RIGHTS_SCOPE_PROMPT = "mdh-news-scope-3-rights-nexus"
 _SELECTION_PROMPTS = {FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT,
-                      SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT}
+                      SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT,
+                      SCOPE_PROMPT, EXCLUSION_PROMPT}
 _STAMP = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})"
 _COMMON = {"method", "review_status", "human_reviewed", "jurisdiction", "relevance"}
 _AUTOMATIC = _COMMON | {"classified_at", "model", "prompt_version", "evidence"}
@@ -219,7 +223,7 @@ def _validate_scope_review_shape(document):
             or not isinstance(extraction, dict) or set(extraction) != {"provider", "model", "prompt_version", "prepared_at"}
             or extraction["provider"] != "gemini" or not _matches(_MODEL, extraction["model"])
             or extraction["prompt_version"] not in (
-                {INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT} if document["schema_version"] == 2 else {SCOPE_REVIEW_PROMPT})):
+                {INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, SCOPE_PROMPT, EXCLUSION_PROMPT} if document["schema_version"] == 2 else {SCOPE_REVIEW_PROMPT})):
         _fail()
     prepared = _timestamp(extraction["prepared_at"])
     if "source_read" in document:
@@ -326,8 +330,10 @@ def _category(scope, *, legacy=False):
     return "uncertain"
 
 
-def _decision(scope, extraction, evidence, *, fetched_at=None, legacy=False):
-    category = _category(scope, legacy=legacy)
+def _decision(scope, extraction, evidence, *, fetched_at=None, exclusion_verified=False):
+    # A first-pass negative (under any policy) is an assessment awaiting a
+    # source-bound second check, never an automatic exclusion by itself.
+    category = _category(scope, legacy=not exclusion_verified)
     prepared = _timestamp(extraction["prepared_at"])
     selection = None
     if category == "relevant":
@@ -351,7 +357,7 @@ def _dossier_decision(original, reference, instant):
     fetched, prepared = _timestamp(extraction["fetched_at"]), _timestamp(extraction["prepared_at"])
     if (news["extraction_status"] != "processed" or not _bound(news, reference)
             or scope != document.get("classification") or extraction.get("provider") != "gemini"
-            or extraction.get("prompt_version") not in {FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT}
+            or extraction.get("prompt_version") not in {FULL_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT}
             or not _matches(_MODEL, extraction.get("model"))
             or not _matches(_HEX, extraction.get("content_sha256"))
             or not _day(news["published_date"]) <= fetched.date()
@@ -363,12 +369,12 @@ def _dossier_decision(original, reference, instant):
         citations = grounding.get(field, [])
         evidence[field + "_paragraph_ids"] = (_scope_paragraphs(citations)
             if citations or scope[field] == positive else [])
-    return _decision(scope, extraction, evidence, fetched_at=extraction["fetched_at"],
-                     legacy=extraction["prompt_version"] == LEGACY_FULL_SCOPE_PROMPT)
+    return _decision(scope, extraction, evidence, fetched_at=extraction["fetched_at"])
 
 
 def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_reviews=None,
-                           reviewed_dossiers=None, scope_audits=None):
+                           reviewed_dossiers=None, scope_audits=None, scope_verifications=None,
+                           scope_rechecks=None):
     """Classify bibliography directly from source-bound private scope snapshots.
 
     A dossier or queue issue is never a prerequisite. The source reader validates
@@ -381,8 +387,18 @@ def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_
     now = now or datetime.now(timezone.utc)
     generated = now.isoformat() if isinstance(now, datetime) else now
     instant = _timestamp(generated)
+    # Import lazily: audit requests validate scope receipts through this module.
+    from .news_scope_rechecks import blocked_source_hashes
+    blocked_hashes = blocked_source_hashes(scope_rechecks if scope_rechecks is not None else
+        {"schema_version": 1, "requests": []}, now=instant)
     audits = validate_scope_audits(scope_audits if scope_audits is not None else
                                   {"schema_version": 1, "audits": []}, archive, now=instant)["audits"]
+    verifications = {}
+    for receipt in scope_verifications if scope_verifications is not None else ():
+        identifier = receipt.get("candidate_id") if isinstance(receipt, dict) else None
+        if not _matches(_HEX, identifier) or identifier in verifications:
+            _fail()
+        verifications[identifier] = receipt
     decisions = {}
     seen = set()
     for original in drafts:
@@ -409,10 +425,12 @@ def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_
         try:
             assessment = validate_scope_review(original, reference=references[identifier],
                 content_sha256=original["evidence"]["content_sha256"], now=instant)
-            receipt = assessment.get("source_read", {})
+            from .news_exclusions import confirmed_exclusion
+            source_receipt = assessment.get("source_read", {})
+            confirmed = confirmed_exclusion(verifications.get(identifier), assessment, references[identifier], now=instant)
             decisions.setdefault(identifier, []).append(_decision(
                 assessment["classification"], assessment["extraction"], assessment["evidence"],
-                fetched_at=receipt.get("fetched_at"), legacy=assessment["schema_version"] == 1))
+                fetched_at=source_receipt.get("fetched_at"), exclusion_verified=confirmed))
         except (ValueError, TypeError, KeyError, AttributeError):
             continue
     latest = {}
@@ -422,27 +440,38 @@ def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_
         # The dedicated inclusive classifier owns scope for this exact text.
         # Later dossier enrichment must not silently re-decide its eligibility.
         same_text = len({item["hash"] for item in options}) == 1
-        dedicated = [item for item in options if item["policy"] in {INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT}]
-        if same_text and dedicated:
-            rights_nexus = [item for item in dedicated if item["policy"] == RIGHTS_SCOPE_PROMPT]
-            options = rights_nexus or dedicated
+        dedicated = [item for item in options if item["policy"] in {
+            INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, SCOPE_PROMPT, EXCLUSION_PROMPT}]
+        if same_text:
+            current = [item for item in options if item["policy"] in {FULL_SCOPE_PROMPT, SCOPE_PROMPT, EXCLUSION_PROMPT}]
+            current_scope = [item for item in current if item["policy"] in {SCOPE_PROMPT, EXCLUSION_PROMPT}]
+            if current:
+                options = current_scope or current
+            elif dedicated:
+                rights_nexus = [item for item in dedicated if item["policy"] == RIGHTS_SCOPE_PROMPT]
+                options = rights_nexus or dedicated
         # A different body can supersede the old snapshot only after the newer
         # read is classified under the inclusive policy, never the old v8/v1 rules.
         decision_time = lambda item: item["timestamp"][1] if same_text else item["timestamp"]
         stamp = max(decision_time(item) for item in options)
         newest = [item for item in options if decision_time(item) == stamp]
         if (len({(item["scope"], item["hash"]) for item in newest}) > 1
-                or not same_text and any(item["policy"] not in {FULL_SCOPE_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT}
+                or not same_text and any(item["policy"] not in {FULL_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, SCOPE_PROMPT, EXCLUSION_PROMPT}
                                          for item in newest)):
             latest[identifier] = {"category": "uncertain", "selection": None}
         else:
             latest[identifier] = newest[-1]
     for audit in audits:
         decision = latest.get(audit["candidate_id"])
-        if decision is not None and decision.get("hash") == audit["content_sha256"]:
-            # The audited bytes alone are excluded. A new source hash remains
-            # eligible for classification, and an explicit human decision follows.
-            latest[audit["candidate_id"]] = {**decision, "category": "excluded", "selection": None}
+        if (decision is not None and decision.get("hash") == audit["content_sha256"]
+                and decision.get("policy") not in {FULL_SCOPE_PROMPT, SCOPE_PROMPT, EXCLUSION_PROMPT}):
+            # Old restrictive audits are reassessment hints, not current-policy
+            # exclusion evidence. Fresh inclusive decisions supersede them.
+            latest[audit["candidate_id"]] = {**decision, "category": "uncertain", "selection": None}
+    # Bind the audit to the effective source decision after precedence resolution.
+    # A coherent newer body must not be held just because an old draft is cached.
+    blocked_ids = {identifier for identifier, digest in blocked_hashes.items()
+                   if latest.get(identifier, {}).get("hash") == digest}
     if reviewed_dossiers is not None:
         from .news_publication import validate_collection
         for dossier in validate_collection(reviewed_dossiers, archive=archive)["dossiers"]:
@@ -450,6 +479,8 @@ def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_
             category = _category(dossier["classification"])
             automatic = latest.get(identifier, {}).get("selection") if category == "relevant" else None
             latest[identifier] = {"category": category, "selection": automatic}
+    for identifier in blocked_ids:
+        latest[identifier] = {"category": "uncertain", "selection": None}
     for identifier in excluded & references.keys():
         # A human withheld the reference, without necessarily finding it irrelevant.
         latest[identifier] = {"category": "uncertain", "selection": None}
@@ -573,6 +604,8 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--excluded-ids", type=Path, help="JSON list of candidate IDs rejected by human review")
     parser.add_argument("--scope-reviews", type=Path, help="Independent private source snapshots; a dossier is not required")
+    parser.add_argument("--scope-verifications", type=Path, help="Private source-bound second checks before automatic exclusions")
+    parser.add_argument("--scope-rechecks", type=Path, help="Private audit requests identifying inconsistent source bodies")
     parser.add_argument("--reviewed-dossiers", type=Path, help="Approved human scope decisions included in snapshot counts")
     parser.add_argument("--scope-audits", type=Path, help="Source-bound automated exclusions; defaults to repository audit collection")
     args = parser.parse_args()
@@ -595,12 +628,22 @@ def main():
             scope_paths = sorted(args.scope_reviews.glob("*.json"))
             if len(scope_paths) > MAX_SELECTIONS:
                 _fail()
+        verification_paths = []
+        if args.scope_verifications is not None:
+            if args.scope_verifications.is_symlink() or (args.scope_verifications.exists() and not args.scope_verifications.is_dir()):
+                _fail()
+            verification_paths = sorted(args.scope_verifications.glob("*.json"))
+            if len(verification_paths) > MAX_SELECTIONS:
+                _fail()
         audit_path = args.scope_audits if args.scope_audits is not None else DEFAULT_SCOPE_AUDITS
         audits = (_read_json(audit_path, MAX_JSON_BYTES)
                   if args.scope_audits is not None or audit_path.exists() else {"schema_version": 1, "audits": []})
+        from .news_scope_rechecks import load_rechecks
+        rechecks = load_rechecks(args.scope_rechecks) if args.scope_rechecks is not None else None
         document = project_news_selection(_read_drafts(paths), archive, excluded,
-            scope_reviews=_read_drafts(scope_paths), reviewed_dossiers=(
-                _read_json(args.reviewed_dossiers, MAX_JSON_BYTES) if args.reviewed_dossiers else None), scope_audits=audits)
+            scope_reviews=_read_drafts(scope_paths), scope_verifications=_read_drafts(verification_paths), reviewed_dossiers=(
+                _read_json(args.reviewed_dossiers, MAX_JSON_BYTES) if args.reviewed_dossiers else None),
+            scope_audits=audits, scope_rechecks=rechecks)
         if args.output.exists():
             try:
                 previous = validate_manifest(_read_json(args.output, MAX_JSON_BYTES))

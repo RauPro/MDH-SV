@@ -9,7 +9,9 @@ from collections import defaultdict
 from datetime import datetime, timezone
 
 from .news_publication import validate_collection
-from .news_scope import SCOPE_PROMPT
+from .news_scope_policy import SCOPE_PROMPT, CURRENT_SCOPE_PROMPTS
+from .news_exclusions import confirmed_exclusion, is_current_positive
+from .news_scope_rechecks import pending_recheck_ids, validate_rechecks
 from .news_selection import (
     MAX_SELECTIONS, _archive_index, _bound, _category, _decision,
     _dossier_decision, _excluded_set, _timestamp, project_news_selection,
@@ -70,7 +72,7 @@ def _legacy_published_draft(original, reference, dossier, assessment, instant):
             and _category(news["classification"]) == "relevant"
             and _timestamp(extraction["fetched_at"]) <= _timestamp(extraction["prepared_at"])
             <= _timestamp(dossier["automation"]["validated_at"]) <= instant
-            and assessment["extraction"]["prompt_version"] == SCOPE_PROMPT
+            and is_current_positive(assessment)
             and assessment.get("source_read", {}).get("truncated") is False
             and assessment["evidence"]["content_sha256"] == digest
             and _category(assessment["classification"]) == "relevant")
@@ -88,7 +90,7 @@ def build_reopen_index(**kwargs):
 
 def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
                               scope_reviews=(), drafts=(), scope_audits=None,
-                              excluded_ids=(), now=None):
+                              scope_verifications=(), rechecks=None, excluded_ids=(), now=None):
     """Return ``(terminal, reopen)`` source-bound evidence indexes.
 
     ``published_*`` must be obtained from the deployed production snapshot, not
@@ -106,15 +108,25 @@ def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
     audits = validate_scope_audits(scope_audits if scope_audits is not None else
         {"schema_version": 1, "audits": []}, archive, now=instant)["audits"]
     audit_groups, scope_groups, draft_groups = map(_group, (audits, scope_reviews, drafts))
+    verification_groups = _group(scope_verifications)
+    requests = validate_rechecks(rechecks or {"schema_version": 1, "requests": []}, now=instant)
+    request_index = {item["candidate_id"]: item for item in requests["requests"]}
+    pending_requests = pending_recheck_ids(requests, scope_reviews, now=instant)
     public = {item["candidate_id"]: item for item in published}
     public_selected = {item["id"]: item["selection"] for item in published_archive["records"]
                        if "selection" in item}
     bibliography_selected = {item["id"]: item["selection"] for item in archive["records"]
                              if "selection" in item}
     result, reopen = {}, {}
-    for identifier in (public.keys() | scope_groups.keys()) - excluded:
+    for identifier in (public.keys() | scope_groups.keys() | pending_requests) - excluded:
         reference = references.get(identifier)
         if reference is None:
+            continue
+        if identifier in pending_requests:
+            request = request_index[identifier]
+            reopen[identifier] = _evidence(reference, "pending",
+                "source_content_mismatch" if request["reason_code"] == "source_content_mismatch" else "audit_recheck",
+                request["source_content_sha256"], request["requested_at"])
             continue
         dossier = public.get(identifier)
         if dossier is not None:
@@ -132,8 +144,10 @@ def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
                                                     None, dossier["reviewed_at"])
                 continue
         scope_rows, draft_rows = scope_groups.get(identifier, []), draft_groups.get(identifier, [])
-        if len(scope_rows) > 1 or len(draft_rows) > 1:
+        verification_rows = verification_groups.get(identifier, [])
+        if len(scope_rows) > 1 or len(draft_rows) > 1 or len(verification_rows) > 1:
             continue
+        verification = verification_rows[0] if verification_rows else None
         assessment, scope_decision, draft_decision = None, None, None
         try:
             if scope_rows:
@@ -141,7 +155,7 @@ def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
                     content_sha256=scope_rows[0]["evidence"]["content_sha256"], now=instant)
                 scope_decision = _decision(assessment["classification"], assessment["extraction"],
                     assessment["evidence"], fetched_at=assessment.get("source_read", {}).get("fetched_at"),
-                    legacy=assessment["schema_version"] == 1)
+                    exclusion_verified=confirmed_exclusion(verification, assessment, reference, now=instant))
             selection_drafts = draft_rows
             if draft_rows:
                 try:
@@ -154,6 +168,7 @@ def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
             # and disagreements between snapshots. Never classify from a title.
             manifest = project_news_selection(selection_drafts, {"schema_version": 1, "records": [reference]},
                 now=instant, scope_reviews=scope_rows,
+                scope_verifications=verification_rows,
                 scope_audits={"schema_version": 1, "audits": audit_groups.get(identifier, [])})
         except _ERRORS:
             continue
@@ -175,16 +190,27 @@ def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
                 result[identifier] = _evidence(reference, "published", "published_automatic", digest, stamp)
                 continue
 
-        # Only the current dedicated scope policy, after a complete source read,
-        # may close a negative automatically. Older/narrower policies must retry.
-        if (assessment is None or assessment["extraction"]["prompt_version"] != SCOPE_PROMPT
-                or assessment.get("source_read", {}).get("truncated") is not False):
+        if assessment is None or assessment.get("source_read", {}).get("truncated") is not False:
+            continue
+        raw_negative = (assessment["classification"]["jurisdiction"] == "other"
+                        or assessment["classification"]["relevance"] == "not_relevant")
+        if raw_negative and not confirmed_exclusion(verification, assessment, reference, now=instant):
+            # A stored single-pass exclusion is explicit evidence of unfinished
+            # work under this policy, not a fresh semantic rejection. This also
+            # reopens our historical closures without invoking a model.
+            if dossier is None:
+                reopen[identifier] = _evidence(reference, "pending", "exclusion_requires_verification",
+                    scope_decision["hash"], assessment["extraction"]["prepared_at"])
+            continue
+        if (not raw_negative and not is_current_positive(assessment)
+                and assessment["extraction"]["prompt_version"] not in CURRENT_SCOPE_PROMPTS):
             continue
         if draft_decision is not None:
             same_text = draft_decision["hash"] == scope_decision["hash"]
             # Dedicated scope owns selection, but closure is more conservative:
             # retain a same-text disagreement or a newer different source read.
-            if ((same_text and draft_decision["category"] != scope_decision["category"])
+            if ((same_text and _category(draft_rows[0]["news_dossier"]["classification"])
+                    != _category(assessment["classification"]))
                     or not same_text and draft_decision["timestamp"] >= scope_decision["timestamp"]):
                 continue
         category = scope_decision["category"]

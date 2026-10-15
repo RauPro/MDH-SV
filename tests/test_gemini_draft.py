@@ -160,18 +160,18 @@ def test_request_uses_header_only_fixed_endpoint_json_schema_and_bounds():
     assert "tools" not in request["json"]
 
 
-def test_full_dossier_sends_versioned_rights_nexus_policy_without_losing_legitimate_context():
+def test_full_dossier_uses_shared_inclusive_policy_without_inventing_a_violation():
+    from mdh_pipeline.news_scope_policy import SCOPE_POLICY
     from mdh_pipeline.news_selection import FULL_SCOPE_PROMPT
     session = Session([response()])
     result = run(session=session)
     prompt = session.calls[0][1]["json"]["systemInstruction"]["parts"][0]["text"]
     assert result["extraction"]["prompt_version"] == PROMPT_VERSION == FULL_SCOPE_PROMPT
-    assert PROMPT_VERSION == "mdh-universal-news-grounded-10-rights-nexus"
-    assert "La actividad judicial ordinaria, una condena por corrupción" in prompt
-    assert "no construyas un vínculo combinando pasajes inconexos" in prompt
-    assert "Las referencias de jurisdiction y\nrelevance deben respaldar un mismo asunto" in prompt
-    assert "Una noticia de contexto no necesita denunciar una vulneración" in prompt
-    assert "puede tratarse de personas salvadoreñas en el extranjero" in prompt
+    assert PROMPT_VERSION == "mdh-universal-news-grounded-11-inclusive-violence"
+    assert SCOPE_POLICY in prompt
+    assert "Incluye TODOS los reportes de homicidios" in prompt
+    assert "No inventes una violación: alleged_violation puede faltar" in prompt
+    assert "privacidad" in prompt
     assert result["publishable"] is False and result["human_reviewed"] is False
 
 
