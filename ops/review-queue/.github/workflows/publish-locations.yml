@@ -161,7 +161,7 @@ jobs:
           assert set(subprocess.check_output(['git', 'diff', '--cached', '--name-only'], text=True).splitlines()) <= allowed
           PYTHON
           git commit -m 'chore: publish automatically validated news dossiers and locations'
-          git pull --rebase origin main
+          PYTHONPATH=../monitor/apps/pipeline/src:../monitor/packages/schema/src python -m mdh_pipeline.news_git_publication --repository . --excluded-ids ../excluded-news.json
           PYTHONPATH=../monitor/apps/pipeline/src:../monitor/packages/schema/src python -m mdh_pipeline.history --export-only --data-dir data/history --selection data/selection/news.json --reviewed-news data/reviewed/news_dossiers.json --exceptions data/selection/news_exceptions.json --excluded-ids ../excluded-news.json --output apps/web/public/archive/news.json
           node apps/web/scripts/sync-news-publication.mjs
           node apps/web/scripts/sync-news-processing.mjs

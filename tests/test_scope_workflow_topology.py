@@ -113,6 +113,9 @@ def test_validated_partial_extractor_results_publish_without_hiding_the_run_fail
     validation = next(step['run'] for step in steps if 'git push' in step.get('run', ''))
     assert validation.index('check-data.mjs') < validation.index('git push')
     assert validation.index('audit_release.py') < validation.index('git push')
+    assert 'mdh_pipeline.news_git_publication --repository . --excluded-ids ../excluded-news.json' in validation
+    assert 'git pull --rebase' not in validation
+    assert validation.index('mdh_pipeline.news_git_publication') < validation.rindex('check-data.mjs') < validation.index('git push')
 
 
 @pytest.mark.parametrize('changes', [
