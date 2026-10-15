@@ -115,7 +115,9 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
 
     drafts remains for caller compatibility. Load scope_reviews and attempts once
     from the private checkout; only actual writes read the latest GitHub SHA.
-    selected_ids is internal orchestration data and must be omitted from logs.
+    selected_ids and updated_reviews are internal orchestration data and must
+    be omitted from logs. Updated receipts are authoritative for routing this
+    run, including negative decisions that supersede older positive drafts.
     """
     if (type(max_requests) is not int or not 1 <= max_requests <= 50
             or type(batch_size) is not int or not 1 <= batch_size <= MAX_BATCH_ITEMS):
@@ -143,7 +145,7 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
     report = dict(candidates=len(references) - sum(identifier in references for identifier in excluded),
                   cached=0, retry_deferred=0, sources_checked=0, source_unavailable=0,
                   source_changed=0, reviewed=0, classified=0, relevant_sv=0, accepted=0,
-                  http_requests=0, stopped_reason=None, selected_ids=[], model_errors=0,
+                  http_requests=0, stopped_reason=None, selected_ids=[], updated_reviews=[], model_errors=0,
                   model_recovery_splits=0, model_recovered_articles=0,
                   model_failed_articles=0, model_deferred_articles=0)
     selected, pending = set(), []
@@ -225,6 +227,7 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
                 raise ValueError("scope_source_receipt_mismatch")
         for result in results:
             _put_private(inbox, "scope-reviews", result, before_write=pace_write)
+            report["updated_reviews"].append(result)
             report["reviewed"] += 1
             report["classified"] += 1
             if result["candidate_id"] in recovery_ids:
@@ -370,7 +373,7 @@ def main():
             failure["error_code"] = error.code
         print(json.dumps(failure))
         raise SystemExit(1) from None
-    print(json.dumps({key: value for key, value in report.items() if key != "selected_ids"}))
+    print(json.dumps({key: value for key, value in report.items() if key not in {"selected_ids", "updated_reviews"}}))
     if report["stopped_reason"] == "model_error":
         raise SystemExit(1)
 
