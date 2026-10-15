@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T05:38:55.224909+00:00",
+  "generated_at": "2026-10-15T06:15:52.829350+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11096,
-      "selected": 1575,
-      "evaluated": 4547,
-      "relevant": 1575,
-      "excluded": 2969,
+      "selected": 1577,
+      "evaluated": 4579,
+      "relevant": 1577,
+      "excluded": 2999,
       "uncertain": 3,
-      "pending": 6549,
-      "evaluated_at": "2026-10-15T05:29:42.729382+00:00"
+      "pending": 6517,
+      "evaluated_at": "2026-10-15T06:15:50.873711+00:00"
     }
   },
   "paper": {
@@ -48,16 +48,16 @@
   },
   "coverage": {
     "start_date": "2010-01-01",
-    "end_date": "2026-10-14",
+    "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1575,
+    "records": 1577,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 1339,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-14",
@@ -2476,7 +2476,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 2,
             "screen_version": 3,
             "posts_scanned": 155,
@@ -2492,7 +2492,7 @@
         "id": "gatoencerrado",
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 55,
         "first_published_date": "2014-09-21",
         "last_published_date": "2018-07-25",
@@ -4911,7 +4911,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 2,
@@ -4927,7 +4927,7 @@
         "id": "factum",
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 48,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
@@ -7346,7 +7346,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 0,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 131,
+        "records": 133,
         "first_published_date": "2013-02-14",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15188,7 +15188,7 @@
           {
             "month": "2013-06",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 19,
             "source_total_posts": null,
@@ -15200,7 +15200,7 @@
           {
             "month": "2013-07",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 25,
             "source_total_posts": null,
@@ -18895,7 +18895,7 @@
         "month": "2013-06",
         "start_date": "2013-06-01",
         "end_date": "2013-06-30",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18930,7 +18930,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -18938,7 +18938,7 @@
         "month": "2013-07",
         "start_date": "2013-07-01",
         "end_date": "2013-07-31",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18973,7 +18973,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -25774,22 +25774,22 @@
       {
         "month": "2026-10",
         "start_date": "2026-10-01",
-        "end_date": "2026-10-14",
+        "end_date": "2026-10-15",
         "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
-            "status": "enumerated",
+            "status": "partial",
             "records": 2
           },
           {
             "source_id": "gatoencerrado",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0
           },
           {
             "source_id": "factum",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0
           },
           {
@@ -97614,6 +97614,94 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bb247b4c540d601813bd3a26af80eb11bcdfe5838733fe3c0d5ea26619f374fe",
+      "title": "Capturan al Z-40, el jefe del cártel de Los Zetas",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/111325/capturan-al-z-40-el-jefe-del-cartel-de-los-zetas.html",
+      "published_date": "2013-07-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T00:10:26.486096-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6a496993b26aaef45da7c6ff1c7cc1c87f02f1792d9505472fbb25cdecae94b9",
+          "jurisdiction_paragraph_ids": [
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ec0115ef63d24cb4219481a16e86152f8ba24ee990e43866a7bede5d0374e8a2",
+      "title": "La Utec impartirá nuevo postgrado en “Violencia de género”",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/108039/la-utec-impartira-nuevo-postgrado-en-violencia-de-genero.html",
+      "published_date": "2013-06-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T00:09:43.332255-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4e01a313972ad0168e5674dc3a8fb952b85296987db57a5e0abe7dbf1dd4e979",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5"
           ]
         }
       }

@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T05:29:42.729382+00:00",
+  "generated_at": "2026-10-15T06:15:50.873711+00:00",
   "assessment_counts": {
     "candidates": 11096,
-    "evaluated": 4547,
-    "relevant": 1575,
-    "excluded": 2969,
+    "evaluated": 4579,
+    "relevant": 1577,
+    "excluded": 2999,
     "uncertain": 3,
-    "pending": 6549
+    "pending": 6517
   },
   "selections": [
     {
@@ -33140,6 +33140,32 @@
       }
     },
     {
+      "candidate_id": "bb247b4c540d601813bd3a26af80eb11bcdfe5838733fe3c0d5ea26619f374fe",
+      "source_url": "https://historico.elsalvador.com/historico/111325/capturan-al-z-40-el-jefe-del-cartel-de-los-zetas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-07-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T00:10:26.486096-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6a496993b26aaef45da7c6ff1c7cc1c87f02f1792d9505472fbb25cdecae94b9",
+          "jurisdiction_paragraph_ids": [
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "bb2bd21ae703f0471dcf6996d9f551246010080af8f2909c385df3512bf10da9",
       "source_url": "https://www.diariocolatino.com/diputados-aplauden-encarcelamiento-de-ex-presidente-francisco-flores/",
       "publisher": "Diario Co Latino",
@@ -40686,6 +40712,34 @@
           "relevance_paragraph_ids": [
             "p1",
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ec0115ef63d24cb4219481a16e86152f8ba24ee990e43866a7bede5d0374e8a2",
+      "source_url": "https://historico.elsalvador.com/historico/108039/la-utec-impartira-nuevo-postgrado-en-violencia-de-genero.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-06-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T00:09:43.332255-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4e01a313972ad0168e5674dc3a8fb952b85296987db57a5e0abe7dbf1dd4e979",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5"
           ]
         }
       }
