@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T01:15:34.106153+00:00",
+  "generated_at": "2026-10-15T02:21:00.665413+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -2085,6 +2085,30 @@
       }
     },
     {
+      "candidate_id": "5baa3ecdf630b77bd1c4059c2111e22d6a59fa5364d1076ab6326a62314e414e",
+      "source_url": "https://gatoencerrado.news/2018/06/06/donde-estan-gritan-las-madres-de-los-desaparecidos-en-la-guerra/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-06-06",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T02:19:43.729217+00:00",
+      "source_checked_at": "2026-10-15T02:19:43.729217+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "4a2458421458474315b6446fc335ead9bf922c6a150306680a6fc3bce2cca79c"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Martín",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "5bf1f8f327a8cf5d38850ad1d2958337c393c2b6fa9336d0542f40bb5f046c13",
       "source_url": "https://www.diariocolatino.com/inauguraron-diplomado-de-defensoria-de-los-derechos-de-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -3906,6 +3930,47 @@
             "municipality_kind": "district",
             "reference_version": "sv-decree-762-2023-v1",
             "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+          }
+        }
+      ]
+    },
+    {
+      "candidate_id": "9cbf2c4579246e54ae87dfefc02ca0d41a8ffff07ded87e15a75e6a5bd74d2eb",
+      "source_url": "https://www.diariocolatino.com/fgr-investigara-asesinato-de-monsenor-romero-y-otros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-06-21",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T02:20:05.514007+00:00",
+      "source_checked_at": "2026-10-15T02:20:05.514007+00:00",
+      "evidence": {
+        "content_sha256": "af3aeda42575b29e09c0bd306270a28bc9056b2d92d16d21e6cb8cb0fc460d3b"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Cuscatlán",
+          "paragraph_id": "p9",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Suchitoto",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Miguel",
+          "paragraph_id": "p16",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Miguel",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
           }
         }
       ]

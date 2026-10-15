@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T01:15:36.758435+00:00",
+  "generated_at": "2026-10-15T02:18:14.144664+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 10943,
-      "selected": 1522,
-      "evaluated": 4418,
-      "relevant": 1522,
-      "excluded": 2893,
+      "selected": 1538,
+      "evaluated": 4450,
+      "relevant": 1538,
+      "excluded": 2909,
       "uncertain": 3,
-      "pending": 6525,
-      "evaluated_at": "2026-10-15T01:14:21.762880+00:00"
+      "pending": 6493,
+      "evaluated_at": "2026-10-15T02:18:11.787941+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-14",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1522,
+    "records": 1538,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1290,
+        "records": 1305,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -1277,7 +1277,7 @@
           {
             "month": "2018-06",
             "status": "enumerated",
-            "records": 8,
+            "records": 23,
             "screen_version": 3,
             "posts_scanned": 1053,
             "source_total_posts": 1053,
@@ -2493,9 +2493,9 @@
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 52,
+        "records": 53,
         "first_published_date": "2014-09-21",
-        "last_published_date": "2018-05-26",
+        "last_published_date": "2018-06-06",
         "months": [
           {
             "month": "2010-01",
@@ -3712,7 +3712,7 @@
           {
             "month": "2018-06",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 10,
             "source_total_posts": 10,
@@ -21475,17 +21475,17 @@
         "month": "2018-06",
         "start_date": "2018-06-01",
         "end_date": "2018-06-30",
-        "records": 8,
+        "records": 24,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 8
+            "records": 23
           },
           {
             "source_id": "gatoencerrado",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "factum",
@@ -26295,6 +26295,732 @@
             "p18",
             "p32",
             "p33"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9cbf2c4579246e54ae87dfefc02ca0d41a8ffff07ded87e15a75e6a5bd74d2eb",
+      "title": "FGR investigará asesinato de Monseñor Romero y otros",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-investigara-asesinato-de-monsenor-romero-y-otros/",
+      "published_date": "2018-06-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 180498,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:11:12.203237-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "af3aeda42575b29e09c0bd306270a28bc9056b2d92d16d21e6cb8cb0fc460d3b",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "37e22ce83ba03956f07d37f8b6d6f9fc745d110abfc0b057cfd14e71d2c6190f",
+      "title": "PNC captura a agente que ayudó a escapar Juan Josué Castillo",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-agente-que-ayudo-a-escapar-juan-josue-castillo/",
+      "published_date": "2018-06-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 180558,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:11:12.203237-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "de8ee6be25e793d7fa2b72247a6b5fd98c19a20f735bb89ea0a84ce9399a6de0",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bfb82570bd4751218dd381bac30ac84b42d1ae45259f9832272d1074ee4f6558",
+      "title": "Movimiento social exige elevar a rango constitucional derecho al agua",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/movimiento-social-exige-elevar-a-rango-constitucional-derecho-al-agua/",
+      "published_date": "2018-06-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 180244,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:11:12.203237-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f379603a99492a3c1189b25be20d1056029e2c88c33083ce0a41581c28b3211c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p19"
+          ],
+          "relevance_paragraph_ids": [
+            "p6",
+            "p9",
+            "p17",
+            "p18"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e7f2856d7b2815bbb4d2fac3520336986d1920b1c0a566785d69868fd0a0e33d",
+      "title": "NO A LA DISCRIMINACIÓN",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/no-a-la-discriminacion/",
+      "published_date": "2018-06-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 180120,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:11:12.203237-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4d56f038dcf4b4448cd6a52bcd1cf622b229fc001a6dc8f3a531b0396489a365",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9d05390057efebdf2a3c7b8ecbb96ddc0c295d14b122210e2a0f8692074f03d1",
+      "title": "San Juan Nonualco recuerda asesinato de Fray Cosme Spessotto",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/san-juan-nonualco-recuerda-asesinato-de-fray-cosme-spessotto/",
+      "published_date": "2018-06-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 179826,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:11:12.203237-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2f626c5ca15e158128852d12d7d13362d2a97ac01345bff1a97fd52e247188e4",
+          "jurisdiction_paragraph_ids": [
+            "p8",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p9",
+            "p12",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8a821f0da5140527c857dfd0aef698b54a02699c2ff4d016b0b844e509e6fe7b",
+      "title": "Solicitan integración de medidas extraordinarias a Ley Penitenciaria",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/solicitan-integracion-de-medidas-extraordinarias-a-ley-penitenciaria/",
+      "published_date": "2018-06-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 179386,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:11:12.203237-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b30569683da69afac94511164991827117039acb7a89dd26b87c24fc2826e8b4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "86728e2b830ca903d4c10ddeb6fc1696197a1889e5af15572a4f1ac88855d40c",
+      "title": "Población LGBTI ilumina Palacio Nacional con el arcoíris",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/poblacion-lgbti-ilumina-palacio-nacional-con-el-arcoiris/",
+      "published_date": "2018-06-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 179366,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:11:12.203237-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5fe0138b6c25d9fe34975213fe609c2a7790d7b592f6265cb994f43454d5a090",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1e454f870578212e59aa99f0bf5ddb5794d4fa8cec0683d736d8b0f505f46d82",
+      "title": "El agua, el más fundamental de los derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-agua-el-mas-fundamental-de-los-derechos-humanos/",
+      "published_date": "2018-06-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 179340,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "41c6e66337ad90259b2dfde4165e03b0f9cf1fc1e27828dea10b1b0bb0c51672",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "431c4460df602554eb5b8a223ab5641b2fd74ceb6e6dffa5c724908813bd608a",
+      "title": "FGR gira orden de captura contra Mauricio Funes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-gira-orden-de-captura-contra-mauricio-funes/",
+      "published_date": "2018-06-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 179122,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "650ebd4422c4a00b4df36194cd4a93c156926ff1f7c79ee820b47830702dc931",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "204b4ea525b2c636e36e75654d919514df60c8189f8089bb355e9f9ac67facaf",
+      "title": "Pareja detenida por tráfico de objetos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pareja-detenida-por-trafico-de-objetos/",
+      "published_date": "2018-06-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 178520,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "555d38720d8f0730a6b522ad7510bf62f4aa2fc3e1386958a1308f2d0e725d12",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fb80f158e9ab0895d1e1472d3ac046d4cd77c590be351ca49456c609e008f4b0",
+      "title": "A los oídos de los derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/a-los-oidos-de-los-derechos-humanos/",
+      "published_date": "2018-06-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 178964,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "6bcb70825e42d926ee6af50431bc36b50e47130d580a03136d7e038ee1787236",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e3a7d62a63938556d12c80fbbb83382f9ff6e1b0f3ed9fd107f32a7000d5f13e",
+      "title": "Juzgado manda a prisión a exjefe del GRP por homicidio de Carla Ayala",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-manda-a-prision-a-exjefe-del-grp-por-homicidio-de-carla-ayala/",
+      "published_date": "2018-06-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 179038,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "caf102ec4b764dfd901ac651fe3258cd13ca9adb15351ca38a4e228a8bc812e3",
+          "jurisdiction_paragraph_ids": [
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "831c5b9b1cf75090a05a7ef807cb42dc3476040d8f13d93f26e8dfc8ed948cd5",
+      "title": "Captura de Mecafé y otros es arbitraria: Mauricio Funes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/captura-de-mecafe-y-otros-es-arbitraria-mauricio-funes/",
+      "published_date": "2018-06-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 178879,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "feb18303b30e706aa56548042cca34efb9c9e84bdb8b9f27c4ac0dd465935a61",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p8",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "94cca3ee4afacee99c2daf109061c381e4222b579f92d2b1e6dec9f4b75fa510",
+      "title": "Captura de Mecafe es totalmente arbitraria: Mauricio Funes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/captura-de-mecafe-es-totalmente-arbitraria-mauricio-funes/",
+      "published_date": "2018-06-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 178761,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3d7eeb501d087cefe75eb32422dece885539932a67e5d336e75ffc46a034c204",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5baa3ecdf630b77bd1c4059c2111e22d6a59fa5364d1076ab6326a62314e414e",
+      "title": "¿Dónde están? gritan las madres de los desaparecidos en la guerra",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2018/06/06/donde-estan-gritan-las-madres-de-los-desaparecidos-en-la-guerra/",
+      "published_date": "2018-06-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 6414,
+        "retrieved_at": "2026-10-10T18:02:39.731848+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4a2458421458474315b6446fc335ead9bf922c6a150306680a6fc3bce2cca79c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p7",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fe273196324571adf24d080ae5a36730d6e964a17bda7920c3d922babc14d8bb",
+      "title": "11 personas son vinculadas al asesinato de Carla Ayala",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/11-personas-son-vinculadas-al-asesinato-de-carla-ayala/",
+      "published_date": "2018-06-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 178633,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:10:11.292793-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0a05e67f7dbb313e256ed360efe858981d8610c35fe523f89248df55328596f2",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6",
+            "p7",
+            "p8"
           ]
         }
       }
