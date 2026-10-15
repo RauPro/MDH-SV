@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T14:20:16.567877+00:00",
+  "generated_at": "2026-10-15T18:03:13.065012+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -2157,6 +2157,30 @@
       }
     },
     {
+      "candidate_id": "55f3554658e8dd8f4bccca01ee472144e953ec40f7dae4ead3b8d6e5cb9123c9",
+      "source_url": "https://www.diariocolatino.com/sindicalismo-y-sector-informal/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-07",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T18:02:37.467222+00:00",
+      "source_checked_at": "2026-10-15T18:02:37.467222+00:00",
+      "evidence": {
+        "paragraph_id": "p16",
+        "content_sha256": "73697b91e9ea30081a9e8b39fb93ae5a937f4fdb301ce0c0f19c930da49cbbca"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "56bb1b01b301bc935b1583e7d6213ed9ed9814a82baa76d9f3ee7ac6d7ed7ffd",
       "source_url": "https://www.revistafactum.com/mas-de-500-policias-y-militares-acusados-por-homicidio/",
       "publisher": "Revista Factum",
@@ -3244,6 +3268,48 @@
       ]
     },
     {
+      "candidate_id": "818d5ef5e5c32b1400e56d47bf2bba397b36ee46c2a5636fd57ec9e51400cc29",
+      "source_url": "https://www.diariocolatino.com/a-dos-meses-de-cerrar-el-2014-pnc-registra-3387-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-22",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T18:02:22.232201+00:00",
+      "source_checked_at": "2026-10-15T18:02:22.232201+00:00",
+      "evidence": {
+        "content_sha256": "0d9351a39317f98b60217339902dc582e7db69bcec3b88df674cb52420660e68"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cuscatlán",
+          "paragraph_id": "p7"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p7"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Miguel",
+          "paragraph_id": "p7"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p7"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Usulután",
+          "paragraph_id": "p7"
+        }
+      ]
+    },
+    {
       "candidate_id": "8220baae0365b830548424193327ee4974b8fe7ee25921062e49829862849f74",
       "source_url": "https://www.diariocolatino.com/las-comunidades-construimos-la-resistencia-frente-la-mineria-metalica-alejandro-guevara/",
       "publisher": "Diario Co Latino",
@@ -4114,6 +4180,58 @@
             "reference_version": "sv-decree-762-2023-v1",
             "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
           }
+        }
+      ]
+    },
+    {
+      "candidate_id": "9c52be7f6bc1944f24e612c67270a0a4b7d3158da28ed30b373071694671a79f",
+      "source_url": "https://www.diariocolatino.com/homicidios-se-concentran-en-20-municipios-segun-fgr%e2%80%a8-%e2%80%a8/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-01",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T18:02:23.059452+00:00",
+      "source_checked_at": "2026-10-15T18:02:23.059452+00:00",
+      "evidence": {
+        "content_sha256": "1814e8affe17e745648ff7b809235ce7a9f7b364eaa7767048d2d31dc3245a52"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cabañas",
+          "paragraph_id": "p12"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Chalatenango",
+          "paragraph_id": "p12"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Cuscatlán",
+          "paragraph_id": "p12"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p12"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Paz",
+          "paragraph_id": "p10"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p12"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Santa Ana",
+          "paragraph_id": "p9"
         }
       ]
     },
@@ -5210,6 +5328,30 @@
       }
     },
     {
+      "candidate_id": "c8e53e8362fbe3654f31fbbdb7e851c8cd4e61ec7566507de682ce6b3416a124",
+      "source_url": "https://www.diariocolatino.com/reportan-el-asesinato-de-una-mujer-en-fiestas-navidenas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-25",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T18:02:27.274655+00:00",
+      "source_checked_at": "2026-10-15T18:02:27.274655+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "ac8d35eb7c33db044676b1c17e169ea1d977876c7e1ddc3a2ee82b61fd7baa85"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Nahuizalco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
+    },
+    {
       "candidate_id": "c93ab9ec6cd42f4b5e0394831771290ee62f85e5377244c5bb2cc7c12513f431",
       "source_url": "https://www.diariocolatino.com/un-pais-sin-discriminaciones-y-solidario-con-la-poblacion-portadora-del-vih/",
       "publisher": "Diario Co Latino",
@@ -5342,6 +5484,23 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
+      "candidate_id": "d2afdb61cb8928932353dbd9d58642492c107ec81ae63bf34aff635a68bcd708",
+      "source_url": "https://www.diariocolatino.com/agente-pnc-es-asesinado-en-cabanas-por-otro-supuesto-agente/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-16",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T18:02:29.594184+00:00",
+      "source_checked_at": "2026-10-15T18:02:29.594184+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "5a3995775073a7d297e8c07038876e08fafd443d1cef2dc96f882011612578bc"
       }
     },
     {
