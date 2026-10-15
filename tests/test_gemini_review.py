@@ -1087,3 +1087,18 @@ def test_privacy_retry_retains_migration_share_after_error_badge_replaces_privac
     assert later["privacy_reprocessed"] == later["attempted"] == 1
     assert workers.model_calls == [protected["id"], protected["id"]]
     assert "mdh-field-privacy-retry:v2" not in inbox.issues[1]["body"]
+
+
+def test_scope_routing_does_not_extract_unknown_historical_or_known_negative_news():
+    items = [candidate(n, historical=True) for n in range(1, 4)]
+    items += [candidate(4), candidate(5), candidate(6)]
+    inbox, extractors = PrivateInbox(items), Extractors()
+    report = process_queue(inbox, api_key=KEY, model='gemini-2.5-flash', limit=10,
+        eligible_ids={items[0]['id']}, excluded_ids={items[1]['id'], items[3]['id']},
+        priority_ids={items[0]['id']}, fetch=extractors.fetch, extract=extractors.extract,
+        now=NOW, sleep=lambda _: None)
+    assert items[0]['id'] in extractors.model_calls
+    assert not set(extractors.model_calls) & {item['id'] for item in items[1:4]}
+    assert len(set(extractors.model_calls) & {items[4]['id'], items[5]['id']}) == 1
+    assert report['ineligible'] == 3
+    assert report['unclassified_rss_attempts'] == 1

@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 from types import SimpleNamespace
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -492,7 +493,7 @@ def test_human_override_and_removal_request_take_precedence():
     document, reference, _ = inputs()
     value = receipt(document, reference)
     human = deepcopy(document["news_dossier"])
-    human.update(human_reviewed=True, reviewed_by="maintainer", reviewed_at=date.today().isoformat(),
+    human.update(human_reviewed=True, reviewed_by="maintainer", reviewed_at=datetime.now(ZoneInfo("America/El_Salvador")).date().isoformat(),
                  review_notes="Comprobados el texto, la atribución y la privacidad.")
     human["fields"]["summary"]["value"] = "Corrección editorial respaldada por la fuente."
     automatic, merged = project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference),
@@ -677,10 +678,12 @@ def test_cli_prints_safe_failure_report_then_exits_nonzero(tmp_path, monkeypatch
     monkeypatch.setenv("GITHUB_REPOSITORY", inbox.repository)
     monkeypatch.setenv("GH_TOKEN", "unit-test-token")
     monkeypatch.setenv("GEMINI_API_KEY", KEY)
+    monkeypatch.setenv("GITHUB_RUN_ID", "123")
     monkeypatch.setattr(module, "BudgetConfig", lambda **kw: SimpleNamespace(model=MODEL))
     monkeypatch.setattr(module, "GitHubInbox", lambda *a: inbox)
     monkeypatch.setattr(module, "GeminiBudget", lambda *a: Budget())
     monkeypatch.setattr(module, "evaluate_queue", lambda *a, **kw: report)
+    monkeypatch.setattr(module, "allocated_validation_grant", lambda *a, **kw: (3, "manual_allocation"))
     monkeypatch.setattr("sys.argv", ["automatic_news", "evaluate", "--inbox-dir", str(folder), "--archive", str(archive_path)])
     with pytest.raises(SystemExit) as error:
         module.main()

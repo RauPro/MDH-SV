@@ -12,10 +12,10 @@ on:
         default: '50'
         options: ['20', '50']
       automatic_validation_limit:
-        description: 'Techo de llamadas adicionales de evaluación; comparte el presupuesto gratuito de Gemini'
+        description: 'Techo de llamadas por lotes; el reparto compartido determina cuántas pueden ejecutarse'
         type: choice
-        default: '3'
-        options: ['1', '3', '5']
+        default: '50'
+        options: ['1', '2', '3', '5', '10', '50']
 permissions:
   contents: write
   issues: read
@@ -119,9 +119,11 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
           MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
-          VALIDATION_LIMIT: ${{ inputs.automatic_validation_limit || '3' }}
+          VALIDATION_LIMIT: ${{ inputs.automatic_validation_limit || '50' }}
+          VALIDATION_BATCH_SIZE: '4'
+          MDH_ALLOCATION_SOURCE_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.name == 'Preparar fichas con Gemini' && format('{0}', github.event.workflow_run.id) || '' }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.automatic_news evaluate --inbox-dir inbox --archive publication/apps/web/public/archive/news.json --excluded-ids excluded-locations.json --request-generations request-generations.json --limit "$VALIDATION_LIMIT"
+        run: python -m mdh_pipeline.automatic_news evaluate --inbox-dir inbox --archive publication/apps/web/public/archive/news.json --excluded-ids excluded-locations.json --request-generations request-generations.json --limit "$VALIDATION_LIMIT" --batch-size "$VALIDATION_BATCH_SIZE"
       - name: Proyectar campos validados y respetar correcciones humanas
         env:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src

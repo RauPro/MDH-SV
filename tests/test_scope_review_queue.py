@@ -584,3 +584,17 @@ def test_invalid_worker_limits_fail_before_source_access(arguments):
     _, _, data = fixtures()
     with pytest.raises(ValueError):
         run(Inbox(), Budget(), [], data, **arguments)
+
+
+def test_internal_updated_receipts_include_negative_decisions_and_only_confirmed_writes():
+    refs, _, data = fixtures(2)
+    def negative(items, **kwargs):
+        results = classify(items, **kwargs)
+        results[0]['classification']['relevance'] = 'not_relevant'
+        return results
+    result = run(Inbox(), Budget(), [], data, classify=negative)
+    assert len(result['updated_reviews']) == 2
+    negative_ids = {row['candidate_id'] for row in result['updated_reviews'] if row['classification']['relevance'] == 'not_relevant'}
+    assert len(negative_ids) == 1
+    assert not negative_ids.intersection(result['selected_ids'])
+    assert all('hacinamiento' not in json.dumps(row) for row in result['updated_reviews'])
