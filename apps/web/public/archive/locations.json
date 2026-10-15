@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T03:19:07.659696+00:00",
+  "generated_at": "2026-10-15T04:19:04.479261+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -6272,6 +6272,30 @@
         "model_paragraph_id": "p6",
         "explicit_paragraph_id": "p24",
         "rule_version": 1
+      }
+    },
+    {
+      "candidate_id": "fff436f67138891d50891a33b551c42cf458571511dff7cd6bebcb5757b0df21",
+      "source_url": "https://gatoencerrado.news/2018/07/25/el-dato-234-mujeres-asesinadas-en-el-salvador-en-lo-que-va-de-2018/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-07-25",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T04:18:16.788648+00:00",
+      "source_checked_at": "2026-10-15T04:18:16.788648+00:00",
+      "evidence": {
+        "paragraph_id": "p6",
+        "content_sha256": "d56a8d9cc1bd66edbeb89520a763754f97fb6214cce6b1d7896233a9323b403e"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Ana",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
       }
     }
   ]

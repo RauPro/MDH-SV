@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T03:19:10.281366+00:00",
+  "generated_at": "2026-10-15T04:15:34.529258+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 10943,
-      "selected": 1557,
-      "evaluated": 4482,
-      "relevant": 1557,
-      "excluded": 2922,
+      "selected": 1574,
+      "evaluated": 4514,
+      "relevant": 1574,
+      "excluded": 2937,
       "uncertain": 3,
-      "pending": 6461,
-      "evaluated_at": "2026-10-15T03:16:02.404888+00:00"
+      "pending": 6429,
+      "evaluated_at": "2026-10-15T04:15:31.775484+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-14",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1557,
+    "records": 1574,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1322,
+        "records": 1338,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-10",
         "months": [
@@ -1289,7 +1289,7 @@
           {
             "month": "2018-07",
             "status": "enumerated",
-            "records": 5,
+            "records": 21,
             "screen_version": 3,
             "posts_scanned": 1028,
             "source_total_posts": 1028,
@@ -2493,9 +2493,9 @@
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 54,
+        "records": 55,
         "first_published_date": "2014-09-21",
-        "last_published_date": "2018-06-28",
+        "last_published_date": "2018-07-25",
         "months": [
           {
             "month": "2010-01",
@@ -3724,7 +3724,7 @@
           {
             "month": "2018-07",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 19,
             "source_total_posts": 19,
@@ -21518,17 +21518,17 @@
         "month": "2018-07",
         "start_date": "2018-07-01",
         "end_date": "2018-07-31",
-        "records": 5,
+        "records": 22,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 5
+            "records": 21
           },
           {
             "source_id": "gatoencerrado",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "factum",
@@ -26295,6 +26295,786 @@
             "p18",
             "p32",
             "p33"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cd5a8a6f7b6b74b4aece00a47260b9603307563ce6c95685899ba70e21e72ae9",
+      "title": "Inicia proceso de consulta para ley de protección a la defensoría social",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/inicia-proceso-de-consulta-para-ley-de-proteccion-a-la-defensoria-social/",
+      "published_date": "2018-07-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184292,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:10:29.154626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "006b011bbdeb5a5cbb6cf18fbde1f70ba7939885d51abb0210646104eeb0a86d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fff436f67138891d50891a33b551c42cf458571511dff7cd6bebcb5757b0df21",
+      "title": "El dato: 234 mujeres asesinadas en El Salvador en lo que va de 2018",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2018/07/25/el-dato-234-mujeres-asesinadas-en-el-salvador-en-lo-que-va-de-2018/",
+      "published_date": "2018-07-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 6866,
+        "retrieved_at": "2026-10-10T18:02:39.731848+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:10:29.154626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d56a8d9cc1bd66edbeb89520a763754f97fb6214cce6b1d7896233a9323b403e",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f0c96c86e43f9f9a7630099b4be2c6655e95fc8d5350b2dddaddab1d779b3031",
+      "title": "El Salvador se suma a la Alianza Global para eliminar la violencia contra niñas, niños y jóvenes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-salvador-se-suma-a-la-alianza-global-para-eliminar-la-violencia-contra-ninas-ninos-y-jovenes/",
+      "published_date": "2018-07-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184173,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:10:29.154626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "69895f4e62141e7bf0464b86ddb19d0c75bb548b48741879afd4d799af515f49",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d654b6ab12a4d2eda25000c906cc3ae65ac91c8a9ae30cdcb70d31c95ae5cbf3",
+      "title": "APES e ISDEMU construyen alianza en defensa de la mujer periodista",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/apes-e-isdemu-construyen-alianza-en-defensa-de-la-mujer-periodista/",
+      "published_date": "2018-07-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184148,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:10:29.154626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fa71dc28263fa20887e78e03d2ec2c15f5a0bc813be92e4d07ea9495856be46d",
+          "jurisdiction_paragraph_ids": [
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "62e8f9ba55ca0af8b05efec22126616aa7da7f79adf0090c2eeb4baae3ea347d",
+      "title": "APES por una ley de protección al gremio periodístico",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/apes-por-una-ley-de-proteccion-al-gremio-periodistico/",
+      "published_date": "2018-07-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184071,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:10:29.154626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "328f076e9622398505051d6537dc6732b5877ca7e50e76911e4502cfe5b49d8e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "291a967266bfb8cea6bf6d3a169fee54150d4da36dc09f5bb1d09979dc94f974",
+      "title": "Fiscal explica a diputados procedimiento de investigación en casos de feminicidio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fiscal-explica-a-diputados-procedimiento-de-investigacion-en-casos-de-feminicidio/",
+      "published_date": "2018-07-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184087,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:10:29.154626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "85ffee67f7965f6967bff5e60a46046f6033a43a7a46ec3a9c857b1eeaed5de1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0523d628e96b77a7d2c57a597bc33a73f7cb36413b1d38d5e0b9b2427f69e6aa",
+      "title": "Organizaciones de derechos humanos piden ser incluidas en discusión de Ley Penitenciaria",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-de-derechos-humanos-piden-ser-incluidas-en-discusion-de-ley-penitenciaria/",
+      "published_date": "2018-07-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 183848,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:10:29.154626-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "4280dc14e4c1c214d1d04361109734c14f34771d099e93395a3cba0f38e87fa8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6198bc871cca742f3f845101422cea3f38118b6a84c93cf65a1235aaa204112a",
+      "title": "SIS y FGR capacitan sobre delitos contra población LGBTI",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sis-y-fgr-capacitan-sobre-delitos-contra-poblacion-lgbti/",
+      "published_date": "2018-07-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 182980,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "42a483e3ae7f36e73b12687b4760718675b7a2d18e598fb4bd16c614115e12fa",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7",
+            "p8",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "24e29ee2f6261af13d380b444ae94884afe011aafe4b4423d4073089c650f779",
+      "title": "Coronel Montano será procesado en España por “asesinato terrorista”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/coronel-montano-sera-procesado-en-espana-por-asesinato-terrorista/",
+      "published_date": "2018-07-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "espana"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 183002,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d7f27819e40086768960a1fd079324d330e2503dddf9fbaf16aadeb694eb3529",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "137c99144008070cb4334d84556da5425b9d42c4df66ca19d4b4dbf9638910dd",
+      "title": "Sector Justicia unificará cifras de homicidios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sector-justicia-unificara-cifras-de-homicidios/",
+      "published_date": "2018-07-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 183004,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "da5a8c9fcf136414b758ce2574c0e82fc6fe3c6242a6679559deba74b6ea1e19",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a21f00a9fe178061b40eba1a4b74bea64ff373c310f889d1e542dab3532ae874",
+      "title": "PNC y FGR capturan al presunto feminicida de Jocelyn Abarca",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-y-fgr-capturan-al-presunto-feminicida-de-jocelyn-abarca/",
+      "published_date": "2018-07-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 182837,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3b642580af0359c58c79c7f0bd9250c42742f98a2b88d27e2a0c568b5f76d819",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "29aad651544e9403a0816099853aabc312151f669c7a3969d2ddbc946d1556c9",
+      "title": "Comisión de la Verdad no señala al Presidente en desapariciones forzadas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/comision-de-la-verdad-no-senala-al-presidente-en-desapariciones-forzadas/",
+      "published_date": "2018-07-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 182839,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "15d94ade7a270ba6fba5427e441460aba6c4c2a97bf6a6f44b646384dfa08777",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "614c71a128265b2d268cef989d28be53f6376ec01ba33a447133ab4e8cdf0eac",
+      "title": "Tricamex pide medida migratoria respetuosa de derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/tricamex-pide-medida-migratoria-respetuosa-de-derechos-humanos/",
+      "published_date": "2018-07-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 182714,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "5901165a621dd94cc7f42bd9c3373d6c95377ff9cdebf8c26d3de6e5643d8606",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6a03d39ef730f66ba3116b569f1ebf2fa5eb5fba1e15d60741380bd376e0ca23",
+      "title": "APES: el periodismo desde los derechos humanos y género",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/apes-el-periodismo-desde-los-derechos-humanos-y-genero/",
+      "published_date": "2018-07-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion",
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 182470,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ec74eda3733e4d8698f2f079c4d4ba9d1498655be39ccf8111b9521812a98e42",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3bbad8a9aa1cf4cdbfe8e1c6e2d9c251fe4167089e27c337d2c1d72488151f42",
+      "title": "Formación policial es apegada a los derechos humanos: Jaime Martínez",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/formacion-policial-es-apegada-a-los-derechos-humanos-jaime-martinez-2/",
+      "published_date": "2018-07-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 182323,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "33f3460b5ac8ea9828571de7559ee517e52f10249db2b607bc2f9b4b7763d3f2",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "175de3ca75db4c4f5b91cfd360565484b04f3602a54de9fc68a11e90665cb47c",
+      "title": "Zona especial garantizará respeto a derechos laborales, dice Reyes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/zona-especial-garantizara-respeto-a-derechos-laborales-dice-reyes/",
+      "published_date": "2018-07-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 182295,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a8a065de83c68efb57a5ba5bda901e805dda7a117eb134e9dfbe167c22fd3cb7",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "245db7d2901fd3fabb1c6305bbc3a509ff93113c77b6336bf2a029936f3cae2a",
+      "title": "Formación policial es apegada a los derechos humanos: Jaime Martínez",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/formacion-policial-es-apegada-a-los-derechos-humanos-jaime-martinez/",
+      "published_date": "2018-07-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 182293,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T22:09:30.855603-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ca0feb308e1410b628959e91aab0549fb29923283b856dd809e90a6681b34785",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }
