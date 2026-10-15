@@ -1,0 +1,88 @@
+name: Conciliar issues de noticias
+on:
+  workflow_run:
+    workflows: [Publicar ubicaciones automáticas]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Actualizar estados; desactivar para comprobar sin modificar issues'
+        type: boolean
+        default: true
+      limit:
+        description: 'Máximo de transiciones, sujeto al límite compartido de 150 por hora'
+        type: choice
+        default: '150'
+        options: ['50', '150']
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: editorial-inbox
+  cancel-in-progress: false
+  queue: max
+jobs:
+  reconcile:
+    # A publisher can push valid data before a later step fails. Reconciliation
+    # reads the actual production datasets, never run artifacts or failed code.
+    if: >-
+      github.repository == 'RauPro/MDH-SV-review' &&
+      github.event.repository.private == true && github.ref == 'refs/heads/main' &&
+      (github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
+      github.event.workflow_run.name == 'Publicar ubicaciones automáticas' &&
+      github.event.workflow_run.path == '.github/workflows/publish-locations.yml' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      (github.event.workflow_run.conclusion == 'success' ||
+      github.event.workflow_run.conclusion == 'failure')))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: inbox
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: main
+          path: publication
+          sparse-checkout: |
+            data/history
+            data/selection
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Instalar entorno fijado
+        run: pip install -r monitor/ops/review-queue/requirements.txt
+      - name: Reconstruir todas las candidatas para comprobar decisiones
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: python -m mdh_pipeline.history --export-only --candidates-only --data-dir publication/data/history --output candidates.json
+      - name: Conciliar estados con publicaciones y decisiones existentes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+          RECONCILE_LIMIT: ${{ inputs.limit || '150' }}
+          RECONCILE_APPLY: ${{ github.event_name != 'workflow_dispatch' || inputs.apply }}
+        run: |
+          set -euo pipefail
+          private_revision="$(git -C inbox rev-parse HEAD)"
+          apply_args=()
+          if [ "$RECONCILE_APPLY" = 'true' ]; then apply_args+=(--apply); fi
+          python -m mdh_pipeline.news_issue_reconcile \
+            --inbox-dir inbox --archive candidates.json \
+            --scope-audits publication/data/selection/scope_audits.json \
+            --exceptions publication/data/selection/news_exceptions.json \
+            --private-revision "$private_revision" --limit "$RECONCILE_LIMIT" \
+            "${apply_args[@]}"

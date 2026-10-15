@@ -133,6 +133,47 @@ conserva también las protecciones de títulos y geografía en las descargas pú
 La publicación automática nunca añade registros al catálogo de casos ni modifica
 cifras oficiales. Véase [NEWS-DOSSIERS.md](https://github.com/RauPro/MDH-SV/blob/main/docs/NEWS-DOSSIERS.md).
 
+## Sincronización de los issues
+
+**Conciliar issues de noticias** (`reconcile-news-issues.yml`) se ejecuta después
+del publicador y admite ejecución manual. Comprueba las fichas realmente
+disponibles en producción y las decisiones privadas existentes; no llama a
+Gemini, vuelve a extraer artículos ni publica datos. Puede recuperar publicaciones
+válidas de una ejecución del publicador que termine con error, sin descargar
+sus artefactos ni ejecutar código procedente de esa ejecución.
+
+Una ficha publicada cierra su issue con `news/published`. Una exclusión válida
+y vigente lo cierra con `news/discarded`. En ambos casos elimina `review/pending`
+y conserva las demás etiquetas y decisiones humanas. Una ficha generada todavía
+sin publicar, un fallo reintentable o una decisión incierta mantienen el issue
+abierto. No se interpreta la ausencia de una ficha pública como un descarte.
+El recibo del issue enlaza la evidencia de publicación o la revisión privada
+fijada a un commit, sin copiar citas ni campos de la ficha. Las etiquetas
+automáticas no atribuyen revisión humana ni sustituyen `review/approved` o
+`review/rejected`.
+
+La conciliación es idempotente. Si cambia la evidencia y una noticia vuelve a
+estar pendiente, sólo puede reabrir cierres hechos por esta automatización;
+respeta los cierres y exclusiones humanos. Los recolectores deduplican contra
+issues abiertos y cerrados, por lo que no crean otro issue para una noticia
+ya conocida.
+
+Cada ejecución permite hasta 150 transiciones y reserva como máximo 150 en
+una ventana móvil de una hora, registrado en
+`runtime/news-issue-reconciliation.json`. La reserva se conserva si el resultado
+de una escritura es incierto. También deja un margen de 400 solicitudes de
+GitHub para la recolección y extracción. La recuperación del histórico avanza
+por lotes y puede necesitar varias horas: el contador de issues se corrige
+gradualmente, sin consumir las 240 llamadas diarias de Gemini. Una ejecución
+manual adicional respeta los mismos límites; desactivar `apply` permite
+consultar el plan sin modificar issues.
+
+El workflow usa el grupo compartido `editorial-inbox`. Su token permite modificar
+issues y guardar el registro de límite en el repositorio privado; no recibe
+secretos, clave de Gemini ni credenciales para escribir en el repositorio público.
+Las estadísticas oficiales y sus solicitudes de revisión quedan fuera de esta
+conciliación.
+
 ## Corregir una ficha por solicitud humana
 
 Las fichas ordinarias se publican automáticamente. Este procedimiento se conserva
