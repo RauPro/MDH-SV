@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T18:03:16.310413+00:00",
+  "generated_at": "2026-10-15T18:17:27.045071+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11404,
-      "selected": 1699,
+      "selected": 1710,
       "evaluated": 4887,
-      "relevant": 1699,
-      "excluded": 9,
-      "uncertain": 3179,
+      "relevant": 1710,
+      "excluded": 17,
+      "uncertain": 3160,
       "pending": 6517,
-      "evaluated_at": "2026-10-15T17:53:30.957119+00:00"
+      "evaluated_at": "2026-10-15T18:17:23.905746+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1699,
+    "records": 1710,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 178,
+        "records": 189,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15128,7 +15128,7 @@
           {
             "month": "2013-01",
             "status": "partial",
-            "records": 13,
+            "records": 24,
             "screen_version": 3,
             "posts_scanned": 79,
             "source_total_posts": null,
@@ -18680,7 +18680,7 @@
         "month": "2013-01",
         "start_date": "2013-01-01",
         "end_date": "2013-01-31",
-        "records": 13,
+        "records": 24,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18715,7 +18715,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 13
+            "records": 24
           }
         ]
       },
@@ -103041,6 +103041,90 @@
       }
     },
     {
+      "id": "093ec29a4f42aac35ea96b506318d72680a9b41da061f9764f5d61199d8b9daf",
+      "title": "Ventas deberán desalojar calles en tres semanas",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100932/ventas-deberan-desalojar-calles-en-tres-semanas.html",
+      "published_date": "2013-01-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "aa9834d292d4c1eee44a397e495623a53607f056fe214f7430fc0e08f9049277",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "010500f6af4df246ac9b2f24dc5cbebbb6fe07b6635527238e34bfaf46f9b5ea",
+      "title": "Decomiso de droga y nueve detenidos en bar de Zona Real",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100711/decomiso-de-droga-y-nueve-detenidos-en-bar-de-zona-real.html",
+      "published_date": "2013-01-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6b5de8d4877b99ebbaddf2002e733145fdd2f713113e9ad10694c5dae081e521",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
       "id": "e9892ee41d6983b7817252648c8fd837fbced857d5f8e5903fbcee5775ceb729",
       "title": "Buscan a dos adolescentes de 16 años desaparecidos",
       "title_truncated": false,
@@ -103080,6 +103164,270 @@
           "relevance_paragraph_ids": [
             "p1",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e26c178fbc63a4b4cec59359d207d92ff9f740648629b3da325f33bb515da4d2",
+      "title": "Capturan a nueve personas ligadas a narco apodado “Juan Colorado”",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/99955/capturan-a-nueve-personas-ligadas-a-narco-apodado-juan-colorado.html",
+      "published_date": "2013-01-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "9df97bf6688c564b03f824ad7ff7e54e332ba87f472862624377b35bba0f42b3",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b24bf596364003c45ee3b81c7d8ea0b801238bbecaa978b5044039a324ba6686",
+      "title": "Libres motoristas y cobradores detenidos por desórdenes en San Salvador y Aguilares",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100916/libres-motoristas-y-cobradores-detenidos-por-desordenes-en-san-salvador-y-aguilares.html",
+      "published_date": "2013-01-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1351617f6a16b4b52829a1fcdd6686a6e907bf01e51b971823c957c6e435501f",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9778d03b5a4eecd6b83a975231ddd53279a1af52ca30d2e082493f10fd488c09",
+      "title": "Fiscalía pedirá libertad para agente detenido",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100698/fiscalia-pedira-libertad-para-agente-detenido.html",
+      "published_date": "2013-01-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "65490486c9fdb27b1e443c390804985d884a992d828ca1c0446c4d259a86c438",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6bce608920a0d7d0bcf0b96ff634495294254094aa3f02521d427deaea82de82",
+      "title": "Protestan por desalojo de ventas",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100958/protestan-por-desalojo-de-ventas.html",
+      "published_date": "2013-01-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "524a140851efc72e74a81097eb085ade3b803a9d12a095850d7dcc5f1ebafcfa",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "830c8f551bdcc67f711072ab812bfa4ff03502a10b465e45f7c42344236108aa",
+      "title": "Persecución termina con un muerto y 2 detenidos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100778/persecucion-termina-con-un-muerto-y-2-detenidos.html",
+      "published_date": "2013-01-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "61e0bf69272bbfca96a110c017cf34b3431696f92feb7778bc8b48ea248cdf49",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3e19afc6fa4fc5fc7139f9684acd42c80c22e04d02daa8474ca148819cd5fdb8",
+      "title": "Un policía detenido tras asesinar a un asaltante en tiroteo",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/99307/un-policia-detenido-tras-asesinar-a-un-asaltante-en-tiroteo.html",
+      "published_date": "2013-01-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "131e67e33abf873080aa78d68c6b32b688f0ad39d8cb452d187bbfa13186818a",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5"
           ]
         }
       }
@@ -103250,6 +103598,135 @@
           ],
           "relevance_paragraph_ids": [
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3b7e5d1d2809171b5463c1311f1b68dbea4f7e24658fc36bd975da73cf659a8b",
+      "title": "Policía captura a 58 buseros acusados de desórdenes en la vía pública",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100491/policia-captura-a-58-buseros-acusados-de-desordenes-en-la-via-publica.html",
+      "published_date": "2013-01-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1b26373d3c799043138f798875eb4d1f84f0f69ec8c758fda31fefe32271d913",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p6",
+            "p8",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bc00a602794e4c1f05c936f27c9880fd5fd7f83eec84d3f2b3d8f35014639179",
+      "title": "Ordenan detención para oficial PNC por intentar robar carro",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101096/ordenan-detencion-para-oficial-pnc-por-intentar-robar-carro.html",
+      "published_date": "2013-01-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "db7b6642914dd8c9742699b46871dfa88f2db6f86da8e0493fa734d96c163894",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "10b0a93b1d90d4c5b195aaaa9189304eec0d3974ecb227bcb31198462b43fede",
+      "title": "Alcaldía desalojará a vendedores de acera",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101036/alcaldia-desalojara-a-vendedores-de-acera.html",
+      "published_date": "2013-01-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T12:09:41.256895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "624f14f670a6d6cf9050787f8b547017f459a654426755b01a7ff8015f75e60f",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }
