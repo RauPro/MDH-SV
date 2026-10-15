@@ -89,6 +89,13 @@ anteriores y se respetan las decisiones humanas existentes.
    `sync-news-processing.mjs`, validación de datos y auditoría del commit permitido.
 6. Push al repositorio público, del que Vercel despliega web, REST y MCP.
 
+Si una actualización simultánea de la hemeroteca causa un conflicto únicamente
+en el archivo generado `archive/news.json`, `news_git_publication` lo reconstruye
+con el historial y la selección combinados antes de continuar el rebase. Esta
+recuperación no llama a Gemini, conserva los cambios ajenos y vuelve a validar
+los datos antes del push. Otros conflictos o cambios fuera de los seis archivos
+generados permitidos detienen la publicación para su inspección.
+
 El límite de evaluación es un techo de llamadas por ejecución, no un presupuesto
 nuevo. `automatic_validation_limit` vale 50 por defecto; cada solicitud puede
 evaluar hasta cuatro fichas. La plantilla usa `VALIDATION_BATCH_SIZE=4` y
