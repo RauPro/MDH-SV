@@ -7,7 +7,9 @@ un único presupuesto horario repartido entre etapas según el trabajo elegible.
 La clasificación avanza a la vez que se extraen y validan noticias ya seleccionadas;
 no hace falta terminar el archivo completo para publicar fichas. `review-scope.yml` queda para pruebas
 manuales, sin otro disparo automático. Conserva evaluaciones en `scope-reviews/`
-y reintentos diferidos en `scope-attempts/`.
+y reintentos diferidos en `scope-attempts/`. Los descartes necesitan una segunda
+evaluación separada, guardada en `scope-verifications/`; ambas fases comparten
+la asignación de alcance y el mismo límite diario de Gemini.
 El publicador usa esas decisiones para actualizar selección, noticias y mapa.
 Las referencias ya seleccionadas se sincronizan con la cola privada en lotes de
 hasta 50 altas por ejecución, con pausas entre escrituras. Esa sincronización no
@@ -142,8 +144,9 @@ Gemini, vuelve a extraer artículos ni publica datos. Puede recuperar publicacio
 válidas de una ejecución del publicador que termine con error, sin descargar
 sus artefactos ni ejecutar código procedente de esa ejecución.
 
-Una ficha publicada cierra su issue con `news/published`. Una exclusión válida
-y vigente lo cierra con `news/discarded`. En ambos casos elimina `review/pending`
+Una ficha publicada cierra su issue con `news/published`. Una exclusión vigente
+con dos evaluaciones concordantes del mismo texto lo cierra con `news/discarded`.
+Una negativa aislada o una discrepancia permanece pendiente. En ambos casos terminales elimina `review/pending`
 y conserva las demás etiquetas y decisiones humanas. Una ficha generada todavía
 sin publicar, un fallo reintentable o una decisión incierta mantienen el issue
 abierto. No se interpreta la ausencia de una ficha pública como un descarte.
@@ -154,7 +157,11 @@ automáticas no atribuyen revisión humana ni sustituyen `review/approved` o
 
 La conciliación es idempotente. Si cambia la evidencia y una noticia vuelve a
 estar pendiente, sólo puede reabrir cierres hechos por esta automatización;
-respeta los cierres y exclusiones humanos. Los recolectores deduplican contra
+respeta los cierres y exclusiones humanos. Los cierres históricos de una sola
+evaluación se reabren con `news/recheck`; las solicitudes auditadas de
+`runtime/news-scope-rechecks.json` tienen prioridad sobre el resto del histórico.
+Las noticias de homicidios, sus cifras y seguimiento entran en el alcance desde
+2010 sin exigir una denuncia jurídica adicional. Los recolectores deduplican contra
 issues abiertos y cerrados, por lo que no crean otro issue para una noticia
 ya conocida.
 

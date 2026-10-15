@@ -1,4 +1,4 @@
-export const NEWS_SELECTION_PROMPTS: readonly ['mdh-universal-news-grounded-8-relevance-scope', 'mdh-universal-news-grounded-9-inclusive-context', 'mdh-news-scope-1', 'mdh-news-scope-2-inclusive-context', 'mdh-news-scope-3-rights-nexus', 'mdh-universal-news-grounded-10-rights-nexus'];
+export const NEWS_SELECTION_PROMPTS: readonly ['mdh-universal-news-grounded-8-relevance-scope', 'mdh-universal-news-grounded-9-inclusive-context', 'mdh-news-scope-1', 'mdh-news-scope-2-inclusive-context', 'mdh-news-scope-3-rights-nexus', 'mdh-universal-news-grounded-10-rights-nexus', 'mdh-universal-news-grounded-11-inclusive-violence', 'mdh-news-scope-4-inclusive-violence', 'mdh-news-exclusion-1-inclusive-violence'];
 export type NewsSelection = {
   method: 'gemini_grounded_scope'; review_status: 'automated_unreviewed'; human_reviewed: false; jurisdiction: 'SV'; relevance: 'relevant';
   classified_at: string; model: string; prompt_version: typeof NEWS_SELECTION_PROMPTS[number];

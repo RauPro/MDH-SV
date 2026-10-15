@@ -3,9 +3,13 @@
 El monitor publica posibles afectaciones de derechos humanos y contexto
 sustantivo de su ejercicio, protección, defensa, reparación o memoria histórica,
 con vínculo con El Salvador. Incluye leyes, políticas, investigaciones y trabajo
-de defensores; no exige una violación probada ni una víctima identificada. Delitos
-comunes, deportes o política general no bastan por sí solos, ni palabras como
-«captura», «prisión» o «periodista».
+de defensores; no exige una violación probada ni una víctima identificada.
+Incluye los reportes de homicidios vinculados a El Salvador o a personas
+salvadoreñas desde 2010: hechos, cifras, tendencias y seguimiento policial o
+judicial. No exige otra denuncia de abuso ni la expresión «derechos humanos».
+Clasificar una noticia como pertinente no acredita sus hechos ni determina
+responsabilidad jurídica. Deportes, entretenimiento y asuntos sin vínculo
+sustantivo siguen fuera; la duda mantiene una candidata pendiente.
 
 ## Descubrimiento y publicación
 
@@ -48,23 +52,25 @@ controles diferentes.
 
 ## Clasificación antes de las fichas
 
-La política `mdh-news-scope-3-rights-nexus` clasifica directamente
+La política `mdh-news-scope-4-inclusive-violence` clasifica directamente
 cualquier referencia tras leer su fuente: no exige ficha, issue ni etiqueta
 positiva anterior. Incluye hacinamiento y reinserción como contexto cuando el
 artículo trata sustantivamente esas cuestiones, sin convertir una política
 pública en una denuncia de violación. Las fichas nuevas usan
-`mdh-universal-news-grounded-10-rights-nexus`. La evaluación de alcance v3
+`mdh-universal-news-grounded-11-inclusive-violence`. La evaluación de alcance v4
 prevalece sobre la clasificación auxiliar de una ficha del mismo texto.
-Una condena, una investigación por corrupción o la justicia ordinaria por sí
-solas no acreditan pertinencia: hace falta una afectación, riesgo o protección
-concreta de derechos. El vínculo con El Salvador debe corresponder a ese mismo
-asunto, no a una mención incidental separada.
+Una noticia policial o judicial no se descarta por su formato: homicidios,
+violencia de género, niñez, desapariciones y muertes bajo custodia son pertinentes.
+También se admite contexto laboral, vivienda, agua, salud, migración y garantías.
+Basta un hecho pertinente dentro de una nota de varios sucesos. El vínculo con
+El Salvador debe corresponder a ese asunto; no se inventa a partir del medio.
 
 El job horario clasifica primero y completa fichas después, bajo una única
-reserva horaria. Asigna aproximadamente el 70% de las solicitudes a clasificación
-(máximo ocho); el resto, incluidos recursos no usados por esa fase, a fichas.
-Con diez solicitudes disponibles, el reparto inicial es siete y tres. Cada
-solicitud clasifica hasta dieciséis artículos, reduciendo el lote según el tamaño
+reserva horaria. Con diez solicitudes, el reparto normal es dos para alcance,
+seis para extracción y dos para validar fichas en lotes de hasta cuatro. Las
+dos de alcance se comparten entre primera clasificación y segunda validación
+de descartes; no se suman por encima de la reserva. La primera solicitud puede
+clasificar hasta dieciséis artículos, reduciendo el lote según el tamaño
 del JSON completo, con el mismo máximo de 100.000 unidades conservadoras de
 entrada. La fase tiene hasta 720 segundos para aprovechar su asignación sin
 aumentar solicitudes. El máximo de salida sigue en 4.096 tokens; una respuesta
@@ -89,7 +95,8 @@ descargan código, logs ni artefactos de la ejecución fallida y su alerta perma
 
 Las decisiones quedan en `scope-reviews/`; v2 conserva un recibo de lectura con
 fecha, método, truncamiento y hash, sin cuerpo. Las evaluaciones con políticas
-v1/v2 se reanalizan una vez antes de continuar con referencias nuevas, sin
+negativas anteriores se reanalizan bajo la política inclusiva. Los positivos
+v3 válidos se conservan. Las solicitudes auditadas tienen prioridad sin
 reiniciar el contador de uso. Una ficha
 puede conservar otro snapshot: no bloquea la clasificación de una lectura nueva
 ni convierte los datos antiguos en campos aprobados.
@@ -105,21 +112,46 @@ la pausa global ante 429. No se eleva el tope diario ni se habilita facturación
 
 ## Correcciones automáticas trazables
 
+Una negativa inicial no es un descarte definitivo. La segunda evaluación usa
+`mdh-news-exclusion-1-inclusive-violence`, en una petición separada de Gemini,
+sin recibir el veredicto anterior y con hasta ocho artículos de texto completo.
+Sólo dos decisiones concordantes sobre el mismo eje negativo pueden excluir.
+La segunda debe identificar párrafos del asunto efectivamente tratado. Un cambio
+de texto, entrada truncada o discrepancia mantiene pendiente; si la segunda
+identifica pertinencia salvadoreña, se conserva esa evaluación positiva.
+
+Los recibos de `scope-verifications/` vinculan ambas evaluaciones, el hash del
+texto, el hash de la primera decisión, versiones, fechas y motivos acotados.
+No guardan cuerpos ni citas. Una segunda consulta al mismo proveedor no es
+corroboración independiente de los hechos y no garantiza ausencia de errores.
+Las discrepancias se reintentan con una pausa de siete días; los reintentos
+consumen el mismo límite diario y la misma reserva de la fase.
+
+`runtime/news-scope-rechecks.json` conserva las solicitudes de reevaluación de
+la auditoría. Los cierres automáticos afectados se reabren prioritariamente con
+`news/recheck` y `review/pending`; los descartes históricos sin doble validación
+también vuelven a pendientes. Una evaluación antigua no permite cerrarlos otra
+vez. Los cierres y retiros humanos conservan prioridad.
+
+Una inconsistencia conocida entre el título y el cuerpo queda vinculada a su
+hash y no se vuelve a enviar a Gemini mientras persista. Si el medio corrige
+el contenido, puede reintentarse con el texto nuevo. Los campos faltantes de
+una noticia válida no se confunden con una fuente incoherente.
+
 `data/selection/scope_audits.json` conserva exclusiones tras comprobar una fuente
 que el clasificador interpretó incorrectamente. Son decisiones automáticas, con
 `human_reviewed: false`, identidad bibliográfica, fecha, motivo acotado y hash
 del texto; nunca contienen fichas, citas ni identidades extraídas. Una corrección
-sólo prevalece sobre una evaluación automática del mismo contenido. Un texto
+anterior conserva su historial, pero no sustituye la doble validación actual
+ni bloquea una nueva evaluación positiva bajo la política inclusiva. Un texto
 nuevo requiere otra evaluación y las decisiones humanas conservan prioridad.
-El publicador aplica este registro al regenerar los recuentos, para impedir que
-un lote posterior reincorpore silenciosamente el mismo falso positivo.
 
 ## Interpretar los recuentos
 
 El manifiesto v2 conserva `assessment_counts`. `evaluated` es la suma de
 `relevant`, `excluded` y `uncertain`; `pending = candidates - evaluated`.
 Las noticias sin evaluación nunca se suman a descartes. Las negativas antiguas
-pendientes de reevaluar son inciertas. Las decisiones humanas prevalecen.
+o sin segunda validación concordante son inciertas. Las decisiones humanas prevalecen.
 
 El archivo público expone esos recuentos en `policy.selection_gate`, con la fecha
 del snapshot `evaluated_at`. `selected` cuenta lo disponible tras decisiones

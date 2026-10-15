@@ -219,7 +219,8 @@ def evaluate_queue_batched(inbox, inbox_dir, archive, *, api_key, model, budget,
                 report["cached"] += 1
                 continue
         receipt = deepcopy(previous) if previous and previous["fingerprint"] == item["fingerprint"] else single._receipt(document, reference, item["generation"], now=now)
-        if ((receipt["status"] == "source_changed" and single._selection_hash(reference) == document["extraction"]["content_sha256"])
+        if (single.needs_scope_reassessment(receipt, reference)
+                or (receipt["status"] == "source_changed" and single._selection_hash(reference) == document["extraction"]["content_sha256"])
                 or (receipt["status"] in single.TERMINAL and single._selection_hash(reference) != document["extraction"]["content_sha256"])):
             receipt = single._receipt(document, reference, item["generation"], now=now)
         item.update(receipt=receipt, sha=sha)

@@ -342,9 +342,9 @@ def test_all_prior_policy_decisions_including_positives_are_reclassified_only_on
                current_review(refs[6], relevance="not_relevant")]
     inbox = Inbox()
     result = run(inbox, Budget(), [], data, scope_reviews=reviews)
-    assert result["cached"] == 1 and result["classified"] == 6
+    assert result["cached"] == 0 and result["classified"] == 7
     stored = {review["candidate_id"]: review for review in inbox.documents("scope-reviews")}
-    assert set(stored) == {ref["id"] for ref in refs[:6]}
+    assert set(stored) == {ref["id"] for ref in refs}
     assert all(value["extraction"]["prompt_version"] == SCOPE_PROMPT for value in stored.values())
     combined = [stored.get(value["candidate_id"], value) for value in reviews]
     result = run(inbox, Budget(), [], data, scope_reviews=combined,
@@ -592,9 +592,282 @@ def test_internal_updated_receipts_include_negative_decisions_and_only_confirmed
         results = classify(items, **kwargs)
         results[0]['classification']['relevance'] = 'not_relevant'
         return results
-    result = run(Inbox(), Budget(), [], data, classify=negative)
+    result = run(Inbox(), Budget(), [], data, classify=negative, max_requests=1)
     assert len(result['updated_reviews']) == 2
     negative_ids = {row['candidate_id'] for row in result['updated_reviews'] if row['classification']['relevance'] == 'not_relevant'}
     assert len(negative_ids) == 1
     assert not negative_ids.intersection(result['selected_ids'])
     assert all('hacinamiento' not in json.dumps(row) for row in result['updated_reviews'])
+
+
+def negative_classifier(items, **kwargs):
+    results = classify(items, **kwargs)
+    for result in results:
+        result["classification"]["relevance"] = "not_relevant"
+    return results
+
+
+def verify_fixture(items, *, budget, now=NOW, outcome="confirmed_excluded", **kwargs):
+    from test_news_exclusions import receipt_fixture
+    from mdh_pipeline.news_exclusions import prepare_verification_batch
+    assert budget.requests_this_run < budget.request_limit
+    prepare_verification_batch(items)
+    budget.requests_this_run += 1
+    rows = []
+    for item in items:
+        row = receipt_fixture(item["reference"], item["first_review"], outcome=outcome, now=now)
+        row["second_review"]["source_read"] = {key: item["article"][key]
+            for key in ("fetched_at", "extraction_method", "truncated", "content_sha256")}
+        rows.append(row)
+    return rows
+
+
+def matching_negative(ref):
+    # A real current first decision on this exact fetched source, no fake digest.
+    return negative_classifier([{"reference": ref, "article": fetched(ref)}], budget=SimpleNamespace(
+        requests_this_run=0, request_limit=1), model=Budget.config.model)[0]
+
+
+def test_one_scope_call_leaves_new_negatives_pending_without_a_second_call():
+    refs, _, data = fixtures(8)
+    result = run(Inbox(), Budget(), [], data, classify=negative_classifier, max_requests=1,
+        verify=lambda *a, **k: pytest.fail("no grant for a second assessment"))
+    assert result["classified"] == 8 and result["verified"] == 0 and result["remaining"] == 8
+    assert result["http_requests"] == 1 and result["selected_ids"] == []
+    assert result["updated_verifications"] == []
+
+
+def test_new_negative_then_second_pass_share_exact_two_call_allowance():
+    refs, _, data = fixtures(8)
+    inbox = Inbox()
+    result = run(inbox, Budget(), [], data, classify=negative_classifier, verify=verify_fixture)
+    assert result["classified"] == result["verified"] == result["confirmed_excluded"] == 8
+    assert result["http_requests"] == 2 and result["remaining"] == 0
+    assert result["sources_checked"] == 8  # reuse the identical in-memory source
+    assert len(inbox.documents("scope-verifications")) == 8
+    assert result["selected_ids"] == []
+
+
+def test_second_positive_is_persisted_after_provenance_and_selected_without_reextraction():
+    refs, _, data = fixtures(2)
+    inbox = Inbox()
+    result = run(inbox, Budget(), [], data, classify=negative_classifier,
+        verify=lambda *a, **k: verify_fixture(*a, outcome="retained", **k))
+    assert result["retained"] == result["accepted"] == 2 and result["remaining"] == 0
+    assert result["http_requests"] == 2
+    assert result["selected_ids"] == sorted(ref["id"] for ref in refs)
+    for ref in refs:
+        paths = [path for path, _ in inbox.puts if ref["id"] in path]
+        assert [path.split("/contents/")[1].split("/")[0] for path in paths] == [
+            "scope-reviews", "scope-verifications", "scope-reviews"]
+
+
+def test_existing_second_pass_and_first_pass_each_receive_one_shared_call():
+    refs, _, data = fixtures(24)
+    reviews = [matching_negative(ref) for ref in refs[:8]]
+    result = run(Inbox(), Budget(), [], data, scope_reviews=reviews, classify=classify, verify=verify_fixture)
+    assert result["http_requests"] == 2
+    assert result["classified"] == 16 and result["verified"] == 8
+    assert result["accepted"] == 16 and result["confirmed_excluded"] == 8 and result["remaining"] == 0
+
+
+def test_verification_only_work_uses_idle_first_pass_capacity_without_extra_grants():
+    refs, _, data = fixtures(16)
+    reviews = [matching_negative(ref) for ref in refs]
+    result = run(Inbox(), Budget(), [], data, scope_reviews=reviews, verify=verify_fixture,
+        classify=lambda *a, **k: pytest.fail("all first assessments exist"))
+    assert result["verified"] == result["confirmed_excluded"] == 16
+    assert result["http_requests"] == 2 and result["classified"] == 0 and result["remaining"] == 0
+
+
+def test_changed_source_invalidates_first_negative_and_reclassifies_before_verification():
+    refs, _, data = fixtures()
+    prior = matching_negative(refs[0])
+    result = run(Inbox(), Budget(), [], data, scope_reviews=[prior],
+        fetch=lambda r: fetched(r, length=120), verify=lambda *a, **k: pytest.fail("source changed"))
+    assert result["source_changed"] == 1 and result["classified"] == result["accepted"] == 1
+    assert result["verified"] == 0 and result["http_requests"] == 1
+
+
+def test_cached_confirmed_exclusion_needs_no_source_reads_or_calls():
+    from test_news_exclusions import receipt_fixture
+    refs, _, data = fixtures()
+    receipt = receipt_fixture(refs[0], matching_negative(refs[0]), now=NOW)
+    result = run(Inbox(), Budget(), [], data, scope_reviews=[receipt["first_review"]], verifications=[receipt],
+        fetch=lambda r: pytest.fail("confirmed cache should not fetch"))
+    assert result["cached"] == 1 and result["remaining"] == result["http_requests"] == 0
+
+
+def test_cached_uncertain_verification_does_not_retry_before_seven_days():
+    from test_news_exclusions import receipt_fixture
+    refs, _, data = fixtures()
+    receipt = receipt_fixture(refs[0], matching_negative(refs[0]), outcome="uncertain", now=NOW)
+    result = run(Inbox(), Budget(), [], data, scope_reviews=[receipt["first_review"]], verifications=[receipt],
+        now=NOW + timedelta(days=6), fetch=lambda r: pytest.fail("uncertain cooldown"))
+    assert result["http_requests"] == 0 and result["selected_ids"] == []
+
+
+def test_current_positive_from_preceding_policy_is_not_reclassified():
+    refs, _, data = fixtures()
+    prior = current_review(refs[0])
+    prior["extraction"]["prompt_version"] = "mdh-news-scope-3-rights-nexus"
+    result = run(Inbox(), Budget(), [], data, scope_reviews=[prior], fetch=lambda r: pytest.fail("positive still valid"))
+    assert result["cached"] == 1 and result["selected_ids"] == [refs[0]["id"]]
+    assert result["http_requests"] == 0
+
+
+def test_priority_news_are_classified_before_the_ordinary_historical_tail():
+    refs, _, data = fixtures(17)
+    refs[16]["published_date"] = "2026-10-01"
+    seen = []
+    def remember(items, **kwargs):
+        seen.extend(item["reference"]["id"] for item in items)
+        return classify(items, **kwargs)
+    result = run(Inbox(), Budget(), [], data, priority_ids=[refs[16]["id"]], classify=remember, max_requests=1)
+    assert seen[0] == refs[16]["id"] and result["http_requests"] == 1
+
+
+def test_retained_receipt_recovers_interrupted_positive_write_without_another_model_call():
+    from test_news_exclusions import receipt_fixture
+    refs, _, data = fixtures()
+    receipt = receipt_fixture(refs[0], matching_negative(refs[0]), outcome="retained", now=NOW)
+    inbox = Inbox()
+    result = run(inbox, Budget(), [], data, scope_reviews=[receipt["first_review"]], verifications=[receipt],
+        fetch=lambda r: pytest.fail("persisted second assessment should be reused"))
+    assert result["retained"] == 1 and result["http_requests"] == 0
+    assert result["selected_ids"] == [refs[0]["id"]]
+    assert inbox.documents("scope-reviews") == [receipt["second_review"]]
+    from mdh_pipeline.news_exclusions import scope_needs_work
+    assert scope_needs_work(receipt["first_review"], receipt, refs[0], now=NOW)
+    assert not scope_needs_work(receipt["second_review"], receipt, refs[0], now=NOW)
+
+
+def test_missing_verification_write_receipt_prevents_positive_overwrite_and_selection():
+    refs, _, data = fixtures()
+    prior = matching_negative(refs[0])
+    inbox = Inbox()
+    inbox.invalid_receipt = True
+    with pytest.raises(ValueError, match="scope_write_receipt_invalid"):
+        run(inbox, Budget(), [], data, scope_reviews=[prior],
+            verify=lambda *a, **k: verify_fixture(*a, outcome="retained", **k))
+    assert inbox.documents("scope-reviews") == []
+
+
+def test_audited_legacy_positive_is_reclassified_once_while_new_policy_positive_is_cached():
+    refs, _, data = fixtures()
+    prior = current_review(refs[0])
+    prior["extraction"]["prompt_version"] = "mdh-news-scope-3-rights-nexus"
+    inbox = Inbox()
+    result = run(inbox, Budget(), [], data, scope_reviews=[prior], priority_ids=[refs[0]["id"]])
+    assert result["classified"] == result["http_requests"] == 1
+    result = run(Inbox(), Budget(), [], data, scope_reviews=inbox.documents("scope-reviews"),
+        priority_ids=[refs[0]["id"]], fetch=lambda r: pytest.fail("current audit review already processed"))
+    assert result["cached"] == 1 and result["http_requests"] == 0
+
+
+def test_audited_corrupt_source_hash_stays_pending_without_spending_gemini_calls():
+    from test_news_scope_rechecks import document, request
+    refs, _, data = fixtures()
+    body_hash = fetched(refs[0])["content_sha256"]
+    receipt = document(request(refs[0], source_content_sha256=body_hash,
+        requested_at=(NOW - timedelta(hours=1)).isoformat(), reason_code="source_content_mismatch"))
+    inbox = Inbox()
+    result = run(inbox, Budget(), [], data, rechecks=receipt,
+        classify=lambda *a, **k: pytest.fail("known corrupt source cannot reach Gemini"))
+    assert result["source_unavailable"] == 1 and result["http_requests"] == 0
+    attempt = inbox.documents("scope-attempts")[0]
+    assert attempt["error_code"] == "source_content_mismatch"
+    assert datetime.fromisoformat(attempt["next_retry_at"]) == NOW + timedelta(days=7)
+    assert result["selected_ids"] == [] and result["remaining"] == 1
+
+
+def test_audit_request_bypasses_older_source_backoff_once_but_new_failure_keeps_backoff():
+    from test_news_scope_rechecks import document, request
+    refs, _, data = fixtures()
+    audit = document(request(refs[0], requested_at=(NOW - timedelta(hours=1)).isoformat()))
+    older = {"schema_version": 1, "candidate_id": refs[0]["id"], "source_url": refs[0]["source_url"],
+        "status": "source_unavailable", "error_code": "source_access_restricted",
+        "attempted_at": (NOW - timedelta(hours=2)).isoformat(),
+        "next_retry_at": (NOW - timedelta(hours=2) + timedelta(days=7)).isoformat()}
+    inbox = Inbox()
+    def blocked(ref):
+        raise SourceFetchError("source_access_restricted")
+    result = run(inbox, Budget(), [], data, rechecks=audit, attempts=[older], fetch=blocked)
+    assert result["sources_checked"] == result["source_unavailable"] == 1 and result["retry_deferred"] == 0
+    result = run(Inbox(), Budget(), [], data, rechecks=audit, attempts=inbox.documents("scope-attempts"),
+        fetch=lambda ref: pytest.fail("fresh audit failure must retain bounded backoff"))
+    assert result["retry_deferred"] == 1 and result["sources_checked"] == result["http_requests"] == 0
+
+
+def test_scope_deadline_proxy_guards_every_reservation_and_dispatch():
+    from mdh_pipeline.scope_review_queue import _ScopeDeadlineBudget
+    clock = [0]
+    calls = []
+    base = SimpleNamespace(requests_this_run=0, reserve=lambda value: calls.append("reserve") or value,
+        assert_dispatch_allowed=lambda value: calls.append("dispatch"), record_429=lambda: "cooldown")
+    proxy = _ScopeDeadlineBudget(base, 60, lambda: clock[0])
+    proxy.reserve({"request": 1})
+    proxy.assert_dispatch_allowed({})
+    proxy.requests_this_run += 1
+    assert base.requests_this_run == 1 and proxy.record_429() == "cooldown"
+    clock[0] = 60
+    with pytest.raises(QuotaDeferred, match="run_time_limit"):
+        proxy.reserve({"retry": 2})
+    with pytest.raises(QuotaDeferred, match="run_time_limit"):
+        proxy.assert_dispatch_allowed({})
+    assert calls == ["reserve", "dispatch"]
+
+
+def test_scope_phase_cap_stops_http_retry_even_when_global_run_allowance_is_larger(monkeypatch):
+    from mdh_pipeline.news_scope import classify_scope_batch
+    from test_gemini_budget import ready
+    from test_news_scope import Session, Response
+    refs, _, data = fixtures()
+    budget, ledger, _ = ready()
+    budget.set_request_limit(50)
+    session = Session([Response({}, status=503)])
+    monkeypatch.setattr("mdh_pipeline.gemini_draft.time.sleep", lambda seconds: None)
+    def real_classifier(items, **kwargs):
+        return classify_scope_batch(items, request_session=session, **kwargs)
+    result = run(Inbox(), budget, [], data, max_requests=1, classify=real_classifier)
+    assert result["http_requests"] == ledger.document()["used_requests"] == len(session.calls) == 1
+    assert result["stopped_reason"] == "budget_deferred"
+    assert result["quota_reason"] == "run_budget_exhausted"
+    assert budget.request_limit == 50
+
+
+def test_same_run_retained_second_assessment_routes_latest_unique_review_to_extraction():
+    from mdh_pipeline.gemini_review import _refresh_scope_workload
+    from mdh_pipeline.news_scope_policy import EXCLUSION_PROMPT
+    refs, _, data = fixtures(2)
+    inbox = Inbox()
+    result = run(inbox, Budget(), [], data, classify=negative_classifier,
+        verify=lambda *a, **k: verify_fixture(*a, outcome="retained", **k))
+    updated = result["updated_reviews"]
+    assert len(updated) == len({row["candidate_id"] for row in updated}) == 2
+    assert all(row["extraction"]["prompt_version"] == EXCLUSION_PROMPT for row in updated)
+    assert all(row["classification"] == {"jurisdiction": "SV", "relevance": "relevant"} for row in updated)
+    # Both writes remain tracked, but only the latest acknowledged value is routed.
+    assert len([path for path, _ in inbox.puts if "/scope-reviews/" in path]) == 4
+    class RoutingInbox:
+        base = "/repos/example/private"
+        def call(self, method, path, **kwargs):
+            assert method == "GET" and path.endswith("/issues")
+            return []
+    workload = _refresh_scope_workload(RoutingInbox(), data, [], [], [], updated,
+        excluded=set(), now=NOW, scope_audits=None, updated_verifications=result["updated_verifications"])
+    assert workload["selected_ids"] == {ref["id"] for ref in refs}
+    assert workload["extraction_pending"] == 2 and workload["scope_pending"] == 0
+    assert workload["excluded_ids"] == set()
+
+
+def test_recovered_and_fresh_reviews_share_one_bounded_update_inventory():
+    from test_news_exclusions import receipt_fixture
+    refs, _, data = fixtures(53)
+    receipts = [receipt_fixture(ref, matching_negative(ref), outcome="retained", now=NOW) for ref in refs[:21]]
+    result = run(Inbox(), Budget(), [], data, scope_reviews=[row["first_review"] for row in receipts],
+        verifications=receipts, max_requests=1)
+    assert result["retained"] == 21
+    assert result["sources_checked"] == result["classified"] == 11
+    assert len(result["updated_reviews"]) == 32  # max_requests * batch_size * 2
+    assert result["http_requests"] == 1 and result["stopped_reason"] == "source_check_limit"

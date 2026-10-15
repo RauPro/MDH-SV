@@ -18,12 +18,13 @@ from .gemini_review import candidate_from_issue, _load_phase_documents
 from .news_dossier import empty_news_dossier
 from .news_issue_state import build_issue_state_indexes, candidate_matches_terminal
 from .news_requests import read_json, withdrawn_ids
+from .news_scope_rechecks import load_rechecks
 from .review_queue import GitHubInbox, GitHubRequestError
 
 REPOSITORY = "RauPro/MDH-SV-review"
 PRODUCTION = "https://mdh-sv.vercel.app"
 STATE_PATH = "runtime/news-issue-reconciliation.json"
-LABELS = {"news/published": "16815D", "news/discarded": "6B7280"}
+LABELS = {"news/published": "16815D", "news/discarded": "6B7280", "news/recheck": "D97706"}
 MAX_TRANSITIONS = 150
 PRIMARY_RESERVE = 400
 MAX_PAGES = 200
@@ -213,8 +214,12 @@ def transition_payload(issue, transition, *, private_revision, now):
     labels = _labels(issue) - set(LABELS) - {"review/pending"}
     if status == "pending":
         labels.add("review/pending")
-        title = "Pendiente de procesamiento"
-        detail = "La evidencia vigente ya no confirma el cierre anterior. Se reabre para continuar el procesamiento automático."
+        labels.add("news/recheck")
+        title = "Pendiente de reevaluación"
+        detail = {"audit_recheck": "La auditoría solicitó una reevaluación prioritaria. La decisión anterior no permite volver a cerrar esta noticia.",
+                  "source_content_mismatch": "El título y el cuerpo publicado por la fuente son incoherentes. Se conserva pendiente hasta obtener una fuente coherente; no se descarta ni se inventan datos.",
+                  "exclusion_requires_verification": "La exclusión anterior tenía una sola evaluación. Se reabre para aplicar la política inclusiva y una segunda validación antes de cualquier descarte."}.get(
+                      transition["reason"], "La evidencia vigente ya no confirma el cierre anterior. Se reabre para continuar el procesamiento automático.")
     elif status == "published":
         labels.add("news/published")
         title = "Ficha publicada"
@@ -228,6 +233,7 @@ def transition_payload(issue, transition, *, private_revision, now):
         detail = reasons[transition["reason"]]
         if transition["reason"] != "editorial_rejection":
             detail += f"\n\n[Clasificación guardada](https://github.com/{REPOSITORY}/blob/{private_revision}/scope-reviews/{identifier}.json)."
+            detail += f"\n\n[Segunda validación concordante](https://github.com/{REPOSITORY}/blob/{private_revision}/scope-verifications/{identifier}.json)."
     digest = transition.get("content_sha256")
     proof = f"\n\nHuella del texto evaluado: `{digest}`." if digest else ""
     block = ("<!-- mdh-news-lifecycle:start -->\n"
@@ -260,8 +266,10 @@ def reconcile(inbox, terminals, *, private_revision, run_id=None, apply=False, l
     issues = issue_snapshot(inbox) if issues is None else issues
     planned = [(row, transition) for row in issues
                if (transition := desired_transition(row, terminals, excluded_ids=excluded_ids, reopen=reopen)) is not None]
-    # Published dossiers first, then reopen changed decisions, then historical exclusions.
-    planned.sort(key=lambda pair: ({"published": 0, "pending": 1, "discarded": 2}[pair[1]["status"]], pair[0]["number"]))
+    # Recover audited errors first; otherwise a large legacy backlog could keep
+    # the concrete findings closed for hours despite an explicit recheck request.
+    planned.sort(key=lambda pair: (0 if pair[1]["reason"] in {"audit_recheck", "source_content_mismatch"}
+        else {"published": 1, "pending": 2, "discarded": 3}[pair[1]["status"]], pair[0]["number"]))
     report = {"issues_scanned": len(issues), "planned": dict(Counter(t["status"] for _, t in planned)),
               "changed": {"published": 0, "discarded": 0, "pending": 0}, "concurrent_changes": 0,
               "remaining_transitions": len(planned), "gemini_calls": 0, "dry_run": not apply}
@@ -326,6 +334,8 @@ def main():
         public_news, public_dossiers = production_snapshot()
         evidence = dict(archive=read_json(args.archive), published_archive=public_news,
             published_dossiers=public_dossiers, scope_reviews=_load_phase_documents(args.inbox_dir, "scope-reviews", maximum_bytes=30_000),
+            scope_verifications=_load_phase_documents(args.inbox_dir, "scope-verifications", maximum_bytes=60_000),
+            rechecks=load_rechecks(args.inbox_dir / "runtime/news-scope-rechecks.json"),
             drafts=_load_phase_documents(args.inbox_dir, "drafts"), scope_audits=read_json(args.scope_audits), excluded_ids=excluded)
         terminals, reopen = build_issue_state_indexes(**evidence)
         inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])

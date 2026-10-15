@@ -20,6 +20,9 @@ describe('public news selection boundary', () => {
     expect(validateNewsSelection({ ...auto(), prompt_version: 'mdh-news-scope-2-inclusive-context' })).toMatchObject({ relevance: 'relevant' });
     expect(validateNewsSelection({ ...auto(), prompt_version: 'mdh-news-scope-3-rights-nexus' })).toMatchObject({ relevance: 'relevant' });
     expect(validateNewsSelection({ ...auto(), prompt_version: 'mdh-universal-news-grounded-10-rights-nexus' })).toMatchObject({ relevance: 'relevant' });
+    for (const prompt_version of ['mdh-universal-news-grounded-11-inclusive-violence', 'mdh-news-scope-4-inclusive-violence', 'mdh-news-exclusion-1-inclusive-violence']) {
+      expect(validateNewsSelection({ ...auto(), prompt_version })).toMatchObject({ relevance: 'relevant', human_reviewed: false });
+    }
     expect(assertSelectedNewsArchive({ ...fixture, policy: { ...fixture.policy, selection_gate: progress() } })).toBeTruthy();
   });
   it.each([{ evaluated: 48 }, { excluded: 8 }, { pending: 12 }, { relevant: -1 }, { uncertain: true }, { evaluated_at: 'invalid' }, { pending: undefined }])('rejects fabricated or non-partitioning progress: %j', patch => {

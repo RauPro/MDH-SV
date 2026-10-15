@@ -257,6 +257,8 @@ def test_discard_closure_has_pinned_private_evidence_without_approval_label():
     assert lifecycle._labels(updated) == {"news/discarded"}
     assert updated["state_reason"] == "not_planned"
     assert f"/blob/{REVISION}/scope-reviews/{candidate()['id']}.json" in updated["body"]
+    assert f"/blob/{REVISION}/scope-verifications/{candidate()['id']}.json" in updated["body"]
+    assert "Segunda validación concordante" in updated["body"]
     assert "review/rejected" not in lifecycle._labels(updated)
 
 
@@ -301,7 +303,7 @@ def test_existing_machine_closure_is_idempotent_and_changed_evidence_reopens_it(
     result = run(inbox, {}, apply=True, reopen=evidence(pending()))
     reopened = inbox.rows[1]
     assert reopened["state"] == "open" and reopened["state_reason"] == "reopened"
-    assert lifecycle._labels(reopened) == {"custom/keep", "review/pending"}
+    assert lifecycle._labels(reopened) == {"custom/keep", "review/pending", "news/recheck"}
     assert result["changed"]["pending"] == 1
     assert reopened["body"].count("<!-- mdh-news-lifecycle:start -->") == 1
     assert lifecycle.desired_transition(reopened, {}) is None
@@ -335,6 +337,74 @@ def test_published_then_reopen_then_discard_priority_and_bounded_writes():
     assert [call[1].rsplit("/", 1)[1] for call in inbox.mutations("PATCH")] == ["3", "2"]
     assert result["changed"] == {"published": 1, "pending": 1, "discarded": 0}
     assert result["remaining_transitions"] == 1
+
+
+def test_audited_and_source_inconsistent_closures_reopen_before_ordinary_backlog():
+    inbox = Inbox([issue(1), machine_closed(2), machine_closed(3, "discarded"), machine_closed(4, "discarded")])
+    audit = {**pending(3), "reason": "audit_recheck"}
+    source = {**pending(4), "reason": "source_content_mismatch"}
+    result = run(inbox, evidence(terminal(1)), reopen=evidence(pending(2), audit, source),
+                 apply=True, limit=2)
+    assert [call[1].rsplit("/", 1)[1] for call in inbox.mutations("PATCH")] == ["3", "4"]
+    assert result["changed"] == {"published": 0, "pending": 2, "discarded": 0}
+    assert result["remaining_transitions"] == 2
+    assert all(lifecycle._labels(inbox.rows[n]) == {"review/pending", "news/recheck"} for n in (3, 4))
+    assert "auditoría" in inbox.rows[3]["body"]
+    assert "incoherentes" in inbox.rows[4]["body"]
+
+
+@pytest.mark.parametrize("reason", ["audit_recheck", "source_content_mismatch", "exclusion_requires_verification"])
+def test_new_recheck_reasons_never_override_a_human_closure(reason):
+    row = machine_closed(status="discarded")
+    row["closed_by"] = {"login": "maintainer", "type": "User"}
+    inbox = Inbox([row])
+    result = run(inbox, {}, reopen=evidence({**pending(), "reason": reason}), apply=True)
+    assert result["changed"]["pending"] == 0 and not inbox.mutations()
+
+
+@pytest.mark.parametrize("key,value", [
+    ("candidate_id", "f" * 64), ("source_url", "https://www.diariocolatino.com/different/"),
+    ("publisher", "Another publisher"), ("published_date", "2025-01-03"),
+])
+def test_audit_reopening_requires_exact_issue_bibliographic_binding(key, value):
+    row = machine_closed(status="discarded")
+    evidence_row = {**pending(), "reason": "audit_recheck", key: value}
+    assert lifecycle.desired_transition(row, {}, reopen={candidate()["id"]: evidence_row}) is None
+
+
+def test_old_single_pass_discard_reopens_once_and_cannot_reclose_without_verification(monkeypatch):
+    from mdh_pipeline import gemini_draft
+    from mdh_pipeline.news_issue_state import build_issue_state_indexes
+    from test_news_issue_state import bibliography
+    from test_news_selection import reference, rights_review
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Saved evidence reconciliation must not invoke Gemini")
+    monkeypatch.setattr(gemini_draft, "_request", forbidden)
+    ref = reference()
+    metadata = {**candidate(), "id": ref["id"], "source_title": ref["title"],
+                **{key: ref[key] for key in ("source_url", "publisher", "published_date")}}
+    row = issue()
+    row["body"] = issue_body(metadata)
+    old_discard = {**terminal(status="discarded"), "candidate_id": ref["id"],
+                   **{key: ref[key] for key in ("source_url", "publisher", "published_date")}}
+    transition = lifecycle.desired_transition(row, evidence(old_discard))
+    payload = lifecycle.transition_payload(row, transition, private_revision=REVISION, now=NOW)
+    row.update(**payload, closed_by={"login": "github-actions[bot]", "type": "Bot"})
+    row["labels"] = [{"name": name} for name in payload["labels"]]
+    terminals, reopen = build_issue_state_indexes(archive=bibliography(ref),
+        published_archive=bibliography(), published_dossiers={"schema_version": 1, "dossiers": []},
+        scope_reviews=[rights_review(ref, relevance="not_relevant")], now=NOW)
+    assert terminals == {} and reopen[ref["id"]]["reason"] == "exclusion_requires_verification"
+    inbox = Inbox([row])
+    result = run(inbox, terminals, reopen=reopen, apply=True)
+    assert result["changed"]["pending"] == 1 and result["gemini_calls"] == 0
+    assert inbox.rows[1]["state"] == "open"
+    assert lifecycle._labels(inbox.rows[1]) == {"review/pending", "news/recheck"}
+    assert "una sola evaluación" in inbox.rows[1]["body"]
+    assert lifecycle.desired_transition(inbox.rows[1], terminals, reopen=reopen) is None
+    writes = len(inbox.mutations())
+    again = run(inbox, terminals, reopen=reopen, apply=True)
+    assert again["planned"] == {} and len(inbox.mutations()) == writes
 
 
 def test_initial_budget_reservation_and_existing_file_cas_are_confirmed():
@@ -481,7 +551,7 @@ def test_label_creation_is_reserved_and_never_contains_source_or_model_data():
     inbox = Inbox([issue()], labels=())
     result = run(inbox, evidence(terminal()), apply=True)
     mutations = inbox.mutations()
-    assert [call[0] for call in mutations] == ["PUT", "POST", "POST", "PATCH"]
+    assert [call[0] for call in mutations] == ["PUT", "POST", "POST", "POST", "PATCH"]
     assert all(set(call[2]["json"]) == {"name", "color"} for call in mutations if call[0] == "POST")
     assert result["changed"]["published"] == 1
 

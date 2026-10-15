@@ -8,6 +8,8 @@ from mdh_pipeline.news_issue_state import (
     build_issue_state_indexes, build_reopen_index, build_terminal_index, candidate_matches_terminal,
 )
 from mdh_pipeline.news_selection import project_news_selection
+from mdh_pipeline.news_scope_policy import SCOPE_PROMPT
+from test_news_exclusions import receipt_fixture
 from test_news_selection import (
     NOW, draft, inclusive_review, reference, reviewed, rights_review, scope_review, source_audit,
 )
@@ -51,6 +53,26 @@ def published(item=None, *, automatic=True):
 
 def negative(item=None, **classification):
     return rights_review(item, relevance="not_relevant", **classification)
+
+
+def current_review(item=None, **classification):
+    value = rights_review(item, **classification)
+    value["extraction"]["prompt_version"] = SCOPE_PROMPT
+    return value
+
+
+def confirmed(item=None, **classification):
+    item = item or reference()
+    value = current_review(item, **{"relevance": "not_relevant", **classification})
+    receipt = receipt_fixture(item, value, now=NOW)
+    return {"scope_reviews": [receipt["first_review"]], "scope_verifications": [receipt]}
+
+
+def audit_recheck(item=None, *, reason="confirmed_false_exclusion", **changes):
+    item = item or reference()
+    return {"schema_version": 1, "requests": [{"candidate_id": item["id"],
+        "source_content_sha256": "c" * 64, "issue_number": 1187,
+        "reason_code": reason, "requested_at": "2026-10-12T15:00:00Z", **changes}]}
 
 
 def change_hash(document, digest):
@@ -132,10 +154,12 @@ def test_actual_editorial_publication_precedes_automatic_negatives_or_failed_pri
     ({"jurisdiction": "other"}, "outside_el_salvador"),
     ({"jurisdiction": "unclear", "relevance": "not_relevant"}, "not_relevant"),
 ])
-def test_current_full_source_negative_is_terminal(classification, reason):
-    assessment = rights_review(**classification)
-    assessment["evidence"]["relevance_paragraph_ids"] = [] if classification.get("relevance") == "not_relevant" else ["p3"]
-    result = state(scope_reviews=[assessment])[reference()["id"]]
+def test_current_full_source_negative_is_terminal_only_with_second_agreeing_assessment(classification, reason):
+    proof = confirmed(**{"relevance": "relevant", **classification})
+    assessment = proof["scope_reviews"][0]
+    assert state(scope_reviews=[assessment]) == {}
+    assert reopening(scope_reviews=[assessment])[reference()["id"]]["reason"] == "exclusion_requires_verification"
+    result = state(**proof)[reference()["id"]]
     assert result["status"] == "discarded" and result["reason"] == reason
     assert result["content_sha256"] == assessment["source_read"]["content_sha256"]
 
@@ -190,14 +214,15 @@ def test_newer_source_read_must_not_be_closed_by_old_negative_scope():
 def test_an_older_different_source_draft_does_not_override_current_negative():
     old = draft()
     old["extraction"]["content_sha256"] = "d" * 64
-    assert state(scope_reviews=[negative()], drafts=[old])[reference()["id"]]["status"] == "discarded"
+    assert state(**confirmed(), drafts=[old])[reference()["id"]]["status"] == "discarded"
 
 
 def test_agreeing_full_draft_and_dedicated_negative_can_close():
     document = draft()
     document["classification"]["relevance"] = "not_relevant"
     document["news_dossier"]["classification"]["relevance"] = "not_relevant"
-    assert state(scope_reviews=[negative()], drafts=[document])
+    assert state(scope_reviews=[negative()], drafts=[document]) == {}
+    assert state(**confirmed(), drafts=[document])
 
 
 def test_unprocessed_or_invalid_full_draft_is_not_silently_ignored():
@@ -254,12 +279,14 @@ def test_public_source_must_match_full_bibliography_and_actual_instant():
 def test_bad_private_record_does_not_block_another_candidates_terminal_state():
     first, second = reference(), reference(2)
     bad = negative(first); bad["evidence"]["content_sha256"] = "bad"
-    result = state(archive=bibliography(first, second), scope_reviews=[bad, negative(second)])
+    proof = confirmed(second)
+    result = state(archive=bibliography(first, second),
+                   scope_reviews=[bad, *proof["scope_reviews"]], scope_verifications=proof["scope_verifications"])
     assert set(result) == {second["id"]}
 
 
 def test_exact_candidate_binding_ignores_title_but_never_missing_or_changed_identity():
-    item = reference(); evidence = state(scope_reviews=[negative()])[item["id"]]
+    item = reference(); evidence = state(**confirmed())[item["id"]]
     assert candidate_matches_terminal(item, evidence)
     changed = {**item, "source_title": "Privacy-safe display title"}
     assert candidate_matches_terminal(changed, evidence)
@@ -274,14 +301,14 @@ def test_exact_candidate_binding_ignores_title_but_never_missing_or_changed_iden
     ({"jurisdiction": "unclear", "relevance": "unclear"}, "scope_unclear"),
 ])
 def test_explicit_current_positive_or_unclear_source_read_can_reopen(classification, reason):
-    result = reopening(scope_reviews=[rights_review(**classification)])[reference()["id"]]
+    result = reopening(scope_reviews=[current_review(**classification)])[reference()["id"]]
     assert result["status"] == "pending" and result["reason"] == reason
     assert result["content_sha256"] == "c" * 64
 
 
-def test_missing_negative_and_corrupt_records_never_supply_reopen_evidence():
+def test_old_negative_supplies_explicit_reopen_evidence_but_missing_and_corrupt_records_do_not():
     assert reopening() == {}
-    assert reopening(scope_reviews=[negative()]) == {}
+    assert reopening(scope_reviews=[negative()])[reference()["id"]]["reason"] == "exclusion_requires_verification"
     invalid = rights_review(); invalid["source_read"]["content_sha256"] = "broken"
     assert reopening(scope_reviews=[invalid]) == {}
     assert reopening(scope_reviews=[rights_review(), rights_review()]) == {}
@@ -320,7 +347,89 @@ def test_newer_changed_source_can_reopen_while_old_automatic_dossier_is_still_de
 
 def test_combined_projection_returns_disjoint_terminal_and_explicit_reopen_indexes():
     first, second = reference(), reference(2)
+    proof = confirmed(first)
     terminal, pending = build_issue_state_indexes(archive=bibliography(first, second),
         published_archive=bibliography(), published_dossiers={"schema_version": 1, "dossiers": []},
-        scope_reviews=[negative(first), rights_review(second)], now=NOW)
+        scope_reviews=[*proof["scope_reviews"], rights_review(second)],
+        scope_verifications=proof["scope_verifications"], now=NOW)
     assert set(terminal) == {first["id"]} and set(pending) == {second["id"]}
+
+
+@pytest.mark.parametrize("factory", [scope_review, inclusive_review, rights_review, current_review])
+def test_no_single_pass_negative_can_automatically_close_or_reclose_an_issue(factory):
+    assessment = factory(relevance="not_relevant")
+    assert state(scope_reviews=[assessment]) == {}
+    if "source_read" in assessment:
+        assert reopening(scope_reviews=[assessment])[reference()["id"]]["reason"] == "exclusion_requires_verification"
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda receipt: receipt.update(content_sha256="d" * 64),
+    lambda receipt: receipt.update(candidate_id="d" * 64),
+    lambda receipt: receipt.update(first_review_sha256="d" * 64),
+    lambda receipt: receipt.update(source_url="https://www.diariocolatino.com/wrong/"),
+    lambda receipt: receipt.update(publisher="Another publisher"),
+    lambda receipt: receipt.update(published_date="2025-03-27"),
+    lambda receipt: receipt.update(checked_at="2026-10-13T16:00:00Z"),
+    lambda receipt: receipt.update(reason_paragraph_ids=[]),
+    lambda receipt: receipt["second_review"]["source_read"].update(truncated=True),
+    lambda receipt: receipt["second_review"]["classification"].update(relevance="relevant"),
+    lambda receipt: receipt["second_review"]["extraction"].update(prompt_version=SCOPE_PROMPT),
+    lambda receipt: receipt.update(private_note="close it"),
+])
+def test_second_receipt_requires_exact_identity_evidence_policy_and_full_source(mutation):
+    proof = confirmed()
+    mutation(proof["scope_verifications"][0])
+    assert state(**proof) == {}
+    assert reopening(**proof)[reference()["id"]]["reason"] == "exclusion_requires_verification"
+
+
+@pytest.mark.parametrize("outcome", ["retained", "uncertain"])
+def test_disagreeing_or_unclear_second_assessment_never_closes(outcome):
+    receipt = receipt_fixture(reference(), outcome=outcome, now=NOW)
+    proof = {"scope_reviews": [receipt["first_review"]], "scope_verifications": [receipt]}
+    assert state(**proof) == {}
+    assert reopening(**proof)[reference()["id"]]["reason"] == "exclusion_requires_verification"
+
+
+@pytest.mark.parametrize("reason", ["confirmed_false_exclusion", "policy_mismatch", "source_content_mismatch"])
+def test_explicit_audit_recheck_precedes_old_negative_and_existing_automatic_publication(reason):
+    request = audit_recheck(reason=reason)
+    for snapshot in [{}, published()]:
+        assert state(scope_reviews=[negative()], rechecks=request, **snapshot) == {}
+        pending = reopening(scope_reviews=[negative()], rechecks=request, **snapshot)[reference()["id"]]
+        assert pending["reason"] == ("source_content_mismatch" if reason == "source_content_mismatch" else "audit_recheck")
+        assert pending["content_sha256"] == request["requests"][0]["source_content_sha256"]
+        assert pending["evidence_at"] == request["requests"][0]["requested_at"]
+        assert all(pending[key] == reference()[key] for key in ("source_url", "publisher", "published_date"))
+
+
+def test_explicit_recheck_does_not_resolve_from_legacy_positive_or_pre_request_current_negative():
+    request = audit_recheck()
+    assert reopening(scope_reviews=[rights_review()], rechecks=request)[reference()["id"]]["reason"] == "audit_recheck"
+    assert reopening(scope_reviews=[current_review(relevance="not_relevant")],
+                     rechecks=request)[reference()["id"]]["reason"] == "audit_recheck"
+    # Full fresh evidence plus an independent confirmation can resolve the request.
+    proof = confirmed()
+    for assessment in [proof["scope_reviews"][0], proof["scope_verifications"][0]["second_review"]]:
+        assessment["source_read"]["fetched_at"] = "2026-10-12T15:30:00Z"
+    from mdh_pipeline.news_exclusions import review_sha256
+    proof["scope_verifications"][0]["first_review_sha256"] = review_sha256(proof["scope_reviews"][0])
+    assert state(**proof, rechecks=request)[reference()["id"]]["status"] == "discarded"
+    assert reopening(**proof, rechecks=request) == {}
+
+
+def test_known_corrupt_body_never_resolves_recheck_even_with_two_new_agreeing_assessments():
+    proof = confirmed()
+    for assessment in [proof["scope_reviews"][0], proof["scope_verifications"][0]["second_review"]]:
+        assessment["source_read"]["fetched_at"] = "2026-10-12T15:30:00Z"
+    from mdh_pipeline.news_exclusions import review_sha256
+    proof["scope_verifications"][0]["first_review_sha256"] = review_sha256(proof["scope_reviews"][0])
+    request = audit_recheck(reason="source_content_mismatch")
+    assert state(**proof, rechecks=request) == {}
+    assert reopening(**proof, rechecks=request)[reference()["id"]]["reason"] == "source_content_mismatch"
+
+
+def test_recheck_for_unknown_candidate_cannot_borrow_another_bibliographic_identity():
+    assert reopening(rechecks=audit_recheck(reference(2))) == {}
+    assert state(rechecks=audit_recheck(reference(2))) == {}

@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       max_requests:
-        description: Máximo de solicitudes compartidas de Gemini (hasta 16 noticias por solicitud; se reduce según tamaño)
+        description: Máximo compartido entre primera clasificación (hasta 16) y segunda validación de descartes (hasta 8)
         type: choice
         default: '2'
         options: ['1', '2', '4']
@@ -66,4 +66,4 @@ jobs:
           MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
           MDH_SCOPE_REQUESTS: ${{ inputs.max_requests || '2' }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.scope_review_queue --drafts inbox/drafts --scope-reviews inbox/scope-reviews --attempts inbox/scope-attempts --archive candidates.json --excluded-ids scope-exclusions.json --max-requests "$MDH_SCOPE_REQUESTS"
+        run: python -m mdh_pipeline.scope_review_queue --drafts inbox/drafts --scope-reviews inbox/scope-reviews --attempts inbox/scope-attempts --verifications inbox/scope-verifications --rechecks inbox/runtime/news-scope-rechecks.json --archive candidates.json --excluded-ids scope-exclusions.json --max-requests "$MDH_SCOPE_REQUESTS"

@@ -319,6 +319,11 @@ def test_completed_first_five_rss_do_not_starve_the_next_rss_behind_historical_b
     lambda state: state.update(privacy_reprocessing_version=2, privacy_reprocessing_attempts=True),
     lambda state: state.update(privacy_reprocessing_version=2, privacy_reprocessing_attempts=-1),
     lambda state: state.update(privacy_reprocessing_version=1, privacy_reprocessing_attempts=0),
+    lambda state: state.update(scope_reprocessing_version="mdh-universal-news-grounded-11-inclusive-violence"),
+    lambda state: state.update(scope_reprocessing_version="mdh-universal-news-grounded-11-inclusive-violence", scope_reprocessing_attempts=True),
+    lambda state: state.update(scope_reprocessing_version="mdh-universal-news-grounded-11-inclusive-violence", scope_reprocessing_attempts=-1),
+    lambda state: state.update(scope_reprocessing_version="mdh-universal-news-grounded-10-rights-nexus", scope_reprocessing_attempts=0),
+    lambda state: state.update(scope_reprocessing_attempts=0),
 ])
 def test_mismatched_or_malformed_processing_state_is_rejected_before_ai(change):
     item = candidate(); inbox = PrivateInbox([item]); workers = Extractors()
@@ -1140,3 +1145,147 @@ def test_future_metadata_does_not_call_model_even_when_only_candidate(monkeypatc
     assert workers.fetch_calls == workers.model_calls == []
     assert not inbox.files
     assert report['stopped_reason'] is None
+
+
+def old_negative_scope_draft(item):
+    value = draft(item, status='needs_scope_review')
+    value['classification'] = {'jurisdiction': 'SV', 'relevance': 'not_relevant', 'record_type': 'publication'}
+    value['news_dossier']['classification'] = deepcopy(value['classification'])
+    value['extraction']['prompt_version'] = 'mdh-universal-news-grounded-10-rights-nexus'
+    return value
+
+
+class InclusiveExtractors(Extractors):
+    def extract(self, item, article, *, api_key, model, budget=None):
+        from mdh_pipeline.gemini_draft import PROMPT_VERSION
+        if budget is not None:
+            assert budget.requests_this_run < budget.request_limit
+            assert budget.remaining > 0
+            budget.requests_this_run += 1
+            budget.remaining -= 1
+        value = super().extract(item, article, api_key=api_key, model=model)
+        value['extraction']['prompt_version'] = PROMPT_VERSION
+        return value
+
+
+def inclusive_run(inbox, workers, ids, *, now=NOW, **options):
+    return process_queue(inbox, api_key=KEY, model='gemini-2.5-flash', fetch=workers.fetch,
+        extract=workers.extract, now=now, sleep=lambda _: None, eligible_ids=ids,
+        scope_reprocessing_ids=ids, **options)
+
+
+def test_inclusive_reextraction_bypasses_complete_marker_once_and_preserves_cumulative_attempts():
+    from mdh_pipeline.gemini_draft import PROMPT_VERSION
+    item = candidate(historical=True)
+    inbox = PrivateInbox([item]); workers = InclusiveExtractors()
+    store_marked_draft(inbox, 1, item, old_negative_scope_draft(item), attempts=3, marker_version=2)
+    report = inclusive_run(inbox, workers, [item['id']])
+    assert report['attempted'] == report['scope_reprocessed'] == report['news_dossiers'] == 1
+    state = inbox.document('processing', item['id'])
+    assert state['attempts'] == 4 and state['scope_reprocessing_attempts'] == 1
+    assert state['scope_reprocessing_version'] == PROMPT_VERSION
+    assert inbox.document('drafts', item['id'])['extraction']['prompt_version'] == PROMPT_VERSION
+    rerun = inclusive_run(inbox, workers, [item['id']])
+    assert rerun['attempted'] == 0 and rerun['skipped_existing'] == 1
+    assert workers.model_calls == [item['id']]
+    assert_private_minimal(inbox, report)
+
+
+def test_inclusive_failures_consume_a_separate_bounded_attempt_budget_without_resetting_history():
+    from mdh_pipeline.gemini_draft import GeminiDraftError, PROMPT_VERSION
+    item = candidate(historical=True)
+    inbox = PrivateInbox([item]); workers = InclusiveExtractors()
+    store_marked_draft(inbox, 1, item, old_negative_scope_draft(item), attempts=7, marker_version=2)
+    workers.error = GeminiDraftError('invalid_provider_response')
+    for attempt in range(1, 4):
+        instant = NOW + timedelta(hours=2 * (attempt - 1))
+        report = inclusive_run(inbox, workers, [item['id']], now=instant)
+        assert report['attempted'] == report['errors'] == 1
+        state = inbox.document('processing', item['id'])
+        assert state['attempts'] == 7 + attempt
+        assert state['scope_reprocessing_attempts'] == attempt
+        assert state['scope_reprocessing_version'] == PROMPT_VERSION
+        deferred = inclusive_run(inbox, workers, [item['id']], now=instant + timedelta(minutes=20))
+        assert deferred['attempted'] == 0 and deferred['deferred'] == 1
+    exhausted = inclusive_run(inbox, workers, [item['id']], now=NOW + timedelta(days=1))
+    assert exhausted['attempted'] == 0 and exhausted['deferred'] == 1
+    assert len(workers.model_calls) == 3
+
+
+def test_inclusive_reextraction_checks_current_prompt_and_never_marks_stale_result_completed():
+    item = candidate(historical=True)
+    inbox = PrivateInbox([item]); workers = Extractors()
+    store_marked_draft(inbox, 1, item, old_negative_scope_draft(item), attempts=3)
+    report = inclusive_run(inbox, workers, [item['id']])
+    assert report['errors'] == 1 and report['news_dossiers'] == 0
+    state = inbox.document('processing', item['id'])
+    assert state['status'] == 'error' and state['scope_reprocessing_attempts'] == 1
+    assert state['attempts'] == 4
+
+
+def test_current_inclusive_negative_is_not_reextracted_again_by_stale_priority_ids():
+    from mdh_pipeline.gemini_draft import PROMPT_VERSION
+    item = candidate(historical=True)
+    inbox = PrivateInbox([item]); workers = InclusiveExtractors()
+    current = old_negative_scope_draft(item)
+    current['extraction']['prompt_version'] = PROMPT_VERSION
+    store_marked_draft(inbox, 1, item, current, attempts=4)
+    report = inclusive_run(inbox, workers, [item['id']])
+    assert report['attempted'] == 0 and report['skipped_existing'] == 1
+    assert not workers.model_calls and not workers.fetch_calls
+
+
+def test_scope_reprocessing_and_fresh_selected_news_share_existing_phase_cap():
+    old, fresh = candidate(1, historical=True), candidate(2, historical=True)
+    inbox = PrivateInbox([old, fresh]); workers = InclusiveExtractors()
+    store_marked_draft(inbox, 1, old, old_negative_scope_draft(old), attempts=3)
+    budget = Budget(remaining=8)
+    report = inclusive_run(inbox, workers, [old['id'], fresh['id']], budget=budget, phase_http_limit=1)
+    assert report['http_requests'] == report['attempted'] == 1
+    assert budget.remaining == 7 and budget.request_limit == 1
+    assert len(workers.model_calls) == 1
+
+
+def test_scope_reprocessing_with_exhausted_daily_quota_never_changes_old_attempts_or_reads_source():
+    item = candidate(historical=True)
+    inbox = PrivateInbox([item]); workers = InclusiveExtractors()
+    store_marked_draft(inbox, 1, item, old_negative_scope_draft(item), attempts=3)
+    prior = deepcopy(inbox.files)
+    report = inclusive_run(inbox, workers, [item['id']], budget=Budget(remaining=0))
+    assert report['attempted'] == report['http_requests'] == 0
+    assert not workers.fetch_calls and not workers.model_calls
+    assert inbox.files == prior
+
+
+def test_scope_reprocessing_draft_write_failure_keeps_retry_count_and_cooldown():
+    from mdh_pipeline.gemini_draft import GeminiDraftError
+    item = candidate(historical=True)
+    inbox = PrivateInbox([item]); workers = InclusiveExtractors()
+    store_marked_draft(inbox, 1, item, old_negative_scope_draft(item), attempts=3)
+    workers.error = GeminiDraftError('invalid_provider_response')
+    inbox.fail_draft_write = True
+    with pytest.raises(RuntimeError, match='before draft persistence'):
+        inclusive_run(inbox, workers, [item['id']])
+    state = inbox.document('processing', item['id'])
+    assert state['attempts'] == 4 and state['scope_reprocessing_attempts'] == 1
+    assert inbox.document('drafts', item['id'])['extraction']['prompt_version'] == 'mdh-universal-news-grounded-10-rights-nexus'
+    retry = inclusive_run(inbox, workers, [item['id']], now=NOW + timedelta(minutes=10))
+    assert retry['attempted'] == 0 and retry['deferred'] == 1
+    assert len(workers.model_calls) == 1
+
+
+@pytest.mark.parametrize('during_extraction', [False, True])
+def test_scope_reprocessing_never_overwrites_human_decision(during_extraction):
+    item = candidate(historical=True)
+    inbox = PrivateInbox([item]); workers = InclusiveExtractors()
+    store_marked_draft(inbox, 1, item, old_negative_scope_draft(item), attempts=3)
+    before = deepcopy(inbox.files)
+    def close_human():
+        inbox.issues[1]['labels'].append({'name': 'review/rejected'})
+    if during_extraction:
+        workers.on_extract = close_human
+    else:
+        close_human()
+    report = inclusive_run(inbox, workers, [item['id']])
+    assert report['scope_reprocessed'] == report['news_dossiers'] == 0
+    assert inbox.files == before

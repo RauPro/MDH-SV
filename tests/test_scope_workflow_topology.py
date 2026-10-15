@@ -47,6 +47,20 @@ def test_publisher_separates_news_withdrawals_from_automatic_location_overrides(
     assert '--output publication/apps/web/public/archive/news.json --excluded-ids excluded-news.json' in text
 
 
+def test_publication_and_manual_scope_read_the_same_saved_exclusion_proofs_and_rechecks():
+    publisher = workflow('publish-locations.yml')['jobs']['publish']['steps']
+    selection = next(s for s in publisher if 'mdh_pipeline.news_selection ' in s.get('run', ''))
+    assert '--scope-verifications inbox/scope-verifications' in selection['run']
+    assert '--scope-rechecks inbox/runtime/news-scope-rechecks.json' in selection['run']
+    assert 'GEMINI_API_KEY' not in selection.get('env', {})
+    scope = workflow('review-scope.yml')['jobs']['scope']['steps']
+    execution = next(s for s in scope if 'mdh_pipeline.scope_review_queue ' in s.get('run', ''))
+    assert '--verifications inbox/scope-verifications' in execution['run']
+    assert '--rechecks inbox/runtime/news-scope-rechecks.json' in execution['run']
+    assert '--max-requests "$MDH_SCOPE_REQUESTS"' in execution['run']
+    assert 'MDH_GEMINI_BUDGET_CONFIG' in execution['env']
+
+
 def test_geographic_source_checks_remain_separate_from_budgeted_dossier_evaluation():
     value = workflow('publish-locations.yml')
     assert value['permissions'] == {'contents': 'write', 'issues': 'read'}
