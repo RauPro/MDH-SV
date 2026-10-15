@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T05:10:09.574533+00:00",
+  "generated_at": "2026-10-15T05:29:45.075520+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11096,
-      "selected": 1574,
-      "evaluated": 4514,
-      "relevant": 1574,
-      "excluded": 2937,
+      "selected": 1575,
+      "evaluated": 4547,
+      "relevant": 1575,
+      "excluded": 2969,
       "uncertain": 3,
-      "pending": 6582,
-      "evaluated_at": "2026-10-15T04:15:31.775484+00:00"
+      "pending": 6549,
+      "evaluated_at": "2026-10-15T05:29:42.729382+00:00"
     }
   },
   "paper": {
@@ -51,16 +51,16 @@
     "end_date": "2026-10-14",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1574,
+    "records": 1575,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1338,
+        "records": 1339,
         "first_published_date": "2014-01-02",
-        "last_published_date": "2026-10-10",
+        "last_published_date": "2026-10-14",
         "months": [
           {
             "month": "2010-01",
@@ -2477,7 +2477,7 @@
           {
             "month": "2026-10",
             "status": "enumerated",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 155,
             "source_total_posts": 155,
@@ -25775,12 +25775,12 @@
         "month": "2026-10",
         "start_date": "2026-10-01",
         "end_date": "2026-10-14",
-        "records": 1,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 1
+            "records": 2
           },
           {
             "source_id": "gatoencerrado",
@@ -25817,6 +25817,50 @@
     ]
   },
   "records": [
+    {
+      "id": "87c1cf084df9941e412eb4e98dbde57ffcd5cb6bc8c313abe3c3f13b82a4319c",
+      "title": "Nuevas Ideas niega crear comisión para revisar casos de inocentes en régimen de excepción",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/nuevas-ideas-niega-crear-comision-para-revisar-casos-de-inocentes-en-regimen-de-excepcion/",
+      "published_date": "2026-10-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420662,
+        "retrieved_at": "2026-10-15T05:07:41.035133+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:13:30.190765-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-10-rights-nexus",
+        "evidence": {
+          "content_sha256": "40f04da6a310bb27c3a6340c7dbc4dd7547369e9604faacb94e47200c7bdc567",
+          "jurisdiction_paragraph_ids": [
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p7"
+          ]
+        }
+      }
+    },
     {
       "id": "c387278d3c5c225d66caedf2f934a5cd5ce55486e838093ceab9303b7024fbe7",
       "title": "Cristosal denuncia campaña de desprestigio contra Ruth López",

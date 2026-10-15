@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T04:15:31.775484+00:00",
+  "generated_at": "2026-10-15T05:29:42.729382+00:00",
   "assessment_counts": {
-    "candidates": 10943,
-    "evaluated": 4514,
-    "relevant": 1574,
-    "excluded": 2937,
+    "candidates": 11096,
+    "evaluated": 4547,
+    "relevant": 1575,
+    "excluded": 2969,
     "uncertain": 3,
-    "pending": 6429
+    "pending": 6549
   },
   "selections": [
     {
@@ -23821,6 +23821,33 @@
             "p1",
             "p10",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "87c1cf084df9941e412eb4e98dbde57ffcd5cb6bc8c313abe3c3f13b82a4319c",
+      "source_url": "https://www.diariocolatino.com/nuevas-ideas-niega-crear-comision-para-revisar-casos-de-inocentes-en-regimen-de-excepcion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-14T20:13:30.190765-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-10-rights-nexus",
+        "evidence": {
+          "content_sha256": "40f04da6a310bb27c3a6340c7dbc4dd7547369e9604faacb94e47200c7bdc567",
+          "jurisdiction_paragraph_ids": [
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p7"
           ]
         }
       }
