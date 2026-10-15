@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T08:21:08.970290+00:00",
+  "generated_at": "2026-10-15T09:17:19.728080+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11096,
-      "selected": 1579,
-      "evaluated": 4627,
-      "relevant": 1579,
-      "excluded": 3045,
+      "selected": 1582,
+      "evaluated": 4659,
+      "relevant": 1582,
+      "excluded": 3074,
       "uncertain": 3,
-      "pending": 6469,
-      "evaluated_at": "2026-10-15T08:17:51.378731+00:00"
+      "pending": 6437,
+      "evaluated_at": "2026-10-15T09:17:17.711130+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1579,
+    "records": 1582,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 135,
+        "records": 138,
         "first_published_date": "2013-02-14",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15236,7 +15236,7 @@
           {
             "month": "2013-10",
             "status": "partial",
-            "records": 2,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 32,
             "source_total_posts": null,
@@ -15248,7 +15248,7 @@
           {
             "month": "2013-11",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 15,
             "source_total_posts": null,
@@ -19067,7 +19067,7 @@
         "month": "2013-10",
         "start_date": "2013-10-01",
         "end_date": "2013-10-31",
-        "records": 2,
+        "records": 4,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19102,7 +19102,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 4
           }
         ]
       },
@@ -19110,7 +19110,7 @@
         "month": "2013-11",
         "start_date": "2013-11-01",
         "end_date": "2013-11-30",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19145,7 +19145,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -97614,6 +97614,139 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "74c79002489598d45c1dd94c70c8dd8f156c748c0941d0e3e15db96df54bd4e5",
+      "title": "Suspenden homenaje a Fernando Llort por paro de sindicalistas de Secultura",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/116741/suspenden-homenaje-a-fernando-llort-por-paro-de-sindicalistas-de-secultura.html",
+      "published_date": "2013-11-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T03:09:22.185868-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d70f08a1487d6b71054ab01b6bbe8d73a03b15c720e49d23bf90ef480daef605",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ddd4d4a0e0413512d898ea3b21365b70774925a8a8e3510c6797257e0fd771ad",
+      "title": "Condenan a religiosa por encubrir abuso sexual",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/115449/condenan-a-religiosa-por-encubrir-abuso-sexual.html",
+      "published_date": "2013-10-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T03:09:22.185868-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "60284944de5cd2bf2cc56b62cf9e9e6ebf91171dcd0a0806ecea6d24ce2a01b5",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3788cf9365f6ea73cf32f03ad879dfa5534340e31d3d8c230d4f913c351c9dec",
+      "title": "Condenan a monja salvadoreña por encubrir violación de niña, Guatemala",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/114694/condenan-a-monja-salvadorena-por-encubrir-violacion-de-nina-guatemala.html",
+      "published_date": "2013-10-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "guatemala",
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T03:09:22.185868-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d3ec5c9bb6aa0ed04f905ce1769e96ac4a1c00463ed76f56344faaaf9e834f21",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4"
           ]
         }
       }

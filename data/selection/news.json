@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T08:17:51.378731+00:00",
+  "generated_at": "2026-10-15T09:17:17.711130+00:00",
   "assessment_counts": {
     "candidates": 11096,
-    "evaluated": 4627,
-    "relevant": 1579,
-    "excluded": 3045,
+    "evaluated": 4659,
+    "relevant": 1582,
+    "excluded": 3074,
     "uncertain": 3,
-    "pending": 6469
+    "pending": 6437
   },
   "selections": [
     {
@@ -9248,6 +9248,32 @@
           "relevance_paragraph_ids": [
             "p1",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "3788cf9365f6ea73cf32f03ad879dfa5534340e31d3d8c230d4f913c351c9dec",
+      "source_url": "https://historico.elsalvador.com/historico/114694/condenan-a-monja-salvadorena-por-encubrir-violacion-de-nina-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-10-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T03:09:22.185868-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d3ec5c9bb6aa0ed04f905ce1769e96ac4a1c00463ed76f56344faaaf9e834f21",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4"
           ]
         }
       }
@@ -20596,6 +20622,32 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "74c79002489598d45c1dd94c70c8dd8f156c748c0941d0e3e15db96df54bd4e5",
+      "source_url": "https://historico.elsalvador.com/historico/116741/suspenden-homenaje-a-fernando-llort-por-paro-de-sindicalistas-de-secultura.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-11-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T03:09:22.185868-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d70f08a1487d6b71054ab01b6bbe8d73a03b15c720e49d23bf90ef480daef605",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -38884,6 +38936,33 @@
             "p4",
             "p8",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ddd4d4a0e0413512d898ea3b21365b70774925a8a8e3510c6797257e0fd771ad",
+      "source_url": "https://historico.elsalvador.com/historico/115449/condenan-a-religiosa-por-encubrir-abuso-sexual.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-10-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T03:09:22.185868-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "60284944de5cd2bf2cc56b62cf9e9e6ebf91171dcd0a0806ecea6d24ce2a01b5",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
           ]
         }
       }
