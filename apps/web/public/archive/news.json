@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T09:19:56.604775+00:00",
+  "generated_at": "2026-10-15T10:18:40.577630+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11096,
-      "selected": 1582,
-      "evaluated": 4659,
-      "relevant": 1582,
-      "excluded": 3074,
+      "selected": 1590,
+      "evaluated": 4691,
+      "relevant": 1590,
+      "excluded": 3098,
       "uncertain": 3,
-      "pending": 6437,
-      "evaluated_at": "2026-10-15T09:17:17.711130+00:00"
+      "pending": 6405,
+      "evaluated_at": "2026-10-15T10:18:37.825912+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1582,
+    "records": 1590,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1339,
+        "records": 1346,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-14",
         "months": [
@@ -1289,7 +1289,7 @@
           {
             "month": "2018-07",
             "status": "enumerated",
-            "records": 21,
+            "records": 22,
             "screen_version": 3,
             "posts_scanned": 1028,
             "source_total_posts": 1028,
@@ -1301,7 +1301,7 @@
           {
             "month": "2018-08",
             "status": "enumerated",
-            "records": 0,
+            "records": 6,
             "screen_version": 3,
             "posts_scanned": 1011,
             "source_total_posts": 1011,
@@ -4928,7 +4928,7 @@
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 48,
+        "records": 49,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
         "months": [
@@ -6159,7 +6159,7 @@
           {
             "month": "2018-07",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 40,
             "source_total_posts": 40,
@@ -21518,12 +21518,12 @@
         "month": "2018-07",
         "start_date": "2018-07-01",
         "end_date": "2018-07-31",
-        "records": 22,
+        "records": 24,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 21
+            "records": 22
           },
           {
             "source_id": "gatoencerrado",
@@ -21533,7 +21533,7 @@
           {
             "source_id": "factum",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "el-faro",
@@ -21561,12 +21561,12 @@
         "month": "2018-08",
         "start_date": "2018-08-01",
         "end_date": "2018-08-31",
-        "records": 0,
+        "records": 6,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 6
           },
           {
             "source_id": "gatoencerrado",
@@ -26339,6 +26339,368 @@
             "p18",
             "p32",
             "p33"
+          ]
+        }
+      }
+    },
+    {
+      "id": "65bbae5c4de2234ce4aa8cd81cdf661e4f3f0cf75dd569236c77b9fe79eab4bf",
+      "title": "APES presentará ley integral para los periodistas y estudiantes de periodismo",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/apes-presentara-ley-integral-para-los-periodistas-y-estudiantes-de-periodismo/",
+      "published_date": "2018-08-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186008,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:10:23.329442-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "76ea7e0f2c007a8c8da4bd6e2f22ab34655beb1106fcd49c5cd08138da58ba85",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "babbd09b5e0dd144b5acaeb9fd265c08453d1934234fd51d3400a7ed15fb4889",
+      "title": "Capacitan a periodistas en seguridad y primeros auxilios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capacitan-a-periodistas-en-seguridad-y-primeros-auxilios/",
+      "published_date": "2018-08-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 185856,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:10:23.329442-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a817527a03283ec898ba8c3f4503bbd42894778860d37a05133f5982c14bbd20",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b54f5d96e88109e5e9729df22b9059f5436eab40d51008ae0d29e843bede1267",
+      "title": "Defensoría detecta establecimientos que ofrecen productos vencidos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-detecta-establecimientos-que-ofrecen-productos-vencidos/",
+      "published_date": "2018-08-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 185241,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:10:23.329442-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "25f048db28ad07b07791fdab2222405c0438e404655980073256d9034e42b57d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1796604ef37b4c16e2efa5ad869e82b9e571cc7e6bac7cfbc60f9c70854581ca",
+      "title": "“Defensoría Agostina” reporta 969 atenciones",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-agostina-reporta-969-atenciones/",
+      "published_date": "2018-08-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184979,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a4b0f19fbd9d7d834a619815b9707c32e9ef0f26c6b4ece27945d7f961fe2619",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7f92b303eac3be63d43c2fac463b45b3296d79bf6efc79609719062abe4d38bb",
+      "title": "Quijano viola acuerdo sindical y despide a más de 150 empleados legislativos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/quijano-viola-acuerdo-sindical-y-despide-a-mas-de-150-empleados-legislativos/",
+      "published_date": "2018-08-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184881,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c04fa2ed62b63ca1fea0bd8b9f1f2df8dd6a5239fefc433111019a51ec7c9598",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "18b233ddaeafd6e0c0421e2b2396596d49be4e8456ee5b70f33a3e4c69df88d1",
+      "title": "APES desarrolla foro sobre situación laboral de periodistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/apes-desarrolla-foro-sobre-situacion-laboral-de-periodistas/",
+      "published_date": "2018-08-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184852,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8ae6a571f2818161b24d212ccd49b3ed8cb3512d76d45b042dd4a3c0fa43314a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "541a2d5d7ba2ebf1aa1d8e362a534edc273801bdd4e27ecfc15a4d93d13bd740",
+      "title": "Empleados legislativos interrumpen labores para denunciar despidos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/empleados-legislativos-interrumpen-labores-para-denunciar-despidos/",
+      "published_date": "2018-07-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 184769,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "07afbdbb997c6acfad42ddc15916cb066b3c61ba8504b4b78d2cdbc65e68c41b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0cc1ae59d24cc1c0384ae1e73c518450cff411405c6e3cfd70de7d8253726412",
+      "title": "¿Y ahora quién podrá pensionarme?",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/pensiones-periodistas/",
+      "published_date": "2018-07-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 27937,
+        "retrieved_at": "2026-10-10T18:02:39.732033+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "68a484f8caf821962006bef30768d7b341f9e8189a80d248cdcd3e3d6b227f02",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
           ]
         }
       }
@@ -75327,7 +75689,7 @@
     },
     {
       "id": "ffc4c70bd381f60e13da114ea52b67ab7df81717b5a4868e266fcb1413985bbb",
-      "title": "Chalatenango, al filo de una sequía por la contaminación en sus ríos",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",

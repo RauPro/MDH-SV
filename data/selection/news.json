@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T09:17:17.711130+00:00",
+  "generated_at": "2026-10-15T10:18:37.825912+00:00",
   "assessment_counts": {
     "candidates": 11096,
-    "evaluated": 4659,
-    "relevant": 1582,
-    "excluded": 3074,
+    "evaluated": 4691,
+    "relevant": 1590,
+    "excluded": 3098,
     "uncertain": 3,
-    "pending": 6437
+    "pending": 6405
   },
   "selections": [
     {
@@ -2341,6 +2341,33 @@
       }
     },
     {
+      "candidate_id": "0cc1ae59d24cc1c0384ae1e73c518450cff411405c6e3cfd70de7d8253726412",
+      "source_url": "https://www.revistafactum.com/pensiones-periodistas/",
+      "publisher": "Revista Factum",
+      "published_date": "2018-07-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "68a484f8caf821962006bef30768d7b341f9e8189a80d248cdcd3e3d6b227f02",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "0ccba306664d733156e0ab44c569911283866c73ab515d6095a4b7273cc746da",
       "source_url": "https://www.diariocolatino.com/fmln-condena-asesinato-de-sindicalista-de-alcaldia/",
       "publisher": "Diario Co Latino",
@@ -3807,6 +3834,31 @@
       }
     },
     {
+      "candidate_id": "1796604ef37b4c16e2efa5ad869e82b9e571cc7e6bac7cfbc60f9c70854581ca",
+      "source_url": "https://www.diariocolatino.com/defensoria-agostina-reporta-969-atenciones/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a4b0f19fbd9d7d834a619815b9707c32e9ef0f26c6b4ece27945d7f961fe2619",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "17ab43175646e5bdbb8bbca7a6a15b358ebcd5ec5f1421eb1f80747c66156656",
       "source_url": "https://www.diariocolatino.com/recuerdan-con-exposicion-fotografica-ninos-desaparecidos-durante-el-conflicto-armado/",
       "publisher": "Diario Co Latino",
@@ -4121,6 +4173,35 @@
             "p3",
             "p5",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "18b233ddaeafd6e0c0421e2b2396596d49be4e8456ee5b70f33a3e4c69df88d1",
+      "source_url": "https://www.diariocolatino.com/apes-desarrolla-foro-sobre-situacion-laboral-de-periodistas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8ae6a571f2818161b24d212ccd49b3ed8cb3512d76d45b042dd4a3c0fa43314a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p8"
           ]
         }
       }
@@ -13648,6 +13729,35 @@
       }
     },
     {
+      "candidate_id": "541a2d5d7ba2ebf1aa1d8e362a534edc273801bdd4e27ecfc15a4d93d13bd740",
+      "source_url": "https://www.diariocolatino.com/empleados-legislativos-interrumpen-labores-para-denunciar-despidos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-07-31",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "07afbdbb997c6acfad42ddc15916cb066b3c61ba8504b4b78d2cdbc65e68c41b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "54989cb183f61b7a726113817efac5ead20e6d28ed8e43ec8ef0f6ef8b655399",
       "source_url": "https://www.diariocolatino.com/cam-intenta-desalojar-a-sindicalistas-en-huelga-de-hambre/",
       "publisher": "Diario Co Latino",
@@ -17144,6 +17254,36 @@
             "p4",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "65bbae5c4de2234ce4aa8cd81cdf661e4f3f0cf75dd569236c77b9fe79eab4bf",
+      "source_url": "https://www.diariocolatino.com/apes-presentara-ley-integral-para-los-periodistas-y-estudiantes-de-periodismo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:10:23.329442-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "76ea7e0f2c007a8c8da4bd6e2f22ab34655beb1106fcd49c5cd08138da58ba85",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p9"
           ]
         }
       }
@@ -22409,6 +22549,35 @@
             "p8",
             "p13",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7f92b303eac3be63d43c2fac463b45b3296d79bf6efc79609719062abe4d38bb",
+      "source_url": "https://www.diariocolatino.com/quijano-viola-acuerdo-sindical-y-despide-a-mas-de-150-empleados-legislativos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:09:25.528336-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c04fa2ed62b63ca1fea0bd8b9f1f2df8dd6a5239fefc433111019a51ec7c9598",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p7"
           ]
         }
       }
@@ -31969,6 +32138,34 @@
       }
     },
     {
+      "candidate_id": "b54f5d96e88109e5e9729df22b9059f5436eab40d51008ae0d29e843bede1267",
+      "source_url": "https://www.diariocolatino.com/defensoria-detecta-establecimientos-que-ofrecen-productos-vencidos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:10:23.329442-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "25f048db28ad07b07791fdab2222405c0438e404655980073256d9034e42b57d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b551a46f557b65327a47424f99bd54e4a3008bbde18ffd07e68c846a718ac2d2",
       "source_url": "https://www.diariocolatino.com/ansp-insta-policias-respetuosos-derechos-humanos-criminales/",
       "publisher": "Diario Co Latino",
@@ -33103,6 +33300,35 @@
           "relevance_paragraph_ids": [
             "p3",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "babbd09b5e0dd144b5acaeb9fd265c08453d1934234fd51d3400a7ed15fb4889",
+      "source_url": "https://www.diariocolatino.com/capacitan-a-periodistas-en-seguridad-y-primeros-auxilios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T04:10:23.329442-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a817527a03283ec898ba8c3f4503bbd42894778860d37a05133f5982c14bbd20",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
