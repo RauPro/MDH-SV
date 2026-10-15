@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T19:22:11.936184+00:00",
+  "generated_at": "2026-10-15T20:16:55.916005+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11404,
-      "selected": 1721,
+      "selected": 1727,
       "evaluated": 4887,
-      "relevant": 1721,
-      "excluded": 23,
-      "uncertain": 3143,
+      "relevant": 1727,
+      "excluded": 31,
+      "uncertain": 3129,
       "pending": 6517,
-      "evaluated_at": "2026-10-15T19:18:04.942062+00:00"
+      "evaluated_at": "2026-10-15T20:16:54.160264+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1721,
+    "records": 1727,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 200,
+        "records": 206,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15140,7 +15140,7 @@
           {
             "month": "2013-02",
             "status": "partial",
-            "records": 11,
+            "records": 17,
             "screen_version": 3,
             "posts_scanned": 74,
             "source_total_posts": null,
@@ -18723,7 +18723,7 @@
         "month": "2013-02",
         "start_date": "2013-02-01",
         "end_date": "2013-02-28",
-        "records": 11,
+        "records": 17,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18758,7 +18758,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 11
+            "records": 17
           }
         ]
       },
@@ -97523,7 +97523,7 @@
     },
     {
       "id": "c93ab9ec6cd42f4b5e0394831771290ee62f85e5377244c5bb2cc7c12513f431",
-      "title": "Un país sin discriminaciones y solidario con la población portadora del VIH",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -102366,6 +102366,148 @@
       }
     },
     {
+      "id": "d2c89cf0953abe38bf1d6899f5a24eb09a69077cbdaad160cbffa4a7f586328b",
+      "title": "Persecución y tiroteo deja tres detenidos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101841/persecucion-y-tiroteo-deja-tres-detenidos.html",
+      "published_date": "2013-02-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2859479f16e37328c2f7400f50fa52860e16617f1be39c5a1ef811eba08ec05c",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p10",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
+      "id": "decaf2792bd0c167ff14aa326b077c391349fa2d511c7f728fab270a133002bd",
+      "title": "Usuarios temen por su seguridad en Apanteos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101944/usuarios-temen-por-su-seguridad-en-apanteos.html",
+      "published_date": "2013-02-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "apanteos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a7079bce6248b268715752255b7ecb6e807f4a69cf96e3cb50e41e4de6570168",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c766b7c12d6c00554ea5a1a8a39063200398d8cd493618a1b34489f48a3952f1",
+      "title": "Asesinan a dos miembros de una familia en La Unión",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/102590/asesinan-a-dos-miembros-de-una-familia-en-la-union.html",
+      "published_date": "2013-02-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2e07c7c270b488718246eb93fcbdb6653e7d23f05dc740c2bf65c1d343f87b69",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "id": "4618f0ee23272ab3d4323a560877631557a01bf6eeac117baa2949c722e8886b",
       "title": "Sindicalistas bloquean ingreso a jefaturas en Hospital Primero de Mayo ISSS",
       "title_truncated": false,
@@ -102498,6 +102640,55 @@
       }
     },
     {
+      "id": "b9a51e8b54318f666db94820f4aeae4c9221ed592ae2668c096e942c3f18c10c",
+      "title": "Asesinan a vendedor en municipio declarado “libre de violencia”",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/102528/asesinan-a-vendedor-en-municipio-declarado-libre-de-violencia.html",
+      "published_date": "2013-02-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1a5f3894855f0a21e6a1208c3e546e173782f5b5d870ef8e3d069eebbfbc12b4",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "id": "68f94734dae44e932c5563c0ab650131aa14565ca4e7ae5a7f49ee4c0e786b19",
       "title": "Aumentan violaciones y la violencia doméstica en Ahuachapán",
       "title_truncated": false,
@@ -102542,6 +102733,106 @@
             "p13",
             "p19",
             "p27"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5daa10eb6d183f6832cd1d89736d97289e49d9b8efe5b75d977c8c052419bd66",
+      "title": "PNC sin capturar a homicidas de embarazada en Aguilares",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101898/pnc-sin-capturar-a-homicidas-de-embarazada-en-aguilares.html",
+      "published_date": "2013-02-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fb1d8ad23a4e45e3af9cd73f6f418b19eac18af6dd72b9fbf6ffac387982334f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5",
+            "p8",
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6a3b6c832accdd951415aace92f5a1a35dca321eb28b597e29742b1e04c5947d",
+      "title": "Dan captura a un guatemalteco con droga en estómago que llevaba a Suiza",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/102754/dan-captura-a-un-guatemalteco-con-droga-en-estomago-que-llevaba-a-suiza.html",
+      "published_date": "2013-02-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ede7c6f4f57c7f96a7be796bc23fccc425435dd60e09cedee91fbbc5568966e9",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p9",
+            "p13",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p11",
+            "p14"
           ]
         }
       }

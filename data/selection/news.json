@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T19:18:04.942062+00:00",
+  "generated_at": "2026-10-15T20:16:54.160264+00:00",
   "assessment_counts": {
     "candidates": 11404,
     "evaluated": 4887,
-    "relevant": 1721,
-    "excluded": 23,
-    "uncertain": 3143,
+    "relevant": 1727,
+    "excluded": 31,
+    "uncertain": 3129,
     "pending": 6517
   },
   "selections": [
@@ -17195,6 +17195,38 @@
       }
     },
     {
+      "candidate_id": "5daa10eb6d183f6832cd1d89736d97289e49d9b8efe5b75d977c8c052419bd66",
+      "source_url": "https://historico.elsalvador.com/historico/101898/pnc-sin-capturar-a-homicidas-de-embarazada-en-aguilares.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fb1d8ad23a4e45e3af9cd73f6f418b19eac18af6dd72b9fbf6ffac387982334f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5",
+            "p8",
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5dbbbcd93af2ec86f67fa7d4009c4c9b0b595c8db70426c7a7ae3809a2900144",
       "source_url": "https://www.diariocolatino.com/sin-pistas-ni-implicados-en-el-asesinato-de-periodista-karla-turcios/",
       "publisher": "Diario Co Latino",
@@ -20026,6 +20058,39 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "6a3b6c832accdd951415aace92f5a1a35dca321eb28b597e29742b1e04c5947d",
+      "source_url": "https://historico.elsalvador.com/historico/102754/dan-captura-a-un-guatemalteco-con-droga-en-estomago-que-llevaba-a-suiza.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ede7c6f4f57c7f96a7be796bc23fccc425435dd60e09cedee91fbbc5568966e9",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p9",
+            "p13",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p11",
+            "p14"
           ]
         }
       }
@@ -36182,6 +36247,38 @@
       }
     },
     {
+      "candidate_id": "b9a51e8b54318f666db94820f4aeae4c9221ed592ae2668c096e942c3f18c10c",
+      "source_url": "https://historico.elsalvador.com/historico/102528/asesinan-a-vendedor-en-municipio-declarado-libre-de-violencia.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1a5f3894855f0a21e6a1208c3e546e173782f5b5d870ef8e3d069eebbfbc12b4",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4",
+            "p5",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b9a6cda98f2e1a603cd2fefa0bbd2ce5358c1c569d8143546e39bd44ab418aff",
       "source_url": "https://historico.elsalvador.com/historico/445888/pnc-captura-a-tres-acusados-de-violacion.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -39091,6 +39188,35 @@
       }
     },
     {
+      "candidate_id": "c766b7c12d6c00554ea5a1a8a39063200398d8cd493618a1b34489f48a3952f1",
+      "source_url": "https://historico.elsalvador.com/historico/102590/asesinan-a-dos-miembros-de-una-familia-en-la-union.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2e07c7c270b488718246eb93fcbdb6653e7d23f05dc740c2bf65c1d343f87b69",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c76f4ee5f1dac68309fa82774c5b8b5e7191db72de18f3119f1d8a1282758994",
       "source_url": "https://www.diariocolatino.com/isna-inaugura-certamen-de-investigacion-sobre-la-ninez-y-adolescencia-enfocado-en-la-violencia-de-genero/",
       "publisher": "Diario Co Latino",
@@ -40861,6 +40987,36 @@
             "p10",
             "p11",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d2c89cf0953abe38bf1d6899f5a24eb09a69077cbdaad160cbffa4a7f586328b",
+      "source_url": "https://historico.elsalvador.com/historico/101841/persecucion-y-tiroteo-deja-tres-detenidos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2859479f16e37328c2f7400f50fa52860e16617f1be39c5a1ef811eba08ec05c",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p10",
+            "p15"
           ]
         }
       }
@@ -42707,6 +42863,36 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "decaf2792bd0c167ff14aa326b077c391349fa2d511c7f728fab270a133002bd",
+      "source_url": "https://historico.elsalvador.com/historico/101944/usuarios-temen-por-su-seguridad-en-apanteos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T14:09:32.849744-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a7079bce6248b268715752255b7ecb6e807f4a69cf96e3cb50e41e4de6570168",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
             "p5",
             "p6",
             "p7",
