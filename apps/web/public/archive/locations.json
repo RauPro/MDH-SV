@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T13:19:41.283156+00:00",
+  "generated_at": "2026-10-15T14:20:16.567877+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -4331,6 +4331,29 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "a57ab3516f149a73b1c28f129b059b80decc3db0ecc035d4920d1927679eba90",
+      "source_url": "https://www.diariocolatino.com/ejecutan-programas-para-prevenir-la-violencia-contra-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-28",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-14T23:27:03.146465-06:00",
+      "source_checked_at": "2026-10-15T14:19:47.385804+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "9d1b076368b96311dd60af68c3203eb4dabfd10a775f50874da88ab92787341b"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
     },
     {
       "candidate_id": "a71caeaac0c631218229c98cfa633a5430281546fcd44a9dffbefb6409eeef85",

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T13:19:43.996083+00:00",
+  "generated_at": "2026-10-15T14:17:49.459496+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11251,
-      "selected": 1625,
-      "evaluated": 4789,
-      "relevant": 1625,
-      "excluded": 3161,
+      "selected": 1633,
+      "evaluated": 4822,
+      "relevant": 1633,
+      "excluded": 3186,
       "uncertain": 3,
-      "pending": 6462,
-      "evaluated_at": "2026-10-15T13:17:49.135876+00:00"
+      "pending": 6429,
+      "evaluated_at": "2026-10-15T14:17:46.617101+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1625,
+    "records": 1633,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1359,
+        "records": 1360,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-15",
         "months": [
@@ -2477,7 +2477,7 @@
           {
             "month": "2026-10",
             "status": "enumerated",
-            "records": 4,
+            "records": 5,
             "screen_version": 3,
             "posts_scanned": 164,
             "source_total_posts": 164,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 157,
+        "records": 164,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15140,7 +15140,7 @@
           {
             "month": "2013-02",
             "status": "partial",
-            "records": 6,
+            "records": 11,
             "screen_version": 3,
             "posts_scanned": 36,
             "source_total_posts": null,
@@ -15212,7 +15212,7 @@
           {
             "month": "2013-08",
             "status": "partial",
-            "records": 0,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 38,
             "source_total_posts": null,
@@ -18723,7 +18723,7 @@
         "month": "2013-02",
         "start_date": "2013-02-01",
         "end_date": "2013-02-28",
-        "records": 6,
+        "records": 11,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18758,7 +18758,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 6
+            "records": 11
           }
         ]
       },
@@ -18981,7 +18981,7 @@
         "month": "2013-08",
         "start_date": "2013-08-01",
         "end_date": "2013-08-31",
-        "records": 0,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19016,7 +19016,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 2
           }
         ]
       },
@@ -25775,12 +25775,12 @@
         "month": "2026-10",
         "start_date": "2026-10-01",
         "end_date": "2026-10-15",
-        "records": 4,
+        "records": 5,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 4
+            "records": 5
           },
           {
             "source_id": "gatoencerrado",
@@ -25904,6 +25904,49 @@
           "relevance_paragraph_ids": [
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "08611b3b2fafd5b80d6ab7372a17bfe41a4bfd3112bf81d9a323b7737b392a19",
+      "title": "Veteranos del FMLN denuncian arbitrariedad del régimen de excepción y exigen audiencia para dirigentes detenidos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/veteranos-fmln-denuncian-arbitrariedad-regimen-excepcion-exigen-audiencia-dirigentes-detenidos/",
+      "published_date": "2026-10-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420674,
+        "retrieved_at": "2026-10-15T12:03:19.272972+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:12:50.761981-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-10-rights-nexus",
+        "evidence": {
+          "content_sha256": "ac501305f023650cbb9300f197a20b7e1cd7e3b3df2b2856c5e4a7bfacadff34",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -89203,7 +89246,7 @@
     },
     {
       "id": "4b9e74ed94dd76c4afdd16ebe572b8bd9713baa9597d1059c24345a3763eab40",
-      "title": "Se reportan 10, 800 abusos contra menores en 2014 en El Salvador Rufianes, intermediarios y clientes irán a la cárcel por 25 años",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -98946,6 +98989,99 @@
       }
     },
     {
+      "id": "35b0014dc6e5c706f6974d2198d84c8746ff1d8e7c967aa6250d7e5f916a78c8",
+      "title": "Homofobia, otro disfraz de la intolerancia social",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/111494/homofobia-otro-disfraz-de-la-intolerancia-social.html",
+      "published_date": "2013-08-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:10:15.802003-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "dbb5bc477555fa732901fe0858583cbcc703a1a7c9e93aae550366066e7d65bc",
+          "jurisdiction_paragraph_ids": [
+            "p16",
+            "p23",
+            "p24"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p18",
+            "p21",
+            "p23",
+            "p24"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f136458a08d3a78b130522181d78a8c90d2edbcda93672e3cc3a55f122e61455",
+      "title": "Estados Unidos captura a 263 pandilleros de la MS",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/111600/estados-unidos-captura-a-263-pandilleros-de-la-ms.html",
+      "published_date": "2013-08-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "estados unidos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d3e9ad48a1950043330a91f9f9c9601177aba31b41579a5776464c79eafd63e6",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "id": "bb247b4c540d601813bd3a26af80eb11bcdfe5838733fe3c0d5ea26619f374fe",
       "title": "Capturan al Z-40, el jefe del cártel de Los Zetas",
       "title_truncated": false,
@@ -99080,6 +99216,94 @@
       }
     },
     {
+      "id": "a5f128cb89a44ceaa5684c51a41c1bfe2b83cec2c35d147d01b9f1a100568c20",
+      "title": "Demanda por acoso sexual camino al archivo de FGR",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101794/demanda-por-acoso-sexual-camino-al-archivo-de-fgr.html",
+      "published_date": "2013-02-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3399183c2897380746a4f68aa622dcbc7cf8db0c78ef999ba482fd1dd1d722a6",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9fd81ba89faa6c96d25db8d9c36a62a82d770aded807ac61f52cef829b5fe2bd",
+      "title": "Justicia militar declaró inocentes a seis militares pese a confesión",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/102332/justicia-militar-declaro-inocentes-a-seis-militares-pese-a-confesion.html",
+      "published_date": "2013-02-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0d99ac46c90be23d71c6a7c261833911493de787697d25ce35903bf836695395",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p23"
+          ]
+        }
+      }
+    },
+    {
       "id": "4aed9517e05099c1bf6a247e8fb0b534f7625d3ecebb32f8bbec0344afda59ba",
       "title": "Brasil, Ecuador y México, los peores para el periodismo",
       "title_truncated": false,
@@ -99126,6 +99350,138 @@
             "p4",
             "p7",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4618f0ee23272ab3d4323a560877631557a01bf6eeac117baa2949c722e8886b",
+      "title": "Sindicalistas bloquean ingreso a jefaturas en Hospital Primero de Mayo ISSS",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101597/sindicalistas-bloquean-ingreso-a-jefaturas-en-hospital-primero-de-mayo-isss.html",
+      "published_date": "2013-02-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3979ac7890b5341be4a67fb027d0cb8b5abf65089a5f4e5c38d985cbd12ddec8",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ead69df6fbf6183f7aa31492f7b3ed5ec5bc16eceea604a9f469e0a80c65683c",
+      "title": "Hoy inicia festival de cine sobre derechos humanos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101283/hoy-inicia-festival-de-cine-sobre-derechos-humanos.html",
+      "published_date": "2013-02-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3c5cf4eedddef16604da0d12475968798443c74f10d0d71097ebfacc7b1bf3af",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c98f5ee1a96a98cf4f378f695892982901307987c3bcae0e659159bde24e86f1",
+      "title": "Alba Alimentos dará $250 mil a las granjas penitenciarias",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101372/alba-alimentos-dara-250-mil-a-las-granjas-penitenciarias.html",
+      "published_date": "2013-02-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "81888afe8deb20921d9a1e079adc8e16f063374fe8ad31adfce35eceef036602",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p9"
           ]
         }
       }

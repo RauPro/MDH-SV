@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T13:17:49.135876+00:00",
+  "generated_at": "2026-10-15T14:17:46.617101+00:00",
   "assessment_counts": {
     "candidates": 11251,
-    "evaluated": 4789,
-    "relevant": 1625,
-    "excluded": 3161,
+    "evaluated": 4822,
+    "relevant": 1633,
+    "excluded": 3186,
     "uncertain": 3,
-    "pending": 6462
+    "pending": 6429
   },
   "selections": [
     {
@@ -1421,6 +1421,32 @@
             "p5",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "08611b3b2fafd5b80d6ab7372a17bfe41a4bfd3112bf81d9a323b7737b392a19",
+      "source_url": "https://www.diariocolatino.com/veteranos-fmln-denuncian-arbitrariedad-regimen-excepcion-exigen-audiencia-dirigentes-detenidos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:12:50.761981-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-10-rights-nexus",
+        "evidence": {
+          "content_sha256": "ac501305f023650cbb9300f197a20b7e1cd7e3b3df2b2856c5e4a7bfacadff34",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -9346,6 +9372,37 @@
       }
     },
     {
+      "candidate_id": "35b0014dc6e5c706f6974d2198d84c8746ff1d8e7c967aa6250d7e5f916a78c8",
+      "source_url": "https://historico.elsalvador.com/historico/111494/homofobia-otro-disfraz-de-la-intolerancia-social.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-08-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:10:15.802003-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "dbb5bc477555fa732901fe0858583cbcc703a1a7c9e93aae550366066e7d65bc",
+          "jurisdiction_paragraph_ids": [
+            "p16",
+            "p23",
+            "p24"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p18",
+            "p21",
+            "p23",
+            "p24"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "36091f84ff7721117a3165fd13d9fa549c8c374b58fa28936f6ec6b2d6044b49",
       "source_url": "https://historico.elsalvador.com/historico/437763/fiscalia-investiga-a-sacerdote-acusado-de-violacion-de-menores.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -12112,6 +12169,32 @@
             "p9",
             "p11",
             "p19"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4618f0ee23272ab3d4323a560877631557a01bf6eeac117baa2949c722e8886b",
+      "source_url": "https://historico.elsalvador.com/historico/101597/sindicalistas-bloquean-ingreso-a-jefaturas-en-hospital-primero-de-mayo-isss.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3979ac7890b5341be4a67fb027d0cb8b5abf65089a5f4e5c38d985cbd12ddec8",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
           ]
         }
       }
@@ -29715,6 +29798,33 @@
       }
     },
     {
+      "candidate_id": "9fd81ba89faa6c96d25db8d9c36a62a82d770aded807ac61f52cef829b5fe2bd",
+      "source_url": "https://historico.elsalvador.com/historico/102332/justicia-militar-declaro-inocentes-a-seis-militares-pese-a-confesion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "0d99ac46c90be23d71c6a7c261833911493de787697d25ce35903bf836695395",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p23"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a0127f15688961d224f3963c3bb95a30dc6d72633cdbb032ea19a2e25437d4bf",
       "source_url": "https://www.revistafactum.com/autorregulacion-la-deuda-del-periodismo-salvadoreno/",
       "publisher": "Revista Factum",
@@ -30900,6 +31010,33 @@
             "p13",
             "p15",
             "p16"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a5f128cb89a44ceaa5684c51a41c1bfe2b83cec2c35d147d01b9f1a100568c20",
+      "source_url": "https://historico.elsalvador.com/historico/101794/demanda-por-acoso-sexual-camino-al-archivo-de-fgr.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3399183c2897380746a4f68aa622dcbc7cf8db0c78ef999ba482fd1dd1d722a6",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6"
           ]
         }
       }
@@ -37067,6 +37204,34 @@
       }
     },
     {
+      "candidate_id": "c98f5ee1a96a98cf4f378f695892982901307987c3bcae0e659159bde24e86f1",
+      "source_url": "https://historico.elsalvador.com/historico/101372/alba-alimentos-dara-250-mil-a-las-granjas-penitenciarias.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "81888afe8deb20921d9a1e079adc8e16f063374fe8ad31adfce35eceef036602",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c998d6b235fa1e6f82e0b99ec7d91dd7bebc74a9a24f724a1799528cac3ba9cd",
       "source_url": "https://www.diariocolatino.com/preparan-propuesta-dignificar-condiciones-sistema-penitenciario/",
       "publisher": "Diario Co Latino",
@@ -41893,6 +42058,33 @@
       }
     },
     {
+      "candidate_id": "ead69df6fbf6183f7aa31492f7b3ed5ec5bc16eceea604a9f469e0a80c65683c",
+      "source_url": "https://historico.elsalvador.com/historico/101283/hoy-inicia-festival-de-cine-sobre-derechos-humanos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3c5cf4eedddef16604da0d12475968798443c74f10d0d71097ebfacc7b1bf3af",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "eae3d7a6cf623b22ab79c94568daf3a1ef7f6e4e926fcdcd35f54e53731961c6",
       "source_url": "https://www.diariocolatino.com/sis-y-csj-firman-convenio-para-fortalecer-ciudad-mujer-en-la-atencion-de-violencia-de-genero/",
       "publisher": "Diario Co Latino",
@@ -42932,6 +43124,32 @@
             "p7",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f136458a08d3a78b130522181d78a8c90d2edbcda93672e3cc3a55f122e61455",
+      "source_url": "https://historico.elsalvador.com/historico/111600/estados-unidos-captura-a-263-pandilleros-de-la-ms.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-08-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T08:09:30.204707-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d3e9ad48a1950043330a91f9f9c9601177aba31b41579a5776464c79eafd63e6",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
           ]
         }
       }
