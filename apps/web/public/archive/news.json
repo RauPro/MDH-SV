@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T12:03:46.377948+00:00",
+  "generated_at": "2026-10-15T12:18:50.398989+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11251,
-      "selected": 1604,
-      "evaluated": 4723,
-      "relevant": 1604,
-      "excluded": 3116,
+      "selected": 1612,
+      "evaluated": 4757,
+      "relevant": 1612,
+      "excluded": 3142,
       "uncertain": 3,
-      "pending": 6528,
-      "evaluated_at": "2026-10-15T11:17:51.422886+00:00"
+      "pending": 6494,
+      "evaluated_at": "2026-10-15T12:18:47.873159+00:00"
     }
   },
   "paper": {
@@ -51,16 +51,16 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1604,
+    "records": 1612,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1357,
+        "records": 1359,
         "first_published_date": "2014-01-02",
-        "last_published_date": "2026-10-14",
+        "last_published_date": "2026-10-15",
         "months": [
           {
             "month": "2010-01",
@@ -2477,7 +2477,7 @@
           {
             "month": "2026-10",
             "status": "enumerated",
-            "records": 2,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 164,
             "source_total_posts": 164,
@@ -14689,8 +14689,8 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 138,
-        "first_published_date": "2013-02-14",
+        "records": 144,
+        "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
           {
@@ -15044,7 +15044,7 @@
           {
             "month": "2012-06",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 1,
             "source_total_posts": null,
@@ -15104,7 +15104,7 @@
           {
             "month": "2012-11",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 6,
             "source_total_posts": null,
@@ -15128,7 +15128,7 @@
           {
             "month": "2013-01",
             "status": "partial",
-            "records": 0,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 49,
             "source_total_posts": null,
@@ -18379,7 +18379,7 @@
         "month": "2012-06",
         "start_date": "2012-06-01",
         "end_date": "2012-06-30",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18414,7 +18414,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -18594,7 +18594,7 @@
         "month": "2012-11",
         "start_date": "2012-11-01",
         "end_date": "2012-11-30",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18629,7 +18629,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -18680,7 +18680,7 @@
         "month": "2013-01",
         "start_date": "2013-01-01",
         "end_date": "2013-01-31",
-        "records": 0,
+        "records": 4,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18715,7 +18715,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 4
           }
         ]
       },
@@ -25775,12 +25775,12 @@
         "month": "2026-10",
         "start_date": "2026-10-01",
         "end_date": "2026-10-15",
-        "records": 2,
+        "records": 4,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 2
+            "records": 4
           },
           {
             "source_id": "gatoencerrado",
@@ -25817,6 +25817,97 @@
     ]
   },
   "records": [
+    {
+      "id": "e6da93b259c56e197cee9ad3465beb20612cab9c359f39705ab420a34f55b05e",
+      "title": "Bukele plantea liberación del 50% de los capturados bajo el Régimen de Excepción",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/bukele-plantea-liberacion-del-50-de-los-capturados-bajo-el-regimen-de-excepcion/",
+      "published_date": "2026-10-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420684,
+        "retrieved_at": "2026-10-15T12:03:19.272972+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:12:50.182386-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-10-rights-nexus",
+        "evidence": {
+          "content_sha256": "ea08685c58c831fccef1197d572513043961e4314583201342f301a46fe4751d",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "48a3c682cf095797f541d076dd123fb15f76d631a6f2528eb44afd21272b19b9",
+      "title": "Cuestionan candidatura de Bukele al Premio Sájarov por violaciones a DDHH",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cuestionan-candidatura-bukele-premio-sajarov-por-violaciones-ddhh/",
+      "published_date": "2026-10-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion",
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420681,
+        "retrieved_at": "2026-10-15T12:03:19.272972+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:13:02.288663-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-10-rights-nexus",
+        "evidence": {
+          "content_sha256": "d840df4c9f573c7a8a787bded474d1c66b2ebbf8a590ff1afbbeb7bd4ec5dfdb",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p8"
+          ]
+        }
+      }
+    },
     {
       "id": "87c1cf084df9941e412eb4e98dbde57ffcd5cb6bc8c313abe3c3f13b82a4319c",
       "title": "Nuevas Ideas niega crear comisión para revisar casos de inocentes en régimen de excepción",
@@ -89975,7 +90066,7 @@
     },
     {
       "id": "4c784312cd702db80fa98d3c0c8584445654b6b903dfd8590339e879cd5072dd",
-      "title": "Los pueblos que dijeron NO a la Minería en El Salvador",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "GatoEncerrado",
       "source_id": "gatoencerrado",
@@ -99035,6 +99126,266 @@
             "p4",
             "p7",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ccb8c36456371a36d4d6e788199f4da0fc45c33e6698e83c350d1000c49e33eb",
+      "title": "Titular de Asamblea llama “patán” a periodista de EDH",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100874/titular-de-asamblea-llama-patan-a-periodista-de-edh.html",
+      "published_date": "2013-01-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:10:25.531253-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "326ec163c86dcc0c077ea11cf76f635c900883d315045a8131e36d053e6173a3",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "82cd014249052622ecd2be4a0bc3a40c7cc7d7598c72a1327a036d1a3f01a471",
+      "title": "Más de 80 detenciones registra Ejército y Policía",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100861/mas-de-80-detenciones-registra-ejercito-y-policia.html",
+      "published_date": "2013-01-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:10:25.531253-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f65f48bda74ff2e3b0c7c3cefd49974c5edbf6f034721a383501c2678ccecdad",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p10",
+            "p16",
+            "p17"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2f78f7a36fc16043eacc5d5fe0bdd3d0fcec6bb6d3f817a7ece41424655b61e7",
+      "title": "A la cárcel un policía por matar a esposa",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/99305/a-la-carcel-un-policia-por-matar-a-esposa.html",
+      "published_date": "2013-01-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:10:25.531253-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ec4739cbef084be348b8f9f61b59065e0d32242a2fab486d242f22fe9917018f",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4622c8bbb472c6a5f27da1a5b9a02758f8a563b32b26fa14a260f125ace11a5c",
+      "title": "Vendedores capitalinos divididos ante acciones para desalojar calles",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100672/vendedores-capitalinos-divididos-ante-acciones-para-desalojar-calles.html",
+      "published_date": "2013-01-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:10:25.531253-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "17a8aa99f93abb0a20d174806a0b31b907f2a4b7f717cc458afc09c56a78c2c1",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cc22b9101697cbb68dee0c243b36c90a6faa12790fbe56443b9d38c142cb620d",
+      "title": "Dennis Alas abandonó las bartolinas",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/263475/dennis-alas-abandono-las-bartolinas.html",
+      "published_date": "2012-11-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:09:36.375205-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a71c9c8a6d3662b9aad60451981cd83e8ba7249ead05145d48dd8bb6cb12a575",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d816ebeea68f670eba0be6362622d2b1a4e8ccdf17800552ef0fd33e1c22cea4",
+      "title": "Edil notifica que no habrá desalojo de familias en Barra de Santiago",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/264871/edil-notifica-que-no-habra-desalojo-de-familias-en-barra-de-santiago.html",
+      "published_date": "2012-06-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:09:36.375205-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "69c6477c8061ac45876333a67d4354f49005dcbc7da19efd08895f23249307bd",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p5",
+            "p6"
           ]
         }
       }

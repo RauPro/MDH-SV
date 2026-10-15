@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T11:17:51.422886+00:00",
+  "generated_at": "2026-10-15T12:18:47.873159+00:00",
   "assessment_counts": {
-    "candidates": 11096,
-    "evaluated": 4723,
-    "relevant": 1604,
-    "excluded": 3116,
+    "candidates": 11251,
+    "evaluated": 4757,
+    "relevant": 1612,
+    "excluded": 3142,
     "uncertain": 3,
-    "pending": 6373
+    "pending": 6494
   },
   "selections": [
     {
@@ -8275,6 +8275,31 @@
       }
     },
     {
+      "candidate_id": "2f78f7a36fc16043eacc5d5fe0bdd3d0fcec6bb6d3f817a7ece41424655b61e7",
+      "source_url": "https://historico.elsalvador.com/historico/99305/a-la-carcel-un-policia-por-matar-a-esposa.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:10:25.531253-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ec4739cbef084be348b8f9f61b59065e0d32242a2fab486d242f22fe9917018f",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2f7f091e6b11bd0bcc7ab015603faffd9f68d99eab701245a73326c69463b959",
       "source_url": "https://www.diariocolatino.com/gobierno-condena-agresion-contra-activista-lgbti/",
       "publisher": "Diario Co Latino",
@@ -11924,6 +11949,31 @@
       }
     },
     {
+      "candidate_id": "4622c8bbb472c6a5f27da1a5b9a02758f8a563b32b26fa14a260f125ace11a5c",
+      "source_url": "https://historico.elsalvador.com/historico/100672/vendedores-capitalinos-divididos-ante-acciones-para-desalojar-calles.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:10:25.531253-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "17a8aa99f93abb0a20d174806a0b31b907f2a4b7f717cc458afc09c56a78c2c1",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "46574cbd841328d442a49cd5f2ccea6eb9cd19c5938a929742e27ec1b37c840c",
       "source_url": "https://www.diariocolatino.com/fiscalia-solicitara-colaboracion-internacional-ubicar-agente-desaparecida/",
       "publisher": "Diario Co Latino",
@@ -12117,6 +12167,32 @@
             "p4",
             "p27",
             "p28"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "48a3c682cf095797f541d076dd123fb15f76d631a6f2528eb44afd21272b19b9",
+      "source_url": "https://www.diariocolatino.com/cuestionan-candidatura-bukele-premio-sajarov-por-violaciones-ddhh/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:13:02.288663-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-10-rights-nexus",
+        "evidence": {
+          "content_sha256": "d840df4c9f573c7a8a787bded474d1c66b2ebbf8a590ff1afbbeb7bd4ec5dfdb",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p8"
           ]
         }
       }
@@ -23407,6 +23483,33 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "82cd014249052622ecd2be4a0bc3a40c7cc7d7598c72a1327a036d1a3f01a471",
+      "source_url": "https://historico.elsalvador.com/historico/100861/mas-de-80-detenciones-registra-ejercito-y-policia.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:10:25.531253-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f65f48bda74ff2e3b0c7c3cefd49974c5edbf6f034721a383501c2678ccecdad",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p10",
+            "p16",
+            "p17"
           ]
         }
       }
@@ -36943,6 +37046,33 @@
       }
     },
     {
+      "candidate_id": "cc22b9101697cbb68dee0c243b36c90a6faa12790fbe56443b9d38c142cb620d",
+      "source_url": "https://historico.elsalvador.com/historico/263475/dennis-alas-abandono-las-bartolinas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2012-11-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:09:36.375205-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a71c9c8a6d3662b9aad60451981cd83e8ba7249ead05145d48dd8bb6cb12a575",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "cc2a8d48cbacbc40dd170a8a0370d26c44dc4647e28ebb708d61c88c15c35c32",
       "source_url": "https://www.diariocolatino.com/inician-desalojo-familias-la-comunidad-espino/",
       "publisher": "Diario Co Latino",
@@ -37080,6 +37210,31 @@
           ],
           "relevance_paragraph_ids": [
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ccb8c36456371a36d4d6e788199f4da0fc45c33e6698e83c350d1000c49e33eb",
+      "source_url": "https://historico.elsalvador.com/historico/100874/titular-de-asamblea-llama-patan-a-periodista-de-edh.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:10:25.531253-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "326ec163c86dcc0c077ea11cf76f635c900883d315045a8131e36d053e6173a3",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }
@@ -38567,6 +38722,35 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d816ebeea68f670eba0be6362622d2b1a4e8ccdf17800552ef0fd33e1c22cea4",
+      "source_url": "https://historico.elsalvador.com/historico/264871/edil-notifica-que-no-habra-desalojo-de-familias-en-barra-de-santiago.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2012-06-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:09:36.375205-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "69c6477c8061ac45876333a67d4354f49005dcbc7da19efd08895f23249307bd",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p5",
             "p6"
           ]
         }
@@ -40793,6 +40977,32 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e6da93b259c56e197cee9ad3465beb20612cab9c359f39705ab420a34f55b05e",
+      "source_url": "https://www.diariocolatino.com/bukele-plantea-liberacion-del-50-de-los-capturados-bajo-el-regimen-de-excepcion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T06:12:50.182386-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-10-rights-nexus",
+        "evidence": {
+          "content_sha256": "ea08685c58c831fccef1197d572513043961e4314583201342f301a46fe4751d",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p14"
           ]
         }
       }
