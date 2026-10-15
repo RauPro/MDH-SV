@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T22:30:59.754595+00:00",
+  "generated_at": "2026-10-15T23:18:38.547585+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -24,6 +24,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
+      "candidate_id": "010500f6af4df246ac9b2f24dc5cbebbb6fe07b6635527238e34bfaf46f9b5ea",
+      "source_url": "https://historico.elsalvador.com/historico/100711/decomiso-de-droga-y-nueve-detenidos-en-bar-de-zona-real.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-09",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-15T14:12:26.404857-06:00",
+      "source_checked_at": "2026-10-15T23:18:23.554759+00:00",
+      "evidence": {
+        "paragraph_id": "p1",
+        "content_sha256": "6b5de8d4877b99ebbaddf2002e733145fdd2f713113e9ad10694c5dae081e521"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -886,6 +909,30 @@
       }
     },
     {
+      "candidate_id": "227911f06eb5ae55ba6e68087c134d1b954f94090944eb5d89fb6464c8d1d7b6",
+      "source_url": "https://www.diariocolatino.com/director-de-la-pnc-dice-que-junio-cierra-con-mas-350-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-30",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T23:18:36.435702+00:00",
+      "source_checked_at": "2026-10-15T23:18:36.435702+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "7895d694d24cad760d71aa7f853651603d69d6d3fa50948346e1ad787dcf217b"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa María Ostuma",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
       "candidate_id": "2306dbdfc7e546199ab559c464ee021352b2820e99b895ce11057196800f5a5c",
       "source_url": "https://www.diariocolatino.com/pediran-explicacion-a-alcalde-por-despidos/",
       "publisher": "Diario Co Latino",
@@ -1585,6 +1632,63 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
+    },
+    {
+      "candidate_id": "3653f45e485fc624ef8690fa926204f9a65f731eba008ebc1925e0b80490822c",
+      "source_url": "https://www.diariocolatino.com/medicina-legal-28-mujeres-fueron-asesinadas-en-marzo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-04",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T23:18:28.865528+00:00",
+      "source_checked_at": "2026-10-15T23:18:28.865528+00:00",
+      "evidence": {
+        "content_sha256": "990e1f8db38b6e2a69c3bf45c4a864fdc4e77138a898644f3ae9d39fd273e100"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cabañas",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Cuscatlán",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Paz",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Miguel",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Santa Ana",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Sonsonate",
+          "paragraph_id": "p4"
+        }
+      ]
     },
     {
       "candidate_id": "37ca625d2f3605d7648d71d0ae818e050094edcfafe804b0610937e937b362c7",
@@ -2378,6 +2482,29 @@
       ]
     },
     {
+      "candidate_id": "5daa10eb6d183f6832cd1d89736d97289e49d9b8efe5b75d977c8c052419bd66",
+      "source_url": "https://historico.elsalvador.com/historico/101898/pnc-sin-capturar-a-homicidas-de-embarazada-en-aguilares.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-03",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-15T17:12:22.927951-06:00",
+      "source_checked_at": "2026-10-15T23:18:24.556307+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "fb1d8ad23a4e45e3af9cd73f6f418b19eac18af6dd72b9fbf6ffac387982334f"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Aguilares",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "5eaff40875c92603a05e6e9bf24cc463b48adcb9d79e5e8abe5de68b51def2e2",
       "source_url": "https://www.diariocolatino.com/secretaria-de-inclusion-social-condena-asesinato-de-funcionaria-de-ciudad-mujer-usulutan-2/",
       "publisher": "Diario Co Latino",
@@ -2756,6 +2883,40 @@
       }
     },
     {
+      "candidate_id": "6738f118629ccff2e15f41e4465c99c13c4468a1cca52742857bf7b187df4314",
+      "source_url": "https://www.diariocolatino.com/tiple-homicidio-hoy-en-san-juan-opico/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-18",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T23:18:27.015776+00:00",
+      "source_checked_at": "2026-10-15T23:18:27.015776+00:00",
+      "evidence": {
+        "content_sha256": "9152ce181fda5f97baa9d5b373717a97d4a0d29e333098b5906b03d447a5c60e"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cuscatlán",
+          "paragraph_id": "p8"
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "La Libertad",
+          "paragraph_id": "p10",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Santa Tecla",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+          }
+        }
+      ]
+    },
+    {
       "candidate_id": "6833654d37ef0b51dba3d23fcc4bb06cbccb8e8906699e413718f99c43cc25d6",
       "source_url": "https://www.diariocolatino.com/procurador-reporta-mas-de-14-mil-acciones-en-defensa-de-los-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -2852,6 +3013,29 @@
       }
     },
     {
+      "candidate_id": "6a3b6c832accdd951415aace92f5a1a35dca321eb28b597e29742b1e04c5947d",
+      "source_url": "https://historico.elsalvador.com/historico/102754/dan-captura-a-un-guatemalteco-con-droga-en-estomago-que-llevaba-a-suiza.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-02",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-15T16:15:50.228116-06:00",
+      "source_checked_at": "2026-10-15T23:18:24.489356+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "ede7c6f4f57c7f96a7be796bc23fccc425435dd60e09cedee91fbbc5568966e9"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "6b04d36e855adc92cc6103e4af124342193bb56c2445f87105b364c04e83b0e4",
       "source_url": "https://www.diariocolatino.com/lamentan-que-hijo-de-asesino-intelectual-de-romero-sea-edil-de-santa-tecla/",
       "publisher": "Diario Co Latino",
@@ -2872,6 +3056,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "6bce608920a0d7d0bcf0b96ff634495294254094aa3f02521d427deaea82de82",
+      "source_url": "https://historico.elsalvador.com/historico/100958/protestan-por-desalojo-de-ventas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-06",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T23:18:23.134492+00:00",
+      "source_checked_at": "2026-10-15T23:18:23.134492+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "524a140851efc72e74a81097eb085ade3b803a9d12a095850d7dcc5f1ebafcfa"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -3050,6 +3258,22 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "73cfa59aada3804e852bcf862e4235182524bbab269dedb3c8c73604da7c94c3",
+      "source_url": "https://historico.elsalvador.com/historico/99812/sepultan-restos-de-periodista-salvadoreno-mauricio-vasquez.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-14",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-15T15:14:25.381881-06:00",
+      "source_checked_at": "2026-10-15T23:18:23.877636+00:00",
+      "evidence": {
+        "paragraph_id": "p1",
+        "content_sha256": "2f481017242a455545f2db64947c19a57e428c9c94074568d227fb76b7fc9f41"
       }
     },
     {
@@ -4483,6 +4707,29 @@
       "evidence": {
         "paragraph_id": "p3",
         "content_sha256": "56344d8aaffee268da43b534643d260eeca230d517961718fe53f83f599b8359"
+      }
+    },
+    {
+      "candidate_id": "a061d16cf021355fe011ee289e5b1ad60f74a4d9a4508062ebcfaabea1ca6c74",
+      "source_url": "https://historico.elsalvador.com/historico/100222/alcaldia-de-sensuntepeque-desaloja-vendedores.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-18",
+      "department": "Cabañas",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-15T16:14:05.160959-06:00",
+      "source_checked_at": "2026-10-15T23:18:24.417350+00:00",
+      "evidence": {
+        "paragraph_id": "p1",
+        "content_sha256": "d2cddb5afa841229cb95b5bf36bf4813a7903369eea04f7803ed90cf124f7571"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Sensuntepeque",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
       }
     },
     {
