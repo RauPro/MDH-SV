@@ -179,6 +179,9 @@ def desired_transition(issue, terminals, *, excluded_ids=(), reopen=None):
     owned = _managed(issue, candidate)
     if issue["state"] == "closed" and not owned:
         return None  # Never reopen or rewrite somebody else's closure.
+    if (issue["state"] == "closed" and issue.get("closed_by") is not None
+            and issue["closed_by"].get("login") != "github-actions[bot]"):
+        return None
     if "review/rejected" in labels:
         if issue["state"] == "closed":
             return None
@@ -284,6 +287,10 @@ def reconcile(inbox, terminals, *, private_revision, run_id=None, apply=False, l
             sleep(max(0, 2 - (clock() - last_write)))
         path = inbox.base + f"/issues/{original['number']}"
         current = inbox.call("GET", path)
+        if (transition["status"] == "pending"
+                and (current.get("closed_by") or {}).get("login") != "github-actions[bot]"):
+            report["concurrent_changes"] += 1
+            continue
         if (current.get("body") != original.get("body") or _labels(current) != _labels(original)
                 or current.get("state") != original.get("state") or current.get("updated_at") != original.get("updated_at")
                 or desired_transition(current, terminals, excluded_ids=excluded_ids, reopen=reopen) != transition):

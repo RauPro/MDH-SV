@@ -129,7 +129,8 @@ def machine_closed(number=1, status="published", *, extra=()):
     original = issue(number, labels=("review/pending", *extra))
     decision = lifecycle.desired_transition(original, evidence(terminal(number, status)))
     payload = lifecycle.transition_payload(original, decision, private_revision=REVISION, now=NOW)
-    return {**original, **payload, "labels": [{"name": label} for label in payload["labels"]]}
+    return {**original, **payload, "labels": [{"name": label} for label in payload["labels"]],
+            "closed_by": {"login": "github-actions[bot]", "type": "Bot"}}
 
 
 def test_issue_snapshot_is_complete_stable_and_filters_pull_requests():
@@ -163,6 +164,24 @@ def test_write_budget_always_reads_and_writes_main():
     assert lifecycle.TransitionBudget(inbox).claim("123", 1, NOW) == 1
     assert inbox.calls[0][1].endswith("?ref=main")
     assert inbox.mutations("PUT")[0][2]["json"]["branch"] == "main"
+
+
+def test_later_manual_closure_is_not_reopened_even_with_an_old_automation_marker():
+    row = machine_closed()
+    row["closed_by"] = {"login": "maintainer", "type": "User"}
+    inbox = Inbox([row])
+    result = run(inbox, {}, reopen=evidence(pending()), apply=True)
+    assert result["changed"]["pending"] == 0
+    assert not inbox.mutations()
+
+
+def test_reopening_requires_fresh_confirmation_of_the_bot_closure():
+    row = machine_closed()
+    del row["closed_by"]  # The list endpoint can omit this field.
+    inbox = Inbox([row])
+    result = run(inbox, {}, reopen=evidence(pending()), apply=True)
+    assert result["changed"]["pending"] == 0 and result["concurrent_changes"] == 1
+    assert not inbox.mutations("PATCH")
 
 
 def test_all_issue_pages_are_loaded_before_first_mutation():

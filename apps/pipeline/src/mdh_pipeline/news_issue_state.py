@@ -18,6 +18,10 @@ from .news_selection import (
 
 _IDENTITY = ("source_url", "publisher", "published_date")
 _ERRORS = (ValueError, TypeError, KeyError, AttributeError)
+_LEGACY_EXTRACTION_PROMPTS = {
+    "mdh-private-grounded-5", "mdh-universal-news-grounded-6",
+    "mdh-universal-news-grounded-7-field-privacy",
+}
 
 
 def candidate_matches_terminal(candidate, evidence):
@@ -44,6 +48,32 @@ def _evidence(reference, status, reason, digest, stamp):
     return {"candidate_id": reference["id"], "status": status, "reason": reason,
             **{key: reference[key] for key in _IDENTITY},
             "content_sha256": digest, "evidence_at": stamp}
+
+
+def _legacy_published_draft(original, reference, dossier, assessment, instant):
+    """A current publication can validate a legacy extraction's exact text.
+
+    Older extraction prompts are not current scope evidence and cannot close a
+    rejection or reopen an issue. The current dedicated classification and the
+    independently validated production dossier must agree on this exact source.
+    """
+    from .automatic_news import _bound_draft
+    if dossier is None or dossier["schema_version"] != 2 or assessment is None:
+        return False
+    document = _bound_draft(original, reference)
+    extraction, news = document["extraction"], document["news_dossier"]
+    digest = dossier["automation"]["source_content_sha256"]
+    return (extraction.get("prompt_version") in _LEGACY_EXTRACTION_PROMPTS
+            and extraction.get("provider") == "gemini"
+            and extraction["content_sha256"] == digest
+            and document.get("classification") == news["classification"]
+            and _category(news["classification"]) == "relevant"
+            and _timestamp(extraction["fetched_at"]) <= _timestamp(extraction["prepared_at"])
+            <= _timestamp(dossier["automation"]["validated_at"]) <= instant
+            and assessment["extraction"]["prompt_version"] == SCOPE_PROMPT
+            and assessment.get("source_read", {}).get("truncated") is False
+            and assessment["evidence"]["content_sha256"] == digest
+            and _category(assessment["classification"]) == "relevant")
 
 
 def build_terminal_index(**kwargs):
@@ -112,11 +142,17 @@ def build_issue_state_indexes(*, archive, published_archive, published_dossiers,
                 scope_decision = _decision(assessment["classification"], assessment["extraction"],
                     assessment["evidence"], fetched_at=assessment.get("source_read", {}).get("fetched_at"),
                     legacy=assessment["schema_version"] == 1)
+            selection_drafts = draft_rows
             if draft_rows:
-                draft_decision = _dossier_decision(draft_rows[0], reference, instant)
+                try:
+                    draft_decision = _dossier_decision(draft_rows[0], reference, instant)
+                except _ERRORS:
+                    if not _legacy_published_draft(draft_rows[0], reference, dossier, assessment, instant):
+                        raise
+                    selection_drafts = []
             # Reuse selection precedence, including current text, source audits,
             # and disagreements between snapshots. Never classify from a title.
-            manifest = project_news_selection(draft_rows, {"schema_version": 1, "records": [reference]},
+            manifest = project_news_selection(selection_drafts, {"schema_version": 1, "records": [reference]},
                 now=instant, scope_reviews=scope_rows,
                 scope_audits={"schema_version": 1, "audits": audit_groups.get(identifier, [])})
         except _ERRORS:

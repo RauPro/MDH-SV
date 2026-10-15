@@ -81,6 +81,44 @@ def test_valid_current_publication_can_match_private_positive_snapshots():
     assert state(**published(), drafts=[draft()], scope_reviews=[rights_review()])
 
 
+@pytest.mark.parametrize("prompt", ["mdh-private-grounded-5", "mdh-universal-news-grounded-6",
+                                   "mdh-universal-news-grounded-7-field-privacy"])
+def test_verified_production_and_current_scope_can_bind_a_legacy_extraction(prompt):
+    document = draft(); document["extraction"]["prompt_version"] = prompt
+    assert state(**published(), drafts=[document], scope_reviews=[rights_review()])[reference()["id"]]["status"] == "published"
+    assert state(drafts=[document], scope_reviews=[negative()]) == {}
+    assert reopening(drafts=[document], scope_reviews=[rights_review()]) == {}
+
+
+@pytest.mark.parametrize("mutate", [
+    lambda d: d["extraction"].update(content_sha256="d" * 64),
+    lambda d: d["extraction"].update(prompt_version="unrecognized-extraction-policy"),
+    lambda d: d["extraction"].update(provider="another-provider"),
+    lambda d: d["extraction"].update(prepared_at="2026-10-12T16:01:00Z"),
+    lambda d: d["extraction"].update(fetched_at="2026-10-12T16:01:00Z"),
+    lambda d: d["news_dossier"].update(publisher="Wrong publisher"),
+    lambda d: d.update(status="error"),
+])
+def test_legacy_publication_exception_never_accepts_wrong_identity_hash_policy_or_time(mutate):
+    document = draft(); document["extraction"]["prompt_version"] = "mdh-private-grounded-5"
+    mutate(document)
+    assert state(**published(), drafts=[document], scope_reviews=[rights_review()]) == {}
+
+
+def test_legacy_publication_requires_complete_positive_current_scope_and_positive_full_draft():
+    document = draft(); document["extraction"]["prompt_version"] = "mdh-private-grounded-5"
+    assert state(**published(), drafts=[document]) == {}
+    assert state(**published(), drafts=[document], scope_reviews=[inclusive_review()]) == {}
+    assert state(**published(), drafts=[document], scope_reviews=[negative()]) == {}
+    assessment = rights_review(); assessment["source_read"]["truncated"] = True
+    assert state(**published(), drafts=[document], scope_reviews=[assessment]) == {}
+    assessment = rights_review(); change_hash(assessment, "d" * 64)
+    assert state(**published(), drafts=[document], scope_reviews=[assessment]) == {}
+    document["classification"]["relevance"] = "not_relevant"
+    document["news_dossier"]["classification"]["relevance"] = "not_relevant"
+    assert state(**published(), drafts=[document], scope_reviews=[rights_review()]) == {}
+
+
 def test_actual_editorial_publication_precedes_automatic_negatives_or_failed_private_retries():
     assert state(**published(automatic=False), scope_reviews=[negative()], scope_audits=source_audit())
     invalid = draft(); invalid["status"] = "error"
