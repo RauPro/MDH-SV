@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 from types import SimpleNamespace
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -492,7 +493,7 @@ def test_human_override_and_removal_request_take_precedence():
     document, reference, _ = inputs()
     value = receipt(document, reference)
     human = deepcopy(document["news_dossier"])
-    human.update(human_reviewed=True, reviewed_by="maintainer", reviewed_at=date.today().isoformat(),
+    human.update(human_reviewed=True, reviewed_by="maintainer", reviewed_at=datetime.now(ZoneInfo("America/El_Salvador")).date().isoformat(),
                  review_notes="Comprobados el texto, la atribución y la privacidad.")
     human["fields"]["summary"]["value"] = "Corrección editorial respaldada por la fuente."
     automatic, merged = project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference),
