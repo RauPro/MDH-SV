@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T10:21:44.381098+00:00",
+  "generated_at": "2026-10-15T11:17:52.852790+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11096,
-      "selected": 1590,
-      "evaluated": 4691,
-      "relevant": 1590,
-      "excluded": 3098,
+      "selected": 1604,
+      "evaluated": 4723,
+      "relevant": 1604,
+      "excluded": 3116,
       "uncertain": 3,
-      "pending": 6405,
-      "evaluated_at": "2026-10-15T10:18:37.825912+00:00"
+      "pending": 6373,
+      "evaluated_at": "2026-10-15T11:17:51.422886+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1590,
+    "records": 1604,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1346,
+        "records": 1357,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-14",
         "months": [
@@ -1301,7 +1301,7 @@
           {
             "month": "2018-08",
             "status": "enumerated",
-            "records": 6,
+            "records": 17,
             "screen_version": 3,
             "posts_scanned": 1011,
             "source_total_posts": 1011,
@@ -2493,9 +2493,9 @@
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 55,
+        "records": 57,
         "first_published_date": "2014-09-21",
-        "last_published_date": "2018-07-25",
+        "last_published_date": "2018-08-27",
         "months": [
           {
             "month": "2010-01",
@@ -3736,7 +3736,7 @@
           {
             "month": "2018-08",
             "status": "enumerated",
-            "records": 0,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 13,
             "source_total_posts": 13,
@@ -4928,7 +4928,7 @@
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 49,
+        "records": 50,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
         "months": [
@@ -6171,7 +6171,7 @@
           {
             "month": "2018-08",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 29,
             "source_total_posts": 29,
@@ -21561,22 +21561,22 @@
         "month": "2018-08",
         "start_date": "2018-08-01",
         "end_date": "2018-08-31",
-        "records": 6,
+        "records": 20,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 6
+            "records": 17
           },
           {
             "source_id": "gatoencerrado",
             "status": "enumerated",
-            "records": 0
+            "records": 2
           },
           {
             "source_id": "factum",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "el-faro",
@@ -26339,6 +26339,654 @@
             "p18",
             "p32",
             "p33"
+          ]
+        }
+      }
+    },
+    {
+      "id": "571827274e9bb221bc4fbdf4c902a00483f16fcd5859b71f0011b4b129a37a35",
+      "title": "ARENA es sinónimo de despidos y privatización",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/arena-es-sinonimo-de-despidos-y-privatizacion/",
+      "published_date": "2018-08-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 187624,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9082fa03d1fab5c022b846f089d6c400e9ae040cb061233b03fdfc59c8856b55",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a57f1fa8fc7da158856b21506c8fef9fdbbc7a03889eeb47eb64e50cbb034881",
+      "title": "La falsa conclusión de Carlos Calleja sobre el asesinato de Monseñor Romero",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2018/08/27/la-falsa-conclusion-de-carlos-calleja-sobre-el-asesinato-de-monsenor-romero/",
+      "published_date": "2018-08-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 7111,
+        "retrieved_at": "2026-10-10T18:02:39.731848+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ffe885020871faa0fa2ad34f830f284581f239d1e8af0b66320ce6fa1b22b2be",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4548789f2d16af1f169b1c5a731cc10f5578ade6777620f08d4ac2ea11697f16",
+      "title": "“Ciudad Mujer” realiza talleres de prevención de violencia de género en Atiquizaya",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ciudad-mujer-realiza-talleres-de-prevencion-de-violencia-de-genero-en-atiquizaya/",
+      "published_date": "2018-08-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 187287,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ecdbe5e43a8538b22fc9b71f3272107a9757acec9964c9e5bdc962a66f6ce406",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c2e6b6e7d094d568180cfbe448059d6a317bbe4187d2df3787703b2001939379",
+      "title": "Implicación de d’Aubuisson en asesinato de Romero es “especulación”: Carlos Calleja",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/implicacion-de-daubuisson-en-asesinato-de-romero-es-especulacion-carlos-calleja/",
+      "published_date": "2018-08-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 187196,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "02d52882d3a6b4538b801b92f50eb366240f673245e43c68d183ddf8023ab369",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "06c53f85f0f94be6e4664f9b8ddb4ba2ce7e83f6baaf3176b5b9cfdd45a8baab",
+      "title": "“En sus bolsillos había juguetes. ¿Qué hacían esos niños asesinados allí?”",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/que-hacian-esos-ninos-asesinados-alli/",
+      "published_date": "2018-08-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 28370,
+        "retrieved_at": "2026-10-10T18:02:39.732033+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "736c1b014d7aa76626c9d98e4f48d41e752f6d0d5e3f9068ea3e1b89e4698fc5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1eb0bacf1d561dfe4e822cd3d725aab3a05f720e34ebc3d768c71d91503bd2e2",
+      "title": "Exigen que se investigue si asesinato de Dina Puente está ligado a su lucha ambientalista",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2018/08/23/exigen-que-se-investigue-si-asesinato-de-dina-puente-esta-ligado-a-su-lucha-ambientalista/",
+      "published_date": "2018-08-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 7087,
+        "retrieved_at": "2026-10-10T18:02:39.731848+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1c3f96076eb2804f2157444010104bf06c83092f3e892b2e6005c366bfb074f8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9f1a25b21f81ebe5d0267382d773616b1028312b61895a3150cc8011bb77df28",
+      "title": "“Ciudad Mujer” gradúa a mujeres en derechos humanos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ciudad-mujer-gradua-a-mujeres-en-derechos-humanos/",
+      "published_date": "2018-08-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186928,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "21e037cbbc5d8a48ccb1265cb8591f459afd6234db8a7c2193243a820e98a56f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6eb866a537848aefd5038d13a1d8139938c834e2c1bfdcc316accd50b0fd9b78",
+      "title": "PDDH niega que reformas a la Ley Penitenciaria tengan su aval",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pddh-niega-que-reformas-a-la-ley-penitenciaria-tengan-su-aval/",
+      "published_date": "2018-08-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186942,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "91a22d1103b04b7926ba77111f31fa01b21627cdcc8d2835831bec07379a207e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "33e60547d4acec9f13f907bda4af6eb29a35b5e7fe77d3c752805b71dab94a88",
+      "title": "Antropólogas argentinas confirman “Ejecución Extrajudicial Masiva” en El Mozote",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/antropologas-argentinas-confirman-ejecucion-extrajudicial-masiva-en-el-mozote/",
+      "published_date": "2018-08-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186738,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e22c2bb5124421e97e182f3b9e8f0c2c33080d7f3bd9b2420e39e9f9fe59566d",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p17"
+          ]
+        }
+      }
+    },
+    {
+      "id": "193ca64b9bcd84dfbf293678942afdd0ea91b4714a2d67660ba97c9df83bf1a8",
+      "title": "Diputadas participan en encuentro sobre derechos laborales de las mujeres",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/diputadas-participan-en-encuentro-sobre-derechos-laborales-de-las-mujeres/",
+      "published_date": "2018-08-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186568,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8ac543d72e46eb9dd2423d6b2aaaf31becbe9007b4ec91a3e92e2dda3efb18b5",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d615e788c24354bc5dbad76dfe70a7128b761612b94b543903c94e6caf5fe2e3",
+      "title": "GANA pide que periodistas tengan acceso a escrutinios en elecciones",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/gana-pide-que-periodistas-tengan-acceso-a-escrutinios-en-elecciones/",
+      "published_date": "2018-08-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186458,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "73d8aded8cefa81b4e703bfba3b539fa2050835acde0d2d49493b6a1829cee09",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2a441afd54f71ff0b3ad3c8242a97c35efde156ae12fb3ae77c2335a75b433da",
+      "title": "Ministerio de Trabajo condena despidos en comuna tecleña",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ministerio-de-trabajo-condena-despidos-en-comuna-teclena/",
+      "published_date": "2018-08-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186291,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8d6611732ad782d05ecc2352bfebbcab44abd32ab4deef15fbceedbae07e8f97",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9c2aac7253ab331a09cdf6dfe6f124de40e72c44acba0b8dcd1c3514dae19845",
+      "title": "Tribunal restringe trabajo de periodistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/tribunal-restringe-trabajo-de-periodistas/",
+      "published_date": "2018-08-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186109,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "894c4dd9811384de2acb77acf3d720c5a606720d0664ed5ac897a858e96ec3c3",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "77a9cbd27ec2a92d279bb8cd16066aa7dfe881cfd8b02ac261bb4c9544b45d4f",
+      "title": "“Operación Rescate” evidencia la violencia contra población civil desde el Alto Mando de la FAES",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/operacion-rescate-evidencia-la-violencia-contra-poblacion-civil-desde-el-alto-mando-de-la-faes/",
+      "published_date": "2018-08-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 186096,
+        "retrieved_at": "2026-10-11T22:25:58.835294+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3d3bf9458a4aa655f17ac82623d753fc9dbde5f7464561a338a0443e193e08b9",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p7"
           ]
         }
       }
@@ -71146,7 +71794,7 @@
     },
     {
       "id": "87c5c022aaf4fedce1cc5aae4efb940788acce2cde6845f379d9df06fb82754f",
-      "title": "“Estamos en una prisión en Izalco, pero uno se siente en un Centro Educativo”: Yoalmo Cabrera",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",

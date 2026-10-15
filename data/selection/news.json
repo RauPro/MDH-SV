@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T10:18:37.825912+00:00",
+  "generated_at": "2026-10-15T11:17:51.422886+00:00",
   "assessment_counts": {
     "candidates": 11096,
-    "evaluated": 4691,
-    "relevant": 1590,
-    "excluded": 3098,
+    "evaluated": 4723,
+    "relevant": 1604,
+    "excluded": 3116,
     "uncertain": 3,
-    "pending": 6405
+    "pending": 6373
   },
   "selections": [
     {
@@ -1108,6 +1108,34 @@
           "relevance_paragraph_ids": [
             "p5",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "06c53f85f0f94be6e4664f9b8ddb4ba2ce7e83f6baaf3176b5b9cfdd45a8baab",
+      "source_url": "https://www.revistafactum.com/que-hacian-esos-ninos-asesinados-alli/",
+      "publisher": "Revista Factum",
+      "published_date": "2018-08-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "736c1b014d7aa76626c9d98e4f48d41e752f6d0d5e3f9068ea3e1b89e4698fc5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -4236,6 +4264,38 @@
       }
     },
     {
+      "candidate_id": "193ca64b9bcd84dfbf293678942afdd0ea91b4714a2d67660ba97c9df83bf1a8",
+      "source_url": "https://www.diariocolatino.com/diputadas-participan-en-encuentro-sobre-derechos-laborales-de-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8ac543d72e46eb9dd2423d6b2aaaf31becbe9007b4ec91a3e92e2dda3efb18b5",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "194c823b69f039313cd68cc957bfe46f471e1c647b65284b092dde2007181b5e",
       "source_url": "https://www.diariocolatino.com/benjamin-garcia-defendamos-derecho-al-agua-desde-proyecto-popular-no-capitalista/",
       "publisher": "Diario Co Latino",
@@ -5276,6 +5336,35 @@
             "p2",
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "1eb0bacf1d561dfe4e822cd3d725aab3a05f720e34ebc3d768c71d91503bd2e2",
+      "source_url": "https://gatoencerrado.news/2018/08/23/exigen-que-se-investigue-si-asesinato-de-dina-puente-esta-ligado-a-su-lucha-ambientalista/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-08-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "1c3f96076eb2804f2157444010104bf06c83092f3e892b2e6005c366bfb074f8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -7002,6 +7091,34 @@
             "p2",
             "p4",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2a441afd54f71ff0b3ad3c8242a97c35efde156ae12fb3ae77c2335a75b433da",
+      "source_url": "https://www.diariocolatino.com/ministerio-de-trabajo-condena-despidos-en-comuna-teclena/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "8d6611732ad782d05ecc2352bfebbcab44abd32ab4deef15fbceedbae07e8f97",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -8859,6 +8976,37 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "33e60547d4acec9f13f907bda4af6eb29a35b5e7fe77d3c752805b71dab94a88",
+      "source_url": "https://www.diariocolatino.com/antropologas-argentinas-confirman-ejecucion-extrajudicial-masiva-en-el-mozote/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-20",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e22c2bb5124421e97e182f3b9e8f0c2c33080d7f3bd9b2420e39e9f9fe59566d",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p17"
           ]
         }
       }
@@ -11489,6 +11637,34 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4548789f2d16af1f169b1c5a731cc10f5578ade6777620f08d4ac2ea11697f16",
+      "source_url": "https://www.diariocolatino.com/ciudad-mujer-realiza-talleres-de-prevencion-de-violencia-de-genero-en-atiquizaya/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ecdbe5e43a8538b22fc9b71f3272107a9757acec9964c9e5bdc962a66f6ce406",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -14254,6 +14430,35 @@
             "p2",
             "p4",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "571827274e9bb221bc4fbdf4c902a00483f16fcd5859b71f0011b4b129a37a35",
+      "source_url": "https://www.diariocolatino.com/arena-es-sinonimo-de-despidos-y-privatizacion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "9082fa03d1fab5c022b846f089d6c400e9ae040cb061233b03fdfc59c8856b55",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p8"
           ]
         }
       }
@@ -19178,6 +19383,37 @@
       }
     },
     {
+      "candidate_id": "6eb866a537848aefd5038d13a1d8139938c834e2c1bfdcc316accd50b0fd9b78",
+      "source_url": "https://www.diariocolatino.com/pddh-niega-que-reformas-a-la-ley-penitenciaria-tengan-su-aval/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "91a22d1103b04b7926ba77111f31fa01b21627cdcc8d2835831bec07379a207e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "6f1ae7ff69566e21efd7d9f3a38c4d2cc733b6b06b2a792ffa7c52f647e681cf",
       "source_url": "https://www.diariocolatino.com/raul-mijango-afirma-que-alza-de-homicidios-se-puede-reducir-al-devolver-facilidades-a-la-tregua/",
       "publisher": "Diario Co Latino",
@@ -21297,6 +21533,36 @@
             "p6",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "77a9cbd27ec2a92d279bb8cd16066aa7dfe881cfd8b02ac261bb4c9544b45d4f",
+      "source_url": "https://www.diariocolatino.com/operacion-rescate-evidencia-la-violencia-contra-poblacion-civil-desde-el-alto-mando-de-la-faes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "3d3bf9458a4aa655f17ac82623d753fc9dbde5f7464561a338a0443e193e08b9",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p7"
           ]
         }
       }
@@ -27859,6 +28125,35 @@
       }
     },
     {
+      "candidate_id": "9c2aac7253ab331a09cdf6dfe6f124de40e72c44acba0b8dcd1c3514dae19845",
+      "source_url": "https://www.diariocolatino.com/tribunal-restringe-trabajo-de-periodistas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "894c4dd9811384de2acb77acf3d720c5a606720d0664ed5ac897a858e96ec3c3",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "9c33839e936e81945d8533ef9a9d0442484f9b1153b35e060396d5673f46a17e",
       "source_url": "https://www.diariocolatino.com/presidente-la-asamblea-se-reune-encargado-derechos-humanos-latinoamerica/",
       "publisher": "Diario Co Latino",
@@ -28694,6 +28989,35 @@
             "p2",
             "p5",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "9f1a25b21f81ebe5d0267382d773616b1028312b61895a3150cc8011bb77df28",
+      "source_url": "https://www.diariocolatino.com/ciudad-mujer-gradua-a-mujeres-en-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "21e037cbbc5d8a48ccb1265cb8591f459afd6234db8a7c2193243a820e98a56f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9",
+            "p10"
           ]
         }
       }
@@ -29998,6 +30322,34 @@
           "relevance_paragraph_ids": [
             "p2",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a57f1fa8fc7da158856b21506c8fef9fdbbc7a03889eeb47eb64e50cbb034881",
+      "source_url": "https://gatoencerrado.news/2018/08/27/la-falsa-conclusion-de-carlos-calleja-sobre-el-asesinato-de-monsenor-romero/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-08-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "ffe885020871faa0fa2ad34f830f284581f239d1e8af0b66320ce6fa1b22b2be",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p7",
+            "p8"
           ]
         }
       }
@@ -34866,6 +35218,34 @@
       }
     },
     {
+      "candidate_id": "c2e6b6e7d094d568180cfbe448059d6a317bbe4187d2df3787703b2001939379",
+      "source_url": "https://www.diariocolatino.com/implicacion-de-daubuisson-en-asesinato-de-romero-es-especulacion-carlos-calleja/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:10:54.392236-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "02d52882d3a6b4538b801b92f50eb366240f673245e43c68d183ddf8023ab369",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c314993af89e430bf8995c758fd27b0644fb9b82eb9d45ab3fd0efeada38900d",
       "source_url": "https://www.diariocolatino.com/presidente-reitera-compromiso-por-continuar-busqueda-de-ninos-desaparecidos-en-conflicto-armado/",
       "publisher": "Diario Co Latino",
@@ -37850,6 +38230,36 @@
             "p6",
             "p8",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d615e788c24354bc5dbad76dfe70a7128b761612b94b543903c94e6caf5fe2e3",
+      "source_url": "https://www.diariocolatino.com/gana-pide-que-periodistas-tengan-acceso-a-escrutinios-en-elecciones/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T05:09:53.784192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "73d8aded8cefa81b4e703bfba3b539fa2050835acde0d2d49493b6a1829cee09",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
