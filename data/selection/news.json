@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T18:17:23.905746+00:00",
+  "generated_at": "2026-10-15T19:18:04.942062+00:00",
   "assessment_counts": {
     "candidates": 11404,
     "evaluated": 4887,
-    "relevant": 1710,
-    "excluded": 17,
-    "uncertain": 3160,
+    "relevant": 1721,
+    "excluded": 23,
+    "uncertain": 3143,
     "pending": 6517
   },
   "selections": [
@@ -118,6 +118,32 @@
           "relevance_paragraph_ids": [
             "p2",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "00b1e3f623bfc8a342e6647c546b9597528c82e1702e16aa4d15f30325416910",
+      "source_url": "https://historico.elsalvador.com/historico/99968/fallece-el-periodista-salvadoreno-mauricio-vasquez.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T19:10:09.692553+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7ee6ea116c547a7a61fe57b8f5ba563a91b3204424506bfbd0608802693c399e",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
           ]
         }
       }
@@ -6447,6 +6473,37 @@
       }
     },
     {
+      "candidate_id": "2241bf6a2ceaab371a2ba350a69c9df3d6522d546763dda20ba8c8db2c4ca3d6",
+      "source_url": "https://historico.elsalvador.com/historico/100292/dictan-90-anos-por-asesinar-a-plagiada.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "49b31ca7f96e54d5f45c330e98ba4da2f4258e389860466ba2371ab03cfc0a45",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "226d86d47ea17d07241411189686913127dc159ae1c7f4d96f990d83362dc9f3",
       "source_url": "https://historico.elsalvador.com/historico/446845/defensores-del-tps-tras-estatus-definitivo-para-los-salvadorenos.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -11459,6 +11516,33 @@
       }
     },
     {
+      "candidate_id": "3dd8ac4db74fc7e341247c97d696aec91e53280931619784e3d498498be26460",
+      "source_url": "https://historico.elsalvador.com/historico/99605/sicarios-asesinan-a-un-alcalde-guatemalteco.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5db17eb6cfc9affaf369e48527a92c6656d9e40c89a4ac1d8fd2bec9dcbf7f8c",
+          "jurisdiction_paragraph_ids": [
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "3de8d2f3d4fe155165b3d0016a54ac9334ec67ec63b8105ae0e04df94b0fa746",
       "source_url": "https://www.diariocolatino.com/fgr-deficiente-en-la-investigacion-de-feminicidios-las-dignas/",
       "publisher": "Diario Co Latino",
@@ -12909,6 +12993,32 @@
             "p3",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "45e882454dd1345c7727453afa9506db71c086bedb20db89c8e136a9e73bfd10",
+      "source_url": "https://historico.elsalvador.com/historico/266157/fallece-el-periodista-salvadoreno-mauricio-vasquez-2.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T19:10:09.692553+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2e358f1d17ae34ec85b4a8fd6f79412f2f46b62ee11562097b8b84107b91a90b",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
           ]
         }
       }
@@ -16010,6 +16120,36 @@
           "relevance_paragraph_ids": [
             "p1",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "594b8eef32bec4283e2eb5a8edd20af5938eca68787b13d44a7d9b51fb51c151",
+      "source_url": "https://historico.elsalvador.com/historico/99646/asesinan-a-exconvicto-por-violacion-en-lourdes-colon.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d85d92a61e78083255e696bbba897ee7be63634d0126416b0b7993747a4e2b24",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p9"
           ]
         }
       }
@@ -22396,6 +22536,33 @@
       }
     },
     {
+      "candidate_id": "73cfa59aada3804e852bcf862e4235182524bbab269dedb3c8c73604da7c94c3",
+      "source_url": "https://historico.elsalvador.com/historico/99812/sepultan-restos-de-periodista-salvadoreno-mauricio-vasquez.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2f481017242a455545f2db64947c19a57e428c9c94074568d227fb76b7fc9f41",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "73d0dc7009aeebea6d4dad7ac1eaabc44ca9ef7bcf5c7fdd470c897016863902",
       "source_url": "https://www.diariocolatino.com/coronel-montano-participo-diseno-asesinato-los-jesuitas/",
       "publisher": "Diario Co Latino",
@@ -23887,6 +24054,37 @@
           "relevance_paragraph_ids": [
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7b12d3661775b6df979c177ccca3ed8b333ece57fa00b46ec1ed7befacd267a1",
+      "source_url": "https://historico.elsalvador.com/historico/100235/tres-detenidos-tras-ataque-y-persecucion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "9883b35c4af1b8e8d55354efea28adf124648dd1fd7296055ef28c220e73ad58",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5",
+            "p12",
+            "p13",
+            "p14",
+            "p15"
           ]
         }
       }
@@ -29982,6 +30180,41 @@
       }
     },
     {
+      "candidate_id": "9a8c29a20ec0e4a57458f01c31d5b31b9c95685d2ec11c6fd379d246572157d7",
+      "source_url": "https://historico.elsalvador.com/historico/99575/asesinan-a-cuatro-personas-en-las-ultimas-horas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7d47cb3544b522d48acb4bd04f804ddf9112bdf5670fa21618811e24d5e8d73f",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "9abce6d1e4f5c2607dc6614db9332cec2d417cb4f9e7a7dd379bc0580c011064",
       "source_url": "https://www.diariocolatino.com/movimientos-sindicales-y-gremiales-a-favor-de-las-reformas-de-pensiones/",
       "publisher": "Diario Co Latino",
@@ -31536,6 +31769,33 @@
             "p6",
             "p21",
             "p22"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a061d16cf021355fe011ee289e5b1ad60f74a4d9a4508062ebcfaabea1ca6c74",
+      "source_url": "https://historico.elsalvador.com/historico/100222/alcaldia-de-sensuntepeque-desaloja-vendedores.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d2cddb5afa841229cb95b5bf36bf4813a7903369eea04f7803ed90cf124f7571",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p5"
           ]
         }
       }
@@ -33988,6 +34248,33 @@
             "p2",
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "aff3570681f51275f2fc81d237c351b4a11d974f1440d4807465ea77bda2cbad",
+      "source_url": "https://historico.elsalvador.com/historico/100323/asesinan-en-ataque-armado-a-alcalde-de-jutiapa-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e5008044574ae40c978921b381832dea9c3a084a3f931aba9e3815c764372a30",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p4"
           ]
         }
       }
@@ -37584,6 +37871,32 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c2364ce984ddc22501ecf08a8af96e5923dca322f8c1434b0fe2435a09ffea5b",
+      "source_url": "https://historico.elsalvador.com/historico/99838/prision-para-tres-por-caso-droga-en-zona-real.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T13:09:32.089348-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "92fb234d86ed5c608a0239e089ed16310deae325e8954f7191d15f9f8f6c4721",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p5"
           ]
         }
       }
