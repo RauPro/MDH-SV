@@ -94,7 +94,13 @@ def candidate_from_entry(entry, feed, now=None):
         published_dt = datetime.fromtimestamp(timegm(entry['published_parsed']), timezone.utc)
         if (now - published_dt).days > 45 or (published_dt - now).total_seconds() > 86400:
             return None
-        published = published_dt.date().isoformat()
+        # feedparser normalizes RSS timestamps to UTC. The monitor's calendar
+        # and dossier validator use El Salvador: 01:00 UTC is still yesterday
+        # locally. Preserve the instant, then derive the local publication day.
+        local_published = published_dt.astimezone(ZoneInfo('America/El_Salvador')).date()
+        if local_published > now.astimezone(ZoneInfo('America/El_Salvador')).date():
+            return None
+        published = local_published.isoformat()
     # Minimal quotation only. No article body, images, attachments or identity extraction.
     title = ' '.join(title.split()[:24])[:180]
     return {'id': hashlib.sha256(url.encode()).hexdigest(), 'source_url': url,
