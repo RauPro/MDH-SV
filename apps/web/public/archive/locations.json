@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T02:21:00.665413+00:00",
+  "generated_at": "2026-10-15T03:19:07.659696+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1515,6 +1515,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "402ad6a23a3f0cca594ed0a498852c73927eb51e804c7ef37e43bd0ae8d32565",
+      "source_url": "https://gatoencerrado.news/2018/06/28/las-victimas-lgbti-de-la-guerra-civil-salvadorena-siguen-en-la-impunidad/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-06-28",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T03:17:46.295640+00:00",
+      "source_checked_at": "2026-10-15T03:17:46.295640+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "7d63343e87e74ec7776836424e8febcd70c346782c1681772bdcd29509b5bf25"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -4171,6 +4195,30 @@
       }
     },
     {
+      "candidate_id": "a9a87abc744c499a39a29a26a4b6e2f9b9be5f8dececb9640cf245bcb2266355",
+      "source_url": "https://www.diariocolatino.com/salvadorena-en-libertad-tras-ser-acusada-de-homicidio-por-aborto-que-no-se-probo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-06-23",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T03:17:39.596211+00:00",
+      "source_checked_at": "2026-10-15T03:17:39.596211+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "313aeb49d81770e47b94f7a38fb422e9210429866c98478a3fc659318b804a32"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "a9e511d1a20a13f5f126765147b228f604ab422f0ba7bb32a5c68107a7a7eb5f",
       "source_url": "https://www.diariocolatino.com/nayib-bukele-se-compromete-a-trabajar-de-la-mano-con-sindicalistas/",
       "publisher": "Diario Co Latino",
@@ -6150,6 +6198,59 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
       }
+    },
+    {
+      "candidate_id": "fef7288deb574e0ee3c41df747f237ab45252b877d861770b9f1826c12b4a4dd",
+      "source_url": "https://www.revistafactum.com/entrevista-karla-avelar/",
+      "publisher": "Revista Factum",
+      "published_date": "2018-06-28",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T03:17:49.796563+00:00",
+      "source_checked_at": "2026-10-15T03:17:49.796563+00:00",
+      "evidence": {
+        "content_sha256": "c33d13e08e041ce6a52b5732e5ed2897259ace3ddfc370a8d44d45f49f43fa6b"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Ahuachapán",
+          "paragraph_id": "p20",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Ahuachapán",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Santa Ana",
+          "paragraph_id": "p20",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Santa Ana",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Sonsonate",
+          "paragraph_id": "p20",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Sonsonate",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "ffc4c70bd381f60e13da114ea52b67ab7df81717b5a4868e266fcb1413985bbb",
