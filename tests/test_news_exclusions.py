@@ -112,7 +112,7 @@ def test_eight_independent_second_assessments_use_one_shared_request_and_restore
     lambda rows: rows[1].update(reason_paragraph_ids=["n1-p2"]),
     lambda rows: rows[1].update(reason_paragraph_ids=[]),
     lambda rows: rows[1].update(reason_code="within_scope"),
-    lambda rows: rows[1].update(relevance_paragraph_ids=[]),
+    lambda rows: rows[1].update(jurisdiction_paragraph_ids=[]),
     lambda rows: rows.pop(),
 ])
 def test_malformed_second_response_never_returns_a_valid_prefix(mutate):
@@ -192,3 +192,60 @@ def test_two_passes_cannot_reserve_past_shared_request_grant():
     with pytest.raises(QuotaDeferred):
         run([value], session=blocked, budget=budget)
     assert blocked.calls == [] and ledger.document()["used_requests"] == 1
+
+
+def test_real_response_shape_keeps_negative_proof_in_reason_anchors_without_inventing_axis_citations():
+    source = item(texts=[
+        "La noticia relata un partido de tenis disputado en el torneo de otra nación.",
+        "Dos jugadores participaron en la final de tenis y disputaron tres sets completos.",
+        "El primer jugador ganó el primer set del partido según el marcador del torneo.",
+        "El segundo jugador ganó el siguiente set con una diferencia de dos juegos.",
+        "La final terminó después de un desempate en la última parte del encuentro.",
+        "Los organizadores presentaron el resultado deportivo y entregaron el trofeo al ganador.",
+    ])
+    source["first_review"] = first_review(source, jurisdiction="other", relevance="not_relevant")
+    row = assessment(source, jurisdiction="other", relevance="not_relevant")
+    row.update(reason_code="unrelated_subject", relevance_paragraph_ids=[],
+               reason_paragraph_ids=[f"n1-p{n}" for n in range(1, 7)])
+    receipt = run([source], [row])[0]
+    assert receipt["outcome"] == "confirmed_excluded"
+    assert receipt["reason_code"] == "unrelated_subject"
+    assert receipt["reason_paragraph_ids"] == [f"p{n}" for n in range(1, 7)]
+    assert receipt["second_review"]["evidence"]["relevance_paragraph_ids"] == []
+    assert confirmed_exclusion(receipt, source["first_review"], source["reference"], now=NOW)
+
+
+@pytest.mark.parametrize("first_jurisdiction,first_relevance,second_jurisdiction,second_relevance,reason,expected", [
+    ("other", "not_relevant", "SV", "not_relevant", "unrelated_subject", "confirmed_excluded"),
+    ("other", "relevant", "other", "not_relevant", "unrelated_subject", "uncertain"),
+    ("SV", "not_relevant", "other", "not_relevant", "unrelated_country", "uncertain"),
+    ("other", "not_relevant", "other", "not_relevant", "unrelated_country", "confirmed_excluded"),
+])
+def test_exclusion_requires_agreement_on_the_axis_actually_supported_by_the_reason(
+        first_jurisdiction, first_relevance, second_jurisdiction, second_relevance, reason, expected):
+    source = verification_item(jurisdiction=first_jurisdiction, relevance=first_relevance)
+    row = assessment(source, jurisdiction=second_jurisdiction, relevance=second_relevance)
+    row["reason_code"] = reason
+    if second_relevance == "not_relevant":
+        row["relevance_paragraph_ids"] = []
+    if second_jurisdiction == "other":
+        row["jurisdiction_paragraph_ids"] = []
+    receipt = run([source], [row])[0]
+    assert receipt["outcome"] == expected and receipt["reason_code"] == reason
+    assert confirmed_exclusion(receipt, source["first_review"], source["reference"], now=NOW) == (expected == "confirmed_excluded")
+    if expected == "uncertain":
+        assert receipt["next_retry_at"] == (NOW + timedelta(days=7)).isoformat()
+        forged = deepcopy(receipt)
+        forged.update(outcome="confirmed_excluded", next_retry_at=None)
+        assert not confirmed_exclusion(forged, source["first_review"], source["reference"], now=NOW)
+
+
+@pytest.mark.parametrize("jurisdiction,relevance,reason", [
+    ("other", "relevant", "unrelated_subject"), ("SV", "not_relevant", "unrelated_country"),
+])
+def test_negative_reason_must_describe_an_axis_the_second_assessment_actually_rejected(jurisdiction, relevance, reason):
+    source = verification_item(jurisdiction="other", relevance="not_relevant")
+    row = assessment(source, jurisdiction=jurisdiction, relevance=relevance)
+    row["reason_code"] = reason
+    with pytest.raises(GeminiDraftError, match="invalid_scope_response"):
+        run([source], [row])
