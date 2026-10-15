@@ -465,8 +465,16 @@ def _safe_error_code(error):
 
 def evaluate_queue(inbox, inbox_dir, archive, *, api_key, model, budget, limit=3, fetch=None,
                    evaluate=None, extract=None, excluded_ids=(), request_generations=None, now=None,
-                   max_seconds=720, run_clock=time.monotonic):
+                   max_seconds=720, run_clock=time.monotonic, batch_size=1, batch_evaluate=None):
     """Bounded worker. Every retry shares the extraction ledger; no quota resets."""
+    if batch_size != 1 or batch_evaluate is not None:
+        from .automatic_news_worker import evaluate_queue_batched
+        if evaluate is not None:
+            raise AutomaticNewsError("ambiguous_automatic_evaluator")
+        return evaluate_queue_batched(inbox, inbox_dir, archive, api_key=api_key, model=model,
+            budget=budget, limit=limit, fetch=fetch, batch_evaluate=batch_evaluate, extract=extract,
+            excluded_ids=excluded_ids, request_generations=request_generations, now=now,
+            max_seconds=max_seconds, run_clock=run_clock, batch_size=batch_size)
     from .article_source import fetch_article
     if (inbox.repository.lower() != "raupro/mdh-sv-review" or type(limit) is not int or not 1 <= limit <= 10
             or budget is None or budget.config.model != model):
@@ -690,12 +698,40 @@ def failed_report(report):
                 and report.get("errors", 0) == report["attempted"]))
 
 
+def allocated_validation_grant(inbox, inbox_dir, archive, *, config, budget, limit,
+                               batch_size, source_run_id, consumer_run_id,
+                               excluded_ids=(), request_generations=None, now=None, ledger=None):
+    """Claim an upstream reservation once, or a bounded manual fair-share grant."""
+    from .automatic_news_worker import ready_items
+    from .gemini_review import hourly_request_allowance
+    from .pipeline_allocation import AllocationLedger
+    if (type(limit) is not int or not 1 <= limit <= 50
+            or type(batch_size) is not int or not 1 <= batch_size <= 4):
+        raise AutomaticNewsError("invalid_automatic_worker_configuration")
+    snapshot = budget.snapshot()
+    if snapshot.get("cooldown_until") or not snapshot["remaining_requests"]:
+        return 0, "budget_deferred"
+    ready = ready_items(inbox_dir, archive, excluded_ids=excluded_ids, request_generations=request_generations)
+    if not ready:
+        return 0, "no_validation_work"
+    ledger = ledger or AllocationLedger(inbox, project_id=config.project_id, model=config.model)
+    if source_run_id:
+        grant = ledger.claim_validation(source_run_id=source_run_id,
+            consumer_run_id=consumer_run_id, day=snapshot["day"])
+        # Missing/old/consumed upstream plans never fall back to a manual grant.
+        return min(grant, limit, snapshot["remaining_requests"]), "upstream_allocation" if grant else "allocation_unavailable"
+    fair, _ = hourly_request_allowance(snapshot, config, limit, _instant(now))
+    grant = ledger.claim_manual_validation(consumer_run_id=consumer_run_id, day=snapshot["day"], grant=fair)
+    return grant, "manual_allocation" if grant else "allocation_unavailable"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("evaluate", "export"))
     parser.add_argument("--inbox-dir", type=Path, required=True)
     parser.add_argument("--archive", type=Path, required=True)
-    parser.add_argument("--limit", type=int, default=3)
+    parser.add_argument("--limit", type=int, default=50, help="HTTP ceiling; actual grant comes from the shared allocation")
+    parser.add_argument("--batch-size", type=int, choices=(1, 2, 3, 4), default=4)
     parser.add_argument("--excluded-ids", type=Path)
     parser.add_argument("--request-generations", type=Path)
     parser.add_argument("--reviewed", type=Path)
@@ -707,13 +743,23 @@ def main():
         generations = _read_json(args.request_generations, 10_000_000) if args.request_generations else {}
         _requests(excluded, generations)
         if args.command == "evaluate":
+            from .automatic_news_batch import evaluate_batch
             config = BudgetConfig(**json.loads(os.environ["MDH_GEMINI_BUDGET_CONFIG"]))
             model = os.environ.get("GEMINI_MODEL", config.model)
             inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
             budget = GeminiBudget(inbox, config)
-            result = evaluate_queue(inbox, args.inbox_dir, _read_json(args.archive, 30_000_000),
-                api_key=os.environ["GEMINI_API_KEY"], model=model, budget=budget, limit=args.limit,
-                excluded_ids=excluded, request_generations=generations)
+            archive = _read_json(args.archive, 30_000_000)
+            grant, allocation = allocated_validation_grant(inbox, args.inbox_dir, archive,
+                config=config, budget=budget, limit=args.limit, batch_size=args.batch_size,
+                source_run_id=os.environ.get("MDH_ALLOCATION_SOURCE_RUN_ID", ""),
+                consumer_run_id=os.environ["GITHUB_RUN_ID"], excluded_ids=excluded, request_generations=generations)
+            result = (evaluate_queue(inbox, args.inbox_dir, archive,
+                api_key=os.environ["GEMINI_API_KEY"], model=model, budget=budget, limit=grant,
+                excluded_ids=excluded, request_generations=generations, batch_size=args.batch_size,
+                batch_evaluate=evaluate_batch) if grant else
+                {"attempted": 0, "evaluated": 0, "publishable": 0, "errors": 0, "http_requests": 0,
+                 "deferred": 1, "stopped_reason": allocation})
+            result.update(validation_request_grant=grant, allocation_source=allocation)
         else:
             if not all((args.reviewed, args.output, args.automatic_output)):
                 raise AutomaticNewsError("missing_automatic_export_paths")

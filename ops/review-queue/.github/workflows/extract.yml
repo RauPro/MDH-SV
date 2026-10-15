@@ -49,7 +49,9 @@ jobs:
           repository: RauPro/MDH-SV
           ref: main
           path: bibliography
-          sparse-checkout: data/history
+          sparse-checkout: |
+            data/history
+            data/selection
           persist-credentials: false
       - uses: actions/checkout@v4
         with:
@@ -92,6 +94,6 @@ jobs:
           MDH_TRIGGER_SOURCE: ${{ inputs.trigger_source || 'manual' }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: |
-          args=(--archive candidates.json --limit "$MDH_BATCH_SIZE" --scope-first --inbox-dir inbox)
+          args=(--archive candidates.json --limit "$MDH_BATCH_SIZE" --scope-first --inbox-dir inbox --exceptions bibliography/data/selection/news_exceptions.json --scope-audits bibliography/data/selection/scope_audits.json)
           if [ "$MDH_RETRY_FAILED" = 'true' ]; then args+=(--retry-failed); fi
           python -m mdh_pipeline.gemini_review "${args[@]}"

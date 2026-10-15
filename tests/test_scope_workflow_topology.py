@@ -21,6 +21,10 @@ def test_hourly_job_classifies_first_from_a_current_private_cache():
     assert private_checkout['with']['persist-credentials'] == 'false'
     execution = next(s for s in steps if 'mdh_pipeline.gemini_review' in s.get('run', ''))
     assert '--scope-first --inbox-dir inbox' in execution['run']
+    assert '--exceptions bibliography/data/selection/news_exceptions.json' in execution['run']
+    assert '--scope-audits bibliography/data/selection/scope_audits.json' in execution['run']
+    public_checkout = next(s for s in steps if s.get('with', {}).get('path') == 'bibliography')
+    assert 'data/selection' in public_checkout['with']['sparse-checkout']
 
 
 def test_separate_scope_worker_is_manual_only_and_uses_the_same_private_queue():

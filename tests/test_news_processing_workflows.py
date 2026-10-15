@@ -32,6 +32,9 @@ def test_processing_projection_requires_a_verified_full_private_inventory():
     assert '--request-generations request-generations.json' in evaluate['run']
     assert '--excluded-ids excluded-locations.json' in evaluate['run']
     assert evaluate['id'] == 'automatic_validation' and evaluate['continue-on-error'] == 'true'
+    assert evaluate['env']['VALIDATION_BATCH_SIZE'] == '4'
+    assert 'github.event.workflow_run.id' in evaluate['env']['MDH_ALLOCATION_SOURCE_RUN_ID']
+    assert '--batch-size "$VALIDATION_BATCH_SIZE"' in evaluate['run']
     failure_report = next(s for s in steps if "steps.automatic_validation.outcome == 'failure'" in s.get('if', ''))
     assert steps.index(failure_report) > steps.index(publish)
     assert 'apps/web/public/archive/processing.json' in publish['run']
