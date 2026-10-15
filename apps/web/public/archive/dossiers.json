@@ -669,6 +669,583 @@
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
       }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "0b1971e0c9e1c8ca421b4dd29cc89b4cbce17669e5982551ea5c73edb18b3f9e",
+      "source_url": "https://www.diariocolatino.com/el-salvador-en-el-consejo-de-derechos-humanos-de-la-onu/",
+      "publisher": "Diario Co Latino",
+      "source_title": "El Salvador en el Consejo de Derechos Humanos de la ONU",
+      "published_date": "2014-10-22",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "category": {
+          "value": "Política exterior y derechos humanos",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "La Asamblea General de Naciones Unidas eligió por voto directo y secreto a los nuevos miembros del Consejo de Derechos Humanos, resultando electo El Salvador para el periodo de 2015 a 2017 tras obtener 151 de 192 votos.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": "El Salvador",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Organización de la Naciones Unidas",
+            "Asamblea General de Naciones Unidas",
+            "Gobierno del Presidente Salvador Sánchez Cerén"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "canciller de la República, Hugo Martínez"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Derechos Humanos",
+            "Diplomacia internacional"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/el-salvador-en-el-consejo-de-derechos-humanos-de-la-onu/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p1",
+          "url": "https://www.diariocolatino.com/el-salvador-en-el-consejo-de-derechos-humanos-de-la-onu/",
+          "locator": "Párrafo p1 del texto consultado; SHA-256 d17c813923cf55f7d3ec4710e2f258ad8ab732fa7050221a209297973dac603d."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/el-salvador-en-el-consejo-de-derechos-humanos-de-la-onu/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 d17c813923cf55f7d3ec4710e2f258ad8ab732fa7050221a209297973dac603d."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/el-salvador-en-el-consejo-de-derechos-humanos-de-la-onu/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 d17c813923cf55f7d3ec4710e2f258ad8ab732fa7050221a209297973dac603d."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/el-salvador-en-el-consejo-de-derechos-humanos-de-la-onu/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 d17c813923cf55f7d3ec4710e2f258ad8ab732fa7050221a209297973dac603d."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "d17c813923cf55f7d3ec4710e2f258ad8ab732fa7050221a209297973dac603d",
+        "validated_at": "2026-10-15T00:14:41.574517+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "0b4374e7718e721f53f0871bb585df27ebc9db2b9fc89ad02a61c9a9013f13d2",
+      "source_url": "https://www.diariocolatino.com/fundacion-katya-miranda-se-encargara-de-velar-por-los-derechos-de-la-ninez-salvadorena/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Noticia con título protegido; consulte la fuente original",
+      "published_date": "2014-04-29",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "category": {
+          "value": "Derechos de la niñez",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "facts": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "country": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "niños y niñas",
+            "jóvenes"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": [
+            "Derechos humanos",
+            "Defensa de la niñez"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/fundacion-katya-miranda-se-encargara-de-velar-por-los-derechos-de-la-ninez-salvadorena/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p1",
+          "url": "https://www.diariocolatino.com/fundacion-katya-miranda-se-encargara-de-velar-por-los-derechos-de-la-ninez-salvadorena/",
+          "locator": "Párrafo p1 del texto consultado; SHA-256 e330b80cc03499a8f38fda5c2166dbe6f9969e6b34556ae570274078e7c61529."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/fundacion-katya-miranda-se-encargara-de-velar-por-los-derechos-de-la-ninez-salvadorena/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 e330b80cc03499a8f38fda5c2166dbe6f9969e6b34556ae570274078e7c61529."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/fundacion-katya-miranda-se-encargara-de-velar-por-los-derechos-de-la-ninez-salvadorena/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 e330b80cc03499a8f38fda5c2166dbe6f9969e6b34556ae570274078e7c61529."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "e330b80cc03499a8f38fda5c2166dbe6f9969e6b34556ae570274078e7c61529",
+        "validated_at": "2026-10-15T00:15:05.725454+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "0b43ba9b4aaf45ab40da4079b01a0d5f4703f4fb2439b1d021b91bca993ca39b",
+      "source_url": "https://www.diariocolatino.com/complejo-lago-de-guija-en-peligro-por-contaminacion/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Complejo Lago de Güija en peligro por contaminación",
+      "published_date": "2014-07-08",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "El Complejo Lagunar del Lago de Güija enfrenta riesgos de contaminación por desechos y proliferación de lirio acuático, afectando la subsistencia de familias pesqueras ante la falta de respuestas estatales.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6",
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Derecho al medio ambiente y a la alimentación",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "La fuente señala que la contaminación por desechos sólidos en la Laguna de Metapán impulsa la proliferación de lirio acuático, lo que obstaculiza la pesca y la subsistencia alimentaria de las familias locales.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "pobladores",
+            "familias"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p6",
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": "Metapán",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "public_place": {
+          "value": "Laguna de Metapán",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Cooperativa Laguna de Metapán",
+            "Grupo Consultivo Gestor de la Trinacional",
+            "ADESCOS"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p4",
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "instancias de gobierno local y nacional"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "pescadores"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": [
+            "medio ambiente",
+            "agua",
+            "derechos económicos, sociales y culturales"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7",
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/complejo-lago-de-guija-en-peligro-por-contaminacion/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/complejo-lago-de-guija-en-peligro-por-contaminacion/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 8d8a3882f37fb02561a1e63de639f91a8943b8d8da6d448913a19926a439a225."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/complejo-lago-de-guija-en-peligro-por-contaminacion/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 8d8a3882f37fb02561a1e63de639f91a8943b8d8da6d448913a19926a439a225."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/complejo-lago-de-guija-en-peligro-por-contaminacion/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 8d8a3882f37fb02561a1e63de639f91a8943b8d8da6d448913a19926a439a225."
+        },
+        {
+          "id": "article-p7",
+          "url": "https://www.diariocolatino.com/complejo-lago-de-guija-en-peligro-por-contaminacion/",
+          "locator": "Párrafo p7 del texto consultado; SHA-256 8d8a3882f37fb02561a1e63de639f91a8943b8d8da6d448913a19926a439a225."
+        },
+        {
+          "id": "article-p8",
+          "url": "https://www.diariocolatino.com/complejo-lago-de-guija-en-peligro-por-contaminacion/",
+          "locator": "Párrafo p8 del texto consultado; SHA-256 8d8a3882f37fb02561a1e63de639f91a8943b8d8da6d448913a19926a439a225."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "8d8a3882f37fb02561a1e63de639f91a8943b8d8da6d448913a19926a439a225",
+        "validated_at": "2026-10-15T00:16:43.576376+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
     }
   ]
 }

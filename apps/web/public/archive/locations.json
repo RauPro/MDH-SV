@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T00:13:59.084015+00:00",
+  "generated_at": "2026-10-15T00:17:24.376896+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -374,6 +374,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "0f3c28cb55fc578385cc4b3b00df0ebe82b76f765a3c1e362e5c144c28e0d4ab",
+      "source_url": "https://www.diariocolatino.com/investigacion-del-asesinato-del-padre-walter-sin-apoyo-por-parte-de-la-misma-iglesia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-05-18",
+      "department": "San Miguel",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T00:17:16.792131+00:00",
+      "source_checked_at": "2026-10-15T00:17:16.792131+00:00",
+      "evidence": {
+        "paragraph_id": "p8",
+        "content_sha256": "432ee8985d3530f54a00cf8e768c3197077e9137471a21043812ffbcd457023d"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Lolotique",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
       }
     },
     {
@@ -3820,6 +3844,30 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "9d4b29928551ea7f2b6cf11b2ecb6bfed151c024a4ab1e08f7fbd4d69f8bb4ba",
+      "source_url": "https://www.diariocolatino.com/piden-que-asesinato-de-promotora-de-salud-no-quede-impune/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-05-11",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T00:17:04.221301+00:00",
+      "source_checked_at": "2026-10-15T00:17:04.221301+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "fadadeb07f72b976959630bcf73e0afd973529d357a5bf0122c7969d6f223a44"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ciudad Arce",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
     },
     {
       "candidate_id": "9dd3a5938ec0175828db8eabf7c1973bb3588fb047bcbe11a09cc6a315c48a95",
