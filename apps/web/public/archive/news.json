@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T14:20:19.444747+00:00",
+  "generated_at": "2026-10-15T15:19:40.752867+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11251,
-      "selected": 1633,
-      "evaluated": 4822,
-      "relevant": 1633,
-      "excluded": 3186,
+      "selected": 1635,
+      "evaluated": 4854,
+      "relevant": 1635,
+      "excluded": 3216,
       "uncertain": 3,
-      "pending": 6429,
-      "evaluated_at": "2026-10-15T14:17:46.617101+00:00"
+      "pending": 6397,
+      "evaluated_at": "2026-10-15T15:19:37.127228+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1633,
+    "records": 1635,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 164,
+        "records": 166,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15212,7 +15212,7 @@
           {
             "month": "2013-08",
             "status": "partial",
-            "records": 2,
+            "records": 3,
             "screen_version": 3,
             "posts_scanned": 38,
             "source_total_posts": null,
@@ -15224,7 +15224,7 @@
           {
             "month": "2013-09",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 16,
             "source_total_posts": null,
@@ -18981,7 +18981,7 @@
         "month": "2013-08",
         "start_date": "2013-08-01",
         "end_date": "2013-08-31",
-        "records": 2,
+        "records": 3,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19016,7 +19016,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 3
           }
         ]
       },
@@ -19024,7 +19024,7 @@
         "month": "2013-09",
         "start_date": "2013-09-01",
         "end_date": "2013-09-30",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19059,7 +19059,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -87355,7 +87355,7 @@
     },
     {
       "id": "5eaff40875c92603a05e6e9bf24cc463b48adcb9d79e5e8abe5de68b51def2e2",
-      "title": "Secretaría de Inclusión Social condena asesinato de funcionaria de Ciudad Mujer Usulután",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -87445,7 +87445,7 @@
     },
     {
       "id": "fab91838fa384d7142ed865e4f2f4d94b6508bb88780355a9a74107056ba327d",
-      "title": "Secretaria de Inclusión Social condena asesinato de funcionaria de Ciudad Mujer Usulután",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -98984,6 +98984,102 @@
           "relevance_paragraph_ids": [
             "p4",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b6e24c2b53d3e08ea3b8afe5ac7ecf4cb6d4b5c7467cf2737a1d711cd4a0a6a6",
+      "title": "Esfotoperiodismo 2013: “Mirar para cambiar”",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/114297/esfotoperiodismo-2013-mirar-para-cambiar.html",
+      "published_date": "2013-09-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T09:09:59.378591-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a8e2b2f944ddf555272cc41e12e9cf6c64e83571db7907b4924a279e34d120d9",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "14a1b1e1d6c1bcdec3dfe809203aa21e32de0e5f74a24b6f5c95a7e1cebdba47",
+      "title": "Asesinan periodistas por develar crimen organizado",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/112399/asesinan-periodistas-por-develar-crimen-organizado.html",
+      "published_date": "2013-08-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T09:09:59.378591-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fec286c6026bbb0869616da317a8b3788b22aabaa44c49aaaeab94edff351c8e",
+          "jurisdiction_paragraph_ids": [
+            "p13",
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p13",
+            "p14",
+            "p15",
+            "p16",
+            "p17",
+            "p21"
           ]
         }
       }

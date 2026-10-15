@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T14:17:46.617101+00:00",
+  "generated_at": "2026-10-15T15:19:37.127228+00:00",
   "assessment_counts": {
     "candidates": 11251,
-    "evaluated": 4822,
-    "relevant": 1633,
-    "excluded": 3186,
+    "evaluated": 4854,
+    "relevant": 1635,
+    "excluded": 3216,
     "uncertain": 3,
-    "pending": 6429
+    "pending": 6397
   },
   "selections": [
     {
@@ -3526,6 +3526,38 @@
             "p5",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "14a1b1e1d6c1bcdec3dfe809203aa21e32de0e5f74a24b6f5c95a7e1cebdba47",
+      "source_url": "https://historico.elsalvador.com/historico/112399/asesinan-periodistas-por-develar-crimen-organizado.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-08-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T09:09:59.378591-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "fec286c6026bbb0869616da317a8b3788b22aabaa44c49aaaeab94edff351c8e",
+          "jurisdiction_paragraph_ids": [
+            "p13",
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p13",
+            "p14",
+            "p15",
+            "p16",
+            "p17",
+            "p21"
           ]
         }
       }
@@ -33448,6 +33480,35 @@
           ],
           "relevance_paragraph_ids": [
             "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b6e24c2b53d3e08ea3b8afe5ac7ecf4cb6d4b5c7467cf2737a1d711cd4a0a6a6",
+      "source_url": "https://historico.elsalvador.com/historico/114297/esfotoperiodismo-2013-mirar-para-cambiar.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-09-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T09:09:59.378591-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "a8e2b2f944ddf555272cc41e12e9cf6c64e83571db7907b4924a279e34d120d9",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
             "p4",
             "p5"
           ]
