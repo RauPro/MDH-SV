@@ -336,3 +336,28 @@ def test_collector_does_not_import_optional_ingestion_stack():
     root=Path(__file__).resolve().parents[1]
     code='import sys; import mdh_pipeline.review_queue; import mdh_pipeline.publication; assert not any(x in sys.modules for x in ["bs4","google.genai","pyarrow","dotenv"])'
     subprocess.run([sys.executable,'-c',code],check=True,env={**os.environ,'PYTHONPATH':str(root/'apps/pipeline/src')+os.pathsep+str(root/'packages/schema/src')})
+
+
+@pytest.mark.parametrize('published,now,expected', [
+    ('2026-10-15T01:06:53+00:00', '2026-10-15T01:07:44+00:00', '2026-10-14'),
+    ('2026-10-15T05:59:59+00:00', '2026-10-15T06:00:00+00:00', '2026-10-14'),
+    ('2026-10-15T06:00:00+00:00', '2026-10-15T06:01:00+00:00', '2026-10-15'),
+])
+def test_rss_publication_day_matches_el_salvador_calendar(monkeypatch, published, now, expected):
+    from zoneinfo import ZoneInfo
+    from mdh_pipeline import news_dossier
+    instant = datetime.fromisoformat(now)
+    item = entry()
+    item['published_parsed'] = datetime.fromisoformat(published).utctimetuple()
+    result = candidate_from_entry(item, FEEDS[1], instant)
+    assert result['published_date'] == expected
+    monkeypatch.setattr(news_dossier, '_today', lambda: instant.astimezone(ZoneInfo('America/El_Salvador')).date())
+    assert news_dossier.empty_news_dossier(result)['published_date'] == expected
+
+
+def test_rss_future_local_publication_day_waits_for_that_day_without_rewriting_the_source():
+    item = entry()
+    item['published_parsed'] = datetime(2026, 10, 15, 7, tzinfo=timezone.utc).utctimetuple()
+    assert candidate_from_entry(item, FEEDS[1], datetime(2026, 10, 15, 1, tzinfo=timezone.utc)) is None
+    result = candidate_from_entry(item, FEEDS[1], datetime(2026, 10, 15, 8, tzinfo=timezone.utc))
+    assert result['published_date'] == '2026-10-15'

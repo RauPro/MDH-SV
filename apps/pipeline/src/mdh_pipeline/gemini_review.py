@@ -404,9 +404,15 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         budget.set_request_limit(limit)
     ensure_ai_labels(inbox)
     candidates = []
+    from .news_dossier import empty_news_dossier
     for issue in pending_issues(inbox):
         try:
             candidate = candidate_from_issue(issue)
+            # Check that bibliographic metadata can form even an empty dossier
+            # before source reads, migrations or paid/quota-counted requests.
+            # Otherwise the failure handler would fail constructing its own
+            # error skeleton and abort unrelated eligible work in the batch.
+            empty_news_dossier(candidate)
             if (candidate["id"] in excluded_ids or (eligible_ids is not None
                     and candidate.get("discovery_method") == "historical_bibliography"
                     and candidate["id"] not in eligible_ids)):

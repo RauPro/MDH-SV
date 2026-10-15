@@ -1102,3 +1102,41 @@ def test_scope_routing_does_not_extract_unknown_historical_or_known_negative_new
     assert len(set(extractors.model_calls) & {items[4]['id'], items[5]['id']}) == 1
     assert report['ineligible'] == 3
     assert report['unclassified_rss_attempts'] == 1
+
+
+@pytest.mark.parametrize('change', [
+    {'published_date': '2026-10-15'},
+    {'published_date': '2026-02-30'},
+    {'published_date': 'tomorrow'},
+    {'source_title': 'x'},
+    {'publisher': 'x'},
+])
+def test_invalid_metadata_is_isolated_before_sources_or_error_skeletons(monkeypatch, change):
+    from datetime import date
+    from mdh_pipeline import news_dossier
+    monkeypatch.setattr(news_dossier, '_today', lambda: date(2026, 10, 14))
+    invalid, valid = candidate(100), candidate(101)
+    invalid.update(change)
+    inbox, workers = PrivateInbox([invalid, valid]), Extractors()
+    report = run(inbox, workers, limit=2)
+    assert report['invalid_metadata'] == 1
+    assert report['news_dossiers'] == 1
+    assert report['attempted'] == 1
+    assert workers.model_calls == [valid['id']]
+    assert [row['id'] for row in workers.fetch_calls] == [valid['id']]
+    assert not any(invalid['id'] in path for path in inbox.files)
+    assert inbox.issues[1]['body'] == issue_body(invalid)
+    assert report['stopped_reason'] is None
+
+
+def test_future_metadata_does_not_call_model_even_when_only_candidate(monkeypatch):
+    from datetime import date
+    from mdh_pipeline import news_dossier
+    monkeypatch.setattr(news_dossier, '_today', lambda: date(2026, 10, 14))
+    item = candidate(102, published_date='2026-10-15')
+    inbox, workers = PrivateInbox([item]), Extractors()
+    report = run(inbox, workers)
+    assert report['invalid_metadata'] == 1 and report['attempted'] == 0
+    assert workers.fetch_calls == workers.model_calls == []
+    assert not inbox.files
+    assert report['stopped_reason'] is None
