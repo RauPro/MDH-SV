@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-14T23:34:52.766637+00:00",
+  "generated_at": "2026-10-15T00:13:59.084015+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -221,6 +221,47 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
       }
+    },
+    {
+      "candidate_id": "0944596b2363f55d631858be39fb5c34c3d0088c0a08aa105064db60a5f1d82a",
+      "source_url": "https://gatoencerrado.news/2018/05/04/mas-de-2500-feminicidios-en-seis-anos-en-el-salvador/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-05-04",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T00:13:53.230708+00:00",
+      "source_checked_at": "2026-10-15T00:13:53.230708+00:00",
+      "evidence": {
+        "content_sha256": "1ff571dc50440e7013b84f8d68efab82ae4d11114b8ecc2e38a353abe3091737"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p12",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Salvador",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Santa Ana",
+          "paragraph_id": "p10",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Santa Ana",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "09bee23712a63e53dd0a6deffbb6e9da4d5938fb88833e768dbffd6cdf890963",
@@ -2762,6 +2803,30 @@
       ]
     },
     {
+      "candidate_id": "79955a216f7c41ef65fcf93841e0a672bbdfc06aebe6915b285fbba2a7b975fe",
+      "source_url": "https://www.diariocolatino.com/reducen-homicidios-de-mujeres-en-los-ultimos-tres-anos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-04-25",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T00:13:33.865688+00:00",
+      "source_checked_at": "2026-10-15T00:13:33.865688+00:00",
+      "evidence": {
+        "paragraph_id": "p9",
+        "content_sha256": "c6585c548e28ac6a66818c5d5f89d591d00986c804bf66532c5666b4df482a6b"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Sebastián Salitrillo",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
       "candidate_id": "7a7619d1985a3608865b084da9f308d29376bc919996b8f160634853dd4950b9",
       "source_url": "https://www.diariocolatino.com/sala-ampara-a-personas-afectadas-por-contaminacion-por-plomo/",
       "publisher": "Diario Co Latino",
@@ -3663,6 +3728,30 @@
       }
     },
     {
+      "candidate_id": "99867557b3de1a1df890e9c8024c37c387d7ebbd22a8058d5838ed7cb3db26ea",
+      "source_url": "https://gatoencerrado.news/2018/04/28/paren-de-matarnos-exigen-periodistas-salvadorenas/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-04-28",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T00:13:44.530778+00:00",
+      "source_checked_at": "2026-10-15T00:13:44.530778+00:00",
+      "evidence": {
+        "paragraph_id": "p7",
+        "content_sha256": "9854359985d6e1366313d9754ceaca37267d5e1b6e1833d297fe554e8347ed41"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Ana",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
       "candidate_id": "9adbbc1e48d5790bf729e0eb9c5b7fab77e28117ad08d536874961972fe74ac4",
       "source_url": "https://www.diariocolatino.com/gobierno-busca-reducir-hacinamiento-carcelario-con-liberacion-de-2-mil-400-reos/",
       "publisher": "Diario Co Latino",
@@ -3795,6 +3884,30 @@
       "evidence": {
         "paragraph_id": "p3",
         "content_sha256": "56344d8aaffee268da43b534643d260eeca230d517961718fe53f83f599b8359"
+      }
+    },
+    {
+      "candidate_id": "a37ff74a9be178f5dfe58476d03ffc313c101ada3ae4d2d87adbac25ef573a1d",
+      "source_url": "https://www.revistafactum.com/mejor-sola-que-con-un-feminicida/",
+      "publisher": "Revista Factum",
+      "published_date": "2018-04-29",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T00:13:46.341555+00:00",
+      "source_checked_at": "2026-10-15T00:13:46.341555+00:00",
+      "evidence": {
+        "paragraph_id": "p1",
+        "content_sha256": "e09b4001ead4f9373bf82ff16aa9c22d2cc26bf7d52e7c97a84fa568dfcecf95"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Rosa Guachipilín",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
       }
     },
     {
@@ -3999,6 +4112,23 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "b3cb8ef9ac632231d5da4733dde3d5930fc590d103687a588c4c2d472159bda1",
+      "source_url": "https://www.diariocolatino.com/afectados-por-contaminacion-de-baterias-record-piden-interpelacion-del-fiscal-melendez/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-04-27",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T00:13:37.849700+00:00",
+      "source_checked_at": "2026-10-15T00:13:37.849700+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "57374a9b20aceab9b3300b3ab43e73e16e3c7a33089b904e7ebb046e10433f33"
       }
     },
     {
