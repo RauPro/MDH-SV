@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-15T12:20:39.656489+00:00",
+  "generated_at": "2026-10-15T13:19:41.283156+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -494,6 +494,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
+      "candidate_id": "11b95700b6d60b5ef0d218a01e803e27fe8412ca5f6dc19af35f4e91d4cd7a8d",
+      "source_url": "https://historico.elsalvador.com/historico/101751/alba-alimentos-trabajara-con-granjas-penitenciarias.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-01",
+      "department": "Sonsonate",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T13:19:12.480656+00:00",
+      "source_checked_at": "2026-10-15T13:19:12.480656+00:00",
+      "evidence": {
+        "paragraph_id": "p4",
+        "content_sha256": "abd563ad2c9c5d95083c91a9e76860de01e5c83e4abb286f6e62a4648b905b57"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Sonsonate",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
     },
     {
@@ -2639,6 +2663,30 @@
       }
     },
     {
+      "candidate_id": "68f94734dae44e932c5563c0ab650131aa14565ca4e7ae5a7f49ee4c0e786b19",
+      "source_url": "https://historico.elsalvador.com/historico/101161/aumentan-violaciones-y-la-violencia-domestica-en-ahuachapan.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-03",
+      "department": "Ahuachapán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T13:19:12.650707+00:00",
+      "source_checked_at": "2026-10-15T13:19:12.650707+00:00",
+      "evidence": {
+        "paragraph_id": "p14",
+        "content_sha256": "b47e5f332b679c20f27c6582efbb214d005f8633d0f5537df24356e549e51a5d"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ahuachapán",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "69690c50dcace766aafe3fa7249598a9c3ae023ed5bc3d4f762f1bfad9e7bcb1",
       "source_url": "https://www.diariocolatino.com/fiscal-general-condena-asesinato-de-colaborador-de-la-fgr-2/",
       "publisher": "Diario Co Latino",
@@ -3235,6 +3283,45 @@
         "paragraph_id": "p2",
         "content_sha256": "b3003c516e0c0a3c1aeda028f27147eee05728240eea8963dda84984983e282c"
       }
+    },
+    {
+      "candidate_id": "82cd014249052622ecd2be4a0bc3a40c7cc7d7598c72a1327a036d1a3f01a471",
+      "source_url": "https://historico.elsalvador.com/historico/100861/mas-de-80-detenciones-registra-ejercito-y-policia.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-04",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-15T13:19:11.895975+00:00",
+      "source_checked_at": "2026-10-15T13:19:11.895975+00:00",
+      "evidence": {
+        "content_sha256": "f65f48bda74ff2e3b0c7c3cefd49974c5edbf6f034721a383501c2678ccecdad"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cabañas",
+          "paragraph_id": "p5"
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Miguel",
+          "paragraph_id": "p11",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Lolotique",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+          }
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Sonsonate",
+          "paragraph_id": "p17"
+        }
+      ]
     },
     {
       "candidate_id": "859fb4e70ff6cebcabd589602585117c59df5510f3ad9d46a16388e45a32f4fd",
@@ -4664,6 +4751,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
+    },
+    {
+      "candidate_id": "bcda3ecc696cb1943b6607a2c299d8bbb4c7598ae5be7f2344cadcf2c9e5cdce",
+      "source_url": "https://www.diariocolatino.com/policia-reporta-123-feminicidios-en-2014/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-16",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-14T11:19:41.572886-06:00",
+      "source_checked_at": "2026-10-15T13:19:39.311283+00:00",
+      "evidence": {
+        "paragraph_id": "p14",
+        "content_sha256": "865d21a0c301611b98862bad3f8b4a46758721218138bd5ee68456b6c39f23e0"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {

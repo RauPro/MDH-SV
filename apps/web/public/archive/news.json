@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T12:20:42.675860+00:00",
+  "generated_at": "2026-10-15T13:17:51.147640+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11251,
-      "selected": 1612,
-      "evaluated": 4757,
-      "relevant": 1612,
-      "excluded": 3142,
+      "selected": 1625,
+      "evaluated": 4789,
+      "relevant": 1625,
+      "excluded": 3161,
       "uncertain": 3,
-      "pending": 6494,
-      "evaluated_at": "2026-10-15T12:18:47.873159+00:00"
+      "pending": 6462,
+      "evaluated_at": "2026-10-15T13:17:49.135876+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1612,
+    "records": 1625,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 144,
+        "records": 157,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15128,7 +15128,7 @@
           {
             "month": "2013-01",
             "status": "partial",
-            "records": 4,
+            "records": 12,
             "screen_version": 3,
             "posts_scanned": 49,
             "source_total_posts": null,
@@ -15140,7 +15140,7 @@
           {
             "month": "2013-02",
             "status": "partial",
-            "records": 1,
+            "records": 6,
             "screen_version": 3,
             "posts_scanned": 36,
             "source_total_posts": null,
@@ -18680,7 +18680,7 @@
         "month": "2013-01",
         "start_date": "2013-01-01",
         "end_date": "2013-01-31",
-        "records": 4,
+        "records": 12,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18715,7 +18715,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 4
+            "records": 12
           }
         ]
       },
@@ -18723,7 +18723,7 @@
         "month": "2013-02",
         "start_date": "2013-02-01",
         "end_date": "2013-02-28",
-        "records": 1,
+        "records": 6,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18758,7 +18758,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 1
+            "records": 6
           }
         ]
       },
@@ -99126,6 +99126,593 @@
             "p4",
             "p7",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "68f94734dae44e932c5563c0ab650131aa14565ca4e7ae5a7f49ee4c0e786b19",
+      "title": "Aumentan violaciones y la violencia doméstica en Ahuachapán",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101161/aumentan-violaciones-y-la-violencia-domestica-en-ahuachapan.html",
+      "published_date": "2013-02-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "ahuachapan"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b47e5f332b679c20f27c6582efbb214d005f8633d0f5537df24356e549e51a5d",
+          "jurisdiction_paragraph_ids": [
+            "p5",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p13",
+            "p19",
+            "p27"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8a53a18218971efc3be505a81a6d5d1db38ecd4006216c981a10471f221a0d68",
+      "title": "Visitadores médicos culpan a ley de fármacos de sus despidos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101144/visitadores-medicos-culpan-a-ley-de-farmacos-de-sus-despidos.html",
+      "published_date": "2013-02-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7174d516e1d57188aef07dffa8e1fb2e2e06a47db27321b03bb1350c507736b6",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "73820db0ab3bd747d24914bdd868a553271735e5037b5cab04aa5bce2b81bdc1",
+      "title": "Demandan a Sigfrido Reyes en FGR por despedir a sindicalista",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101413/demandan-a-sigfrido-reyes-en-fgr-por-despedir-a-sindicalista.html",
+      "published_date": "2013-02-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "90d5af64247337746996896f6319f0c5e26960bd44bd70489dbb64d932972412",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "11b95700b6d60b5ef0d218a01e803e27fe8412ca5f6dc19af35f4e91d4cd7a8d",
+      "title": "Alba Alimentos trabajará con granjas penitenciarias",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101751/alba-alimentos-trabajara-con-granjas-penitenciarias.html",
+      "published_date": "2013-02-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "abd563ad2c9c5d95083c91a9e76860de01e5c83e4abb286f6e62a4648b905b57",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0975d7ced2f50c33226d94da2ff916e7fa1cf4e2e4925149b62dc8eb3fd1789e",
+      "title": "Carta a los defensores de la libertad de expresión",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/101906/carta-a-los-defensores-de-la-libertad-de-expresion.html",
+      "published_date": "2013-02-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion",
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c8e81d9ab8f3089dd8e357f087767b354fb356220aa4a248773fe8fade5a6e04",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ae7648d437d608e965c2ec9c3d2220c1a07e6e2b481ff9523a21921abb5d8c2c",
+      "title": "Hallan muerto a un prisionero en cárcel Apanteos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100219/hallan-muerto-a-un-prisionero-en-carcel-apanteos.html",
+      "published_date": "2013-01-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "apanteos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c1b987c2630ed85115dcc947d7763ffab796bac4dfb37d8b94d73ea375d3afb4",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7a43be26f8596bd891c50312ca3fc4eabb7d42a571999d39e0e152e3335dd471",
+      "title": "A prisión jefe policial por presunto abuso de una pandillera",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/99490/a-prision-jefe-policial-por-presunto-abuso-de-una-pandillera.html",
+      "published_date": "2013-01-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d24acb5508e3413c364e0480d28b82e3f36817c815a5c4312bd9d5cdd3e33f01",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "222e41dac5101c99dcac757fea8b07bb4d24a4c1215c2e60e53bd5eb36b78d7d",
+      "title": "Subinspector de la Policía irá a prisión por violación",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/99358/subinspector-de-la-policia-ira-a-prision-por-violacion.html",
+      "published_date": "2013-01-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2260b48e9ae5bf4042f854c7f0decf4d6a5d8c84e60726358001882bc7f1cb8b",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "36d23812f70f255378b3d5d291bf0c224e440cbd73072a005efec5d56c1a146d",
+      "title": "Mareros rechazan comunicado contra periodista Lüers",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/99765/mareros-rechazan-comunicado-contra-periodista-luers.html",
+      "published_date": "2013-01-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "26298885d9027c956a65574240ce117a0079eab49b2cf606a22f528332c52e14",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c713aedda221cc4686bacdcae391c94afde06f841a548fcc6b13f989a3192ffc",
+      "title": "Cárcel provisional para mujer por tráfico de menor",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/99758/carcel-provisional-para-mujer-por-trafico-de-menor.html",
+      "published_date": "2013-01-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:09:30.647865-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f01904cc35b4a90e4f1e788f8d87ead4edf4bcb10363ce547c9b9b7211facc86",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1bb1cff6d1d4fcdd97d0b0477243aae1bbff07cb3ca6105d2468a516ff380805",
+      "title": "Fallo a favor de la libertad de expresión",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100236/fallo-a-favor-de-la-libertad-de-expresion.html",
+      "published_date": "2013-01-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:09:30.647865-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d88aa5c5d60fbe523bf108fd10cb829990bc75015f6382c06ee298e6dedac717",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1351ead991512af7a974ac559a9ea9bf07bb57109b450f70bf995219c48e5c00",
+      "title": "Niño de 9 años está desaparecido",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/99726/nino-de-9-anos-esta-desaparecido.html",
+      "published_date": "2013-01-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:09:30.647865-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "80a94b9324346e510f2e573e0d81bef286a03cd6aed1b142c663077a0c536b44",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e9892ee41d6983b7817252648c8fd837fbced857d5f8e5903fbcee5775ceb729",
+      "title": "Buscan a dos adolescentes de 16 años desaparecidos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/100856/buscan-a-dos-adolescentes-de-16-anos-desaparecidos.html",
+      "published_date": "2013-01-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T12:03:23.640692+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:09:30.647865-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "331e0a4443bb51b8c646a00bef94ce4b14ec2e54280fe08cf963683851c86fa6",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p12"
           ]
         }
       }

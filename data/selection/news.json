@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T12:18:47.873159+00:00",
+  "generated_at": "2026-10-15T13:17:49.135876+00:00",
   "assessment_counts": {
     "candidates": 11251,
-    "evaluated": 4757,
-    "relevant": 1612,
-    "excluded": 3142,
+    "evaluated": 4789,
+    "relevant": 1625,
+    "excluded": 3161,
     "uncertain": 3,
-    "pending": 6494
+    "pending": 6462
   },
   "selections": [
     {
@@ -1737,6 +1737,36 @@
       }
     },
     {
+      "candidate_id": "0975d7ced2f50c33226d94da2ff916e7fa1cf4e2e4925149b62dc8eb3fd1789e",
+      "source_url": "https://historico.elsalvador.com/historico/101906/carta-a-los-defensores-de-la-libertad-de-expresion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c8e81d9ab8f3089dd8e357f087767b354fb356220aa4a248773fe8fade5a6e04",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "09ae53ae06bdaf99769acc60d6611daac025bb0c19c29a201d6e9637e5c52ff5",
       "source_url": "https://www.diariocolatino.com/presidente-sanchez-ceren-reafirma-su-compromiso-de-lucha-por-los-derechos-de-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -2996,6 +3026,33 @@
       }
     },
     {
+      "candidate_id": "11b95700b6d60b5ef0d218a01e803e27fe8412ca5f6dc19af35f4e91d4cd7a8d",
+      "source_url": "https://historico.elsalvador.com/historico/101751/alba-alimentos-trabajara-con-granjas-penitenciarias.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "abd563ad2c9c5d95083c91a9e76860de01e5c83e4abb286f6e62a4648b905b57",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "12967e1ab1d9bd4377a612fd95412b5bc41ac61f844d3ca940e6b79a734a2652",
       "source_url": "https://www.diariocolatino.com/organizaciones-denuncian-persecucion-y-agresion-contra-defensores-de-dh/",
       "publisher": "Diario Co Latino",
@@ -3102,6 +3159,32 @@
             "p4",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "1351ead991512af7a974ac559a9ea9bf07bb57109b450f70bf995219c48e5c00",
+      "source_url": "https://historico.elsalvador.com/historico/99726/nino-de-9-anos-esta-desaparecido.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:09:30.647865-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "80a94b9324346e510f2e573e0d81bef286a03cd6aed1b142c663077a0c536b44",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }
@@ -4790,6 +4873,34 @@
       }
     },
     {
+      "candidate_id": "1bb1cff6d1d4fcdd97d0b0477243aae1bbff07cb3ca6105d2468a516ff380805",
+      "source_url": "https://historico.elsalvador.com/historico/100236/fallo-a-favor-de-la-libertad-de-expresion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:09:30.647865-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d88aa5c5d60fbe523bf108fd10cb829990bc75015f6382c06ee298e6dedac717",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "1be8ab40c77b819ee9d2f67c659b4257b80d109aee5b9327279f80adc5bd40f2",
       "source_url": "https://www.diariocolatino.com/labor-de-periodistas-es-obstaculizada-por-correligionarios-y-la-umo-2/",
       "publisher": "Diario Co Latino",
@@ -5903,6 +6014,35 @@
           "relevance_paragraph_ids": [
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "222e41dac5101c99dcac757fea8b07bb4d24a4c1215c2e60e53bd5eb36b78d7d",
+      "source_url": "https://historico.elsalvador.com/historico/99358/subinspector-de-la-policia-ira-a-prision-por-violacion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "2260b48e9ae5bf4042f854c7f0decf4d6a5d8c84e60726358001882bc7f1cb8b",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -9364,6 +9504,34 @@
             "p7",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "36d23812f70f255378b3d5d291bf0c224e440cbd73072a005efec5d56c1a146d",
+      "source_url": "https://historico.elsalvador.com/historico/99765/mareros-rechazan-comunicado-contra-periodista-luers.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "26298885d9027c956a65574240ce117a0079eab49b2cf606a22f528332c52e14",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p12"
           ]
         }
       }
@@ -18153,6 +18321,36 @@
       }
     },
     {
+      "candidate_id": "68f94734dae44e932c5563c0ab650131aa14565ca4e7ae5a7f49ee4c0e786b19",
+      "source_url": "https://historico.elsalvador.com/historico/101161/aumentan-violaciones-y-la-violencia-domestica-en-ahuachapan.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "b47e5f332b679c20f27c6582efbb214d005f8633d0f5537df24356e549e51a5d",
+          "jurisdiction_paragraph_ids": [
+            "p5",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p13",
+            "p19",
+            "p27"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "6961a987d7bbfcbd6a9a97e62e5bbc0b0351959ea624d31e471c52ddcb4237a8",
       "source_url": "https://www.diariocolatino.com/trasladaran-penales-2300-encarcelados-bartolinas-la-pnc/",
       "publisher": "Diario Co Latino",
@@ -20738,6 +20936,34 @@
       }
     },
     {
+      "candidate_id": "73820db0ab3bd747d24914bdd868a553271735e5037b5cab04aa5bce2b81bdc1",
+      "source_url": "https://historico.elsalvador.com/historico/101413/demandan-a-sigfrido-reyes-en-fgr-por-despedir-a-sindicalista.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "90d5af64247337746996896f6319f0c5e26960bd44bd70489dbb64d932972412",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "739b47eea8d13b00469052db7c24acfd3661dddf3e108e3562114cd4e8d14fa0",
       "source_url": "https://www.revistafactum.com/onu-impunidad-pnc/",
       "publisher": "Revista Factum",
@@ -22238,6 +22464,33 @@
           "relevance_paragraph_ids": [
             "p2",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7a43be26f8596bd891c50312ca3fc4eabb7d42a571999d39e0e152e3335dd471",
+      "source_url": "https://historico.elsalvador.com/historico/99490/a-prision-jefe-policial-por-presunto-abuso-de-una-pandillera.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "d24acb5508e3413c364e0480d28b82e3f36817c815a5c4312bd9d5cdd3e33f01",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
           ]
         }
       }
@@ -25023,6 +25276,32 @@
             "p1",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8a53a18218971efc3be505a81a6d5d1db38ecd4006216c981a10471f221a0d68",
+      "source_url": "https://historico.elsalvador.com/historico/101144/visitadores-medicos-culpan-a-ley-de-farmacos-de-sus-despidos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "7174d516e1d57188aef07dffa8e1fb2e2e06a47db27321b03bb1350c507736b6",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4"
           ]
         }
       }
@@ -31579,6 +31858,33 @@
       }
     },
     {
+      "candidate_id": "ae7648d437d608e965c2ec9c3d2220c1a07e6e2b481ff9523a21921abb5d8c2c",
+      "source_url": "https://historico.elsalvador.com/historico/100219/hallan-muerto-a-un-prisionero-en-carcel-apanteos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-20",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:10:11.314428-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "c1b987c2630ed85115dcc947d7763ffab796bac4dfb37d8b94d73ea375d3afb4",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "aeb8e6bb99617f2cc36da67c2a28ed90d678fbdb1ab9b2a7862bb9a2019f8e48",
       "source_url": "https://www.diariocolatino.com/alianza-ambiental-exige-responsabilidad-gubernamental-con-agua-y-mineria/",
       "publisher": "Diario Co Latino",
@@ -36275,6 +36581,33 @@
           "content_sha256": "72b0dfa3adf585fda1d068a125615bc1cd5f2a72b462898efc2a6e02abce63bc",
           "jurisdiction_paragraph_ids": [
             "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c713aedda221cc4686bacdcae391c94afde06f841a548fcc6b13f989a3192ffc",
+      "source_url": "https://historico.elsalvador.com/historico/99758/carcel-provisional-para-mujer-por-trafico-de-menor.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:09:30.647865-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f01904cc35b4a90e4f1e788f8d87ead4edf4bcb10363ce547c9b9b7211facc86",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
@@ -41394,6 +41727,33 @@
             "p4",
             "p5",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e9892ee41d6983b7817252648c8fd837fbced857d5f8e5903fbcee5775ceb729",
+      "source_url": "https://historico.elsalvador.com/historico/100856/buscan-a-dos-adolescentes-de-16-anos-desaparecidos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T07:09:30.647865-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "331e0a4443bb51b8c646a00bef94ce4b14ec2e54280fe08cf963683851c86fa6",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p12"
           ]
         }
       }
