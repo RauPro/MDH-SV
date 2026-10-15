@@ -75,12 +75,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: python -m mdh_pipeline.review_queue collect
-      - name: Incorporar candidatas locales e inciertas a la cola de revisión
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
-        run: python -m mdh_pipeline.history_review --archive candidates.json --limit 50 --exclude-international
       - name: Preparar fichas de noticia y migrar borradores previos sin publicarlos
         env:
           GH_TOKEN: ${{ github.token }}

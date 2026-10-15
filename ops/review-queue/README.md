@@ -12,6 +12,9 @@ El publicador usa esas decisiones para actualizar selección, noticias y mapa.
 Las referencias ya seleccionadas se sincronizan con la cola privada en lotes de
 hasta 50 altas por ejecución, con pausas entre escrituras. Esa sincronización no
 consume llamadas a Gemini ni aumenta el cupo de extracción de fichas. Una noticia
+histórica crea su issue después de ser seleccionada; el flujo horario no añade
+otra tanda de candidatas históricas inciertas antes de clasificar. La recogida RSS
+se mantiene para atender noticias nuevas. Una noticia
 seleccionada puede tener todavía su extracción pendiente; una ficha extraída
 necesita validación automática de evidencia y privacidad antes de publicar sus campos. La intervención editorial se reserva para solicitudes en GitHub.
 La ubicación se comprueba también directamente en las fuentes seleccionadas,
