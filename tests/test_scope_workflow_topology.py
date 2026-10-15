@@ -25,6 +25,8 @@ def test_hourly_job_classifies_first_from_a_current_private_cache():
     assert '--scope-audits bibliography/data/selection/scope_audits.json' in execution['run']
     public_checkout = next(s for s in steps if s.get('with', {}).get('path') == 'bibliography')
     assert 'data/selection' in public_checkout['with']['sparse-checkout']
+    assert any('mdh_pipeline.review_queue collect' in step.get('run', '') for step in steps)
+    assert not any('mdh_pipeline.history_review' in step.get('run', '') for step in steps)
 
 
 def test_separate_scope_worker_is_manual_only_and_uses_the_same_private_queue():
