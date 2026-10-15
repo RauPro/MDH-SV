@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T06:15:50.873711+00:00",
+  "generated_at": "2026-10-15T07:17:16.296288+00:00",
   "assessment_counts": {
     "candidates": 11096,
-    "evaluated": 4579,
-    "relevant": 1577,
-    "excluded": 2999,
+    "evaluated": 4611,
+    "relevant": 1579,
+    "excluded": 3029,
     "uncertain": 3,
-    "pending": 6517
+    "pending": 6485
   },
   "selections": [
     {
@@ -35155,6 +35155,34 @@
       }
     },
     {
+      "candidate_id": "c5994c45f7278c2efea24d52cd9e3fa727a72f0f9dbf18e5b3986310e1c985da",
+      "source_url": "https://historico.elsalvador.com/historico/116189/capturan-25-pandilleros-de-la-ms-13-en-italia.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-10-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T01:10:12.963246-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "e426296de3d25e1df4c9e6320912f5454b220b1e06d3158b267e007551c43002",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c59e44d22544af24de391d4bd437956e3d13423efe603d4aa760f2c3935a85df",
       "source_url": "https://www.diariocolatino.com/reforma-constitucional-en-tenencia-de-tierra-deja-sin-restriccion-proyectos-extractivistas/",
       "publisher": "Diario Co Latino",
@@ -38663,6 +38691,32 @@
             "p3",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "dcd7c975ae80f5f2d70b1aaf3ed440812c4ad62d28225768f68f64cfb47b783a",
+      "source_url": "https://historico.elsalvador.com/historico/115020/capturan-a-pandilleros-salvadorenos-en-italia.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-10-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T01:10:12.963246-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "evidence": {
+          "content_sha256": "f6b99241d7440067c6bcc0e9729e884a5d5aa0684767be7d681f19828e6a4d4c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
           ]
         }
       }
