@@ -19,6 +19,7 @@ from urllib.parse import quote, urlencode
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 REPOSITORY = "RauPro/MDH-SV"
+REPOSITORY_ID = 1412705369
 NEWS_PUBLISHER_ACTOR_ID = 37725305
 BOT_ID = 41898282
 BRANCH = re.compile(r"chore/automated-(history|exception|news)-([1-9][0-9]*)-([1-9][0-9]*)")
@@ -29,6 +30,10 @@ MAX_JSON = 32_000_000
 MAX_TOTAL_JSON = 64_000_000
 CI_WAIT_SECONDS = 18 * 60
 CI_POLL_SECONDS = 10
+NATIVE_PR_WORKFLOWS = {
+    ".github/workflows/ci.yml": "Verify public monitor",
+    ".github/workflows/deploy_web.yml": "Deployment configuration check",
+}
 PROJECTIONS = frozenset({
     "data/automated/news_dossiers.json",
     "apps/web/public/archive/news.json",
@@ -329,6 +334,104 @@ def propose(client, branch, kind):
     return "proposed_and_ci_dispatched"
 
 
+def validate_native_pr_run(run, branch, head, base, number):
+    require(isinstance(run, dict) and type(run.get("id")) is int and run["id"] > 0
+            and run.get("event") == "pull_request"
+            and run.get("path") in NATIVE_PR_WORKFLOWS
+            and run.get("name") == NATIVE_PR_WORKFLOWS[run["path"]]
+            and run.get("head_branch") == branch and run.get("head_sha") == head
+            and run.get("repository", {}).get("full_name") == REPOSITORY
+            and run["repository"].get("id") == REPOSITORY_ID
+            and run.get("head_repository", {}).get("full_name") == REPOSITORY
+            and run["head_repository"].get("id") == REPOSITORY_ID
+            and bot_run(run), "untrusted_native_pr_workflow")
+    prs = run.get("pull_requests")
+    require(isinstance(prs, list) and len(prs) == 1 and isinstance(prs[0], dict),
+            "invalid_native_pr_association")
+    linked = prs[0]
+    require(linked.get("number") == number
+            and linked.get("head", {}).get("ref") == branch
+            and linked["head"].get("sha") == head
+            and linked.get("base", {}).get("ref") == "main"
+            and linked["base"].get("sha") == base,
+            "changed_native_pr_association")
+    for side in ("head", "base"):
+        repository = linked[side].get("repo", {})
+        require(repository.get("id") == REPOSITORY_ID
+                and repository.get("url") == f"https://api.github.com/repos/{REPOSITORY}",
+                "untrusted_native_pr_repository")
+    require(run.get("status") in {
+        "queued", "requested", "waiting", "pending", "in_progress", "completed"},
+        "invalid_native_pr_status")
+
+
+def native_pr_runs(client, branch, head, base, number):
+    query = urlencode({"event": "pull_request", "head_sha": head, "per_page": 100})
+    listing = client.call("GET", api("actions/runs?" + query))
+    require(isinstance(listing, dict) and type(listing.get("total_count")) is int
+            and 0 <= listing["total_count"] <= 100
+            and isinstance(listing.get("workflow_runs"), list)
+            and len(listing["workflow_runs"]) == listing["total_count"],
+            "incomplete_native_pr_run_listing")
+    latest, seen = {}, set()
+    for run in listing["workflow_runs"]:
+        require(isinstance(run, dict) and type(run.get("id")) is int
+                and run["id"] > 0 and run["id"] not in seen, "invalid_native_pr_run_listing")
+        seen.add(run["id"])
+        if run.get("path") not in NATIVE_PR_WORKFLOWS:
+            continue  # Never approve any other workflow, even with a similar name.
+        validate_native_pr_run(run, branch, head, base, number)
+        previous = latest.get(run["path"])
+        if previous is None or previous["id"] < run["id"]:
+            latest[run["path"]] = run
+    # Re-read the exact selected runs before any approvals. The list endpoint is
+    # not permission to approve a run with changed identity or PR association.
+    result = {}
+    for path, selected in latest.items():
+        fresh = client.call("GET", api(f"actions/runs/{selected['id']}"))
+        validate_native_pr_run(fresh, branch, head, base, number)
+        require(fresh["id"] == selected["id"] and fresh["path"] == path,
+                "changed_native_pr_run_identity")
+        result[path] = fresh
+    return result
+
+
+def wait_for_native_pr_ci(client, pr, branch, head, base):
+    # workflow_dispatch checks cannot satisfy required PR checks on GitHub.
+    # Only after validating the complete data-only diff do we allow the two
+    # read-only native PR workflows to run, using GitHub's approval endpoint.
+    # This approves execution, never a PR review or a synthetic check result.
+    approved = set()
+    for attempt in range(CI_WAIT_SECONDS // CI_POLL_SECONDS + 1):
+        require(ref_sha(client, branch) == head and ref_sha(client, "main") == base,
+                "publication_refs_changed_retry_required")
+        current = client.call("GET", api(f"pulls/{pr['number']}"))
+        validate_pr(current, branch, head)
+        require(current["base"].get("sha") == base, "publication_pr_base_changed")
+        native = native_pr_runs(client, branch, head, base, pr["number"])
+        if ".github/workflows/ci.yml" in native:
+            require(all(candidate["status"] != "completed" or candidate.get("conclusion") in {
+                "success", "action_required"} for candidate in native.values()), "native_pr_ci_unsuccessful")
+            require(ref_sha(client, branch) == head and ref_sha(client, "main") == base,
+                    "publication_refs_changed_retry_required")
+            all_success = True
+            for candidate in native.values():
+                if candidate["status"] == "completed" and candidate.get("conclusion") == "action_required":
+                    all_success = False
+                    if candidate["id"] not in approved:
+                        client.call("POST", api(f"actions/runs/{candidate['id']}/approve"))
+                        approved.add(candidate["id"])
+                elif candidate["status"] == "completed":
+                    require(candidate.get("conclusion") == "success", "native_pr_ci_unsuccessful")
+                else:
+                    all_success = False
+            if all_success:
+                return
+        if attempt < CI_WAIT_SECONDS // CI_POLL_SECONDS:
+            time.sleep(CI_POLL_SECONDS)
+    raise PublicationError("native_pr_ci_wait_timeout")
+
+
 def control(client, event):
     if event.get("repository", {}).get("full_name") != REPOSITORY:
         return "ignored_repository"
@@ -408,6 +511,11 @@ def control(client, event):
             if attempt < 14:
                 time.sleep(2)
         raise PublicationError("branch_update_pending_rerun_controller")
+    if run["event"] == "workflow_dispatch":
+        wait_for_native_pr_ci(client, pr, branch, head, base)
+        require(ref_sha(client, branch) == head and ref_sha(client, "main") == base,
+                "publication_refs_changed_retry_required")
+        validate_pr(client.call("GET", api(f"pulls/{pr['number']}")), branch, head)
     merged = client.call("PUT", api(f"pulls/{pr['number']}/merge"), {
         "sha": head, "merge_method": "squash", "commit_title": f"chore: update public {kind} snapshots",
     })
