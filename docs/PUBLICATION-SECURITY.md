@@ -36,6 +36,16 @@ explícitamente. No dependen de que un push con `GITHUB_TOKEN` dispare otro
 workflow. El push SSH privado sí dispara CI público. Verificación tiene sólo
 permisos de lectura y no recibe secretos.
 
+El ensayo real confirmó que terminar un CI despachado con `GITHUB_TOKEN` no
+garantiza un evento `workflow_run`. Por eso el productor solicita el ID exacto
+con [`return_run_details`](https://github.blog/changelog/2026-02-19-workflow-dispatch-api-now-returns-run-ids/),
+verifica repositorio, workflow, rama, SHA e identidad del bot y despacha también
+`publication-pr.yml` sobre `main`, con su `ci_run_id`. El
+controlador espera un resultado satisfactorio dentro de un plazo acotado y
+reutiliza todas las validaciones de origen, cambios permitidos y SHA. La espera
+no concede permisos de escritura al código candidato. Una actualización de rama
+repite ambos despachos; el evento `workflow_run` se conserva para pushes SSH.
+
 `publication-pr.yml` ejecuta código de confianza tras CI. Nunca descarga ni
 ejecuta código del PR. Su controlador verifica repositorio, workflow, actor,
 rama, SHA y árboles Git completos. Sólo acepta JSON regulares dentro de la
@@ -93,3 +103,9 @@ auto-merge general: el controlador solicita una fusión normal bajo las reglas.
 Ante un fallo, conservar protección y evidencias. Resolver el conflicto o preparar
 otro snapshot; no añadir bypass ni restaurar pushes directos. Revisar el PR y
 Actions antes de afirmar que una actualización está publicada.
+
+Si CI ya terminó y faltó el encadenamiento, puede ejecutarse manualmente
+`Merge verified public snapshots` desde `main` indicando el ID de la ejecución
+de CI. Este disparo no concede aprobación: el controlador vuelve a comprobar
+que pertenece al productor permitido, pasó sobre el SHA actual y sólo modifica
+los JSON autorizados. Una ejecución ajena, fallida u obsoleta no se integra.
