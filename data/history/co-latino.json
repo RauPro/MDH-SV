@@ -276,7 +276,7 @@
       "start_date": "2026-09-01",
       "end_date": "2026-09-30",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-16T04:57:46.659120+00:00",
+      "last_attempt_at": "2026-10-16T11:52:37.980244+00:00",
       "screen_version": 3,
       "next_page": 5,
       "pages_fetched": 4,
@@ -285,22 +285,22 @@
       "source_total_posts": 351,
       "source_total_pages": 4,
       "error": null,
-      "completed_at": "2026-10-16T04:57:46.659120+00:00"
+      "completed_at": "2026-10-16T11:52:37.980244+00:00"
     },
     "2026-10": {
       "start_date": "2026-10-01",
-      "end_date": "2026-10-15",
+      "end_date": "2026-10-16",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-16T04:57:46.659120+00:00",
+      "last_attempt_at": "2026-10-16T11:52:37.980244+00:00",
       "screen_version": 3,
       "next_page": 3,
       "pages_fetched": 2,
-      "posts_scanned": 166,
+      "posts_scanned": 175,
       "invalid_posts": 0,
-      "source_total_posts": 166,
+      "source_total_posts": 175,
       "source_total_pages": 2,
       "error": null,
-      "completed_at": "2026-10-16T04:57:46.659120+00:00"
+      "completed_at": "2026-10-16T11:52:37.980244+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3034,6 +3034,33 @@
     }
   },
   "records": [
+    {
+      "id": "b2d0bc759392a53426d594729fc86387a817d1c4d01f8869d9d6647ca32618da",
+      "title": "MOVIR exige a Bukele liberar a los inocentes: “no queremos libertades condicionadas, queremos justicia”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/movir-exige-a-bukele-liberar-a-los-inocentes-no-queremos-libertades-condicionadas-queremos-justicia/",
+      "published_date": "2026-10-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "movir"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420719,
+        "retrieved_at": "2026-10-16T11:52:37.980244+00:00"
+      }
+    },
     {
       "id": "e6da93b259c56e197cee9ad3465beb20612cab9c359f39705ab420a34f55b05e",
       "title": "Bukele plantea liberación del 50% de los capturados bajo el Régimen de Excepción",
