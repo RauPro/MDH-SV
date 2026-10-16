@@ -123,7 +123,9 @@ def trusted_source(tmp_path, root):
 def binary():
     value = os.environ.get("GITLEAKS_BIN") or shutil.which("gitleaks")
     if not value:
-        pytest.skip("Set GITLEAKS_BIN to run real pre-push integration")
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            pytest.fail("The pinned Gitleaks engine is required in GitHub Actions")
+        pytest.skip("Install gitleaks on PATH or set GITLEAKS_BIN to run real pre-push integration")
     return Path(value).resolve()
 
 

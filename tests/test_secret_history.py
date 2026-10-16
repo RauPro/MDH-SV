@@ -4,6 +4,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -51,9 +52,11 @@ def secret():
 
 @pytest.fixture
 def engine_binary():
-    binary = os.environ.get("GITLEAKS_BIN")
+    binary = os.environ.get("GITLEAKS_BIN") or shutil.which("gitleaks")
     if not binary:
-        pytest.skip("Set GITLEAKS_BIN to the pinned engine to run integration cases")
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            pytest.fail("The pinned Gitleaks engine is required in GitHub Actions")
+        pytest.skip("Install gitleaks on PATH or set GITLEAKS_BIN to run integration cases")
     return binary
 
 
