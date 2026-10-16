@@ -30,7 +30,7 @@ Solo se publica departamento cuando está respaldado por la fuente. No se asigna
 
 Se omiten identidades de menores, edades exactas, domicilios, coordenadas individuales, fotografías, historias clínicas, expedientes privados e identidades inferidas. En casos ampliamente documentados pueden conservarse los nombres públicos de defensores o los seudónimos judiciales necesarios para identificar la fuente. No se agregan datos personales ajenos al objeto de documentación. Los documentos enlazados pueden contener datos personales bajo sus propias políticas. No se reconstruyen identidades a partir de seudónimos. El esquema público rechaza campos adicionales.
 
-Una solicitud de retiro puede señalar solo el ID de la ficha en un issue público. No existe todavía un canal confidencial; nunca se debe pedir a una persona que revele circunstancias privadas para solicitar una corrección. El sitio no recibe denuncias ni atiende emergencias.
+Las solicitudes de retirada y las correcciones sensibles se reciben por el [correo editorial privado](PRIVATE-REPORTING.md), atendido por @RauPro. No requieren abrir un issue público ni revelar circunstancias privadas. El primer contacto debe limitarse a la URL o ID público y una descripción mínima, sin documentos personales. La tramitación es humana; el correo no se incorpora al pipeline ni a Gemini. El sitio no recibe denuncias ni atiende emergencias.
 
 ## Incorporación y corrección del catálogo de casos
 
@@ -54,7 +54,7 @@ El manifest SHA-256 verifica los bytes de nuestras exportaciones. No representa 
 
 ## Licencias y correcciones
 
-Código bajo MIT. Metadatos y resúmenes propios: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), con atribución a MDH-SV y versión consultada. Documentos originales: derechos de sus respectivos autores; no se distribuyen copias completas. Las correcciones no sensibles se reciben en [GitHub](https://github.com/RauPro/MDH-SV/issues). No hay plazo de respuesta garantizado.
+Código bajo MIT. Metadatos y resúmenes propios: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), con atribución a MDH-SV y versión consultada. Documentos originales: derechos de sus respectivos autores; no se distribuyen copias completas. Las correcciones no sensibles se reciben en los [formularios públicos de GitHub](https://github.com/RauPro/MDH-SV/issues/new/choose). Para los canales privados, el [procedimiento de recepción](PRIVATE-REPORTING.md) establece un objetivo orientativo de primera respuesta de 7 días naturales, sin plazo de resolución garantizado.
 
 
 ## Fuentes complementarias y precisión temporal
@@ -78,7 +78,7 @@ las proyecciones públicas, incluida la bibliografía y las descargas, no sólo 
 interior de la ficha. La conciliación y las comprobaciones de publicación impiden
 reintroducir un dato protegido a través de otra capa.
 
-«Reportar un problema» abre un issue con identificador y versión. La primera
+«Corrección pública no sensible» abre un issue con identificador y versión. Las solicitudes sensibles y retiradas se tramitan por el [canal editorial privado](PRIVATE-REPORTING.md). La primera
 solicitud pública por noticia puede activar una reevaluación acotada; su texto y
 adjuntos no se ejecutan ni se envían a Gemini. Repetir reevaluaciones y retirar
 noticias exige un mantenedor autorizado. Las decisiones se conservan en Git y

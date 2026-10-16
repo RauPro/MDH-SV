@@ -98,20 +98,25 @@ describe('automatic public dossiers', () => {
     expect(screen.getByText('Estado de extracción sin confirmar')).toBeInTheDocument();
   });
 
-  it('links a public correction using only candidate and version, without a prefilled article or field value', () => {
+  it('separates private corrections from a public link carrying only candidate and version', () => {
     const dossier = automaticNewsDossier(reference);
     dossier.fields.summary.value = 'A value that must not be sent to GitHub in the link';
     render(<NewsDossier dossier={dossier}/>);
-    const link = screen.getByRole('link', { name: 'Reportar un problema' });
+    const link = screen.getByRole('link', { name: 'Corrección pública no sensible' });
     const url = new URL(link.getAttribute('href')!);
     expect(url.origin + url.pathname).toBe('https://github.com/RauPro/MDH-SV/issues/new');
     expect(url.searchParams.get('template')).toBe('news-correction.yml');
     expect(url.searchParams.get('candidate_id')).toBe(reference.id);
-    expect(url.searchParams.get('publication_version')).toContain(dossier.automation!.source_content_sha256);
+    expect(url.searchParams.get('publication_version')).toBe(`${dossier.automation!.policy_version}:${dossier.automation!.source_content_sha256}:${dossier.automation!.validated_at}`);
+    expect([...url.searchParams.keys()]).toEqual(['template', 'title', 'candidate_id', 'publication_version']);
     expect(url.searchParams.has('body')).toBe(false);
     expect(url.href).not.toContain(encodeURIComponent(reference.title));
     expect(url.href).not.toContain('A+value');
     expect(screen.getByText(/La solicitud en GitHub es pública/)).toBeInTheDocument();
+    const privateLink = screen.getByRole('link', { name: 'Corrección sensible o retirada en privado' });
+    expect(privateLink).toHaveAttribute('href', 'mailto:raul.guillen.eng@proton.me');
+    expect(new URL(privateLink.getAttribute('href')!).search).toBe('');
+    expect(screen.getByText(/El correo abre un mensaje vacío/)).toHaveTextContent('no adjuntes testimonios ni documentos personales');
   });
 });
 

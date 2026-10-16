@@ -90,6 +90,32 @@ it('offers same-origin downloads and describes MCP accurately', async () => {
   expect(dialog).not.toHaveTextContent('date_from=2025-03-26');
   expect(within(dialog).getByRole('link',{name:'Especificación OpenAPI'})).toHaveAttribute('href','/api/v1/openapi.json');
 });
+it('separates private editorial and technical reports from public corrections without sending content', async () => {
+  await ready();
+  const requestsBeforeOpening = vi.mocked(fetch).mock.calls.length;
+  await userEvent.click(screen.getByRole('button', { name: 'Privacidad y correcciones' }));
+  const dialog = await screen.findByRole('dialog', { name: 'Privacidad y correcciones' });
+  const privateReport = within(dialog).getByRole('link', { name: 'Reportar vulnerabilidad técnica en privado' });
+  expect(privateReport).toHaveAttribute('href', 'https://github.com/RauPro/MDH-SV/security/advisories/new');
+  expect(privateReport).toHaveAttribute('target', '_blank');
+  expect(privateReport).toHaveAttribute('rel', 'noopener noreferrer');
+  expect(dialog).toHaveTextContent('Requiere una cuenta de GitHub');
+  expect(dialog).toHaveTextContent('no tramita correcciones editoriales ni denuncias');
+  const privateCorrection = within(dialog).getByRole('link', { name: 'Corrección sensible o retirada en privado' });
+  expect(privateCorrection).toHaveAttribute('href', 'mailto:raul.guillen.eng@proton.me');
+  expect(within(dialog).getByRole('link', { name: 'raul.guillen.eng@proton.me' })).toHaveAttribute('href', privateCorrection.getAttribute('href'));
+  expect(dialog).toHaveTextContent('primer contacto indica sólo el identificador o enlace de la ficha y el tipo de solicitud');
+  expect(dialog).toHaveTextContent('La revisión es humana');
+  expect(dialog).toHaveTextContent('El mensaje privado no se publica ni se envía a Gemini');
+  expect(dialog).toHaveTextContent('Responsable de ambos canales privados: @RauPro');
+  expect(dialog).toHaveTextContent('7 días naturales; es un plazo orientativo, no una garantía ni un plazo de resolución');
+  expect(dialog).toHaveTextContent('no ofrecen anonimato, no reciben denuncias ni atienden emergencias');
+  const publicCorrection = new URL(within(dialog).getByRole('link', { name: 'Registrar corrección no sensible' }).getAttribute('href')!);
+  expect(publicCorrection.origin + publicCorrection.pathname).toBe('https://github.com/RauPro/MDH-SV/issues/new');
+  expect([...publicCorrection.searchParams]).toEqual([['template', 'record-correction.yml'], ['title', 'Corrección de registro']]);
+  expect(dialog).toHaveTextContent('El registro de incidencias es público');
+  expect(vi.mocked(fetch).mock.calls.length).toBe(requestsBeforeOpening);
+});
 it('describes 2010 as the historical objective without equating it to the IEEE paper or completed coverage', async () => {
   await ready();
   await userEvent.click(screen.getByRole('button', { name: 'Metodología' }));

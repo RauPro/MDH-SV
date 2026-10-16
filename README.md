@@ -33,7 +33,7 @@ Para desarrollo: `npm ci`, `npm run test:api`, `npm run dev:api`. El módulo Pyt
 
 ## Uso responsable
 
-Contraste cada reporte con su documento original. No use las fichas para determinar culpabilidad, elegibilidad o riesgo de personas. Para errores no sensibles, abra un issue con el identificador del registro. No adjunte denuncias, nombres de víctimas ni documentos privados: el repositorio es público y no es un canal confidencial ni de emergencia.
+Contraste cada reporte con su documento original. No use las fichas para determinar culpabilidad, elegibilidad o riesgo de personas. Para errores no sensibles, use los formularios públicos con el identificador del registro. Para correcciones sensibles o retiradas, escriba a [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me), atendido por @RauPro; no necesita abrir un issue público. Las vulnerabilidades técnicas tienen un canal privado separado en [Seguridad](SECURITY.md). No adjunte denuncias, nombres de personas protegidas ni documentos privados al primer contacto. El objetivo de primera respuesta privada es de 7 días naturales, orientativo y sin atención de emergencias.
 
 Código nuevo bajo MIT; metadatos y resúmenes propios bajo CC BY 4.0. Los documentos originales conservan los derechos y condiciones de sus autores.
 
@@ -53,9 +53,9 @@ Vercel usa la raíz del repositorio y `vercel.json`. La consulta pública no nec
 
 ## Recolección, publicación automática y correcciones
 
-La cola está en el repositorio privado `RauPro/MDH-SV-review`. El procesamiento horario incorpora RSS y referencias históricas, deduplica por URL y conserva decisiones y reintentos. Gemini extrae una ficha y una segunda pasada del mismo proveedor evalúa sus campos contra la misma versión del artículo. Las reglas locales conservan sólo datos respaldados y publicables. La intervención humana se reserva para solicitudes en GitHub; la publicación de noticias no exige aprobación previa.
+La cola está en el repositorio privado `RauPro/MDH-SV-review`. El procesamiento horario incorpora RSS y referencias históricas, deduplica por URL y conserva decisiones y reintentos. Gemini extrae una ficha y una segunda pasada del mismo proveedor evalúa sus campos contra la misma versión del artículo. Las reglas locales conservan sólo datos respaldados y publicables. La intervención humana atiende solicitudes públicas no sensibles y solicitudes privadas recibidas por el [canal editorial](docs/PRIVATE-REPORTING.md); la publicación de noticias no exige aprobación previa.
 
-Los workflows reproducibles están en [ops/review-queue](ops/review-queue/README.md). El botón «Reportar un problema» abre una solicitud pública con identificador y versión, sin adjuntar contenido sensible. Las reevaluaciones usan el mismo presupuesto limitado; retiradas y cambios manuales requieren un mantenedor autorizado. El catálogo de casos conserva el importador de propuestas con aprobación humana y no recibe casos automáticamente de las noticias.
+Los workflows reproducibles están en [ops/review-queue](ops/review-queue/README.md). El enlace «Corrección pública no sensible» abre una solicitud con identificador y versión, sin adjuntar valores de la ficha. «Corrección sensible o retirada en privado» abre el correo editorial sin copiar contenido de la noticia. Las reevaluaciones usan el mismo presupuesto limitado; retiradas y cambios manuales requieren un mantenedor autorizado. El catálogo de casos conserva el importador de propuestas con aprobación humana y no recibe casos automáticamente de las noticias.
 
 ## Continuidad de la investigación WSDS
 

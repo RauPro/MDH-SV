@@ -46,7 +46,7 @@ diagnóstico, sin afirmar que la extracción haya terminado.
 
 La web y `search_news`/`GET /api/v1/news` presentan una estructura para cada
 referencia. Los campos se publican por defecto tras validación automática de
-evidencia y privacidad. La revisión humana se reserva para solicitudes en GitHub. Un
+evidencia y privacidad. La revisión humana atiende solicitudes públicas no sensibles y solicitudes por el [canal editorial privado](PRIVATE-REPORTING.md). Un
 registro independiente de progreso permite distinguir si la ficha ya se generó,
 sin consultar la cola privada desde el navegador ni exponer borradores sin validar.
 
@@ -137,12 +137,12 @@ personas al recuento de víctimas.
 
 ## Solicitudes en GitHub y correcciones excepcionales
 
-El botón **Reportar un problema** abre una solicitud pública con identificador y
+El enlace **Corrección pública no sensible** abre una solicitud pública con identificador y
 versión, sin copiar los valores de la ficha. El publicador consulta las solicitudes
 en cada ejecución. La primera solicitud por noticia añade una reevaluación
 persistente; duplicados no reinician intentos ni consumen presupuesto adicional.
 El texto libre y sus enlaces no se ejecutan ni se incorporan como evidencia del
-modelo. No publicar datos sensibles en una issue; solicitar un canal privado.
+modelo. **Corrección sensible o retirada en privado** abre el correo editorial sin copiar título, campos ni identificadores. No es necesario abrir una issue para escribir a [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me). El responsable @RauPro tramita esos mensajes de forma humana según el [procedimiento privado](PRIVATE-REPORTING.md); el correo no entra en Gemini ni en la cola automática.
 
 Un mantenedor con permiso de escritura puede aplicar las etiquetas
 `news/withdraw`, `news/restore` o `news/recheck`. El workflow verifica la identidad
