@@ -34,7 +34,7 @@ concurrency:
   queue: max
 jobs:
   review:
-    if: github.repository == 'RauPro/MDH-SV-review' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.event.sender.type == 'User' && github.triggering_actor == github.event.sender.login
+    if: vars.MDH_AUTOMATION_ENABLED == 'true' && github.repository == 'RauPro/MDH-SV-review' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.event.sender.type == 'User' && github.triggering_actor == github.event.sender.login
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:

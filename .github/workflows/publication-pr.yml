@@ -19,7 +19,7 @@ concurrency:
 jobs:
   promote:
     if: >-
-      github.repository == 'RauPro/MDH-SV' && github.ref == 'refs/heads/main' &&
+      vars.MDH_AUTOMATION_ENABLED == 'true' && github.repository == 'RauPro/MDH-SV' && github.ref == 'refs/heads/main' &&
       (github.event_name == 'workflow_dispatch' ||
        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' &&
         (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch')))

@@ -1,12 +1,16 @@
 """Issue reconciliation uses existing decisions and cannot publish or call a model."""
-import re
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1] / "ops/review-queue/.github/workflows"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+ROOT = PROJECT_ROOT / "ops/review-queue/.github/workflows"
+INSTANCE = json.loads((PROJECT_ROOT / "instance.json").read_text())
+PUBLIC_REPOSITORY = INSTANCE["public_repository"]
+PRIVATE_REPOSITORY = INSTANCE["private_repository"]
 
 
 def workflow():
@@ -15,16 +19,16 @@ def workflow():
 
 def allowed(*, conclusion="success", name="Publicar ubicaciones automáticas",
             path=".github/workflows/publish-locations.yml", head_branch="main",
-            head_repository="RauPro/MDH-SV-review", repository="RauPro/MDH-SV-review",
-            private=True, ref="refs/heads/main", event_name="workflow_run"):
+            head_repository=PRIVATE_REPOSITORY, repository=PRIVATE_REPOSITORY,
+            private=True, ref="refs/heads/main", event_name="workflow_run", automation="true"):
     run = SimpleNamespace(conclusion=conclusion, name=name, path=path,
         head_branch=head_branch, head_repository=SimpleNamespace(full_name=head_repository))
     github = SimpleNamespace(event=SimpleNamespace(repository=SimpleNamespace(private=private), workflow_run=run),
         ref=ref, event_name=event_name, repository=repository)
     # Only the repository-owned boolean condition is evaluated, never event prose.
     condition = workflow()["jobs"]["reconcile"]["if"].replace("&&", " and ").replace("||", " or ")
-    condition = re.sub(r"\btrue\b", "True", condition)
-    return eval(condition, {"__builtins__": {}}, {"github": github})
+    condition = condition.replace(" == true", " == True")
+    return eval(condition, {"__builtins__": {}}, {"github": github, "vars": SimpleNamespace(MDH_AUTOMATION_ENABLED=automation.casefold())})
 
 
 def test_reconciliation_follows_publication_and_serializes_with_private_pipeline():
@@ -43,6 +47,7 @@ def test_reconciliation_follows_publication_and_serializes_with_private_pipeline
     {"head_branch": "untrusted"}, {"head_repository": "another/fork"},
     {"repository": "another/private-repo"}, {"private": False},
     {"ref": "refs/heads/untrusted"}, {"event_name": "push"},
+    {"automation": ""}, {"automation": "false"}, {"automation": "yes"},
 ])
 def test_reconciliation_rejects_untrusted_or_unrelated_runs(changes):
     assert not allowed(**changes)
@@ -54,7 +59,7 @@ def test_reconciliation_pins_code_without_model_or_public_write_credentials():
     assert value["permissions"] == {"contents": "write", "issues": "write"}
     steps = value["jobs"]["reconcile"]["steps"]
     checkouts = {step["with"]["path"]: step["with"] for step in steps if step.get("uses", "").split("@", 1)[0] == "actions/checkout"}
-    assert checkouts["monitor"]["repository"] == checkouts["publication"]["repository"] == "RauPro/MDH-SV"
+    assert checkouts["monitor"]["repository"] == checkouts["publication"]["repository"] == PUBLIC_REPOSITORY
     assert checkouts["monitor"]["ref"] == "MDH_PUBLIC_CODE_REF"
     assert checkouts["inbox"]["ref"] == checkouts["publication"]["ref"] == "main"
     assert "sparse-checkout" not in checkouts["inbox"]

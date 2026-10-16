@@ -16,7 +16,7 @@ concurrency:
   queue: max
 jobs:
   scope:
-    if: github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    if: vars.MDH_AUTOMATION_ENABLED == 'true' && github.repository == 'RauPro/MDH-SV-review' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:

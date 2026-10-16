@@ -28,13 +28,15 @@ python3.13 scripts/bootstrap.py
 .venv/bin/python scripts/check.py
 ```
 
-La API REST está en [`/api/v1/records`](https://mdh-sv.vercel.app/api/v1/records), [`/api/v1/news`](https://mdh-sv.vercel.app/api/v1/news) y [`/api/v1/stats`](https://mdh-sv.vercel.app/api/v1/stats). El MCP remoto usa **https://mdh-sv.vercel.app/mcp**, transporte Streamable HTTP, lectura anónima sin clave. [Contrato OpenAPI](https://mdh-sv.vercel.app/api/v1/openapi.json) y [guía de integración](docs/API.md).
+Para configurar un fork, sus contactos y automatizaciones, siga [la guía de preparación e instancias](docs/FORKS.md). Las pruebas y la web local no requieren secretos.
+
+En la instancia original, la API REST está en [`/api/v1/records`](https://mdh-sv.vercel.app/api/v1/records), [`/api/v1/news`](https://mdh-sv.vercel.app/api/v1/news) y [`/api/v1/stats`](https://mdh-sv.vercel.app/api/v1/stats). El MCP remoto usa **https://mdh-sv.vercel.app/mcp**, transporte Streamable HTTP, lectura anónima sin clave. [Contrato OpenAPI](https://mdh-sv.vercel.app/api/v1/openapi.json) y [guía de integración](docs/API.md).
 
 Para desarrollo: `npm ci`, `npm run test:api`, `npm run dev:api`. El módulo Python `.venv/bin/python -m mdh_mcp.server` conserva el transporte local `stdio`.
 
 ## Uso responsable
 
-Contraste cada reporte con su documento original. No use las fichas para determinar culpabilidad, elegibilidad o riesgo de personas. Para errores no sensibles, use los formularios públicos con el identificador del registro. Para correcciones sensibles o retiradas, escriba a [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me), atendido por @RauPro; no necesita abrir un issue público. Las vulnerabilidades técnicas tienen un canal privado separado en [Seguridad](SECURITY.md). No adjunte denuncias, nombres de personas protegidas ni documentos privados al primer contacto. El objetivo de primera respuesta privada es de 7 días naturales, orientativo y sin atención de emergencias.
+Contraste cada reporte con su documento original. No use las fichas para determinar culpabilidad, elegibilidad o riesgo de personas. Para errores no sensibles, use los formularios públicos con el identificador del registro. Para correcciones sensibles o retiradas, use el [canal editorial privado de esta instancia](SECURITY.md#correcciones-editoriales-sensibles-y-retiradas); no necesita abrir un issue público. Las vulnerabilidades técnicas tienen un canal privado separado en [Seguridad](SECURITY.md). No adjunte denuncias, nombres de personas protegidas ni documentos privados al primer contacto. El objetivo de primera respuesta privada es de 7 días naturales, orientativo y sin atención de emergencias.
 
 Código nuevo bajo MIT; metadatos y resúmenes propios bajo CC BY 4.0. Los documentos originales conservan los derechos y condiciones de sus autores.
 
@@ -54,7 +56,7 @@ Vercel usa la raíz del repositorio y `vercel.json`. La consulta pública no nec
 
 ## Recolección, publicación automática y correcciones
 
-La cola está en el repositorio privado `RauPro/MDH-SV-review`. El procesamiento horario incorpora RSS y referencias históricas, deduplica por URL y conserva decisiones y reintentos. Gemini extrae una ficha y una segunda pasada del mismo proveedor evalúa sus campos contra la misma versión del artículo. Las reglas locales conservan sólo datos respaldados y publicables. La intervención humana atiende solicitudes públicas no sensibles y solicitudes privadas recibidas por el [canal editorial](docs/PRIVATE-REPORTING.md); la publicación de noticias no exige aprobación previa.
+La cola se configura en `instance.json` y debe ser privada. En la instancia original es `RauPro/MDH-SV-review`. El procesamiento horario incorpora RSS y referencias históricas, deduplica por URL y conserva decisiones y reintentos. Gemini extrae una ficha y una segunda pasada del mismo proveedor evalúa sus campos contra la misma versión del artículo. Las reglas locales conservan sólo datos respaldados y publicables. La intervención humana atiende solicitudes públicas no sensibles y solicitudes privadas recibidas por el [canal editorial](docs/PRIVATE-REPORTING.md); la publicación de noticias no exige aprobación previa.
 
 Los workflows reproducibles están en [ops/review-queue](ops/review-queue/README.md). El enlace «Corrección pública no sensible» abre una solicitud con identificador y versión, sin adjuntar valores de la ficha. «Corrección sensible o retirada en privado» abre el correo editorial sin copiar contenido de la noticia. Las reevaluaciones usan el mismo presupuesto limitado; retiradas y cambios manuales requieren un mantenedor autorizado. El catálogo de casos conserva el importador de propuestas con aprobación humana y no recibe casos automáticamente de las noticias.
 
@@ -70,7 +72,7 @@ La búsqueda se actualiza cada seis horas. El procesador horario incorpora hasta
 
 ## Gemini en el flujo privado de producción
 
-El workflow **Preparar fichas con Gemini**, instalado en `RauPro/MDH-SV-review`,
+El workflow **Preparar fichas con Gemini**, instalado en la cola privada configurada,
 está programado para recoger noticias nuevas y procesar el backlog cada hora,
 según el presupuesto disponible. El disparo principal de Vercel está configurado
 al minuto 07 y GitHub conserva el respaldo al minuto 23; los eventos y recibos de

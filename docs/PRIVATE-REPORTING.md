@@ -4,12 +4,12 @@
 
 | Solicitud | Destino | Tratamiento |
 | --- | --- | --- |
-| Vulnerabilidad del código o infraestructura | [Reporte privado de GitHub](https://github.com/RauPro/MDH-SV/security/advisories/new) | Requiere cuenta; aviso privado de seguridad |
-| Corrección editorial sensible o retirada | [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me) | Correo privado y revisión humana; no requiere issue público |
-| Error no sensible de una noticia, registro o sitio | [Formularios públicos](https://github.com/RauPro/MDH-SV/issues/new/choose) | El contenido y los adjuntos del issue son públicos |
+| Vulnerabilidad del código o infraestructura | [Reporte privado configurado](../SECURITY.md#vulnerabilidades-técnicas) | Requiere cuenta; aviso privado de seguridad |
+| Corrección editorial sensible o retirada | [Correo editorial configurado](../SECURITY.md#correcciones-editoriales-sensibles-y-retiradas) | Correo privado y revisión humana; no requiere issue público |
+| Error no sensible de una noticia, registro o sitio | Formularios públicos del repositorio definido en `instance.json` | El contenido y los adjuntos del issue son públicos |
 
-El responsable de recepción, seguimiento y decisión es [@RauPro](https://github.com/RauPro).
-El correo editorial fue autorizado por el titular para su publicación. El objetivo
+El responsable y los destinos vigentes figuran en [SECURITY.md](../SECURITY.md).
+Cada instancia debe contar con la autorización del titular del canal para publicarlo. El objetivo
 de primera respuesta en ambos canales privados es de **7 días naturales**. Es
 orientativo, no un SLA ni una promesa de resolución en ese plazo. No hay atención
 permanente, atención de emergencias ni recepción de denuncias. Correo y GitHub
@@ -48,7 +48,11 @@ su precedencia sobre resultados automáticos. El catálogo documental mantiene s
 revisión y regeneración propias. No se modifica el presupuesto de Gemini ni se
 reinician intentos al recibir un correo.
 
-## Comprobación operativa de P0.4
+## Comprobación operativa de P0.4 en la instancia original
+
+Esta evidencia corresponde exclusivamente a `RauPro/MDH-SV`, su responsable
+@RauPro y el correo raul.guillen.eng@proton.me. Un fork debe habilitar y comprobar
+sus propios canales; copiar este historial no acredita su funcionamiento.
 
 El criterio del roadmap es que un reporte ficticio llegue por una vía privada y
 que la política y los formularios indiquen el destino correcto.

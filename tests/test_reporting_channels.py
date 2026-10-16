@@ -1,4 +1,5 @@
 """Public forms preserve automation identifiers and route sensitive reports away."""
+import json
 from pathlib import Path
 
 import yaml
@@ -6,8 +7,9 @@ from mdh_pipeline.news_requests import candidate_from_request, public_rechecks
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / ".github/ISSUE_TEMPLATE"
-EDITORIAL = "mailto:raul.guillen.eng@proton.me"
-TECHNICAL = "https://github.com/RauPro/MDH-SV/security/advisories/new"
+INSTANCE = json.loads((ROOT / "instance.json").read_text())
+EDITORIAL = "mailto:" + INSTANCE["editorial_email"]
+TECHNICAL = f"https://github.com/{INSTANCE['public_repository']}/security/advisories/new"
 IDENTIFIER = "a" * 64
 
 
@@ -72,7 +74,7 @@ def test_issue_chooser_uses_renderable_https_destinations_and_no_blank_form():
     config = form("config.yml")
     assert config["blank_issues_enabled"] is False
     urls = {item["url"] for item in config["contact_links"]}
-    policy_url = ("https://github.com/RauPro/MDH-SV/blob/main/SECURITY.md"
+    policy_url = (f"https://github.com/{INSTANCE['public_repository']}/blob/main/SECURITY.md"
                   "#correcciones-editoriales-sensibles-y-retiradas")
     assert urls == {TECHNICAL, policy_url}
     # The chooser does not display mailto contact entries; its HTTPS policy

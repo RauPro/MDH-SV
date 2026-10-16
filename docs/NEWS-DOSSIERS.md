@@ -142,7 +142,7 @@ versión, sin copiar los valores de la ficha. El publicador consulta las solicit
 en cada ejecución. La primera solicitud por noticia añade una reevaluación
 persistente; duplicados no reinician intentos ni consumen presupuesto adicional.
 El texto libre y sus enlaces no se ejecutan ni se incorporan como evidencia del
-modelo. **Corrección sensible o retirada en privado** abre el correo editorial sin copiar título, campos ni identificadores. No es necesario abrir una issue para escribir a [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me). El responsable @RauPro tramita esos mensajes de forma humana según el [procedimiento privado](PRIVATE-REPORTING.md); el correo no entra en Gemini ni en la cola automática.
+modelo. **Corrección sensible o retirada en privado** abre el correo editorial sin copiar título, campos ni identificadores. No es necesario abrir una issue para usar el [canal editorial de esta instancia](../SECURITY.md#correcciones-editoriales-sensibles-y-retiradas). El responsable configurado tramita esos mensajes de forma humana según el [procedimiento privado](PRIVATE-REPORTING.md); el correo no entra en Gemini ni en la cola automática.
 
 Un mantenedor con permiso de escritura puede aplicar las etiquetas
 `news/withdraw`, `news/restore` o `news/recheck`. El workflow verifica la identidad
