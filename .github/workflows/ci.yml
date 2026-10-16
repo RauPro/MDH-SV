@@ -15,11 +15,17 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
           cache: pip
           cache-dependency-path: requirements.lock
+      - name: Install pinned secret scanner
+        run: python scripts/install_gitleaks.py --destination "$RUNNER_TEMP/mdh-gitleaks" >> "$GITHUB_PATH"
+      - name: Check complete publishable history for secrets
+        run: python scripts/publication_guard.py check --ref HEAD
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

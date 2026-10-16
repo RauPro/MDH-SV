@@ -1,0 +1,46 @@
+title = "MDH-SV publishable history secret detection"
+
+[extend]
+useDefault = true
+
+# Include Google API keys independently of the defaults' entropy/assignment checks.
+# There are deliberately no repository-wide path, commit or value allowlists.
+[[rules]]
+id = "mdh-google-api-key"
+description = "Google API key"
+regex = '''AIza[0-9A-Za-z_-]{35}'''
+keywords = ["AIza"]
+
+# Extend this built-in rule without replacing its regex, entropy or keywords.
+# These eleven public editorial identifiers were checked against the canonical
+# data/reviewed/publications.json catalog. They are record IDs, not credentials.
+# AND requires both an exact known JSON match and an exact catalog/fixture path.
+# New IDs, other fields, other paths and every other detector remain checked.
+# ["] is an exact quote; it prevents this policy from resembling an assignment.
+[[rules]]
+id = "generic-api-key"
+
+[[rules.allowlists]]
+description = "Reviewed public editorial IDs in their catalog source_record_key fields"
+condition = "AND"
+regexTarget = "match"
+paths = [
+  '''^data/reviewed/publications\.json$''',
+  '''^apps/web/public/data/catalog\.json$''',
+  '''^apps/web/public/data/records\.geojson$''',
+  '''^tests/fixtures/catalog\.json$''',
+  '''^apps/web/src/__fixtures__/catalog\.json$''',
+]
+regexes = [
+  '''^source_record_key["]: ["]amnistia-espacio-civico-2023["]$''',
+  '''^source_record_key["]: ["]amnistia-seguridad-sin-derechos-2026["]$''',
+  '''^source_record_key["]: ["]cidh-excepcion-2024["]$''',
+  '''^source_record_key["]: ["]hrw-cristosal-2022["]$''',
+  '''^source_record_key["]: ["]mdh-alejandro-henriquez-2025["]$''',
+  '''^source_record_key["]: ["]mdh-beatriz-2013["]$''',
+  '''^source_record_key["]: ["]mdh-enrique-anaya-2025["]$''',
+  '''^source_record_key["]: ["]mdh-jose-angel-perez-2025["]$''',
+  '''^source_record_key["]: ["]mdh-muyshondt-2024["]$''',
+  '''^source_record_key["]: ["]mdh-ruth-lopez-2025["]$''',
+  '''^source_record_key["]: ["]mdh-venezolanos-cecot-2025["]$''',
+]
