@@ -65,7 +65,7 @@ def _hostname(value):
             or any(not LABEL.fullmatch(label) for label in value.split("."))):
         _fail()
     # WHATWG URLs normalize alternative numeric IP spellings; reject those too.
-    if value.rsplit(".", 1)[-1].isdigit():
+    if re.fullmatch(r'(?:[0-9]+|0x[0-9a-f]*)', value.rsplit('.', 1)[-1]):
         _fail()
     try:
         ipaddress.ip_address(value)
