@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T06:15:21.496000+00:00",
+  "generated_at": "2026-10-16T07:17:34.669093+00:00",
   "assessment_counts": {
     "candidates": 11707,
     "evaluated": 4888,
-    "relevant": 1733,
-    "excluded": 111,
-    "uncertain": 3044,
+    "relevant": 1734,
+    "excluded": 119,
+    "uncertain": 3035,
     "pending": 6819
   },
   "selections": [
@@ -6770,19 +6770,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T01:14:51.146737-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c4a924d9260e10498c4f5fb8027fcd0bdab8a546caa7e60fba36099f92cbdf6e",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p8"
+            "p8",
+            "p15"
           ]
         }
       }
@@ -11520,19 +11519,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T01:16:52.687219-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "29a289d0b63f9417dea02df06bd9eb0e7a6b6b448d05b5817630605aa2b724ff",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p6",
-            "p7"
+            "p3"
           ]
         }
       }
@@ -27055,9 +27051,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:14:20.019937-06:00",
+        "classified_at": "2026-10-16T01:12:51.826702-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a6ef1f32aa456a9b558bfc1817925786f2f59e524c42a26a615138f200c7c673",
           "jurisdiction_paragraph_ids": [
@@ -27065,8 +27061,8 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p26",
-            "p27"
+            "p17",
+            "p26"
           ]
         }
       }
@@ -33610,6 +33606,33 @@
       }
     },
     {
+      "candidate_id": "aa2645e1b42f8c57e21c7518aae0520ab9fd4ce2e675b961671448b4ca2e707d",
+      "source_url": "https://historico.elsalvador.com/historico/114633/capturan-a-monja-salvadorena-con-15-mil-dolares-honduras.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-10-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T01:09:44.224862-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0a3336cb073bcd5e2b5e04fdbc075b03e5b77f4f04b21bd33c887e55b1b981df",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "aa2831d4e766561c31e2627455d272e12b9e062ca770a68518b4ee5b77feb049",
       "source_url": "https://www.diariocolatino.com/controlar-sistema-penitenciario-aportar-la-seguridad-oscar-ortiz/",
       "publisher": "Diario Co Latino",
@@ -36725,18 +36748,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T01:16:35.488879-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4b4e21101eb36425a4a5e34441eab138867d1fe63a3596726bc5d30d933b1154",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ]
         }
       }
