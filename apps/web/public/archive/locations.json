@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-16T17:19:45.091363+00:00",
+  "generated_at": "2026-10-16T22:19:17.094558+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -3315,6 +3315,40 @@
         "paragraph_id": "p1",
         "content_sha256": "2f481017242a455545f2db64947c19a57e428c9c94074568d227fb76b7fc9f41"
       }
+    },
+    {
+      "candidate_id": "742c4dd7c86b8d07808526fba622c4ecc4072ca1f31610e3dc2f9c16da93894a",
+      "source_url": "https://www.diariocolatino.com/pandilleros-figuran-como-victimas-de-ultimos-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-26",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-16T22:19:07.268290+00:00",
+      "source_checked_at": "2026-10-16T22:19:07.268290+00:00",
+      "evidence": {
+        "content_sha256": "8c044969b7d04097095d1a08df3e7a4daf9863436d6af6fc3289e533b71d921a"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Cuscatlán",
+          "paragraph_id": "p4",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Pedro Perulapán",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+          }
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Usulután",
+          "paragraph_id": "p6"
+        }
+      ]
     },
     {
       "candidate_id": "7570c287aea2b84e87b63cd712f7a194c355d1a8c321e43934835741851a05fc",
