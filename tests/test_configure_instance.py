@@ -18,18 +18,24 @@ SPEC.loader.exec_module(configure_instance)
 FORK = json.loads((Path(__file__).parent / 'fixtures/instance-config-cases.json').read_text())['base']
 
 
-@pytest.fixture
-def checkout(tmp_path):
-    root = tmp_path / 'checkout'
+def copy_checkout(source_root, root):
     paths = ('instance.json', *configure_instance.STATIC_PATHS, 'scripts/configure_instance.py',
              'apps/pipeline/src/mdh_pipeline/instance.py', 'apps/pipeline/src/mdh_pipeline/__init__.py',
-             'docs/PRIVATE-REPORTING.md')
+             'docs/PRIVATE-REPORTING.md', 'tests/fixtures/upstream-instance.json')
     for relative in paths:
         destination = root / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT / relative, destination)
+        shutil.copyfile(source_root / relative, destination)
+    # The caller's checkout may already use the exact FORK identity below. Start
+    # each isolated scenario from the immutable fixture, never that ambient state.
+    configure_instance.configure(root, source=root / 'tests/fixtures/upstream-instance.json')
     (root / 'untouched.txt').write_text('Unrelated contributor work.\n')
     return root
+
+
+@pytest.fixture
+def checkout(tmp_path):
+    return copy_checkout(ROOT, tmp_path / 'checkout')
 
 
 @pytest.fixture
@@ -102,6 +108,18 @@ def test_prefix_collisions_never_rewrite_new_or_private_repository(checkout, sou
         assert 'project-private-fork-private-fork' not in content
     assert 'https://github.com/SameOwner)' in (checkout / 'SECURITY.md').read_text()
     assert configure_instance.configure(checkout, check=True) == ()
+
+
+def test_configured_fork_checkout_can_run_the_same_preparation_again(checkout, source, tmp_path):
+    configure_instance.configure(checkout, source=source)
+    original_fork = snapshot(checkout)
+    isolated = copy_checkout(checkout, tmp_path / 'isolated-again')
+    assert json.loads((isolated / 'instance.json').read_text()) != FORK
+    changes = configure_instance.configure(isolated, source=source)
+    assert 'instance.json' in changes and 'SECURITY.md' in changes
+    assert json.loads((isolated / 'instance.json').read_text()) == FORK
+    assert configure_instance.configure(isolated, check=True) == ()
+    assert snapshot(checkout) == original_fork
 
 
 def test_approved_private_code_refs_survive_rendering(checkout, source):

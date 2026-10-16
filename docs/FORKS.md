@@ -66,6 +66,8 @@ git diff
 | `editorial_email` | Correo autorizado para correcciones sensibles y retiradas |
 | `reporting_responsible` | Usuario `@cuenta` o equipo `@organizacion/equipo` responsable, con acceso de escritura para CODEOWNERS |
 
+Los dominios deben usar DNS ASCII en minúsculas; no se admiten IDN ni etiquetas punycode `xn--` en URLs, hosts MCP o correo. Esto mantiene la misma interpretación en Python y JavaScript.
+
 Obtenga el ID del repositorio de `GET /repos/{owner}/{repo}` y el del actor de
 su cuenta GitHub (`GET /users/{login}`); compruebe también la atribución de una
 propuesta SSH de prueba. No reutilice los números de la instancia original. El
