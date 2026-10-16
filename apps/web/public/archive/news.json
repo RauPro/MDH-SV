@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T14:17:52.433388+00:00",
+  "generated_at": "2026-10-16T15:15:26.495937+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11858,
-      "selected": 1742,
+      "selected": 1749,
       "evaluated": 4889,
-      "relevant": 1742,
+      "relevant": 1749,
       "excluded": 142,
-      "uncertain": 3005,
+      "uncertain": 2998,
       "pending": 6969,
-      "evaluated_at": "2026-10-16T14:17:50.193747+00:00"
+      "evaluated_at": "2026-10-16T15:15:23.334775+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1742,
+    "records": 1749,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1414,
+        "records": 1421,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -641,7 +641,7 @@
           {
             "month": "2014-01",
             "status": "enumerated",
-            "records": 16,
+            "records": 21,
             "screen_version": 3,
             "posts_scanned": 1010,
             "source_total_posts": 1010,
@@ -653,7 +653,7 @@
           {
             "month": "2014-02",
             "status": "enumerated",
-            "records": 21,
+            "records": 23,
             "screen_version": 3,
             "posts_scanned": 967,
             "source_total_posts": 967,
@@ -19196,12 +19196,12 @@
         "month": "2014-01",
         "start_date": "2014-01-01",
         "end_date": "2014-01-31",
-        "records": 16,
+        "records": 21,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 16
+            "records": 21
           },
           {
             "source_id": "gatoencerrado",
@@ -19239,12 +19239,12 @@
         "month": "2014-02",
         "start_date": "2014-02-01",
         "end_date": "2014-02-28",
-        "records": 23,
+        "records": 25,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 21
+            "records": 23
           },
           {
             "source_id": "gatoencerrado",
@@ -101027,6 +101027,50 @@
       }
     },
     {
+      "id": "6432833f8cbf6347d81065ec077cd0b94ebd668064042e27e4ee3a370a4eb0ab",
+      "title": "Cuatro personas detenidas por delitos electorales informa Fiscal General",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cuatro-personas-detenidas-por-delitos-electorales-informa-fiscal-general/",
+      "published_date": "2014-02-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 4713,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T09:10:23.276305-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "9a75875395f8addaf6349ba54f6104bbe609e3a7235f75da6bee1dc68539baf4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "id": "1be8ab40c77b819ee9d2f67c659b4257b80d109aee5b9327279f80adc5bd40f2",
       "title": "Labor de periodistas es obstaculizada por correligionarios y la UMO",
       "title_truncated": false,
@@ -101122,6 +101166,52 @@
             "p23",
             "p24",
             "p27"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c60534dd0bf8ccfd575640933778de59a0d45350bbc1fb5e770c58135b8e6716",
+      "title": "Autoridades salvadoreñas confirman que existe orden de captura contra asesor de ARENA JJR",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/autoridades-salvadorenas-confirman-que-existe-orden-de-captura-contra-asesor-de-arena-jjr/",
+      "published_date": "2014-02-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorenas"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 4372,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T09:10:23.276305-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c236aefbc5d7888a68515f43fb2169bd1d90267e7b5cf54229ee500a1af1f071",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p12"
           ]
         }
       }
@@ -101266,6 +101356,225 @@
             "p1",
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c164045e59d51f4fa2248460cef082ecbe1f2c82c50b6b672369750658982d35",
+      "title": "Si se puede… en primera vuelta que no nos detenga la Indecisión",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/si-se-puede-en-primera-vuelta-que-no-nos-detenga-la-indecision/",
+      "published_date": "2014-01-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 4051,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T09:10:23.276305-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b61df94ddad763dd18093356893365c24ff4a29496f2c63174b98c1916444a43",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4cea6d2f4b883efe149ce5ad588d7e197f81352d0c329bc04a71e0acb9b20483",
+      "title": "Capturan asesor jurídico por filtrar audios de investigación sobre tregua entre pandillas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-asesor-juridico-por-filtrar-audios-de-investigacion-sobre-tregua-entre-pandillas/",
+      "published_date": "2014-01-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 4122,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T09:10:23.276305-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "75f63331570b5e9c7ef331196330bba6185ca14ae1839f09d292b09f4f57f113",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "16acad5d42a98145fdabe8cbb6e25d64e2e3c962267b97d245cd775a98bf98f9",
+      "title": "Entregan reconocimiento a Narciso Castillo por sus 30 años de ejercicio periodístico",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/entregan-reconocimiento-a-narciso-castillo-por-sus-30-anos-de-ejercicio-periodistico/",
+      "published_date": "2014-01-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 4080,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T09:10:23.276305-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "833c6aaa7b4388b6e0557c550cc8c118f4bf285ae135e8ca9db462351e7fb5a1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e34d2c3c259f5b7a77248c115f324d0c8acd9af5e6df0d22be2b0f82e2b7f606",
+      "title": "Pandilleros asesinan a agente de la PNC",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pandilleros-asesinan-a-agente-de-la-pnc/",
+      "published_date": "2014-01-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 3746,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T09:10:23.276305-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2ef5bf0555ed785a6152269d98cc28fa6994d80cea4fa39370ab6364a25dc624",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b812068301485c5064e2aa47871ed0a36347fd89b5cd8d7b7f4a5d72a6b95e43",
+      "title": "Sicarios estarían siendo contratados para incrementar homicidios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sicarios-estarian-siendo-contratados-para-incrementar-homicidios/",
+      "published_date": "2014-01-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 3352,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T09:10:23.276305-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8783a1c84fd0d50d118306ff3b88cf7ccd2ee8f70c35615c44838f22ce4da110",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }
