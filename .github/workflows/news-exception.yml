@@ -27,6 +27,8 @@ jobs:
           python-version: '3.13'
           cache: pip
           cache-dependency-path: requirements.lock
+      - name: Install pinned secret scanner
+        run: python scripts/install_gitleaks.py --destination "$RUNNER_TEMP/mdh-gitleaks" >> "$GITHUB_PATH"
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: '22'
@@ -53,5 +55,6 @@ jobs:
           if git diff --cached --quiet; then exit 0; fi
           git switch -c "$PUBLICATION_BRANCH"
           git commit -m 'fix: apply authenticated news request and reconcile publication'
+          python scripts/publication_guard.py check --ref HEAD
           git push origin "HEAD:refs/heads/$PUBLICATION_BRANCH"
           python -m mdh_pipeline.publication_pr propose --kind exception --branch "$PUBLICATION_BRANCH"
