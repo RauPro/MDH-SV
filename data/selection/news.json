@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T19:17:54.345769+00:00",
+  "generated_at": "2026-10-16T20:22:33.865570+00:00",
   "assessment_counts": {
     "candidates": 12010,
     "evaluated": 4889,
-    "relevant": 1758,
+    "relevant": 1762,
     "excluded": 158,
-    "uncertain": 2973,
+    "uncertain": 2969,
     "pending": 7121
   },
   "selections": [
@@ -9920,19 +9920,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T14:16:42.928393-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "98035fa0e6de0d9a6677dbd33e42683b3edfa18a426fd105ab98fda92d190b68",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p3",
-            "p4",
-            "p5"
+            "p4"
           ]
         }
       }
@@ -24755,6 +24753,32 @@
       }
     },
     {
+      "candidate_id": "7dfbec0aef8e5566eb15361d6f09785ceb56d7906bcf8606142ae7272267e505",
+      "source_url": "https://www.diariocolatino.com/fiscal-informa-cuatro-detenciones-por-fraude-electoral/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T14:10:05.851977-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "96eebc406c78067b42fa7e571b67ce44f6115a39b9ce558d6b637f8bf97e136b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7e11c911955379fca3f4872e4717079c20a55a064c1c96f9e15d8bc9400be963",
       "source_url": "https://www.diariocolatino.com/tribunal-condena-a-pastor-a-26-anos-por-violacion-de-menor/",
       "publisher": "Diario Co Latino",
@@ -28196,6 +28220,34 @@
             "p7",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8ed138dd008ea8de8ce7fe270105b4ce612295b857ee4e82be5d13fe9a272f5a",
+      "source_url": "https://www.diariocolatino.com/diputado-echeverria-desmiente-captura/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T14:10:05.851977-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a0f04fc6e511b4d6751bdbe25bd08d0e8b4ebaa38d736a25114f5b5176507783",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5",
+            "p9"
           ]
         }
       }
@@ -33880,6 +33932,33 @@
             "p3",
             "p4",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a9f4afeb34dba4fccc8f43c8e5da517335457aff919094cc1bcbb4055f49aa48",
+      "source_url": "https://historico.elsalvador.com/historico/124127/policia-hondurena-captura-pandilleros-salvadorenos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-03-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T14:10:05.851977-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "02ffc0735c583b40170b51c83e3c82961569efe8415fde9a26ea78a399fb48dc",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
           ]
         }
       }
@@ -48830,6 +48909,36 @@
             "p2",
             "p3",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fc9fc495972e94e0445bb149202a09e356aa7947cdeccd803364bc2a1873da89",
+      "source_url": "https://www.diariocolatino.com/fiscal-informa-de-cuatro-detenciones-por-fraude-electoral/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T14:10:05.851977-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "668e17cb3e9dccd688dd1ace4e5ca13571a5047224e743d49a65905913948f3c",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p5",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p7",
+            "p8"
           ]
         }
       }
