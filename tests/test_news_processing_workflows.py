@@ -13,7 +13,8 @@ def test_processing_projection_requires_a_verified_full_private_inventory():
     value = workflow('ops/review-queue/.github/workflows/publish-locations.yml')
     # The evaluator persists receipts and quota reservations in the private repo;
     # the processing projection itself remains credential-free.
-    assert value['permissions'] == {'contents': 'write', 'issues': 'read'}
+    assert value['permissions'] == {'contents': 'read'}
+    assert value['jobs']['publish']['permissions'] == {'contents': 'write', 'issues': 'read'}
     steps = value['jobs']['publish']['steps']
     checkout = next(s['with'] for s in steps if s.get('with', {}).get('path') == 'inbox')
     assert 'sparse-checkout' not in checkout
@@ -24,10 +25,10 @@ def test_processing_projection_requires_a_verified_full_private_inventory():
     assert "'diff', '--quiet', 'HEAD'" in step['run']
     assert step['run'].index('expected == actual') < step['run'].index('--snapshot-complete')
     assert '--output publication/apps/web/public/archive/processing.json' in step['run']
-    publish = next(s for s in steps if 'git push' in s.get('run', ''))
-    assert steps.index(step) < steps.index(publish)
+    pack = next(s for s in steps if 'publication_snapshot pack' in s.get('run', ''))
+    assert steps.index(step) < steps.index(pack)
     evaluate = next(s for s in steps if 'mdh_pipeline.automatic_news evaluate' in s.get('run', ''))
-    assert steps.index(step) < steps.index(evaluate) < steps.index(publish)
+    assert steps.index(step) < steps.index(evaluate) < steps.index(pack)
     assert evaluate['env']['MDH_GEMINI_BUDGET_CONFIG'] == '${{ vars.MDH_GEMINI_BUDGET_CONFIG }}'
     assert '--request-generations request-generations.json' in evaluate['run']
     assert '--excluded-ids excluded-locations.json' in evaluate['run']
@@ -35,11 +36,13 @@ def test_processing_projection_requires_a_verified_full_private_inventory():
     assert evaluate['env']['VALIDATION_BATCH_SIZE'] == '4'
     assert 'github.event.workflow_run.id' in evaluate['env']['MDH_ALLOCATION_SOURCE_RUN_ID']
     assert '--batch-size "$VALIDATION_BATCH_SIZE"' in evaluate['run']
-    failure_report = next(s for s in steps if "steps.automatic_validation.outcome == 'failure'" in s.get('if', ''))
-    assert steps.index(failure_report) > steps.index(publish)
-    assert 'apps/web/public/archive/processing.json' in publish['run']
-    assert 'inbox/drafts' not in publish['run']
-    assert publish['run'].index('check-data.mjs') < publish['run'].index('git push')
+    assert value['jobs']['publish']['outputs']['evaluation_failed'] == "${{ steps.automatic_validation.outcome == 'failure' }}"
+    failure_report = value['jobs']['report']
+    assert failure_report['needs'] == ['publish', 'propose']
+    assert failure_report['if'] == "always() && needs.publish.outputs.evaluation_failed == 'true'"
+    assert failure_report['steps'] == [{'run': 'exit 1'}]
+    assert 'inbox/drafts' not in pack['run']
+    assert pack['run'].index('check-data.mjs') < pack['run'].index('publication_snapshot pack')
 
 
 def test_public_bibliography_refresh_only_reconciles_receipts_without_private_access():
