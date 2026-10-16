@@ -629,7 +629,7 @@ it('shows automatic publication in the news list and opens its public fields des
   const dialog = screen.getByRole('dialog');
   expect(within(dialog).getByText('Resumen ficticio atribuido al medio para pruebas.')).toBeInTheDocument();
   expect(within(dialog).getAllByText('Ficha publicada automáticamente')).toHaveLength(1);
-  expect(within(dialog).getByRole('link', { name: 'Reportar un problema' })).toHaveAttribute('href', expect.stringContaining(`candidate_id=${fixture.records[0].id}`));
+  expect(within(dialog).getByRole('link', { name: 'Corrección pública no sensible' })).toHaveAttribute('href', expect.stringContaining(`candidate_id=${fixture.records[0].id}`));
   expect(dialog).not.toHaveTextContent('Ficha revisada por');
 });
 

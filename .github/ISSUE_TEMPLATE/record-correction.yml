@@ -1,0 +1,30 @@
+name: Corrección pública de registro o del sitio
+description: Informar de un error no sensible del catálogo o del funcionamiento del sitio.
+title: Corrección de registro
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Esta solicitud y sus adjuntos son públicos. No incluyas claves, nombres de personas protegidas, testimonios privados ni documentos personales.
+        Para correcciones sensibles o retiradas, escribe a [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me), atendido por @RauPro. No necesitas abrir un issue público. Primer contacto: sólo URL o ID público y descripción mínima, sin adjuntos personales.
+        Para vulnerabilidades técnicas usa el [reporte privado de GitHub](https://github.com/RauPro/MDH-SV/security/advisories/new).
+        Para una ficha de noticia, utiliza el formulario específico de noticias para conservar su identificador y versión.
+  - type: input
+    id: record_id
+    attributes:
+      label: Identificador del registro o URL pública
+      description: Opcional si el error afecta al funcionamiento general del sitio.
+  - type: textarea
+    id: explanation
+    attributes:
+      label: Explicación sin datos sensibles
+      description: Indica el campo incorrecto y una referencia pública, o pasos de reproducción con datos ficticios.
+    validations:
+      required: true
+  - type: checkboxes
+    id: public_content
+    attributes:
+      label: Publicación de esta solicitud
+      options:
+        - label: Entiendo que será pública y no incluyo datos sensibles ni una solicitud privada de retirada.
+          required: true

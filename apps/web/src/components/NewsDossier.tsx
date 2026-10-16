@@ -5,6 +5,7 @@ import type { NewsProcessingStatus } from '../../../../shared/news-processing.mj
 import { newsProcessingPresentation, type PublicLoadState } from '../newsProcessingPresentation';
 import { automaticPublicDossier, newsCorrectionUrl } from '../newsPublication';
 import { archiveInstant } from '../newsArchive';
+import { EDITORIAL_REPORT_URL } from '../reporting';
 
 const fieldLabels: Record<NewsDossierFieldName, string> = {
   summary: 'Resumen', category: 'Clasificación temática', alleged_violation: 'Presunto hecho violatorio',
@@ -79,7 +80,9 @@ export function NewsDossier({ dossier: supplied, selection, reviewState = 'ready
     <h3>Clasificación y contexto</h3><dl className="dossier-grid">{(['category', 'themes', 'vulnerable_groups', 'institutional_sources', 'hypothesis', 'instrument'] as const).map(field)}</dl>
     <h3>Referencias de la ficha</h3><ol className="dossier-evidence">{dossier.evidence.map(evidence => <li key={evidence.id}><a href={evidence.url} target="_blank" rel="noopener noreferrer">{evidence.locator}</a></li>)}</ol>
     <p className="filter-note">Una ficha de noticia puede ser parcial. Su existencia no la convierte en una violación ni incorpora personas al recuento de víctimas. «Dato no mencionado» se limita al texto analizado; no afirma ausencia en otras versiones, documentos o fuentes. «No se pudo determinar» indica que no se obtuvo un dato con respaldo suficiente.</p>
-    <a className="text-button" href={newsCorrectionUrl(dossier)} target="_blank" rel="noopener noreferrer">Reportar un problema</a>
-    <p className="filter-note">La solicitud en GitHub es pública. Incluye sólo el identificador de la ficha y una descripción general. No publiques identidades protegidas ni información sensible; solicita un canal privado al equipo.</p>
+    <a className="text-button" href={newsCorrectionUrl(dossier)} target="_blank" rel="noopener noreferrer">Corrección pública no sensible</a>
+    <p className="filter-note">La solicitud en GitHub es pública. Incluye sólo el identificador de la ficha y una descripción general. No publiques identidades protegidas ni información sensible.</p>
+    <a className="text-button" href={EDITORIAL_REPORT_URL}>Corrección sensible o retirada en privado</a>
+    <p className="filter-note">El correo abre un mensaje vacío. En el primer contacto indica sólo el identificador o enlace de la ficha y el tipo de solicitud; no adjuntes testimonios ni documentos personales. La revisión es humana. El canal no ofrece anonimato ni atención de emergencias.</p>
   </section>;
 }

@@ -23,7 +23,7 @@ histórica crea su issue después de ser seleccionada; el flujo horario no añad
 otra tanda de candidatas históricas inciertas antes de clasificar. La recogida RSS
 se mantiene para atender noticias nuevas. Una noticia
 seleccionada puede tener todavía su extracción pendiente; una ficha extraída
-necesita validación automática de evidencia y privacidad antes de publicar sus campos. La intervención editorial se reserva para solicitudes en GitHub.
+necesita validación automática de evidencia y privacidad antes de publicar sus campos. La intervención editorial atiende solicitudes públicas no sensibles y solicitudes por el [canal editorial privado](../../docs/PRIVATE-REPORTING.md).
 La ubicación se comprueba también directamente en las fuentes seleccionadas,
 sin esperar una ficha completa ni llamar de nuevo a Gemini. Comprueba hasta
 50 fuentes por ejecución y conserva recibos mínimos de reintento en una caché
@@ -200,7 +200,7 @@ para una corrección editorial solicitada; no es un requisito para vaciar el bac
 La primera solicitud pública por noticia permite una reevaluación acotada. La
 explicación y sus adjuntos no se ejecutan ni se envían al modelo; sólo pasan el
 identificador y la generación de solicitud. Un mantenedor autorizado puede
-solicitar nuevas reevaluaciones o una retirada persistente.
+solicitar nuevas reevaluaciones o una retirada persistente. Las solicitudes sensibles se reciben por correo privado y se tramitan de forma humana: no copie el mensaje, sus adjuntos ni la identidad del remitente a issues, borradores, prompts o logs. Registre sólo la decisión pública mínima siguiendo el [procedimiento de recepción](../../docs/PRIVATE-REPORTING.md).
 
 1. Abre la fuente original y `news_dossier` en el borrador. Contrasta la fecha,
    hechos, campos no mencionados, atribuciones, duplicados y privacidad. Corrige

@@ -1,5 +1,5 @@
-name: Reportar un problema con una ficha
-description: Solicitar una reevaluación, corrección o retirada de una noticia del monitor.
+name: Corrección pública no sensible de una noticia
+description: Solicitar una reevaluación o corrección sin información privada.
 title: "Revisión de ficha de noticia"
 labels: [news-correction]
 body:
@@ -9,7 +9,8 @@ body:
         Esta solicitud es pública. Incluye sólo el identificador y una explicación sin datos personales sensibles.
         No adjuntes testimonios privados, documentos de identidad, teléfonos ni direcciones.
         El sistema reevaluará automáticamente la primera solicitud por noticia. Un mantenedor puede solicitar nuevas comprobaciones o retirar la noticia.
-        Para detalles sensibles, solicita primero un canal privado sin publicarlos aquí.
+        Para correcciones sensibles o retiradas, escribe directamente a [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me), atendido por @RauPro. No necesitas abrir un issue público. Primer contacto: sólo URL o ID público y descripción mínima, sin adjuntos personales.
+        Para vulnerabilidades técnicas usa el [reporte privado de GitHub](https://github.com/RauPro/MDH-SV/security/advisories/new).
   - type: input
     id: candidate_id
     attributes:
@@ -25,7 +26,7 @@ body:
     id: request_kind
     attributes:
       label: Tipo de solicitud
-      options: [Reevaluar datos, Corregir atribución o ubicación, Privacidad o retirada, Otro problema]
+      options: [Reevaluar datos, Corregir atribución o ubicación, Otro problema no sensible]
     validations:
       required: true
   - type: textarea
@@ -35,3 +36,10 @@ body:
       description: Indica el campo y el problema. La explicación no se ejecuta ni se incorpora automáticamente a la ficha.
     validations:
       required: true
+  - type: checkboxes
+    id: public_content
+    attributes:
+      label: Publicación de esta solicitud
+      options:
+        - label: Entiendo que será pública y no incluyo datos sensibles ni una solicitud privada de retirada.
+          required: true

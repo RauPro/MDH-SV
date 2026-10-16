@@ -4,7 +4,7 @@ Gemini se ejecuta en GitHub Actions del repositorio **privado**
 `RauPro/MDH-SV-review`. La web, la API REST y el MCP no reciben la clave ni llaman
 al modelo cuando una persona consulta el monitor. Las fichas de noticias se
 publican por campo después de validación automática; la intervención humana se
-reserva para solicitudes en GitHub. El catálogo de casos y las estadísticas
+dedica a solicitudes públicas no sensibles y al [canal editorial privado](PRIVATE-REPORTING.md). El catálogo de casos y las estadísticas
 oficiales conservan sus procesos de revisión humana separados.
 
 ## Configuración, horario y presupuesto
@@ -218,12 +218,12 @@ y decisiones de pertinencia pueden reducir la publicación efectiva.
 
 ## Solicitudes y correcciones humanas
 
-«Reportar un problema» abre la plantilla pública `news-correction.yml` con
+«Corrección pública no sensible» abre la plantilla `news-correction.yml` con
 identificador y versión. No adjunta campos de la ficha ni el artículo. La primera
 solicitud pública por noticia puede generar una reevaluación acotada; repeticiones
 y retiradas requieren un mantenedor autorizado. El contenido libre de la solicitud
 no se ejecuta ni se envía al modelo. Las decisiones persistentes y la procedencia
-se conservan en Git. No publique datos sensibles en un issue público.
+se conservan en Git. Las correcciones sensibles y retiradas se reciben por el [canal editorial privado](PRIVATE-REPORTING.md), sin exigir un issue al remitente. @RauPro tramita la solicitud y conserva sólo la decisión pública mínima; el mensaje y sus adjuntos no se envían al modelo ni se copian a Git.
 
 El workflow manual **Revisar noticia** y el importador continúan disponibles para
 correcciones editoriales solicitadas. La aprobación identifica a la persona,
