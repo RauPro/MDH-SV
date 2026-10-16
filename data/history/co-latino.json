@@ -275,30 +275,32 @@
     "2026-09": {
       "start_date": "2026-09-01",
       "end_date": "2026-09-30",
-      "status": "partial",
-      "last_attempt_at": "2026-10-16T04:29:00.123590+00:00",
+      "status": "enumerated",
+      "last_attempt_at": "2026-10-16T04:57:46.659120+00:00",
       "screen_version": 3,
-      "next_page": 2,
-      "pages_fetched": 1,
-      "posts_scanned": 100,
+      "next_page": 5,
+      "pages_fetched": 4,
+      "posts_scanned": 351,
       "invalid_posts": 0,
       "source_total_posts": 351,
       "source_total_pages": 4,
-      "error": null
+      "error": null,
+      "completed_at": "2026-10-16T04:57:46.659120+00:00"
     },
     "2026-10": {
       "start_date": "2026-10-01",
       "end_date": "2026-10-15",
-      "status": "partial",
-      "last_attempt_at": "2026-10-16T03:42:33.723490+00:00",
+      "status": "enumerated",
+      "last_attempt_at": "2026-10-16T04:57:46.659120+00:00",
       "screen_version": 3,
-      "next_page": 2,
-      "pages_fetched": 1,
-      "posts_scanned": 100,
+      "next_page": 3,
+      "pages_fetched": 2,
+      "posts_scanned": 166,
       "invalid_posts": 0,
-      "source_total_posts": 165,
+      "source_total_posts": 166,
       "source_total_pages": 2,
-      "error": null
+      "error": null,
+      "completed_at": "2026-10-16T04:57:46.659120+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3055,6 +3057,29 @@
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 420684,
         "retrieved_at": "2026-10-15T12:03:19.272972+00:00"
+      }
+    },
+    {
+      "id": "c8064f3e9753a82a415dabe55c9f74443c169f547408541d7bd14f20accc725b",
+      "title": "Del encarcelamiento injusto a la desprotección estatal, el calvario de Don Sabino Ramos tras recuperar su libertad",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/del-encarcelamiento-injusto-a-la-desproteccion-estatal-el-calvario-de-don-sabino-ramos-tras-recuperar-su-libertad/",
+      "published_date": "2026-10-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420734,
+        "retrieved_at": "2026-10-16T04:57:46.659120+00:00"
       }
     },
     {

@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T04:24:48.866119+00:00",
+  "generated_at": "2026-10-16T05:15:37.608486+00:00",
   "assessment_counts": {
-    "candidates": 11555,
-    "evaluated": 4887,
-    "relevant": 1732,
-    "excluded": 95,
-    "uncertain": 3060,
-    "pending": 6668
+    "candidates": 11707,
+    "evaluated": 4888,
+    "relevant": 1733,
+    "excluded": 103,
+    "uncertain": 3052,
+    "pending": 6819
   },
   "selections": [
     {
@@ -14718,9 +14718,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-15T23:13:01.933645-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8db3feef99bafc3ee334a79d74670ec97b6930afc0c4554a69ae71f2d2f2cb22",
           "jurisdiction_paragraph_ids": [
@@ -14728,7 +14728,8 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3"
+            "p3",
+            "p6"
           ]
         }
       }
@@ -15036,14 +15037,14 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-15T23:15:02.495172-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "51c204720d4b3f8a0c917540f962332a2a7a1689c83217551e16844cfb4f48af",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p7"
+            "p7",
+            "p8"
           ],
           "relevance_paragraph_ids": [
             "p7",
@@ -24158,9 +24159,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-15T23:14:47.324116-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "03eff88854cbaf22bbaaaa1869e9ecfdc041ed1a9b2bf591d824406548ad811b",
           "jurisdiction_paragraph_ids": [
@@ -24169,7 +24170,9 @@
           ],
           "relevance_paragraph_ids": [
             "p3",
-            "p6"
+            "p4",
+            "p6",
+            "p7"
           ]
         }
       }
@@ -39433,6 +39436,33 @@
             "p6",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c8064f3e9753a82a415dabe55c9f74443c169f547408541d7bd14f20accc725b",
+      "source_url": "https://www.diariocolatino.com/del-encarcelamiento-injusto-a-la-desproteccion-estatal-el-calvario-de-don-sabino-ramos-tras-recuperar-su-libertad/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T22:12:02.496372-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0c69a63df5c171c8234848513a6a29a1e065e8782d5669d6f8e88029d40f1ad1",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p9",
+            "p17"
           ]
         }
       }
