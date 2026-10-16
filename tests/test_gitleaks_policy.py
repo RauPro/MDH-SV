@@ -3,6 +3,7 @@
 import json
 import os
 import re
+import shutil
 import subprocess
 import tomllib
 from pathlib import Path
@@ -53,9 +54,11 @@ def test_policy_extends_defaults_and_limits_exceptions_to_exact_reviewed_fields_
 
 @pytest.fixture
 def engine_binary():
-    binary = os.environ.get("GITLEAKS_BIN")
+    binary = os.environ.get("GITLEAKS_BIN") or shutil.which("gitleaks")
     if not binary:
-        pytest.skip("Set GITLEAKS_BIN to the pinned engine to run integration cases")
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            pytest.fail("The pinned Gitleaks engine is required in GitHub Actions")
+        pytest.skip("Install gitleaks on PATH or set GITLEAKS_BIN to run integration cases")
     result = subprocess.run([binary, "version"], capture_output=True, check=True)
     assert result.stdout.decode().strip() == "8.30.1"
     return binary
