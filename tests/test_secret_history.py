@@ -187,6 +187,19 @@ def test_output_never_echoes_secret_path_or_context(repository, engine_binary, s
     assert "type=content" in output.out and "value withheld" in output.out
 
 
+def test_push_ref_names_are_scanned_without_changing_oid_scope(repository, engine_binary, secret, capsys):
+    value = git(repository, "rev-parse", "HEAD")
+    name = "refs/heads/" + secret
+    result = scan(repository, engine_binary, refs=[value], ref_names=[name])
+    assert result.commits == 1
+    assert any(item.oid == value and item.kind == "reference" for item in result.findings)
+    assert scanner.main(["--repo", str(repository), "--gitleaks", engine_binary,
+                         "--ref", value, "--ref-name", name]) == 1
+    output = capsys.readouterr()
+    assert secret not in output.out + output.err
+    assert name not in output.out + output.err
+
+
 def test_environment_disables_overrides_and_lazy_fetch(monkeypatch):
     for name in ("GIT_DIR", "GIT_CONFIG_COUNT", "GIT_TRACE", "GITLEAKS_CONFIG", "GITLEAKS_CONFIG_TOML"):
         monkeypatch.setenv(name, "untrusted")

@@ -243,7 +243,8 @@ def engine(binary: str, source: Path, *, mode: str, config: Path, scratch: Path,
 
 def scan(repo: Path, refs: list[str], *, binary: str, config: Path = CONFIG,
          require_root: str | None = None,
-         reject_ancestors: list[str] | None = None) -> ScanResult:
+         reject_ancestors: list[str] | None = None,
+         ref_names: list[str] | None = None) -> ScanResult:
     repo, config = repo.resolve(), config.resolve()
     env = environment()
     if not config.is_file() or not refs:
@@ -315,6 +316,12 @@ def scan(repo: Path, refs: list[str], *, binary: str, config: Path = CONFIG,
             name = f"{index}.ref"
             (metadata_dir / name).write_text(ref)
             mapping[name] = (value, "reference")
+        # A pre-push caller selects immutable OIDs, and separately supplies the
+        # source/destination names. Names never participate in object resolution.
+        for index, name in enumerate(ref_names or []):
+            path = f"name-{index}.ref"
+            (metadata_dir / path).write_text(name.replace("\x00", "\n"))
+            mapping[path] = (resolved[0], "reference")
         content_findings = engine(executable, isolated, mode="git", config=config,
                                   scratch=scratch, env=env, commits=commits,
                                   metadata=mapping, tips=tips)
@@ -337,6 +344,8 @@ def main(argv: list[str] | None = None) -> int:
         parser = SafeParser(description=__doc__)
         parser.add_argument("--repo", type=Path, default=Path.cwd())
         parser.add_argument("--ref", action="append", dest="refs")
+        parser.add_argument("--ref-name", action="append", default=[],
+                            help="Additional push reference name to scan as metadata only")
         parser.add_argument("--gitleaks", default=os.environ.get("GITLEAKS_BIN", "gitleaks"))
         parser.add_argument("--config", type=Path, default=CONFIG)
         parser.add_argument("--require-root")
@@ -344,7 +353,7 @@ def main(argv: list[str] | None = None) -> int:
         args = parser.parse_args(argv)
         result = scan(args.repo, args.refs or ["HEAD"], binary=args.gitleaks,
                       config=args.config, require_root=args.require_root,
-                      reject_ancestors=args.reject_ancestor)
+                      reject_ancestors=args.reject_ancestor, ref_names=args.ref_name)
         for finding in result.findings:
             print(f"Secret match: object={finding.oid} type={finding.kind} "
                   f"rule={finding.rule} line={finding.line}; value withheld.")
