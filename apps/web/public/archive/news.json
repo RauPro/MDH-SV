@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T16:08:10.264626+00:00",
+  "generated_at": "2026-10-16T16:20:07.337812+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11858,
-      "selected": 1749,
+      "selected": 1753,
       "evaluated": 4889,
-      "relevant": 1749,
+      "relevant": 1753,
       "excluded": 142,
-      "uncertain": 2998,
+      "uncertain": 2994,
       "pending": 6969,
-      "evaluated_at": "2026-10-16T15:15:23.334775+00:00"
+      "evaluated_at": "2026-10-16T16:20:05.643521+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1749,
+    "records": 1753,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1421,
+        "records": 1425,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -653,7 +653,7 @@
           {
             "month": "2014-02",
             "status": "enumerated",
-            "records": 23,
+            "records": 27,
             "screen_version": 3,
             "posts_scanned": 967,
             "source_total_posts": 967,
@@ -19239,12 +19239,12 @@
         "month": "2014-02",
         "start_date": "2014-02-01",
         "end_date": "2014-02-28",
-        "records": 25,
+        "records": 29,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 23
+            "records": 27
           },
           {
             "source_id": "gatoencerrado",
@@ -93049,7 +93049,7 @@
     },
     {
       "id": "182ec97f8b86c9798ba788e5bd4676918a0a2ccca0a14393ea2f95d6d0d3d159",
-      "title": "Procuradores de DDHH instan a Centroamérica a negociar con Estados Unidos plan migratorio",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -100937,6 +100937,98 @@
       }
     },
     {
+      "id": "bf420792997d425f6913db2fe3d070e4d406e501a5126f78599931ce627b1e90",
+      "title": "IEJES afirma que solicitud de habeas corpus de expresidente Flores es un distractor",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/iejes-afirma-que-solicitud-de-habeas-corpus-de-expresidente-flores-es-un-distractor/",
+      "published_date": "2014-02-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 5261,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T10:11:16.928259-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6b54c0d09c9edb12c1acc4a4690974dfde4c50b2a81db22ce0dfa89f42ae9149",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e7b3ab1ea4485ffcbe5c9fbfcc53a706388a9c0741beb9f9096df4b625590cc9",
+      "title": "Sala de lo Constitucional recibe hábeas corpus en nombre de Francisco Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-de-lo-constitucional-recibe-habeas-corpus-en-nombre-de-francisco-flores-2/",
+      "published_date": "2014-02-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 4996,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T10:11:16.928259-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "489871304c37adc1579310ae9c6ae96f261a680cbc5180c4f5096f4d86bf2f83",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "id": "c558aa203908d00348772f4bd5b19fb4529586b2fc56d60ae3551ee135841bb3",
       "title": "PDDH pide investigación a director de PNC y fiscal por detención de director de Diario Co Latino",
       "title_truncated": false,
@@ -100976,6 +101068,98 @@
           "relevance_paragraph_ids": [
             "p2",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "be58ab3e164fd78abd1bded5bdb807e1b253ba9208e52f8d9c0489c9040600d3",
+      "title": "Comerciantes de plaza San Vicente de Paúl temerosos por amenaza de desalojo San Salvador",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/comerciantes-de-plaza-san-vicente-de-paul-temerosos-por-amenaza-de-desalojo-san-salvador/",
+      "published_date": "2014-02-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 4856,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T10:11:16.928259-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6505ae7e406a50efee9d72100910695fc9f135b1fb8226f24e35483a05fbc8f2",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2d15a3932bc125132abf5df788a277cf5af521fbf1e6f206d7877dd63accd2ea",
+      "title": "Sala de lo Constitucional recibe hábeas corpus en nombre de Francisco Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-de-lo-constitucional-recibe-habeas-corpus-en-nombre-de-francisco-flores/",
+      "published_date": "2014-02-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 4816,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T10:11:16.928259-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1602f1cdf21f01621ec11cdd72782b034527fa7180ee76c18ea483f0604a404d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
           ]
         }
       }

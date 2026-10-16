@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T15:15:23.334775+00:00",
+  "generated_at": "2026-10-16T16:20:05.643521+00:00",
   "assessment_counts": {
     "candidates": 11858,
     "evaluated": 4889,
-    "relevant": 1749,
+    "relevant": 1753,
     "excluded": 142,
-    "uncertain": 2998,
+    "uncertain": 2994,
     "pending": 6969
   },
   "selections": [
@@ -8383,6 +8383,34 @@
             "p4",
             "p5",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2d15a3932bc125132abf5df788a277cf5af521fbf1e6f206d7877dd63accd2ea",
+      "source_url": "https://www.diariocolatino.com/sala-de-lo-constitucional-recibe-habeas-corpus-en-nombre-de-francisco-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T10:11:16.928259-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1602f1cdf21f01621ec11cdd72782b034527fa7180ee76c18ea483f0604a404d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
           ]
         }
       }
@@ -37794,6 +37822,34 @@
       }
     },
     {
+      "candidate_id": "be58ab3e164fd78abd1bded5bdb807e1b253ba9208e52f8d9c0489c9040600d3",
+      "source_url": "https://www.diariocolatino.com/comerciantes-de-plaza-san-vicente-de-paul-temerosos-por-amenaza-de-desalojo-san-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T10:11:16.928259-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6505ae7e406a50efee9d72100910695fc9f135b1fb8226f24e35483a05fbc8f2",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "be8419968d68e90b7b72805204dd2dcc13da724e6628f7721a24240b813084ec",
       "source_url": "https://www.diariocolatino.com/la-anep-y-sindicalistas-mienten-ante-la-organizacion-internacional-del-trabajo-oit/",
       "publisher": "Diario Co Latino",
@@ -37900,6 +37956,35 @@
           "relevance_paragraph_ids": [
             "p1",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "bf420792997d425f6913db2fe3d070e4d406e501a5126f78599931ce627b1e90",
+      "source_url": "https://www.diariocolatino.com/iejes-afirma-que-solicitud-de-habeas-corpus-de-expresidente-flores-es-un-distractor/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T10:11:16.928259-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6b54c0d09c9edb12c1acc4a4690974dfde4c50b2a81db22ce0dfa89f42ae9149",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7",
+            "p12"
           ]
         }
       }
@@ -44723,6 +44808,35 @@
           "relevance_paragraph_ids": [
             "p2",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e7b3ab1ea4485ffcbe5c9fbfcc53a706388a9c0741beb9f9096df4b625590cc9",
+      "source_url": "https://www.diariocolatino.com/sala-de-lo-constitucional-recibe-habeas-corpus-en-nombre-de-francisco-flores-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T10:11:16.928259-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "489871304c37adc1579310ae9c6ae96f261a680cbc5180c4f5096f4d86bf2f83",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p6",
+            "p9"
           ]
         }
       }
