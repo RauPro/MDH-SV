@@ -26,7 +26,7 @@ jobs:
         run: python scripts/install_gitleaks.py --destination "$RUNNER_TEMP/mdh-gitleaks" >> "$GITHUB_PATH"
       - name: Check complete publishable history for secrets
         run: python scripts/publication_guard.py check --ref HEAD
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm
