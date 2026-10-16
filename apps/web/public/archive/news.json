@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T13:17:10.123511+00:00",
+  "generated_at": "2026-10-16T14:17:52.433388+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11858,
-      "selected": 1739,
+      "selected": 1742,
       "evaluated": 4889,
-      "relevant": 1739,
-      "excluded": 135,
-      "uncertain": 3015,
+      "relevant": 1742,
+      "excluded": 142,
+      "uncertain": 3005,
       "pending": 6969,
-      "evaluated_at": "2026-10-16T13:17:07.425521+00:00"
+      "evaluated_at": "2026-10-16T14:17:50.193747+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1739,
+    "records": 1742,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1412,
+        "records": 1414,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -641,7 +641,7 @@
           {
             "month": "2014-01",
             "status": "enumerated",
-            "records": 14,
+            "records": 16,
             "screen_version": 3,
             "posts_scanned": 1010,
             "source_total_posts": 1010,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 214,
+        "records": 215,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15212,7 +15212,7 @@
           {
             "month": "2013-08",
             "status": "partial",
-            "records": 2,
+            "records": 3,
             "screen_version": 3,
             "posts_scanned": 38,
             "source_total_posts": null,
@@ -18981,7 +18981,7 @@
         "month": "2013-08",
         "start_date": "2013-08-01",
         "end_date": "2013-08-31",
-        "records": 2,
+        "records": 3,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19016,7 +19016,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 3
           }
         ]
       },
@@ -19196,12 +19196,12 @@
         "month": "2014-01",
         "start_date": "2014-01-01",
         "end_date": "2014-01-31",
-        "records": 14,
+        "records": 16,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 14
+            "records": 16
           },
           {
             "source_id": "gatoencerrado",
@@ -91407,18 +91407,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:10:10.186200-06:00",
+        "classified_at": "2026-10-16T08:16:58.353630-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4534a4f8fdab07bb1d6191c38771ee1976a93bd9759b35f4fe8ce05932abdb41",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p7"
+            "p2"
           ]
         }
       }
@@ -101456,6 +101454,55 @@
       }
     },
     {
+      "id": "eeba0be4475bd97cdd4d4bba1ad7e1437ee13654b91a05479802b9009931a761",
+      "title": "FGR presentará acusación contra dos pandilleros por homicidio de madre de subinspector del 911",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-presentara-acusacion-contra-dos-pandilleros-por-homicidio-de-madre-de-subinspector-del-911/",
+      "published_date": "2014-01-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 1918,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T08:09:42.956957-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f4a97ac3215168ca58efc0ba1474e9f39af2903eac6f1839ed544166a099fcec",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "id": "24f3edaca68ccb1c0ac8234bbd4e0e9e5032840a9bb61671246c5da18eb10dc3",
       "title": "Útiles escolares con precios más bajos que el año pasado, según sondeo de la Defensoría",
       "title_truncated": false,
@@ -101592,6 +101639,51 @@
           "relevance_paragraph_ids": [
             "p10",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a846e33fee9b46233f31920873bee2cd2981bfafc168c630eb2212e7d5a51ebc",
+      "title": "Sondeo de precios escolares realiza Defensoría del Consumidor",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sondeo-de-precios-escolares-realiza-defensoria-del-consumidor/",
+      "published_date": "2014-01-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 1417,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T08:09:42.956957-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b4e9b795bf59523a5b7d3d6f4d2797e0b1c9f3456d11c4591032dbcd1155245e",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -102353,6 +102445,48 @@
             "p1",
             "p6",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2b9f3cc079cbf8f6b2aaafbe8b65250e656b3a6c794917b49d8ffeedf24509d9",
+      "title": "Alberto Salcedo Ramos: “Los periodistas son perezosos para leer”",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/113013/alberto-salcedo-ramos-los-periodistas-son-perezosos-para-leer.html",
+      "published_date": "2013-08-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T14:10:44.252970+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8deb131e973b752ba8ff49af9e0dcb078111f06eeca027face6a206f5fc95806",
+          "jurisdiction_paragraph_ids": [
+            "p31"
+          ],
+          "relevance_paragraph_ids": [
+            "p31"
           ]
         }
       }
