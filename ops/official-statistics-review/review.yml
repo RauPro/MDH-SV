@@ -38,23 +38,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: RauPro/MDH-SV
           ref: MDH_PUBLIC_CODE_REF
           path: monitor
           persist-credentials: false
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: RauPro/MDH-SV
           ref: main
           path: baseline
           sparse-checkout: data/official-statistics
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: '3.13'
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
       - name: Instalar dependencias fijadas
@@ -69,7 +69,7 @@ jobs:
           --output "$RUNNER_TEMP/official-statistics-approved"
           --schema-validator monitor/shared/official-statistics.mjs
           --baseline baseline/data/official-statistics/homicides.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: github.event.inputs.decision == 'approve'
         with:
           name: estadisticas-oficiales-aprobadas

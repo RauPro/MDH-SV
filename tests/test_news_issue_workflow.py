@@ -1,6 +1,6 @@
 """Issue reconciliation uses existing decisions and cannot publish or call a model."""
-from pathlib import Path
 import re
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -53,7 +53,7 @@ def test_reconciliation_pins_code_without_model_or_public_write_credentials():
     # Contents writes are only for the durable private reconciliation allowance.
     assert value["permissions"] == {"contents": "write", "issues": "write"}
     steps = value["jobs"]["reconcile"]["steps"]
-    checkouts = {step["with"]["path"]: step["with"] for step in steps if step.get("uses") == "actions/checkout@v4"}
+    checkouts = {step["with"]["path"]: step["with"] for step in steps if step.get("uses", "").split("@", 1)[0] == "actions/checkout"}
     assert checkouts["monitor"]["repository"] == checkouts["publication"]["repository"] == "RauPro/MDH-SV"
     assert checkouts["monitor"]["ref"] == "MDH_PUBLIC_CODE_REF"
     assert checkouts["inbox"]["ref"] == checkouts["publication"]["ref"] == "main"

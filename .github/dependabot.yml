@@ -11,6 +11,8 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
   - package-ecosystem: github-actions
+    # This covers live public workflows; mirror updates into ops/ and the
+    # private installation using docs/GITHUB-ACTIONS.md before closing the work.
     directory: /
     schedule:
       interval: monthly

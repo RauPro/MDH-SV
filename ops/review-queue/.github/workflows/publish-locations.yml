@@ -50,26 +50,26 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: RauPro/MDH-SV
           ref: MDH_PUBLIC_CODE_REF
           path: monitor
           persist-credentials: false
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: main
           path: inbox
           persist-credentials: false
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: '3.13'
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
       - name: Instalar entorno fijado
         run: pip install -r monitor/ops/review-queue/requirements.txt
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: RauPro/MDH-SV
           ref: main
@@ -154,7 +154,7 @@ jobs:
         if: inputs.validation_only != true
         # Only bounded source-check receipts are cached in this private workflow.
         # No source bodies, quotations, personal fields or full drafts enter it.
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         id: source-location-cache
         continue-on-error: true
         with:
@@ -177,7 +177,7 @@ jobs:
           node monitor/apps/web/scripts/check-data.mjs --root publication
           python -m mdh_pipeline.publication_snapshot pack --repository publication --output public-snapshot
       - name: Transferir el snapshot validado al publicador aislado
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: public-news-snapshot-${{ github.run_id }}-${{ github.run_attempt }}
           path: public-snapshot/
@@ -185,7 +185,7 @@ jobs:
           retention-days: 1
       - name: Conservar comprobaciones de fuentes sin cuerpos ni datos personales
         if: inputs.validation_only != true
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         continue-on-error: true
         with:
           path: .source-location-cache/source-checks.json
@@ -197,23 +197,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: RauPro/MDH-SV
           ref: MDH_PUBLIC_CODE_REF
           path: monitor
           persist-credentials: false
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: '3.13'
       - name: Instalar detector de secretos desde código aprobado
         run: python monitor/scripts/install_gitleaks.py --destination "$RUNNER_TEMP/mdh-gitleaks" >> "$GITHUB_PATH"
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
       - name: Instalar validador fijado
         run: pip install -r monitor/ops/review-queue/requirements.txt
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: RauPro/MDH-SV
           ref: ${{ needs.publish.outputs.base_sha }}
@@ -225,7 +225,7 @@ jobs:
         # Fetch complete objects first so the offline history scan cannot skip any.
         run: git -C publication sparse-checkout set --no-cone '/data/' '/apps/web/public/'
       - name: Descargar exclusivamente el snapshot de esta ejecución
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: public-news-snapshot-${{ github.run_id }}-${{ github.run_attempt }}
           path: public-snapshot

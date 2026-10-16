@@ -1,5 +1,6 @@
 """Scheduled statistics detection must never become an automatic public writer."""
 from pathlib import Path
+
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,7 +30,7 @@ def test_templates_pin_code_and_have_no_public_push_or_model_secret():
     for name in ['monitor.yml', 'review.yml']:
         value = workflow(name)
         job = next(iter(value['jobs'].values()))
-        checkouts = [s['with'] for s in job['steps'] if s.get('uses') == 'actions/checkout@v4']
+        checkouts = [s['with'] for s in job['steps'] if s.get('uses', '').split('@', 1)[0] == 'actions/checkout']
         assert next(s for s in checkouts if s['path'] == 'monitor')['ref'] == 'MDH_PUBLIC_CODE_REF'
         assert next(s for s in checkouts if s['path'] == 'baseline')['sparse-checkout'] == 'data/official-statistics'
         assert all(s['persist-credentials'] == 'false' for s in checkouts)
