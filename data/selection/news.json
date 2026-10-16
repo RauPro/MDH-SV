@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T18:17:41.991891+00:00",
+  "generated_at": "2026-10-16T19:17:54.345769+00:00",
   "assessment_counts": {
     "candidates": 12010,
     "evaluated": 4889,
-    "relevant": 1756,
-    "excluded": 150,
-    "uncertain": 2983,
+    "relevant": 1758,
+    "excluded": 158,
+    "uncertain": 2973,
     "pending": 7121
   },
   "selections": [
@@ -2126,9 +2126,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T13:15:08.165617-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "7f5892021e2512032b533791a6ac63a6720099dda46dc1b916f0394cca1b794a",
           "jurisdiction_paragraph_ids": [
@@ -11147,19 +11147,24 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T13:16:50.333521-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "048e75712cac3a6d29e9fc792ed0ed21ffb7b78c12225f6d975d5ab1984051f0",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p7"
+            "p1"
           ],
           "relevance_paragraph_ids": [
             "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5",
             "p7",
-            "p9"
+            "p15",
+            "p16",
+            "p22"
           ]
         }
       }
@@ -11175,19 +11180,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T13:17:14.730374-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "03c63b0b4aa8464c94b5d7e4dced9965a1654be3b87f405ea6c1be506d3cd989",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p8"
+            "p4"
           ]
         }
       }
@@ -22952,6 +22955,38 @@
           "relevance_paragraph_ids": [
             "p2",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "742c4dd7c86b8d07808526fba622c4ecc4072ca1f31610e3dc2f9c16da93894a",
+      "source_url": "https://www.diariocolatino.com/pandilleros-figuran-como-victimas-de-ultimos-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T13:09:52.912299-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8c044969b7d04097095d1a08df3e7a4daf9863436d6af6fc3289e533b71d921a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -41030,6 +41065,32 @@
           ],
           "relevance_paragraph_ids": [
             "p16"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "cf71cc23d378e58eb783cbd5704eadaa6392dc395034311e1a435f0be839f0ea",
+      "source_url": "https://www.diariocolatino.com/tse-sanciona-a-fusades-por-violacion-al-codigo-electoral/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T13:09:52.912299-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "514f8375049c124da0c6cabb8f4ed3492b24c56e5399cc14d0a712d897cff186",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
           ]
         }
       }
