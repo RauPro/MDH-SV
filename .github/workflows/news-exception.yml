@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   apply:
-    if: github.repository == 'RauPro/MDH-SV' && github.event.sender.type == 'User' && contains(fromJSON('["news/withdraw","news/restore","news/recheck"]'), github.event.label.name)
+    if: vars.MDH_AUTOMATION_ENABLED == 'true' && github.repository == 'RauPro/MDH-SV' && github.event.sender.type == 'User' && contains(fromJSON('["news/withdraw","news/restore","news/recheck"]'), github.event.label.name)
     permissions:
       contents: write
       issues: read

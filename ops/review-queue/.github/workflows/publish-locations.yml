@@ -38,7 +38,7 @@ jobs:
     # A failed extractor may have already saved valid batches. Revalidate those
     # main-branch documents; never consume failed-run code, logs or artifacts.
     if: >-
-      github.event.repository.private == true && github.ref == 'refs/heads/main' &&
+      vars.MDH_AUTOMATION_ENABLED == 'true' && github.repository == 'RauPro/MDH-SV-review' && github.event.repository.private == true && github.ref == 'refs/heads/main' &&
       (github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'workflow_run' &&
       github.event.workflow_run.head_branch == 'main' &&
@@ -193,6 +193,7 @@ jobs:
   propose:
     name: Proponer snapshot público en una rama sin acceso a borradores
     needs: publish
+    if: vars.MDH_AUTOMATION_ENABLED == 'true' && github.repository == 'RauPro/MDH-SV-review' && github.event.repository.private == true && github.ref == 'refs/heads/main'
     permissions: {}
     runs-on: ubuntu-latest
     timeout-minutes: 10

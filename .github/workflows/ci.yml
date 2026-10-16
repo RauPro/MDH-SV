@@ -40,6 +40,7 @@ jobs:
           python -m pip check
       - name: Validate data, MCP and private publication boundary
         run: |
+          python scripts/configure_instance.py --check
           python scripts/audit_release.py
           pytest -q
           python -m mdh_pipeline.publication

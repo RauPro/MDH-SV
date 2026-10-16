@@ -1,11 +1,17 @@
 """Production must have one hourly classification owner and preserve human exclusions."""
-from pathlib import Path
+import json
 import re
+from pathlib import Path
 from types import SimpleNamespace
+
 import pytest
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1] / 'ops/review-queue/.github/workflows'
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+ROOT = PROJECT_ROOT / 'ops/review-queue/.github/workflows'
+INSTANCE = json.loads((PROJECT_ROOT / 'instance.json').read_text())
+PUBLIC_REPOSITORY = INSTANCE['public_repository']
+PRIVATE_REPOSITORY = INSTANCE['private_repository']
 
 
 def workflow(name):
@@ -87,17 +93,18 @@ def test_geographic_source_checks_remain_separate_from_budgeted_dossier_evaluati
 
 def publisher_allowed(*, conclusion='success', name='Preparar fichas con Gemini',
                       path='.github/workflows/extract.yml', head_branch='main',
-                      head_repository='RauPro/MDH-SV-review', private=True,
-                      ref='refs/heads/main', event_name='workflow_run'):
+                      head_repository=PRIVATE_REPOSITORY, private=True,
+                      ref='refs/heads/main', event_name='workflow_run',
+                      repository=PRIVATE_REPOSITORY, automation='true'):
     run = SimpleNamespace(conclusion=conclusion, name=name, path=path,
                           head_branch=head_branch, head_repository=SimpleNamespace(full_name=head_repository))
     github = SimpleNamespace(event=SimpleNamespace(repository=SimpleNamespace(private=private), workflow_run=run),
-                             ref=ref, event_name=event_name, repository='RauPro/MDH-SV-review')
+                             ref=ref, event_name=event_name, repository=repository)
     # Evaluate this repository-owned boolean gate, never event data as code.
     condition = workflow('publish-locations.yml')['jobs']['publish']['if']
     condition = condition.replace('&&', ' and ').replace('||', ' or ')
-    condition = re.sub(r'\btrue\b', 'True', condition)
-    return eval(condition, {'__builtins__': {}}, {'github': github})
+    condition = condition.replace(' == true', ' == True')
+    return eval(condition, {'__builtins__': {}}, {'github': github, 'vars': SimpleNamespace(MDH_AUTOMATION_ENABLED=automation.casefold())})
 
 
 def test_validated_partial_extractor_results_publish_without_hiding_the_run_failure():
@@ -124,6 +131,8 @@ def test_validated_partial_extractor_results_publish_without_hiding_the_run_fail
     {'conclusion': 'failure', 'path': '.github/workflows/other.yml'},
     {'head_branch': 'untrusted'}, {'head_repository': 'another/fork'},
     {'private': False}, {'ref': 'refs/heads/untrusted'}, {'event_name': 'push'},
+    {'repository': 'another/private-repo'},
+    {'automation': ''}, {'automation': 'false'}, {'automation': 'yes'},
 ])
 def test_partial_publication_does_not_relax_other_event_or_repository_boundaries(changes):
     assert not publisher_allowed(**changes)
@@ -170,7 +179,7 @@ def test_publication_key_is_isolated_from_private_data_and_can_only_propose_a_br
     steps = propose['steps']
     checkouts = [s['with'] for s in steps if s.get('uses', '').startswith('actions/checkout@')]
     assert {s['path'] for s in checkouts} == {'monitor', 'publication'}
-    assert all(s['repository'] == 'RauPro/MDH-SV' for s in checkouts)
+    assert all(s['repository'] == PUBLIC_REPOSITORY for s in checkouts)
     assert next(s for s in checkouts if s['path'] == 'monitor')['ref'] == 'MDH_PUBLIC_CODE_REF'
     public = next(s for s in checkouts if s['path'] == 'publication')
     assert public['ref'] == '${{ needs.publish.outputs.base_sha }}'

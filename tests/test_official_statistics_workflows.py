@@ -1,9 +1,11 @@
 """Scheduled statistics detection must never become an automatic public writer."""
+import json
 from pathlib import Path
 
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+INSTANCE = json.loads((ROOT / "instance.json").read_text())
 
 
 def workflow(name):
@@ -16,7 +18,7 @@ def test_daily_statistics_worker_has_only_private_queue_access():
     assert set(value['on']) == {'schedule', 'workflow_dispatch'}
     assert value['permissions'] == {'contents': 'write', 'issues': 'write'}
     job = value['jobs']['monitor']
-    assert "github.repository == 'RauPro/MDH-SV-review'" in job['if']
+    assert f"github.repository == '{INSTANCE['private_repository']}'" in job['if']
     assert 'github.event.repository.private == true' in job['if']
     assert "github.ref == 'refs/heads/main'" in job['if']
     collector = next(s for s in job['steps'] if s.get('id') == 'collect')

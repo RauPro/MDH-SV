@@ -27,7 +27,7 @@ jobs:
     # A publisher can push valid data before a later step fails. Reconciliation
     # reads the actual production datasets, never run artifacts or failed code.
     if: >-
-      github.repository == 'RauPro/MDH-SV-review' &&
+      vars.MDH_AUTOMATION_ENABLED == 'true' && github.repository == 'RauPro/MDH-SV-review' &&
       github.event.repository.private == true && github.ref == 'refs/heads/main' &&
       (github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'workflow_run' &&

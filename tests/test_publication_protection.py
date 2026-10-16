@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+INSTANCE = json.loads((ROOT / "instance.json").read_text())
 
 EXPECTED_GENERATED = {
     "data/history/co-latino.json", "data/history/gatoencerrado.json",
@@ -18,7 +19,7 @@ EXPECTED_GENERATED = {
 def test_only_exact_generated_paths_are_exempt_from_code_owner_review():
     lines = [line.split() for line in (ROOT / ".github/CODEOWNERS").read_text().splitlines()
              if line.strip() and not line.lstrip().startswith("#")]
-    assert lines[0] == ["*", "@RauPro"]
+    assert lines[0] == ["*", INSTANCE["reporting_responsible"]]
     assert all(len(line) == 1 and line[0].startswith("/") for line in lines[1:])
     assert {line[0][1:] for line in lines[1:]} == EXPECTED_GENERATED
     assert len(lines) == len(EXPECTED_GENERATED) + 1

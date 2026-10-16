@@ -34,7 +34,7 @@ concurrency:
   queue: max
 jobs:
   extract:
-    if: github.event.repository.private == true && github.ref == 'refs/heads/main'
+    if: vars.MDH_AUTOMATION_ENABLED == 'true' && github.repository == 'RauPro/MDH-SV-review' && github.event.repository.private == true && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:

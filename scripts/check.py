@@ -88,6 +88,7 @@ def check(root: Path = ROOT, *, audit: bool = False) -> None:
     commands = [
         [str(python), "-m", "pip", "check"],
         [str(python), "scripts/publication_guard.py", "check", "--ref", "HEAD"],
+        [str(python), "scripts/configure_instance.py", "--check"],
         [str(python), "scripts/audit_release.py"],
         [str(python), "-m", "pytest", "-q"],
     ]
