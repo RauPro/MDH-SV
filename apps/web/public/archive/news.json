@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T23:19:32.301694+00:00",
+  "generated_at": "2026-10-16T23:27:26.657362+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12165,
-      "selected": 1765,
+      "selected": 1766,
       "evaluated": 4889,
-      "relevant": 1765,
-      "excluded": 174,
-      "uncertain": 2950,
+      "relevant": 1766,
+      "excluded": 182,
+      "uncertain": 2941,
       "pending": 7276,
-      "evaluated_at": "2026-10-16T22:16:58.301033+00:00"
+      "evaluated_at": "2026-10-16T23:27:23.490673+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1765,
+    "records": 1766,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1435,
+        "records": 1436,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -665,7 +665,7 @@
           {
             "month": "2014-03",
             "status": "enumerated",
-            "records": 23,
+            "records": 24,
             "screen_version": 3,
             "posts_scanned": 1028,
             "source_total_posts": 1028,
@@ -19282,12 +19282,12 @@
         "month": "2014-03",
         "start_date": "2014-03-01",
         "end_date": "2014-03-31",
-        "records": 26,
+        "records": 27,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 23
+            "records": 24
           },
           {
             "source_id": "gatoencerrado",
@@ -89887,9 +89887,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:03.064204-06:00",
+        "classified_at": "2026-10-16T17:16:23.211419-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ce7e7f2f2c71f782a6cf45dcb53323ffbaefa569b178263ab97551df04793e77",
           "jurisdiction_paragraph_ids": [
@@ -89897,8 +89897,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p7"
+            "p3"
           ]
         }
       }
@@ -89980,20 +89979,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T17:16:08.111028-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "fc2d1bbc5e1098ee3b47c86c7634b736035b7643ce74e94c4892bed35c5bdc00",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p6",
-            "p8"
+            "p5"
           ]
         }
       }
@@ -90026,18 +90022,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T17:14:22.398126-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c6e5343a78e40656d3fd3f861e7956361473752ff0513fe605b226dd8af4abad",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p3",
+            "p6"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ]
         }
       }
@@ -90070,20 +90065,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T17:14:07.662649-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "95fb971902ca3354a3d3f2fcd094873b23d124bafac34b3181080d9e2cb0ae6e",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p9"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p6",
-            "p9",
-            "p12"
+            "p8"
           ]
         }
       }
@@ -99280,6 +99271,52 @@
           "relevance_paragraph_ids": [
             "p1",
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a5ddd31b424e8c3aa53140ed066b58f9f7f7845a2812b9e3dcd415de23e04e11",
+      "title": "Autoridades confirman fin de semana con 25 homicidios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/autoridades-confirman-fin-de-semana-con-25-homicidios/",
+      "published_date": "2014-03-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 10004,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T17:09:34.611564-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b68ad2ea0b5e165eb6949e07eab89472f1d2e30019c9bcd33d2ce995ff3b3aa5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p7"
           ]
         }
       }
