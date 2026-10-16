@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T06:15:24.042798+00:00",
+  "generated_at": "2026-10-16T07:17:36.573054+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11707,
-      "selected": 1733,
+      "selected": 1734,
       "evaluated": 4888,
-      "relevant": 1733,
-      "excluded": 111,
-      "uncertain": 3044,
+      "relevant": 1734,
+      "excluded": 119,
+      "uncertain": 3035,
       "pending": 6819,
-      "evaluated_at": "2026-10-16T06:15:21.496000+00:00"
+      "evaluated_at": "2026-10-16T07:17:34.669093+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1733,
+    "records": 1734,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 211,
+        "records": 212,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15236,7 +15236,7 @@
           {
             "month": "2013-10",
             "status": "partial",
-            "records": 4,
+            "records": 5,
             "screen_version": 3,
             "posts_scanned": 32,
             "source_total_posts": null,
@@ -19067,7 +19067,7 @@
         "month": "2013-10",
         "start_date": "2013-10-01",
         "end_date": "2013-10-31",
-        "records": 4,
+        "records": 5,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19102,7 +19102,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 4
+            "records": 5
           }
         ]
       },
@@ -92643,19 +92643,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T01:16:52.687219-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "29a289d0b63f9417dea02df06bd9eb0e7a6b6b448d05b5817630605aa2b724ff",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p6",
-            "p7"
+            "p3"
           ]
         }
       }
@@ -92688,18 +92685,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T01:16:35.488879-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4b4e21101eb36425a4a5e34441eab138867d1fe63a3596726bc5d30d933b1154",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ]
         }
       }
@@ -92732,19 +92727,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T01:14:51.146737-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c4a924d9260e10498c4f5fb8027fcd0bdab8a546caa7e60fba36099f92cbdf6e",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p8"
+            "p8",
+            "p15"
           ]
         }
       }
@@ -93307,9 +93301,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:14:20.019937-06:00",
+        "classified_at": "2026-10-16T01:12:51.826702-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a6ef1f32aa456a9b558bfc1817925786f2f59e524c42a26a615138f200c7c673",
           "jurisdiction_paragraph_ids": [
@@ -93317,8 +93311,8 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p26",
-            "p27"
+            "p17",
+            "p26"
           ]
         }
       }
@@ -101904,6 +101898,53 @@
           "relevance_paragraph_ids": [
             "p1",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "aa2645e1b42f8c57e21c7518aae0520ab9fd4ce2e675b961671448b4ca2e707d",
+      "title": "Capturan a monja salvadoreña con 15 mil dólares, Honduras",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/114633/capturan-a-monja-salvadorena-con-15-mil-dolares-honduras.html",
+      "published_date": "2013-10-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "honduras",
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T01:09:44.224862-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0a3336cb073bcd5e2b5e04fdbc075b03e5b77f4f04b21bd33c887e55b1b981df",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p6"
           ]
         }
       }
