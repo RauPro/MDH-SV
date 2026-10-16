@@ -57,6 +57,9 @@ class GitHubFake:
         self.first_ref_reads = 0
         self.mergeability_delay = 0
         self.mergeability_reads = 0
+        self.dispatch_response = {"workflow_run_id": 92}
+        self.dispatched_run_changes = {}
+        self.run_sequences = {}
 
     def add_file(self, commit, path, content, *, mode="100644", kind="blob"):
         import hashlib
@@ -69,7 +72,14 @@ class GitHubFake:
         self.calls.append((method, path, deepcopy(payload)))
         path = path.removeprefix(f"/repos/{publication.REPOSITORY}/")
         if method == "GET" and path.startswith("actions/runs/"):
-            return deepcopy(self.runs[int(path.split("/")[-1])])
+            identifier = int(path.split("/")[-1])
+            sequence = self.run_sequences.get(identifier)
+            if sequence:
+                result = sequence.pop(0) if len(sequence) > 1 else sequence[0]
+                if isinstance(result, Exception):
+                    raise result
+                self.runs[identifier] = deepcopy(result)
+            return deepcopy(self.runs[identifier])
         if method == "GET" and path.startswith("git/ref/heads/"):
             branch = path.removeprefix("git/ref/heads/")
             if branch == "main":
@@ -120,7 +130,12 @@ class GitHubFake:
             self.update_reads = 0
             return {"message": "Updating pull request branch."}
         if method == "POST" and path == "actions/workflows/ci.yml/dispatches":
-            assert payload == {"ref": self.branch}
+            assert payload == {"ref": self.branch, "return_run_details": True}
+            self.runs[92] = run(self.branch, self.head, identifier=92)
+            self.runs[92].update(deepcopy(self.dispatched_run_changes))
+            return self.dispatch_response
+        if method == "POST" and path == "actions/workflows/publication-pr.yml/dispatches":
+            assert payload == {"ref": "main", "inputs": {"ci_run_id": "92"}}
             return None
         raise AssertionError((method, path, payload))
 
@@ -147,7 +162,7 @@ def test_proposal_creates_bot_pr_and_explicitly_dispatches_ci(kind):
     client = GitHubFake(kind)
     client.pr = None
     assert publication.propose(client, client.branch, kind) == "proposed_and_ci_dispatched"
-    assert [path.rsplit("/", 1)[-1] for _, path, _ in client.writes()] == ["pulls", "dispatches"]
+    assert [path.rsplit("/", 1)[-1] for _, path, _ in client.writes()] == ["pulls", "dispatches", "dispatches"]
 
 
 def test_proposal_will_not_reuse_human_pr():
@@ -305,7 +320,7 @@ def test_behind_branch_waits_for_update_and_dispatches_new_ci(monkeypatch):
     client.update_delay = 2
     assert publication.control(client, client.event()) == "branch_updated_ci_dispatched"
     assert waits == [2, 2]
-    assert [path.rsplit("/", 1)[-1] for _, path, _ in client.writes()] == ["update-branch", "dispatches"]
+    assert [path.rsplit("/", 1)[-1] for _, path, _ in client.writes()] == ["update-branch", "dispatches", "dispatches"]
     assert client.head == UPDATED
 
 
@@ -402,3 +417,178 @@ def test_conflicting_json_is_never_resolved_by_overwriting():
     with pytest.raises(publication.PublicationError, match="publication_merge_conflict"):
         publication.control(client, client.event())
     assert not client.writes()
+
+
+@pytest.mark.parametrize("response", [None, {}, {"workflow_run_id": True},
+                                      {"workflow_run_id": "92"}, {"workflow_run_id": 0}])
+def test_dispatch_requires_exact_numeric_run_id_from_github(response):
+    client = GitHubFake()
+    client.dispatch_response = response
+    with pytest.raises(publication.PublicationError, match="ci_dispatch_missing_run_id"):
+        publication.dispatch(client, client.branch)
+    assert len(client.writes()) == 1
+
+
+@pytest.mark.parametrize("field,value", [
+    ("id", 93), ("head_sha", UPDATED), ("head_branch", "chore/automated-history-999-1"),
+    ("path", ".github/workflows/fake.yml"), ("actor", HUMAN), ("triggering_actor", HUMAN),
+    ("event", "push"), ("repository", {"full_name": "someone/fork"}),
+])
+def test_dispatch_reads_back_exact_ci_identity_before_arming_controller(field, value):
+    client = GitHubFake()
+    client.dispatched_run_changes[field] = value
+    with pytest.raises(publication.PublicationError):
+        publication.dispatch(client, client.branch)
+    assert len(client.writes()) == 1
+
+
+def test_dispatch_arms_controller_on_main_with_exact_returned_id():
+    client = GitHubFake()
+    publication.dispatch(client, client.branch)
+    assert client.writes()[-1] == (
+        "POST", publication.api("actions/workflows/publication-pr.yml/dispatches"),
+        {"ref": "main", "inputs": {"ci_run_id": "92"}},
+    )
+    assert ("GET", publication.api("actions/runs/92"), None) in client.calls
+
+
+def test_dispatched_run_readback_tolerates_only_bounded_visibility_delay(monkeypatch):
+    waits = []
+    monkeypatch.setattr(publication.time, "sleep", waits.append)
+    client = GitHubFake()
+    client.run_sequences[92] = [publication.PublicationError("github_get_failed_status_404"),
+                                run(client.branch, identifier=92)]
+    publication.dispatch(client, client.branch)
+    assert waits == [2]
+    assert len(client.writes()) == 2
+
+
+def test_dispatched_run_readback_does_not_hide_permission_failures(monkeypatch):
+    monkeypatch.setattr(publication.time, "sleep", lambda _: pytest.fail("unexpected retry"))
+    client = GitHubFake()
+    client.run_sequences[92] = [publication.PublicationError("github_get_failed_status_403")]
+    with pytest.raises(publication.PublicationError, match="403"):
+        publication.dispatch(client, client.branch)
+    assert len(client.writes()) == 1
+
+
+def dispatch_event(identifier="91"):
+    return {"repository": {"full_name": publication.REPOSITORY}, "inputs": {"ci_run_id": identifier}}
+
+
+def test_explicit_controller_waits_for_ci_then_reuses_all_merge_guards(monkeypatch):
+    waits = []
+    monkeypatch.setattr(publication.time, "sleep", waits.append)
+    client = GitHubFake()
+    complete = deepcopy(client.runs[91])
+    pending = dict(complete, status="in_progress", conclusion=None)
+    client.run_sequences[91] = [pending, pending, complete]
+    assert publication.control_dispatch(client, dispatch_event(), "refs/heads/main") == "merged_with_required_checks"
+    assert waits == [10, 10]
+    assert client.writes()[-1][2]["sha"] == HEAD
+
+
+@pytest.mark.parametrize("conclusion", ["failure", "cancelled", "timed_out", "action_required", "skipped"])
+def test_explicit_controller_never_promotes_unsuccessful_ci(conclusion):
+    client = GitHubFake()
+    client.runs[91]["conclusion"] = conclusion
+    with pytest.raises(publication.PublicationError, match="dispatched_ci_unsuccessful"):
+        publication.control_dispatch(client, dispatch_event(), "refs/heads/main")
+    assert not client.writes()
+
+
+def test_explicit_controller_ci_wait_is_bounded(monkeypatch):
+    waits = []
+    monkeypatch.setattr(publication.time, "sleep", waits.append)
+    monkeypatch.setattr(publication, "CI_WAIT_SECONDS", 20)
+    client = GitHubFake()
+    client.runs[91].update(status="queued", conclusion=None)
+    with pytest.raises(publication.PublicationError, match="dispatched_ci_wait_timeout"):
+        publication.control_dispatch(client, dispatch_event(), "refs/heads/main")
+    assert waits == [10, 10]
+    assert not client.writes()
+
+
+@pytest.mark.parametrize("identifier", [None, "", "0", "01", "-1", "1;echo injected", "9" * 21, 91, True])
+def test_explicit_controller_rejects_invalid_input_before_api_calls(identifier):
+    client = GitHubFake()
+    with pytest.raises(publication.PublicationError, match="invalid_dispatched_ci_run_id"):
+        publication.control_dispatch(client, dispatch_event(identifier), "refs/heads/main")
+    assert not client.calls
+
+
+@pytest.mark.parametrize("ref", ["main", "refs/heads/feat/hijack", "refs/tags/main", None])
+def test_explicit_controller_only_runs_on_default_branch(ref):
+    client = GitHubFake()
+    with pytest.raises(publication.PublicationError, match="requires_main"):
+        publication.control_dispatch(client, dispatch_event(), ref)
+    assert not client.calls
+
+
+@pytest.mark.parametrize("field,value", [("actor", HUMAN), ("triggering_actor", HUMAN),
+                                         ("id", 123), ("path", ".github/workflows/evil.yml")])
+def test_explicit_controller_authenticates_before_waiting(monkeypatch, field, value):
+    monkeypatch.setattr(publication.time, "sleep", lambda _: pytest.fail("unexpected wait"))
+    client = GitHubFake()
+    client.runs[91].update(status="queued", conclusion=None)
+    client.runs[91][field] = value
+    with pytest.raises(publication.PublicationError):
+        publication.control_dispatch(client, dispatch_event(), "refs/heads/main")
+    assert not client.writes()
+
+
+@pytest.mark.parametrize("field,value", [("head_sha", UPDATED), ("head_branch", "chore/automated-history-1-2"),
+                                         ("triggering_actor", HUMAN), ("id", 99)])
+def test_explicit_controller_revalidates_identity_on_each_poll(monkeypatch, field, value):
+    monkeypatch.setattr(publication.time, "sleep", lambda _: None)
+    client = GitHubFake()
+    pending = dict(client.runs[91], status="in_progress", conclusion=None)
+    changed = dict(client.runs[91])
+    changed[field] = value
+    client.run_sequences[91] = [pending, changed]
+    with pytest.raises(publication.PublicationError):
+        publication.control_dispatch(client, dispatch_event(), "refs/heads/main")
+    assert not client.writes()
+
+
+def test_explicit_controller_discards_stale_candidate_without_waiting(monkeypatch):
+    monkeypatch.setattr(publication.time, "sleep", lambda _: pytest.fail("unexpected wait"))
+    client = GitHubFake()
+    client.head = UPDATED
+    client.runs[91].update(status="queued", conclusion=None)
+    assert publication.control_dispatch(client, dispatch_event(), "refs/heads/main") == "ignored_stale_ci_head"
+    assert not client.writes()
+
+
+def test_explicit_controller_still_enforces_full_tree_allowlist():
+    client = GitHubFake()
+    client.add_file(HEAD, ".github/workflows/ci.yml", b'{}')
+    with pytest.raises(publication.PublicationError, match="outside_allowlist"):
+        publication.control_dispatch(client, dispatch_event(), "refs/heads/main")
+    assert not client.writes()
+
+
+def test_cli_dispatch_uses_event_file_not_shell_interpolation(monkeypatch, tmp_path):
+    client = GitHubFake()
+    event = tmp_path / "event.json"
+    event.write_text(json.dumps(dispatch_event()))
+    monkeypatch.setenv("GITHUB_REPOSITORY", publication.REPOSITORY)
+    monkeypatch.setenv("GITHUB_EVENT_NAME", "workflow_dispatch")
+    monkeypatch.setenv("GITHUB_REF", "refs/heads/main")
+    monkeypatch.setenv("GITHUB_EVENT_PATH", str(event))
+    monkeypatch.setattr(publication, "GitHub", lambda _: client)
+    assert publication.main([]) == 0
+    assert client.writes()[-1][1].endswith("/merge")
+
+
+def test_controller_workflow_has_bounded_default_branch_dispatch_and_queue():
+    from pathlib import Path
+    import yaml
+    document = yaml.load((Path(__file__).resolve().parents[1] / ".github/workflows/publication-pr.yml").read_text(), Loader=yaml.BaseLoader)
+    assert document["on"]["workflow_dispatch"]["inputs"]["ci_run_id"]["type"] == "string"
+    assert document["concurrency"] == {"group": "public-snapshot-promotion", "cancel-in-progress": "false", "queue": "max"}
+    job = document["jobs"]["promote"]
+    assert "github.ref == 'refs/heads/main'" in job["if"]
+    assert int(job["timeout-minutes"]) * 60 > publication.CI_WAIT_SECONDS
+    assert job["steps"][0]["with"]["ref"] == "${{ github.workflow_sha }}"
+    assert "inputs.ci_run_id" not in str(job["steps"])
