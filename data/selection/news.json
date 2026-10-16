@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T22:16:58.301033+00:00",
+  "generated_at": "2026-10-16T23:17:00.631420+00:00",
   "assessment_counts": {
     "candidates": 12164,
     "evaluated": 4889,
-    "relevant": 1765,
-    "excluded": 174,
-    "uncertain": 2950,
+    "relevant": 1766,
+    "excluded": 182,
+    "uncertain": 2941,
     "pending": 7275
   },
   "selections": [
@@ -4446,20 +4446,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T17:14:07.662649-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "95fb971902ca3354a3d3f2fcd094873b23d124bafac34b3181080d9e2cb0ae6e",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p9"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p6",
-            "p9",
-            "p12"
+            "p8"
           ]
         }
       }
@@ -5502,18 +5498,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T17:14:22.398126-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c6e5343a78e40656d3fd3f861e7956361473752ff0513fe605b226dd8af4abad",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p3",
+            "p6"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ]
         }
       }
@@ -33478,6 +33473,35 @@
       }
     },
     {
+      "candidate_id": "a5ddd31b424e8c3aa53140ed066b58f9f7f7845a2812b9e3dcd415de23e04e11",
+      "source_url": "https://www.diariocolatino.com/autoridades-confirman-fin-de-semana-con-25-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T17:09:34.611564-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b68ad2ea0b5e165eb6949e07eab89472f1d2e30019c9bcd33d2ce995ff3b3aa5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a5f128cb89a44ceaa5684c51a41c1bfe2b83cec2c35d147d01b9f1a100568c20",
       "source_url": "https://historico.elsalvador.com/historico/101794/demanda-por-acoso-sexual-camino-al-archivo-de-fgr.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -36362,20 +36386,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T17:16:08.111028-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "fc2d1bbc5e1098ee3b47c86c7634b736035b7643ce74e94c4892bed35c5bdc00",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p6",
-            "p8"
+            "p5"
           ]
         }
       }
@@ -38174,9 +38195,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:03.064204-06:00",
+        "classified_at": "2026-10-16T17:16:23.211419-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ce7e7f2f2c71f782a6cf45dcb53323ffbaefa569b178263ab97551df04793e77",
           "jurisdiction_paragraph_ids": [
@@ -38184,8 +38205,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p7"
+            "p3"
           ]
         }
       }
