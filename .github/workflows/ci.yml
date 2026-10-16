@@ -61,7 +61,7 @@ jobs:
           npm --prefix apps/web test
           npm --prefix apps/web run lint
           npm --prefix apps/web run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: public-website
           path: apps/web/dist
