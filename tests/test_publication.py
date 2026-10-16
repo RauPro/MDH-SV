@@ -2,7 +2,10 @@ import csv
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 import pytest
 import pyarrow.parquet as pq
 from pydantic import ValidationError
@@ -39,6 +42,29 @@ def test_exports_consistent_and_checksums_real(tmp_path):
         assert hashlib.sha256((tmp_path/name).read_bytes()).hexdigest() == item['sha256']
     second = tmp_path/'again'
     assert export_catalog(destination=second) == manifest
+
+
+@pytest.mark.parametrize('explicit_source', [False, True])
+def test_catalogue_cli_exports_to_explicit_directory_from_outside_checkout(tmp_path, explicit_source):
+    root = Path(__file__).resolve().parents[1]
+    source = tmp_path / 'reviewed.json'
+    original = CATALOG.read_bytes()
+    source.write_bytes(original)
+    output = tmp_path / 'exports'
+    # A malicious or accidental CWD catalogue is never an implicit data source.
+    (tmp_path / 'data/reviewed').mkdir(parents=True)
+    (tmp_path / 'data/reviewed/publications.json').write_text('{"private":"do not export"}')
+    args = ['--reviewed', str(source)] if explicit_source else []
+    result = subprocess.run([sys.executable, '-m', 'mdh_pipeline.publication', *args,
+                             '--output', str(output)], cwd=tmp_path, capture_output=True, text=True,
+                            env={**os.environ, 'PYTHONPATH': os.pathsep.join(str(root / path)
+                                 for path in ('apps/pipeline/src', 'packages/schema/src'))}, timeout=30,
+                            check=False)
+    assert result.returncode == 0, result.stderr
+    manifest = json.loads(result.stdout)
+    assert manifest['source_sha256'] == hashlib.sha256(original).hexdigest()
+    assert {item.name for item in output.iterdir()} == {*manifest['files'], 'manifest.json'}
+    assert CATALOG.read_bytes() == original
 
 
 @pytest.mark.parametrize('value', ['=HYPERLINK("evil")', '+1', '-1', '@SUM(A1)', '  =1', '\t=1', '\r=1'])

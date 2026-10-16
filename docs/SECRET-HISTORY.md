@@ -46,7 +46,7 @@ y ninguna alerta de secretos en el repositorio público.
 
 ## Preparación local
 
-Requiere Python 3.12+, Git y acceso a la release oficial para la primera
+Requiere Python 3.13, Git y acceso a la release oficial para la primera
 instalación. El scanner se ejecuta localmente, sin enviar código o secretos a un
 servicio de análisis.
 

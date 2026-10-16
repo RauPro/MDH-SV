@@ -17,14 +17,15 @@ El prototipo contenía registros sintéticos atribuidos a organizaciones reales.
 
 ## Desarrollo y pruebas
 
-Requiere Python 3.12+ y Node 22.12+.
+Se soporta la aplicación desde un checkout completo con Python 3.13 y Node 22
+(mínimo 22.12). `.python-version` y `.nvmrc` declaran esas líneas; las revisiones
+de parche pueden actualizarse. Las dependencias se instalan desde los locks.
+No se distribuye un paquete Python autónomo con sus datasets: la instalación
+editable registra los módulos dentro del checkout.
 
 ```sh
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-.venv/bin/pip install -e . --no-deps
-.venv/bin/pytest -q
-.venv/bin/python -m mdh_pipeline.publication
+python3.13 scripts/bootstrap.py
+.venv/bin/python scripts/check.py
 ```
 
 La API REST está en [`/api/v1/records`](https://mdh-sv.vercel.app/api/v1/records), [`/api/v1/news`](https://mdh-sv.vercel.app/api/v1/news) y [`/api/v1/stats`](https://mdh-sv.vercel.app/api/v1/stats). El MCP remoto usa **https://mdh-sv.vercel.app/mcp**, transporte Streamable HTTP, lectura anónima sin clave. [Contrato OpenAPI](https://mdh-sv.vercel.app/api/v1/openapi.json) y [guía de integración](docs/API.md).
