@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T21:11:46.838282+00:00",
+  "generated_at": "2026-10-16T21:18:00.657623+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12011,
-      "selected": 1762,
+      "selected": 1764,
       "evaluated": 4889,
-      "relevant": 1762,
-      "excluded": 158,
-      "uncertain": 2969,
+      "relevant": 1764,
+      "excluded": 166,
+      "uncertain": 2959,
       "pending": 7122,
-      "evaluated_at": "2026-10-16T20:17:41.907176+00:00"
+      "evaluated_at": "2026-10-16T21:17:58.400091+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1762,
+    "records": 1764,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1433,
+        "records": 1434,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -665,7 +665,7 @@
           {
             "month": "2014-03",
             "status": "enumerated",
-            "records": 21,
+            "records": 22,
             "screen_version": 3,
             "posts_scanned": 1028,
             "source_total_posts": 1028,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 216,
+        "records": 217,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15296,7 +15296,7 @@
           {
             "month": "2014-03",
             "status": "partial",
-            "records": 2,
+            "records": 3,
             "screen_version": 3,
             "posts_scanned": 137,
             "source_total_posts": null,
@@ -19282,12 +19282,12 @@
         "month": "2014-03",
         "start_date": "2014-03-01",
         "end_date": "2014-03-31",
-        "records": 23,
+        "records": 25,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 21
+            "records": 22
           },
           {
             "source_id": "gatoencerrado",
@@ -19317,7 +19317,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 3
           }
         ]
       },
@@ -90291,18 +90291,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T15:16:37.020618-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d5b0d3a56a25d7d3ce67158dee1a705d23b9d91494c730e20e3f1e6e6ed1fabe",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p8",
-            "p9",
-            "p11"
+            "p2",
+            "p5",
+            "p14"
           ]
         }
       }
@@ -90339,17 +90339,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T16:14:32.813515-06:00",
+        "classified_at": "2026-10-16T15:16:20.712015-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "7654bcb33932a77915695cee26a771d81eb7d1b048a8218860af2a3ee732d50e",
           "jurisdiction_paragraph_ids": [
             "p1"
           ],
           "relevance_paragraph_ids": [
-            "p9",
-            "p12"
+            "p1"
           ]
         }
       }
@@ -90382,14 +90381,13 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T15:14:36.835417-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d600d67b2bebb75b261010210b1137fab27eb9ce64f482e1db3212d476021432",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
@@ -90426,22 +90424,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T15:14:21.202427-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "fa7cdd6c3e65931de39ed375b1bfad21c21fb5e18c99609b009039a8a8cbcf96",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p6"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p5",
-            "p7",
-            "p9"
+            "p2"
           ]
         }
       }
@@ -90474,21 +90466,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T15:12:39.647563-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8a9264c1edb478ad11f6956983658a3ba2efc5aa2cec3cbc6135d9283e0b2a08",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p5",
-            "p6",
-            "p7"
+            "p2"
           ]
         }
       }
@@ -99619,6 +99606,53 @@
       }
     },
     {
+      "id": "470ba218c249a143c3f4e8ef037fe7abf7f97d543984ae352f34382a68554f88",
+      "title": "Frente Sindical Salvadoreño exige avances en caso Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/frente-sindical-salvadoreno-exige-avances-en-caso-flores/",
+      "published_date": "2014-03-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 8686,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T15:09:43.814392-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "43b17578cb563d5909c826d5359575b2f0344c69a0ffea0189bc60f1880bcfb8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "id": "c5a58609da89010d9d09354d59329b2b369bd4a788cf99df2a64e17e483cff40",
       "title": "Denuncian violaciones a la ley de la carrera administrativa municipal",
       "title_truncated": false,
@@ -99661,6 +99695,54 @@
             "p5",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "37022affb46f9d7fb2d0c4e2ef828f367fd2ee4715bd65c10754b80d57ece0ef",
+      "title": "Asesinan de 15 disparos a un empresario salvadoreño en Ciudad de Panamá",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/124913/asesinan-de-15-disparos-a-un-empresario-salvadoreno-en-ciudad-de-panama.html",
+      "published_date": "2014-03-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "panama",
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T12:20:08.470685+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T15:09:43.814392-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "887b8860eeab8b7467460a694e3f426fe4940aad86887b85330049b063a8f520",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4"
           ]
         }
       }
