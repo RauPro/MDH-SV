@@ -12,7 +12,7 @@ export function validInstanceHost(value) {
   const host = match[1];
   if (loopback(host)) return true;
   return host.length <= 253 && host.includes('.') && !/^(?:[0-9]+|0x[0-9a-f]*)$/.test(host.split('.').at(-1))
-    && host.split('.').every(label => /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(label));
+    && host.split('.').every(label => !label.startsWith('xn--') && /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(label));
 }
 
 export function validateInstanceConfig(value) {

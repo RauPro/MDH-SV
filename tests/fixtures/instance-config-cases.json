@@ -764,6 +764,87 @@
       "patch": {
         "editorial_email": "editor@1.0x"
       }
+    },
+    {
+      "name": "punycode URL xn--a.example.org",
+      "valid": false,
+      "patch": {
+        "public_url": "https://xn--a.example.org",
+        "mcp_allowed_hosts": [
+          "xn--a.example.org"
+        ]
+      }
+    },
+    {
+      "name": "punycode MCP xn--a.example.org",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "xn--a.example.org"
+        ]
+      }
+    },
+    {
+      "name": "punycode email xn--a.example.org",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@xn--a.example.org"
+      }
+    },
+    {
+      "name": "punycode URL xn--d1acufc.xn--p1ai",
+      "valid": false,
+      "patch": {
+        "public_url": "https://xn--d1acufc.xn--p1ai",
+        "mcp_allowed_hosts": [
+          "xn--d1acufc.xn--p1ai"
+        ]
+      }
+    },
+    {
+      "name": "punycode MCP xn--d1acufc.xn--p1ai",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "xn--d1acufc.xn--p1ai"
+        ]
+      }
+    },
+    {
+      "name": "punycode email xn--d1acufc.xn--p1ai",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@xn--d1acufc.xn--p1ai"
+      }
+    },
+    {
+      "name": "punycode URL test.xn--d1acufc.example.org",
+      "valid": false,
+      "patch": {
+        "public_url": "https://test.xn--d1acufc.example.org",
+        "mcp_allowed_hosts": [
+          "test.xn--d1acufc.example.org"
+        ]
+      }
+    },
+    {
+      "name": "punycode MCP test.xn--d1acufc.example.org",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "test.xn--d1acufc.example.org"
+        ]
+      }
+    },
+    {
+      "name": "punycode email test.xn--d1acufc.example.org",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@test.xn--d1acufc.example.org"
+      }
     }
   ]
 }

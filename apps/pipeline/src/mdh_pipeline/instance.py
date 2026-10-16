@@ -62,7 +62,8 @@ def _hostname(value):
     if value in {"localhost", "127.0.0.1", "[::1]"}:
         return
     if (not value or len(value) > 253 or "." not in value
-            or any(not LABEL.fullmatch(label) for label in value.split("."))):
+            or any(label.startswith('xn--') or not LABEL.fullmatch(label)
+                   for label in value.split('.'))):
         _fail()
     # WHATWG URLs normalize alternative numeric IP spellings; reject those too.
     if re.fullmatch(r'(?:[0-9]+|0x[0-9a-f]*)', value.rsplit('.', 1)[-1]):
