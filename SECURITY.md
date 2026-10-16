@@ -1,8 +1,18 @@
 # Seguridad
 
-No publique claves, identidades de víctimas o pruebas privadas en issues. Para informar de un problema no sensible, describa únicamente el componente y el impacto general. El proyecto aún no dispone de un canal confidencial de recepción.
+## Vulnerabilidades técnicas
+
+Use [Reportar una vulnerabilidad de forma privada en GitHub](https://github.com/RauPro/MDH-SV/security/advisories/new). El reporte privado está habilitado; requiere una cuenta de GitHub. Responsable de recepción y seguimiento: [@RauPro](https://github.com/RauPro), propietario del repositorio.
+
+Describa el componente, el impacto y los pasos para reproducirlo con datos ficticios. No incluya claves reales, identidades de víctimas ni documentos privados. Los reportes se tramitan en el aviso privado; los detalles que se publiquen después deben excluir datos sensibles. Los issues, comentarios de PR y discusiones ordinarias son públicos.
+
+## Correcciones editoriales sensibles y retiradas
+
+El canal separado para correcciones sensibles y solicitudes de retirada está pendiente de designación por el responsable. No use un issue público para aportar circunstancias privadas ni el formulario de vulnerabilidades para una corrección editorial ordinaria. Para errores no sensibles, describa únicamente el identificador de la ficha y el problema general en el formulario público.
 
 El portal público no recibe denuncias, no proporciona atención de emergencias y no promete anonimato de red. Las preferencias de tema se almacenan en el navegador; las consultas de búsqueda se realizan localmente. Los enlaces externos y el proveedor de alojamiento tienen políticas propias.
+
+## Controles de publicación
 
 La publicación debe excluir `.env`, bases SQLite, candidatos de IA, datasets del prototipo y código legado. Ejecute `python scripts/audit_release.py` y `python scripts/publication_guard.py check` antes de cualquier push. El segundo control revisa también commits anteriores y archivos ya borrados. Instale el guard local siguiendo [el procedimiento del historial publicable](docs/SECRET-HISTORY.md).
 
