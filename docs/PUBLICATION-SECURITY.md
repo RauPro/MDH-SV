@@ -46,6 +46,23 @@ reutiliza todas las validaciones de origen, cambios permitidos y SHA. La espera
 no concede permisos de escritura al código candidato. Una actualización de rama
 repite ambos despachos; el evento `workflow_run` se conserva para pushes SSH.
 
+GitHub no considera los checks de `workflow_dispatch` como checks obligatorios
+para integrar un PR. Para esos productores, después de comprobar el árbol
+completo de cambios, el autor, las referencias y que la rama está actualizada,
+el controlador busca los workflows nativos `pull_request` del mismo PR y SHA.
+Sólo permite `ci.yml` y `deploy_web.yml`, ambos con permisos de lectura. Si están
+en `action_required`, solicita su ejecución mediante el endpoint de aprobación
+de workflows, una sola vez por ejecución. Espera el éxito del CI nativo y del
+comprobador de configuración si existe, vuelve a comprobar las referencias y
+solicita la fusión normal. No añade reviews de aprobación al PR ni publica
+checks sintéticos. Un error de permisos al aprobar o un resultado fallido detiene
+la publicación; nunca cambia las reglas de protección. El CI de un push SSH ya
+es elegible y conserva su ruta verificada de publicación.
+
+Cada espera de CI está limitada a 18 minutos; el job del controlador permite
+40 minutos para cubrir la validación despachada y los checks nativos. La cola
+conserva los controladores pendientes con `queue: max`.
+
 `publication-pr.yml` ejecuta código de confianza tras CI. Nunca descarga ni
 ejecuta código del PR. Su controlador verifica repositorio, workflow, actor,
 rama, SHA y árboles Git completos. Sólo acepta JSON regulares dentro de la
