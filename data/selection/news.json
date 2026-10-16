@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T08:17:19.166411+00:00",
+  "generated_at": "2026-10-16T09:17:53.956908+00:00",
   "assessment_counts": {
     "candidates": 11707,
     "evaluated": 4888,
     "relevant": 1736,
-    "excluded": 127,
-    "uncertain": 3025,
+    "excluded": 135,
+    "uncertain": 3017,
     "pending": 6819
   },
   "selections": [
@@ -1653,9 +1653,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T18:11:20.013027-06:00",
+        "classified_at": "2026-10-16T03:14:39.392546-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "77efc8d8aa311fe6100eaae1eb0f8bcbc334189ed3e20145cae4d26f1aee32d5",
           "jurisdiction_paragraph_ids": [
@@ -3084,19 +3084,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:16:20.490937-06:00",
+        "classified_at": "2026-10-16T03:12:38.948099-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "be1462737e69ff41f20320123063f5d60b2d2f3e81636d31cc3d44400462cd71",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p8"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p5",
-            "p7"
+            "p2"
           ]
         }
       }
@@ -7307,9 +7304,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:16:20.490937-06:00",
+        "classified_at": "2026-10-16T03:14:22.981508-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "dd2f1b86386d108b9f9788e363315687a5fd31eaecb5c8ca5c9e8556f0104153",
           "jurisdiction_paragraph_ids": [
@@ -21714,23 +21711,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T18:13:21.441303-06:00",
+        "classified_at": "2026-10-16T03:16:48.486075-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "0cc23ccb29c76a87fcc35d448303918e544f674744ad8342293eb1237698f678",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8",
-            "p9"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p5",
-            "p7",
-            "p9"
+            "p5"
           ]
         }
       }
@@ -23549,22 +23540,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T18:13:21.441303-06:00",
+        "classified_at": "2026-10-16T03:17:05.906889-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ff85d3226be4a7cd092a30a530757fdcf334aa5e6ec35d42c188f2625c2f299e",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p6",
-            "p7"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p6",
-            "p7",
-            "p10",
-            "p16"
+            "p4"
           ]
         }
       }
