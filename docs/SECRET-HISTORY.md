@@ -34,6 +34,7 @@ servicio de análisis.
 
 ```sh
 MDH_GITLEAKS_DIR="$(python3 scripts/install_gitleaks.py)"
+export GITLEAKS_BIN="$MDH_GITLEAKS_DIR/gitleaks"
 python3 scripts/install_publication_guard.py --gitleaks "$MDH_GITLEAKS_DIR/gitleaks"
 python3 scripts/publication_guard.py --gitleaks "$MDH_GITLEAKS_DIR/gitleaks" check
 ```
@@ -58,7 +59,7 @@ actualización del guard o de sus reglas.
 `check` escanea HEAD completo por defecto, no sólo el diff reciente:
 
 ```sh
-python3 scripts/publication_guard.py check --ref HEAD --ref refs/tags/v2.0.0
+python3 scripts/publication_guard.py --gitleaks "$MDH_GITLEAKS_DIR/gitleaks" check --ref HEAD --ref refs/tags/v2.0.0
 ```
 
 El ejemplo de tag sólo se usa si ese tag existe. No se aceptan referencias
@@ -67,6 +68,11 @@ que Git va a enviar y comprueba el lote entero. También escanea los nombres de
 referencia, mensajes de commits y tags anotados. Una operación sólo de borrado
 no necesita analizar objetos nuevos. Los destinos ajenos a `refs/heads/` y
 `refs/tags/` se rechazan: no se publica con `--mirror`.
+
+La variable exportada vale para esa terminal. El hook instalado conserva una
+ruta absoluta y funciona también en sesiones posteriores; para comprobar el
+historial manualmente en otra terminal, repita la preparación o indique
+explícitamente la ruta del binario con `--gitleaks`.
 
 Los snapshots superficiales, clones parciales, grafts, objetos faltantes y errores
 del motor hacen fallar el control. Las replacement refs se ignoran. Los patches
