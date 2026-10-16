@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T01:32:56.628822+00:00",
+  "generated_at": "2026-10-16T02:16:23.446184+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11554,
-      "selected": 1730,
+      "selected": 1732,
       "evaluated": 4887,
-      "relevant": 1730,
-      "excluded": 71,
-      "uncertain": 3086,
+      "relevant": 1732,
+      "excluded": 79,
+      "uncertain": 3076,
       "pending": 6667,
-      "evaluated_at": "2026-10-16T01:16:34.601257+00:00"
+      "evaluated_at": "2026-10-16T02:16:20.456707+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1730,
+    "records": 1732,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 209,
+        "records": 211,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15200,7 +15200,7 @@
           {
             "month": "2013-07",
             "status": "partial",
-            "records": 1,
+            "records": 3,
             "screen_version": 3,
             "posts_scanned": 25,
             "source_total_posts": null,
@@ -18938,7 +18938,7 @@
         "month": "2013-07",
         "start_date": "2013-07-01",
         "end_date": "2013-07-31",
-        "records": 1,
+        "records": 3,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18973,7 +18973,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 1
+            "records": 3
           }
         ]
       },
@@ -102092,6 +102092,50 @@
       }
     },
     {
+      "id": "ba293e0371531b97fecebd77c734fe0f1db2226920d6d4132028a58ad5d3796f",
+      "title": "Edgar Romero: “A varios colegas se les agotó su trabajo [fotoperiodístico]”",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/109998/edgar-romero-a-varios-colegas-se-les-agoto-su-trabajo-fotoperiodistico.html",
+      "published_date": "2013-07-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T20:09:17.738935-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e4982dbcb68154248f7eab80f0649a592078287f1601b39c53a47dd750c3f1a4",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p10",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "id": "bb247b4c540d601813bd3a26af80eb11bcdfe5838733fe3c0d5ea26619f374fe",
       "title": "Capturan al Z-40, el jefe del cártel de Los Zetas",
       "title_truncated": false,
@@ -102130,6 +102174,51 @@
           "relevance_paragraph_ids": [
             "p11",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "32b7fd7f4bf56a02a274ea4d70fe5b30ce6943b6defc0ab39a3d42d786ef3f74",
+      "title": "En 2013 ha habido más asesinatos en Guatemala",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/111140/en-2013-ha-habido-mas-asesinatos-en-guatemala.html",
+      "published_date": "2013-07-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "guatemala"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T20:09:17.738935-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "150fbc1a1e858b39f149e5362b772930c2b693a14cf42abcfc312a654cf7bf6b",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
           ]
         }
       }
