@@ -63,10 +63,10 @@ def test_publication_and_manual_scope_read_the_same_saved_exclusion_proofs_and_r
 
 def test_geographic_source_checks_remain_separate_from_budgeted_dossier_evaluation():
     value = workflow('publish-locations.yml')
-    assert value['permissions'] == {'contents': 'write', 'issues': 'read'}
+    assert value['jobs']['publish']['permissions'] == {'contents': 'write', 'issues': 'read'}
     steps = value['jobs']['publish']['steps']
-    restore = next(s for s in steps if s.get('uses') == 'actions/cache/restore@v4')
-    save = next(s for s in steps if s.get('uses') == 'actions/cache/save@v4')
+    restore = next(s for s in steps if s.get('uses', '').startswith('actions/cache/restore@'))
+    save = next(s for s in steps if s.get('uses', '').startswith('actions/cache/save@'))
     assert restore['with']['path'] == save['with']['path'] == '.source-location-cache/source-checks.json'
     assert restore['with']['key'] == save['with']['key']
     assert 'github.run_attempt' in save['with']['key']
@@ -80,7 +80,7 @@ def test_geographic_source_checks_remain_separate_from_budgeted_dossier_evaluati
     assert len(keyed) == 1 and 'mdh_pipeline.automatic_news evaluate' in keyed[0]['run']
     assert 'MDH_GEMINI_BUDGET_CONFIG' in keyed[0]['env']
     assert steps.index(restore) < steps.index(check) < steps.index(save)
-    publication = next(s for s in steps if 'git push' in s.get('run', ''))
+    publication = next(s for s in steps if 'publication_snapshot pack' in s.get('run', ''))
     assert steps.index(publication) < steps.index(save)
     assert '.source-location-cache' not in publication['run']
 
@@ -106,16 +106,15 @@ def test_validated_partial_extractor_results_publish_without_hiding_the_run_fail
     assert publisher_allowed(name='Revisar noticia', path='.github/workflows/review.yml')
     assert publisher_allowed(name='Reevaluar pertinencia de noticias', path='.github/workflows/review-scope.yml')
     steps = workflow('publish-locations.yml')['jobs']['publish']['steps']
-    checkouts = [step['with'] for step in steps if step.get('uses') == 'actions/checkout@v4']
+    checkouts = [step['with'] for step in steps if step.get('uses', '').startswith('actions/checkout@')]
     assert next(step for step in checkouts if step['path'] == 'monitor')['ref'] == 'MDH_PUBLIC_CODE_REF'
     assert next(step for step in checkouts if step['path'] == 'inbox')['ref'] == 'main'
     assert not any('download-artifact' in step.get('uses', '') for step in steps)
-    validation = next(step['run'] for step in steps if 'git push' in step.get('run', ''))
-    assert validation.index('check-data.mjs') < validation.index('git push')
-    assert validation.index('audit_release.py') < validation.index('git push')
-    assert 'mdh_pipeline.news_git_publication --repository . --excluded-ids ../excluded-news.json' in validation
-    assert 'git pull --rebase' not in validation
-    assert validation.index('mdh_pipeline.news_git_publication') < validation.rindex('check-data.mjs') < validation.index('git push')
+    validation = next(step['run'] for step in steps if 'publication_snapshot pack' in step.get('run', ''))
+    assert validation.index('check-data.mjs --root publication') < validation.index('publication_snapshot pack')
+    assert all('git push' not in step.get('run', '') for step in steps)
+    assert workflow('publish-locations.yml')['jobs']['propose']['needs'] == 'publish'
+    assert workflow('publish-locations.yml')['jobs']['report']['needs'] == ['publish', 'propose']
 
 
 @pytest.mark.parametrize('changes', [
@@ -128,3 +127,91 @@ def test_validated_partial_extractor_results_publish_without_hiding_the_run_fail
 ])
 def test_partial_publication_does_not_relax_other_event_or_repository_boundaries(changes):
     assert not publisher_allowed(**changes)
+
+
+def test_private_preparation_never_receives_the_publication_key_or_executes_mutable_code():
+    value = workflow('publish-locations.yml')
+    prepare = value['jobs']['publish']
+    steps = prepare['steps']
+    checkouts = [s['with'] for s in steps if s.get('uses', '').startswith('actions/checkout@')]
+    assert {s['path'] for s in checkouts} == {'monitor', 'inbox', 'publication'}
+    public = next(s for s in checkouts if s['path'] == 'publication')
+    assert public['ref'] == 'main'
+    assert public['persist-credentials'] == 'false'
+    assert public['sparse-checkout-cone-mode'] == 'false'
+    assert public['sparse-checkout'].splitlines() == ['/data/', '/apps/web/public/']
+    assert all(s['persist-credentials'] == 'false' for s in checkouts)
+    assert 'NEWS_LOCATION_PUBLISH_KEY' not in str(prepare)
+    input_check = next(s for s in steps if 'publication_snapshot check-inputs' in s.get('run', ''))
+    private_read = next(s for s in steps if 'editorial_excluded_ids' in s.get('run', ''))
+    assert steps.index(input_check) < steps.index(private_read)
+    assert prepare['outputs']['base_sha'] == '${{ steps.public_base.outputs.sha }}'
+    assert input_check['id'] == 'public_base' and 'git -C publication rev-parse HEAD' in input_check['run']
+    for step in steps:
+        assert step.get('working-directory') != 'publication'
+        assert 'node apps/web/' not in step.get('run', '')
+        assert 'git push' not in step.get('run', '')
+        for line in step.get('run', '').splitlines():
+            if line.startswith('node '):
+                assert line.startswith('node monitor/apps/web/scripts/')
+                assert line.endswith('--root publication')
+    upload = next(s for s in steps if s.get('uses', '').startswith('actions/upload-artifact@'))
+    assert upload['with']['path'] == 'public-snapshot/'
+    assert upload['with']['retention-days'] == '1'
+    assert upload['with']['if-no-files-found'] == 'error'
+    assert not any('download-artifact' in s.get('uses', '') for s in steps)
+
+
+def test_publication_key_is_isolated_from_private_data_and_can_only_propose_a_branch():
+    value = workflow('publish-locations.yml')
+    propose = value['jobs']['propose']
+    assert propose['needs'] == 'publish'
+    assert propose['permissions'] == {}
+    steps = propose['steps']
+    checkouts = [s['with'] for s in steps if s.get('uses', '').startswith('actions/checkout@')]
+    assert {s['path'] for s in checkouts} == {'monitor', 'publication'}
+    assert all(s['repository'] == 'RauPro/MDH-SV' for s in checkouts)
+    assert next(s for s in checkouts if s['path'] == 'monitor')['ref'] == 'MDH_PUBLIC_CODE_REF'
+    public = next(s for s in checkouts if s['path'] == 'publication')
+    assert public['ref'] == '${{ needs.publish.outputs.base_sha }}'
+    assert public['ssh-key'] == '${{ secrets.NEWS_LOCATION_PUBLISH_KEY }}'
+    assert 'GEMINI' not in str(propose) and 'inbox/' not in str(propose)
+    assert 'GH_TOKEN' not in str(propose)
+    download = next(s for s in steps if s.get('uses', '').startswith('actions/download-artifact@'))
+    upload = next(s for s in value['jobs']['publish']['steps'] if s.get('uses', '').startswith('actions/upload-artifact@'))
+    assert download['with']['name'] == upload['with']['name']
+    assert set(download['with']) == {'name', 'path'}  # Never another run/repository.
+    apply = next(s for s in steps if 'publication_snapshot apply' in s.get('run', ''))
+    push = next(s for s in steps if 'git -C publication push' in s.get('run', ''))
+    assert steps.index(download) < steps.index(apply) < steps.index(push)
+    assert 'node monitor/apps/web/scripts/check-data.mjs --root publication' in apply['run']
+    assert push['env']['PUBLICATION_BRANCH'] == 'chore/automated-news-${{ github.run_id }}-${{ github.run_attempt }}'
+    assert 'HEAD:refs/heads/$PUBLICATION_BRANCH' in push['run']
+    assert 'HEAD:main' not in str(value) and '--force' not in push['run']
+    assert 'assert base == os.environ' in push['run']
+    assert 'changed <= allowed' in push['run']
+    assert 'diff --cached --quiet; then exit 0' in push['run']
+    assert all(s.get('working-directory') != 'publication' for s in steps)
+    assert len([job for job in value['jobs'].values() if 'NEWS_LOCATION_PUBLISH_KEY' in str(job)]) == 1
+
+
+def test_validation_only_preserves_publication_without_model_or_source_calls():
+    value = workflow('publish-locations.yml')
+    assert value['on']['workflow_dispatch']['inputs']['validation_only'] == {
+        'description': 'Ensayo de publicación con recibos existentes; sin llamadas a Gemini ni a fuentes',
+        'type': 'boolean', 'default': 'false'}
+    steps = value['jobs']['publish']['steps']
+    for command in ('mdh_pipeline.automatic_news evaluate', 'mdh_pipeline.automatic_locations'):
+        step = next(s for s in steps if command in s.get('run', ''))
+        assert step['if'] == 'inputs.validation_only != true'
+    for command in ('mdh_pipeline.automatic_news export', 'publication_snapshot pack'):
+        step = next(s for s in steps if command in s.get('run', ''))
+        assert 'if' not in step
+
+
+def test_actions_crossing_the_private_public_boundary_are_immutable():
+    value = workflow('publish-locations.yml')
+    for job in value['jobs'].values():
+        for step in job['steps']:
+            if 'uses' in step:
+                assert re.fullmatch(r'actions/[a-z/-]+@[a-f0-9]{40}', step['uses'])

@@ -6,6 +6,10 @@ on:
     branches: [main]
   workflow_dispatch:
     inputs:
+      validation_only:
+        description: 'Ensayo de publicación con recibos existentes; sin llamadas a Gemini ni a fuentes'
+        type: boolean
+        default: false
       source_check_limit:
         description: 'Fuentes seleccionadas que se comprobarán para el mapa; no llama a Gemini'
         type: choice
@@ -17,14 +21,20 @@ on:
         default: '50'
         options: ['1', '2', '3', '5', '10', '50']
 permissions:
-  contents: write
-  issues: read
+  contents: read
 concurrency:
   group: editorial-inbox
   cancel-in-progress: false
   queue: max
 jobs:
   publish:
+    name: Preparar snapshot público sin credencial de publicación
+    permissions:
+      contents: write
+      issues: read
+    outputs:
+      base_sha: ${{ steps.public_base.outputs.sha }}
+      evaluation_failed: ${{ steps.automatic_validation.outcome == 'failure' }}
     # A failed extractor may have already saved valid batches. Revalidate those
     # main-branch documents; never consume failed-run code, logs or artifacts.
     if: >-
@@ -40,31 +50,42 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: RauPro/MDH-SV
           ref: MDH_PUBLIC_CODE_REF
           path: monitor
           persist-credentials: false
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: main
           path: inbox
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.13'
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: '22'
       - name: Instalar entorno fijado
         run: pip install -r monitor/ops/review-queue/requirements.txt
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: RauPro/MDH-SV
           ref: main
           path: publication
-          ssh-key: ${{ secrets.NEWS_LOCATION_PUBLISH_KEY }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /data/
+            /apps/web/public/
+      - name: Comprobar entradas públicas antes de acceder a la cola privada
+        id: public_base
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: |
+          python -m mdh_pipeline.publication_snapshot check-inputs --repository publication
+          echo "sha=$(git -C publication rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Excluir decisiones editoriales y fichas ya aprobadas
         env:
           GH_TOKEN: ${{ github.token }}
@@ -113,6 +134,7 @@ jobs:
         run: python -m mdh_pipeline.news_requests sync --archive publication/apps/web/public/archive/news.json --exceptions publication/data/selection/news_exceptions.json --output request-generations.json
       - name: Validar fichas automáticamente con el presupuesto compartido
         id: automatic_validation
+        if: inputs.validation_only != true
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -129,9 +151,10 @@ jobs:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: python -m mdh_pipeline.automatic_news export --inbox-dir inbox --archive publication/apps/web/public/archive/news.json --reviewed publication/data/reviewed/news_dossiers.json --excluded-ids excluded-news.json --request-generations request-generations.json --automatic-output publication/data/automated/news_dossiers.json --output publication/apps/web/public/archive/dossiers.json
       - name: Recuperar comprobaciones geográficas anteriores
+        if: inputs.validation_only != true
         # Only bounded source-check receipts are cached in this private workflow.
         # No source bodies, quotations, personal fields or full drafts enter it.
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: source-location-cache
         continue-on-error: true
         with:
@@ -139,42 +162,106 @@ jobs:
           key: source-location-checks-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: source-location-checks-v1-${{ runner.os }}-
       - name: Comprobar ubicaciones en las fuentes sin exigir una ficha completa
+        if: inputs.validation_only != true
         env:
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
           SOURCE_CHECK_LIMIT: ${{ inputs.source_check_limit || '50' }}
         run: python -m mdh_pipeline.automatic_locations --drafts inbox/drafts --archive publication/apps/web/public/archive/news.json --output publication/apps/web/public/archive/locations.json --excluded-ids excluded-locations.json --limit "$SOURCE_CHECK_LIMIT" --cache-file .source-location-cache/source-checks.json
-      - name: Validar frontera pública y publicar metadatos y campos aprobados
-        working-directory: publication
+      - name: Validar y empaquetar únicamente archivos públicos
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: |
           set -euo pipefail
-          node apps/web/scripts/sync-news-publication.mjs
-          node apps/web/scripts/sync-news-processing.mjs
-          node apps/web/scripts/check-data.mjs
-          python ../monitor/scripts/audit_release.py
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- data/selection/news.json data/automated/news_dossiers.json apps/web/public/archive/news.json apps/web/public/archive/locations.json apps/web/public/archive/dossiers.json apps/web/public/archive/processing.json
-          if git diff --cached --quiet; then exit 0; fi
-          python - <<'PYTHON'
-          import subprocess
-          allowed = {'data/selection/news.json', 'data/automated/news_dossiers.json', 'apps/web/public/archive/news.json', 'apps/web/public/archive/locations.json', 'apps/web/public/archive/dossiers.json', 'apps/web/public/archive/processing.json'}
-          assert set(subprocess.check_output(['git', 'diff', '--cached', '--name-only'], text=True).splitlines()) <= allowed
-          PYTHON
-          git commit -m 'chore: publish automatically validated news dossiers and locations'
-          PYTHONPATH=../monitor/apps/pipeline/src:../monitor/packages/schema/src python -m mdh_pipeline.news_git_publication --repository . --excluded-ids ../excluded-news.json
-          PYTHONPATH=../monitor/apps/pipeline/src:../monitor/packages/schema/src python -m mdh_pipeline.history --export-only --data-dir data/history --selection data/selection/news.json --reviewed-news data/reviewed/news_dossiers.json --exceptions data/selection/news_exceptions.json --excluded-ids ../excluded-news.json --output apps/web/public/archive/news.json
-          node apps/web/scripts/sync-news-publication.mjs
-          node apps/web/scripts/sync-news-processing.mjs
-          git add -- data/automated/news_dossiers.json apps/web/public/archive/news.json apps/web/public/archive/dossiers.json apps/web/public/archive/locations.json apps/web/public/archive/processing.json
-          if ! git diff --cached --quiet; then git commit -m 'chore: reconcile public news after concurrent updates'; fi
-          node apps/web/scripts/check-data.mjs
-          git push origin HEAD:main
+          node monitor/apps/web/scripts/sync-news-publication.mjs --root publication
+          node monitor/apps/web/scripts/sync-news-processing.mjs --root publication
+          node monitor/apps/web/scripts/check-data.mjs --root publication
+          python -m mdh_pipeline.publication_snapshot pack --repository publication --output public-snapshot
+      - name: Transferir el snapshot validado al publicador aislado
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-news-snapshot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: public-snapshot/
+          if-no-files-found: error
+          retention-days: 1
       - name: Conservar comprobaciones de fuentes sin cuerpos ni datos personales
-        uses: actions/cache/save@v4
+        if: inputs.validation_only != true
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         continue-on-error: true
         with:
           path: .source-location-cache/source-checks.json
           key: source-location-checks-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Informar fallos de evaluación después de conservar publicaciones válidas
-        if: always() && steps.automatic_validation.outcome == 'failure'
-        run: exit 1
+  propose:
+    name: Proponer snapshot público en una rama sin acceso a borradores
+    needs: publish
+    permissions: {}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: MDH_PUBLIC_CODE_REF
+          path: monitor
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '22'
+      - name: Instalar validador fijado
+        run: pip install -r monitor/ops/review-queue/requirements.txt
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: RauPro/MDH-SV
+          ref: ${{ needs.publish.outputs.base_sha }}
+          path: publication
+          ssh-key: ${{ secrets.NEWS_LOCATION_PUBLISH_KEY }}
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /data/
+            /apps/web/public/
+      - name: Descargar exclusivamente el snapshot de esta ejecución
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: public-news-snapshot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: public-snapshot
+      - name: Aplicar snapshot sobre su base exacta y validar con código aprobado
+        env:
+          PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
+        run: |
+          python -m mdh_pipeline.publication_snapshot apply --repository publication --snapshot public-snapshot
+          node monitor/apps/web/scripts/check-data.mjs --root publication
+      - name: Proponer únicamente cambios públicos para comprobación y PR
+        env:
+          PUBLIC_BASE_SHA: ${{ needs.publish.outputs.base_sha }}
+          PUBLICATION_BRANCH: chore/automated-news-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          git -C publication config user.name 'github-actions[bot]'
+          git -C publication config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C publication add -- data/selection/news.json data/automated/news_dossiers.json apps/web/public/archive/news.json apps/web/public/archive/locations.json apps/web/public/archive/dossiers.json apps/web/public/archive/processing.json
+          if git -C publication diff --cached --quiet; then exit 0; fi
+          python - <<'PYTHON'
+          import os, re, subprocess
+          allowed = {'data/selection/news.json', 'data/automated/news_dossiers.json', 'apps/web/public/archive/news.json', 'apps/web/public/archive/locations.json', 'apps/web/public/archive/dossiers.json', 'apps/web/public/archive/processing.json'}
+          assert re.fullmatch(r'[a-f0-9]{40}', os.environ['PUBLIC_BASE_SHA'])
+          assert re.fullmatch(r'chore/automated-news-[0-9]+-[0-9]+', os.environ['PUBLICATION_BRANCH'])
+          base = subprocess.check_output(['git', '-C', 'publication', 'rev-parse', 'HEAD'], text=True).strip()
+          assert base == os.environ['PUBLIC_BASE_SHA'], 'Publication base changed'
+          for arguments in (['diff', '--cached', '--name-only', '-z'], ['diff', '--name-only', '-z']):
+              changed = set(filter(None, subprocess.check_output(['git', '-C', 'publication', *arguments], text=True).split('\0')))
+              assert changed <= allowed, 'Unexpected publication path'
+          PYTHON
+          git -C publication commit -m 'chore: propose validated news dossiers and locations'
+          # SSH push triggers the public CI; its trusted completion controller
+          # creates and merges the PR under the normal main rules.
+          git -C publication push origin "HEAD:refs/heads/$PUBLICATION_BRANCH"
+  report:
+    name: Informar evaluación incompleta tras proponer los lotes válidos
+    needs: [publish, propose]
+    if: always() && needs.publish.outputs.evaluation_failed == 'true'
+    permissions: {}
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
