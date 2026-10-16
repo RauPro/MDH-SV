@@ -17,6 +17,7 @@ from zoneinfo import ZoneInfo
 import feedparser
 import requests
 from .publishers import NEWS_HOSTS
+from .instance import load_instance
 
 FEEDS = [
     {'name': 'Diario Co Latino', 'url': 'https://www.diariocolatino.com/feed/', 'hosts': ['www.diariocolatino.com', 'diariocolatino.com']},
@@ -137,18 +138,36 @@ class GitHubRequestError(RuntimeError):
 
 class GitHubInbox:
     def __init__(self, repository, token, session=None, *, sleep=time.sleep):
-        if not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', repository):
-            raise ValueError('Invalid review repository')
-        self.repository = repository
-        self.base = '/repos/' + repository
+        self.instance = load_instance()
+        if (not isinstance(repository, str)
+                or repository.lower() != self.instance.private_repository.lower()):
+            raise ValueError('Review repository is not the configured private queue')
+        self.repository = self.instance.private_repository
+        self.base = '/repos/' + self.repository
         self.sleep = sleep
         self.session = session or requests.Session()
         self.session.headers.update({'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
         repo = self.call('GET', self.base)
-        if repo.get('private') is not True or repo.get('full_name', '').lower() != repository.lower():
+        if (not isinstance(repo, dict) or repo.get('private') is not True
+                or not isinstance(repo.get('full_name'), str)
+                or repo['full_name'].lower() != self.repository.lower()):
             raise ValueError('The review inbox MUST be a private repository')
 
     def _response(self, method, path, *, file_get=False, **kwargs):
+        # Private credentials never follow API redirects or address another repo.
+        # Reading public correction issues and the token's rate limit are the
+        # only cross-queue operations used by these workers.
+        if (not isinstance(path, str) or re.search(r'[\x00-\x20\\%#]', path)
+                or not path.startswith('/') or path.startswith('//')):
+            raise GitHubRequestError(code='github_path_not_authorized')
+        relative = urlsplit(path)
+        own = relative.path == self.base or relative.path.startswith(self.base + '/')
+        public_read = method == 'GET' and relative.path in {
+            '/rate_limit', '/repos/' + self.instance.public_repository + '/issues'}
+        if (not (own or public_read) or relative.scheme or relative.netloc
+                or any(part in {'.', '..'} for part in relative.path.split('/'))):
+            raise GitHubRequestError(code='github_path_not_authorized')
+        kwargs['allow_redirects'] = False
         transient = {500, 502, 503, 504}
         for attempt in range(3):
             try:
@@ -157,6 +176,8 @@ class GitHubInbox:
             except requests.RequestException:
                 raise GitHubRequestError() from None
             status = response.status_code
+            if 300 <= status < 400:
+                raise GitHubRequestError(status)
             if status not in transient:
                 return response
             if method == 'PUT' and path.startswith(self.base + '/contents/'):

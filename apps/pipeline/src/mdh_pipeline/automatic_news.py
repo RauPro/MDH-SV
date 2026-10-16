@@ -23,6 +23,7 @@ import requests
 from .gemini_budget import BudgetConfig, GeminiBudget, QuotaDeferred, QuotaStateError
 from .gemini_draft import _input, _request, _single_json, _usage, GeminiDraftError, extract_draft
 from .gemini_review import validate_envelope, put_private_file
+from .instance import load_instance
 from .news_dossier import FIELD_NAMES, validate_news_dossier, validate_published_news_dossier
 from .news_processing import _references, _selection_hash, _read_json, _atomic_json
 from .privacy import minimize_fields, privacy_flags
@@ -503,7 +504,7 @@ def evaluate_queue(inbox, inbox_dir, archive, *, api_key, model, budget, limit=3
             excluded_ids=excluded_ids, request_generations=request_generations, now=now,
             max_seconds=max_seconds, run_clock=run_clock, batch_size=batch_size)
     from .article_source import fetch_article
-    if (inbox.repository.lower() != "raupro/mdh-sv-review" or type(limit) is not int or not 1 <= limit <= 10
+    if (inbox.repository.lower() != load_instance().private_repository.lower() or type(limit) is not int or not 1 <= limit <= 10
             or budget is None or budget.config.model != model):
         raise AutomaticNewsError("invalid_automatic_worker_configuration")
     excluded_ids, generations = _requests(excluded_ids, request_generations or {})

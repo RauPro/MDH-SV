@@ -20,7 +20,9 @@ from .homicide_recovery import identity_keys, validate_recovery_report
 from .publishers import SOURCES
 from .review_queue import GitHubInbox, GitHubRequestError
 
-REPOSITORY = "RauPro/MDH-SV-review"
+from .instance import load_instance
+
+REPOSITORY = load_instance().private_repository
 ROOT = "discovery/homicides-2015"
 MAX_BYTES = 900_000  # Contents API must return inline base64, including on retries.
 LABELS = {"discovery/homicides-2015": "1D76DB", "discovery/pending": "D97706"}

@@ -17,8 +17,11 @@ import re
 
 import requests
 
-PUBLIC_REPO = "RauPro/MDH-SV"
-PRIVATE_REPO = "RauPro/MDH-SV-review"
+from .instance import load_instance
+
+INSTANCE = load_instance()
+PUBLIC_REPO = INSTANCE.public_repository
+PRIVATE_REPO = INSTANCE.private_repository
 STATE_PATH = "runtime/news-requests.json"
 ROOT = Path(__file__).resolve().parents[4]
 EXCEPTIONS = ROOT / "data/selection/news_exceptions.json"

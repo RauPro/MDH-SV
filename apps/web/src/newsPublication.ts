@@ -1,4 +1,5 @@
 import { validatePublishedNewsDossier, type NewsDossier } from '../../../shared/news-dossier.mjs';
+import { REPOSITORY_URL } from './reporting';
 
 /** A private generated draft must never unlock fields merely by claiming generation. */
 export function automaticPublicDossier(value: NewsDossier): NewsDossier | null {
@@ -8,7 +9,7 @@ export function automaticPublicDossier(value: NewsDossier): NewsDossier | null {
 
 /** Public corrections carry only the stable identifier and publication version. */
 export function newsCorrectionUrl(dossier: NewsDossier): string {
-  const url = new URL('https://github.com/RauPro/MDH-SV/issues/new');
+  const url = new URL(`${REPOSITORY_URL}/issues/new`);
   const automatic = automaticPublicDossier(dossier);
   const version = automatic?.automation
     ? `${automatic.automation.policy_version}:${automatic.automation.source_content_sha256}:${automatic.automation.validated_at}`

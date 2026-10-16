@@ -18,9 +18,12 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
-REPOSITORY = "RauPro/MDH-SV"
-REPOSITORY_ID = 1412705369
-NEWS_PUBLISHER_ACTOR_ID = 37725305
+from .instance import load_instance
+
+INSTANCE = load_instance()
+REPOSITORY = INSTANCE.public_repository
+REPOSITORY_ID = INSTANCE.public_repository_id
+NEWS_PUBLISHER_ACTOR_ID = INSTANCE.publisher_actor_id
 BOT_ID = 41898282
 BRANCH = re.compile(r"chore/automated-(history|exception|news)-([1-9][0-9]*)-([1-9][0-9]*)")
 SHA = re.compile(r"[a-f0-9]{40}")
@@ -209,7 +212,7 @@ def validate_changes(client, base, head, kind):
 
 
 def find_pr(client, branch):
-    query = urlencode({"state": "open", "base": "main", "head": f"RauPro:{branch}", "per_page": 100})
+    query = urlencode({"state": "open", "base": "main", "head": f"{INSTANCE.public_owner}:{branch}", "per_page": 100})
     values = client.call("GET", api("pulls?" + query))
     require(isinstance(values, list) and len(values) < 100 and len(values) <= 1,
             "ambiguous_publication_pull_request")

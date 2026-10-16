@@ -1,4 +1,4 @@
-import { ApiError } from './public-data.mjs';
+import { ApiError, PUBLIC_URL } from './public-data.mjs';
 
 export function cors(res, methods = 'GET, HEAD, OPTIONS') {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,7 +27,7 @@ export function rest(callback) {
     }
     try {
       if ((req.url ?? '').length > 4096) throw new ApiError(414, 'uri_too_long', 'La consulta excede el tamaño permitido.');
-      const url = new URL(req.url, 'https://mdh-sv.vercel.app');
+      const url = new URL(req.url, PUBLIC_URL);
       json(res, 200, await callback(url, req), req.method === 'HEAD');
     } catch (error) {
       if (!(error instanceof ApiError)) console.error('Public API failure:', error.name);

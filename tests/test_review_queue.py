@@ -222,7 +222,7 @@ def test_real_contents_http_malformed_response_cannot_fall_back_to_external_down
     inbox=GitHubInbox('RauPro/MDH-SV-review','test-token',session)
     ev=event();ev['inputs'].update(record_json='',review_notes='He contrastado la fuente y la privacidad de la ficha.')
     with pytest.raises(ValueError,match='metadata'):review(inbox,ev)
-    session.get.assert_called_once_with('https://api.github.com/repos/RauPro/MDH-SV-review/contents/drafts/'+candidate['id']+'.json',timeout=(8,30))
+    session.get.assert_called_once_with('https://api.github.com/repos/RauPro/MDH-SV-review/contents/drafts/'+candidate['id']+'.json',timeout=(8,30),allow_redirects=False)
     assert all(call.args[0]=='GET' for call in session.request.call_args_list)
     assert not (tmp_path/'proposal.json').exists()
 

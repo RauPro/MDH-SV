@@ -12,6 +12,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from .publication import CATALOG, Catalog, Publication, export_catalog
 from .review_queue import GitHubInbox
+from .instance import load_instance
 from .news_publication import ROOT, SOURCE as NEWS_SOURCE, PUBLIC as NEWS_PUBLIC, ARCHIVE as NEWS_ARCHIVE
 
 NEWS_SELECTION = ROOT / "data/selection/news.json"
@@ -181,7 +182,7 @@ def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEW
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--candidate', required=True)
-    parser.add_argument('--repository', default='RauPro/MDH-SV-review')
+    parser.add_argument('--repository', default=load_instance().private_repository)
     parser.add_argument('--kind', choices=('case', 'news_dossier'), default='case')
     args=parser.parse_args()
     try:
