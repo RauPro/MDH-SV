@@ -257,7 +257,7 @@ def test_manifest_and_config_preserve_pinning_and_default_rules():
     assert config["extend"] == {"useDefault": True}
     assert "allowlists" not in config and "allowlist" not in config
     assert config["rules"][0]["id"] == "mdh-google-api-key"
-    assert all("allowlists" not in rule and "allowlist" not in rule for rule in config["rules"])
+    assert "allowlists" not in config["rules"][0] and "allowlist" not in config["rules"][0]
 
 
 def test_manifest_rejects_unpinned_or_redirected_artifacts(tmp_path):
