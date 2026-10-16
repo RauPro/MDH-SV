@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T17:17:13.396262+00:00",
+  "generated_at": "2026-10-16T18:17:41.991891+00:00",
   "assessment_counts": {
     "candidates": 12010,
     "evaluated": 4889,
-    "relevant": 1755,
-    "excluded": 142,
-    "uncertain": 2992,
+    "relevant": 1756,
+    "excluded": 150,
+    "uncertain": 2983,
     "pending": 7121
   },
   "selections": [
@@ -8651,23 +8651,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T12:14:53.058662-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "cbc29c01acf29f807f443e840e7bdc251893b05176b7a4af57e754675e79425b",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p9"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p9",
-            "p10",
-            "p12",
-            "p13",
-            "p16"
+            "p2"
           ]
         }
       }
@@ -22813,21 +22806,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T12:16:31.805275-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6e7f2b23f655d4d3fe2cc04f053db419ad55006eb1ff7ca4b41eba4754c78eb4",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p9"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4",
-            "p5",
-            "p9"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -25002,6 +24991,36 @@
             "p8",
             "p13",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7f871d0c12ed9b90e774df28539ae28fcecb9390bead43283fbd499ea9353868",
+      "source_url": "https://www.diariocolatino.com/la-etica-periodistica-esta-en-entredicho-una-vez-mas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T12:09:44.222292-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d27c7524e21ac53406834509126fe4a6f4538d948d4f721cfa9407cf5fe845c3",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p5",
+            "p8"
           ]
         }
       }
@@ -42580,18 +42599,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:10:10.186200-06:00",
+        "classified_at": "2026-10-16T12:14:32.492328-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "2ac7f72be82c37f1cd42cd0e330be3b64f7bee5a77fdff2a3ae69559341cff50",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p6",
-            "p7",
-            "p13"
+            "p6"
           ]
         }
       }
@@ -47269,20 +47286,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T12:16:53.359364-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c9697dc38ce46e34a2b36da36f729438872f58e96745051844ba4aee2c567a44",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p3",
-            "p5"
+            "p1"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p5",
-            "p42"
+            "p5"
           ]
         }
       }
