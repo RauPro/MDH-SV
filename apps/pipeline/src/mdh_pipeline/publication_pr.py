@@ -27,6 +27,8 @@ ORIGIN = re.compile(r"<!-- mdh-publication-origin: ([1-9][0-9]*) -->")
 MAX_RESPONSE = 48_000_000
 MAX_JSON = 32_000_000
 MAX_TOTAL_JSON = 64_000_000
+CI_WAIT_SECONDS = 18 * 60
+CI_POLL_SECONDS = 10
 PROJECTIONS = frozenset({
     "data/automated/news_dossiers.json",
     "apps/web/public/archive/news.json",
@@ -114,7 +116,7 @@ def owner_push(run):
             and run.get("triggering_actor", {}).get("id") == NEWS_PUBLISHER_ACTOR_ID)
 
 
-def validate_run(run, branch):
+def validate_run(run, branch, *, allow_pending=False):
     require(isinstance(run, dict)
             and run.get("repository", {}).get("full_name") == REPOSITORY
             and run.get("head_repository", {}).get("full_name") == REPOSITORY
@@ -123,7 +125,9 @@ def validate_run(run, branch):
             and run.get("head_branch") == branch
             and valid_sha(run.get("head_sha"))
             and run.get("event") in {"push", "workflow_dispatch"}
-            and run.get("status") == "completed" and run.get("conclusion") == "success",
+            and ((allow_pending and run.get("status") in {
+                "queued", "requested", "waiting", "pending", "in_progress", "completed"})
+                 or (run.get("status") == "completed" and run.get("conclusion") == "success")),
             "untrusted_or_unsuccessful_ci_run")
 
 
@@ -243,8 +247,75 @@ def create_pr(client, branch, kind, origin=None):
     })
 
 
+def validate_dispatched_run(run, run_id, *, branch=None, head=None):
+    candidate_branch = run.get("head_branch", "") if isinstance(run, dict) else ""
+    require(isinstance(candidate_branch, str) and BRANCH.fullmatch(candidate_branch)
+            and type(run.get("id")) is int and run["id"] == run_id,
+            "invalid_dispatched_ci_identity")
+    validate_run(run, candidate_branch, allow_pending=True)
+    require(run["event"] == "workflow_dispatch" and bot_run(run), "untrusted_dispatched_ci_actor")
+    require((branch is None or candidate_branch == branch)
+            and (head is None or run["head_sha"] == head), "changed_dispatched_ci_identity")
+
+
+def read_dispatched_run(client, run_id):
+    # The dispatch response identifies the exact run; allow only brief API
+    # visibility delay, never fall back to a different run from a listing.
+    for attempt in range(15):
+        try:
+            return client.call("GET", api(f"actions/runs/{run_id}"))
+        except PublicationError as exc:
+            if str(exc) != "github_get_failed_status_404" or attempt == 14:
+                raise
+            time.sleep(2)
+    raise PublicationError("dispatched_ci_not_visible")
+
+
 def dispatch(client, branch):
-    client.call("POST", api("actions/workflows/ci.yml/dispatches"), {"ref": branch})
+    require(isinstance(branch, str) and BRANCH.fullmatch(branch), "invalid_dispatch_branch")
+    head = ref_sha(client, branch)
+    # Since February 2026 GitHub can return the exact run ID. Token-authored CI
+    # does not reliably emit workflow_run, so explicitly arm the trusted
+    # default-branch controller as well; candidate CI keeps read-only access.
+    dispatched = client.call("POST", api("actions/workflows/ci.yml/dispatches"), {
+        "ref": branch, "return_run_details": True,
+    })
+    run_id = dispatched.get("workflow_run_id") if isinstance(dispatched, dict) else None
+    require(type(run_id) is int and run_id > 0, "ci_dispatch_missing_run_id")
+    run = read_dispatched_run(client, run_id)
+    validate_dispatched_run(run, run_id, branch=branch, head=head)
+    require(ref_sha(client, branch) == head, "publication_refs_changed_retry_required")
+    client.call("POST", api("actions/workflows/publication-pr.yml/dispatches"), {
+        "ref": "main", "inputs": {"ci_run_id": str(run_id)},
+    })
+
+
+def control_dispatch(client, event, ref):
+    require(ref == "refs/heads/main"
+            and event.get("repository", {}).get("full_name") == REPOSITORY,
+            "controller_dispatch_requires_main")
+    run_id_text = event.get("inputs", {}).get("ci_run_id")
+    require(isinstance(run_id_text, str) and re.fullmatch(r"[1-9][0-9]{0,19}", run_id_text),
+            "invalid_dispatched_ci_run_id")
+    run_id = int(run_id_text)
+    run = read_dispatched_run(client, run_id)
+    validate_dispatched_run(run, run_id)
+    branch, head = run["head_branch"], run["head_sha"]
+    for attempt in range(CI_WAIT_SECONDS // CI_POLL_SECONDS + 1):
+        validate_dispatched_run(run, run_id, branch=branch, head=head)
+        if ref_sha(client, branch) != head:
+            return "ignored_stale_ci_head"
+        if run["status"] == "completed":
+            require(run.get("conclusion") == "success", "dispatched_ci_unsuccessful")
+            # Reuse every PR/origin/tree/check/protection guard and reload the
+            # successful run again in control(); inputs never supply its data.
+            return control(client, {
+                "repository": {"full_name": REPOSITORY}, "workflow_run": run,
+            })
+        if attempt < CI_WAIT_SECONDS // CI_POLL_SECONDS:
+            time.sleep(CI_POLL_SECONDS)
+            run = client.call("GET", api(f"actions/runs/{run_id}"))
+    raise PublicationError("dispatched_ci_wait_timeout")
 
 
 def propose(client, branch, kind):
@@ -359,7 +430,12 @@ def main(argv=None):
         else:
             event_path = Path(os.environ["GITHUB_EVENT_PATH"])
             require(event_path.stat().st_size <= 2_000_000, "event_too_large")
-            result = control(client, json.loads(event_path.read_text()))
+            event = json.loads(event_path.read_text())
+            if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+                result = control_dispatch(client, event, os.environ.get("GITHUB_REF"))
+            else:
+                require(os.environ.get("GITHUB_EVENT_NAME") == "workflow_run", "invalid_controller_event")
+                result = control(client, event)
         print(result)
         return 0
     except (PublicationError, KeyError, ValueError, OSError) as exc:
