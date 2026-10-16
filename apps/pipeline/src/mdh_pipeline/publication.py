@@ -1,4 +1,5 @@
 """Explicit public catalogue boundary. Never export the candidate incident database."""
+import argparse
 import csv
 import hashlib
 import io
@@ -270,5 +271,15 @@ def export_catalog(source=CATALOG, destination=PUBLIC):
     return manifest
 
 
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--reviewed', type=Path, default=CATALOG,
+                        help='Reviewed catalogue JSON; defaults to the checkout catalogue')
+    parser.add_argument('--output', type=Path, default=PUBLIC,
+                        help='Destination directory for the validated public export files')
+    args = parser.parse_args()
+    print(json.dumps(export_catalog(source=args.reviewed, destination=args.output), indent=2))
+
+
 if __name__ == "__main__":
-    print(json.dumps(export_catalog(), indent=2))
+    main()

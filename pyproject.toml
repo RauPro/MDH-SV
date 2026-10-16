@@ -1,13 +1,15 @@
 [build-system]
-requires = ["setuptools>=68.0"]
+requires = ["setuptools==84.0.0", "wheel==0.48.0", "packaging==26.3"]
 build-backend = "setuptools.build_meta"
 
+# Checkout application: scripts/bootstrap.py installs requirements.lock before
+# registering editable modules. Standalone wheels do not include the datasets.
 [project]
 name = "mdh-sv"
 version = "2.0.0"
 description = "Monitor de Violaciones a Derechos Humanos en El Salvador - Open Data, AI & MCP"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13,<3.14"
 license = { text = "MIT" }
 authors = [
     { name = "Raul Guillen" }
@@ -30,4 +32,4 @@ asyncio_mode = "auto"
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py313"
