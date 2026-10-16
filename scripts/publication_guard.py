@@ -154,6 +154,9 @@ def main(argv=None) -> int:
     except GuardError as error:
         print(str(error), file=sys.stderr)
         return 2
+    except (OSError, UnicodeError):
+        print("publication_guard_unavailable", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

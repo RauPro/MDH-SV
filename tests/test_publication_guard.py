@@ -71,6 +71,16 @@ def test_duplicate_policy_fields_are_invalid(tmp_path):
         guard.policy_arguments(path)
 
 
+def test_startup_error_does_not_echo_exception_content(monkeypatch, capsys):
+    def unavailable(*_args, **_kwargs):
+        raise OSError("private diagnostic must not appear in logs")
+    monkeypatch.setattr(guard, "check", unavailable)
+    assert guard.main(["check"]) == 2
+    captured = capsys.readouterr()
+    assert captured.err == "publication_guard_unavailable\n"
+    assert not captured.out
+
+
 def test_private_bundle_remains_forbidden_after_deletion(tmp_path):
     repo = tmp_path / "repository"
     repository(repo)
