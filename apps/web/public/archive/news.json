@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T22:17:01.221408+00:00",
+  "generated_at": "2026-10-16T23:19:32.301694+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -22,13 +22,13 @@
     "selection_gate": {
       "version": 2,
       "scope": "human_rights_el_salvador",
-      "candidates": 12164,
+      "candidates": 12165,
       "selected": 1765,
       "evaluated": 4889,
       "relevant": 1765,
       "excluded": 174,
       "uncertain": 2950,
-      "pending": 7275,
+      "pending": 7276,
       "evaluated_at": "2026-10-16T22:16:58.301033+00:00"
     }
   },
@@ -57,7 +57,7 @@
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 1435,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
@@ -2476,14 +2476,14 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 7,
             "screen_version": 3,
-            "posts_scanned": 177,
-            "source_total_posts": 177,
-            "pages_fetched": 2,
+            "posts_scanned": 100,
+            "source_total_posts": 178,
+            "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-16T21:40:03.525401+00:00",
+            "last_attempt_at": "2026-10-16T23:19:28.959739+00:00",
             "error": null
           }
         ]
@@ -4918,7 +4918,7 @@
             "source_total_posts": 2,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-16T21:40:03.525607+00:00",
+            "last_attempt_at": "2026-10-16T23:19:28.959942+00:00",
             "error": null
           }
         ]
@@ -7353,7 +7353,7 @@
             "source_total_posts": 0,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-16T21:40:03.525844+00:00",
+            "last_attempt_at": "2026-10-16T23:19:28.960117+00:00",
             "error": null
           }
         ]
@@ -9797,7 +9797,7 @@
           "phase": "partial",
           "access": "public",
           "notice": "Selección parcial del especial de 2010 y páginas públicas actuales. Algunos enlaces antiguos restringen el acceso; no es una hemeroteca completa.",
-          "last_attempt_at": "2026-10-16T21:40:05.859501+00:00"
+          "last_attempt_at": "2026-10-16T23:19:30.782010+00:00"
         }
       },
       {
@@ -12236,10 +12236,10 @@
         ],
         "collection": {
           "method": "html_article_metadata",
-          "phase": "complete",
+          "phase": "partial",
           "access": "public",
           "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible.",
-          "last_attempt_at": "2026-10-16T21:40:07.011792+00:00"
+          "last_attempt_at": "2026-10-16T23:19:30.782060+00:00"
         }
       },
       {
@@ -15346,11 +15346,11 @@
             "status": "partial",
             "records": 2,
             "screen_version": 3,
-            "posts_scanned": 77,
+            "posts_scanned": 78,
             "source_total_posts": null,
-            "pages_fetched": 77,
+            "pages_fetched": 78,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-16T21:40:07.267677+00:00",
+            "last_attempt_at": "2026-10-16T23:19:30.821355+00:00",
             "error": null
           },
           {
@@ -17123,7 +17123,7 @@
           "phase": "partial",
           "access": "public",
           "notice": "Recorrido reanudable de los sitemaps públicos del archivo. La fecha se consulta en cada artículo; lastmod no se utiliza como fecha de publicación.",
-          "last_attempt_at": "2026-10-16T21:40:07.267677+00:00"
+          "last_attempt_at": "2026-10-16T23:19:30.821355+00:00"
         }
       }
     ],
@@ -25779,7 +25779,7 @@
         "sources": [
           {
             "source_id": "co-latino",
-            "status": "enumerated",
+            "status": "partial",
             "records": 7
           },
           {
