@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T23:18:41.703215+00:00",
+  "generated_at": "2026-10-16T00:17:04.446590+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11554,
-      "selected": 1728,
+      "selected": 1729,
       "evaluated": 4887,
-      "relevant": 1728,
-      "excluded": 55,
-      "uncertain": 3104,
+      "relevant": 1729,
+      "excluded": 63,
+      "uncertain": 3095,
       "pending": 6667,
-      "evaluated_at": "2026-10-15T23:16:58.866065+00:00"
+      "evaluated_at": "2026-10-16T00:17:01.768480+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1728,
+    "records": 1729,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 207,
+        "records": 208,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15176,7 +15176,7 @@
           {
             "month": "2013-05",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 57,
             "source_total_posts": null,
@@ -18852,7 +18852,7 @@
         "month": "2013-05",
         "start_date": "2013-05-01",
         "end_date": "2013-05-31",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18887,7 +18887,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -96129,7 +96129,7 @@
     },
     {
       "id": "ce72ce145e1cb5a4638342a912249c6db4749191b4af3d37a791fc0d090de351",
-      "title": "En 2014 se registran cero homicidios en 79 municipios: Benito Lara",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -101717,18 +101717,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-15T10:11:36.845826-06:00",
+        "classified_at": "2026-10-15T18:16:12.879609-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "3f656845370604b29eb2fca1fa58d8844a16140b6a2363ed2d15c69fd5334ca8",
           "jurisdiction_paragraph_ids": [
             "p1"
           ],
           "relevance_paragraph_ids": [
-            "p1",
-            "p2",
-            "p3"
+            "p1"
           ]
         }
       }
@@ -101987,18 +101985,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-15T09:09:59.378591-06:00",
+        "classified_at": "2026-10-15T18:14:27.974160-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a8e2b2f944ddf555272cc41e12e9cf6c64e83571db7907b4924a279e34d120d9",
           "jurisdiction_paragraph_ids": [
             "p3",
-            "p4",
-            "p5"
+            "p4"
           ],
           "relevance_paragraph_ids": [
-            "p1",
             "p4",
             "p5"
           ]
@@ -102179,6 +102175,48 @@
             "p1",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d108eef8c2e565a2caa2d4a0d7da02102b2a7c83abc72efb3fe53625b91f7cde",
+      "title": "Rodrigo Abd: “En el periodismo no se puede ganar siendo egoísta…”",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/106688/rodrigo-abd-en-el-periodismo-no-se-puede-ganar-siendo-egoista.html",
+      "published_date": "2013-05-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T21:55:35.230627+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T18:09:36.363149-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "64b97a9a1e3f0e55c15f970635cf2348b0b00ac111f84ee7e02f4cc66f08d6f4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p13"
           ]
         }
       }

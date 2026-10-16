@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T23:16:58.866065+00:00",
+  "generated_at": "2026-10-16T00:17:01.768480+00:00",
   "assessment_counts": {
     "candidates": 11554,
     "evaluated": 4887,
-    "relevant": 1728,
-    "excluded": 55,
-    "uncertain": 3104,
+    "relevant": 1729,
+    "excluded": 63,
+    "uncertain": 3095,
     "pending": 6667
   },
   "selections": [
@@ -35701,18 +35701,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-15T09:09:59.378591-06:00",
+        "classified_at": "2026-10-15T18:14:27.974160-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a8e2b2f944ddf555272cc41e12e9cf6c64e83571db7907b4924a279e34d120d9",
           "jurisdiction_paragraph_ids": [
             "p3",
-            "p4",
-            "p5"
+            "p4"
           ],
           "relevance_paragraph_ids": [
-            "p1",
             "p4",
             "p5"
           ]
@@ -40673,6 +40671,31 @@
             "p8",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d108eef8c2e565a2caa2d4a0d7da02102b2a7c83abc72efb3fe53625b91f7cde",
+      "source_url": "https://historico.elsalvador.com/historico/106688/rodrigo-abd-en-el-periodismo-no-se-puede-ganar-siendo-egoista.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-05-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T18:09:36.363149-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "64b97a9a1e3f0e55c15f970635cf2348b0b00ac111f84ee7e02f4cc66f08d6f4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p13"
           ]
         }
       }
@@ -46120,18 +46143,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-15T10:11:36.845826-06:00",
+        "classified_at": "2026-10-15T18:16:12.879609-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "3f656845370604b29eb2fca1fa58d8844a16140b6a2363ed2d15c69fd5334ca8",
           "jurisdiction_paragraph_ids": [
             "p1"
           ],
           "relevance_paragraph_ids": [
-            "p1",
-            "p2",
-            "p3"
+            "p1"
           ]
         }
       }
