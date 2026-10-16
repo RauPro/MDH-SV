@@ -8,6 +8,12 @@ La web consume JSON del mismo origen. Tiene CSP, bloqueo de iframes, `nosniff`, 
 
 El prebuild comprueba la fuente canónica, la correspondencia exacta de registros y los hashes de todas las descargas. Una edición exige regeneración. CI prueba Python, MCP, frontend y estructura accesible; un check HTTP exitoso no certifica veracidad.
 
+Las actualizaciones automáticas se proponen mediante PR y necesitan el check
+`verify` antes de integrarse. El publicador privado prepara y escribe en runners
+separados; el código que lee borradores está fijado a un SHA aprobado. Consulte
+[publicación aislada y protección de main](PUBLICATION-SECURITY.md) para la
+política, la activación y las comprobaciones operativas.
+
 ## Verificación de una versión
 
 ```sh
