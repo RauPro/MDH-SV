@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T21:17:58.400091+00:00",
+  "generated_at": "2026-10-16T22:16:58.301033+00:00",
   "assessment_counts": {
-    "candidates": 12011,
+    "candidates": 12164,
     "evaluated": 4889,
-    "relevant": 1764,
-    "excluded": 166,
-    "uncertain": 2959,
-    "pending": 7122
+    "relevant": 1765,
+    "excluded": 174,
+    "uncertain": 2950,
+    "pending": 7275
   },
   "selections": [
     {
@@ -3459,18 +3459,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T16:14:08.880116-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "2470171c657e58a09c2dfeb06bef5cb3d1447b68bcb92c35bb791bfbc9e800d0",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p6",
-            "p7"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -3554,6 +3553,37 @@
             "p5",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "137dbec8c44a75732b26442474ecf26b5518fa7ae253cdc4b0c4c844a4f20965",
+      "source_url": "https://www.diariocolatino.com/comision-pide-llamar-a-jorge-velado-como-complice-de-la-desaparicion-de-francisco-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T16:09:38.477110-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7e325c5c17ac2f3d34d1764279a0ac59e79d47012e3974f4d5272ce6cc605c2f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p11",
+            "p13"
           ]
         }
       }
@@ -7550,9 +7580,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T16:14:26.041166-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "656e056c8ef9dbe49a8404a123b639ec44318b27d876dc578f3ab26059f69f9d",
           "jurisdiction_paragraph_ids": [
@@ -27278,18 +27308,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T16:16:07.708361-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "45afa3383336fdd99e214d76648441a58a2ad1535005f167a0e7b4cdd5fd3f4d",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p6"
+            "p4"
           ]
         }
       }
@@ -28871,18 +28900,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T16:16:24.255980-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4721b1f565a4e64f9fc0272e9888ac641a134bf236e7cdc0c1efff7da0db7eac",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p6",
-            "p9"
+            "p9",
+            "p11"
           ]
         }
       }
