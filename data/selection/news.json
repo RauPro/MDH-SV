@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T00:17:01.768480+00:00",
+  "generated_at": "2026-10-16T01:16:34.601257+00:00",
   "assessment_counts": {
     "candidates": 11554,
     "evaluated": 4887,
-    "relevant": 1729,
-    "excluded": 63,
-    "uncertain": 3095,
+    "relevant": 1730,
+    "excluded": 71,
+    "uncertain": 3086,
     "pending": 6667
   },
   "selections": [
@@ -22358,6 +22358,31 @@
             "p2",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "736207b8e2952afc93442e4b039f28b18b387ed57d0da1ce8709f5d196882e19",
+      "source_url": "https://historico.elsalvador.com/historico/108699/lanzan-concurso-de-fotografia-para-periodistas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-06-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T19:09:25.916596-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ef819721f763a36f6c566caa31f6fd73adabbc5395625988a1863c500556dcfb",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }

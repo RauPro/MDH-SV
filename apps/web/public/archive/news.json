@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T00:19:21.169632+00:00",
+  "generated_at": "2026-10-16T01:16:36.330778+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11554,
-      "selected": 1729,
+      "selected": 1730,
       "evaluated": 4887,
-      "relevant": 1729,
-      "excluded": 63,
-      "uncertain": 3095,
+      "relevant": 1730,
+      "excluded": 71,
+      "uncertain": 3086,
       "pending": 6667,
-      "evaluated_at": "2026-10-16T00:17:01.768480+00:00"
+      "evaluated_at": "2026-10-16T01:16:34.601257+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-10-15",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1729,
+    "records": 1730,
     "sources": [
       {
         "id": "co-latino",
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 208,
+        "records": 209,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15188,7 +15188,7 @@
           {
             "month": "2013-06",
             "status": "partial",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 80,
             "source_total_posts": null,
@@ -18895,7 +18895,7 @@
         "month": "2013-06",
         "start_date": "2013-06-01",
         "end_date": "2013-06-30",
-        "records": 1,
+        "records": 2,
         "sources": [
           {
             "source_id": "co-latino",
@@ -18930,7 +18930,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 1
+            "records": 2
           }
         ]
       },
@@ -102130,6 +102130,48 @@
           "relevance_paragraph_ids": [
             "p11",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "736207b8e2952afc93442e4b039f28b18b387ed57d0da1ce8709f5d196882e19",
+      "title": "Lanzan concurso de fotografía para periodistas",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/108699/lanzan-concurso-de-fotografia-para-periodistas.html",
+      "published_date": "2013-06-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-15T05:07:46.534681+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-15T19:09:25.916596-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ef819721f763a36f6c566caa31f6fd73adabbc5395625988a1863c500556dcfb",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }
