@@ -24,16 +24,44 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 18,
-      "pages_fetched": 18,
+      "posts_scanned": 20,
+      "pages_fetched": 20,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-16T16:55:40.122662+00:00",
+      "last_attempt_at": "2026-10-16T21:40:07.011792+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "fe1491a80cbc5a92c1d94a1fdb3eb63dc804fd4b8e39e3fbc8ff7bd15f66778f",
+      "title": "Llega presidenta de Costa Rica a El Salvador para reunirse con Bukele y conocer cómo funciona el CECOT",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/politica/llega-presidenta-de-costa-rica-a-el-salvador-para-reunirse-con-bukele-y-conocer-como-funciona-el-cecot",
+      "published_date": "2026-10-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "cecot",
+        "costa rica",
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-16T21:40:07.011792+00:00"
+      }
+    },
     {
       "id": "d408e9b08b084eed65363364529794a03fbac81f8dfee4af594d91b0e6e66d94",
       "title": "Capturan a hombre por agredir con un martillo y mantener encerrada a su compañera de vida en Ahuachapán",
@@ -57,6 +85,29 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-10-16T16:55:40.122662+00:00"
+      }
+    },
+    {
+      "id": "3c50da5b19c06140e2f636cd853a7eb9bfeff9b1f1d310a6436371f7609c0561",
+      "title": "PNC captura a dos mujeres señaladas de transportar cocaína en carretera a Comalapa",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/pnc-captura-a-dos-mujeres-senaladas-de-transportar-cocaina-en-carretera-a-comalapa",
+      "published_date": "2026-10-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-16T21:40:07.011792+00:00"
       }
     },
     {
@@ -515,15 +566,15 @@
   ],
   "collection": {
     "method": "html_archive",
-    "phase": "partial",
+    "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-16T21:11:43.539343+00:00",
+    "last_attempt_at": "2026-10-16T21:40:07.011792+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
     ],
-    "index_cursor": 1,
+    "index_cursor": 2,
     "articles": [
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales",
       "https://diario.elmundo.sv/nacionales/mas-del-30-de-salvadorenos-aprueba-tortura-y-ejecuciones-extrajudiciales",
@@ -545,9 +596,10 @@
       "https://diario.elmundo.sv/nacionales/dan-hasta-21-anos-de-prision-a-tres-mexicanos-y-cuatro-ecuatorianos-por-trafico-de-armas-y-drogas",
       "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-tres-empleados-del-isss-acusados-de-hurto-agravado",
       "https://diario.elmundo.sv/nacionales/capturan-a-hombre-por-agredir-con-un-martillo-y-mantener-encerrada-a-su-companera-de-vida-en-ahuachapan",
+      "https://diario.elmundo.sv/politica/llega-presidenta-de-costa-rica-a-el-salvador-para-reunirse-con-bukele-y-conocer-como-funciona-el-cecot",
       "https://diario.elmundo.sv/nacionales/pnc-captura-a-dos-mujeres-senaladas-de-transportar-cocaina-en-carretera-a-comalapa"
     ],
-    "article_cursor": 20,
+    "article_cursor": 22,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -668,6 +720,18 @@
         "published_date": "2026-10-16",
         "last_attempt_at": "2026-10-16T16:55:40.122662+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/politica/llega-presidenta-de-costa-rica-a-el-salvador-para-reunirse-con-bukele-y-conocer-como-funciona-el-cecot": {
+        "status": "selected",
+        "published_date": "2026-10-16",
+        "last_attempt_at": "2026-10-16T21:40:07.011792+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/pnc-captura-a-dos-mujeres-senaladas-de-transportar-cocaina-en-carretera-a-comalapa": {
+        "status": "selected",
+        "published_date": "2026-10-16",
+        "last_attempt_at": "2026-10-16T21:40:07.011792+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -679,16 +743,16 @@
         "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
         "article_urls_selected": 4,
-        "last_attempt_at": "2026-10-16T21:11:43.539343+00:00"
+        "last_attempt_at": "2026-10-16T21:40:07.011792+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 13,
-        "article_urls_matching_anchor": 1,
+        "article_urls_matching_anchor": 2,
         "article_urls_observed": 19,
-        "article_urls_selected": 1,
-        "last_attempt_at": "2026-10-16T16:55:40.122662+00:00"
+        "article_urls_selected": 2,
+        "last_attempt_at": "2026-10-16T21:40:07.011792+00:00"
       }
     },
     "index_screen_version": 3
