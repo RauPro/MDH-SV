@@ -8,21 +8,23 @@ import { parsePublishedNewsLocations, validateLocationBindings } from '../../../
 import { checkOfficialStatisticsExports } from './export-official-statistics.mjs';
 import { parseNewsProcessing, validateProcessingBindings } from '../../../shared/news-processing.mjs';
 import { parseNewsExceptions } from '../../../shared/news-exceptions.mjs';
+import { publicDataRoot } from './public-data-root.mjs';
 
-const source = new URL('../../../data/reviewed/publications.json', import.meta.url);
-const publicDir = new URL('../public/data/', import.meta.url);
+const data = publicDataRoot();
+const source = data.path('data/reviewed/publications.json');
+const publicDir = data.path('apps/web/public/data', 'directory');
 const hash = data => createHash('sha256').update(data).digest('hex');
-const manifest = JSON.parse(readFileSync(new URL('manifest.json', publicDir)));
+const manifest = JSON.parse(readFileSync(data.path('apps/web/public/data/manifest.json')));
 assert.equal(hash(readFileSync(source)), manifest.source_sha256, 'Regenerate public data after changing source');
 const allowed = ['catalog.json', 'records.csv', 'records.geojson', 'records.parquet'];
 assert.deepEqual(Object.keys(manifest.files).sort(), [...allowed].sort());
 assert.deepEqual(readdirSync(publicDir).sort(), [...allowed, 'manifest.json'].sort(), 'Unexpected public data file');
 for (const name of allowed) {
-  const bytes = readFileSync(new URL(name, publicDir));
+  const bytes = readFileSync(data.path(`apps/web/public/data/${name}`));
   assert.equal(hash(bytes), manifest.files[name].sha256, `Stale/tampered export: ${name}`);
   assert.equal(bytes.length, manifest.files[name].bytes);
 }
-const catalog = JSON.parse(readFileSync(new URL('catalog.json', publicDir)));
+const catalog = JSON.parse(readFileSync(data.path('apps/web/public/data/catalog.json')));
 const original = JSON.parse(readFileSync(source));
 assert.equal(catalog.records.length, manifest.records_count);
 assert.deepEqual([...catalog.records].sort((a,b)=>a.id.localeCompare(b.id)), [...original.records].sort((a,b)=>a.id.localeCompare(b.id)));
@@ -38,17 +40,17 @@ for (const row of catalog.records) {
 }
 console.log(`Validated ${catalog.records.length} public records and all download checksums.`);
 
-const approvedNews = JSON.parse(readFileSync(new URL('../../../data/reviewed/news_dossiers.json', import.meta.url)));
-const automatedNews = JSON.parse(readFileSync(new URL('../../../data/automated/news_dossiers.json', import.meta.url)));
-const publicNews = JSON.parse(readFileSync(new URL('../public/archive/dossiers.json', import.meta.url)));
-const newsArchive = JSON.parse(readFileSync(new URL('../public/archive/news.json', import.meta.url)));
-const exceptions = parseNewsExceptions(JSON.parse(readFileSync(new URL('../../../data/selection/news_exceptions.json', import.meta.url))));
+const approvedNews = JSON.parse(readFileSync(data.path('data/reviewed/news_dossiers.json')));
+const automatedNews = JSON.parse(readFileSync(data.path('data/automated/news_dossiers.json')));
+const publicNews = JSON.parse(readFileSync(data.path('apps/web/public/archive/dossiers.json')));
+const newsArchive = JSON.parse(readFileSync(data.path('apps/web/public/archive/news.json')));
+const exceptions = parseNewsExceptions(JSON.parse(readFileSync(data.path('data/selection/news_exceptions.json'))));
 const withdrawn = id => exceptions.get(id)?.withdrawn === true;
 for (const reference of newsArchive.records) assert.ok(!withdrawn(reference.id), 'Withdrawn news must not remain in the public archive');
 // Verify discovery coverage independently of classification or publication.
 const candidateIds = new Set();
 for (const id of ['co-latino', 'gatoencerrado', 'factum', 'el-faro', 'el-mundo', 'la-prensa-grafica', 'el-diario-de-hoy']) {
-  const checkpoint = JSON.parse(readFileSync(new URL(`../../../data/history/${id}.json`, import.meta.url)));
+  const checkpoint = JSON.parse(readFileSync(data.path(`data/history/${id}.json`)));
   for (const item of checkpoint.records) if (item.published_date >= newsArchive.coverage.start_date && item.published_date <= newsArchive.coverage.end_date) candidateIds.add(item.id);
 }
 assert.equal(newsArchive.policy.selection_gate.candidates, candidateIds.size, 'Discovery denominator must match the candidate checkpoints');
@@ -57,7 +59,7 @@ const allApproved = parsePublishedNewsDossiers(approvedNews);
 for (const dossier of allApproved.values()) assert.equal(dossier.human_reviewed, true, 'Reviewed source must contain only human decisions');
 const automaticIndex = parsePublishedNewsDossiers(automatedNews);
 for (const dossier of automaticIndex.values()) assert.equal(dossier.schema_version, 2, 'Automated source must contain only validated automatic publications');
-const selectionManifest = JSON.parse(readFileSync(new URL('../../../data/selection/news.json', import.meta.url)));
+const selectionManifest = JSON.parse(readFileSync(data.path('data/selection/news.json')));
 assertSelectionProvenance(newsArchive, selectionManifest, allApproved);
 // Human decisions replace automatic content, including a decision to withhold
 // the reference from the public scope. Source stores remain separate.
@@ -79,14 +81,14 @@ for (const dossier of publicIndex.values()) {
 }
 console.log(`Validated ${publicIndex.size} public news dossiers with explicit publication provenance and source bindings.`);
 
-const processing = JSON.parse(readFileSync(new URL('../public/archive/processing.json', import.meta.url)));
+const processing = JSON.parse(readFileSync(data.path('apps/web/public/archive/processing.json')));
 const processingIndex = validateProcessingBindings(parseNewsProcessing(processing), newsArchive.records);
 for (const entry of processingIndex.values()) {
   assert.equal(hash(entry.source_url), entry.candidate_id, 'Processing identity must match its public source URL');
 }
 console.log(`Validated ${processingIndex.size} processing statuses without exposing unreviewed fields.`);
 
-const automaticLocations = JSON.parse(readFileSync(new URL('../public/archive/locations.json', import.meta.url)));
+const automaticLocations = JSON.parse(readFileSync(data.path('apps/web/public/archive/locations.json')));
 const locationsIndex = validateLocationBindings(parsePublishedNewsLocations(automaticLocations), newsArchive.records);
 for (const location of locationsIndex.values()) {
   assert.ok(!withdrawn(location.candidate_id), 'Withdrawn news must not retain a public location');
@@ -97,5 +99,10 @@ for (const location of locationsIndex.values()) {
 }
 console.log(`Validated ${locationsIndex.size} unreviewed automatic news locations; no dossier approvals implied.`);
 
-const officialStatistics = checkOfficialStatisticsExports();
+const statisticsDirectory = data.path('apps/web/public/statistics', 'directory');
+// The exporter reads its own imports; validate every external data leaf first.
+for (const name of readdirSync(statisticsDirectory)) data.path(`apps/web/public/statistics/${name}`);
+const officialStatistics = checkOfficialStatisticsExports(
+  data.path('data/official-statistics/homicides.json'), statisticsDirectory,
+);
 console.log(`Validated ${officialStatistics.period_count} separate official statistical periods, provenance and download checksums.`);

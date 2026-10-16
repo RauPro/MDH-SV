@@ -1,5 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import { publicDataRoot, readPublicJson, writePublicJson } from './public-data-root.mjs';
 import { parseNewsProcessing, processingMatchesReference } from '../../../shared/news-processing.mjs';
 
 /** A public-only refresh may remove stale receipts, never invent private progress. */
@@ -13,10 +13,11 @@ export function reconcileNewsProcessing(payload, references, now = new Date().to
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const location = new URL('../public/archive/processing.json', import.meta.url);
-  const before = JSON.parse(readFileSync(location, 'utf8'));
-  const archive = JSON.parse(readFileSync(new URL('../public/archive/news.json', import.meta.url), 'utf8'));
+  const data = publicDataRoot();
+  const location = data.path('apps/web/public/archive/processing.json');
+  const before = readPublicJson(location);
+  const archive = readPublicJson(data.path('apps/web/public/archive/news.json'));
   const after = reconcileNewsProcessing(before, archive.records);
-  if (JSON.stringify(before) !== JSON.stringify(after)) writeFileSync(location, `${JSON.stringify(after, null, 2)}\n`);
+  if (JSON.stringify(before) !== JSON.stringify(after)) writePublicJson(location, after);
   console.log(`Retained ${after.entries.length} matching public processing receipts; missing statuses remain unknown.`);
 }

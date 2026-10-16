@@ -1,6 +1,5 @@
-import { lstatSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
-import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
+import { publicDataRoot, readPublicJson, writePublicJson } from './public-data-root.mjs';
 import { NEWS_DOSSIER_PROTECTED_TITLE, newsDossierFor, parsePublishedNewsDossiers, validateDossierBindings } from '../../../shared/news-dossier.mjs';
 import { newsLocationFor, parsePublishedNewsLocations, validateLocationBindings } from '../../../shared/news-location.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference } from '../../../shared/news-selection.mjs';
@@ -58,36 +57,21 @@ export function reconcileNewsPublication({ archive, automated, reviewed, locatio
     published: { schema_version: 1, dossiers: sorted(merged) }, locations: afterLocations, archive: safeArchive };
 }
 
-function readSafe(path) {
-  const info = lstatSync(path);
-  if (!info.isFile() || info.isSymbolicLink() || info.size > 64 * 1024 * 1024) throw new Error('Unsafe public projection path');
-  return JSON.parse(readFileSync(path, 'utf8'));
-}
-
-function writeAtomically(path, value) {
-  const text = `${JSON.stringify(value, null, 2)}\n`;
-  if (readFileSync(path, 'utf8') === text) return;
-  const temporary = new URL(`.${path.pathname.split('/').at(-1)}.${randomUUID()}.tmp`, path);
-  try {
-    writeFileSync(temporary, text, { flag: 'wx', mode: 0o644 });
-    renameSync(temporary, path);
-  } finally { rmSync(temporary, { force: true }); }
-}
-
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const data = publicDataRoot();
   const paths = {
-    archive: new URL('../public/archive/news.json', import.meta.url),
-    automated: new URL('../../../data/automated/news_dossiers.json', import.meta.url),
-    reviewed: new URL('../../../data/reviewed/news_dossiers.json', import.meta.url),
-    locations: new URL('../public/archive/locations.json', import.meta.url),
-    exceptions: new URL('../../../data/selection/news_exceptions.json', import.meta.url),
-    published: new URL('../public/archive/dossiers.json', import.meta.url),
+    archive: data.path('apps/web/public/archive/news.json'),
+    automated: data.path('data/automated/news_dossiers.json'),
+    reviewed: data.path('data/reviewed/news_dossiers.json'),
+    locations: data.path('apps/web/public/archive/locations.json'),
+    exceptions: data.path('data/selection/news_exceptions.json'),
+    published: data.path('apps/web/public/archive/dossiers.json'),
   };
-  const input = Object.fromEntries(Object.entries(paths).map(([name, path]) => [name, readSafe(path)]));
+  const input = Object.fromEntries(Object.entries(paths).map(([name, path]) => [name, readPublicJson(path)]));
   parsePublishedNewsDossiers(input.published);
   const after = reconcileNewsPublication(input);
   // Validate everything before the first write. Each file replacement is atomic;
   // the workflow publishes all related replacements in a single Git commit.
-  for (const name of ['automated', 'published', 'locations', 'archive']) writeAtomically(paths[name], after[name]);
+  for (const name of ['automated', 'published', 'locations', 'archive']) writePublicJson(paths[name], after[name]);
   console.log(`Retained ${after.automated.dossiers.length} automatic dossiers, ${after.published.dossiers.length} public dossiers and ${after.locations.locations.length} locations.`);
 }
