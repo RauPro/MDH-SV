@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T13:17:07.425521+00:00",
+  "generated_at": "2026-10-16T14:17:50.193747+00:00",
   "assessment_counts": {
     "candidates": 11858,
     "evaluated": 4889,
-    "relevant": 1739,
-    "excluded": 135,
-    "uncertain": 3015,
+    "relevant": 1742,
+    "excluded": 142,
+    "uncertain": 3005,
     "pending": 6969
   },
   "selections": [
@@ -8048,6 +8048,31 @@
             "p4",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2b9f3cc079cbf8f6b2aaafbe8b65250e656b3a6c794917b49d8ffeedf24509d9",
+      "source_url": "https://historico.elsalvador.com/historico/113013/alberto-salcedo-ramos-los-periodistas-son-perezosos-para-leer.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-08-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T14:10:44.252970+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8deb131e973b752ba8ff49af9e0dcb078111f06eeca027face6a206f5fc95806",
+          "jurisdiction_paragraph_ids": [
+            "p31"
+          ],
+          "relevance_paragraph_ids": [
+            "p31"
           ]
         }
       }
@@ -33421,6 +33446,34 @@
       }
     },
     {
+      "candidate_id": "a846e33fee9b46233f31920873bee2cd2981bfafc168c630eb2212e7d5a51ebc",
+      "source_url": "https://www.diariocolatino.com/sondeo-de-precios-escolares-realiza-defensoria-del-consumidor/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T08:09:42.956957-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b4e9b795bf59523a5b7d3d6f4d2797e0b1c9f3456d11c4591032dbcd1155245e",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a8d4fa368031d15cc0ae958ee0585cf86ba7873dadae50cde9563cce9d12ae9a",
       "source_url": "https://historico.elsalvador.com/historico/162856/capturan-a-guatemalteco-con-15-inmigrantes-salvadorenos.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -34042,18 +34095,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:10:10.186200-06:00",
+        "classified_at": "2026-10-16T08:16:58.353630-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4534a4f8fdab07bb1d6191c38771ee1976a93bd9759b35f4fe8ce05932abdb41",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p7"
+            "p2"
           ]
         }
       }
@@ -45651,6 +45702,38 @@
             "p5",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "eeba0be4475bd97cdd4d4bba1ad7e1437ee13654b91a05479802b9009931a761",
+      "source_url": "https://www.diariocolatino.com/fgr-presentara-acusacion-contra-dos-pandilleros-por-homicidio-de-madre-de-subinspector-del-911/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T08:09:42.956957-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f4a97ac3215168ca58efc0ba1474e9f39af2903eac6f1839ed544166a099fcec",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p9"
           ]
         }
       }
