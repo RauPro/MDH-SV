@@ -656,6 +656,114 @@
       "patch": {
         "publisher_actor_id": 1.5
       }
+    },
+    {
+      "name": "hexadecimal IP URL 127.0.0.0x1",
+      "valid": false,
+      "patch": {
+        "public_url": "https://127.0.0.0x1",
+        "mcp_allowed_hosts": [
+          "127.0.0.0x1"
+        ]
+      }
+    },
+    {
+      "name": "hexadecimal IP MCP 127.0.0.0x1",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "127.0.0.0x1"
+        ]
+      }
+    },
+    {
+      "name": "hexadecimal IP email 127.0.0.0x1",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@127.0.0.0x1"
+      }
+    },
+    {
+      "name": "hexadecimal IP URL 1.0x1",
+      "valid": false,
+      "patch": {
+        "public_url": "https://1.0x1",
+        "mcp_allowed_hosts": [
+          "1.0x1"
+        ]
+      }
+    },
+    {
+      "name": "hexadecimal IP MCP 1.0x1",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "1.0x1"
+        ]
+      }
+    },
+    {
+      "name": "hexadecimal IP email 1.0x1",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@1.0x1"
+      }
+    },
+    {
+      "name": "hexadecimal IP URL 1.0xffffffff",
+      "valid": false,
+      "patch": {
+        "public_url": "https://1.0xffffffff",
+        "mcp_allowed_hosts": [
+          "1.0xffffffff"
+        ]
+      }
+    },
+    {
+      "name": "hexadecimal IP MCP 1.0xffffffff",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "1.0xffffffff"
+        ]
+      }
+    },
+    {
+      "name": "hexadecimal IP email 1.0xffffffff",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@1.0xffffffff"
+      }
+    },
+    {
+      "name": "hexadecimal IP URL 1.0x",
+      "valid": false,
+      "patch": {
+        "public_url": "https://1.0x",
+        "mcp_allowed_hosts": [
+          "1.0x"
+        ]
+      }
+    },
+    {
+      "name": "hexadecimal IP MCP 1.0x",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "1.0x"
+        ]
+      }
+    },
+    {
+      "name": "hexadecimal IP email 1.0x",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@1.0x"
+      }
     }
   ]
 }
