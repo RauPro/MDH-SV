@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T05:15:37.608486+00:00",
+  "generated_at": "2026-10-16T06:15:21.496000+00:00",
   "assessment_counts": {
     "candidates": 11707,
     "evaluated": 4888,
     "relevant": 1733,
-    "excluded": 103,
-    "uncertain": 3052,
+    "excluded": 111,
+    "uncertain": 3044,
     "pending": 6819
   },
   "selections": [
@@ -352,19 +352,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T00:12:36.960963-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "88b90cfcfcfd1a6016ea2a89eef1655a82c11f7df1cebf225c012b930dc58bfa",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p6"
+            "p3"
           ]
         }
       }
@@ -6746,19 +6744,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T00:14:39.649494-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "261934369d4846305d6cb2c49cd4ec2a40b25022b30ef45dc1e92246c4dd2128",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p5"
+            "p7"
           ]
         }
       }
@@ -19878,16 +19874,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T00:12:16.640673-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ed24c4e63c6cdf97d09bae8d7111424dee23cbd4bda743b22ba3098c79acf3d0",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
+            "p6",
             "p7"
           ]
         }
