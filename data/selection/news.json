@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T20:17:41.907176+00:00",
+  "generated_at": "2026-10-16T21:17:58.400091+00:00",
   "assessment_counts": {
-    "candidates": 12010,
+    "candidates": 12011,
     "evaluated": 4889,
-    "relevant": 1762,
-    "excluded": 158,
-    "uncertain": 2969,
-    "pending": 7121
+    "relevant": 1764,
+    "excluded": 166,
+    "uncertain": 2959,
+    "pending": 7122
   },
   "selections": [
     {
@@ -9050,14 +9050,13 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T15:14:36.835417-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d600d67b2bebb75b261010210b1137fab27eb9ce64f482e1db3212d476021432",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
@@ -10377,6 +10376,34 @@
             "p3",
             "p4",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "37022affb46f9d7fb2d0c4e2ef828f367fd2ee4715bd65c10754b80d57ece0ef",
+      "source_url": "https://historico.elsalvador.com/historico/124913/asesinan-de-15-disparos-a-un-empresario-salvadoreno-en-ciudad-de-panama.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-03-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T15:09:43.814392-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "887b8860eeab8b7467460a694e3f426fe4940aad86887b85330049b063a8f520",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -13336,6 +13363,34 @@
           "relevance_paragraph_ids": [
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "470ba218c249a143c3f4e8ef037fe7abf7f97d543984ae352f34382a68554f88",
+      "source_url": "https://www.diariocolatino.com/frente-sindical-salvadoreno-exige-avances-en-caso-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T15:09:43.814392-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "43b17578cb563d5909c826d5359575b2f0344c69a0ffea0189bc60f1880bcfb8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -20313,17 +20368,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T16:14:32.813515-06:00",
+        "classified_at": "2026-10-16T15:16:20.712015-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "7654bcb33932a77915695cee26a771d81eb7d1b048a8218860af2a3ee732d50e",
           "jurisdiction_paragraph_ids": [
             "p1"
           ],
           "relevance_paragraph_ids": [
-            "p9",
-            "p12"
+            "p1"
           ]
         }
       }
@@ -23673,21 +23727,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T15:12:39.647563-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8a9264c1edb478ad11f6956983658a3ba2efc5aa2cec3cbc6135d9283e0b2a08",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p5",
-            "p6",
-            "p7"
+            "p2"
           ]
         }
       }
@@ -31867,18 +31916,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:12:14.918610-06:00",
+        "classified_at": "2026-10-16T15:16:37.020618-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d5b0d3a56a25d7d3ce67158dee1a705d23b9d91494c730e20e3f1e6e6ed1fabe",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p8",
-            "p9",
-            "p11"
+            "p2",
+            "p5",
+            "p14"
           ]
         }
       }
@@ -32646,22 +32695,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:11:16.943285-06:00",
+        "classified_at": "2026-10-16T15:14:21.202427-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "fa7cdd6c3e65931de39ed375b1bfad21c21fb5e18c99609b009039a8a8cbcf96",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p6"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p5",
-            "p7",
-            "p9"
+            "p2"
           ]
         }
       }
