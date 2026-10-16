@@ -24,16 +24,41 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 17,
-      "pages_fetched": 17,
+      "posts_scanned": 18,
+      "pages_fetched": 18,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-15T17:20:01.405150+00:00",
+      "last_attempt_at": "2026-10-16T16:55:40.122662+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "d408e9b08b084eed65363364529794a03fbac81f8dfee4af594d91b0e6e66d94",
+      "title": "Capturan a hombre por agredir con un martillo y mantener encerrada a su compañera de vida en Ahuachapán",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/capturan-a-hombre-por-agredir-con-un-martillo-y-mantener-encerrada-a-su-companera-de-vida-en-ahuachapan",
+      "published_date": "2026-10-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "ahuachapan"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-16T16:55:40.122662+00:00"
+      }
+    },
     {
       "id": "f8da707032ee37b408e5d4eb0578c0a265ec9df5a46ad165398252f9aa5cbf4f",
       "title": "Envían a prisión provisional a tres empleados del ISSS acusados de hurto agravado",
@@ -493,7 +518,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-16T11:52:43.604773+00:00",
+    "last_attempt_at": "2026-10-16T16:55:40.122662+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -518,9 +543,10 @@
       "https://diario.elmundo.sv/politica/gobierno-propone-carcel-para-conductores-y-propietarios-de-transporte-publico-y-de-carga-sin-licencia",
       "https://diario.elmundo.sv/nacionales/hombre-que-asesino-a-su-esposa-en-san-vicente-recibe-50-anos-de-carcel",
       "https://diario.elmundo.sv/nacionales/dan-hasta-21-anos-de-prision-a-tres-mexicanos-y-cuatro-ecuatorianos-por-trafico-de-armas-y-drogas",
-      "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-tres-empleados-del-isss-acusados-de-hurto-agravado"
+      "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-tres-empleados-del-isss-acusados-de-hurto-agravado",
+      "https://diario.elmundo.sv/nacionales/capturan-a-hombre-por-agredir-con-un-martillo-y-mantener-encerrada-a-su-companera-de-vida-en-ahuachapan"
     ],
-    "article_cursor": 19,
+    "article_cursor": 20,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -635,6 +661,12 @@
         "published_date": "2026-10-15",
         "last_attempt_at": "2026-10-15T17:20:01.405150+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/capturan-a-hombre-por-agredir-con-un-martillo-y-mantener-encerrada-a-su-companera-de-vida-en-ahuachapan": {
+        "status": "selected",
+        "published_date": "2026-10-16",
+        "last_attempt_at": "2026-10-16T16:55:40.122662+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -643,10 +675,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 4,
+        "article_urls_matching_anchor": 5,
         "article_urls_observed": 20,
-        "article_urls_selected": 4,
-        "last_attempt_at": "2026-10-16T11:52:43.604773+00:00"
+        "article_urls_selected": 5,
+        "last_attempt_at": "2026-10-16T16:55:40.122662+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -655,7 +687,7 @@
         "article_urls_matching_anchor": 1,
         "article_urls_observed": 19,
         "article_urls_selected": 1,
-        "last_attempt_at": "2026-10-16T11:52:43.604773+00:00"
+        "last_attempt_at": "2026-10-16T16:55:40.122662+00:00"
       }
     },
     "index_screen_version": 3
