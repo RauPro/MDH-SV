@@ -14,6 +14,7 @@ import math
 import re
 
 from .gemini_budget import QuotaStateError
+from .instance import load_instance
 
 STATE_PATH = "runtime/news-allocation.json"
 MAX_BYTES = 120_000
@@ -57,7 +58,7 @@ class AllocationLedger:
     """
     def __init__(self, inbox, *, project_id, model, clock=None):
         if (not isinstance(getattr(inbox, "repository", None), str)
-                or inbox.repository.lower() != "raupro/mdh-sv-review"
+                or inbox.repository.lower() != load_instance().private_repository.lower()
                 or not isinstance(project_id, str) or not project_id or len(project_id) > 200
                 or not isinstance(model, str) or not re.fullmatch(r"gemini-[A-Za-z0-9.-]+", model)):
             raise QuotaStateError("invalid_allocation_configuration")

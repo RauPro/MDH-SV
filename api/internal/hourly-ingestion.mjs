@@ -1,7 +1,8 @@
 import { createHash, createPrivateKey, sign, timingSafeEqual } from 'node:crypto';
+import { instance } from '../../server/instance.mjs';
+import { validateInstanceConfig } from '../../shared/instance-config.mjs';
 
 const GITHUB_API = 'https://api.github.com';
-const DISPATCH_PATH = '/repos/RauPro/MDH-SV-review/actions/workflows/extract.yml/dispatches';
 const ENDPOINT_PATH = '/api/internal/hourly-ingestion';
 const CRON_SCHEDULE = '7 * * * *';
 const NETWORK_TIMEOUT_MS = 8_000;
@@ -76,7 +77,10 @@ export function createHourlyIngestionHandler({
   fetchImpl = globalThis.fetch,
   now = () => new Date(),
   timeoutMs = NETWORK_TIMEOUT_MS,
+  instanceConfig = instance,
 } = {}) {
+  const target = validateInstanceConfig(instanceConfig);
+  const repositoryPath = `/repos/${target.private_repository}`;
   return async function hourlyIngestion(request, response) {
     const secret = env.CRON_SECRET;
     if (env.VERCEL_ENV !== 'production' || typeof secret !== 'string' || secret.length < 32 || secret.length > 4_096) {
@@ -125,7 +129,19 @@ export function createHourlyIngestionHandler({
           || Object.entries(tokenData.permissions).some(([name, permission]) => name !== 'actions'
             && (name !== 'metadata' || permission !== 'read'))) throw new Error('invalid_token_response');
 
-      const dispatchResponse = await fetchImpl(`${GITHUB_API}${DISPATCH_PATH}`, {
+      // A numeric installation scope is insufficient if the operator copied a
+      // different repository name. Prove both identities and private visibility.
+      const repositoryResponse = await fetchImpl(`${GITHUB_API}${repositoryPath}`, {
+        method: 'GET', redirect: 'error', signal: controller.signal,
+        headers: githubHeaders(tokenData.token),
+      });
+      if (repositoryResponse.status !== 200) throw new Error('repository_unavailable');
+      const repository = await repositoryResponse.json();
+      if (repository.private !== true || repository.id !== config.repositoryId
+          || typeof repository.full_name !== 'string'
+          || repository.full_name.toLowerCase() !== target.private_repository.toLowerCase()) throw new Error('invalid_repository');
+
+      const dispatchResponse = await fetchImpl(`${GITHUB_API}${repositoryPath}/actions/workflows/extract.yml/dispatches`, {
         method: 'POST',
         redirect: 'error',
         signal: controller.signal,

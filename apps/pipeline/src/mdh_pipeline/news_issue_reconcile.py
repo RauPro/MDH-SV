@@ -21,8 +21,11 @@ from .news_requests import read_json, withdrawn_ids
 from .news_scope_rechecks import load_rechecks
 from .review_queue import GitHubInbox, GitHubRequestError
 
-REPOSITORY = "RauPro/MDH-SV-review"
-PRODUCTION = "https://mdh-sv.vercel.app"
+from .instance import load_instance
+
+INSTANCE = load_instance()
+REPOSITORY = INSTANCE.private_repository
+PRODUCTION = INSTANCE.public_url
 STATE_PATH = "runtime/news-issue-reconciliation.json"
 LABELS = {"news/published": "16815D", "news/discarded": "6B7280", "news/recheck": "D97706"}
 MAX_TRANSITIONS = 150

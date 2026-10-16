@@ -1,0 +1,661 @@
+{
+  "base": {
+    "schema_version": 1,
+    "public_url": "https://monitor.example.org",
+    "public_repository": "ExampleOrg/monitor",
+    "private_repository": "ExampleOrg/review-private",
+    "public_repository_id": 1234567,
+    "publisher_actor_id": 7654321,
+    "mcp_allowed_hosts": [
+      "monitor.example.org",
+      "localhost:3000",
+      "127.0.0.1:3000",
+      "[::1]:3000"
+    ],
+    "editorial_email": "editor@example.org",
+    "reporting_responsible": "@ExampleOrg/editors"
+  },
+  "cases": [
+    {
+      "name": "configured fork",
+      "valid": true,
+      "patch": {}
+    },
+    {
+      "name": "canonical trailing slash and default port",
+      "valid": true,
+      "patch": {
+        "public_url": "https://monitor.example.org:443/"
+      }
+    },
+    {
+      "name": "explicit HTTPS port",
+      "valid": true,
+      "patch": {
+        "public_url": "https://monitor.example.org:8443/",
+        "mcp_allowed_hosts": [
+          "monitor.example.org:8443"
+        ]
+      }
+    },
+    {
+      "name": "development localhost",
+      "valid": true,
+      "patch": {
+        "public_url": "http://localhost:3000",
+        "mcp_allowed_hosts": [
+          "localhost:3000"
+        ]
+      }
+    },
+    {
+      "name": "development IPv4",
+      "valid": true,
+      "patch": {
+        "public_url": "http://127.0.0.1:3000",
+        "mcp_allowed_hosts": [
+          "127.0.0.1:3000"
+        ]
+      }
+    },
+    {
+      "name": "development IPv6",
+      "valid": true,
+      "patch": {
+        "public_url": "http://[::1]:3000",
+        "mcp_allowed_hosts": [
+          "[::1]:3000"
+        ]
+      }
+    },
+    {
+      "name": "loopback default port",
+      "valid": true,
+      "patch": {
+        "public_url": "http://localhost:80/",
+        "mcp_allowed_hosts": [
+          "localhost"
+        ]
+      }
+    },
+    {
+      "name": "maximum safe IDs",
+      "valid": true,
+      "patch": {
+        "public_repository_id": 9007199254740991,
+        "publisher_actor_id": 9007199254740991
+      }
+    },
+    {
+      "name": "single responsible",
+      "valid": true,
+      "patch": {
+        "reporting_responsible": "@maintainer"
+      }
+    },
+    {
+      "name": "remote HTTP",
+      "valid": false,
+      "patch": {
+        "public_url": "http://monitor.example.org"
+      }
+    },
+    {
+      "name": "URL credentials",
+      "valid": false,
+      "patch": {
+        "public_url": "https://user:pass@monitor.example.org"
+      }
+    },
+    {
+      "name": "URL query",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org?next=1"
+      }
+    },
+    {
+      "name": "URL empty query",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org?"
+      }
+    },
+    {
+      "name": "URL fragment",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org#section"
+      }
+    },
+    {
+      "name": "URL path",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org/path"
+      }
+    },
+    {
+      "name": "URL backslash",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org\\evil"
+      }
+    },
+    {
+      "name": "URL control",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org\n"
+      }
+    },
+    {
+      "name": "URL Unicode",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitór.example.org"
+      }
+    },
+    {
+      "name": "URL percent host",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor%2eexample.org"
+      }
+    },
+    {
+      "name": "URL protocol relative",
+      "valid": false,
+      "patch": {
+        "public_url": "//monitor.example.org"
+      }
+    },
+    {
+      "name": "URL uppercase host",
+      "valid": false,
+      "patch": {
+        "public_url": "https://MONITOR.example.org"
+      }
+    },
+    {
+      "name": "URL trailing dot",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org."
+      }
+    },
+    {
+      "name": "URL numeric alias",
+      "valid": false,
+      "patch": {
+        "public_url": "http://127.1"
+      }
+    },
+    {
+      "name": "URL hexadecimal alias",
+      "valid": false,
+      "patch": {
+        "public_url": "http://0x7f000001"
+      }
+    },
+    {
+      "name": "URL private IP",
+      "valid": false,
+      "patch": {
+        "public_url": "https://192.168.1.5"
+      }
+    },
+    {
+      "name": "URL IPv6 nonloopback",
+      "valid": false,
+      "patch": {
+        "public_url": "https://[::2]"
+      }
+    },
+    {
+      "name": "URL invalid port",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org:99999"
+      }
+    },
+    {
+      "name": "URL zero port",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org:0"
+      }
+    },
+    {
+      "name": "URL padded port",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor.example.org:0443"
+      }
+    },
+    {
+      "name": "URL single hostname",
+      "valid": false,
+      "patch": {
+        "public_url": "https://monitor"
+      }
+    },
+    {
+      "name": "URL uppercase scheme",
+      "valid": false,
+      "patch": {
+        "public_url": "HTTPS://monitor.example.org"
+      }
+    },
+    {
+      "name": "same repo",
+      "valid": false,
+      "patch": {
+        "private_repository": "ExampleOrg/monitor"
+      }
+    },
+    {
+      "name": "same repo differing case",
+      "valid": false,
+      "patch": {
+        "private_repository": "exampleorg/MONITOR"
+      }
+    },
+    {
+      "name": "repo URL",
+      "valid": false,
+      "patch": {
+        "public_repository": "https://github.com/ExampleOrg/monitor"
+      }
+    },
+    {
+      "name": "repo escape",
+      "valid": false,
+      "patch": {
+        "public_repository": "ExampleOrg/../monitor"
+      }
+    },
+    {
+      "name": "repo query",
+      "valid": false,
+      "patch": {
+        "public_repository": "ExampleOrg/monitor?x=1"
+      }
+    },
+    {
+      "name": "repo malformed owner",
+      "valid": false,
+      "patch": {
+        "public_repository": "-owner/repo"
+      }
+    },
+    {
+      "name": "repo empty",
+      "valid": false,
+      "patch": {
+        "public_repository": ""
+      }
+    },
+    {
+      "name": "public_repository_id bool",
+      "valid": false,
+      "patch": {
+        "public_repository_id": true
+      }
+    },
+    {
+      "name": "public_repository_id zero",
+      "valid": false,
+      "patch": {
+        "public_repository_id": 0
+      }
+    },
+    {
+      "name": "public_repository_id negative",
+      "valid": false,
+      "patch": {
+        "public_repository_id": -1
+      }
+    },
+    {
+      "name": "public_repository_id unsafe",
+      "valid": false,
+      "patch": {
+        "public_repository_id": 9007199254740992
+      }
+    },
+    {
+      "name": "public_repository_id string",
+      "valid": false,
+      "patch": {
+        "public_repository_id": "12"
+      }
+    },
+    {
+      "name": "public_repository_id null",
+      "valid": false,
+      "patch": {
+        "public_repository_id": null
+      }
+    },
+    {
+      "name": "publisher_actor_id bool",
+      "valid": false,
+      "patch": {
+        "publisher_actor_id": true
+      }
+    },
+    {
+      "name": "publisher_actor_id zero",
+      "valid": false,
+      "patch": {
+        "publisher_actor_id": 0
+      }
+    },
+    {
+      "name": "publisher_actor_id negative",
+      "valid": false,
+      "patch": {
+        "publisher_actor_id": -1
+      }
+    },
+    {
+      "name": "publisher_actor_id unsafe",
+      "valid": false,
+      "patch": {
+        "publisher_actor_id": 9007199254740992
+      }
+    },
+    {
+      "name": "publisher_actor_id string",
+      "valid": false,
+      "patch": {
+        "publisher_actor_id": "12"
+      }
+    },
+    {
+      "name": "publisher_actor_id null",
+      "valid": false,
+      "patch": {
+        "publisher_actor_id": null
+      }
+    },
+    {
+      "name": "unknown secret field",
+      "valid": false,
+      "patch": {
+        "GEMINI_API_KEY": "nonsecret-fixture"
+      }
+    },
+    {
+      "name": "schema bool",
+      "valid": false,
+      "patch": {
+        "schema_version": true
+      }
+    },
+    {
+      "name": "schema unsupported",
+      "valid": false,
+      "patch": {
+        "schema_version": 2
+      }
+    },
+    {
+      "name": "host empty",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": []
+      }
+    },
+    {
+      "name": "host missing public",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "another.example.org"
+        ]
+      }
+    },
+    {
+      "name": "host duplicate",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "monitor.example.org"
+        ]
+      }
+    },
+    {
+      "name": "host scheme",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "https://evil.example.org"
+        ]
+      }
+    },
+    {
+      "name": "host wildcard",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "*.example.org"
+        ]
+      }
+    },
+    {
+      "name": "host path",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "evil.example.org/path"
+        ]
+      }
+    },
+    {
+      "name": "host credentials",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "user@evil.example.org"
+        ]
+      }
+    },
+    {
+      "name": "host control",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "evil.example.org\n"
+        ]
+      }
+    },
+    {
+      "name": "host uppercase",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "EVIL.example.org"
+        ]
+      }
+    },
+    {
+      "name": "host underscore",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "_bad.example.org"
+        ]
+      }
+    },
+    {
+      "name": "host IP",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "10.0.0.1"
+        ]
+      }
+    },
+    {
+      "name": "host empty port",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "evil.example.org:"
+        ]
+      }
+    },
+    {
+      "name": "host padding",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          "evil.example.org:080"
+        ]
+      }
+    },
+    {
+      "name": "host object",
+      "valid": false,
+      "patch": {
+        "mcp_allowed_hosts": [
+          "monitor.example.org",
+          {}
+        ]
+      }
+    },
+    {
+      "name": "email newline",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@example.org\nBcc:other@example.org"
+      }
+    },
+    {
+      "name": "email URL",
+      "valid": false,
+      "patch": {
+        "editorial_email": "mailto:editor@example.org"
+      }
+    },
+    {
+      "name": "email Unicode",
+      "valid": false,
+      "patch": {
+        "editorial_email": "edítor@example.org"
+      }
+    },
+    {
+      "name": "email missing domain",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@"
+      }
+    },
+    {
+      "name": "email domain loopback",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@localhost"
+      }
+    },
+    {
+      "name": "email domain IP",
+      "valid": false,
+      "patch": {
+        "editorial_email": "editor@127.0.0.1"
+      }
+    },
+    {
+      "name": "email space",
+      "valid": false,
+      "patch": {
+        "editorial_email": "ed itor@example.org"
+      }
+    },
+    {
+      "name": "responsible missing at",
+      "valid": false,
+      "patch": {
+        "reporting_responsible": "ExampleOrg"
+      }
+    },
+    {
+      "name": "responsible URL",
+      "valid": false,
+      "patch": {
+        "reporting_responsible": "https://github.com/ExampleOrg"
+      }
+    },
+    {
+      "name": "responsible newline",
+      "valid": false,
+      "patch": {
+        "reporting_responsible": "@ExampleOrg\n"
+      }
+    },
+    {
+      "name": "responsible bad team",
+      "valid": false,
+      "patch": {
+        "reporting_responsible": "@ExampleOrg/team/other"
+      }
+    },
+    {
+      "name": "responsible trailing dash",
+      "valid": false,
+      "patch": {
+        "reporting_responsible": "@ExampleOrg/team-"
+      }
+    },
+    {
+      "name": "missing field",
+      "valid": false,
+      "remove": [
+        "private_repository"
+      ]
+    },
+    {
+      "name": "duplicate key",
+      "valid": false,
+      "raw": "{\"schema_version\": 1, \"public_url\": \"https://monitor.example.org\", \"public_repository\": \"ExampleOrg/monitor\", \"private_repository\": \"ExampleOrg/review-private\", \"public_repository_id\": 1234567, \"publisher_actor_id\": 7654321, \"mcp_allowed_hosts\": [\"monitor.example.org\", \"localhost:3000\", \"127.0.0.1:3000\", \"[::1]:3000\"], \"editorial_email\": \"editor@example.org\", \"reporting_responsible\": \"@ExampleOrg/editors\", \"public_url\": \"https://evil.example.org\"}"
+    },
+    {
+      "name": "invalid JSON constant",
+      "valid": false,
+      "raw": "{\"schema_version\": 1, \"public_url\": \"https://monitor.example.org\", \"public_repository\": \"ExampleOrg/monitor\", \"private_repository\": \"ExampleOrg/review-private\", \"public_repository_id\": NaN, \"publisher_actor_id\": 7654321, \"mcp_allowed_hosts\": [\"monitor.example.org\", \"localhost:3000\", \"127.0.0.1:3000\", \"[::1]:3000\"], \"editorial_email\": \"editor@example.org\", \"reporting_responsible\": \"@ExampleOrg/editors\"}"
+    },
+    {
+      "name": "JSON integral number forms",
+      "valid": true,
+      "raw": "{\"schema_version\": 1.0, \"public_url\": \"https://monitor.example.org\", \"public_repository\": \"ExampleOrg/monitor\", \"private_repository\": \"ExampleOrg/review-private\", \"public_repository_id\": 1234567.0, \"publisher_actor_id\": 7654321e0, \"mcp_allowed_hosts\": [\"monitor.example.org\", \"localhost:3000\", \"127.0.0.1:3000\", \"[::1]:3000\"], \"editorial_email\": \"editor@example.org\", \"reporting_responsible\": \"@ExampleOrg/editors\"}"
+    },
+    {
+      "name": "ID fractional number",
+      "valid": false,
+      "patch": {
+        "public_repository_id": 1.5
+      }
+    },
+    {
+      "name": "actor fractional number",
+      "valid": false,
+      "patch": {
+        "publisher_actor_id": 1.5
+      }
+    }
+  ]
+}

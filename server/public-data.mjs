@@ -5,7 +5,8 @@ import { assertSelectedNewsArchive, isSelectedNewsReference } from '../shared/ne
 import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
 import { newsProcessingFor, parseNewsProcessing } from '../shared/news-processing.mjs';
 
-export const PUBLIC_URL = 'https://mdh-sv.vercel.app';
+import { PUBLIC_URL } from './instance.mjs';
+export { PUBLIC_URL };
 export const LICENSE = 'https://creativecommons.org/licenses/by/4.0/';
 export const LIMITATION = 'Cobertura parcial de reportes públicos; no es un censo ni una determinación judicial. Conservar fuentes, fechas y estado de revisión. No sumar noticias, informes y casos como víctimas.';
 

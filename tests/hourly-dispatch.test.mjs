@@ -3,6 +3,7 @@ import { generateKeyPairSync, verify } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { createHourlyIngestionHandler } from '../api/internal/hourly-ingestion.mjs';
+import { instance } from '../server/instance.mjs';
 
 const { privateKey, publicKey } = generateKeyPairSync('rsa', { modulusLength: 2_048 });
 const secret = 'test-cron-authorization-'.repeat(3);
@@ -16,7 +17,7 @@ const baseEnv = {
   MDH_DISPATCH_PRIVATE_KEY: privateKey.export({ format: 'pem', type: 'pkcs8' }),
 };
 
-async function invoke({ env = {}, request = {}, fetchImpl, timeoutMs } = {}) {
+async function invoke({ env = {}, request = {}, fetchImpl, timeoutMs, instanceConfig } = {}) {
   const headers = {};
   const response = {
     statusCode: null,
@@ -26,6 +27,7 @@ async function invoke({ env = {}, request = {}, fetchImpl, timeoutMs } = {}) {
   let calls = 0;
   const handler = createHourlyIngestionHandler({
     env: { ...baseEnv, ...env },
+    ...(instanceConfig ? { instanceConfig } : {}),
     now: () => currentTime,
     fetchImpl: async (...args) => {
       calls += 1;
@@ -48,6 +50,11 @@ const installationToken = () => new Response(JSON.stringify({
   permissions: { actions: 'write', metadata: 'read' },
 }), { status: 201 });
 
+const repositoryMetadata = (overrides = {}) => new Response(JSON.stringify({
+  id: 34567, full_name: instance.private_repository, private: true, ...overrides,
+}), { status: 200 });
+const successfulReply = index => index === 1 ? installationToken() : index === 2 ? repositoryMetadata() : new Response(null, { status: 204 });
+
 test('cron dispatch is scoped to one repository, one workflow and the current UTC hour', async () => {
   const config = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
   const cron = config.crons.find(item => item.path === '/api/internal/hourly-ingestion');
@@ -57,7 +64,7 @@ test('cron dispatch is scoped to one repository, one workflow and the current UT
     request: { headers: { authorization: `Bearer ${secret}`, 'x-vercel-cron-schedule': cron.schedule } },
     fetchImpl: async (url, options) => {
       requests.push({ url, ...options });
-      return requests.length === 1 ? installationToken() : new Response(null, { status: 204 });
+      return successfulReply(requests.length);
     },
   });
   assert.equal(result.status, 202);
@@ -68,7 +75,7 @@ test('cron dispatch is scoped to one repository, one workflow and the current UT
   });
   assert.equal(result.body.executed, undefined);
   assert.equal(result.headers['Cache-Control'], 'no-store, max-age=0');
-  assert.equal(requests.length, 2);
+  assert.equal(requests.length, 3);
   assert.equal(requests[0].url, 'https://api.github.com/app/installations/23456/access_tokens');
   assert.deepEqual(JSON.parse(requests[0].body), {
     repository_ids: [34567], permissions: { actions: 'write' },
@@ -82,9 +89,11 @@ test('cron dispatch is scoped to one repository, one workflow and the current UT
     iss: '12345',
   });
   assert.ok(verify('RSA-SHA256', Buffer.from(`${header}.${payload}`), publicKey, Buffer.from(signature, 'base64url')));
-  assert.equal(requests[1].url, 'https://api.github.com/repos/RauPro/MDH-SV-review/actions/workflows/extract.yml/dispatches');
+  assert.equal(requests[1].url, `https://api.github.com/repos/${instance.private_repository}`);
+  assert.equal(requests[1].method, 'GET');
+  assert.equal(requests[2].url, `https://api.github.com/repos/${instance.private_repository}/actions/workflows/extract.yml/dispatches`);
   assert.equal(requests[1].headers.Authorization, 'Bearer ephemeral-test-installation-token');
-  assert.deepEqual(JSON.parse(requests[1].body), {
+  assert.deepEqual(JSON.parse(requests[2].body), {
     ref: 'main',
     inputs: {
       batch_size: '50', retry_failed: 'false',
@@ -92,7 +101,7 @@ test('cron dispatch is scoped to one repository, one workflow and the current UT
     },
   });
   for (const request of requests) {
-    assert.equal(request.method, 'POST');
+    assert.equal(request.method, request === requests[1] ? 'GET' : 'POST');
     assert.equal(request.redirect, 'error');
     assert.equal(request.headers['X-GitHub-Api-Version'], '2022-11-28');
   }
@@ -106,12 +115,12 @@ test('authenticated probes without the exact cron schedule remain manual in both
     if (schedule !== undefined) headers['x-vercel-cron-schedule'] = schedule;
     const result = await invoke({ request: { headers }, fetchImpl: async (_url, options) => {
       requests.push(options);
-      return requests.length === 1 ? installationToken() : new Response(null, { status: 204 });
+      return successfulReply(requests.length);
     } });
     assert.equal(result.status, 202);
     assert.equal(result.body.trigger_source, 'manual');
-    assert.equal(JSON.parse(requests[1].body).inputs.trigger_source, 'manual');
-    assert.equal(JSON.parse(requests[1].body).inputs.scheduled_hour, result.body.scheduled_hour);
+    assert.equal(JSON.parse(requests[2].body).inputs.trigger_source, 'manual');
+    assert.equal(JSON.parse(requests[2].body).inputs.scheduled_hour, result.body.scheduled_hour);
   }
 });
 
@@ -196,9 +205,42 @@ test('workflow dispatch failure never returns a success acknowledgement', async 
   for (const status of [200, 202, 302, 401, 404, 422, 429, 500]) {
     let count = 0;
     const result = await invoke({ fetchImpl: async () => ++count === 1
-      ? installationToken() : new Response('private-provider-detail', { status }) });
+      ? installationToken() : count === 2 ? repositoryMetadata() : new Response('private-provider-detail', { status }) });
     assert.equal(result.status, 502);
     assert.deepEqual(result.body, { error: 'dispatch_failed' });
+    assert.equal(result.calls, 3);
+  }
+});
+
+test('a configured fork dispatches only to its verified private repository', async () => {
+  const configuration = { ...instance, private_repository: 'Research/fork-review' };
+  const requests = [];
+  const result = await invoke({ instanceConfig: configuration, fetchImpl: async (url, options) => {
+    requests.push({ url, ...options });
+    return requests.length === 1 ? installationToken() : requests.length === 2
+      ? repositoryMetadata({ full_name: configuration.private_repository }) : new Response(null, { status: 204 });
+  } });
+  assert.equal(result.status, 202);
+  assert.equal(requests[1].url, 'https://api.github.com/repos/Research/fork-review');
+  assert.equal(requests[2].url, 'https://api.github.com/repos/Research/fork-review/actions/workflows/extract.yml/dispatches');
+  assert.deepEqual(JSON.parse(requests[0].body).repository_ids, [34567]);
+});
+
+test('public, renamed, mismatched and unreadable private targets fail before dispatch', async () => {
+  for (const metadata of [
+    { private: false }, { private: 'true' }, { id: 34568 }, { id: '34567' },
+    { full_name: instance.public_repository }, { full_name: 'Other/private' }, { full_name: null },
+  ]) {
+    let count = 0;
+    const result = await invoke({ fetchImpl: async () => ++count === 1 ? installationToken() : repositoryMetadata(metadata) });
+    assert.equal(result.status, 502);
+    assert.equal(result.calls, 2);
+    assert.deepEqual(result.body, { error: 'dispatch_failed' });
+  }
+  for (const status of [302, 403, 404, 500]) {
+    let count = 0;
+    const result = await invoke({ fetchImpl: async () => ++count === 1 ? installationToken() : new Response('private-provider-detail', { status }) });
+    assert.equal(result.status, 502);
     assert.equal(result.calls, 2);
   }
 });

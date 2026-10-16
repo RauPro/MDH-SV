@@ -5,7 +5,7 @@
   "buildCommand": "npm --prefix apps/web run build",
   "outputDirectory": "apps/web/dist",
   "functions": {
-    "api/**/*.mjs": { "includeFiles": "apps/web/public/**/*.json", "maxDuration": 15 }
+    "api/**/*.mjs": { "includeFiles": "{instance.json,apps/web/public/**/*.json}", "maxDuration": 15 }
   },
   "crons": [
     { "path": "/api/internal/hourly-ingestion", "schedule": "7 * * * *" }

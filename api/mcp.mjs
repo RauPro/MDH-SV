@@ -2,21 +2,23 @@ import { isIP } from 'node:net';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createMcpServer } from '../server/mcp-server.mjs';
 import { cors } from '../server/http.mjs';
+import { instance } from '../server/instance.mjs';
+import { validInstanceHost } from '../shared/instance-config.mjs';
 
 const MAX_BODY = 32768;
 const loopback = hostname => ['localhost', '127.0.0.1', '[::1]'].includes(hostname);
 
 // Public data supports any well-formed HTTPS browser origin in production, without cookies.
 // Exact Host validation plus loopback-only origins locally prevents DNS rebinding.
-export function validMcpRequest(headers, environment = process.env) {
+export function validMcpRequest(headers, environment = process.env, configuration = instance) {
   const host = headers.host;
-  if (typeof host !== 'string' || !/^[a-zA-Z0-9.:[\]-]+$/.test(host)) return false;
+  if (!validInstanceHost(host)) return false;
   const production = environment.VERCEL === '1' || environment.NODE_ENV === 'production';
-  const knownHosts = ['mdh-sv.vercel.app', environment.VERCEL_URL, environment.VERCEL_PROJECT_PRODUCTION_URL].filter(Boolean);
+  const knownHosts = [...configuration.mcp_allowed_hosts, environment.VERCEL_URL, environment.VERCEL_PROJECT_PRODUCTION_URL].filter(validInstanceHost);
   let hostUrl;
   try { hostUrl = new URL(`https://${host}`); } catch { return false; }
   const local = !production && loopback(hostUrl.hostname);
-  if (!local && !knownHosts.includes(host)) return false;
+  if ((!local && !knownHosts.includes(host)) || (production && loopback(hostUrl.hostname))) return false;
   if (!headers.origin) return true; // Native MCP clients do not send Origin.
   if (typeof headers.origin !== 'string') return false;
   try {

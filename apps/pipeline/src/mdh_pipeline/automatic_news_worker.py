@@ -7,6 +7,7 @@ import time
 from datetime import datetime, timezone
 
 from . import automatic_news as single
+from .instance import load_instance
 from .automatic_news_batch import batch_input_limit, evaluate_batch, prepare_evaluation_batch
 from .gemini_budget import QuotaDeferred, QuotaStateError
 
@@ -64,7 +65,7 @@ def evaluate_queue_batched(inbox, inbox_dir, archive, *, api_key, model, budget,
                            excluded_ids=(), request_generations=None, now=None,
                            max_seconds=720, run_clock=time.monotonic):
     from .article_source import fetch_article, SourceFetchError
-    if (inbox.repository.lower() != "raupro/mdh-sv-review" or budget is None
+    if (inbox.repository.lower() != load_instance().private_repository.lower() or budget is None
             or model != budget.config.model or type(limit) is not int or not 1 <= limit <= 50
             or type(batch_size) is not int or not 1 <= batch_size <= 4
             or type(max_seconds) is not int or not 1 <= max_seconds <= 1800):

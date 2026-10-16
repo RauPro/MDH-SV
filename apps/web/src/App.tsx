@@ -8,10 +8,10 @@ import { SalvadorMap } from './components/SalvadorMap';
 import { DEPARTMENTS } from './geography/elSalvador';
 import { matchesTerritory, summarizeTerritory, UNKNOWN_DEPARTMENT } from './geography/territory';
 import { citation, eventDate, filterRecords, formatDate, parseCatalog, type Catalog } from './catalog';
-import { EDITORIAL_REPORT_EMAIL, EDITORIAL_REPORT_URL, RECORD_CORRECTION_URL, REPORTING_RESPONSIBLE, TECHNICAL_REPORT_URL } from './reporting';
+import { REPOSITORY_URL, EDITORIAL_REPORT_EMAIL, EDITORIAL_REPORT_URL, RECORD_CORRECTION_URL, REPORTING_RESPONSIBLE, TECHNICAL_REPORT_URL } from './reporting';
 import './App.css';
 
-const REPO = 'https://github.com/RauPro/MDH-SV';
+const REPO = REPOSITORY_URL;
 const typeLabel = { incident: 'Reporte individual', aggregate: 'Reporte colectivo', publication: 'Informe de contexto' };
 const informationViews = new Set(['metodologia', 'datos', 'privacidad']);
 const collectionRoutes = new Set(['archivo', 'reportes', 'estadisticas', 'contenido']);
