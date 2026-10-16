@@ -64,9 +64,16 @@ que la política y los formularios indiquen el destino correcto.
   [PR #84](https://github.com/RauPro/MDH-SV/pull/84) y Vercel confirmó el despliegue.
   Un primer snapshot quedó en conflicto con otra actualización; se regeneró
   desde `main` y se cerró la propuesta obsoleta sin forzar su integración.
-- La prueba de recepción del buzón editorial y la verificación de las rutas
-  desplegadas están pendientes. **P0.4 sigue en verificación** hasta registrar
-  esa evidencia; la autorización de publicar una dirección no demuestra entrega.
+- El ensayo editorial `MDH-P04-20261016` se envió al correo autorizado con
+  permiso explícito del titular, sin documentos ni una solicitud real. El
+  titular confirmó su recepción en el buzón el 16 de octubre de 2026. Esta
+  confirmación acredita recepción; la aceptación de envío por sí sola no basta.
+- Las pruebas de interfaz y formularios comprueban destinos distintos, ausencia
+  de contenido precargado en el correo y compatibilidad con las reevaluaciones
+  automáticas. La implementación y su CI se conservan en la
+  [PR #81](https://github.com/RauPro/MDH-SV/pull/81).
+
+**P0.4: canales y responsable establecidos; recepción privada comprobada.**
 
 Para repetir el ensayo editorial, enviar únicamente un mensaje ficticio con un
 código de prueba, sin noticias reales, documentos ni datos personales. Confirmar
