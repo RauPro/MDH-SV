@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T12:36:44.581456+00:00",
+  "generated_at": "2026-10-16T13:17:10.123511+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11858,
-      "selected": 1737,
+      "selected": 1739,
       "evaluated": 4889,
-      "relevant": 1737,
+      "relevant": 1739,
       "excluded": 135,
-      "uncertain": 3017,
+      "uncertain": 3015,
       "pending": 6969,
-      "evaluated_at": "2026-10-16T12:16:38.808380+00:00"
+      "evaluated_at": "2026-10-16T13:17:07.425521+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1737,
+    "records": 1739,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1410,
+        "records": 1412,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -641,7 +641,7 @@
           {
             "month": "2014-01",
             "status": "enumerated",
-            "records": 12,
+            "records": 14,
             "screen_version": 3,
             "posts_scanned": 1010,
             "source_total_posts": 1010,
@@ -19196,12 +19196,12 @@
         "month": "2014-01",
         "start_date": "2014-01-01",
         "end_date": "2014-01-31",
-        "records": 12,
+        "records": 14,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 12
+            "records": 14
           },
           {
             "source_id": "gatoencerrado",
@@ -101639,6 +101639,54 @@
       }
     },
     {
+      "id": "4b7545553dfd48b0371d363f1f8ddf6824f14f5fbbb44a78f2fdcaed7db34b51",
+      "title": "Ministerio Público de Venezuela pide a Interpol girar orden de captura para asesor de ARENA",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ministerio-publico-de-venezuela-pide-a-interpol-girar-orden-de-captura-para-asesor-de-arena/",
+      "published_date": "2014-01-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "venezuela"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 1086,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T07:09:43.189309-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c674a984963f9e0460ca16ef992a0101cd3794df21e36ec647ca6ff14142d704",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "id": "875949fe84bc33521946904c777cabb3e8af7a6e7fd269b8ab3d8cc3906474d4",
       "title": "Juntas de agua enfrentan amenazas de contaminación y servidumbre de paso",
       "title_truncated": false,
@@ -101715,6 +101763,50 @@
         "prompt_version": "mdh-news-scope-3-rights-nexus",
         "evidence": {
           "content_sha256": "1149d6bec5c02cebf034a5c31fae5e1b336c7babfa6bac56b58cd3b9f22b718b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2e72617450fb527dd1c05482fccad2a8e22d94a6bb1d7310b3a042be070a16ac",
+      "title": "Más denuncias de irrespeto a los derechos sindicales en alcaldías del Gran San Salvador",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mas-denuncias-de-irrespeto-a-los-derechos-sindicales-en-alcaldias-del-gran-san-salvador-2/",
+      "published_date": "2014-01-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 805,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T07:09:43.189309-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8d882788a0c445b711cb6ce2e2c20622be50dce73e8ffe65cd0d127e8079e56c",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],

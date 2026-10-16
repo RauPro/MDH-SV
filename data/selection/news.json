@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T12:16:38.808380+00:00",
+  "generated_at": "2026-10-16T13:17:07.425521+00:00",
   "assessment_counts": {
     "candidates": 11858,
     "evaluated": 4889,
-    "relevant": 1737,
+    "relevant": 1739,
     "excluded": 135,
-    "uncertain": 3017,
+    "uncertain": 3015,
     "pending": 6969
   },
   "selections": [
@@ -8660,6 +8660,31 @@
       }
     },
     {
+      "candidate_id": "2e72617450fb527dd1c05482fccad2a8e22d94a6bb1d7310b3a042be070a16ac",
+      "source_url": "https://www.diariocolatino.com/mas-denuncias-de-irrespeto-a-los-derechos-sindicales-en-alcaldias-del-gran-san-salvador-2/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T07:09:43.189309-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8d882788a0c445b711cb6ce2e2c20622be50dce73e8ffe65cd0d127e8079e56c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2ecc5d0084a23421a903533f5b570404154c6fdf600ce7717598ecb83497c38f",
       "source_url": "https://www.diariocolatino.com/fiscalia-ordena-captura-de-dos-personas-con-armas-y-prendas-de-uso-militar/",
       "publisher": "Diario Co Latino",
@@ -13826,6 +13851,35 @@
             "p1",
             "p4",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4b7545553dfd48b0371d363f1f8ddf6824f14f5fbbb44a78f2fdcaed7db34b51",
+      "source_url": "https://www.diariocolatino.com/ministerio-publico-de-venezuela-pide-a-interpol-girar-orden-de-captura-para-asesor-de-arena/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-01-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T07:09:43.189309-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c674a984963f9e0460ca16ef992a0101cd3794df21e36ec647ca6ff14142d704",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8"
           ]
         }
       }
