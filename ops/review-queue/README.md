@@ -1,5 +1,10 @@
 # Procesamiento privado de noticias de MDH-SV
 
+El publicador prepara un snapshot con código fijado y lo propone desde un runner
+separado sin borradores ni Gemini. La propuesta necesita PR, CI y protección de
+`main` antes de publicarse. La [política de publicación](../../docs/PUBLICATION-SECURITY.md)
+describe permisos, instalación y ensayo sin llamadas al modelo.
+
 La consulta pública aplica el [protocolo de selección temática](https://github.com/RauPro/MDH-SV/blob/main/docs/NEWS-SELECTION.md).
 Las candidatas se reconstruyen desde los checkpoints, no desde el archivo público
 filtrado. `extract.yml` clasifica candidatas y completa fichas de las seleccionadas, con

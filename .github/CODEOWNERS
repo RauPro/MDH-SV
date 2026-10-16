@@ -1,0 +1,20 @@
+# Code, workflows, policies, dependencies and reviewed datasets require an owner.
+* @RauPro
+
+# Only these generated JSON files may be integrated by the publication controller.
+# Empty owners are intentional: main still requires a PR and successful CI.
+# Never replace these exact paths with directory or wildcard exemptions.
+/data/history/co-latino.json
+/data/history/gatoencerrado.json
+/data/history/factum.json
+/data/history/el-faro.json
+/data/history/el-mundo.json
+/data/history/la-prensa-grafica.json
+/data/history/el-diario-de-hoy.json
+/data/selection/news.json
+/data/selection/news_exceptions.json
+/data/automated/news_dossiers.json
+/apps/web/public/archive/news.json
+/apps/web/public/archive/dossiers.json
+/apps/web/public/archive/locations.json
+/apps/web/public/archive/processing.json
