@@ -14,6 +14,10 @@ separados; el código que lee borradores está fijado a un SHA aprobado. Consult
 [publicación aislada y protección de main](PUBLICATION-SECURITY.md) para la
 política, la activación y las comprobaciones operativas.
 
+Las Actions se fijan por SHA completo en workflows y plantillas. El procedimiento
+para verificar versiones, actualizar con Dependabot y promover los pins a la
+cola privada está en [GITHUB-ACTIONS.md](GITHUB-ACTIONS.md).
+
 ## Verificación de una versión
 
 ```sh
