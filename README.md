@@ -6,7 +6,7 @@ La edición inicial contiene 17 reportes individuales, 2 reportes colectivos y 5
 
 ## Integridad de la publicación
 
-El prototipo contenía registros sintéticos atribuidos a organizaciones reales. Se excluyeron del conjunto público. Sus datos y el sistema anterior se conservan **solo localmente**, fuera del historial de publicación. El historial antiguo también contenía una credencial incrustada: esta publicación comienza con un historial limpio y no incluye esa credencial. Su titular debe revocarla en Google si aún existe.
+El prototipo contenía registros sintéticos atribuidos a organizaciones reales. Se excluyeron del conjunto público. Sus datos y el sistema anterior se conservan **solo localmente**, fuera del historial de publicación. El historial antiguo también contenía una credencial incrustada: esta publicación comienza con un historial limpio y no incluye esa credencial. El 16 de octubre de 2026 se registró la confirmación del titular de su identificación exacta y eliminación en Google; véase el [cierre de P0.3 y los controles del historial publicable](docs/SECRET-HISTORY.md).
 
 - Fuente pública canónica: `data/reviewed/publications.json`.
 - Validador y exportador: `python -m mdh_pipeline.publication`.

@@ -14,12 +14,30 @@ las dos referencias antiguas. El `main` local se alineó con `origin/main`; ning
 referencia local restante alcanza el commit del prototipo. Esto no certifica
 otros clones ni sustituye la revocación de la credencial.
 
-La revocación en Google requiere confirmación del titular o evidencia del
-proveedor. A falta de esa evidencia, su estado debe describirse como **pendiente
-de confirmar**. Eliminar una rama, obtener cero alertas en GitHub o recibir un
-error de autenticación no demuestra revocación. Si la clave aún se usa, preparar
-su sustitución y comprobar los consumidores antes de revocarla; nunca registrar
-su valor en issues, informes, comandos compartidos o capturas.
+**P0.3 cerrado el 16 de octubre de 2026.** El titular confirmó primero que el
+comparador local devolvió una coincidencia exacta con la credencial histórica y,
+después, que eliminó esa clave y Google confirmó la eliminación. La clave se
+utilizaba en Google Custom Search en el prototipo.
+
+La evidencia de revocación es la confirmación explícita del titular recibida en
+esa fecha; no se realizó una verificación independiente mediante la API o la
+consola de Google. No se dispone de la hora exacta de eliminación ni del ID
+administrativo del proveedor. La fecha anterior corresponde al registro del
+cierre, no a una marca de tiempo emitida por Google. No se conserva el valor de
+la clave en este registro.
+
+El cierre reúne la revocación confirmada por el titular, la cuarentena local
+recuperable y los controles de publicación integrados en las
+[PR #71](https://github.com/RauPro/MDH-SV/pull/71) y
+[#73](https://github.com/RauPro/MDH-SV/pull/73). La CI de #73 aprobó 2.512 pruebas
+Python sin omisiones y 327 pruebas web. La publicación automática con escaneo
+previo al push se comprobó mediante la
+[PR #72](https://github.com/RauPro/MDH-SV/pull/72), integrada y desplegada.
+
+Eliminar una rama, obtener cero alertas en GitHub o recibir un error de
+autenticación no demuestra revocación. La credencial histórica no debe
+restaurarse ni reutilizarse; nunca registrar su valor en issues, informes,
+comandos compartidos o capturas.
 
 GitHub ofrece escaneo nativo y protección de pushes para este repositorio. Son
 una capa adicional, no un sustituto del control local y del cierre con el

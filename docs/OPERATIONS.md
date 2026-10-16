@@ -45,7 +45,7 @@ Los fallos de carga de datos se muestran explícitamente, sin cifras falsas de c
 
 Asignar responsables de solicitudes de corrección y retirada, un canal seguro de contacto y revisión especializada para el uso institucional del catálogo de casos y las estadísticas. La publicación ordinaria de noticias se automatiza, y no acredita por sí sola los hechos relatados. Expandir cobertura con fuentes comprobadas. Estas tareas no quedan sustituidas por una compilación o un despliegue exitoso.
 
-La clave de Google del código legado debe revocarse por su titular. No forma parte de la nueva publicación ni de su historial. Los archivos históricos y datos no revisados permanecen locales en `legacy/`, `data/` y `.local-quarantine/`, además del respaldo temporal de esta auditoría.
+El 16 de octubre de 2026 se registró la confirmación del titular de que identificó exactamente la clave Google del código legado, la eliminó y Google confirmó la eliminación. [P0.3 queda cerrado](SECRET-HISTORY.md) con esa declaración y los controles de publicación; no se realizó una comprobación independiente con el proveedor. La clave no forma parte de la publicación ni de su historial permitido y no debe restaurarse ni reutilizarse. Los materiales históricos y datos no revisados permanecen fuera de la publicación; el bundle de recuperación se conserva bajo `.git/mdh-quarantine/`, fuera de las referencias publicables.
 
 
 ## Cola privada operativa
