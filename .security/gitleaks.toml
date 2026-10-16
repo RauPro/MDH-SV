@@ -1,0 +1,12 @@
+title = "MDH-SV publishable history secret detection"
+
+[extend]
+useDefault = true
+
+# Include Google API keys independently of the defaults' entropy/assignment checks.
+# There are deliberately no repository-wide path, commit or value allowlists.
+[[rules]]
+id = "mdh-google-api-key"
+description = "Google API key"
+regex = '''AIza[0-9A-Za-z_-]{35}'''
+keywords = ["AIza"]
