@@ -22,15 +22,25 @@ def run(branch, sha=HEAD, event="workflow_dispatch", actor=BOT, identifier=91):
         "id": identifier, "path": ".github/workflows/ci.yml", "name": "Verify public monitor",
         "head_branch": branch, "head_sha": sha, "event": event,
         "status": "completed", "conclusion": "success", "actor": deepcopy(actor),
-        "triggering_actor": deepcopy(actor), "repository": {"full_name": publication.REPOSITORY},
-        "head_repository": {"full_name": publication.REPOSITORY},
+        "triggering_actor": deepcopy(actor), "repository": {"full_name": publication.REPOSITORY, "id": publication.REPOSITORY_ID},
+        "head_repository": {"full_name": publication.REPOSITORY, "id": publication.REPOSITORY_ID},
     }
 
 
 def pull(branch, sha=HEAD, body=""):
     return {"number": 7, "state": "open", "draft": False, "mergeable": True, "user": deepcopy(BOT), "body": body,
             "head": {"ref": branch, "sha": sha, "repo": {"full_name": publication.REPOSITORY}},
-            "base": {"ref": "main", "repo": {"full_name": publication.REPOSITORY}}}
+            "base": {"ref": "main", "sha": BASE, "repo": {"full_name": publication.REPOSITORY}}}
+
+
+def native_run(branch, identifier=501, path=".github/workflows/ci.yml", *, sha=HEAD, base=BASE):
+    value = run(branch, sha, "pull_request", BOT, identifier)
+    value.update(path=path, name=publication.NATIVE_PR_WORKFLOWS.get(path, "Unexpected workflow"))
+    repository = {"id": publication.REPOSITORY_ID, "url": f"https://api.github.com/repos/{publication.REPOSITORY}"}
+    value["pull_requests"] = [{"number": 7,
+                              "head": {"ref": branch, "sha": sha, "repo": deepcopy(repository)},
+                              "base": {"ref": "main", "sha": base, "repo": deepcopy(repository)}}]
+    return value
 
 
 class GitHubFake:
@@ -60,6 +70,10 @@ class GitHubFake:
         self.dispatch_response = {"workflow_run_id": 92}
         self.dispatched_run_changes = {}
         self.run_sequences = {}
+        self.runs[501] = native_run(self.branch)
+        self.native_ids = [501]
+        self.native_listing_count = None
+        self.approval_error = None
 
     def add_file(self, commit, path, content, *, mode="100644", kind="blob"):
         import hashlib
@@ -71,6 +85,19 @@ class GitHubFake:
     def call(self, method, path, payload=None):
         self.calls.append((method, path, deepcopy(payload)))
         path = path.removeprefix(f"/repos/{publication.REPOSITORY}/")
+        if method == "GET" and path.startswith("actions/runs?"):
+            query = parse_qs(urlsplit("/" + path).query)
+            assert query == {"event": ["pull_request"], "head_sha": [HEAD], "per_page": ["100"]}
+            entries = [deepcopy(self.runs[identifier]) for identifier in self.native_ids]
+            count = len(entries) if self.native_listing_count is None else self.native_listing_count
+            return {"total_count": count, "workflow_runs": entries}
+        if method == "POST" and path.endswith("/approve"):
+            if self.approval_error:
+                raise publication.PublicationError(self.approval_error)
+            identifier = int(path.split("/")[-2])
+            assert identifier in self.native_ids
+            self.runs[identifier].update(status="queued", conclusion=None)
+            return None
         if method == "GET" and path.startswith("actions/runs/"):
             identifier = int(path.split("/")[-1])
             sequence = self.run_sequences.get(identifier)
@@ -592,3 +619,185 @@ def test_controller_workflow_has_bounded_default_branch_dispatch_and_queue():
     assert int(job["timeout-minutes"]) * 60 > publication.CI_WAIT_SECONDS
     assert job["steps"][0]["with"]["ref"] == "${{ github.workflow_sha }}"
     assert "inputs.ci_run_id" not in str(job["steps"])
+
+
+def test_dispatch_source_waits_for_native_pr_checks_before_merge():
+    client = GitHubFake()
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    assert any(path.startswith(publication.api("actions/runs?")) for _, path, _ in client.calls)
+    native_read = client.calls.index(("GET", publication.api("actions/runs/501"), None))
+    merge = next(index for index, (method, path, _) in enumerate(client.calls) if method == "PUT" and path.endswith("/merge"))
+    assert native_read < merge
+
+
+def test_owner_push_ci_already_satisfies_protection_without_native_approval():
+    client = GitHubFake("news")
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    assert not any("actions/runs?" in path or path.endswith("/approve") for _, path, _ in client.calls)
+
+
+def test_native_ci_and_optional_configuration_are_approved_once_then_awaited(monkeypatch):
+    waits = []
+    monkeypatch.setattr(publication.time, "sleep", waits.append)
+    client = GitHubFake()
+    for identifier, path in [(501, ".github/workflows/ci.yml"), (502, ".github/workflows/deploy_web.yml")]:
+        ready = native_run(client.branch, identifier, path)
+        approval = dict(ready, conclusion="action_required")
+        client.runs[identifier] = approval
+        client.run_sequences[identifier] = [approval, approval, ready]
+    client.native_ids = [501, 502]
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    assert waits == [10, 10]
+    assert [path.rsplit("/", 2)[-2:] for _, path, _ in client.writes()] == [
+        ["501", "approve"], ["502", "approve"], ["7", "merge"],
+    ]
+
+
+@pytest.mark.parametrize("field,value", [
+    ("event", "workflow_dispatch"), ("name", "Misleading verification"),
+    ("head_sha", UPDATED), ("head_branch", "feat/untrusted"),
+    ("actor", HUMAN), ("triggering_actor", HUMAN),
+    ("repository", {"id": 1, "full_name": publication.REPOSITORY}),
+    ("head_repository", {"id": publication.REPOSITORY_ID, "full_name": "someone/fork"}),
+    ("pull_requests", []), ("status", "unexpected"),
+])
+def test_native_run_identity_is_checked_before_approval(field, value):
+    client = GitHubFake()
+    client.runs[501]["conclusion"] = "action_required"
+    client.runs[501][field] = value
+    with pytest.raises(publication.PublicationError):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+@pytest.mark.parametrize("side,field,value", [
+    ("head", "sha", UPDATED), ("head", "ref", "feat/untrusted"),
+    ("base", "sha", ANCESTOR), ("base", "ref", "other-main"),
+    ("head", "repo", {"id": 1, "url": f"https://api.github.com/repos/{publication.REPOSITORY}"}),
+    ("base", "repo", {"id": publication.REPOSITORY_ID, "url": "https://api.github.com/repos/someone/fork"}),
+])
+def test_native_run_pr_association_matches_both_repo_ids_and_exact_refs(side, field, value):
+    client = GitHubFake()
+    client.runs[501]["conclusion"] = "action_required"
+    client.runs[501]["pull_requests"][0][side][field] = value
+    with pytest.raises(publication.PublicationError):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+def test_native_pr_number_cannot_be_substituted():
+    client = GitHubFake()
+    client.runs[501]["pull_requests"][0]["number"] = 8
+    with pytest.raises(publication.PublicationError, match="association"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+@pytest.mark.parametrize("count", [101, 2, -1, True])
+def test_native_run_listing_must_be_complete(count):
+    client = GitHubFake()
+    client.native_listing_count = count
+    with pytest.raises(publication.PublicationError, match="incomplete_native"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+def test_native_run_listing_cannot_repeat_ids():
+    client = GitHubFake()
+    client.native_ids = [501, 501]
+    with pytest.raises(publication.PublicationError, match="invalid_native_pr_run_listing"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+def test_native_readback_identity_checked_before_any_approval():
+    client = GitHubFake()
+    client.runs[501]["conclusion"] = "action_required"
+    fresh = dict(client.runs[501], id=999)
+    client.run_sequences[501] = [fresh]
+    with pytest.raises(publication.PublicationError, match="changed_native_pr_run_identity"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+@pytest.mark.parametrize("conclusion", ["failure", "cancelled", "timed_out", "skipped"])
+def test_failed_native_ci_never_merges_or_approves_another_run(conclusion):
+    client = GitHubFake()
+    client.runs[501]["conclusion"] = conclusion
+    client.runs[502] = native_run(client.branch, 502, ".github/workflows/deploy_web.yml")
+    client.runs[502]["conclusion"] = "action_required"
+    client.native_ids = [502, 501]  # Validate all conclusions before approvals.
+    with pytest.raises(publication.PublicationError, match="native_pr_ci_unsuccessful"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+def test_missing_native_ci_times_out_without_approving_only_configuration(monkeypatch):
+    monkeypatch.setattr(publication, "CI_WAIT_SECONDS", 20)
+    monkeypatch.setattr(publication.time, "sleep", lambda _: None)
+    client = GitHubFake()
+    client.runs[502] = native_run(client.branch, 502, ".github/workflows/deploy_web.yml")
+    client.runs[502]["conclusion"] = "action_required"
+    client.native_ids = [502]
+    with pytest.raises(publication.PublicationError, match="native_pr_ci_wait_timeout"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+def test_unknown_workflows_are_never_approved(monkeypatch):
+    monkeypatch.setattr(publication, "CI_WAIT_SECONDS", 0)
+    client = GitHubFake()
+    client.runs[501]["path"] = ".github/workflows/evil.yml"
+    client.runs[501]["conclusion"] = "action_required"
+    with pytest.raises(publication.PublicationError, match="native_pr_ci_wait_timeout"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+def test_native_approval_permission_failure_is_visible_without_bypass():
+    client = GitHubFake()
+    client.runs[501]["conclusion"] = "action_required"
+    client.approval_error = "github_post_failed_status_403"
+    with pytest.raises(publication.PublicationError, match="403"):
+        publication.control(client, client.event())
+    assert len(client.writes()) == 1 and client.writes()[0][1].endswith("/501/approve")
+
+
+def test_native_approval_timeout_does_not_repeat_approval_or_merge(monkeypatch):
+    monkeypatch.setattr(publication, "CI_WAIT_SECONDS", 20)
+    monkeypatch.setattr(publication.time, "sleep", lambda _: None)
+    client = GitHubFake()
+    client.runs[501]["conclusion"] = "action_required"
+    with pytest.raises(publication.PublicationError, match="native_pr_ci_wait_timeout"):
+        publication.control(client, client.event())
+    assert len(client.writes()) == 1 and client.writes()[0][1].endswith("/501/approve")
+
+
+@pytest.mark.parametrize("changed_ref", ["head", "base"])
+def test_refs_are_rechecked_while_native_ci_runs(monkeypatch, changed_ref):
+    client = GitHubFake()
+    client.runs[501]["conclusion"] = "action_required"
+    monkeypatch.setattr(publication.time, "sleep", lambda _: setattr(client, changed_ref, UPDATED))
+    with pytest.raises(publication.PublicationError, match="publication_refs_changed"):
+        publication.control(client, client.event())
+    assert len(client.writes()) == 1 and client.writes()[0][1].endswith("/501/approve")
+
+
+def test_native_wait_rechecks_pr_base_sha_before_approving():
+    client = GitHubFake()
+    client.pr["base"]["sha"] = ANCESTOR
+    client.runs[501]["conclusion"] = "action_required"
+    with pytest.raises(publication.PublicationError, match="publication_pr_base_changed"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+def test_latest_native_run_for_each_workflow_must_pass(monkeypatch):
+    monkeypatch.setattr(publication.time, "sleep", lambda _: None)
+    client = GitHubFake()
+    client.runs[502] = native_run(client.branch, 502)
+    client.runs[502]["conclusion"] = "failure"
+    client.native_ids = [501, 502]
+    with pytest.raises(publication.PublicationError, match="native_pr_ci_unsuccessful"):
+        publication.control(client, client.event())
+    assert not client.writes()

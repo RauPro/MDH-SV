@@ -24,7 +24,7 @@ jobs:
        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' &&
         (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch')))
     runs-on: ubuntu-latest
-    timeout-minutes: 22
+    timeout-minutes: 40
     permissions:
       contents: write
       pull-requests: write
