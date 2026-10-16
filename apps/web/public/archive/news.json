@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T05:15:40.419823+00:00",
+  "generated_at": "2026-10-16T06:15:24.042798+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -26,10 +26,10 @@
       "selected": 1733,
       "evaluated": 4888,
       "relevant": 1733,
-      "excluded": 103,
-      "uncertain": 3052,
+      "excluded": 111,
+      "uncertain": 3044,
       "pending": 6819,
-      "evaluated_at": "2026-10-16T05:15:37.608486+00:00"
+      "evaluated_at": "2026-10-16T06:15:21.496000+00:00"
     }
   },
   "paper": {
@@ -48,7 +48,7 @@
   },
   "coverage": {
     "start_date": "2010-01-01",
-    "end_date": "2026-10-15",
+    "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
     "records": 1733,
@@ -57,7 +57,7 @@
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 1409,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-15",
@@ -2476,7 +2476,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 6,
             "screen_version": 3,
             "posts_scanned": 166,
@@ -2492,7 +2492,7 @@
         "id": "gatoencerrado",
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 59,
         "first_published_date": "2014-09-21",
         "last_published_date": "2018-09-03",
@@ -4911,7 +4911,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 2,
@@ -4927,7 +4927,7 @@
         "id": "factum",
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 52,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
@@ -7346,7 +7346,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 0,
@@ -25774,22 +25774,22 @@
       {
         "month": "2026-10",
         "start_date": "2026-10-01",
-        "end_date": "2026-10-15",
+        "end_date": "2026-10-16",
         "records": 6,
         "sources": [
           {
             "source_id": "co-latino",
-            "status": "enumerated",
+            "status": "partial",
             "records": 6
           },
           {
             "source_id": "gatoencerrado",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0
           },
           {
             "source_id": "factum",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0
           },
           {
@@ -92777,19 +92777,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T00:14:39.649494-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "261934369d4846305d6cb2c49cd4ec2a40b25022b30ef45dc1e92246c4dd2128",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p5"
+            "p7"
           ]
         }
       }
@@ -92822,19 +92820,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T00:12:36.960963-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "88b90cfcfcfd1a6016ea2a89eef1655a82c11f7df1cebf225c012b930dc58bfa",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p6"
+            "p3"
           ]
         }
       }
@@ -92867,16 +92863,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T17:15:21.206076-06:00",
+        "classified_at": "2026-10-16T00:12:16.640673-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ed24c4e63c6cdf97d09bae8d7111424dee23cbd4bda743b22ba3098c79acf3d0",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
+            "p6",
             "p7"
           ]
         }
