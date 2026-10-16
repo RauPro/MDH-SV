@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T16:56:12.926621+00:00",
+  "generated_at": "2026-10-16T17:17:15.046343+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12010,
-      "selected": 1753,
+      "selected": 1755,
       "evaluated": 4889,
-      "relevant": 1753,
+      "relevant": 1755,
       "excluded": 142,
-      "uncertain": 2994,
+      "uncertain": 2992,
       "pending": 7121,
-      "evaluated_at": "2026-10-16T16:20:05.643521+00:00"
+      "evaluated_at": "2026-10-16T17:17:13.396262+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1753,
+    "records": 1755,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1425,
+        "records": 1427,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -653,7 +653,7 @@
           {
             "month": "2014-02",
             "status": "enumerated",
-            "records": 27,
+            "records": 29,
             "screen_version": 3,
             "posts_scanned": 967,
             "source_total_posts": 967,
@@ -19239,12 +19239,12 @@
         "month": "2014-02",
         "start_date": "2014-02-01",
         "end_date": "2014-02-28",
-        "records": 29,
+        "records": 31,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 27
+            "records": 29
           },
           {
             "source_id": "gatoencerrado",
@@ -91175,9 +91175,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:10:10.186200-06:00",
+        "classified_at": "2026-10-16T11:14:51.379596-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "cf14056ee932b440a451bfc7e33196ac422a51ac9ce0a3fbde86781026d2f2d6",
           "jurisdiction_paragraph_ids": [
@@ -91185,9 +91185,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p7",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -91316,9 +91314,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T16:14:32.813515-06:00",
+        "classified_at": "2026-10-16T11:12:38.576769-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "faa1299dd1e63c395c5380cb54d2b693d8472da42674cffc614f41f0effba527",
           "jurisdiction_paragraph_ids": [
@@ -91328,7 +91326,6 @@
           "relevance_paragraph_ids": [
             "p1",
             "p2",
-            "p6",
             "p14"
           ]
         }
@@ -100749,6 +100746,50 @@
       }
     },
     {
+      "id": "01477f81d4b7674d3dca37a03c664b94a85b79f9aec5afc6f14f89e7c16cdc2d",
+      "title": "Abogado defensor de Saca resta importancia a demanda",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/abogado-defensor-de-saca-resta-importancia-a-demanda/",
+      "published_date": "2014-02-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 5825,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T11:09:39.594639-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d51e27f7ba0c0202a006bd4dcf2c46d757b162b14c95954a41eac48da9203a18",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "id": "d8decca79af5fe2a4e7d16d1571fb854f095e771e0feb553618812d5642d47cb",
       "title": "Flores podría ser demandado internacionalmente por violar derechos humanos de familias pobres",
       "title_truncated": false,
@@ -100792,6 +100833,51 @@
             "p8",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "99502d760a3436e986e3ea6e92033f1b3d4bf2204343232ab8a4ec9448994845",
+      "title": "Sala rechaza petición de hábeas corpus a favor de ex presidente Francisco Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sala-rechaza-peticion-de-habeas-corpus-a-favor-de-ex-presidente-francisco-flores/",
+      "published_date": "2014-02-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 5721,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T11:09:39.594639-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "95e08872727448558f6f29dcd741f6f885f393290047230aa320f1bb0d3a7cb5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -104763,7 +104849,7 @@
     },
     {
       "id": "1351ead991512af7a974ac559a9ea9bf07bb57109b450f70bf995219c48e5c00",
-      "title": "Niño de 9 años está desaparecido",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "El Diario de Hoy (archivo)",
       "source_id": "el-diario-de-hoy",

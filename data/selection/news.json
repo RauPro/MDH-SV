@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T16:20:05.643521+00:00",
+  "generated_at": "2026-10-16T17:17:13.396262+00:00",
   "assessment_counts": {
-    "candidates": 11858,
+    "candidates": 12010,
     "evaluated": 4889,
-    "relevant": 1753,
+    "relevant": 1755,
     "excluded": 142,
-    "uncertain": 2994,
-    "pending": 6969
+    "uncertain": 2992,
+    "pending": 7121
   },
   "selections": [
     {
@@ -331,6 +331,33 @@
             "p5",
             "p6",
             "p16"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "01477f81d4b7674d3dca37a03c664b94a85b79f9aec5afc6f14f89e7c16cdc2d",
+      "source_url": "https://www.diariocolatino.com/abogado-defensor-de-saca-resta-importancia-a-demanda/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T11:09:39.594639-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d51e27f7ba0c0202a006bd4dcf2c46d757b162b14c95954a41eac48da9203a18",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8"
           ]
         }
       }
@@ -27964,9 +27991,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:10:10.186200-06:00",
+        "classified_at": "2026-10-16T11:14:51.379596-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "cf14056ee932b440a451bfc7e33196ac422a51ac9ce0a3fbde86781026d2f2d6",
           "jurisdiction_paragraph_ids": [
@@ -27974,9 +28001,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p7",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -30327,6 +30352,34 @@
             "p3",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "99502d760a3436e986e3ea6e92033f1b3d4bf2204343232ab8a4ec9448994845",
+      "source_url": "https://www.diariocolatino.com/sala-rechaza-peticion-de-habeas-corpus-a-favor-de-ex-presidente-francisco-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T11:09:39.594639-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "95e08872727448558f6f29dcd741f6f885f393290047230aa320f1bb0d3a7cb5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -38082,9 +38135,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T16:14:32.813515-06:00",
+        "classified_at": "2026-10-16T11:12:38.576769-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "faa1299dd1e63c395c5380cb54d2b693d8472da42674cffc614f41f0effba527",
           "jurisdiction_paragraph_ids": [
@@ -38094,7 +38147,6 @@
           "relevance_paragraph_ids": [
             "p1",
             "p2",
-            "p6",
             "p14"
           ]
         }

@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-16T13:19:57.840748+00:00",
+  "generated_at": "2026-10-16T17:19:45.091363+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -4750,6 +4750,22 @@
       }
     },
     {
+      "candidate_id": "9fd81ba89faa6c96d25db8d9c36a62a82d770aded807ac61f52cef829b5fe2bd",
+      "source_url": "https://historico.elsalvador.com/historico/102332/justicia-militar-declaro-inocentes-a-seis-militares-pese-a-confesion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-02-14",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-15T11:15:46.262238-06:00",
+      "source_checked_at": "2026-10-16T17:19:38.942691+00:00",
+      "evidence": {
+        "paragraph_id": "p9",
+        "content_sha256": "0d99ac46c90be23d71c6a7c261833911493de787697d25ce35903bf836695395"
+      }
+    },
+    {
       "candidate_id": "a061d16cf021355fe011ee289e5b1ad60f74a4d9a4508062ebcfaabea1ca6c74",
       "source_url": "https://historico.elsalvador.com/historico/100222/alcaldia-de-sensuntepeque-desaloja-vendedores.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -5288,6 +5304,30 @@
       "evidence": {
         "paragraph_id": "p14",
         "content_sha256": "865d21a0c301611b98862bad3f8b4a46758721218138bd5ee68456b6c39f23e0"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "be58ab3e164fd78abd1bded5bdb807e1b253ba9208e52f8d9c0489c9040600d3",
+      "source_url": "https://www.diariocolatino.com/comerciantes-de-plaza-san-vicente-de-paul-temerosos-por-amenaza-de-desalojo-san-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-04",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-16T17:19:41.886374+00:00",
+      "source_checked_at": "2026-10-16T17:19:41.886374+00:00",
+      "evidence": {
+        "paragraph_id": "p7",
+        "content_sha256": "6505ae7e406a50efee9d72100910695fc9f135b1fb8226f24e35483a05fbc8f2"
       },
       "resolution": {
         "type": "municipality_to_department",
