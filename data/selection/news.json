@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T11:16:49.629049+00:00",
+  "generated_at": "2026-10-16T12:16:38.808380+00:00",
   "assessment_counts": {
-    "candidates": 11707,
-    "evaluated": 4888,
-    "relevant": 1736,
+    "candidates": 11858,
+    "evaluated": 4889,
+    "relevant": 1737,
     "excluded": 135,
     "uncertain": 3017,
-    "pending": 6819
+    "pending": 6969
   },
   "selections": [
     {
@@ -21,22 +21,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T16:13:52.371907-06:00",
+        "classified_at": "2026-10-16T06:15:34.496406-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "1915be1bdd174eaeb26d9971857c93ea57f64492fdb01f79e51fdc40c54d660e",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p2",
-            "p3",
-            "p4",
-            "p5"
+            "p1"
           ],
           "relevance_paragraph_ids": [
-            "p1",
-            "p6",
-            "p7"
+            "p1"
           ]
         }
       }
@@ -8270,25 +8264,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T16:13:52.371907-06:00",
+        "classified_at": "2026-10-16T06:15:57.746058-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "95c95763f4ce5d8b64e1d61fd4afe28b3179a1745a9a7af71bd5baa9bcac306c",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p3",
-            "p4",
-            "p5",
-            "p6",
-            "p7"
+            "p1"
           ],
           "relevance_paragraph_ids": [
-            "p1",
-            "p3",
-            "p4",
-            "p7",
-            "p12"
+            "p1"
           ]
         }
       }
@@ -12190,19 +12175,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:09:16.734370-06:00",
+        "classified_at": "2026-10-16T06:13:53.660753-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "18b53d792ffd3598d0af92987cac07abb5a243d06f1da4e8acaefbf63842d43b",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
+            "p2",
             "p3",
-            "p9",
-            "p10"
+            "p4"
           ]
         }
       }
@@ -34840,6 +34824,32 @@
             "p6",
             "p17",
             "p22"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b2d0bc759392a53426d594729fc86387a817d1c4d01f8869d9d6647ca32618da",
+      "source_url": "https://www.diariocolatino.com/movir-exige-a-bukele-liberar-a-los-inocentes-no-queremos-libertades-condicionadas-queremos-justicia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T06:13:35.386637-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f0bdb381c7639200ecadf8c44db5134ed973fb98675f1fbbbdec78ebc778ff81",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p18"
           ]
         }
       }

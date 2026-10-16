@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T11:53:16.889351+00:00",
+  "generated_at": "2026-10-16T12:16:41.081568+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 11858,
-      "selected": 1736,
-      "evaluated": 4888,
-      "relevant": 1736,
+      "selected": 1737,
+      "evaluated": 4889,
+      "relevant": 1737,
       "excluded": 135,
       "uncertain": 3017,
-      "pending": 6970,
-      "evaluated_at": "2026-10-16T11:16:49.629049+00:00"
+      "pending": 6969,
+      "evaluated_at": "2026-10-16T12:16:38.808380+00:00"
     }
   },
   "paper": {
@@ -51,16 +51,16 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1736,
+    "records": 1737,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1409,
+        "records": 1410,
         "first_published_date": "2014-01-02",
-        "last_published_date": "2026-10-15",
+        "last_published_date": "2026-10-16",
         "months": [
           {
             "month": "2010-01",
@@ -2477,7 +2477,7 @@
           {
             "month": "2026-10",
             "status": "enumerated",
-            "records": 6,
+            "records": 7,
             "screen_version": 3,
             "posts_scanned": 175,
             "source_total_posts": 175,
@@ -25775,12 +25775,12 @@
         "month": "2026-10",
         "start_date": "2026-10-01",
         "end_date": "2026-10-16",
-        "records": 6,
+        "records": 7,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 6
+            "records": 7
           },
           {
             "source_id": "gatoencerrado",
@@ -25817,6 +25817,53 @@
     ]
   },
   "records": [
+    {
+      "id": "b2d0bc759392a53426d594729fc86387a817d1c4d01f8869d9d6647ca32618da",
+      "title": "MOVIR exige a Bukele liberar a los inocentes: “no queremos libertades condicionadas, queremos justicia”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/movir-exige-a-bukele-liberar-a-los-inocentes-no-queremos-libertades-condicionadas-queremos-justicia/",
+      "published_date": "2026-10-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "movir"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420719,
+        "retrieved_at": "2026-10-16T11:52:37.980244+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T06:13:35.386637-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f0bdb381c7639200ecadf8c44db5134ed973fb98675f1fbbbdec78ebc778ff81",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p18"
+          ]
+        }
+      }
+    },
     {
       "id": "e6da93b259c56e197cee9ad3465beb20612cab9c359f39705ab420a34f55b05e",
       "title": "Bukele plantea liberación del 50% de los capturados bajo el Régimen de Excepción",
@@ -91406,25 +91453,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T16:13:52.371907-06:00",
+        "classified_at": "2026-10-16T06:15:57.746058-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "95c95763f4ce5d8b64e1d61fd4afe28b3179a1745a9a7af71bd5baa9bcac306c",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p3",
-            "p4",
-            "p5",
-            "p6",
-            "p7"
+            "p1"
           ],
           "relevance_paragraph_ids": [
-            "p1",
-            "p3",
-            "p4",
-            "p7",
-            "p12"
+            "p1"
           ]
         }
       }
@@ -91505,22 +91543,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T16:13:52.371907-06:00",
+        "classified_at": "2026-10-16T06:15:34.496406-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "1915be1bdd174eaeb26d9971857c93ea57f64492fdb01f79e51fdc40c54d660e",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p2",
-            "p3",
-            "p4",
-            "p5"
+            "p1"
           ],
           "relevance_paragraph_ids": [
-            "p1",
-            "p6",
-            "p7"
+            "p1"
           ]
         }
       }
@@ -91863,19 +91895,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:09:16.734370-06:00",
+        "classified_at": "2026-10-16T06:13:53.660753-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "18b53d792ffd3598d0af92987cac07abb5a243d06f1da4e8acaefbf63842d43b",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
+            "p2",
             "p3",
-            "p9",
-            "p10"
+            "p4"
           ]
         }
       }
@@ -93153,7 +93184,7 @@
     },
     {
       "id": "c314993af89e430bf8995c758fd27b0644fb9b82eb9d45ab3fd0efeada38900d",
-      "title": "Presidente reitera compromiso por continuar búsqueda de niños desaparecidos en conflicto armado",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
