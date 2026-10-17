@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T15:55:07.060795+00:00",
+  "generated_at": "2026-10-17T16:17:18.452561+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12621,
-      "selected": 1829,
+      "selected": 1832,
       "evaluated": 4891,
-      "relevant": 1829,
-      "excluded": 302,
-      "uncertain": 2760,
+      "relevant": 1832,
+      "excluded": 310,
+      "uncertain": 2749,
       "pending": 7730,
-      "evaluated_at": "2026-10-17T15:17:28.932212+00:00"
+      "evaluated_at": "2026-10-17T16:17:15.960648+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1829,
+    "records": 1832,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1492,
+        "records": 1495,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -737,7 +737,7 @@
           {
             "month": "2014-09",
             "status": "enumerated",
-            "records": 44,
+            "records": 47,
             "screen_version": 3,
             "posts_scanned": 1085,
             "source_total_posts": 1085,
@@ -19540,12 +19540,12 @@
         "month": "2014-09",
         "start_date": "2014-09-01",
         "end_date": "2014-09-30",
-        "records": 47,
+        "records": 50,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 44
+            "records": 47
           },
           {
             "source_id": "gatoencerrado",
@@ -88668,9 +88668,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T10:16:35.925429-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a4f02f80d6aa243332aed39947cd89f2ae809233722c1ab3e9cad702d598001e",
           "jurisdiction_paragraph_ids": [
@@ -88678,12 +88678,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p6",
-            "p7",
-            "p8",
-            "p9"
+            "p4"
           ]
         }
       }
@@ -88804,9 +88799,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T10:16:20.105981-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b6953d7fcb47f0213587ee353045350a23c6608eb153dbab255cb39b85886dd4",
           "jurisdiction_paragraph_ids": [
@@ -88814,9 +88809,7 @@
           ],
           "relevance_paragraph_ids": [
             "p5",
-            "p9",
-            "p11",
-            "p19"
+            "p7"
           ]
         }
       }
@@ -88892,9 +88885,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T10:14:35.477188-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6df81f77e8492bd989086922f40bf3f3b15b92fee163bb241c104a494879f508",
           "jurisdiction_paragraph_ids": [
@@ -88902,8 +88895,7 @@
             "p5"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p5",
+            "p4",
             "p7"
           ]
         }
@@ -92197,6 +92189,109 @@
       }
     },
     {
+      "id": "f3f72ff671e87e46b6e2d476e6577efcb849d0b545a44cab5ffc8346f90950b7",
+      "title": "FGR pide detención provisional para ex jugadores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-pide-detencion-provisional-para-ex-jugadores/",
+      "published_date": "2014-09-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 29319,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T10:09:42.422458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e22ef15920c02ef5282e7d2828b0abc7d63c44aff85e14997ea49eae56457528",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f0c0b8f78e1390b153b7f454050b1d7f5c88cf2f61ecc5e9406beeceef34cba8",
+      "title": "Capturan a bartolineros de la PNC",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-a-bartolineros-de-la-pnc/",
+      "published_date": "2014-09-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 29294,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T10:09:42.422458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e1c6c73563e1cafc35561eaa517fdb8efa5e973c3cc0058611cc320e88f813b9",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p10",
+            "p11",
+            "p12",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "id": "0882a3318084c4cadb23b4aa03851310c23ae9a6ae51c9ab4097f182fe78e977",
       "title": "Cuando la madre del desaparecido habló",
       "title_truncated": false,
@@ -92234,6 +92329,56 @@
           ],
           "relevance_paragraph_ids": [
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bb91446924885814cec3c9f2c5120bb277a82bf58f1addb17e99f8721e8e28b0",
+      "title": "Cámara ratifica decisión de enviar a bartolinas policiales a ex presidente Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/camara-ratifica-decision-de-enviar-a-bartolinas-policiales-a-ex-presidente-flores/",
+      "published_date": "2014-09-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 29071,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T10:09:42.422458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "17dc6a2760eccc21ee3c74e9071ce1874a590816678e713883d737c03638d351",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
           ]
         }
       }
