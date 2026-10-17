@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T09:18:35.836481+00:00",
+  "generated_at": "2026-10-17T10:16:46.717141+00:00",
   "assessment_counts": {
     "candidates": 12317,
     "evaluated": 4889,
-    "relevant": 1803,
-    "excluded": 254,
-    "uncertain": 2832,
+    "relevant": 1805,
+    "excluded": 262,
+    "uncertain": 2822,
     "pending": 7428
   },
   "selections": [
@@ -24038,9 +24038,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T04:15:55.497935-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b7a691c06ed02defe03ed5d29f6906f1f91b547456b8985ffe3b3746d22f3ca7",
           "jurisdiction_paragraph_ids": [
@@ -24048,9 +24048,7 @@
           ],
           "relevance_paragraph_ids": [
             "p3",
-            "p7",
-            "p9",
-            "p17"
+            "p12"
           ]
         }
       }
@@ -34238,6 +34236,33 @@
       }
     },
     {
+      "candidate_id": "a6940278bf401eedf9a460b7d0a5786353b72e98f74e231e53e6415f66312fe5",
+      "source_url": "https://historico.elsalvador.com/historico/130976/capturan-a-salvadoreno-por-extorsionar-un-sacristan-en-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-07-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T04:09:28.793713-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6fd52995a11df86aa565fb505a90b80e72a78eb1e16050b9b8641c8f4e2d18b0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a6ad5576171383fe6a679a9fbf7803f722938304409a80e60fab08464f624fa2",
       "source_url": "https://www.diariocolatino.com/ncrementa-detencion-de-conductores-peligrosos-pnc/",
       "publisher": "Diario Co Latino",
@@ -34864,19 +34889,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T04:16:10.249593-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "bc44ab92aed7ed704af48e0cabc3f834acf39215728580261ebf3fcf56404c0b",
           "jurisdiction_paragraph_ids": [
-            "p5",
-            "p6"
+            "p5"
           ],
           "relevance_paragraph_ids": [
             "p5",
-            "p6",
-            "p7"
+            "p6"
           ]
         }
       }
@@ -35729,6 +35752,35 @@
             "p1",
             "p14",
             "p15"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b09cbba54d57bedfea47aa40ac7938e7c91d94b28efd22c871254c9890bd423a",
+      "source_url": "https://www.diariocolatino.com/capturan-a-ex-alcalde-acusado-de-secuestro/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T04:09:28.793713-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "727f597c76af138af1da9fd5df5c554a4a05a5aa3f001dc64d436df3110c7251",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p9",
+            "p13"
           ]
         }
       }
