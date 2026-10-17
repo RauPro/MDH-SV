@@ -17,8 +17,12 @@ Los borradores privados y sus envelopes no son formatos públicos compatibles.
 | Ubicaciones automáticas v1–v5 | `mdh_pipeline.automatic_locations.validate_collection` | `shared/news-location.mjs` |
 | Registro de fuentes | `mdh_pipeline.publishers` | `shared/source-registry.mjs` |
 
-Los ejemplos de `tests/fixtures/contracts` se ejecutan en ambos lenguajes con el
-mismo resultado esperado. El registro tiene además su corpus de configuración en
+Los ejemplos de catálogo, referencias, selección, fichas, procesamiento y
+ubicaciones de `tests/fixtures/contracts` se ejecutan en ambos lenguajes con el
+mismo resultado esperado. Las fixtures del archivo completo comprueban su
+envoltura JavaScript y el rechazo en la API; Python valida las referencias al
+construir ese archivo, sin un segundo parser de su envoltura. El registro tiene
+además su corpus de configuración en
 `tests/fixtures/source-registry-contract.json`. Son datos ficticios: no se llaman
 servicios de IA, no se descargan artículos y no se utilizan credenciales.
 
