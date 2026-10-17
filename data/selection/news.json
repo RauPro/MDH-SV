@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T22:17:25.320116+00:00",
+  "generated_at": "2026-10-17T23:17:08.414468+00:00",
   "assessment_counts": {
     "candidates": 12775,
     "evaluated": 4891,
-    "relevant": 1842,
-    "excluded": 357,
-    "uncertain": 2692,
+    "relevant": 1846,
+    "excluded": 365,
+    "uncertain": 2680,
     "pending": 7884
   },
   "selections": [
@@ -10416,6 +10416,33 @@
       }
     },
     {
+      "candidate_id": "3483520924f1d6a3c2e59364971bc3f2aead38126c92f4253ad40eb3d678b5d7",
+      "source_url": "https://www.diariocolatino.com/disturbios-en-protestas-en-mexico-por-43-estudiantes-desaparecidos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T17:09:25.951192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "709513c7e4cab3e9df5889893001a58694fd500f48e4710588207e6cc4892ddf",
+          "jurisdiction_paragraph_ids": [
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p23"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "34af901b76152476c19ecdaac9da92e56a56d614d6f36e85cd5bbc4dc2c976cf",
       "source_url": "https://www.diariocolatino.com/comunidades-de-cabanas-denuncian-contaminacion-de-rio-que-sirve-para-pesca-y-agricultura-2/",
       "publisher": "Diario Co Latino",
@@ -13456,17 +13483,15 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T17:16:26.164030-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9c7887f383a0d75177d74924007d77e20adc024a9178f312a27b503c0646ec4d",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p8",
             "p10"
           ]
         }
@@ -19221,6 +19246,34 @@
             "p7",
             "p8",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "61797d23ff10718103da71203b7831eb5fa7fadc92ee2c19c428a9524fe22955",
+      "source_url": "https://www.diariocolatino.com/promedio-diario-de-homicidios-ha-disminuido-en-los-ultimos-tres-meses/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T17:09:25.951192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7b538ab640acd006995ef6466d51af7de7c01af980078cf97da5d8f5f4793c80",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10"
           ]
         }
       }
@@ -29261,6 +29314,36 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8d4e9f1dbdb600933716b03c7bf41ffbe86ce33c968ac6342582cd50095aeeec",
+      "source_url": "https://www.diariocolatino.com/descaro-periodistico/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T17:09:25.951192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "31b0c3cc5911456d07d4083b46267ba7825cc7bf8499125bad8653d8b00193ab",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p7"
           ]
         }
       }
@@ -41604,6 +41687,32 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c7414c295423031856762cc895dfb933ed4e7d38bf796b2ba5c52f250ff35108",
+      "source_url": "https://www.diariocolatino.com/ataque-deja-ocho-personas-asesinadas-en-sonsonate/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T17:09:25.951192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7efdfc4a78da0c7ea2e1e0112d22092fa0fe174ae62961fdde163384e06c994a",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p18"
           ]
         }
       }
