@@ -1,5 +1,6 @@
 """Private GitHub editorial inbox. Collection cannot write to the public monitor."""
 from __future__ import annotations
+
 import hashlib
 import html
 import ipaddress
@@ -11,19 +12,16 @@ import socket
 import time
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
-from urllib.parse import urlsplit, urlunsplit, parse_qsl
+from urllib.parse import parse_qsl, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
 import feedparser
 import requests
-from .publishers import NEWS_HOSTS
-from .instance import load_instance
 
-FEEDS = [
-    {'name': 'Diario Co Latino', 'url': 'https://www.diariocolatino.com/feed/', 'hosts': ['www.diariocolatino.com', 'diariocolatino.com']},
-    {'name': 'GatoEncerrado', 'url': 'https://gatoencerrado.news/feed/', 'hosts': ['gatoencerrado.news']},
-    {'name': 'Revista Factum', 'url': 'https://www.revistafactum.com/feed/', 'hosts': ['www.revistafactum.com', 'revistafactum.com']},
-]
+from .instance import load_instance
+from .publishers import NEWS_HOSTS, registered_feeds
+
+FEEDS = registered_feeds('private_queue')
 HOSTS = NEWS_HOSTS
 KEYWORDS = ('derechos humanos', 'regimen de excepcion', 'detencion', 'detenido', 'detenida',
     'tortura', 'custodia', 'desaparecid', 'desaparicion', 'periodista', 'prensa', 'censura',

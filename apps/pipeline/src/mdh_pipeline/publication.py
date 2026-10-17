@@ -5,19 +5,39 @@ import hashlib
 import io
 import json
 import re
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
-from typing import Generic, Literal, TypeVar
+from typing import Generic, Literal, TypeVar, get_args
 from urllib.parse import urlparse
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
-from .publishers import NEWS_HOSTS
+from .publishers import PRIMARY_SOURCE_HOSTS
 
 ROOT = Path(__file__).resolve().parents[4]
 CATALOG = ROOT / "data/reviewed/publications.json"
 PUBLIC = ROOT / "apps/web/public/data"
 
 T = TypeVar("T")
+
+
+def _calendar(value):
+    if value is None or type(value) is date:
+        return value
+    if (not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value)
+            or date.fromisoformat(value).isoformat() != value):
+        raise ValueError("Expected an explicit ISO calendar date")
+    return value
+
+
+def _version(value):
+    if type(value) not in {int, float} or value != 1:
+        raise ValueError("Expected public schema version 1")
+    return 1
+
+
+def _today():
+    # Catalogue review dates use one clock in Python, Node and the browser.
+    return datetime.now(timezone.utc).date()
 
 
 class EvidenceField(BaseModel, Generic[T]):
@@ -27,6 +47,11 @@ class EvidenceField(BaseModel, Generic[T]):
     status: Literal["reported", "not_reported", "withheld", "not_applicable"]
     evidence_refs: list[str] = Field(default_factory=list)
     note: str | None = None
+
+    @field_validator("value", mode="before")
+    @classmethod
+    def explicit_calendar_value(cls, value):
+        return _calendar(value) if date in get_args(cls.model_fields["value"].annotation) else value
 
     @model_validator(mode="after")
     def meaningful_value(self):
@@ -78,6 +103,11 @@ class Dossier(BaseModel):
     instrument: EvidenceField[list[str]]
     evidence: list[DossierEvidence] = Field(min_length=1)
 
+    @field_validator("schema_version", mode="before")
+    @classmethod
+    def explicit_version(cls, value):
+        return _version(value)
+
     def evidence_fields(self):
         for name in type(self).model_fields:
             value = getattr(self, name)
@@ -121,7 +151,7 @@ class Publication(BaseModel):
     incident_date_end: date | None
     date_precision: Literal["day", "unknown", "month_range", "year_range"]
     review_status: Literal["source_checked", "editorially_reviewed"]
-    human_reviewed: bool
+    human_reviewed: bool = Field(strict=True)
     reviewed_by: str | None = None
     reviewed_at: date | None = None
     review_notes: str | None = None
@@ -130,17 +160,23 @@ class Publication(BaseModel):
     reported_actor: str | None
     source_record_key: str = Field(min_length=4)
     privacy_note: str = Field(min_length=10)
-    penitentiary_related: bool
+    penitentiary_related: bool = Field(strict=True)
     dossier: Dossier
+
+    @field_validator("published_date", "source_checked_at", "incident_date", "incident_date_end",
+                     "reviewed_at", mode="before")
+    @classmethod
+    def explicit_dates(cls, value):
+        return _calendar(value)
 
     @field_validator("source_url")
     @classmethod
     def primary_source(cls, value):
         url = urlparse(value)
-        if (url.scheme != "https" or url.hostname not in
-                {"www.hrw.org", "www.oas.org", "www.amnesty.org", "citizenlab.ca",
-                 "www.corteidh.or.cr", "spcommreports.ohchr.org", "www.ohchr.org", *NEWS_HOSTS}
-                or url.username or url.password or url.port or len(url.path) < 5):
+        if (url.scheme != "https" or url.hostname not in PRIMARY_SOURCE_HOSTS
+                or url.username or url.password or url.port or len(url.path) < 5
+                or re.search(r"[\x00-\x20\x7f\\]", value) or "@" in url.netloc
+                or url.netloc.lower() != url.hostname):
             raise ValueError("Expected an explicit, reviewed primary-source HTTPS URL")
         return value
 
@@ -168,7 +204,7 @@ class Publication(BaseModel):
                 raise ValueError('Human review requires reviewer, date and substantive notes')
             if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9-]{0,38}', self.reviewed_by):
                 raise ValueError('Invalid reviewer identifier')
-            if self.reviewed_at > date.today() or self.reviewed_at < self.source_checked_at:
+            if self.reviewed_at > _today() or self.reviewed_at < self.source_checked_at:
                 raise ValueError('Inconsistent review date')
         elif (self.review_status != 'source_checked' or self.reviewed_by or self.reviewed_at or self.review_notes):
             raise ValueError('Do not attribute a human review that did not take place')
@@ -178,9 +214,10 @@ class Publication(BaseModel):
             if set(source) != {'url', 'title', 'published_date', 'locator'} or not all(source.values()):
                 raise ValueError('Invalid supporting source')
             self.primary_source(source['url'])
+            _calendar(source['published_date'])
             if date.fromisoformat(source['published_date']) > self.source_checked_at:
                 raise ValueError('Supporting source newer than review')
-        if self.published_date > self.source_checked_at or self.source_checked_at > date.today():
+        if self.published_date > self.source_checked_at or self.source_checked_at > _today():
             raise ValueError("Publication/review dates are inconsistent")
         if self.incident_date and self.incident_date > self.published_date:
             raise ValueError("Event cannot be later than its source")
@@ -204,6 +241,16 @@ class Catalog(BaseModel):
     updated_at: date
     scope: str
     records: list[Publication]
+
+    @field_validator("schema_version", mode="before")
+    @classmethod
+    def explicit_version(cls, value):
+        return _version(value)
+
+    @field_validator("updated_at", mode="before")
+    @classmethod
+    def explicit_date(cls, value):
+        return _calendar(value)
 
     @model_validator(mode="after")
     def unique(self):

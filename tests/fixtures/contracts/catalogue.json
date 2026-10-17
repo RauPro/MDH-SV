@@ -1,0 +1,3204 @@
+{
+  "schema_version": 1,
+  "contract": "catalogue",
+  "bases": {
+    "incident": {
+      "schema_version": 1,
+      "updated_at": "2026-10-09",
+      "scope": "Monitor inicial de reportes de presuntas violaciones. Cobertura parcial; casos individuales, reportes colectivos e informes se contabilizan por separado.",
+      "records": [
+        {
+          "id": "fixture-incident",
+          "record_type": "incident",
+          "title": "Reporte de detención de un adolescente en Ahuachapán",
+          "publisher": "Human Rights Watch",
+          "source_title": "Su hijo no existe aquí",
+          "published_date": "2024-07-16",
+          "date_note": "La fecha corresponde a la detención descrita; no fecha los hechos posteriores.",
+          "category": "Libertad y debido proceso",
+          "tags": [
+            "Detención",
+            "Niñez"
+          ],
+          "summary": "HRW relata una detención en un centro educativo y dificultades familiares para obtener información sobre el adolescente.",
+          "source_url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+          "source_locator": "Resumen: relato de la detención del 10 de julio de 2022.",
+          "source_checked_at": "2026-10-09",
+          "source_check_method": "Consulta documental asistida; no constituye verificación independiente de los hechos.",
+          "coverage": "El Salvador · ubicación departamental",
+          "department": "Ahuachapán",
+          "geometry": null,
+          "language": "es",
+          "incident_date": "2022-07-10",
+          "incident_date_end": null,
+          "date_precision": "day",
+          "review_status": "source_checked",
+          "human_reviewed": false,
+          "reviewed_by": null,
+          "reviewed_at": null,
+          "review_notes": null,
+          "origin_candidate_id": null,
+          "related_sources": [],
+          "reported_actor": "Fuerzas de seguridad, según la fuente",
+          "source_record_key": "test-incident",
+          "privacy_note": "Identidad, edad exacta y ubicación local omitidas. Consulte las condiciones de protección de la fuente.",
+          "penitentiary_related": true,
+          "dossier": {
+            "schema_version": 1,
+            "alleged_violation": {
+              "value": "Detención de un menor y obstáculos al contacto familiar.",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Atribución a la fuente; el monitor no determina responsabilidad individual."
+            },
+            "facts": {
+              "value": "HRW relata una detención en un centro educativo y dificultades familiares para obtener información sobre el adolescente.",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "affected_persons": {
+              "value": [
+                "Adolescente estudiante; identidad reservada"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Identidad, edad exacta y ubicación local omitidas. Consulte las condiciones de protección de la fuente."
+            },
+            "location": {
+              "department": {
+                "value": "Ahuachapán",
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": null
+              },
+              "municipality": {
+                "value": null,
+                "status": "withheld",
+                "evidence_refs": [],
+                "note": "Localidad omitida para reducir el riesgo de identificar a la persona afectada."
+              },
+              "public_place": {
+                "value": null,
+                "status": "withheld",
+                "evidence_refs": [],
+                "note": "Localidad omitida para reducir el riesgo de identificar a la persona afectada."
+              }
+            },
+            "event_date": {
+              "value": "2022-07-10",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "La fecha corresponde a la detención descrita; no fecha los hechos posteriores."
+            },
+            "event_date_end": {
+              "value": null,
+              "status": "not_applicable",
+              "evidence_refs": [],
+              "note": "No se publica un intervalo para este registro; consulte la precisión de fecha."
+            },
+            "date_precision": "day",
+            "event_time": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "Hora no consignada; no se infiere a partir de la fecha de publicación."
+            },
+            "reported_actors": {
+              "value": [
+                "Policías y soldados"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Actores mencionados por la fuente; su inclusión no determina culpabilidad individual."
+            },
+            "institutional_sources": {
+              "value": [
+                "Human Rights Watch",
+                "Familiares citados por HRW"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Autoría documental y, cuando se indican, fuentes citadas por ella; no implica acceso directo del monitor a los expedientes o testimonios."
+            },
+            "vulnerable_groups": {
+              "value": [
+                "Niñez y adolescencia"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "themes": {
+              "value": [
+                "Detención",
+                "Niñez"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Etiquetas de consulta asignadas a partir del contenido; no son conclusiones judiciales."
+            },
+            "hypothesis": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se incorpora una hipótesis propia ni se infiere motivación."
+            },
+            "instrument": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se atribuye un arma o instrumento por el tipo de hecho."
+            },
+            "evidence": [
+              {
+                "id": "primary",
+                "url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+                "locator": "Resumen: relato de la detención del 10 de julio de 2022."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "overview": {
+      "schema_version": 1,
+      "updated_at": "2026-10-09",
+      "scope": "Monitor inicial de reportes de presuntas violaciones. Cobertura parcial; casos individuales, reportes colectivos e informes se contabilizan por separado.",
+      "records": [
+        {
+          "id": "fixture-overview",
+          "record_type": "publication",
+          "title": "Su hijo no existe aquí",
+          "publisher": "Human Rights Watch",
+          "source_title": "Su hijo no existe aquí",
+          "published_date": "2024-07-16",
+          "date_note": "Fecha de publicación del informe.",
+          "category": "Niñez y adolescencia",
+          "tags": [
+            "Niñez",
+            "Debido proceso",
+            "Detención",
+            "Condiciones penitenciarias"
+          ],
+          "summary": "Human Rights Watch examina las detenciones y las condiciones de reclusión de niños, niñas y adolescentes durante el régimen de excepción. El informe describe su metodología, entrevistas y recomendaciones.",
+          "source_url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+          "source_locator": "Resumen; Metodología; Recomendaciones.",
+          "source_checked_at": "2026-10-09",
+          "source_check_method": "Consulta documental asistida; no constituye verificación independiente de los hechos.",
+          "coverage": "El Salvador · alcance nacional",
+          "department": null,
+          "geometry": null,
+          "language": "es",
+          "incident_date": null,
+          "incident_date_end": null,
+          "date_precision": "unknown",
+          "review_status": "source_checked",
+          "human_reviewed": false,
+          "reviewed_by": null,
+          "reviewed_at": null,
+          "review_notes": null,
+          "origin_candidate_id": null,
+          "related_sources": [],
+          "reported_actor": null,
+          "source_record_key": "test-overview",
+          "privacy_note": "Ficha bibliográfica sin datos personales.",
+          "penitentiary_related": true,
+          "dossier": {
+            "schema_version": 1,
+            "alleged_violation": {
+              "value": "Informe sobre presuntas detenciones arbitrarias y afectaciones al debido proceso de menores.",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Atribución a la fuente; el monitor no determina responsabilidad individual."
+            },
+            "facts": {
+              "value": "Human Rights Watch examina las detenciones y las condiciones de reclusión de niños, niñas y adolescentes durante el régimen de excepción. El informe describe su metodología, entrevistas y recomendaciones.",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "affected_persons": {
+              "value": [
+                "Niños, niñas y adolescentes detenidos"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Ficha bibliográfica sin datos personales."
+            },
+            "location": {
+              "department": {
+                "value": null,
+                "status": "not_applicable",
+                "evidence_refs": [],
+                "note": "Informe de alcance general; no describe un único hecho localizado y fechado."
+              },
+              "municipality": {
+                "value": null,
+                "status": "not_applicable",
+                "evidence_refs": [],
+                "note": "Informe de alcance general; no describe un único hecho localizado y fechado."
+              },
+              "public_place": {
+                "value": null,
+                "status": "not_applicable",
+                "evidence_refs": [],
+                "note": "Informe de alcance general; no describe un único hecho localizado y fechado."
+              }
+            },
+            "event_date": {
+              "value": null,
+              "status": "not_applicable",
+              "evidence_refs": [],
+              "note": "Informe de alcance general; no describe un único hecho localizado y fechado."
+            },
+            "event_date_end": {
+              "value": null,
+              "status": "not_applicable",
+              "evidence_refs": [],
+              "note": "Informe de alcance general; no describe un único hecho localizado y fechado."
+            },
+            "date_precision": "unknown",
+            "event_time": {
+              "value": null,
+              "status": "not_applicable",
+              "evidence_refs": [],
+              "note": "Informe de alcance general; no describe un único hecho localizado y fechado."
+            },
+            "reported_actors": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se individualiza un presunto responsable en esta ficha."
+            },
+            "institutional_sources": {
+              "value": [
+                "Human Rights Watch"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Autoría documental y, cuando se indican, fuentes citadas por ella; no implica acceso directo del monitor a los expedientes o testimonios."
+            },
+            "vulnerable_groups": {
+              "value": [
+                "Niñez y adolescencia"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "themes": {
+              "value": [
+                "Niñez",
+                "Debido proceso",
+                "Detención",
+                "Condiciones penitenciarias"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Etiquetas de consulta asignadas a partir del contenido; no son conclusiones judiciales."
+            },
+            "hypothesis": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se incorpora una hipótesis propia ni se infiere motivación."
+            },
+            "instrument": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se atribuye un arma o instrumento por el tipo de hecho."
+            },
+            "evidence": [
+              {
+                "id": "primary",
+                "url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+                "locator": "Resumen; Metodología; Recomendaciones."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "range": {
+      "schema_version": 1,
+      "updated_at": "2026-10-09",
+      "scope": "Monitor inicial de reportes de presuntas violaciones. Cobertura parcial; casos individuales, reportes colectivos e informes se contabilizan por separado.",
+      "records": [
+        {
+          "id": "fixture-range",
+          "record_type": "aggregate",
+          "title": "Reporte colectivo de vigilancia digital con Pegasus",
+          "publisher": "The Citizen Lab y Access Now",
+          "source_title": "Proyecto Torogoz",
+          "published_date": "2022-01-12",
+          "date_note": "Intervalo de meses reportado: julio de 2020 a noviembre de 2021. Los días delimitan meses, no ataques individuales.",
+          "category": "Libertades civiles y prensa",
+          "tags": [
+            "Prensa",
+            "Vigilancia digital",
+            "Privacidad"
+          ],
+          "summary": "Citizen Lab y Access Now reportan infecciones con Pegasus en teléfonos de periodistas y sociedad civil. Este registro representa el conjunto investigado, no personas o ataques individuales.",
+          "source_url": "https://citizenlab.ca/research/project-torogoz-extensive-hacking-media-civil-society-el-salvador-pegasus-spyware/proyecto-torogoz-hackeo-extensivo-de-los-medios-de-comunicacion-y-la-sociedad-civil-en-el-salvador-con-el-programa-espia-pegasus/",
+          "source_locator": "Hallazgos principales y sección de metodología del análisis técnico.",
+          "source_checked_at": "2026-10-09",
+          "source_check_method": "Consulta documental asistida; no constituye verificación independiente de los hechos.",
+          "coverage": "El Salvador · alcance nacional",
+          "department": null,
+          "geometry": null,
+          "language": "es",
+          "incident_date": "2020-07-01",
+          "incident_date_end": "2021-11-30",
+          "date_precision": "month_range",
+          "review_status": "source_checked",
+          "human_reviewed": false,
+          "reviewed_by": null,
+          "reviewed_at": null,
+          "review_notes": null,
+          "origin_candidate_id": null,
+          "related_sources": [],
+          "reported_actor": null,
+          "source_record_key": "test-range",
+          "privacy_note": "Ficha bibliográfica sin datos personales.",
+          "penitentiary_related": false,
+          "dossier": {
+            "schema_version": 1,
+            "alleged_violation": {
+              "value": "Vigilancia digital contra periodistas y sociedad civil reportada por el análisis técnico.",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Atribución a la fuente; el monitor no determina responsabilidad individual."
+            },
+            "facts": {
+              "value": "Citizen Lab y Access Now reportan infecciones con Pegasus en teléfonos de periodistas y sociedad civil. Este registro representa el conjunto investigado, no personas o ataques individuales.",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "affected_persons": {
+              "value": [
+                "Periodistas y miembros de la sociedad civil"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Ficha bibliográfica sin datos personales."
+            },
+            "location": {
+              "department": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "No consignado en esta ficha; no equivale a afirmar que no ocurrió o que la fuente no lo menciona."
+              },
+              "municipality": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "No se asigna un municipio sin referencia expresa; los topónimos de la fuente no se convierten automáticamente a la división administrativa vigente."
+              },
+              "public_place": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "No consignado en esta ficha; no equivale a afirmar que no ocurrió o que la fuente no lo menciona."
+              }
+            },
+            "event_date": {
+              "value": "2020-07-01",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Intervalo de meses reportado: julio de 2020 a noviembre de 2021. Los días delimitan meses, no ataques individuales."
+            },
+            "event_date_end": {
+              "value": "2021-11-30",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Intervalo de meses reportado: julio de 2020 a noviembre de 2021. Los días delimitan meses, no ataques individuales."
+            },
+            "date_precision": "month_range",
+            "event_time": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "Hora no consignada; no se infiere a partir de la fecha de publicación."
+            },
+            "reported_actors": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se individualiza un presunto responsable en esta ficha."
+            },
+            "institutional_sources": {
+              "value": [
+                "Citizen Lab",
+                "Access Now",
+                "Laboratorio de Seguridad de Amnistía Internacional"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Autoría documental y, cuando se indican, fuentes citadas por ella; no implica acceso directo del monitor a los expedientes o testimonios."
+            },
+            "vulnerable_groups": {
+              "value": [
+                "Periodistas",
+                "Personas defensoras de derechos humanos"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "themes": {
+              "value": [
+                "Prensa",
+                "Vigilancia digital",
+                "Privacidad"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Etiquetas de consulta asignadas a partir del contenido; no son conclusiones judiciales."
+            },
+            "hypothesis": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se incorpora una hipótesis propia ni se infiere motivación."
+            },
+            "instrument": {
+              "value": [
+                "Programa espía Pegasus"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "evidence": [
+              {
+                "id": "primary",
+                "url": "https://citizenlab.ca/research/project-torogoz-extensive-hacking-media-civil-society-el-salvador-pegasus-spyware/proyecto-torogoz-hackeo-extensivo-de-los-medios-de-comunicacion-y-la-sociedad-civil-en-el-salvador-con-el-programa-espia-pegasus/",
+                "locator": "Hallazgos principales y sección de metodología del análisis técnico."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "reviewed": {
+      "schema_version": 1,
+      "updated_at": "2026-10-09",
+      "scope": "Monitor inicial de reportes de presuntas violaciones. Cobertura parcial; casos individuales, reportes colectivos e informes se contabilizan por separado.",
+      "records": [
+        {
+          "id": "fixture-reviewed",
+          "record_type": "incident",
+          "title": "Reporte de detención de un adolescente en Ahuachapán",
+          "publisher": "Human Rights Watch",
+          "source_title": "Su hijo no existe aquí",
+          "published_date": "2024-07-16",
+          "date_note": "La fecha corresponde a la detención descrita; no fecha los hechos posteriores.",
+          "category": "Libertad y debido proceso",
+          "tags": [
+            "Detención",
+            "Niñez"
+          ],
+          "summary": "HRW relata una detención en un centro educativo y dificultades familiares para obtener información sobre el adolescente.",
+          "source_url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+          "source_locator": "Resumen: relato de la detención del 10 de julio de 2022.",
+          "source_checked_at": "2026-10-09",
+          "source_check_method": "Consulta documental asistida; no constituye verificación independiente de los hechos.",
+          "coverage": "El Salvador · ubicación departamental",
+          "department": "Ahuachapán",
+          "geometry": null,
+          "language": "es",
+          "incident_date": "2022-07-10",
+          "incident_date_end": null,
+          "date_precision": "day",
+          "review_status": "editorially_reviewed",
+          "human_reviewed": true,
+          "reviewed_by": "fixture-reviewer",
+          "reviewed_at": "2026-10-09",
+          "review_notes": "Revisión sintética de procedencia, evidencia y privacidad.",
+          "origin_candidate_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "related_sources": [],
+          "reported_actor": "Fuerzas de seguridad, según la fuente",
+          "source_record_key": "test-reviewed",
+          "privacy_note": "Identidad, edad exacta y ubicación local omitidas. Consulte las condiciones de protección de la fuente.",
+          "penitentiary_related": true,
+          "dossier": {
+            "schema_version": 1,
+            "alleged_violation": {
+              "value": "Detención de un menor y obstáculos al contacto familiar.",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Atribución a la fuente; el monitor no determina responsabilidad individual."
+            },
+            "facts": {
+              "value": "HRW relata una detención en un centro educativo y dificultades familiares para obtener información sobre el adolescente.",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "affected_persons": {
+              "value": [
+                "Adolescente estudiante; identidad reservada"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Identidad, edad exacta y ubicación local omitidas. Consulte las condiciones de protección de la fuente."
+            },
+            "location": {
+              "department": {
+                "value": "Ahuachapán",
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": null
+              },
+              "municipality": {
+                "value": null,
+                "status": "withheld",
+                "evidence_refs": [],
+                "note": "Localidad omitida para reducir el riesgo de identificar a la persona afectada."
+              },
+              "public_place": {
+                "value": null,
+                "status": "withheld",
+                "evidence_refs": [],
+                "note": "Localidad omitida para reducir el riesgo de identificar a la persona afectada."
+              }
+            },
+            "event_date": {
+              "value": "2022-07-10",
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "La fecha corresponde a la detención descrita; no fecha los hechos posteriores."
+            },
+            "event_date_end": {
+              "value": null,
+              "status": "not_applicable",
+              "evidence_refs": [],
+              "note": "No se publica un intervalo para este registro; consulte la precisión de fecha."
+            },
+            "date_precision": "day",
+            "event_time": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "Hora no consignada; no se infiere a partir de la fecha de publicación."
+            },
+            "reported_actors": {
+              "value": [
+                "Policías y soldados"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Actores mencionados por la fuente; su inclusión no determina culpabilidad individual."
+            },
+            "institutional_sources": {
+              "value": [
+                "Human Rights Watch",
+                "Familiares citados por HRW"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Autoría documental y, cuando se indican, fuentes citadas por ella; no implica acceso directo del monitor a los expedientes o testimonios."
+            },
+            "vulnerable_groups": {
+              "value": [
+                "Niñez y adolescencia"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": null
+            },
+            "themes": {
+              "value": [
+                "Detención",
+                "Niñez"
+              ],
+              "status": "reported",
+              "evidence_refs": [
+                "primary"
+              ],
+              "note": "Etiquetas de consulta asignadas a partir del contenido; no son conclusiones judiciales."
+            },
+            "hypothesis": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se incorpora una hipótesis propia ni se infiere motivación."
+            },
+            "instrument": {
+              "value": null,
+              "status": "not_reported",
+              "evidence_refs": [],
+              "note": "No se atribuye un arma o instrumento por el tipo de hecho."
+            },
+            "evidence": [
+              {
+                "id": "primary",
+                "url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+                "locator": "Resumen: relato de la detención del 10 de julio de 2022."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "valid incident",
+      "base": "incident",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "valid overview",
+      "base": "overview",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "valid range",
+      "base": "range",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "valid reviewed",
+      "base": "reviewed",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "valid empty catalogue",
+      "base": "incident",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "valid absent optional review defaults",
+      "base": "incident",
+      "valid": true,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "reviewed_by"
+          ]
+        },
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "reviewed_at"
+          ]
+        },
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "review_notes"
+          ]
+        },
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "origin_candidate_id"
+          ]
+        },
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "related_sources"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "valid reported field with absent note",
+      "base": "incident",
+      "valid": true,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "note"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "valid trim and astral codepoint length",
+      "base": "incident",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "title"
+          ],
+          "value": "  🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊🕊  "
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "publisher"
+          ],
+          "value": "  Fuente de prueba  "
+        }
+      ]
+    },
+    {
+      "name": "private extra at root",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "private_quote"
+          ],
+          "value": "Contenido privado ficticio"
+        }
+      ]
+    },
+    {
+      "name": "private extra at records/0",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "records",
+            0,
+            "private_quote"
+          ],
+          "value": "Contenido privado ficticio"
+        }
+      ]
+    },
+    {
+      "name": "private extra at records/0/dossier",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "private_quote"
+          ],
+          "value": "Contenido privado ficticio"
+        }
+      ]
+    },
+    {
+      "name": "private extra at records/0/dossier/location",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "location",
+            "private_quote"
+          ],
+          "value": "Contenido privado ficticio"
+        }
+      ]
+    },
+    {
+      "name": "private extra at records/0/dossier/facts",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "private_quote"
+          ],
+          "value": "Contenido privado ficticio"
+        }
+      ]
+    },
+    {
+      "name": "private extra at records/0/dossier/evidence/0",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "evidence",
+            0,
+            "private_quote"
+          ],
+          "value": "Contenido privado ficticio"
+        }
+      ]
+    },
+    {
+      "name": "missing envelope schema_version",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "schema_version"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing envelope updated_at",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "updated_at"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing envelope scope",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "scope"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing envelope records",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing record id",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing record dossier",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "dossier"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing record language",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "language"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing record geometry",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "geometry"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing record source_url",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing record source_record_key",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "source_record_key"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing record tags",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "tags"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing record human_reviewed",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "records",
+            0,
+            "human_reviewed"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid root version True",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "invalid dossier version True",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "schema_version"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "invalid root version '1'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "invalid dossier version '1'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "schema_version"
+          ],
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "invalid root version None",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "invalid dossier version None",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "schema_version"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "invalid root version 2",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "invalid dossier version 2",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "schema_version"
+          ],
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "strict boolean human_reviewed 'false'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "human_reviewed"
+          ],
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "strict boolean human_reviewed 0",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "human_reviewed"
+          ],
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "strict boolean human_reviewed 1",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "human_reviewed"
+          ],
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "strict boolean human_reviewed None",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "human_reviewed"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "strict boolean penitentiary_related 'false'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "penitentiary_related"
+          ],
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "strict boolean penitentiary_related 0",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "penitentiary_related"
+          ],
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "strict boolean penitentiary_related 1",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "penitentiary_related"
+          ],
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "strict boolean penitentiary_related None",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "penitentiary_related"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "text bound title 2",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "title"
+          ],
+          "value": "ab"
+        }
+      ]
+    },
+    {
+      "name": "text bound publisher 2",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "publisher"
+          ],
+          "value": "ab"
+        }
+      ]
+    },
+    {
+      "name": "text bound source_title 2",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_title"
+          ],
+          "value": "ab"
+        }
+      ]
+    },
+    {
+      "name": "text bound summary 5",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "summary"
+          ],
+          "value": "short"
+        }
+      ]
+    },
+    {
+      "name": "text bound date_note 5",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "date_note"
+          ],
+          "value": "short"
+        }
+      ]
+    },
+    {
+      "name": "text bound source_locator 5",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_locator"
+          ],
+          "value": "short"
+        }
+      ]
+    },
+    {
+      "name": "text bound source_check_method 5",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_check_method"
+          ],
+          "value": "short"
+        }
+      ]
+    },
+    {
+      "name": "text bound privacy_note 5",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "privacy_note"
+          ],
+          "value": "short"
+        }
+      ]
+    },
+    {
+      "name": "text bound source_record_key 1",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_record_key"
+          ],
+          "value": "a"
+        }
+      ]
+    },
+    {
+      "name": "text bound category 1",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "category"
+          ],
+          "value": "a"
+        }
+      ]
+    },
+    {
+      "name": "text bound title 301",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "title"
+          ],
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    {
+      "name": "text bound summary 1001",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "summary"
+          ],
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    {
+      "name": "record invalid language en",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "language"
+          ],
+          "value": "en"
+        }
+      ]
+    },
+    {
+      "name": "record invalid record_type candidate",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "record_type"
+          ],
+          "value": "candidate"
+        }
+      ]
+    },
+    {
+      "name": "record invalid review_status pending",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "review_status"
+          ],
+          "value": "pending"
+        }
+      ]
+    },
+    {
+      "name": "record invalid date_precision precise",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "date_precision"
+          ],
+          "value": "precise"
+        }
+      ]
+    },
+    {
+      "name": "record invalid id Bad ID",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "id"
+          ],
+          "value": "Bad ID"
+        }
+      ]
+    },
+    {
+      "name": "record invalid geometry {'type': 'Point', 'coordinates': [0, 0]}",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "geometry"
+          ],
+          "value": {
+            "type": "Point",
+            "coordinates": [
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "record invalid reported_actor []",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "reported_actor"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "record invalid tags []",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "tags"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "record invalid tags [1]",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "tags"
+          ],
+          "value": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "calendar published_date '2024-02-30'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "published_date"
+          ],
+          "value": "2024-02-30"
+        }
+      ]
+    },
+    {
+      "name": "calendar published_date '20240101'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "published_date"
+          ],
+          "value": "20240101"
+        }
+      ]
+    },
+    {
+      "name": "calendar published_date 1704067200",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "published_date"
+          ],
+          "value": 1704067200
+        }
+      ]
+    },
+    {
+      "name": "calendar published_date True",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "published_date"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "calendar published_date '2024-01-01T00:00:00Z'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "published_date"
+          ],
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "calendar published_date '0000-01-01'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "published_date"
+          ],
+          "value": "0000-01-01"
+        }
+      ]
+    },
+    {
+      "name": "calendar source_checked_at '2024-02-30'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_checked_at"
+          ],
+          "value": "2024-02-30"
+        }
+      ]
+    },
+    {
+      "name": "calendar source_checked_at '20240101'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_checked_at"
+          ],
+          "value": "20240101"
+        }
+      ]
+    },
+    {
+      "name": "calendar source_checked_at 1704067200",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_checked_at"
+          ],
+          "value": 1704067200
+        }
+      ]
+    },
+    {
+      "name": "calendar source_checked_at True",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_checked_at"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "calendar source_checked_at '2024-01-01T00:00:00Z'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_checked_at"
+          ],
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "calendar source_checked_at '0000-01-01'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_checked_at"
+          ],
+          "value": "0000-01-01"
+        }
+      ]
+    },
+    {
+      "name": "calendar incident_date '2024-02-30'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "incident_date"
+          ],
+          "value": "2024-02-30"
+        }
+      ]
+    },
+    {
+      "name": "calendar incident_date '20240101'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "incident_date"
+          ],
+          "value": "20240101"
+        }
+      ]
+    },
+    {
+      "name": "calendar incident_date 1704067200",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "incident_date"
+          ],
+          "value": 1704067200
+        }
+      ]
+    },
+    {
+      "name": "calendar incident_date True",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "incident_date"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "calendar incident_date '2024-01-01T00:00:00Z'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "incident_date"
+          ],
+          "value": "2024-01-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "calendar incident_date '0000-01-01'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "incident_date"
+          ],
+          "value": "0000-01-01"
+        }
+      ]
+    },
+    {
+      "name": "root numeric date",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "updated_at"
+          ],
+          "value": 1704067200
+        }
+      ]
+    },
+    {
+      "name": "future source review",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_checked_at"
+          ],
+          "value": "2999-01-01"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "updated_at"
+          ],
+          "value": "2999-01-01"
+        }
+      ]
+    },
+    {
+      "name": "catalogue predates source review",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "updated_at"
+          ],
+          "value": "2000-01-01"
+        }
+      ]
+    },
+    {
+      "name": "publication after source review",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "published_date"
+          ],
+          "value": "2998-01-01"
+        }
+      ]
+    },
+    {
+      "name": "source identity duplicate",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "records",
+            1
+          ],
+          "value": {
+            "id": "fixture-incident",
+            "record_type": "incident",
+            "title": "Reporte de detención de un adolescente en Ahuachapán",
+            "publisher": "Human Rights Watch",
+            "source_title": "Su hijo no existe aquí",
+            "published_date": "2024-07-16",
+            "date_note": "La fecha corresponde a la detención descrita; no fecha los hechos posteriores.",
+            "category": "Libertad y debido proceso",
+            "tags": [
+              "Detención",
+              "Niñez"
+            ],
+            "summary": "HRW relata una detención en un centro educativo y dificultades familiares para obtener información sobre el adolescente.",
+            "source_url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+            "source_locator": "Resumen: relato de la detención del 10 de julio de 2022.",
+            "source_checked_at": "2026-10-09",
+            "source_check_method": "Consulta documental asistida; no constituye verificación independiente de los hechos.",
+            "coverage": "El Salvador · ubicación departamental",
+            "department": "Ahuachapán",
+            "geometry": null,
+            "language": "es",
+            "incident_date": "2022-07-10",
+            "incident_date_end": null,
+            "date_precision": "day",
+            "review_status": "source_checked",
+            "human_reviewed": false,
+            "reviewed_by": null,
+            "reviewed_at": null,
+            "review_notes": null,
+            "origin_candidate_id": null,
+            "related_sources": [],
+            "reported_actor": "Fuerzas de seguridad, según la fuente",
+            "source_record_key": "test-incident",
+            "privacy_note": "Identidad, edad exacta y ubicación local omitidas. Consulte las condiciones de protección de la fuente.",
+            "penitentiary_related": true,
+            "dossier": {
+              "schema_version": 1,
+              "alleged_violation": {
+                "value": "Detención de un menor y obstáculos al contacto familiar.",
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Atribución a la fuente; el monitor no determina responsabilidad individual."
+              },
+              "facts": {
+                "value": "HRW relata una detención en un centro educativo y dificultades familiares para obtener información sobre el adolescente.",
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": null
+              },
+              "affected_persons": {
+                "value": [
+                  "Adolescente estudiante; identidad reservada"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Identidad, edad exacta y ubicación local omitidas. Consulte las condiciones de protección de la fuente."
+              },
+              "location": {
+                "department": {
+                  "value": "Ahuachapán",
+                  "status": "reported",
+                  "evidence_refs": [
+                    "primary"
+                  ],
+                  "note": null
+                },
+                "municipality": {
+                  "value": null,
+                  "status": "withheld",
+                  "evidence_refs": [],
+                  "note": "Localidad omitida para reducir el riesgo de identificar a la persona afectada."
+                },
+                "public_place": {
+                  "value": null,
+                  "status": "withheld",
+                  "evidence_refs": [],
+                  "note": "Localidad omitida para reducir el riesgo de identificar a la persona afectada."
+                }
+              },
+              "event_date": {
+                "value": "2022-07-10",
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "La fecha corresponde a la detención descrita; no fecha los hechos posteriores."
+              },
+              "event_date_end": {
+                "value": null,
+                "status": "not_applicable",
+                "evidence_refs": [],
+                "note": "No se publica un intervalo para este registro; consulte la precisión de fecha."
+              },
+              "date_precision": "day",
+              "event_time": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "Hora no consignada; no se infiere a partir de la fecha de publicación."
+              },
+              "reported_actors": {
+                "value": [
+                  "Policías y soldados"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Actores mencionados por la fuente; su inclusión no determina culpabilidad individual."
+              },
+              "institutional_sources": {
+                "value": [
+                  "Human Rights Watch",
+                  "Familiares citados por HRW"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Autoría documental y, cuando se indican, fuentes citadas por ella; no implica acceso directo del monitor a los expedientes o testimonios."
+              },
+              "vulnerable_groups": {
+                "value": [
+                  "Niñez y adolescencia"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": null
+              },
+              "themes": {
+                "value": [
+                  "Detención",
+                  "Niñez"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Etiquetas de consulta asignadas a partir del contenido; no son conclusiones judiciales."
+              },
+              "hypothesis": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "No se incorpora una hipótesis propia ni se infiere motivación."
+              },
+              "instrument": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "No se atribuye un arma o instrumento por el tipo de hecho."
+              },
+              "evidence": [
+                {
+                  "id": "primary",
+                  "url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+                  "locator": "Resumen: relato de la detención del 10 de julio de 2022."
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "source record key duplicate",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "records",
+            1
+          ],
+          "value": {
+            "id": "another-id",
+            "record_type": "incident",
+            "title": "Reporte de detención de un adolescente en Ahuachapán",
+            "publisher": "Human Rights Watch",
+            "source_title": "Su hijo no existe aquí",
+            "published_date": "2024-07-16",
+            "date_note": "La fecha corresponde a la detención descrita; no fecha los hechos posteriores.",
+            "category": "Libertad y debido proceso",
+            "tags": [
+              "Detención",
+              "Niñez"
+            ],
+            "summary": "HRW relata una detención en un centro educativo y dificultades familiares para obtener información sobre el adolescente.",
+            "source_url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+            "source_locator": "Resumen: relato de la detención del 10 de julio de 2022.",
+            "source_checked_at": "2026-10-09",
+            "source_check_method": "Consulta documental asistida; no constituye verificación independiente de los hechos.",
+            "coverage": "El Salvador · ubicación departamental",
+            "department": "Ahuachapán",
+            "geometry": null,
+            "language": "es",
+            "incident_date": "2022-07-10",
+            "incident_date_end": null,
+            "date_precision": "day",
+            "review_status": "source_checked",
+            "human_reviewed": false,
+            "reviewed_by": null,
+            "reviewed_at": null,
+            "review_notes": null,
+            "origin_candidate_id": null,
+            "related_sources": [],
+            "reported_actor": "Fuerzas de seguridad, según la fuente",
+            "source_record_key": "test-incident",
+            "privacy_note": "Identidad, edad exacta y ubicación local omitidas. Consulte las condiciones de protección de la fuente.",
+            "penitentiary_related": true,
+            "dossier": {
+              "schema_version": 1,
+              "alleged_violation": {
+                "value": "Detención de un menor y obstáculos al contacto familiar.",
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Atribución a la fuente; el monitor no determina responsabilidad individual."
+              },
+              "facts": {
+                "value": "HRW relata una detención en un centro educativo y dificultades familiares para obtener información sobre el adolescente.",
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": null
+              },
+              "affected_persons": {
+                "value": [
+                  "Adolescente estudiante; identidad reservada"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Identidad, edad exacta y ubicación local omitidas. Consulte las condiciones de protección de la fuente."
+              },
+              "location": {
+                "department": {
+                  "value": "Ahuachapán",
+                  "status": "reported",
+                  "evidence_refs": [
+                    "primary"
+                  ],
+                  "note": null
+                },
+                "municipality": {
+                  "value": null,
+                  "status": "withheld",
+                  "evidence_refs": [],
+                  "note": "Localidad omitida para reducir el riesgo de identificar a la persona afectada."
+                },
+                "public_place": {
+                  "value": null,
+                  "status": "withheld",
+                  "evidence_refs": [],
+                  "note": "Localidad omitida para reducir el riesgo de identificar a la persona afectada."
+                }
+              },
+              "event_date": {
+                "value": "2022-07-10",
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "La fecha corresponde a la detención descrita; no fecha los hechos posteriores."
+              },
+              "event_date_end": {
+                "value": null,
+                "status": "not_applicable",
+                "evidence_refs": [],
+                "note": "No se publica un intervalo para este registro; consulte la precisión de fecha."
+              },
+              "date_precision": "day",
+              "event_time": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "Hora no consignada; no se infiere a partir de la fecha de publicación."
+              },
+              "reported_actors": {
+                "value": [
+                  "Policías y soldados"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Actores mencionados por la fuente; su inclusión no determina culpabilidad individual."
+              },
+              "institutional_sources": {
+                "value": [
+                  "Human Rights Watch",
+                  "Familiares citados por HRW"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Autoría documental y, cuando se indican, fuentes citadas por ella; no implica acceso directo del monitor a los expedientes o testimonios."
+              },
+              "vulnerable_groups": {
+                "value": [
+                  "Niñez y adolescencia"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": null
+              },
+              "themes": {
+                "value": [
+                  "Detención",
+                  "Niñez"
+                ],
+                "status": "reported",
+                "evidence_refs": [
+                  "primary"
+                ],
+                "note": "Etiquetas de consulta asignadas a partir del contenido; no son conclusiones judiciales."
+              },
+              "hypothesis": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "No se incorpora una hipótesis propia ni se infiere motivación."
+              },
+              "instrument": {
+                "value": null,
+                "status": "not_reported",
+                "evidence_refs": [],
+                "note": "No se atribuye un arma o instrumento por el tipo de hecho."
+              },
+              "evidence": [
+                {
+                  "id": "primary",
+                  "url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+                  "locator": "Resumen: relato de la detención del 10 de julio de 2022."
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'http://www.hrw.org/report/example'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "http://www.hrw.org/report/example"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://unapproved.example/report'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://unapproved.example/report"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://user:pass@www.hrw.org/report'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://user:pass@www.hrw.org/report"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://@www.hrw.org/report'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://@www.hrw.org/report"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://www.hrw.org:443/report'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://www.hrw.org:443/report"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://www.hrw.org/x'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://www.hrw.org/x"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://www.hrw.org/report/with space'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://www.hrw.org/report/with space"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://www.hrw.org/re\\\\port'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://www.hrw.org/re\\port"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://www.hrw.org/re\\tport'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://www.hrw.org/re\tport"
+        }
+      ]
+    },
+    {
+      "name": "unsafe source 'https://www%2ehrw.org/report'",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "source_url"
+          ],
+          "value": "https://www%2ehrw.org/report"
+        }
+      ]
+    },
+    {
+      "name": "unknown department",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "department"
+          ],
+          "value": "Unknownland"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "location",
+            "department",
+            "value"
+          ],
+          "value": "Unknownland"
+        }
+      ]
+    },
+    {
+      "name": "date mirror mismatch",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "event_date",
+            "value"
+          ],
+          "value": "2000-01-01"
+        }
+      ]
+    },
+    {
+      "name": "nested numeric calendar",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "event_date",
+            "value"
+          ],
+          "value": 1704067200
+        }
+      ]
+    },
+    {
+      "name": "date precision contradicts event",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "date_precision"
+          ],
+          "value": "unknown"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "date_precision"
+          ],
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "name": "range without end",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "date_precision"
+          ],
+          "value": "month_range"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "date_precision"
+          ],
+          "value": "month_range"
+        }
+      ]
+    },
+    {
+      "name": "unmatched evidence",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "evidence",
+            0,
+            "url"
+          ],
+          "value": "https://www.hrw.org/report/undeclared"
+        }
+      ]
+    },
+    {
+      "name": "invalid evidence id",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "evidence",
+            0,
+            "id"
+          ],
+          "value": "BAD ID"
+        }
+      ]
+    },
+    {
+      "name": "short evidence locator",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "evidence",
+            0,
+            "locator"
+          ],
+          "value": "short"
+        }
+      ]
+    },
+    {
+      "name": "duplicate evidence ids",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "evidence",
+            1
+          ],
+          "value": {
+            "id": "primary",
+            "url": "https://www.hrw.org/es/report/2024/07/16/su-hijo-no-existe-aqui/violaciones-de-derechos-humanos-de-ninos-ninas-y",
+            "locator": "Resumen: relato de la detención del 10 de julio de 2022."
+          }
+        }
+      ]
+    },
+    {
+      "name": "duplicate field refs",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "evidence_refs"
+          ],
+          "value": [
+            "primary",
+            "primary"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unknown field refs",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "evidence_refs"
+          ],
+          "value": [
+            "missing"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "reported field without refs",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "evidence_refs"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "reported field null",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "value"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "reported field blank",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "value"
+          ],
+          "value": "   "
+        }
+      ]
+    },
+    {
+      "name": "withheld without explanation",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "value"
+          ],
+          "value": null
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "status"
+          ],
+          "value": "withheld"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "note"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "nonreported field contains claim",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "facts",
+            "status"
+          ],
+          "value": "not_reported"
+        }
+      ]
+    },
+    {
+      "name": "reported list contains number",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "affected_persons",
+            "value"
+          ],
+          "value": [
+            3
+          ]
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "affected_persons",
+            "status"
+          ],
+          "value": "reported"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "affected_persons",
+            "evidence_refs"
+          ],
+          "value": [
+            "primary"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "overview cannot assert event semantics",
+      "base": "overview",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "dossier",
+            "event_time",
+            "status"
+          ],
+          "value": "not_reported"
+        }
+      ]
+    },
+    {
+      "name": "human review metadata without review",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "reviewed_by"
+          ],
+          "value": "fixture-reviewer"
+        }
+      ]
+    },
+    {
+      "name": "invalid human review reviewed_by bad/name",
+      "base": "reviewed",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "reviewed_by"
+          ],
+          "value": "bad/name"
+        }
+      ]
+    },
+    {
+      "name": "invalid human review reviewed_at 2999-01-01",
+      "base": "reviewed",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "reviewed_at"
+          ],
+          "value": "2999-01-01"
+        }
+      ]
+    },
+    {
+      "name": "invalid human review reviewed_at 2000-01-01",
+      "base": "reviewed",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "reviewed_at"
+          ],
+          "value": "2000-01-01"
+        }
+      ]
+    },
+    {
+      "name": "invalid human review review_notes short",
+      "base": "reviewed",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "review_notes"
+          ],
+          "value": "short"
+        }
+      ]
+    },
+    {
+      "name": "invalid human review origin_candidate_id bad",
+      "base": "reviewed",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "origin_candidate_id"
+          ],
+          "value": "bad"
+        }
+      ]
+    },
+    {
+      "name": "invalid human review reviewed_at 1704067200",
+      "base": "reviewed",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "reviewed_at"
+          ],
+          "value": 1704067200
+        }
+      ]
+    },
+    {
+      "name": "candidate origin without human review",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "origin_candidate_id"
+          ],
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    {
+      "name": "supporting source newer than review",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "related_sources"
+          ],
+          "value": [
+            {
+              "url": "https://www.hrw.org/report/secondary",
+              "title": "Fuente secundaria de prueba",
+              "published_date": "2000-01-01",
+              "locator": "Referencia documental de prueba",
+              "private_quote": "Datos ficticios no publicables"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "supporting source private field",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "related_sources"
+          ],
+          "value": [
+            {
+              "url": "https://www.hrw.org/report/secondary",
+              "title": "Fuente secundaria de prueba",
+              "published_date": "2000-01-01",
+              "locator": "Referencia documental de prueba",
+              "private_quote": "Datos ficticios no publicables"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "supporting source compact date rejected",
+      "base": "incident",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            0,
+            "related_sources"
+          ],
+          "value": [
+            {
+              "url": "https://www.hrw.org/report/secondary",
+              "title": "Fuente secundaria de prueba",
+              "published_date": "20000101",
+              "locator": "Referencia documental de prueba"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

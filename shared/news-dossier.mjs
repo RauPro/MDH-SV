@@ -1,3 +1,4 @@
+import { PRIMARY_SOURCE_HOSTS } from './source-registry.mjs';
 // Shared browser/server contract. Only this module constructs public placeholders.
 export const NEWS_DOSSIER_FIELDS = Object.freeze([
   'summary', 'category', 'alleged_violation', 'facts', 'affected_persons', 'country',
@@ -8,7 +9,7 @@ export const NEWS_DOSSIER_PENDING = 'Pendiente de extracción o revisión';
 export const NEWS_DOSSIER_PROTECTED_TITLE = 'Noticia con título protegido; consulte la fuente original';
 export const NEWS_DOSSIER_LIST_FIELDS = Object.freeze(['affected_persons', 'reported_actors', 'institutional_sources', 'vulnerable_groups', 'themes', 'instrument']);
 const listFields = new Set(NEWS_DOSSIER_LIST_FIELDS);
-const sourceHosts = new Set(['www.hrw.org', 'www.oas.org', 'www.amnesty.org', 'citizenlab.ca', 'www.corteidh.or.cr', 'spcommreports.ohchr.org', 'www.ohchr.org', 'www.diariocolatino.com', 'diariocolatino.com', 'gatoencerrado.news', 'www.revistafactum.com', 'revistafactum.com', 'elfaro.net', 'www.elfaro.net', 'beta.elfaro.net', 'diario.elmundo.sv', 'www.laprensagrafica.com', 'laprensagrafica.com', 'historico.elsalvador.com', 'www.elsalvador.com', 'elsalvador.com']);
+const sourceHosts = new Set(PRIMARY_SOURCE_HOSTS);
 export function safeSource(value) {
   if (typeof value !== 'string') return false;
   try {

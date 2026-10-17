@@ -1,0 +1,851 @@
+{
+  "schema_version": 1,
+  "contract": "source-registry",
+  "bases": {
+    "minimal": {
+      "schema_version": 1,
+      "publishers": [
+        {
+          "id": "fixture-news",
+          "name": "Fixture News",
+          "kind": "wordpress",
+          "endpoint": "https://news.example.org/wp-json/wp/v2/posts",
+          "hosts": [
+            "news.example.org"
+          ],
+          "feeds": [
+            {
+              "url": "https://news.example.org/feed/",
+              "consumers": [
+                "private_queue"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fixture-archive",
+          "name": "Fixture Archive",
+          "kind": "html_archive",
+          "endpoint": "https://archive.example.org/index.html",
+          "hosts": [
+            "archive.example.org"
+          ],
+          "archive_urls": [
+            "https://archive.example.org/index.html"
+          ],
+          "seed_urls": [],
+          "notice": "Partial public archive for synthetic tests.",
+          "feeds": []
+        }
+      ],
+      "primary_evidence_hosts": [
+        "evidence.example.org"
+      ],
+      "official_statistics_hosts": [
+        "statistics.example.org"
+      ],
+      "official_statistics_discovery_extra_hosts": [
+        "discovery.example.org"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "approved explicit roles",
+      "base": "minimal",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "schema number has integer value",
+      "base": "minimal",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "name": "legacy consumer remains separate",
+      "base": "minimal",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            0,
+            "consumers"
+          ],
+          "value": [
+            "legacy_scraper"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "two declared consumers share one endpoint",
+      "base": "minimal",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            0,
+            "consumers"
+          ],
+          "value": [
+            "private_queue",
+            "legacy_scraper"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty feeds do not enable collection",
+      "base": "minimal",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "feeds"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "unknown top-level field",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "untrusted"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "missing evidence role",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "primary_evidence_hosts"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "boolean schema version",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "unsupported schema version",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "empty publishers",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "missing publisher name",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "publishers",
+            0,
+            "name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unknown publisher field",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "publishers",
+            0,
+            "extra"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "duplicate publisher identity",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            1,
+            "id"
+          ],
+          "value": "fixture-news"
+        }
+      ]
+    },
+    {
+      "name": "duplicate publisher name",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            1,
+            "name"
+          ],
+          "value": "Fixture News"
+        }
+      ]
+    },
+    {
+      "name": "non-slug identifier",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "id"
+          ],
+          "value": "../fixture-news"
+        }
+      ]
+    },
+    {
+      "name": "identifier trailing newline",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "id"
+          ],
+          "value": "fixture-news\n"
+        }
+      ]
+    },
+    {
+      "name": "unknown discovery kind",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "kind"
+          ],
+          "value": "automatic_approval"
+        }
+      ]
+    },
+    {
+      "name": "empty hosts",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "hosts"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "duplicate host within publisher",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "hosts"
+          ],
+          "value": [
+            "news.example.org",
+            "news.example.org"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "host appears in two publishers",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            1,
+            "hosts"
+          ],
+          "value": [
+            "news.example.org"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "wildcard does not register subdomains",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "hosts"
+          ],
+          "value": [
+            "*.example.org"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "non-public IP literal",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "hosts"
+          ],
+          "value": [
+            "127.0.0.1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "host contains trailing newline",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "hosts"
+          ],
+          "value": [
+            "news.example.org\n"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "host contains explicit port",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "hosts"
+          ],
+          "value": [
+            "news.example.org:443"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "endpoint uses unregistered subdomain",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "https://child.news.example.org/posts"
+        }
+      ]
+    },
+    {
+      "name": "endpoint insecure scheme",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "http://news.example.org/posts"
+        }
+      ]
+    },
+    {
+      "name": "endpoint credentials",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "https://user@news.example.org/posts"
+        }
+      ]
+    },
+    {
+      "name": "endpoint explicit default port",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "https://news.example.org:443/posts"
+        }
+      ]
+    },
+    {
+      "name": "endpoint unreviewed query",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "https://news.example.org/posts?token=x"
+        }
+      ]
+    },
+    {
+      "name": "endpoint fragment",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "https://news.example.org/posts#x"
+        }
+      ]
+    },
+    {
+      "name": "endpoint backslash",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "https://news.example.org/\\evil"
+        }
+      ]
+    },
+    {
+      "name": "endpoint encoded ambiguity",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "https://news.example.org/%2f%2fevil"
+        }
+      ]
+    },
+    {
+      "name": "wordpress cannot receive archive controls",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "publishers",
+            0,
+            "archive_urls"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "html notice mandatory",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "publishers",
+            1,
+            "notice"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "html null access invalid",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "publishers",
+            1,
+            "access"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "archive URL outside own hosts",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            1,
+            "archive_urls"
+          ],
+          "value": [
+            "https://news.example.org/index"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "duplicate seed URL",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            1,
+            "seed_urls"
+          ],
+          "value": [
+            "https://archive.example.org/item",
+            "https://archive.example.org/item"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "restricted archive cannot keep active discovery",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "publishers",
+            1,
+            "access"
+          ],
+          "value": "restricted"
+        }
+      ]
+    },
+    {
+      "name": "feed URL outside own hosts",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            0,
+            "url"
+          ],
+          "value": "https://other.example.org/feed/"
+        }
+      ]
+    },
+    {
+      "name": "unknown feed field",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            0,
+            "approved"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "unknown consumer cannot enable a capability",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            0,
+            "consumers"
+          ],
+          "value": [
+            "public_writer"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "no implicit feed consumer",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            0,
+            "consumers"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "duplicate feed consumer",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            0,
+            "consumers"
+          ],
+          "value": [
+            "private_queue",
+            "private_queue"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "duplicate feed",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            1
+          ],
+          "value": {
+            "url": "https://news.example.org/feed/",
+            "consumers": [
+              "private_queue"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "same consumer cannot silently collect two feeds",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            1
+          ],
+          "value": {
+            "url": "https://news.example.org/other-feed/",
+            "consumers": [
+              "private_queue"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "news and evidence roles cannot duplicate host",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "news.example.org"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "official and evidence roles remain distinct",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "official_statistics_hosts"
+          ],
+          "value": [
+            "evidence.example.org"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "public and discovery official roles remain distinct",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "official_statistics_discovery_extra_hosts"
+          ],
+          "value": [
+            "statistics.example.org"
+          ]
+        }
+      ]
+    }
+  ]
+}

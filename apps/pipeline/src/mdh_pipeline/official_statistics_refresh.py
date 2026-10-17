@@ -12,16 +12,17 @@ import copy
 import hashlib
 import json
 import os
-from pathlib import Path
 import re
 import tempfile
 from datetime import date, datetime, timezone
+from pathlib import Path
 from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
 
+from .publishers import OFFICIAL_STATISTICS_DISCOVERY_HOSTS
 from .review_queue import normalize, require_public_dns
 
 FGR_URL = "https://www.fiscalia.gob.sv/estadisticas-de-homicidios/"
@@ -31,8 +32,7 @@ PNC_URL = "https://transparencia.pnc.gob.sv/reportes"
 PNC_ID = "pnc-reports"
 MEMORIAS_ID = "fgr-memorias"
 MEMORIAS_URL = "https://www.fiscalia.gob.sv/memoria-de-labores/"
-ALLOWED_HOSTS = frozenset({"www.fiscalia.gob.sv", "fiscalia.gob.sv",
-                           "transparencia.oj.gob.sv", "data.unodc.org", "transparencia.pnc.gob.sv"})
+ALLOWED_HOSTS = OFFICIAL_STATISTICS_DISCOVERY_HOSTS
 MAX_BYTES = {"html": 2_000_000, "pdf": 25_000_000, "xlsx": 40_000_000}
 MONTHS = ("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO",
           "SEP", "OCT", "NOV", "DIC")
