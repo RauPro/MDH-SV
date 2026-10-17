@@ -4,6 +4,173 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "00b1e3f623bfc8a342e6647c546b9597528c82e1702e16aa4d15f30325416910",
+      "source_url": "https://historico.elsalvador.com/historico/99968/fallece-el-periodista-salvadoreno-mauricio-vasquez.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_title": "Fallece el periodista salvadoreño Mauricio Vásquez",
+      "published_date": "2013-01-12",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "Falleció el periodista salvadoreño Mauricio Vásquez tras una enfermedad y de permanecer hospitalizado.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "affected_persons": {
+          "value": [
+            "periodista"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "salud"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://historico.elsalvador.com/historico/99968/fallece-el-periodista-salvadoreno-mauricio-vasquez.html",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p1",
+          "url": "https://historico.elsalvador.com/historico/99968/fallece-el-periodista-salvadoreno-mauricio-vasquez.html",
+          "locator": "Párrafo p1 del texto consultado; SHA-256 7ee6ea116c547a7a61fe57b8f5ba563a91b3204424506bfbd0608802693c399e."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://historico.elsalvador.com/historico/99968/fallece-el-periodista-salvadoreno-mauricio-vasquez.html",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 7ee6ea116c547a7a61fe57b8f5ba563a91b3204424506bfbd0608802693c399e."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "7ee6ea116c547a7a61fe57b8f5ba563a91b3204424506bfbd0608802693c399e",
+        "validated_at": "2026-10-17T00:17:59.662620+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "010500f6af4df246ac9b2f24dc5cbebbb6fe07b6635527238e34bfaf46f9b5ea",
       "source_url": "https://historico.elsalvador.com/historico/100711/decomiso-de-droga-y-nueve-detenidos-en-bar-de-zona-real.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -1268,6 +1435,211 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "ac501305f023650cbb9300f197a20b7e1cd7e3b3df2b2856c5e4a7bfacadff34",
         "validated_at": "2026-10-16T17:18:54.731270+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "093ec29a4f42aac35ea96b506318d72680a9b41da061f9764f5d61199d8b9daf",
+      "source_url": "https://historico.elsalvador.com/historico/100932/ventas-deberan-desalojar-calles-en-tres-semanas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_title": "Ventas deberán desalojar calles en tres semanas",
+      "published_date": "2013-01-10",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "La municipalidad de San Miguel advirtió que los vendedores ambulantes con permisos temporales deberán desalojar las calles al finalizar enero, mientras los comerciantes reclaman opciones definitivas.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p3",
+            "article-p10"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Espacio público y comercio informal",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "La comuna de San Miguel otorgó permisos temporales a vendedores para ocupar calles durante las fiestas, pero el plazo concluye a final de enero y el alcalde advirtió que las aceras serán desocupadas.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "La evidencia automática no permite publicar este campo."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": "San Miguel",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "municipality": {
+          "value": "San Miguel",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "comuna migueleńa",
+            "alcaldķa"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "alcalde Wilfredo Salgado",
+            "fuentes municipales"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "comercio informal",
+            "espacio público",
+            "condiciones laborales"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p10"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://historico.elsalvador.com/historico/100932/ventas-deberan-desalojar-calles-en-tres-semanas.html",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p1",
+          "url": "https://historico.elsalvador.com/historico/100932/ventas-deberan-desalojar-calles-en-tres-semanas.html",
+          "locator": "Párrafo p1 del texto consultado; SHA-256 aa9834d292d4c1eee44a397e495623a53607f056fe214f7430fc0e08f9049277."
+        },
+        {
+          "id": "article-p10",
+          "url": "https://historico.elsalvador.com/historico/100932/ventas-deberan-desalojar-calles-en-tres-semanas.html",
+          "locator": "Párrafo p10 del texto consultado; SHA-256 aa9834d292d4c1eee44a397e495623a53607f056fe214f7430fc0e08f9049277."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://historico.elsalvador.com/historico/100932/ventas-deberan-desalojar-calles-en-tres-semanas.html",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 aa9834d292d4c1eee44a397e495623a53607f056fe214f7430fc0e08f9049277."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://historico.elsalvador.com/historico/100932/ventas-deberan-desalojar-calles-en-tres-semanas.html",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 aa9834d292d4c1eee44a397e495623a53607f056fe214f7430fc0e08f9049277."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://historico.elsalvador.com/historico/100932/ventas-deberan-desalojar-calles-en-tres-semanas.html",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 aa9834d292d4c1eee44a397e495623a53607f056fe214f7430fc0e08f9049277."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "aa9834d292d4c1eee44a397e495623a53607f056fe214f7430fc0e08f9049277",
+        "validated_at": "2026-10-17T00:17:59.660986+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -34249,6 +34621,166 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "95e08872727448558f6f29dcd741f6f885f393290047230aa320f1bb0d3a7cb5",
         "validated_at": "2026-10-16T17:18:19.313241+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "9a8c29a20ec0e4a57458f01c31d5b31b9c95685d2ec11c6fd379d246572157d7",
+      "source_url": "https://historico.elsalvador.com/historico/99575/asesinan-a-cuatro-personas-en-las-ultimas-horas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_title": "Asesinan a cuatro personas en las últimas horas",
+      "published_date": "2013-01-13",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "aggregate"
+      },
+      "fields": {
+        "summary": {
+          "value": "Se reportan múltiples homicidios en distintos puntos de El Salvador.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Policía"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Homicidio"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://historico.elsalvador.com/historico/99575/asesinan-a-cuatro-personas-en-las-ultimas-horas.html",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p1",
+          "url": "https://historico.elsalvador.com/historico/99575/asesinan-a-cuatro-personas-en-las-ultimas-horas.html",
+          "locator": "Párrafo p1 del texto consultado; SHA-256 7d47cb3544b522d48acb4bd04f804ddf9112bdf5670fa21618811e24d5e8d73f."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "7d47cb3544b522d48acb4bd04f804ddf9112bdf5670fa21618811e24d5e8d73f",
+        "validated_at": "2026-10-17T00:17:59.665515+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"

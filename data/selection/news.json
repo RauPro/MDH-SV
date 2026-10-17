@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T23:27:23.490673+00:00",
+  "generated_at": "2026-10-17T00:16:56.018362+00:00",
   "assessment_counts": {
     "candidates": 12165,
     "evaluated": 4889,
-    "relevant": 1766,
-    "excluded": 182,
-    "uncertain": 2941,
+    "relevant": 1767,
+    "excluded": 190,
+    "uncertain": 2932,
     "pending": 7276
   },
   "selections": [
@@ -1755,23 +1755,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T18:16:13.993116-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4e7e37f264f1d7ed7c25bcf3da12af77333a755fa25404058286992f002942db",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p14",
-            "p21"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4",
-            "p9",
-            "p18",
-            "p19",
-            "p21"
+            "p3"
           ]
         }
       }
@@ -13848,19 +13841,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:03.064204-06:00",
+        "classified_at": "2026-10-16T18:13:58.432040-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "24f0bb10668a1f268f20096a1d5b78953259baa7f550e8c4aeab3bd9d62cc296",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4",
-            "p8"
+            "p2",
+            "p3"
           ]
         }
       }
@@ -31472,18 +31463,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T18:15:57.658226-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "aeaecd41c59df39b48c335a1c2cb899fd5fadbf0dda90f9ca28dce59632b1248",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p5"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p3",
-            "p4",
+            "p5",
             "p6"
           ]
         }
@@ -32842,6 +32832,33 @@
             "p7",
             "p9",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a3831d32d86b074ca4f97a6d3f380e2ecc23cb22d48732059b718a4d898ed164",
+      "source_url": "https://www.diariocolatino.com/capturan-a-fiscal-vinculado-a-estructura-de-robo-y-hurto-de-vehiculos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T18:09:29.595620-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b6dfe7a05e0be5c9fa98844ac8b739b672c8b1e58d3496afd6e9ae0718506685",
+          "jurisdiction_paragraph_ids": [
+            "p5",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7"
           ]
         }
       }
@@ -44313,26 +44330,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T18:14:19.068201-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "44bf8ce6d0229870e8328f25cb8a1b18e59c66d292cf6415f9fcecd116e5a19e",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p7",
-            "p8",
-            "p11"
+            "p7"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p5",
-            "p7",
-            "p11",
-            "p16",
-            "p19"
+            "p16"
           ]
         }
       }
