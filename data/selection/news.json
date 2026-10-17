@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T16:40:57.378123+00:00",
+  "generated_at": "2026-10-17T17:23:16.263121+00:00",
   "assessment_counts": {
     "candidates": 12622,
     "evaluated": 4891,
-    "relevant": 1832,
-    "excluded": 310,
-    "uncertain": 2749,
+    "relevant": 1834,
+    "excluded": 318,
+    "uncertain": 2739,
     "pending": 7731
   },
   "selections": [
@@ -427,18 +427,15 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:11:45.865851-06:00",
+        "classified_at": "2026-10-17T11:14:20.667120-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "bedcfd309cadd7e246f6328712c25f5d32031935ce42a9dbbecebdd594c15306",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p13",
-            "p14"
+            "p13"
           ],
           "relevance_paragraph_ids": [
-            "p10",
             "p12",
             "p13"
           ]
@@ -8227,6 +8224,33 @@
       }
     },
     {
+      "candidate_id": "2a8a819f782c4d29b28c2a0663084af2f3c4b55c85d6fc9e49f8b01dce64a610",
+      "source_url": "https://www.diariocolatino.com/dos-desaparecidos-un-muerto-y-un-herido-tras-accidente-de-avioneta-en-lago-suchitlan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-10-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T11:09:32.882764-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b9269b72915db57e37f4aadbc1e6d54741f23d64c9053b957662464e34af1916",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2ac296ca8c038e9c4c997b483392b840042db2d8f5bd0c1f231263d9aece6166",
       "source_url": "https://www.diariocolatino.com/empleados-municipales-protestan-frente-a-catedral-por-las-violaciones-laborales/",
       "publisher": "Diario Co Latino",
@@ -10236,23 +10260,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:11:45.865851-06:00",
+        "classified_at": "2026-10-17T11:16:20.630995-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "0cee61b7d406bac83b0553938557ee1b53d2e385a801d4deb9d032b5c8464b45",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5",
-            "p6",
-            "p7"
+            "p5"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p6",
-            "p7",
-            "p10"
+            "p6"
           ]
         }
       }
@@ -16454,6 +16472,33 @@
             "p6",
             "p7",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "556780ce2c019cd3861393838a1902a53fb53f1df4a5218a19c6e8995b10e9a0",
+      "source_url": "https://www.diariocolatino.com/asesinan-agente-policial-en-zacatecoluca/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-10-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T11:09:32.882764-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "3800b9bca4c9d17c5267770370b693645f15c4ef3fbbb95f125b94efb710811d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
           ]
         }
       }
