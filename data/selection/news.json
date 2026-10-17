@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T19:17:19.923124+00:00",
+  "generated_at": "2026-10-17T20:16:52.524730+00:00",
   "assessment_counts": {
     "candidates": 12622,
     "evaluated": 4891,
-    "relevant": 1835,
-    "excluded": 333,
-    "uncertain": 2723,
+    "relevant": 1836,
+    "excluded": 341,
+    "uncertain": 2714,
     "pending": 7731
   },
   "selections": [
@@ -19862,6 +19862,34 @@
       }
     },
     {
+      "candidate_id": "644ddea242772ec5e2412ec233608aaaa10fb6fca09abd4961bdfed9e346b636",
+      "source_url": "https://www.diariocolatino.com/homicidios-con-tendencia-a-la-baja-en-los-ultimos-meses/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T14:09:30.967133-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "9085228f9d26f20621ed02266f089699409a9f30a697f4b89bc89307739dcc6e",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "645ef8b18a5f53e21c871c25dcb14fb5a1ab68877b8e560a3ad9985eb522f19e",
       "source_url": "https://www.revistafactum.com/los-cuatro-objetivos-de-la-relatora-sobre-ejecuciones-extrajudiciales/",
       "publisher": "Revista Factum",
@@ -24625,25 +24653,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:13:47.893719-06:00",
+        "classified_at": "2026-10-17T14:14:12.813803-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "483b20dc8d6c55845501edc2ce7a2d9f90a78402730329ab7140db83c45d8dac",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p2",
-            "p3",
-            "p7",
-            "p8",
-            "p13"
+            "p7"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p5",
-            "p9",
-            "p13",
-            "p14"
+            "p5"
           ]
         }
       }
@@ -33641,17 +33660,19 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:12:26.380425-06:00",
+        "classified_at": "2026-10-17T14:12:13.361934-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a2e404f304cbc92403f67c72759702347f002956dcb96777ac4b782ba7d77540",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p2",
+            "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
             "p3",
+            "p4",
             "p7"
           ]
         }
@@ -38838,21 +38859,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:13:47.893719-06:00",
+        "classified_at": "2026-10-17T14:13:58.043023-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b2d17ad89a37187f5a3525ec99d0ca426052c055d9bd534ec0bd7999f3faa49d",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p12",
-            "p22",
-            "p25"
+            "p1"
           ],
           "relevance_paragraph_ids": [
-            "p3",
             "p11",
-            "p12"
+            "p22",
+            "p27"
           ]
         }
       }
@@ -42219,20 +42237,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:13:47.893719-06:00",
+        "classified_at": "2026-10-17T14:16:13.240816-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "934631bf31e3feb8b09af85323e523a80a18689b32574e351c3a7b19ec8445c4",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p6",
-            "p7",
-            "p9"
+            "p2",
+            "p7"
           ]
         }
       }
