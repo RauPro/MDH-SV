@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T02:16:44.203866+00:00",
+  "generated_at": "2026-10-17T03:16:55.086411+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12165,
-      "selected": 1774,
+      "selected": 1785,
       "evaluated": 4889,
-      "relevant": 1774,
-      "excluded": 206,
-      "uncertain": 2909,
+      "relevant": 1785,
+      "excluded": 214,
+      "uncertain": 2890,
       "pending": 7276,
-      "evaluated_at": "2026-10-17T02:16:41.430396+00:00"
+      "evaluated_at": "2026-10-17T03:16:51.815554+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1774,
+    "records": 1785,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1444,
+        "records": 1454,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -677,7 +677,7 @@
           {
             "month": "2014-04",
             "status": "enumerated",
-            "records": 31,
+            "records": 35,
             "screen_version": 3,
             "posts_scanned": 937,
             "source_total_posts": 937,
@@ -689,7 +689,7 @@
           {
             "month": "2014-05",
             "status": "enumerated",
-            "records": 24,
+            "records": 30,
             "screen_version": 3,
             "posts_scanned": 1083,
             "source_total_posts": 1083,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 217,
+        "records": 218,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15308,7 +15308,7 @@
           {
             "month": "2014-04",
             "status": "partial",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 117,
             "source_total_posts": null,
@@ -19325,12 +19325,12 @@
         "month": "2014-04",
         "start_date": "2014-04-01",
         "end_date": "2014-04-30",
-        "records": 32,
+        "records": 37,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 31
+            "records": 35
           },
           {
             "source_id": "gatoencerrado",
@@ -19360,7 +19360,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 1
+            "records": 2
           }
         ]
       },
@@ -19368,12 +19368,12 @@
         "month": "2014-05",
         "start_date": "2014-05-01",
         "end_date": "2014-05-31",
-        "records": 25,
+        "records": 31,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 24
+            "records": 30
           },
           {
             "source_id": "gatoencerrado",
@@ -97823,6 +97823,95 @@
       }
     },
     {
+      "id": "00b8463d9af2f73fc9bb6e2d4fce83ad33d1dfc00a7bc1f602fcbcae001d036c",
+      "title": "Juzgado giró a PNC órdenes de detención contra ex presidente Francisco Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-giro-a-pnc-ordenes-de-detencion-contra-ex-presidente-francisco-flores/",
+      "published_date": "2014-05-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 14458,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a4c2d7f449dc47dec5ab1d3575a6369ecf2ebac9c74e7a6e6e5c97cf6f63294c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "dd883355824f8fb1533d83ad49f6cedd8fa2bcd98d5ee6a9fcafb61b49b4d738",
+      "title": "Juzgado ordena captura de expresidente Flores y embargo de bienes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-captura-de-expresidente-flores-y-embargo-de-bienes/",
+      "published_date": "2014-05-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 14374,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "4e6bdb6119d312fffdf2ee15359a7f4dd60688ec8d89c84a5b6b210a2a07fe38",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "id": "849fcc90214784ab342dbfea64f47ff21a1c3817cf6b54ab3233596d0876aa63",
       "title": "Escuela penitenciaria forma a más de 600 custodios",
       "title_truncated": false,
@@ -97909,6 +97998,51 @@
       }
     },
     {
+      "id": "554b0b8827c7a92c1f1ea8815eabdd2159ef08a077047b4ca7018c58d6e51ec2",
+      "title": "Cadete de Escuela Militar vinculado a pandillas y homicidio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cadete-de-escuela-militar-vinculado-a-pandillas-y-homicidio/",
+      "published_date": "2014-05-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 14218,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2bff6598921f7d640e90a4edf852d47e941bab91536ec8be21d16392a5252865",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
       "id": "056a6815ddcb7a05780f041ef0e88b7815820ae870d6e3f2fa04b28cef0f79b3",
       "title": "En el Día de la Libertad de Prensa",
       "title_truncated": false,
@@ -97953,6 +98087,93 @@
       }
     },
     {
+      "id": "0cba993719994c36715b1b0cdce460b25176c7027ab1766bbfc6f766ddc7e472",
+      "title": "Detienen a cadete de Escuela Militar vinculado a pandillas y homicidio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/detienen-a-cadete-de-escuela-militar-vinculado-a-pandillas-y-homicidio/",
+      "published_date": "2014-05-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 14134,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fd259f4a2ae8422dcf390f53c467f9e89361333fe931dc6ec4b7b420f9d593db",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "59a586e1f58bca444d16eca7b1aa45a6b4ce15c4dcf5589773268ef50316f62a",
+      "title": "PNC realiza capturas en diversas zonas del país",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-realiza-capturas-en-diversas-zonas-del-pais/",
+      "published_date": "2014-05-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13991,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "bfba13fe28f1058abb39fd06aaf8833a97cf7ba3f3015631833ae54e73d2e0dc",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p12",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "id": "3735af5d2d571d9a742becb6e5d1a1a0cf6006aa4e3dcc653c14e226041e5945",
       "title": "Movimiento sindical llama a la unidad de la clase trabajadora",
       "title_truncated": false,
@@ -97991,6 +98212,95 @@
           "relevance_paragraph_ids": [
             "p2",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b1195de9116c69a4da0fa55d5f315dd7279ccd610fbd1d16a3754f121efc0ce0",
+      "title": "Norman Quijano toma distancia de la orden de captura de Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/norman-quijano-toma-distancia-de-la-orden-de-captura-de-flores/",
+      "published_date": "2014-05-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13810,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8948af17359efcb5076d29cf0526409fe0b8385d1099da504ad363c3e44d3a79",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9224d66b60684d22998addf83e000a8f8a26dae761299a2df1854c22e677e9cd",
+      "title": "FGR gira orden de captura en contra de presidente Francisco Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-gira-orden-de-captura-en-contra-de-presidente-francisco-flores/",
+      "published_date": "2014-04-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13626,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5eaf5a132b8ae49e3a9bf0b768820362c2845b2459f1ba394810f7285af1d25c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -98132,6 +98442,53 @@
       }
     },
     {
+      "id": "829d37bd44277058036d023d24c5bfd7ebb7a648b83b346eabb2e49fce8ddc2b",
+      "title": "Capturan a salvadoreño acusado de estafar a 48 municipalidades de Guatemala",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/125702/capturan-a-salvadoreno-acusado-de-estafar-a-48-municipalidades-de-guatemala.html",
+      "published_date": "2014-04-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "guatemala",
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T17:35:16.799175+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "12302973abaa3634850da05e8f6be618dfda1977e2e43532fe80af161a78d351",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "id": "0b4374e7718e721f53f0871bb585df27ebc9db2b9fc89ad02a61c9a9013f13d2",
       "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
@@ -98172,6 +98529,95 @@
           "relevance_paragraph_ids": [
             "p1",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ed0d8bb0f712a2c0e590e97365480e41fee6c131e92592a2a0bd2f6fe298b4a3",
+      "title": "Asesinan a adolescente presuntamente vinculado a pandillas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-adolescente-presuntamente-vinculado-a-pandillas/",
+      "published_date": "2014-04-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13501,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d5e51c9d8553721efce5561debf4f56baa96e8cc94383cdbdb56cbaa91f5cb00",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p17"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2b48a85548a2b5d81a6375b8780c816b2c52ff2c06ce8f8ad5c8b47074e5d917",
+      "title": "Mandatario anuncia preparación de “Plan Contingencial” para reducir asesinatos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mandatario-anuncia-preparacion-de-plan-contingencial-para-reducir-asesinatos/",
+      "published_date": "2014-04-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13461,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "29ee69dd3dda8a84cf55b7960448d314c6a81479bebe152a245f88dd13927ed7",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p7"
           ]
         }
       }
@@ -98256,6 +98702,53 @@
           ],
           "relevance_paragraph_ids": [
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5caf5eb2940d2b1c03eaaa95b832624dd2a1da0b5e24616d3be952508df516e4",
+      "title": "Homicidios en Zacatecoluca ligados a pugna interna de pandilla 18",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/homicidios-en-zacatecoluca-ligados-a-pugna-interna-de-pandilla-18/",
+      "published_date": "2014-04-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "zacatecoluca"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13359,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2a0a953cff1e774fddc8cc2583c978a7fbe6284576b7bca3f8fe5a83f8a5a367",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p8"
           ]
         }
       }
