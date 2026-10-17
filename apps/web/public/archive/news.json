@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T04:57:32.793553+00:00",
+  "generated_at": "2026-10-17T05:17:09.038360+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12316,
-      "selected": 1793,
+      "selected": 1795,
       "evaluated": 4889,
-      "relevant": 1793,
-      "excluded": 222,
-      "uncertain": 2874,
+      "relevant": 1795,
+      "excluded": 230,
+      "uncertain": 2864,
       "pending": 7427,
-      "evaluated_at": "2026-10-17T04:18:22.118877+00:00"
+      "evaluated_at": "2026-10-17T05:17:05.714707+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1793,
+    "records": 1795,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1462,
+        "records": 1464,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -689,7 +689,7 @@
           {
             "month": "2014-05",
             "status": "enumerated",
-            "records": 38,
+            "records": 40,
             "screen_version": 3,
             "posts_scanned": 1083,
             "source_total_posts": 1083,
@@ -19368,12 +19368,12 @@
         "month": "2014-05",
         "start_date": "2014-05-01",
         "end_date": "2014-05-31",
-        "records": 39,
+        "records": 41,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 38
+            "records": 40
           },
           {
             "source_id": "gatoencerrado",
@@ -97205,6 +97205,60 @@
       }
     },
     {
+      "id": "aaddfd48d2637d227cbc4fe39ff6a8dcad1025e0d80afd9e36136333712eff2e",
+      "title": "Reducción de homicidios durante el fin de semana",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/reduccion-de-homicidios-durante-el-fin-de-semana/",
+      "published_date": "2014-05-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 16340,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T23:09:34.512563-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "eab9a454b7d9fd71b873e2f9109a86845ce4a5745a4cd2eae8602bf2f3a4df7f",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p9",
+            "p12",
+            "p13",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "id": "362986c3d5edaac4b8cf8ce8a05067186d96bcf3628a71f7e2d57d7b746499c9",
       "title": "Familiares recuerdan a víctimas de la desaparición forzada",
       "title_truncated": false,
@@ -97289,6 +97343,52 @@
             "p3",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bd9742fce928613a4b39b29a3132d67e2a2663eff402e5944dbe07890d680e4a",
+      "title": "Juicio Paralelo: reseña mis 50 años como periodista y escritor",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juicio-paralelo-resena-mis-50-anos-como-periodista-y-escritor/",
+      "published_date": "2014-05-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 16195,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T23:09:34.512563-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "39b3e1d59e1d801ca56aedb0328e903c1c57d28a9c5ad7923afc15dbea7f1cad",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
