@@ -363,3 +363,118 @@ def test_partial_file_replace_failure_restores_all_existing_snapshots(tmp_path, 
         import_approved_news(ApprovedInbox(human_dossier(candidate_reference())), ID, source, **options)
     assert all(path.read_bytes() == content for path, content in snapshots.items())
     assert not list(tmp_path.glob('.*.json.*'))
+
+
+def test_existing_human_source_repairs_unfinished_news_exports_without_rewriting_authority(tmp_path):
+    bibliography, _ = candidate_archive(tmp_path)
+    source, options = import_paths(tmp_path, bibliography, selection_manifest([]))
+    inbox = ApprovedInbox(human_dossier(candidate_reference()))
+    assert import_approved_news(inbox, ID, source, export=False, **options)
+    assert json.loads(options['destination'].read_text())['dossiers'] == []
+    # Preserve unusual but valid source formatting as well as the review date.
+    source.write_text(json.dumps(json.loads(source.read_text()), separators=(',', ':')) + '\n\n')
+    original = source.read_bytes()
+    timestamp = source.stat().st_mtime_ns
+    assert import_approved_news(inbox, ID, source, **options)
+    assert source.read_bytes() == original and source.stat().st_mtime_ns == timestamp
+    assert len(json.loads(options['destination'].read_text())['dossiers']) == 1
+    assert len(json.loads(options['archive'].read_text())['records']) == 1
+    snapshots = {path: path.read_bytes() for path in (source, *[options[key] for key in ('archive', 'destination', 'locations')])}
+    assert not import_approved_news(inbox, ID, source, **options)
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items())
+
+
+@pytest.mark.parametrize('missing', ['archive', 'destination', 'locations', 'truncated_destination'])
+def test_existing_news_source_rebuilds_missing_or_truncated_projection(tmp_path, missing):
+    bibliography, _ = candidate_archive(tmp_path)
+    source, options = import_paths(tmp_path, bibliography, selection_manifest([]))
+    inbox = ApprovedInbox(human_dossier(candidate_reference()))
+    assert import_approved_news(inbox, ID, source, **options)
+    original = source.read_bytes()
+    if missing == 'truncated_destination':
+        options['destination'].write_text('{"interrupted":')
+    else:
+        options[missing].unlink()
+    assert import_approved_news(inbox, ID, source, **options)
+    assert source.read_bytes() == original
+    assert json.loads(options['destination'].read_text())['dossiers'] == [human_dossier(candidate_reference())]
+    assert not import_approved_news(inbox, ID, source, **options)
+
+
+def test_news_projection_failure_leaves_every_snapshot_and_retry_converges(tmp_path, monkeypatch):
+    from mdh_pipeline import news_selection
+    bibliography, _ = candidate_archive(tmp_path)
+    source, options = import_paths(tmp_path, bibliography, selection_manifest([]))
+    inbox = ApprovedInbox(human_dossier(candidate_reference()))
+    snapshots = {path: path.read_bytes() for path in (source, *[options[key] for key in ('archive', 'destination', 'locations')])}
+    select = news_selection.select_archive
+
+    def fail(*args, **kwargs):
+        raise OSError('Simulated news projection failure')
+
+    monkeypatch.setattr(news_selection, 'select_archive', fail)
+    with pytest.raises(OSError):
+        import_approved_news(inbox, ID, source, **options)
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items())
+    monkeypatch.setattr(news_selection, 'select_archive', select)
+    assert import_approved_news(inbox, ID, source, **options)
+    assert len(json.loads(options['destination'].read_text())['dossiers']) == 1
+
+
+def test_default_history_retry_keeps_healthy_projection_timestamp(tmp_path, monkeypatch):
+    from mdh_pipeline import history
+    bibliography, folder = candidate_archive(tmp_path)
+    source, options = import_paths(tmp_path, bibliography, selection_manifest([]))
+    options.pop('candidates')
+    options['history_folder'] = folder
+    inbox = ApprovedInbox(human_dossier(candidate_reference()))
+    assert import_approved_news(inbox, ID, source, **options)
+    snapshots = {path: path.read_bytes() for path in (source, *[options[key] for key in ('archive', 'destination', 'locations')])}
+    export = history.export_archive
+
+    def later(*args, **kwargs):
+        return export(*args, **kwargs, generated_at='2026-10-17T12:34:56+00:00')
+
+    monkeypatch.setattr(history, 'export_archive', later)
+    assert not import_approved_news(inbox, ID, source, **options)
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items())
+
+
+@pytest.mark.parametrize('labels', [[], ['review/rejected'], ['review/approved', 'review/rejected']])
+def test_news_repair_does_not_bypass_withdrawn_approval(tmp_path, labels):
+    bibliography, _ = candidate_archive(tmp_path)
+    source, options = import_paths(tmp_path, bibliography, selection_manifest([]))
+    inbox = ApprovedInbox(human_dossier(candidate_reference()))
+    assert import_approved_news(inbox, ID, source, export=False, **options)
+    inbox.labels = labels
+    snapshots = {path: path.read_bytes() for path in (source, *[options[key] for key in ('archive', 'destination', 'locations')])}
+    with pytest.raises(ValueError, match='Approval'):
+        import_approved_news(inbox, ID, source, **options)
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items())
+
+
+def test_interleaved_news_import_is_detected_and_retry_preserves_both_approvals(tmp_path, monkeypatch):
+    from mdh_pipeline import review_import
+    first, second = candidate_reference(), candidate_reference(2)
+    bibliography, _ = candidate_archive(tmp_path, [first, second])
+    source, options = import_paths(tmp_path, bibliography, selection_manifest([]))
+    first_inbox = ApprovedInbox(human_dossier(first))
+    second_inbox = ApprovedInbox(human_dossier(second))
+    writer = review_import._write_news_outputs
+    interrupted = False
+
+    def interleave(outputs, **kwargs):
+        nonlocal interrupted
+        if not interrupted:
+            interrupted = True
+            assert import_approved_news(second_inbox, second['id'], source, **options)
+        return writer(outputs, **kwargs)
+
+    monkeypatch.setattr(review_import, '_write_news_outputs', interleave)
+    with pytest.raises(ValueError, match='changed during preparation'):
+        import_approved_news(first_inbox, first['id'], source, **options)
+    assert [item['candidate_id'] for item in json.loads(source.read_text())['dossiers']] == [second['id']]
+    assert import_approved_news(first_inbox, first['id'], source, **options)
+    assert {item['candidate_id'] for item in json.loads(source.read_text())['dossiers']} == {first['id'], second['id']}
+    assert {item['candidate_id'] for item in json.loads(options['destination'].read_text())['dossiers']} == {first['id'], second['id']}
+    assert not import_approved_news(first_inbox, first['id'], source, **options)
