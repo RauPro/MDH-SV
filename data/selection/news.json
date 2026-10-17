@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T05:48:41.091806+00:00",
+  "generated_at": "2026-10-17T06:17:00.013680+00:00",
   "assessment_counts": {
     "candidates": 12317,
     "evaluated": 4889,
-    "relevant": 1795,
-    "excluded": 230,
-    "uncertain": 2864,
+    "relevant": 1798,
+    "excluded": 238,
+    "uncertain": 2853,
     "pending": 7428
   },
   "selections": [
@@ -4786,6 +4786,32 @@
       }
     },
     {
+      "candidate_id": "18aab11579e95a9ab15e9039afd35a4db478716a818455d96d10cc4ffbff766f",
+      "source_url": "https://historico.elsalvador.com/historico/129943/5-anos-de-carcel-a-exjefes-de-seguridad-de-portillo-en-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-06-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T00:09:29.837783-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "92ea1d5a4bc7f0b05ee4d9fe1c9aea97e85eaaca21dda77e6c90b475fcbd0d0f",
+          "jurisdiction_paragraph_ids": [
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "18b233ddaeafd6e0c0421e2b2396596d49be4e8456ee5b70f33a3e4c69df88d1",
       "source_url": "https://www.diariocolatino.com/apes-desarrolla-foro-sobre-situacion-laboral-de-periodistas/",
       "publisher": "Diario Co Latino",
@@ -8782,6 +8808,35 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2df2315cf73f83a7945d157ebcef5a077b389a7d7619632713ec5c69144e653e",
+      "source_url": "https://www.diariocolatino.com/pnc-registra-91-homicidios-en-once-dias-de-junio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T00:09:29.837783-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "eaf1674b7a82c6d12fe7d7fba3968f8e375f2fc9d38929d5e97a9436f1f653eb",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8",
+            "p9"
           ]
         }
       }
@@ -14928,6 +14983,33 @@
       }
     },
     {
+      "candidate_id": "4f10e070a79471adada8bde1f7e65415935b77a2fb4d2b9d49abc235862d5ea4",
+      "source_url": "https://www.diariocolatino.com/camara-confirma-orden-de-detencion-en-contra-del-ex-presidente-francisco-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-11",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T00:09:29.837783-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "942a93312799c0d03f2b06cc831996a0132106f3b99e0142f25cc77498e71843",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "4f189d974c365486f0bd38b165c6dbc6af33f783fe76555f4c2839d8c840522f",
       "source_url": "https://www.diariocolatino.com/pddh-establece-violacion-al-derecho-a-la-justicia-en-caso-jesuitas/",
       "publisher": "Diario Co Latino",
@@ -16462,19 +16544,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T00:14:19.822792-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "55244065f5fa55c7e4521724d648dfb268e673fd51fe94bae3606232434c7b76",
           "jurisdiction_paragraph_ids": [
-            "p7",
-            "p8"
+            "p7"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p11"
+            "p3",
+            "p7"
           ]
         }
       }
@@ -23074,22 +23155,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T00:16:05.423297-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "276c98903e11a6d22869cf249720f9c333fecf821c253460bb43f216ee5e66c5",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p4",
-            "p5",
-            "p6",
-            "p7",
-            "p9"
+            "p5"
           ]
         }
       }

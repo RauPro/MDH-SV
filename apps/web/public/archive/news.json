@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T05:48:44.279311+00:00",
+  "generated_at": "2026-10-17T06:17:03.322790+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12317,
-      "selected": 1795,
+      "selected": 1798,
       "evaluated": 4889,
-      "relevant": 1795,
-      "excluded": 230,
-      "uncertain": 2864,
+      "relevant": 1798,
+      "excluded": 238,
+      "uncertain": 2853,
       "pending": 7428,
-      "evaluated_at": "2026-10-17T05:48:41.091806+00:00"
+      "evaluated_at": "2026-10-17T06:17:00.013680+00:00"
     }
   },
   "paper": {
@@ -48,17 +48,17 @@
   },
   "coverage": {
     "start_date": "2010-01-01",
-    "end_date": "2026-10-16",
+    "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1795,
+    "records": 1798,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1464,
+        "records": 1466,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -701,7 +701,7 @@
           {
             "month": "2014-06",
             "status": "enumerated",
-            "records": 20,
+            "records": 22,
             "screen_version": 3,
             "posts_scanned": 1071,
             "source_total_posts": 1071,
@@ -2492,7 +2492,7 @@
         "id": "gatoencerrado",
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 59,
         "first_published_date": "2014-09-21",
         "last_published_date": "2018-09-03",
@@ -4911,7 +4911,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 2,
@@ -4927,7 +4927,7 @@
         "id": "factum",
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 52,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
@@ -7346,7 +7346,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 0,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 218,
+        "records": 219,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15332,7 +15332,7 @@
           {
             "month": "2014-06",
             "status": "partial",
-            "records": 3,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 122,
             "source_total_posts": null,
@@ -19411,12 +19411,12 @@
         "month": "2014-06",
         "start_date": "2014-06-01",
         "end_date": "2014-06-30",
-        "records": 23,
+        "records": 26,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 20
+            "records": 22
           },
           {
             "source_id": "gatoencerrado",
@@ -19446,7 +19446,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 3
+            "records": 4
           }
         ]
       },
@@ -25774,7 +25774,7 @@
       {
         "month": "2026-10",
         "start_date": "2026-10-01",
-        "end_date": "2026-10-16",
+        "end_date": "2026-10-17",
         "records": 7,
         "sources": [
           {
@@ -25784,12 +25784,12 @@
           },
           {
             "source_id": "gatoencerrado",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0
           },
           {
             "source_id": "factum",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0
           },
           {
@@ -89184,22 +89184,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T00:16:05.423297-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "276c98903e11a6d22869cf249720f9c333fecf821c253460bb43f216ee5e66c5",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p4",
-            "p5",
-            "p6",
-            "p7",
-            "p9"
+            "p5"
           ]
         }
       }
@@ -89232,19 +89227,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T00:14:19.822792-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "55244065f5fa55c7e4521724d648dfb268e673fd51fe94bae3606232434c7b76",
           "jurisdiction_paragraph_ids": [
-            "p7",
-            "p8"
+            "p7"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p11"
+            "p3",
+            "p7"
           ]
         }
       }
@@ -96624,6 +96618,96 @@
       }
     },
     {
+      "id": "4f10e070a79471adada8bde1f7e65415935b77a2fb4d2b9d49abc235862d5ea4",
+      "title": "Cámara confirma orden de detención en contra del ex presidente Francisco Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/camara-confirma-orden-de-detencion-en-contra-del-ex-presidente-francisco-flores/",
+      "published_date": "2014-06-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 18072,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T00:09:29.837783-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "942a93312799c0d03f2b06cc831996a0132106f3b99e0142f25cc77498e71843",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2df2315cf73f83a7945d157ebcef5a077b389a7d7619632713ec5c69144e653e",
+      "title": "PNC registra 91 homicidios en once días de junio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-registra-91-homicidios-en-once-dias-de-junio/",
+      "published_date": "2014-06-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 18064,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T00:09:29.837783-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "eaf1674b7a82c6d12fe7d7fba3968f8e375f2fc9d38929d5e97a9436f1f653eb",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "id": "b39575161bbe8316953b7b435fcc78ecdced31c1c34a3483bcca5eb03cc576d6",
       "title": "Piden a ONU el estatus de refugiados para menores ilegales detenidos en EEUU",
       "title_truncated": false,
@@ -96842,6 +96926,51 @@
             "p2",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "18aab11579e95a9ab15e9039afd35a4db478716a818455d96d10cc4ffbff766f",
+      "title": "5 años de cárcel a exjefes de seguridad de Portillo en Guatemala",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/129943/5-anos-de-carcel-a-exjefes-de-seguridad-de-portillo-en-guatemala.html",
+      "published_date": "2014-06-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "guatemala"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T17:35:16.799175+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T00:09:29.837783-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "92ea1d5a4bc7f0b05ee4d9fe1c9aea97e85eaaca21dda77e6c90b475fcbd0d0f",
+          "jurisdiction_paragraph_ids": [
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
           ]
         }
       }
