@@ -27,6 +27,7 @@ from .publication import (
 from .review_queue import GitHubInbox
 
 NEWS_SELECTION = ROOT / "data/selection/news.json"
+NEWS_EXCEPTIONS = ROOT / "data/selection/news_exceptions.json"
 HISTORY_SOURCE = ROOT / "data/history"
 
 
@@ -118,14 +119,73 @@ def _preserve_generated_at(document, previous_bytes):
         pass
 
 
+def _retained_automatic_dossiers(previous_bytes, selected, reviewed_ids):
+    """Keep existing public automation only after provenance and live binding checks."""
+    from .news_publication import validate_collection
+    if previous_bytes is None:
+        return []
+    try:
+        previous = validate_collection(json.loads(previous_bytes), allow_automatic=True)
+    except (ValueError, TypeError, KeyError, AttributeError):
+        # This is a derived output, not an approval authority. Missing/corrupt
+        # automation can be restored later from its separate validated source.
+        return []
+    selected_ids = {reference['id'] for reference in selected['records']}
+    retained = []
+    for item in previous['dossiers']:
+        if (item['schema_version'] != 2 or item['candidate_id'] in reviewed_ids
+                or item['candidate_id'] not in selected_ids):
+            continue
+        try:
+            bound = validate_collection({'schema_version': 1, 'dossiers': [item]},
+                                        archive=selected, allow_automatic=True)
+        except (ValueError, TypeError, KeyError, AttributeError):
+            continue
+        retained.extend(bound['dossiers'])
+    return retained
+
+
+def _existing_title_masks(previous_bytes, selected, protected_title):
+    """Preserve an existing redaction, never evidence or fields from the old archive."""
+    from .history import SOURCES, validate_reference
+    if previous_bytes is None:
+        return set()
+    try:
+        previous = json.loads(previous_bytes)
+        references = previous['records']
+        if not isinstance(references, list):
+            return set()
+    except (ValueError, TypeError, KeyError):
+        return set()
+    sources = {source['id']: source for source in SOURCES}
+    current = {reference['id']: reference for reference in selected['records']}
+    masked = set()
+    for reference in references:
+        if not isinstance(reference, dict) or reference.get('title') != protected_title:
+            continue
+        try:
+            bound = current[reference['id']]
+            if any(reference[key] != bound[key]
+                   for key in ('source_url', 'source_id', 'publisher', 'published_date')):
+                continue
+            validate_reference(reference, sources[reference['source_id']])
+            masked.add(reference['id'])
+        except (ValueError, TypeError, KeyError, AttributeError):
+            continue
+    return masked
+
+
 def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEWS_ARCHIVE,
                          destination=NEWS_PUBLIC, export=True, candidates=None,
-                         selection=NEWS_SELECTION, locations=None, history_folder=HISTORY_SOURCE):
+                         selection=NEWS_SELECTION, exceptions=NEWS_EXCEPTIONS,
+                         locations=None, history_folder=HISTORY_SOURCE):
     """Import a human decision against all candidates and regenerate selected public snapshots."""
     from .automatic_locations import validate_collection as validate_locations
     from .history import export_archive
     from .news_dossier import validate_news_dossier
     from .news_publication import validate_collection
+    from .news_requests import read_json as read_exceptions
+    from .news_requests import validate_exceptions
     from .news_selection import select_archive
     if not re.fullmatch(r'[a-f0-9]{64}', candidate_id):
         raise ValueError('Invalid candidate ID')
@@ -164,6 +224,16 @@ def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEW
     if export:
         locations = Path(locations) if locations is not None else archive.with_name('locations.json')
         expected.update({destination: _snapshot(destination), locations: _snapshot(locations)})
+        if isinstance(exceptions, (str, Path)):
+            exception_path = Path(exceptions)
+            if exception_path.resolve() in {path.resolve() for path in (source, archive, destination, locations)}:
+                raise ValueError('News exceptions cannot overlap import outputs')
+            exception_bytes = _snapshot(exception_path)
+            expected[exception_path] = exception_bytes
+            decisions = validate_exceptions(read_exceptions(exception_path))
+        else:
+            decisions = validate_exceptions(exceptions)
+        excluded_ids = {item['candidate_id'] for item in decisions['decisions'] if item['withdrawn']}
     if candidates is None:
         # The public archive intentionally excludes candidates with no positive scope
         # decision. Human review must still be able to admit or reject those candidates.
@@ -185,20 +255,33 @@ def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEW
         prepared_source = _json_bytes(document)
     outputs = []
     if export:
-        selected = select_archive(bibliography, _json_document(selection), reviewed_dossiers=document)
-        _preserve_generated_at(selected, archive_bytes)
+        from .automatic_news import PROTECTED_TITLE
+        selected = select_archive(bibliography, _json_document(selection), reviewed_dossiers=document,
+                                  excluded_ids=excluded_ids)
+        selected_ids = {reference['id'] for reference in selected['records']}
+        reviewed_ids = {item['candidate_id'] for item in document['dossiers']}
         eligible = {'schema_version': 1, 'dossiers': [item for item in document['dossiers']
-            if item['classification']['jurisdiction'] == 'SV' and item['classification']['relevance'] == 'relevant']}
-        public_dossiers = validate_collection(eligible, archive=selected)
+            if item['candidate_id'] in selected_ids and item['classification']['jurisdiction'] == 'SV'
+            and item['classification']['relevance'] == 'relevant']}
+        retained = _retained_automatic_dossiers(expected[destination], selected, reviewed_ids)
+        public_dossiers = validate_collection(
+            {'schema_version': 1, 'dossiers': [*eligible['dossiers'], *retained]},
+            archive=selected, allow_automatic=True)
+        protected_titles = {item['candidate_id'] for item in retained if item['source_title'] == PROTECTED_TITLE}
+        protected_titles.update(_existing_title_masks(archive_bytes, selected, PROTECTED_TITLE))
+        withheld_locations = {item['candidate_id'] for item in retained if item['fields']['department']['status'] == 'withheld'}
+        for reference in selected['records']:
+            if reference['id'] in protected_titles:
+                reference.update(title=PROTECTED_TITLE, title_truncated=False)
+        _preserve_generated_at(selected, archive_bytes)
         previous_locations = (json.loads(expected[locations]) if expected[locations] is not None else
             {'schema_version': 3, 'generated_at': bibliography['generated_at'], 'locations': []})
         # Validate against the complete bibliography before pruning. A malformed or
         # unrelated entry must fail, not silently disappear during an approval import.
         projected = validate_locations(previous_locations, archive=bibliography)
-        selected_ids = {reference['id'] for reference in selected['records']}
-        reviewed_ids = {item['candidate_id'] for item in document['dossiers']}
         projected['locations'] = [item for item in projected['locations']
-            if item['candidate_id'] in selected_ids and item['candidate_id'] not in reviewed_ids]
+            if item['candidate_id'] in selected_ids and item['candidate_id'] not in reviewed_ids
+            and item['candidate_id'] not in withheld_locations]
         projected = validate_locations(projected, archive=selected)
         outputs.extend([(archive, selected), (destination, public_dossiers), (locations, projected)])
     # All sources, scope decisions, dossiers and remaining locations are validated

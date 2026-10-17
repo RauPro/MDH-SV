@@ -230,8 +230,9 @@ Ante un fallo temporal de escritura, repite la misma importación con el mismo
 `--candidate` y completa la cadena anterior. Cada intento vuelve a verificar la
 aprobación privada; una aprobación ausente, malformada o retirada no se sustituye
 por la ficha local. El importador también repara salidas derivadas de una ficha ya
-incorporada e informa cambios cuando lo hace. Los reemplazos son atómicos por
-archivo, no para todo el conjunto: no publiques una salida parcial tras una
+incorporada e informa cambios cuando lo hace. Conserva automáticas válidas y
+respeta retiradas, títulos protegidos y ubicaciones omitidas. Los reemplazos son
+atómicos por archivo, no para todo el conjunto: no publiques una salida parcial tras una
 interrupción. El reintento permite recuperar la coherencia sin volver a llamar a
 Gemini. Véanse los [detalles de importación y reintento](../../docs/NEWS-DOSSIERS.md#corregir-una-ficha-parcial-mediante-decisión-humana).
 
