@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T06:17:03.322790+00:00",
+  "generated_at": "2026-10-17T07:19:27.835939+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12317,
-      "selected": 1798,
+      "selected": 1800,
       "evaluated": 4889,
-      "relevant": 1798,
-      "excluded": 238,
-      "uncertain": 2853,
+      "relevant": 1800,
+      "excluded": 246,
+      "uncertain": 2843,
       "pending": 7428,
-      "evaluated_at": "2026-10-17T06:17:00.013680+00:00"
+      "evaluated_at": "2026-10-17T07:19:24.526437+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1798,
+    "records": 1800,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1466,
+        "records": 1467,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -701,7 +701,7 @@
           {
             "month": "2014-06",
             "status": "enumerated",
-            "records": 22,
+            "records": 23,
             "screen_version": 3,
             "posts_scanned": 1071,
             "source_total_posts": 1071,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 219,
+        "records": 220,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15332,7 +15332,7 @@
           {
             "month": "2014-06",
             "status": "partial",
-            "records": 4,
+            "records": 5,
             "screen_version": 3,
             "posts_scanned": 122,
             "source_total_posts": null,
@@ -19411,12 +19411,12 @@
         "month": "2014-06",
         "start_date": "2014-06-01",
         "end_date": "2014-06-30",
-        "records": 26,
+        "records": 28,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 22
+            "records": 23
           },
           {
             "source_id": "gatoencerrado",
@@ -19446,7 +19446,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 4
+            "records": 5
           }
         ]
       },
@@ -88950,19 +88950,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T01:18:41.810043-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "00d734b06aabd02e4288dbbd701fa156c83cfb6064584f1bdc6fdacf7bf1bd5b",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p2",
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p7",
-            "p9",
-            "p10"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -89043,21 +89042,20 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T01:18:16.770095-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "f5a1b44dbf603a13523b78f944041b0078d4873593293c5e4cc768226504ce58",
           "jurisdiction_paragraph_ids": [
             "p1"
           ],
           "relevance_paragraph_ids": [
-            "p9",
-            "p10",
-            "p11",
+            "p1",
+            "p6",
+            "p7",
             "p12",
-            "p13",
-            "p14"
+            "p13"
           ]
         }
       }
@@ -89090,21 +89088,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T01:16:40.497755-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "2556e33793d820c087c1817417c5ee2f25028f244b44e77c7faab322cd822579",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p9",
-            "p13",
-            "p14"
+            "p3",
+            "p4"
           ]
         }
       }
@@ -96389,6 +96384,54 @@
       }
     },
     {
+      "id": "60e5e1bc892b4e96bb3d63817d6ffcdfa95ce727e1d4217b60180fe983035ab4",
+      "title": "Capturan segundo fugitivo salvadoreño en Honduras",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/129901/capturan-segundo-fugitivo-salvadoreno-en-honduras.html",
+      "published_date": "2014-06-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "honduras",
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T17:35:16.799175+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T01:11:39.427706-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7787816a70e73b92a5e20a88c4a0fa38b9a60a233838af9abb0277e424140b5a",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "id": "026bf11832aa307207e0ecf11ba9da2128b0f63b318a6a6e295d9c427b80821e",
       "title": "Sindicalistas exigen destitución de director general de Centros Penales",
       "title_truncated": false,
@@ -96480,6 +96523,53 @@
             "p3",
             "p8",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cd9ae3d9848ffac516bfea0400f0957d0bb5ed0abc3d7d768e2f30a3373ccf75",
+      "title": "FGR de Sonsonate gira orden de captura para 37 pandilleros",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-de-sonsonate-gira-orden-de-captura-para-37-pandilleros/",
+      "published_date": "2014-06-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "sonsonate"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 18185,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T01:11:39.427706-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ff0e47f71dc2fecd417aababf35fd990f97457957baaddaf4b3213294644d59c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }

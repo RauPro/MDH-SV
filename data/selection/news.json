@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T06:17:00.013680+00:00",
+  "generated_at": "2026-10-17T07:19:24.526437+00:00",
   "assessment_counts": {
     "candidates": 12317,
     "evaluated": 4889,
-    "relevant": 1798,
-    "excluded": 238,
-    "uncertain": 2853,
+    "relevant": 1800,
+    "excluded": 246,
+    "uncertain": 2843,
     "pending": 7428
   },
   "selections": [
@@ -7970,21 +7970,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T01:16:40.497755-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "2556e33793d820c087c1817417c5ee2f25028f244b44e77c7faab322cd822579",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p9",
-            "p13",
-            "p14"
+            "p3",
+            "p4"
           ]
         }
       }
@@ -13368,21 +13365,20 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T01:18:16.770095-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "f5a1b44dbf603a13523b78f944041b0078d4873593293c5e4cc768226504ce58",
           "jurisdiction_paragraph_ids": [
             "p1"
           ],
           "relevance_paragraph_ids": [
-            "p9",
-            "p10",
-            "p11",
+            "p1",
+            "p6",
+            "p7",
             "p12",
-            "p13",
-            "p14"
+            "p13"
           ]
         }
       }
@@ -18508,6 +18504,34 @@
       }
     },
     {
+      "candidate_id": "60e5e1bc892b4e96bb3d63817d6ffcdfa95ce727e1d4217b60180fe983035ab4",
+      "source_url": "https://historico.elsalvador.com/historico/129901/capturan-segundo-fugitivo-salvadoreno-en-honduras.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-06-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T01:11:39.427706-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7787816a70e73b92a5e20a88c4a0fa38b9a60a233838af9abb0277e424140b5a",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "610f6d37ab2462ea96985652fa6bbed7ebfe04d44df1134c8556689c7c3b76d0",
       "source_url": "https://www.diariocolatino.com/450-infantes-aun-permanecen-en-centros-de-detencion-de-ee-uu/",
       "publisher": "Diario Co Latino",
@@ -19204,19 +19228,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-17T01:18:41.810043-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "00d734b06aabd02e4288dbbd701fa156c83cfb6064584f1bdc6fdacf7bf1bd5b",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p2",
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p7",
-            "p9",
-            "p10"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -41795,6 +41818,34 @@
             "p4",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "cd9ae3d9848ffac516bfea0400f0957d0bb5ed0abc3d7d768e2f30a3373ccf75",
+      "source_url": "https://www.diariocolatino.com/fgr-de-sonsonate-gira-orden-de-captura-para-37-pandilleros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T01:11:39.427706-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ff0e47f71dc2fecd417aababf35fd990f97457957baaddaf4b3213294644d59c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
