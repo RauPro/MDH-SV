@@ -67,7 +67,9 @@ HTTP reales usando AJV 2020-12 y `ajv-formats`, fijados en el lock. Comprueba to
 las páginas actuales, fichas individuales, filtros, estadísticas, errores y los
 métodos HEAD/OPTIONS sin cuerpo. No modifica las respuestas para hacerlas pasar:
 la coerción, la inserción de defaults y la eliminación de propiedades están
-desactivadas.
+desactivadas. La prueba HTTP completa tiene un límite de 60 segundos por archivo
+(`npm run test:api-contract`), porque recorre todas las páginas y filtros; el resto
+de pruebas API conserva su límite de 15 segundos. `npm run test:api` ejecuta ambas.
 
 La misma suite valida los resultados estructurados de las herramientas MCP con
 los esquemas REST correspondientes. Los errores del protocolo se contrastan con
