@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T15:17:28.932212+00:00",
+  "generated_at": "2026-10-17T16:17:15.960648+00:00",
   "assessment_counts": {
-    "candidates": 12471,
+    "candidates": 12621,
     "evaluated": 4891,
-    "relevant": 1829,
-    "excluded": 302,
-    "uncertain": 2760,
-    "pending": 7580
+    "relevant": 1832,
+    "excluded": 310,
+    "uncertain": 2749,
+    "pending": 7730
   },
   "selections": [
     {
@@ -9370,9 +9370,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T10:16:20.105981-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b6953d7fcb47f0213587ee353045350a23c6608eb153dbab255cb39b85886dd4",
           "jurisdiction_paragraph_ids": [
@@ -9380,9 +9380,7 @@
           ],
           "relevance_paragraph_ids": [
             "p5",
-            "p9",
-            "p11",
-            "p19"
+            "p7"
           ]
         }
       }
@@ -38887,6 +38885,39 @@
       }
     },
     {
+      "candidate_id": "bb91446924885814cec3c9f2c5120bb277a82bf58f1addb17e99f8721e8e28b0",
+      "source_url": "https://www.diariocolatino.com/camara-ratifica-decision-de-enviar-a-bartolinas-policiales-a-ex-presidente-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T10:09:42.422458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "17dc6a2760eccc21ee3c74e9071ce1874a590816678e713883d737c03638d351",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "bba60236e993cac2555ee447d3ee550a92bb16b29b9feab6462f7ad6ef19e86b",
       "source_url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
       "publisher": "Diario Co Latino",
@@ -41269,9 +41300,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T10:16:35.925429-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a4f02f80d6aa243332aed39947cd89f2ae809233722c1ab3e9cad702d598001e",
           "jurisdiction_paragraph_ids": [
@@ -41279,12 +41310,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p6",
-            "p7",
-            "p8",
-            "p9"
+            "p4"
           ]
         }
       }
@@ -45678,9 +45704,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T10:14:35.477188-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6df81f77e8492bd989086922f40bf3f3b15b92fee163bb241c104a494879f508",
           "jurisdiction_paragraph_ids": [
@@ -45688,8 +45714,7 @@
             "p5"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p5",
+            "p4",
             "p7"
           ]
         }
@@ -48321,6 +48346,44 @@
       }
     },
     {
+      "candidate_id": "f0c0b8f78e1390b153b7f454050b1d7f5c88cf2f61ecc5e9406beeceef34cba8",
+      "source_url": "https://www.diariocolatino.com/capturan-a-bartolineros-de-la-pnc/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T10:09:42.422458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e1c6c73563e1cafc35561eaa517fdb8efa5e973c3cc0058611cc320e88f813b9",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p10",
+            "p11",
+            "p12",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f0c96c86e43f9f9a7630099b4be2c6655e95fc8d5350b2dddaddab1d779b3031",
       "source_url": "https://www.diariocolatino.com/el-salvador-se-suma-a-la-alianza-global-para-eliminar-la-violencia-contra-ninas-ninos-y-jovenes/",
       "publisher": "Diario Co Latino",
@@ -49033,6 +49096,37 @@
             "p2",
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f3f72ff671e87e46b6e2d476e6577efcb849d0b545a44cab5ffc8346f90950b7",
+      "source_url": "https://www.diariocolatino.com/fgr-pide-detencion-provisional-para-ex-jugadores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T10:09:42.422458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e22ef15920c02ef5282e7d2828b0abc7d63c44aff85e14997ea49eae56457528",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
