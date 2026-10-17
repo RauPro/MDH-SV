@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T14:16:52.688464+00:00",
+  "generated_at": "2026-10-17T15:17:28.932212+00:00",
   "assessment_counts": {
     "candidates": 12471,
     "evaluated": 4891,
-    "relevant": 1826,
-    "excluded": 294,
-    "uncertain": 2771,
+    "relevant": 1829,
+    "excluded": 302,
+    "uncertain": 2760,
     "pending": 7580
   },
   "selections": [
@@ -3467,6 +3467,35 @@
           "relevance_paragraph_ids": [
             "p1",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "11cfca54af31b1d29e43398987a82eea77b33ff4cb8d10198d99f075dcefec92",
+      "source_url": "https://www.diariocolatino.com/diputado-suplente-se-declara-inocente-de-cargos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T09:09:54.980458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "bb4e372afe74feb8f2e4b7de9003f1637a89cf7cbdbdf4ff9585dfb3c3a0f53f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10",
+            "p14"
           ]
         }
       }
@@ -14763,6 +14792,35 @@
             "p5",
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4bd2fe36a6b30a3278b698dca90fec30279d9659d8a408bb7f97a64732a902cb",
+      "source_url": "https://www.diariocolatino.com/presentan-revocatoria-en-caso-de-detencion-de-ex-presidente-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T09:09:54.980458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "36bdbc89c4eeba6fbd1ca3c2fce007bd12949bae83bbb246d1ba770657528541",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -35930,6 +35988,34 @@
             "p1",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ae81dc142b07fc465ec13829998bdd7bd321bd0b760503aae960ec30e51e80db",
+      "source_url": "https://www.diariocolatino.com/ordenan-detencion-para-diputado-suplente-wilver-rivera-monge-%e2%80%a8/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T09:09:54.980458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e785e58b71543a3fa170ba3d53608dda704ad60f7a61b0826f9c35c9b6b36212",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
           ]
         }
       }

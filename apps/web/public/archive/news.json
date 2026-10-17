@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T14:16:55.100225+00:00",
+  "generated_at": "2026-10-17T15:17:31.285588+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12471,
-      "selected": 1826,
+      "selected": 1829,
       "evaluated": 4891,
-      "relevant": 1826,
-      "excluded": 294,
-      "uncertain": 2771,
+      "relevant": 1829,
+      "excluded": 302,
+      "uncertain": 2760,
       "pending": 7580,
-      "evaluated_at": "2026-10-17T14:16:52.688464+00:00"
+      "evaluated_at": "2026-10-17T15:17:28.932212+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1826,
+    "records": 1829,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1489,
+        "records": 1492,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -737,7 +737,7 @@
           {
             "month": "2014-09",
             "status": "enumerated",
-            "records": 41,
+            "records": 44,
             "screen_version": 3,
             "posts_scanned": 1085,
             "source_total_posts": 1085,
@@ -19540,12 +19540,12 @@
         "month": "2014-09",
         "start_date": "2014-09-01",
         "end_date": "2014-09-30",
-        "records": 44,
+        "records": 47,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 41
+            "records": 44
           },
           {
             "source_id": "gatoencerrado",
@@ -92367,6 +92367,52 @@
       }
     },
     {
+      "id": "4bd2fe36a6b30a3278b698dca90fec30279d9659d8a408bb7f97a64732a902cb",
+      "title": "Presentan revocatoria en caso de detención de ex presidente Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/presentan-revocatoria-en-caso-de-detencion-de-ex-presidente-flores/",
+      "published_date": "2014-09-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 28849,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T09:09:54.980458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "36bdbc89c4eeba6fbd1ca3c2fce007bd12949bae83bbb246d1ba770657528541",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "id": "283f0a4d6f95b76b8eb4f7976970072bbab03ca7ff5ba1377d4c8638fa29f94c",
       "title": "Exigen al Fiscal investigar autores intelectuales de asesinatos de ambientalistas en Cabañas",
       "title_truncated": false,
@@ -92448,6 +92494,97 @@
             "p2",
             "p8",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ae81dc142b07fc465ec13829998bdd7bd321bd0b760503aae960ec30e51e80db",
+      "title": "Ordenan detención para diputado suplente Wilver Rivera Monge",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ordenan-detencion-para-diputado-suplente-wilver-rivera-monge-%e2%80%a8/",
+      "published_date": "2014-09-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 28742,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T09:09:54.980458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e785e58b71543a3fa170ba3d53608dda704ad60f7a61b0826f9c35c9b6b36212",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "11cfca54af31b1d29e43398987a82eea77b33ff4cb8d10198d99f075dcefec92",
+      "title": "Diputado suplente se declara inocente de cargos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/diputado-suplente-se-declara-inocente-de-cargos/",
+      "published_date": "2014-09-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 28721,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T09:09:54.980458-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "bb4e372afe74feb8f2e4b7de9003f1637a89cf7cbdbdf4ff9585dfb3c3a0f53f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10",
+            "p14"
           ]
         }
       }
