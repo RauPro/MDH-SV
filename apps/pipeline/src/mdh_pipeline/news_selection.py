@@ -25,7 +25,7 @@ RIGHTS_SCOPE_PROMPT = "mdh-news-scope-3-rights-nexus"
 _SELECTION_PROMPTS = {FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT,
                       SCOPE_REVIEW_PROMPT, INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT,
                       SCOPE_PROMPT, EXCLUSION_PROMPT}
-_STAMP = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})"
+_STAMP = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)"
 _COMMON = {"method", "review_status", "human_reviewed", "jurisdiction", "relevance"}
 _AUTOMATIC = _COMMON | {"classified_at", "model", "prompt_version", "evidence"}
 _HUMAN = _COMMON | {"reviewed_by", "reviewed_at"}

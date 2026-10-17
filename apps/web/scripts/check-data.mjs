@@ -11,6 +11,7 @@ import { parseNewsProcessing, validateProcessingBindings } from '../../../shared
 import { parseNewsExceptions } from '../../../shared/news-exceptions.mjs';
 import { publicDataRoot } from './public-data-root.mjs';
 import { parseCatalog } from '../../../shared/catalog.mjs';
+import { parseNewsArchive } from '../../../shared/news-archive.mjs';
 
 const data = publicDataRoot();
 const source = data.path('data/reviewed/publications.json');
@@ -45,7 +46,7 @@ console.log(`Validated ${catalog.records.length} public records and all download
 const approvedNews = JSON.parse(readFileSync(data.path('data/reviewed/news_dossiers.json')));
 const automatedNews = JSON.parse(readFileSync(data.path('data/automated/news_dossiers.json')));
 const publicNews = JSON.parse(readFileSync(data.path('apps/web/public/archive/dossiers.json')));
-const newsArchive = JSON.parse(readFileSync(data.path('apps/web/public/archive/news.json')));
+const newsArchive = parseNewsArchive(JSON.parse(readFileSync(data.path('apps/web/public/archive/news.json'))));
 const exceptions = parseNewsExceptions(JSON.parse(readFileSync(data.path('data/selection/news_exceptions.json'))));
 const withdrawn = id => exceptions.get(id)?.withdrawn === true;
 for (const reference of newsArchive.records) assert.ok(!withdrawn(reference.id), 'Withdrawn news must not remain in the public archive');

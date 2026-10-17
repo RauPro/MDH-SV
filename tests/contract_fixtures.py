@@ -1,6 +1,6 @@
 """Load the same declarative wire examples used by the JavaScript contract tests."""
-from copy import deepcopy
 import json
+from copy import deepcopy
 from pathlib import Path
 
 

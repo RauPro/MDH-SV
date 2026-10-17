@@ -12,6 +12,10 @@ Cada entrada de `publishers` contiene `id`, `name`, `kind`, `endpoint`, `hosts` 
 `feeds`. El ID es estable porque aparece en referencias, estados históricos y
 rutas de checkpoints. Los nombres y hosts no se repiten entre entradas. No hay
 comodines ni confianza implícita en subdominios, aliases `www` o redirecciones.
+Los hosts son nombres DNS ASCII canónicos: se rechazan direcciones IP, sus
+formas numéricas o hexadecimales alternativas y etiquetas `xn--` (punycode).
+Admitir dominios internacionalizados requiere una política explícita compatible
+entre ambos lectores, no una normalización implícita diferente en cada runtime.
 Los endpoints deben ser URLs HTTPS explícitas dentro de los hosts de la entrada,
 sin credenciales, puerto, consulta, fragmento ni escapes ambiguos.
 

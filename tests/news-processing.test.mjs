@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { NEWS_PROCESSING_STATUSES, newsProcessingFor, parseNewsProcessing, processingMatchesReference, validateNewsProcessingEntry, validateProcessingBindings } from '../shared/news-processing.mjs';
 import { pendingNewsDossier } from '../shared/news-dossier.mjs';
 import { parseNewsExceptions } from '../shared/news-exceptions.mjs';
@@ -59,6 +60,9 @@ test('stale bibliography or selection hashes invalidate only their own runtime e
     value => { value.selection_content_sha256 = null; value.status = 'unknown'; },
   ]) {
     const stale = entry(); change(stale);
+    // A stale source can be internally valid while no longer matching this
+    // bibliography. A forged URL/hash pair is rejected before binding instead.
+    stale.candidate_id = createHash('sha256').update(stale.source_url).digest('hex');
     const index = parseNewsProcessing(collection([stale]));
     assert.equal(newsProcessingFor(reference, index), 'unknown');
     assert.equal(processingMatchesReference(stale, reference), false);

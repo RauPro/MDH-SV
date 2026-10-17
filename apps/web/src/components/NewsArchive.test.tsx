@@ -1,3 +1,4 @@
+import { sourceId, recountArchive } from '../../../../tests/source-identity-fixture.mjs';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -171,6 +172,7 @@ it('shows all selected references regardless of keyword hints and separates cand
   const archive = structuredClone(fixture);
   archive.records[1].scope_hint = 'international_context';
   archive.records[2].scope_hint = 'undetermined';
+  archive.records[2].scope_terms = [];
   serve(archive);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('3 noticias seleccionadas');
@@ -225,11 +227,12 @@ it('shows failed or malformed loads and allows retry without silent empty result
 });
 it('renders 30 items per page and resets pagination after filtering', async () => {
   const archive = structuredClone(fixture);
-  archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: (index + 1).toString(16).padStart(64, '0'), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
+  archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: sourceId(`https://www.diariocolatino.com/test-${index}/`), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
   archive.coverage.records = 31;
   archive.policy.selection_gate.selected = 31; archive.policy.selection_gate.candidates = 31;
   archive.coverage.sources = archive.coverage.sources.map(source => ({ ...source, records: source.id === 'co-latino' ? 31 : 0 }));
   archive.coverage.months = archive.coverage.months.map(month => ({ ...month, records: month.month === '2026-10' ? 31 : 0 }));
+  recountArchive(archive);
   serve(archive);
   render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('31 noticias seleccionadas');
@@ -314,6 +317,7 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   const archive = structuredClone(fixture);
   archive.records[1].scope_hint = 'international_context';
   archive.records[2].scope_hint = 'undetermined';
+  archive.records[2].scope_terms = [];
   serve(archive);
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('3 noticias seleccionadas');
@@ -365,6 +369,7 @@ it('updates the news map with search, detected topic, scope and publication date
   dossier.fields.department = { value: 'San Salvador', status: 'reported', evidence_refs: ['bibliography'], note: null };
   const archive = structuredClone(fixture);
   archive.records[0].scope_hint = 'undetermined';
+  archive.records[0].scope_terms = [];
   serve(archive, { schema_version: 1, dossiers: [dossier] });
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
@@ -395,11 +400,12 @@ it('retains every news reference and its pending sheet in the monitor when appro
 
 it('keeps a valid result page when a late public dossier response changes which news have reviewed locations', async () => {
   const archive = structuredClone(fixture);
-  archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: (index + 1).toString(16).padStart(64, '0'), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
+  archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: sourceId(`https://www.diariocolatino.com/test-${index}/`), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
   archive.coverage.records = 31;
   archive.policy.selection_gate.selected = 31; archive.policy.selection_gate.candidates = 31;
   archive.coverage.sources = archive.coverage.sources.map(source => ({ ...source, records: source.id === 'co-latino' ? 31 : 0 }));
   archive.coverage.months = archive.coverage.months.map(month => ({ ...month, records: month.month === '2026-10' ? 31 : 0 }));
+  recountArchive(archive);
   const dossiers = archive.records.slice(0, 30).map(reference => {
     const dossier = { ...approved(), candidate_id: reference.id, source_url: reference.source_url, source_title: reference.title };
     dossier.classification.jurisdiction = 'SV';
@@ -503,11 +509,12 @@ it('does not use automatic data while the human-review overlay is unavailable', 
 
 it('clamps a later page when a delayed automatic layer finishes loading', async () => {
   const archive = structuredClone(fixture);
-  archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: (index + 1).toString(16).padStart(64, '0'), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
+  archive.records = Array.from({ length: 31 }, (_, index) => ({ ...fixture.records[0], id: sourceId(`https://www.diariocolatino.com/test-${index}/`), title: `Referencia ${index}`, source_url: `https://www.diariocolatino.com/test-${index}/` }));
   archive.coverage.records = 31;
   archive.policy.selection_gate.selected = 31; archive.policy.selection_gate.candidates = 31;
   archive.coverage.sources = archive.coverage.sources.map(source => ({ ...source, records: source.id === 'co-latino' ? 31 : 0 }));
   archive.coverage.months = archive.coverage.months.map(month => ({ ...month, records: month.month === '2026-10' ? 31 : 0 }));
+  recountArchive(archive);
   let finish: (value: unknown) => void = () => {};
   const locations = new Promise(resolve => { finish = resolve; });
   vi.mocked(fetch).mockImplementation(async url => ({ ok: true, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? locations : archive }) as Response);
@@ -559,7 +566,7 @@ it('shows extraction status per selected news item and only once in the opened s
 it.each(['missing', 'stale', 'different_source'])('does not infer pending for %s metadata or discard other matching statuses', async kind => {
   const first = processingEntry(fixture.records[0], 'generated');
   if (kind === 'stale') first.selection_content_sha256 = 'f'.repeat(64);
-  if (kind === 'different_source') first.source_url = 'https://www.diariocolatino.com/different-source/';
+  if (kind === 'different_source') { first.source_url = 'https://www.diariocolatino.com/different-source/'; first.candidate_id = sourceId(first.source_url); }
   serve(fixture, EMPTY, EMPTY_LOCATIONS, processingFixture([
     ...(kind === 'missing' ? [] : [first]), processingEntry(fixture.records[1], 'generated'), processingEntry(fixture.records[2], 'source_unavailable'),
   ]));

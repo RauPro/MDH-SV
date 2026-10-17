@@ -1,0 +1,1156 @@
+{
+  "schema_version": 1,
+  "contract": "news-dossier",
+  "bases": {
+    "human": {
+      "schema_version": 1,
+      "kind": "news_dossier",
+      "candidate_id": "2c4374a373845de53df4559a1ffd9818dc710d708066f92bbb59cb660b50021a",
+      "source_url": "https://www.diariocolatino.com/contract-fixture/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Noticia sintética para probar el contrato",
+      "published_date": "2025-05-01",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "Resumen ficticio con evidencia sintética, sin personas ni hechos reales.",
+          "status": "reported",
+          "evidence_refs": [
+            "primary"
+          ],
+          "note": null
+        },
+        "category": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "facts": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "themes": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/contract-fixture/",
+          "locator": "Referencia sintética de prueba; no describe un hecho real."
+        }
+      ],
+      "human_reviewed": true,
+      "reviewed_by": "fixture-editor",
+      "reviewed_at": "2025-05-02",
+      "review_notes": "Revisión sintética destinada únicamente a las pruebas de contrato."
+    },
+    "automatic": {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "2c4374a373845de53df4559a1ffd9818dc710d708066f92bbb59cb660b50021a",
+      "source_url": "https://www.diariocolatino.com/contract-fixture/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Noticia sintética para probar el contrato",
+      "published_date": "2025-05-01",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "Resumen ficticio con evidencia sintética, sin personas ni hechos reales.",
+          "status": "reported",
+          "evidence_refs": [
+            "primary"
+          ],
+          "note": null
+        },
+        "category": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "facts": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "themes": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": null
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/contract-fixture/",
+          "locator": "Referencia sintética de prueba; no describe un hecho real."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "validated_at": "2025-05-02T12:00:00Z",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-fixture",
+        "corroboration": "single_source"
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "human valid",
+      "base": "human",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "automatic valid",
+      "base": "automatic",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "human wrong URL identity",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "candidate_id"
+          ],
+          "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "name": "human private field",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "private_draft"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "human private evidence quote",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "evidence",
+            0,
+            "quote"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "human unread source",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "extraction_status"
+          ],
+          "value": "pending"
+        }
+      ]
+    },
+    {
+      "name": "human invalid publication date",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "published_date"
+          ],
+          "value": "2025-02-30"
+        }
+      ]
+    },
+    {
+      "name": "human withheld non-null",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "status"
+          ],
+          "value": "withheld"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "note"
+          ],
+          "value": "Omitido por privacidad en esta prueba."
+        }
+      ]
+    },
+    {
+      "name": "human dangling evidence",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "evidence_refs"
+          ],
+          "value": [
+            "missing"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "human duplicate evidence",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "evidence_refs"
+          ],
+          "value": [
+            "primary",
+            "primary"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "human short protected note",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "affected_persons",
+            "status"
+          ],
+          "value": "withheld"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "affected_persons",
+            "note"
+          ],
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "name": "human list field with scalar",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "affected_persons"
+          ],
+          "value": {
+            "value": "Someone",
+            "status": "reported",
+            "evidence_refs": [
+              "primary"
+            ],
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "human missing field",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "fields",
+            "facts"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "human untrusted source",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://untrusted.example/article/"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "candidate_id"
+          ],
+          "value": "e2e98594405df9eb37b440d619a8724b5b24c2642567d0ae8f90beb4cb382656"
+        }
+      ]
+    },
+    {
+      "name": "human inconsistent precision",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "date_precision"
+          ],
+          "value": "day"
+        }
+      ]
+    },
+    {
+      "name": "human extra classification",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "classification",
+            "private_reason"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "human missing evidence",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "evidence"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "automatic wrong URL identity",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "candidate_id"
+          ],
+          "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "name": "automatic private field",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "private_draft"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "automatic private evidence quote",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "evidence",
+            0,
+            "quote"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "automatic unread source",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "extraction_status"
+          ],
+          "value": "pending"
+        }
+      ]
+    },
+    {
+      "name": "automatic invalid publication date",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "published_date"
+          ],
+          "value": "2025-02-30"
+        }
+      ]
+    },
+    {
+      "name": "automatic withheld non-null",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "status"
+          ],
+          "value": "withheld"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "note"
+          ],
+          "value": "Omitido por privacidad en esta prueba."
+        }
+      ]
+    },
+    {
+      "name": "automatic dangling evidence",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "evidence_refs"
+          ],
+          "value": [
+            "missing"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "automatic duplicate evidence",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "evidence_refs"
+          ],
+          "value": [
+            "primary",
+            "primary"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "automatic short protected note",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "affected_persons",
+            "status"
+          ],
+          "value": "withheld"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "affected_persons",
+            "note"
+          ],
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "name": "automatic list field with scalar",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "affected_persons"
+          ],
+          "value": {
+            "value": "Someone",
+            "status": "reported",
+            "evidence_refs": [
+              "primary"
+            ],
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "automatic missing field",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "fields",
+            "facts"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "automatic untrusted source",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://untrusted.example/article/"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "candidate_id"
+          ],
+          "value": "e2e98594405df9eb37b440d619a8724b5b24c2642567d0ae8f90beb4cb382656"
+        }
+      ]
+    },
+    {
+      "name": "automatic inconsistent precision",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "date_precision"
+          ],
+          "value": "day"
+        }
+      ]
+    },
+    {
+      "name": "automatic extra classification",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "classification",
+            "private_reason"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "automatic missing evidence",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "evidence"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "false human review",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "human_reviewed"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "name": "human missing reviewer",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "reviewed_by"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "automatic human claim",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "human_reviewed"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "automatic false corroboration",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "corroboration"
+          ],
+          "value": "independent_sources"
+        }
+      ]
+    },
+    {
+      "name": "automatic receipt private quote",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "automation",
+            "quote"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "automatic empty fields",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary"
+          ],
+          "value": {
+            "value": null,
+            "status": "pending",
+            "evidence_refs": [],
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "protected field without value",
+      "base": "automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "affected_persons"
+          ],
+          "value": {
+            "value": null,
+            "status": "withheld",
+            "evidence_refs": [],
+            "note": "Omitido para proteger la identidad en el ejemplo ficticio."
+          }
+        }
+      ]
+    },
+    {
+      "name": "publisher length counts Unicode scalar values",
+      "base": "automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publisher"
+          ],
+          "value": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+        }
+      ]
+    },
+    {
+      "name": "title length counts Unicode scalar values",
+      "base": "automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_title"
+          ],
+          "value": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+        }
+      ]
+    },
+    {
+      "name": "reported summary length counts Unicode scalar values",
+      "base": "automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "value"
+          ],
+          "value": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+        }
+      ]
+    },
+    {
+      "name": "ten supplementary characters are not twenty review characters",
+      "base": "human",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "review_notes"
+          ],
+          "value": "😀😀😀😀😀😀😀😀😀😀"
+        }
+      ]
+    },
+    {
+      "name": "publisher minimum is measured after normalization",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publisher"
+          ],
+          "value": "  ab  "
+        }
+      ]
+    },
+    {
+      "name": "unpaired Unicode surrogate is not publishable text",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "fields",
+            "summary",
+            "value"
+          ],
+          "value": "\ud800"
+        }
+      ]
+    },
+    {
+      "name": "exact source authority rejects default HTTPS port",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://www.hrw.org:443/report"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "candidate_id"
+          ],
+          "value": "94c88c87c968bbca1945768637bbdc68d3bd62b408b8e7d6d5558db594af9681"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "evidence",
+            0,
+            "url"
+          ],
+          "value": "https://www.hrw.org:443/report"
+        }
+      ]
+    },
+    {
+      "name": "exact source authority rejects empty userinfo",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://@www.hrw.org/report"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "candidate_id"
+          ],
+          "value": "28db44b599bb14eedda9fb0c06b5e0a52cbf0a52dc406b6b8a509c2c3f3983e6"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "evidence",
+            0,
+            "url"
+          ],
+          "value": "https://@www.hrw.org/report"
+        }
+      ]
+    },
+    {
+      "name": "exact source authority rejects embedded source control",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://www.hrw.org/re\nport"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "candidate_id"
+          ],
+          "value": "e533e750a01f0f41cc35880558d3d5b9c7cc5ed464f438f54c1d58db2df0ab49"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "evidence",
+            0,
+            "url"
+          ],
+          "value": "https://www.hrw.org/re\nport"
+        }
+      ]
+    },
+    {
+      "name": "semantic JSON integer version 1.0",
+      "base": "human",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "name": "semantic JSON integer version 2.0",
+      "base": "automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": 2.0
+        }
+      ]
+    },
+    {
+      "name": "wire source URL cannot be trimmed into an approved identity",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": " https://www.diariocolatino.com/contract-fixture/ "
+        }
+      ]
+    }
+  ]
+}

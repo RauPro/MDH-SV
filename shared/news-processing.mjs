@@ -1,4 +1,5 @@
 import { newsDossierFor, safeSource } from './news-dossier.mjs';
+import { sourceIdentityMatches } from './news-identity.mjs';
 
 // This projection describes processing only. It never contains draft fields,
 // model output, private review notes or a claim of human approval.
@@ -12,8 +13,8 @@ const fail = () => { throw new Error('Estado público de procesamiento de notici
 
 export function validateNewsProcessingEntry(value) {
   if (!exact(value, ['candidate_id', 'source_url', 'publisher', 'published_date', 'selection_content_sha256', 'status'])
-    || !sha(value.candidate_id) || !safeSource(value.source_url) || value.source_url.length > 4096 || new URL(value.source_url).pathname.length < 5
-    || typeof value.publisher !== 'string' || value.publisher.trim().length < 3 || value.publisher.length > 200
+    || !sourceIdentityMatches(value.candidate_id, value.source_url) || !safeSource(value.source_url) || value.source_url.length > 4096 || new URL(value.source_url).pathname.length < 5
+    || typeof value.publisher !== 'string' || [...value.publisher.trim()].length < 3 || [...value.publisher].length > 200
     || !date(value.published_date)
     || (value.selection_content_sha256 !== null && !sha(value.selection_content_sha256))
     || !NEWS_PROCESSING_STATUSES.includes(value.status)

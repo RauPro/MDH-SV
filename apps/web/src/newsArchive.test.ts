@@ -1,3 +1,4 @@
+import { sourceId } from '../../../tests/source-identity-fixture.mjs';
 import { expect, it } from 'vitest';
 import fixture from './__fixtures__/newsArchive.json';
 import catalog from './__fixtures__/catalog.json';
@@ -15,6 +16,7 @@ function htmlArchiveFixture() {
   source.publisher = reference.publisher = 'El Diario de Hoy (archivo)';
   source.endpoint = reference.discovery.endpoint = 'https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml';
   reference.source_url = 'https://historico.elsalvador.com/historico/123/detenciones.html';
+  reference.id = sourceId(reference.source_url);
   reference.discovery.method = 'html_article_metadata';
   reference.discovery.source_post_id = null;
   for (const month of value.coverage.months) for (const item of month.sources) if (item.source_id === previousId) item.source_id = source.id;
@@ -24,6 +26,7 @@ it('accepts historical HTML metadata without pretending it has a WordPress id', 
   const value = htmlArchiveFixture();
   expect(parseNewsArchive(value).records).toHaveLength(3);
   value.records[0].source_url = 'https://www.elsalvador.com/h-noticias/h-nacional/detenciones/123/2024/';
+  value.records[0].id = sourceId(value.records[0].source_url);
   expect(parseNewsArchive(value).records).toHaveLength(3);
   value.records[0].source_url = 'https://evil.elsalvador.com/detenciones';
   expect(() => parseNewsArchive(value)).toThrow();

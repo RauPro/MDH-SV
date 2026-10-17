@@ -171,7 +171,8 @@ class NewsDossier(BaseModel):
 def validate_news_dossier(document, require_reviewed=False):
     """Validate and return plain JSON data; failures never echo personal values."""
     try:
-        if (not isinstance(document, dict) or type(document.get("schema_version")) is not int
+        if (not isinstance(document, dict) or type(document.get("schema_version")) not in (int, float)
+                or document.get("schema_version") != 1
                 or type(document.get("human_reviewed")) is not bool
                 or len(json.dumps(document, ensure_ascii=False).encode()) > MAX_DOCUMENT_BYTES):
             raise ValueError("Invalid document envelope")
@@ -193,8 +194,20 @@ def validate_published_news_dossier(document, *, now=None):
     Private extraction envelopes remain v1 and cannot satisfy the automatic
     publication contract by merely dropping the human-review requirement.
     """
-    if not isinstance(document, dict) or type(document.get("schema_version")) is not int:
+    if (not isinstance(document, dict) or type(document.get("schema_version")) not in (int, float)
+            or document.get("schema_version") not in (1, 2)):
         raise NewsDossierError()
+    try:
+        # Published wire identity is exact. Private model normalization must not
+        # make a padded URL/hash or a normalized URL authority publicly valid.
+        url = document["source_url"]
+        if (not isinstance(url, str) or _source_url(url) != url
+                or hashlib.sha256(url.encode()).hexdigest() != document["candidate_id"]):
+            raise ValueError()
+        for evidence in document["evidence"]:
+            Publication.primary_source(evidence["url"])
+    except (ValueError, KeyError, TypeError, AttributeError):
+        raise NewsDossierError() from None
     if document["schema_version"] == 1:
         return validate_news_dossier(document, require_reviewed=True)
     try:

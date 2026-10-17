@@ -19,9 +19,10 @@ import tempfile
 from .gemini_review import validate_envelope
 from .history import SOURCES, validate_reference
 from .news_selection import validate_selection
+from .publication import Publication
 
 HEX = re.compile(r"^[a-f0-9]{64}$")
-STAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})$")
+STAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$")
 STATUSES = frozenset({"pending", "generated", "source_unavailable", "error", "unknown"})
 ENTRY_KEYS = {"candidate_id", "source_url", "publisher", "published_date", "selection_content_sha256", "status"}
 MAX_DRAFT_BYTES = 512_000
@@ -82,7 +83,7 @@ def validate_collection(document, *, archive=None):
     """Validate the exact public allowlist, optionally against current selection."""
     try:
         if (not isinstance(document, dict) or set(document) != {"schema_version", "generated_at", "entries"}
-                or type(document["schema_version"]) is not int or document["schema_version"] != 1
+                or type(document["schema_version"]) not in (int, float) or document["schema_version"] != 1
                 or not isinstance(document["entries"], list) or len(document["entries"]) > MAX_ENTRIES):
             raise ValueError()
         _timestamp(document["generated_at"])
@@ -93,7 +94,7 @@ def validate_collection(document, *, archive=None):
                     or not isinstance(entry["candidate_id"], str) or not HEX.fullmatch(entry["candidate_id"])
                     or not isinstance(entry["source_url"], str) or not 1 <= len(entry["source_url"]) <= 4096
                     or hashlib.sha256(entry["source_url"].encode()).hexdigest() != entry["candidate_id"]
-                    or not isinstance(entry["publisher"], str) or not 3 <= len(entry["publisher"]) <= 200
+                    or not isinstance(entry["publisher"], str) or len(entry["publisher"].strip()) < 3 or len(entry["publisher"]) > 200
                     or not isinstance(entry["published_date"], str)
                     or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", entry["published_date"])
                     or date.fromisoformat(entry["published_date"]).isoformat() != entry["published_date"]
@@ -104,6 +105,7 @@ def validate_collection(document, *, archive=None):
                     or (entry["status"] == "generated" and entry["selection_content_sha256"] is None)
                     or entry["candidate_id"] in identifiers or entry["source_url"] in urls):
                 raise ValueError()
+            Publication.primary_source(entry["source_url"])
             if references is not None:
                 reference = references.get(entry["candidate_id"])
                 if (reference is None or any(entry[key] != reference[key] for key in ("source_url", "publisher", "published_date"))
