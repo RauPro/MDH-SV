@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T13:17:15.342007+00:00",
+  "generated_at": "2026-10-17T14:16:55.100225+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12471,
-      "selected": 1823,
+      "selected": 1826,
       "evaluated": 4891,
-      "relevant": 1823,
-      "excluded": 286,
-      "uncertain": 2782,
+      "relevant": 1826,
+      "excluded": 294,
+      "uncertain": 2771,
       "pending": 7580,
-      "evaluated_at": "2026-10-17T13:17:11.946730+00:00"
+      "evaluated_at": "2026-10-17T14:16:52.688464+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1823,
+    "records": 1826,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1486,
+        "records": 1489,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -737,7 +737,7 @@
           {
             "month": "2014-09",
             "status": "enumerated",
-            "records": 38,
+            "records": 41,
             "screen_version": 3,
             "posts_scanned": 1085,
             "source_total_posts": 1085,
@@ -19540,12 +19540,12 @@
         "month": "2014-09",
         "start_date": "2014-09-01",
         "end_date": "2014-09-30",
-        "records": 41,
+        "records": 44,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 38
+            "records": 41
           },
           {
             "source_id": "gatoencerrado",
@@ -93023,6 +93023,93 @@
       }
     },
     {
+      "id": "47d251c382a80382a9a4f67fcd5563d46f04ce705a4eccf08704839d678ac681",
+      "title": "El Ser ahí -Ser-el-ahí- (Dasein)",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-desaparecido-actor-norteamericano-robin-williams-que-tanto-hizo-reir-y-sacar-lagrimas-a-millones-de-personas-alrededor-del-mundo-fallecio-tragicamente-en-su-casa-de-tiburon-al-norte-de-californi/",
+      "published_date": "2014-09-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 27778,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T08:09:36.177510-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "59b39aef7da9cb30a9ef297da2119557817eba747bab9414d916b714f99473fc",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2479bb2c7f97479125987f75f5a68a9b3e0f9bffcbbcd664ea12b5073aca5380",
+      "title": "Ordenan cárcel para acusado de matar y desmembrar a empleado de alcaldía",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ordenan-carcel-para-acusado-de-matar-y-desmembrar-a-empleado-de-alcaldia/",
+      "published_date": "2014-09-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 27779,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T08:09:36.177510-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7d5621a707825681cb19078facf9cd5fa7b44c1dc391a3f8271d3a42db2ee515",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
       "id": "182ec97f8b86c9798ba788e5bd4676918a0a2ccca0a14393ea2f95d6d0d3d159",
       "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
@@ -93834,6 +93921,51 @@
             "p2",
             "p6",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e6ea7d4552db36e73616b5b42e1b6c0e0762ef3560edac31f0a9a1b07af22352",
+      "title": "Ordenan detención para familiares de diputado suplente",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ordenan-detencion-para-familiares-de-diputado-suplente-2/",
+      "published_date": "2014-09-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 26593,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T08:09:36.177510-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b2dc58faa426d8cbb144c05c6c35a881d75495658cfa60ee1f857d74da51526e",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
