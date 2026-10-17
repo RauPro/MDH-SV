@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T09:18:39.145532+00:00",
+  "generated_at": "2026-10-17T10:16:49.066979+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12317,
-      "selected": 1803,
+      "selected": 1805,
       "evaluated": 4889,
-      "relevant": 1803,
-      "excluded": 254,
-      "uncertain": 2832,
+      "relevant": 1805,
+      "excluded": 262,
+      "uncertain": 2822,
       "pending": 7428,
-      "evaluated_at": "2026-10-17T09:18:35.836481+00:00"
+      "evaluated_at": "2026-10-17T10:16:46.717141+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1803,
+    "records": 1805,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1468,
+        "records": 1469,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -713,7 +713,7 @@
           {
             "month": "2014-07",
             "status": "enumerated",
-            "records": 22,
+            "records": 23,
             "screen_version": 3,
             "posts_scanned": 1088,
             "source_total_posts": 1088,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 222,
+        "records": 223,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15344,7 +15344,7 @@
           {
             "month": "2014-07",
             "status": "partial",
-            "records": 3,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 147,
             "source_total_posts": null,
@@ -19454,12 +19454,12 @@
         "month": "2014-07",
         "start_date": "2014-07-01",
         "end_date": "2014-07-31",
-        "records": 25,
+        "records": 27,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 22
+            "records": 23
           },
           {
             "source_id": "gatoencerrado",
@@ -19489,7 +19489,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 3
+            "records": 4
           }
         ]
       },
@@ -88848,19 +88848,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T04:16:10.249593-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "bc44ab92aed7ed704af48e0cabc3f834acf39215728580261ebf3fcf56404c0b",
           "jurisdiction_paragraph_ids": [
-            "p5",
-            "p6"
+            "p5"
           ],
           "relevance_paragraph_ids": [
             "p5",
-            "p6",
-            "p7"
+            "p6"
           ]
         }
       }
@@ -88893,9 +88891,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:09:51.922072-06:00",
+        "classified_at": "2026-10-17T04:15:55.497935-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b7a691c06ed02defe03ed5d29f6906f1f91b547456b8985ffe3b3746d22f3ca7",
           "jurisdiction_paragraph_ids": [
@@ -88903,9 +88901,7 @@
           ],
           "relevance_paragraph_ids": [
             "p3",
-            "p7",
-            "p9",
-            "p17"
+            "p12"
           ]
         }
       }
@@ -94992,6 +94988,99 @@
             "p6",
             "p7",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b09cbba54d57bedfea47aa40ac7938e7c91d94b28efd22c871254c9890bd423a",
+      "title": "Capturan a ex alcalde acusado de secuestro",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-a-ex-alcalde-acusado-de-secuestro/",
+      "published_date": "2014-07-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 22328,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T04:09:28.793713-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "727f597c76af138af1da9fd5df5c554a4a05a5aa3f001dc64d436df3110c7251",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p9",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a6940278bf401eedf9a460b7d0a5786353b72e98f74e231e53e6415f66312fe5",
+      "title": "Capturan a salvadoreño por extorsionar un sacristán en Guatemala",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/130976/capturan-a-salvadoreno-por-extorsionar-un-sacristan-en-guatemala.html",
+      "published_date": "2014-07-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "guatemala",
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T17:35:16.799175+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T04:09:28.793713-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6fd52995a11df86aa565fb505a90b80e72a78eb1e16050b9b8641c8f4e2d18b0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
           ]
         }
       }
