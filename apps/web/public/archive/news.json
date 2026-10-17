@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T22:28:57.672750+00:00",
+  "generated_at": "2026-10-17T23:17:11.038660+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12775,
-      "selected": 1842,
+      "selected": 1846,
       "evaluated": 4891,
-      "relevant": 1842,
-      "excluded": 357,
-      "uncertain": 2692,
+      "relevant": 1846,
+      "excluded": 365,
+      "uncertain": 2680,
       "pending": 7884,
-      "evaluated_at": "2026-10-17T22:17:25.320116+00:00"
+      "evaluated_at": "2026-10-17T23:17:08.414468+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1842,
+    "records": 1846,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1505,
+        "records": 1509,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -761,7 +761,7 @@
           {
             "month": "2014-11",
             "status": "enumerated",
-            "records": 43,
+            "records": 47,
             "screen_version": 3,
             "posts_scanned": 985,
             "source_total_posts": 985,
@@ -19626,12 +19626,12 @@
         "month": "2014-11",
         "start_date": "2014-11-01",
         "end_date": "2014-11-30",
-        "records": 44,
+        "records": 48,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 43
+            "records": 47
           },
           {
             "source_id": "gatoencerrado",
@@ -87469,17 +87469,15 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T17:16:26.164030-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9c7887f383a0d75177d74924007d77e20adc024a9178f312a27b503c0646ec4d",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p8",
             "p10"
           ]
         }
@@ -88848,7 +88846,7 @@
     },
     {
       "id": "aa9920e3aa1d781cb483238bc97ef0ce86c4339dbe46f5a0a871e23034faac14",
-      "title": "Día internacional de la eliminación de la violencia contra la mujer",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -88972,6 +88970,96 @@
           "relevance_paragraph_ids": [
             "p2",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "61797d23ff10718103da71203b7831eb5fa7fadc92ee2c19c428a9524fe22955",
+      "title": "Promedio diario de homicidios ha disminuido en los últimos tres meses",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/promedio-diario-de-homicidios-ha-disminuido-en-los-ultimos-tres-meses/",
+      "published_date": "2014-11-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 35420,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T17:09:25.951192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7b538ab640acd006995ef6466d51af7de7c01af980078cf97da5d8f5f4793c80",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c7414c295423031856762cc895dfb933ed4e7d38bf796b2ba5c52f250ff35108",
+      "title": "Ataque deja ocho personas asesinadas en Sonsonate",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ataque-deja-ocho-personas-asesinadas-en-sonsonate/",
+      "published_date": "2014-11-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "sonsonate"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 35309,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T17:09:25.951192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7efdfc4a78da0c7ea2e1e0112d22092fa0fe174ae62961fdde163384e06c994a",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p18"
           ]
         }
       }
@@ -89249,6 +89337,53 @@
       }
     },
     {
+      "id": "8d4e9f1dbdb600933716b03c7bf41ffbe86ce33c968ac6342582cd50095aeeec",
+      "title": "Descaro periodístico",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/descaro-periodistico/",
+      "published_date": "2014-11-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 34892,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T17:09:25.951192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "31b0c3cc5911456d07d4083b46267ba7825cc7bf8499125bad8653d8b00193ab",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "id": "8435d51f186fe84021c5fb7931307f3d4a15e3bb75a4eda3cdba179172f2d7a3",
       "title": "Maestros universitarios repudian la desaparición de estudiantes de Ayotzinapa",
       "title_truncated": false,
@@ -89287,6 +89422,52 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3483520924f1d6a3c2e59364971bc3f2aead38126c92f4253ad40eb3d678b5d7",
+      "title": "Disturbios en protestas en México por 43 estudiantes desaparecidos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/disturbios-en-protestas-en-mexico-por-43-estudiantes-desaparecidos/",
+      "published_date": "2014-11-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "mexico"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 34870,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T17:09:25.951192-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "709513c7e4cab3e9df5889893001a58694fd500f48e4710588207e6cc4892ddf",
+          "jurisdiction_paragraph_ids": [
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p23"
           ]
         }
       }
