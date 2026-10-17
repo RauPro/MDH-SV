@@ -3,6 +3,7 @@ import base64
 import copy
 import hashlib
 import json
+import subprocess
 from datetime import date
 from pathlib import Path
 
@@ -134,7 +135,8 @@ def test_approved_news_import_is_idempotent_and_keeps_the_case_catalog_untouched
     archive = tmp_path / 'news.json'
     archive.write_text(json.dumps(select_archive(bibliography, manifest)))
     public = tmp_path / 'public-dossiers.json'
-    options = dict(archive=archive, destination=public, candidates=bibliography, selection=manifest)
+    options = dict(archive=archive, destination=public, candidates=bibliography, selection=manifest,
+                   exceptions={'schema_version': 1, 'decisions': []})
     assert import_approved_news(inbox, ID, source, **options)
     assert not import_approved_news(inbox, ID, source, **options)
     assert len(json.loads(source.read_text())["dossiers"]) == 1
@@ -244,7 +246,8 @@ def import_paths(tmp_path, bibliography, manifest, approved=None):
     locations = tmp_path / 'locations.json'
     locations.write_text(json.dumps({'schema_version': 3, 'generated_at': STAMP, 'locations': []}))
     return source, dict(archive=archive, destination=public, candidates=bibliography,
-                        selection=manifest, locations=locations)
+                        selection=manifest, locations=locations,
+                        exceptions={'schema_version': 1, 'decisions': []})
 
 
 def test_positive_human_approval_can_admit_a_candidate_excluded_by_ai(tmp_path):
@@ -478,3 +481,191 @@ def test_interleaved_news_import_is_detected_and_retry_preserves_both_approvals(
     assert {item['candidate_id'] for item in json.loads(source.read_text())['dossiers']} == {first['id'], second['id']}
     assert {item['candidate_id'] for item in json.loads(options['destination'].read_text())['dossiers']} == {first['id'], second['id']}
     assert not import_approved_news(first_inbox, first['id'], source, **options)
+
+
+def automatic_dossier(reference):
+    dossier = human_dossier(reference)
+    dossier['fields']['summary'] = {
+        'value': 'La fuente describe preocupaciones por el debido proceso.',
+        'status': 'reported', 'evidence_refs': [dossier['evidence'][0]['id']], 'note': None,
+    }
+    dossier.update(schema_version=2, human_reviewed=False, reviewed_by=None, reviewed_at=None,
+                   review_notes=None, automation={
+                       'policy_version': 'auto-news-v1', 'source_content_sha256': 'a' * 64,
+                       'validated_at': STAMP, 'method': 'gemini_evidence_review',
+                       'evaluator_model': 'gemini-3.5-flash-lite', 'corroboration': 'single_source',
+                   })
+    return dossier
+
+
+def write_snapshot(path, document):
+    path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + '\n')
+
+
+def mixed_import(tmp_path, *, history=False):
+    first, second = candidate_reference(), candidate_reference(2)
+    bibliography, folder = candidate_archive(tmp_path, [first, second])
+    source, options = import_paths(tmp_path, bibliography, selection_manifest([second]))
+    if history:
+        options.pop('candidates')
+        options['history_folder'] = folder
+    inbox = ApprovedInbox(human_dossier(first))
+    assert import_approved_news(inbox, first['id'], source, **options)
+    automatic = automatic_dossier(second)
+    mixed = validate_collection({'schema_version': 1, 'dossiers': [human_dossier(first), automatic]},
+                                archive=json.loads(options['archive'].read_text()), allow_automatic=True)
+    write_snapshot(options['destination'], mixed)
+    return first, second, source, options, inbox, automatic
+
+
+@pytest.mark.parametrize('history', [False, True])
+def test_healthy_mixed_publication_retry_preserves_automatic_dossier_bytes(tmp_path, history):
+    first, _, source, options, inbox, _ = mixed_import(tmp_path, history=history)
+    snapshots = {path: path.read_bytes() for path in (source, *[options[key] for key in ('archive', 'destination', 'locations')])}
+    assert not import_approved_news(inbox, first['id'], source, **options)
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items())
+
+
+@pytest.mark.parametrize('relevant', [False, True])
+def test_every_human_decision_supersedes_a_previously_public_automatic_dossier(tmp_path, relevant):
+    first, second, source, options, _, _ = mixed_import(tmp_path)
+    decision = human_dossier(second, relevant=relevant)
+    assert import_approved_news(ApprovedInbox(decision), second['id'], source, **options)
+    public = json.loads(options['destination'].read_text())['dossiers']
+    assert all(item['schema_version'] == 1 and item['human_reviewed'] for item in public)
+    assert {item['candidate_id'] for item in public} == ({first['id'], second['id']} if relevant else {first['id']})
+    assert not import_approved_news(ApprovedInbox(decision), second['id'], source, **options)
+
+
+@pytest.mark.parametrize('invalid', ['stale_hash', 'private_extra', 'stale_human'])
+def test_retry_never_preserves_stale_human_private_or_unbound_automatic_output(tmp_path, invalid):
+    first, second, source, options, inbox, automatic = mixed_import(tmp_path)
+    if invalid == 'stale_hash':
+        automatic['automation']['source_content_sha256'] = 'b' * 64
+    elif invalid == 'private_extra':
+        automatic['private_quote'] = 'PRIVATE_SENTINEL'
+    else:
+        automatic = human_dossier(second)
+    write_snapshot(options['destination'], {'schema_version': 1, 'dossiers': [human_dossier(first), automatic]})
+    assert import_approved_news(inbox, first['id'], source, **options)
+    public = json.loads(options['destination'].read_text())['dossiers']
+    assert public == [human_dossier(first)]
+    assert 'PRIVATE_SENTINEL' not in options['destination'].read_text()
+
+
+def test_retained_auto_keeps_protected_title_and_removes_withheld_locations(tmp_path):
+    from mdh_pipeline.automatic_news import PROTECTED_TITLE
+    first, second, source, options, inbox, automatic = mixed_import(tmp_path, history=True)
+    automatic['source_title'] = PROTECTED_TITLE
+    automatic['fields']['department'].update(status='withheld', note='Se omite el lugar por protección de las personas.')
+    write_snapshot(options['destination'], validate_collection(
+        {'schema_version': 1, 'dossiers': [human_dossier(first), automatic]}, allow_automatic=True))
+    selected = json.loads(options['archive'].read_text())
+    next(record for record in selected['records'] if record['id'] == second['id']).update(
+        title=PROTECTED_TITLE, title_truncated=False)
+    write_snapshot(options['archive'], selected)
+    write_snapshot(options['locations'], {'schema_version': 3, 'generated_at': STAMP,
+                                         'locations': [automatic_location(second)]})
+    assert import_approved_news(inbox, first['id'], source, **options)
+    after = json.loads(options['archive'].read_text())
+    assert after == selected
+    assert json.loads(options['locations'].read_text())['locations'] == []
+    assert automatic in json.loads(options['destination'].read_text())['dossiers']
+    snapshots = {path: path.read_bytes() for path in (source, *[options[key] for key in ('archive', 'destination', 'locations')])}
+    assert not import_approved_news(inbox, first['id'], source, **options)
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items())
+
+
+def withdrawal(identifier):
+    return {'candidate_id': identifier, 'withdrawn': True, 'request_generation': 0,
+            'issue_number': 7, 'decided_by': 'editor', 'decided_at': STAMP}
+
+
+def test_retry_preserves_withdrawal_of_both_human_and_automatic_publications(tmp_path):
+    first, second, source, options, inbox, _ = mixed_import(tmp_path)
+    exception_path = tmp_path / 'exceptions.json'
+    write_snapshot(exception_path, {'schema_version': 1,
+                                    'decisions': [withdrawal(first['id']), withdrawal(second['id'])]})
+    options['exceptions'] = exception_path
+    authority = source.read_bytes()
+    assert import_approved_news(inbox, first['id'], source, **options)
+    assert source.read_bytes() == authority
+    assert json.loads(options['archive'].read_text())['records'] == []
+    assert json.loads(options['destination'].read_text())['dossiers'] == []
+    assert not import_approved_news(inbox, first['id'], source, **options)
+
+
+@pytest.mark.parametrize('invalid', ['malformed', 'output_alias', 'duplicate_keys'])
+def test_invalid_or_output_aliased_exceptions_never_change_outputs(tmp_path, invalid):
+    first, _, source, options, inbox, _ = mixed_import(tmp_path)
+    if invalid == 'malformed':
+        options['exceptions'] = {'schema_version': 1, 'decisions': 'PRIVATE_SENTINEL'}
+    elif invalid == 'duplicate_keys':
+        exception_path = tmp_path / 'exceptions.json'
+        exception_path.write_text('{"schema_version":1,"decisions":'
+                                  + json.dumps([withdrawal(first['id'])])
+                                  + ',"decisions":[]}')
+        options['exceptions'] = exception_path
+    else:
+        write_snapshot(options['destination'], {'schema_version': 1, 'decisions': []})
+        options['exceptions'] = options['destination']
+    snapshots = {path: path.read_bytes() for path in (source, *[options[key] for key in ('archive', 'destination', 'locations')])}
+    with pytest.raises(ValueError):
+        import_approved_news(inbox, first['id'], source, **options)
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items())
+
+
+def test_concurrent_withdrawal_change_blocks_stale_retry_then_converges(tmp_path, monkeypatch):
+    from mdh_pipeline import review_import
+    first, _, source, options, inbox, _ = mixed_import(tmp_path)
+    exception_path = tmp_path / 'exceptions.json'
+    write_snapshot(exception_path, {'schema_version': 1, 'decisions': []})
+    options['exceptions'] = exception_path
+    snapshots = {path: path.read_bytes() for path in (source, *[options[key] for key in ('archive', 'destination', 'locations')])}
+    writer = review_import._write_news_outputs
+
+    def concurrent_decision(outputs, **kwargs):
+        write_snapshot(exception_path, {'schema_version': 1, 'decisions': [withdrawal(first['id'])]})
+        return writer(outputs, **kwargs)
+
+    monkeypatch.setattr(review_import, '_write_news_outputs', concurrent_decision)
+    with pytest.raises(ValueError, match='changed during preparation'):
+        import_approved_news(inbox, first['id'], source, **options)
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items())
+    monkeypatch.setattr(review_import, '_write_news_outputs', writer)
+    assert import_approved_news(inbox, first['id'], source, **options)
+    assert first['id'] not in {record['id'] for record in json.loads(options['archive'].read_text())['records']}
+
+
+@pytest.mark.parametrize('broken', ['missing', 'corrupt'])
+def test_overlay_repair_keeps_bound_archive_title_mask_until_final_js_reconciliation(tmp_path, broken):
+    from mdh_pipeline.automatic_news import PROTECTED_TITLE
+    first, second, source, options, inbox, automatic = mixed_import(tmp_path, history=True)
+    automatic['source_title'] = PROTECTED_TITLE
+    selected = json.loads(options['archive'].read_text())
+    next(record for record in selected['records'] if record['id'] == second['id']).update(
+        title=PROTECTED_TITLE, title_truncated=False)
+    write_snapshot(options['archive'], selected)
+    if broken == 'missing':
+        options['destination'].unlink()
+    else:
+        options['destination'].write_text('{"interrupted":')
+    assert import_approved_news(inbox, first['id'], source, **options)
+    assert json.loads(options['archive'].read_text()) == selected
+    assert json.loads(options['destination'].read_text())['dossiers'] == [human_dossier(first)]
+    inputs = {'archive': selected, 'automated': {'schema_version': 1, 'dossiers': [automatic]},
+              'reviewed': json.loads(source.read_text()),
+              'locations': json.loads(options['locations'].read_text()), 'exceptions': options['exceptions']}
+    code = """
+      import { readFileSync } from 'node:fs';
+      import { reconcileNewsPublication } from './apps/web/scripts/sync-news-publication.mjs';
+      const result = reconcileNewsPublication(JSON.parse(readFileSync(0, 'utf8')));
+      process.stdout.write(JSON.stringify(result));
+    """
+    result = subprocess.run(['node', '--input-type=module', '-e', code],
+                            cwd=Path(__file__).resolve().parents[1], input=json.dumps(inputs),
+                            text=True, capture_output=True, check=True)
+    reconciled = json.loads(result.stdout)
+    assert reconciled['archive'] == selected
+    assert len(reconciled['published']['dossiers']) == 2
+    assert automatic in reconciled['published']['dossiers']

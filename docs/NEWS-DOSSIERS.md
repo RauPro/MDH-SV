@@ -186,6 +186,14 @@ malformada sigue siendo un error; la copia local no permite omitir esa comprobac
 En la API Python, `True` indica incorporación o reparación y `False` indica que
 no hubo cambios.
 
+La reparación conserva las fichas automáticas del snapshot anterior sólo cuando
+siguen siendo válidas, están seleccionadas y ninguna decisión humana las sustituye.
+Respeta `data/selection/news_exceptions.json`, los títulos protegidos y las
+ubicaciones omitidas. No convierte el snapshot público en una fuente de nuevas
+aprobaciones ni consulta borradores. Si falta o está malformado, reconstruye la
+parte humana; la sincronización JS final recupera las automáticas desde su fuente
+validada.
+
 Los archivos se preparan antes de reemplazarlos; cada reemplazo es atómico en su
 sistema de archivos, pero el conjunto no es una transacción atómica. Una
 interrupción puede dejar proyecciones de distintas versiones: no publique ese
