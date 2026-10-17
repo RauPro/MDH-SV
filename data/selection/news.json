@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T21:17:22.992827+00:00",
+  "generated_at": "2026-10-17T22:17:25.320116+00:00",
   "assessment_counts": {
     "candidates": 12775,
     "evaluated": 4891,
-    "relevant": 1840,
-    "excluded": 349,
-    "uncertain": 2702,
+    "relevant": 1842,
+    "excluded": 357,
+    "uncertain": 2692,
     "pending": 7884
   },
   "selections": [
@@ -13375,9 +13375,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T16:16:45.039097-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "866dd84bf4cb7a8158acdfe6a7a50e541c9d1acb94433bb42cdfb3247283939e",
           "jurisdiction_paragraph_ids": [
@@ -13385,8 +13385,6 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p10",
             "p17"
           ]
         }
@@ -18874,18 +18872,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T16:16:29.056141-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "39a762b7d065f71fcde18db2853c2d2dfe1528f8db70095db25ab7515c389463",
           "jurisdiction_paragraph_ids": [
             "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p7"
+            "p2"
           ]
         }
       }
@@ -23325,6 +23321,39 @@
           ],
           "relevance_paragraph_ids": [
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7243bb9f9a84f7a866e94a09a388f192a1e7e770a51d1ab4e71eb9e4641edcaa",
+      "source_url": "https://www.diariocolatino.com/alza-de-homicidios-en-la-zona-oriental-es-por-rina-entre-pandillas-y-drogas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T16:09:51.351501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7912b2416cad348f0640486977e195da94ed35628ced55d0b7b2dec23ff9487a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p10",
+            "p11"
           ]
         }
       }
@@ -47568,6 +47597,35 @@
       }
     },
     {
+      "candidate_id": "eb12b99139584b3409e59ca9edfe2305d9f6967ec612b0c50086bb5efcdb99a4",
+      "source_url": "https://www.diariocolatino.com/mas-de-600-extranjeros-estan-en-prision-en-guatemala/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T16:09:51.351501-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "bd8c6768d6b4ec35ec79a29cf4863000618534a910e5a05124244658e334a200",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "eb39042567541630958aa1aee119e563ac677ca34f9c8de553fb7c7d0301d0b9",
       "source_url": "https://historico.elsalvador.com/historico/444977/pareja-de-doctora-asesinada-enfrenta-audiencia-por-feminicidio.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -48014,21 +48072,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T16:14:45.232153-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "39d9e91cd0e14bb7b51297663e15e2b66b254bf0a1a45106185a795ab6820bc8",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p6",
-            "p7"
+            "p9"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p8",
-            "p9",
-            "p10"
+            "p7"
           ]
         }
       }
