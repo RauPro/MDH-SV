@@ -24,16 +24,65 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 22,
-      "pages_fetched": 22,
+      "posts_scanned": 25,
+      "pages_fetched": 25,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-17T11:09:02.903022+00:00",
+      "last_attempt_at": "2026-10-17T20:55:16.734327+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "6ee20465b0441317b08c1e2dac45fedeb58cf83f616d1c07e36273b2e0e04e93",
+      "title": "Un hombre que intentó asesinar a su expareja es condenado a 35 años de prisión",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/un-hombre-que-intento-asesinar-a-su-expareja-es-condenado-a-35-anos-de-prision",
+      "published_date": "2026-10-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-17T20:55:16.734327+00:00"
+      }
+    },
+    {
+      "id": "4f2530ba1424316a007ea0adb6df47d945b2de1be83f0c8b595aad84d9068fa2",
+      "title": "Presidente del Congreso hondureño encabeza delegación que visitó el Cecot y busca replicar medidas",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/politica/presidente-del-congreso-hondureno-encabeza-delegacion-que-visito-el-cecot-y-busca-replicar-medidas",
+      "published_date": "2026-10-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "cecot"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-17T20:55:16.734327+00:00"
+      }
+    },
     {
       "id": "0acd4da34d1af15d0b20555646c1602b97840960f7c255c9e02e663d0785bfc0",
       "title": "Bukele aclara que beneficios carcelarios sería solo para unos 5,000 colaboradores de pandillas",
@@ -57,6 +106,30 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-10-17T11:09:02.903022+00:00"
+      }
+    },
+    {
+      "id": "04c03f9c68907a64be9e2dfd0df57cc8d15fb4f348474b1bb686609f8b058ade",
+      "title": "Pandillero de la MS-13 es condenado a 642 años de cárcel por 18 homicidios",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/pandillero-de-la-ms-13-es-condenado-a-642-anos-de-carcel-por-18-homicidios",
+      "published_date": "2026-10-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-17T20:55:16.734327+00:00"
       }
     },
     {
@@ -617,15 +690,15 @@
   ],
   "collection": {
     "method": "html_archive",
-    "phase": "partial",
+    "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-17T16:31:51.185318+00:00",
+    "last_attempt_at": "2026-10-17T20:55:16.734327+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
     ],
-    "index_cursor": 1,
+    "index_cursor": 2,
     "articles": [
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales",
       "https://diario.elmundo.sv/nacionales/mas-del-30-de-salvadorenos-aprueba-tortura-y-ejecuciones-extrajudiciales",
@@ -651,9 +724,11 @@
       "https://diario.elmundo.sv/nacionales/pnc-captura-a-dos-mujeres-senaladas-de-transportar-cocaina-en-carretera-a-comalapa",
       "https://diario.elmundo.sv/politica/presidenta-de-costa-rica-visita-la-carcel-simbolo-de-la-lucha-antipandillas-en-el-salvador",
       "https://diario.elmundo.sv/nacionales/bukele-aclara-que-beneficios-carcelarios-seria-solo-para-unos-5000-colaboradores-de-pandillas",
+      "https://diario.elmundo.sv/nacionales/un-hombre-que-intento-asesinar-a-su-expareja-es-condenado-a-35-anos-de-prision",
+      "https://diario.elmundo.sv/politica/presidente-del-congreso-hondureno-encabeza-delegacion-que-visito-el-cecot-y-busca-replicar-medidas",
       "https://diario.elmundo.sv/nacionales/pandillero-de-la-ms-13-es-condenado-a-642-anos-de-carcel-por-18-homicidios"
     ],
-    "article_cursor": 24,
+    "article_cursor": 27,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -798,6 +873,24 @@
         "published_date": "2026-10-17",
         "last_attempt_at": "2026-10-17T11:09:02.903022+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/un-hombre-que-intento-asesinar-a-su-expareja-es-condenado-a-35-anos-de-prision": {
+        "status": "selected",
+        "published_date": "2026-10-17",
+        "last_attempt_at": "2026-10-17T20:55:16.734327+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/politica/presidente-del-congreso-hondureno-encabeza-delegacion-que-visito-el-cecot-y-busca-replicar-medidas": {
+        "status": "selected",
+        "published_date": "2026-10-17",
+        "last_attempt_at": "2026-10-17T20:55:16.734327+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/pandillero-de-la-ms-13-es-condenado-a-642-anos-de-carcel-por-18-homicidios": {
+        "status": "selected",
+        "published_date": "2026-10-17",
+        "last_attempt_at": "2026-10-17T20:55:16.734327+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -806,19 +899,19 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
+        "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-17T16:31:51.185318+00:00"
+        "article_urls_selected": 4,
+        "last_attempt_at": "2026-10-17T20:55:16.734327+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
+        "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-17T15:54:39.859230+00:00"
+        "article_urls_selected": 4,
+        "last_attempt_at": "2026-10-17T20:55:16.734327+00:00"
       }
     },
     "index_screen_version": 3
