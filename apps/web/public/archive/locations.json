@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-17T07:36:06.099081+00:00",
+  "generated_at": "2026-10-17T11:00:29.664232+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1637,6 +1637,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "327e82de1c3198a5dc961bbfe7de1d6e19a74a482e7bb8ae5d8fa2aadb940af4",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-hijo-de-militar-retirado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-23",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-16T20:12:02.212643-06:00",
+      "source_checked_at": "2026-10-17T11:00:25.496195+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "8505c47314ed3b118597dd7ba6acf4ab724da26d07ddce517b38947fbc87fec8"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
     },
     {
@@ -5133,6 +5156,23 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
+      "candidate_id": "acaaed8a54e292c16704a4d6437a33d01640b6361764566e2a0adb7242986213",
+      "source_url": "https://www.diariocolatino.com/el-ministro-de-justicia-y-seguridad-ricardo-perdomo-se-reunio-con-diferentes-actores-de-la-sociedad-civil-en-un-intento-de-impulsar-un-nuevo-proceso-de-pacificacion-como-una-soluc/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-24",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-17T11:00:26.526273+00:00",
+      "source_checked_at": "2026-10-17T11:00:26.526273+00:00",
+      "evidence": {
+        "paragraph_id": "p18",
+        "content_sha256": "4016715e8b7a9aab1b7efe75226393cd6403717915de83411c6998641033408c"
       }
     },
     {
