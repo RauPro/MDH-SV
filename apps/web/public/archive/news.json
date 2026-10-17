@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T12:22:49.127314+00:00",
+  "generated_at": "2026-10-17T13:17:15.342007+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12471,
-      "selected": 1817,
+      "selected": 1823,
       "evaluated": 4891,
-      "relevant": 1817,
-      "excluded": 278,
-      "uncertain": 2796,
+      "relevant": 1823,
+      "excluded": 286,
+      "uncertain": 2782,
       "pending": 7580,
-      "evaluated_at": "2026-10-17T12:22:45.766997+00:00"
+      "evaluated_at": "2026-10-17T13:17:11.946730+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1817,
+    "records": 1823,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1480,
+        "records": 1486,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -725,7 +725,7 @@
           {
             "month": "2014-08",
             "status": "enumerated",
-            "records": 25,
+            "records": 29,
             "screen_version": 3,
             "posts_scanned": 996,
             "source_total_posts": 996,
@@ -737,7 +737,7 @@
           {
             "month": "2014-09",
             "status": "enumerated",
-            "records": 36,
+            "records": 38,
             "screen_version": 3,
             "posts_scanned": 1085,
             "source_total_posts": 1085,
@@ -19497,12 +19497,12 @@
         "month": "2014-08",
         "start_date": "2014-08-01",
         "end_date": "2014-08-31",
-        "records": 27,
+        "records": 31,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 25
+            "records": 29
           },
           {
             "source_id": "gatoencerrado",
@@ -19540,12 +19540,12 @@
         "month": "2014-09",
         "start_date": "2014-09-01",
         "end_date": "2014-09-30",
-        "records": 39,
+        "records": 41,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 36
+            "records": 38
           },
           {
             "source_id": "gatoencerrado",
@@ -93839,6 +93839,98 @@
       }
     },
     {
+      "id": "63ff6678b9fda3c678e0eaef540a251db8a5a9dfc1d6fc2774f4c32893f344db",
+      "title": "Asamblea busca imponer hasta 6 años de cárcel por sobornos en deportes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asamblea-busca-imponer-hasta-6-anos-de-carcel-por-sobornos-en-deportes/",
+      "published_date": "2014-09-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 26576,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T07:09:36.998568-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5f668b730203cc2b9dfe703df7a56824deca6bf6c09297105f7d296fe8f0a856",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9170cbd60ce51fbc82fa74b4559ad2d3acba099fac8d5d5c6b37b1744b9e3024",
+      "title": "Ordenan detención para familiares de diputado suplente",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ordenan-detencion-para-familiares-de-diputado-suplente/",
+      "published_date": "2014-09-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 26456,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T07:09:36.998568-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d1c7609019ac8ea74a1c1b38771230371b06189d772dd08ff8d6d76695f625ba",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "id": "6fb75e7435ff3bc3d777c89d60244794624d6b5d25cc73863c3a5c202cd2b988",
       "title": "Familiares y feligreses recuerdan a los desaparecidos forzados durante el conflicto",
       "title_truncated": false,
@@ -93883,6 +93975,90 @@
             "p5",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b61db03778398df3ff5e06b2c5e2c391e8c926c9a96e20863f43dc5d5667f2c7",
+      "title": "Ex jugadores podrían ser condenados a ocho años de cárcel",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ex-jugadores-podrian-ser-condenados-a-ocho-anos-de-carcel/",
+      "published_date": "2014-08-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 26367,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T07:09:36.998568-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e17ca3fa8c9a62236b2b86ba830bf1bbc4b29615f72cddfbaff219b233a0e67b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bb271387931f0878f4514e640202bc3c9b24ba119220b110000c5dcec7b5d182",
+      "title": "Un años después, Fiscalía solicita orden de captura contra 11 jugadores por amaños",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/un-anos-despues-fiscalia-solicita-orden-de-captura-contra-11-jugadores-por-amanos/",
+      "published_date": "2014-08-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 26324,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T07:09:36.998568-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a1817cf09081fe5807cb92e6483075f1b4db72ef2959a89aa5045a734543f51b",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
@@ -93972,6 +94148,52 @@
           "relevance_paragraph_ids": [
             "p2",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0524c5483485bc395693ce4c103e9d147be9e3d4f37aa4f3e3a47019314c3071",
+      "title": "Otra vez diputados en líos legales por asesinato y lavado de dinero",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/otra-vez-diputados-en-lios-legales-por-asesinato-y-lavado-de-dinero/",
+      "published_date": "2014-08-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 26352,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T07:09:36.998568-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c97c2d77b9ab4cdf1d8f419ddbe36452016d5706c5ad67a303b4eae2b42fe8d3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p16"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p8",
+            "p16"
           ]
         }
       }
@@ -94159,6 +94381,52 @@
           "relevance_paragraph_ids": [
             "p2",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2347637f2670d0aec01143abd722e36fc155dd3df09b1be200f322d40ed34d66",
+      "title": "Capturan a esposa e hijo de diputado suplente",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-a-esposa-e-hijo-de-diputado-suplente/",
+      "published_date": "2014-08-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 26096,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T07:09:36.998568-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1aae9c5f735886f7a2387f2a238a8db2619d65c1010779f90399b5fc8379fac3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
           ]
         }
       }
