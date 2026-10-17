@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T07:19:24.526437+00:00",
+  "generated_at": "2026-10-17T08:19:06.528971+00:00",
   "assessment_counts": {
     "candidates": 12317,
     "evaluated": 4889,
-    "relevant": 1800,
-    "excluded": 246,
-    "uncertain": 2843,
+    "relevant": 1803,
+    "excluded": 254,
+    "uncertain": 2832,
     "pending": 7428
   },
   "selections": [
@@ -1735,6 +1735,34 @@
             "p3",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "08d5e23ad701f128c76e8e9da8ae99d86f2c37670d72904cdd42e80e87a3c3d9",
+      "source_url": "https://historico.elsalvador.com/historico/132153/roberto-zucco-la-historia-de-un-asesino.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-07-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T02:13:23.524686-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e3d2a9d252b69f25698e7b6183707e08d12401b5f8c8418f42c024302e27b006",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7"
           ]
         }
       }
@@ -8290,6 +8318,34 @@
             "p4",
             "p16",
             "p17"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2c1f4e32ad4fab741e04f14033047939feb428d7f96533046a8a6fce8ad2d7d5",
+      "source_url": "https://historico.elsalvador.com/historico/128582/dan-prision-preventiva-a-salvadoreno-por-narco.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-06-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T02:13:23.524686-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c56d9e217a90050fdbce2873aae48104e28a9709e707f4c2c4a7540598c2ab8a",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
           ]
         }
       }
@@ -29849,6 +29905,37 @@
           "relevance_paragraph_ids": [
             "p3",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "93f88ea3c02591dbd0c1787b2d24eee3dccff75da7d556087b4a5466faca9f9e",
+      "source_url": "https://www.diariocolatino.com/medios-hondurenos-informan-de-asesinato-de-natividad-luna/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T02:13:23.524686-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "65cf14a2d1a14a2357056d573a564a9f600d72657d1267655ccf2b76b92fc28e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10",
+            "p11"
           ]
         }
       }
