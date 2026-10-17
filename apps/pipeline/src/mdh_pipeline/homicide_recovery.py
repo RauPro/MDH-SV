@@ -292,7 +292,10 @@ def validate_recovery_report(report, candidates, *, sources=SOURCES):
         source = source_map.get(reference.get("source_id"))
         if source is None or not reference.get("published_date", "").startswith(f"{report['year']}-"):
             raise RecoveryError("invalid_candidate_year_or_source")
-        validate_reference(reference, source)
+        try:
+            validate_reference(reference, source)
+        except ValueError:
+            raise RecoveryError("invalid_candidate_reference") from None
         retrieved = datetime.fromisoformat(reference["discovery"]["retrieved_at"])
         if retrieved.tzinfo is None or retrieved > generated:
             raise RecoveryError("invalid_candidate_timestamp")
