@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T10:16:46.717141+00:00",
+  "generated_at": "2026-10-17T11:17:54.467838+00:00",
   "assessment_counts": {
-    "candidates": 12317,
-    "evaluated": 4889,
-    "relevant": 1805,
-    "excluded": 262,
-    "uncertain": 2822,
-    "pending": 7428
+    "candidates": 12471,
+    "evaluated": 4890,
+    "relevant": 1813,
+    "excluded": 270,
+    "uncertain": 2807,
+    "pending": 7581
   },
   "selections": [
     {
@@ -1735,6 +1735,43 @@
             "p3",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "08c7c2a1e9a61e217152bf6f91041997c20f2b36e39ff5ee329519cb10c9290c",
+      "source_url": "https://www.diariocolatino.com/pnc-y-fgr-informan-de-homicidios-en-ultimas-horas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "245a13a6c546681cecd549828f931ac5a1eb63f77738eb676984ca91394e5260",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p9",
+            "p10"
           ]
         }
       }
@@ -11871,6 +11908,40 @@
       }
     },
     {
+      "candidate_id": "3c9413b5598131223bb9db9fe9c79fdda37ffec0bb18268febc7e45d7d932e6f",
+      "source_url": "https://www.diariocolatino.com/el-padre-antonio-entre-el-centenar-de-capturados-en-las-ultimas-horas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b7ad0f7bcd6cf79fb3615407714f2cea1fffbcefae781c07e08a7cb3e0085e34",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p14",
+            "p16",
+            "p18"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "3cd4ad6c35fc43233ed2859550027c8aeebdaf945b205beb138514d7c5db779e",
       "source_url": "https://www.diariocolatino.com/derechos-humanos-son-altamente-violentados-en-centroamerica/",
       "publisher": "Diario Co Latino",
@@ -14348,6 +14419,35 @@
             "p10",
             "p16",
             "p22"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4ae9329d1b6fac376d1f7215e9199250e3e8ca7d47236a7b3052842e157fdf74",
+      "source_url": "https://www.diariocolatino.com/capturan-a-padre-antonio-por-supuesto-cometimiento-de-ilicitos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "733d9eca325c0da265e6b28c3c23fa87910cd2361c88bae87545ca5f9491c640",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -16947,6 +17047,32 @@
             "p2",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "598f33144c59f672e23cb527d2fd977d9c288040193505e0a65e9d8ab31746e3",
+      "source_url": "https://www.diariocolatino.com/organizaciones-nacionales-e-internacionales-exigen-liberar-a-detenidos-de-la-floresta/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:12:13.185655-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f7ceafb3a0be008a515f7d78a0ef36b4f07bf8e85f201bfac22c8a182088e40b",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -20112,6 +20238,35 @@
             "p2",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "66f07ddbb737b65e76b57fc21e04a0a620e05577f8a79c42f8dec2f1297f4a1f",
+      "source_url": "https://www.diariocolatino.com/fotoperiodista-de-diario-co-latino-recibe-reconocimiento/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b0b0fdcbb56b249530ec813d77dddf4b9ea689f1d0a01dc8165defdea9d90e62",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
           ]
         }
       }
@@ -27726,6 +27881,31 @@
       }
     },
     {
+      "candidate_id": "8920ef3d0efd1c374672a8645d56a33c3ddf1a43f89b040d6f15b0f694370642",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-magistrado-de-camara-segundo-de-lo-penal-junto-a-la-esposa/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c4f48a02de1bb22c9c47b5a77a4a6c6f393a788ddd77e01a63a93fcb8d9990ff",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "8937e69719731744a1a2977094a3ea6c8fd96500fffa36b798063f05f9116a79",
       "source_url": "https://www.diariocolatino.com/asamblea-legislativa-frente-al-reto-historico-prohibir-la-mineria-pais/",
       "publisher": "Diario Co Latino",
@@ -28669,6 +28849,37 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8def0aa3a252caddaf3d42c7b39d5936d28f95b2c970fd6e75128cd222f14277",
+      "source_url": "https://www.diariocolatino.com/vicepresidente-insto-a-no-adelantar-juicio-en-caso-de-captura-de-religioso/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "612c42bf60fd0cb9d780e3295b051225fffd0cc2922a7386aad726c7cedd3fd4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p9",
+            "p10"
           ]
         }
       }
@@ -49454,6 +49665,31 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f97b7e7cbcda7e066cc54db5ff114722c8d9164289ca90915f391f0101cff6a0",
+      "source_url": "https://www.diariocolatino.com/capturan-a-presunto-dueno-de-droga-incautada/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cd15081b664265b48e47482d3a1379a75129fd384648294335a18a1a9ffd3326",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
