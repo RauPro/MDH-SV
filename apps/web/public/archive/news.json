@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T11:09:23.817704+00:00",
+  "generated_at": "2026-10-17T11:17:56.089770+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12471,
-      "selected": 1805,
-      "evaluated": 4889,
-      "relevant": 1805,
-      "excluded": 262,
-      "uncertain": 2822,
-      "pending": 7582,
-      "evaluated_at": "2026-10-17T10:16:46.717141+00:00"
+      "selected": 1813,
+      "evaluated": 4890,
+      "relevant": 1813,
+      "excluded": 270,
+      "uncertain": 2807,
+      "pending": 7581,
+      "evaluated_at": "2026-10-17T11:17:54.467838+00:00"
     }
   },
   "paper": {
@@ -51,16 +51,16 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1805,
+    "records": 1813,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1469,
+        "records": 1477,
         "first_published_date": "2014-01-02",
-        "last_published_date": "2026-10-16",
+        "last_published_date": "2026-10-17",
         "months": [
           {
             "month": "2010-01",
@@ -713,7 +713,7 @@
           {
             "month": "2014-07",
             "status": "enumerated",
-            "records": 23,
+            "records": 26,
             "screen_version": 3,
             "posts_scanned": 1088,
             "source_total_posts": 1088,
@@ -725,7 +725,7 @@
           {
             "month": "2014-08",
             "status": "enumerated",
-            "records": 19,
+            "records": 23,
             "screen_version": 3,
             "posts_scanned": 996,
             "source_total_posts": 996,
@@ -2477,7 +2477,7 @@
           {
             "month": "2026-10",
             "status": "enumerated",
-            "records": 7,
+            "records": 8,
             "screen_version": 3,
             "posts_scanned": 195,
             "source_total_posts": 195,
@@ -19454,12 +19454,12 @@
         "month": "2014-07",
         "start_date": "2014-07-01",
         "end_date": "2014-07-31",
-        "records": 27,
+        "records": 30,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 23
+            "records": 26
           },
           {
             "source_id": "gatoencerrado",
@@ -19497,12 +19497,12 @@
         "month": "2014-08",
         "start_date": "2014-08-01",
         "end_date": "2014-08-31",
-        "records": 20,
+        "records": 24,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 19
+            "records": 23
           },
           {
             "source_id": "gatoencerrado",
@@ -25775,12 +25775,12 @@
         "month": "2026-10",
         "start_date": "2026-10-01",
         "end_date": "2026-10-17",
-        "records": 7,
+        "records": 8,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 7
+            "records": 8
           },
           {
             "source_id": "gatoencerrado",
@@ -25817,6 +25817,49 @@
     ]
   },
   "records": [
+    {
+      "id": "598f33144c59f672e23cb527d2fd977d9c288040193505e0a65e9d8ab31746e3",
+      "title": "Organizaciones nacionales e internacionales exigen liberar a detenidos de La Floresta",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-nacionales-e-internacionales-exigen-liberar-a-detenidos-de-la-floresta/",
+      "published_date": "2026-10-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420779,
+        "retrieved_at": "2026-10-17T11:09:00.005039+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:12:13.185655-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f7ceafb3a0be008a515f7d78a0ef36b4f07bf8e85f201bfac22c8a182088e40b",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
     {
       "id": "b2d0bc759392a53426d594729fc86387a817d1c4d01f8869d9d6647ca32618da",
       "title": "MOVIR exige a Bukele liberar a los inocentes: “no queremos libertades condicionadas, queremos justicia”",
@@ -94534,6 +94577,48 @@
       }
     },
     {
+      "id": "8920ef3d0efd1c374672a8645d56a33c3ddf1a43f89b040d6f15b0f694370642",
+      "title": "Asesinan a Magistrado de cámara segundo de lo penal, junto a la esposa",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-magistrado-de-camara-segundo-de-lo-penal-junto-a-la-esposa/",
+      "published_date": "2014-08-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 24119,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c4f48a02de1bb22c9c47b5a77a4a6c6f393a788ddd77e01a63a93fcb8d9990ff",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "id": "8c18dd4a4cd52a94cd10ef0931fc5655cf194b402291ebe9448157c3a825c396",
       "title": "Cae a la mitad detención de niños indocumentados en julio",
       "title_truncated": false,
@@ -94573,6 +94658,102 @@
           "relevance_paragraph_ids": [
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "08c7c2a1e9a61e217152bf6f91041997c20f2b36e39ff5ee329519cb10c9290c",
+      "title": "PNC y FGR informan de homicidios en últimas horas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-y-fgr-informan-de-homicidios-en-ultimas-horas/",
+      "published_date": "2014-08-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 23998,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "245a13a6c546681cecd549828f931ac5a1eb63f77738eb676984ca91394e5260",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f97b7e7cbcda7e066cc54db5ff114722c8d9164289ca90915f391f0101cff6a0",
+      "title": "Capturan a presunto dueño de droga incautada",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-a-presunto-dueno-de-droga-incautada/",
+      "published_date": "2014-08-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 23547,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cd15081b664265b48e47482d3a1379a75129fd384648294335a18a1a9ffd3326",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
           ]
         }
       }
@@ -94618,6 +94799,52 @@
             "p11",
             "p12",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "66f07ddbb737b65e76b57fc21e04a0a620e05577f8a79c42f8dec2f1297f4a1f",
+      "title": "Fotoperiodista de Diario Co Latino recibe reconocimiento",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fotoperiodista-de-diario-co-latino-recibe-reconocimiento/",
+      "published_date": "2014-08-01",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 23394,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b0b0fdcbb56b249530ec813d77dddf4b9ea689f1d0a01dc8165defdea9d90e62",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
           ]
         }
       }
@@ -94756,6 +94983,151 @@
             "p3",
             "p4",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8def0aa3a252caddaf3d42c7b39d5936d28f95b2c970fd6e75128cd222f14277",
+      "title": "Vicepresidente instó a no adelantar juicio en caso de captura de religioso",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/vicepresidente-insto-a-no-adelantar-juicio-en-caso-de-captura-de-religioso/",
+      "published_date": "2014-07-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 23185,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "612c42bf60fd0cb9d780e3295b051225fffd0cc2922a7386aad726c7cedd3fd4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4ae9329d1b6fac376d1f7215e9199250e3e8ca7d47236a7b3052842e157fdf74",
+      "title": "Capturan a Padre Antonio por supuesto cometimiento de ilícitos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/capturan-a-padre-antonio-por-supuesto-cometimiento-de-ilicitos/",
+      "published_date": "2014-07-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 23088,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "733d9eca325c0da265e6b28c3c23fa87910cd2361c88bae87545ca5f9491c640",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3c9413b5598131223bb9db9fe9c79fdda37ffec0bb18268febc7e45d7d932e6f",
+      "title": "El Padre Antonio, entre el centenar de capturados en las últimas horas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-padre-antonio-entre-el-centenar-de-capturados-en-las-ultimas-horas/",
+      "published_date": "2014-07-30",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 23187,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T05:09:36.650252-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b7ad0f7bcd6cf79fb3615407714f2cea1fffbcefae781c07e08a7cb3e0085e34",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p14",
+            "p16",
+            "p18"
           ]
         }
       }

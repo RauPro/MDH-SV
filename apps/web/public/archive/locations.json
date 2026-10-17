@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-17T11:00:29.664232+00:00",
+  "generated_at": "2026-10-17T11:19:22.813336+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -261,6 +261,48 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
       }
+    },
+    {
+      "candidate_id": "08c7c2a1e9a61e217152bf6f91041997c20f2b36e39ff5ee329519cb10c9290c",
+      "source_url": "https://www.diariocolatino.com/pnc-y-fgr-informan-de-homicidios-en-ultimas-horas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-08",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-17T11:19:21.639536+00:00",
+      "source_checked_at": "2026-10-17T11:19:21.639536+00:00",
+      "evidence": {
+        "content_sha256": "245a13a6c546681cecd549828f931ac5a1eb63f77738eb676984ca91394e5260"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cuscatlán",
+          "paragraph_id": "p10"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p10"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Paz",
+          "paragraph_id": "p10"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p10"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Usulután",
+          "paragraph_id": "p10"
+        }
+      ]
     },
     {
       "candidate_id": "0944596b2363f55d631858be39fb5c34c3d0088c0a08aa105064db60a5f1d82a",
@@ -1833,6 +1875,29 @@
       }
     },
     {
+      "candidate_id": "3c9413b5598131223bb9db9fe9c79fdda37ffec0bb18268febc7e45d7d932e6f",
+      "source_url": "https://www.diariocolatino.com/el-padre-antonio-entre-el-centenar-de-capturados-en-las-ultimas-horas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-30",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-17T05:12:28.096699-06:00",
+      "source_checked_at": "2026-10-17T11:19:15.842536+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "b7ad0f7bcd6cf79fb3615407714f2cea1fffbcefae781c07e08a7cb3e0085e34"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Mejicanos",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "3f0b3d956640847220a0ffa18c36f7ef12e972949008220b89fb752789381daf",
       "source_url": "https://www.diariocolatino.com/sala-establece-responsabilidad-de-faes-en-desapariciones-forzadas-guindas-de-mayo/",
       "publisher": "Diario Co Latino",
@@ -2202,6 +2267,29 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "4ae9329d1b6fac376d1f7215e9199250e3e8ca7d47236a7b3052842e157fdf74",
+      "source_url": "https://www.diariocolatino.com/capturan-a-padre-antonio-por-supuesto-cometimiento-de-ilicitos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-30",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-17T05:14:12.268545-06:00",
+      "source_checked_at": "2026-10-17T11:19:17.252469+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "733d9eca325c0da265e6b28c3c23fa87910cd2361c88bae87545ca5f9491c640"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Mejicanos",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
     },
     {
       "candidate_id": "4c784312cd702db80fa98d3c0c8584445654b6b903dfd8590339e879cd5072dd",
@@ -5251,6 +5339,23 @@
       }
     },
     {
+      "candidate_id": "b09cbba54d57bedfea47aa40ac7938e7c91d94b28efd22c871254c9890bd423a",
+      "source_url": "https://www.diariocolatino.com/capturan-a-ex-alcalde-acusado-de-secuestro/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-22",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-17T11:19:14.787826+00:00",
+      "source_checked_at": "2026-10-17T11:19:14.787826+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "727f597c76af138af1da9fd5df5c554a4a05a5aa3f001dc64d436df3110c7251"
+      }
+    },
+    {
       "candidate_id": "b3cb8ef9ac632231d5da4733dde3d5930fc590d103687a588c4c2d472159bda1",
       "source_url": "https://www.diariocolatino.com/afectados-por-contaminacion-de-baterias-record-piden-interpelacion-del-fiscal-melendez/",
       "publisher": "Diario Co Latino",
@@ -6671,6 +6776,30 @@
       "resolution": {
         "type": "municipality_to_department",
         "municipality": "Mejicanos",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "ed0d8bb0f712a2c0e590e97365480e41fee6c131e92592a2a0bd2f6fe298b4a3",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-adolescente-presuntamente-vinculado-a-pandillas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-28",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-17T11:19:13.457731+00:00",
+      "source_checked_at": "2026-10-17T11:19:13.457731+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "d5e51c9d8553721efce5561debf4f56baa96e8cc94383cdbdb56cbaa91f5cb00"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Guazapa",
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
