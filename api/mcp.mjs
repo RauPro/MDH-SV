@@ -29,10 +29,14 @@ export function validMcpRequest(headers, environment = process.env, configuratio
   } catch { return false; }
 }
 
-function failure(res, status, code, message) {
+function failure(res, status, code, message, id) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.end(JSON.stringify({ jsonrpc: '2.0', error: { code, message }, id: null }));
+  // The pinned MCP schema omits an unreadable request ID; it never accepts null.
+  // Once JSON was parsed, preserve a valid ID when reporting a transport failure.
+  const response = { jsonrpc: '2.0', error: { code, message } };
+  if (typeof id === 'string' || Number.isSafeInteger(id)) response.id = id;
+  res.end(JSON.stringify(response));
 }
 
 async function body(req) {
@@ -85,7 +89,7 @@ export default async function handler(req, res) {
     await transport.handleRequest(req, res, parsed);
   } catch (error) {
     console.error('MCP request failure:', error.name);
-    if (!res.headersSent) failure(res, 500, -32603, 'Internal server error.');
+    if (!res.headersSent) failure(res, 500, -32603, 'Internal server error.', parsed?.id);
     await server.close();
   }
 }

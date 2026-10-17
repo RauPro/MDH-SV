@@ -8,7 +8,7 @@
   "scripts": {
     "build": "npm --prefix apps/web run build",
     "test": "npm run test:api && npm --prefix apps/web test",
-    "test:api": "node --import ./tests/setup-instance.mjs --test --test-timeout=15000 tests/public-api.test.mjs tests/news-processing.test.mjs tests/news-processing-sync.test.mjs tests/news-publication-sync.test.mjs tests/official-statistics-parser.test.mjs tests/official-statistics-export.test.mjs tests/official-statistics.test.mjs tests/hourly-dispatch.test.mjs tests/publication-root.test.mjs tests/instance-config.test.mjs tests/source-registry.test.mjs tests/catalogue-contract.test.mjs tests/public-contracts.test.mjs tests/news-identity.test.mjs tests/news-archive-contract.test.mjs",
+    "test:api": "node --import ./tests/setup-instance.mjs --test --test-timeout=15000 tests/public-api.test.mjs tests/news-processing.test.mjs tests/news-processing-sync.test.mjs tests/news-publication-sync.test.mjs tests/official-statistics-parser.test.mjs tests/official-statistics-export.test.mjs tests/official-statistics.test.mjs tests/hourly-dispatch.test.mjs tests/publication-root.test.mjs tests/instance-config.test.mjs tests/source-registry.test.mjs tests/catalogue-contract.test.mjs tests/public-contracts.test.mjs tests/openapi-responses.test.mjs tests/news-identity.test.mjs tests/news-archive-contract.test.mjs",
     "test:scheduler": "node --import ./tests/setup-instance.mjs --test --test-timeout=15000 tests/hourly-dispatch.test.mjs",
     "dev:api": "node server/dev.mjs",
     "dev": "npm --prefix apps/web run dev"
@@ -17,5 +17,9 @@
     "@modelcontextprotocol/sdk": "1.32.1",
     "@noble/hashes": "2.4.0",
     "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
   }
 }
