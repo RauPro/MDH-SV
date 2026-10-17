@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T11:17:54.467838+00:00",
+  "generated_at": "2026-10-17T12:22:45.766997+00:00",
   "assessment_counts": {
     "candidates": 12471,
-    "evaluated": 4890,
-    "relevant": 1813,
-    "excluded": 270,
-    "uncertain": 2807,
-    "pending": 7581
+    "evaluated": 4891,
+    "relevant": 1817,
+    "excluded": 278,
+    "uncertain": 2796,
+    "pending": 7580
   },
   "selections": [
     {
@@ -14089,6 +14089,33 @@
       }
     },
     {
+      "candidate_id": "4947a9d2bee72c1ae323c14226b46d576c3b68a3f3f05f5a230024c28c120f81",
+      "source_url": "https://www.diariocolatino.com/ivania-cruz-pregunta-a-bukele-quiere-liberar-inocentes-o-pandilleros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T06:17:48.126018-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d0a284a6331cb8f89e18ef80033a50e3228ce7c5cdcce76aad614ac2286fdbaa",
+          "jurisdiction_paragraph_ids": [
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "499685e87ad98841cc9a4d2c99e2c7ec9f0e0fea4630cabc94b0ed08ec082246",
       "source_url": "https://www.diariocolatino.com/el-salvador-a-examen-en-ginebra-sobre-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -22120,6 +22147,36 @@
       }
     },
     {
+      "candidate_id": "6ed715f3d06bc99534fc15087446b4076f4ce2ed08a9b8edf5310277c48651b0",
+      "source_url": "https://www.diariocolatino.com/desde-mayo-se-registra-leve-disminucion-de-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T06:15:00.865063-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f9d50f81bb189ed83261fe4c7258a431f081bc58c884fda74173c095ca75ae9f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p18"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p18",
+            "p21"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "6f1ae7ff69566e21efd7d9f3a38c4d2cc733b6b06b2a792ffa7c52f647e681cf",
       "source_url": "https://www.diariocolatino.com/raul-mijango-afirma-que-alza-de-homicidios-se-puede-reducir-al-devolver-facilidades-a-la-tregua/",
       "publisher": "Diario Co Latino",
@@ -26113,6 +26170,31 @@
       }
     },
     {
+      "candidate_id": "811298dc4edd95d63c2b45ed2f2cbb9cce19911879e218fb7cf68f320d0cd518",
+      "source_url": "https://www.diariocolatino.com/capturan-a-siete-pandilleros-implicados-en-intento-de-secuestro-en-motel/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T06:15:00.865063-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "9af2b81f8879736eaa6ba43960b6e8d4df185ea51ccd8feb0476164f8ca7ad33",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "814af37fdc0908c8be6317e8d33fead3ec233864e8766977142cd0734fa827c5",
       "source_url": "https://www.diariocolatino.com/ley-la-mineria-metalica-salvador-compromiso/",
       "publisher": "Diario Co Latino",
@@ -28594,6 +28676,33 @@
             "p14",
             "p19",
             "p21"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8bbdbde824a3cddcff6789f4cfdbd6d9ff47b28065a5ee3af930e932960ce0d1",
+      "source_url": "https://historico.elsalvador.com/historico/133653/salvadorena-es-capturada-en-eeuu-al-transportar-tamales-con-cocaina.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-08-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T06:15:00.865063-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c2b6324389632ec3495560b70714ca6ff585013879ced7466f7520e61bb0110a",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p6"
           ]
         }
       }
