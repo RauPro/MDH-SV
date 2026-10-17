@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-17T06:20:32.344631+00:00",
+  "generated_at": "2026-10-17T07:36:06.099081+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -2370,6 +2370,30 @@
       }
     },
     {
+      "candidate_id": "554b0b8827c7a92c1f1ea8815eabdd2159ef08a077047b4ca7018c58d6e51ec2",
+      "source_url": "https://www.diariocolatino.com/cadete-de-escuela-militar-vinculado-a-pandillas-y-homicidio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-05",
+      "department": "Cuscatlán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-17T07:25:01.056200+00:00",
+      "source_checked_at": "2026-10-17T07:25:01.056200+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "2bff6598921f7d640e90a4edf852d47e941bab91536ec8be21d16392a5252865"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Cojutepeque",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
       "candidate_id": "55ded0f10fef0c2519246c41776b3fcff3dfb280014d54925d5eab1633971d49",
       "source_url": "https://www.diariocolatino.com/coopesa-condena-asesinato-de-sacerdote-walter-vasquez/",
       "publisher": "Diario Co Latino",
@@ -2488,6 +2512,47 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
+    },
+    {
+      "candidate_id": "59a586e1f58bca444d16eca7b1aa45a6b4ce15c4dcf5589773268ef50316f62a",
+      "source_url": "https://www.diariocolatino.com/pnc-realiza-capturas-en-diversas-zonas-del-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-02",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-17T07:24:21.809378+00:00",
+      "source_checked_at": "2026-10-17T07:24:21.809378+00:00",
+      "evidence": {
+        "content_sha256": "bfba13fe28f1058abb39fd06aaf8833a97cf7ba3f3015631833ae54e73d2e0dc"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p3",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Ciudad Delgado",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Sonsonate",
+          "paragraph_id": "p12",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Nahuizalco",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "5baa3ecdf630b77bd1c4059c2111e22d6a59fa5364d1076ab6326a62314e414e",
