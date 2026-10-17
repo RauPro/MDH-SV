@@ -276,7 +276,7 @@
       "start_date": "2026-09-01",
       "end_date": "2026-09-30",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-17T04:57:09.482678+00:00",
+      "last_attempt_at": "2026-10-17T11:09:00.005039+00:00",
       "screen_version": 3,
       "next_page": 5,
       "pages_fetched": 4,
@@ -285,21 +285,22 @@
       "source_total_posts": 351,
       "source_total_pages": 4,
       "error": null,
-      "completed_at": "2026-10-17T04:57:09.482678+00:00"
+      "completed_at": "2026-10-17T11:09:00.005039+00:00"
     },
     "2026-10": {
       "start_date": "2026-10-01",
-      "end_date": "2026-10-16",
-      "status": "partial",
-      "last_attempt_at": "2026-10-17T05:40:37.976752+00:00",
+      "end_date": "2026-10-17",
+      "status": "enumerated",
+      "last_attempt_at": "2026-10-17T11:09:00.005039+00:00",
       "screen_version": 3,
-      "next_page": 2,
-      "pages_fetched": 1,
-      "posts_scanned": 100,
+      "next_page": 3,
+      "pages_fetched": 2,
+      "posts_scanned": 195,
       "invalid_posts": 0,
-      "source_total_posts": 186,
+      "source_total_posts": 195,
       "source_total_pages": 2,
-      "error": null
+      "error": null,
+      "completed_at": "2026-10-17T11:09:00.005039+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3033,6 +3034,77 @@
     }
   },
   "records": [
+    {
+      "id": "da4df657b90b653e0b7db56fd7fef5b6ef2bb14d26b709f11359305791288d8c",
+      "title": "Piden endurecer penas de prisión por conducción peligrosa y crean nuevo delito",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/piden-endurecer-penas-prision-conduccion-peligrosa-nuevo-delito/",
+      "published_date": "2026-10-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420773,
+        "retrieved_at": "2026-10-17T11:09:00.005039+00:00"
+      }
+    },
+    {
+      "id": "598f33144c59f672e23cb527d2fd977d9c288040193505e0a65e9d8ab31746e3",
+      "title": "Organizaciones nacionales e internacionales exigen liberar a detenidos de La Floresta",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-nacionales-e-internacionales-exigen-liberar-a-detenidos-de-la-floresta/",
+      "published_date": "2026-10-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420779,
+        "retrieved_at": "2026-10-17T11:09:00.005039+00:00"
+      }
+    },
+    {
+      "id": "4947a9d2bee72c1ae323c14226b46d576c3b68a3f3f05f5a230024c28c120f81",
+      "title": "Ivania Cruz pregunta a Bukele: ¿quiere liberar inocentes o pandilleros?",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ivania-cruz-pregunta-a-bukele-quiere-liberar-inocentes-o-pandilleros/",
+      "published_date": "2026-10-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420782,
+        "retrieved_at": "2026-10-17T11:09:00.005039+00:00"
+      }
+    },
     {
       "id": "deea2988c300566cec7c76a8b101dffad63e97bd92a5573db618d186371ebffb",
       "title": "MTD exige reinstalo de sindicalista tras cuatro años en prisión sin pruebas",
