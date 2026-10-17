@@ -710,6 +710,55 @@ def test_export_only_safe_fields_to_both_sources_and_rejects_symlinks(tmp_path):
         export_collection(folder, archive_path, reviewed_path, public, automatic)
 
 
+def test_automatic_export_rolls_back_final_replace_failure_and_retry_converges(tmp_path, monkeypatch):
+    import os
+
+    document, reference, _ = inputs()
+    _, folder = setup_queue(tmp_path)
+    (folder / "automatic-news").mkdir()
+    receipt_path = folder / "automatic-news" / (reference["id"] + ".json")
+    receipt_path.write_text(json.dumps(receipt(document, reference)))
+    archive_path, reviewed_path = tmp_path / "news.json", tmp_path / "reviewed.json"
+    archive_path.write_text(json.dumps(archive(reference)))
+    reviewed_path.write_text(json.dumps({"schema_version": 1, "dossiers": []}))
+    public, automatic = tmp_path / "public.json", tmp_path / "auto.json"
+    previous = json.dumps({"schema_version": 1, "dossiers": []}).encode()
+    for path in (automatic, public):
+        path.write_bytes(previous)
+    inputs_before = {path: path.read_bytes() for path in (
+        archive_path, reviewed_path, receipt_path, folder / "drafts" / (reference["id"] + ".json"))}
+    replace = os.replace
+    failed = False
+
+    def fail_final_once(source, target, *args, **kwargs):
+        nonlocal failed
+        if Path(target).resolve() == public.resolve() and not failed:
+            # Exercise rollback after the first public projection really changed.
+            assert automatic.read_bytes() != previous
+            failed = True
+            raise OSError("Simulated final publication replacement failure")
+        return replace(source, target, *args, **kwargs)
+
+    monkeypatch.setattr(os, "replace", fail_final_once)
+    with pytest.raises(OSError):
+        export_collection(folder, archive_path, reviewed_path, public, automatic)
+    assert failed
+    assert automatic.read_bytes() == public.read_bytes() == previous
+    assert all(path.read_bytes() == content for path, content in inputs_before.items())
+    assert not list(tmp_path.glob(".*"))
+
+    expected = {"automatic_dossiers": 1, "published_dossiers": 1}
+    assert export_collection(folder, archive_path, reviewed_path, public, automatic) == expected
+    published = {path: path.read_bytes() for path in (automatic, public)}
+    assert published[automatic] == published[public]
+    assert len(json.loads(published[public])["dossiers"]) == 1
+    assert b'"judgment"' not in published[public]
+    assert export_collection(folder, archive_path, reviewed_path, public, automatic) == expected
+    assert all(path.read_bytes() == content for path, content in published.items())
+    assert all(path.read_bytes() == content for path, content in inputs_before.items())
+    assert not list(tmp_path.glob(".*"))
+
+
 def test_automatic_field_judge_uses_same_inclusive_scope_without_fabricating_legal_findings():
     from mdh_pipeline.automatic_news import SYSTEM_PROMPT
     from mdh_pipeline.news_scope_policy import SCOPE_POLICY

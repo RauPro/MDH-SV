@@ -216,12 +216,24 @@ solicitar nuevas reevaluaciones o una retirada persistente. Las solicitudes sens
 
 ```sh
 python -m mdh_pipeline.review_import --kind news_dossier --candidate IDENTIFICADOR
+python -m mdh_pipeline.news_publication
+node apps/web/scripts/sync-news-publication.mjs
+node apps/web/scripts/sync-news-processing.mjs
 ```
 
 El importador comprueba aprobación vigente, identidad y bibliografía, y prepara
 los archivos revisables. Revisa el diff, crea commit/PR y espera CI antes de
 publicar la corrección humana, que prevalece sobre la ficha automática. Comentarios,
 diagnósticos y envoltorios privados no se exportan.
+
+Ante un fallo temporal de escritura, repite la misma importación con el mismo
+`--candidate` y completa la cadena anterior. Cada intento vuelve a verificar la
+aprobación privada; una aprobación ausente, malformada o retirada no se sustituye
+por la ficha local. El importador también repara salidas derivadas de una ficha ya
+incorporada e informa cambios cuando lo hace. Los reemplazos son atómicos por
+archivo, no para todo el conjunto: no publiques una salida parcial tras una
+interrupción. El reintento permite recuperar la coherencia sin volver a llamar a
+Gemini. Véanse los [detalles de importación y reintento](../../docs/NEWS-DOSSIERS.md#corregir-una-ficha-parcial-mediante-decisión-humana).
 
 Una ficha parcial o internacional puede aprobarse como ficha de noticia. Un fallo
 de lectura no puede aprobarse como lectura completada: primero consulta la fuente
@@ -233,6 +245,9 @@ y prepara o corrige su ficha. Para rechazar, elige `reject`; no se exige una fic
 del catálogo. Usa `record` del borrador o un JSON manual completo. Las propuestas
 quedan en `approved/<id>.json`; el importador anterior sin `--kind news_dossier`
 incorpora casos. Las fichas de noticias nunca se suman automáticamente a ese catálogo.
+Si falla su exportación, repite también la importación del mismo candidato: se
+verifica de nuevo su aprobación y se reparan las descargas derivadas antes de
+revisar el diff y pasar CI.
 
 ## Código, credenciales y publicación
 

@@ -1,6 +1,9 @@
 import base64
+import copy
+import hashlib
 import json
 from datetime import datetime, timezone
+from pathlib import Path
 from unittest.mock import MagicMock
 import pytest
 from mdh_pipeline.review_queue import (FEEDS, HOSTS, GitHubInbox, canonical_url,
@@ -361,3 +364,178 @@ def test_rss_future_local_publication_day_waits_for_that_day_without_rewriting_t
     assert candidate_from_entry(item, FEEDS[1], datetime(2026, 10, 15, 1, tzinfo=timezone.utc)) is None
     result = candidate_from_entry(item, FEEDS[1], datetime(2026, 10, 15, 8, tzinfo=timezone.utc))
     assert result['published_date'] == '2026-10-15'
+
+
+@pytest.fixture
+def approved_case(tmp_path, monkeypatch):
+    from mdh_pipeline.publication import export_catalog
+    monkeypatch.chdir(tmp_path)
+    inbox = Inbox()
+    candidate = candidate_from_entry(entry(), FEEDS[1], NOW)
+    inbox.enqueue(candidate)
+    record = proposed()
+    record.update(id='reviewed-retry-example', source_record_key='reviewed-retry-example')
+    review(inbox, event(record=record))
+    proposal = json.loads((tmp_path / 'proposal.json').read_text())
+    source = tmp_path / 'reviewed-catalogue.json'
+    source.write_text(load_catalog().model_dump_json())
+    destination = tmp_path / 'isolated-public-data'
+    export_catalog(source, destination)
+
+    class Approval:
+        repository = inbox.repository
+        base = inbox.base
+        labels = ('review/approved',)
+
+        def call(self, method, path):
+            assert method == 'GET'
+            if '/contents/' in path:
+                return {'content': base64.b64encode(json.dumps(self.proposal).encode()).decode()}
+            return {'labels': [{'name': label} for label in self.labels], 'body': issue_body(candidate)}
+
+    approval = Approval()
+    approval.proposal = proposal
+    return approval, candidate['id'], source, destination
+
+
+def _case_snapshots(source, destination):
+    from mdh_pipeline.publication import CATALOG_EXPORT_NAMES
+    paths = [source, *(destination / name for name in CATALOG_EXPORT_NAMES)]
+    return {path: path.read_bytes() if path.exists() else None for path in paths}
+
+
+def _assert_case_exports(source, destination, identifier):
+    manifest = json.loads((destination / 'manifest.json').read_text())
+    assert manifest['source_sha256'] == hashlib.sha256(source.read_bytes()).hexdigest()
+    records = json.loads((destination / 'catalog.json').read_text())['records']
+    assert sum(record['origin_candidate_id'] == identifier for record in records) == 1
+    assert manifest['records_count'] == len(records)
+    for name, metadata in manifest['files'].items():
+        raw = (destination / name).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == metadata['sha256']
+        assert len(raw) == metadata['bytes']
+
+
+def test_case_source_only_or_historical_partial_import_repairs_exports_without_source_churn(approved_case):
+    from mdh_pipeline.review_import import import_approved
+    approval, identifier, source, destination = approved_case
+    assert import_approved(approval, identifier, source, export=False, destination=destination)
+    # This is also the state left by the former source-first importer after an
+    # export failed: the approval exists, but projections describe the old source.
+    original = source.read_bytes()
+    source_time = source.stat().st_mtime_ns
+    assert import_approved(approval, identifier, source, destination=destination)
+    assert source.read_bytes() == original and source.stat().st_mtime_ns == source_time
+    _assert_case_exports(source, destination, identifier)
+    snapshots = _case_snapshots(source, destination)
+    assert not import_approved(approval, identifier, source, destination=destination)
+    assert _case_snapshots(source, destination) == snapshots
+
+
+def test_case_retry_repairs_missing_and_partial_outputs_in_isolated_destination(approved_case):
+    from mdh_pipeline.publication import PUBLIC
+    from mdh_pipeline.review_import import import_approved
+    approval, identifier, source, destination = approved_case
+    real_public = {path: path.read_bytes() for path in PUBLIC.iterdir() if path.is_file()}
+    assert import_approved(approval, identifier, source, destination=destination)
+    original = source.read_bytes()
+    (destination / 'records.parquet').unlink()
+    (destination / 'catalog.json').write_text('{"interrupted":')
+    assert import_approved(approval, identifier, source, destination=destination)
+    assert source.read_bytes() == original
+    _assert_case_exports(source, destination, identifier)
+    assert all(path.read_bytes() == raw for path, raw in real_public.items())
+
+
+@pytest.mark.parametrize('exception', [OSError, ValueError])
+def test_case_render_failure_changes_nothing_and_retry_converges(approved_case, monkeypatch, exception):
+    from mdh_pipeline import review_import
+    approval, identifier, source, destination = approved_case
+    snapshots = _case_snapshots(source, destination)
+    builder = review_import.build_catalog_exports
+
+    def fail(_):
+        raise exception('Simulated rendering failure')
+
+    monkeypatch.setattr(review_import, 'build_catalog_exports', fail)
+    with pytest.raises(exception):
+        review_import.import_approved(approval, identifier, source, destination=destination)
+    assert _case_snapshots(source, destination) == snapshots
+    monkeypatch.setattr(review_import, 'build_catalog_exports', builder)
+    assert review_import.import_approved(approval, identifier, source, destination=destination)
+    _assert_case_exports(source, destination, identifier)
+
+
+@pytest.mark.parametrize('failed_output', ['catalog.json', 'records.geojson', 'records.csv',
+                                         'records.parquet', 'manifest.json', 'source'])
+def test_case_replace_failure_preserves_authority_and_retry_converges(
+        approved_case, monkeypatch, failed_output):
+    from mdh_pipeline.review_import import import_approved
+    approval, identifier, source, destination = approved_case
+    snapshots = _case_snapshots(source, destination)
+    target = source if failed_output == 'source' else destination / failed_output
+    replace = Path.replace
+    failed = False
+
+    def fail_once(path, output):
+        nonlocal failed
+        if Path(output) == target and not failed:
+            failed = True
+            raise OSError('Simulated replacement failure')
+        return replace(path, output)
+
+    monkeypatch.setattr(Path, 'replace', fail_once)
+    with pytest.raises(OSError):
+        import_approved(approval, identifier, source, destination=destination)
+    assert _case_snapshots(source, destination) == snapshots
+    assert import_approved(approval, identifier, source, destination=destination)
+    _assert_case_exports(source, destination, identifier)
+    assert not list(source.parent.rglob('*.mdh-*'))
+
+
+@pytest.mark.parametrize('labels', [[], ['review/rejected'], ['review/approved', 'review/rejected']])
+def test_case_repair_rechecks_withdrawn_approval_without_writing(approved_case, labels):
+    from mdh_pipeline.review_import import import_approved
+    approval, identifier, source, destination = approved_case
+    assert import_approved(approval, identifier, source, export=False, destination=destination)
+    approval.labels = labels
+    snapshots = _case_snapshots(source, destination)
+    with pytest.raises(ValueError, match='Approval'):
+        import_approved(approval, identifier, source, destination=destination)
+    assert _case_snapshots(source, destination) == snapshots
+
+
+def test_case_conflict_still_requires_explicit_review_even_when_exports_need_repair(approved_case):
+    from mdh_pipeline.review_import import import_approved
+    approval, identifier, source, destination = approved_case
+    assert import_approved(approval, identifier, source, export=False, destination=destination)
+    approval.proposal = copy.deepcopy(approval.proposal)
+    approval.proposal['record']['review_notes'] = 'Changed editorial review requires an explicit conflict resolution.'
+    snapshots = _case_snapshots(source, destination)
+    with pytest.raises(ValueError, match='Conflicting'):
+        import_approved(approval, identifier, source, destination=destination)
+    assert _case_snapshots(source, destination) == snapshots
+
+
+def test_case_import_detects_source_changes_during_render_and_retry_retains_them(approved_case, monkeypatch):
+    from mdh_pipeline import review_import
+    approval, identifier, source, destination = approved_case
+    snapshots = _case_snapshots(source, destination)
+    builder = review_import.build_catalog_exports
+    concurrent = json.loads(source.read_text())
+    concurrent['scope'] += ' Concurrent reviewed description.'
+    concurrent_bytes = json.dumps(concurrent).encode()
+
+    def changed_during_render(raw):
+        source.write_bytes(concurrent_bytes)
+        return builder(raw)
+
+    monkeypatch.setattr(review_import, 'build_catalog_exports', changed_during_render)
+    with pytest.raises(ValueError, match='changed during preparation'):
+        review_import.import_approved(approval, identifier, source, destination=destination)
+    assert source.read_bytes() == concurrent_bytes
+    assert all(path.read_bytes() == raw for path, raw in snapshots.items() if path != source)
+    monkeypatch.setattr(review_import, 'build_catalog_exports', builder)
+    assert review_import.import_approved(approval, identifier, source, destination=destination)
+    assert json.loads(source.read_text())['scope'] == concurrent['scope']
+    _assert_case_exports(source, destination, identifier)

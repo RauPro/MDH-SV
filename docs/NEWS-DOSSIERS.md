@@ -178,6 +178,21 @@ ficha validada en `data/reviewed/news_dossiers.json` y la exporta a
 `apps/web/public/archive/dossiers.json`. No copia el envoltorio privado, comentarios,
 diagnósticos, cuerpos de artículos ni credenciales. Los cambios pasan por Git y CI.
 
+Si una escritura o exportación falla temporalmente, vuelva a ejecutar el mismo
+comando de importación, con el mismo `--candidate`. El reintento vuelve a comprobar
+la aprobación privada vigente y repara las salidas derivadas ausentes o distintas,
+aunque la ficha ya esté incorporada. Una aprobación retirada, inexistente o
+malformada sigue siendo un error; la copia local no permite omitir esa comprobación.
+En la API Python, `True` indica incorporación o reparación y `False` indica que
+no hubo cambios.
+
+Los archivos se preparan antes de reemplazarlos; cada reemplazo es atómico en su
+sistema de archivos, pero el conjunto no es una transacción atómica. Una
+interrupción puede dejar proyecciones de distintas versiones: no publique ese
+estado parcial. Repita la importación para recuperar un conjunto coherente y
+complete las sincronizaciones JS anteriores, la revisión del diff y CI. Estas
+operaciones no requieren nuevas llamadas a Gemini.
+
 Para proponer un caso se mantiene `proposal_kind: case` y el importador anterior
 sin `--kind news_dossier`. No se debilitan las reglas del catálogo de casos para
 permitir fichas de noticias incompletas.
