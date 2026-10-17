@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T04:18:22.118877+00:00",
+  "generated_at": "2026-10-17T05:17:05.714707+00:00",
   "assessment_counts": {
-    "candidates": 12165,
+    "candidates": 12316,
     "evaluated": 4889,
-    "relevant": 1793,
-    "excluded": 222,
-    "uncertain": 2874,
-    "pending": 7276
+    "relevant": 1795,
+    "excluded": 230,
+    "uncertain": 2864,
+    "pending": 7427
   },
   "selections": [
     {
@@ -34781,6 +34781,43 @@
       }
     },
     {
+      "candidate_id": "aaddfd48d2637d227cbc4fe39ff6a8dcad1025e0d80afd9e36136333712eff2e",
+      "source_url": "https://www.diariocolatino.com/reduccion-de-homicidios-durante-el-fin-de-semana/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T23:09:34.512563-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "eab9a454b7d9fd71b873e2f9109a86845ce4a5745a4cd2eae8602bf2f3a4df7f",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
+            "p8",
+            "p9",
+            "p12",
+            "p13",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "ab0b832685432d2d622739f8390592e307d5ebe8ddc813676f8f56204a815459",
       "source_url": "https://www.diariocolatino.com/20-anos-de-pro-busqueda-en-la-lucha-por-encontrar-a-ninas-y-ninos-desaparecidos-durante-la-guerra/",
       "publisher": "Diario Co Latino",
@@ -38532,6 +38569,35 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "bd9742fce928613a4b39b29a3132d67e2a2663eff402e5944dbe07890d680e4a",
+      "source_url": "https://www.diariocolatino.com/juicio-paralelo-resena-mis-50-anos-como-periodista-y-escritor/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T23:09:34.512563-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "39b3e1d59e1d801ca56aedb0328e903c1c57d28a9c5ad7923afc15dbea7f1cad",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
             "p5"
           ]
         }
