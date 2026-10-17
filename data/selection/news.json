@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T01:16:38.501630+00:00",
+  "generated_at": "2026-10-17T02:16:41.430396+00:00",
   "assessment_counts": {
     "candidates": 12165,
     "evaluated": 4889,
-    "relevant": 1770,
-    "excluded": 198,
-    "uncertain": 2921,
+    "relevant": 1774,
+    "excluded": 206,
+    "uncertain": 2909,
     "pending": 7276
   },
   "selections": [
@@ -9720,6 +9720,34 @@
       }
     },
     {
+      "candidate_id": "327e82de1c3198a5dc961bbfe7de1d6e19a74a482e7bb8ae5d8fa2aadb940af4",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-hijo-de-militar-retirado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T20:09:21.825461-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8505c47314ed3b118597dd7ba6acf4ab724da26d07ddce517b38947fbc87fec8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "32a180712fbbdc77146d6bb7e0fdfe64e21d11802060f039d7934b43420a3cc2",
       "source_url": "https://www.diariocolatino.com/conmemoran-victimas-de-desaparicion-forzada/",
       "publisher": "Diario Co Latino",
@@ -14924,6 +14952,32 @@
       }
     },
     {
+      "candidate_id": "5031da722a85cda2ecb6fc857af1c10f2dd8120ad6079078084698411b26d3ea",
+      "source_url": "https://www.diariocolatino.com/mandatario-anuncia-preparacion-de-plan-contigencial-para-reducir-asesinatos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T20:09:21.825461-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d58d0647d14166be08a6990540b44745dbb46d09ccceb84d093e84d2df6769b4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5039068adfd77aa8918f156849917d55b88655796a684f253422d239c33bbfec",
       "source_url": "https://www.diariocolatino.com/centros-penitenciarios-no-seran-mas-un-centro-multiplicador-de-violencia-oscar-ortiz/",
       "publisher": "Diario Co Latino",
@@ -19243,22 +19297,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T20:14:02.060923-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d81da248d1970c5bc1321a0d96ff67dbafd0f4c08977c72b9965307d1e3cef40",
           "jurisdiction_paragraph_ids": [
             "p6",
-            "p10",
-            "p14"
+            "p10"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4",
-            "p12",
-            "p13",
             "p14"
           ]
         }
@@ -26131,16 +26179,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-16T20:16:02.264147-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6fb18a70a668d25fdcab0a405714c76d8f84adfa5696866b5761bad93b4efd55",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
+            "p2",
             "p3"
           ]
         }
@@ -28094,9 +28142,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T20:15:48.199560-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "5854a345fabf449051327d5bc079747f401efdcb9623bfaa6673499dfa8de4ac",
           "jurisdiction_paragraph_ids": [
@@ -28104,9 +28152,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p6"
+            "p3"
           ]
         }
       }
@@ -33616,6 +33662,33 @@
       }
     },
     {
+      "candidate_id": "a6ad5576171383fe6a679a9fbf7803f722938304409a80e60fab08464f624fa2",
+      "source_url": "https://www.diariocolatino.com/ncrementa-detencion-de-conductores-peligrosos-pnc/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T20:09:21.825461-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ebc56d0e4d1c3700b1f1a7979da6f876381adff084dd065fd3228673fb889d37",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a6c6d8402471d7c372b68fad581f4e12e0a27757c4eb4604a16d6f6da8ea2e07",
       "source_url": "https://www.diariocolatino.com/inauguran-xi-congreso-internacional-de-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -34473,6 +34546,34 @@
             "p2",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "acaaed8a54e292c16704a4d6437a33d01640b6361764566e2a0adb7242986213",
+      "source_url": "https://www.diariocolatino.com/el-ministro-de-justicia-y-seguridad-ricardo-perdomo-se-reunio-con-diferentes-actores-de-la-sociedad-civil-en-un-intento-de-impulsar-un-nuevo-proceso-de-pacificacion-como-una-soluc/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T20:09:21.825461-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "4016715e8b7a9aab1b7efe75226393cd6403717915de83411c6998641033408c",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p9"
           ]
         }
       }
