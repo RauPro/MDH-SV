@@ -12,10 +12,12 @@ from urllib.parse import urlparse
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from .publishers import PRIMARY_SOURCE_HOSTS
+from .file_outputs import write_outputs
 
 ROOT = Path(__file__).resolve().parents[4]
 CATALOG = ROOT / "data/reviewed/publications.json"
 PUBLIC = ROOT / "apps/web/public/data"
+CATALOG_EXPORT_NAMES = ('catalog.json', 'records.geojson', 'records.csv', 'records.parquet', 'manifest.json')
 
 T = TypeVar("T")
 
@@ -273,12 +275,13 @@ def csv_safe(value):
     return "'" + text if text.lstrip().startswith(("=", "+", "-", "@")) or text.startswith(("\t", "\r", "\n")) else text
 
 
-def export_catalog(source=CATALOG, destination=PUBLIC):
+def build_catalog_exports(source_bytes):
+    """Render every public export from the exact reviewed bytes, without writes."""
+    if not isinstance(source_bytes, bytes):
+        raise TypeError('Catalogue input must be encoded bytes')
+    catalog = Catalog.model_validate_json(source_bytes)
     import pyarrow as pa
     import pyarrow.parquet as pq
-    catalog = load_catalog(source)
-    destination = Path(destination)
-    destination.mkdir(parents=True, exist_ok=True)
     payload = catalog.model_dump(mode="json")
     payload["records"].sort(key=lambda r: (r["published_date"], r["id"]), reverse=True)
     records = payload["records"]
@@ -305,16 +308,23 @@ def export_catalog(source=CATALOG, destination=PUBLIC):
     files["records.parquet"] = buffer.getvalue().to_pybytes()
     manifest = {"schema_version": 1, "updated_at": payload["updated_at"],
                 "records_count": len(records),
-                "source_sha256": hashlib.sha256(Path(source).read_bytes()).hexdigest(),
+                "source_sha256": hashlib.sha256(source_bytes).hexdigest(),
                 "hash_scope": "Exported catalogue bytes; does not authenticate source articles or reported events.",
                 "files": {name: {"sha256": hashlib.sha256(content).hexdigest(), "bytes": len(content)}
                           for name, content in files.items()}}
-    # Only fixed allowlisted filenames are written; raw/private data never enter the web directory.
-    for name, content in files.items():
-        temp = destination / (name + ".tmp")
-        temp.write_bytes(content)
-        temp.replace(destination / name)
-    (destination / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    files['manifest.json'] = json.dumps(manifest, indent=2).encode('utf-8')
+    return manifest, files
+
+
+def export_catalog(source=CATALOG, destination=PUBLIC):
+    """Render before replacing; a failed or interrupted export can be retried."""
+    source, destination = Path(source), Path(destination)
+    if source.resolve() in {(destination / name).resolve() for name in CATALOG_EXPORT_NAMES}:
+        raise ValueError('The reviewed catalogue must be separate from its exports')
+    source_bytes = source.read_bytes()
+    manifest, files = build_catalog_exports(source_bytes)
+    write_outputs([(destination / name, files[name]) for name in CATALOG_EXPORT_NAMES],
+                  expected={source: source_bytes})
     return manifest
 
 
