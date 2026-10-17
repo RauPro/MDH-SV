@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-16T22:19:17.094558+00:00",
+  "generated_at": "2026-10-17T01:19:06.114641+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1331,6 +1331,30 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "2da85b7197fb1b38d6339802e2aab285004ca9fe4a9953e1ba430cc2001690e9",
+      "source_url": "https://www.diariocolatino.com/pnc-reporta-doble-homicidio-en-cuscatlan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-14",
+      "department": "Usulután",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-17T01:19:04.172707+00:00",
+      "source_checked_at": "2026-10-17T01:19:04.172707+00:00",
+      "evidence": {
+        "paragraph_id": "p12",
+        "content_sha256": "6d451437ca81f9ec164cb2d34baf1195add67080fdf21b5399758c4fa071a2c3"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Concepción Batres",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
     },
     {
       "candidate_id": "2e5b44a7fc80d42e48b35dd717f7c2030037c57dd3db6cd59df3796abccef1c2",
@@ -4904,6 +4928,30 @@
       }
     },
     {
+      "candidate_id": "a5ddd31b424e8c3aa53140ed066b58f9f7f7845a2812b9e3dcd415de23e04e11",
+      "source_url": "https://www.diariocolatino.com/autoridades-confirman-fin-de-semana-con-25-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-03-25",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-17T01:18:58.849145+00:00",
+      "source_checked_at": "2026-10-17T01:18:58.849145+00:00",
+      "evidence": {
+        "paragraph_id": "p15",
+        "content_sha256": "b68ad2ea0b5e165eb6949e07eab89472f1d2e30019c9bcd33d2ce995ff3b3aa5"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Mejicanos",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "a71caeaac0c631218229c98cfa633a5430281546fcd44a9dffbefb6409eeef85",
       "source_url": "https://gatoencerrado.news/2015/10/27/arcatao-llama-a-referendum-municipal-por-mineria-metalica/",
       "publisher": "GatoEncerrado",
@@ -5962,6 +6010,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
+      "candidate_id": "d2163dcb36642e92828f61152756d8ed472da072572e372f52d3d3fb15a579bb",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-oficial-de-la-fuerza-armada/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-15",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-16T19:12:05.056583-06:00",
+      "source_checked_at": "2026-10-17T01:19:06.110931+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "64ec19529fb63929e35da47eee50ecb08e5769d33c8b6d38af183736ad402c6e"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Tecla",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
     },
     {
