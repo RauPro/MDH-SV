@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T00:36:57.083514+00:00",
+  "generated_at": "2026-10-17T01:16:40.562229+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12165,
-      "selected": 1767,
+      "selected": 1770,
       "evaluated": 4889,
-      "relevant": 1767,
-      "excluded": 190,
-      "uncertain": 2932,
+      "relevant": 1770,
+      "excluded": 198,
+      "uncertain": 2921,
       "pending": 7276,
-      "evaluated_at": "2026-10-17T00:16:56.018362+00:00"
+      "evaluated_at": "2026-10-17T01:16:38.501630+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1767,
+    "records": 1770,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1437,
+        "records": 1440,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -677,7 +677,7 @@
           {
             "month": "2014-04",
             "status": "enumerated",
-            "records": 24,
+            "records": 27,
             "screen_version": 3,
             "posts_scanned": 937,
             "source_total_posts": 937,
@@ -19325,12 +19325,12 @@
         "month": "2014-04",
         "start_date": "2014-04-01",
         "end_date": "2014-04-30",
-        "records": 25,
+        "records": 28,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 24
+            "records": 27
           },
           {
             "source_id": "gatoencerrado",
@@ -89416,22 +89416,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T19:16:05.840028-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8bb9f7e1f5ed3010214ede369956cb873cf4735418f7f3c09645125e7e179aef",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5",
-            "p6",
-            "p9"
+            "p3"
           ]
         }
       }
@@ -89465,22 +89459,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T19:15:51.498318-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6c86b93b5eaec392f58e409b0c4b16092f19067213ddb62c26a7335f6b3b14d5",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p12",
-            "p14"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p11",
-            "p12",
-            "p13",
-            "p14"
+            "p2"
           ]
         }
       }
@@ -89513,21 +89501,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T19:14:05.582466-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "70d296cb6af59a81cefb389dc945da4b1b9985071a271c76be3e3dd96a6a36c3",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4",
-            "p6"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
             "p4",
-            "p5",
             "p6"
           ]
         }
@@ -98379,6 +98362,53 @@
       }
     },
     {
+      "id": "eb54d66d7da0e4b9d496c1b4ae74a0d2c9396d2eaf34ab9320c2adbd649f91aa",
+      "title": "PNC reporta 42 capturas de conductores temerarios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-reporta-42-capturas-de-conductores-temerarios/",
+      "published_date": "2014-04-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12618,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T19:09:23.732895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a98e9c5551277c9dd65c43b0d477efa3219630f389b512a78ae8a189ad521ab5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "id": "166cdb58864302e25bc5a39018287e78a0fbe5e7e26f8ea58fe12791110432d0",
       "title": "Defensoría detecta más de mil productos vencidos en restaurantes",
       "title_truncated": false,
@@ -98418,6 +98448,52 @@
           "relevance_paragraph_ids": [
             "p2",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d2163dcb36642e92828f61152756d8ed472da072572e372f52d3d3fb15a579bb",
+      "title": "Asesinan a oficial de la Fuerza Armada",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-oficial-de-la-fuerza-armada/",
+      "published_date": "2014-04-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12503,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T19:09:23.732895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "64ec19529fb63929e35da47eee50ecb08e5769d33c8b6d38af183736ad402c6e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -98557,6 +98633,57 @@
             "p8",
             "p18",
             "p20"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2da85b7197fb1b38d6339802e2aab285004ca9fe4a9953e1ba430cc2001690e9",
+      "title": "PNC reporta doble homicidio en Cuscatlán",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-reporta-doble-homicidio-en-cuscatlan/",
+      "published_date": "2014-04-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12337,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T19:09:23.732895-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6d451437ca81f9ec164cb2d34baf1195add67080fdf21b5399758c4fa071a2c3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10",
+            "p12",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p10",
+            "p11"
           ]
         }
       }
