@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T17:17:02.579984+00:00",
+  "generated_at": "2026-10-17T18:16:42.614710+00:00",
   "assessment_counts": {
     "candidates": 12622,
     "evaluated": 4891,
-    "relevant": 1834,
-    "excluded": 318,
-    "uncertain": 2739,
+    "relevant": 1835,
+    "excluded": 325,
+    "uncertain": 2731,
     "pending": 7731
   },
   "selections": [
@@ -22301,6 +22301,31 @@
       }
     },
     {
+      "candidate_id": "6e7d274532096f101ab54aa19765e753abaf781dfb01c4abdc5ff352fcf997df",
+      "source_url": "https://www.diariocolatino.com/al-revisar-la-tragica-historia-del-siglo-xx-muchos-numeros-vienen-a-la-mente-hace-100-anos-con-su-secuela-de-millones-de-muertos-recien-iniciaba-la-primera-guerra-mundial-hace-75-despues-de-que-el/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-10-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T12:09:24.324810-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5fda85911eb8dd2033d03fc81d717d09fc8937543d078c06d1cfb7068017eb0a",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "6ea423b85993dcd2534368fed34dd999f48b990ec966d2966b0a9435e2b5ec06",
       "source_url": "https://www.diariocolatino.com/escuela-penitenciaria-gradua-173-nuevos-agentes-de-seguridad-penitenciarios/",
       "publisher": "Diario Co Latino",
@@ -25889,20 +25914,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:11:45.865851-06:00",
+        "classified_at": "2026-10-17T12:12:04.394624-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "fff029257fb2c8a6e2cdda29b03d61ff5f535560f04d812bea26f9d527d5c0f0",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p5",
-            "p8"
+            "p2"
           ]
         }
       }
@@ -28733,20 +28754,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:11:45.865851-06:00",
+        "classified_at": "2026-10-17T12:13:50.520614-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b6489a53d4c6c26d6ec017951b3007bc84a083f557a4fc97f5acb60edb85cf2a",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p14"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p13",
-            "p14",
-            "p15",
-            "p16"
+            "p2",
+            "p14"
           ]
         }
       }
@@ -41371,21 +41389,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:12:26.380425-06:00",
+        "classified_at": "2026-10-17T12:14:05.634667-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c4ecbe9be7b04c18a9b1c72ed8ffc88d135c3dc0e9884444b73ba14f8608d814",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p5",
-            "p9",
-            "p11",
-            "p15"
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }
@@ -47611,18 +47626,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:12:26.380425-06:00",
+        "classified_at": "2026-10-17T12:15:50.908114-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "47b76640bf783909d729f5ab1554597fecc5a3fb48ecb329cae74c0dc1d8722e",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4"
+            "p3"
           ]
         }
       }

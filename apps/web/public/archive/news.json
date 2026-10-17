@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T17:17:05.954593+00:00",
+  "generated_at": "2026-10-17T18:16:45.989405+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12622,
-      "selected": 1834,
+      "selected": 1835,
       "evaluated": 4891,
-      "relevant": 1834,
-      "excluded": 318,
-      "uncertain": 2739,
+      "relevant": 1835,
+      "excluded": 325,
+      "uncertain": 2731,
       "pending": 7731,
-      "evaluated_at": "2026-10-17T17:17:02.579984+00:00"
+      "evaluated_at": "2026-10-17T18:16:42.614710+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1834,
+    "records": 1835,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1497,
+        "records": 1498,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -749,7 +749,7 @@
           {
             "month": "2014-10",
             "status": "enumerated",
-            "records": 37,
+            "records": 38,
             "screen_version": 3,
             "posts_scanned": 1071,
             "source_total_posts": 1071,
@@ -19583,12 +19583,12 @@
         "month": "2014-10",
         "start_date": "2014-10-01",
         "end_date": "2014-10-31",
-        "records": 44,
+        "records": 45,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 37
+            "records": 38
           },
           {
             "source_id": "gatoencerrado",
@@ -88290,18 +88290,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:12:26.380425-06:00",
+        "classified_at": "2026-10-17T12:15:50.908114-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "47b76640bf783909d729f5ab1554597fecc5a3fb48ecb329cae74c0dc1d8722e",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4"
+            "p3"
           ]
         }
       }
@@ -88334,21 +88332,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:12:26.380425-06:00",
+        "classified_at": "2026-10-17T12:14:05.634667-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c4ecbe9be7b04c18a9b1c72ed8ffc88d135c3dc0e9884444b73ba14f8608d814",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p5",
-            "p9",
-            "p11",
-            "p15"
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }
@@ -88381,20 +88376,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:11:45.865851-06:00",
+        "classified_at": "2026-10-17T12:13:50.520614-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b6489a53d4c6c26d6ec017951b3007bc84a083f557a4fc97f5acb60edb85cf2a",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p14"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p13",
-            "p14",
-            "p15",
-            "p16"
+            "p2",
+            "p14"
           ]
         }
       }
@@ -88427,20 +88419,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:11:45.865851-06:00",
+        "classified_at": "2026-10-17T12:12:04.394624-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "fff029257fb2c8a6e2cdda29b03d61ff5f535560f04d812bea26f9d527d5c0f0",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p5",
-            "p8"
+            "p2"
           ]
         }
       }
@@ -91729,6 +91717,51 @@
           ],
           "relevance_paragraph_ids": [
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6e7d274532096f101ab54aa19765e753abaf781dfb01c4abdc5ff352fcf997df",
+      "title": "Al revisar la trágica historia del siglo XX muchos números vienen a la mente. Hace 100 años con su secuela de millones de muertos",
+      "title_truncated": true,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/al-revisar-la-tragica-historia-del-siglo-xx-muchos-numeros-vienen-a-la-mente-hace-100-anos-con-su-secuela-de-millones-de-muertos-recien-iniciaba-la-primera-guerra-mundial-hace-75-despues-de-que-el/",
+      "published_date": "2014-10-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones",
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorena"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 30883,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T12:09:24.324810-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5fda85911eb8dd2033d03fc81d717d09fc8937543d078c06d1cfb7068017eb0a",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p8"
           ]
         }
       }
