@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T10:59:24.854078+00:00",
+  "generated_at": "2026-10-17T11:09:23.817704+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -22,13 +22,13 @@
     "selection_gate": {
       "version": 2,
       "scope": "human_rights_el_salvador",
-      "candidates": 12317,
+      "candidates": 12471,
       "selected": 1805,
       "evaluated": 4889,
       "relevant": 1805,
       "excluded": 262,
       "uncertain": 2822,
-      "pending": 7428,
+      "pending": 7582,
       "evaluated_at": "2026-10-17T10:16:46.717141+00:00"
     }
   },
@@ -57,7 +57,7 @@
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
-        "status": "partial",
+        "status": "enumerated",
         "records": 1469,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
@@ -2471,19 +2471,19 @@
             "source_total_posts": 351,
             "pages_fetched": 4,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T04:57:09.482678+00:00",
+            "last_attempt_at": "2026-10-17T11:09:00.005039+00:00",
             "error": null
           },
           {
             "month": "2026-10",
-            "status": "partial",
+            "status": "enumerated",
             "records": 7,
             "screen_version": 3,
-            "posts_scanned": 100,
-            "source_total_posts": 186,
-            "pages_fetched": 1,
+            "posts_scanned": 195,
+            "source_total_posts": 195,
+            "pages_fetched": 2,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T05:40:37.976752+00:00",
+            "last_attempt_at": "2026-10-17T11:09:00.005039+00:00",
             "error": null
           }
         ]
@@ -2492,7 +2492,7 @@
         "id": "gatoencerrado",
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
-        "status": "partial",
+        "status": "enumerated",
         "records": 59,
         "first_published_date": "2014-09-21",
         "last_published_date": "2018-09-03",
@@ -4906,19 +4906,19 @@
             "source_total_posts": 8,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T04:57:09.482968+00:00",
+            "last_attempt_at": "2026-10-17T11:09:00.005303+00:00",
             "error": null
           },
           {
             "month": "2026-10",
-            "status": "partial",
+            "status": "enumerated",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 2,
             "source_total_posts": 2,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T05:40:37.977055+00:00",
+            "last_attempt_at": "2026-10-17T11:09:00.005303+00:00",
             "error": null
           }
         ]
@@ -4927,7 +4927,7 @@
         "id": "factum",
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
-        "status": "partial",
+        "status": "enumerated",
         "records": 52,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
@@ -7341,19 +7341,19 @@
             "source_total_posts": 7,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T04:57:09.483329+00:00",
+            "last_attempt_at": "2026-10-17T11:09:00.005584+00:00",
             "error": null
           },
           {
             "month": "2026-10",
-            "status": "partial",
+            "status": "enumerated",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 0,
             "source_total_posts": 0,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T05:40:37.977327+00:00",
+            "last_attempt_at": "2026-10-17T11:09:00.005584+00:00",
             "error": null
           }
         ]
@@ -9797,7 +9797,7 @@
           "phase": "partial",
           "access": "public",
           "notice": "Selección parcial del especial de 2010 y páginas públicas actuales. Algunos enlaces antiguos restringen el acceso; no es una hemeroteca completa.",
-          "last_attempt_at": "2026-10-17T05:40:39.193342+00:00"
+          "last_attempt_at": "2026-10-17T11:09:02.604838+00:00"
         }
       },
       {
@@ -12226,20 +12226,20 @@
             "status": "partial",
             "records": 0,
             "screen_version": 3,
-            "posts_scanned": 21,
+            "posts_scanned": 22,
             "source_total_posts": null,
-            "pages_fetched": 21,
+            "pages_fetched": 22,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T04:57:12.543188+00:00",
+            "last_attempt_at": "2026-10-17T11:09:02.903022+00:00",
             "error": null
           }
         ],
         "collection": {
           "method": "html_article_metadata",
-          "phase": "partial",
+          "phase": "complete",
           "access": "public",
           "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible.",
-          "last_attempt_at": "2026-10-17T05:40:39.286921+00:00"
+          "last_attempt_at": "2026-10-17T11:09:02.903022+00:00"
         }
       },
       {
@@ -15214,11 +15214,11 @@
             "status": "partial",
             "records": 3,
             "screen_version": 3,
-            "posts_scanned": 43,
+            "posts_scanned": 110,
             "source_total_posts": null,
-            "pages_fetched": 43,
+            "pages_fetched": 110,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T04:57:13.168434+00:00",
+            "last_attempt_at": "2026-10-17T11:09:03.711746+00:00",
             "error": null
           },
           {
@@ -15358,11 +15358,11 @@
             "status": "partial",
             "records": 1,
             "screen_version": 3,
-            "posts_scanned": 79,
+            "posts_scanned": 116,
             "source_total_posts": null,
-            "pages_fetched": 79,
+            "pages_fetched": 116,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-17T05:40:39.341350+00:00",
+            "last_attempt_at": "2026-10-17T11:09:03.711746+00:00",
             "error": null
           },
           {
@@ -15370,11 +15370,11 @@
             "status": "partial",
             "records": 2,
             "screen_version": 3,
-            "posts_scanned": 25,
+            "posts_scanned": 71,
             "source_total_posts": null,
-            "pages_fetched": 25,
+            "pages_fetched": 71,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-14T21:55:35.230627+00:00",
+            "last_attempt_at": "2026-10-17T11:09:03.711746+00:00",
             "error": null
           },
           {
@@ -17123,7 +17123,7 @@
           "phase": "partial",
           "access": "public",
           "notice": "Recorrido reanudable de los sitemaps públicos del archivo. La fecha se consulta en cada artículo; lastmod no se utiliza como fecha de publicación.",
-          "last_attempt_at": "2026-10-17T05:40:39.341350+00:00"
+          "last_attempt_at": "2026-10-17T11:09:03.711746+00:00"
         }
       }
     ],
@@ -25779,17 +25779,17 @@
         "sources": [
           {
             "source_id": "co-latino",
-            "status": "partial",
+            "status": "enumerated",
             "records": 7
           },
           {
             "source_id": "gatoencerrado",
-            "status": "partial",
+            "status": "enumerated",
             "records": 0
           },
           {
             "source_id": "factum",
-            "status": "partial",
+            "status": "enumerated",
             "records": 0
           },
           {

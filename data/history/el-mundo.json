@@ -24,16 +24,41 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 21,
-      "pages_fetched": 21,
+      "posts_scanned": 22,
+      "pages_fetched": 22,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-17T04:57:12.543188+00:00",
+      "last_attempt_at": "2026-10-17T11:09:02.903022+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "0acd4da34d1af15d0b20555646c1602b97840960f7c255c9e02e663d0785bfc0",
+      "title": "Bukele aclara que beneficios carcelarios sería solo para unos 5,000 colaboradores de pandillas",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/bukele-aclara-que-beneficios-carcelarios-seria-solo-para-unos-5000-colaboradores-de-pandillas",
+      "published_date": "2026-10-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-17T11:09:02.903022+00:00"
+      }
+    },
     {
       "id": "fe1491a80cbc5a92c1d94a1fdb3eb63dc804fd4b8e39e3fbc8ff7bd15f66778f",
       "title": "Llega presidenta de Costa Rica a El Salvador para reunirse con Bukele y conocer cómo funciona el CECOT",
@@ -592,15 +617,15 @@
   ],
   "collection": {
     "method": "html_archive",
-    "phase": "partial",
+    "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-17T05:40:39.286921+00:00",
+    "last_attempt_at": "2026-10-17T11:09:02.903022+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
     ],
-    "index_cursor": 1,
+    "index_cursor": 2,
     "articles": [
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales",
       "https://diario.elmundo.sv/nacionales/mas-del-30-de-salvadorenos-aprueba-tortura-y-ejecuciones-extrajudiciales",
@@ -624,9 +649,10 @@
       "https://diario.elmundo.sv/nacionales/capturan-a-hombre-por-agredir-con-un-martillo-y-mantener-encerrada-a-su-companera-de-vida-en-ahuachapan",
       "https://diario.elmundo.sv/politica/llega-presidenta-de-costa-rica-a-el-salvador-para-reunirse-con-bukele-y-conocer-como-funciona-el-cecot",
       "https://diario.elmundo.sv/nacionales/pnc-captura-a-dos-mujeres-senaladas-de-transportar-cocaina-en-carretera-a-comalapa",
-      "https://diario.elmundo.sv/politica/presidenta-de-costa-rica-visita-la-carcel-simbolo-de-la-lucha-antipandillas-en-el-salvador"
+      "https://diario.elmundo.sv/politica/presidenta-de-costa-rica-visita-la-carcel-simbolo-de-la-lucha-antipandillas-en-el-salvador",
+      "https://diario.elmundo.sv/nacionales/bukele-aclara-que-beneficios-carcelarios-seria-solo-para-unos-5000-colaboradores-de-pandillas"
     ],
-    "article_cursor": 23,
+    "article_cursor": 24,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -765,6 +791,12 @@
         "published_date": "2026-10-16",
         "last_attempt_at": "2026-10-17T04:57:12.543188+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/bukele-aclara-que-beneficios-carcelarios-seria-solo-para-unos-5000-colaboradores-de-pandillas": {
+        "status": "selected",
+        "published_date": "2026-10-17",
+        "last_attempt_at": "2026-10-17T11:09:02.903022+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -776,7 +808,7 @@
         "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
         "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-17T05:40:39.286921+00:00"
+        "last_attempt_at": "2026-10-17T11:09:02.903022+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -785,7 +817,7 @@
         "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
         "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-17T04:57:12.543188+00:00"
+        "last_attempt_at": "2026-10-17T11:09:02.903022+00:00"
       }
     },
     "index_screen_version": 3
