@@ -57,7 +57,7 @@ class AutomaticLocationError(ValueError):
 
 def _timestamp(value):
     if not isinstance(value, str) or len(value) > 40 or not re.fullmatch(
-            r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})", value):
+            r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)", value):
         raise AutomaticLocationError("invalid_location_timestamp")
     parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     if parsed.utcoffset() is None:
@@ -95,7 +95,7 @@ def validate_collection(document, *, archive=None):
     """Validate the exact public allowlist; neither private wrapper nor quotes fit it."""
     try:
         if (not isinstance(document, dict) or set(document) != {"schema_version", "generated_at", "locations"}
-                or type(document["schema_version"]) is not int or document["schema_version"] not in {1, 2, 3, 4, 5}
+                or type(document["schema_version"]) not in (int, float) or document["schema_version"] not in {1, 2, 3, 4, 5}
                 or not isinstance(document["locations"], list) or len(document["locations"]) > MAX_ENTRIES):
             raise ValueError()
         _timestamp(document["generated_at"])
@@ -123,7 +123,7 @@ def validate_collection(document, *, archive=None):
                     or entry["method"] not in {"gemini_explicit_department", MUNICIPAL_METHOD, CORROBORATED_METHOD} | SOURCE_METHODS
                     or entry["candidate_id"] in identifiers or entry["source_url"] in urls):
                 raise ValueError()
-            if source_based and (document["schema_version"] not in {4, 5} or type(entry["rule_version"]) is not int
+            if source_based and (document["schema_version"] not in {4, 5} or type(entry["rule_version"]) not in (int, float)
                                  or entry["rule_version"] not in {1, 2}
                                  or (entry["rule_version"] == 2 and document["schema_version"] != 5)):
                 raise ValueError()
@@ -149,7 +149,7 @@ def validate_collection(document, *, archive=None):
                 if (document["schema_version"] not in {3, 4, 5} or not isinstance(proof, dict)
                         or set(proof) != CORROBORATION_KEYS
                         or proof["strategy"] != "same_article_explicit_department"
-                        or type(proof["rule_version"]) is not int or proof["rule_version"] != 1
+                        or type(proof["rule_version"]) not in (int, float) or proof["rule_version"] != 1
                         or any(not isinstance(proof[key], str) or not re.fullmatch(r"p[1-9][0-9]{0,2}", proof[key])
                                for key in ("model_paragraph_id", "explicit_paragraph_id"))
                         or proof["model_paragraph_id"] == proof["explicit_paragraph_id"]):
@@ -577,7 +577,7 @@ def validate_negative_cache(document, *, now=None):
     """Private cache stores only identity, source hash, a bounded retry and status."""
     try:
         if (not isinstance(document, dict) or set(document) != {"schema_version", "entries"}
-                or type(document["schema_version"]) is not int or document["schema_version"] != 1
+                or type(document["schema_version"]) not in (int, float) or document["schema_version"] != 1
                 or not isinstance(document["entries"], list) or len(document["entries"]) > MAX_ENTRIES):
             raise ValueError()
         instant = now or datetime.now(timezone.utc)
@@ -588,7 +588,7 @@ def validate_negative_cache(document, *, now=None):
                     or not isinstance(entry["id"], str) or not HEX.fullmatch(entry["id"])
                     or not isinstance(entry["selectionhash"], str) or not HEX.fullmatch(entry["selectionhash"])
                     or entry["status"] not in {"unresolved", "source_unavailable"}
-                    or type(entry["rule_version"]) is not int or not 1 <= entry["rule_version"] <= 1000
+                    or type(entry["rule_version"]) not in (int, float) or not 1 <= entry["rule_version"] <= 1000
                     or entry["id"] in seen):
                 raise ValueError()
             checked = datetime.fromisoformat(_timestamp(entry["checked_at"]).replace("Z", "+00:00"))

@@ -436,21 +436,27 @@ def validate_reference(reference, source):
     if set(reference) != required:
         raise ValueError("Unexpected fields in public bibliography")
     url = canonical_url(reference["source_url"], set(source["hosts"]))
-    if reference["id"] != hashlib.sha256(url.encode()).hexdigest():
+    if (reference["source_url"] != url or len(urlsplit(url).path) < 5
+            or reference["id"] != hashlib.sha256(url.encode()).hexdigest()):
         raise ValueError("Bibliography identity mismatch")
     if reference["review_status"] != "not_reviewed" or reference["jurisdiction_status"] != "not_reviewed" or reference["record_type"] != "news_reference":
         raise ValueError("Bibliography cannot publish reviewed cases")
     if reference["publisher"] != source["name"] or reference["source_id"] != source["id"]:
         raise ValueError("Bibliography publisher mismatch")
-    if not isinstance(reference["title"], str) or not reference["title"] or len(reference["title"]) > 180 or len(reference["title"].split()) > 24:
+    if (not isinstance(reference["title"], str) or not reference["title"].strip()
+            or len(reference["title"]) > 180 or len(reference["title"].split()) > 24
+            or type(reference["title_truncated"]) is not bool):
         raise ValueError("Bibliographic title exceeds quotation limit")
+    if (not isinstance(reference["published_date"], str)
+            or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", reference["published_date"])):
+        raise ValueError("Bibliography requires an explicit calendar date")
     date.fromisoformat(reference["published_date"])
     if not isinstance(reference["topics"], list) or not reference["topics"] or any(t not in TOPICS for t in reference["topics"]):
         raise ValueError("Invalid bibliography topic")
     if reference["scope_hint"] not in ("el_salvador", "international_context", "undetermined"):
         raise ValueError("Invalid geographic scope hint")
     terms = reference["scope_terms"]
-    if not isinstance(terms, list) or any(not isinstance(t, str) or not t or len(t) > 80 for t in terms):
+    if not isinstance(terms, list) or any(not isinstance(t, str) or not t.strip() or len(t) > 80 for t in terms):
         raise ValueError("Invalid geographic scope terms")
     if (reference["scope_hint"] == "undetermined") != (len(terms) == 0):
         raise ValueError("Scope hint must retain the terms supporting it")
@@ -460,8 +466,14 @@ def validate_reference(reference, source):
     if set(discovery) != {"method", "endpoint", "source_post_id", "retrieved_at"} or discovery["method"] != expected_method or discovery["endpoint"] != source["endpoint"]:
         raise ValueError("Invalid discovery metadata")
     post_id = discovery["source_post_id"]
-    if (wordpress or post_id is not None) and (type(post_id) is not int or post_id < 1):
+    if (wordpress or post_id is not None) and (
+            type(post_id) not in {int, float} or not 1 <= post_id <= 9_007_199_254_740_991
+            or int(post_id) != post_id):
         raise ValueError("Invalid source post identifier")
+    if (not isinstance(discovery["retrieved_at"], str) or not re.fullmatch(
+            r"\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)",
+            discovery["retrieved_at"])):
+        raise ValueError("Discovery requires an explicit time zone")
     datetime.fromisoformat(discovery["retrieved_at"])
 
 

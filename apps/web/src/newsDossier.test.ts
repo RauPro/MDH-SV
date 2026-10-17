@@ -1,3 +1,4 @@
+import { sourceId } from '../../../tests/source-identity-fixture.mjs';
 import { expect, it } from 'vitest';
 import fixture from './__fixtures__/newsArchive.json';
 import { NEWS_DOSSIER_FIELDS, newsDossierFor, parsePublishedNewsDossiers, pendingNewsDossier, validateDossierBindings, validatePublishedNewsDossier, type NewsDossier } from '../../../shared/news-dossier.mjs';
@@ -72,10 +73,14 @@ it.each([
 
 it.each(['source_url', 'publisher', 'published_date', 'candidate_id'] as const)('requires exact bibliography binding for %s', key => {
   const value = approved();
-  if (key === 'source_url') { value.source_url = 'https://www.diariocolatino.com/other-article/'; value.evidence[0].url = value.source_url; }
+  if (key === 'source_url') { value.source_url = 'https://www.diariocolatino.com/other-article/'; value.evidence[0].url = value.source_url; value.candidate_id = sourceId(value.source_url); }
   if (key === 'publisher') value.publisher = 'Otra editorial';
   if (key === 'published_date') value.published_date = '2026-10-07';
-  if (key === 'candidate_id') value.candidate_id = 'a'.repeat(64);
+  if (key === 'candidate_id') {
+    value.candidate_id = 'a'.repeat(64);
+    expect(() => parsePublishedNewsDossiers({ schema_version: 1, dossiers: [value] })).toThrow();
+    return;
+  }
   const index = parsePublishedNewsDossiers({ schema_version: 1, dossiers: [value] });
   expect(() => validateDossierBindings(index, fixture.records)).toThrow();
   expect(newsDossierFor(reference, index).human_reviewed).toBe(false);

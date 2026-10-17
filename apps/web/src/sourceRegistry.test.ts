@@ -1,3 +1,4 @@
+import { sourceId } from '../../../tests/source-identity-fixture.mjs';
 import { afterEach, expect, it, vi } from 'vitest';
 import registryDocument from '../../../shared/source-registry.json';
 import fixture from './__fixtures__/newsArchive.json';
@@ -18,7 +19,7 @@ it('accepts a new registered publisher in the archive and primary URL policy wit
   vi.doMock('../../../shared/source-registry.mjs', async importOriginal => {
     const actual = await importOriginal<typeof import('../../../shared/source-registry.mjs')>();
     const derived = actual.deriveSourceRegistry(registry);
-    return { ...actual, NEWS_PUBLISHERS: derived.publishers, NEWS_HOSTS: derived.newsHosts,
+    return { ...actual, NEWS_PUBLISHERS: derived.publishers, NEWS_SOURCES: derived.publishers, NEWS_HOSTS: derived.newsHosts,
       PRIMARY_SOURCE_HOSTS: derived.primarySourceHosts, PUBLISHER_HOSTS: derived.publisherHosts,
       HTML_PUBLISHERS: derived.htmlPublishers, SOURCE_FEEDS: derived.feeds };
   });
@@ -32,6 +33,7 @@ it('accepts a new registered publisher in the archive and primary URL policy wit
   source.publisher = reference.publisher = 'Synthetic Outlet';
   source.endpoint = reference.discovery.endpoint = 'https://synthetic.example.org/wp-json/wp/v2/posts';
   reference.source_url = 'https://synthetic.example.org/detenciones/';
+  reference.id = sourceId(reference.source_url);
   for (const month of value.coverage.months) {
     for (const entry of month.sources) if (entry.source_id === previousId) entry.source_id = source.id;
   }

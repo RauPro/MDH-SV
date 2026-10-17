@@ -1,3 +1,4 @@
+import { sourceId } from '../../../tests/source-identity-fixture.mjs';
 import { describe, expect, it } from 'vitest';
 import { NEWS_LOCATION_DEPARTMENTS, newsLocationFor, parsePublishedNewsLocations, validateLocationBindings, validatePublishedNewsLocation, type NewsLocation } from '../../../shared/news-location.mjs';
 import { DEPARTMENTS } from './geography/elSalvador';
@@ -195,6 +196,11 @@ describe('public automatic location contract', () => {
   });
   it.each(['source_url', 'publisher', 'published_date', 'candidate_id'] as const)('requires exact bibliography binding for %s', key => {
     const changed = { ...locationFixture(), [key]: key === 'published_date' ? '2026-10-01' : key === 'candidate_id' ? 'b'.repeat(64) : key === 'publisher' ? 'Otro medio' : 'https://www.diariocolatino.com/otra-noticia/' };
+    if (key === 'candidate_id' || key === 'publisher') {
+      expect(() => parsePublishedNewsLocations(collection([changed]))).toThrow();
+      return;
+    }
+    if (key === 'source_url') changed.candidate_id = sourceId(changed.source_url);
     const index = parsePublishedNewsLocations(collection([changed]));
     expect(() => validateLocationBindings(index, fixture.records)).toThrow();
     expect(newsLocationFor(reference, index)).toBeNull();

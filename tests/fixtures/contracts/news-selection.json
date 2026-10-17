@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "contract": "news-selection",
+  "bases": {
+    "automatic": {
+      "method": "gemini_grounded_scope",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "jurisdiction": "SV",
+      "relevance": "relevant",
+      "classified_at": "2025-05-02T12:00:00Z",
+      "model": "gemini-fixture",
+      "prompt_version": "mdh-news-scope-4-inclusive-violence",
+      "evidence": {
+        "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "jurisdiction_paragraph_ids": [
+          "p1"
+        ],
+        "relevance_paragraph_ids": [
+          "p2"
+        ]
+      }
+    },
+    "editorial": {
+      "method": "editorial_scope",
+      "review_status": "editorially_reviewed",
+      "human_reviewed": true,
+      "jurisdiction": "SV",
+      "relevance": "relevant",
+      "reviewed_by": "fixture-editor",
+      "reviewed_at": "2025-05-02"
+    }
+  },
+  "cases": [
+    {
+      "name": "automatic valid",
+      "base": "automatic",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "editorial valid",
+      "base": "editorial",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "private quote",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "evidence",
+            "quote"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "forged human approval",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "human_reviewed"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "string boolean",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "human_reviewed"
+          ],
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "unresolved jurisdiction",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "jurisdiction"
+          ],
+          "value": "unclear"
+        }
+      ]
+    },
+    {
+      "name": "unresolved relevance",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "relevance"
+          ],
+          "value": "unclear"
+        }
+      ]
+    },
+    {
+      "name": "unsupported prompt",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "prompt_version"
+          ],
+          "value": "unapproved"
+        }
+      ]
+    },
+    {
+      "name": "invalid source digest",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "evidence",
+            "content_sha256"
+          ],
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    {
+      "name": "empty support",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "evidence",
+            "relevance_paragraph_ids"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "duplicate paragraphs",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "evidence",
+            "jurisdiction_paragraph_ids"
+          ],
+          "value": [
+            "p1",
+            "p1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "zero paragraph",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "evidence",
+            "jurisdiction_paragraph_ids"
+          ],
+          "value": [
+            "p0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid calendar",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "classified_at"
+          ],
+          "value": "2025-02-30T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "invalid timezone",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "classified_at"
+          ],
+          "value": "2025-05-02T12:00:00+24:00"
+        }
+      ]
+    },
+    {
+      "name": "private envelope",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "private_draft"
+          ],
+          "value": {}
+        }
+      ]
+    },
+    {
+      "name": "missing actor",
+      "base": "editorial",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "reviewed_by"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid actor",
+      "base": "editorial",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "reviewed_by"
+          ],
+          "value": "../editor"
+        }
+      ]
+    },
+    {
+      "name": "editorial impossible date",
+      "base": "editorial",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "reviewed_at"
+          ],
+          "value": "2025-02-30"
+        }
+      ]
+    },
+    {
+      "name": "editorial automatic status",
+      "base": "editorial",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "review_status"
+          ],
+          "value": "automated_unreviewed"
+        }
+      ]
+    },
+    {
+      "name": "editorial extra evidence",
+      "base": "editorial",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "evidence"
+          ],
+          "value": {}
+        }
+      ]
+    },
+    {
+      "name": "timezone minutes cannot overflow",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "classified_at"
+          ],
+          "value": "2025-05-02T12:00:00+01:99"
+        }
+      ]
+    }
+  ]
+}

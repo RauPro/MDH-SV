@@ -1,0 +1,686 @@
+{
+  "schema_version": 1,
+  "contract": "news-reference",
+  "bases": {
+    "reference": {
+      "id": "e2887327f8b3644aef38dec5c8e48c6d3f7ab685382afeac7152b42065bea4e5",
+      "title": "Crecimiento económico contrasta con pobreza y crisis de pensiones en El Salvador, afirman periodistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/crecimiento-economico-contrasta-con-pobreza-y-crisis-de-pensiones-en-el-salvador-afirman-periodistas/",
+      "published_date": "2026-10-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420393,
+        "retrieved_at": "2026-10-10T04:47:37.520054+00:00"
+      },
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-10T10:00:00Z",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-8-relevance-scope",
+        "evidence": {
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "valid selected reference",
+      "base": "reference",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "valid private candidate metadata without selection",
+      "base": "reference",
+      "valid": true,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "selection"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "private field at root",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "private_quote"
+          ],
+          "value": "Datos ficticios"
+        }
+      ]
+    },
+    {
+      "name": "private field at discovery",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "discovery",
+            "private_quote"
+          ],
+          "value": "Datos ficticios"
+        }
+      ]
+    },
+    {
+      "name": "private field at selection",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "selection",
+            "private_quote"
+          ],
+          "value": "Datos ficticios"
+        }
+      ]
+    },
+    {
+      "name": "missing id",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing source_url",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "source_url"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing title_truncated",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "title_truncated"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing published_date",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "published_date"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "missing discovery",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "discovery"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid id 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "id"
+          ],
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    {
+      "name": "invalid publisher 'Unregistered publisher'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publisher"
+          ],
+          "value": "Unregistered publisher"
+        }
+      ]
+    },
+    {
+      "name": "invalid source_id 'unregistered'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_id"
+          ],
+          "value": "unregistered"
+        }
+      ]
+    },
+    {
+      "name": "invalid title '   '",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "title"
+          ],
+          "value": "   "
+        }
+      ]
+    },
+    {
+      "name": "invalid title 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "title"
+          ],
+          "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "name": "invalid title 'word word word word word word word word word word word word word word word word word word word word word word word word word '",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "title"
+          ],
+          "value": "word word word word word word word word word word word word word word word word word word word word word word word word word "
+        }
+      ]
+    },
+    {
+      "name": "invalid title_truncated 'false'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "title_truncated"
+          ],
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "invalid title_truncated 0",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "title_truncated"
+          ],
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "invalid review_status 'reviewed'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "review_status"
+          ],
+          "value": "reviewed"
+        }
+      ]
+    },
+    {
+      "name": "invalid jurisdiction_status 'confirmed'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "jurisdiction_status"
+          ],
+          "value": "confirmed"
+        }
+      ]
+    },
+    {
+      "name": "invalid record_type 'incident'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "record_type"
+          ],
+          "value": "incident"
+        }
+      ]
+    },
+    {
+      "name": "invalid topics []",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "topics"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "invalid topics ['invented']",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "topics"
+          ],
+          "value": [
+            "invented"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid scope_hint 'confirmed'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "scope_hint"
+          ],
+          "value": "confirmed"
+        }
+      ]
+    },
+    {
+      "name": "invalid scope_terms []",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "scope_terms"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "invalid scope_terms [' ']",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "scope_terms"
+          ],
+          "value": [
+            " "
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid scope_terms ['xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx']",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "scope_terms"
+          ],
+          "value": [
+            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid published_date '20260101'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "published_date"
+          ],
+          "value": "20260101"
+        }
+      ]
+    },
+    {
+      "name": "invalid published_date '2026-02-30'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "published_date"
+          ],
+          "value": "2026-02-30"
+        }
+      ]
+    },
+    {
+      "name": "invalid published_date 0",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "published_date"
+          ],
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "invalid canonical source https://www.diariocolatino.com/crecimiento-economico-contrasta-con-pobreza-y-crisis-de-pensiones-en-el-salvador-afirman-periodistas/?utm_source=test",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://www.diariocolatino.com/crecimiento-economico-contrasta-con-pobreza-y-crisis-de-pensiones-en-el-salvador-afirman-periodistas/?utm_source=test"
+        }
+      ]
+    },
+    {
+      "name": "invalid canonical source https://www.diariocolatino.com/crecimiento-economico-contrasta-con-pobreza-y-crisis-de-pensiones-en-el-salvador-afirman-periodistas/#article",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://www.diariocolatino.com/crecimiento-economico-contrasta-con-pobreza-y-crisis-de-pensiones-en-el-salvador-afirman-periodistas/#article"
+        }
+      ]
+    },
+    {
+      "name": "invalid canonical source https://www.diariocolatino.com/x",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://www.diariocolatino.com/x"
+        }
+      ]
+    },
+    {
+      "name": "invalid canonical source https://www.diariocolatino.com:443/article/",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://www.diariocolatino.com:443/article/"
+        }
+      ]
+    },
+    {
+      "name": "invalid canonical source https://unapproved.example/article/",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "source_url"
+          ],
+          "value": "https://unapproved.example/article/"
+        }
+      ]
+    },
+    {
+      "name": "invalid discovery method 'wordpress_html'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "method"
+          ],
+          "value": "wordpress_html"
+        }
+      ]
+    },
+    {
+      "name": "invalid discovery endpoint 'https://unapproved.example/api'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "endpoint"
+          ],
+          "value": "https://unapproved.example/api"
+        }
+      ]
+    },
+    {
+      "name": "invalid discovery source_post_id True",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "source_post_id"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "invalid discovery source_post_id 0",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "source_post_id"
+          ],
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "invalid discovery source_post_id 9007199254740992",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "source_post_id"
+          ],
+          "value": 9007199254740992
+        }
+      ]
+    },
+    {
+      "name": "invalid discovery retrieved_at '2026-10-10'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "retrieved_at"
+          ],
+          "value": "2026-10-10"
+        }
+      ]
+    },
+    {
+      "name": "invalid discovery retrieved_at '2026-10-10T12:00:00'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "retrieved_at"
+          ],
+          "value": "2026-10-10T12:00:00"
+        }
+      ]
+    },
+    {
+      "name": "invalid discovery retrieved_at '2026-10-10T12:00:00+24:00'",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "retrieved_at"
+          ],
+          "value": "2026-10-10T12:00:00+24:00"
+        }
+      ]
+    },
+    {
+      "name": "integral JSON post identifier",
+      "base": "reference",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "source_post_id"
+          ],
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "name": "fractional post identifier",
+      "base": "reference",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "discovery",
+            "source_post_id"
+          ],
+          "value": 1.5
+        }
+      ]
+    }
+  ]
+}

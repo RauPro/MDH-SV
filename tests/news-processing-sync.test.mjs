@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { reconcileNewsProcessing } from '../apps/web/scripts/sync-news-processing.mjs';
 
 const source = 'https://www.diariocolatino.com/noticia-de-prueba/';
-const reference = { id: 'a'.repeat(64), source_url: source, publisher: 'Diario Co Latino', published_date: '2015-01-02',
+const identifier = url => createHash('sha256').update(url).digest('hex');
+const reference = { id: identifier(source), source_url: source, publisher: 'Diario Co Latino', published_date: '2015-01-02',
   selection: { method: 'gemini_grounded_scope', evidence: { content_sha256: 'b'.repeat(64) } } };
 const entry = { candidate_id: reference.id, source_url: source, publisher: reference.publisher, published_date: reference.published_date,
   selection_content_sha256: 'b'.repeat(64), status: 'generated' };
@@ -15,7 +17,7 @@ test('public refresh preserves valid processing status without manufacturing a n
 });
 
 test('new news references do not become pending without a private inventory check', () => {
-  const another = { ...reference, id: 'c'.repeat(64), source_url: source + 'otra/' };
+  const another = { ...reference, id: identifier(source + 'otra/'), source_url: source + 'otra/' };
   assert.deepEqual(reconcileNewsProcessing(snapshot(), [reference, another]), snapshot());
 });
 

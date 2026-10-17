@@ -33,7 +33,8 @@ def _text(value, maximum):
 
 def _host(value):
     return (isinstance(value, str) and len(value) <= 253 and "." in value
-            and not value.rsplit(".", 1)[-1].isdigit()
+            and not re.fullmatch(r"(?:[0-9]+|0x[0-9a-f]*)", value.rsplit(".", 1)[-1])
+            and not any(label.startswith("xn--") for label in value.split("."))
             and all(re.fullmatch(r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?", label)
                     for label in value.split(".")))
 

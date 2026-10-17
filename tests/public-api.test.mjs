@@ -12,6 +12,7 @@ import fixtureArchive from '../apps/web/src/__fixtures__/newsArchive.json' with 
 import { assertSelectedNewsArchive, validateNewsSelection } from '../shared/news-selection.mjs';
 import { NEWS_PROCESSING_STATUSES } from '../shared/news-processing.mjs';
 import municipalityReference from '../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json' with { type: 'json' };
+import { recountArchive } from './source-identity-fixture.mjs';
 
 let server, base;
 before(async () => {
@@ -20,7 +21,7 @@ before(async () => {
   base = `http://127.0.0.1:${server.address().port}`;
 });
 after(async () => { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); });
-const selectedArchive = (records, base = fixtureArchive) => ({ ...base, coverage: { ...base.coverage, records: records.length }, policy: { ...base.policy, selection_gate: { ...base.policy.selection_gate, selected: records.length, candidates: Math.max(base.policy.selection_gate.candidates, records.length) } }, records });
+const selectedArchive = (records, base = fixtureArchive) => recountArchive({ ...structuredClone(base), records: structuredClone(records) });
 const get = async path => { const response = await fetch(`${base}${path}`); return { response, body: await response.json() }; };
 
 async function vercelRequest(handler, url, query = {}) {
@@ -123,7 +124,7 @@ test('stats preserve record units and disclose documentary review', async () => 
 });
 
 test('news is a separate metadata archive with coverage and explicit unreviewed state', () => {
-  const archive = selectedArchive([{ ...fixtureArchive.records[0], topics: ['detención'] }]);
+  const archive = selectedArchive([{ ...fixtureArchive.records[0], topics: ['detencion_y_debido_proceso'] }]);
   const result = searchNews({ q: 'detencion' }, archive);
   assert.equal(result.data[0].review_status, 'not_reviewed');
   assert.equal(result.meta.coverage.status, 'partial');
@@ -133,7 +134,7 @@ test('news is a separate metadata archive with coverage and explicit unreviewed 
 });
 
 test('every selected news result has a worksheet regardless of discovery hint, without inferring public dossier fields', () => {
-  const current = selectedArchive(fixtureArchive.records.map((reference, index) => ({ ...reference, scope_hint: ['el_salvador', 'international_context', 'undetermined'][index] })));
+  const current = selectedArchive(fixtureArchive.records.map((reference, index) => ({ ...reference, scope_hint: ['el_salvador', 'international_context', 'undetermined'][index], scope_terms: index === 2 ? [] : reference.scope_terms })));
   for (const scope of ['el_salvador', 'international_context', 'undetermined']) {
     const response = searchNews({ scope_hint: scope, limit: 2 }, current, { schema_version: 1, dossiers: [] });
     assert.ok(response.data.length > 0);

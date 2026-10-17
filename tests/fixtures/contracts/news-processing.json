@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "contract": "news-processing",
+  "bases": {
+    "generated": {
+      "schema_version": 1,
+      "generated_at": "2025-05-02T12:00:00Z",
+      "entries": [
+        {
+          "candidate_id": "2c4374a373845de53df4559a1ffd9818dc710d708066f92bbb59cb660b50021a",
+          "source_url": "https://www.diariocolatino.com/contract-fixture/",
+          "publisher": "Diario Co Latino",
+          "published_date": "2025-05-01",
+          "selection_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "status": "generated"
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "generated valid",
+      "base": "generated",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "unknown without content hash",
+      "base": "generated",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "selection_content_sha256"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "empty snapshot",
+      "base": "generated",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "wrong URL identity",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "candidate_id"
+          ],
+          "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "name": "untrusted source",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "source_url"
+          ],
+          "value": "https://untrusted.example/article/"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "candidate_id"
+          ],
+          "value": "e2e98594405df9eb37b440d619a8724b5b24c2642567d0ae8f90beb4cb382656"
+        }
+      ]
+    },
+    {
+      "name": "homepage",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "source_url"
+          ],
+          "value": "https://www.diariocolatino.com/"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "candidate_id"
+          ],
+          "value": "a68245cb4646184216725deb5e9237007fa253b403efbf431878d80e258b82d1"
+        }
+      ]
+    },
+    {
+      "name": "private fields",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "entries",
+            0,
+            "fields"
+          ],
+          "value": {
+            "facts": "PRIVATE_FIXTURE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "private envelope",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "private_draft"
+          ],
+          "value": "PRIVATE_FIXTURE"
+        }
+      ]
+    },
+    {
+      "name": "invalid status",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "status"
+          ],
+          "value": "reviewed"
+        }
+      ]
+    },
+    {
+      "name": "generated without content hash",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "selection_content_sha256"
+          ],
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "invalid content hash",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "selection_content_sha256"
+          ],
+          "value": "bad"
+        }
+      ]
+    },
+    {
+      "name": "invalid calendar",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "published_date"
+          ],
+          "value": "2025-02-30"
+        }
+      ]
+    },
+    {
+      "name": "blank publisher",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "publisher"
+          ],
+          "value": "   "
+        }
+      ]
+    },
+    {
+      "name": "duplicate source",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "entries",
+            1
+          ],
+          "value": {
+            "candidate_id": "2c4374a373845de53df4559a1ffd9818dc710d708066f92bbb59cb660b50021a",
+            "source_url": "https://www.diariocolatino.com/contract-fixture/",
+            "publisher": "Diario Co Latino",
+            "published_date": "2025-05-01",
+            "selection_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "status": "generated"
+          }
+        }
+      ]
+    },
+    {
+      "name": "string version",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "boolean version",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "invalid timestamp",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "generated_at"
+          ],
+          "value": "2025-05-02"
+        }
+      ]
+    },
+    {
+      "name": "invalid timezone",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "generated_at"
+          ],
+          "value": "2025-05-02T12:00:00+24:00"
+        }
+      ]
+    },
+    {
+      "name": "semantic JSON integer version",
+      "base": "generated",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "schema_version"
+          ],
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "name": "timezone minutes cannot overflow",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "generated_at"
+          ],
+          "value": "2025-05-02T12:00:00+01:99"
+        }
+      ]
+    },
+    {
+      "name": "exact source authority rejects default HTTPS port",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "source_url"
+          ],
+          "value": "https://www.hrw.org:443/report"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "candidate_id"
+          ],
+          "value": "94c88c87c968bbca1945768637bbdc68d3bd62b408b8e7d6d5558db594af9681"
+        }
+      ]
+    },
+    {
+      "name": "exact source authority rejects empty userinfo",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "source_url"
+          ],
+          "value": "https://@www.hrw.org/report"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "candidate_id"
+          ],
+          "value": "28db44b599bb14eedda9fb0c06b5e0a52cbf0a52dc406b6b8a509c2c3f3983e6"
+        }
+      ]
+    },
+    {
+      "name": "exact source authority rejects embedded source control",
+      "base": "generated",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "source_url"
+          ],
+          "value": "https://www.hrw.org/re\nport"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "entries",
+            0,
+            "candidate_id"
+          ],
+          "value": "e533e750a01f0f41cc35880558d3d5b9c7cc5ed464f438f54c1d58db2df0ab49"
+        }
+      ]
+    }
+  ]
+}

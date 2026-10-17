@@ -846,6 +846,236 @@
           ]
         }
       ]
+    },
+    {
+      "name": "hexadecimal IPv4 notation",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "127.0.0.0x1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "hexadecimal final label",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "example.0x1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty hexadecimal final label",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "example.0x"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "abbreviated IPv4 notation",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "127.1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "octal IPv4 notation",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "0177.0.0.1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "single numeric address",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "2130706433"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IPv6 literal",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "[::1]"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "punycode requires explicit future policy",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "xn--bcher-kva.example"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "malformed punycode",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "xn--a.example"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Unicode domain",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "caf\u00e9.example"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "uppercase host is not canonical",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "Evidence.example.org"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "trailing dot is not canonical",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "primary_evidence_hosts"
+          ],
+          "value": [
+            "evidence.example.org."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ambiguous publisher hostname and matching URLs",
+      "base": "minimal",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "hosts"
+          ],
+          "value": [
+            "127.0.0.0x1"
+          ]
+        },
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "endpoint"
+          ],
+          "value": "https://127.0.0.0x1/posts"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "publishers",
+            0,
+            "feeds",
+            0,
+            "url"
+          ],
+          "value": "https://127.0.0.0x1/feed/"
+        }
+      ]
     }
   ]
 }

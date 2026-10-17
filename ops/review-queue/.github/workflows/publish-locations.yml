@@ -67,6 +67,8 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
+      - name: Instalar validadores compartidos desde código aprobado
+        run: npm --prefix monitor ci --omit=dev --ignore-scripts
       - name: Instalar entorno fijado
         run: pip install -r monitor/ops/review-queue/requirements.txt
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -212,6 +214,8 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
+      - name: Instalar validadores compartidos desde código aprobado
+        run: npm --prefix monitor ci --omit=dev --ignore-scripts
       - name: Instalar validador fijado
         run: pip install -r monitor/ops/review-queue/requirements.txt
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0

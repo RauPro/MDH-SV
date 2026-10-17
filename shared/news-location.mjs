@@ -1,4 +1,5 @@
 import { safeSource } from './news-dossier.mjs';
+import { canonicalNewsSource, sourceIdentityMatches } from './news-identity.mjs';
 import municipalityReference from '../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json' with { type: 'json' };
 
 export const NEWS_LOCATION_DEPARTMENTS = Object.freeze(['Ahuachapán', 'Santa Ana', 'Sonsonate', 'Chalatenango', 'La Libertad', 'San Salvador', 'Cuscatlán', 'La Paz', 'Cabañas', 'San Vicente', 'Usulután', 'San Miguel', 'Morazán', 'La Unión']);
@@ -45,7 +46,8 @@ export function validatePublishedNewsLocation(value) {
   const municipal = object(value) && ['gemini_municipality_reference', 'source_municipality_reference'].includes(value.method);
   const corroborated = object(value) && value.method === 'gemini_department_corroborated';
   if (!exact(value, ['candidate_id', 'source_url', 'publisher', 'published_date', 'review_status', 'human_reviewed', 'method', 'extracted_at', 'source_checked_at', 'evidence', ...(plural ? ['rule_version', 'mentions'] : ['department', ...(sourceOnly ? ['rule_version'] : []), ...(municipal ? ['resolution'] : corroborated ? ['corroboration'] : [])])])
-    || !sha(value.candidate_id) || !safeSource(value.source_url) || value.source_url.length > 4096 || new URL(value.source_url).pathname.length < 5
+    || !sourceIdentityMatches(value.candidate_id, value.source_url) || !safeSource(value.source_url) || value.source_url.length > 4096 || new URL(value.source_url).pathname.length < 5
+    || canonicalNewsSource(value.source_url)?.name !== value.publisher
     || typeof value.publisher !== 'string' || value.publisher.trim().length < 3 || value.publisher.length > 200
     || !date(value.published_date) || (!plural && !NEWS_LOCATION_DEPARTMENTS.includes(value.department))
     || value.review_status !== 'automated_unreviewed' || value.human_reviewed !== false || !['gemini_explicit_department','gemini_municipality_reference','gemini_department_corroborated','source_explicit_department','source_municipality_reference','source_administrative_mentions'].includes(value.method)

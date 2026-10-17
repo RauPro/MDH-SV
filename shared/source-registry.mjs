@@ -9,7 +9,8 @@ const exact = (value, keys) => object(value) && Object.keys(value).length === ke
 const text = (value, maximum) => typeof value === 'string' && [...value].length > 0 && [...value].length <= maximum
   && value.trim() === value && !/[\u0000-\u001f\u007f]/u.test(value);
 const host = value => typeof value === 'string' && value.length <= 253 && value.includes('.') && !/\s/u.test(value)
-  && !/^[0-9]+$/.test(value.split('.').at(-1))
+  && !/^(?:[0-9]+|0x[0-9a-f]*)$/.test(value.split('.').at(-1))
+  && !value.split('.').some(label => label.startsWith('xn--'))
   && value.split('.').every(label => /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(label));
 const fail = () => { throw new Error('Invalid source registry.'); };
 const unique = values => new Set(values).size === values.length;

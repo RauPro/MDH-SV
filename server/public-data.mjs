@@ -1,8 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
 import { parseCatalog } from '../shared/catalog.mjs';
+import { parseNewsArchive } from '../shared/news-archive.mjs';
 import { NEWS_DOSSIER_PROTECTED_TITLE, newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
-import { assertSelectedNewsArchive, isSelectedNewsReference } from '../shared/news-selection.mjs';
+import { isSelectedNewsReference } from '../shared/news-selection.mjs';
 import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
 import { newsProcessingFor, parseNewsProcessing } from '../shared/news-processing.mjs';
 
@@ -79,8 +80,7 @@ export function loadNews() {
   if (!newsCache) {
     try {
       const news = JSON.parse(readFileSync(new URL('../apps/web/public/archive/news.json', import.meta.url), 'utf8'));
-      assertSelectedNewsArchive(news);
-      newsCache = news;
+      newsCache = parseNewsArchive(news);
     } catch (error) {
       if (error.code === 'ENOENT') throw new ApiError(503, 'archive_unavailable', 'El archivo de noticias no está disponible en este despliegue.');
       throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.');
@@ -179,7 +179,7 @@ export function getRecord(id, catalog = loadCatalog()) {
   return { data: record, meta: metadata(catalog) };
 }
 export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload, processingPayload) {
-  try { assertSelectedNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
+  try { archive = parseNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
   const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
   const eligible = archive.records.filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index))).map(reference => {
     const dossier = newsDossierFor(reference, snapshot.index);

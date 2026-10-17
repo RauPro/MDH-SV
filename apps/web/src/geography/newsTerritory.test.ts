@@ -1,3 +1,4 @@
+import { sourceId } from '../../../../tests/source-identity-fixture.mjs';
 import { describe, expect, it } from 'vitest';
 import { pendingNewsDossier, type NewsDossier, type NewsDossierFieldStatus } from '../../../../shared/news-dossier.mjs';
 import type { NewsLocation } from '../../../../shared/news-location.mjs';
@@ -82,7 +83,7 @@ describe('news territory with a reviewed public source', () => {
 
   it('separates counts and reasons without changing the source data or inferring from hints', () => {
     const references = Array.from({ length: 6 }, (_, offset): NewsReference => ({
-      ...reference, id: String(offset).repeat(64), source_url: `${reference.source_url}?fixture=${offset}`,
+      ...reference, id: sourceId(`${reference.source_url}fixture-${offset}/`), source_url: `${reference.source_url}fixture-${offset}/`,
     }));
     const dossiers = references.slice(0, 5).map(source => approved(source));
     dossiers[1].fields.department.value = 'Sonsonate';
