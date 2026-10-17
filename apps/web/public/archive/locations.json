@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-17T01:19:06.114641+00:00",
+  "generated_at": "2026-10-17T03:19:24.172539+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -6180,6 +6180,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "d813189b5f547a7b28a144a4264262b8facc85d28dcb853d80135073adc6806f",
+      "source_url": "https://www.diariocolatino.com/san-jose-las-flores-dijo-no-a-la-mineria-metalica-en-su-territorio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-22",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-16T02:14:33.740672-06:00",
+      "source_checked_at": "2026-10-17T03:19:13.214316+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "e8f763b05150bc36b32849094f764eb7933e30f046d85cc1566643c4a5084e8e"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San José Las Flores",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
     },
     {

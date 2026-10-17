@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T02:16:41.430396+00:00",
+  "generated_at": "2026-10-17T03:16:51.815554+00:00",
   "assessment_counts": {
     "candidates": 12165,
     "evaluated": 4889,
-    "relevant": 1774,
-    "excluded": 206,
-    "uncertain": 2909,
+    "relevant": 1785,
+    "excluded": 214,
+    "uncertain": 2890,
     "pending": 7276
   },
   "selections": [
@@ -138,6 +138,34 @@
           "relevance_paragraph_ids": [
             "p1",
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "00b8463d9af2f73fc9bb6e2d4fce83ad33d1dfc00a7bc1f602fcbcae001d036c",
+      "source_url": "https://www.diariocolatino.com/juzgado-giro-a-pnc-ordenes-de-detencion-contra-ex-presidente-francisco-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a4c2d7f449dc47dec5ab1d3575a6369ecf2ebac9c74e7a6e6e5c97cf6f63294c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
           ]
         }
       }
@@ -2644,6 +2672,31 @@
             "p6",
             "p7",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "0cba993719994c36715b1b0cdce460b25176c7027ab1766bbfc6f766ddc7e472",
+      "source_url": "https://www.diariocolatino.com/detienen-a-cadete-de-escuela-militar-vinculado-a-pandillas-y-homicidio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fd259f4a2ae8422dcf390f53c467f9e89361333fe931dc6ec4b7b420f9d593db",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }
@@ -8108,6 +8161,34 @@
             "p4",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2b48a85548a2b5d81a6375b8780c816b2c52ff2c06ce8f8ad5c8b47074e5d917",
+      "source_url": "https://www.diariocolatino.com/mandatario-anuncia-preparacion-de-plan-contingencial-para-reducir-asesinatos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "29ee69dd3dda8a84cf55b7960448d314c6a81479bebe152a245f88dd13927ed7",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p7"
           ]
         }
       }
@@ -15749,6 +15830,34 @@
       }
     },
     {
+      "candidate_id": "554b0b8827c7a92c1f1ea8815eabdd2159ef08a077047b4ca7018c58d6e51ec2",
+      "source_url": "https://www.diariocolatino.com/cadete-de-escuela-militar-vinculado-a-pandillas-y-homicidio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2bff6598921f7d640e90a4edf852d47e941bab91536ec8be21d16392a5252865",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "55592fa909338b8f2ddd38dc23f9f77a33cfc2f07c73be3c6596d282e622d942",
       "source_url": "https://www.diariocolatino.com/apes-apuesta-fortalecer-derechos-humanos-en-el-ambito-periodistico/",
       "publisher": "Diario Co Latino",
@@ -16570,6 +16679,34 @@
       }
     },
     {
+      "candidate_id": "59a586e1f58bca444d16eca7b1aa45a6b4ce15c4dcf5589773268ef50316f62a",
+      "source_url": "https://www.diariocolatino.com/pnc-realiza-capturas-en-diversas-zonas-del-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "bfba13fe28f1058abb39fd06aaf8833a97cf7ba3f3015631833ae54e73d2e0dc",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p12",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "59a9ad8a8da76f1bd8e0ec66a6efb86390414a126f7faa8d3d3bf9984af41432",
       "source_url": "https://www.diariocolatino.com/el-mito-y-los-retos-de-la-mineria-verde-en-el-salvador/",
       "publisher": "Diario Co Latino",
@@ -17315,6 +17452,34 @@
             "p2",
             "p3",
             "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "5caf5eb2940d2b1c03eaaa95b832624dd2a1da0b5e24616d3be952508df516e4",
+      "source_url": "https://www.diariocolatino.com/homicidios-en-zacatecoluca-ligados-a-pugna-interna-de-pandilla-18/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2a0a953cff1e774fddc8cc2583c978a7fbe6284576b7bca3f8fe5a83f8a5a367",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
             "p8"
           ]
         }
@@ -25811,6 +25976,33 @@
       }
     },
     {
+      "candidate_id": "829d37bd44277058036d023d24c5bfd7ebb7a648b83b346eabb2e49fce8ddc2b",
+      "source_url": "https://historico.elsalvador.com/historico/125702/capturan-a-salvadoreno-acusado-de-estafar-a-48-municipalidades-de-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-04-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "12302973abaa3634850da05e8f6be618dfda1977e2e43532fe80af161a78d351",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "82a8cdd9f6122a2fedcbf33839244d3c65c6e03ac8a27d58c2ec74e91d9851b5",
       "source_url": "https://www.diariocolatino.com/probusqueda-presenta-siete-habeas-corpus-de-victimas-de-guinda-de-mayo/",
       "publisher": "Diario Co Latino",
@@ -28960,6 +29152,33 @@
           "relevance_paragraph_ids": [
             "p9",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "9224d66b60684d22998addf83e000a8f8a26dae761299a2df1854c22e677e9cd",
+      "source_url": "https://www.diariocolatino.com/fgr-gira-orden-de-captura-en-contra-de-presidente-francisco-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5eaf5a132b8ae49e3a9bf0b768820362c2845b2459f1ba394810f7285af1d25c",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -35145,6 +35364,34 @@
             "p3",
             "p4",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b1195de9116c69a4da0fa55d5f315dd7279ccd610fbd1d16a3754f121efc0ce0",
+      "source_url": "https://www.diariocolatino.com/norman-quijano-toma-distancia-de-la-orden-de-captura-de-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8948af17359efcb5076d29cf0526409fe0b8385d1099da504ad363c3e44d3a79",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p6",
+            "p10"
           ]
         }
       }
@@ -43729,6 +43976,33 @@
       }
     },
     {
+      "candidate_id": "dd883355824f8fb1533d83ad49f6cedd8fa2bcd98d5ee6a9fcafb61b49b4d738",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-captura-de-expresidente-flores-y-embargo-de-bienes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "4e6bdb6119d312fffdf2ee15359a7f4dd60688ec8d89c84a5b6b210a2a07fe38",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "ddc998b7525684ca2e527a459db0d399fa1b0e849f500e1dd42fac43717f80cd",
       "source_url": "https://www.diariocolatino.com/en-el-dia-de-la-libertad-de-prensa-2/",
       "publisher": "Diario Co Latino",
@@ -46205,6 +46479,33 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ed0d8bb0f712a2c0e590e97365480e41fee6c131e92592a2a0bd2f6fe298b4a3",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-adolescente-presuntamente-vinculado-a-pandillas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-04-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T21:09:35.077045-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d5e51c9d8553721efce5561debf4f56baa96e8cc94383cdbdb56cbaa91f5cb00",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p17"
           ]
         }
       }
