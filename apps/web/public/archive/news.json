@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T01:16:40.562229+00:00",
+  "generated_at": "2026-10-17T02:16:44.203866+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12165,
-      "selected": 1770,
+      "selected": 1774,
       "evaluated": 4889,
-      "relevant": 1770,
-      "excluded": 198,
-      "uncertain": 2921,
+      "relevant": 1774,
+      "excluded": 206,
+      "uncertain": 2909,
       "pending": 7276,
-      "evaluated_at": "2026-10-17T01:16:38.501630+00:00"
+      "evaluated_at": "2026-10-17T02:16:41.430396+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-16",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1770,
+    "records": 1774,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1440,
+        "records": 1444,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -677,7 +677,7 @@
           {
             "month": "2014-04",
             "status": "enumerated",
-            "records": 27,
+            "records": 31,
             "screen_version": 3,
             "posts_scanned": 937,
             "source_total_posts": 937,
@@ -19325,12 +19325,12 @@
         "month": "2014-04",
         "start_date": "2014-04-01",
         "end_date": "2014-04-30",
-        "records": 28,
+        "records": 32,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 27
+            "records": 31
           },
           {
             "source_id": "gatoencerrado",
@@ -89277,16 +89277,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:16:04.200234-06:00",
+        "classified_at": "2026-10-16T20:16:02.264147-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6fb18a70a668d25fdcab0a405714c76d8f84adfa5696866b5761bad93b4efd55",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
+            "p2",
             "p3"
           ]
         }
@@ -89320,9 +89320,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T20:15:48.199560-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "5854a345fabf449051327d5bc079747f401efdcb9623bfaa6673499dfa8de4ac",
           "jurisdiction_paragraph_ids": [
@@ -89330,9 +89330,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p6"
+            "p3"
           ]
         }
       }
@@ -89367,22 +89365,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T19:14:56.896188-06:00",
+        "classified_at": "2026-10-16T20:14:02.060923-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d81da248d1970c5bc1321a0d96ff67dbafd0f4c08977c72b9965307d1e3cef40",
           "jurisdiction_paragraph_ids": [
             "p6",
-            "p10",
-            "p14"
+            "p10"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4",
-            "p12",
-            "p13",
             "p14"
           ]
         }
@@ -98269,6 +98261,141 @@
       }
     },
     {
+      "id": "5031da722a85cda2ecb6fc857af1c10f2dd8120ad6079078084698411b26d3ea",
+      "title": "Mandatario anuncia preparación de plan contigencial para reducir asesinatos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mandatario-anuncia-preparacion-de-plan-contigencial-para-reducir-asesinatos/",
+      "published_date": "2014-04-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13389,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T20:09:21.825461-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d58d0647d14166be08a6990540b44745dbb46d09ccceb84d093e84d2df6769b4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "acaaed8a54e292c16704a4d6437a33d01640b6361764566e2a0adb7242986213",
+      "title": "Pandilleros asesinan a padre e hijos en Zacatecoluca",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-ministro-de-justicia-y-seguridad-ricardo-perdomo-se-reunio-con-diferentes-actores-de-la-sociedad-civil-en-un-intento-de-impulsar-un-nuevo-proceso-de-pacificacion-como-una-soluc/",
+      "published_date": "2014-04-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "zacatecoluca"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13160,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T20:09:21.825461-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "4016715e8b7a9aab1b7efe75226393cd6403717915de83411c6998641033408c",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "327e82de1c3198a5dc961bbfe7de1d6e19a74a482e7bb8ae5d8fa2aadb940af4",
+      "title": "Asesinan a hijo de militar retirado",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-hijo-de-militar-retirado/",
+      "published_date": "2014-04-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 13064,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T20:09:21.825461-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8505c47314ed3b118597dd7ba6acf4ab724da26d07ddce517b38947fbc87fec8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "id": "b58ee067f340dcdcba9a0da014f3f1cf56a17d8b7203093ec9dca9c266a4b68e",
       "title": "La minería metálica, el conflicto socio – ambiental por el agua",
       "title_truncated": false,
@@ -98357,6 +98484,50 @@
             "p3",
             "p4",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a6ad5576171383fe6a679a9fbf7803f722938304409a80e60fab08464f624fa2",
+      "title": "Incrementa detención de «conductores peligrosos»: PNC",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ncrementa-detencion-de-conductores-peligrosos-pnc/",
+      "published_date": "2014-04-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12700,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-16T20:09:21.825461-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ebc56d0e4d1c3700b1f1a7979da6f876381adff084dd065fd3228673fb889d37",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7"
           ]
         }
       }
@@ -104552,7 +104723,7 @@
     },
     {
       "id": "5daa10eb6d183f6832cd1d89736d97289e49d9b8efe5b75d977c8c052419bd66",
-      "title": "PNC sin capturar a homicidas de embarazada en Aguilares",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "El Diario de Hoy (archivo)",
       "source_id": "el-diario-de-hoy",
