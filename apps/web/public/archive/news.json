@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T20:56:12.944245+00:00",
+  "generated_at": "2026-10-17T21:17:25.858868+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12775,
-      "selected": 1836,
+      "selected": 1840,
       "evaluated": 4891,
-      "relevant": 1836,
-      "excluded": 341,
-      "uncertain": 2714,
+      "relevant": 1840,
+      "excluded": 349,
+      "uncertain": 2702,
       "pending": 7884,
-      "evaluated_at": "2026-10-17T20:16:52.524730+00:00"
+      "evaluated_at": "2026-10-17T21:17:22.992827+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1836,
+    "records": 1840,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1499,
+        "records": 1503,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -761,7 +761,7 @@
           {
             "month": "2014-11",
             "status": "enumerated",
-            "records": 37,
+            "records": 41,
             "screen_version": 3,
             "posts_scanned": 985,
             "source_total_posts": 985,
@@ -19626,12 +19626,12 @@
         "month": "2014-11",
         "start_date": "2014-11-01",
         "end_date": "2014-11-30",
-        "records": 38,
+        "records": 42,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 37
+            "records": 41
           },
           {
             "source_id": "gatoencerrado",
@@ -87692,19 +87692,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T15:16:43.903578-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a249803054c34a3ab7d0c82f26757df40b4f9f53f150bb1854741e90e54f28bf",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p10"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4"
+            "p3"
           ]
         }
       }
@@ -87737,18 +87735,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T15:16:24.752425-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "0a519b973114b68a15f7076af433d7a03324c7466ffd0c8fafaef8328abbbeb1",
           "jurisdiction_paragraph_ids": [
-            "p5",
             "p7"
           ],
           "relevance_paragraph_ids": [
-            "p6",
-            "p8"
+            "p6"
           ]
         }
       }
@@ -89828,6 +89824,98 @@
       }
     },
     {
+      "id": "4db2e25191fe9069f6a9bbba94faa34ec9197c7eb9cbe4f3c53b4d11a8dc482c",
+      "title": "FUNDAUNGO presenta estudio sobre la evolución de las cifras de homicidios en El Salvador durante los últimos años",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fundaungo-presenta-estudio-sobre-la-evolucion-de-las-cifras-de-homicidios-en-el-salvador-durante-los-ultimos-anos/",
+      "published_date": "2014-11-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 33956,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T15:09:46.272193-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2c6b9f0307324303f07f42d71631a061f3d677e0aca31d1bcd88b8d7e9f9bbc5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d82280ca364c4e846feb84b84f26d9a12efe66b6fe7ad8e8527f8b7d4c0a115a",
+      "title": "Director de PNC afirma que gastan ocho mil dólares por custodia de ex presidente Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/director-de-pnc-afirma-que-gastan-ocho-mil-dolares-por-custodia-de-ex-presidente-flores/",
+      "published_date": "2014-11-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 33873,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T15:09:46.272193-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "633f36b014d3541b78a0e9ec4340ce791b1af2ed0b24cfdbd88c532c5641c1c0",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p10",
+            "p17"
+          ]
+        }
+      }
+    },
+    {
       "id": "bee3f4e9670545171e2716eb050f9e176b25dbe813a580bc9c9cb2550840e341",
       "title": "San Isidro Labrador someterá a consulta ciudadana tema de minería metálica",
       "title_truncated": false,
@@ -89866,6 +89954,96 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d8bfacbda4418dbef8e0072b5e22ed06b73429b0c9efd33e83494c5875d4bce0",
+      "title": "CEPAL pide eliminar desigualdades que inciden en la violencia contra las mujeres",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cepal-pide-eliminar-desigualdades-que-inciden-en-la-violencia-contra-las-mujeres/",
+      "published_date": "2014-11-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 33476,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T15:09:46.272193-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f1bba1b54f8d4ab870336fb481a1308ffba206464712280b4644ef8888cdfe6b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "62d87253a9b016a7e2cc6c24f6fd62ee9690d9201f5429f4f01a080c6b50ccaf",
+      "title": "Seguridad gasta recursos extras por 18 agentes que custodian a ex presidente Flores",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/seguridad-gasta-recursos-extras-por-18-agentes-que-custodian-a-ex-presidente-flores/",
+      "published_date": "2014-11-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 33531,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T15:09:46.272193-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "536c6aafdce05bf00f4254cf9d730bc6de40cdbd87f07178def9a5c679599299",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p16"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
           ]
         }
       }

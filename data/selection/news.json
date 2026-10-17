@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T20:16:52.524730+00:00",
+  "generated_at": "2026-10-17T21:17:22.992827+00:00",
   "assessment_counts": {
-    "candidates": 12622,
+    "candidates": 12775,
     "evaluated": 4891,
-    "relevant": 1836,
-    "excluded": 341,
-    "uncertain": 2714,
-    "pending": 7731
+    "relevant": 1840,
+    "excluded": 349,
+    "uncertain": 2702,
+    "pending": 7884
   },
   "selections": [
     {
@@ -14991,18 +14991,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T15:16:24.752425-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "0a519b973114b68a15f7076af433d7a03324c7466ffd0c8fafaef8328abbbeb1",
           "jurisdiction_paragraph_ids": [
-            "p5",
             "p7"
           ],
           "relevance_paragraph_ids": [
-            "p6",
-            "p8"
+            "p6"
           ]
         }
       }
@@ -15198,6 +15196,34 @@
             "p4",
             "p8",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "4db2e25191fe9069f6a9bbba94faa34ec9197c7eb9cbe4f3c53b4d11a8dc482c",
+      "source_url": "https://www.diariocolatino.com/fundaungo-presenta-estudio-sobre-la-evolucion-de-las-cifras-de-homicidios-en-el-salvador-durante-los-ultimos-anos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T15:09:46.272193-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2c6b9f0307324303f07f42d71631a061f3d677e0aca31d1bcd88b8d7e9f9bbc5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -19455,6 +19481,34 @@
           "relevance_paragraph_ids": [
             "p11",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "62d87253a9b016a7e2cc6c24f6fd62ee9690d9201f5429f4f01a080c6b50ccaf",
+      "source_url": "https://www.diariocolatino.com/seguridad-gasta-recursos-extras-por-18-agentes-que-custodian-a-ex-presidente-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T15:09:46.272193-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "536c6aafdce05bf00f4254cf9d730bc6de40cdbd87f07178def9a5c679599299",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p16"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
           ]
         }
       }
@@ -26737,19 +26791,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:14:32.618353-06:00",
+        "classified_at": "2026-10-17T15:16:43.903578-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a249803054c34a3ab7d0c82f26757df40b4f9f53f150bb1854741e90e54f28bf",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p10"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4"
+            "p3"
           ]
         }
       }
@@ -44278,6 +44330,34 @@
       }
     },
     {
+      "candidate_id": "d82280ca364c4e846feb84b84f26d9a12efe66b6fe7ad8e8527f8b7d4c0a115a",
+      "source_url": "https://www.diariocolatino.com/director-de-pnc-afirma-que-gastan-ocho-mil-dolares-por-custodia-de-ex-presidente-flores/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T15:09:46.272193-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "633f36b014d3541b78a0e9ec4340ce791b1af2ed0b24cfdbd88c532c5641c1c0",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p10",
+            "p17"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "d85bb41ef7b40e892a37f37ef2674427bce48cb464671ffa4ed33835e4b24ce9",
       "source_url": "https://www.diariocolatino.com/procuradora-presenta-nuevo-equipo-de-trabajo-en-defensa-de-los-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -44300,6 +44380,34 @@
           "relevance_paragraph_ids": [
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d8bfacbda4418dbef8e0072b5e22ed06b73429b0c9efd33e83494c5875d4bce0",
+      "source_url": "https://www.diariocolatino.com/cepal-pide-eliminar-desigualdades-que-inciden-en-la-violencia-contra-las-mujeres/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T15:09:46.272193-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f1bba1b54f8d4ab870336fb481a1308ffba206464712280b4644ef8888cdfe6b",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
