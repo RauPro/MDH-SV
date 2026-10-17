@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T07:19:27.835939+00:00",
+  "generated_at": "2026-10-17T08:19:09.799266+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12317,
-      "selected": 1800,
+      "selected": 1803,
       "evaluated": 4889,
-      "relevant": 1800,
-      "excluded": 246,
-      "uncertain": 2843,
+      "relevant": 1803,
+      "excluded": 254,
+      "uncertain": 2832,
       "pending": 7428,
-      "evaluated_at": "2026-10-17T07:19:24.526437+00:00"
+      "evaluated_at": "2026-10-17T08:19:06.528971+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1800,
+    "records": 1803,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1467,
+        "records": 1468,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-16",
         "months": [
@@ -701,7 +701,7 @@
           {
             "month": "2014-06",
             "status": "enumerated",
-            "records": 23,
+            "records": 24,
             "screen_version": 3,
             "posts_scanned": 1071,
             "source_total_posts": 1071,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 220,
+        "records": 222,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15332,7 +15332,7 @@
           {
             "month": "2014-06",
             "status": "partial",
-            "records": 5,
+            "records": 6,
             "screen_version": 3,
             "posts_scanned": 122,
             "source_total_posts": null,
@@ -15344,7 +15344,7 @@
           {
             "month": "2014-07",
             "status": "partial",
-            "records": 2,
+            "records": 3,
             "screen_version": 3,
             "posts_scanned": 147,
             "source_total_posts": null,
@@ -19411,12 +19411,12 @@
         "month": "2014-06",
         "start_date": "2014-06-01",
         "end_date": "2014-06-30",
-        "records": 28,
+        "records": 30,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 23
+            "records": 24
           },
           {
             "source_id": "gatoencerrado",
@@ -19446,7 +19446,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 5
+            "records": 6
           }
         ]
       },
@@ -19454,7 +19454,7 @@
         "month": "2014-07",
         "start_date": "2014-07-01",
         "end_date": "2014-07-31",
-        "records": 24,
+        "records": 25,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19489,7 +19489,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 3
           }
         ]
       },
@@ -91459,7 +91459,7 @@
     },
     {
       "id": "b547a0ed88e279e5c88aae0bc542ec0af90de7d58cf60539d06a96fc4a28c239",
-      "title": "PNUD, UNICEF y OPS destacan esfuerzos que realiza el Gobierno en temas de seguridad, derechos de la niñez y salud",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -92039,7 +92039,7 @@
     },
     {
       "id": "780b134eaba8002cd1168dab843f986b5d0e2314f04610521ee0dc83c29d1cfd",
-      "title": "El 43% de los nombres del Libro Amarillo coinciden con las denuncias registradas contra los derechos humanos",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -95790,6 +95790,51 @@
       }
     },
     {
+      "id": "08d5e23ad701f128c76e8e9da8ae99d86f2c37670d72904cdd42e80e87a3c3d9",
+      "title": "“Roberto Zucco”, la historia de un asesino",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/132153/roberto-zucco-la-historia-de-un-asesino.html",
+      "published_date": "2014-07-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T17:35:16.799175+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T02:13:23.524686-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e3d2a9d252b69f25698e7b6183707e08d12401b5f8c8418f42c024302e27b006",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "id": "54989cb183f61b7a726113817efac5ead20e6d28ed8e43ec8ef0f6ef8b655399",
       "title": "CAM intenta desalojar a sindicalistas en huelga de hambre",
       "title_truncated": false,
@@ -95973,6 +96018,54 @@
             "p12",
             "p19",
             "p21"
+          ]
+        }
+      }
+    },
+    {
+      "id": "93f88ea3c02591dbd0c1787b2d24eee3dccff75da7d556087b4a5466faca9f9e",
+      "title": "Medios hondureños informan de asesinato de Natividad Luna",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/medios-hondurenos-informan-de-asesinato-de-natividad-luna/",
+      "published_date": "2014-06-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 19851,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T02:13:23.524686-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "65cf14a2d1a14a2357056d573a564a9f600d72657d1267655ccf2b76b92fc28e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10",
+            "p11"
           ]
         }
       }
@@ -96242,6 +96335,53 @@
           "relevance_paragraph_ids": [
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2c1f4e32ad4fab741e04f14033047939feb428d7f96533046a8a6fce8ad2d7d5",
+      "title": "Dan prisión preventiva a salvadoreño por narco",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/128582/dan-prision-preventiva-a-salvadoreno-por-narco.html",
+      "published_date": "2014-06-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T17:35:16.799175+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T02:13:23.524686-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c56d9e217a90050fdbce2873aae48104e28a9709e707f4c2c4a7540598c2ab8a",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
           ]
         }
       }
