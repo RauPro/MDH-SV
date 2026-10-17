@@ -1,3 +1,4 @@
+import { PUBLISHER_HOSTS, HTML_PUBLISHERS } from '../../../shared/source-registry.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference, type NewsSelection, type NewsSelectionGate } from '../../../shared/news-selection.mjs';
 import { normalize, safeSource, type Publication } from './catalog';
 
@@ -66,14 +67,8 @@ const month = (value: unknown): value is string => typeof value === 'string' && 
 const safeUrl = (value: unknown): value is string => typeof value === 'string' && safeSource(value);
 const strings = (value: unknown): value is string[] => Array.isArray(value) && value.every(text);
 const fail = (): never => { throw new Error('Archivo de noticias inválido o no compatible'); };
-const publisherHosts: Record<string, string[]> = {
-  'co-latino': ['www.diariocolatino.com', 'diariocolatino.com'],
-  gatoencerrado: ['gatoencerrado.news'], factum: ['www.revistafactum.com', 'revistafactum.com'],
-  'el-faro': ['elfaro.net', 'www.elfaro.net', 'beta.elfaro.net'],
-  'el-mundo': ['diario.elmundo.sv'], 'la-prensa-grafica': ['www.laprensagrafica.com', 'laprensagrafica.com'],
-  'el-diario-de-hoy': ['historico.elsalvador.com', 'www.elsalvador.com', 'elsalvador.com'],
-};
-const htmlPublishers = new Set(['el-faro', 'el-mundo', 'la-prensa-grafica', 'el-diario-de-hoy']);
+const publisherHosts = PUBLISHER_HOSTS;
+const htmlPublishers = new Set(HTML_PUBLISHERS);
 export const validArchiveDate = (value: unknown): value is string => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
 
 /** Validate the public metadata boundary before rendering any publisher links or counts. */

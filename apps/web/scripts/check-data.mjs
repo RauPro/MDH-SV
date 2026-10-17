@@ -1,3 +1,4 @@
+import { NEWS_SOURCES } from '../../../shared/source-registry.mjs';
 import { readFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
@@ -9,6 +10,7 @@ import { checkOfficialStatisticsExports } from './export-official-statistics.mjs
 import { parseNewsProcessing, validateProcessingBindings } from '../../../shared/news-processing.mjs';
 import { parseNewsExceptions } from '../../../shared/news-exceptions.mjs';
 import { publicDataRoot } from './public-data-root.mjs';
+import { parseCatalog } from '../../../shared/catalog.mjs';
 
 const data = publicDataRoot();
 const source = data.path('data/reviewed/publications.json');
@@ -24,8 +26,8 @@ for (const name of allowed) {
   assert.equal(hash(bytes), manifest.files[name].sha256, `Stale/tampered export: ${name}`);
   assert.equal(bytes.length, manifest.files[name].bytes);
 }
-const catalog = JSON.parse(readFileSync(data.path('apps/web/public/data/catalog.json')));
-const original = JSON.parse(readFileSync(source));
+const catalog = parseCatalog(JSON.parse(readFileSync(data.path('apps/web/public/data/catalog.json'))));
+const original = parseCatalog(JSON.parse(readFileSync(source)));
 assert.equal(catalog.records.length, manifest.records_count);
 assert.deepEqual([...catalog.records].sort((a,b)=>a.id.localeCompare(b.id)), [...original.records].sort((a,b)=>a.id.localeCompare(b.id)));
 for (const row of catalog.records) {
@@ -49,7 +51,7 @@ const withdrawn = id => exceptions.get(id)?.withdrawn === true;
 for (const reference of newsArchive.records) assert.ok(!withdrawn(reference.id), 'Withdrawn news must not remain in the public archive');
 // Verify discovery coverage independently of classification or publication.
 const candidateIds = new Set();
-for (const id of ['co-latino', 'gatoencerrado', 'factum', 'el-faro', 'el-mundo', 'la-prensa-grafica', 'el-diario-de-hoy']) {
+for (const { id } of NEWS_SOURCES) {
   const checkpoint = JSON.parse(readFileSync(data.path(`data/history/${id}.json`)));
   for (const item of checkpoint.records) if (item.published_date >= newsArchive.coverage.start_date && item.published_date <= newsArchive.coverage.end_date) candidateIds.add(item.id);
 }

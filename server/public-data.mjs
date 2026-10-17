@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
+import { parseCatalog } from '../shared/catalog.mjs';
 import { NEWS_DOSSIER_PROTECTED_TITLE, newsDossierFor, parsePublishedNewsDossiers } from '../shared/news-dossier.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference } from '../shared/news-selection.mjs';
 import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
@@ -64,10 +65,11 @@ export function parseFilters(params, schema) {
 let catalogCache;
 export function loadCatalog() {
   if (!catalogCache) {
-    const catalog = JSON.parse(readFileSync(new URL('../apps/web/public/data/catalog.json', import.meta.url), 'utf8'));
-    if (!Array.isArray(catalog.records)) throw new Error('Invalid public catalog');
-    // Defense in depth: never expose collection candidates through the documented-case API.
-    catalogCache = { ...catalog, records: catalog.records.filter(record => ['source_checked', 'editorially_reviewed'].includes(record.review_status)) };
+    try {
+      catalogCache = parseCatalog(JSON.parse(readFileSync(new URL('../apps/web/public/data/catalog.json', import.meta.url), 'utf8')));
+    } catch {
+      throw new ApiError(503, 'catalog_invalid', 'No se pudo verificar el catálogo público.');
+    }
   }
   return catalogCache;
 }

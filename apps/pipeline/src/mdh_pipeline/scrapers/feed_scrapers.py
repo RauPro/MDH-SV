@@ -5,10 +5,13 @@ Scrapers basados en RSS y Sitemaps para medios de comunicación salvadoreños ($
 import logging
 from datetime import date, datetime
 from typing import List, Optional
+from urllib.parse import urlsplit
+
 import feedparser
 import requests
 from bs4 import BeautifulSoup
 
+from ..publishers import registered_feeds
 from .base import BaseNewsScraper, RawNewsArticle
 
 logger = logging.getLogger(__name__)
@@ -99,21 +102,9 @@ class SalvadoranMediaRSSScraper(BaseNewsScraper):
 
 # Directorio de fuentes preconfiguradas de El Salvador (Sin costo)
 SALVADORAN_FEEDS = [
-    {
-        "outlet": "Diario Co Latino",
-        "feed": "https://www.diariocolatino.com/feed/",
-        "base": "https://www.diariocolatino.com"
-    },
-    {
-        "outlet": "GatoEncerrado",
-        "feed": "https://gatoencerrado.news/feed/",
-        "base": "https://gatoencerrado.news"
-    },
-    {
-        "outlet": "El Faro",
-        "feed": "https://elfaro.net/es/rss",
-        "base": "https://elfaro.net"
-    },
+    {"outlet": feed["name"], "feed": feed["url"],
+     "base": "https://" + urlsplit(feed["url"]).hostname}
+    for feed in registered_feeds("legacy_scraper")
 ]
 
 

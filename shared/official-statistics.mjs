@@ -1,10 +1,11 @@
+import { OFFICIAL_STATISTICS_HOSTS } from './source-registry.mjs';
 /** Official aggregate statistics are a separate dataset, never documentary case counts. */
 export const OFFICIAL_STATISTICS_DEPARTMENTS = Object.freeze([
   'Ahuachapán', 'Santa Ana', 'Sonsonate', 'Chalatenango', 'La Libertad', 'San Salvador',
   'Cuscatlán', 'La Paz', 'Cabañas', 'San Vicente', 'Usulután', 'San Miguel', 'Morazán', 'La Unión',
 ]);
 
-const hosts = new Set(['transparencia.oj.gob.sv', 'fiscalia.gob.sv', 'www.fiscalia.gob.sv', 'data.unodc.org']);
+const hosts = new Set(OFFICIAL_STATISTICS_HOSTS);
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const exact = (value, keys) => object(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
 const text = (value, maximum = 4000) => typeof value === 'string' && value.trim().length > 0 && value.length <= maximum && !/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/u.test(value);

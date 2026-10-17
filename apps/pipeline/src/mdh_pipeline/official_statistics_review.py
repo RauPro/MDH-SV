@@ -12,13 +12,14 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import quote, urlsplit
 
+from .publishers import OFFICIAL_STATISTICS_DISCOVERY_HOSTS
 from .review_queue import GitHubInbox, GitHubRequestError
 
 ROOT = "official-statistics"
 MAX_BYTES = 2_000_000
 HEX = re.compile(r"[a-f0-9]{64}\Z")
 ID = re.compile(r"[a-z][a-z0-9_-]{0,99}\Z")
-HOSTS = {"transparencia.oj.gob.sv", "transparencia.pnc.gob.sv", "fiscalia.gob.sv", "www.fiscalia.gob.sv", "data.unodc.org"}
+HOSTS = OFFICIAL_STATISTICS_DISCOVERY_HOSTS
 LABELS = {"statistics/source-update": "1D76DB", "statistics/pending": "D97706",
           "statistics/approved": "16815D", "statistics/rejected": "6B7280"}
 REPORT_KEYS = {"schema_version", "checked_at", "as_of", "baseline_sha256", "status",
