@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T12:17:13.287403+00:00",
+  "generated_at": "2026-10-18T13:16:51.743141+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 13077,
-      "selected": 1882,
+      "selected": 1886,
       "evaluated": 4892,
-      "relevant": 1882,
-      "excluded": 468,
-      "uncertain": 2542,
+      "relevant": 1886,
+      "excluded": 476,
+      "uncertain": 2530,
       "pending": 8185,
-      "evaluated_at": "2026-10-18T12:17:09.762258+00:00"
+      "evaluated_at": "2026-10-18T13:16:48.950716+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-18",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1882,
+    "records": 1886,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1542,
+        "records": 1546,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -725,7 +725,7 @@
           {
             "month": "2014-08",
             "status": "enumerated",
-            "records": 29,
+            "records": 32,
             "screen_version": 3,
             "posts_scanned": 996,
             "source_total_posts": 996,
@@ -809,7 +809,7 @@
           {
             "month": "2015-03",
             "status": "enumerated",
-            "records": 34,
+            "records": 35,
             "screen_version": 3,
             "posts_scanned": 1025,
             "source_total_posts": 1025,
@@ -19497,12 +19497,12 @@
         "month": "2014-08",
         "start_date": "2014-08-01",
         "end_date": "2014-08-31",
-        "records": 31,
+        "records": 34,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 29
+            "records": 32
           },
           {
             "source_id": "gatoencerrado",
@@ -19798,12 +19798,12 @@
         "month": "2015-03",
         "start_date": "2015-03-01",
         "end_date": "2015-03-31",
-        "records": 36,
+        "records": 37,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 34
+            "records": 35
           },
           {
             "source_id": "gatoencerrado",
@@ -85126,6 +85126,51 @@
       }
     },
     {
+      "id": "c50742dfd409defdc51affccc4903bfaabfc4b7cd9b5de11d2bceeb10b07a9f9",
+      "title": "La FGR informa cuádruple homicidio en San José Guayabal",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/la-fgr-informa-cuadruple-homicidio-en-san-jose-guayabal/",
+      "published_date": "2015-03-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 62392,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T07:09:32.819443-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8585e875d96b3d34f8e42829c4d93d7c414ed57cd856eb65750e0ff9a701ddc0",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "id": "7a7619d1985a3608865b084da9f308d29376bc919996b8f160634853dd4950b9",
       "title": "Sala ampara a personas afectadas por contaminación por plomo",
       "title_truncated": false,
@@ -85805,19 +85850,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:11:23.276512-06:00",
+        "classified_at": "2026-10-18T07:16:14.199050-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9ddf764859495d0baa1479a73829a183f271e4b59bf23348bf244590da95e7ca",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
             "p5"
           ],
           "relevance_paragraph_ids": [
             "p3",
-            "p4",
             "p6"
           ]
         }
@@ -85851,18 +85893,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:11:23.276512-06:00",
+        "classified_at": "2026-10-18T07:15:59.198189-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6dd3533cedff53330f40b7f278afa690a74ee573d307d8a6a54812b5a0d31c14",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
+            "p4",
             "p6"
           ]
         }
@@ -86825,7 +86865,7 @@
     },
     {
       "id": "3ff67160c2b32b289302ef24e4f9b3d0d33a510c9d4de033ae7bfa51e8bbfaab",
-      "title": "Organizaciones de Derechos Humanos denuncian represión y persecución del Estado hondureño a la coordinadora de Las Chonas Gladys Lanza",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -97073,6 +97113,96 @@
       }
     },
     {
+      "id": "290b288b832ee812181b85f3b53c1c3ce9c04ff0b399266c8dc85c8f05226ff9",
+      "title": "PNC captura a presuntos extorsionistas en La Paz",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-presuntos-extorsionistas-en-la-paz/",
+      "published_date": "2014-08-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 24619,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T07:09:32.819443-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2346052e17e555eabe9c1e9318484675b474f4a63ee55fa60bb55b9a1719c60b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8e1b385df5113129bdf2b90bb3558cbd4a2b7828cf55c432b3b5682c66c90b5a",
+      "title": "Diputados buscan aumentar penas carcelarias a acaparadores y agiotistas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/diputados-buscan-aumentar-penas-carcelarias-a-acaparadores-y-agiotistas/",
+      "published_date": "2014-08-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 24529,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T07:09:32.819443-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "783a25d6cac31bb15f8584c627c69e1930921a68dcbacbaffa8b9bc9b6bbe67a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "id": "ec4bc214e61233b21654247bc12e16268c82c616c76b4806df62752c2f5868d2",
       "title": "Defendamos nuestros derechos laborales y nuestra estabilidad laboral",
       "title_truncated": false,
@@ -97159,6 +97289,51 @@
           "relevance_paragraph_ids": [
             "p6",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "26a4f7eee7da171e265e2b1855cb78fc2f29665707aa1c7a4210f69ed1c23bae",
+      "title": "Asesinan a Magistrado de Cámara y a su esposa en el oriente del país",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-magistrado-de-camara-y-a-su-esposa-en-el-oriente-del-pais/",
+      "published_date": "2014-08-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 24267,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T07:09:32.819443-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "dd088a1e63546b6bbb7896c7dc02233a6a3bf5bf1062ffbf32834965f6551a06",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7",
+            "p10"
           ]
         }
       }
