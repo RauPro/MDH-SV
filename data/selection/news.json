@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T15:16:43.032130+00:00",
+  "generated_at": "2026-10-18T17:17:08.463734+00:00",
   "assessment_counts": {
-    "candidates": 13077,
+    "candidates": 13228,
     "evaluated": 4892,
-    "relevant": 1890,
-    "excluded": 484,
-    "uncertain": 2518,
-    "pending": 8185
+    "relevant": 1897,
+    "excluded": 500,
+    "uncertain": 2495,
+    "pending": 8336
   },
   "selections": [
     {
@@ -5998,6 +5998,33 @@
       }
     },
     {
+      "candidate_id": "1dbafbe3706e4f91bcc5186fa5265c4d70a7129503e34092b76e83d8a48234aa",
+      "source_url": "https://www.diariocolatino.com/dos-militares-asesinados-en-la-zona-para-central/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T11:09:36.642125-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "74a4bb55a92e5755756fdb5ff2986b8899124afebc9b63be0bcf0d47be89afdb",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "1dcb2dbd9ea141f582cbcfe9ff64838326097a8149f0c3e94ae13f4cf91339f8",
       "source_url": "https://www.diariocolatino.com/recordacion-padres-85-anos-del-asesinato-farabundo-marti-genocidio-los-pueblos-originarios-izalco-juayua-acusados-comunistas/",
       "publisher": "Diario Co Latino",
@@ -8518,6 +8545,35 @@
       }
     },
     {
+      "candidate_id": "2acfcc7d0ef5876055d54f64d5a63832cf838c83f66e34a131fd47239198391f",
+      "source_url": "https://www.diariocolatino.com/mexicana-es-detenida-por-trafico-de-drogas-en-aeropuerto/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T10:01:16.770441-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "607a737226a9ec80d688da30f2e6306bb440cabe6fa3cf678b52d9b51665f731",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2aee7ac4ca38aadb4aeecfca2812816f5f217bfc361e1de1ca5b2d0253049e74",
       "source_url": "https://www.diariocolatino.com/sindicalistas-se-pronuncian-en-contra-de-medidas-de-cuatro-magistrados-de-la-csj/",
       "publisher": "Diario Co Latino",
@@ -9121,20 +9177,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:14:17.110889-06:00",
+        "classified_at": "2026-10-18T11:16:31.448228-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "126696fb17416dd83ecab04bd38051254e026ba7a5e4a9a2ddc99d5f42547f1f",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p6"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p6"
+            "p4"
           ]
         }
       }
@@ -17463,6 +17516,35 @@
       }
     },
     {
+      "candidate_id": "57ce6aca6dc66f835c50296c556eeaa9ae73c4476f4e4dcc864c178412992aee",
+      "source_url": "https://www.diariocolatino.com/director-de-ansp-lamenta-asesinato-de-agente-destacado-en-la-institucion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T11:09:36.642125-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b044527449d4712c952646e23dfcea02fd4dc3f6ea836b351395e61959a13861",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "57e845c7d3fe2377ca4017060615030a6dd8cdbd53fbea4e785019b821bb3a7e",
       "source_url": "https://historico.elsalvador.com/historico/129262/la-violencia-de-genero-es-estudiada-en-el-salvador.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -19051,6 +19133,35 @@
       }
     },
     {
+      "candidate_id": "5f0ec720079ca3bdfd57413f4966c136f415cdb51d2827ada11b8ba74e288b80",
+      "source_url": "https://www.diariocolatino.com/director-de-la-ansp-condena-asesinato-de-agente-destacado-en-la-institucion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T11:09:36.642125-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "de2f52df930b9cf58f835135ce1ca59b85e70a11d4679620a4a3b8620cc55c33",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "5f0f2185c9cbe21b9b40dec56a8b3f783869c24cf2d01079c5a165e955588869",
       "source_url": "https://www.diariocolatino.com/inauguran-granja-penitenciaria-zacatecoluca-desmontar-factores-violencia/",
       "publisher": "Diario Co Latino",
@@ -19414,6 +19525,35 @@
             "p1",
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "6103e15efdfa8a0be924c5ec9d71de34aa0b97e33a1877b618b7526eab11725b",
+      "source_url": "https://www.diariocolatino.com/autoridades-reportan-alza-en-homicidios-en-24-horas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T10:01:16.770441-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "07e3105019404302d4d65da7dfd112e53232140a2da8997e83cb8110da8df77b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }
@@ -22273,22 +22413,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:13:22.949138-06:00",
+        "classified_at": "2026-10-18T10:07:53.689653-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "305ae2f4e20583cb7bdee74d3ba4bbc9df3a37efb89e05e678ab92e1eb6e49e2",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p10"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5",
-            "p6",
-            "p10"
+            "p3"
           ]
         }
       }
@@ -25094,6 +25228,35 @@
       }
     },
     {
+      "candidate_id": "7631088d99b669493f0ec15790d983418ba3682e9c8ee399cd71102786e20841",
+      "source_url": "https://www.diariocolatino.com/autoridades-reportan-dos-agentes-policiales-asesinados-esta-manana/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T10:01:16.770441-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1bae84dc10c5d01762f5f9665ce4573f4a66d99f234e8c5c9130e72550f6f21f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "76751fd10e8792c6c5213733a1d92913b2144d540a0671cf880f75b166ad38d7",
       "source_url": "https://www.diariocolatino.com/defensores-del-derecho-al-agua-en-tacuba-capturados-de-forma-arbitraria/",
       "publisher": "Diario Co Latino",
@@ -26055,9 +26218,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:13:22.949138-06:00",
+        "classified_at": "2026-10-18T10:03:52.644256-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "bb4f9d04aca31bcc66db7f4f07e9bef368a6fea53d86e9b5715b98db178d8935",
           "jurisdiction_paragraph_ids": [
@@ -28305,17 +28468,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:14:17.110889-06:00",
+        "classified_at": "2026-10-18T11:14:30.941677-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "bcaf2fdab2cb4e86ea3f57c8126b0378828a302d1299991733ef8c5f72eff110",
           "jurisdiction_paragraph_ids": [
-            "p3",
             "p9"
           ],
           "relevance_paragraph_ids": [
-            "p8",
+            "p2",
             "p9"
           ]
         }
@@ -36996,21 +37158,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:13:22.949138-06:00",
+        "classified_at": "2026-10-18T11:12:14.477999-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "7393cdcf044acacfc82a8bddfd8506d08b698519fb0b7a7dff6aeb9e90217449",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4",
-            "p6"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p10"
+            "p3"
           ]
         }
       }
@@ -39517,6 +39675,34 @@
             "p2",
             "p10",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ba30faf41392f5209a9d48730cdfaa41f2a040d5cdb5dd4dac9e69bcf66e59e2",
+      "source_url": "https://www.diariocolatino.com/defensoria-veraniega-continua-inspecciones-para-garantizar-consumo-seguro-en-semana-santa/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-30",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T10:01:16.770441-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ae795736fe0ff4fdb131c54560e30be74801317fb18da546d1615eb6318ad1ed",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5",
+            "p10"
           ]
         }
       }
@@ -42405,19 +42591,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:14:17.110889-06:00",
+        "classified_at": "2026-10-18T11:16:14.521480-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "19060911a9978538ef2bd5c5a7c5aa0b558aa5db608b8424ebe419481858e8bb",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
             "p6"
           ]
         }
@@ -49396,20 +49579,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:13:22.949138-06:00",
+        "classified_at": "2026-10-18T10:05:52.515437-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a476273fade27207e4ddad134a6e96fc4f637305e40165598e700b0502a1bf67",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p9"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p8",
-            "p9"
+            "p2"
           ]
         }
       }
@@ -49787,22 +49966,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:13:22.949138-06:00",
+        "classified_at": "2026-10-18T10:06:06.783148-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "bdff780b3d9d79aa080f5221f14e62ada44aed16e1bc16d8d36214091d774ac4",
           "jurisdiction_paragraph_ids": [
-            "p4",
-            "p7",
-            "p8"
+            "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p6",
-            "p7",
-            "p10"
+            "p3",
+            "p4"
           ]
         }
       }
