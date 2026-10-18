@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-18T09:19:15.693087+00:00",
+  "generated_at": "2026-10-18T11:19:08.247433+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -827,6 +827,29 @@
       "evidence": {
         "paragraph_id": "p3",
         "content_sha256": "7a364a530174a0e2874e1379313e8b2ee767d6b6fabdca5575eab65fd4a56be3"
+      }
+    },
+    {
+      "candidate_id": "1a2e5cc52e0b2bbf91f58f3f1379dfd7dbe35bf7824f119008c6676bf37c6a73",
+      "source_url": "https://www.diariocolatino.com/nayib-bukele-pide-se-detenga-la-campana-sucia-en-su-contra/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-23",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-11T07:03:14.427311-06:00",
+      "source_checked_at": "2026-10-18T11:18:30.538975+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "455473d54ecd2c083835c4e3425056213ba3292d1af0f43bbc78163305372c00"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -6022,6 +6045,22 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "c22a3e970f3ba43b67f99596d61ee9a92fe2f1c07833a3b4b90f3bf356050ba3",
+      "source_url": "https://www.diariocolatino.com/san-salvador-registra-mas-de-500-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-10",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-10T12:56:16.376790-06:00",
+      "source_checked_at": "2026-10-18T11:18:22.843211+00:00",
+      "evidence": {
+        "paragraph_id": "p5",
+        "content_sha256": "5441a948aa7b69b5861949fd77ac03ad0ad1b04a7ec27ab88dc41763db0bffff"
       }
     },
     {
