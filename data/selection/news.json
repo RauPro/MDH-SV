@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T04:16:53.787748+00:00",
+  "generated_at": "2026-10-18T05:17:49.816863+00:00",
   "assessment_counts": {
-    "candidates": 12775,
+    "candidates": 12925,
     "evaluated": 4891,
     "relevant": 1854,
-    "excluded": 405,
-    "uncertain": 2632,
-    "pending": 7884
+    "excluded": 413,
+    "uncertain": 2624,
+    "pending": 8034
   },
   "selections": [
     {
@@ -11698,9 +11698,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:11:25.681697-06:00",
+        "classified_at": "2026-10-17T23:16:12.223103-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6e9a95485306b8e3b5219f04d56e530be11200127cd955f49a8c9e25ccbe14c5",
           "jurisdiction_paragraph_ids": [
@@ -24362,19 +24362,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:11:28.413758-06:00",
+        "classified_at": "2026-10-17T23:13:57.834829-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b754f929266347cf3d4afbc8f09796bd3e5c379d7330cb6432aece9260123836",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p2"
+            "p1"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p2",
-            "p3"
+            "p3",
+            "p4"
           ]
         }
       }
@@ -27067,6 +27066,36 @@
           "relevance_paragraph_ids": [
             "p2",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "82a8bfde5db277899c10657049fd768033124ceacc389a192f09f4b11941b7f5",
+      "source_url": "https://www.diariocolatino.com/director-tilda-de-cobardes-a-los-que-ordenan-asesinatos-de-agentes-policiales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T23:09:27.897251-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c945e9d336ead168df542357bd94a2a500d23b0312fd8970a765eab5fd481b08",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p7",
+            "p14"
           ]
         }
       }
@@ -48519,21 +48548,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:14:15.018452-06:00",
+        "classified_at": "2026-10-17T23:15:58.480018-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "f54c1b01d85e223818fcfd793f190f2b761a371e4fb1e0fc8460fb7ad921fb63",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
             "p3",
-            "p7",
-            "p19"
+            "p7"
           ]
         }
       }
@@ -50920,9 +50946,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:11:28.413758-06:00",
+        "classified_at": "2026-10-17T23:14:11.535483-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6884ab7657ac2622f505ba16f8dd4b3d69d23447bc7462668ba6c2feb13f7a37",
           "jurisdiction_paragraph_ids": [
@@ -50930,8 +50956,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p5"
+            "p3"
           ]
         }
       }
@@ -50961,35 +50986,6 @@
             "p3",
             "p4",
             "p7"
-          ]
-        }
-      }
-    },
-    {
-      "candidate_id": "fa8062b1af8d93e414c01f618d6594eca7a92dd2023d7bbb2bb62ee2f5a4746d",
-      "source_url": "https://www.diariocolatino.com/secretario-de-la-onu-anuncia-apertura-de-oficina-de-ddhh-en-honduras/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-01-15",
-      "selection": {
-        "method": "gemini_grounded_scope",
-        "review_status": "automated_unreviewed",
-        "human_reviewed": false,
-        "jurisdiction": "SV",
-        "relevance": "relevant",
-        "classified_at": "2026-10-12T21:11:28.413758-06:00",
-        "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
-        "evidence": {
-          "content_sha256": "731ce5591332b851c673fa2edba95d8599969614de194d19b695bcea3f65e9e3",
-          "jurisdiction_paragraph_ids": [
-            "p6",
-            "p10",
-            "p11"
-          ],
-          "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4"
           ]
         }
       }
