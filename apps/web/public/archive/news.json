@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T03:16:58.082896+00:00",
+  "generated_at": "2026-10-18T04:16:56.579111+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12775,
-      "selected": 1851,
+      "selected": 1854,
       "evaluated": 4891,
-      "relevant": 1851,
-      "excluded": 397,
-      "uncertain": 2643,
+      "relevant": 1854,
+      "excluded": 405,
+      "uncertain": 2632,
       "pending": 7884,
-      "evaluated_at": "2026-10-18T03:16:54.384727+00:00"
+      "evaluated_at": "2026-10-18T04:16:53.787748+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-17",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1851,
+    "records": 1854,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1512,
+        "records": 1515,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -785,7 +785,7 @@
           {
             "month": "2015-01",
             "status": "enumerated",
-            "records": 18,
+            "records": 21,
             "screen_version": 3,
             "posts_scanned": 973,
             "source_total_posts": 973,
@@ -19712,12 +19712,12 @@
         "month": "2015-01",
         "start_date": "2015-01-01",
         "end_date": "2015-01-31",
-        "records": 18,
+        "records": 21,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 18
+            "records": 21
           },
           {
             "source_id": "gatoencerrado",
@@ -86779,14 +86779,13 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:11:28.413758-06:00",
+        "classified_at": "2026-10-17T22:16:13.453472-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "33ce2772f8d3a49d17090208d8f4e74018d74e770d82d7b3cf4d4946062013cd",
           "jurisdiction_paragraph_ids": [
-            "p4",
-            "p6"
+            "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
@@ -86872,9 +86871,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:10:25.432018-06:00",
+        "classified_at": "2026-10-17T22:14:13.371056-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b90beba5b1aa10999d5cf2124f9c2214111d22690a682c028622a6aa87ccf7a0",
           "jurisdiction_paragraph_ids": [
@@ -86882,7 +86881,6 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
             "p6",
             "p7"
           ]
@@ -87014,6 +87012,147 @@
           ],
           "relevance_paragraph_ids": [
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2d9bc6f1105d99bedc77bd6def1116e98f03b7d98ea129028df45e7cba067382",
+      "title": "Cinco agentes policiales asesinados en primeros días de enero",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cinco-agentes-policiales-asesinados-en-primeros-dias-de-enero/",
+      "published_date": "2015-01-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 39271,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T22:09:29.675784-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "dd1dcf317641886a95c34e2987996e40ed656d5b6084e8318d6c994895bdef36",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p11",
+            "p16",
+            "p19",
+            "p23"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a8a3426b7463e9c2f18f5fc32d3bb29fa97577fcbc2ddd8b25940f6f65534e12",
+      "title": "PNC captura a tres supuestos pandilleros por asesinato de policía",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-tres-supuestos-pandilleros-por-asesinato-de-policia/",
+      "published_date": "2015-01-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 39103,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T22:09:29.675784-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8673bb3897eb9777a56a7cd2307422b14bc2810759b845e233d892b0694613dc",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p9",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "88137e4991e8293579bd16bcb9ed3d1457b7abac4efc076a2bbf176221471066",
+      "title": "Asesinan a agente de la UMO en San Juan Opico",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-agente-de-la-umo-en-san-juan-opico/",
+      "published_date": "2015-01-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 39160,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T22:09:29.675784-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "eec115f4633676fe928530c8eacddf015283b42b6cd524b3a8a84b45ca9ce117",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
