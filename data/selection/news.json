@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T08:17:10.069524+00:00",
+  "generated_at": "2026-10-18T09:16:45.207610+00:00",
   "assessment_counts": {
     "candidates": 12925,
     "evaluated": 4891,
-    "relevant": 1865,
-    "excluded": 436,
-    "uncertain": 2590,
+    "relevant": 1869,
+    "excluded": 444,
+    "uncertain": 2578,
     "pending": 8034
   },
   "selections": [
@@ -1961,6 +1961,39 @@
           "relevance_paragraph_ids": [
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "0923ac30c170a18d437eb80c7e0edde6f88dfb57e3d92d65b3d8209d4ee0a386",
+      "source_url": "https://www.diariocolatino.com/pnc-atribuye-alza-de-homicidios-de-fin-de-semana-a-rencillas-entre-pandillas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T03:09:24.865459-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2c47bc4632c7818d654b29bfc2eb3b0090ddf547115a9fbbb83ebea64869b33f",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p14",
+            "p15"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p7",
+            "p15"
           ]
         }
       }
@@ -22614,21 +22647,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:15:29.734943-06:00",
+        "classified_at": "2026-10-18T03:16:10.589131-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "49040de14a5a99dd63ec051733c6ad94709dcfd00fd53f160fa16e8380a1a4d5",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p10"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p6",
-            "p9",
-            "p11"
+            "p6"
           ]
         }
       }
@@ -25913,6 +25942,31 @@
       }
     },
     {
+      "candidate_id": "7b46bf59307c1fd78e38ab9b52a6476ab5ef30c8dd1490166a162063b09a072a",
+      "source_url": "https://www.diariocolatino.com/medio-hondureno-informa-del-asesinato-de-natividad-luna/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T03:09:24.865459-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b745455fd8c70583e972d4925ba09b01e0f7aefcd47d5859d6976cf87e2858c4",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7b4aeb309c13a5b4478b3ea02fad00f9170fbf99accae822d103944b927bb62b",
       "source_url": "https://www.diariocolatino.com/decreto-de-medidas-extraordinarias-no-violenta-derechos-humanos-procurador-david-morales/",
       "publisher": "Diario Co Latino",
@@ -26083,6 +26137,37 @@
             "p2",
             "p5",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "7c92813181bcd39e442204e47730515e9ce653cc19885493ee43661747ead1ad",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-dos-motoristas-del-transporte-publico/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T03:09:24.865459-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "56cc727b95b04ba7497227ca5eb98bee341c00e8c75756531e82cc7e1cc127d9",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7",
+            "p9",
+            "p10"
           ]
         }
       }
@@ -40538,9 +40623,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "classified_at": "2026-10-18T03:15:55.460323-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d67b20a03fb462e0cc0142bddff04b1203c186bae9b34bff1f84f196e9f55658",
           "jurisdiction_paragraph_ids": [
@@ -40548,6 +40633,7 @@
           ],
           "relevance_paragraph_ids": [
             "p3",
+            "p4",
             "p5",
             "p7"
           ]
@@ -43434,6 +43520,34 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "cddc839847a8e6aab9e32f2dbda1739f20ea602fda75eb6973b9cf8d96e16800",
+      "source_url": "https://www.diariocolatino.com/el-racismo-de-el-diario-de-hoy/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T03:09:24.865459-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5b8b3d2af0da9458bd36969858c7b621c8a93c744d5ae90fd26cfaa6d1ed5c90",
+          "jurisdiction_paragraph_ids": [
+            "p6",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p9",
+            "p12"
           ]
         }
       }

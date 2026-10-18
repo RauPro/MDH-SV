@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-18T08:20:10.679751+00:00",
+  "generated_at": "2026-10-18T09:19:15.693087+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -2569,6 +2569,22 @@
       }
     },
     {
+      "candidate_id": "52682c4ee8a06009d05b067f64f3913bb4e1beeedd66d4b3514d7afb1152ad39",
+      "source_url": "https://www.diariocolatino.com/joven-desaparecido-en-la-guerra-salvadorena-se-reencuentra-con-su-madre-biologica/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-06",
+      "department": "San Vicente",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-18T02:16:29.698274-06:00",
+      "source_checked_at": "2026-10-18T09:19:00.696857+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "2459baac8bacebc8a5905c5daa5df835a5683b7a28d87ac48f5f4322692c9005"
+      }
+    },
+    {
       "candidate_id": "527feade7464df69ac3a579a9fbb65dd7dc5a96a4e713be63073b6a5cf36da34",
       "source_url": "https://www.diariocolatino.com/policia-y-fgr-incauta-armas-en-diferentes-detenciones/",
       "publisher": "Diario Co Latino",
@@ -3296,6 +3312,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "67368863fdcc687041330990a4a4f7c53de0ea7317c0f6307e0bb0152e6c0138",
+      "source_url": "https://www.diariocolatino.com/dan-captura-supuestos-narcotraficantes-con-mas-de-25-mil-en-cocaina/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-27",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-18T01:16:14.325558-06:00",
+      "source_checked_at": "2026-10-18T09:18:59.833432+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "590bf6a7ee669e33bc9a0c2573097ab5810048ccd3e7549cf4a395ada9b5eb5a"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -4730,6 +4769,30 @@
       }
     },
     {
+      "candidate_id": "9580ce3dd686af64066189e836ef4b96d6751db7708cf926a34adbf72fc608f9",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-cuatro-hermanos-en-el-majahual/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-10",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T09:19:03.295252+00:00",
+      "source_checked_at": "2026-10-18T09:19:03.295252+00:00",
+      "evidence": {
+        "paragraph_id": "p10",
+        "content_sha256": "c38d8ca800d67e32c0260cd20b37602bc38118606e5a5d50bcab67afba8f3859"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Zacatecoluca",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+      }
+    },
+    {
       "candidate_id": "9603d801ffc4f6ff9d977c12da1a90c4c6db7fd430f1c7f3a04b5c7cad3f36c1",
       "source_url": "https://www.diariocolatino.com/operativo-policial-deja-mas-de-90-pandilleros-capturados/",
       "publisher": "Diario Co Latino",
@@ -4975,6 +5038,22 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
+      "candidate_id": "9a1f530ea7aa1ff54bf65a543c4eae1af50ab7d85aaa541d34b1f30e141bd5d1",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-hombre-en-cercanias-de-centro-gobierno-en-zacatecoluca/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-09",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-11T07:02:48.001529-06:00",
+      "source_checked_at": "2026-10-18T09:19:02.291512+00:00",
+      "evidence": {
+        "paragraph_id": "p10",
+        "content_sha256": "173edfa39264badced371fab8e6ed76a5ec376d5268631a237d2cc2cd10e9a66"
       }
     },
     {
@@ -6107,6 +6186,30 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "c450982aa8f323b965916557734b4b4cf4245e4237e5d8bd6f381311b73a969e",
+      "source_url": "https://www.diariocolatino.com/fiscalia-cinco-de-los-siete-casos-de-policias-asesinados-en-2015-fueron-judicializados/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-22",
+      "department": "San Miguel",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T09:18:57.091525+00:00",
+      "source_checked_at": "2026-10-18T09:18:57.091525+00:00",
+      "evidence": {
+        "paragraph_id": "p7",
+        "content_sha256": "aee840eb605a76860becb481e21b652ec829a7e4c04f0d51bbabb2f32fea650c"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Carolina",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
     },
     {
       "candidate_id": "c5949baf97c3748869cf101e365e76add09eb39c1d6d8bcf8f4bbd3451239595",
