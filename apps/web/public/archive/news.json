@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T18:45:39.058863+00:00",
+  "generated_at": "2026-10-18T19:17:37.344754+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 13228,
-      "selected": 1903,
+      "selected": 1909,
       "evaluated": 4892,
-      "relevant": 1903,
-      "excluded": 508,
-      "uncertain": 2481,
+      "relevant": 1909,
+      "excluded": 515,
+      "uncertain": 2468,
       "pending": 8336,
-      "evaluated_at": "2026-10-18T18:17:47.650996+00:00"
+      "evaluated_at": "2026-10-18T19:17:33.538395+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-18",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1903,
+    "records": 1909,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1563,
+        "records": 1569,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -713,7 +713,7 @@
           {
             "month": "2014-07",
             "status": "enumerated",
-            "records": 31,
+            "records": 32,
             "screen_version": 3,
             "posts_scanned": 1088,
             "source_total_posts": 1088,
@@ -821,7 +821,7 @@
           {
             "month": "2015-04",
             "status": "enumerated",
-            "records": 33,
+            "records": 35,
             "screen_version": 3,
             "posts_scanned": 890,
             "source_total_posts": 890,
@@ -833,7 +833,7 @@
           {
             "month": "2015-05",
             "status": "enumerated",
-            "records": 38,
+            "records": 41,
             "screen_version": 3,
             "posts_scanned": 1000,
             "source_total_posts": 1000,
@@ -19454,12 +19454,12 @@
         "month": "2014-07",
         "start_date": "2014-07-01",
         "end_date": "2014-07-31",
-        "records": 35,
+        "records": 36,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 31
+            "records": 32
           },
           {
             "source_id": "gatoencerrado",
@@ -19841,12 +19841,12 @@
         "month": "2015-04",
         "start_date": "2015-04-01",
         "end_date": "2015-04-30",
-        "records": 34,
+        "records": 36,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 33
+            "records": 35
           },
           {
             "source_id": "gatoencerrado",
@@ -19884,12 +19884,12 @@
         "month": "2015-05",
         "start_date": "2015-05-01",
         "end_date": "2015-05-31",
-        "records": 42,
+        "records": 45,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 38
+            "records": 41
           },
           {
             "source_id": "gatoencerrado",
@@ -82750,6 +82750,98 @@
       }
     },
     {
+      "id": "fef18e14352965ec9d7a00faa4ac37515ea7a67ad7019cf7a0ce6e4e7d71ba78",
+      "title": "Unidad de elite policial inicia con más de un centenar de capturas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/unidad-de-elite-policial-inicia-con-mas-de-un-centenar-de-capturas/",
+      "published_date": "2015-05-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 67056,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fd4027f4ed9e755ab200e3e4525de68ddd09888ce788deb6b77a4df2598f070a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d6c34ad2ecd97cea77e9be9f602ceaa9747602e688ab337155097f10939072b7",
+      "title": "Condenan a empresario y periodistas por calumia",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/condenan-a-empresario-y-periodistas-por-calumia/",
+      "published_date": "2015-05-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 67038,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "eaeddbc086be61f4561f489dd624f9ff0e9172314503832cea07d7fff26bc7d6",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "id": "5d31edf9b2b0242d7ec5ed016bb972531167a7f4659ffb66814a27f76eea90fc",
       "title": "Presidente Sánchez Cerén reafirma compromiso con el cumplimiento y respeto de los derechos laborales",
       "title_truncated": false,
@@ -82796,6 +82888,51 @@
             "p13",
             "p19",
             "p20"
+          ]
+        }
+      }
+    },
+    {
+      "id": "453bed99d6c981f46c7e13770fc13dd2fcce487c925410f5cdf64ff97590b65e",
+      "title": "Protección Civil reporta menor desaparecido por fuerte oleaje",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/proteccion-civil-reporta-menor-desaparecido-por-fuerte-oleaje/",
+      "published_date": "2015-05-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 67074,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1cb577e8029ba454f9e28a587b44ce4e9a6424d1ad5457c2fa9a440d4071163a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -83073,6 +83210,100 @@
             "p7",
             "p8",
             "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "36428f2427627067391b858d7167438623375c4e10672f0b5126104ad1fbf80d",
+      "title": "Operativo policial deja 24 detenidos en San Marcos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/operativo-policial-deja-24-detenidos-en-san-marcos/",
+      "published_date": "2015-04-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 66733,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f745468f1d45d381dde6524d44d5de8620443d5b269d4f4a61b72b4aeee6cc95",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p7",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f2e97217e9f61d8cc9394481370696bb07dc3f9418282166c6b400e4aae00190",
+      "title": "Juzgados decretan detención contra presuntos delincuentes",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+      "published_date": "2015-04-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 66656,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9",
+            "p10"
           ]
         }
       }
@@ -84929,20 +85160,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T13:16:53.618545-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "28e01142a29080ba073cfc9f1fac3f441a64b6e0068a29251beac2b65f7f8b60",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p8"
+            "p1"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p4",
-            "p7",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -84976,17 +85204,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T13:16:37.483003-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "0f61feea29088bbe2910f2adf65c4aeb034afa2f670c007dcd7a3ee9c8558f66",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ]
         }
       }
@@ -85019,21 +85246,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T13:14:53.471434-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "62992451f86b80a3a513e21f697c42e2ff1cb43adf9dc804a63253285eff50c7",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
             "p7"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p7",
-            "p10",
-            "p11"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -99589,6 +99812,48 @@
             "p2",
             "p4",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "3b4667637ff7f6e276ee3f4ec32f9debe6193eac65d783b8e7aafe2a25757de8",
+      "title": "Sánchez Cerén se reúne con sector sindical del país",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sanchez-ceren-se-reune-con-sector-sindical-del-pais/",
+      "published_date": "2014-07-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 21210,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T19:10:40.117894+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "56a135203f05ff7bb4dd77a745ca02fd5721db5b46117f2a7d42d440f2090c39",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p6"
           ]
         }
       }

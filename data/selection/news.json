@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T18:17:47.650996+00:00",
+  "generated_at": "2026-10-18T19:17:33.538395+00:00",
   "assessment_counts": {
     "candidates": 13228,
     "evaluated": 4892,
-    "relevant": 1903,
-    "excluded": 508,
-    "uncertain": 2481,
+    "relevant": 1909,
+    "excluded": 515,
+    "uncertain": 2468,
     "pending": 8336
   },
   "selections": [
@@ -8672,20 +8672,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T13:16:53.618545-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "28e01142a29080ba073cfc9f1fac3f441a64b6e0068a29251beac2b65f7f8b60",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p8"
+            "p1"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p4",
-            "p7",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -10982,6 +10979,37 @@
       }
     },
     {
+      "candidate_id": "36428f2427627067391b858d7167438623375c4e10672f0b5126104ad1fbf80d",
+      "source_url": "https://www.diariocolatino.com/operativo-policial-deja-24-detenidos-en-san-marcos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-29",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f745468f1d45d381dde6524d44d5de8620443d5b269d4f4a61b72b4aeee6cc95",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p7",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "3653f45e485fc624ef8690fa926204f9a65f731eba008ebc1925e0b80490822c",
       "source_url": "https://www.diariocolatino.com/medicina-legal-28-mujeres-fueron-asesinadas-en-marzo/",
       "publisher": "Diario Co Latino",
@@ -12127,6 +12155,31 @@
             "p5",
             "p6",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "3b4667637ff7f6e276ee3f4ec32f9debe6193eac65d783b8e7aafe2a25757de8",
+      "source_url": "https://www.diariocolatino.com/sanchez-ceren-se-reune-con-sector-sindical-del-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T19:10:40.117894+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "56a135203f05ff7bb4dd77a745ca02fd5721db5b46117f2a7d42d440f2090c39",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p6"
           ]
         }
       }
@@ -13892,6 +13945,34 @@
           ],
           "relevance_paragraph_ids": [
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "453bed99d6c981f46c7e13770fc13dd2fcce487c925410f5cdf64ff97590b65e",
+      "source_url": "https://www.diariocolatino.com/proteccion-civil-reporta-menor-desaparecido-por-fuerte-oleaje/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1cb577e8029ba454f9e28a587b44ce4e9a6424d1ad5457c2fa9a440d4071163a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -29406,21 +29487,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T13:14:53.471434-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "62992451f86b80a3a513e21f697c42e2ff1cb43adf9dc804a63253285eff50c7",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
             "p7"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p7",
-            "p10",
-            "p11"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -34221,17 +34298,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T13:16:37.483003-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "0f61feea29088bbe2910f2adf65c4aeb034afa2f670c007dcd7a3ee9c8558f66",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ]
         }
       }
@@ -45574,6 +45650,34 @@
       }
     },
     {
+      "candidate_id": "d6c34ad2ecd97cea77e9be9f602ceaa9747602e688ab337155097f10939072b7",
+      "source_url": "https://www.diariocolatino.com/condenan-a-empresario-y-periodistas-por-calumia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "eaeddbc086be61f4561f489dd624f9ff0e9172314503832cea07d7fff26bc7d6",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "d6f5798686797862e66f86624c1b3472c4d329743b47450b7531071cb1216bcc",
       "source_url": "https://www.diariocolatino.com/lo-mas-importante-es-esclarecer-todos-los-asesinatos-que-estan-en-el-olvido-julian-perez/",
       "publisher": "Diario Co Latino",
@@ -50676,6 +50780,35 @@
       }
     },
     {
+      "candidate_id": "f2e97217e9f61d8cc9394481370696bb07dc3f9418282166c6b400e4aae00190",
+      "source_url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f31c3daba36ec26bb8a08d0de998d15eb21bd30d2543e92fd89d39e956db2895",
       "source_url": "https://www.diariocolatino.com/isdemu-corte-cuentas-firman-convenio-garantizar-espacios-libres-violencia-la-mujer/",
       "publisher": "Diario Co Latino",
@@ -53084,6 +53217,36 @@
             "p2",
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fef18e14352965ec9d7a00faa4ac37515ea7a67ad7019cf7a0ce6e4e7d71ba78",
+      "source_url": "https://www.diariocolatino.com/unidad-de-elite-policial-inicia-con-mas-de-un-centenar-de-capturas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T13:09:54.427195-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fd4027f4ed9e755ab200e3e4525de68ddd09888ce788deb6b77a4df2598f070a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p9"
           ]
         }
       }
