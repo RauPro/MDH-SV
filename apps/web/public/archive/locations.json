@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-18T05:19:42.757307+00:00",
+  "generated_at": "2026-10-18T08:20:10.679751+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -400,6 +400,56 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "0ba2b9d2c33ec9d10ad010d873bacd2c3cdf0c02be10194aac5d78b4f878f7d0",
+      "source_url": "https://www.diariocolatino.com/leve-reduccion-de-homicidios-en-el-fin-de-semana/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-16",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T08:19:21.092958+00:00",
+      "source_checked_at": "2026-10-18T08:19:21.092958+00:00",
+      "evidence": {
+        "content_sha256": "500e99b38f340797bca25dcb3ced4eb3b91d71cbd9b81a39c2af6714fdb94748"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p2"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p2"
+        }
+      ]
+    },
+    {
+      "candidate_id": "0cba993719994c36715b1b0cdce460b25176c7027ab1766bbfc6f766ddc7e472",
+      "source_url": "https://www.diariocolatino.com/detienen-a-cadete-de-escuela-militar-vinculado-a-pandillas-y-homicidio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-03",
+      "department": "Cuscatlán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-16T22:13:26.950970-06:00",
+      "source_checked_at": "2026-10-18T08:18:58.314802+00:00",
+      "evidence": {
+        "paragraph_id": "p1",
+        "content_sha256": "fd259f4a2ae8422dcf390f53c467f9e89361333fe931dc6ec4b7b420f9d593db"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Cojutepeque",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
     },
     {
@@ -2608,6 +2658,29 @@
       }
     },
     {
+      "candidate_id": "556c374cc820e49eb2534fc5c0e99d7e8b2b01c46bc494f5910da3fa6435dee0",
+      "source_url": "https://www.diariocolatino.com/policia-no-descarta-que-incremento-de-asesinatos-tengan-fines-politicos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-23",
+      "department": "Usulután",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-16T23:14:28.665680-06:00",
+      "source_checked_at": "2026-10-18T08:19:15.169817+00:00",
+      "evidence": {
+        "paragraph_id": "p18",
+        "content_sha256": "a6e51382710d46e110ab66a284a36f464c2b6cc90cd36ebd72965d51b8692e0f"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Jiquilisco",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+      }
+    },
+    {
       "candidate_id": "55ded0f10fef0c2519246c41776b3fcff3dfb280014d54925d5eab1633971d49",
       "source_url": "https://www.diariocolatino.com/coopesa-condena-asesinato-de-sacerdote-walter-vasquez/",
       "publisher": "Diario Co Latino",
@@ -4083,6 +4156,22 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
+      }
+    },
+    {
+      "candidate_id": "82a8bfde5db277899c10657049fd768033124ceacc389a192f09f4b11941b7f5",
+      "source_url": "https://www.diariocolatino.com/director-tilda-de-cobardes-a-los-que-ordenan-asesinatos-de-agentes-policiales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-16",
+      "department": "San Miguel",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-18T01:12:12.906944-06:00",
+      "source_checked_at": "2026-10-18T08:20:08.865750+00:00",
+      "evidence": {
+        "paragraph_id": "p9",
+        "content_sha256": "c945e9d336ead168df542357bd94a2a500d23b0312fd8970a765eab5fd481b08"
       }
     },
     {
@@ -6891,6 +6980,38 @@
             "reference_version": "sv-decree-762-2023-v1",
             "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
           }
+        }
+      ]
+    },
+    {
+      "candidate_id": "e370e87b876399f63df8c36f3714d3d702cc23dbb6a792f4e18acb60d273ae13",
+      "source_url": "https://www.diariocolatino.com/medicina-legal-reporta-281-homicidios-para-abril/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-05-13",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T08:19:08.205659+00:00",
+      "source_checked_at": "2026-10-18T08:19:08.205659+00:00",
+      "evidence": {
+        "content_sha256": "b06b8b2ac4e9b96f09dc013ac4fa662d3bc0032df7f60d55854343b297097267"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "San Salvador",
+          "paragraph_id": "p4"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Santa Ana",
+          "paragraph_id": "p6"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Usulután",
+          "paragraph_id": "p6"
         }
       ]
     },

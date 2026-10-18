@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T07:16:53.274281+00:00",
+  "generated_at": "2026-10-18T08:17:10.069524+00:00",
   "assessment_counts": {
     "candidates": 12925,
     "evaluated": 4891,
-    "relevant": 1862,
-    "excluded": 428,
-    "uncertain": 2601,
+    "relevant": 1865,
+    "excluded": 436,
+    "uncertain": 2590,
     "pending": 8034
   },
   "selections": [
@@ -2705,6 +2705,36 @@
             "p7",
             "p9",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "0ba2b9d2c33ec9d10ad010d873bacd2c3cdf0c02be10194aac5d78b4f878f7d0",
+      "source_url": "https://www.diariocolatino.com/leve-reduccion-de-homicidios-en-el-fin-de-semana/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T02:09:38.040943-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "500e99b38f340797bca25dcb3ced4eb3b91d71cbd9b81a39c2af6714fdb94748",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -7713,21 +7743,19 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "classified_at": "2026-10-18T02:14:30.449066-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "fd04a4c4d52ec08a8c88e68529ab1739672c6e8f314893ec4efd4a96b13103a1",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
             "p3",
-            "p9",
-            "p11",
-            "p21"
+            "p4",
+            "p5"
           ]
         }
       }
@@ -12694,9 +12722,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "classified_at": "2026-10-18T02:16:14.645114-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "828bbec623f022e1f97c7c28e0cefa083ef07f9a29f9c0ead9d0a7aa771865ab",
           "jurisdiction_paragraph_ids": [
@@ -12704,9 +12732,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p5",
-            "p6"
+            "p3"
           ]
         }
       }
@@ -16189,20 +16215,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:14:04.606190-06:00",
+        "classified_at": "2026-10-18T02:16:29.698274-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "2459baac8bacebc8a5905c5daa5df835a5683b7a28d87ac48f5f4322692c9005",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p7"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p5",
-            "p8",
-            "p13"
+            "p3"
           ]
         }
       }
@@ -31301,6 +31323,37 @@
       }
     },
     {
+      "candidate_id": "9580ce3dd686af64066189e836ef4b96d6751db7708cf926a34adbf72fc608f9",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-cuatro-hermanos-en-el-majahual/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T02:09:38.040943-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c38d8ca800d67e32c0260cd20b37602bc38118606e5a5d50bcab67afba8f3859",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8",
+            "p11",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "9587fdb0b36f248585499d3a89a5c8a8edb049f71628d1b665f2140d65d051e4",
       "source_url": "https://www.diariocolatino.com/mineria-metalica-negocios-riesgosos-salvador/",
       "publisher": "Diario Co Latino",
@@ -32289,6 +32342,36 @@
             "p1",
             "p6",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "9a1f530ea7aa1ff54bf65a543c4eae1af50ab7d85aaa541d34b1f30e141bd5d1",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-hombre-en-cercanias-de-centro-gobierno-en-zacatecoluca/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T02:09:38.040943-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "173edfa39264badced371fab8e6ed76a5ec376d5268631a237d2cc2cd10e9a66",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p7",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7",
+            "p11",
+            "p12"
           ]
         }
       }
@@ -40611,6 +40694,35 @@
       }
     },
     {
+      "candidate_id": "c069f9e1d1ec9caa362b57a092ef09eccc5b6e1410045f2e99f002705c7630fd",
+      "source_url": "https://www.diariocolatino.com/el-salvador-debe-exigir-a-honduras-desalojo-de-isla-conejo-ochoa-perez/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T02:09:38.040943-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ffa0e066ccdabb8428ec7a3b518a7123a8bea6a11ed6c6849e5b20e56d7a571d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c116a7d60031705df68eca1af4eea2be792ac86fbf3a421373100b45c0619986",
       "source_url": "https://www.diariocolatino.com/pnc-hace-efectiva-captura-de-militares-por-caso-jesuitas/",
       "publisher": "Diario Co Latino",
@@ -44243,35 +44355,6 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
-          ]
-        }
-      }
-    },
-    {
-      "candidate_id": "d411d442d73fec952f55189fdbf9c0308c201afe9d1c12c9fb59af37d3b576f3",
-      "source_url": "https://www.diariocolatino.com/je-suis-charlie-sobre-la-libertad-de-expresion-en-francia/",
-      "publisher": "Diario Co Latino",
-      "published_date": "2015-02-02",
-      "selection": {
-        "method": "gemini_grounded_scope",
-        "review_status": "automated_unreviewed",
-        "human_reviewed": false,
-        "jurisdiction": "SV",
-        "relevance": "relevant",
-        "classified_at": "2026-10-12T22:14:04.606190-06:00",
-        "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
-        "evidence": {
-          "content_sha256": "b60c469b4ec5dc6fc856a6967628dc241f6a0a6cf27a3a4536f4ec8c600aa218",
-          "jurisdiction_paragraph_ids": [
-            "p1",
-            "p2"
-          ],
-          "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p7",
-            "p8"
           ]
         }
       }
