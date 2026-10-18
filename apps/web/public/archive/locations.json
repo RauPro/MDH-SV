@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-18T11:26:55.825065+00:00",
+  "generated_at": "2026-10-18T13:19:21.873279+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1152,6 +1152,30 @@
       "evidence": {
         "paragraph_id": "p6",
         "content_sha256": "3e0050322e8064bf8c8e8ce54244529108c2c34d7a89616a7d8f22fa157b5c4a"
+      }
+    },
+    {
+      "candidate_id": "26a4f7eee7da171e265e2b1855cb78fc2f29665707aa1c7a4210f69ed1c23bae",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-magistrado-de-camara-y-a-su-esposa-en-el-oriente-del-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-08-11",
+      "department": "San Miguel",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T13:18:43.039770+00:00",
+      "source_checked_at": "2026-10-18T13:18:43.039770+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "dd088a1e63546b6bbb7896c7dc02233a6a3bf5bf1062ffbf32834965f6551a06"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Miguel",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
       }
     },
     {
@@ -6274,6 +6298,23 @@
       }
     },
     {
+      "candidate_id": "c50742dfd409defdc51affccc4903bfaabfc4b7cd9b5de11d2bceeb10b07a9f9",
+      "source_url": "https://www.diariocolatino.com/la-fgr-informa-cuadruple-homicidio-en-san-jose-guayabal/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-11",
+      "department": "Cuscatlán",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T13:19:02.678854+00:00",
+      "source_checked_at": "2026-10-18T13:19:02.678854+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "8585e875d96b3d34f8e42829c4d93d7c414ed57cd856eb65750e0ff9a701ddc0"
+      }
+    },
+    {
       "candidate_id": "c5949baf97c3748869cf101e365e76add09eb39c1d6d8bcf8f4bbd3451239595",
       "source_url": "https://www.diariocolatino.com/demandan-edil-tacuba-violaciones-la-libertad-expresion/",
       "publisher": "Diario Co Latino",
@@ -7147,6 +7188,22 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "e307beb0947b1492595b425fd585bfd50a6d78bc3c044992a62eb60f4f5cdf7c",
+      "source_url": "https://www.diariocolatino.com/caso-de-contaminacion-ambiental-por-plomo-de-la-record-ira-a-la-cidh/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-19",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-18T05:16:07.819224-06:00",
+      "source_checked_at": "2026-10-18T13:18:48.345795+00:00",
+      "evidence": {
+        "paragraph_id": "p9",
+        "content_sha256": "72f4043bd3e25a0944dd9783986bbf9cb8301578008f50feccf011915a7b9b2d"
+      }
     },
     {
       "candidate_id": "e370e87b876399f63df8c36f3714d3d702cc23dbb6a792f4e18acb60d273ae13",
