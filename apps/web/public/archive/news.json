@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T09:16:48.750808+00:00",
+  "generated_at": "2026-10-18T10:16:59.242581+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12925,
-      "selected": 1869,
+      "selected": 1875,
       "evaluated": 4891,
-      "relevant": 1869,
-      "excluded": 444,
-      "uncertain": 2578,
+      "relevant": 1875,
+      "excluded": 452,
+      "uncertain": 2564,
       "pending": 8034,
-      "evaluated_at": "2026-10-18T09:16:45.207610+00:00"
+      "evaluated_at": "2026-10-18T10:16:55.747046+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-18",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1869,
+    "records": 1875,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1529,
+        "records": 1535,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -713,7 +713,7 @@
           {
             "month": "2014-07",
             "status": "enumerated",
-            "records": 27,
+            "records": 31,
             "screen_version": 3,
             "posts_scanned": 1088,
             "source_total_posts": 1088,
@@ -797,7 +797,7 @@
           {
             "month": "2015-02",
             "status": "enumerated",
-            "records": 19,
+            "records": 21,
             "screen_version": 3,
             "posts_scanned": 849,
             "source_total_posts": 849,
@@ -19454,12 +19454,12 @@
         "month": "2014-07",
         "start_date": "2014-07-01",
         "end_date": "2014-07-31",
-        "records": 31,
+        "records": 35,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 27
+            "records": 31
           },
           {
             "source_id": "gatoencerrado",
@@ -19755,12 +19755,12 @@
         "month": "2015-02",
         "start_date": "2015-02-01",
         "end_date": "2015-02-28",
-        "records": 21,
+        "records": 23,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 19
+            "records": 21
           },
           {
             "source_id": "gatoencerrado",
@@ -85969,6 +85969,52 @@
       }
     },
     {
+      "id": "6bce467d65aa92cbaaf48851d2132249261ba6087dd2ae3224022856c7d0119a",
+      "title": "Autoridades capturan a 25 pandilleros por orden de FGR",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/autoridades-capturan-a-25-pandilleros-por-orden-de-fgr/",
+      "published_date": "2015-02-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 45771,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T04:09:32.299623-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fca974ca99c503ef13a74b43c9124effb503062d2c08b45f05a312437a212bc3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "id": "aeb8e6bb99617f2cc36da67c2a28ed90d678fbdb1ab9b2a7862bb9a2019f8e48",
       "title": "Alianza Ambiental exige responsabilidad gubernamental con agua y minería",
       "title_truncated": false,
@@ -86010,6 +86056,50 @@
             "p3",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5d19b654dc9bf7b7e79ee721f114c452a30365d7d1618b30f0ab28508b8aa977",
+      "title": "Defensoría del Consumidor pendiente de empresarios y comerciantes que encarecen el frijol",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-del-consumidor-pendiente-de-empresarios-y-comerciantes-que-encarecen-el-frijol/",
+      "published_date": "2015-02-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 44982,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T04:09:32.299623-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "060b98849e638930e821b2a093666213f46d99d6b53cda664060b0024ae7e4b2",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p7"
           ]
         }
       }
@@ -86143,14 +86233,13 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:09:22.600879-06:00",
+        "classified_at": "2026-10-18T04:16:18.392335-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "97de11121c57c0f7d84e9e3609188e3840bd869e097bdbcb5b35b96b3410b487",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p8"
@@ -97839,6 +97928,50 @@
       }
     },
     {
+      "id": "84bde5f360c63c4487ef69b58895d001a21e4bcb46b3d5f446402a83f2e5a3f0",
+      "title": "Ulloa dice que “están montando una parafernalia” para ver a Funes en la cárcel",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ulloa-dice-que-estan-montando-una-parafernalia-para-ver-a-funes-en-la-carcel/",
+      "published_date": "2014-07-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 21998,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T04:09:32.299623-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "baba23e451b1dd25cbcaf10474039f17f188e8ce135e91ca1476233d8479707a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "id": "728878198f51cf7d5f9f697e14d957588db7b7284a0dcb0cafaaadcd2865e649",
       "title": "Seguridad Pública, uno de los principales retos del gobierno, ante asesinato de más de 2000 personas en 2014",
       "title_truncated": false,
@@ -97928,6 +98061,51 @@
             "p2",
             "p3",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d1c5cb9b95cd0f7225838f821c959ee916727717ad95cf9bb7e4248f6e5fcc86",
+      "title": "Fiscalía ordena captura de miembros de banda dedicada al hurto de vehículos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fiscalia-ordena-captura-de-miembros-de-banda-dedicada-al-hurto-de-vehiculos/",
+      "published_date": "2014-07-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 21767,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T04:09:32.299623-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "99dd0e3733d7c8dfa5f9967202547b073d130d1eb62c3567008ec0b860d9c0c5",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p9",
+            "p12"
           ]
         }
       }
@@ -98105,6 +98283,97 @@
             "p4",
             "p5",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "256834e037f1725bb76328058f02ff8141dfb4c10eca00d75842abd869984890",
+      "title": "Sector sindical del país conoce propuesta fiscal del Ejecutivo",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sector-sindical-del-pais-conoce-propuesta-fiscal-del-ejecutivo/",
+      "published_date": "2014-07-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 21332,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T04:09:32.299623-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "3fdfe02180cb073d39e31db2c2eeccd1922f7ceb8cb174bdddcee417200d644c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c22a3e970f3ba43b67f99596d61ee9a92fe2f1c07833a3b4b90f3bf356050ba3",
+      "title": "San Salvador registra más de 500 homicidios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/san-salvador-registra-mas-de-500-homicidios/",
+      "published_date": "2014-07-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 21198,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T04:09:32.299623-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5441a948aa7b69b5861949fd77ac03ad0ad1b04a7ec27ab88dc41763db0bffff",
+          "jurisdiction_paragraph_ids": [
+            "p5",
+            "p18"
+          ],
+          "relevance_paragraph_ids": [
+            "p5",
+            "p16",
+            "p18",
+            "p20"
           ]
         }
       }
