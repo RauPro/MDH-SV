@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-17T21:20:31.559746+00:00",
+  "generated_at": "2026-10-18T02:18:53.631515+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -2114,6 +2114,29 @@
       }
     },
     {
+      "candidate_id": "44fffe0e5ce0156cd0deeff5a05ab4c577013215094f4f316bc7b11039adf8fe",
+      "source_url": "https://www.diariocolatino.com/los-santos-ninos-inocentes-una-tradicion-que-cada-ano-cobra-mas-fuerza-en-el-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-27",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-17T17:16:26.164030-06:00",
+      "source_checked_at": "2026-10-18T02:18:36.197299+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "9c7887f383a0d75177d74924007d77e20adc024a9178f312a27b503c0646ec4d"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Antiguo Cuscatlán",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "4548789f2d16af1f169b1c5a731cc10f5578ade6777620f08d4ac2ea11697f16",
       "source_url": "https://www.diariocolatino.com/ciudad-mujer-realiza-talleres-de-prevencion-de-violencia-de-genero-en-atiquizaya/",
       "publisher": "Diario Co Latino",
@@ -3507,6 +3530,40 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
       }
+    },
+    {
+      "candidate_id": "7243bb9f9a84f7a866e94a09a388f192a1e7e770a51d1ab4e71eb9e4641edcaa",
+      "source_url": "https://www.diariocolatino.com/alza-de-homicidios-en-la-zona-oriental-es-por-rina-entre-pandillas-y-drogas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-14",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T02:18:26.270621+00:00",
+      "source_checked_at": "2026-10-18T02:18:26.270621+00:00",
+      "evidence": {
+        "content_sha256": "7912b2416cad348f0640486977e195da94ed35628ced55d0b7b2dec23ff9487a"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "La Unión",
+          "paragraph_id": "p8",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "La Unión",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+          }
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Usulután",
+          "paragraph_id": "p2"
+        }
+      ]
     },
     {
       "candidate_id": "72a2d362fd154dc166d2ac13ca0e9e0e89774789e19c87e1b6611b211f7db55d",
@@ -5850,6 +5907,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
+      "candidate_id": "c36fe0e40950d229c74b7bb76128e42c7dfe61bf1fc6fa2d66c22ad38d7bafea",
+      "source_url": "https://www.diariocolatino.com/pnc-reporta-homicidio-en-ciudad-delgado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-21",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-17T20:11:50.898658-06:00",
+      "source_checked_at": "2026-10-18T02:18:34.046087+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "05cf65bdc5d81c6ab0c9867d89f63a27c8250d69e212829f58e289b0bbdb40aa"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ciudad Delgado",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
