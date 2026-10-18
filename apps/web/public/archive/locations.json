@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-18T19:22:08.532336+00:00",
+  "generated_at": "2026-10-18T20:19:45.546690+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -151,6 +151,22 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "02e59a4d720a32bd1e30207417294162bffac9c9d36e55b8f8899df04a85cec4",
+      "source_url": "https://gatoencerrado.news/2015/03/30/nueva-trinidad-es-el-tercer-municipio-de-el-salvador-que-dice-no-a-la-mineria/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2015-03-30",
+      "department": "Chalatenango",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-18T14:16:16.284971-06:00",
+      "source_checked_at": "2026-10-18T20:18:30.916460+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "0fc68546fe0afda661b0f0e17412d407837cbdae0f5869b214adf1c20481be37"
+      }
     },
     {
       "candidate_id": "03dfc6ca70d63dd1f0c14c4cc7db50e82bc42f768172740bba24cbe79c9b930a",
@@ -1978,6 +1994,40 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
       }
+    },
+    {
+      "candidate_id": "36428f2427627067391b858d7167438623375c4e10672f0b5126104ad1fbf80d",
+      "source_url": "https://www.diariocolatino.com/operativo-policial-deja-24-detenidos-en-san-marcos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-29",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T20:18:51.024017+00:00",
+      "source_checked_at": "2026-10-18T20:18:51.024017+00:00",
+      "evidence": {
+        "content_sha256": "f745468f1d45d381dde6524d44d5de8620443d5b269d4f4a61b72b4aeee6cc95"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p3",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Marcos",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+          }
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Santa Ana",
+          "paragraph_id": "p9"
+        }
+      ]
     },
     {
       "candidate_id": "3653f45e485fc624ef8690fa926204f9a65f731eba008ebc1925e0b80490822c",
@@ -3904,6 +3954,40 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
       }
+    },
+    {
+      "candidate_id": "6f3547e15023b58745f160220cccae92ede5f906f56176e79cba7a4d054043e8",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-04-25",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T20:18:42.266526+00:00",
+      "source_checked_at": "2026-10-18T20:18:42.266526+00:00",
+      "evidence": {
+        "content_sha256": "cd14f3ab85c946ce1d7907fd8f5d5470425b5fd128b65226a5fefb3c643a2d27"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "Cuscatlán",
+          "paragraph_id": "p5"
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Usulután",
+          "paragraph_id": "p3",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Mercedes Umaña",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+          }
+        }
+      ]
     },
     {
       "candidate_id": "6f48c1fd603dd33842fd9c132d58580a3a3a9a4482228b1514f111836b49f5c7",
@@ -8298,6 +8382,33 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
       }
+    },
+    {
+      "candidate_id": "fef18e14352965ec9d7a00faa4ac37515ea7a67ad7019cf7a0ce6e4e7d71ba78",
+      "source_url": "https://www.diariocolatino.com/unidad-de-elite-policial-inicia-con-mas-de-un-centenar-de-capturas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-02",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T20:19:02.531043+00:00",
+      "source_checked_at": "2026-10-18T20:19:02.531043+00:00",
+      "evidence": {
+        "content_sha256": "fd4027f4ed9e755ab200e3e4525de68ddd09888ce788deb6b77a4df2598f070a"
+      },
+      "mentions": [
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p2"
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Sonsonate",
+          "paragraph_id": "p2"
+        }
+      ]
     },
     {
       "candidate_id": "fef7288deb574e0ee3c41df747f237ab45252b877d861770b9f1826c12b4a4dd",
