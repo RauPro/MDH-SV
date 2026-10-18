@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T01:23:21.614919+00:00",
+  "generated_at": "2026-10-18T02:16:46.049125+00:00",
   "assessment_counts": {
     "candidates": 12775,
     "evaluated": 4891,
-    "relevant": 1848,
-    "excluded": 381,
-    "uncertain": 2662,
+    "relevant": 1851,
+    "excluded": 389,
+    "uncertain": 2651,
     "pending": 7884
   },
   "selections": [
@@ -1426,6 +1426,31 @@
             "p1",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "07559e1007251fa3f3f36e8664950983615b8be1f36913137e89963827d3a8f4",
+      "source_url": "https://www.diariocolatino.com/fiscalia-reporta-cuadruple-homicidio-en-ahuachapan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T20:09:21.858961-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "27fdfe10ca21e49086188f60c401b3635c7c6223b2ee528f1077827474d3fc41",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }
@@ -4763,9 +4788,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T20:15:47.505194-06:00",
+        "classified_at": "2026-10-17T20:13:51.339094-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "666566d8ee8fb8a0777c2a6eb7909d4def99c0629042c73bed57b4455487ae1a",
           "jurisdiction_paragraph_ids": [
@@ -4773,11 +4798,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p5",
             "p9",
-            "p10",
             "p13",
             "p17"
           ]
@@ -7794,6 +7815,33 @@
             "p4",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "28cd74b59ebebaaf22ca3f2bef0231405a7c3e8930d355f05baa6add3893fea0",
+      "source_url": "https://www.diariocolatino.com/pnc-reporta-30-capturas-de-conductores-temerarios-en-lo-que-va-de-la-vacacion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T20:09:21.858961-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6a18132dd56b675ddce58d823eb27efe4cfb05ed4f60923dfac27a24006da7ab",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
           ]
         }
       }
@@ -40800,6 +40848,32 @@
       }
     },
     {
+      "candidate_id": "c36fe0e40950d229c74b7bb76128e42c7dfe61bf1fc6fa2d66c22ad38d7bafea",
+      "source_url": "https://www.diariocolatino.com/pnc-reporta-homicidio-en-ciudad-delgado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T20:09:21.858961-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "05cf65bdc5d81c6ab0c9867d89f63a27c8250d69e212829f58e289b0bbdb40aa",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c37d57e36ca0b14701d5ad1b452cd59150309eb0ba65ddb2ca1552ad5e6f820b",
       "source_url": "https://www.diariocolatino.com/gobierno-le-apuesta-reducir-hacinamiento-carcelario-2018/",
       "publisher": "Diario Co Latino",
@@ -42341,9 +42415,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:09:27.085734-06:00",
+        "classified_at": "2026-10-17T20:15:50.966351-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "451307403bfbeab387ea80cfb4fb16d7265ce7bcea3dcc6efb7516a5d44cc3aa",
           "jurisdiction_paragraph_ids": [
@@ -42351,7 +42425,6 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
             "p6"
           ]
         }
@@ -48517,17 +48590,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:09:27.085734-06:00",
+        "classified_at": "2026-10-17T20:14:05.815224-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8975e2e82d50137b41bb36641021d253c391c72a8b208b3cfadd2e7a58aedab8",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p10",
-            "p15"
+            "p2",
+            "p3",
+            "p14"
           ]
         }
       }
