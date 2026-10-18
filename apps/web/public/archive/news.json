@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T05:17:53.580334+00:00",
+  "generated_at": "2026-10-18T06:18:13.133927+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12925,
-      "selected": 1854,
+      "selected": 1860,
       "evaluated": 4891,
-      "relevant": 1854,
-      "excluded": 413,
-      "uncertain": 2624,
+      "relevant": 1860,
+      "excluded": 421,
+      "uncertain": 2610,
       "pending": 8034,
-      "evaluated_at": "2026-10-18T05:17:49.816863+00:00"
+      "evaluated_at": "2026-10-18T06:18:11.192101+00:00"
     }
   },
   "paper": {
@@ -48,17 +48,17 @@
   },
   "coverage": {
     "start_date": "2010-01-01",
-    "end_date": "2026-10-17",
+    "end_date": "2026-10-18",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1854,
+    "records": 1860,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
-        "records": 1515,
+        "status": "partial",
+        "records": 1521,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -785,7 +785,7 @@
           {
             "month": "2015-01",
             "status": "enumerated",
-            "records": 21,
+            "records": 27,
             "screen_version": 3,
             "posts_scanned": 973,
             "source_total_posts": 973,
@@ -2476,7 +2476,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 9,
             "screen_version": 3,
             "posts_scanned": 199,
@@ -2492,7 +2492,7 @@
         "id": "gatoencerrado",
         "publisher": "GatoEncerrado",
         "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 59,
         "first_published_date": "2014-09-21",
         "last_published_date": "2018-09-03",
@@ -4911,7 +4911,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 2,
@@ -4927,7 +4927,7 @@
         "id": "factum",
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 53,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
@@ -7346,7 +7346,7 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0,
             "screen_version": 3,
             "posts_scanned": 0,
@@ -19712,12 +19712,12 @@
         "month": "2015-01",
         "start_date": "2015-01-01",
         "end_date": "2015-01-31",
-        "records": 21,
+        "records": 27,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 21
+            "records": 27
           },
           {
             "source_id": "gatoencerrado",
@@ -25774,22 +25774,22 @@
       {
         "month": "2026-10",
         "start_date": "2026-10-01",
-        "end_date": "2026-10-17",
+        "end_date": "2026-10-18",
         "records": 9,
         "sources": [
           {
             "source_id": "co-latino",
-            "status": "enumerated",
+            "status": "partial",
             "records": 9
           },
           {
             "source_id": "gatoencerrado",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0
           },
           {
             "source_id": "factum",
-            "status": "enumerated",
+            "status": "partial",
             "records": 0
           },
           {
@@ -86438,6 +86438,51 @@
       }
     },
     {
+      "id": "67368863fdcc687041330990a4a4f7c53de0ea7317c0f6307e0bb0152e6c0138",
+      "title": "DAN captura supuestos narcotraficantes con más de $25 mil en cocaína",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/dan-captura-supuestos-narcotraficantes-con-mas-de-25-mil-en-cocaina/",
+      "published_date": "2015-01-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40690,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T00:06:16.608124-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "590bf6a7ee669e33bc9a0c2573097ab5810048ccd3e7549cf4a395ada9b5eb5a",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8",
+            "p10",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "id": "97905d4bdefc8be53b40a5f24628d6ec7d1c1f1228149c88f8cb1904b49676da",
       "title": "Querella denuncia ante PDDH a juez Orellana y fiscal general por violación al derecho de libre expresión y opinión",
       "title_truncated": false,
@@ -86616,6 +86661,99 @@
       }
     },
     {
+      "id": "cc08e2117ed27057973e364fb4cf1310fe698d040cdbad861e27fffdc05af700",
+      "title": "Defensoría del Consumidor verifica precios del frijol en calle Gerardo Barrios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/defensoria-del-consumidor-verifica-precios-del-frijol-en-calle-gerardo-barrios/",
+      "published_date": "2015-01-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40369,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T00:06:16.608124-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "71d2aac0c3d1b0d957d9ad1b491466437a5265870561a24336730cb7787d46c9",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b5ff809283d8d59f14b9d81137d4ac2291f9190dd1a3d5dbe1769c2aedb28c92",
+      "title": "Primer día del año sin homicidios: jueves 22 de enero",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/primer-dia-del-ano-sin-homicidios-jueves-22-de-enero/",
+      "published_date": "2015-01-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40354,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T00:06:16.608124-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "4a9da5de51ab2c2c15504e37bfbb96af11668d4a2a109a8166c0bf5d56da4c91",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "id": "ee813296137889c105e6ac26a03921704805badd81b955a137da8f806dd1973c",
       "title": "Congreso concede indulto a mujer acusada de homicidio agravado",
       "title_truncated": false,
@@ -86654,6 +86792,54 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c450982aa8f323b965916557734b4b4cf4245e4237e5d8bd6f381311b73a969e",
+      "title": "Fiscalía: cinco de los siete casos de policías asesinados en 2015 fueron judicializados",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fiscalia-cinco-de-los-siete-casos-de-policias-asesinados-en-2015-fueron-judicializados/",
+      "published_date": "2015-01-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40237,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T00:06:16.608124-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "aee840eb605a76860becb481e21b652ec829a7e4c04f0d51bbabb2f32fea650c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6",
             "p7"
           ]
         }
@@ -86742,6 +86928,100 @@
             "p1",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "35b24a96804f0d3b7f2adcf1fa9ab47b4617f72dc0263f456c90309fe94f9d28",
+      "title": "Condenados por asesinar agentes policiales serán enviados a penal de Máxima Seguridad",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/condenados-por-asesinar-agentes-policiales-seran-enviados-a-penal-de-maxima-seguridad/",
+      "published_date": "2015-01-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 40018,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T00:06:16.608124-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0563d327c31ed46f844afce237ad92e5416d69220e263d152505dac240d7e6ce",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p10",
+            "p21"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fe0620d41cbc88d8dc77c018b1e1768e043c9fcc17e6e11cfa76b3de0698df4b",
+      "title": "PNC: diez personas vinculadas a asesinatos de agentes policiales",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-diez-personas-vinculadas-a-asesinatos-de-agentes-policiales/",
+      "published_date": "2015-01-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 39893,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T00:06:16.608124-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "43f7d6925d5a9cfcb7557e93d634d5fbe5daacdc55214edc7604c91d1b328810",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
           ]
         }
       }
@@ -87506,7 +87786,7 @@
     },
     {
       "id": "44fffe0e5ce0156cd0deeff5a05ab4c577013215094f4f316bc7b11039adf8fe",
-      "title": "Los Santos niños inocentes, una tradición que cada año cobra más fuerza en El Salvador",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
