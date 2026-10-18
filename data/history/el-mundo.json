@@ -24,16 +24,39 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 25,
-      "pages_fetched": 25,
+      "posts_scanned": 26,
+      "pages_fetched": 26,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-17T20:55:16.734327+00:00",
+      "last_attempt_at": "2026-10-18T16:07:46.221021+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "977d2dda200c2b0aa0c701733d13fd52f8ee8ef420200b016aa6a348a61799cb",
+      "title": "PNC reporta homicidio de mujer víctima de ataque familiar e incendio en Ciudad Barrios",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/pnc-reporta-homicidio-de-mujer-victima-de-ataque-familiar-e-incendio-en-ciudad-barrios",
+      "published_date": "2026-10-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-18T16:07:46.221021+00:00"
+      }
+    },
     {
       "id": "6ee20465b0441317b08c1e2dac45fedeb58cf83f616d1c07e36273b2e0e04e93",
       "title": "Un hombre que intentó asesinar a su expareja es condenado a 35 años de prisión",
@@ -693,7 +716,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-18T11:39:55.707928+00:00",
+    "last_attempt_at": "2026-10-18T16:07:46.221021+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -726,9 +749,10 @@
       "https://diario.elmundo.sv/nacionales/bukele-aclara-que-beneficios-carcelarios-seria-solo-para-unos-5000-colaboradores-de-pandillas",
       "https://diario.elmundo.sv/nacionales/un-hombre-que-intento-asesinar-a-su-expareja-es-condenado-a-35-anos-de-prision",
       "https://diario.elmundo.sv/politica/presidente-del-congreso-hondureno-encabeza-delegacion-que-visito-el-cecot-y-busca-replicar-medidas",
-      "https://diario.elmundo.sv/nacionales/pandillero-de-la-ms-13-es-condenado-a-642-anos-de-carcel-por-18-homicidios"
+      "https://diario.elmundo.sv/nacionales/pandillero-de-la-ms-13-es-condenado-a-642-anos-de-carcel-por-18-homicidios",
+      "https://diario.elmundo.sv/nacionales/pnc-reporta-homicidio-de-mujer-victima-de-ataque-familiar-e-incendio-en-ciudad-barrios"
     ],
-    "article_cursor": 27,
+    "article_cursor": 28,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -891,6 +915,12 @@
         "published_date": "2026-10-17",
         "last_attempt_at": "2026-10-17T20:55:16.734327+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/pnc-reporta-homicidio-de-mujer-victima-de-ataque-familiar-e-incendio-en-ciudad-barrios": {
+        "status": "selected",
+        "published_date": "2026-10-18",
+        "last_attempt_at": "2026-10-18T16:07:46.221021+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -899,10 +929,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
+        "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-18T11:39:55.707928+00:00"
+        "article_urls_selected": 4,
+        "last_attempt_at": "2026-10-18T16:07:46.221021+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -911,7 +941,7 @@
         "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
         "article_urls_selected": 4,
-        "last_attempt_at": "2026-10-18T11:39:55.707928+00:00"
+        "last_attempt_at": "2026-10-18T16:07:46.221021+00:00"
       }
     },
     "index_screen_version": 3
