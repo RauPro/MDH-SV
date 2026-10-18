@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T17:17:11.618293+00:00",
+  "generated_at": "2026-10-18T18:17:51.229128+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 13228,
-      "selected": 1897,
+      "selected": 1903,
       "evaluated": 4892,
-      "relevant": 1897,
-      "excluded": 500,
-      "uncertain": 2495,
+      "relevant": 1903,
+      "excluded": 508,
+      "uncertain": 2481,
       "pending": 8336,
-      "evaluated_at": "2026-10-18T17:17:08.463734+00:00"
+      "evaluated_at": "2026-10-18T18:17:47.650996+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-18",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1897,
+    "records": 1903,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1557,
+        "records": 1563,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -821,7 +821,7 @@
           {
             "month": "2015-04",
             "status": "enumerated",
-            "records": 27,
+            "records": 33,
             "screen_version": 3,
             "posts_scanned": 890,
             "source_total_posts": 890,
@@ -19841,12 +19841,12 @@
         "month": "2015-04",
         "start_date": "2015-04-01",
         "end_date": "2015-04-30",
-        "records": 28,
+        "records": 34,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 27
+            "records": 33
           },
           {
             "source_id": "gatoencerrado",
@@ -83170,6 +83170,52 @@
       }
     },
     {
+      "id": "b0a29cbf51ace52cbbe4489696b07c18ee578b81ba59f10b6b31c828190d0c3c",
+      "title": "Exprisioneros de Guantánamo protestan frente a Embajada de los Estados Unidos en Uruguay",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/exprisioneros-de-guantanamo-protestan-frente-a-embajada-de-los-estados-unidos-en-uruguay/",
+      "published_date": "2015-04-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "estados unidos",
+        "uruguay"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 66483,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T12:09:59.340494-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6861a6db1cef8bbaa1a25e1c26a8c5075adea2f30235008e5bc3ba51798ebc5c",
+          "jurisdiction_paragraph_ids": [
+            "p19"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "id": "6209ac76e0951738611a515f9abd6b97a0ff1e7915b9626ae9ac4a23e52e01c7",
       "title": "“No hay ninguna complacencia hacia reos en el sistema penitenciario”: Rodil Hernández",
       "title_truncated": false,
@@ -83210,6 +83256,93 @@
             "p4",
             "p5",
             "p17"
+          ]
+        }
+      }
+    },
+    {
+      "id": "de9766ec5ffd9854d8b527106ee9b5190839b3f37a5fd9c0b221bcc0a815d81f",
+      "title": "Juzgado ordena detención provisional contra Diputado Suplente de GANA",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-detencion-provisional-contra-diputado-suplente-de-gana/",
+      "published_date": "2015-04-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 66441,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T12:09:59.340494-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "72b8cf5559d029a74b027dfaabbd394829a84b49665ac25fa71ed5ab08fffc27",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "6f3547e15023b58745f160220cccae92ede5f906f56176e79cba7a4d054043e8",
+      "title": "Asesinan a un empleado de la PNC y muere presunta pandillera este sábado",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+      "published_date": "2015-04-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 66449,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T12:09:59.340494-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cd14f3ab85c946ce1d7907fd8f5d5470425b5fd128b65226a5fefb3c643a2d27",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p7"
           ]
         }
       }
@@ -83257,6 +83390,50 @@
             "p5",
             "p9",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c3f1301cddc3e8d3f648398580bcca6e529b04068dfc2ce9eccb9596decbddce",
+      "title": "Reglas básicas del periodista",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/reglas-basicas-del-periodista/",
+      "published_date": "2015-04-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 66137,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T12:09:59.340494-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8fa571677daea2f25beac43721718ccd91270cd38a9b4609ff77f3454bac7701",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8"
           ]
         }
       }
@@ -83486,6 +83663,95 @@
             "p2",
             "p4",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4aa14a24a656fdd28b5edf9bd82462115298b438635525870e399b110b4360b9",
+      "title": "FGR informa detención de diputado suplente de GANA",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-informa-detencion-de-diputado-suplente-de-gana/",
+      "published_date": "2015-04-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 66000,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T12:09:59.340494-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d89d41c441114f2d0e7fb6f677ca5a30f99fe153071cbcc97171ff5be1245516",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5f3980b62304a43102188d64630eb1f84e3ced2b48370c94b9bc25182560ea49",
+      "title": "Nueve pandilleros y seis militares asesinados en el fin de semana",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+      "published_date": "2015-04-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 65921,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T12:09:59.340494-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p7",
+            "p10",
+            "p13"
           ]
         }
       }
@@ -84988,22 +85254,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T12:15:07.840653-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9e7dfda29461a67b08abcdcdb3a21b17976441f02fbf755f897685fdcc507016",
           "jurisdiction_paragraph_ids": [
             "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
             "p3",
-            "p5",
             "p6",
-            "p7",
-            "p8",
-            "p10"
+            "p7"
           ]
         }
       }
@@ -85036,23 +85298,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T12:14:50.261017-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "e1e2d6221de9a518cf3c5dfdbc9d715324c70b48d1f2067efecae8a726d1f2d3",
           "jurisdiction_paragraph_ids": [
-            "p12",
-            "p13",
-            "p23",
-            "p25"
+            "p12"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p11",
-            "p14",
-            "p17",
-            "p20",
+            "p12",
             "p23"
           ]
         }
@@ -85086,21 +85341,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T12:13:08.391457-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "91c5b0a69623e8aaccedfc77666e0a21015e8e90541324a8d7f6cf95a143665f",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p5",
-            "p6"
+            "p3"
           ]
         }
       }
@@ -85133,20 +85384,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:14:17.110889-06:00",
+        "classified_at": "2026-10-18T12:12:51.452551-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4cfd71251bf8892d503957f8a7051453d69fb1b94b380c6c0c923e9ba82e2740",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p6",
-            "p9"
+            "p6"
           ]
         }
       }
