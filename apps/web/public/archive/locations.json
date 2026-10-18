@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-18T02:18:53.631515+00:00",
+  "generated_at": "2026-10-18T05:19:42.757307+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -4271,6 +4271,29 @@
       }
     },
     {
+      "candidate_id": "88137e4991e8293579bd16bcb9ed3d1457b7abac4efc076a2bbf176221471066",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-agente-de-la-umo-en-san-juan-opico/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-10",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-17T22:11:58.032868-06:00",
+      "source_checked_at": "2026-10-18T05:19:36.756782+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "eec115f4633676fe928530c8eacddf015283b42b6cd524b3a8a84b45ca9ce117"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Juan Opico",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "8b564037bdca149f685a8f08df79e81a8ffdd8e7bab4751ab1f2898cac822d6f",
       "source_url": "https://www.diariocolatino.com/sindicalistas-comuna-revisaran-incremento-del-escalafon/",
       "publisher": "Diario Co Latino",
@@ -5258,6 +5281,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+      }
+    },
+    {
+      "candidate_id": "a8a3426b7463e9c2f18f5fc32d3bb29fa97577fcbc2ddd8b25940f6f65534e12",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-tres-supuestos-pandilleros-por-asesinato-de-policia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-10",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-17T22:12:13.043498-06:00",
+      "source_checked_at": "2026-10-18T05:19:37.656393+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "8673bb3897eb9777a56a7cd2307422b14bc2810759b845e233d892b0694613dc"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Coatepeque",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
       }
     },
     {
