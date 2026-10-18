@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T03:16:54.384727+00:00",
+  "generated_at": "2026-10-18T04:16:53.787748+00:00",
   "assessment_counts": {
     "candidates": 12775,
     "evaluated": 4891,
-    "relevant": 1851,
-    "excluded": 397,
-    "uncertain": 2643,
+    "relevant": 1854,
+    "excluded": 405,
+    "uncertain": 2632,
     "pending": 7884
   },
   "selections": [
@@ -9024,6 +9024,37 @@
             "p5",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2d9bc6f1105d99bedc77bd6def1116e98f03b7d98ea129028df45e7cba067382",
+      "source_url": "https://www.diariocolatino.com/cinco-agentes-policiales-asesinados-en-primeros-dias-de-enero/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T22:09:29.675784-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "dd1dcf317641886a95c34e2987996e40ed656d5b6084e8318d6c994895bdef36",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p14"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p11",
+            "p16",
+            "p19",
+            "p23"
           ]
         }
       }
@@ -19668,14 +19699,13 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:11:28.413758-06:00",
+        "classified_at": "2026-10-17T22:16:13.453472-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "33ce2772f8d3a49d17090208d8f4e74018d74e770d82d7b3cf4d4946062013cd",
           "jurisdiction_paragraph_ids": [
-            "p4",
-            "p6"
+            "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
@@ -20470,9 +20500,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T21:10:25.432018-06:00",
+        "classified_at": "2026-10-17T22:14:13.371056-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b90beba5b1aa10999d5cf2124f9c2214111d22690a682c028622a6aa87ccf7a0",
           "jurisdiction_paragraph_ids": [
@@ -20480,7 +20510,6 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
             "p6",
             "p7"
           ]
@@ -28164,6 +28193,34 @@
       }
     },
     {
+      "candidate_id": "88137e4991e8293579bd16bcb9ed3d1457b7abac4efc076a2bbf176221471066",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-agente-de-la-umo-en-san-juan-opico/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T22:09:29.675784-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "eec115f4633676fe928530c8eacddf015283b42b6cd524b3a8a84b45ca9ce117",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "881b02220509dcb4b332d5bda32a5a0d879c76e176b62c4e3b3782b5e444b942",
       "source_url": "https://www.diariocolatino.com/sindicalistas-exigen-incremento-salarial-acordado-con-mined/",
       "publisher": "Diario Co Latino",
@@ -35424,6 +35481,36 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "a8a3426b7463e9c2f18f5fc32d3bb29fa97577fcbc2ddd8b25940f6f65534e12",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-tres-supuestos-pandilleros-por-asesinato-de-policia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-17T22:09:29.675784-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8673bb3897eb9777a56a7cd2307422b14bc2810759b845e233d892b0694613dc",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p9",
+            "p13"
           ]
         }
       }
