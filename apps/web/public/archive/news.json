@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T06:14:37.706467+00:00",
+  "generated_at": "2026-10-18T07:16:56.712666+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 12925,
-      "selected": 1860,
+      "selected": 1862,
       "evaluated": 4891,
-      "relevant": 1860,
-      "excluded": 421,
-      "uncertain": 2610,
+      "relevant": 1862,
+      "excluded": 428,
+      "uncertain": 2601,
       "pending": 8034,
-      "evaluated_at": "2026-10-18T06:14:35.827320+00:00"
+      "evaluated_at": "2026-10-18T07:16:53.274281+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-18",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1860,
+    "records": 1862,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "partial",
-        "records": 1521,
+        "records": 1522,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -677,7 +677,7 @@
           {
             "month": "2014-04",
             "status": "enumerated",
-            "records": 35,
+            "records": 36,
             "screen_version": 3,
             "posts_scanned": 937,
             "source_total_posts": 937,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 225,
+        "records": 226,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15428,7 +15428,7 @@
           {
             "month": "2015-02",
             "status": "partial",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 37,
             "source_total_posts": null,
@@ -19325,12 +19325,12 @@
         "month": "2014-04",
         "start_date": "2014-04-01",
         "end_date": "2014-04-30",
-        "records": 37,
+        "records": 38,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 35
+            "records": 36
           },
           {
             "source_id": "gatoencerrado",
@@ -19755,7 +19755,7 @@
         "month": "2015-02",
         "start_date": "2015-02-01",
         "end_date": "2015-02-28",
-        "records": 18,
+        "records": 19,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19790,7 +19790,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 1
           }
         ]
       },
@@ -86438,6 +86438,56 @@
       }
     },
     {
+      "id": "3a0c0903d71918c85de6fa473f4186bed14a236c2134fd3e8edb5aedd1b2dbf9",
+      "title": "Capturan a salvadoreńos en Guatemala con un cadáver tras tiroteo con Policía",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/146212/capturan-a-salvadorenos-en-guatemala-con-un-cadaver-tras-tiroteo-con-policia.html",
+      "published_date": "2015-02-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "guatemala",
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T00:57:45.034812+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T01:09:28.941635-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "45c270b8c90edb4838d203e018806cfb912096e583d2e0b443d4ec2cfa126024",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "id": "67368863fdcc687041330990a4a4f7c53de0ea7317c0f6307e0bb0152e6c0138",
       "title": "DAN captura supuestos narcotraficantes con más de $25 mil en cocaína",
       "title_truncated": false,
@@ -86510,20 +86560,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:13:26.760004-06:00",
+        "classified_at": "2026-10-18T01:15:59.818439-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d0588720f86f7e915a599eef3de58e30cef57e755c74582f869a39e4dc1cff2b",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p6",
-            "p15",
-            "p19"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -86556,18 +86603,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:11:35.806848-06:00",
+        "classified_at": "2026-10-18T01:14:13.604947-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9940f12c32e079d7d5341360cd0661f5439ff647fa0332ea184426a67978d7fc",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
             "p10"
           ]
         }
@@ -86601,19 +86646,20 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T22:11:35.806848-06:00",
+        "classified_at": "2026-10-18T01:13:59.531982-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "89c1d8a61b28598df149707635c9d75d912e7b3d7a458813a13dc818b7570f9e",
           "jurisdiction_paragraph_ids": [
             "p4",
-            "p14"
+            "p6"
           ],
           "relevance_paragraph_ids": [
-            "p3",
+            "p2",
             "p4",
-            "p16"
+            "p5",
+            "p17"
           ]
         }
       }
@@ -102411,6 +102457,51 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5cdccaaaffe143ae791fe74727772b448a81b8f3f683a502fd105ebe300a5794",
+      "title": "El periodista venezolano Walter Martínez fue condecorado en La Habana",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/el-periodista-venezolano-walter-martinez-fue-condecorado-en-la-habana/",
+      "published_date": "2014-04-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "la habana",
+        "venezolano"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 12524,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T07:10:06.958918+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "4f6a42f5781456f735db92886af927f3e132fd0ad76bc03db11da7ccff0949a8",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p5"
           ]
         }
       }
