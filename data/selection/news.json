@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T11:16:46.701843+00:00",
+  "generated_at": "2026-10-18T12:17:09.762258+00:00",
   "assessment_counts": {
-    "candidates": 12925,
-    "evaluated": 4891,
-    "relevant": 1879,
-    "excluded": 460,
-    "uncertain": 2552,
-    "pending": 8034
+    "candidates": 13077,
+    "evaluated": 4892,
+    "relevant": 1882,
+    "excluded": 468,
+    "uncertain": 2542,
+    "pending": 8185
   },
   "selections": [
     {
@@ -15956,20 +15956,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:10:13.732842-06:00",
+        "classified_at": "2026-10-18T06:12:17.426027-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "baf4c1dab73269c5c76c81572af0b88b8eb3d92de0d0a4fb869157a66a052d4d",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p11"
+            "p12"
           ],
           "relevance_paragraph_ids": [
-            "p9",
             "p14",
-            "p15",
-            "p16"
+            "p15"
           ]
         }
       }
@@ -20260,22 +20257,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:11:23.276512-06:00",
+        "classified_at": "2026-10-18T06:16:29.494353-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "049df41877e3df2edafa09c9a71b14e15928a64cfe0c83c939e8779a12accdb4",
           "jurisdiction_paragraph_ids": [
-            "p4",
-            "p5",
-            "p22"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p20",
-            "p21",
-            "p23",
-            "p30"
+            "p3"
           ]
         }
       }
@@ -31155,20 +31146,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:10:13.732842-06:00",
+        "classified_at": "2026-10-18T06:14:01.138544-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8e16b691d56c6ba11afc4481601272158bdc5673564fb6079cdafb587ba8dc0f",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p5",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -32307,6 +32294,33 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "984e8fc710efa31658d4a6fa34c63f29b7336e457c36aa810e33acdb206aead8",
+      "source_url": "https://www.diariocolatino.com/roxana-cardona-cuestiona-que-bukele-anticipe-condenas-a-detenidos-por-colaboracion-con-pandillas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T00:08:52.879815-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0a05b068cc82ceb827fc46585996ae17f3062825f1147c5c9f6427f4698a5777",
+          "jurisdiction_paragraph_ids": [
+            "p18"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p18",
+            "p26"
           ]
         }
       }
@@ -37764,22 +37778,20 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:10:13.732842-06:00",
+        "classified_at": "2026-10-18T06:14:16.888998-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "51715a10df2f5f4920079a1c97b1ed800f4fc376b249e3b48cdf4985cae00cdf",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p5",
-            "p6"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
+            "p3",
             "p4",
-            "p5",
             "p11",
-            "p14"
+            "p13"
           ]
         }
       }
@@ -42840,6 +42852,36 @@
       }
     },
     {
+      "candidate_id": "c88c905397e150860723fdb51393c7c7470e80682ed0749b6b562f758b2601e0",
+      "source_url": "https://www.diariocolatino.com/isd-exige-a-dirigencia-de-arena-detener-campana-de-fraude/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T06:09:28.871050-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "bd673feecf30edfc4e2dcfe3884afe7822d87e627e9b6adbd6d7780262db3abc",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "c8b341e44e35686b9958f3b05fef23fc1e3c39710b484187eab4a4ea66d9773b",
       "source_url": "https://www.diariocolatino.com/martires-belen-los-santos-ninos-inocentes/",
       "publisher": "Diario Co Latino",
@@ -46898,6 +46940,35 @@
           "relevance_paragraph_ids": [
             "p4",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e0c5d122a262b848a06a0c2b3187f794d8aa9156916542cc9fda82785a4c4400",
+      "source_url": "https://www.diariocolatino.com/fgr-realiza-capturas-por-fraude-electoral/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T06:09:28.871050-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cf0a4a52149fdb6df83117129249fba77b5624a2d912aeffd3dd98ff70900d33",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }
