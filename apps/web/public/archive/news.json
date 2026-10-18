@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T21:00:47.041488+00:00",
+  "generated_at": "2026-10-18T21:17:03.010250+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 13378,
-      "selected": 1912,
+      "selected": 1914,
       "evaluated": 4892,
-      "relevant": 1912,
-      "excluded": 523,
-      "uncertain": 2457,
+      "relevant": 1914,
+      "excluded": 531,
+      "uncertain": 2447,
       "pending": 8486,
-      "evaluated_at": "2026-10-18T20:16:52.712217+00:00"
+      "evaluated_at": "2026-10-18T21:16:59.441522+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-18",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1912,
+    "records": 1914,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1571,
+        "records": 1573,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -833,7 +833,7 @@
           {
             "month": "2015-05",
             "status": "enumerated",
-            "records": 43,
+            "records": 45,
             "screen_version": 3,
             "posts_scanned": 1000,
             "source_total_posts": 1000,
@@ -19884,12 +19884,12 @@
         "month": "2015-05",
         "start_date": "2015-05-01",
         "end_date": "2015-05-31",
-        "records": 48,
+        "records": 50,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 43
+            "records": 45
           },
           {
             "source_id": "gatoencerrado",
@@ -81930,6 +81930,57 @@
       }
     },
     {
+      "id": "768c2b51ebc5bf1e063feb9bd00cbe0c5f9b725070cfbf21db3d985661dc044b",
+      "title": "PNC confirma captura de acusado del homicidio del Fiscal de Usulután",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-confirma-captura-de-acusado-del-homicidio-del-fiscal-de-usulutan/",
+      "published_date": "2015-05-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "usulutan"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 68946,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T15:09:25.433875-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8b51d257ef13649f407801aec2620213bbdf7a9defdc826cff38a5fd59ac9427",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "id": "a4de9446d48eafdf32f85187446415b79271904294c5e096e2186008f3b8f9d2",
       "title": "La desigualdad desde el enfoque periodístico abordan en foro",
       "title_truncated": false,
@@ -82058,6 +82109,53 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8d841330855701f51fdf471d59b4d2b5bf5a44825087535bd945f5ea69fa7ca5",
+      "title": "Homicidios durante el fin de semana reporta FGR",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/homicidios-durante-el-fin-de-semana-reporta-fgr/",
+      "published_date": "2015-05-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 68522,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T15:09:25.433875-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6bd877706f2592a66df9e86df1323a1e9e849818662250a1dde89d3b415b9b6a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p16"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p14",
+            "p17"
           ]
         }
       }
@@ -84878,20 +84976,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:16:43.823206-06:00",
+        "classified_at": "2026-10-18T15:14:05.500817-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "5336081e88e09c04ec7cfca1a3db3bda2d672a5958227c0d1ed393fe502f654c",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p11"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p28",
-            "p33",
-            "p47"
+            "p3",
+            "p32"
           ]
         }
       }
@@ -84969,17 +85065,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:16:43.823206-06:00",
+        "classified_at": "2026-10-18T15:12:03.977679-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "04029b011f790ae703ae1456d817e13a9c361e73a0c7a209e4edc8d82dc95402",
           "jurisdiction_paragraph_ids": [
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p6",
-            "p11",
+            "p3",
             "p13",
             "p14"
           ]
@@ -86510,7 +86605,7 @@
     },
     {
       "id": "80dab2630262ca87f8a5691980b760c3f7b6a0969bba331bef0c4c86308b0d71",
-      "title": "“Tenemos que cambiar la cultura machista y respetar los derechos de las mujeres”: Sánchez Cerén",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",

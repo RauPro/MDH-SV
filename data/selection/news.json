@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T20:16:52.712217+00:00",
+  "generated_at": "2026-10-18T21:16:59.441522+00:00",
   "assessment_counts": {
-    "candidates": 13228,
+    "candidates": 13378,
     "evaluated": 4892,
-    "relevant": 1912,
-    "excluded": 523,
-    "uncertain": 2457,
-    "pending": 8336
+    "relevant": 1914,
+    "excluded": 531,
+    "uncertain": 2447,
+    "pending": 8486
   },
   "selections": [
     {
@@ -20458,20 +20458,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:16:43.823206-06:00",
+        "classified_at": "2026-10-18T15:14:05.500817-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "5336081e88e09c04ec7cfca1a3db3bda2d672a5958227c0d1ed393fe502f654c",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p11"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p28",
-            "p33",
-            "p47"
+            "p3",
+            "p32"
           ]
         }
       }
@@ -25485,6 +25483,37 @@
       }
     },
     {
+      "candidate_id": "768c2b51ebc5bf1e063feb9bd00cbe0c5f9b725070cfbf21db3d985661dc044b",
+      "source_url": "https://www.diariocolatino.com/pnc-confirma-captura-de-acusado-del-homicidio-del-fiscal-de-usulutan/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T15:09:25.433875-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8b51d257ef13649f407801aec2620213bbdf7a9defdc826cff38a5fd59ac9427",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p10"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "76ba7b8a9d5d4a7b19ff9535226ab4d66e9ed7c1ca7ea85df879f155f07a2ffd",
       "source_url": "https://www.diariocolatino.com/marcha-conmemoracion-del-dia-internacional-la-eliminacion-violencia-la-mujer-2/",
       "publisher": "Diario Co Latino",
@@ -27184,17 +27213,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:16:43.823206-06:00",
+        "classified_at": "2026-10-18T15:12:03.977679-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "04029b011f790ae703ae1456d817e13a9c361e73a0c7a209e4edc8d82dc95402",
           "jurisdiction_paragraph_ids": [
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p6",
-            "p11",
+            "p3",
             "p13",
             "p14"
           ]
@@ -30372,6 +30400,36 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8d841330855701f51fdf471d59b4d2b5bf5a44825087535bd945f5ea69fa7ca5",
+      "source_url": "https://www.diariocolatino.com/homicidios-durante-el-fin-de-semana-reporta-fgr/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T15:09:25.433875-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6bd877706f2592a66df9e86df1323a1e9e849818662250a1dde89d3b415b9b6a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p16"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p14",
+            "p17"
           ]
         }
       }

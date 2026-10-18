@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-18T20:19:45.546690+00:00",
+  "generated_at": "2026-10-18T21:20:16.796304+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -4958,6 +4958,105 @@
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
       }
+    },
+    {
+      "candidate_id": "8d841330855701f51fdf471d59b4d2b5bf5a44825087535bd945f5ea69fa7ca5",
+      "source_url": "https://www.diariocolatino.com/homicidios-durante-el-fin-de-semana-reporta-fgr/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-05-18",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_administrative_mentions",
+      "rule_version": 2,
+      "extracted_at": "2026-10-18T21:19:07.928634+00:00",
+      "source_checked_at": "2026-10-18T21:19:07.928634+00:00",
+      "evidence": {
+        "content_sha256": "6bd877706f2592a66df9e86df1323a1e9e849818662250a1dde89d3b415b9b6a"
+      },
+      "mentions": [
+        {
+          "method": "source_municipality_reference",
+          "department": "Cabañas",
+          "paragraph_id": "p13",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Ilobasco",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Cuscatlán",
+          "paragraph_id": "p13",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Cojutepeque",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=8"
+          }
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "La Libertad",
+          "paragraph_id": "p7"
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "La Paz",
+          "paragraph_id": "p6",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Rafael Obrajuelo",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=10"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Miguel",
+          "paragraph_id": "p16",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "San Miguel",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=13"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "San Salvador",
+          "paragraph_id": "p11",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Apopa",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+          }
+        },
+        {
+          "method": "source_municipality_reference",
+          "department": "Sonsonate",
+          "paragraph_id": "p13",
+          "resolution": {
+            "type": "municipality_to_department",
+            "municipality": "Armenia",
+            "municipality_kind": "district",
+            "reference_version": "sv-decree-762-2023-v1",
+            "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=11"
+          }
+        },
+        {
+          "method": "source_explicit_department",
+          "department": "Usulután",
+          "paragraph_id": "p10"
+        }
+      ]
     },
     {
       "candidate_id": "8f9f8efd9d42fd5d9b9cfbd319ea38d3443d1ce7d1a3280c0625d1fd993868e2",
