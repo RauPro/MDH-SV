@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T13:16:48.950716+00:00",
+  "generated_at": "2026-10-18T14:17:10.899937+00:00",
   "assessment_counts": {
     "candidates": 13077,
     "evaluated": 4892,
-    "relevant": 1886,
-    "excluded": 476,
-    "uncertain": 2530,
+    "relevant": 1888,
+    "excluded": 484,
+    "uncertain": 2520,
     "pending": 8185
   },
   "selections": [
@@ -14488,6 +14488,39 @@
       }
     },
     {
+      "candidate_id": "4863e2f2392b7fe985484ec28f275acc11921b6d472006982f0d91ecda5577ab",
+      "source_url": "https://www.diariocolatino.com/fiscal-general-lamenta-que-iml-atribuya-homicidios-al-traslado-de-pandilleros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-13",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T08:09:37.413914-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "9dec7f6951098bc05da5ea2d8f1b8e0919fd76444fb0160ca182a8e59ee77c7a",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p7",
+            "p8",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "48a3c682cf095797f541d076dd123fb15f76d631a6f2528eb44afd21272b19b9",
       "source_url": "https://www.diariocolatino.com/cuestionan-candidatura-bukele-premio-sajarov-por-violaciones-ddhh/",
       "publisher": "Diario Co Latino",
@@ -15203,20 +15236,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:11:23.276512-06:00",
+        "classified_at": "2026-10-18T08:12:14.062252-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "49c4a1a4746f66d8c1ea284536e67f144f2d0d141f450b7eaae0c18b23028403",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4"
+            "p6"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p6",
-            "p9"
+            "p4",
+            "p5"
           ]
         }
       }
@@ -20479,23 +20509,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:12:18.003185-06:00",
+        "classified_at": "2026-10-18T08:16:14.078913-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c6c3e1144943587b2f8bcbcca648c2921c795e7705963fa187aa7d939a7485b0",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4",
             "p5"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p5",
-            "p6",
-            "p7",
-            "p8"
+            "p4"
           ]
         }
       }
@@ -32898,6 +32922,33 @@
       }
     },
     {
+      "candidate_id": "9ac99d1dae89ba19ca5c8db5f7a6e447a47739f9a18ba1b2211721e565da58a0",
+      "source_url": "https://www.diariocolatino.com/campesinos-guatemaltecos-protestan-contra-la-mineria/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T08:09:37.413914-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ffc7cf825541104948a46d1a2ab1753db9820b2405c80fc2a06dc5aa251b9b33",
+          "jurisdiction_paragraph_ids": [
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p11",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "9adbbc1e48d5790bf729e0eb9c5b7fab77e28117ad08d536874961972fe74ac4",
       "source_url": "https://www.diariocolatino.com/gobierno-busca-reducir-hacinamiento-carcelario-con-liberacion-de-2-mil-400-reos/",
       "publisher": "Diario Co Latino",
@@ -44146,9 +44197,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:12:18.003185-06:00",
+        "classified_at": "2026-10-18T08:16:29.261295-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8ecc2def5dc9a1a28b4fbffcd88c219e1deb2470402d054ed8e6e4e6e689d15f",
           "jurisdiction_paragraph_ids": [
