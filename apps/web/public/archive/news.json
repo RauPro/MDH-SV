@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T19:17:37.344754+00:00",
+  "generated_at": "2026-10-18T20:16:55.431040+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 13228,
-      "selected": 1909,
+      "selected": 1912,
       "evaluated": 4892,
-      "relevant": 1909,
-      "excluded": 515,
-      "uncertain": 2468,
+      "relevant": 1912,
+      "excluded": 523,
+      "uncertain": 2457,
       "pending": 8336,
-      "evaluated_at": "2026-10-18T19:17:33.538395+00:00"
+      "evaluated_at": "2026-10-18T20:16:52.712217+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-18",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1909,
+    "records": 1912,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1569,
+        "records": 1571,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -833,7 +833,7 @@
           {
             "month": "2015-05",
             "status": "enumerated",
-            "records": 41,
+            "records": 43,
             "screen_version": 3,
             "posts_scanned": 1000,
             "source_total_posts": 1000,
@@ -14689,7 +14689,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 226,
+        "records": 227,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15464,7 +15464,7 @@
           {
             "month": "2015-05",
             "status": "partial",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 38,
             "source_total_posts": null,
@@ -19884,12 +19884,12 @@
         "month": "2015-05",
         "start_date": "2015-05-01",
         "end_date": "2015-05-31",
-        "records": 45,
+        "records": 48,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 41
+            "records": 43
           },
           {
             "source_id": "gatoencerrado",
@@ -19919,7 +19919,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 1
+            "records": 2
           }
         ]
       },
@@ -82107,6 +82107,51 @@
       }
     },
     {
+      "id": "7d4d5d36c0029cdbe1f4812349f89b25c345b28b48d6a2c9ec06443f7401ee81",
+      "title": "PNC reporta cuádruple homicidio en La Paz",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-reporta-cuadruple-homicidio-en-la-paz/",
+      "published_date": "2015-05-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 68422,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T14:09:24.149157-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0851fe18d4c882b3954e3430f6d706063905226783e8e9a89d52659cd0f98ccf",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "id": "5b55fde48aa693294f840be836e8a76a0c7235fa2bcdc5aa30b20a77fa36b617",
       "title": "Corte Constitucional Ecuatoriana busca capacitar a comunicadores y periodistas de la región",
       "title_truncated": false,
@@ -82147,6 +82192,53 @@
           "relevance_paragraph_ids": [
             "p5",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b40f6423689305eba2c13e7ebb5a5aa129a7a15546103f28c4af367a870ecc33",
+      "title": "Capturan a pandillero salvadoreńo en Honduras",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/152329/capturan-a-pandillero-salvadoreno-en-honduras.html",
+      "published_date": "2015-05-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "honduras",
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T14:09:24.149157-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "01cb19677fee6dc8d1baf26124c555d9b829f216e4e810290b825696e2e23ad0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p7"
           ]
         }
       }
@@ -82701,6 +82793,48 @@
             "p7",
             "p12",
             "p14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "59ed83c8062eb05bd9414a7b6daccbabcb25d543dafd39f59f62cda3d15ff10b",
+      "title": "Marejadas provocan tres muertos y un desaparecido en costas del Pacífico americano",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/marejadas-provocan-tres-muertos-y-un-desaparecido-en-costas-del-pacifico-americano/",
+      "published_date": "2015-05-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 67156,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-18T14:09:24.149157-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e908b60e861319b43d4244cc773d87556d4b0d9ff093865091d4596cc98880c3",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
           ]
         }
       }
@@ -84882,20 +85016,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:16:43.823206-06:00",
+        "classified_at": "2026-10-18T14:16:16.284971-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "0fc68546fe0afda661b0f0e17412d407837cbdae0f5869b214adf1c20481be37",
           "jurisdiction_paragraph_ids": [
-            "p1",
             "p3"
           ],
           "relevance_paragraph_ids": [
-            "p1",
-            "p5",
-            "p15",
-            "p20"
+            "p3"
           ]
         }
       }
@@ -84928,20 +85058,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:16:43.823206-06:00",
+        "classified_at": "2026-10-18T14:15:58.302504-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c8ec570665efccbad4515eadc918d7a3ec9d0663d97af0fe9e6fb580b8f304f3",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
             "p5",
-            "p6",
-            "p8"
+            "p6"
           ]
         }
       }
@@ -85067,20 +85195,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:16:43.823206-06:00",
+        "classified_at": "2026-10-18T14:13:58.106075-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "95cb894ed73041aa594d3e4cc2966e7da91fd58baefc32dce863de301fd687f4",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p7",
-            "p8",
-            "p9",
-            "p10"
+            "p9"
           ]
         }
       }
@@ -85113,21 +85238,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:15:24.356103-06:00",
+        "classified_at": "2026-10-18T14:12:12.029214-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "e50e3d2ad550b8b3db7348c7f43589b2e377e965539c523d69a53da48424af4e",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p8"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p5",
-            "p10",
-            "p12",
-            "p15",
-            "p16"
+            "p8"
           ]
         }
       }
