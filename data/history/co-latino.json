@@ -276,7 +276,7 @@
       "start_date": "2026-09-01",
       "end_date": "2026-09-30",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-20T05:13:38.138082+00:00",
+      "last_attempt_at": "2026-10-20T12:05:18.768531+00:00",
       "screen_version": 3,
       "next_page": 5,
       "pages_fetched": 4,
@@ -285,19 +285,22 @@
       "source_total_posts": 351,
       "source_total_pages": 4,
       "error": null,
-      "completed_at": "2026-10-20T05:13:38.138082+00:00"
+      "completed_at": "2026-10-20T12:05:18.768531+00:00"
     },
     "2026-10": {
       "start_date": "2026-10-01",
-      "end_date": "2026-10-19",
-      "status": "failed",
-      "last_attempt_at": "2026-10-20T05:13:38.138082+00:00",
+      "end_date": "2026-10-20",
+      "status": "enumerated",
+      "last_attempt_at": "2026-10-20T12:05:18.768531+00:00",
       "screen_version": 3,
-      "next_page": 1,
-      "pages_fetched": 0,
-      "posts_scanned": 0,
+      "next_page": 4,
+      "pages_fetched": 3,
+      "posts_scanned": 225,
       "invalid_posts": 0,
-      "error": "ReadTimeout"
+      "source_total_posts": 225,
+      "source_total_pages": 3,
+      "error": null,
+      "completed_at": "2026-10-20T12:05:18.768531+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3031,6 +3034,32 @@
     }
   },
   "records": [
+    {
+      "id": "a985a98cfa92ff6b81b73a2611e76bcd155cf15a93cc5c968f996e80e82caca2",
+      "title": "Ingrid Escobar: “bukele anuncia liberar colaboradores de pandillas, mientras las familias siguen exigiendo justicia para los inocentes”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/ingrid-escobar-bukele-anuncia-liberar-colaboradores-pandillas-mientras-familias-siguen-exigiendo-justicia-para-inocentes/",
+      "published_date": "2026-10-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "ingrid escobar"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420912,
+        "retrieved_at": "2026-10-20T12:05:18.768531+00:00"
+      }
+    },
     {
       "id": "da4df657b90b653e0b7db56fd7fef5b6ef2bb14d26b709f11359305791288d8c",
       "title": "Piden endurecer penas de prisión por conducción peligrosa y crean nuevo delito",
