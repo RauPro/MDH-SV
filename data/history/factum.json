@@ -276,7 +276,7 @@
       "start_date": "2026-09-01",
       "end_date": "2026-09-30",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-19T22:37:32.988564+00:00",
+      "last_attempt_at": "2026-10-20T05:13:38.138529+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
@@ -285,22 +285,22 @@
       "source_total_posts": 7,
       "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-10-19T22:37:32.988564+00:00"
+      "completed_at": "2026-10-20T05:13:38.138529+00:00"
     },
     "2026-10": {
       "start_date": "2026-10-01",
       "end_date": "2026-10-19",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-19T22:37:32.988564+00:00",
+      "last_attempt_at": "2026-10-20T05:13:38.138529+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
-      "posts_scanned": 0,
+      "posts_scanned": 1,
       "invalid_posts": 0,
-      "source_total_posts": 0,
-      "source_total_pages": 0,
+      "source_total_posts": 1,
+      "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-10-19T22:37:32.988564+00:00"
+      "completed_at": "2026-10-20T05:13:38.138529+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3034,6 +3034,29 @@
     }
   },
   "records": [
+    {
+      "id": "f83898a9e12e819915e822f04a63b555c7b360f8680c31a3cb8c2dc43b954d6d",
+      "title": "Cecibel Romero: la maestra del periodismo de datos que no dejó de reportear",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/cecibel-romero-la-maestra-del-periodismo-de-datos-que-no-dejo-de-reportear/",
+      "published_date": "2026-10-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 72956,
+        "retrieved_at": "2026-10-20T05:13:38.138529+00:00"
+      }
+    },
     {
       "id": "ea671bbe7877990684dbaa2ceddbd2ad7013bb2027c693f4db459d73af1d3d2d",
       "title": "Denuncian acoso sexual y encubrimiento por parte de maestros y directivos del Centro Cultural Salvadoreño Americano de San Salvador",
