@@ -24,16 +24,42 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 28,
-      "pages_fetched": 28,
+      "posts_scanned": 29,
+      "pages_fetched": 29,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-19T22:37:37.382507+00:00",
+      "last_attempt_at": "2026-10-20T12:05:22.052567+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "34b2346ea4a90beb4f593d1abe2bdf5d439e46c67912023610f02ed16877175d",
+      "title": "Cuatro militares salvadoreños siguen desaparecidos tras emboscada en Haití",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/cuatro-militares-salvadorenos-siguen-desaparecidos-tras-emboscada-en-haiti",
+      "published_date": "2026-10-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "haiti",
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-20T12:05:22.052567+00:00"
+      }
+    },
     {
       "id": "20aa647c7cebf56abb0da40222b110def75d0a7c399a83af243599078931f8b5",
       "title": "EEUU promete rescatar a los cuatro soldados salvadoreños desaparecidos en Haití",
@@ -766,7 +792,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-20T05:13:41.358833+00:00",
+    "last_attempt_at": "2026-10-20T12:05:22.052567+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -802,9 +828,10 @@
       "https://diario.elmundo.sv/nacionales/pandillero-de-la-ms-13-es-condenado-a-642-anos-de-carcel-por-18-homicidios",
       "https://diario.elmundo.sv/nacionales/pnc-reporta-homicidio-de-mujer-victima-de-ataque-familiar-e-incendio-en-ciudad-barrios",
       "https://diario.elmundo.sv/nacionales/condenan-a-35-anos-a-hombre-por-homicidio-en-san-miguel",
-      "https://diario.elmundo.sv/nacionales/eeuu-promete-rescatar-a-los-cuatro-soldados-salvadorenos-desaparecidos-en-haiti"
+      "https://diario.elmundo.sv/nacionales/eeuu-promete-rescatar-a-los-cuatro-soldados-salvadorenos-desaparecidos-en-haiti",
+      "https://diario.elmundo.sv/nacionales/cuatro-militares-salvadorenos-siguen-desaparecidos-tras-emboscada-en-haiti"
     ],
-    "article_cursor": 30,
+    "article_cursor": 31,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -985,6 +1012,12 @@
         "published_date": "2026-10-19",
         "last_attempt_at": "2026-10-19T22:37:37.382507+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/cuatro-militares-salvadorenos-siguen-desaparecidos-tras-emboscada-en-haiti": {
+        "status": "selected",
+        "published_date": "2026-10-20",
+        "last_attempt_at": "2026-10-20T12:05:22.052567+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -993,19 +1026,19 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 4,
+        "article_urls_matching_anchor": 5,
         "article_urls_observed": 20,
-        "article_urls_selected": 4,
-        "last_attempt_at": "2026-10-20T05:13:41.358833+00:00"
+        "article_urls_selected": 5,
+        "last_attempt_at": "2026-10-20T12:05:22.052567+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 4,
+        "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
-        "article_urls_selected": 4,
-        "last_attempt_at": "2026-10-20T05:13:41.358833+00:00"
+        "article_urls_selected": 3,
+        "last_attempt_at": "2026-10-20T12:05:22.052567+00:00"
       }
     },
     "index_screen_version": 3
