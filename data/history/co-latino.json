@@ -276,7 +276,7 @@
       "start_date": "2026-09-01",
       "end_date": "2026-09-30",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-20T17:30:03.938592+00:00",
+      "last_attempt_at": "2026-10-22T05:19:33.954461+00:00",
       "screen_version": 3,
       "next_page": 5,
       "pages_fetched": 4,
@@ -285,22 +285,22 @@
       "source_total_posts": 351,
       "source_total_pages": 4,
       "error": null,
-      "completed_at": "2026-10-20T17:30:03.938592+00:00"
+      "completed_at": "2026-10-22T05:19:33.954461+00:00"
     },
     "2026-10": {
       "start_date": "2026-10-01",
-      "end_date": "2026-10-20",
+      "end_date": "2026-10-21",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-20T17:30:03.938592+00:00",
+      "last_attempt_at": "2026-10-22T05:19:33.954461+00:00",
       "screen_version": 3,
       "next_page": 4,
       "pages_fetched": 3,
-      "posts_scanned": 225,
+      "posts_scanned": 242,
       "invalid_posts": 0,
-      "source_total_posts": 225,
+      "source_total_posts": 242,
       "source_total_pages": 3,
       "error": null,
-      "completed_at": "2026-10-20T17:30:03.938592+00:00"
+      "completed_at": "2026-10-22T05:19:33.954461+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3035,6 +3035,53 @@
   },
   "records": [
     {
+      "id": "54c7dab5d58d7cdc0d0facda8a869b4721d64404a46bae293258d85be0f83fb6",
+      "title": "Nuevas Ideas prórroga régimen de excepción un mes más",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/nuevas-ideas-prorroga-regimen-de-excepcion-un-mes-mas/",
+      "published_date": "2026-10-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420960,
+        "retrieved_at": "2026-10-22T05:19:33.954461+00:00"
+      }
+    },
+    {
+      "id": "16e8f05c406e6f4d521bd7970c1fa27a96515574b2fe169c2e4addd424d4789a",
+      "title": "Organizaciones de DDHH y colectivos de familiares exigen la liberación de inocentes detenidos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/organizaciones-de-ddhh-y-colectivos-de-familiares-exigen-la-liberacion-de-inocentes-detenidos/",
+      "published_date": "2026-10-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "derechos_humanos"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420999,
+        "retrieved_at": "2026-10-22T05:19:33.954461+00:00"
+      }
+    },
+    {
       "id": "a985a98cfa92ff6b81b73a2611e76bcd155cf15a93cc5c968f996e80e82caca2",
       "title": "Ingrid Escobar: “bukele anuncia liberar colaboradores de pandillas, mientras las familias siguen exigiendo justicia para los inocentes”",
       "title_truncated": false,
@@ -3058,6 +3105,31 @@
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "source_post_id": 420912,
         "retrieved_at": "2026-10-20T12:05:18.768531+00:00"
+      }
+    },
+    {
+      "id": "4cdb0de34b2d7d026fb67e68685a8f26301c0e6bebe786d41bba7e85a9c5bf6e",
+      "title": "Sector Magisterial y la CROSS convocan a una concentración en el marco del Día del Sindicalismo Salvadoreño",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sector-magisterial-y-la-cross-convocan-a-una-concentracion-en-el-marco-del-dia-del-sindicalismo-salvadoreno/",
+      "published_date": "2026-10-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 420955,
+        "retrieved_at": "2026-10-22T05:19:33.954461+00:00"
       }
     },
     {
