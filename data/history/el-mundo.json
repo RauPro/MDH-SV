@@ -24,16 +24,65 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 30,
-      "pages_fetched": 30,
+      "posts_scanned": 32,
+      "pages_fetched": 32,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
+      "last_attempt_at": "2026-10-24T04:59:35.440534+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "5672c6f5274ff4c05330dbea38225b0516fb6feb4eba4b996b147c6353f39a54",
+      "title": "Envían a prisión provisional a hombre y su hija acusados de violación agravada y complicidad en El Porvenir",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-hombre-y-su-hija-acusados-de-violacion-agravada-y-complicidad-en-el-porvenir",
+      "published_date": "2026-10-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-24T04:59:35.440534+00:00"
+      }
+    },
+    {
+      "id": "3e19c78c2aab6ee2868336c4f8ca4bf525708a3ea186ec0301fc688c3b5a3d9b",
+      "title": "Bukele confía en vencer pandillas haitianas y rescatar a militares desaparecidos",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/bukele-confia-en-vencer-pandillas-haitianas-y-rescatar-a-militares-desaparecidos",
+      "published_date": "2026-10-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-24T04:59:35.440534+00:00"
+      }
+    },
     {
       "id": "36c81fc683be98328a7354d5c7ab7c3cef7431f4afb4ddfb23f6748a2d6cb29e",
       "title": "Ordenan prisión provisional para conductor ebrio que atropelló mortalmente a mujer",
@@ -815,7 +864,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
+    "last_attempt_at": "2026-10-24T04:59:35.440534+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -853,9 +902,11 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-35-anos-a-hombre-por-homicidio-en-san-miguel",
       "https://diario.elmundo.sv/nacionales/eeuu-promete-rescatar-a-los-cuatro-soldados-salvadorenos-desaparecidos-en-haiti",
       "https://diario.elmundo.sv/nacionales/cuatro-militares-salvadorenos-siguen-desaparecidos-tras-emboscada-en-haiti",
-      "https://diario.elmundo.sv/nacionales/ordenan-prision-provisional-para-conductor-ebrio-que-atropello-mortalmente-a-mujer"
+      "https://diario.elmundo.sv/nacionales/ordenan-prision-provisional-para-conductor-ebrio-que-atropello-mortalmente-a-mujer",
+      "https://diario.elmundo.sv/nacionales/bukele-confia-en-vencer-pandillas-haitianas-y-rescatar-a-militares-desaparecidos",
+      "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-hombre-y-su-hija-acusados-de-violacion-agravada-y-complicidad-en-el-porvenir"
     ],
-    "article_cursor": 32,
+    "article_cursor": 34,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1048,6 +1099,18 @@
         "published_date": "2026-10-20",
         "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/bukele-confia-en-vencer-pandillas-haitianas-y-rescatar-a-militares-desaparecidos": {
+        "status": "selected",
+        "published_date": "2026-10-23",
+        "last_attempt_at": "2026-10-24T04:59:35.440534+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/envian-a-prision-provisional-a-hombre-y-su-hija-acusados-de-violacion-agravada-y-complicidad-en-el-porvenir": {
+        "status": "selected",
+        "published_date": "2026-10-23",
+        "last_attempt_at": "2026-10-24T04:59:35.440534+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1056,10 +1119,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 6,
+        "article_urls_matching_anchor": 5,
         "article_urls_observed": 20,
-        "article_urls_selected": 6,
-        "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+        "article_urls_selected": 5,
+        "last_attempt_at": "2026-10-24T04:59:35.440534+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -1068,7 +1131,7 @@
         "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
         "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+        "last_attempt_at": "2026-10-24T04:59:35.440534+00:00"
       }
     },
     "index_screen_version": 3
