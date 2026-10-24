@@ -24,16 +24,62 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 30,
-      "pages_fetched": 30,
+      "posts_scanned": 32,
+      "pages_fetched": 32,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
+      "last_attempt_at": "2026-10-24T21:10:13.726621+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "61d976741c9b5d0f165eb8d6057a7a351b13751d03755887a5b501144d8f2feb",
+      "title": "Un hombre que estafó por WhatsApp pasará cinco años en prisión",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/un-hombre-que-estafo-por-whatsapp-pasara-cinco-anos-en-prision",
+      "published_date": "2026-10-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-24T21:10:13.726621+00:00"
+      }
+    },
+    {
+      "id": "13136c895ca0d51ae854ae46882a7187d1e4225d1fc60568694ee5141a128b61",
+      "title": "Dan ocho años de cárcel a una mujer que se apropió de buses en Soyapango",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/dan-ocho-anos-de-carcel-a-una-mujer-que-se-apropio-de-buses-en-soyapango",
+      "published_date": "2026-10-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-24T21:10:13.726621+00:00"
+      }
+    },
     {
       "id": "36c81fc683be98328a7354d5c7ab7c3cef7431f4afb4ddfb23f6748a2d6cb29e",
       "title": "Ordenan prisión provisional para conductor ebrio que atropelló mortalmente a mujer",
@@ -815,7 +861,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
+    "last_attempt_at": "2026-10-24T21:10:13.726621+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -853,9 +899,11 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-35-anos-a-hombre-por-homicidio-en-san-miguel",
       "https://diario.elmundo.sv/nacionales/eeuu-promete-rescatar-a-los-cuatro-soldados-salvadorenos-desaparecidos-en-haiti",
       "https://diario.elmundo.sv/nacionales/cuatro-militares-salvadorenos-siguen-desaparecidos-tras-emboscada-en-haiti",
-      "https://diario.elmundo.sv/nacionales/ordenan-prision-provisional-para-conductor-ebrio-que-atropello-mortalmente-a-mujer"
+      "https://diario.elmundo.sv/nacionales/ordenan-prision-provisional-para-conductor-ebrio-que-atropello-mortalmente-a-mujer",
+      "https://diario.elmundo.sv/nacionales/dan-ocho-anos-de-carcel-a-una-mujer-que-se-apropio-de-buses-en-soyapango",
+      "https://diario.elmundo.sv/nacionales/un-hombre-que-estafo-por-whatsapp-pasara-cinco-anos-en-prision"
     ],
-    "article_cursor": 32,
+    "article_cursor": 34,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1048,6 +1096,18 @@
         "published_date": "2026-10-20",
         "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/dan-ocho-anos-de-carcel-a-una-mujer-que-se-apropio-de-buses-en-soyapango": {
+        "status": "selected",
+        "published_date": "2026-10-24",
+        "last_attempt_at": "2026-10-24T21:10:13.726621+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/un-hombre-que-estafo-por-whatsapp-pasara-cinco-anos-en-prision": {
+        "status": "selected",
+        "published_date": "2026-10-24",
+        "last_attempt_at": "2026-10-24T21:10:13.726621+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1056,19 +1116,19 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 6,
+        "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
-        "article_urls_selected": 6,
-        "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+        "article_urls_selected": 4,
+        "last_attempt_at": "2026-10-24T21:10:13.726621+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
-        "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
-        "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+        "duplicate_article_urls": 13,
+        "article_urls_matching_anchor": 2,
+        "article_urls_observed": 19,
+        "article_urls_selected": 2,
+        "last_attempt_at": "2026-10-24T21:10:13.726621+00:00"
       }
     },
     "index_screen_version": 3
