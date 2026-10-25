@@ -14,16 +14,67 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 3,
-      "pages_fetched": 3,
+      "posts_scanned": 5,
+      "pages_fetched": 5,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-10T18:51:37.922217+00:00",
+      "last_attempt_at": "2026-10-25T11:58:12.397510+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "3ce428e57bbe188c8a6af1b800980ba313985ca8588255823559b6ae32afe53a",
+      "title": "La pregunta incómoda que obligó a Bukele a hablar de los detenidos del régimen",
+      "title_truncated": false,
+      "publisher": "El Faro",
+      "source_id": "el-faro",
+      "source_url": "https://beta.elfaro.net/el-salvador/la-pregunta-incomoda-que-obligo-a-bukele-a-hablar-de-los-detenidos-del-regimen",
+      "published_date": "2026-10-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-25T11:58:12.397510+00:00"
+      }
+    },
+    {
+      "id": "f2df4723090e165fbbf9f5bc0d64980e9faa8e22d3d7956ac72ebc67b6cf876e",
+      "title": "Guatemala entierra a Foppa y la Policía ensucia la investigación",
+      "title_truncated": false,
+      "publisher": "El Faro",
+      "source_id": "el-faro",
+      "source_url": "https://beta.elfaro.net/centroamerica/guatemala-foppa-asesinato-policia",
+      "published_date": "2026-10-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "guatemala"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-25T11:58:12.397510+00:00"
+      }
+    },
     {
       "id": "d1ab4b3736f783014dc73447610835e44b7a6baa279479cbaed327700b2dfd14",
       "title": "A la espera del juicio Samcam, Costa Rica deja de perseguir al autor intelectual de su asesinato",
@@ -109,7 +160,7 @@
     "phase": "partial",
     "access": "public",
     "notice": "Selección parcial del especial de 2010 y páginas públicas actuales. Algunos enlaces antiguos restringen el acceso; no es una hemeroteca completa. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-20T17:30:06.899068+00:00",
+    "last_attempt_at": "2026-10-25T11:58:12.397510+00:00",
     "indexes": [
       "https://www.elfaro.net/templates/elfaro/especiales/2010/index.html",
       "https://beta.elfaro.net/"
@@ -127,9 +178,11 @@
       "https://www.elfaro.net/es/201007/noticias/2044/",
       "https://www.elfaro.net/es/201011/noticias/2911/",
       "https://www.elfaro.net/es/201010/el_agora/2639/",
-      "https://www.elfaro.net/es/201003/opinion/1421/"
+      "https://www.elfaro.net/es/201003/opinion/1421/",
+      "https://beta.elfaro.net/centroamerica/guatemala-foppa-asesinato-policia",
+      "https://beta.elfaro.net/el-salvador/la-pregunta-incomoda-que-obligo-a-bukele-a-hablar-de-los-detenidos-del-regimen"
     ],
-    "article_cursor": 12,
+    "article_cursor": 14,
     "visited": {
       "https://beta.elfaro.net/el-salvador/trump-bukele-carcel-ruth-lopez": {
         "status": "selected",
@@ -157,7 +210,7 @@
       },
       "https://www.elfaro.net/es/201003/noticias/1403/": {
         "status": "failed",
-        "last_attempt_at": "2026-10-20T12:05:21.238130+00:00",
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00",
         "screen_version": 3
       },
       "https://www.elfaro.net/es/201011/noticias/3030/": {
@@ -177,12 +230,12 @@
       },
       "https://www.elfaro.net/es/201007/noticias/2044/": {
         "status": "failed",
-        "last_attempt_at": "2026-10-20T05:13:41.264751+00:00",
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00",
         "screen_version": 3
       },
       "https://www.elfaro.net/es/201011/noticias/2911/": {
         "status": "failed",
-        "last_attempt_at": "2026-10-20T05:13:41.264751+00:00",
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00",
         "screen_version": 3
       },
       "https://www.elfaro.net/es/201010/el_agora/2639/": {
@@ -194,12 +247,24 @@
         "status": "failed",
         "last_attempt_at": "2026-10-20T17:30:06.899068+00:00",
         "screen_version": 3
+      },
+      "https://beta.elfaro.net/centroamerica/guatemala-foppa-asesinato-policia": {
+        "status": "selected",
+        "published_date": "2026-10-23",
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00",
+        "screen_version": 3
+      },
+      "https://beta.elfaro.net/el-salvador/la-pregunta-incomoda-que-obligo-a-bukele-a-hablar-de-los-detenidos-del-regimen": {
+        "status": "selected",
+        "published_date": "2026-10-24",
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00",
+        "screen_version": 3
       }
     },
     "failures": {
       "https://www.elfaro.net/es/201003/noticias/1403/": {
         "code": "access_restricted",
-        "last_attempt_at": "2026-10-20T12:05:21.238130+00:00"
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00"
       },
       "https://www.elfaro.net/es/201011/noticias/3030/": {
         "code": "access_restricted",
@@ -215,11 +280,11 @@
       },
       "https://www.elfaro.net/es/201007/noticias/2044/": {
         "code": "access_restricted",
-        "last_attempt_at": "2026-10-20T05:13:41.264751+00:00"
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00"
       },
       "https://www.elfaro.net/es/201011/noticias/2911/": {
         "code": "access_restricted",
-        "last_attempt_at": "2026-10-20T05:13:41.264751+00:00"
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00"
       },
       "https://www.elfaro.net/es/201010/el_agora/2639/": {
         "code": "access_restricted",
@@ -238,16 +303,16 @@
         "article_urls_matching_anchor": 8,
         "article_urls_observed": 90,
         "article_urls_selected": 8,
-        "last_attempt_at": "2026-10-20T17:30:06.899068+00:00"
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00"
       },
       "https://beta.elfaro.net/": {
         "url_entries_observed": 49,
         "url_entries_rejected": 8,
         "duplicate_article_urls": 8,
-        "article_urls_matching_anchor": 2,
+        "article_urls_matching_anchor": 3,
         "article_urls_observed": 33,
-        "article_urls_selected": 2,
-        "last_attempt_at": "2026-10-20T17:30:06.899068+00:00"
+        "article_urls_selected": 4,
+        "last_attempt_at": "2026-10-25T11:58:12.397510+00:00"
       }
     },
     "index_screen_version": 3
