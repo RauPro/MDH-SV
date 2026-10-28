@@ -24,16 +24,62 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 30,
-      "pages_fetched": 30,
+      "posts_scanned": 32,
+      "pages_fetched": 32,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
+      "last_attempt_at": "2026-10-28T06:15:19.102852+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "e76db95f0c3ec925471037f83013768aaed08974f2105e4d9a8ece5f5d96a142",
+      "title": "Padrastro que violó a una menor de edad en Chinameca recibe más de 26 años de cárcel",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/padrastro-que-violo-a-una-menor-de-edad-en-chinameca-recibe-mas-de-26-anos-de-carcel",
+      "published_date": "2026-10-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-28T06:15:19.102852+00:00"
+      }
+    },
+    {
+      "id": "ca022285236a9750d0dca8ae379abd187c67ae0f8885b4b4aa8830b407375dbc",
+      "title": "CIDH realiza audiencia sobre el papel de la PDDH en el régimen de excepción",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/politica/cidh-realiza-audiencia-sobre-el-papel-de-la-pddh-en-el-regimen-de-excepcion",
+      "published_date": "2026-10-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-28T06:15:19.102852+00:00"
+      }
+    },
     {
       "id": "36c81fc683be98328a7354d5c7ab7c3cef7431f4afb4ddfb23f6748a2d6cb29e",
       "title": "Ordenan prisión provisional para conductor ebrio que atropelló mortalmente a mujer",
@@ -815,7 +861,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
+    "last_attempt_at": "2026-10-28T06:15:19.102852+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -853,9 +899,11 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-35-anos-a-hombre-por-homicidio-en-san-miguel",
       "https://diario.elmundo.sv/nacionales/eeuu-promete-rescatar-a-los-cuatro-soldados-salvadorenos-desaparecidos-en-haiti",
       "https://diario.elmundo.sv/nacionales/cuatro-militares-salvadorenos-siguen-desaparecidos-tras-emboscada-en-haiti",
-      "https://diario.elmundo.sv/nacionales/ordenan-prision-provisional-para-conductor-ebrio-que-atropello-mortalmente-a-mujer"
+      "https://diario.elmundo.sv/nacionales/ordenan-prision-provisional-para-conductor-ebrio-que-atropello-mortalmente-a-mujer",
+      "https://diario.elmundo.sv/politica/cidh-realiza-audiencia-sobre-el-papel-de-la-pddh-en-el-regimen-de-excepcion",
+      "https://diario.elmundo.sv/nacionales/padrastro-que-violo-a-una-menor-de-edad-en-chinameca-recibe-mas-de-26-anos-de-carcel"
     ],
-    "article_cursor": 32,
+    "article_cursor": 34,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1048,6 +1096,18 @@
         "published_date": "2026-10-20",
         "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/politica/cidh-realiza-audiencia-sobre-el-papel-de-la-pddh-en-el-regimen-de-excepcion": {
+        "status": "selected",
+        "published_date": "2026-10-26",
+        "last_attempt_at": "2026-10-28T06:15:19.102852+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/padrastro-que-violo-a-una-menor-de-edad-en-chinameca-recibe-mas-de-26-anos-de-carcel": {
+        "status": "selected",
+        "published_date": "2026-10-27",
+        "last_attempt_at": "2026-10-28T06:15:19.102852+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1056,19 +1116,19 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 6,
+        "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
-        "article_urls_selected": 6,
-        "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+        "article_urls_selected": 1,
+        "last_attempt_at": "2026-10-28T06:15:19.102852+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
+        "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+        "article_urls_selected": 1,
+        "last_attempt_at": "2026-10-28T06:15:19.102852+00:00"
       }
     },
     "index_screen_version": 3

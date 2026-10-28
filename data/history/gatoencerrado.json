@@ -276,7 +276,7 @@
       "start_date": "2026-09-01",
       "end_date": "2026-09-30",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-20T17:30:03.938904+00:00",
+      "last_attempt_at": "2026-10-28T06:15:15.279171+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
@@ -285,22 +285,22 @@
       "source_total_posts": 8,
       "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-10-20T17:30:03.938904+00:00"
+      "completed_at": "2026-10-28T06:15:15.279171+00:00"
     },
     "2026-10": {
       "start_date": "2026-10-01",
-      "end_date": "2026-10-20",
+      "end_date": "2026-10-28",
       "status": "enumerated",
-      "last_attempt_at": "2026-10-20T17:30:03.938904+00:00",
+      "last_attempt_at": "2026-10-28T06:15:15.279171+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
-      "posts_scanned": 2,
+      "posts_scanned": 7,
       "invalid_posts": 0,
-      "source_total_posts": 2,
+      "source_total_posts": 7,
       "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-10-20T17:30:03.938904+00:00"
+      "completed_at": "2026-10-28T06:15:15.279171+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3034,6 +3034,56 @@
     }
   },
   "records": [
+    {
+      "id": "b7c9bde89c551c34d2397b33c484650ba086b0288405a7664990300d92cce9d7",
+      "title": "Ingrid Escobar denuncia ante la CIDH la muerte de su hermano en prisión",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2026/10/27/ingrid-escobar-denuncia-cidh-muerte-hermano-prision/",
+      "published_date": "2026-10-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "ingrid escobar"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 84317,
+        "retrieved_at": "2026-10-28T06:15:15.279171+00:00"
+      }
+    },
+    {
+      "id": "6349adb5124d249b92fddd54aac55d2c02c06c7074e635f38554efacb41830e4",
+      "title": "Denuncian que la PDDH encubre las violaciones a derechos en El Salvador",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2026/10/27/denuncian-que-la-pddh-encubre-las-violaciones-a-derechos-en-el-salvador/",
+      "published_date": "2026-10-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 84347,
+        "retrieved_at": "2026-10-28T06:15:15.279171+00:00"
+      }
+    },
     {
       "id": "a3c97935d60a0d5e530547ba74379303c215cd2e4678a7f46e86534e63651376",
       "title": "El espejismo de las megacárceles",
