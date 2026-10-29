@@ -24,16 +24,87 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 30,
-      "pages_fetched": 30,
+      "posts_scanned": 33,
+      "pages_fetched": 33,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
+      "last_attempt_at": "2026-10-29T13:40:53.070857+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "c711788fb31c688fcd330b0a318563448aee5f4fc31a5a365fd0596de9cb3239",
+      "title": "El expresidente Antonio Saca cumplió 10 años en prisión",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/el-expresidente-antonio-saca-cumplio-10-anos-en-prision",
+      "published_date": "2026-10-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-29T13:40:53.070857+00:00"
+      }
+    },
+    {
+      "id": "afb036e25034ac3d83746cc4ff721f295d1099d7c19505fcb5d242ab76ffac14",
+      "title": "Estados Unidos extradita a procesado por el feminicidio de Fernanda Nájera",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/estados-unidos-extradita-a-procesado-por-el-feminicidio-de-fernanda-najera",
+      "published_date": "2026-10-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "estados unidos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-29T13:40:53.070857+00:00"
+      }
+    },
+    {
+      "id": "8f59fc9009224a902c71befb2265c01183ad2702ebf960ae6d32f13d5b535421",
+      "title": "Fiscalía confirma excarcelación de expresidente Saca y señala que bienes seguirán administrados por el Estado",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/fiscalia-confirma-excarcelacion-de-expresidente-saca-y-senala-que-bienes-seguiran-administrados-por-el-estado",
+      "published_date": "2026-10-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-29T13:40:53.070857+00:00"
+      }
+    },
     {
       "id": "36c81fc683be98328a7354d5c7ab7c3cef7431f4afb4ddfb23f6748a2d6cb29e",
       "title": "Ordenan prisión provisional para conductor ebrio que atropelló mortalmente a mujer",
@@ -815,7 +886,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
+    "last_attempt_at": "2026-10-29T13:40:53.070857+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -853,9 +924,12 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-35-anos-a-hombre-por-homicidio-en-san-miguel",
       "https://diario.elmundo.sv/nacionales/eeuu-promete-rescatar-a-los-cuatro-soldados-salvadorenos-desaparecidos-en-haiti",
       "https://diario.elmundo.sv/nacionales/cuatro-militares-salvadorenos-siguen-desaparecidos-tras-emboscada-en-haiti",
-      "https://diario.elmundo.sv/nacionales/ordenan-prision-provisional-para-conductor-ebrio-que-atropello-mortalmente-a-mujer"
+      "https://diario.elmundo.sv/nacionales/ordenan-prision-provisional-para-conductor-ebrio-que-atropello-mortalmente-a-mujer",
+      "https://diario.elmundo.sv/nacionales/estados-unidos-extradita-a-procesado-por-el-feminicidio-de-fernanda-najera",
+      "https://diario.elmundo.sv/nacionales/el-expresidente-antonio-saca-cumplio-10-anos-en-prision",
+      "https://diario.elmundo.sv/nacionales/fiscalia-confirma-excarcelacion-de-expresidente-saca-y-senala-que-bienes-seguiran-administrados-por-el-estado"
     ],
-    "article_cursor": 32,
+    "article_cursor": 35,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1048,6 +1122,24 @@
         "published_date": "2026-10-20",
         "last_attempt_at": "2026-10-20T17:30:08.448500+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/estados-unidos-extradita-a-procesado-por-el-feminicidio-de-fernanda-najera": {
+        "status": "selected",
+        "published_date": "2026-10-29",
+        "last_attempt_at": "2026-10-29T13:40:53.070857+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/el-expresidente-antonio-saca-cumplio-10-anos-en-prision": {
+        "status": "selected",
+        "published_date": "2026-10-29",
+        "last_attempt_at": "2026-10-29T13:40:53.070857+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/fiscalia-confirma-excarcelacion-de-expresidente-saca-y-senala-que-bienes-seguiran-administrados-por-el-estado": {
+        "status": "selected",
+        "published_date": "2026-10-28",
+        "last_attempt_at": "2026-10-29T13:40:53.070857+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1056,19 +1148,19 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 6,
+        "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
-        "article_urls_selected": 6,
-        "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+        "article_urls_selected": 3,
+        "last_attempt_at": "2026-10-29T13:40:53.070857+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
+        "article_urls_matching_anchor": 0,
         "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+        "article_urls_selected": 0,
+        "last_attempt_at": "2026-10-29T13:40:53.070857+00:00"
       }
     },
     "index_screen_version": 3
