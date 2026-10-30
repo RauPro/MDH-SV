@@ -1,6 +1,5 @@
 """Generated-archive conflicts rebuild from merged inputs; unknown work is preserved."""
 import json
-from pathlib import Path
 import subprocess
 
 import pytest

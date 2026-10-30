@@ -9,7 +9,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 
 from .news_publication import validate_collection
-from .news_scope_policy import SCOPE_PROMPT, CURRENT_SCOPE_PROMPTS
+from .news_scope_policy import CURRENT_SCOPE_PROMPTS
 from .news_exclusions import confirmed_exclusion, is_current_positive
 from .news_scope_rechecks import pending_recheck_ids, validate_rechecks
 from .news_selection import (

@@ -5,12 +5,11 @@ en La Prensa Gráfica, El Diario de Hoy, El Faro, Revista Factum, Diario Co Lati
 Utiliza googlenewsdecoder para obtener la URL original y curl_cffi para evadir protecciones anti-bot (Cloudflare/Akamai).
 """
 
-import hashlib
 import logging
 import re
 import urllib.parse
-from datetime import date, datetime
-from typing import Dict, List, Optional, Set
+from datetime import date
+from typing import List, Optional, Set
 import feedparser
 import requests
 from bs4 import BeautifulSoup

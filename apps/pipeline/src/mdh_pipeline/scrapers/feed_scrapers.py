@@ -3,7 +3,7 @@ Scrapers basados en RSS y Sitemaps para medios de comunicación salvadoreños ($
 """
 
 import logging
-from datetime import date, datetime
+from datetime import date
 from typing import List, Optional
 from urllib.parse import urlsplit
 

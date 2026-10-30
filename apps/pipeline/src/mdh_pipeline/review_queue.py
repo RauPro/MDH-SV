@@ -11,7 +11,6 @@ import re
 import socket
 import time
 from datetime import datetime, timezone
-from email.utils import parsedate_to_datetime
 from urllib.parse import parse_qsl, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 

@@ -5,8 +5,8 @@ Permite recuperar artículos de investigación histórica que ya no aparecen en 
 
 import logging
 import re
-from datetime import date, datetime
-from typing import List, Optional, Set
+from datetime import date
+from typing import List, Set
 import requests
 from bs4 import BeautifulSoup
 

@@ -12,7 +12,8 @@
     "test:scheduler": "node --import ./tests/setup-instance.mjs --test --test-timeout=15000 tests/hourly-dispatch.test.mjs",
     "dev:api": "node server/dev.mjs",
     "dev": "npm --prefix apps/web run dev",
-    "test:api-contract": "node --import ./tests/setup-instance.mjs --test --test-timeout=60000 tests/openapi-responses.test.mjs"
+    "test:api-contract": "node --import ./tests/setup-instance.mjs --test --test-timeout=60000 tests/openapi-responses.test.mjs",
+    "lint": "oxlint --config .oxlintrc.json --deny-warnings ."
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.1",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "ajv": "8.20.0",
-    "ajv-formats": "3.0.1"
+    "ajv-formats": "3.0.1",
+    "oxlint": "1.83.0"
   }
 }

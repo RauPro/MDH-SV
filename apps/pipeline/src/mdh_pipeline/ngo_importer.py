@@ -6,8 +6,8 @@ criptográficos SHA-256 e inyecta los expedientes en el repositorio inmutable.
 
 import json
 import logging
-from datetime import date, datetime
-from typing import List, Optional
+from datetime import date
+from typing import List
 import os
 
 from mdh_schema import (
@@ -20,7 +20,6 @@ from mdh_schema import (
     ViolationCategory,
     MacroCategoryEnum,
     SpecificViolationType,
-    SpecificViolationTypeEnum,
     SeverityLevel,
     CertaintyLevel,
     WeaponType,

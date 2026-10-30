@@ -4,6 +4,8 @@ Incluye los 14 Departamentos y los 44 Nuevos Municipios (Ley Especial de Reestru
 junto con sus coordenadas de referencia (lat/lon) y distritos históricos asociados.
 """
 
+import unicodedata
+
 from enum import Enum
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
@@ -131,7 +133,6 @@ SALVADOR_MUNICIPALITIES: Dict[DepartmentEnum, List[str]] = {
 }
 
 
-import unicodedata
 
 
 def _strip_accents(text: str) -> str:

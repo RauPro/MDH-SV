@@ -9,7 +9,7 @@ import pytest
 
 from mdh_pipeline.official_statistics_review import (
     ROOT, enqueue_report, export_source_state, review_revision, revision_id,
-    validate_candidate_schema, validate_report, validate_source_state,
+    validate_candidate_schema, validate_source_state,
 )
 
 NOW = datetime(2026, 10, 13, 5, tzinfo=timezone.utc)

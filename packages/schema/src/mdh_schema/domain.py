@@ -20,7 +20,7 @@ from .taxonomy import (
     VulnerableGroup,
     VulnerableGroupEnum,
 )
-from .territory import DepartmentEnum, GeoCoordinates, get_default_coordinates
+from .territory import DepartmentEnum, GeoCoordinates
 
 
 class SeverityLevel(str, Enum):

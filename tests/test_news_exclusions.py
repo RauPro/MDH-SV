@@ -8,8 +8,7 @@ import pytest
 from mdh_pipeline.gemini_budget import MODEL, QuotaDeferred
 from mdh_pipeline.gemini_draft import GeminiDraftError
 from mdh_pipeline.news_exclusions import (
-    EXCLUSION_PROMPT, MAX_VERIFICATION_ITEMS, confirmed_exclusion, prepare_verification_batch,
-    review_sha256, scope_needs_work, validate_verification, verify_exclusions_batch,
+    EXCLUSION_PROMPT, MAX_VERIFICATION_ITEMS, confirmed_exclusion, review_sha256, scope_needs_work, validate_verification, verify_exclusions_batch,
 )
 from mdh_pipeline.news_scope_policy import SCOPE_PROMPT
 from test_gemini_budget import ready

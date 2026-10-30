@@ -1,7 +1,6 @@
 """Local, opt-in candidate collection. Cannot publish or update the public web dataset."""
 import logging
 import os
-from pathlib import Path
 from mdh_pipeline.storage import IncidentRepository
 from mdh_pipeline.ai_extractor import HumanRightsExtractor
 from mdh_pipeline.scrapers.feed_scrapers import get_all_scrapers

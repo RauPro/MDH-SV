@@ -4,7 +4,7 @@ from datetime import date
 from collections import Counter
 from fastmcp import FastMCP
 from mdh_pipeline.publication import load_catalog
-from mdh_schema import DepartmentEnum, ViolationCategory
+from mdh_schema import DepartmentEnum
 
 mcp = FastMCP(name='Monitor Derechos Humanos El Salvador', instructions=(
     'Consulta reportes atribuidos a sus fuentes y comprueba el estado de revisión de cada ficha. '

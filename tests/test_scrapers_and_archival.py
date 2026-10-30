@@ -4,12 +4,10 @@ Pruebas automatizadas para los scrapers OSINT y módulo de preservación inmutab
 
 from datetime import date
 from unittest.mock import MagicMock, patch
-import pytest
 
 from mdh_pipeline.archiver import EvidenceArchiver
 from mdh_pipeline.ingest import IngestionPipeline
 from mdh_pipeline.scrapers.base import BaseNewsScraper, RawNewsArticle
-from mdh_pipeline.scrapers.feed_scrapers import SalvadoranMediaRSSScraper
 
 
 def test_raw_article_hashing():

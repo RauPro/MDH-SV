@@ -4,7 +4,7 @@ Coordina la extracción de medios, cómputo criptográfico y preservación inmut
 """
 
 import logging
-from typing import List, Optional
+from typing import List
 from mdh_schema import SourceEvidence
 from .archiver import EvidenceArchiver
 from .scrapers.base import RawNewsArticle
