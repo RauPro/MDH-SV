@@ -18,13 +18,15 @@ backend de construcción Python también está fijado. Repetir el comando conser
 `.env` y reutiliza una `.venv` compatible; rechaza una `.venv` incompatible o
 simbólica. No crea credenciales. La primera instalación requiere Internet; la
 comprobación ordinaria usa dependencias locales y pruebas con datos ficticios.
-`check.py --audit` añade consultas al servicio de avisos de npm.
+`check.py --audit` añade auditorías npm (raíz y web) y Python (lock completo y
+subconjunto de la cola privada). CI usa el mismo bootstrap y comando de comprobación;
+[QUALITY.md](QUALITY.md) documenta su cobertura y el mantenimiento de dependencias.
 
 La comprobación ejecuta el escaneo completo del historial, auditoría de archivos,
 coherencia de instancia, pruebas Python/API/web, lint y build. Regenera los
 exports en un directorio temporal y los compara byte a byte sin cambiar los datos
 del checkout. La CI conserva el escaneo previo a instalar dependencias del
-proyecto y ejecuta también las auditorías npm.
+proyecto y ejecuta `check.py --audit`, con auditorías npm y Python.
 
 El paquete editable es un mecanismo de importación de esta aplicación: un wheel
 no incluye los catálogos ni constituye una distribución autónoma. Los datos por
