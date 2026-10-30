@@ -35,6 +35,7 @@ function primarySource(value) {
   // Compare the explicit authority too: WHATWG normalizes default ports and
   // percent-encoded hosts, while the reviewed Python boundary rejects them.
   const parts = /^https:\/\/([^/?#]+)([^?#]*)(?:\?[^#]*)?(?:#.*)?$/i.exec(clean);
+// oxlint-disable-next-line no-control-regex -- Reject control characters at the public data boundary.
   if (!parts || /[\u0000-\u0020\u007f\\]/.test(clean) || !safeSource(clean)
       || parts[1].toLowerCase() !== new URL(clean).hostname || parts[2].length < 5) fail();
   return clean;

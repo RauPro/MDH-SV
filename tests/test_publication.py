@@ -12,7 +12,6 @@ from pydantic import ValidationError
 from mdh_pipeline.publication import CATALOG, Catalog, export_catalog, load_catalog, csv_safe
 from mdh_pipeline.open_data import OpenDataExporter
 from mdh_pipeline.archiver import EvidenceArchiver
-from mdh_pipeline.deduplicator import IncidentDeduplicator
 
 
 def test_provenance_and_privacy_boundary():

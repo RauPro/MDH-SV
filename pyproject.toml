@@ -33,3 +33,7 @@ asyncio_mode = "auto"
 [tool.ruff]
 line-length = 100
 target-version = "py313"
+
+# Explicit correctness baseline, independent of user-level Ruff settings.
+[tool.ruff.lint]
+select = ["E4", "E9", "F", "B023"]

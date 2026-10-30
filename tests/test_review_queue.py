@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import MagicMock
 import pytest
-from mdh_pipeline.review_queue import (FEEDS, HOSTS, GitHubInbox, canonical_url,
+from mdh_pipeline.review_queue import (FEEDS, GitHubInbox, canonical_url,
     candidate_from_entry, collect, issue_body, review, require_public_dns)
 from mdh_pipeline.publication import Publication, load_catalog
 
@@ -334,7 +334,9 @@ def test_import_requires_current_approval_and_is_idempotent(tmp_path,monkeypatch
     with pytest.raises(ValueError):import_approved(approved,candidate['id'],source,export=False)
 
 def test_collector_does_not_import_optional_ingestion_stack():
-    import subprocess,sys,os
+    import subprocess
+    import sys
+    import os
     from pathlib import Path
     root=Path(__file__).resolve().parents[1]
     code='import sys; import mdh_pipeline.review_queue; import mdh_pipeline.publication; assert not any(x in sys.modules for x in ["bs4","google.genai","pyarrow","dotenv"])'

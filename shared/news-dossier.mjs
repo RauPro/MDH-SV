@@ -109,6 +109,7 @@ export function validatePublishedNewsDossier(value) {
       || Date.parse(receipt.validated_at) > Date.now() + 300000
       || (value.published_date && receipt.validated_at.slice(0, 10) < value.published_date)
       || !text(receipt.evaluator_model) || receipt.evaluator_model.trim() !== receipt.evaluator_model
+// oxlint-disable-next-line no-control-regex -- Reject control characters at the public data boundary.
       || length(receipt.evaluator_model) > 100 || /[\u0000-\u001f\u007f]/.test(receipt.evaluator_model)
       || value.classification?.jurisdiction !== 'SV' || value.classification?.relevance !== 'relevant') fail();
   }

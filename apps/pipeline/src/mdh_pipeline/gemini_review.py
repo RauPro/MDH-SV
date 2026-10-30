@@ -802,7 +802,6 @@ def _allocation_workload(inbox, archive, drafts, cached, receipts, *, excluded, 
     from .news_exclusions import confirmed_exclusion, scope_needs_work
     from .gemini_draft import PROMPT_VERSION
     from .scope_review_queue import _cache_index
-    from .news_scope import SCOPE_PROMPT
     references = _archive_index(archive)
     reviews = _cache_index(cached, references, now=now)
     verification_index = {row["candidate_id"]: row for row in verifications}

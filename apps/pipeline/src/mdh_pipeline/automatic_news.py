@@ -9,7 +9,7 @@ from __future__ import annotations
 import argparse
 import base64
 from copy import deepcopy
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
@@ -21,7 +21,7 @@ from types import SimpleNamespace
 import requests
 
 from .gemini_budget import BudgetConfig, GeminiBudget, QuotaDeferred, QuotaStateError
-from .gemini_draft import _input, _request, _single_json, _usage, GeminiDraftError, extract_draft
+from .gemini_draft import _input, _request, _single_json, _usage, extract_draft
 from .gemini_review import validate_envelope, put_private_file
 from .instance import load_instance
 from .news_dossier import FIELD_NAMES, validate_news_dossier, validate_published_news_dossier

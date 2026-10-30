@@ -452,7 +452,7 @@ def project_news_selection(drafts, archive, excluded_ids=(), now=None, *, scope_
                 options = rights_nexus or dedicated
         # A different body can supersede the old snapshot only after the newer
         # read is classified under the inclusive policy, never the old v8/v1 rules.
-        decision_time = lambda item: item["timestamp"][1] if same_text else item["timestamp"]
+        decision_time = lambda item, same_text=same_text: item["timestamp"][1] if same_text else item["timestamp"]
         stamp = max(decision_time(item) for item in options)
         newest = [item for item in options if decision_time(item) == stamp]
         if (len({(item["scope"], item["hash"]) for item in newest}) > 1

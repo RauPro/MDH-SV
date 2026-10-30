@@ -8,6 +8,7 @@ export const OFFICIAL_STATISTICS_DEPARTMENTS = Object.freeze([
 const hosts = new Set(OFFICIAL_STATISTICS_HOSTS);
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const exact = (value, keys) => object(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
+// oxlint-disable-next-line no-control-regex -- Reject control characters at the public data boundary.
 const text = (value, maximum = 4000) => typeof value === 'string' && value.trim().length > 0 && value.length <= maximum && !/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/u.test(value);
 const date = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !value.startsWith('0000-')
   && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;

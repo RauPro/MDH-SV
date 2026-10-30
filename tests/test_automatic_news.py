@@ -11,9 +11,9 @@ from zoneinfo import ZoneInfo
 import pytest
 
 from mdh_pipeline.automatic_news import (
-    AutomaticNewsError, POLICY_VERSION, _hash, _privacy_projection, _receipt,
+    AutomaticNewsError, _receipt,
     evaluate_draft, evaluate_queue, export_collection, failed_report, fingerprint, project_collection,
-    project_dossier, response_schema, validate_receipt,
+    project_dossier, response_schema,
 )
 from mdh_pipeline.article_source import SourceFetchError
 from mdh_pipeline.gemini_budget import QuotaDeferred, QuotaStateError

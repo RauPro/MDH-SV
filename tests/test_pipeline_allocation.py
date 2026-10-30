@@ -4,7 +4,6 @@ from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
 import json
-from types import SimpleNamespace
 
 import pytest
 

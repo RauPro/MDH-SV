@@ -2,11 +2,9 @@
 Pruebas de las Estrategias de Ingesta Histórica (Sitemaps y Reportes de ONGs).
 """
 
-import os
 import pytest
 from mdh_pipeline.ngo_importer import NGOReportImporter
 from mdh_pipeline.scrapers.sitemap_scraper import SalvadoranMediaSitemapScraper
-from mdh_schema import ViolationCategory, SeverityLevel
 
 
 def test_ngo_importer_missing_file(tmp_path):

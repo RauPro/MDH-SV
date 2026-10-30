@@ -9,10 +9,9 @@ import logging
 import os
 import re
 from datetime import date
-from typing import Optional, Tuple
+from typing import Optional
 from dotenv import load_dotenv
 
-load_dotenv()
 
 from mdh_schema import (
     ActorType,
@@ -23,13 +22,12 @@ from mdh_schema import (
     SeverityLevel,
     SourceEvidence,
     SpecificViolationType,
-    Victim,
     ViolationCategory,
-    VulnerableGroup,
     get_default_coordinates,
-    normalize_department,
     normalize_municipality,
 )
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -360,11 +358,6 @@ class HumanRightsExtractor:
                 pass
 
         # Nivel de certeza
-        is_confirmed = any(k in combined_text for k in [
-            "medicina legal", "iml", "autopsia", "peritaje", "fiscalía confirmó",
-            "carta de libertad", "juez ordenó", "informe forense", "cristosal",
-            "socorro jurídico", "oudh", "idhuca", "certificado de defunción"
-        ])
         certainty = CertaintyLevel.EN_INVESTIGACION
 
         # Extracción de presunto perpetrador

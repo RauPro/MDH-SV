@@ -7,6 +7,7 @@ const consumers = ['private_queue', 'legacy_scraper'];
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const exact = (value, keys) => object(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
 const text = (value, maximum) => typeof value === 'string' && [...value].length > 0 && [...value].length <= maximum
+// oxlint-disable-next-line no-control-regex -- Reject control characters at the public data boundary.
   && value.trim() === value && !/[\u0000-\u001f\u007f]/u.test(value);
 const host = value => typeof value === 'string' && value.length <= 253 && value.includes('.') && !/\s/u.test(value)
   && !/^(?:[0-9]+|0x[0-9a-f]*)$/.test(value.split('.').at(-1))
@@ -18,6 +19,7 @@ function hosts(value) {
   if (!Array.isArray(value) || value.length < 1 || value.length > 100 || !value.every(host) || !unique(value)) fail();
 }
 function sourceUrl(value, allowedHosts) {
+// oxlint-disable-next-line no-control-regex -- Reject control characters at the public data boundary.
   if (!text(value, 4096) || /[^\x00-\x7f]|[\s\\%?#]/u.test(value)) fail();
   const match = /^https:\/\/([^/]+)(\/.*)$/.exec(value);
   if (!match || !allowedHosts.includes(match[1])) fail();

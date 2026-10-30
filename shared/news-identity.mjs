@@ -14,6 +14,7 @@ export function sourceIdentityMatches(identifier, value) {
 
 /** A public article URL is already canonical: no tracking query or fragment. */
 export function canonicalNewsSource(value) {
+// oxlint-disable-next-line no-control-regex -- Reject control characters at the public data boundary.
   if (typeof value !== 'string' || value.length > 4096 || /[\u0000-\u001f<>\\]/.test(value)) return null;
   const parts = /^https:\/\/([^/?#]+)(\/[^?#]*)$/u.exec(value);
   if (!parts || [...parts[2]].length < 5) return null;
