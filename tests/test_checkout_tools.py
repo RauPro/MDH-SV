@@ -138,8 +138,8 @@ def test_bootstrap_uses_locks_and_preserves_env_from_external_directory(checkout
     bootstrap.bootstrap(checkout)
     python = str(checkout / ".venv/bin/python")
     assert calls[0][0] == [python, "-m", "pip", "install", "-r", "requirements.lock"]
-    assert calls[1][0] == [python, "-m", "pip", "install", "-e", ".", "--no-deps"]
-    assert calls[3][0] == ["/tools/npm", "ci", "--no-audit", "--no-fund"]
+    assert calls[1][0] == [python, "-m", "pip", "install", "-e", ".", "--no-deps", "--no-build-isolation"]
+    assert calls[3][0] == ["/tools/npm", "ci", "--ignore-scripts", "--no-audit", "--no-fund"]
     assert calls[4][0] == ["/tools/npm", "--prefix", "apps/web", "ci", "--no-audit", "--no-fund"]
     assert calls[5][0] == [python, "scripts/install_gitleaks.py"]
     assert all(arguments["root"] == checkout for _, arguments in calls)
@@ -241,6 +241,13 @@ def test_full_check_requires_real_scanner_and_audit_is_explicit(checkout, monkey
     assert any("scripts/publication_guard.py" in command for command, _ in calls)
     assert any("pytest" in command for command, _ in calls)
     assert any("test:api" in command for command, _ in calls)
+    assert any(command[1:] == ["-m", "ruff", "check", "--config", "pyproject.toml", "."] for command, _ in calls)
+    assert any(command[-2:] == ["run", "lint"] for command, _ in calls)
+    audits = [command for command, _ in calls if "pip_audit" in command]
+    assert len(audits) == (2 if audit else 0)
+    if audit:
+        assert {command[-1] for command in audits} == {"requirements.lock", "ops/review-queue/requirements.txt"}
+        assert all("--strict" in command and "--disable-pip" in command and "--no-deps" in command for command in audits)
     assert sum("audit" in command for command, _ in calls) == (2 if audit else 0)
     assert all(arguments["env"]["GITLEAKS_BIN"] == str(binary) for _, arguments in calls)
     assert all(arguments["root"] == checkout for _, arguments in calls)

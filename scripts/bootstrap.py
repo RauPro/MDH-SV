@@ -99,10 +99,10 @@ def bootstrap(root: Path = ROOT) -> None:
     environment["PIP_DISABLE_PIP_VERSION_CHECK"] = "1"
     run([str(executable), "-m", "pip", "install", "-r", "requirements.lock"],
         root=root, env=environment)
-    run([str(executable), "-m", "pip", "install", "-e", ".", "--no-deps"],
+    run([str(executable), "-m", "pip", "install", "-e", ".", "--no-deps", "--no-build-isolation"],
         root=root, env=environment)
     run([str(executable), "-m", "pip", "check"], root=root, env=environment)
-    run([npm, "ci", "--no-audit", "--no-fund"], root=root, env=environment)
+    run([npm, "ci", "--ignore-scripts", "--no-audit", "--no-fund"], root=root, env=environment)
     run([npm, "--prefix", "apps/web", "ci", "--no-audit", "--no-fund"],
         root=root, env=environment)
     # Use the environment's locked CA bundle when system Python lacks certificates

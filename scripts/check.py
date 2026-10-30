@@ -1,4 +1,4 @@
-"""Verify a prepared checkout locally. --audit also queries npm's advisory service.
+"""Verify a prepared checkout locally. --audit also queries npm and Python advisory services.
 
 The default checks need no credentials, external articles, model API or deployment.
 Exports are rebuilt in a temporary directory, leaving checkout data untouched.
@@ -90,6 +90,8 @@ def check(root: Path = ROOT, *, audit: bool = False) -> None:
         [str(python), "scripts/publication_guard.py", "check", "--ref", "HEAD"],
         [str(python), "scripts/configure_instance.py", "--check"],
         [str(python), "scripts/audit_release.py"],
+        [str(python), "-m", "ruff", "check", "--config", "pyproject.toml", "."],
+        [npm, "run", "lint"],
         [str(python), "-m", "pytest", "-q"],
     ]
     for command in commands:
@@ -103,6 +105,10 @@ def check(root: Path = ROOT, *, audit: bool = False) -> None:
     ):
         bootstrap.run(command, root=root, env=environment)
     if audit:
+        for lock in ("requirements.lock", "ops/review-queue/requirements.txt"):
+            bootstrap.run([str(python), "-m", "pip_audit", "--strict", "--no-deps",
+                           "--disable-pip", "--progress-spinner", "off", "-r", lock],
+                          root=root, env=environment)
         for command in ([npm, "audit", "--audit-level=moderate"],
                         [npm, "--prefix", "apps/web", "audit", "--audit-level=moderate"]):
             bootstrap.run(command, root=root, env=environment)
@@ -111,7 +117,7 @@ def check(root: Path = ROOT, *, audit: bool = False) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--audit", action="store_true", help="Also query npm's advisory service")
+    parser.add_argument("--audit", action="store_true", help="Also query npm and Python advisory services")
     args = parser.parse_args(argv)
     try:
         check(audit=args.audit)

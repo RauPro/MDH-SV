@@ -23,7 +23,7 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.lock
       - name: Install pinned secret scanner
-        run: python scripts/install_gitleaks.py --destination "$RUNNER_TEMP/mdh-gitleaks" >> "$GITHUB_PATH"
+        run: python scripts/install_gitleaks.py >> "$GITHUB_PATH"
       - name: Check complete publishable history for secrets
         run: python scripts/publication_guard.py check --ref HEAD
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
@@ -33,36 +33,10 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             apps/web/package-lock.json
-      - name: Install locked JavaScript environment
-        run: npm ci --ignore-scripts
-      - name: Install reproducible Python environment
-        run: |
-          python -m pip install -r requirements.txt
-          python -m pip install -e . --no-deps
-          python -m pip check
-      - name: Validate data, MCP and private publication boundary
-        run: |
-          python scripts/configure_instance.py --check
-          python scripts/audit_release.py
-          pytest -q
-          python -m mdh_pipeline.publication
-          node apps/web/scripts/sync-news-publication.mjs
-          git diff --exit-code -- apps/web/public/data
-          git diff --exit-code -- apps/web/public/archive/dossiers.json
-          git diff --exit-code -- data/automated/news_dossiers.json apps/web/public/archive/locations.json
-      - name: Audit and test remote API and MCP
-        run: |
-          npm audit --audit-level=moderate
-          npm run test:api
-      - name: Install and audit frontend
-        run: |
-          npm --prefix apps/web ci
-          npm --prefix apps/web audit --audit-level=moderate
-      - name: Test and build public website
-        run: |
-          npm --prefix apps/web test
-          npm --prefix apps/web run lint
-          npm --prefix apps/web run build
+      - name: Prepare the same locked checkout used locally
+        run: python scripts/bootstrap.py
+      - name: Run the same complete checks used locally
+        run: .venv/bin/python scripts/check.py --audit
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: public-website

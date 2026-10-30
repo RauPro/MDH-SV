@@ -29,21 +29,19 @@ def test_ci_installs_shared_dependencies_once_after_history_scan_before_any_cons
     document = workflow('.github/workflows/ci.yml')
     assert document['permissions'] == {'contents': 'read'}
     steps = document['jobs']['verify']['steps']
-    install = install_step(steps, 'npm ci --ignore-scripts')
+    prepare = next(step for step in steps if step.get('run') == 'python scripts/bootstrap.py')
+    verify = next(step for step in steps if step.get('run') == '.venv/bin/python scripts/check.py --audit')
     checkout = next(step for step in steps if step.get('uses', '').startswith('actions/checkout@'))
+    setup = next(step for step in steps if step.get('uses', '').startswith('actions/setup-node@'))
     scan = next(step for step in steps if step.get('run') ==
                 'python scripts/publication_guard.py check --ref HEAD')
     scanner = next(step for step in steps if
                    'python scripts/install_gitleaks.py' in step.get('run', ''))
     assert checkout['with']['fetch-depth'] == '0'
-    assert steps.index(checkout) < steps.index(scanner) < steps.index(scan) < steps.index(install)
-    assert 'if' not in scan and 'continue-on-error' not in scan
-    root_installs = [line for step in steps for line in step.get('run', '').splitlines()
-                     if re.match(r'\s*npm\s+ci(?:\s|$)', line)]
-    assert root_installs == ['npm ci --ignore-scripts']
-    consumers = [step for step in steps if 'pytest' in step.get('run', '')
-                 or 'npm run test:api' in step.get('run', '')]
-    assert consumers and all(steps.index(install) < steps.index(step) for step in consumers)
+    assert steps.index(checkout) < steps.index(scanner) < steps.index(scan) < steps.index(prepare)
+    assert steps.index(setup) < steps.index(prepare) < steps.index(verify)
+    assert all('if' not in step and 'continue-on-error' not in step for step in (scan, prepare, verify))
+    assert not any(re.search(r'\bnpm (ci|install)\b', step.get('run', '')) for step in steps)
     assert 'secrets.' not in str(document['jobs']['verify'])
 
 

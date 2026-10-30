@@ -25,7 +25,7 @@ editable registra los módulos dentro del checkout.
 
 ```sh
 python3.13 scripts/bootstrap.py
-.venv/bin/python scripts/check.py
+.venv/bin/python scripts/check.py --audit
 ```
 
 Para configurar un fork, sus contactos y automatizaciones, siga [la guía de preparación e instancias](docs/FORKS.md). Las pruebas y la web local no requieren secretos.

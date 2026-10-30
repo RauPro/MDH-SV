@@ -35,7 +35,7 @@ def test_required_verify_scans_full_history_before_dependency_installation():
     assert checkout["with"]["fetch-depth"] == "0"
     install = command_step(steps, "python scripts/install_gitleaks.py")
     scan = command_step(steps, "python scripts/publication_guard.py check --ref HEAD")
-    dependencies = command_step(steps, "python -m pip install")
+    dependencies = command_step(steps, "python scripts/bootstrap.py")
     assert_required(install)
     assert_required(scan)
     assert steps.index(checkout) < steps.index(install) < steps.index(scan) < steps.index(dependencies)
