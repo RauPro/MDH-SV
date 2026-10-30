@@ -41,7 +41,7 @@ consulta o hallazgo bloqueante hace fallar la comprobación.
 
 Las auditorías npm incluyen dependencias de desarrollo en raíz y web y bloquean
 avisos moderados o mayores. Python usa [pip-audit](https://github.com/pypa/pip-audit)
-fijado en el lock, con `--strict --no-deps --disable-pip`, sobre `requirements.lock`
+fijado en el lock, con `--strict --no-deps --disable-pip`, sobre `requirements.lock.txt`
 y `ops/review-queue/requirements.txt` por separado. Se consultan las versiones
 exactas sin instalar ni ejecutar paquetes para resolverlas. No se ignoran avisos.
 El escaneo de dependencias no sustituye el análisis del código ni de secretos.
@@ -49,8 +49,10 @@ El escaneo de dependencias no sustituye el análisis del código ni de secretos.
 ## Actualizaciones
 
 Dependabot revisa semanalmente npm raíz/web y pip raíz/cola privada. El fichero
-raíz `requirements.txt` incluye `requirements.lock`; conserve esa relación para
-que las actualizaciones lleguen al entorno instalado. Las Actions siguen su
+raíz `requirements.txt` incluye `requirements.lock.txt`; conserve esa relación para
+que las actualizaciones lleguen al entorno instalado. El antiguo requirements.lock
+se conserva sólo como entrada compatible que incluye ese mismo fichero. La extensión
+.txt permite que el lector de requisitos de Dependabot descubra todas las versiones. Las Actions siguen su
 procedimiento separado en [GITHUB-ACTIONS.md](GITHUB-ACTIONS.md).
 
 Para una actualización Python, cambie las versiones afectadas y resuelva con pip

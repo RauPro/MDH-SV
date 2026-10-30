@@ -97,7 +97,7 @@ def bootstrap(root: Path = ROOT) -> None:
     executable = prepare_environment(root, python)
     environment = os.environ.copy()
     environment["PIP_DISABLE_PIP_VERSION_CHECK"] = "1"
-    run([str(executable), "-m", "pip", "install", "-r", "requirements.lock"],
+    run([str(executable), "-m", "pip", "install", "-r", "requirements.lock.txt"],
         root=root, env=environment)
     run([str(executable), "-m", "pip", "install", "-e", ".", "--no-deps", "--no-build-isolation"],
         root=root, env=environment)

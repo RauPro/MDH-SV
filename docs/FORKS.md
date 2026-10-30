@@ -12,7 +12,7 @@ python3.13 scripts/bootstrap.py
 .venv/bin/python scripts/check.py
 ```
 
-La preparación instala `requirements.lock`, los módulos Python en modo editable,
+La preparación instala `requirements.lock.txt`, los módulos Python en modo editable,
 los dos `package-lock.json` con `npm ci` y Gitleaks autenticado por SHA256. El
 backend de construcción Python también está fijado. Repetir el comando conserva
 `.env` y reutiliza una `.venv` compatible; rechaza una `.venv` incompatible o
