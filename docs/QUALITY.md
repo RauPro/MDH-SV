@@ -68,3 +68,13 @@ siguen usando el lock de cada SHA. La auditoría de esta rama cubre los manifies
 actuales, no certifica esos snapshots históricos. Promover código en la cola
 privada requiere seguir GITHUB-ACTIONS.md, revisar cada workflow instalado y
 verificar su ejecución; no reemplace todos los pins por uno de forma automática.
+
+## Operación con presupuesto cero
+
+El proyecto debe mantenerse sin coste. No habilite gasto adicional ni añada
+servicios de auditoría de pago para superar estos controles. El límite de gasto
+de Actions debe permanecer en $0 con bloqueo al alcanzarlo. Los runners privados
+pueden dejar de arrancar al agotarse la cuota incluida; en ese caso registre la
+verificación privada como pendiente hasta su renovación, sin presentarla como
+aprobada. El histórico público y las comprobaciones locales se verifican por
+separado. Cambiar la frecuencia de los bots requiere acordar esa decisión operativa.
