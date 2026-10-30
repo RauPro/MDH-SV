@@ -2,7 +2,7 @@
 requires = ["setuptools==84.1.0", "wheel==0.48.0", "packaging==26.3"]
 build-backend = "setuptools.build_meta"
 
-# Checkout application: scripts/bootstrap.py installs requirements.lock before
+# Checkout application: scripts/bootstrap.py installs requirements.lock.txt before
 # registering editable modules. Standalone wheels do not include the datasets.
 [project]
 name = "mdh-sv"

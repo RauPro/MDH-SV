@@ -105,7 +105,7 @@ def check(root: Path = ROOT, *, audit: bool = False) -> None:
     ):
         bootstrap.run(command, root=root, env=environment)
     if audit:
-        for lock in ("requirements.lock", "ops/review-queue/requirements.txt"):
+        for lock in ("requirements.lock.txt", "ops/review-queue/requirements.txt"):
             bootstrap.run([str(python), "-m", "pip_audit", "--strict", "--no-deps",
                            "--disable-pip", "--progress-spinner", "off", "-r", lock],
                           root=root, env=environment)

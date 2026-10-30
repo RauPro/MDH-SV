@@ -137,7 +137,7 @@ def test_bootstrap_uses_locks_and_preserves_env_from_external_directory(checkout
     monkeypatch.setattr(bootstrap, "run", lambda command, **kwargs: calls.append((command, kwargs)))
     bootstrap.bootstrap(checkout)
     python = str(checkout / ".venv/bin/python")
-    assert calls[0][0] == [python, "-m", "pip", "install", "-r", "requirements.lock"]
+    assert calls[0][0] == [python, "-m", "pip", "install", "-r", "requirements.lock.txt"]
     assert calls[1][0] == [python, "-m", "pip", "install", "-e", ".", "--no-deps", "--no-build-isolation"]
     assert calls[3][0] == ["/tools/npm", "ci", "--ignore-scripts", "--no-audit", "--no-fund"]
     assert calls[4][0] == ["/tools/npm", "--prefix", "apps/web", "ci", "--no-audit", "--no-fund"]
@@ -246,7 +246,7 @@ def test_full_check_requires_real_scanner_and_audit_is_explicit(checkout, monkey
     audits = [command for command, _ in calls if "pip_audit" in command]
     assert len(audits) == (2 if audit else 0)
     if audit:
-        assert {command[-1] for command in audits} == {"requirements.lock", "ops/review-queue/requirements.txt"}
+        assert {command[-1] for command in audits} == {"requirements.lock.txt", "ops/review-queue/requirements.txt"}
         assert all("--strict" in command and "--disable-pip" in command and "--no-deps" in command for command in audits)
     assert sum("audit" in command for command, _ in calls) == (2 if audit else 0)
     assert all(arguments["env"]["GITLEAKS_BIN"] == str(binary) for _, arguments in calls)
