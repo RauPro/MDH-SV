@@ -34,6 +34,7 @@ WORKFLOWS = {
     '.github/workflows/publication-pr.yml': ('public', 0, 1),
     '.github/workflows/news-exception.yml': ('public', 0, 1),
     '.github/workflows/refresh-history.yml': ('public', 0, 1),
+    '.github/workflows/release.yml': ('public', 0, 0),
     'ops/history/refresh-history.yml': ('public', 0, 1),
     'ops/history/review-history.yml': ('private', 2, 1),
     'ops/official-statistics-review/monitor.yml': ('private', 2, 1),

@@ -1,0 +1,39 @@
+name: Reproducible release
+on:
+  push:
+    tags: ['v*.*.*']
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  release:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.13'
+      - name: Require the tagged commit to be integrated into main
+        run: |
+          git fetch origin main
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+      - name: Build the release twice and compare every byte
+        run: |
+          python3.13 scripts/release.py build --tag "$GITHUB_REF_NAME" --output dist-a
+          python3.13 scripts/release.py build --tag "$GITHUB_REF_NAME" --output dist-b
+          for file in dist-a/*; do cmp "$file" "dist-b/$(basename "$file")"; done
+      - name: Verify the manifest against a rebuild
+        run: python3.13 scripts/release.py verify --tag "$GITHUB_REF_NAME" --manifest dist-a/release-manifest.json
+      - name: Read the release notes from the changelog
+        run: python3.13 scripts/release.py notes --tag "$GITHUB_REF_NAME" > notes.md
+      - name: Publish the GitHub release with the artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist-a/* --title "MDH-SV $GITHUB_REF_NAME" --notes-file notes.md --verify-tag
