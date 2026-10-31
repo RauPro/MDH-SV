@@ -7,10 +7,10 @@ queue. Source text is fetched into memory and never written into the projection.
 from __future__ import annotations
 
 import argparse
+from .json_files import write_location_json as _atomic_json
 import hashlib
 import json
 import re
-import tempfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -632,20 +632,6 @@ def _read_json(path, maximum):
     if path.is_symlink() or not path.is_file() or path.stat().st_size > maximum:
         raise AutomaticLocationError("invalid_location_file")
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _atomic_json(path, document):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = None
-    try:
-        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
-                                         prefix=".locations-", suffix=".tmp", delete=False) as stream:
-            temporary = Path(stream.name)
-            stream.write(json.dumps(document, ensure_ascii=False, indent=2) + "\n")
-        temporary.replace(path)
-    finally:
-        if temporary is not None:
-            temporary.unlink(missing_ok=True)
 
 
 def export_automatic_locations(drafts_dir, archive_path, output_path, *, limit=20,
