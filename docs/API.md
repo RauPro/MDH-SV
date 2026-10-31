@@ -47,7 +47,7 @@ Sólo se admiten los criterios actuales y las decisiones humanas prevalecen; un
 archivo inválido devuelve 503. JSON descargable, REST, MCP, listado y mapa aplican
 la misma regla. Véase [el protocolo de selección](NEWS-SELECTION.md).
 
-El objetivo histórico es recuperar noticias desde 2010. Lea `meta.coverage.start_date` y `meta.coverage.end_date` para conocer el intervalo solicitado por la versión consultada, junto con los estados por medio y mes para evaluar su avance. Un intervalo amplio no acredita cobertura completa ni la disponibilidad de noticias en todos sus meses. La referencia IEEE se conserva como antecedente independiente de ese inicio.
+El objetivo histórico es recuperar noticias desde 2010. Lea `meta.coverage.start_date` y `meta.coverage.end_date` para conocer el intervalo solicitado por la versión consultada. Los estados por medio permanecen en `meta.coverage.sources[]`; los meses por fuente y el agregado se consultan en `/api/v1/news/coverage` (véase «Cobertura del archivo»). Un intervalo amplio no acredita cobertura completa ni la disponibilidad de noticias en todos sus meses. La referencia IEEE se conserva como antecedente independiente de ese inicio.
 
 `discovery.method` distingue `wordpress_rest_title_screen` de `html_article_metadata`.
 En este último, `source_post_id` puede ser nulo; no se inventa un identificador del
@@ -77,6 +77,16 @@ while (url) {
 ```
 
 Para reproducibilidad estricta, descargue el snapshot y registre su versión/commit y fecha. Las páginas de la API reflejan el despliegue activo; una actualización entre peticiones puede cambiar la paginación. La caché de la API puede conservar respuestas durante cinco minutos. No se promete cobertura exhaustiva, disponibilidad contractual ni un límite dedicado por consumidor. Use las descargas completas para trabajos masivos y evite sondeos continuos.
+
+## Cobertura del archivo
+
+`meta.coverage` comunica el alcance del archivo: intervalo solicitado, estado por medio y recuento de referencias. El parámetro `coverage` de `GET /api/v1/news` acota su detalle: `summary` (sin las listas `months`) o `full` (objeto completo). `meta.coverage_detail` declara cuál se sirvió.
+
+Cronograma: anunciado el 2026-11-01 (`Deprecation: @1793491200`); desde el 2027-02-01 —92 días después— la respuesta sin parámetro equivale a `summary`. Hasta ese instante, la respuesta sin parámetro conserva el objeto completo y añade `Deprecation`, `Sunset` y `Link` apuntando a este ancla.
+
+La cobertura completa se descarga de `GET /api/v1/news/coverage` (objeto único con `months` por fuente y agregado; crece unos 2 KB por mes). MCP: `search_news` sirve `summary` por defecto y admite `full`; `get_news_coverage` equivale al endpoint.
+
+Migración: donde se leía `meta.coverage.months` o `meta.coverage.sources[].months`, consulte `/api/v1/news/coverage` una vez por ciclo, o solicite `coverage=full` si necesita el detalle en la misma respuesta. Los estados por medio (`sources[].status`, fechas primera/última y `collection`) permanecen en `summary`.
 
 ## Estadísticas oficiales de homicidios
 
@@ -196,7 +206,7 @@ Se valida `Host` contra el dominio público y los dominios Vercel del despliegue
 
 - `source_checked` es consulta documental asistida; **no equivale a revisión editorial humana**. `editorially_reviewed` y `human_reviewed` deben conservarse al reutilizar una ficha.
 - `incident`, `aggregate` y `publication` son unidades distintas. Los conteos de documentos no son cantidades de víctimas.
-- `/news` conserva referencias bibliográficas con `not_reviewed` y una `news_dossier` propia: descubrir un enlace o mostrar una ficha no convierte la noticia en un caso validado. `meta.coverage` comunica alcance parcial, fuentes y meses recolectados. No contiene decisiones ni comentarios de la cola privada.
+- `/news` conserva referencias bibliográficas con `not_reviewed` y una `news_dossier` propia: descubrir un enlace o mostrar una ficha no convierte la noticia en un caso validado. `meta.coverage` comunica alcance parcial y fuentes; los meses recolectados se sirven en `/api/v1/news/coverage` o con `coverage=full`. No contiene decisiones ni comentarios de la cola privada.
 - El dossier conserva estado y evidencia en cada campo. `not_reported`, `withheld` y `not_applicable` tienen significado propio; no complete los valores nulos mediante inferencias. Consulte [el esquema de fichas](DOSSIER-SCHEMA.md).
 - Cite `source_url`, localizador, fecha y estado de revisión. Los enlaces son las fuentes originales; el servicio no redistribuye el cuerpo completo de los artículos.
 - Metadatos y resúmenes propios: CC BY 4.0, con atribución a MDH-SV y versión/fecha de consulta. Los originales enlazados conservan sus derechos.
