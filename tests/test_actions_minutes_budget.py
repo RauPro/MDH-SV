@@ -192,14 +192,17 @@ def run_window_step(event, schedule, hour, tmp_path):
 
 
 @pytest.mark.parametrize('event,schedule,hour,expected', [
-    ('schedule', extract_fallback_cron(), '01', 'true'),
-    ('schedule', extract_fallback_cron(), '13', 'true'),
-    ('schedule', extract_fallback_cron(), '00', 'false'),
-    ('schedule', extract_fallback_cron(), '11', 'false'),
-    ('schedule', extract_fallback_cron(), '14', 'false'),
-    ('schedule', extract_fallback_cron(), '19', 'false'),
-    ('schedule', '', '13', 'false'),
-    ('workflow_dispatch', '', '19', 'true'),
+    ('schedule', extract_fallback_cron(), '01:00', 'true'),
+    ('schedule', extract_fallback_cron(), '01:23', 'true'),
+    ('schedule', extract_fallback_cron(), '13:44', 'true'),
+    ('schedule', extract_fallback_cron(), '13:45', 'false'),
+    ('schedule', extract_fallback_cron(), '01:59', 'false'),
+    ('schedule', extract_fallback_cron(), '00:23', 'false'),
+    ('schedule', extract_fallback_cron(), '11:23', 'false'),
+    ('schedule', extract_fallback_cron(), '14:05', 'false'),
+    ('schedule', extract_fallback_cron(), '19:30', 'false'),
+    ('schedule', '', '13:10', 'false'),
+    ('workflow_dispatch', '', '19:59', 'true'),
 ])
 def test_late_schedule_guard_behaviour(event, schedule, hour, expected, tmp_path):
     assert run_window_step(event, schedule, hour, tmp_path) == f'on_time={expected}\n'

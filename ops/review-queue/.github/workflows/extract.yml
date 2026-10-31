@@ -44,10 +44,10 @@ jobs:
         run: |
           on_time=true
           if [ "$MDH_EVENT_NAME" = schedule ]; then
-            on_time=$(printf '%s\n' "$MDH_SCHEDULE" | awk -v now="$(date -u +%H)" '{n = split($2, h, ","); ok = "false"; for (i = 1; i <= n; i++) if (h[i] ~ /^[0-9]+$/ && h[i] + 0 == now + 0) ok = "true"; print ok}')
+            on_time=$(printf '%s\n' "$MDH_SCHEDULE" | awk -v now="$(date -u +%H:%M)" '{split(now, t, ":"); n = split($2, h, ","); ok = "false"; if (t[2] + 0 < 45) for (i = 1; i <= n; i++) if (h[i] ~ /^[0-9]+$/ && h[i] + 0 == t[1] + 0) ok = "true"; print ok}')
             if [ "$on_time" != true ]; then
               on_time=false
-              echo "GitHub entregó el disparo programado fuera de sus horas UTC; termina sin reclamar otra franja ni llamar a Gemini."
+              echo "GitHub entregó el disparo programado fuera de su ventana (una hora del cron, antes del minuto 45); termina sin reclamar franja ni llamar a Gemini."
             fi
           fi
           echo "on_time=$on_time" >> "$GITHUB_OUTPUT"

@@ -153,16 +153,22 @@ un `workflow_dispatch` manual de `Publicar ubicaciones automáticas`.
 
 GitHub no garantiza la puntualidad de los disparos programados y el
 repositorio privado de la cola ha registrado retrasos de unas seis horas (31 de
-octubre de 2026). Las franjas deduplican por la hora UTC real de la ejecución, así que un
-respaldo entregado tarde reclamaría una hora nueva y ejecutaría un ciclo
-completo no presupuestado. Por eso el primer paso compara la hora UTC actual
-con las horas del cron que disparó (`github.event.schedule`): si no coinciden,
-se omiten los pasos restantes y el trabajo termina en segundos, sin
-preparación, sin reclamar franja y sin llamar a Gemini. Si Vercel falla y
-GitHub retrasa el respaldo, ese ciclo se omite y las candidatas pendientes
-esperan al siguiente. `extract.yml` lleva el mismo paso, inerte para disparos
-manuales y de Vercel, de modo que ambos workflows ejecutan un trabajo
-idéntico.
+octubre de 2026). Las franjas deduplican por la hora UTC real de la ejecución,
+así que un respaldo entregado tarde reclamaría una hora nueva y ejecutaría un
+ciclo completo no presupuestado. Por eso el primer paso comprueba que la hora
+UTC actual sea una de las horas del cron que disparó (`github.event.schedule`)
+y que el minuto esté por debajo de 45: la franja se reclama unos minutos
+después, tras una preparación de unos tres minutos, así que el margen mantiene
+la reclamación dentro de la misma hora. Si no coincide, se omiten los pasos
+restantes y el trabajo termina en segundos, sin preparación, sin reclamar
+franja y sin llamar a Gemini. Un respaldo retrasado hasta la hora del otro
+ciclo (por ejemplo, el de las 01:23 entregado a las 13:30) sólo reclama las
+13:00 si el disparo de las 13:07 no lo hizo antes, de modo que reemplaza ese
+ciclo en lugar de añadir otro: cada día hay como máximo dos extracciones
+automáticas (franjas de 01:00 y 13:00). Si Vercel falla y GitHub retrasa el
+respaldo, ese ciclo se omite y las candidatas pendientes esperan al siguiente.
+`extract.yml` lleva el mismo paso, inerte para disparos manuales y de Vercel,
+de modo que ambos workflows ejecutan un trabajo idéntico.
 
 ## Fichas de todas las noticias
 
