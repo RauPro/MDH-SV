@@ -28,7 +28,7 @@ export function rest(callback) {
     try {
       if ((req.url ?? '').length > 4096) throw new ApiError(414, 'uri_too_long', 'La consulta excede el tamaño permitido.');
       const url = new URL(req.url, PUBLIC_URL);
-      json(res, 200, await callback(url, req), req.method === 'HEAD');
+      json(res, 200, await callback(url, req, res), req.method === 'HEAD');
     } catch (error) {
       if (!(error instanceof ApiError)) console.error('Public API failure:', error.name);
       json(res, error.status ?? 500, { error: { code: error.code ?? 'internal_error', message: error instanceof ApiError ? error.message : 'No se pudo consultar el catálogo público.' } }, req.method === 'HEAD');

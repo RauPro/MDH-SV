@@ -50,7 +50,7 @@ after(async () => { if (server) await close(server); });
 
 test('every actual REST operation, method and declared response schema is executable', async () => {
   const paths = Object.keys(documented.paths);
-  assert.equal(paths.length, 6);
+  assert.equal(paths.length, 7);
   for (const route of paths) {
     const path = route.replace('{id}', firstRecord.id);
     await request(path, route);
@@ -110,10 +110,19 @@ test('all documented filters are exercised through real HTTP and validate withou
     category: firstRecord.category, review_status: firstRecord.review_status, limit: 1, offset: 0,
   };
   const news = (await request('/api/v1/news?limit=1')).data[0];
+  // Default (pre-sunset), summary and full responses all validate against the
+  // declared contracts; the coverage endpoint ships the full object.
+  const summary = await request('/api/v1/news?limit=1&coverage=summary', '/api/v1/news');
+  assert.equal(summary.meta.coverage_detail, 'summary');
+  assert.equal(Object.hasOwn(summary.meta.coverage, 'months'), false);
+  assert.equal(Object.hasOwn(summary.meta.coverage.sources[0] ?? {}, 'months'), false);
+  const coverage = await request('/api/v1/news/coverage');
+  assert.ok(coverage.data.months.length > 0);
+  assert.equal(coverage.meta.coverage_detail, undefined);
   const values = {
     '/api/v1/records': recordValues,
     '/api/v1/stats': recordValues,
-    '/api/v1/news': { q: news.title.slice(0, 150), publisher: news.publisher, date_from: news.published_date, date_to: news.published_date, scope_hint: news.scope_hint, limit: 1, offset: 0 },
+    '/api/v1/news': { q: news.title.slice(0, 150), publisher: news.publisher, date_from: news.published_date, date_to: news.published_date, scope_hint: news.scope_hint, coverage: 'full', limit: 1, offset: 0 },
     '/api/v1/official-statistics': { year: 2020, department: 'national' },
   };
   for (const [route, available] of Object.entries(values)) {

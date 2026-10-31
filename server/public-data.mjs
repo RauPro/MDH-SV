@@ -7,7 +7,7 @@ import { isSelectedNewsReference } from '../shared/news-selection.mjs';
 import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
 import { newsProcessingFor, parseNewsProcessing } from '../shared/news-processing.mjs';
 
-import { PUBLIC_URL } from './instance.mjs';
+import { instance, PUBLIC_URL } from './instance.mjs';
 export { PUBLIC_URL };
 export const LICENSE = 'https://creativecommons.org/licenses/by/4.0/';
 export const LIMITATION = 'Cobertura parcial de reportes públicos; no es un censo ni una determinación judicial. Conservar fuentes, fechas y estado de revisión. No sumar noticias, informes y casos como víctimas.';
@@ -37,7 +37,43 @@ export const recordFilters = {
   review_status: z.enum(['source_checked', 'editorially_reviewed']).optional(),
 };
 export const recordSearchSchema = z.object({ ...recordFilters, ...page }).strict();
-export const newsSearchSchema = z.object({ ...commonFilters, scope_hint: z.enum(['el_salvador', 'international_context', 'undetermined']).optional(), ...page }).strict();
+export const newsSearchSchema = z.object({ ...commonFilters, scope_hint: z.enum(['el_salvador', 'international_context', 'undetermined']).optional(), coverage: z.enum(['summary', 'full']).optional(), ...page }).strict();
+
+// A missing coverage parameter answers full until the sunset, then summary.
+// The headers below advertise that window on unparameterized requests only.
+export const NEWS_COVERAGE_SUNSET = '2027-02-01T00:00:00Z';
+const NEWS_COVERAGE_SUNSET_INSTANT = Date.parse(NEWS_COVERAGE_SUNSET);
+export const NEWS_COVERAGE_DEPRECATION = '@1793491200'; // 2026-11-01T00:00:00Z, RFC 9745
+export const NEWS_COVERAGE_SUNSET_HTTP = 'Mon, 01 Feb 2027 00:00:00 GMT'; // RFC 8594
+
+export function newsCoverageDetail(filters, now = new Date()) {
+  return filters.coverage ?? (now.getTime() < NEWS_COVERAGE_SUNSET_INSTANT ? 'full' : 'summary');
+}
+
+export function newsCoverageDeprecation(now = new Date()) {
+  if (now.getTime() >= NEWS_COVERAGE_SUNSET_INSTANT) return {};
+  return {
+    Deprecation: NEWS_COVERAGE_DEPRECATION,
+    Sunset: NEWS_COVERAGE_SUNSET_HTTP,
+    Link: `<${PUBLIC_URL}/api/v1/news/coverage>; rel="alternate"; type="application/json", <https://github.com/${instance.public_repository}/blob/main/docs/API.md#cobertura-del-archivo>; rel="deprecation"; type="text/html"`,
+  };
+}
+
+const summarizedCoverage = new WeakMap();
+function summaryCoverage(archive) {
+  let summary = summarizedCoverage.get(archive);
+  if (!summary) {
+    const { months, ...rest } = archive.coverage;
+    summary = { ...rest, sources: archive.coverage.sources.map(({ months: sourceMonths, ...source }) => source) };
+    summarizedCoverage.set(archive, summary);
+  }
+  return summary;
+}
+
+export function newsCoverage(archive = loadNews()) {
+  try { archive = parseNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
+  return { data: archive.coverage, meta: { ...metadata(archive), generated_at: archive.generated_at } };
+}
 export const statsSchema = z.object(recordFilters).strict();
 export const recordIdSchema = z.string().regex(/^[a-z0-9][a-z0-9-]{0,149}$/);
 
@@ -178,7 +214,7 @@ export function getRecord(id, catalog = loadCatalog()) {
   if (!record) throw new ApiError(404, 'record_not_found', 'Registro no encontrado.');
   return { data: record, meta: metadata(catalog) };
 }
-export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload, processingPayload) {
+export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload, processingPayload, now = new Date()) {
   try { archive = parseNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
   const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
   const eligible = archive.records.filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index))).map(reference => {
@@ -188,7 +224,9 @@ export function searchNews(filters = {}, archive = loadNews(), dossierPayload, l
     return dossier.schema_version === 2 && dossier.source_title === NEWS_DOSSIER_PROTECTED_TITLE
       ? { ...reference, title: NEWS_DOSSIER_PROTECTED_TITLE, title_truncated: false } : reference;
   });
-  const result = paginated(eligible, newsSearchSchema.parse(filters), archive, '/api/v1/news');
+  const parsed = newsSearchSchema.parse(filters);
+  const detail = newsCoverageDetail(parsed, now);
+  const result = paginated(eligible, parsed, archive, '/api/v1/news');
   const locations = locationPayload === undefined ? loadNewsLocations() : locationSnapshot(locationPayload);
   const processing = processingPayload === undefined ? loadNewsProcessing() : processingSnapshot(processingPayload);
   result.data = result.data.map(reference => {
@@ -198,7 +236,7 @@ export function searchNews(filters = {}, archive = loadNews(), dossierPayload, l
       automatic_location: snapshot.status === 'available' && !dossier.human_reviewed && dossier.fields.department.status !== 'withheld'
         ? newsLocationFor(reference, locations.index) : null };
   });
-  result.meta = { ...result.meta, selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador', coverage: archive.coverage, paper: archive.paper, policy: archive.policy,
+  result.meta = { ...result.meta, selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador', coverage: detail === 'full' ? archive.coverage : summaryCoverage(archive), coverage_detail: detail, paper: archive.paper, policy: archive.policy,
     news_dossiers_status: snapshot.status,
     automatic_locations_status: locations.status,
     news_processing_status: processing.status,
