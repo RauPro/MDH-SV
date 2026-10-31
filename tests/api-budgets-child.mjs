@@ -1,6 +1,9 @@
 // Latency measurement for tests/api-budgets.test.mjs: prints JSON timings.
 const started = performance.now();
 const { searchNews } = await import('../server/public-data.mjs');
+// The cold budget covers the import plus the first summary query; that query
+// stays out of the warm samples below.
+searchNews({ limit: 1, coverage: 'summary' });
 const cold = performance.now() - started;
 
 const mixed = [
