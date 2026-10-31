@@ -7,12 +7,12 @@ bound to the selected source text can supply that state.
 from __future__ import annotations
 
 import argparse
+from .json_files import read_processing_json as _read_json, write_processing_json as _atomic_json
 from collections import Counter
 from copy import deepcopy
 from datetime import datetime, timezone
 import json
 from pathlib import Path
-import tempfile
 
 from .contracts.drafts import validate_envelope as validate_envelope
 from .contracts.reference import validate_reference as validate_reference
@@ -95,38 +95,6 @@ def project_news_processing(drafts, archive, *, snapshot_complete=False, previou
         return result
     except (ValueError, KeyError, TypeError, AttributeError):
         raise NewsProcessingError("processing_projection_failed") from None
-
-
-def _read_json(path, maximum):
-    if path.is_symlink() or not path.is_file() or path.stat().st_size > maximum:
-        raise NewsProcessingError("invalid_processing_file")
-    def unique_object(pairs):
-        result = {}
-        for key, value in pairs:
-            if key in result:
-                raise NewsProcessingError("invalid_processing_file")
-            result[key] = value
-        return result
-
-    def invalid_constant(_):
-        raise NewsProcessingError("invalid_processing_file")
-
-    return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_object,
-                      parse_constant=invalid_constant)
-
-
-def _atomic_json(path, document):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = None
-    try:
-        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
-                                         prefix=".processing-", suffix=".tmp", delete=False) as stream:
-            temporary = Path(stream.name)
-            stream.write(json.dumps(document, ensure_ascii=False, indent=2) + "\n")
-        temporary.replace(path)
-    finally:
-        if temporary is not None:
-            temporary.unlink(missing_ok=True)
 
 
 def export_news_processing(drafts_dir, archive_path, output_path, *, snapshot_complete=False, now=None):

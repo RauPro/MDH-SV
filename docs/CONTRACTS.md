@@ -156,3 +156,15 @@ las reglas propias de cada dominio; no se relajan para unificarlos artificialmen
 imports diferidos, y ejecuta el corpus en un proceso que bloquea los adaptadores,
 HTTP, DNS, Gemini y dependencias pesadas. Las pruebas de adaptadores siguen usando
 los imports de compatibilidad; las del corpus usan directamente los contratos.
+
+`json_files.read_processing_json` conserva la lectura acotada y el rechazo de
+symlinks, claves duplicadas y constantes no finitas de procesamiento. Los escritores
+`write_processing_json` y `write_location_json` comparten implementación y conservan
+bytes, prefijos temporales y limpieza ante fallos. La lectura de ubicaciones conserva
+su política propia; la extracción no amplía ni endurece accidentalmente sus entradas.
+
+Esta separación reduce de 47 a 34 los nombres privados importados entre módulos
+raíz del pipeline (imports relativos, sin contar los aliases desde `contracts`).
+No pretende eliminar los acoplamientos internos de todos los adaptadores de Gemini,
+planificación o evidencia geográfica. El límite garantizado aquí es el de contratos
+puros y utilidades compartidas, con compatibilidad de CLI y snapshots.

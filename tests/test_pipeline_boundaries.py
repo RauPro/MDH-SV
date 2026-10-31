@@ -110,3 +110,29 @@ def test_contract_import_direction_including_lazy_branches():
             for module in modules:
                 if module.startswith('mdh_pipeline.'):
                     assert module.startswith('mdh_pipeline.contracts.') or module in support, (path, module)
+
+
+def test_json_utilities_keep_the_processing_reader_policy_without_projector():
+    isolated('''
+import importlib.abc, sys, tempfile
+from pathlib import Path
+class NoProjector(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname in {'mdh_pipeline.news_processing', 'mdh_pipeline.automatic_locations', 'mdh_pipeline.review_import'}:
+            raise AssertionError('Unexpected projector: ' + fullname)
+sys.meta_path.insert(0, NoProjector())
+from mdh_pipeline.json_files import read_processing_json, write_processing_json, write_location_json
+from mdh_pipeline.contracts.processing import NewsProcessingError
+with tempfile.TemporaryDirectory() as folder:
+    path = Path(folder) / 'snapshot.json'
+    for writer in (write_processing_json, write_location_json):
+        writer(path, {'text': 'San Martín'})
+        assert path.read_bytes() == '{\\n  "text": "San Martín"\\n}\\n'.encode()
+        assert read_processing_json(path, 1000) == {'text': 'San Martín'}
+    for invalid in ('{"a":1,"a":2}', '{"value":NaN}'):
+        path.write_text(invalid)
+        try: read_processing_json(path, 1000)
+        except NewsProcessingError as error: assert error.code == 'invalid_processing_file'
+        else: raise AssertionError('Unsafe processing JSON accepted')
+    assert list(Path(folder).iterdir()) == [path]
+''')

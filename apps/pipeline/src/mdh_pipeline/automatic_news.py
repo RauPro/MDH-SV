@@ -28,7 +28,7 @@ from .gemini_review import put_private_file
 from .contracts.drafts import validate_envelope as validate_envelope
 from .instance import load_instance
 from .contracts.dossier import FIELD_NAMES as FIELD_NAMES, validate_news_dossier as validate_news_dossier, validate_published_news_dossier as validate_published_news_dossier
-from .news_processing import _read_json, _atomic_json
+from .json_files import read_processing_json, write_processing_json
 from .contracts.processing import selected_references as _references, selection_content_hash as _selection_hash
 from .privacy import minimize_fields, privacy_flags
 from .review_queue import GitHubInbox
@@ -367,7 +367,7 @@ def _inventory(folder, *, required=False):
     for path in files:
         if not HEX.fullmatch(path.stem):
             raise AutomaticNewsError("invalid_automatic_filename")
-        result[path.stem] = _read_json(path, MAX_FILE_BYTES)
+        result[path.stem] = read_processing_json(path, MAX_FILE_BYTES)
     return result
 
 
@@ -402,7 +402,7 @@ def _store(inbox, receipt, sha, inbox_dir):
     new_sha = (saved or {}).get("content", {}).get("sha")
     if not isinstance(new_sha, str) or not re.fullmatch(r"[a-f0-9]{40,64}", new_sha):
         raise AutomaticNewsError("automatic_receipt_write_unconfirmed")
-    _atomic_json(Path(inbox_dir) / "automatic-news" / (identifier + ".json"), receipt)
+    write_processing_json(Path(inbox_dir) / "automatic-news" / (identifier + ".json"), receipt)
     return new_sha
 
 
@@ -549,7 +549,7 @@ def evaluate_queue(inbox, inbox_dir, archive, *, api_key, model, budget, limit=3
         if previous is not None:
             previous = validate_receipt(previous)
             if _cached(previous, key, document, reference):
-                _atomic_json(Path(inbox_dir) / "automatic-news" / (identifier + ".json"), previous)
+                write_processing_json(Path(inbox_dir) / "automatic-news" / (identifier + ".json"), previous)
                 report["cached"] += 1
                 continue
         receipt = previous if previous and previous["fingerprint"] == key else _receipt(document, reference, generation, now=now)
@@ -581,7 +581,7 @@ def evaluate_queue(inbox, inbox_dir, archive, *, api_key, model, budget, limit=3
                     if updated["extraction"]["content_sha256"] != article["content_sha256"]:
                         raise AutomaticNewsError("automatic_refresh_hash_mismatch")
                     put_private_file(inbox, "drafts", identifier, updated, draft_sha)
-                    _atomic_json(Path(inbox_dir) / "drafts" / (identifier + ".json"), updated)
+                    write_processing_json(Path(inbox_dir) / "drafts" / (identifier + ".json"), updated)
                     receipt["status"] = "source_refreshed"
                     report["source_refreshed"] += 1
             else:
@@ -706,8 +706,8 @@ def project_collection(drafts, receipts, archive, *, human=None, excluded_ids=()
 
 def export_collection(inbox_dir, archive_path, reviewed_path, output_path, automatic_output, *, excluded_ids=(), request_generations=None):
     inbox_dir = Path(inbox_dir)
-    archive = _read_json(Path(archive_path), 30_000_000)
-    human = _read_json(Path(reviewed_path), 30_000_000)
+    archive = read_processing_json(Path(archive_path), 30_000_000)
+    human = read_processing_json(Path(reviewed_path), 30_000_000)
     destinations = [Path(output_path), Path(automatic_output)]
     if (len({path.resolve() for path in destinations}) != 2
             or any(path.resolve() in {Path(archive_path).resolve(), Path(reviewed_path).resolve()} for path in destinations)
@@ -771,8 +771,8 @@ def main():
     parser.add_argument("--automatic-output", type=Path)
     args = parser.parse_args()
     try:
-        excluded = _read_json(args.excluded_ids, 10_000_000) if args.excluded_ids else []
-        generations = _read_json(args.request_generations, 10_000_000) if args.request_generations else {}
+        excluded = read_processing_json(args.excluded_ids, 10_000_000) if args.excluded_ids else []
+        generations = read_processing_json(args.request_generations, 10_000_000) if args.request_generations else {}
         _requests(excluded, generations)
         if args.command == "evaluate":
             from .automatic_news_batch import evaluate_batch
@@ -780,7 +780,7 @@ def main():
             model = os.environ.get("GEMINI_MODEL", config.model)
             inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
             budget = GeminiBudget(inbox, config)
-            archive = _read_json(args.archive, 30_000_000)
+            archive = read_processing_json(args.archive, 30_000_000)
             grant, allocation = allocated_validation_grant(inbox, args.inbox_dir, archive,
                 config=config, budget=budget, limit=args.limit, batch_size=args.batch_size,
                 source_run_id=os.environ.get("MDH_ALLOCATION_SOURCE_RUN_ID", ""),
