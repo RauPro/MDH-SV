@@ -1,0 +1,33 @@
+name: Informe público de error técnico
+description: Reportar un fallo reproducible del sitio, la API o el código, sin datos sensibles.
+title: Error técnico
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Este informe es público. No incluyas claves, nombres de personas protegidas, testimonios privados ni documentos personales.
+        Para correcciones sensibles o retiradas, escribe a [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me), atendido por @RauPro. No necesitas abrir un issue público. Primer contacto: sólo URL o ID público y descripción mínima, sin adjuntos personales.
+        Para vulnerabilidades de seguridad usa el [reporte privado de GitHub](https://github.com/RauPro/MDH-SV/security/advisories/new), no este formulario.
+        Para errores de datos del catálogo o de fichas, usa los formularios de corrección específicos.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Pasos para reproducir con datos ficticios
+      description: Componente afectado, comportamiento esperado y observado. Reproduce el fallo con datos públicos o inventados.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Entorno
+      description: Navegador o versión de Node/Python si aplica, y el commit o la fecha de la última comprobación.
+    validations:
+      required: false
+  - type: checkboxes
+    id: public_content
+    attributes:
+      label: Publicación de este informe
+      options:
+        - label: Entiendo que será público y no incluyo datos sensibles ni una solicitud privada.
+          required: true
