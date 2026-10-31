@@ -76,7 +76,7 @@ while (url) {
 }
 ```
 
-Para reproducibilidad estricta, descargue el snapshot y registre su versión/commit y fecha. Las páginas de la API reflejan el despliegue activo; una actualización entre peticiones puede cambiar la paginación. La caché de la API puede conservar respuestas durante cinco minutos. No se promete cobertura exhaustiva, disponibilidad contractual ni un límite dedicado por consumidor. Use las descargas completas para trabajos masivos y evite sondeos continuos.
+Para reproducibilidad estricta, descargue el snapshot y registre `meta.snapshot` de cada respuesta: `code_version`, `commit` (SHA del despliegue o null) y las fechas de generación del archivo, los estados y las ubicaciones. Las páginas de la API reflejan el despliegue activo; una actualización entre peticiones puede cambiar la paginación. La caché de la API puede conservar respuestas durante cinco minutos. No se promete cobertura exhaustiva, disponibilidad contractual ni un límite dedicado por consumidor. Use las descargas completas para trabajos masivos y evite sondeos continuos.
 
 ## Cobertura del archivo
 
