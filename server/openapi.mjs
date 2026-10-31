@@ -140,7 +140,19 @@ export const openapi = {
       parameter('year', 'Año exacto, desde 2010 hasta el año de meta.as_of; años posteriores al corte se rechazan.', { type: 'integer', minimum: 2010, maximum: 9999 }),
       parameter('department', 'national o uno de los 14 departamentos canónicos. Omitirlo devuelve todos los ámbitos, incluidos datos no disponibles.', { type: 'string', enum: ['national', ...OFFICIAL_STATISTICS_DEPARTMENTS] }),
     ], ref('OfficialStatisticsResponse')), description: `${OFFICIAL_STATISTICS_NOTICE} Sin paginación. Una fila nacional y 14 departamentales por año: 255 filas para el corte 2026. Las filas departamentales no heredan meses nacionales. Un snapshot inválido o ausente devuelve 503.` } },
-    '/api/v1/news': { get: operation('searchNews', 'Consultar noticias seleccionadas por pertinencia en derechos humanos de El Salvador', [...common, parameter('scope_hint', 'Indicio de búsqueda por título y URL, conservado como metadato; no determina la selección. Todos los resultados ya pasan el filtro de pertinencia en derechos humanos de El Salvador.', { type: 'string', enum: ['el_salvador', 'international_context', 'undetermined'] }), ...pagination], paged('News')) },
+    '/api/v1/news': { get: (() => {
+      const get = operation('searchNews', 'Consultar noticias seleccionadas por pertinencia en derechos humanos de El Salvador', [...common,
+        parameter('scope_hint', 'Indicio de búsqueda por título y URL, conservado como metadato; no determina la selección. Todos los resultados ya pasan el filtro de pertinencia en derechos humanos de El Salvador.', { type: 'string', enum: ['el_salvador', 'international_context', 'undetermined'] }),
+        parameter('coverage', 'Detalle de meta.coverage: summary omite las listas months (del agregado y de cada fuente); full conserva el objeto completo. Sin el parámetro la respuesta equivale a full hasta el 2027-02-01 con las cabeceras de retirada siguientes, y a summary desde esa fecha.', { type: 'string', enum: ['summary', 'full'] }),
+        ...pagination], paged('News'));
+      get.responses[200].headers = {
+        Deprecation: { description: 'RFC 9745; presente sólo cuando se omite coverage antes del 2027-02-01.', schema: { type: 'string', const: '@1793491200' } },
+        Sunset: { description: 'RFC 8594; instante en que el valor implícito pasa de full a summary. Presente sólo cuando se omite coverage antes del 2027-02-01.', schema: { type: 'string', const: 'Mon, 01 Feb 2027 00:00:00 GMT' } },
+        Link: { description: 'Enlace alternate a /api/v1/news/coverage y deprecation a la documentación. Presente sólo cuando se omite coverage antes del 2027-02-01.', schema: { type: 'string' } },
+      };
+      return get;
+    })() },
+    '/api/v1/news/coverage': { get: operation('getNewsCoverage', 'Cobertura completa del archivo de noticias, con los meses por fuente y el agregado', [], { type: 'object', additionalProperties: false, required: ['data', 'meta'], properties: { data: ref('NewsCoverage'), meta: ref('Metadata') } }) },
     '/api/v1/openapi.json': { get: operation('getOpenApi', 'Contrato OpenAPI 3.1', [], { type: 'object' }) },
   },
   components: { schemas: {
@@ -327,7 +339,57 @@ export const openapi = {
     Pagination: { type: 'object', additionalProperties: false, required: ['total', 'limit', 'offset', 'next_offset', 'next'], properties: { total: { type: 'integer', minimum: 0 }, limit: { type: 'integer', minimum: 1, maximum: 100 }, offset: { type: 'integer', minimum: 0, maximum: 1000000 }, next_offset: { type: ['integer', 'null'], minimum: 0 }, next: { type: ['string', 'null'], format: 'uri' } },
       allOf: [{ if: { properties: { next_offset: { type: 'null' } } }, then: { properties: { next: { type: 'null' } } }, else: { properties: { next: { type: 'string' } } } }],
     },
-    Metadata: { type: 'object', required: ['api_version', 'schema_version', 'updated_at', 'license', 'attribution', 'limitations'], additionalProperties: false, properties: { policy: { type: 'object' }, automatic_locations_status: { type: 'string', enum: ['available', 'unavailable'] }, automatic_location_notice: { type: 'string' }, selection_gate: ref('NewsSelectionGate'), public_scope: { type: 'string', const: 'human_rights_el_salvador' }, api_version: { type: 'string', const: '1' }, schema_version: { type: 'integer' }, updated_at: { type: ['string', 'null'] }, license: { type: 'string', format: 'uri' }, attribution: { type: 'string' }, limitations: { type: 'string' }, coverage: { type: 'object', additionalProperties: true }, paper: { type: 'object', additionalProperties: true }, review_notice: { type: 'string' }, news_dossiers_status: { type: 'string', enum: ['available', 'unavailable'] }, news_processing_status: { type: 'string', enum: ['available', 'unavailable'] }, news_processing_updated_at: { type: ['string', 'null'], format: 'date-time', description: 'Fecha del snapshot público de estados; null si no está disponible. No es la fecha de revisión de una ficha.' } } },
+    NewsCoverageMonthSource: { type: 'object', additionalProperties: false, required: ['month', 'status', 'records', 'posts_scanned', 'source_total_posts', 'pages_fetched', 'error'], properties: { month: { type: 'string', pattern: '^\\d{4}-(0[1-9]|1[0-2])$' }, status: { type: 'string', enum: ['enumerated', 'partial', 'failed', 'not_started'] }, records: { type: 'integer', minimum: 0 }, posts_scanned: { type: 'integer', minimum: 0 }, source_total_posts: { type: ['integer', 'null'], minimum: 0 }, pages_fetched: { type: 'integer', minimum: 0 }, error: { type: ['string', 'null'] }, invalid_posts: { type: 'integer', minimum: 0 }, last_attempt_at: { type: ['string', 'null'], format: 'date-time' }, screen_version: { type: ['integer', 'null'], minimum: 0 } } },
+    NewsCoverageMonth: { type: 'object', additionalProperties: false, required: ['month', 'start_date', 'end_date', 'records', 'sources'], properties: { month: { type: 'string', pattern: '^\\d{4}-(0[1-9]|1[0-2])$' }, start_date: { type: 'string', format: 'date' }, end_date: { type: 'string', format: 'date' }, records: { type: 'integer', minimum: 0 }, sources: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['source_id', 'status', 'records'], properties: { source_id: { type: 'string' }, status: { type: 'string', enum: ['enumerated', 'partial', 'failed', 'not_started'] }, records: { type: 'integer', minimum: 0 } } } } } },
+    NewsCoverageSource: {
+      type: 'object', additionalProperties: false,
+      required: ['id', 'publisher', 'endpoint', 'status', 'records', 'first_published_date', 'last_published_date'],
+      properties: {
+        id: { type: 'string' }, publisher: { type: 'string' }, endpoint: { type: 'string', format: 'uri' },
+        status: { type: 'string', enum: ['enumerated', 'partial', 'failed', 'not_started'] },
+        records: { type: 'integer', minimum: 0 },
+        first_published_date: { type: ['string', 'null'], format: 'date' },
+        last_published_date: { type: ['string', 'null'], format: 'date' },
+        months: { type: 'array', items: ref('NewsCoverageMonthSource') },
+        collection: { type: 'object', additionalProperties: false, required: ['method', 'phase', 'access', 'notice', 'last_attempt_at'], properties: { method: { type: 'string', const: 'html_article_metadata' }, phase: { type: 'string' }, access: { type: 'string', enum: ['public', 'restricted'] }, notice: { type: 'string' }, last_attempt_at: { type: ['string', 'null'], format: 'date-time' } } },
+      },
+    },
+    NewsCoverageSourceSummary: {
+      type: 'object', additionalProperties: false,
+      required: ['id', 'publisher', 'endpoint', 'status', 'records', 'first_published_date', 'last_published_date'],
+      properties: {
+        id: { type: 'string' }, publisher: { type: 'string' }, endpoint: { type: 'string', format: 'uri' },
+        status: { type: 'string', enum: ['enumerated', 'partial', 'failed', 'not_started'] },
+        records: { type: 'integer', minimum: 0 },
+        first_published_date: { type: ['string', 'null'], format: 'date' },
+        last_published_date: { type: ['string', 'null'], format: 'date' },
+        collection: { type: 'object', additionalProperties: false, required: ['method', 'phase', 'access', 'notice', 'last_attempt_at'], properties: { method: { type: 'string', const: 'html_article_metadata' }, phase: { type: 'string' }, access: { type: 'string', enum: ['public', 'restricted'] }, notice: { type: 'string' }, last_attempt_at: { type: ['string', 'null'], format: 'date-time' } } },
+      },
+    },
+    NewsCoverage: {
+      type: 'object', additionalProperties: false,
+      required: ['start_date', 'end_date', 'timezone', 'status', 'records', 'sources', 'months'],
+      description: 'Cobertura completa del archivo de noticias con los meses por fuente y el agregado mensual.',
+      properties: {
+        start_date: { type: 'string', format: 'date' }, end_date: { type: 'string', format: 'date' },
+        timezone: { type: 'string', const: 'America/El_Salvador' }, status: { type: 'string', const: 'partial' },
+        records: { type: 'integer', minimum: 0 },
+        sources: { type: 'array', items: ref('NewsCoverageSource') },
+        months: { type: 'array', items: ref('NewsCoverageMonth') },
+      },
+    },
+    NewsCoverageSummary: {
+      type: 'object', additionalProperties: false,
+      required: ['start_date', 'end_date', 'timezone', 'status', 'records', 'sources'],
+      description: 'Cobertura sin las listas months: el agregado mensual y los meses por fuente se descargan desde /api/v1/news/coverage.',
+      properties: {
+        start_date: { type: 'string', format: 'date' }, end_date: { type: 'string', format: 'date' },
+        timezone: { type: 'string', const: 'America/El_Salvador' }, status: { type: 'string', const: 'partial' },
+        records: { type: 'integer', minimum: 0 },
+        sources: { type: 'array', items: ref('NewsCoverageSourceSummary') },
+      },
+    },
+    Metadata: { type: 'object', required: ['api_version', 'schema_version', 'updated_at', 'license', 'attribution', 'limitations'], additionalProperties: false, properties: { policy: { type: 'object' }, automatic_locations_status: { type: 'string', enum: ['available', 'unavailable'] }, automatic_location_notice: { type: 'string' }, selection_gate: ref('NewsSelectionGate'), public_scope: { type: 'string', const: 'human_rights_el_salvador' }, api_version: { type: 'string', const: '1' }, schema_version: { type: 'integer' }, updated_at: { type: ['string', 'null'] }, license: { type: 'string', format: 'uri' }, attribution: { type: 'string' }, limitations: { type: 'string' }, coverage: { oneOf: [ref('NewsCoverage'), ref('NewsCoverageSummary')] }, coverage_detail: { type: 'string', enum: ['summary', 'full'] }, generated_at: { type: ['string', 'null'], format: 'date-time', description: 'Instante de generación del snapshot consultado.' }, paper: { type: 'object', additionalProperties: true }, review_notice: { type: 'string' }, news_dossiers_status: { type: 'string', enum: ['available', 'unavailable'] }, news_processing_status: { type: 'string', enum: ['available', 'unavailable'] }, news_processing_updated_at: { type: ['string', 'null'], format: 'date-time', description: 'Fecha del snapshot público de estados; null si no está disponible. No es la fecha de revisión de una ficha.' } } },
     Error: { type: 'object', additionalProperties: false, required: ['error'], properties: { error: { type: 'object', additionalProperties: false, required: ['code', 'message'], properties: { code: { type: 'string', minLength: 1 }, message: { type: 'string', minLength: 1 } } } } },
   } },
 };
