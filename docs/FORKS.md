@@ -131,7 +131,7 @@ La variable no sustituye las comprobaciones de identidad, rama o privacidad.
    estén resueltas. Pruebe una actualización de histórico limitada y una
    publicación con `validation_only=true`. Observe la PR, el escaneo, `verify`,
    la integración protegida y el despliegue. Después confirme una ejecución
-   horaria real: un dispatch manual no demuestra por sí solo el horario.
+   programada real: un dispatch manual no demuestra por sí solo el horario.
 
 Para pausar la automatización, establezca la variable en `false`. Un despacho
 puede ser aceptado y terminar con jobs omitidos; compruebe los jobs y los datos

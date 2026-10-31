@@ -2,7 +2,7 @@
 
 ## Producción
 
-Vercel importa `RauPro/MDH-SV`, rama `main`, raíz `.` y `vercel.json`. Ejecuta `npm ci && npm --prefix apps/web ci`, el build del portal y las funciones Node de `api/`. Node 22.x. Sirve los archivos estáticos de `apps/web/dist` y la API REST/MCP de solo lectura. La consulta pública no requiere secretos, base de datos, autenticación ni servicios de IA. El disparador horario utiliza las credenciales separadas descritas en [HOURLY-INGESTION.md](HOURLY-INGESTION.md).
+Vercel importa `RauPro/MDH-SV`, rama `main`, raíz `.` y `vercel.json`. Ejecuta `npm ci && npm --prefix apps/web ci`, el build del portal y las funciones Node de `api/`. Node 22.x. Sirve los archivos estáticos de `apps/web/dist` y la API REST/MCP de solo lectura. La consulta pública no requiere secretos, base de datos, autenticación ni servicios de IA. El disparador programado utiliza las credenciales separadas descritas en [HOURLY-INGESTION.md](HOURLY-INGESTION.md).
 
 La web consume JSON del mismo origen. Tiene CSP, bloqueo de iframes, `nosniff`, política sin referrer y permisos de cámara/micrófono/geolocalización deshabilitados. El portal no incorpora analítica ni tipografías externas. El alojamiento conserva las políticas y registros técnicos propios de Vercel.
 
@@ -54,7 +54,7 @@ El 16 de octubre de 2026 se registró la confirmación del titular de que identi
 
 ## Cola privada operativa
 
-Repositorio: `RauPro/MDH-SV-review`. Workflow `Recoger noticias`, cron `17 */6 * * *` UTC: aproximadamente 00:17, 06:17, 12:17 y 18:17 en El Salvador (GitHub puede retrasar ejecuciones). Usa un commit fijo del código público y un token efímero limitado al repositorio privado. El recolector RSS no usa PAT persistente, no escribe en el monitor público y no depende de cuotas de Gemini. La etapa de extracción asistida sí utiliza la API de Gemini.
+Repositorio: `RauPro/MDH-SV-review`. Workflow `Recoger noticias`, cron `17 7,19 * * *` UTC: aproximadamente 01:17 y 13:17 en El Salvador (GitHub puede retrasar ejecuciones). Cada ciclo de extracción también recoge RSS, por lo que la recolección combinada sigue siendo aproximadamente cada seis horas. Usa un commit fijo del código público y un token efímero limitado al repositorio privado. El recolector RSS no usa PAT persistente, no escribe en el monitor público y no depende de cuotas de Gemini. La etapa de extracción asistida sí utiliza la API de Gemini.
 
 Se verificaron los tres RSS: Co Latino, GatoEncerrado y Factum. El Faro no se configuró porque su URL RSS devolvió HTML sin entradas; Amnistía no se usa como RSS por bloqueo HTTP. Estas exclusiones no afectan las fuentes documentales ya enlazadas en las fichas.
 
@@ -74,13 +74,14 @@ Comprobar REST `/api/v1/records`, `/api/v1/records/{id}`, `/api/v1/news` y `/api
 
 ## Procesamiento asistido de candidatas
 
-La extracción está programada para ejecutarse cada hora en **Preparar fichas con
+La extracción está programada para ejecutarse dos veces al día en **Preparar fichas con
 Gemini**, dentro del repositorio privado. El disparo principal de Vercel está
-configurado al minuto 07 y GitHub conserva el respaldo al minuto 23. Comprobar las
+configurado a las 01:07 y 13:07 UTC y GitHub conserva el respaldo al minuto 23
+de esas mismas horas. Comprobar las
 invocaciones reales después de cada cambio: el horario configurado no demuestra
 que una ejecución concreta haya terminado. El modelo y la clave Gemini se configuran
 en Actions, no en Vercel. La plantilla usa un SHA público fijo y un token limitado
-a la cola. Solicita hasta 50 noticias por lote; el límite efectivo se reduce según
+a la cola. Solicita hasta 16 solicitudes por ciclo; el límite efectivo se reduce según
 el saldo y las horas restantes del día del Pacífico. Cada intento HTTP, incluidos
 los reintentos, consume ese presupuesto compartido por clasificación, extracción y evaluación automática.
 
@@ -118,6 +119,27 @@ generación por sí sola no autoriza publicar. Los fallos ordinarios conservan
 reintentos acotados y los fallos de configuración requieren intervención técnica.
 Las solicitudes de GitHub permiten reevaluar o corregir fichas; no se envía al
 modelo el texto de los issues. Véase el [procedimiento Gemini](GEMINI-REVIEW.md).
+
+## Presupuesto de minutos de Actions
+
+El plan gratuito de GitHub incluye 2 000 minutos mensuales de Actions en el
+repositorio privado; la automatización se dimensiona para no pasar del 80 %
+(1 600 minutos). El modelo versionado está en `ops/actions-minutes-budget.json`
+y `tests/test_actions_minutes_budget.py` lo contrasta con los horarios reales de
+`vercel.json` y las plantillas privadas: dos ciclos diarios de extracción (01:07
+y 13:07 UTC, con el respaldo de GitHub deduplicado por hora), dos recolecciones,
+dos ingresos históricos y una consulta de estadísticas oficiales. El peor caso
+mensual estimado es de unos 1 548 minutos, incluida una reserva manual de 60.
+
+La medición se hizo con la API de jobs de Actions, sumando por job la duración
+redondeada al minuto, que es como GitHub factura. Para volver a medir, consulte
+los jobs de cada workflow en la ventana elegida y ajuste `per_run` y los
+términos de `cycle`. Subir la frecuencia o el techo por ciclo exige actualizar
+el modelo, mantener la prueba en verde y contar con el acuerdo del titular:
+una cadencia horaria superaría la cuota incluida. El régimen anterior gastaba
+unas 240 solicitudes diarias durante unos cinco días y después se detenía; la
+cadencia actual reparte un volumen mensual semejante de forma continua, sin
+cortarse a mitad de mes.
 
 ## Fichas de todas las noticias
 

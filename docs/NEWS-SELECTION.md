@@ -65,7 +65,7 @@ También se admite contexto laboral, vivienda, agua, salud, migración y garant�
 Basta un hecho pertinente dentro de una nota de varios sucesos. El vínculo con
 El Salvador debe corresponder a ese asunto; no se inventa a partir del medio.
 
-El job horario clasifica primero y completa fichas después, bajo una única
+El job programado clasifica primero y completa fichas después, bajo una única
 reserva horaria. Con diez solicitudes, el reparto normal es dos para alcance,
 seis para extracción y dos para validar fichas en lotes de hasta cuatro. Las
 dos de alcance se comparten entre primera clasificación y segunda validación
@@ -107,7 +107,7 @@ fallos ordinarios y siete días para acceso restringido, sin eludirlo. Los hashe
 describen lo consultado; una caché no demuestra que la página no haya cambiado.
 
 `review-scope.yml` queda para pruebas manuales; no duplica automáticamente el
-presupuesto del job horario. Todos comparten el contador persistente de Gemini y
+presupuesto del job programado. Todos comparten el contador persistente de Gemini y
 la pausa global ante 429. No se eleva el tope diario ni se habilita facturación.
 
 ## Correcciones automáticas trazables

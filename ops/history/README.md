@@ -154,7 +154,7 @@ referencia ni publica una ficha. Valida toda la entrada antes de crear un issue.
 `review-history.yml` es una plantilla para el repositorio **privado**, con el SHA
 de código revisado en `MDH_PUBLIC_CODE_REF`; el archivo bibliográfico se lee de
 `main` para incorporar futuras referencias. No se debe instalar en el repositorio
-público. Permite veinte referencias cada seis horas y comparte el grupo de
+público. Permite veinte referencias por ejecución, dos veces al día, y comparte el grupo de
 concurrencia de la cola RSS para evitar carreras de deduplicación.
 
 ## Programación
