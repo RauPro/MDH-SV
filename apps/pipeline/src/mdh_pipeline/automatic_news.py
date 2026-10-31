@@ -34,6 +34,10 @@ from .privacy import minimize_fields, privacy_flags
 from .review_queue import GitHubInbox
 from .news_scope_policy import SCOPE_POLICY, CURRENT_SCOPE_PROMPTS
 
+# Compatibility aliases for the former processing helper imports.
+_read_json = read_processing_json
+_atomic_json = write_processing_json
+
 POLICY_VERSION = "auto-news-v1"
 MAX_FILE_BYTES = 512_000
 MAX_FILES = 100_000
