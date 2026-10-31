@@ -48,8 +48,9 @@ documentos personales.
 **Preparar fichas con Gemini** tiene un respaldo de GitHub al minuto 23 de las
 horas 01 y 13 UTC en `extract-fallback.yml`, un workflow hermano con los mismos
 pasos: su nombre queda fuera de la cadena de publicación, así que una ejecución
-deduplicada no la dispara. El disparador principal de Vercel lo solicita al
-minuto 07 de esas mismas horas; su instalación y configuración están descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
+deduplicada no la dispara. El respaldo se descarta si GitHub lo entrega fuera
+de su hora, sin reclamar franja ni llamar a Gemini. El disparador principal de
+Vercel lo solicita al minuto 07 de esas mismas horas; su instalación y configuración están descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
 Recoge RSS, incorpora hasta 50 referencias históricas y solicita como máximo
 16 llamadas a Gemini por ciclo. El presupuesto configurado reduce ese máximo y
 cuenta cada solicitud

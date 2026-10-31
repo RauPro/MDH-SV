@@ -129,9 +129,10 @@ otro repositorio privado con Actions en la misma cuenta reduce ese margen.
 El modelo versionado está en `ops/actions-minutes-budget.json`
 y `tests/test_actions_minutes_budget.py` lo contrasta con los horarios reales de
 `vercel.json` y las plantillas privadas: dos ciclos diarios de extracción (01:07
-y 13:07 UTC, con el respaldo de GitHub deduplicado por hora), dos recolecciones,
-dos ingresos históricos y una consulta de estadísticas oficiales. El peor caso
-mensual estimado es de unos 1 548 minutos, incluida una reserva manual de 60.
+y 13:07 UTC, con el respaldo de GitHub deduplicado por hora y descartado si llega
+fuera de su hora), dos recolecciones, dos ingresos históricos y una consulta de
+estadísticas oficiales. El peor caso mensual estimado es de unos 1 548 minutos,
+incluida una reserva manual de 60.
 
 La medición se hizo con la API de jobs de Actions, sumando por job la duración
 redondeada al minuto, que es como GitHub factura. Para volver a medir, consulte
@@ -149,6 +150,19 @@ dispara la cadena de publicación (`workflow_run`) y el respaldo deduplicado no
 debe pagarla. Si Vercel deja de disparar, el respaldo sigue recogiendo RSS y
 preparando fichas, pero la publicación espera al siguiente ciclo despachado o a
 un `workflow_dispatch` manual de `Publicar ubicaciones automáticas`.
+
+GitHub no garantiza la puntualidad de los disparos programados y el
+repositorio privado de la cola ha registrado retrasos de unas seis horas (31 de
+octubre de 2026). Las franjas deduplican por la hora UTC real de la ejecución, así que un
+respaldo entregado tarde reclamaría una hora nueva y ejecutaría un ciclo
+completo no presupuestado. Por eso el primer paso compara la hora UTC actual
+con las horas del cron que disparó (`github.event.schedule`): si no coinciden,
+se omiten los pasos restantes y el trabajo termina en segundos, sin
+preparación, sin reclamar franja y sin llamar a Gemini. Si Vercel falla y
+GitHub retrasa el respaldo, ese ciclo se omite y las candidatas pendientes
+esperan al siguiente. `extract.yml` lleva el mismo paso, inerte para disparos
+manuales y de Vercel, de modo que ambos workflows ejecutan un trabajo
+idéntico.
 
 ## Fichas de todas las noticias
 
