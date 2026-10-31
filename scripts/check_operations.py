@@ -274,6 +274,9 @@ def check_templates(client, private_repo, public_repo, root=ROOT):
     listing_data = client.get_optional(f'/repos/{private_repo}/contents/.github/workflows', 'template-drift', 'failure')
     if listing_data is READ_ERROR:
         return installed_texts
+    if listing_data is None:
+        failure('template-drift', f'/repos/{private_repo}/contents/.github/workflows does not exist')
+        return installed_texts
     listing = {item['name'] for item in listing_data}
     for unknown in sorted(listing - {Path(t).name for t in files.values()}):
         failure('template-drift', f'unknown installed workflow: {unknown}')
@@ -285,6 +288,9 @@ def check_templates(client, private_repo, public_repo, root=ROOT):
         template_text = (root / template).read_text()
         remote = client.get_optional(f'/repos/{private_repo}/contents/{installed}', 'template-drift', 'failure')
         if remote is READ_ERROR:
+            continue
+        if remote is None:
+            failure('template-drift', f'{installed} is listed but missing at /repos/{private_repo}/contents/{installed}')
             continue
         installed_text = base64.b64decode(remote['content']).decode()
         installed_texts[name] = installed_text
@@ -298,13 +304,15 @@ def check_templates(client, private_repo, public_repo, root=ROOT):
         for ref in dict.fromkeys(installed_checkout_refs(installed_text, public_repo)):
             if re.fullmatch(r'[0-9a-f]{40}', ref):
                 compare = client.get_optional(f'/repos/{public_repo}/compare/{ref}...main', 'template-drift', 'failure')
-                if compare is READ_ERROR:
+                if compare is READ_ERROR or compare is None:
                     continue
-                behind = compare.get('behind_by')
-                if behind and behind > 0:
-                    warning('template-drift', f'{installed} pins code {ref[:7]}, {behind} commits behind main')
-                else:
+                status, ahead = compare.get('status'), compare.get('ahead_by')
+                if status == 'identical':
                     ok('template-drift', f'{installed} pins code {ref[:7]}, up to date')
+                elif status == 'ahead':
+                    warning('template-drift', f'{installed} pins code {ref[:7]}, {ahead} commits behind main')
+                else:
+                    failure('template-drift', f'{installed} pins code {ref[:7]}, which is not contained in main ({status})')
     return installed_texts
 
 
@@ -313,6 +321,9 @@ def check_history_copies(client, public_repo, root=ROOT):
     local_installed = (root / '.github/workflows/refresh-history.yml').read_text()
     remote = client.get_optional(f'/repos/{public_repo}/contents/.github/workflows/refresh-history.yml', 'history-copies', 'failure')
     if remote is READ_ERROR:
+        return
+    if remote is None:
+        failure('history-copies', f'/repos/{public_repo}/contents/.github/workflows/refresh-history.yml does not exist')
         return
     remote_text = base64.b64decode(remote['content']).decode()
     if local_template == local_installed == remote_text:
@@ -419,10 +430,26 @@ def check_run_health(client, repos, expectations, installed, root=ROOT):
                 ok('run-health', f'{name}:{workflow} last success {successes[0]["created_at"]} within {window}')
             elif not runs:
                 warning('run-health', f'{name}:{workflow}: sin ejecuciones registradas')
-            elif runs[:3] and all(run.get('conclusion') in ('startup_failure', 'failure') for run in runs[:3]) and not successes:
-                warning('run-health', f'{name}:{workflow}: sin ejecuciones correctas recientes — probable cuota agotada')
             else:
-                failure('run-health', f'{name}:{workflow}: last success outside {window} or none')
+                # A quota-blocked run never starts: every job has no steps and no runner.
+                not_started = True
+                for run in runs[:3]:
+                    if run.get('id') is None:
+                        not_started = False
+                        break
+                    jobs = client.get_optional(f'/repos/{name}/actions/runs/{run["id"]}/jobs',
+                                               'run-health', 'failure')
+                    if jobs is READ_ERROR:
+                        not_started = None
+                        break
+                    job_list = (jobs or {}).get('jobs', [])
+                    if any(job.get('steps') or job.get('runner_name') for job in job_list):
+                        not_started = False
+                        break
+                if not_started is True:
+                    warning('run-health', f'{name}:{workflow}: sin ejecuciones correctas recientes — probable cuota agotada')
+                elif not_started is False:
+                    failure('run-health', f'{name}:{workflow}: last success outside {window} or none')
 
 
 def run_checks(client, root=ROOT):

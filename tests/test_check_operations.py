@@ -127,7 +127,7 @@ def responses():
         f'/repos/{PRIV}/environments': {'environments': []},
         f'/repos/{PRIV}/contents/.github/workflows': [{'name': name} for name in PRIVATE],
         f'/repos/{PUB}/contents/.github/workflows/refresh-history.yml': {'content': base64.b64encode(PUBLIC_WF.encode()).decode()},
-        f'/repos/{PUB}/compare/{SHA}...main': {'behind_by': 0},
+        f'/repos/{PUB}/compare/{SHA}...main': {'status': 'identical', 'ahead_by': 0},
     }
     for name in PRIVATE:
         fixture[f'/repos/{PRIV}/actions/workflows/{name}/runs?per_page=10'] = {
@@ -230,3 +230,60 @@ def test_client_refusals():
         client.request('POST', '/repos/x/issues')
     with pytest.raises(AssertionError):
         client.request('GET', '/repos/x/actions/secrets/GH_TOKEN')
+
+
+def test_404_on_installed_workflow_and_public_history_are_failures(tmp_path):
+    root = make_root(tmp_path)
+    fixture = responses()
+    del fixture[f'/repos/{PRIV}/contents/.github/workflows/history.yml']
+    del fixture[f'/repos/{PUB}/contents/.github/workflows/refresh-history.yml']
+    report = ops.run_checks(FakeClient(fixture), root)
+    messages = [f['message'] for f in levels(report)]
+    assert any('missing' in message and 'history.yml' in message for message in messages)
+    assert any('does not exist' in message and 'refresh-history' in message for message in messages)
+    assert report['summary']['failures'] >= 2
+
+
+def failed_runs(with_steps):
+    runs = [{'id': index, 'conclusion': 'failure',
+             'created_at': datetime.now(timezone.utc).isoformat()} for index in range(3)]
+    jobs = {index: {'jobs': [{'steps': [{'number': 1}] if with_steps else [],
+                            'runner_name': 'gh-1' if with_steps else None}]}
+            for index in range(3)}
+    return runs, jobs
+
+
+def test_failed_runs_with_executed_steps_are_a_failure(tmp_path):
+    root = make_root(tmp_path)
+    fixture = responses()
+    runs, jobs = failed_runs(with_steps=True)
+    fixture[f'/repos/{PRIV}/actions/workflows/history.yml/runs?per_page=10'] = {'workflow_runs': runs}
+    for index, body in jobs.items():
+        fixture[f'/repos/{PRIV}/actions/runs/{index}/jobs'] = body
+    report = ops.run_checks(FakeClient(fixture), root)
+    assert any('run-health' == f['area'] and 'outside' in f['message'] for f in levels(report))
+
+
+def test_runs_that_never_started_are_a_quota_warning(tmp_path):
+    root = make_root(tmp_path)
+    fixture = responses()
+    runs, jobs = failed_runs(with_steps=False)
+    fixture[f'/repos/{PRIV}/actions/workflows/history.yml/runs?per_page=10'] = {'workflow_runs': runs}
+    for index, body in jobs.items():
+        fixture[f'/repos/{PRIV}/actions/runs/{index}/jobs'] = body
+    report = ops.run_checks(FakeClient(fixture), root)
+    assert any('cuota' in f['message'] for f in levels(report, 'warning'))
+    assert not any(f['area'] == 'run-health' for f in levels(report))
+
+
+def test_compare_status_mapping(tmp_path):
+    root = make_root(tmp_path)
+    for status, level in [('identical', 'ok'), ('ahead', 'warning'), ('diverged', 'failure')]:
+        fixture = responses()
+        fixture[f'/repos/{PUB}/compare/{SHA}...main'] = {'status': status, 'ahead_by': 7}
+        report = ops.run_checks(FakeClient(fixture), root)
+        findings = [f for f in report['findings']
+                    if f['area'] == 'template-drift' and SHA[:7] in f['message']]
+        assert findings and all(f['level'] == level for f in findings), (status, findings)
+        if status == 'ahead':
+            assert '7 commits' in findings[0]['message']

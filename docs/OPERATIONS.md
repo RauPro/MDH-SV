@@ -217,11 +217,16 @@ salud de las ejecuciones programadas.
   - `variables`: recrear la variable faltante o corregir
     `MDH_GEMINI_BUDGET_CONFIG` según `ops/actions-minutes-budget.json`.
   - `template-drift`: sincronizar la plantilla `ops/` con el workflow instalado
-    siguiendo docs/GITHUB-ACTIONS.md; investigar workflows desconocidos.
+    siguiendo docs/GITHUB-ACTIONS.md; investigar workflows desconocidos y los
+    archivos listados pero ausentes (404). Un pin «N commits behind main» es un
+    aviso (promoción deliberada); un pin «not contained in main» es fallo: el
+    código aprobado debe venir de `main`.
   - `history-copies`: volver a igualar `ops/history/refresh-history.yml` con su
     copia instalada.
-  - `run-health`: investigar el workflow sin éxitos recientes; si todas las
-    ejecuciones fallaron al arrancar por cuota agotada se reporta como aviso.
+  - `run-health`: investigar el workflow sin éxitos recientes dentro de su
+    ventana (cadencia del cron + 8 h). Un fallo con pasos ejecutados es fallo;
+    sólo cuando las últimas ejecuciones no llegaron a arrancar (jobs sin pasos
+    ni runner) se reporta como aviso de cuota agotada.
 
 ### Ensayo de pausa y reanudación
 
