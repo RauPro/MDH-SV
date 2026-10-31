@@ -49,10 +49,10 @@ test('summary keeps every scalar and per-source field and drops only the months 
   const full = searchNews({ limit: 1, coverage: 'full' }, fixtureArchive, empty, null, null);
   const summary = searchNews({ limit: 1, coverage: 'summary' }, fixtureArchive, empty, null, null);
   assert.equal(summary.meta.coverage_detail, 'summary');
-  const { months: aggregateMonths, ...scalars } = full.meta.coverage;
+  const { months: _aggregateMonths, ...scalars } = full.meta.coverage;
   assert.deepEqual({ ...summary.meta.coverage, sources: undefined }, { ...scalars, sources: undefined });
   for (const [index, source] of summary.meta.coverage.sources.entries()) {
-    const { months, ...sourceScalars } = full.meta.coverage.sources[index];
+    const { months: _months, ...sourceScalars } = full.meta.coverage.sources[index];
     assert.deepEqual(source, sourceScalars);
   }
   // A summary response never mutates the archive's own coverage.

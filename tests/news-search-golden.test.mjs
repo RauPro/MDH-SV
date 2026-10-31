@@ -40,8 +40,8 @@ function referenceSearch(filters, archive, snapshot, locations, processing, now 
   query.set('limit', String(limit));
   if (nextOffset !== null) query.set('offset', String(nextOffset));
   const detail = newsCoverageDetail(normalizedFilters, now);
-  const { months, ...rest } = archive.coverage;
-  const summary = { ...rest, sources: archive.coverage.sources.map(({ months: m, ...source }) => source) };
+  const { months: _months, ...rest } = archive.coverage;
+  const summary = { ...rest, sources: archive.coverage.sources.map(({ months: _m, ...source }) => source) };
   return {
     data: filtered.slice(offset, offset + limit).map(reference => {
       const dossier = newsDossierFor(reference, snapshot.index);

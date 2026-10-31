@@ -63,8 +63,8 @@ const summarizedCoverage = new WeakMap();
 function summaryCoverage(archive) {
   let summary = summarizedCoverage.get(archive);
   if (!summary) {
-    const { months, ...rest } = archive.coverage;
-    summary = { ...rest, sources: archive.coverage.sources.map(({ months: sourceMonths, ...source }) => source) };
+    const { months: _months, ...rest } = archive.coverage;
+    summary = { ...rest, sources: archive.coverage.sources.map(({ months: _sourceMonths, ...source }) => source) };
     summarizedCoverage.set(archive, summary);
   }
   return summary;
