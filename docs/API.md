@@ -82,7 +82,7 @@ Para reproducibilidad estricta, descargue el snapshot y registre su versión/com
 
 `meta.coverage` comunica el alcance del archivo: intervalo solicitado, estado por medio y recuento de referencias. El parámetro `coverage` de `GET /api/v1/news` acota su detalle: `summary` (sin las listas `months`) o `full` (objeto completo). `meta.coverage_detail` declara cuál se sirvió.
 
-Cronograma: anunciado el 2026-11-01 (`Deprecation: @1793491200`); desde el 2027-02-01 —92 días después— la respuesta sin parámetro equivale a `summary`. Hasta ese instante, la respuesta sin parámetro conserva el objeto completo y añade `Deprecation`, `Sunset` y `Link` apuntando a este ancla.
+Cronograma: anunciado el 2026-11-01 (`Deprecation: @1793491200`); desde el 2027-02-01 —92 días después— la respuesta sin parámetro equivale a `summary`. Hasta ese instante, la respuesta sin parámetro conserva el objeto completo y añade `Deprecation`, `Sunset` y `Link` apuntando a esta ancla.
 
 La cobertura completa se descarga de `GET /api/v1/news/coverage` (objeto único con `months` por fuente y agregado; crece unos 2 KB por mes). MCP: `search_news` sirve `summary` por defecto y admite `full`; `get_news_coverage` equivale al endpoint.
 
