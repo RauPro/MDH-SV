@@ -6,6 +6,7 @@ Run `.venv/bin/python scripts/release.py build --tag vX.Y.Z --output DIR`.
 """
 import argparse
 import gzip
+import tomllib
 import hashlib
 import json
 import re
@@ -64,7 +65,6 @@ def show(root, commit, path):
 def versions_at(root, commit):
     root_pkg = json.loads(show(root, commit, 'package.json'))['version']
     web_pkg = json.loads(show(root, commit, 'apps/web/package.json'))['version']
-    import tomllib
     pyproject = tomllib.loads(show(root, commit, 'pyproject.toml').decode())['project']['version']
     match = re.search(rb"CODE_VERSION = '([0-9.]+)'", show(root, commit, 'server/version.mjs'))
     if not match:
@@ -87,10 +87,6 @@ def preconditions(root, tag, commit):
     return resolved, version, changelog
 
 
-def gunzip_bytes(data):
-    return hashlib.sha256(data).hexdigest(), len(data)
-
-
 def data_paths_at(root, commit):
     # git archive refuses a pathspec that matches nothing at the commit.
     return [path for path in DATA_PATHS
@@ -111,7 +107,7 @@ def artifact(root, commit, name, paths):
 
 
 def datasets(root, commit):
-    paths = git(root, 'ls-tree', '-r', '--name-only', commit, '--', *DATA_PATHS).split()
+    paths = git(root, 'ls-tree', '-r', '-z', '--name-only', commit, '--', *DATA_PATHS).split('\0')
     entries = []
     for path in sorted(paths):
         blob = show(root, commit, path)
@@ -133,7 +129,11 @@ def datasets(root, commit):
 
 def build(root, tag, output, commit):
     resolved, version, _ = preconditions(root, tag, commit)
-    out = Path(output)
+    out = Path(output).resolve()
+    root_resolved = Path(root).resolve()
+    if out == root_resolved or root_resolved in out.parents:
+        raise ReleaseError(f'output directory {out} is inside the checkout {root_resolved}; '
+                           'the dirty tree would fail the next build or enter the artifacts')
     out.mkdir(parents=True, exist_ok=True)
     source, source_meta = artifact(root, resolved, f'mdh-sv-{version}', [])
     data, data_meta = artifact(root, resolved, f'mdh-sv-{version}-data', ['--', *data_paths_at(root, resolved)])

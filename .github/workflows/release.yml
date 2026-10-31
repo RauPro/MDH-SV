@@ -26,14 +26,14 @@ jobs:
           git merge-base --is-ancestor "$GITHUB_SHA" origin/main
       - name: Build the release twice and compare every byte
         run: |
-          python3.13 scripts/release.py build --tag "$GITHUB_REF_NAME" --output dist-a
-          python3.13 scripts/release.py build --tag "$GITHUB_REF_NAME" --output dist-b
-          for file in dist-a/*; do cmp "$file" "dist-b/$(basename "$file")"; done
+          python3.13 scripts/release.py build --tag "$GITHUB_REF_NAME" --output "$RUNNER_TEMP/dist-a"
+          python3.13 scripts/release.py build --tag "$GITHUB_REF_NAME" --output "$RUNNER_TEMP/dist-b"
+          for file in "$RUNNER_TEMP/dist-a"/*; do cmp "$file" "$RUNNER_TEMP/dist-b/$(basename "$file")"; done
       - name: Verify the manifest against a rebuild
-        run: python3.13 scripts/release.py verify --tag "$GITHUB_REF_NAME" --manifest dist-a/release-manifest.json
+        run: python3.13 scripts/release.py verify --tag "$GITHUB_REF_NAME" --manifest "$RUNNER_TEMP/dist-a/release-manifest.json"
       - name: Read the release notes from the changelog
-        run: python3.13 scripts/release.py notes --tag "$GITHUB_REF_NAME" > notes.md
+        run: python3.13 scripts/release.py notes --tag "$GITHUB_REF_NAME" > "$RUNNER_TEMP/notes.md"
       - name: Publish the GitHub release with the artifacts
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist-a/* --title "MDH-SV $GITHUB_REF_NAME" --notes-file notes.md --verify-tag
+        run: gh release create "$GITHUB_REF_NAME" "$RUNNER_TEMP/dist-a"/* --title "MDH-SV $GITHUB_REF_NAME" --notes-file "$RUNNER_TEMP/notes.md" --verify-tag
