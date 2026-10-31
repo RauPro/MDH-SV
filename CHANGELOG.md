@@ -12,6 +12,8 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 
 - `MAINTAINERS.md` con áreas, responsable, suplentes vacantes, continuidad y
   tareas iniciales.
+- Comprobación periódica de deriva operativa y credenciales de solo lectura
+  (`scripts/check_operations.py`, `ops/operations-expectations.json`).
 
 ### Cambiado
 

@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "repositories": {
+    "public": { "name": "RauPro/MDH-SV", "visibility": "public" },
+    "private": { "name": "RauPro/MDH-SV-review", "visibility": "private" }
+  },
+  "actions": {
+    "enabled": true,
+    "sha_pinning_required": true,
+    "default_workflow_permissions": "read",
+    "can_approve_pull_request_reviews": {
+      "public": true,
+      "private": false,
+      "public_reason": "publication-pr.yml creates the snapshot PRs with github.token (publication_pr.py create_pr → POST pulls). Safe: required_approving_review_count is 0 with require_code_owner_reviews and github-actions owns no path, so the owner's review is still required outside the generated files."
+    }
+  },
+  "public_main_protection": {
+    "file": ".github/main-protection.json",
+    "enforce_admins": true,
+    "restrictions": null
+  },
+  "private_main_protection": {
+    "protected": false,
+    "status": "accepted",
+    "reason": "Private workflows write runtime state to main through the contents API (for example runtime/gemini-hourly.json via apps/pipeline/src/mdh_pipeline/review_queue.py), so classic branch protection would block the bots."
+  },
+  "variables": {
+    "MDH_AUTOMATION_ENABLED": { "repositories": ["public", "private"], "equals": "true" },
+    "GEMINI_MODEL": { "repositories": ["private"], "present": true },
+    "MDH_GEMINI_BUDGET_CONFIG": { "repositories": ["private"], "budget_check": true }
+  },
+  "schedule_delay_tolerance_hours": 8
+}

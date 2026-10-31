@@ -177,3 +177,68 @@ validación pública permanecen pendientes; no se interpretan como ausencias en 
 fuente. La generación privada utiliza `news_dossier` para todos los ámbitos y
 conserva `record` sólo cuando hay además una propuesta de caso. Consulte
 [NEWS-DOSSIERS.md](NEWS-DOSSIERS.md) para publicación automática de fichas parciales y correcciones humanas solicitadas.
+
+## Comprobación periódica de operaciones
+
+`scripts/check_operations.py` compara el estado operativo real de ambos
+repositorios con las expectativas versionadas en
+`ops/operations-expectations.json`: visibilidad, política de Actions,
+protección de `main`, variables, deriva entre plantillas `ops/` y workflows
+instalados, rulesets, metadatos de credenciales (nunca valores secretos) y
+salud de las ejecuciones programadas.
+
+- **Cadencia:** una vez al mes y después de cada promoción de workflow.
+- **Comando:**
+
+  ```sh
+  GH_TOKEN="$(printf 'protocol=https\nhost=github.com\n\n' | git credential fill | sed -n 's/^password=//p')" \
+    .venv/bin/python scripts/check_operations.py --output "${TMPDIR:-/tmp}/mdh-ops-report.json"
+  ```
+
+  El token de grano fino necesita lectura de Metadata, Contents, Actions,
+  Administration, Variables, Deployments, Environments, Webhooks (si existe) y
+  la lista de colaboradores en ambos repositorios. El cliente rechaza cualquier
+  método que no sea GET y cualquier ruta `/secrets`.
+- **Reporte:** JSON ordenado con `findings` por área y nivel (`ok`, `warning`,
+  `failure`) más un resumen en texto. Sale 1 ante cualquier deriva o
+  violación; los avisos no cambian el código de salida.
+- **Ante cada fallo:**
+  - `visibility`: devolver el repositorio a la visibilidad esperada antes de
+    continuar.
+  - `actions`: restaurar `sha_pinning_required` y los permisos por defecto en
+    lectura. La creación/aprobación de PRs por Actions sólo debe estar activa
+    en el repo público (la necesita `publication-pr.yml` para abrir los PRs de
+    snapshots con `github.token`; la revisión del propietario sigue siendo
+    obligatoria fuera de las rutas generadas porque `github-actions` no
+    posee ninguna). En el repo privado debe permanecer desactivada.
+  - `protection`: volver a aplicar la protección de `.github/main-protection.json`
+    en el repo público y revisar si apareció una protección en el privado que
+    bloquearía los bots.
+  - `variables`: recrear la variable faltante o corregir
+    `MDH_GEMINI_BUDGET_CONFIG` según `ops/actions-minutes-budget.json`.
+  - `template-drift`: sincronizar la plantilla `ops/` con el workflow instalado
+    siguiendo docs/GITHUB-ACTIONS.md; investigar workflows desconocidos.
+  - `history-copies`: volver a igualar `ops/history/refresh-history.yml` con su
+    copia instalada.
+  - `run-health`: investigar el workflow sin éxitos recientes; si todas las
+    ejecuciones fallaron al arrancar por cuota agotada se reporta como aviso.
+
+### Ensayo de pausa y reanudación
+
+Se ensaya con disparos manuales; la evidencia queda fuera del repositorio.
+
+1. Registrar la línea base: las variables de ambos repositorios, los SHA de
+   `main` público y privado y las últimas ejecuciones.
+2. Poner `MDH_AUTOMATION_ENABLED=false` en ambos repositorios.
+3. Despachar el `extract.yml` privado con `batch_size=1` y el
+   `refresh-history.yml` público con `max_pages=1`: sus trabajos deben
+   saltarse y no debe aparecer ninguna rama, PR ni cambio de datos. El
+   publicador encadenado también está condicionado.
+4. Restaurar `MDH_AUTOMATION_ENABLED=true`.
+5. Ejecutar el `publish-locations.yml` privado con `validation_only=true`,
+   `source_check_limit=20` y `automatic_validation_limit=1` (no llama a Gemini
+   ni a las fuentes). Luego el `refresh-history.yml` público con
+   `max_pages=1` y seguir el ciclo PR → `verify` → integración protegida →
+   despliegue. Comprobar que el JSON servido coincide byte a byte con el
+   commit integrado.
+6. Restaurar la línea base exactamente.
