@@ -7,6 +7,8 @@ import time
 from datetime import datetime, timezone
 
 from . import automatic_news as single
+from .json_files import write_processing_json
+from .contracts.processing import selected_references, selection_content_hash
 from .instance import load_instance
 from .automatic_news_batch import batch_input_limit, evaluate_batch, prepare_evaluation_batch
 from .gemini_budget import QuotaDeferred, QuotaStateError
@@ -35,7 +37,7 @@ class _DeadlineBudget:
 
 def ready_items(inbox_dir, archive, *, excluded_ids=(), request_generations=None):
     excluded, generations = single._requests(excluded_ids, request_generations or {})
-    references = single._references(archive)
+    references = selected_references(archive)
     drafts = single._inventory(Path(inbox_dir) / "drafts", required=True)
     cached = single._inventory(Path(inbox_dir) / "automatic-news")
     ready = []
@@ -216,13 +218,13 @@ def evaluate_queue_batched(inbox, inbox_dir, archive, *, api_key, model, budget,
         if previous is not None:
             previous = single.validate_receipt(previous)
             if single._cached(previous, item["fingerprint"], document, reference):
-                single._atomic_json(Path(inbox_dir) / "automatic-news" / (identifier + ".json"), previous)
+                write_processing_json(Path(inbox_dir) / "automatic-news" / (identifier + ".json"), previous)
                 report["cached"] += 1
                 continue
         receipt = deepcopy(previous) if previous and previous["fingerprint"] == item["fingerprint"] else single._receipt(document, reference, item["generation"], now=now)
         if (single.needs_scope_reassessment(receipt, reference)
-                or (receipt["status"] == "source_changed" and single._selection_hash(reference) == document["extraction"]["content_sha256"])
-                or (receipt["status"] in single.TERMINAL and single._selection_hash(reference) != document["extraction"]["content_sha256"])):
+                or (receipt["status"] == "source_changed" and selection_content_hash(reference) == document["extraction"]["content_sha256"])
+                or (receipt["status"] in single.TERMINAL and selection_content_hash(reference) != document["extraction"]["content_sha256"])):
             receipt = single._receipt(document, reference, item["generation"], now=now)
         item.update(receipt=receipt, sha=sha)
         before = budget.requests_this_run
@@ -235,7 +237,7 @@ def evaluate_queue_batched(inbox, inbox_dir, archive, *, api_key, model, budget,
                 deferred.add(identifier)
                 break
             if (article["content_sha256"] != document["extraction"]["content_sha256"]
-                    or article["content_sha256"] != single._selection_hash(reference)):
+                    or article["content_sha256"] != selection_content_hash(reference)):
                 if not begin(item):
                     continue
                 report["source_changed"] += 1
@@ -251,7 +253,7 @@ def evaluate_queue_batched(inbox, inbox_dir, archive, *, api_key, model, budget,
                     if updated["extraction"]["content_sha256"] != article["content_sha256"]:
                         raise single.AutomaticNewsError("automatic_refresh_hash_mismatch")
                     single.put_private_file(inbox, "drafts", identifier, updated, draft_sha)
-                    single._atomic_json(Path(inbox_dir) / "drafts" / (identifier + ".json"), updated)
+                    write_processing_json(Path(inbox_dir) / "drafts" / (identifier + ".json"), updated)
                     item["receipt"]["status"] = "source_refreshed"
                     report["source_refreshed"] += 1
                 store(item)

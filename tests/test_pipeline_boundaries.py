@@ -136,3 +136,10 @@ with tempfile.TemporaryDirectory() as folder:
         else: raise AssertionError('Unsafe processing JSON accepted')
     assert list(Path(folder).iterdir()) == [path]
 ''')
+
+
+def test_automatic_json_compatibility_names_keep_the_shared_implementation():
+    from mdh_pipeline import automatic_news, news_processing
+    from mdh_pipeline.json_files import read_processing_json, write_processing_json
+    assert automatic_news._read_json is news_processing._read_json is read_processing_json
+    assert automatic_news._atomic_json is news_processing._atomic_json is write_processing_json

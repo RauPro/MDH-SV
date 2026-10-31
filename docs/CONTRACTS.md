@@ -150,7 +150,8 @@ y `locations.index_references` mantienen políticas diferentes: no intercambiarl
 El índice de procesamiento admite sólo referencias seleccionadas; el de ubicaciones
 valida la bibliografía completa. Los parsers de fecha y errores también conservan
 las reglas propias de cada dominio; no se relajan para unificarlos artificialmente.
-`drafts.validate_envelope` comprueba forma y vínculo privado, no autoriza publicación.
+`drafts.validate_envelope` comprueba forma y vínculo privado y conserva la
+normalización del dossier sobre el documento recibido; no autoriza publicación.
 
 `tests/test_pipeline_boundaries.py` verifica la dirección de imports, incluidos
 imports diferidos, y ejecuta el corpus en un proceso que bloquea los adaptadores,
