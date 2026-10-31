@@ -5,7 +5,9 @@ diarios. El código separa el reloj de la extracción. Vercel Cron solicita
 `extract.yml` a las 01:07 y 13:07 UTC. GitHub conserva el respaldo al minuto 23
 de esas mismas horas en `extract-fallback.yml`, un workflow hermano con los
 mismos pasos pero otro nombre: una ejecución deduplicada no debe disparar la
-cadena de publicación que sigue a cada `extract.yml` terminado.
+cadena de publicación que sigue a cada `extract.yml` terminado. Si GitHub
+entrega el respaldo fuera de su hora, el primer paso lo descarta sin reclamar
+franja ni llamar a Gemini.
 El runner admite una sola ejecución por hora UTC y reserva cuota antes de cada
 petición a Gemini. La configuración del repositorio no acredita por sí sola que
 las credenciales estén instaladas o que el cron esté activo en producción.

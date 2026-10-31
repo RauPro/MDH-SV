@@ -18,8 +18,8 @@ oficiales conservan sus procesos de revisión humana separados.
 - Vercel Cron solicita **Preparar fichas con Gemini** dos veces al día, a las
   01:07 y 13:07 UTC; GitHub conserva el respaldo al minuto 23 de esas mismas
   horas en `extract-fallback.yml`, un workflow hermano que no dispara la cadena
-  de publicación. Los minutos coinciden en UTC y El Salvador (19:07 y 07:07
-  locales).
+  de publicación y que se descarta si GitHub lo entrega fuera de su hora. Los
+  minutos coinciden en UTC y El Salvador (19:07 y 07:07 locales).
   La cadencia mantiene la automatización dentro de los minutos gratuitos de
   Actions durante todo el mes: el régimen horario anterior gastaba unas 240
   solicitudes diarias durante unos cinco días y después se detenía, mientras

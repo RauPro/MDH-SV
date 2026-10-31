@@ -1,8 +1,12 @@
 """Scheduled private automation must stay inside the free Actions minutes budget."""
 import json
+import os
 import re
+import stat
+import subprocess
 from pathlib import Path
 
+import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -144,3 +148,58 @@ def test_an_hourly_cycle_would_exceed_the_budget():
     _, fallback, others = measured_runs()
     hourly = monthly_worst_case(runs_per_day('7 * * * *'), fallback, others)
     assert hourly > budget_ceiling()
+
+
+def extract_steps(path):
+    return workflow(path)['jobs']['extract']['steps']
+
+
+def extract_fallback_cron():
+    return workflow(FALLBACK_EXTRACT)['on']['schedule'][0]['cron']
+
+
+def test_late_schedule_guard_is_first_and_gates_every_step():
+    for path in (EXTRACT, FALLBACK_EXTRACT):
+        steps = extract_steps(path)
+        window = steps[0]
+        assert window['id'] == 'window'
+        assert 'uses' not in window
+        assert window['env'] == {
+            'MDH_EVENT_NAME': '${{ github.event_name }}',
+            'MDH_SCHEDULE': '${{ github.event.schedule }}',
+        }
+        for step in steps[1:]:
+            assert step['if'] == "steps.window.outputs.on_time == 'true'"
+
+
+def run_window_step(event, schedule, hour, tmp_path):
+    shim = tmp_path / 'bin'
+    shim.mkdir()
+    # GitHub's default shell is bash -e; the shim stands in for `date -u +%H`.
+    (shim / 'date').write_text(f'#!/bin/sh\nprintf \'%s\\n\' "{hour}"\n')
+    (shim / 'date').chmod(stat.S_IRWXU)
+    output = tmp_path / 'github_output'
+    env = {
+        **os.environ,
+        'PATH': f"{shim}:{os.environ['PATH']}",
+        'MDH_EVENT_NAME': event,
+        'MDH_SCHEDULE': schedule,
+        'GITHUB_OUTPUT': str(output),
+    }
+    subprocess.run(['bash', '-e', '-c', extract_steps(FALLBACK_EXTRACT)[0]['run']],
+                   env=env, check=True, capture_output=True, text=True)
+    return output.read_text()
+
+
+@pytest.mark.parametrize('event,schedule,hour,expected', [
+    ('schedule', extract_fallback_cron(), '01', 'true'),
+    ('schedule', extract_fallback_cron(), '13', 'true'),
+    ('schedule', extract_fallback_cron(), '00', 'false'),
+    ('schedule', extract_fallback_cron(), '11', 'false'),
+    ('schedule', extract_fallback_cron(), '14', 'false'),
+    ('schedule', extract_fallback_cron(), '19', 'false'),
+    ('schedule', '', '13', 'false'),
+    ('workflow_dispatch', '', '19', 'true'),
+])
+def test_late_schedule_guard_behaviour(event, schedule, hour, expected, tmp_path):
+    assert run_window_step(event, schedule, hour, tmp_path) == f'on_time={expected}\n'
