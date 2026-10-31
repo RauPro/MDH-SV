@@ -102,6 +102,7 @@ def check(root: Path = ROOT, *, audit: bool = False) -> None:
         [npm, "--prefix", "apps/web", "test"],
         [npm, "--prefix", "apps/web", "run", "lint"],
         [npm, "--prefix", "apps/web", "run", "build"],
+        [npm, "--prefix", "apps/web", "run", "check:bundle"],
         [npm, "--prefix", "apps/web", "run", "test:browser"],
     ):
         bootstrap.run(command, root=root, env=environment)
