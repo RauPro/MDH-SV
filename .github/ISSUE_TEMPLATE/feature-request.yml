@@ -1,0 +1,32 @@
+name: Propuesta pública de mejora
+description: Proponer una mejora del sitio, la API, la documentación o el pipeline.
+title: Propuesta de mejora
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Esta propuesta es pública. No incluyas datos sensibles ni solicitudes de retirada de contenido.
+        Para correcciones sensibles o retiradas, escribe a [raul.guillen.eng@proton.me](mailto:raul.guillen.eng@proton.me), atendido por @RauPro.
+        Las propuestas que requieran servicios de pago se evalúan contra la regla de coste cero del proyecto (docs/QUALITY.md).
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Propuesta
+      description: Qué cambiaría, para quién y por qué. Incluye un criterio de aceptación comprobable si puedes.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Otras formas de lograr lo mismo y por qué se descartaron.
+    validations:
+      required: false
+  - type: checkboxes
+    id: public_content
+    attributes:
+      label: Publicación de esta propuesta
+      options:
+        - label: Entiendo que será pública y no incluyo datos sensibles.
+          required: true

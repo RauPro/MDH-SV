@@ -1,0 +1,48 @@
+name: Propuesta de fuente de noticias
+description: Proponer un medio o archivo de noticias para evaluación según docs/SOURCES.md.
+title: Propuesta de fuente
+labels: [source-proposal]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Esta propuesta es pública y sólo evalúa candidatos; no los incorpora. La alta real sigue el procedimiento de docs/SOURCES.md.
+        Criterios: URLs HTTPS explícitas dentro de los hosts declarados, sin credenciales ni consultas ambiguas; `kind: wordpress` para colección por API pública o `kind: html_archive` con `archive_urls` y `notice`; `access: restricted` impide declarar feeds activos; cada feed declara sus consumidores (`private_queue`, `legacy_scraper`).
+        No incluyas credenciales, cuerpos de artículos ni datos de personas.
+  - type: input
+    id: source_name
+    attributes:
+      label: Nombre y URL del medio
+      description: Nombre canónico y host, por ejemplo «Medio Ejemplo — ejemplo.com».
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Tipo de acceso declarable
+      options:
+        - wordpress (API pública de posts)
+        - html_archive (índice de archivo HTML)
+        - restricted (acceso restringido, sin feeds activos)
+        - desconocido (requiere evaluación)
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Pertinencia en derechos humanos de El Salvador
+      description: Por qué sus noticias son relevantes, cobertura temporal estimada y URL de RSS o endpoint si se conoce.
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitaciones conocidas
+      description: Paywall, restricciones de acceso, feeds parciales, cambios de dominio u otras.
+    validations:
+      required: false
+  - type: checkboxes
+    id: public_content
+    attributes:
+      label: Publicación de esta propuesta
+      options:
+        - label: Entiendo que será pública, que es una evaluación y no una incorporación, y no incluyo datos sensibles.
+          required: true
