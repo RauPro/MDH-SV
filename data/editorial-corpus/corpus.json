@@ -1,0 +1,2545 @@
+{
+  "schema_version": 1,
+  "corpus_version": 1,
+  "policy_reference": "inclusive-violence-1",
+  "labeling_guide": "docs/EDITORIAL-CORPUS.md",
+  "sampling": {
+    "salt": "mdh-editorial-corpus-v1",
+    "snapshot_commit": "82aaa95c9e93b1ff1cf6ced4fd773be9c3c5ec53",
+    "strata": [
+      {
+        "id": "selected-scope-3",
+        "size": 8
+      },
+      {
+        "id": "selected-scope-4",
+        "size": 6
+      },
+      {
+        "id": "selected-universal-11",
+        "size": 6
+      },
+      {
+        "id": "selected-other-prompts",
+        "size": 3
+      },
+      {
+        "id": "automatic-location",
+        "size": 4
+      },
+      {
+        "id": "automatic-dossier-department",
+        "size": 4
+      },
+      {
+        "id": "unselected-el-salvador-hint",
+        "size": 6
+      },
+      {
+        "id": "unselected-international-hint",
+        "size": 5
+      },
+      {
+        "id": "unselected-undetermined-hint",
+        "size": 6
+      }
+    ],
+    "replaced": []
+  },
+  "items": [
+    {
+      "candidate_id": "5406c624eacfa5923505d602666faa75bb7ecba7ff041e895a597998417c49bb",
+      "source_url": "https://historico.elsalvador.com/historico/176233/honduras-envian-a-prision-formal-a-12-pandilleros-detenidos-en-operacion-avalancha.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2016-02-29",
+      "stratum": "selected-scope-3",
+      "text_binding": {
+        "content_sha256": "fbc43504aff61a5c5ff5e281fb0ec80f66a5fe1bc12e3f3134ae6c22bba69444",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:02:46.168734+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p4",
+          "p5"
+        ],
+        "names_private_persons": false,
+        "rationale": "Proceso judicial en Honduras contra presuntos cabecillas de pandilla; El Salvador sólo aparece como posible línea de investigación, sin vínculo sustantivo con el asunto."
+      },
+      "label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p4",
+          "p5"
+        ],
+        "names_private_persons": false,
+        "rationale": "Proceso judicial en Honduras contra presuntos cabecillas de pandilla; El Salvador sólo aparece como posible línea de investigación, sin vínculo sustantivo con el asunto."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "5ed7a2843a7963f3d4d406c8b32c00ce076d66d754751f5aba6007c80cda1b14",
+      "source_url": "https://gatoencerrado.news/2016/11/26/asesinatos-y-otras-violencias-contra-las-salvadorenas/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2016-11-26",
+      "stratum": "selected-scope-3",
+      "text_binding": {
+        "content_sha256": "0b54d30423d6bea4e92f23c34f901accfe43d8ad4df7b27358379bb6268ddb48",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:02:52.408685+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Santa Ana",
+          "La Libertad",
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "Santa Ana",
+          "La Libertad",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p11",
+          "p16"
+        ],
+        "names_private_persons": false,
+        "rationale": "Datos de feminicidios, desapariciones y violencia sexual contra mujeres y niñas en El Salvador, con demandas de organizaciones al Estado."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Santa Ana",
+          "La Libertad",
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "Santa Ana",
+          "La Libertad",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p11",
+          "p16"
+        ],
+        "names_private_persons": false,
+        "rationale": "Datos de feminicidios, desapariciones y violencia sexual contra mujeres y niñas en El Salvador, con demandas de organizaciones al Estado."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "0b5f1971785743955e627291b951055d4bd0d0e703641c094c27cddb73a8c39d",
+      "source_url": "https://www.diariocolatino.com/organizaciones-sociales-demandan-contundencia-prohibir-la-mineria-pais/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2017-02-14",
+      "stratum": "selected-scope-3",
+      "text_binding": {
+        "content_sha256": "f6b5e68b496f017062347882fa2f7584cd2c8b2d5dae7b4e81316652d617f22c",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": true,
+        "fetched_at": "2026-10-31T04:02:54.910228+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2"
+        ],
+        "names_private_persons": false,
+        "rationale": "Organizaciones sociales exigen el pago de una indemnización minera y una ley que prohíba la minería metálica por sus impactos ambientales y de salud en El Salvador."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2"
+        ],
+        "names_private_persons": false,
+        "rationale": "Organizaciones sociales exigen el pago de una indemnización minera y una ley que prohíba la minería metálica por sus impactos ambientales y de salud en El Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "13bfc3fc041fe0d04cd769c6a0be72565f043bc471415f2151e91b48cafa0ffd",
+      "source_url": "https://www.diariocolatino.com/acusado-de-asesinar-y-desmembrar-a-empleado-municipal-enfrenta-audiencia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-12",
+      "stratum": "selected-scope-3",
+      "text_binding": {
+        "content_sha256": "332bdd7c71cebf4531567333293f4c547ef75a20d2af95b58779c8b06b2eee50",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:02:57.632490+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p4",
+          "p6"
+        ],
+        "names_private_persons": true,
+        "rationale": "Audiencia judicial por el homicidio y desmembramiento de un empleado municipal en Antiguo Cuscatlán; los restos fueron abandonados en San Salvador."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p4",
+          "p6"
+        ],
+        "names_private_persons": true,
+        "rationale": "Audiencia judicial por el homicidio y desmembramiento de un empleado municipal en Antiguo Cuscatlán; los restos fueron abandonados en San Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "189db71bc49a5fbf57d7bff3f03c66e91b0342bcc88ee9ad1bfd327ad346ea7b",
+      "source_url": "https://www.revistafactum.com/el-asesinato-de-un-santo-la-verdad-legal-en-el-caso-romero/",
+      "publisher": "Revista Factum",
+      "published_date": "2017-03-15",
+      "stratum": "selected-scope-3",
+      "text_binding": {
+        "content_sha256": "fb38c87f4f69d4682a3e2ee2b959e7df19ffbd37abc53d11d971bdc82ad48c09",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:02.359403+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p14",
+          "p25"
+        ],
+        "names_private_persons": true,
+        "rationale": "Reseña de un libro sobre el asesinato de Monseñor Romero, el litigio civil en Estados Unidos y la impunidad en El Salvador; memoria histórica y justicia transicional."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p14",
+          "p25"
+        ],
+        "names_private_persons": true,
+        "rationale": "Reseña de un libro sobre el asesinato de Monseñor Romero, el litigio civil en Estados Unidos y la impunidad en El Salvador; memoria histórica y justicia transicional."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "6ac6cdbd675409f9a13815efd7ba602d784d8af290c4685b9925d45a28172c63",
+      "source_url": "https://www.diariocolatino.com/pddh-condena-violacion-de-derechos-politicos-por-resolucion-csj/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-27",
+      "stratum": "selected-scope-3",
+      "text_binding": {
+        "content_sha256": "a6884b8915df6f2a0a6000a317df555f123df0bc2e9eecc3a9e5cad25319d5c4",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:04.715426+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "La Procuraduría de Derechos Humanos cuestiona una resolución constitucional que restringe derechos políticos y de expresión de empleados públicos."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "La Procuraduría de Derechos Humanos cuestiona una resolución constitucional que restringe derechos políticos y de expresión de empleados públicos."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "c19721b659499656ec6cd6c6bbf8be6c7c726716880a8ea4895e24c93743a541",
+      "source_url": "https://historico.elsalvador.com/historico/442458/la-reduccion-de-homicidios-que-ha-tendido-el-salvador-es-adecuada-pero-no-sostenible-segun-analista-para-el-triangulo-norte.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2018-01-24",
+      "stratum": "selected-scope-3",
+      "text_binding": {
+        "content_sha256": "e1d95b6b2379885636813fd5f4f93ce804dc740f9d5eacb1b1df49c7387725e0",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:06.627422+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p16",
+          "p17"
+        ],
+        "names_private_persons": false,
+        "rationale": "Análisis de la reducción de homicidios y de la política de seguridad en El Salvador, con mención de grupos de exterminio y despliegue militar."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p16",
+          "p17"
+        ],
+        "names_private_persons": false,
+        "rationale": "Análisis de la reducción de homicidios y de la política de seguridad en El Salvador, con mención de grupos de exterminio y despliegue militar."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "17ab43175646e5bdbb8bbca7a6a15b358ebcd5ec5f1421eb1f80747c66156656",
+      "source_url": "https://www.diariocolatino.com/recuerdan-con-exposicion-fotografica-ninos-desaparecidos-durante-el-conflicto-armado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-19",
+      "stratum": "selected-scope-3",
+      "text_binding": {
+        "content_sha256": "35e07d1d200d00254a647c9d1ce231f892787edc55c7f0ad5ad79b1cb2c45c72",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:09.260449+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p7"
+        ],
+        "names_private_persons": false,
+        "rationale": "Exposición sobre niñas y niños desaparecidos durante el conflicto armado y la labor de la comisión nacional de búsqueda; memoria histórica."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p7"
+        ],
+        "names_private_persons": false,
+        "rationale": "Exposición sobre niñas y niños desaparecidos durante el conflicto armado y la labor de la comisión nacional de búsqueda; memoria histórica."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "9a8c29a20ec0e4a57458f01c31d5b31b9c95685d2ec11c6fd379d246572157d7",
+      "source_url": "https://historico.elsalvador.com/historico/99575/asesinan-a-cuatro-personas-en-las-ultimas-horas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-13",
+      "stratum": "selected-scope-4",
+      "text_binding": {
+        "content_sha256": "7d47cb3544b522d48acb4bd04f804ddf9112bdf5670fa21618811e24d5e8d73f",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:11.180763+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Sonsonate",
+          "San Salvador",
+          "San Miguel"
+        ],
+        "mentioned_departments": [
+          "Sonsonate",
+          "San Salvador",
+          "San Miguel"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p2",
+          "p5",
+          "p6"
+        ],
+        "names_private_persons": false,
+        "rationale": "Reporte policial de cuatro homicidios en Soyapango, Nahuizalco y Ciudad Barrios."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Sonsonate",
+          "San Salvador",
+          "San Miguel"
+        ],
+        "mentioned_departments": [
+          "Sonsonate",
+          "San Salvador",
+          "San Miguel"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p2",
+          "p5",
+          "p6"
+        ],
+        "names_private_persons": false,
+        "rationale": "Reporte policial de cuatro homicidios en Soyapango, Nahuizalco y Ciudad Barrios."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "6bce608920a0d7d0bcf0b96ff634495294254094aa3f02521d427deaea82de82",
+      "source_url": "https://historico.elsalvador.com/historico/100958/protestan-por-desalojo-de-ventas.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-06",
+      "stratum": "selected-scope-4",
+      "text_binding": {
+        "content_sha256": "524a140851efc72e74a81097eb085ade3b803a9d12a095850d7dcc5f1ebafcfa",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:13.078859+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p3",
+          "p9"
+        ],
+        "names_private_persons": false,
+        "rationale": "Protesta de vendedores informales contra un desalojo municipal en San Salvador y petición de liberar a motoristas detenidos durante un paro."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p3",
+          "p9"
+        ],
+        "names_private_persons": false,
+        "rationale": "Protesta de vendedores informales contra un desalojo municipal en San Salvador y petición de liberar a motoristas detenidos durante un paro."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "01477f81d4b7674d3dca37a03c664b94a85b79f9aec5afc6f14f89e7c16cdc2d",
+      "source_url": "https://www.diariocolatino.com/abogado-defensor-de-saca-resta-importancia-a-demanda/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-02-13",
+      "stratum": "selected-scope-4",
+      "text_binding": {
+        "content_sha256": "d51e27f7ba0c0202a006bd4dcf2c46d757b162b14c95954a41eac48da9203a18",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:15.735653+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "unclear",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p8"
+        ],
+        "names_private_persons": false,
+        "rationale": "Disputa judicial por difamación entre un expresidente y un dirigente partidario sobre acusaciones de corrupción; el texto no plantea una cuestión de derechos."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "unclear",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p8"
+        ],
+        "names_private_persons": false,
+        "rationale": "Disputa judicial por difamación entre un expresidente y un dirigente partidario sobre acusaciones de corrupción; el texto no plantea una cuestión de derechos."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "36c56b423929301c55a4fef8e259e5e6198415f42f85d39f879a22f381cc2a41",
+      "source_url": "https://www.diariocolatino.com/desalojos-de-vendedores-informales-en-el-parque-hula-hula/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-06-05",
+      "stratum": "selected-scope-4",
+      "text_binding": {
+        "content_sha256": "1b14d3e137883194f147bcd53c3462dc17ed79f57422c81678a0429eb7ab7251",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:18.411721+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "Desalojo de vendedores informales del Centro Histórico de San Salvador por agentes municipales; contexto de derecho al trabajo."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "Desalojo de vendedores informales del Centro Histórico de San Salvador por agentes municipales; contexto de derecho al trabajo."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "c22a3e970f3ba43b67f99596d61ee9a92fe2f1c07833a3b4b90f3bf356050ba3",
+      "source_url": "https://www.diariocolatino.com/san-salvador-registra-mas-de-500-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-07-10",
+      "stratum": "selected-scope-4",
+      "text_binding": {
+        "content_sha256": "5441a948aa7b69b5861949fd77ac03ad0ad1b04a7ec27ab88dc41763db0bffff",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:20.730314+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador",
+          "Morazán"
+        ],
+        "mentioned_departments": [
+          "San Salvador",
+          "Morazán"
+        ],
+        "evidence_paragraph_ids": [
+          "p5",
+          "p8",
+          "p19",
+          "p20"
+        ],
+        "names_private_persons": true,
+        "rationale": "Cifras policiales de homicidios en el departamento de San Salvador, casos individuales y muertes de internos en un centro de menores; también un homicidio en Morazán."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador",
+          "Morazán"
+        ],
+        "mentioned_departments": [
+          "San Salvador",
+          "Morazán"
+        ],
+        "evidence_paragraph_ids": [
+          "p5",
+          "p8",
+          "p19",
+          "p20"
+        ],
+        "names_private_persons": true,
+        "rationale": "Cifras policiales de homicidios en el departamento de San Salvador, casos individuales y muertes de internos en un centro de menores; también un homicidio en Morazán."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "87859590757f3aa820ca1d76605212cd339aeb6ed7e4cfcbb5b62c53137ff3a8",
+      "source_url": "https://historico.elsalvador.com/historico/117660/capturan-a-subinspector-por-robar-furgones.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-11-10",
+      "stratum": "selected-scope-4",
+      "text_binding": {
+        "content_sha256": "bf3f6983c51192146a71b583ed3c6484972437665ebe584f559e9ad2def22321",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:22.643921+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "other",
+        "relevance": "not_relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p2",
+          "p4"
+        ],
+        "names_private_persons": true,
+        "rationale": "Capturas en Guatemala de un subinspector y otros presuntos cabecillas de robos de furgones; El Salvador sólo aparece como destino de una ruta."
+      },
+      "label": {
+        "jurisdiction": "other",
+        "relevance": "not_relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p2",
+          "p4"
+        ],
+        "names_private_persons": true,
+        "rationale": "Capturas en Guatemala de un subinspector y otros presuntos cabecillas de robos de furgones; El Salvador sólo aparece como destino de una ruta."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "3a56fb1646a16f4657c06976139e3cf4fc825bcc44ff1ad752563441b9492ac3",
+      "source_url": "https://www.diariocolatino.com/intolerancia-y-libertad-de-expresion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-24",
+      "stratum": "selected-universal-11",
+      "text_binding": {
+        "content_sha256": "6e9a95485306b8e3b5219f04d56e530be11200127cd955f49a8c9e25ccbe14c5",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:25.260856+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "Columna sobre libertad de expresión que, a partir de un atentado en Francia, aborda la impunidad del asesinato de un periodista salvadoreño y la represión en El Salvador."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "Columna sobre libertad de expresión que, a partir de un atentado en Francia, aborda la impunidad del asesinato de un periodista salvadoreño y la represión en El Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "ee813296137889c105e6ac26a03921704805badd81b955a137da8f806dd1973c",
+      "source_url": "https://www.diariocolatino.com/congreso-concede-indulto-a-mujer-acusada-de-homicidio-agravado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-22",
+      "stratum": "selected-universal-11",
+      "text_binding": {
+        "content_sha256": "f54c1b01d85e223818fcfd793f190f2b761a371e4fb1e0fc8460fb7ad921fb63",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:27.766219+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p7",
+          "p19"
+        ],
+        "names_private_persons": true,
+        "rationale": "Indulto legislativo a una mujer condenada por homicidio agravado tras una emergencia obstétrica; violación de garantías procesales y criminalización del aborto."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p7",
+          "p19"
+        ],
+        "names_private_persons": true,
+        "rationale": "Indulto legislativo a una mujer condenada por homicidio agravado tras una emergencia obstétrica; violación de garantías procesales y criminalización del aborto."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "b6e24c2b53d3e08ea3b8afe5ac7ecf4cb6d4b5c7467cf2737a1d711cd4a0a6a6",
+      "source_url": "https://historico.elsalvador.com/historico/114297/esfotoperiodismo-2013-mirar-para-cambiar.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-09-05",
+      "stratum": "selected-universal-11",
+      "text_binding": {
+        "content_sha256": "a8e2b2f944ddf555272cc41e12e9cf6c64e83571db7907b4924a279e34d120d9",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:29.785999+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "unclear",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p4",
+          "p6"
+        ],
+        "names_private_persons": false,
+        "rationale": "Anuncio de una exposición de fotoperiodismo sobre la violencia en Centroamérica; no describe un hecho o asunto de derechos concreto."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "unclear",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p4",
+          "p6"
+        ],
+        "names_private_persons": false,
+        "rationale": "Anuncio de una exposición de fotoperiodismo sobre la violencia en Centroamérica; no describe un hecho o asunto de derechos concreto."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "6a5edb1c1a56732849b9c89b7be52c00022c363c35c3f7a97292c02555711512",
+      "source_url": "https://historico.elsalvador.com/historico/138474/capturan-a-sospechoso-de-asesinar-a-joven-salvadorena-en-ee-uu.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-10-30",
+      "stratum": "selected-universal-11",
+      "text_binding": {
+        "content_sha256": "7654bcb33932a77915695cee26a771d81eb7d1b048a8218860af2a3ee732d50e",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:31.745374+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p4",
+          "p11"
+        ],
+        "names_private_persons": true,
+        "rationale": "Detención del sospechoso del homicidio de una joven salvadoreña en Estados Unidos; la política incluye homicidios de personas salvadoreñas en el extranjero."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p4",
+          "p11"
+        ],
+        "names_private_persons": true,
+        "rationale": "Detención del sospechoso del homicidio de una joven salvadoreña en Estados Unidos; la política incluye homicidios de personas salvadoreñas en el extranjero."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "3518a032468e92c36b408d2d879bdc70a2c2d814be79cc4533bc53c25fb462cd",
+      "source_url": "https://www.diariocolatino.com/el-archivo-subido-no-se-ha-podido-mover-a-wp-contentuploads201503/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-10",
+      "stratum": "selected-universal-11",
+      "text_binding": {
+        "content_sha256": "c239f72ec52149c0d3f7964bf3715d3c87f91d4e66bc465b9625009e993acb9e",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:34.393122+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "unclear",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p11",
+          "p12"
+        ],
+        "names_private_persons": true,
+        "rationale": "Medidas cautelares para 26 personas detenidas por presunto fraude electoral; el texto describe un proceso penal ordinario sin una cuestión de derechos clara."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "unclear",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p11",
+          "p12"
+        ],
+        "names_private_persons": true,
+        "rationale": "Medidas cautelares para 26 personas detenidas por presunto fraude electoral; el texto describe un proceso penal ordinario sin una cuestión de derechos clara."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "5bdf12b01a57482a6c9c493cdb763b8f12a1fdd7010d6954a4fc120ae3d86459",
+      "source_url": "https://www.diariocolatino.com/el-fmln-seguira-trabajando-por-garantizar-los-derechos-de-las-mujeres-cristina-cornejo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-01-13",
+      "stratum": "selected-universal-11",
+      "text_binding": {
+        "content_sha256": "4d0c7d1d47e21bd4c287cd2f1d35a1951ecad92c286518f2d47ce24496538975",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:37.011926+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [
+          "La Libertad"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p9"
+        ],
+        "names_private_persons": false,
+        "rationale": "Declaraciones de una diputada sobre cuotas de participación política de mujeres y compromisos contra la discriminación laboral; contexto de derechos de las mujeres."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [
+          "La Libertad"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p9"
+        ],
+        "names_private_persons": false,
+        "rationale": "Declaraciones de una diputada sobre cuotas de participación política de mujeres y compromisos contra la discriminación laboral; contexto de derechos de las mujeres."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "45e882454dd1345c7727453afa9506db71c086bedb20db89c8e136a9e73bfd10",
+      "source_url": "https://historico.elsalvador.com/historico/266157/fallece-el-periodista-salvadoreno-mauricio-vasquez-2.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-12",
+      "stratum": "selected-other-prompts",
+      "text_binding": {
+        "content_sha256": "2e358f1d17ae34ec85b4a8fd6f79412f2f46b62ee11562097b8b84107b91a90b",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:38.943390+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "not_relevant",
+        "event_departments": [],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1"
+        ],
+        "names_private_persons": false,
+        "rationale": "Nota necrológica sobre un periodista fallecido por enfermedad; no trata un asunto de derechos humanos."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "not_relevant",
+        "event_departments": [],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1"
+        ],
+        "names_private_persons": false,
+        "rationale": "Nota necrológica sobre un periodista fallecido por enfermedad; no trata un asunto de derechos humanos."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "e6da93b259c56e197cee9ad3465beb20612cab9c359f39705ab420a34f55b05e",
+      "source_url": "https://www.diariocolatino.com/bukele-plantea-liberacion-del-50-de-los-capturados-bajo-el-regimen-de-excepcion/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-15",
+      "stratum": "selected-other-prompts",
+      "text_binding": {
+        "content_sha256": "ea08685c58c831fccef1197d572513043961e4314583201342f301a46fe4751d",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:41.181182+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p17",
+          "p18"
+        ],
+        "names_private_persons": false,
+        "rationale": "Anuncio presidencial de posibles liberaciones condicionales de detenidos bajo el régimen de excepción, con datos de organizaciones sobre personas inocentes detenidas."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p17",
+          "p18"
+        ],
+        "names_private_persons": false,
+        "rationale": "Anuncio presidencial de posibles liberaciones condicionales de detenidos bajo el régimen de excepción, con datos de organizaciones sobre personas inocentes detenidas."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "00b1e3f623bfc8a342e6647c546b9597528c82e1702e16aa4d15f30325416910",
+      "source_url": "https://historico.elsalvador.com/historico/99968/fallece-el-periodista-salvadoreno-mauricio-vasquez.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-01-12",
+      "stratum": "selected-other-prompts",
+      "text_binding": {
+        "content_sha256": "7ee6ea116c547a7a61fe57b8f5ba563a91b3204424506bfbd0608802693c399e",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:43.074194+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "not_relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1"
+        ],
+        "names_private_persons": false,
+        "rationale": "Nota necrológica sobre un periodista fallecido por enfermedad, publicada en otra URL del mismo medio; no trata un asunto de derechos humanos."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "not_relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1"
+        ],
+        "names_private_persons": false,
+        "rationale": "Nota necrológica sobre un periodista fallecido por enfermedad, publicada en otra URL del mismo medio; no trata un asunto de derechos humanos."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "5baa3ecdf630b77bd1c4059c2111e22d6a59fa5364d1076ab6326a62314e414e",
+      "source_url": "https://gatoencerrado.news/2018/06/06/donde-estan-gritan-las-madres-de-los-desaparecidos-en-la-guerra/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2018-06-06",
+      "stratum": "automatic-location",
+      "text_binding": {
+        "content_sha256": "4a2458421458474315b6446fc335ead9bf922c6a150306680a6fc3bce2cca79c",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:48.673919+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p3",
+          "p5"
+        ],
+        "names_private_persons": true,
+        "rationale": "Familiares de personas desaparecidas durante el conflicto armado exigen a la Asamblea una ley de reparación y un día nacional; incluye una desaparición en San Martín."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p3",
+          "p5"
+        ],
+        "names_private_persons": true,
+        "rationale": "Familiares de personas desaparecidas durante el conflicto armado exigen a la Asamblea una ley de reparación y un día nacional; incluye una desaparición en San Martín."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "2479bb2c7f97479125987f75f5a68a9b3e0f9bffcbbcd664ea12b5073aca5380",
+      "source_url": "https://www.diariocolatino.com/ordenan-carcel-para-acusado-de-matar-y-desmembrar-a-empleado-de-alcaldia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-13",
+      "stratum": "automatic-location",
+      "text_binding": {
+        "content_sha256": "7d5621a707825681cb19078facf9cd5fa7b44c1dc391a3f8271d3a42db2ee515",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:51.410331+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p15",
+          "p17"
+        ],
+        "names_private_persons": true,
+        "rationale": "Detención provisional del acusado del homicidio y desmembramiento de un empleado municipal, cometido en Antiguo Cuscatlán; restos abandonados en San Salvador."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p15",
+          "p17"
+        ],
+        "names_private_persons": true,
+        "rationale": "Detención provisional del acusado del homicidio y desmembramiento de un empleado municipal, cometido en Antiguo Cuscatlán; restos abandonados en San Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "78182e199612734b8a8c700700ad13aa950c505f6ec56e01499b8d41f2b6a004",
+      "source_url": "https://www.diariocolatino.com/seguridad-presenta-nuevo-modelo-para-reducir-ocio-carcelario/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-12-04",
+      "stratum": "automatic-location",
+      "text_binding": {
+        "content_sha256": "70db243b1579d20dd1352880015b35337077a83f928fcf6c682f435f2fd78263",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:54.245794+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Santa Ana",
+          "San Salvador",
+          "Usulután"
+        ],
+        "mentioned_departments": [
+          "Santa Ana",
+          "San Salvador",
+          "Usulután"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3",
+          "p12"
+        ],
+        "names_private_persons": false,
+        "rationale": "Presentación en el penal de Apanteos de un modelo penitenciario de reinserción y reducción del ocio carcelario, aplicado también en otros centros."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Santa Ana",
+          "San Salvador",
+          "Usulután"
+        ],
+        "mentioned_departments": [
+          "Santa Ana",
+          "San Salvador",
+          "Usulután"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3",
+          "p12"
+        ],
+        "names_private_persons": false,
+        "rationale": "Presentación en el penal de Apanteos de un modelo penitenciario de reinserción y reducción del ocio carcelario, aplicado también en otros centros."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "c8064f3e9753a82a415dabe55c9f74443c169f547408541d7bd14f20accc725b",
+      "source_url": "https://www.diariocolatino.com/del-encarcelamiento-injusto-a-la-desproteccion-estatal-el-calvario-de-don-sabino-ramos-tras-recuperar-su-libertad/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-10-15",
+      "stratum": "automatic-location",
+      "text_binding": {
+        "content_sha256": "0c69a63df5c171c8234848513a6a29a1e065e8782d5669d6f8e88029d40f1ad1",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:03:56.883752+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3",
+          "p17"
+        ],
+        "names_private_persons": true,
+        "rationale": "Persona mayor absuelta tras más de cuatro años de detención bajo el régimen de excepción denuncia la negativa municipal a reinstalarla y la falta de reparación."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "La Libertad",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3",
+          "p17"
+        ],
+        "names_private_persons": true,
+        "rationale": "Persona mayor absuelta tras más de cuatro años de detención bajo el régimen de excepción denuncia la negativa municipal a reinstalarla y la falta de reparación."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "503aa653747cec4b87e51dd2440197adfade2fca6f10cd6e3a56b76256bc5468",
+      "source_url": "https://www.diariocolatino.com/empleados-protestan-frente-a-catedral-por-supuestas-violaciones-laborales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-09-15",
+      "stratum": "automatic-dossier-department",
+      "text_binding": {
+        "content_sha256": "8db3feef99bafc3ee334a79d74670ec97b6930afc0c4554a69ae71f2d2f2cb22",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:00.758036+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "Sindicalistas municipales de San Salvador denuncian suspensiones y violaciones de derechos laborales; también veteranos exigen una ley."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "Sindicalistas municipales de San Salvador denuncian suspensiones y violaciones de derechos laborales; también veteranos exigen una ley."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "9a1f530ea7aa1ff54bf65a543c4eae1af50ab7d85aaa541d34b1f30e141bd5d1",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-hombre-en-cercanias-de-centro-gobierno-en-zacatecoluca/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-09",
+      "stratum": "automatic-dossier-department",
+      "text_binding": {
+        "content_sha256": "173edfa39264badced371fab8e6ed76a5ec376d5268631a237d2cc2cd10e9a66",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:04.209374+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Sonsonate",
+          "San Salvador",
+          "La Paz"
+        ],
+        "mentioned_departments": [
+          "Sonsonate",
+          "San Salvador",
+          "La Paz"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p7",
+          "p9",
+          "p10",
+          "p11"
+        ],
+        "names_private_persons": true,
+        "rationale": "Homicidios en Zacatecoluca, Acajutla y Santa María Ostuma, y muerte de un presunto pandillero en un enfrentamiento policial en Panchimalco."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Sonsonate",
+          "San Salvador",
+          "La Paz"
+        ],
+        "mentioned_departments": [
+          "Sonsonate",
+          "San Salvador",
+          "La Paz"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p7",
+          "p9",
+          "p10",
+          "p11"
+        ],
+        "names_private_persons": true,
+        "rationale": "Homicidios en Zacatecoluca, Acajutla y Santa María Ostuma, y muerte de un presunto pandillero en un enfrentamiento policial en Panchimalco."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "86b3f90206e98e2710e56b09ae41200486cfc353b403beffeb43c3075ace60f7",
+      "source_url": "https://www.revistafactum.com/factum-una-esquina-nueva-para-el-periodismo-en-el-salvador/",
+      "publisher": "Revista Factum",
+      "published_date": "2014-10-27",
+      "stratum": "automatic-dossier-department",
+      "text_binding": {
+        "content_sha256": "b030148f8f39cf4773c73dc5eff38fd107ecb5651d4a5256a31164ac1bdd610a",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:07.977317+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p7",
+          "p12"
+        ],
+        "names_private_persons": true,
+        "rationale": "Editorial de lanzamiento de una revista que presenta, entre otros contenidos, un reportaje sobre una testigo de la masacre de la UCA y la impunidad en El Salvador."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p7",
+          "p12"
+        ],
+        "names_private_persons": true,
+        "rationale": "Editorial de lanzamiento de una revista que presenta, entre otros contenidos, un reportaje sobre una testigo de la masacre de la UCA y la impunidad en El Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "28ef6e2306d0c849e6c020a317b3bcdc1dd514291355617b282b1ce3759a3374",
+      "source_url": "https://www.diariocolatino.com/vendedores-y-sindicalistas-exigen-sus-derechos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-11-04",
+      "stratum": "automatic-dossier-department",
+      "text_binding": {
+        "content_sha256": "656e056c8ef9dbe49a8404a123b639ec44318b27d876dc578f3ab26059f69f9d",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:10.832567+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p6"
+        ],
+        "names_private_persons": false,
+        "rationale": "Vendedores informales y sindicalistas municipales de San Salvador denuncian alzas de tasas y exigen mejoras salariales y laborales."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p6"
+        ],
+        "names_private_persons": false,
+        "rationale": "Vendedores informales y sindicalistas municipales de San Salvador denuncian alzas de tasas y exigen mejoras salariales y laborales."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "2c8de950b9700d59fb2aef408feb98442f949e7920422db3dd30f7d7e6ff66a3",
+      "source_url": "https://www.diariocolatino.com/comunidad-lgbtiq-exige-igualdad-inclusion-y-respeto-en-el-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-06-29",
+      "stratum": "unselected-el-salvador-hint",
+      "text_binding": {
+        "content_sha256": "52ffc2d47e5482168262b07f92ccc295b8f6cef15b4369f31d7c50b2b0e8cf34",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:13.526446+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p5"
+        ],
+        "names_private_persons": false,
+        "rationale": "Marcha del Orgullo en San Salvador exige igualdad, una ley de identidad y el fin de la discriminación contra personas LGBTIQ+."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p5"
+        ],
+        "names_private_persons": false,
+        "rationale": "Marcha del Orgullo en San Salvador exige igualdad, una ley de identidad y el fin de la discriminación contra personas LGBTIQ+."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "57bcaf85eb402beaaf2f19184275c69cf8c88515233384267d16ec1f5e91c10c",
+      "source_url": "https://www.diariocolatino.com/organizaciones-sindicales-internacionales-respaldan-lucha-por-la-libertad-sindical-en-el-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-06-13",
+      "stratum": "unselected-el-salvador-hint",
+      "text_binding": {
+        "content_sha256": "09b0f149ba880a2d6ccc148615ed49c34e48ea2e4057b748e466a0bba2e33bcc",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:15.918094+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p7"
+        ],
+        "names_private_persons": false,
+        "rationale": "Organizaciones sindicales internacionales respaldan denuncias de persecución antisindical y despidos en El Salvador tras la conferencia de la OIT."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p7"
+        ],
+        "names_private_persons": false,
+        "rationale": "Organizaciones sindicales internacionales respaldan denuncias de persecución antisindical y despidos en El Salvador tras la conferencia de la OIT."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "dd4311d7cfab0cafa87b8b85b337c76978df66397b1df3653e9d3ba50d37e470",
+      "source_url": "https://historico.elsalvador.com/historico/112884/el-salvador-en-segundo-lugar-con-tasa-de-homicidios-mas-alta-del-mundo.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2013-08-12",
+      "stratum": "unselected-el-salvador-hint",
+      "text_binding": {
+        "content_sha256": "6d433f83dcbf8898cf47a59ea8f100a0c401ba6c53a1a1442a65fdb9644e2248",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:17.902528+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p3",
+          "p5"
+        ],
+        "names_private_persons": false,
+        "rationale": "Informe de la OMS y cifras policiales sitúan a El Salvador entre los países con mayor tasa de homicidios; aumento atribuido a pugnas entre pandillas."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p3",
+          "p5"
+        ],
+        "names_private_persons": false,
+        "rationale": "Informe de la OMS y cifras policiales sitúan a El Salvador entre los países con mayor tasa de homicidios; aumento atribuido a pugnas entre pandillas."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "f77e4d51bca9e93c3fa722c6b126e046f298a4da4c321e824da8a1c0fd34a442",
+      "source_url": "https://www.diariocolatino.com/reflexion-urgente-dia-periodistas-salvadorenos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2024-07-31",
+      "stratum": "unselected-el-salvador-hint",
+      "text_binding": {
+        "content_sha256": "1cebe491bd4cc55f1fd2621dd98c7f47bb03d7f127de9621fef255b9e6b9371c",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:21.195435+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p9",
+          "p10",
+          "p11"
+        ],
+        "names_private_persons": false,
+        "rationale": "Columna sobre la libertad de prensa en El Salvador: estigmatización, hostigamiento y restricciones de acceso a la información contra periodistas."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p9",
+          "p10",
+          "p11"
+        ],
+        "names_private_persons": false,
+        "rationale": "Columna sobre la libertad de prensa en El Salvador: estigmatización, hostigamiento y restricciones de acceso a la información contra periodistas."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "d08b07d1b5e8e42db7df940b8f001ce4f7f6a723d104f9cd735f2298dd2183bc",
+      "source_url": "https://historico.elsalvador.com/historico/131245/sindicalistas-cierran-alcaldia-de-chalchuapa.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-07-28",
+      "stratum": "unselected-el-salvador-hint",
+      "text_binding": {
+        "content_sha256": "6cd8ecf3d278cc6504d4c29c2965c5b76dd67841bd2286c60606cd400b40a7f6",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:23.118802+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Santa Ana"
+        ],
+        "mentioned_departments": [
+          "Santa Ana"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p2"
+        ],
+        "names_private_persons": true,
+        "rationale": "Sindicato municipal de Chalchuapa suspende labores para exigir nivelación salarial; conflicto laboral con el concejo."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Santa Ana"
+        ],
+        "mentioned_departments": [
+          "Santa Ana"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p2"
+        ],
+        "names_private_persons": true,
+        "rationale": "Sindicato municipal de Chalchuapa suspende labores para exigir nivelación salarial; conflicto laboral con el concejo."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "25bd2c89a6abc2d5870c249ae78537233252e2d80aed65aef6af525c8bb21aae",
+      "source_url": "https://www.diariocolatino.com/feminicidios-en-el-salvador-suman-36-casos-en-lo-que-va-de-2023/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2023-10-14",
+      "stratum": "unselected-el-salvador-hint",
+      "text_binding": {
+        "content_sha256": "5c74b31aa8157d299f153b3a0a4f8239aa13bb5eeecf93cb36d367806c0b2e0f",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:25.510691+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Ahuachapán",
+          "Santa Ana",
+          "San Salvador",
+          "Cuscatlán",
+          "La Paz",
+          "Usulután",
+          "La Unión"
+        ],
+        "mentioned_departments": [
+          "Ahuachapán",
+          "Santa Ana",
+          "San Salvador",
+          "Cuscatlán",
+          "La Paz",
+          "Usulután",
+          "La Unión"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p10",
+          "p12"
+        ],
+        "names_private_persons": true,
+        "rationale": "Recuento de feminicidios de 2023 según la Fiscalía y una organización de mujeres, con distribución por departamento y condenas judiciales."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Ahuachapán",
+          "Santa Ana",
+          "San Salvador",
+          "Cuscatlán",
+          "La Paz",
+          "Usulután",
+          "La Unión"
+        ],
+        "mentioned_departments": [
+          "Ahuachapán",
+          "Santa Ana",
+          "San Salvador",
+          "Cuscatlán",
+          "La Paz",
+          "Usulután",
+          "La Unión"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p10",
+          "p12"
+        ],
+        "names_private_persons": true,
+        "rationale": "Recuento de feminicidios de 2023 según la Fiscalía y una organización de mujeres, con distribución por departamento y condenas judiciales."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "a03e940c6bb6531886ba3a042bcc13352fac69f5cb81377f840b1e4df61a772a",
+      "source_url": "https://historico.elsalvador.com/historico/136480/capturan-a-director-y-exsubdirector-de-penales-en-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-09-03",
+      "stratum": "unselected-international-hint",
+      "text_binding": {
+        "content_sha256": "ef86a732a7f141ee834ef35edc9c7b2bbaba062e09153598dba28b0d21e2689f",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:27.456278+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p2"
+        ],
+        "names_private_persons": false,
+        "rationale": "Captura en Guatemala del director del sistema penitenciario por asesinato y corrupción en una operación de la comisión contra la impunidad; sin vínculo con El Salvador."
+      },
+      "label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p2"
+        ],
+        "names_private_persons": false,
+        "rationale": "Captura en Guatemala del director del sistema penitenciario por asesinato y corrupción en una operación de la comisión contra la impunidad; sin vínculo con El Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "aba2f35e29f7f508118fe06f2b2c53feeefa6b0688ffdbd51ed33c6f93722fdc",
+      "source_url": "https://www.diariocolatino.com/crece-tension-por-estado-de-salud-de-prisionero-palestino-en-israel/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2022-01-04",
+      "stratum": "unselected-international-hint",
+      "text_binding": {
+        "content_sha256": "94a8f7463bfdbe48ceb8b9bd9a35b4a4e1ef329f978e885b18b5f21cd6d9a22b",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:29.907333+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p4",
+          "p9"
+        ],
+        "names_private_persons": true,
+        "rationale": "Estado de salud crítico de un detenido palestino bajo detención administrativa en Israel; asunto internacional sin vínculo con El Salvador."
+      },
+      "label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p4",
+          "p9"
+        ],
+        "names_private_persons": true,
+        "rationale": "Estado de salud crítico de un detenido palestino bajo detención administrativa en Israel; asunto internacional sin vínculo con El Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "ec601e1a7057f437b4911022cd604683bcaa2f776895387dea1385b32341fe6d",
+      "source_url": "https://www.diariocolatino.com/liberan-sin-cargos-a-migrante-hondureno-preso-y-torturado-en-mexico/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2014-10-18",
+      "stratum": "unselected-international-hint",
+      "text_binding": {
+        "content_sha256": "a15e4694bdeae6ad0950d57ceffcc3c864b7bef195fb545d4b173e71918e8fb5",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:32.502487+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p12"
+        ],
+        "names_private_persons": true,
+        "rationale": "Liberación en México de un migrante hondureño encarcelado durante cinco años por una acusación obtenida bajo tortura; sin vínculo con El Salvador."
+      },
+      "label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p12"
+        ],
+        "names_private_persons": true,
+        "rationale": "Liberación en México de un migrante hondureño encarcelado durante cinco años por una acusación obtenida bajo tortura; sin vínculo con El Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "40d833eb645ce408f816e82e1653878f5511e3e345a2318942c1e9eec9997a0a",
+      "source_url": "https://www.diariocolatino.com/periodicos-de-eeuu-defienden-la-libertad-de-prensa-ante-ataques-de-trump/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2018-08-17",
+      "stratum": "unselected-international-hint",
+      "text_binding": {
+        "content_sha256": "ef947247c51babfe1496ae8ef91873e131c82db7eee57b75a0066527d8ebb1f5",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:35.104888+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p12"
+        ],
+        "names_private_persons": false,
+        "rationale": "Campaña de periódicos estadounidenses en defensa de la libertad de prensa frente a ataques presidenciales; asunto de Estados Unidos sin vínculo con El Salvador."
+      },
+      "label": {
+        "jurisdiction": "other",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p12"
+        ],
+        "names_private_persons": false,
+        "rationale": "Campaña de periódicos estadounidenses en defensa de la libertad de prensa frente a ataques presidenciales; asunto de Estados Unidos sin vínculo con El Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "82b1d20a22bf12a0ace4dc21dc3a70ee518104687c98b6912aaac28864c77a4b",
+      "source_url": "https://www.diariocolatino.com/denuncian-ante-an-de-venezuela-planes-de-ee-uu-para-desestabilizar-al-pais-y-asesinar-a-nicolas-maduro/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2022-05-27",
+      "stratum": "unselected-international-hint",
+      "text_binding": {
+        "content_sha256": "557660ea6b976d76dd63146e4a2da33678fcc655773649edfc4d7a590c2a97a4",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:37.839317+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "other",
+        "relevance": "not_relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "Denuncias del gobierno venezolano sobre supuestos planes estadounidenses de desestabilización; asunto geopolítico de otro país sin un hecho de derechos humanos tratado."
+      },
+      "label": {
+        "jurisdiction": "other",
+        "relevance": "not_relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3"
+        ],
+        "names_private_persons": false,
+        "rationale": "Denuncias del gobierno venezolano sobre supuestos planes estadounidenses de desestabilización; asunto geopolítico de otro país sin un hecho de derechos humanos tratado."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "79c0f9b8dba221da75b0253114ee47c72e4a3902edcb0c4e36df0b7c9b10749a",
+      "source_url": "https://historico.elsalvador.com/historico/131142/tres-pandilleros-detenidos-tras-ataque-a-patrulla.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-07-03",
+      "stratum": "unselected-undetermined-hint",
+      "text_binding": {
+        "content_sha256": "2b7046833e9bc12628b1fa49a2267030ce1c0f92dfe03533f57922c347c2de6b",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:39.777149+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "La Libertad"
+        ],
+        "mentioned_departments": [
+          "La Libertad"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p7",
+          "p8"
+        ],
+        "names_private_persons": true,
+        "rationale": "Capturas tras un ataque de presuntos pandilleros a una patrulla en Quezaltepeque, con cifras de enfrentamientos, muertes de pandilleros y policías asesinados."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "La Libertad"
+        ],
+        "mentioned_departments": [
+          "La Libertad"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p7",
+          "p8"
+        ],
+        "names_private_persons": true,
+        "rationale": "Capturas tras un ataque de presuntos pandilleros a una patrulla en Quezaltepeque, con cifras de enfrentamientos, muertes de pandilleros y policías asesinados."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "18681283e818746c558dda28460f30eebd96e955c1fdc76c65374b9f5cc56293",
+      "source_url": "https://www.diariocolatino.com/sindicalistas-cierran-zoologico-nacional-como-medida-de-protesta/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2019-02-18",
+      "stratum": "unselected-undetermined-hint",
+      "text_binding": {
+        "content_sha256": "a96b7c60cf59f9dba83e0adee5bd08c7c6df6d6a83b841bd4a7f06c945d5f8b6",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:42.494109+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3",
+          "p4"
+        ],
+        "names_private_persons": true,
+        "rationale": "Sindicato de trabajadores de cultura cierra el Zoológico Nacional para exigir la destitución de su director por presuntas violaciones de derechos laborales."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p3",
+          "p4"
+        ],
+        "names_private_persons": true,
+        "rationale": "Sindicato de trabajadores de cultura cierra el Zoológico Nacional para exigir la destitución de su director por presuntas violaciones de derechos laborales."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "975985f5b3b05b2d03d677ff9bc5b3ca08c5c20543f8e5cc9e061dffb8fcf622",
+      "source_url": "https://www.diariocolatino.com/cada-dos-horas-una-mujer-es-asesinada-en-america-latina-y-el-caribe/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2023-11-25",
+      "stratum": "unselected-undetermined-hint",
+      "text_binding": {
+        "content_sha256": "8a8fe67aa48bd2d641de00365a2b95d6ed000c1cd4d21ad7dc53dd72cc9bb887",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:45.346667+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "unclear",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p5"
+        ],
+        "names_private_persons": false,
+        "rationale": "Informe regional de feminicidios en América Latina y el Caribe; El Salvador aparece sólo con su tasa entre otros países, por lo que el vínculo sustantivo es dudoso."
+      },
+      "label": {
+        "jurisdiction": "unclear",
+        "relevance": "relevant",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p3",
+          "p5"
+        ],
+        "names_private_persons": false,
+        "rationale": "Informe regional de feminicidios en América Latina y el Caribe; El Salvador aparece sólo con su tasa entre otros países, por lo que el vínculo sustantivo es dudoso."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "df6849a29f5436d24874c50ebaeabb3ea05d6639ae06c60e689a0ddb27868e43",
+      "source_url": "https://www.diariocolatino.com/concejal-de-nuevas-ideas-es-capturado-por-presuntamente-pertenecer-a-pandilla/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2023-06-28",
+      "stratum": "unselected-undetermined-hint",
+      "text_binding": {
+        "content_sha256": "05880623e9714b278fbd31b7316c5541fa775b5d2936d403c23800e58f9adec1",
+        "extraction_method": "wordpress_rest_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:48.288166+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Ahuachapán",
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "Ahuachapán",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p6",
+          "p7"
+        ],
+        "names_private_persons": true,
+        "rationale": "Captura de un concejal por presunta pertenencia a pandilla en Ahuachapán y de una red acusada de al menos diez homicidios en el centro de San Salvador."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Ahuachapán",
+          "San Salvador"
+        ],
+        "mentioned_departments": [
+          "Ahuachapán",
+          "San Salvador"
+        ],
+        "evidence_paragraph_ids": [
+          "p2",
+          "p6",
+          "p7"
+        ],
+        "names_private_persons": true,
+        "rationale": "Captura de un concejal por presunta pertenencia a pandilla en Ahuachapán y de una red acusada de al menos diez homicidios en el centro de San Salvador."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "8c69da88a63a650fff5530ba654e32e834d2847d524d2d746b481645edebc07f",
+      "source_url": "https://historico.elsalvador.com/historico/151308/registran-al-menos-14-homicidios-en-un-dia.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-05-13",
+      "stratum": "unselected-undetermined-hint",
+      "text_binding": {
+        "content_sha256": "6b66aa097386f64c35986e151e24211a8f20dab6d42699d08deed5a256c66490",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:50.207042+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Santa Ana",
+          "La Libertad",
+          "San Salvador",
+          "Cuscatlán",
+          "San Vicente",
+          "Usulután"
+        ],
+        "mentioned_departments": [
+          "Santa Ana",
+          "La Libertad",
+          "San Salvador",
+          "Cuscatlán",
+          "San Vicente",
+          "Usulután"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p4",
+          "p12",
+          "p13"
+        ],
+        "names_private_persons": true,
+        "rationale": "Recuento de al menos 14 homicidios en un día en varios municipios del país, con casos en Jiquilisco, Tepecoyo, San Salvador, San Martín y Apastepeque."
+      },
+      "label": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "event_departments": [
+          "Santa Ana",
+          "La Libertad",
+          "San Salvador",
+          "Cuscatlán",
+          "San Vicente",
+          "Usulután"
+        ],
+        "mentioned_departments": [
+          "Santa Ana",
+          "La Libertad",
+          "San Salvador",
+          "Cuscatlán",
+          "San Vicente",
+          "Usulután"
+        ],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p4",
+          "p12",
+          "p13"
+        ],
+        "names_private_persons": true,
+        "rationale": "Recuento de al menos 14 homicidios en un día en varios municipios del país, con casos en Jiquilisco, Tepecoyo, San Salvador, San Martín y Apastepeque."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    },
+    {
+      "candidate_id": "68b7373a499b473a37c51df2d52426f47f11e75009824212f00402e92db1f38a",
+      "source_url": "https://historico.elsalvador.com/historico/127750/envian-a-prision-a-implicados-en-la-muerte-de-32-ninos-en-incendio-de-bus.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-05-21",
+      "stratum": "unselected-undetermined-hint",
+      "text_binding": {
+        "content_sha256": "d441b32ee8365eb1a4ac261c96547a1c518619b6ca98a52b419d1d887d8b5516",
+        "extraction_method": "html_article_content",
+        "truncated": false,
+        "fetched_at": "2026-10-31T04:04:52.154963+00:00"
+      },
+      "proposed_label": {
+        "jurisdiction": "other",
+        "relevance": "unclear",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p3"
+        ],
+        "names_private_persons": true,
+        "rationale": "Detención en Colombia de dos responsables de un incendio de autobús que causó la muerte de 32 niños; hecho de otro país cuya pertinencia como asunto de derechos es dudosa."
+      },
+      "label": {
+        "jurisdiction": "other",
+        "relevance": "unclear",
+        "event_departments": [],
+        "mentioned_departments": [],
+        "evidence_paragraph_ids": [
+          "p1",
+          "p3"
+        ],
+        "names_private_persons": true,
+        "rationale": "Detención en Colombia de dos responsables de un incendio de autobús que causó la muerte de 32 niños; hecho de otro país cuya pertinencia como asunto de derechos es dudosa."
+      },
+      "review": {
+        "status": "proposed",
+        "proposed_by": "ai_assistant",
+        "proposed_at": "2026-10-31T04:11:27+00:00",
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": null
+      }
+    }
+  ]
+}
