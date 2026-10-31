@@ -4,7 +4,7 @@ El código usa [versionado semántico](https://semver.org/lang/es/). La versión
 vive en cuatro lugares que `tests/test_release.py` mantiene iguales:
 `package.json`, `apps/web/package.json`, `pyproject.toml` y
 `server/version.mjs` (`CODE_VERSION`, que también da la versión del servidor
-MCP). Para publicar, se suben las cuatro a la vez y se integran en `main`.
+MCP). Para publicar, se suben las cuatro a la vez y se integran en `main`. Cada PR añade su entrada bajo `[Sin publicar]` en el changelog; al publicar, esa sección pasa a ser `[X.Y.Z] - fecha`.
 
 ## La API es `v1`
 
