@@ -192,7 +192,7 @@ salud de las ejecuciones programadas.
 
   ```sh
   GH_TOKEN="$(printf 'protocol=https\nhost=github.com\n\n' | git credential fill | sed -n 's/^password=//p')" \
-    .venv/bin/python scripts/check_operations.py --output /private/tmp/mdh-ops-report.json
+    .venv/bin/python scripts/check_operations.py --output "${TMPDIR:-/tmp}/mdh-ops-report.json"
   ```
 
   El token de grano fino necesita lectura de Metadata, Contents, Actions,
@@ -205,8 +205,12 @@ salud de las ejecuciones programadas.
 - **Ante cada fallo:**
   - `visibility`: devolver el repositorio a la visibilidad esperada antes de
     continuar.
-  - `actions`: restaurar `sha_pinning_required`, los permisos por defecto en
-    lectura y la no aprobación automática.
+  - `actions`: restaurar `sha_pinning_required` y los permisos por defecto en
+    lectura. La creación/aprobación de PRs por Actions sólo debe estar activa
+    en el repo público (la necesita `publication-pr.yml` para abrir los PRs de
+    snapshots con `github.token`; la revisión del propietario sigue siendo
+    obligatoria fuera de las rutas generadas porque `github-actions` no
+    posee ninguna). En el repo privado debe permanecer desactivada.
   - `protection`: volver a aplicar la protección de `.github/main-protection.json`
     en el repo público y revisar si apareció una protección en el privado que
     bloquearía los bots.
@@ -221,8 +225,20 @@ salud de las ejecuciones programadas.
 
 ### Ensayo de pausa y reanudación
 
-Para ensayar la pausa y reanudación de la automatización (la evidencia se
-conserva fuera del repositorio): fijar `MDH_AUTOMATION_ENABLED=false` en cada
-repositorio (Settings → Secrets and variables → Actions → Variables),
-comprobar que el siguiente disparo programado termina sin ejecutar los pasos,
-restaurar `true` y comprobar que el ciclo siguiente se ejecuta.
+Se ensaya con disparos manuales; la evidencia queda fuera del repositorio.
+
+1. Registrar la línea base: las variables de ambos repositorios, los SHA de
+   `main` público y privado y las últimas ejecuciones.
+2. Poner `MDH_AUTOMATION_ENABLED=false` en ambos repositorios.
+3. Despachar el `extract.yml` privado con `batch_size=1` y el
+   `refresh-history.yml` público con `max_pages=1`: sus trabajos deben
+   saltarse y no debe aparecer ninguna rama, PR ni cambio de datos. El
+   publicador encadenado también está condicionado.
+4. Restaurar `MDH_AUTOMATION_ENABLED=true`.
+5. Ejecutar el `publish-locations.yml` privado con `validation_only=true`,
+   `source_check_limit=20` y `automatic_validation_limit=1` (no llama a Gemini
+   ni a las fuentes). Luego el `refresh-history.yml` público con
+   `max_pages=1` y seguir el ciclo PR → `verify` → integración protegida →
+   despliegue. Comprobar que el JSON servido coincide byte a byte con el
+   commit integrado.
+6. Restaurar la línea base exactamente.
