@@ -600,6 +600,23 @@
           "value": "PRIVATE_FIXTURE_SENTINEL"
         }
       ]
+    },
+    {
+      "name": "coverage source publisher must match the registered source",
+      "base": "archive",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "coverage",
+            "sources",
+            0,
+            "publisher"
+          ],
+          "value": "Medio Equivocado"
+        }
+      ]
     }
   ]
 }
