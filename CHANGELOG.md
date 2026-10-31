@@ -23,6 +23,12 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 - Comprobación periódica de deriva operativa y credenciales de solo lectura
   (`scripts/check_operations.py`, `ops/operations-expectations.json`).
 
+### Retirado
+
+- El recolector heredado de Google News (`scrapers/google_news_scraper.py`),
+  que usaba `curl_cffi` para eludir protecciones anti-bot, y sus dependencias
+  `curl_cffi`, `googlenewsdecoder` y `selectolax`. Ningún workflow lo utilizaba.
+
 ### Cambiado
 
 - Dependabot agrupa las actualizaciones menores y de parche por directorio.
