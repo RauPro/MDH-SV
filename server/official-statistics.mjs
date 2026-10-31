@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
-import { ApiError } from './public-data.mjs';
+import { ApiError, snapshotMeta } from './public-data.mjs';
 import { OFFICIAL_STATISTICS_DEPARTMENTS, parseOfficialStatistics } from '../shared/official-statistics.mjs';
 
 export const OFFICIAL_STATISTICS_NOTICE = 'Agregados oficiales independientes de las noticias y fichas de MDH-SV, no casos individuales. Conservar fuente, unidad, período y revisiones; no sumar instituciones, años, total nacional y departamentos. null significa dato no disponible, nunca cero. Un período parcial no es un cierre anual.';
@@ -56,6 +56,7 @@ export function getOfficialStatistics(filters = {}, payload) {
     meta: { api_version: '1', schema_version: snapshot.schema_version, dataset_id: snapshot.dataset_id,
       title: snapshot.title, as_of: snapshot.as_of, generated_at: snapshot.generated_at,
       coverage_start_year: snapshot.coverage_start_year, returned_rows: rows.length,
-      comparability_note: snapshot.comparability_note, limitations: OFFICIAL_STATISTICS_NOTICE },
+      comparability_note: snapshot.comparability_note, limitations: OFFICIAL_STATISTICS_NOTICE,
+      snapshot: snapshotMeta() },
   };
 }

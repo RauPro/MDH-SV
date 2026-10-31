@@ -8,6 +8,7 @@ import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-loc
 import { newsProcessingFor, parseNewsProcessing } from '../shared/news-processing.mjs';
 
 import { instance, PUBLIC_URL } from './instance.mjs';
+import { CODE_VERSION } from './version.mjs';
 export { PUBLIC_URL };
 export const LICENSE = 'https://creativecommons.org/licenses/by/4.0/';
 export const LIMITATION = 'Cobertura parcial de reportes públicos; no es un censo ni una determinación judicial. Conservar fuentes, fechas y estado de revisión. No sumar noticias, informes y casos como víctimas.';
@@ -74,7 +75,10 @@ export function newsCoverage(archive = loadNews()) {
   if (!verifiedArchives.has(archive)) {
     try { archive = parseNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
   }
-  return { data: archive.coverage, meta: { ...metadata(archive), generated_at: archive.generated_at } };
+  const processing = loadNewsProcessing();
+  const locations = loadNewsLocations();
+  return { data: archive.coverage, meta: { ...metadata(archive), generated_at: archive.generated_at,
+    snapshot: snapshotMeta({ archive_generated_at: archive.generated_at ?? null, processing_generated_at: processing.generated_at, locations_generated_at: locations.generated_at ?? null }) } };
 }
 export const statsSchema = z.object(recordFilters).strict();
 export const recordIdSchema = z.string().regex(/^[a-z0-9][a-z0-9-]{0,149}$/);
@@ -148,14 +152,14 @@ export function loadNewsDossiers() {
 }
 
 function locationSnapshot(payload) {
-  try { return { index: parsePublishedNewsLocations(payload), status: 'available' }; }
-  catch { return { index: new Map(), status: 'unavailable' }; }
+  try { return { index: parsePublishedNewsLocations(payload), status: 'available', generated_at: payload.generated_at ?? null }; }
+  catch { return { index: new Map(), status: 'unavailable', generated_at: null }; }
 }
 let publicNewsLocations;
 export function loadNewsLocations() {
   if (!publicNewsLocations) {
     try { publicNewsLocations = locationSnapshot(JSON.parse(readFileSync(new URL('../apps/web/public/archive/locations.json', import.meta.url), 'utf8'))); }
-    catch { publicNewsLocations = { index: new Map(), status: 'unavailable' }; }
+    catch { publicNewsLocations = { index: new Map(), status: 'unavailable', generated_at: null }; }
   }
   return publicNewsLocations;
 }
@@ -193,8 +197,15 @@ function matching(records, filters) {
   }).sort((a, b) => (b.published_date ?? '').localeCompare(a.published_date ?? '') || a.id.localeCompare(b.id));
 }
 
+// The snapshot identifies the code and data serving each response; commit is
+// only exposed on the host that injects it, never a guessed value.
+export function snapshotMeta(extra = {}) {
+  const sha = process.env.VERCEL_GIT_COMMIT_SHA ?? '';
+  return { code_version: CODE_VERSION, commit: /^[0-9a-f]{40}$/.test(sha) ? sha : null, ...extra };
+}
+
 function metadata(catalog) {
-  return { api_version: '1', schema_version: catalog.schema_version, updated_at: catalog.updated_at ?? catalog.generated_at ?? null, license: LICENSE, attribution: 'MDH-SV; citar versión/fecha y las fuentes originales.', limitations: LIMITATION };
+  return { api_version: '1', schema_version: catalog.schema_version, updated_at: catalog.updated_at ?? catalog.generated_at ?? null, license: LICENSE, attribution: 'MDH-SV; citar versión/fecha y las fuentes originales.', limitations: LIMITATION, snapshot: snapshotMeta() };
 }
 
 function paginated(records, filters, source, path) {
@@ -302,6 +313,7 @@ export function searchNews(filters = {}, archive = loadNews(), dossierPayload, l
         ? newsLocationFor(entry.reference, locations.index) : null };
   });
   result.meta = { ...result.meta, selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador', coverage: detail === 'full' ? archive.coverage : summaryCoverage(archive), coverage_detail: detail, paper: archive.paper, policy: archive.policy,
+    snapshot: snapshotMeta({ archive_generated_at: archive.generated_at ?? null, processing_generated_at: processing.generated_at, locations_generated_at: locations.generated_at ?? null }),
     news_dossiers_status: snapshot.status,
     automatic_locations_status: locations.status,
     news_processing_status: processing.status,
