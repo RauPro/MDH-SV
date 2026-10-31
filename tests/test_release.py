@@ -46,7 +46,10 @@ def make_repo(tmp_path):
         'pyproject.toml': '[project]\nversion = "2.1.0"\n',
         'server/version.mjs': "export const CODE_VERSION = '2.1.0';\n",
         'CHANGELOG.md': ('# Registro de cambios\n\n## [Sin publicar]\n\n## [2.1.0] - 2026-10-31\n'
-                         '\n### Añadido\n\n- Trabajo de la versión.\n'),
+                         '\n### Añadido\n\n- Trabajo de la versión ([#1]) con otro cambio ([#2]).\n'
+                         '\n## [2.0.0] - 2026-10-09\n\nEdición inicial.\n\n'
+                         '[#1]: https://example.com/pull/1\n[#2]: https://example.com/pull/2\n'
+                         '[#3]: https://example.com/pull/3\n'),
         '.gitignore': 'data/*.sqlite\n',
         'data/history/co-latino.json': json.dumps({'schema_version': 4, 'generated_at': '2026-10-31T00:00:00Z', 'records': []}),
         'data/secret.sqlite': b'\x00\x01not json',
@@ -144,10 +147,14 @@ def test_verify_then_tamper_fails(tmp_path):
         release.verify(repo, 'v2.1.0', tampered)
 
 
-def test_notes_prints_the_section(tmp_path):
+def test_notes_prints_the_section_with_the_cited_link_definitions(tmp_path):
     repo = make_repo(tmp_path)
     text = release.notes(repo, 'v2.1.0', 'HEAD')
-    assert 'Trabajo de la versión.' in text
+    assert 'Trabajo de la versión' in text
+    assert text.rstrip().endswith(
+        '[#1]: https://example.com/pull/1\n[#2]: https://example.com/pull/2')
+    assert '[#3]' not in text
+    assert release.notes(repo, 'v2.0.0', 'HEAD').rstrip() == 'Edición inicial.'
 
 
 def test_build_refuses_an_output_inside_the_checkout(tmp_path):
