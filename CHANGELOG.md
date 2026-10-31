@@ -10,6 +10,14 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 
 ### Añadido
 
+- `CITATION.cff`, `LICENSE-DATA.md` y captura del portal en `docs/assets/portal.png`.
+
+### Cambiado
+
+- README reorganizado en secciones escaneables con insignias y ejemplos verificados.
+
+### Añadido
+
 - `MAINTAINERS.md` con áreas, responsable, suplentes vacantes, continuidad y
   tareas iniciales.
 - Comprobación periódica de deriva operativa y credenciales de solo lectura
