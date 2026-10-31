@@ -2,6 +2,8 @@
 import json
 from pathlib import Path
 
+import importlib.util
+
 import yaml
 from mdh_pipeline.news_requests import candidate_from_request, public_rechecks
 
@@ -68,6 +70,23 @@ def test_both_public_forms_expose_private_channels_before_free_text():
                    if field.get("id") == "request_kind")["attributes"]["options"]
     assert all("privacidad" not in item.lower() and "retirada" not in item.lower()
                for item in options)
+
+
+def test_unmanaged_issue_templates_carry_no_instance_details():
+    spec = importlib.util.spec_from_file_location(
+        'configure_instance', ROOT / 'scripts/configure_instance.py')
+    configure_instance = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(configure_instance)
+    managed = {*configure_instance.FORMS, configure_instance.CONTACTS}
+    details = (INSTANCE['editorial_email'], INSTANCE['reporting_responsible'],
+               INSTANCE['public_repository'], INSTANCE['private_repository'])
+    unmanaged = [path for path in sorted(TEMPLATES.glob('*.yml'))
+                 if path.relative_to(ROOT).as_posix() not in managed]
+    assert len(unmanaged) >= 3, 'bug-report, feature-request and source-proposal are not configured'
+    for path in unmanaged:
+        text = path.read_text()
+        for detail in details:
+            assert detail not in text, f'{detail!r} leaked into {path.name}'
 
 
 def test_issue_chooser_uses_renderable_https_destinations_and_no_blank_form():
