@@ -107,7 +107,7 @@ def artifact(root, commit, name, paths):
 
 
 def datasets(root, commit):
-    paths = git(root, 'ls-tree', '-r', '-z', '--name-only', commit, '--', *DATA_PATHS).split('\0')
+    paths = [path for path in git(root, 'ls-tree', '-r', '-z', '--name-only', commit, '--', *DATA_PATHS).split('\0') if path]
     entries = []
     for path in sorted(paths):
         blob = show(root, commit, path)
@@ -179,6 +179,19 @@ def verify(root, tag, manifest_path, commit=None):
     with tempfile.TemporaryDirectory() as temporary:
         rebuilt = build(root, tag, temporary, commit or manifest['commit'])
     errors = list(mismatches(manifest, rebuilt))
+    artifact_dir = Path(manifest_path).parent
+    for name, expected in manifest['artifacts'].items():
+        target = artifact_dir / name
+        if not target.exists():
+            errors.append(f'{name}: artifact file missing next to the manifest')
+            continue
+        blob = target.read_bytes()
+        actual = {'sha256': hashlib.sha256(blob).hexdigest(), 'bytes': len(blob)}
+        try:
+            actual['tar_sha256'] = hashlib.sha256(gzip.decompress(blob)).hexdigest()
+        except Exception:
+            actual['tar_sha256'] = 'unreadable'
+        errors += list(mismatches(expected, actual, prefix=f'{name}.'))
     for error in errors:
         print(f'mismatch: {error}', file=sys.stderr)
     if errors:
