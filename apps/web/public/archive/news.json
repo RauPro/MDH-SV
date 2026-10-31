@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-20T17:31:13.965490+00:00",
+  "generated_at": "2026-10-30T23:53:59.427241+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -22,13 +22,13 @@
     "selection_gate": {
       "version": 2,
       "scope": "human_rights_el_salvador",
-      "candidates": 14284,
+      "candidates": 14287,
       "selected": 1914,
       "evaluated": 4892,
       "relevant": 1914,
       "excluded": 531,
       "uncertain": 2447,
-      "pending": 9392,
+      "pending": 9395,
       "evaluated_at": "2026-10-18T21:16:59.441522+00:00"
     }
   },
@@ -48,7 +48,7 @@
   },
   "coverage": {
     "start_date": "2010-01-01",
-    "end_date": "2026-10-20",
+    "end_date": "2026-10-30",
     "timezone": "America/El_Salvador",
     "status": "partial",
     "records": 1914,
@@ -57,7 +57,7 @@
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
-        "status": "enumerated",
+        "status": "partial",
         "records": 1573,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
@@ -2476,14 +2476,14 @@
           },
           {
             "month": "2026-10",
-            "status": "enumerated",
+            "status": "partial",
             "records": 10,
             "screen_version": 3,
-            "posts_scanned": 225,
-            "source_total_posts": 225,
-            "pages_fetched": 3,
+            "posts_scanned": 100,
+            "source_total_posts": 354,
+            "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-20T17:30:03.938592+00:00",
+            "last_attempt_at": "2026-10-30T23:53:55.760917+00:00",
             "error": null
           }
         ]
@@ -4914,11 +4914,11 @@
             "status": "enumerated",
             "records": 0,
             "screen_version": 3,
-            "posts_scanned": 2,
-            "source_total_posts": 2,
+            "posts_scanned": 10,
+            "source_total_posts": 10,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-20T17:30:03.938904+00:00",
+            "last_attempt_at": "2026-10-30T23:53:55.761195+00:00",
             "error": null
           }
         ]
@@ -7349,11 +7349,11 @@
             "status": "enumerated",
             "records": 0,
             "screen_version": 3,
-            "posts_scanned": 1,
-            "source_total_posts": 1,
+            "posts_scanned": 3,
+            "source_total_posts": 3,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-20T17:30:03.945754+00:00",
+            "last_attempt_at": "2026-10-30T23:53:55.761389+00:00",
             "error": null
           }
         ]
@@ -9797,7 +9797,7 @@
           "phase": "partial",
           "access": "public",
           "notice": "Selección parcial del especial de 2010 y páginas públicas actuales. Algunos enlaces antiguos restringen el acceso; no es una hemeroteca completa.",
-          "last_attempt_at": "2026-10-20T17:30:06.899068+00:00"
+          "last_attempt_at": "2026-10-30T23:53:57.212714+00:00"
         }
       },
       {
@@ -12236,10 +12236,10 @@
         ],
         "collection": {
           "method": "html_article_metadata",
-          "phase": "complete",
+          "phase": "partial",
           "access": "public",
           "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible.",
-          "last_attempt_at": "2026-10-20T17:30:08.448500+00:00"
+          "last_attempt_at": "2026-10-30T23:53:57.352006+00:00"
         }
       },
       {
@@ -15634,11 +15634,11 @@
             "status": "partial",
             "records": 2,
             "screen_version": 3,
-            "posts_scanned": 138,
+            "posts_scanned": 139,
             "source_total_posts": null,
-            "pages_fetched": 138,
+            "pages_fetched": 139,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-20T17:30:08.560562+00:00",
+            "last_attempt_at": "2026-10-30T23:53:57.516796+00:00",
             "error": null
           },
           {
@@ -17123,7 +17123,7 @@
           "phase": "partial",
           "access": "public",
           "notice": "Recorrido reanudable de los sitemaps públicos del archivo. La fecha se consulta en cada artículo; lastmod no se utiliza como fecha de publicación.",
-          "last_attempt_at": "2026-10-20T17:30:08.560562+00:00"
+          "last_attempt_at": "2026-10-30T23:53:57.516796+00:00"
         }
       }
     ],
@@ -25774,12 +25774,12 @@
       {
         "month": "2026-10",
         "start_date": "2026-10-01",
-        "end_date": "2026-10-20",
+        "end_date": "2026-10-30",
         "records": 10,
         "sources": [
           {
             "source_id": "co-latino",
-            "status": "enumerated",
+            "status": "partial",
             "records": 10
           },
           {
