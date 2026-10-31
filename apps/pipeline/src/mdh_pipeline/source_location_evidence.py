@@ -14,7 +14,7 @@ import re
 from mdh_schema import DepartmentEnum
 
 from .municipalities import _entries, resolve_municipality, REFERENCE_VERSION
-from .review_queue import normalize
+from .source_urls import normalize
 
 SOURCE_LOCATION_RULE_VERSION = 2
 _DEPARTMENTS = {normalize(value.value): value.value for value in DepartmentEnum

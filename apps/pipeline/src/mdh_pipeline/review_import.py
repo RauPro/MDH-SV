@@ -10,7 +10,7 @@ from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .file_outputs import write_outputs
+from .file_outputs import write_outputs, write_json_outputs as _write_news_outputs
 from .instance import load_instance
 from .news_publication import ARCHIVE as NEWS_ARCHIVE
 from .news_publication import PUBLIC as NEWS_PUBLIC
@@ -96,11 +96,6 @@ def _json_bytes(document):
     return (json.dumps(document, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
 
 
-def _write_news_outputs(outputs, *, expected=None):
-    """Write JSON projections and already-validated source bytes with one writer."""
-    encoded = [(Path(path), document if isinstance(document, bytes) else _json_bytes(document))
-               for path, document in outputs]
-    return write_outputs(encoded, expected=expected)
 
 
 def _preserve_generated_at(document, previous_bytes):

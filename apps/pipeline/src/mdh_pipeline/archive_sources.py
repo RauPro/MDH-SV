@@ -11,7 +11,8 @@ from xml.etree import ElementTree
 import requests
 from bs4 import BeautifulSoup
 
-from .review_queue import canonical_url, normalize, require_public_dns
+from .source_urls import canonical_url, normalize
+from .network_safety import require_public_dns
 
 MAX_INDEX_BYTES = 16 * 1024 * 1024
 MAX_ARTICLE_BYTES = 1_000_000

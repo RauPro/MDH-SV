@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import re
 
-from .review_queue import normalize
+from .source_urls import normalize
 
 PRIVACY_POLICY_VERSION = 2
 _MINOR = r"\b(?:niñ[oa]s?|adolescentes?|menor(?:es)? de edad|(?:[1-9]|1[0-7]) años)\b"

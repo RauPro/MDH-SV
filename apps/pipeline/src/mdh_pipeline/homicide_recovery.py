@@ -28,7 +28,8 @@ from .archive_sources import (
 )
 from .history import ROOT, TOPICS, page_url, reference_from_metadata, validate_reference
 from .publishers import SOURCES
-from .review_queue import canonical_url, normalize, require_public_dns
+from .source_urls import canonical_url, normalize
+from .network_safety import require_public_dns
 
 VERSION = 1
 MAX_JOBS = 200_000

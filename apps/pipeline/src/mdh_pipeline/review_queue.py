@@ -3,20 +3,20 @@ from __future__ import annotations
 
 import hashlib
 import html
-import ipaddress
 import json
 import logging
 import os
 import re
-import socket
 import time
 from datetime import datetime, timezone
-from urllib.parse import parse_qsl, urlsplit, urlunsplit
+from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 import feedparser
 import requests
 
+from .source_urls import canonical_url as canonical_url, normalize as normalize
+from .network_safety import require_public_dns as require_public_dns
 from .instance import load_instance
 from .publishers import NEWS_HOSTS, registered_feeds
 
@@ -30,28 +30,10 @@ LABELS = {'review/pending': 'D97706', 'review/approved': '16815D', 'review/rejec
 LOG = logging.getLogger(__name__)
 
 
-def normalize(value):
-    import unicodedata
-    return ''.join(c for c in unicodedata.normalize('NFD', value.lower()) if not unicodedata.combining(c))
 
 
-def canonical_url(value, allowed_hosts=HOSTS):
-    if not isinstance(value, str) or any(ord(c) < 32 or c in '<>\\' for c in value):
-        raise ValueError('Invalid source URL')
-    parts = urlsplit(value)
-    if parts.scheme != 'https' or parts.hostname not in allowed_hosts or parts.username or parts.password or parts.port:
-        raise ValueError('Source URL outside approved HTTPS hosts')
-    if any(not (key.startswith('utm_') or key in ('fbclid', 'gclid')) for key, _ in parse_qsl(parts.query)):
-        raise ValueError('Unexpected source query parameters')
-    if len(parts.path) < 2:
-        raise ValueError('Article URL cannot be a homepage')
-    return urlunsplit(('https', parts.hostname, parts.path, '', ''))
 
 
-def require_public_dns(host):
-    addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
-    if not addresses or any(not ipaddress.ip_address(item[4][0]).is_global for item in addresses):
-        raise ValueError('Source resolved to a non-public network')
 
 
 def fetch_feed(feed, session=None):

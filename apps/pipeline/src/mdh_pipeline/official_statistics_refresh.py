@@ -23,7 +23,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from .publishers import OFFICIAL_STATISTICS_DISCOVERY_HOSTS
-from .review_queue import normalize, require_public_dns
+from .source_urls import normalize
+from .network_safety import require_public_dns
 
 FGR_URL = "https://www.fiscalia.gob.sv/estadisticas-de-homicidios/"
 CATALOG_URL = "https://transparencia.oj.gob.sv/es/documentos/248"

@@ -6,6 +6,7 @@ overwrites bytes written by somebody else after this operation.
 """
 from __future__ import annotations
 
+import json
 import os
 import stat
 import tempfile
@@ -132,3 +133,10 @@ def write_outputs(outputs, *, expected=None):
                 # original error; a retry regenerates the authoritative outputs.
                 pass
     return True
+
+
+def write_json_outputs(outputs, *, expected=None):
+    """Write JSON projections and already-validated source bytes with one writer."""
+    encoded = [(Path(path), document if isinstance(document, bytes) else (json.dumps(document, ensure_ascii=False, indent=2) + '\n').encode('utf-8'))
+               for path, document in outputs]
+    return write_outputs(encoded, expected=expected)
