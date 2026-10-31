@@ -26,11 +26,12 @@ oficiales conservan sus procesos de revisión humana separados.
   que el volumen mensual ahora es continuo. La configuración está en
   [HOURLY-INGESTION.md](HOURLY-INGESTION.md).
   Un HTTP 202 acredita aceptación del disparo, no fichas terminadas ni publicación.
-- El extractor recoge RSS e incorpora referencias antiguas pendientes a la
-  cola, con un máximo de 16 solicitudes por ciclo. El máximo solicitado no
-  equivale al número procesado: el presupuesto efectivo considera las
-  solicitudes disponibles y las horas que faltan hasta su reinicio, por lo que
-  un ciclo puede conceder menos; se esperan unas 25 a 32 solicitudes diarias.
+- El extractor recoge RSS e incorpora hasta 50 referencias antiguas a la cola.
+  Cada ciclo programado solicita como máximo 16 llamadas a Gemini. El máximo
+  solicitado no equivale al número procesado: el presupuesto efectivo considera
+  las solicitudes disponibles y las horas que faltan hasta su reinicio, por lo
+  que un ciclo puede conceder menos; se esperan unas 25 a 32 solicitudes
+  diarias.
   `runtime/gemini-hourly.json` evita repetir el lote de extracción de una misma hora.
 - Clasificación, extracción, evaluación automática, actualizaciones por cambio
   de fuente y reintentos comparten `runtime/gemini-budget.json`. Se reserva saldo

@@ -70,7 +70,7 @@ El monitor amplía la implementación del artículo [Generative AI-based tool fo
 - **Fichas estructuradas:** hechos, personas afectadas, lugar, fechas, actores, fuentes, temas, grupos, hipótesis atribuida e instrumentos. Cada valor tiene estado y evidencia; los datos protegidos o no consignados quedan explícitos. [Esquema](docs/DOSSIER-SCHEMA.md).
 - **Reutilización:** API REST y MCP remoto de solo lectura con filtros, paginación, atribución y estado editorial, para proyectos externos.
 
-La búsqueda se actualiza cada seis horas. El procesador programado incorpora hasta dieciséis candidatas locales o de ámbito incierto por ciclo, dos ciclos al día, para procesamiento privado, además de las RSS. El archivo público sólo muestra noticias seleccionadas por pertinencia en derechos humanos y vínculo con El Salvador, con evidencia del contenido. Las clasificaciones antiguas requieren reevaluación; una coincidencia de palabras no permite publicar. Publica fichas completas o parciales cuando sus campos superan los controles automáticos, con atribución a una fuente única y sin afirmar revisión humana. [Selección temática](docs/NEWS-SELECTION.md), [colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
+La búsqueda se actualiza cada seis horas. El procesador programado se ejecuta dos veces al día: incorpora hasta cincuenta candidatas locales o de ámbito incierto para procesamiento privado, además de las RSS, y cada ciclo solicita como máximo dieciséis llamadas a Gemini. El archivo público sólo muestra noticias seleccionadas por pertinencia en derechos humanos y vínculo con El Salvador, con evidencia del contenido. Las clasificaciones antiguas requieren reevaluación; una coincidencia de palabras no permite publicar. Publica fichas completas o parciales cuando sus campos superan los controles automáticos, con atribución a una fuente única y sin afirmar revisión humana. [Selección temática](docs/NEWS-SELECTION.md), [colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
 
 ## Gemini en el flujo privado de producción
 
@@ -90,7 +90,7 @@ de privacidad separados por artículo. El reparto horario se adapta al trabajo
 pendiente: con un cupo de 10 llamadas y las tres etapas ocupadas, asigna 2 a
 clasificación, 6 a extracción y 2 a evaluar hasta 8 fichas; al terminar la
 clasificación puede asignar 8 a extracción y 2 a evaluación. El techo de dieciséis
-llamadas por ejecución no concede saldo adicional: cada etapa recibe su parte
+llamadas por ciclo programado no concede saldo adicional: cada etapa recibe su parte
 del presupuesto compartido, y cada intento se reserva antes del envío.
 Los límites de 240 llamadas diarias, 2 por minuto y entrada de 200 000 unidades
 conservadoras por minuto se mantienen. Las fuentes largas se agrupan en lotes

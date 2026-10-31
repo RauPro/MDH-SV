@@ -81,8 +81,8 @@ de esas mismas horas. Comprobar las
 invocaciones reales después de cada cambio: el horario configurado no demuestra
 que una ejecución concreta haya terminado. El modelo y la clave Gemini se configuran
 en Actions, no en Vercel. La plantilla usa un SHA público fijo y un token limitado
-a la cola. Solicita hasta 16 solicitudes por ciclo; el límite efectivo se reduce según
-el saldo y las horas restantes del día del Pacífico. Cada intento HTTP, incluidos
+a la cola. Cada ciclo programado solicita como máximo 16 llamadas a Gemini;
+el límite efectivo se reduce según el saldo y las horas restantes del día del Pacífico. Cada intento HTTP, incluidos
 los reintentos, consume ese presupuesto compartido por clasificación, extracción y evaluación automática.
 
 La configuración privada utiliza `operator_cap`, con un tope propio de 240
@@ -122,9 +122,11 @@ modelo el texto de los issues. Véase el [procedimiento Gemini](GEMINI-REVIEW.md
 
 ## Presupuesto de minutos de Actions
 
-El plan gratuito de GitHub incluye 2 000 minutos mensuales de Actions en el
-repositorio privado; la automatización se dimensiona para no pasar del 80 %
-(1 600 minutos). El modelo versionado está en `ops/actions-minutes-budget.json`
+El plan gratuito de GitHub incluye 2 000 minutos mensuales de Actions para
+los repositorios privados de la cuenta propietaria, compartidos entre todos
+ellos. La cola privada se dimensiona para no pasar del 80 % (1 600 minutos);
+otro repositorio privado con Actions en la misma cuenta reduce ese margen.
+El modelo versionado está en `ops/actions-minutes-budget.json`
 y `tests/test_actions_minutes_budget.py` lo contrasta con los horarios reales de
 `vercel.json` y las plantillas privadas: dos ciclos diarios de extracción (01:07
 y 13:07 UTC, con el respaldo de GitHub deduplicado por hora), dos recolecciones,
