@@ -174,6 +174,7 @@ test('MCP successful tool payloads execute the same OpenAPI schemas as their RES
     ['get_statistics', '/api/v1/stats', {}],
     ['get_official_statistics', '/api/v1/official-statistics', { year: 2020, department: 'national' }],
     ['search_news', '/api/v1/news', { limit: 2 }],
+    ['get_news_coverage', '/api/v1/news/coverage', {}],
   ];
   try {
     const tools = await client.listTools();
@@ -183,6 +184,7 @@ test('MCP successful tool payloads execute the same OpenAPI schemas as their RES
       assert.equal(result.isError, undefined);
       contracts.validate(route, 200, result.structuredContent);
       assert.deepEqual(JSON.parse(result.content[0].text), result.structuredContent);
+      if (name === 'search_news') assert.equal(result.structuredContent.meta.coverage_detail, 'summary');
     }
     const unavailable = await client.callTool({ name: 'get_record', arguments: { id: 'absent' } });
     assert.equal(unavailable.isError, true);
