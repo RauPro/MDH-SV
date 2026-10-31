@@ -11,7 +11,7 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 ### Añadido
 
 - `MAINTAINERS.md` con áreas, responsable, suplentes vacantes, continuidad y
-  tareas iniciales ([#251]-[#256]).
+  tareas iniciales.
 
 ### Cambiado
 
