@@ -73,8 +73,10 @@ proyecto público; la cola editorial privada no forma parte del alcance.
    .venv/bin/python -m pytest tests/test_catalogue_contract.py tests/test_public_contracts.py tests/test_source_registry.py -q
    # API pública y contratos OpenAPI (Node)
    npm run test:api
-   # Web (Vitest; pruebas de navegador con Chromium local)
+   # Web (Vitest; las pruebas de navegador usan Chromium local contra dist/,
+   # así que compila antes de ejecutarlas)
    npm --prefix apps/web test
+   npm --prefix apps/web run build
    npm --prefix apps/web run test:browser
    # Corpus editorial
    .venv/bin/python -m mdh_pipeline.editorial_corpus check

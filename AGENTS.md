@@ -11,6 +11,7 @@ python3.13 scripts/bootstrap.py              # preparar .venv, dependencias fija
 .venv/bin/python -m pytest <tests/…> -q      # pruebas acotadas Python del área
 npm run test:api                             # API pública y contratos OpenAPI
 npm --prefix apps/web test                   # Vitest
+npm --prefix apps/web run build              # compilar dist/ (necesario antes de test:browser)
 npm --prefix apps/web run test:browser       # Playwright sobre dist/
 .venv/bin/python scripts/check.py            # comprobación completa (--audit con seguridad)
 ```
