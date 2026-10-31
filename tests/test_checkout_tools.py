@@ -141,7 +141,9 @@ def test_bootstrap_uses_locks_and_preserves_env_from_external_directory(checkout
     assert calls[1][0] == [python, "-m", "pip", "install", "-e", ".", "--no-deps", "--no-build-isolation"]
     assert calls[3][0] == ["/tools/npm", "ci", "--ignore-scripts", "--no-audit", "--no-fund"]
     assert calls[4][0] == ["/tools/npm", "--prefix", "apps/web", "ci", "--no-audit", "--no-fund"]
-    assert calls[5][0] == [python, "scripts/install_gitleaks.py"]
+    assert calls[5][0] == [str(checkout / "apps/web/node_modules/.bin/playwright"),
+                           "install", "chromium"]
+    assert calls[6][0] == [python, "scripts/install_gitleaks.py"]
     assert all(arguments["root"] == checkout for _, arguments in calls)
     assert (checkout / ".env").read_text() == "LOCAL_SETTING=leave-it-alone\n"
 

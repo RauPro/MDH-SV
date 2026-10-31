@@ -13,7 +13,9 @@ python3.13 scripts/bootstrap.py
 ```
 
 La preparación instala `requirements.lock.txt`, los módulos Python en modo editable,
-los dos `package-lock.json` con `npm ci` y Gitleaks autenticado por SHA256. El
+los dos `package-lock.json` con `npm ci` y Gitleaks autenticado por SHA256, y
+descarga el Chromium fijado por `@playwright/test` para la suite de navegador
+(cientos de MB la primera vez; requiere Internet). El
 backend de construcción Python también está fijado. Repetir el comando conserva
 `.env` y reutiliza una `.venv` compatible; rechaza una `.venv` incompatible o
 simbólica. No crea credenciales. La primera instalación requiere Internet; la

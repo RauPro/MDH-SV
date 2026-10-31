@@ -105,6 +105,10 @@ def bootstrap(root: Path = ROOT) -> None:
     run([npm, "ci", "--ignore-scripts", "--no-audit", "--no-fund"], root=root, env=environment)
     run([npm, "--prefix", "apps/web", "ci", "--no-audit", "--no-fund"],
         root=root, env=environment)
+    # Chromium for the browser suite; the binary comes from the locked
+    # @playwright/test version, never from npx. Repeat runs are idempotent.
+    run([str(root / "apps/web/node_modules/.bin/playwright"), "install", "chromium"],
+        root=root, env=environment)
     # Use the environment's locked CA bundle when system Python lacks certificates
     # (notably the python.org macOS installation). TLS verification stays enabled.
     scanner_environment = environment.copy()

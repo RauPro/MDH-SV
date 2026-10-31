@@ -46,6 +46,29 @@ y `ops/review-queue/requirements.txt` por separado. Se consultan las versiones
 exactas sin instalar ni ejecutar paquetes para resolverlas. No se ignoran avisos.
 El escaneo de dependencias no sustituye el análisis del código ni de secretos.
 
+## Pruebas de integración y navegador
+
+`tests/test_offline_flow.py` recorre la cadena completa de publicación —colección,
+clasificación de pertinencia, extracción, selección, evaluación automática,
+ubicaciones, reconciliadores y API pública— en directorios temporales con fakes de
+HTTP, GitHub y Gemini; no requiere red ni credenciales. Demuestra que el flujo
+privado→público produce sólo proyecciones públicas, que los marcadores privados no
+se filtran y que una segunda ejecución es idempotente. No demuestra el
+comportamiento del sitio desplegado ni el contenido real de las fuentes.
+
+`npm --prefix apps/web run test:browser` ejecuta Playwright sobre el `dist`
+construido, servido por una réplica local que aplica las cabeceras y reescrituras
+de `vercel.json` y despacha `/api/*` y `/mcp` a los handlers reales. Las recorridos
+cubren el monitor de noticias, filtros, el diálogo de ficha, los reportes
+documentados, el archivo, las estadísticas, la vista de fallo, el tema, el modo
+móvil y los contratos HTTP del réplica; además, axe-core evalúa las vistas clave
+con reglas WCAG 2 A/AA y 2.1 A/AA (fallan sólo hallazgos serious o critical).
+Demuestra que el build funciona sin servicios de producción y que las
+superficies principales cumplen esas reglas en este recorrido. No es una
+certificación WCAG ni supervisa el sitio en producción; la detección de
+violaciones CSP, peticiones externas y errores de consola se limita a las rutas
+cubiertas.
+
 ## Actualizaciones
 
 Dependabot revisa semanalmente npm raíz/web y pip raíz/cola privada. El fichero
