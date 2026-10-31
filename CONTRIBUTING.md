@@ -33,7 +33,9 @@ proyecto público; la cola editorial privada no forma parte del alcance.
   crea `.venv`, instala las dependencias Python y npm fijadas, descarga la
   release autenticada de Gitleaks y el Chromium de Playwright (sólo las
   dependencias fijadas en `apps/web/package.json`, nunca `npx`). No sobrescribe
-  archivos `.env` ni entornos existentes.
+  archivos `.env` ni entornos existentes. El arranque verifica las versiones
+  de Python y Node y explica la corrección (por ejemplo, `nvm use` cuando nvm
+  está instalado).
 - `.venv/bin/python scripts/check.py` ejecuta la comprobación completa;
   `--audit` añade las comprobaciones de seguridad (secretos, dependencias,
   límites de publicación).
