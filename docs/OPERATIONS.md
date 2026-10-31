@@ -141,6 +141,13 @@ unas 240 solicitudes diarias durante unos cinco días y después se detenía; la
 cadencia actual reparte un volumen mensual semejante de forma continua, sin
 cortarse a mitad de mes.
 
+El respaldo del minuto 23 vive en `extract-fallback.yml`, un workflow hermano
+con los mismos pasos y otro nombre: toda ejecución terminada de `extract.yml`
+dispara la cadena de publicación (`workflow_run`) y el respaldo deduplicado no
+debe pagarla. Si Vercel deja de disparar, el respaldo sigue recogiendo RSS y
+preparando fichas, pero la publicación espera al siguiente ciclo despachado o a
+un `workflow_dispatch` manual de `Publicar ubicaciones automáticas`.
+
 ## Fichas de todas las noticias
 
 Cada referencia tiene una estructura consultable. Los campos sin extracción o

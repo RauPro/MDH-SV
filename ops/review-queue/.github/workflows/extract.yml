@@ -1,7 +1,5 @@
 name: Preparar fichas con Gemini
 on:
-  schedule:
-    - cron: '23 1,13 * * *'
   workflow_dispatch:
     inputs:
       batch_size:

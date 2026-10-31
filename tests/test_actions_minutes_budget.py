@@ -12,12 +12,17 @@ VERCEL = json.loads((ROOT / 'vercel.json').read_text())
 DISPATCHER = (ROOT / 'api/internal/hourly-ingestion.mjs').read_text()
 
 EXTRACT = 'ops/review-queue/.github/workflows/extract.yml'
-CHAINED = (
+FALLBACK_EXTRACT = 'ops/review-queue/.github/workflows/extract-fallback.yml'
+# A completed extract.yml run always launches the publisher, which in turn
+# launches the reconciler; none of them may carry a schedule of their own.
+NO_SELF_SCHEDULE = (
+    EXTRACT,
     'ops/review-queue/.github/workflows/publish-locations.yml',
     'ops/review-queue/.github/workflows/reconcile-news-issues.yml',
 )
 # Private template -> installed workflow name in the model's per_run table.
-# extract.yml is priced by the cycle and fallback terms instead of per_run.
+# extract.yml cycles and extract-fallback.yml runs are priced by the
+# cycle and fallback terms instead of per_run.
 SCHEDULED_PER_RUN = {
     'ops/review-queue/.github/workflows/collect.yml': 'collect.yml',
     'ops/history/review-history.yml': 'history.yml',
@@ -90,7 +95,7 @@ def monthly_worst_case(cycles_per_day, fallback_runs_per_day, other_runs_per_day
 
 def measured_runs():
     cycles = runs_per_day(vercel_schedule())
-    fallback = sum(runs_per_day(cron) for cron in schedules(EXTRACT))
+    fallback = sum(runs_per_day(cron) for cron in schedules(FALLBACK_EXTRACT))
     others = {model_name: sum(runs_per_day(cron) for cron in schedules(template))
               for template, model_name in SCHEDULED_PER_RUN.items()}
     return cycles, fallback, others
@@ -109,27 +114,28 @@ def test_scheduled_private_automation_stays_under_the_included_minutes_target():
 
 def test_every_scheduled_private_template_is_covered_by_the_model():
     scheduled = {path for path in PRIVATE_TEMPLATES if workflow(path)['on'].get('schedule')}
-    assert scheduled == set(SCHEDULED_PER_RUN) | {EXTRACT}
+    assert scheduled == set(SCHEDULED_PER_RUN) | {FALLBACK_EXTRACT}
 
 
 def test_extract_fallback_hours_coincide_with_vercel_cycles():
     _, cycle_hours = cron_times(vercel_schedule())
-    assert schedules(EXTRACT), 'extract.yml must keep a schedule fallback'
-    for expression in schedules(EXTRACT):
+    assert schedules(FALLBACK_EXTRACT), 'the scheduled extract fallback must exist'
+    for expression in schedules(FALLBACK_EXTRACT):
         _, fallback_hours = cron_times(expression)
         assert fallback_hours <= cycle_hours
 
 
-def test_chained_publisher_and_reconciler_have_no_schedule():
-    for path in CHAINED:
+def test_chain_workflows_have_no_schedule():
+    for path in NO_SELF_SCHEDULE:
         assert 'schedule' not in workflow(path)['on']
 
 
 def test_cycle_request_cap_matches_dispatch_and_fallback_values():
     dispatch_batch = re.search(r"batch_size: '(\d+)'", DISPATCHER)
     assert dispatch_batch and int(dispatch_batch.group(1)) == MODEL['max_requests_per_cycle']
-    fallback = re.search(r"MDH_BATCH_SIZE: [^\n]*\|\| '(\d+)' \}\}", (ROOT / EXTRACT).read_text())
-    assert fallback and int(fallback.group(1)) == MODEL['max_requests_per_cycle']
+    for path in (EXTRACT, FALLBACK_EXTRACT):
+        fallback = re.search(r"MDH_BATCH_SIZE: [^\n]*\|\| '(\d+)' \}\}", (ROOT / path).read_text())
+        assert fallback and int(fallback.group(1)) == MODEL['max_requests_per_cycle']
     default = workflow(EXTRACT)['on']['workflow_dispatch']['inputs']['batch_size']['default']
     assert int(default) <= MODEL['max_requests_per_cycle']
 

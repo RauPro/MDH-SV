@@ -46,8 +46,10 @@ documentos personales.
 ## Generación y estados
 
 **Preparar fichas con Gemini** tiene un respaldo de GitHub al minuto 23 de las
-horas 01 y 13 UTC. El disparador principal de Vercel lo solicita al minuto 07 de
-esas mismas horas; su instalación y configuración están descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
+horas 01 y 13 UTC en `extract-fallback.yml`, un workflow hermano con los mismos
+pasos: su nombre queda fuera de la cadena de publicación, así que una ejecución
+deduplicada no la dispara. El disparador principal de Vercel lo solicita al
+minuto 07 de esas mismas horas; su instalación y configuración están descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
 Recoge RSS, incorpora referencias históricas pendientes y solicita hasta 16
 solicitudes por ciclo. El presupuesto configurado reduce ese máximo y cuenta cada solicitud
 y reintento. Si las cuotas de Google no son visibles, `operator_cap` identifica
