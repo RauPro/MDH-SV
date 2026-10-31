@@ -114,10 +114,18 @@ def test_selection_metrics_count_errors_unclear_and_changed_text():
     data = snapshots(range(1, 6), selected=range(1, 6))
     data["selection"][ident(5)] = selection(5, digest="b" * 64)
     cell = evaluate(corpus(*rows), data)["groups"]["provisional"]["selection"][f"{MODEL}|{PROMPT}"]
-    assert (cell["correct"], cell["wrong_jurisdiction"], cell["wrong_relevance"], cell["label_unclear"],
-            cell["text_changed"], cell["bound_items"]) == (1, 1, 1, 1, 1, 4)
-    assert cell["jurisdiction_precision"] == round(2 / 3, 4)
-    assert cell["relevance_precision"] == 0.5
+    assert (cell["correct"], cell["text_changed"], cell["bound_items"]) == (1, 1, 4)
+    assert (cell["jurisdiction_SV"], cell["jurisdiction_other"], cell["jurisdiction_unclear"]) == (2, 1, 1)
+    assert (cell["relevance_relevant"], cell["relevance_not_relevant"], cell["relevance_unclear"]) == (2, 1, 1)
+    assert (cell["jurisdiction_judged"], cell["relevance_judged"]) == (3, 3)
+    assert cell["jurisdiction_precision"] == cell["relevance_precision"] == round(2 / 3, 4)
+
+
+def test_a_wrong_jurisdiction_never_masks_a_wrong_relevance():
+    rows = [item(1, value=label("other", "not_relevant", event=(), mentioned=())), item(2)]
+    cell = evaluate(corpus(*rows), snapshots([1, 2], selected=[1, 2]))["groups"]["provisional"]["selection"][
+        f"{MODEL}|{PROMPT}"]
+    assert (cell["jurisdiction_precision"], cell["relevance_precision"], cell["correct"]) == (0.5, 0.5, 1)
 
 
 def test_dossier_and_location_metrics_bind_to_the_labelled_text():
@@ -233,24 +241,37 @@ def test_history_loader_excludes_restricted_publishers(tmp_path):
 
 
 def test_cli_requires_gates_only_for_failed_confirmed_cells(tmp_path, capsys):
-    numbers = range(1, 13)
+    numbers = range(1, 25)
+    other_prompt = "mdh-news-scope-3-rights-nexus"
+    rows = [selection(n) for n in numbers]
+    for row in rows[12:]:
+        row["selection"]["prompt_version"] = other_prompt
     for folder in ("data/history", "data/selection", "data/automated", "apps/web/public/archive"):
         (tmp_path / folder).mkdir(parents=True)
     (tmp_path / "data/history/co-latino.json").write_text(json.dumps({"records": [reference(n) for n in numbers]}))
-    (tmp_path / "data/selection/news.json").write_text(json.dumps({"selections": [selection(n) for n in numbers]}))
-    (tmp_path / "data/automated/news_dossiers.json").write_text(json.dumps({"dossiers": []}))
+    (tmp_path / "data/selection/news.json").write_text(json.dumps({"selections": rows}))
+    (tmp_path / "data/automated/news_dossiers.json").write_text(json.dumps({"dossiers": [dossier(1)]}))
     (tmp_path / "apps/web/public/archive/locations.json").write_text(json.dumps({"locations": []}))
+    # The first cell fails jurisdiction; the second cell only holds correct labels.
     wrong = corpus(*[item(n, status="confirmed", value=label("other", event=(), mentioned=())) if n < 4
                      else item(n, status="confirmed") for n in numbers])
     path = tmp_path / "corpus.json"
     path.write_text(json.dumps(wrong))
+    report = ["report", "--root", str(tmp_path), "--corpus", str(path)]
     assert main(["check", "--root", str(tmp_path), "--corpus", str(path)]) == 0
-    assert main(["report", "--root", str(tmp_path), "--corpus", str(path)]) == 0
-    assert main(["report", "--root", str(tmp_path), "--corpus", str(path), "--require-gates"]) == 1
-    assert main(["report", "--root", str(tmp_path), "--corpus", str(path), "--require-gates",
-                 "--cell", "other|cell"]) == 0
+    assert main(report) == 0
+    assert main([*report, "--require-gates"]) == 1
+    assert main([*report, "--require-gates", "--cell", f"{MODEL}|{PROMPT}"]) == 1
+    assert main([*report, "--require-gates", "--cell", f"{MODEL}|{other_prompt}"]) == 0
+    capsys.readouterr()
+    # A mistyped cell must never look like an approved change.
+    assert main([*report, "--require-gates", "--cell", "other|cell"]) == 1
+    assert "unknown_gate_cell" in capsys.readouterr().err
     decisions = tmp_path / "decisions.json"
     decisions.write_text(json.dumps({"selections": [selection(n, digest="f" * 64) for n in numbers]}))
-    assert main(["report", "--root", str(tmp_path), "--corpus", str(path), "--decisions", str(decisions),
-                 "--require-gates", "--format", "json"]) == 0
-    assert '"text_changed": 12' in capsys.readouterr().out
+    assert main([*report, "--decisions", str(decisions), "--require-gates", "--format", "json"]) == 0
+    printed = json.loads(capsys.readouterr().out)
+    assert printed["decisions_source"] == "decisions_file"
+    assert printed["groups"]["confirmed"]["selection"][f"{MODEL}|{PROMPT}"]["text_changed"] == 24
+    # Public dossiers belong to another version and are not mixed into a candidate report.
+    assert "dossier_department" not in printed["groups"]["confirmed"]

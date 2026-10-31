@@ -59,19 +59,19 @@ LABEL_KEYS = frozenset({"jurisdiction", "relevance", "event_departments", "menti
                         "evidence_paragraph_ids", "names_private_persons", "rationale"})
 ITEM_KEYS = frozenset({"candidate_id", "source_url", "publisher", "published_date", "stratum",
                        "text_binding", "proposed_label", "label", "review"})
-# Acceptance gates use confirmed labels only. A cell with fewer bound items is
-# reported as insufficient evidence, never as a pass.
+# Acceptance gates use confirmed labels only. A cell with fewer evaluated items
+# (unclear labels and changed texts excluded) is insufficient evidence, never a pass.
 GATES = (
     {"id": "selection_jurisdiction_precision", "section": "selection", "metric": "jurisdiction_precision",
-     "minimum": 0.95, "minimum_items": 10},
+     "count": "jurisdiction_judged", "minimum": 0.95, "minimum_items": 10},
     {"id": "selection_relevance_precision", "section": "selection", "metric": "relevance_precision",
-     "minimum": 0.90, "minimum_items": 10},
+     "count": "relevance_judged", "minimum": 0.90, "minimum_items": 10},
     {"id": "dossier_department_precision", "section": "dossier_department", "metric": "precision",
-     "minimum": 0.90, "minimum_items": 10},
+     "count": "judged", "minimum": 0.90, "minimum_items": 10},
     {"id": "dossier_false_absence", "section": "dossier_department", "metric": "false_absence",
-     "maximum": 0, "minimum_items": 1},
+     "count": "bound_items", "maximum": 0, "minimum_items": 1},
     {"id": "location_faithfulness", "section": "locations", "metric": "faithfulness",
-     "minimum": 0.95, "minimum_items": 10},
+     "count": "bound_items", "minimum": 0.95, "minimum_items": 10},
 )
 
 
@@ -215,13 +215,22 @@ def _history(root: Path):
 
 
 def load_snapshots(root: Path = ROOT, decisions: Path | None = None):
+    """Public snapshots, or candidate selection decisions evaluated on their own.
+
+    A decisions file describes selection only; current public dossiers and
+    locations belong to another version and are not mixed into its report.
+    """
     selection = _read_json(decisions or root / "data/selection/news.json")
     _require(isinstance(selection, dict) and isinstance(selection.get("selections"), list), "invalid_decisions")
+    public = decisions is None
     return {
+        "source": "public_snapshot" if public else "decisions_file",
         "history": _history(root),
         "selection": {row["candidate_id"]: row for row in selection["selections"]},
-        "dossiers": {row["candidate_id"]: row for row in _read_json(root / "data/automated/news_dossiers.json")["dossiers"]},
-        "locations": {row["candidate_id"]: row for row in _read_json(root / "apps/web/public/archive/locations.json")["locations"]},
+        "dossiers": {row["candidate_id"]: row for row in _read_json(root / "data/automated/news_dossiers.json")["dossiers"]}
+        if public else {},
+        "locations": {row["candidate_id"]: row for row in _read_json(root / "apps/web/public/archive/locations.json")["locations"]}
+        if public else {},
     }
 
 
@@ -278,7 +287,8 @@ def _ratio(numerator, denominator):
 
 
 COUNTS = {
-    "selection": ("items", "correct", "wrong_jurisdiction", "wrong_relevance", "label_unclear", "text_changed"),
+    "selection": ("items", "text_changed", "correct", "jurisdiction_SV", "jurisdiction_other", "jurisdiction_unclear",
+                  "relevance_relevant", "relevance_not_relevant", "relevance_unclear"),
     "dossier_department": ("items", "correct", "incorrect", "false_absence", "not_published", "text_changed"),
     "locations": ("items", "bound", "faithful", "unfaithful", "event_match", "event_mismatch", "text_changed"),
     "unselected": ("items", "labelled_in_scope", "labelled_out_or_unclear"),
@@ -312,14 +322,11 @@ def evaluate(corpus, snapshots):
             cell["items"] += 1
             if (decision.get("evidence") or {}).get("content_sha256") != bound_hash:
                 cell["text_changed"] += 1
-            elif label["jurisdiction"] == "other":
-                cell["wrong_jurisdiction"] += 1
-            elif label["relevance"] == "not_relevant":
-                cell["wrong_relevance"] += 1
-            elif in_scope:
-                cell["correct"] += 1
             else:
-                cell["label_unclear"] += 1
+                # Each axis is counted independently so one mistake never masks the other.
+                cell[f"jurisdiction_{label['jurisdiction']}"] += 1
+                cell[f"relevance_{label['relevance']}"] += 1
+                cell["correct"] += in_scope
         dossier = snapshots["dossiers"].get(identifier)
         if dossier is not None and dossier.get("schema_version") == 2:
             automation = dossier["automation"]
@@ -350,7 +357,7 @@ def evaluate(corpus, snapshots):
                 cell["faithful" if projected <= set(label["mentioned_departments"]) else "unfaithful"] += 1
                 cell["event_match" if projected & set(label["event_departments"]) else "event_mismatch"] += 1
     report = {"corpus_version": corpus["corpus_version"], "policy_reference": corpus["policy_reference"],
-              "items": len(corpus["items"]),
+              "decisions_source": snapshots.get("source", "public_snapshot"), "items": len(corpus["items"]),
               "confirmed_items": sum(item["review"]["status"] == "confirmed" for item in corpus["items"]),
               "excluded_identity_changes": dict(sorted(unbound.items())),
               "groups": {}, "privacy_inspection": privacy}
@@ -361,13 +368,15 @@ def evaluate(corpus, snapshots):
             for key, counts in sorted(cells.items()):
                 values = {**dict.fromkeys(COUNTS.get(section, ()), 0), **dict(sorted(counts.items()))}
                 if section == "selection":
-                    judged = values["correct"] + values["wrong_jurisdiction"] + values["wrong_relevance"]
                     values["bound_items"] = values["items"] - values["text_changed"]
-                    values["jurisdiction_precision"] = _ratio(judged - values["wrong_jurisdiction"], judged)
-                    values["relevance_precision"] = _ratio(values["correct"], values["correct"] + values["wrong_relevance"])
+                    values["jurisdiction_judged"] = values["jurisdiction_SV"] + values["jurisdiction_other"]
+                    values["relevance_judged"] = values["relevance_relevant"] + values["relevance_not_relevant"]
+                    values["jurisdiction_precision"] = _ratio(values["jurisdiction_SV"], values["jurisdiction_judged"])
+                    values["relevance_precision"] = _ratio(values["relevance_relevant"], values["relevance_judged"])
                 elif section == "dossier_department":
                     values["bound_items"] = values["items"] - values["text_changed"]
-                    values["precision"] = _ratio(values["correct"], values["correct"] + values["incorrect"])
+                    values["judged"] = values["correct"] + values["incorrect"]
+                    values["precision"] = _ratio(values["correct"], values["judged"])
                 elif section == "locations":
                     values["bound_items"] = values["bound"]
                     values["faithfulness"] = _ratio(values["faithful"], values["bound"])
@@ -382,17 +391,17 @@ def gates(confirmed):
     results = []
     for gate in GATES:
         for key, values in sorted(confirmed.get(gate["section"], {}).items()):
-            observed, items = values.get(gate["metric"]), values.get("bound_items", 0)
+            observed, items = values.get(gate["metric"]), values.get(gate["count"], 0)
             if items < gate["minimum_items"] or observed is None:
                 status = "insufficient_evidence"
             elif "minimum" in gate:
                 status = "pass" if observed >= gate["minimum"] else "fail"
             else:
                 status = "pass" if observed <= gate["maximum"] else "fail"
-            results.append({"gate": gate["id"], "cell": key, "observed": observed, "bound_items": items,
+            results.append({"gate": gate["id"], "cell": key, "observed": observed, "evidence_items": items,
                             "status": status})
         if not confirmed.get(gate["section"]):
-            results.append({"gate": gate["id"], "cell": None, "observed": None, "bound_items": 0,
+            results.append({"gate": gate["id"], "cell": None, "observed": None, "evidence_items": 0,
                             "status": "insufficient_evidence"})
     return results
 
@@ -404,6 +413,9 @@ def render_markdown(report):
              f"bibliográfica: {len(report['excluded_identity_changes'])}.", "",
              "Sólo las etiquetas confirmadas alimentan los criterios de aceptación. Las propuestas "
              "del asistente se muestran como evidencia provisional y no acreditan exactitud.", ""]
+    if report["decisions_source"] == "decisions_file":
+        lines += ["Decisiones evaluadas: archivo de selección candidato. Las fichas y ubicaciones públicas "
+                  "pertenecen a otra versión y no se incluyen.", ""]
     for name, title in (("confirmed", "Etiquetas confirmadas"), ("provisional", "Etiquetas propuestas, pendientes de revisión")):
         lines += [f"## {title}", ""]
         sections = report["groups"][name]
@@ -419,7 +431,7 @@ def render_markdown(report):
     lines += ["## Criterios de aceptación (sólo confirmadas)", "", "| criterio | celda | observado | elementos | estado |",
               "| --- | --- | --- | --- | --- |"]
     lines += [f"| {row['gate']} | {row['cell'] or '—'} | {'' if row['observed'] is None else row['observed']} | "
-              f"{row['bound_items']} | {row['status']} |" for row in report["gates"]]
+              f"{row['evidence_items']} | {row['status']} |" for row in report["gates"]]
     pending = report["privacy_inspection"]
     lines += ["", "## Inspección manual de privacidad", "",
               f"Confirmadas: {len(pending['confirmed'])}; provisionales: {len(pending['provisional'])}. "
@@ -455,6 +467,10 @@ def main(argv=None):
             return 0
         report = evaluate(corpus, snapshots)
         print(render_markdown(report) if args.format == "markdown" else json.dumps(report, ensure_ascii=False, indent=2))
+        # A mistyped or absent cell must not look like an approved change.
+        unknown = sorted(set(args.cell) - {row["cell"] for row in report["gates"] if row["cell"]})
+        if unknown:
+            raise CorpusError("unknown_gate_cell:" + ",".join(unknown))
         failed = [row for row in report["gates"] if row["status"] == "fail" and (not args.cell or row["cell"] in args.cell)]
         return 1 if args.require_gates and failed else 0
     except (CorpusError, OSError, json.JSONDecodeError, KeyError) as error:
