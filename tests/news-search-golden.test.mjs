@@ -5,7 +5,7 @@ import { NEWS_DOSSIER_PROTECTED_TITLE, newsDossierFor, parsePublishedNewsDossier
 import { isSelectedNewsReference } from '../shared/news-selection.mjs';
 import { newsLocationFor, parsePublishedNewsLocations } from '../shared/news-location.mjs';
 import { newsProcessingFor, parseNewsProcessing } from '../shared/news-processing.mjs';
-import { loadNews, loadNewsDossiers, loadNewsLocations, loadNewsProcessing, newsCoverageDetail, newsSearchSchema, PUBLIC_URL, searchNews } from '../server/public-data.mjs';
+import { loadNews, loadNewsDossiers, loadNewsLocations, loadNewsProcessing, newsCoverageDetail, newsSearchSchema, PUBLIC_URL, searchNews, snapshotMeta } from '../server/public-data.mjs';
 import fixtureArchive from '../apps/web/src/__fixtures__/newsArchive.json' with { type: 'json' };
 
 const normalize = value => String(value ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -55,6 +55,7 @@ function referenceSearch(filters, archive, snapshot, locations, processing, now 
       api_version: '1', schema_version: archive.schema_version, updated_at: archive.updated_at ?? archive.generated_at ?? null,
       license: 'https://creativecommons.org/licenses/by/4.0/', attribution: 'MDH-SV; citar versión/fecha y las fuentes originales.',
       limitations: 'Cobertura parcial de reportes públicos; no es un censo ni una determinación judicial. Conservar fuentes, fechas y estado de revisión. No sumar noticias, informes y casos como víctimas.',
+      snapshot: snapshotMeta({ archive_generated_at: archive.generated_at ?? null, processing_generated_at: processing.generated_at, locations_generated_at: locations.generated_at ?? null }),
       selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador',
       coverage: detail === 'full' ? archive.coverage : summary, coverage_detail: detail,
       paper: archive.paper, policy: archive.policy,
