@@ -112,11 +112,15 @@ export function loadCatalog() {
 }
 
 let newsCache;
+// Archives the loader already validated once; explicit payloads still validate
+// per call, exactly as before.
+const verifiedArchives = new WeakSet();
 export function loadNews() {
   if (!newsCache) {
     try {
       const news = JSON.parse(readFileSync(new URL('../apps/web/public/archive/news.json', import.meta.url), 'utf8'));
       newsCache = parseNewsArchive(news);
+      verifiedArchives.add(newsCache);
     } catch (error) {
       if (error.code === 'ENOENT') throw new ApiError(503, 'archive_unavailable', 'El archivo de noticias no está disponible en este despliegue.');
       throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.');
@@ -214,27 +218,86 @@ export function getRecord(id, catalog = loadCatalog()) {
   if (!record) throw new ApiError(404, 'record_not_found', 'Registro no encontrado.');
   return { data: record, meta: metadata(catalog) };
 }
-export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload, processingPayload, now = new Date()) {
-  try { archive = parseNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
-  const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
-  const eligible = archive.records.filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index))).map(reference => {
-    const dossier = newsDossierFor(reference, snapshot.index);
-    // Minimize before search/pagination as well as output, so a protected title
-    // cannot be recovered indirectly from keyword matches in a stale snapshot.
-    return dossier.schema_version === 2 && dossier.source_title === NEWS_DOSSIER_PROTECTED_TITLE
-      ? { ...reference, title: NEWS_DOSSIER_PROTECTED_TITLE, title_truncated: false } : reference;
+const MATCH_KEYS = ['publisher', 'record_type', 'category', 'review_status', 'scope_hint'];
+
+// Eligible references, their dossier and the normalized matching text are
+// computed once per archive/dossier snapshot and kept behind a WeakMap, so a
+// changed snapshot can never revive stale data.
+const preparedNews = new WeakMap();
+function prepareNews(archive, snapshot) {
+  let byIndex = preparedNews.get(archive);
+  if (!byIndex) preparedNews.set(archive, byIndex = new WeakMap());
+  let prepared = byIndex.get(snapshot.index);
+  if (!prepared) {
+    prepared = archive.records
+      .filter(reference => isSelectedNewsReference(reference, newsDossierFor(reference, snapshot.index)))
+      .map(reference => {
+        const dossier = newsDossierFor(reference, snapshot.index);
+        // Minimize before search/pagination as well as output, so a protected title
+        // cannot be recovered indirectly from keyword matches in a stale snapshot.
+        const record = dossier.schema_version === 2 && dossier.source_title === NEWS_DOSSIER_PROTECTED_TITLE
+          ? { ...reference, title: NEWS_DOSSIER_PROTECTED_TITLE, title_truncated: false } : reference;
+        const fields = record.dossier;
+        const dossierText = fields ? [fields.alleged_violation?.value, fields.facts?.value, ...(fields.affected_persons?.value ?? []), ...(fields.reported_actors?.value ?? []), ...(fields.vulnerable_groups?.value ?? []), ...(fields.themes?.value ?? []), fields.location?.public_place?.value] : [];
+        return {
+          reference: record,
+          dossier,
+          searchText: normalize([record.title, record.summary, record.publisher, record.category, ...(record.tags ?? []), ...(record.topics ?? []), ...dossierText].join(' ')),
+          match: Object.fromEntries(MATCH_KEYS.map(key => [key, normalize(record[key])])),
+          department: normalize(record.department ?? 'unknown'),
+        };
+      })
+      .sort((a, b) => (b.reference.published_date ?? '').localeCompare(a.reference.published_date ?? '') || a.reference.id.localeCompare(b.reference.id));
+    byIndex.set(snapshot.index, prepared);
+  }
+  return prepared;
+}
+
+function paginatedNews(prepared, filters, source) {
+  const { limit = 25, offset = 0 } = filters;
+  validateRange(filters);
+  const filtered = prepared.filter(entry => {
+    const record = entry.reference;
+    if (filters.q && !entry.searchText.includes(normalize(filters.q))) return false;
+    for (const key of MATCH_KEYS) {
+      if (filters[key] && entry.match[key] !== normalize(filters[key])) return false;
+    }
+    if (filters.department && entry.department !== normalize(filters.department)) return false;
+    if (filters.date_from && (!record.published_date || record.published_date < filters.date_from)) return false;
+    if (filters.date_to && (!record.published_date || record.published_date > filters.date_to)) return false;
+    // Event ranges overlap inclusively; unknown dates are excluded, never replaced with publication dates.
+    if (filters.incident_date_from && (!record.incident_date || (record.incident_date_end ?? record.incident_date) < filters.incident_date_from)) return false;
+    if (filters.incident_date_to && (!record.incident_date || record.incident_date > filters.incident_date_to)) return false;
+    return true;
   });
+  const nextOffset = offset + limit < filtered.length ? offset + limit : null;
+  const query = new URLSearchParams(Object.entries(filters).map(([key, value]) => [key, String(value)]));
+  query.set('limit', String(limit));
+  if (nextOffset !== null) query.set('offset', String(nextOffset));
+  return {
+    data: filtered.slice(offset, offset + limit),
+    pagination: { total: filtered.length, limit, offset, next_offset: nextOffset, next: nextOffset === null ? null : `${PUBLIC_URL}/api/v1/news?${query}` },
+    meta: metadata(source),
+  };
+}
+
+export function searchNews(filters = {}, archive = loadNews(), dossierPayload, locationPayload, processingPayload, now = new Date()) {
+  if (!verifiedArchives.has(archive)) {
+    try { archive = parseNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
+  }
+  const snapshot = dossierPayload === undefined ? loadNewsDossiers() : dossierSnapshot(dossierPayload);
+  const prepared = prepareNews(archive, snapshot);
   const parsed = newsSearchSchema.parse(filters);
   const detail = newsCoverageDetail(parsed, now);
-  const result = paginated(eligible, parsed, archive, '/api/v1/news');
+  const result = paginatedNews(prepared, parsed, archive);
   const locations = locationPayload === undefined ? loadNewsLocations() : locationSnapshot(locationPayload);
   const processing = processingPayload === undefined ? loadNewsProcessing() : processingSnapshot(processingPayload);
-  result.data = result.data.map(reference => {
-    const dossier = newsDossierFor(reference, snapshot.index);
-    return { ...reference, news_dossier: dossier,
-      processing_status: newsProcessingFor(reference, processing.index, dossier),
+  result.data = result.data.map(entry => {
+    const dossier = entry.dossier;
+    return { ...entry.reference, news_dossier: dossier,
+      processing_status: newsProcessingFor(entry.reference, processing.index, dossier),
       automatic_location: snapshot.status === 'available' && !dossier.human_reviewed && dossier.fields.department.status !== 'withheld'
-        ? newsLocationFor(reference, locations.index) : null };
+        ? newsLocationFor(entry.reference, locations.index) : null };
   });
   result.meta = { ...result.meta, selection_gate: archive.policy.selection_gate, public_scope: 'human_rights_el_salvador', coverage: detail === 'full' ? archive.coverage : summaryCoverage(archive), coverage_detail: detail, paper: archive.paper, policy: archive.policy,
     news_dossiers_status: snapshot.status,
