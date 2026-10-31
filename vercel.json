@@ -8,7 +8,7 @@
     "api/**/*.mjs": { "includeFiles": "{instance.json,shared/source-registry.json,apps/web/public/**/*.json}", "maxDuration": 15 }
   },
   "crons": [
-    { "path": "/api/internal/hourly-ingestion", "schedule": "7 * * * *" }
+    { "path": "/api/internal/hourly-ingestion", "schedule": "7 1,13 * * *" }
   ],
   "rewrites": [
     { "source": "/mcp", "destination": "/api/mcp" },

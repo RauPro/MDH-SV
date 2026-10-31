@@ -1,7 +1,7 @@
 name: Recoger noticias
 on:
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '17 7,19 * * *'
   workflow_dispatch:
 permissions:
   contents: read

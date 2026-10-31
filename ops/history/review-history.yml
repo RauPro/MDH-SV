@@ -1,7 +1,7 @@
 name: Revisar backlog histórico
 on:
   schedule:
-    - cron: '47 */6 * * *'
+    - cron: '47 7,19 * * *'
   workflow_dispatch:
 permissions:
   contents: read
