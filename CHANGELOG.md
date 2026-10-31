@@ -8,6 +8,15 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 
 ## [Sin publicar]
 
+### Añadido
+
+- `MAINTAINERS.md` con áreas, responsable, suplentes vacantes, continuidad y
+  tareas iniciales ([#251]-[#256]).
+
+### Cambiado
+
+- Dependabot agrupa las actualizaciones menores y de parche por directorio.
+
 ## [2.1.0] - 2026-10-31
 
 ### Añadido

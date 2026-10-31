@@ -144,3 +144,5 @@ El fork ordinario hereda la raíz pública aprobada y su escaneo completo. Una
 reescritura de historial requiere revisar deliberadamente
 `.security/publication-history.json`; no quite el guard para hacer pasar el
 bootstrap. Consulte [SECRET-HISTORY.md](SECRET-HISTORY.md).
+
+`MAINTAINERS.md` es específico de cada instancia: cada fork lo sustituye con sus propios responsables.

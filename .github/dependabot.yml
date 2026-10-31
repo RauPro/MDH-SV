@@ -5,21 +5,33 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      npm-root-minor-patch:
+        update-types: [minor, patch]
   - package-ecosystem: pip
     directory: /ops/review-queue
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      pip-review-queue-minor-patch:
+        update-types: [minor, patch]
   - package-ecosystem: npm
     directory: /apps/web
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      npm-web-minor-patch:
+        update-types: [minor, patch]
   - package-ecosystem: pip
     directory: /
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      pip-root-minor-patch:
+        update-types: [minor, patch]
   - package-ecosystem: github-actions
     # This covers live public workflows; mirror updates into ops/ and the
     # private installation using docs/GITHUB-ACTIONS.md before closing the work.

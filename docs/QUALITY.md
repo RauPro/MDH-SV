@@ -127,3 +127,12 @@ consultas mixtas, 3,53 ms (presupuesto 150). La vista inicial transporta
 `check:bundle` fija el tope de JS gzip en 149 444 bytes (medido 119 577 en la
 misma ejecución). Pendiente («help wanted»): cargar el detalle de las fichas de
 noticia bajo demanda en lugar del snapshot completo de `dossiers.json`.
+
+## Actualizaciones de dependencias agrupadas
+
+`.github/dependabot.yml` agrupa las actualizaciones menores y de parche en un
+único PR por ecosistema y directorio (`npm` raíz, `pip` raíz, `npm` de
+`apps/web` y `pip` de `ops/review-queue`), de modo que una oleada de parches no
+reparte decenas de PRs individuales. Las actualizaciones mayores y las de
+GitHub Actions siguen individuales para revisarse una a una. En su próxima
+ejecución Dependabot sustituye los PRs individuales abiertos por los agrupados.
