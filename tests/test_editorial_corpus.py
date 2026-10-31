@@ -8,7 +8,7 @@ import pytest
 
 from mdh_pipeline import editorial_corpus as corpus_module
 from mdh_pipeline.editorial_corpus import (
-    CorpusError, STRATA, check_bindings, evaluate, main, sample, validate_corpus,
+    CorpusError, STRATA, check_bindings, evaluate, load_snapshots, main, render_markdown, sample, validate_corpus,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,6 +79,32 @@ def snapshots(numbers, *, selected=(), dossiers=(), locations=()):
             "selection": {ident(n): selection(n) for n in selected},
             "dossiers": {row["candidate_id"]: row for row in dossiers},
             "locations": {row["candidate_id"]: row for row in locations}}
+
+
+def test_versioned_corpus_is_valid_and_never_stores_bodies():
+    # Identity drift is reported by `editorial_corpus check`; automated snapshot
+    # updates must not fail because a labelled reference changed upstream.
+    document = validate_corpus(json.loads((ROOT / "data/editorial-corpus/corpus.json").read_text()))
+    assert {row["stratum"] for row in document["items"]} == {stratum["id"] for stratum in STRATA}
+    assert len(document["items"]) == sum(stratum["size"] for stratum in STRATA)
+    # The corpus never redistributes bodies: no item stores paragraphs or long text.
+    serialized = json.dumps(document, ensure_ascii=False)
+    assert '"paragraphs"' not in serialized and '"text"' not in serialized
+
+
+def test_real_corpus_report_is_offline_and_separates_proposals():
+    document = validate_corpus(json.loads((ROOT / "data/editorial-corpus/corpus.json").read_text()))
+    report = evaluate(document, load_snapshots(ROOT))
+    confirmed = sum(row["review"]["status"] == "confirmed" for row in document["items"])
+    assert report["confirmed_items"] == confirmed
+    proposals_only = deepcopy(document)
+    for row in proposals_only["items"]:
+        row["label"], row["review"] = deepcopy(row["proposed_label"]), {
+            **row["review"], "status": "proposed", "reviewer": None, "reviewed_at": None}
+    gated = evaluate(validate_corpus(proposals_only), load_snapshots(ROOT))
+    assert {row["status"] for row in gated["gates"]} == {"insufficient_evidence"}
+    assert gated["groups"]["confirmed"] == {}
+    assert "Etiquetas propuestas" in render_markdown(gated)
 
 
 def test_selection_metrics_count_errors_unclear_and_changed_text():

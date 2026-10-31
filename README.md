@@ -36,6 +36,8 @@ Para desarrollo: `npm ci`, `npm run test:api`, `npm run dev:api`. El módulo Pyt
 
 Los [contratos públicos y sus fixtures](docs/CONTRACTS.md) y el [registro único de fuentes](docs/SOURCES.md) explican cómo extender el monitor sin duplicar políticas de publicación.
 
+El [corpus editorial de evaluación](docs/EDITORIAL-CORPUS.md) mide sin red la selección, el departamento de las fichas y las ubicaciones automáticas por modelo y versión de política. Sus etiquetas iniciales son propuestas pendientes de revisión humana; sólo las confirmadas fijan los criterios para aceptar cambios de prompts o reglas.
+
 ## Uso responsable
 
 Contraste cada reporte con su documento original. No use las fichas para determinar culpabilidad, elegibilidad o riesgo de personas. Para errores no sensibles, use los formularios públicos con el identificador del registro. Para correcciones sensibles o retiradas, use el [canal editorial privado de esta instancia](SECURITY.md#correcciones-editoriales-sensibles-y-retiradas); no necesita abrir un issue público. Las vulnerabilidades técnicas tienen un canal privado separado en [Seguridad](SECURITY.md). No adjunte denuncias, nombres de personas protegidas ni documentos privados al primer contacto. El objetivo de primera respuesta privada es de 7 días naturales, orientativo y sin atención de emergencias.
