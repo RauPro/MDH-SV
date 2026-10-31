@@ -304,7 +304,10 @@ def check_templates(client, private_repo, public_repo, root=ROOT):
         for ref in dict.fromkeys(installed_checkout_refs(installed_text, public_repo)):
             if re.fullmatch(r'[0-9a-f]{40}', ref):
                 compare = client.get_optional(f'/repos/{public_repo}/compare/{ref}...main', 'template-drift', 'failure')
-                if compare is READ_ERROR or compare is None:
+                if compare is READ_ERROR:
+                    continue
+                if compare is None:
+                    failure('template-drift', f'{installed} pins code {ref[:7]}, which does not exist in {public_repo}')
                     continue
                 status, ahead = compare.get('status'), compare.get('ahead_by')
                 if status == 'identical':
