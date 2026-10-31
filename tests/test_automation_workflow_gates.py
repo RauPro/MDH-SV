@@ -19,6 +19,7 @@ PUBLIC = [
 PRIVATE = [
     ('ops/review-queue/.github/workflows/collect.yml', 'collect'),
     ('ops/review-queue/.github/workflows/extract.yml', 'extract'),
+    ('ops/review-queue/.github/workflows/extract-fallback.yml', 'extract'),
     ('ops/review-queue/.github/workflows/review.yml', 'review'),
     ('ops/review-queue/.github/workflows/review-scope.yml', 'scope'),
     ('ops/review-queue/.github/workflows/reconcile-news-issues.yml', 'reconcile'),

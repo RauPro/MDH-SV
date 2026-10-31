@@ -18,9 +18,19 @@ def workflow(name):
     return yaml.load((ROOT / name).read_text(), Loader=yaml.BaseLoader)
 
 
-def test_hourly_job_classifies_first_from_a_current_private_cache():
+def test_scheduled_job_classifies_first_from_a_current_private_cache():
     value = workflow('extract.yml')
-    assert value['on']['schedule'] == [{'cron': '23 1,13 * * *'}]
+    # Every extract.yml completion launches the publisher chain, so the
+    # scheduled fallback lives in a sibling workflow that no chain listens to.
+    assert set(value['on']) == {'workflow_dispatch'}
+    fallback = workflow('extract-fallback.yml')
+    assert set(fallback['on']) == {'schedule', 'workflow_dispatch'}
+    assert fallback['on']['schedule'] == [{'cron': '23 1,13 * * *'}]
+    chained = workflow('publish-locations.yml')['on']['workflow_run']['workflows']
+    assert fallback['name'] not in chained
+    assert fallback['jobs']['extract'] == value['jobs']['extract']
+    assert fallback['concurrency'] == value['concurrency']
+    assert fallback['permissions'] == value['permissions']
     steps = value['jobs']['extract']['steps']
     private_checkout = next(s for s in steps if s.get('with', {}).get('path') == 'inbox')
     assert private_checkout['with']['ref'] == 'main'

@@ -40,6 +40,7 @@ WORKFLOWS = {
     'ops/official-statistics-review/review.yml': ('private', 2, 1),
     'ops/review-queue/.github/workflows/collect.yml': ('private', 1, 1),
     'ops/review-queue/.github/workflows/extract.yml': ('private', 2, 1),
+    'ops/review-queue/.github/workflows/extract-fallback.yml': ('private', 2, 1),
     'ops/review-queue/.github/workflows/review.yml': ('private', 1, 1),
     'ops/review-queue/.github/workflows/review-scope.yml': ('private', 2, 1),
     'ops/review-queue/.github/workflows/publish-locations.yml': ('private', 4, 2),
