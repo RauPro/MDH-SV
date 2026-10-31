@@ -24,16 +24,39 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 40,
-      "pages_fetched": 40,
+      "posts_scanned": 42,
+      "pages_fetched": 42,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-31T13:01:05.758166+00:00",
+      "last_attempt_at": "2026-10-31T21:50:40.786884+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "e21ae5e7dc5376ffc0d05f9caa457acb75273522cc10882153b86fdc6cfec120",
+      "title": "PNC captura a joven de 26 años con bolsa llena de marihuana",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/pnc-captura-a-joven-de-26-anos-con-bolsa-llena-de-marihuana",
+      "published_date": "2026-10-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-31T21:50:40.786884+00:00"
+      }
+    },
     {
       "id": "b9ea34dd38fd890b6c55dc312c5efb72f47f38253a38c38f34bcf4e5a8e8df9b",
       "title": "Keiko Fujimori espera concluir dos megacárceles a misma velocidad que el Cecot",
@@ -57,6 +80,30 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-10-31T13:01:05.758166+00:00"
+      }
+    },
+    {
+      "id": "5b431fc46e6d25c7702be9cd145689736c2695bc25325b53587ecad1c1d70ad8",
+      "title": "PNC captura a supuesto pandillero de la MS-13 acusado de homicidio agravado",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/pnc-captura-a-supuesto-pandillero-de-la-ms-13-acusado-de-homicidio-agravado",
+      "published_date": "2026-10-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-31T21:50:40.786884+00:00"
       }
     },
     {
@@ -1063,7 +1110,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-31T13:01:05.758166+00:00",
+    "last_attempt_at": "2026-10-31T21:50:40.786884+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -1111,9 +1158,11 @@
       "https://diario.elmundo.sv/nacionales/hombre-que-violo-a-una-menor-de-edad-en-una-zona-rural-de-nejapa-recibe-mas-de-34-anos-de-carcel",
       "https://diario.elmundo.sv/nacionales/imponen-condenas-de-hasta-60-anos-de-carcel-a-17-pandilleros-de-la-ms-13-que-operaban-en-santa-tecla-y-san-juan-opico",
       "https://diario.elmundo.sv/nacionales/dictan-20-anos-de-carcel-para-un-guatemalteco-y-un-salvadoreno-que-llevaban-375-kilogramos-de-cocaina-en-una-lancha",
-      "https://diario.elmundo.sv/politica/keiko-fujimori-espera-concluir-dos-megacarceles-a-misma-velocidad-que-el-cecot"
+      "https://diario.elmundo.sv/politica/keiko-fujimori-espera-concluir-dos-megacarceles-a-misma-velocidad-que-el-cecot",
+      "https://diario.elmundo.sv/nacionales/pnc-captura-a-supuesto-pandillero-de-la-ms-13-acusado-de-homicidio-agravado",
+      "https://diario.elmundo.sv/nacionales/pnc-captura-a-joven-de-26-anos-con-bolsa-llena-de-marihuana"
     ],
-    "article_cursor": 42,
+    "article_cursor": 44,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1366,6 +1415,18 @@
         "published_date": "2026-10-31",
         "last_attempt_at": "2026-10-31T13:01:05.758166+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/pnc-captura-a-supuesto-pandillero-de-la-ms-13-acusado-de-homicidio-agravado": {
+        "status": "selected",
+        "published_date": "2026-10-31",
+        "last_attempt_at": "2026-10-31T21:50:40.786884+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/pnc-captura-a-joven-de-26-anos-con-bolsa-llena-de-marihuana": {
+        "status": "selected",
+        "published_date": "2026-10-31",
+        "last_attempt_at": "2026-10-31T21:50:40.786884+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1377,16 +1438,16 @@
         "article_urls_matching_anchor": 5,
         "article_urls_observed": 20,
         "article_urls_selected": 5,
-        "last_attempt_at": "2026-10-31T13:01:05.758166+00:00"
+        "last_attempt_at": "2026-10-31T21:50:40.786884+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
+        "article_urls_matching_anchor": 2,
         "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-31T13:01:05.758166+00:00"
+        "article_urls_selected": 2,
+        "last_attempt_at": "2026-10-31T21:50:40.786884+00:00"
       }
     },
     "index_screen_version": 3
