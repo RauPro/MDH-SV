@@ -206,11 +206,21 @@ def notes(root, tag, commit):
         changelog = show(root, f'{ref}', 'CHANGELOG.md').decode()
     except ReleaseError:
         changelog = (root / 'CHANGELOG.md').read_text()
-    match = re.search(rf'^## \[{re.escape(version)}\][^\n]*\n(.*?)(?=^## \[|\Z)',
+    match = re.search(rf'^## \[{re.escape(version)}\][^\n]*\n(.*?)(?=^## \[|^\[[^\]]+\]:|\Z)',
                       changelog, re.MULTILINE | re.DOTALL)
     if not match:
         raise ReleaseError(f'CHANGELOG.md has no ## [{version}] section')
-    return match.group(1).strip()
+    body = match.group(1).strip()
+    # The release body is standalone: append the definitions of the reference
+    # labels this section actually cites, in first-appearance order.
+    definitions = dict(re.findall(r'^\[([^\]]+)\]:\s*(\S+)', changelog, re.MULTILINE))
+    used = []
+    for label in re.findall(r'\[([^\]\n]+)\](?![:(])', body):
+        if label in definitions and label not in used:
+            used.append(label)
+    if used:
+        body += '\n\n' + '\n'.join(f'[{label}]: {definitions[label]}' for label in used)
+    return body
 
 
 def main(argv=None):

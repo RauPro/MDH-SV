@@ -19,6 +19,10 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 
 - Dependabot agrupa las actualizaciones menores y de parche por directorio.
 
+### Corregido
+
+- Las notas de release incluyen las definiciones de los enlaces que citan.
+
 ## [2.1.0] - 2026-10-31
 
 ### Añadido
