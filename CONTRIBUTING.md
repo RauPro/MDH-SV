@@ -81,7 +81,7 @@ proyecto público; la cola editorial privada no forma parte del alcance.
    .venv/bin/python -m pytest -q tests/test_editorial_corpus.py
    ```
 
-   Tras P2.1 ([#249](https://github.com/RauPro/MDH-SV/pull/249)) también aplican
+   Tras P2.1 (#249) también aplican
    `tests/api-budgets.test.mjs` (incluido en `npm run test:api`) y
    `npm --prefix apps/web run check:bundle`.
 4. Antes del PR, `.venv/bin/python scripts/check.py` completo.
