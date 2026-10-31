@@ -77,7 +77,12 @@ revisar y probar este contrato.
 El merge es squash, sobre el SHA verificado, sin bypass. Si `main` avanzó, se
 actualiza la rama y se repite CI; un conflicto queda visible y no autoriza
 sobrescribir JSON. Otra ejecución puede preparar una propuesta nueva. Proponer
-un snapshot no equivale a integrarlo ni desplegarlo.
+un snapshot no equivale a integrarlo ni desplegarlo. Tras un merge confirmado
+de historia, el controlador cierra como sustituidas las PR abiertas de
+instantáneas de bibliografía estrictamente anteriores del mismo bot, con
+comentario y sin borrar ramas; nunca toca PR de noticias ni de excepciones,
+porque su contenido no se regenera. Los cierres son de mejor esfuerzo: un fallo
+sólo emite una advertencia, nunca convierte el merge en error.
 
 La conciliación privada de issues consulta el sitio desplegado. Puede conservar
 una ficha pendiente hasta que se integre y despliegue el PR; una conciliación

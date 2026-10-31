@@ -168,7 +168,9 @@ y el despliegue; el mantenedor integra esta plantilla después de revisar las pr
 Los commits hechos con `GITHUB_TOKEN` no disparan otros workflows de GitHub Actions.
 El refresco propone una rama y un PR, y despacha explícitamente `ci.yml`.
 El controlador público integra sólo los JSON permitidos tras CI y las reglas
-de `main`; no se hace push directo a esa rama. Véase la
+de `main`; no se hace push directo a esa rama. Tras integrar una instantánea
+histórica, cierra como sustituidas las PR abiertas estrictamente anteriores del
+mismo bot, con comentario explicativo y sin borrar ramas. Véase la
 [política de publicación](../../docs/PUBLICATION-SECURITY.md).
 El paso de recolección tiene un máximo de veinte minutos. Si falla o agota ese
 tiempo, el workflow vuelve a exportar los checkpoints disponibles, los valida y
