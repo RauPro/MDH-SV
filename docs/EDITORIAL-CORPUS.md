@@ -107,9 +107,10 @@ documentada en `review.notes`.
 El informe separa etiquetas confirmadas y provisionales:
 
 - `selection`, por `modelo|prompt_version`: precisión de jurisdicción y de
-  pertinencia entre las noticias seleccionadas. Las etiquetas `unclear` no se
-  cuentan como acierto ni como error. Los textos distintos del hash etiquetado
-  quedan en `text_changed`.
+  pertinencia entre las noticias seleccionadas, contadas por separado para que
+  un error de un eje no oculte el del otro. Las etiquetas `unclear` de un eje no
+  se cuentan como acierto ni como error en ese eje. Los textos distintos del hash
+  etiquetado quedan en `text_changed`.
 - `dossier_department`, por `modelo evaluador|policy_version`: precisión del
   departamento publicado. `false_absence` cuenta fichas que declaran
   `not_reported` cuando la etiqueta sitúa el hecho en un departamento.
@@ -127,6 +128,9 @@ El informe separa etiquetas confirmadas y provisionales:
 `--decisions` acepta un archivo con el formato de `data/selection/news.json`
 (`{"selections": [{"candidate_id": ..., "selection": {...}}]}`) sin cuerpos ni
 citas. Así se compara una versión candidata con la vigente sobre los mismos elementos.
+Ese archivo sólo describe la selección: el informe omite entonces las fichas y
+ubicaciones públicas, que pertenecen a otra versión. `--cell` debe nombrar una
+celda presente en el informe; una celda inexistente hace fallar el comando.
 
 ## Criterios para aceptar cambios
 
@@ -134,7 +138,7 @@ Se aplican a cambios de prompts (alcance, exclusión, extracción o evaluación)
 de `SCOPE_POLICY`, de las reglas de publicación automática, de las reglas de
 ubicación y del filtro territorial del título.
 
-| Criterio | Umbral | Mínimo de elementos vinculados |
+| Criterio | Umbral | Mínimo de elementos evaluados |
 | --- | --- | --- |
 | `selection_jurisdiction_precision` | ≥ 0,95 | 10 |
 | `selection_relevance_precision` | ≥ 0,90 | 10 |
@@ -142,9 +146,11 @@ ubicación y del filtro territorial del título.
 | `dossier_false_absence` | 0 | 1 |
 | `location_faithfulness` | ≥ 0,95 | 10 |
 
-1. Los criterios usan **sólo etiquetas confirmadas**. Una celda por debajo del
-   mínimo queda como `insufficient_evidence`: ni aprueba ni bloquea, y el cambio
-   necesita la aprobación temática explícita en la PR.
+1. Los criterios usan **sólo etiquetas confirmadas**. Para las precisiones se
+   cuentan los elementos evaluados en ese eje: no cuentan las etiquetas
+   `unclear` ni los textos cambiados. Una celda por debajo del mínimo queda como
+   `insufficient_evidence`: ni aprueba ni bloquea, y el cambio necesita la
+   aprobación temática explícita en la PR.
 2. Para una versión nueva, ejecútela sobre los mismos textos y obtenga decisiones
    sin cuerpos. Si necesita Gemini, hágalo en la cola privada con su presupuesto.
    Después compare:
