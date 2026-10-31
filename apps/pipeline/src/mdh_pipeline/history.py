@@ -22,7 +22,8 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from .review_queue import canonical_url, normalize, require_public_dns
+from .source_urls import canonical_url, normalize
+from .network_safety import require_public_dns
 from .publishers import SOURCES
 
 ROOT = Path(__file__).resolve().parents[4]

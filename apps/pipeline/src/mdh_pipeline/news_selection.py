@@ -142,7 +142,7 @@ def _assessment_counts(value):
 
 def validate_manifest(document, archive=None):
     """A stale or malformed manifest fails as a unit, without echoing its content."""
-    from .review_queue import canonical_url
+    from .source_urls import canonical_url
     if (not isinstance(document, dict) or type(document.get("schema_version")) is not int
             or document["schema_version"] not in {1, 2}
             or not isinstance(document.get("selections"), list) or len(document["selections"]) > MAX_SELECTIONS):
@@ -249,7 +249,7 @@ def _validate_scope_review_shape(document):
 
 def validate_scope_review(document, *, reference, content_sha256, now=None):
     """Validate a private scope assessment, including negative/unclear decisions."""
-    from .review_queue import canonical_url
+    from .source_urls import canonical_url
     try:
         _validate_scope_review_shape(document)
         instant = now or datetime.now(timezone.utc)
@@ -269,7 +269,7 @@ def validate_scope_review(document, *, reference, content_sha256, now=None):
 
 def validate_scope_audits(document, archive=None, *, now=None):
     """Validate minimal source-audit provenance; no source text or human attribution."""
-    from .review_queue import canonical_url
+    from .source_urls import canonical_url
     required = {"candidate_id", "source_url", "publisher", "published_date", "content_sha256",
                 "decision", "method", "human_reviewed", "checked_at", "reason"}
     if (not isinstance(document, dict) or set(document) != {"schema_version", "audits"}

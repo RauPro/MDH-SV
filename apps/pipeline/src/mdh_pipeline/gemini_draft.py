@@ -22,7 +22,7 @@ from .gemini_budget import QuotaDeferred, QuotaStateError
 from .news_dossier import FIELD_NAMES as NEWS_FIELDS, empty_news_dossier, validate_news_dossier
 from .publication import Publication
 from .privacy import PRIVACY_POLICY_VERSION, minimize_fields, privacy_flags as _privacy_flags
-from .review_queue import canonical_url, normalize
+from .source_urls import canonical_url, normalize
 from .news_scope_policy import SCOPE_POLICY
 
 PROMPT_VERSION = "mdh-universal-news-grounded-11-inclusive-violence"

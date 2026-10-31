@@ -16,7 +16,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .publication import Publication
-from .review_queue import canonical_url
+from .source_urls import canonical_url
 
 ROOT = Path(__file__).resolve().parents[4]
 HISTORY = ROOT / "apps/web/public/archive/news.json"

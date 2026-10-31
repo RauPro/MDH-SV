@@ -14,7 +14,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .review_queue import GitHubInbox, GitHubRequestError, canonical_url
+from .review_queue import GitHubInbox, GitHubRequestError
+from .source_urls import canonical_url
 
 AI_LABELS = {"ai/ready": "16815D", "ai/scope-review": "D97706",
              "ai/privacy-review": "9333EA", "ai/error": "B91C1C", "ai/pending": "D97706"}

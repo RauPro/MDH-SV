@@ -118,3 +118,15 @@ npm --prefix apps/web test
 Los contratos son evidencia ejecutable y acotada, no una afirmación de equivalencia
 formal entre lenguajes para toda entrada posible. Una divergencia nueva debe
 incorporarse al corpus para impedir que vuelva a pasar inadvertida.
+
+## Utilidades del pipeline
+
+`mdh_pipeline.source_urls` contiene normalización de texto e identidad de URL,
+sin importar la cola de GitHub ni realizar consultas DNS. La comprobación DNS
+vive en `network_safety`, usada por los lectores de fuentes. No debe llamarse
+para validar documentos ya disponibles en memoria.
+
+`file_outputs.write_json_outputs` comparte la escritura recuperable de documentos
+validados entre importación y publicación automática. Conserva el contrato de
+reemplazo por archivo, rollback de mejor esfuerzo y reintento de P1.3. Los nombres
+anteriores en los adaptadores se mantienen como aliases de compatibilidad.

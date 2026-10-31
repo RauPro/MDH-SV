@@ -20,7 +20,7 @@ from mdh_schema import DepartmentEnum
 from .article_source import fetch_article
 from .history import SOURCES, validate_reference
 from .news_dossier import FIELD_NAMES, validate_news_dossier
-from .review_queue import canonical_url, normalize
+from .source_urls import canonical_url, normalize
 from .municipalities import resolve_municipality, REFERENCE_VERSION
 
 HEX = re.compile(r"^[a-f0-9]{64}$")

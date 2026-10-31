@@ -16,7 +16,8 @@ import requests
 from bs4 import BeautifulSoup, Comment, Declaration, Doctype, ProcessingInstruction
 
 from .publishers import SOURCES
-from .review_queue import canonical_url, normalize, require_public_dns
+from .source_urls import canonical_url, normalize
+from .network_safety import require_public_dns
 
 MAX_BYTES = 1_000_000
 MAX_TEXT_CHARS = 24_000

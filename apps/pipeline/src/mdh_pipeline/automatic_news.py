@@ -713,8 +713,8 @@ def export_collection(inbox_dir, archive_path, reviewed_path, output_path, autom
     automatic, merged = project_collection(_inventory(inbox_dir / "drafts", required=True),
         _inventory(inbox_dir / "automatic-news"), archive, human=human,
         excluded_ids=excluded_ids, request_generations=request_generations)
-    from .review_import import _write_news_outputs
-    _write_news_outputs([(Path(automatic_output), automatic), (Path(output_path), merged)])
+    from .file_outputs import write_json_outputs
+    write_json_outputs([(Path(automatic_output), automatic), (Path(output_path), merged)])
     return {"automatic_dossiers": len(automatic["dossiers"]), "published_dossiers": len(merged["dossiers"])}
 
 

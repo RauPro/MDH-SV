@@ -17,7 +17,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_valida
 
 from .publication import Publication
 from .publishers import NEWS_HOSTS
-from .review_queue import canonical_url
+from .source_urls import canonical_url
 
 T = TypeVar("T")
 ExtractionStatus = Literal["pending", "processed", "source_unavailable", "error"]
