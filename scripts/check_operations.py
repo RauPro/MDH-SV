@@ -22,7 +22,10 @@ import re
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -34,19 +37,6 @@ TEMPLATE_MAP = {
 }
 REVIEW_QUEUE_TEMPLATES = 'ops/review-queue/.github/workflows'
 CODE_REF_PLACEHOLDER = 'MDH_PUBLIC_CODE_REF'
-
-# Workflows scheduled in GitHub or dispatched remotely on a fixed cadence.
-SCHEDULED = {
-    'public': {'.github/workflows/refresh-history.yml': '23 1,13'},
-    'private': {
-        'extract.yml': '7 1,13',          # Vercel cron dispatches it
-        'extract-fallback.yml': '23 1,13',
-        'collect.yml': '7 1,13',
-        'review.yml': '7 1,13',
-        'review-scope.yml': '7 1,13',
-        'reconcile-news-issues.yml': '7 1,13',
-    },
-}
 
 FINDINGS = []
 
@@ -65,6 +55,9 @@ def warning(area, message):
 
 def failure(area, message):
     find(area, 'failure', message)
+
+
+READ_ERROR = object()
 
 
 class GitHub:
@@ -90,11 +83,19 @@ class GitHub:
     def get(self, path):
         return self.request('GET', path)
 
-    def get_optional(self, path):
+    def get_optional(self, path, area=None, level='failure'):
         try:
             return self.get(path)
-        except Exception:
-            return None
+        except HTTPError as error:
+            if error.code == 404:
+                return None
+            if area:
+                find(area, level, f'{path} no se pudo leer (HTTP {error.code}); revisar permisos del token')
+            return READ_ERROR
+        except Exception as error:
+            if area:
+                find(area, level, f'{path} no se pudo leer ({type(error).__name__})')
+            return READ_ERROR
 
 
 def repo_get(client, repo, suffix=''):
@@ -134,12 +135,14 @@ def check_actions_policy(client, repos, expectations):
         problems = []
         if workflow.get('default_workflow_permissions') != expected['default_workflow_permissions']:
             problems.append(f'default_workflow_permissions={workflow.get("default_workflow_permissions")}')
-        if workflow.get('can_approve_pull_request_reviews') != expected['can_approve_pull_request_reviews']:
+        can_approve = expected['can_approve_pull_request_reviews']
+        want = can_approve[role] if isinstance(can_approve, dict) else can_approve
+        if workflow.get('can_approve_pull_request_reviews') != want:
             problems.append(f'can_approve_pull_request_reviews={workflow.get("can_approve_pull_request_reviews")}')
         if problems:
             failure('actions', f'{name}: ' + '; '.join(problems))
         else:
-            ok('actions', f'{name}: default permissions read, no auto-approval')
+            ok('actions', f'{name}: default permissions read, can_approve={can_approve[role] if isinstance(can_approve, dict) else can_approve}')
 
 
 def normalize(value, template):
@@ -161,8 +164,10 @@ def check_protection(client, repos, expectations, root=ROOT):
     public = repos['public']['full_name']
     expected_file = json.loads((root / '.github/main-protection.json').read_text())
     policy = expectations['public_main_protection']
-    protection = client.get_optional(f'/repos/{public}/branches/main/protection')
-    if protection is None:
+    protection = client.get_optional(f'/repos/{public}/branches/main/protection', 'protection', 'failure')
+    if protection is READ_ERROR:
+        pass
+    elif protection is None:
         failure('protection', f'{public}: main is not protected')
     else:
         diff = normalize(protection, expected_file)
@@ -176,7 +181,9 @@ def check_protection(client, repos, expectations, root=ROOT):
             ok('protection', f'{public}: main protection matches .github/main-protection.json')
     private = repos['private']['full_name']
     expected_private = expectations['private_main_protection']
-    private_protection = client.get_optional(f'/repos/{private}/branches/main/protection')
+    private_protection = client.get_optional(f'/repos/{private}/branches/main/protection', 'protection', 'failure')
+    if private_protection is READ_ERROR:
+        return
     is_protected = private_protection is not None
     if is_protected != expected_private['protected']:
         failure('protection', f'{private}: main protected={is_protected}, expected {expected_private["protected"]}')
@@ -191,8 +198,10 @@ def check_variables(client, repos, expectations, root=ROOT):
     model_var = {}
     for role, repo in repos.items():
         name = repo['full_name']
-        variables = {item['name']: item.get('value')
-                 for item in repo_get(client, name, '/actions/variables').get('variables', [])}
+        raw = client.get_optional(f'/repos/{name}/actions/variables', 'variables', 'failure')
+        if raw is READ_ERROR:
+            continue
+        variables = {item['name']: item.get('value') for item in (raw or {}).get('variables', [])}
         model_var[role] = variables.get('GEMINI_MODEL')
         for variable, rule in expectations['variables'].items():
             if role not in rule['repositories']:
@@ -261,9 +270,12 @@ def substitute_refs(template_text, installed_text, public_repo):
 
 def check_templates(client, private_repo, public_repo, root=ROOT):
     files = template_files(root)
-    listing = {item['name'] for item in repo_get(client, private_repo, '/contents/.github/workflows')}
-    known_targets = set(files.values())
-    for unknown in sorted(listing - {Path(t).name for t in known_targets}):
+    installed_texts = {}
+    listing_data = client.get_optional(f'/repos/{private_repo}/contents/.github/workflows', 'template-drift', 'failure')
+    if listing_data is READ_ERROR:
+        return installed_texts
+    listing = {item['name'] for item in listing_data}
+    for unknown in sorted(listing - {Path(t).name for t in files.values()}):
         failure('template-drift', f'unknown installed workflow: {unknown}')
     for template, installed in files.items():
         name = Path(installed).name
@@ -271,8 +283,11 @@ def check_templates(client, private_repo, public_repo, root=ROOT):
             warning('template-drift', f'template never installed: {template}')
             continue
         template_text = (root / template).read_text()
-        remote = repo_get(client, private_repo, f'/contents/{installed}')
+        remote = client.get_optional(f'/repos/{private_repo}/contents/{installed}', 'template-drift', 'failure')
+        if remote is READ_ERROR:
+            continue
         installed_text = base64.b64decode(remote['content']).decode()
+        installed_texts[name] = installed_text
         expected_text = substitute_refs(template_text, installed_text, public_repo)
         if expected_text == installed_text:
             ok('template-drift', f'{template} == {installed}')
@@ -282,18 +297,23 @@ def check_templates(client, private_repo, public_repo, root=ROOT):
             failure('template-drift', f'{template} differs from {installed}:\n{diff}')
         for ref in dict.fromkeys(installed_checkout_refs(installed_text, public_repo)):
             if re.fullmatch(r'[0-9a-f]{40}', ref):
-                compare = repo_get(client, public_repo, f'/compare/{ref}...main')
+                compare = client.get_optional(f'/repos/{public_repo}/compare/{ref}...main', 'template-drift', 'failure')
+                if compare is READ_ERROR:
+                    continue
                 behind = compare.get('behind_by')
                 if behind and behind > 0:
                     warning('template-drift', f'{installed} pins code {ref[:7]}, {behind} commits behind main')
                 else:
                     ok('template-drift', f'{installed} pins code {ref[:7]}, up to date')
+    return installed_texts
 
 
 def check_history_copies(client, public_repo, root=ROOT):
     local_template = (root / 'ops/history/refresh-history.yml').read_text()
     local_installed = (root / '.github/workflows/refresh-history.yml').read_text()
-    remote = repo_get(client, public_repo, '/contents/.github/workflows/refresh-history.yml')
+    remote = client.get_optional(f'/repos/{public_repo}/contents/.github/workflows/refresh-history.yml', 'history-copies', 'failure')
+    if remote is READ_ERROR:
+        return
     remote_text = base64.b64decode(remote['content']).decode()
     if local_template == local_installed == remote_text:
         ok('history-copies', 'refresh-history.yml identical locally and on public main')
@@ -304,50 +324,103 @@ def check_history_copies(client, public_repo, root=ROOT):
 def check_rulesets_and_credentials(client, repos):
     for role, repo in repos.items():
         name = repo['full_name']
-        rulesets = client.get_optional(f'/repos/{name}/rulesets') or []
-        ok('rulesets', f'{name}: {len(rulesets)} ruleset(s): ' + ', '.join(r.get('name', '?') for r in rulesets) or 'none')
-        keys = client.get_optional(f'/repos/{name}/keys') or []
-        for key in keys:
-            ok('credentials', f'{name}: deploy key {key.get("title")} read_only={key.get("read_only")} created={key.get("created_at")}')
-        collaborators = client.get_optional(f'/repos/{name}/collaborators') or []
-        for collaborator in collaborators:
-            ok('credentials', f'{name}: collaborator {collaborator.get("login")} permission={collaborator.get("role_name", collaborator.get("permissions"))}')
-        hooks = client.get_optional(f'/repos/{name}/hooks') or []
-        for hook in hooks:
-            url = (hook.get('config') or {}).get('url', '')
-            host = url.split('/')[2] if url.count('/') >= 2 else 'unknown'
-            ok('credentials', f'{name}: webhook {host} events={hook.get("events")} active={hook.get("active")}')
-        environments = (client.get_optional(f'/repos/{name}/environments') or {}).get('environments', [])
-        for environment in environments:
-            ok('credentials', f'{name}: environment {environment.get("name")}')
+        rulesets = client.get_optional(f'/repos/{name}/rulesets', 'rulesets', 'warning')
+        if rulesets is not READ_ERROR:
+            rulesets = rulesets or []
+            names = ', '.join(r.get('name', '?') for r in rulesets) or 'ninguno'
+            ok('rulesets', f'{name}: {len(rulesets)} ruleset(s): {names}')
+        keys = client.get_optional(f'/repos/{name}/keys', 'credentials', 'warning')
+        if keys is not READ_ERROR:
+            for key in keys or []:
+                ok('credentials', f'{name}: deploy key {key.get("title")} read_only={key.get("read_only")} created={key.get("created_at")}')
+        collaborators = client.get_optional(f'/repos/{name}/collaborators', 'credentials', 'warning')
+        if collaborators is not READ_ERROR:
+            for collaborator in collaborators or []:
+                ok('credentials', f'{name}: collaborator {collaborator.get("login")} permission={collaborator.get("role_name", collaborator.get("permissions"))}')
+        hooks = client.get_optional(f'/repos/{name}/hooks', 'credentials', 'warning')
+        if hooks is not READ_ERROR:
+            for hook in hooks or []:
+                url = (hook.get('config') or {}).get('url', '')
+                host = url.split('/')[2] if url.count('/') >= 2 else 'unknown'
+                ok('credentials', f'{name}: webhook {host} events={hook.get("events")} active={hook.get("active")}')
+        environments = client.get_optional(f'/repos/{name}/environments', 'credentials', 'warning')
+        if environments is not READ_ERROR:
+            for environment in (environments or {}).get('environments', []):
+                ok('credentials', f'{name}: environment {environment.get("name")}')
 
 
 def cron_gap_hours(cron):
-    minutes, hours, *_ = cron.split()
-    hours = sorted(int(hour) for hour in hours.split(',') if hour.strip().isdigit())
-    if not hours:
+    parts = cron.split()
+    if len(parts) < 2:
         return 24
-    gaps = [hours[index + 1] - hours[index] for index in range(len(hours) - 1)] + [24 - hours[-1] + hours[0]]
-    return max(gaps)
+    hours = parts[1]
+    if hours == '*':
+        return 1
+    if hours.startswith('*/'):
+        return int(hours[2:])
+    if ',' in hours:
+        values = sorted(int(value) for value in hours.split(',') if value.strip().isdigit())
+        if not values:
+            return 24
+        gaps = [values[index + 1] - values[index] for index in range(len(values) - 1)] + [24 - values[-1] + values[0]]
+        return max(gaps)
+    return 24
 
 
-def check_run_health(client, repos, expectations):
+def workflow_schedule(text):
+    """Cron list plus whether the workflow is chained through workflow_run."""
+    document = yaml.load(text, Loader=yaml.BaseLoader)
+    if not isinstance(document, dict) or not isinstance(document.get('on'), dict):
+        return [], False
+    on = document['on']
+    crons = [entry.get('cron') for entry in on.get('schedule') or [] if isinstance(entry, dict)]
+    return [cron for cron in crons if cron], 'workflow_run' in on
+
+
+def vercel_cron(root):
+    """Cadence of the Vercel cron that dispatches the private extract cycle."""
+    config = json.loads((root / 'vercel.json').read_text())
+    for cron in config.get('crons', []):
+        if cron.get('path') == '/api/internal/hourly-ingestion':
+            return cron.get('schedule')
+    return '7 1,13'
+
+
+def check_run_health(client, repos, expectations, installed, root=ROOT):
     tolerance = expectations.get('schedule_delay_tolerance_hours', 8)
+    schedules = {'public': {}, 'private': {}}
+    for path in sorted((root / '.github/workflows').glob('*.yml')):
+        crons, _ = workflow_schedule(path.read_text())
+        if crons:
+            schedules['public'][path.name] = max(crons, key=cron_gap_hours)
+    extract_cron = vercel_cron(root)
+    for name, text in installed.items():
+        crons, chained = workflow_schedule(text)
+        if crons:
+            schedules['private'][name] = max(crons, key=cron_gap_hours)
+        elif chained or name == 'extract.yml':
+            # extract runs on the Vercel dispatch cadence; chained jobs share it
+            schedules['private'][name] = extract_cron
+    known = {'public': {path.name for path in (root / '.github/workflows').glob('*.yml')},
+             'private': set(installed)}
     for role, repo in repos.items():
         name = repo['full_name']
-        for workflow, cron in SCHEDULED[role].items():
-            runs = (client.get_optional(f'/repos/{name}/actions/workflows/{workflow}/runs?per_page=10')
-                    or {}).get('workflow_runs', [])
+        for workflow in sorted(known[role] - set(schedules[role])):
+            ok('run-health', f'{name}:{workflow}: no programado')
+        for workflow, cron in sorted(schedules[role].items()):
+            data = client.get_optional(f'/repos/{name}/actions/workflows/{workflow}/runs?per_page=10',
+                                       'run-health', 'failure')
+            if data is READ_ERROR:
+                continue
+            runs = (data or {}).get('workflow_runs', [])
             successes = [run for run in runs if run.get('conclusion') == 'success']
             window = timedelta(hours=cron_gap_hours(cron) + tolerance)
             if successes and iso_now() - parse_time(successes[0]['created_at']) <= window:
                 ok('run-health', f'{name}:{workflow} last success {successes[0]["created_at"]} within {window}')
-                continue
-            started = [run for run in runs if run.get('status') == 'in_progress' or run.get('conclusion') is not None]
-            if runs and all(run.get('conclusion') in ('startup_failure', 'failure') for run in runs[:3]) and not successes:
+            elif not runs:
+                warning('run-health', f'{name}:{workflow}: sin ejecuciones registradas')
+            elif runs[:3] and all(run.get('conclusion') in ('startup_failure', 'failure') for run in runs[:3]) and not successes:
                 warning('run-health', f'{name}:{workflow}: sin ejecuciones correctas recientes — probable cuota agotada')
-            elif started and not successes:
-                warning('run-health', f'{name}:{workflow}: sin ejecuciones correctas recientes')
             else:
                 failure('run-health', f'{name}:{workflow}: last success outside {window} or none')
 
@@ -359,10 +432,10 @@ def run_checks(client, root=ROOT):
     check_actions_policy(client, repos, expectations)
     check_protection(client, repos, expectations, root)
     check_variables(client, repos, expectations, root)
-    check_templates(client, repos['private']['full_name'], repos['public']['full_name'], root)
+    installed = check_templates(client, repos['private']['full_name'], repos['public']['full_name'], root)
     check_history_copies(client, repos['public']['full_name'], root)
     check_rulesets_and_credentials(client, repos)
-    check_run_health(client, repos, expectations)
+    check_run_health(client, repos, expectations, installed, root)
     return {'generated_at': iso_now().isoformat(), 'findings': FINDINGS,
             'summary': {'ok': sum(1 for f in FINDINGS if f['level'] == 'ok'),
                         'warnings': sum(1 for f in FINDINGS if f['level'] == 'warning'),
