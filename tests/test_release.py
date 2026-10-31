@@ -148,3 +148,28 @@ def test_notes_prints_the_section(tmp_path):
     repo = make_repo(tmp_path)
     text = release.notes(repo, 'v2.1.0', 'HEAD')
     assert 'Trabajo de la versión.' in text
+
+
+def test_build_refuses_an_output_inside_the_checkout(tmp_path):
+    repo = make_repo(tmp_path)
+    with pytest.raises(release.ReleaseError, match='inside the checkout'):
+        build(repo, repo / 'dist-a')
+    with pytest.raises(release.ReleaseError, match='inside the checkout'):
+        release.build(repo, 'v2.1.0', repo, 'HEAD')
+
+
+def test_workflow_outputs_and_assets_stay_outside_the_checkout(tmp_path):
+    import yaml
+    workflow = yaml.safe_load((ROOT / '.github/workflows/release.yml').read_text())
+    runs = ' '.join(step.get('run', '') for step in workflow['jobs']['release']['steps'])
+    outputs = re.findall(r'release\.py build --tag \S+ --output "?([^\s"]+)', runs)
+    assert outputs and all(output.startswith('$RUNNER_TEMP') for output in outputs)
+    assets = re.search(r'gh release create \S+ "?([^"\s]+)"?/\*', runs)
+    assert assets and assets.group(1).startswith('$RUNNER_TEMP')
+
+
+def test_changelog_references_are_bidirectional():
+    text = (ROOT / 'CHANGELOG.md').read_text()
+    used = set(re.findall(r'\[#(\d+)\](?!:)', text))
+    defined = set(re.findall(r'^\[#(\d+)\]:', text, re.MULTILINE))
+    assert used == defined
