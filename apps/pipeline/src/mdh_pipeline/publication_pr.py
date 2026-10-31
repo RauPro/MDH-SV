@@ -523,7 +523,64 @@ def control(client, event):
         "sha": head, "merge_method": "squash", "commit_title": f"chore: update public {kind} snapshots",
     })
     require(isinstance(merged, dict) and merged.get("merged") is True, "protected_merge_not_accepted")
+    if kind == "history":
+        close_superseded_history_prs(client, pr["number"], branch)
     return "merged_with_required_checks"
+
+
+SUPERSEDED_COMMENT = ("Cerrada automáticamente como sustituida por #{number}: `main` ya integró una "
+                      "instantánea posterior y las instantáneas de bibliografía se regeneran desde "
+                      "`main`. La rama se conserva; puede reabrirse si se detecta un dato ausente.")
+SUPERSEDED_MAX_PAGES = 5
+SUPERSEDED_MAX_CLOSINGS = 50
+
+
+def close_superseded_history_prs(client, merged_number, merged_branch):
+    """Close strictly older open history snapshot PRs after a confirmed merge.
+
+    Only history snapshots are superseded this way: they are regenerated from
+    ``main`` on every run. News snapshots can hold publisher output that later
+    runs do not regenerate, and exception PRs carry distinct editorial
+    withdrawals, so neither kind is ever closed here. Branches are never
+    deleted. Failures are best-effort: a listing or closing error cannot turn
+    the confirmed merge into a failure.
+    """
+    merged_match = BRANCH.fullmatch(merged_branch)
+    merged_position = (int(merged_match[2]), int(merged_match[3]))
+    closed, failed = [], []
+    try:
+        for page in range(1, SUPERSEDED_MAX_PAGES + 1):
+            pulls = client.call(
+                "GET", api(f"pulls?state=open&base=main&per_page=100&page={page}"))
+            require(isinstance(pulls, list), "invalid_pulls_listing")
+            for candidate in pulls:
+                if len(closed) + len(failed) >= SUPERSEDED_MAX_CLOSINGS:
+                    break
+                if not isinstance(candidate, dict):
+                    continue
+                ref = candidate.get("head", {}).get("ref")
+                match = BRANCH.fullmatch(ref) if isinstance(ref, str) else None
+                if (match is None or match[1] != "history"
+                        or (int(match[2]), int(match[3])) >= merged_position
+                        or candidate.get("number") == merged_number
+                        or candidate.get("head", {}).get("repo", {}).get("full_name") != REPOSITORY
+                        or not bot(candidate.get("user"))):
+                    continue
+                try:
+                    client.call("POST", api(f"issues/{candidate['number']}/comments"),
+                                {"body": SUPERSEDED_COMMENT.format(number=merged_number)})
+                    client.call("PATCH", api(f"pulls/{candidate['number']}"), {"state": "closed"})
+                except (PublicationError, KeyError, ValueError, OSError):
+                    failed.append(candidate["number"])
+                else:
+                    closed.append(candidate["number"])
+            if len(pulls) < 100 or len(closed) + len(failed) >= SUPERSEDED_MAX_CLOSINGS:
+                break
+    except (PublicationError, KeyError, ValueError, OSError):
+        failed.append("list")
+    if failed:
+        print("::warning::superseded_close_failed")
+    print(json.dumps({"superseded_closed": closed, "superseded_failed": failed}))
 
 
 def main(argv=None):

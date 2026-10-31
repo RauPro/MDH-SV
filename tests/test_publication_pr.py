@@ -27,6 +27,13 @@ def run(branch, sha=HEAD, event="workflow_dispatch", actor=BOT, identifier=91):
     }
 
 
+def snapshot_pr(number, kind="history", run_id=100, attempt=1, *, user=BOT, repo=None):
+    return {"number": number, "state": "open", "user": deepcopy(user),
+            "head": {"ref": f"chore/automated-{kind}-{run_id}-{attempt}",
+                     "repo": {"full_name": publication.REPOSITORY if repo is None else repo}},
+            "base": {"ref": "main", "repo": {"full_name": publication.REPOSITORY}}}
+
+
 def pull(branch, sha=HEAD, body=""):
     return {"number": 7, "state": "open", "draft": False, "mergeable": True, "user": deepcopy(BOT), "body": body,
             "head": {"ref": branch, "sha": sha, "repo": {"full_name": publication.REPOSITORY}},
@@ -74,6 +81,10 @@ class GitHubFake:
         self.native_ids = [501]
         self.native_listing_count = None
         self.approval_error = None
+        self.superseded_prs = []
+        self.superseded_failures = set()
+        self.comments = []
+        self.closed_prs = []
 
     def add_file(self, commit, path, content, *, mode="100644", kind="blob"):
         import hashlib
@@ -136,8 +147,26 @@ class GitHubFake:
             return {"sha": sha, "encoding": "base64", "size": len(self.files[sha]),
                     "content": base64.b64encode(self.files[sha]).decode()}
         if method == "GET" and path.startswith("pulls?"):
-            assert parse_qs(urlsplit("/" + path).query)["head"] == [f"RauPro:{self.branch}"]
+            query = parse_qs(urlsplit("/" + path).query)
+            if "page" in query:
+                assert query["state"] == ["open"] and query["base"] == ["main"] \
+                    and query["per_page"] == ["100"]
+                start = (int(query["page"][0]) - 1) * 100
+                return deepcopy(self.superseded_prs[start:start + 100])
+            assert query["head"] == [f"RauPro:{self.branch}"]
             return [] if self.pr is None else [deepcopy(self.pr)]
+        if method == "POST" and path.startswith("issues/") and path.endswith("/comments"):
+            number = int(path.split("/")[1])
+            if number in self.superseded_failures:
+                raise publication.PublicationError("comment_failed")
+            self.comments.append((number, payload["body"]))
+            return {"id": number}
+        if method == "PATCH" and path.startswith("pulls/"):
+            number = int(path.split("/")[-1])
+            if number in self.superseded_failures:
+                raise publication.PublicationError("patch_failed")
+            self.closed_prs.append(number)
+            return {"state": "closed"}
         if method == "GET" and path == "pulls/7":
             result = deepcopy(self.pr)
             if self.mergeability_reads < self.mergeability_delay:
@@ -801,3 +830,92 @@ def test_latest_native_run_for_each_workflow_must_pass(monkeypatch):
     with pytest.raises(publication.PublicationError, match="native_pr_ci_unsuccessful"):
         publication.control(client, client.event())
     assert not client.writes()
+
+
+def test_supersede_closes_only_older_history_bot_prs(capsys):
+    client = GitHubFake("history")
+    client.superseded_prs = [
+        snapshot_pr(11, run_id=90, attempt=1),                    # older run -> close
+        snapshot_pr(12, run_id=122, attempt=3),                   # older run -> close
+        snapshot_pr(7, run_id=122, attempt=2),                    # the merged PR itself
+        snapshot_pr(13, run_id=124, attempt=1),                   # newer run -> keep
+        snapshot_pr(14, run_id=123, attempt=2),                   # same run newer attempt -> keep
+        snapshot_pr(15, kind="news", run_id=90),                  # news -> keep
+        snapshot_pr(16, kind="exception", run_id=90),             # exception -> keep
+        snapshot_pr(17, run_id=90, user=HUMAN),                   # not the bot -> keep
+        snapshot_pr(18, run_id=90, repo="Other/fork"),            # fork head -> keep
+    ]
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    assert client.closed_prs == [11, 12]
+    assert [number for number, _ in client.comments] == [11, 12]
+    assert "#7" in client.comments[0][1] and "se conserva" in client.comments[0][1]
+    summary = json.loads(capsys.readouterr().out.strip().splitlines()[-1])
+    assert summary == {"superseded_closed": [11, 12], "superseded_failed": []}
+
+
+def test_supersede_honours_listing_pages_and_closing_bounds(capsys):
+    client = GitHubFake("history")
+    client.superseded_prs = [snapshot_pr(1000 + index, run_id=90) for index in range(120)]
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    assert len(client.closed_prs) == 50
+    listed_pages = [path for method, path, _ in client.calls
+                    if method == "GET" and "&page=" in path]
+    assert len(listed_pages) == 1  # bound hit during the first full page
+    client2 = GitHubFake("history")
+    # More than five hundred open PRs with no eligible candidate: listing stops at five pages.
+    client2.superseded_prs = [snapshot_pr(1000 + index, kind="news", run_id=90) for index in range(520)]
+    assert publication.control(client2, client2.event()) == "merged_with_required_checks"
+    listed2 = [path for method, path, _ in client2.calls
+               if method == "GET" and "&page=" in path]
+    assert len(listed2) == 5 and not client2.closed_prs
+
+
+def test_supersede_failure_does_not_stop_others_or_change_result(capsys):
+    client = GitHubFake("history")
+    client.superseded_prs = [snapshot_pr(11, run_id=90), snapshot_pr(12, run_id=91),
+                             snapshot_pr(13, run_id=92)]
+    client.superseded_failures = {12}
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    assert client.closed_prs == [11, 13]
+    out = capsys.readouterr().out
+    assert "::warning::superseded_close_failed" in out
+    summary = json.loads(out.strip().splitlines()[-1])
+    assert summary == {"superseded_closed": [11, 13], "superseded_failed": [12]}
+
+
+def test_supersede_listing_error_is_only_a_warning(capsys):
+    client = GitHubFake("history")
+
+    class FailingList(GitHubFake):
+        def call(self, method, path, payload=None):
+            if method == "GET" and "&page=" in path:
+                raise publication.PublicationError("listing_failed")
+            return super().call(method, path, payload)
+
+    client = FailingList("history")
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    out = capsys.readouterr().out
+    assert "::warning::superseded_close_failed" in out
+    assert json.loads(out.strip().splitlines()[-1]) == {
+        "superseded_closed": [], "superseded_failed": ["list"]}
+
+
+@pytest.mark.parametrize("kind", ["news", "exception"])
+def test_supersede_never_lists_for_non_history_kinds(kind, capsys):
+    client = GitHubFake(kind)
+    if kind == "news":
+        client.pr = pull(client.branch, body="<!-- mdh-publication-origin: 90 -->")
+        client.runs[90] = run(client.branch, BASE, "push", OWNER, 90)
+        client.runs[91] = run(client.branch)
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    assert not client.comments and not client.closed_prs
+    assert not any("&page=" in path for _, path, _ in client.calls)
+
+
+def test_supersede_does_nothing_when_merge_is_not_confirmed(capsys):
+    client = GitHubFake("history")
+    client.merge_result = {"merged": False}
+    with pytest.raises(publication.PublicationError, match="protected_merge_not_accepted"):
+        publication.control(client, client.event())
+    assert not any("&page=" in path for _, path, _ in client.calls)
+    assert capsys.readouterr().out == ""
