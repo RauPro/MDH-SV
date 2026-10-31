@@ -24,16 +24,41 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 39,
-      "pages_fetched": 39,
+      "posts_scanned": 40,
+      "pages_fetched": 40,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-31T06:14:50.463635+00:00",
+      "last_attempt_at": "2026-10-31T13:01:05.758166+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "b9ea34dd38fd890b6c55dc312c5efb72f47f38253a38c38f34bcf4e5a8e8df9b",
+      "title": "Keiko Fujimori espera concluir dos megacárceles a misma velocidad que el Cecot",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/politica/keiko-fujimori-espera-concluir-dos-megacarceles-a-misma-velocidad-que-el-cecot",
+      "published_date": "2026-10-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "cecot"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-31T13:01:05.758166+00:00"
+      }
+    },
     {
       "id": "fef5fc741c76d443b645ff59481c63e75862a60d432fd373de801c9aaeb518ce",
       "title": "Condenan a exalcaldesa de Soyapango a cinco años de prisión por despidos arbitrarios",
@@ -1038,7 +1063,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-31T06:14:50.463635+00:00",
+    "last_attempt_at": "2026-10-31T13:01:05.758166+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -1085,9 +1110,10 @@
       "https://diario.elmundo.sv/nacionales/decretan-prision-provisional-en-contra-de-un-hombre-que-lesiono-a-otro-y-a-una-mujer-mientras-manejaba-ebrio-en-santa-ana",
       "https://diario.elmundo.sv/nacionales/hombre-que-violo-a-una-menor-de-edad-en-una-zona-rural-de-nejapa-recibe-mas-de-34-anos-de-carcel",
       "https://diario.elmundo.sv/nacionales/imponen-condenas-de-hasta-60-anos-de-carcel-a-17-pandilleros-de-la-ms-13-que-operaban-en-santa-tecla-y-san-juan-opico",
-      "https://diario.elmundo.sv/nacionales/dictan-20-anos-de-carcel-para-un-guatemalteco-y-un-salvadoreno-que-llevaban-375-kilogramos-de-cocaina-en-una-lancha"
+      "https://diario.elmundo.sv/nacionales/dictan-20-anos-de-carcel-para-un-guatemalteco-y-un-salvadoreno-que-llevaban-375-kilogramos-de-cocaina-en-una-lancha",
+      "https://diario.elmundo.sv/politica/keiko-fujimori-espera-concluir-dos-megacarceles-a-misma-velocidad-que-el-cecot"
     ],
-    "article_cursor": 41,
+    "article_cursor": 42,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1334,6 +1360,12 @@
         "published_date": "2026-10-30",
         "last_attempt_at": "2026-10-31T06:14:50.463635+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/politica/keiko-fujimori-espera-concluir-dos-megacarceles-a-misma-velocidad-que-el-cecot": {
+        "status": "selected",
+        "published_date": "2026-10-31",
+        "last_attempt_at": "2026-10-31T13:01:05.758166+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1345,7 +1377,7 @@
         "article_urls_matching_anchor": 5,
         "article_urls_observed": 20,
         "article_urls_selected": 5,
-        "last_attempt_at": "2026-10-31T06:14:50.463635+00:00"
+        "last_attempt_at": "2026-10-31T13:01:05.758166+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -1354,7 +1386,7 @@
         "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
         "article_urls_selected": 3,
-        "last_attempt_at": "2026-10-31T06:14:50.463635+00:00"
+        "last_attempt_at": "2026-10-31T13:01:05.758166+00:00"
       }
     },
     "index_screen_version": 3
