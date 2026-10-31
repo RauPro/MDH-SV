@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import { MapPin, X } from 'lucide-react';
 import { DEPARTMENTS } from '../geography/elSalvador';
 import { UNKNOWN_DEPARTMENT } from '../geography/territory';
@@ -26,7 +26,6 @@ const newsLabel = (count: number) => `${count} ${count === 1 ? 'noticia' : 'noti
 export function SalvadorMap({ selected, onSelect, counts, located, unlocated, invalidDates, unit = 'reports', available = true, loading = false, reviewed = 0, automated = 0, reviewedCounts = {}, automaticCounts = {} }: Props) {
   const [hovered, setHovered] = useState<string | null>(null);
   const isNews = unit === 'news';
-  const descriptionId = useId();
   const countLabel = isNews ? newsLabel : reportLabel;
   const unavailable = invalidDates || !available;
   const max = Math.max(1, ...Object.values(counts));
@@ -57,13 +56,12 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
       <div className="map-departments" role="group" aria-label="Seleccionar departamento en el mapa">
         {DEPARTMENTS.map(dept => <button key={dept.id}
           aria-pressed={selected === dept.name} disabled={unavailable}
-          aria-describedby={isNews && available && !invalidDates && (counts[dept.name] ?? 0) > 0 ? `${descriptionId}-${dept.id}` : undefined}
           className={`${selected === dept.name ? 'selected' : ''}${isNews && automaticCounts[dept.name] ? ' has-automatic-location' : ''}`}
           onFocus={() => setHovered(dept.name)} onBlur={() => setHovered(null)}
           onMouseEnter={() => setHovered(dept.name)} onMouseLeave={() => setHovered(null)}
           onClick={() => choose(dept.name)}>
-          <span>{dept.name}{isNews && available && !invalidDates && (counts[dept.name] ?? 0) > 0 && <small className="map-location-breakdown" id={`${descriptionId}-${dept.id}`}><span className="reviewed">{reviewedCounts[dept.name] ?? 0} revisadas</span><span className="automatic">{automaticCounts[dept.name] ?? 0} automáticas</span></small>}</span><strong>{unavailable ? '—' : counts[dept.name] ?? 0}</strong>
-          <span className="visually-hidden"> {invalidDates ? 'rango de fechas inválido' : !available ? 'ubicaciones pendientes de comprobar' : countLabel(counts[dept.name] ?? 0).replace(/^\d+\s*/, '')}</span>
+          <span>{dept.name}{isNews && available && !invalidDates && (counts[dept.name] ?? 0) > 0 && <small className="map-location-breakdown"><span className="reviewed">{reviewedCounts[dept.name] ?? 0} revisadas</span><span className="automatic">{automaticCounts[dept.name] ?? 0} automáticas</span></small>}</span><strong>{unavailable ? '—' : counts[dept.name] ?? 0}</strong>
+          <span className="sr-only"> {invalidDates ? 'rango de fechas inválido' : !available ? 'ubicaciones pendientes de comprobar' : countLabel(counts[dept.name] ?? 0).replace(/^\d+\s*/, '')}</span>
         </button>)}
       </div>
     </div>
