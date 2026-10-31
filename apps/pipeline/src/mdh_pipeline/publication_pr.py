@@ -549,33 +549,39 @@ def close_superseded_history_prs(client, merged_number, merged_branch):
     merged_position = (int(merged_match[2]), int(merged_match[3]))
     closed, failed = [], []
     try:
+        # Collect every candidate before mutating anything: closing shifts the
+        # open-PR listing, so early closures would skip eligible PRs on later
+        # pages.
+        candidates = []
         for page in range(1, SUPERSEDED_MAX_PAGES + 1):
             pulls = client.call(
                 "GET", api(f"pulls?state=open&base=main&per_page=100&page={page}"))
             require(isinstance(pulls, list), "invalid_pulls_listing")
             for candidate in pulls:
-                if len(closed) + len(failed) >= SUPERSEDED_MAX_CLOSINGS:
-                    break
                 if not isinstance(candidate, dict):
                     continue
                 ref = candidate.get("head", {}).get("ref")
                 match = BRANCH.fullmatch(ref) if isinstance(ref, str) else None
+                number = candidate.get("number")
                 if (match is None or match[1] != "history"
                         or (int(match[2]), int(match[3])) >= merged_position
-                        or candidate.get("number") == merged_number
+                        or type(number) is not int or number <= 0
+                        or number == merged_number
                         or candidate.get("head", {}).get("repo", {}).get("full_name") != REPOSITORY
                         or not bot(candidate.get("user"))):
                     continue
-                try:
-                    client.call("POST", api(f"issues/{candidate['number']}/comments"),
-                                {"body": SUPERSEDED_COMMENT.format(number=merged_number)})
-                    client.call("PATCH", api(f"pulls/{candidate['number']}"), {"state": "closed"})
-                except (PublicationError, KeyError, ValueError, OSError):
-                    failed.append(candidate["number"])
-                else:
-                    closed.append(candidate["number"])
-            if len(pulls) < 100 or len(closed) + len(failed) >= SUPERSEDED_MAX_CLOSINGS:
+                candidates.append(candidate)
+            if len(pulls) < 100:
                 break
+        for candidate in candidates[:SUPERSEDED_MAX_CLOSINGS]:
+            try:
+                client.call("POST", api(f"issues/{candidate['number']}/comments"),
+                            {"body": SUPERSEDED_COMMENT.format(number=merged_number)})
+                client.call("PATCH", api(f"pulls/{candidate['number']}"), {"state": "closed"})
+            except (PublicationError, KeyError, ValueError, OSError):
+                failed.append(candidate["number"])
+            else:
+                closed.append(candidate["number"])
     except (PublicationError, KeyError, ValueError, OSError):
         failed.append("list")
     if failed:

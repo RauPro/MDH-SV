@@ -860,7 +860,7 @@ def test_supersede_honours_listing_pages_and_closing_bounds(capsys):
     assert len(client.closed_prs) == 50
     listed_pages = [path for method, path, _ in client.calls
                     if method == "GET" and "&page=" in path]
-    assert len(listed_pages) == 1  # bound hit during the first full page
+    assert len(listed_pages) == 2  # all full pages are listed before any close
     client2 = GitHubFake("history")
     # More than five hundred open PRs with no eligible candidate: listing stops at five pages.
     client2.superseded_prs = [snapshot_pr(1000 + index, kind="news", run_id=90) for index in range(520)]
@@ -868,6 +868,26 @@ def test_supersede_honours_listing_pages_and_closing_bounds(capsys):
     listed2 = [path for method, path, _ in client2.calls
                if method == "GET" and "&page=" in path]
     assert len(listed2) == 5 and not client2.closed_prs
+
+
+def test_supersede_lists_all_pages_before_closing_anything(capsys):
+    client = GitHubFake("history")
+    page_one = [snapshot_pr(1000 + index, run_id=90) if index < 10
+                else snapshot_pr(1000 + index, kind="news", run_id=90)
+                for index in range(100)]
+    page_two = [snapshot_pr(2000 + index, run_id=95) for index in range(12)]
+    client.superseded_prs = page_one + page_two
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    expected = [1000 + index for index in range(10)] + [2000 + index for index in range(12)]
+    assert client.closed_prs == expected
+    listing_at = [index for index, (method, path, _) in enumerate(client.calls)
+                  if method == "GET" and "&page=" in path]
+    closing_at = [index for index, (method, path, _) in enumerate(client.calls)
+                  if (method == "POST" and path.endswith("/comments"))
+                  or (method == "PATCH" and "/pulls/" in path)]
+    assert len(listing_at) == 2 and closing_at and max(listing_at) < min(closing_at)
+    summary = json.loads(capsys.readouterr().out.strip().splitlines()[-1])
+    assert summary == {"superseded_closed": expected, "superseded_failed": []}
 
 
 def test_supersede_failure_does_not_stop_others_or_change_result(capsys):
