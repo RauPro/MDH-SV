@@ -58,7 +58,7 @@ const successfulReply = index => index === 1 ? installationToken() : index === 2
 test('cron dispatch is scoped to one repository, one workflow and the current UTC hour', async () => {
   const config = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
   const cron = config.crons.find(item => item.path === '/api/internal/hourly-ingestion');
-  assert.equal(cron.schedule, '7 * * * *');
+  assert.equal(cron.schedule, '7 1,13 * * *');
   const requests = [];
   const result = await invoke({
     request: { headers: { authorization: `Bearer ${secret}`, 'x-vercel-cron-schedule': cron.schedule } },
@@ -96,7 +96,7 @@ test('cron dispatch is scoped to one repository, one workflow and the current UT
   assert.deepEqual(JSON.parse(requests[2].body), {
     ref: 'main',
     inputs: {
-      batch_size: '50', retry_failed: 'false',
+      batch_size: '16', retry_failed: 'false',
       scheduled_hour: '2026-10-12T05:00:00Z', trigger_source: 'vercel_cron',
     },
   });
@@ -109,7 +109,7 @@ test('cron dispatch is scoped to one repository, one workflow and the current UT
 });
 
 test('authenticated probes without the exact cron schedule remain manual in both the workflow and acknowledgement', async () => {
-  for (const schedule of [undefined, null, '', '23 * * * *', '7  * * * *', ['7 * * * *'], '7 * * * *, 7 * * * *']) {
+  for (const schedule of [undefined, null, '', '7 * * * *', '23 1,13 * * *', '7  1,13 * * *', ['7 1,13 * * *'], '7 1,13 * * *, 7 1,13 * * *']) {
     const requests = [];
     const headers = { authorization: `Bearer ${secret}` };
     if (schedule !== undefined) headers['x-vercel-cron-schedule'] = schedule;
@@ -138,7 +138,7 @@ test('preview, development and missing or weak authorization configuration fail 
 
 test('missing, malformed, overlong and wrong bearer credentials never call GitHub', async () => {
   for (const authorization of [undefined, '', ['Bearer incorrect'], `bearer ${secret}`, `Bearer ${secret} `, 'x'.repeat(8_193)]) {
-    const result = await invoke({ request: { headers: { authorization, 'x-vercel-cron-schedule': '7 * * * *' } } });
+    const result = await invoke({ request: { headers: { authorization, 'x-vercel-cron-schedule': '7 1,13 * * *' } } });
     assert.equal(result.status, 401);
     assert.deepEqual(result.body, { error: 'unauthorized' });
     assert.equal(result.calls, 0);
@@ -264,8 +264,8 @@ test('network errors are sanitized and the entire network operation has a bounde
   assert.deepEqual(timedOut.body, { error: 'dispatch_failed' });
 });
 
-test('deployment config schedules the authenticated endpoint hourly within function timeout', async () => {
+test('deployment config schedules the authenticated endpoint twice daily within function timeout', async () => {
   const config = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
-  assert.deepEqual(config.crons, [{ path: '/api/internal/hourly-ingestion', schedule: '7 * * * *' }]);
+  assert.deepEqual(config.crons, [{ path: '/api/internal/hourly-ingestion', schedule: '7 1,13 * * *' }]);
   assert.ok(config.functions['api/**/*.mjs'].maxDuration > 8);
 });

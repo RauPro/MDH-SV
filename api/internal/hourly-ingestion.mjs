@@ -4,7 +4,7 @@ import { validateInstanceConfig } from '../../shared/instance-config.mjs';
 
 const GITHUB_API = 'https://api.github.com';
 const ENDPOINT_PATH = '/api/internal/hourly-ingestion';
-const CRON_SCHEDULE = '7 * * * *';
+const CRON_SCHEDULE = '7 1,13 * * *';
 const NETWORK_TIMEOUT_MS = 8_000;
 
 function reply(response, status, body) {
@@ -149,7 +149,7 @@ export function createHourlyIngestionHandler({
         body: JSON.stringify({
           ref: 'main',
           inputs: {
-            batch_size: '50',
+            batch_size: '16',
             retry_failed: 'false',
             scheduled_hour: scheduledHour,
             trigger_source: triggerSource,

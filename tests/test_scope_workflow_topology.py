@@ -1,4 +1,4 @@
-"""Production must have one hourly classification owner and preserve human exclusions."""
+"""Production must have one scheduled classification owner and preserve human exclusions."""
 import json
 import re
 from pathlib import Path
@@ -20,7 +20,7 @@ def workflow(name):
 
 def test_hourly_job_classifies_first_from_a_current_private_cache():
     value = workflow('extract.yml')
-    assert value['on']['schedule'] == [{'cron': '23 * * * *'}]
+    assert value['on']['schedule'] == [{'cron': '23 1,13 * * *'}]
     steps = value['jobs']['extract']['steps']
     private_checkout = next(s for s in steps if s.get('with', {}).get('path') == 'inbox')
     assert private_checkout['with']['ref'] == 'main'

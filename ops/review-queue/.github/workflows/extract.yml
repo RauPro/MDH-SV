@@ -1,13 +1,13 @@
 name: Preparar fichas con Gemini
 on:
   schedule:
-    - cron: '23 * * * *'
+    - cron: '23 1,13 * * *'
   workflow_dispatch:
     inputs:
       batch_size:
         description: Techo de solicitudes para clasificación y fichas (1 a 50; respeta la cuota horaria)
         type: number
-        default: 50
+        default: 16
         required: true
       scheduled_hour:
         description: Hora UTC solicitada por el planificador (YYYY-MM-DDTHH:00:00Z; vacía para manual)
@@ -82,7 +82,7 @@ jobs:
           MDH_CODE_REF: MDH_PUBLIC_CODE_REF
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
           MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
-          MDH_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.batch_size) || '50' }}
+          MDH_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.batch_size) || '16' }}
           MDH_RETRY_FAILED: ${{ inputs.retry_failed || false }}
           MDH_SCHEDULED_HOUR: ${{ inputs.scheduled_hour || '' }}
           MDH_TRIGGER_SOURCE: ${{ inputs.trigger_source || 'manual' }}
