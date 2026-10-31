@@ -15,6 +15,7 @@ Usage:
 """
 import argparse
 import base64
+import ssl
 import difflib
 import json
 import re
@@ -77,7 +78,14 @@ class GitHub:
         assert method == 'GET', 'read-only: only GET requests are allowed'
         assert '/secrets' not in path, 'read-only: secrets endpoints are forbidden'
         request = Request(f'https://api.github.com{path}', method='GET', headers=self.headers)
-        return json.loads(urlopen(request, timeout=30).read())
+        context = ssl.create_default_context()
+        try:
+            import certifi
+        except ImportError:
+            pass
+        else:
+            context.load_verify_locations(cafile=certifi.where())
+        return json.loads(urlopen(request, timeout=30, context=context).read())
 
     def get(self, path):
         return self.request('GET', path)
@@ -139,7 +147,7 @@ def normalize(value, template):
     if isinstance(template, dict):
         if not isinstance(value, dict):
             return value
-        return {key: normalize(value.get(key, '∅'), expected) for key, expected in template.items()}
+        return {key: normalize(value.get(key), expected) for key, expected in template.items()}
     if isinstance(template, list):
         if not isinstance(value, list):
             return value
@@ -240,20 +248,21 @@ def installed_checkout_refs(installed_text, public_repo):
 
 
 def substitute_refs(template_text, installed_text, public_repo):
-    refs = installed_checkout_refs(installed_text, public_repo)
+    # Every placeholder takes the pinned code SHA, in checkout order; env-var
+    # placeholders after the checkouts reuse the last SHA.
+    refs = [ref for ref in installed_checkout_refs(installed_text, public_repo)
+            if re.fullmatch(r'[0-9a-f]{40}', ref)]
     parts = template_text.split(CODE_REF_PLACEHOLDER)
     result = parts[0]
     for index, part in enumerate(parts[1:]):
-        result += (refs[index] if index < len(refs) else CODE_REF_PLACEHOLDER) + part
+        result += (refs[min(index, len(refs) - 1)] if refs else CODE_REF_PLACEHOLDER) + part
     return result
 
 
-def check_templates(client, public_repo, root=ROOT):
+def check_templates(client, private_repo, public_repo, root=ROOT):
     files = template_files(root)
-    listing = {item['name'] for item in repo_get(client, public_repo, '/contents/.github/workflows')}
-    known_targets = set(files.values()) | {f'.github/workflows/{name}'
-        for name in ('ci.yml', 'deploy_web.yml', 'monitor_cron.yml', 'publication-pr.yml',
-                     'news-exception.yml', 'refresh-history.yml', 'release.yml')}
+    listing = {item['name'] for item in repo_get(client, private_repo, '/contents/.github/workflows')}
+    known_targets = set(files.values())
     for unknown in sorted(listing - {Path(t).name for t in known_targets}):
         failure('template-drift', f'unknown installed workflow: {unknown}')
     for template, installed in files.items():
@@ -262,7 +271,7 @@ def check_templates(client, public_repo, root=ROOT):
             warning('template-drift', f'template never installed: {template}')
             continue
         template_text = (root / template).read_text()
-        remote = repo_get(client, public_repo, f'/contents/{installed}')
+        remote = repo_get(client, private_repo, f'/contents/{installed}')
         installed_text = base64.b64decode(remote['content']).decode()
         expected_text = substitute_refs(template_text, installed_text, public_repo)
         if expected_text == installed_text:
@@ -271,7 +280,7 @@ def check_templates(client, public_repo, root=ROOT):
             diff = '\n'.join(difflib.unified_diff(expected_text.splitlines(), installed_text.splitlines(),
                                                 template, installed, lineterm=''))
             failure('template-drift', f'{template} differs from {installed}:\n{diff}')
-        for ref in installed_checkout_refs(installed_text, public_repo):
+        for ref in dict.fromkeys(installed_checkout_refs(installed_text, public_repo)):
             if re.fullmatch(r'[0-9a-f]{40}', ref):
                 compare = repo_get(client, public_repo, f'/compare/{ref}...main')
                 behind = compare.get('behind_by')
@@ -350,7 +359,7 @@ def run_checks(client, root=ROOT):
     check_actions_policy(client, repos, expectations)
     check_protection(client, repos, expectations, root)
     check_variables(client, repos, expectations, root)
-    check_templates(client, repos['public']['full_name'], root)
+    check_templates(client, repos['private']['full_name'], repos['public']['full_name'], root)
     check_history_copies(client, repos['public']['full_name'], root)
     check_rulesets_and_credentials(client, repos)
     check_run_health(client, repos, expectations)
