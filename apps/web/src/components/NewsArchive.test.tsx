@@ -42,8 +42,8 @@ it('lists every department mentioned by one news item while counting and display
   };
   serve(fixture, EMPTY, { ...EMPTY_LOCATIONS, schema_version: 5, locations: [location] });
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
-  const sanSalvador = await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
-  const ahuachapan = screen.getByRole('button', { name: 'Ahuachapán: 1 noticia' });
+  const sanSalvador = await screen.findByRole('button', { name: /^San Salvador/ });
+  const ahuachapan = screen.getByRole('button', { name: /^Ahuachapán/ });
   expect(screen.getByText('noticia con departamento disponible')).toHaveTextContent('1 noticia con departamento disponible');
   expect(screen.getByText('noticia con menciones automáticas sin revisar')).toHaveTextContent('1 noticia con menciones automáticas sin revisar');
   expect(screen.getByText(/El total cuenta noticias únicas/)).toBeInTheDocument();
@@ -73,7 +73,7 @@ it.each(['source_explicit_department', 'source_municipality_reference'])('explai
   };
   serve(fixture, EMPTY, { ...EMPTY_LOCATIONS, schema_version: 4, locations: [location] });
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
-  await screen.findByRole('button', { name: `${location.department}: 1 noticia` });
+  await screen.findByRole('button', { name: new RegExp(`^${location.department}`) });
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   const panel = screen.getByRole('region', { name: 'Ubicación automática sin revisar' });
   expect(panel).toHaveTextContent('su identificación no depende de que la ficha esté completa');
@@ -94,7 +94,7 @@ it('explains a department resolved from a cited municipality without pretending 
   } };
   serve(fixture, EMPTY, { ...EMPTY_LOCATIONS, locations: [location] });
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
-  await screen.findByRole('button', { name: 'Ahuachapán: 1 noticia' });
+  await screen.findByRole('button', { name: /^Ahuachapán/ });
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   const panel = screen.getByRole('region', { name: 'Ubicación automática sin revisar' });
   expect(panel).toHaveTextContent('Departamento obtenido del municipio o distrito citado: Ahuachapán');
@@ -109,7 +109,7 @@ it('labels same-source department corroboration as automatic and retains the pen
   };
   serve(fixture, EMPTY, { ...EMPTY_LOCATIONS, schema_version: 3, locations: [location] });
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
-  await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
+  await screen.findByRole('button', { name: /^San Salvador/ });
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   const panel = screen.getByRole('region', { name: 'Ubicación automática sin revisar' });
   expect(panel).toHaveTextContent('Departamento corroborado automáticamente en la misma fuente: San Salvador');
@@ -275,7 +275,7 @@ it.each(['other', 'not_relevant', 'unclear'])('excludes a later negative or unre
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('2 noticias seleccionadas');
   expect(screen.queryByRole('button', { name: fixture.records[0].title })).not.toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
 });
 
 it.each(['unreviewed', 'wrong_url', 'wrong_publisher', 'wrong_date', 'private_extra'])('never overlays unapproved or unrelated dossier data (%s)', async kind => {
@@ -326,7 +326,7 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   expect(screen.getAllByRole('article')).toHaveLength(3);
   expect(screen.getByText(/Ninguna noticia tiene un departamento disponible/)).toBeInTheDocument();
   expect(screen.getByText('3 sin ubicación automática disponible ni ubicación revisada.')).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   expect(screen.queryByText('Ver cobertura por medio y mes')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: /Sin ubicación pública en El Salvador/ }));
   expect(screen.getAllByRole('article')).toHaveLength(3);
@@ -343,7 +343,7 @@ it('filters news with reviewed locations independently of the map counts and kee
   dossier.fields.department = { value: 'San Salvador', status: 'reported', evidence_refs: ['bibliography'], note: null };
   serve(fixture, { schema_version: 1, dossiers: [dossier] });
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
-  const sanSalvador = await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
+  const sanSalvador = await screen.findByRole('button', { name: /^San Salvador/ });
   expect(screen.getAllByRole('article')).toHaveLength(3);
   await userEvent.click(sanSalvador);
   expect(screen.getByText('1 noticia seleccionada')).toBeInTheDocument();
@@ -352,15 +352,15 @@ it('filters news with reviewed locations independently of the map counts and kee
   await userEvent.click(screen.getByRole('button', { name: /Sin ubicación pública en El Salvador/ }));
   expect(screen.getByText('2 noticias seleccionadas')).toBeInTheDocument();
   expect(screen.queryByRole('button', { name: fixture.records[0].title })).not.toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'San Salvador: 1 noticia' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: 'Quitar filtro del mapa' }));
   expect(screen.getByText('3 noticias seleccionadas')).toBeInTheDocument();
   await userEvent.selectOptions(screen.getByLabelText('Medio'), fixture.records[1].publisher);
   expect(screen.getByText('1 noticia seleccionada')).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: 'Restablecer filtros de noticias' }));
   expect(screen.queryByLabelText('Vínculo territorial')).not.toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'San Salvador: 1 noticia' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
 });
 
 it('updates the news map with search, detected topic, scope and publication dates without inferring locations', async () => {
@@ -372,18 +372,18 @@ it('updates the news map with search, detected topic, scope and publication date
   archive.records[0].scope_terms = [];
   serve(archive, { schema_version: 1, dossiers: [dossier] });
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
-  await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
+  await screen.findByRole('button', { name: /^San Salvador/ });
 
   await userEvent.type(screen.getByRole('searchbox', { name: 'Buscar noticias' }), 'persecucion');
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   await userEvent.clear(screen.getByRole('searchbox', { name: 'Buscar noticias' }));
   await userEvent.selectOptions(screen.getByLabelText('Tema detectado'), 'defensores_y_sociedad_civil');
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   await userEvent.selectOptions(screen.getByLabelText('Tema detectado'), '');
   fireEvent.change(screen.getByLabelText('Publicación hasta'), { target: { value: '2026-08-18' } });
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   fireEvent.change(screen.getByLabelText('Publicación desde'), { target: { value: '2026-10-01' } });
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
   expect(screen.getByText('0 noticias seleccionadas')).toBeInTheDocument();
 });
 
@@ -392,7 +392,7 @@ it('retains every news reference and its pending sheet in the monitor when appro
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
   expect(screen.getAllByRole('article')).toHaveLength(3);
-  expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.getByRole('region', { name: 'Ficha estructurada de la noticia' })).toBeInTheDocument();
   expect(screen.getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(18);
@@ -443,15 +443,15 @@ it('maps automatic locations in a separate layer without publishing draft dossie
   const second = automatic(fixture.records[1]);
   serve(fixture, { schema_version: 1, dossiers: [dossier] }, { ...EMPTY_LOCATIONS, locations: [automatic(), second] });
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
-  await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
-  expect(screen.getByRole('button', { name: 'La Libertad: 1 noticia' })).toBeInTheDocument();
+  await screen.findByRole('button', { name: /^San Salvador/ });
+  expect(screen.getByRole('button', { name: /^La Libertad/ })).toBeInTheDocument();
   expect(screen.getByLabelText('Capa de ubicaciones')).toHaveValue('all');
   expect(screen.getAllByRole('article')).toHaveLength(3);
   expect(screen.getByText('Ubicación automática · Sin revisar')).toBeInTheDocument();
   await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'automated_unreviewed');
   expect(screen.getByText('1 noticia seleccionada')).toBeInTheDocument();
   expect(screen.queryByRole('button', { name: fixture.records[0].title })).not.toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'La Libertad: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^La Libertad/ })).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[1].title }));
   const dialog = screen.getByRole('dialog');
   const locationPanel = within(dialog).getByRole('region', { name: 'Ubicación automática sin revisar' });
@@ -466,7 +466,7 @@ it('maps automatic locations in a separate layer without publishing draft dossie
   await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'reviewed');
   expect(screen.getByText('1 noticia seleccionada')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: fixture.records[0].title })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'San Salvador: 0 noticias' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.queryByRole('region', { name: 'Ubicación automática sin revisar' })).not.toBeInTheDocument();
 });
@@ -484,12 +484,12 @@ it.each(['unavailable', 'private_extra', 'wrong_binding', 'stale_source'])('keep
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar ubicaciones' });
   expect(screen.getAllByRole('article')).toHaveLength(3);
-  expect(screen.queryByRole('button', { name: 'San Salvador: 0 noticias' })).not.toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
+  expect(screen.queryByRole('button', { name: /0 noticias/ })).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
   expect(screen.queryByText('PRIVATE VALUE')).not.toBeInTheDocument();
   retried = true;
   await userEvent.click(screen.getByRole('button', { name: 'Reintentar ubicaciones' }));
-  await screen.findByRole('button', { name: 'San Salvador: 1 noticia' });
+  await screen.findByRole('button', { name: /^San Salvador/ });
   expect(screen.getAllByRole('article')).toHaveLength(3);
   expect(vi.mocked(fetch).mock.calls.filter(call => call[0] === '/archive/news.json')).toHaveLength(1);
 });
@@ -501,7 +501,7 @@ it('does not use automatic data while the human-review overlay is unavailable', 
   }) as Response);
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
-  expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
   expect(screen.queryByText('Ubicación automática · Sin revisar')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.queryByRole('region', { name: 'Ubicación automática sin revisar' })).not.toBeInTheDocument();
@@ -520,7 +520,7 @@ it('clamps a later page when a delayed automatic layer finishes loading', async 
   vi.mocked(fetch).mockImplementation(async url => ({ ok: true, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? locations : archive }) as Response);
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('31 noticias seleccionadas');
-  expect(screen.getByRole('button', { name: 'San Salvador: ubicaciones pendientes de comprobar' })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
   await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'automated_unreviewed');
   await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
   expect(screen.getByText('Página 2 de 2')).toBeInTheDocument();

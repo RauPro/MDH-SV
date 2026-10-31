@@ -6,5 +6,7 @@ import { instanceDefine, localApiTarget } from './instance-config.ts'
 export default defineConfig({
   plugins: [react()],
   define: instanceDefine(),
+  // Small font subsets would inline as data: URLs, which font-src 'self' blocks.
+  build: { assetsInlineLimit: 0 },
   server: { proxy: { '/api': localApiTarget(), '/mcp': localApiTarget() } },
 })

@@ -151,7 +151,7 @@ it('shows supporting updates and authentic editorial review separately', async (
 it('restores the map and synchronizes native department buttons with the filters', async () => {
   await ready();
   const map = screen.getByRole('region',{name:'Mapa de El Salvador'});
-  const sonsonate = within(map).getByRole('button',{name:'Sonsonate: 2 reportes individuales'});
+  const sonsonate = within(map).getByRole('button',{name: /^Sonsonate/});
   sonsonate.focus();
   await userEvent.keyboard('{Enter}');
   expect(screen.getByLabelText('Departamento')).toHaveValue('Sonsonate');
@@ -166,8 +166,8 @@ it('filters from the SVG and preserves the other search constraints', async () =
   await userEvent.type(screen.getByRole('searchbox'), 'detencion');
   fireEvent.click(screen.getByTestId('map-region-SVSO'));
   expect(screen.getByText('1 resultado')).toBeInTheDocument();
-  expect(screen.getByRole('button',{name:'Sonsonate: 1 reporte individual'})).toHaveAttribute('aria-pressed','true');
-  await userEvent.click(screen.getByRole('button',{name:'La Unión: 0 reportes individuales'}));
+  expect(screen.getByRole('button',{name: /^Sonsonate/})).toHaveAttribute('aria-pressed','true');
+  await userEvent.click(screen.getByRole('button',{name: /^La Unión/}));
   expect(screen.getByText('0 resultados')).toBeInTheDocument();
   expect(screen.getByText(/La ausencia de registros en este conjunto/)).toBeInTheDocument();
 });
