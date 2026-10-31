@@ -16,14 +16,8 @@ from .news_publication import ARCHIVE as NEWS_ARCHIVE
 from .news_publication import PUBLIC as NEWS_PUBLIC
 from .news_publication import ROOT
 from .news_publication import SOURCE as NEWS_SOURCE
-from .publication import (
-    CATALOG,
-    CATALOG_EXPORT_NAMES,
-    PUBLIC,
-    Catalog,
-    Publication,
-    build_catalog_exports,
-)
+from .publication import CATALOG, CATALOG_EXPORT_NAMES, PUBLIC, build_catalog_exports
+from .contracts.catalog import Catalog as Catalog, Publication as Publication
 from .review_queue import GitHubInbox
 
 NEWS_SELECTION = ROOT / "data/selection/news.json"
@@ -96,11 +90,9 @@ def _json_bytes(document):
     return (json.dumps(document, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
 
 
-
-
 def _preserve_generated_at(document, previous_bytes):
     """A healthy retry must not refresh a projection solely because time passed."""
-    from .news_selection import _timestamp
+    from .contracts.selection import parse_timestamp as _timestamp
     if previous_bytes is None:
         return
     try:
@@ -116,7 +108,7 @@ def _preserve_generated_at(document, previous_bytes):
 
 def _retained_automatic_dossiers(previous_bytes, selected, reviewed_ids):
     """Keep existing public automation only after provenance and live binding checks."""
-    from .news_publication import validate_collection
+    from .contracts.news_collection import validate_collection as validate_collection
     if previous_bytes is None:
         return []
     try:
@@ -142,7 +134,8 @@ def _retained_automatic_dossiers(previous_bytes, selected, reviewed_ids):
 
 def _existing_title_masks(previous_bytes, selected, protected_title):
     """Preserve an existing redaction, never evidence or fields from the old archive."""
-    from .history import SOURCES, validate_reference
+    from .history import SOURCES
+    from .contracts.reference import validate_reference as validate_reference
     if previous_bytes is None:
         return set()
     try:
@@ -175,10 +168,10 @@ def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEW
                          selection=NEWS_SELECTION, exceptions=NEWS_EXCEPTIONS,
                          locations=None, history_folder=HISTORY_SOURCE):
     """Import a human decision against all candidates and regenerate selected public snapshots."""
-    from .automatic_locations import validate_collection as validate_locations
+    from .contracts.locations import validate_collection as validate_locations
     from .history import export_archive
-    from .news_dossier import validate_news_dossier
-    from .news_publication import validate_collection
+    from .contracts.dossier import validate_news_dossier as validate_news_dossier
+    from .contracts.news_collection import validate_collection as validate_collection
     from .news_requests import read_json as read_exceptions
     from .news_requests import validate_exceptions
     from .news_selection import select_archive
@@ -250,7 +243,7 @@ def import_approved_news(inbox, candidate_id, source=NEWS_SOURCE, *, archive=NEW
         prepared_source = _json_bytes(document)
     outputs = []
     if export:
-        from .automatic_news import PROTECTED_TITLE
+        from .contracts.dossier import PROTECTED_TITLE
         selected = select_archive(bibliography, _json_document(selection), reviewed_dossiers=document,
                                   excluded_ids=excluded_ids)
         selected_ids = {reference['id'] for reference in selected['records']}

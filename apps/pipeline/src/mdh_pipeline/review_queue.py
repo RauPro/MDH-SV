@@ -30,12 +30,6 @@ LABELS = {'review/pending': 'D97706', 'review/approved': '16815D', 'review/rejec
 LOG = logging.getLogger(__name__)
 
 
-
-
-
-
-
-
 def fetch_feed(feed, session=None):
     session = session or requests.Session()
     # No unrestricted redirects, network fallback in feedparser, or article-body scraping.
@@ -321,7 +315,7 @@ def private_draft_record(inbox, candidate):
 
 def private_news_dossier(inbox, candidate):
     """A partial news worksheet is reviewable without asserting a rights violation."""
-    from .news_dossier import validate_news_dossier
+    from .contracts.dossier import validate_news_dossier as validate_news_dossier
     draft = read_private_draft(inbox, candidate)
     try:
         document = validate_news_dossier(draft.get('news_dossier'))
@@ -336,7 +330,7 @@ def private_news_dossier(inbox, candidate):
 
 
 def review(inbox, event):
-    from .publication import Publication
+    from .contracts.catalog import Publication as Publication
     sender = event['sender']
     if sender.get('type') != 'User': raise ValueError('Approval requires a human GitHub account')
     username = sender['login']
@@ -389,7 +383,7 @@ def review(inbox, event):
         raise ValueError('Public draft must refer to the collected source')
     today = datetime.now(ZoneInfo('America/El_Salvador')).date().isoformat()
     if proposal_kind == 'news_dossier':
-        from .news_dossier import validate_news_dossier
+        from .contracts.dossier import validate_news_dossier as validate_news_dossier
         if proposed.get('candidate_id') != candidate['id'] or proposed.get('extraction_status') != 'processed':
             raise ValueError('News dossier identity or extraction state mismatch')
         proposed.update(human_reviewed=True, reviewed_by=username, reviewed_at=today, review_notes=notes)

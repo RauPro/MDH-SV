@@ -15,7 +15,7 @@ from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .publication import Publication
+from .contracts.catalog import Publication as Publication
 from .source_urls import canonical_url
 
 ROOT = Path(__file__).resolve().parents[4]

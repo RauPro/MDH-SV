@@ -18,4 +18,3 @@ def canonical_url(value, allowed_hosts=NEWS_HOSTS):
     if len(parts.path) < 2:
         raise ValueError('Article URL cannot be a homepage')
     return urlunsplit(('https', parts.hostname, parts.path, '', ''))
-

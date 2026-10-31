@@ -133,7 +133,7 @@ def parse_index(raw, content_type, url, source, diagnostics=None, selection_hint
                 if article:
                     articles.append(article)
     else:
-        from .history import TOPICS
+        from .contracts.reference import TOPICS as TOPICS
         terms = tuple(term for group in TOPICS.values() for term in group)
         soup = BeautifulSoup(raw, "html.parser")
         _blocked(soup)
@@ -249,7 +249,8 @@ def parse_article_metadata(raw, url, source):
 
 
 def collect_html_archive(source, start, end, folder, *, max_pages=150, refresh=False, now=None, session=None):
-    from .history import atomic_json, read_json, reference_from_metadata, SCREEN_VERSION, TOPICS
+    from .history import atomic_json, read_json, reference_from_metadata, SCREEN_VERSION
+    from .contracts.reference import TOPICS as TOPICS
     if start > end or not 1 <= max_pages <= 1000:
         raise ValueError("Invalid archive interval/budget")
     now = now or datetime.now(timezone.utc).isoformat()

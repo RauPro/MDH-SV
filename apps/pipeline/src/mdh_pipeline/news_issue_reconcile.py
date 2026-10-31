@@ -15,7 +15,7 @@ import time
 import requests
 
 from .gemini_review import candidate_from_issue, _load_phase_documents
-from .news_dossier import empty_news_dossier
+from .contracts.dossier import empty_news_dossier as empty_news_dossier
 from .news_issue_state import build_issue_state_indexes, candidate_matches_terminal
 from .news_requests import read_json, withdrawn_ids
 from .news_scope_rechecks import load_rechecks

@@ -1118,7 +1118,7 @@ def test_scope_routing_does_not_extract_unknown_historical_or_known_negative_new
 ])
 def test_invalid_metadata_is_isolated_before_sources_or_error_skeletons(monkeypatch, change):
     from datetime import date
-    from mdh_pipeline import news_dossier
+    from mdh_pipeline.contracts import dossier as news_dossier
     monkeypatch.setattr(news_dossier, '_today', lambda: date(2026, 10, 14))
     invalid, valid = candidate(100), candidate(101)
     invalid.update(change)
@@ -1136,7 +1136,7 @@ def test_invalid_metadata_is_isolated_before_sources_or_error_skeletons(monkeypa
 
 def test_future_metadata_does_not_call_model_even_when_only_candidate(monkeypatch):
     from datetime import date
-    from mdh_pipeline import news_dossier
+    from mdh_pipeline.contracts import dossier as news_dossier
     monkeypatch.setattr(news_dossier, '_today', lambda: date(2026, 10, 14))
     item = candidate(102, published_date='2026-10-15')
     inbox, workers = PrivateInbox([item]), Extractors()
