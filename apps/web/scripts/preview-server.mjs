@@ -10,7 +10,7 @@ import { createReadStream } from 'node:fs';
 import { readFile, stat } from 'node:fs/promises';
 import { join, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createPublicServer } from '../../../server/dev.mjs';
+import { configureLocalListener } from '../../../server/instance.mjs';
 
 const dist = fileURLToPath(new URL('../dist', import.meta.url));
 const vercel = JSON.parse(await readFile(new URL('../../../vercel.json', import.meta.url), 'utf8'));
@@ -52,7 +52,9 @@ const applyHeaders = (path, response) => {
   }
 };
 
-const api = createPublicServer();
+// The API handlers capture the trusted origin at module init, so the port
+// must be bound before server/dev.mjs is imported (see the listen callback).
+let api;
 
 const listener = async (request, response) => {
   const path = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
@@ -62,6 +64,7 @@ const listener = async (request, response) => {
   // /api/v1/openapi.json), so the original URL is what the handler sees.
   const rewritten = rewrites.find(rule => rule.pattern.test(path));
   if (path.startsWith('/api/') || (rewritten && rewritten.destination.startsWith('/api/'))) {
+    if (!api) { response.writeHead(503).end(); return; }
     api.emit('request', request, response);
     return;
   }
@@ -94,8 +97,12 @@ const server = createServer((request, response) => {
   });
 });
 
-const port = Number(process.env.PORT ?? 0);
-server.listen(port, '127.0.0.1', () => {
+const requestedPort = Number(process.env.PORT ?? 0);
+server.listen(requestedPort, '127.0.0.1', async () => {
   const address = server.address();
-  console.log(`Preview replica: http://127.0.0.1:${typeof address === 'object' && address ? address.port : port}`);
+  const bound = typeof address === 'object' && address ? address.port : requestedPort;
+  configureLocalListener(bound);
+  const { createPublicServer } = await import('../../../server/dev.mjs');
+  api = createPublicServer();
+  console.log(`Preview replica: http://127.0.0.1:${bound}`);
 });
