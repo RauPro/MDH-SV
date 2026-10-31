@@ -343,7 +343,7 @@ export const openapi = {
     NewsCoverageMonth: { type: 'object', additionalProperties: false, required: ['month', 'start_date', 'end_date', 'records', 'sources'], properties: { month: { type: 'string', pattern: '^\\d{4}-(0[1-9]|1[0-2])$' }, start_date: { type: 'string', format: 'date' }, end_date: { type: 'string', format: 'date' }, records: { type: 'integer', minimum: 0 }, sources: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['source_id', 'status', 'records'], properties: { source_id: { type: 'string' }, status: { type: 'string', enum: ['enumerated', 'partial', 'failed', 'not_started'] }, records: { type: 'integer', minimum: 0 } } } } } },
     NewsCoverageSource: {
       type: 'object', additionalProperties: false,
-      required: ['id', 'publisher', 'endpoint', 'status', 'records', 'first_published_date', 'last_published_date'],
+      required: ['id', 'publisher', 'endpoint', 'status', 'records', 'first_published_date', 'last_published_date', 'months'],
       properties: {
         id: { type: 'string' }, publisher: { type: 'string' }, endpoint: { type: 'string', format: 'uri' },
         status: { type: 'string', enum: ['enumerated', 'partial', 'failed', 'not_started'] },

@@ -4,7 +4,7 @@ export function cors(res, methods = 'GET, HEAD, OPTIONS') {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', methods);
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, MCP-Protocol-Version, MCP-Session-Id');
-  res.setHeader('Access-Control-Expose-Headers', 'MCP-Protocol-Version, MCP-Session-Id');
+  res.setHeader('Access-Control-Expose-Headers', 'MCP-Protocol-Version, MCP-Session-Id, Deprecation, Sunset, Link');
   res.setHeader('Access-Control-Max-Age', '86400');
   res.setHeader('X-Content-Type-Options', 'nosniff');
 }

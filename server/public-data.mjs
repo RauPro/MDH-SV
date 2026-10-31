@@ -71,7 +71,9 @@ function summaryCoverage(archive) {
 }
 
 export function newsCoverage(archive = loadNews()) {
-  try { archive = parseNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
+  if (!verifiedArchives.has(archive)) {
+    try { archive = parseNewsArchive(archive); } catch { throw new ApiError(503, 'archive_selection_invalid', 'No se pudo verificar la selección pública de noticias.'); }
+  }
   return { data: archive.coverage, meta: { ...metadata(archive), generated_at: archive.generated_at } };
 }
 export const statsSchema = z.object(recordFilters).strict();
