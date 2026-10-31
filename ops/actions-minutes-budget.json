@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "scope": "Repositorio privado de la cola (minutos facturables de GitHub Actions)",
+  "included_minutes_per_month": 2000,
+  "target_share": 0.8,
+  "days_per_month": 31,
+  "measurement": {"window": "2026-10-16..2026-10-17", "runs": 212, "method": "Suma por job de la duración redondeada al minuto (facturación por job), obtenida de la API de jobs de Actions"},
+  "gemini_minutes_per_request": 0.5,
+  "max_requests_per_cycle": 16,
+  "cycle": {"extract_fixed": 3, "publish": 5, "reconcile": 2},
+  "fallback_dedupe_minutes": 3,
+  "per_run": {"collect.yml": 1, "history.yml": 1.5, "official-statistics-monitor.yml": 1},
+  "manual_reserve_minutes_per_month": 60
+}
