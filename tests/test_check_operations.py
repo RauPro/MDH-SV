@@ -71,12 +71,10 @@ def responses(template):
                 run['created_at'] = now
     protection = {'enforce_admins': {'enabled': True}, 'restrictions': None}
     fixture[f'/repos/{PUB}/branches/main/protection'] = protection
-    fixture[f'/repos/{PUB}/contents/.github/workflows'] = [{'name': name} for name in
-        ('extract.yml', 'history.yml', 'refresh-history.yml', 'ci.yml', 'deploy_web.yml',
-         'monitor_cron.yml', 'publication-pr.yml', 'news-exception.yml', 'release.yml')]
+    fixture[f'/repos/{PRIV}/contents/.github/workflows'] = [{'name': name} for name in ('extract.yml', 'history.yml')]
     installed = template.replace(ops.CODE_REF_PLACEHOLDER, SHA)
     for path in ('/contents/.github/workflows/extract.yml', '/contents/.github/workflows/history.yml'):
-        fixture[f'/repos/{PUB}{path}'] = {'content': base64.b64encode(installed.encode()).decode()}
+        fixture[f'/repos/{PRIV}{path}'] = {'content': base64.b64encode(installed.encode()).decode()}
     fixture[f'/repos/{PUB}/contents/.github/workflows/refresh-history.yml'] = {'content': base64.b64encode(template.encode()).decode()}
     fixture[f'/repos/{PUB}/compare/{SHA}...main'] = {'behind_by': 0}
     return fixture
@@ -96,7 +94,7 @@ def test_template_drift_reports_a_diff(tmp_path):
     root, template = make_root(tmp_path)
     fixture = responses(template)
     drifted = base64.b64encode(b'steps: changed\n').decode()
-    fixture[f'/repos/{PUB}/contents/.github/workflows/extract.yml'] = {'content': drifted}
+    fixture[f'/repos/{PRIV}/contents/.github/workflows/extract.yml'] = {'content': drifted}
     report = ops.run_checks(FakeClient(fixture), root)
     assert any('differs' in f['message'] and 'changed' in f['message'] for f in levels(report))
 
@@ -128,7 +126,7 @@ def test_sha_pinning_off_is_a_failure(tmp_path):
 def test_unknown_installed_workflow(tmp_path):
     root, template = make_root(tmp_path)
     fixture = responses(template)
-    fixture[f'/repos/{PUB}/contents/.github/workflows'].append({'name': 'sneaky.yml'})
+    fixture[f'/repos/{PRIV}/contents/.github/workflows'].append({'name': 'sneaky.yml'})
     report = ops.run_checks(FakeClient(fixture), root)
     assert any('sneaky.yml' in f['message'] for f in levels(report))
 
