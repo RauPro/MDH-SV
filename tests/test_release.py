@@ -173,3 +173,32 @@ def test_changelog_references_are_bidirectional():
     used = set(re.findall(r'\[#(\d+)\](?!:)', text))
     defined = set(re.findall(r'^\[#(\d+)\]:', text, re.MULTILINE))
     assert used == defined
+
+
+def test_verify_checks_the_artifacts_next_to_the_manifest(tmp_path):
+    repo = make_repo(tmp_path)
+    out = tmp_path / 'out'
+    build(repo, out)
+    release.verify(repo, 'v2.1.0', out / 'release-manifest.json')
+    data = out / 'mdh-sv-2.1.0-data.tar.gz'
+    blob = bytearray(data.read_bytes())
+    blob[50] ^= 0xFF
+    data.write_bytes(bytes(blob))
+    with pytest.raises(release.ReleaseError, match='mismatch'):
+        release.verify(repo, 'v2.1.0', out / 'release-manifest.json')
+    blob = bytearray(data.read_bytes())
+    blob[50] ^= 0xFF
+    data.write_bytes(bytes(blob))
+    release.verify(repo, 'v2.1.0', out / 'release-manifest.json')
+    data.unlink()
+    with pytest.raises(release.ReleaseError, match='mismatch'):
+        release.verify(repo, 'v2.1.0', out / 'release-manifest.json')
+
+
+def test_manifest_dataset_paths_match_the_tracked_data_files(tmp_path):
+    repo = make_repo(tmp_path)
+    manifest = build(repo, tmp_path / 'out')
+    listed = set(git(repo, 'ls-tree', '-r', '--name-only', 'HEAD', '--',
+                     *release.DATA_PATHS).split())
+    paths = {entry['path'] for entry in manifest['datasets']}
+    assert all(paths) and paths == listed
