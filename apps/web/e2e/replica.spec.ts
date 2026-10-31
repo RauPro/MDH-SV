@@ -41,4 +41,17 @@ test.describe('replica HTTP', () => {
       }
     }
   });
+
+  test('API links and the OpenAPI origin stay on the replica', async ({ request }) => {
+    const news = await request.get('/api/v1/news?limit=1');
+    const body = await news.json();
+    // The archive has thousands of records, so a next-page link always exists.
+    expect(body.pagination?.next).toMatch(/^http:\/\/127\.0\.0\.1:\d+\//);
+    expect(JSON.stringify(body)).not.toContain('mdh-sv.vercel.app');
+
+    const openapi = await request.get('/api/v1/openapi.json');
+    const doc = await openapi.json();
+    expect(JSON.stringify(doc.servers ?? [])).toMatch(/^\[\{"url":"http:\/\/127\.0\.0\.1:\d+/);
+    expect(JSON.stringify(doc)).not.toContain('mdh-sv.vercel.app');
+  });
 });

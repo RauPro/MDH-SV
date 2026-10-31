@@ -61,3 +61,5 @@ html.dark .map-region.selected path,html.dark .map-key.selected { fill:#60363c; 
 .news-automatic-location { margin:24px 0; padding:18px; border:1px dashed #b9852e; border-radius:6px; background:#fbf0d4; color:var(--text-primary); }
 .news-automatic-location h3 { margin:0 0 10px; }
 .news-automatic-location p { margin:10px 0; }
+
+.visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
