@@ -177,3 +177,52 @@ validación pública permanecen pendientes; no se interpretan como ausencias en 
 fuente. La generación privada utiliza `news_dossier` para todos los ámbitos y
 conserva `record` sólo cuando hay además una propuesta de caso. Consulte
 [NEWS-DOSSIERS.md](NEWS-DOSSIERS.md) para publicación automática de fichas parciales y correcciones humanas solicitadas.
+
+## Comprobación periódica de operaciones
+
+`scripts/check_operations.py` compara el estado operativo real de ambos
+repositorios con las expectativas versionadas en
+`ops/operations-expectations.json`: visibilidad, política de Actions,
+protección de `main`, variables, deriva entre plantillas `ops/` y workflows
+instalados, rulesets, metadatos de credenciales (nunca valores secretos) y
+salud de las ejecuciones programadas.
+
+- **Cadencia:** una vez al mes y después de cada promoción de workflow.
+- **Comando:**
+
+  ```sh
+  GH_TOKEN="$(printf 'protocol=https\nhost=github.com\n\n' | git credential fill | sed -n 's/^password=//p')" \
+    .venv/bin/python scripts/check_operations.py --output /private/tmp/mdh-ops-report.json
+  ```
+
+  El token de grano fino necesita lectura de Metadata, Contents, Actions,
+  Administration, Variables, Deployments, Environments, Webhooks (si existe) y
+  la lista de colaboradores en ambos repositorios. El cliente rechaza cualquier
+  método que no sea GET y cualquier ruta `/secrets`.
+- **Reporte:** JSON ordenado con `findings` por área y nivel (`ok`, `warning`,
+  `failure`) más un resumen en texto. Sale 1 ante cualquier deriva o
+  violación; los avisos no cambian el código de salida.
+- **Ante cada fallo:**
+  - `visibility`: devolver el repositorio a la visibilidad esperada antes de
+    continuar.
+  - `actions`: restaurar `sha_pinning_required`, los permisos por defecto en
+    lectura y la no aprobación automática.
+  - `protection`: volver a aplicar la protección de `.github/main-protection.json`
+    en el repo público y revisar si apareció una protección en el privado que
+    bloquearía los bots.
+  - `variables`: recrear la variable faltante o corregir
+    `MDH_GEMINI_BUDGET_CONFIG` según `ops/actions-minutes-budget.json`.
+  - `template-drift`: sincronizar la plantilla `ops/` con el workflow instalado
+    siguiendo docs/GITHUB-ACTIONS.md; investigar workflows desconocidos.
+  - `history-copies`: volver a igualar `ops/history/refresh-history.yml` con su
+    copia instalada.
+  - `run-health`: investigar el workflow sin éxitos recientes; si todas las
+    ejecuciones fallaron al arrancar por cuota agotada se reporta como aviso.
+
+### Ensayo de pausa y reanudación
+
+Para ensayar la pausa y reanudación de la automatización (la evidencia se
+conserva fuera del repositorio): fijar `MDH_AUTOMATION_ENABLED=false` en cada
+repositorio (Settings → Secrets and variables → Actions → Variables),
+comprobar que el siguiente disparo programado termina sin ejecutar los pasos,
+restaurar `true` y comprobar que el ciclo siguiente se ejecuta.
