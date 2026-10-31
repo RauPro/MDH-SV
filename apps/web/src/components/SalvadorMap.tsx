@@ -63,7 +63,7 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
           onMouseEnter={() => setHovered(dept.name)} onMouseLeave={() => setHovered(null)}
           onClick={() => choose(dept.name)}>
           <span>{dept.name}{isNews && available && !invalidDates && (counts[dept.name] ?? 0) > 0 && <small className="map-location-breakdown" id={`${descriptionId}-${dept.id}`}><span className="reviewed">{reviewedCounts[dept.name] ?? 0} revisadas</span><span className="automatic">{automaticCounts[dept.name] ?? 0} automáticas</span></small>}</span><strong>{unavailable ? '—' : counts[dept.name] ?? 0}</strong>
-          <span className="visually-hidden"> {unavailable ? 'ubicaciones pendientes de comprobar' : countLabel(counts[dept.name] ?? 0).replace(/^\d+\s*/, '')}</span>
+          <span className="visually-hidden"> {invalidDates ? 'rango de fechas inválido' : !available ? 'ubicaciones pendientes de comprobar' : countLabel(counts[dept.name] ?? 0).replace(/^\d+\s*/, '')}</span>
         </button>)}
       </div>
     </div>
