@@ -51,6 +51,7 @@ npm ci
 npm run test:api
 npm --prefix apps/web ci
 npm --prefix apps/web test
+npm --prefix apps/web run test:browser
 npm --prefix apps/web run build
 npm --prefix apps/web run dev
 ```

@@ -12,7 +12,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -35,8 +35,18 @@ jobs:
             apps/web/package-lock.json
       - name: Prepare the same locked checkout used locally
         run: python scripts/bootstrap.py
+      - name: Install the Chromium system libraries for the browser suite
+        run: sudo apps/web/node_modules/.bin/playwright install-deps chromium
       - name: Run the same complete checks used locally
         run: .venv/bin/python scripts/check.py --audit
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            apps/web/playwright-report
+            apps/web/test-results
+          retention-days: 7
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: public-website
