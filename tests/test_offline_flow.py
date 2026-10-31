@@ -53,6 +53,8 @@ MODEL = "gemini-3.5-flash-lite"
 BUDGET_CONFIG = {
     "project_id": "mdh-offline",
     "model": MODEL,
+    # Production runs at 2 requests/minute; the fixture widens the window so the
+    # extraction and evaluation phases do not share the same minute's quota.
     "rpm": 60,
     "rpd": 250,
     "input_tpm": 200_000,
@@ -472,6 +474,8 @@ class FakeInbox:
         if method == "GET" and path.endswith("/issues"):
             params = kwargs.get("params", {})
             rows = list(self.issues.values())
+            # The real API honours the labels and state query params;
+            # editorial_excluded_ids relies on them to read review decisions.
             if params.get("state") in {"open", "closed"}:
                 rows = [issue for issue in rows if issue["state"] == params["state"]]
             if params.get("labels"):

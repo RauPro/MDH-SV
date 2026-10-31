@@ -56,7 +56,6 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
       </svg>
       <div className="map-departments" role="group" aria-label="Seleccionar departamento en el mapa">
         {DEPARTMENTS.map(dept => <button key={dept.id}
-          aria-label={`${dept.name}: ${!available ? 'ubicaciones pendientes de comprobar' : countLabel(counts[dept.name] ?? 0)}`}
           aria-pressed={selected === dept.name} disabled={unavailable}
           aria-describedby={isNews && available && !invalidDates && (counts[dept.name] ?? 0) > 0 ? `${descriptionId}-${dept.id}` : undefined}
           className={`${selected === dept.name ? 'selected' : ''}${isNews && automaticCounts[dept.name] ? ' has-automatic-location' : ''}`}
