@@ -287,3 +287,8 @@ def test_compare_status_mapping(tmp_path):
         assert findings and all(f['level'] == level for f in findings), (status, findings)
         if status == 'ahead':
             assert '7 commits' in findings[0]['message']
+    fixture = responses()
+    del fixture[f'/repos/{PUB}/compare/{SHA}...main']
+    report = ops.run_checks(FakeClient(fixture), root)
+    assert any(f['area'] == 'template-drift' and 'does not exist' in f['message']
+               for f in levels(report))
