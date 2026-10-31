@@ -276,6 +276,24 @@ def test_runs_that_never_started_are_a_quota_warning(tmp_path):
     assert not any(f['area'] == 'run-health' for f in levels(report))
 
 
+@pytest.mark.parametrize('case', ['cancelled', 'jobs_missing', 'no_jobs'])
+def test_cancelled_runs_or_missing_job_data_are_not_quota(tmp_path, case):
+    root = make_root(tmp_path)
+    fixture = responses()
+    runs, jobs = failed_runs(with_steps=False)
+    if case == 'cancelled':
+        for run in runs:
+            run['conclusion'] = 'cancelled'
+    fixture[f'/repos/{PRIV}/actions/workflows/history.yml/runs?per_page=10'] = {'workflow_runs': runs}
+    for index, body in jobs.items():
+        if case == 'jobs_missing':
+            continue
+        fixture[f'/repos/{PRIV}/actions/runs/{index}/jobs'] = {'jobs': []} if case == 'no_jobs' else body
+    report = ops.run_checks(FakeClient(fixture), root)
+    assert any('run-health' == f['area'] and 'outside' in f['message'] for f in levels(report))
+    assert not any('cuota' in f['message'] and 'history.yml' in f['message'] for f in levels(report, 'warning'))
+
+
 def test_compare_status_mapping(tmp_path):
     root = make_root(tmp_path)
     for status, level in [('identical', 'ok'), ('ahead', 'warning'), ('diverged', 'failure')]:

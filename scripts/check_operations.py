@@ -434,10 +434,12 @@ def check_run_health(client, repos, expectations, installed, root=ROOT):
             elif not runs:
                 warning('run-health', f'{name}:{workflow}: sin ejecuciones registradas')
             else:
-                # A quota-blocked run never starts: every job has no steps and no runner.
+                # A quota-blocked run fails without starting: it has jobs, and every
+                # job has no steps and no runner. Cancelled runs or missing job data
+                # prove nothing about the quota, so they stay failures.
                 not_started = True
                 for run in runs[:3]:
-                    if run.get('id') is None:
+                    if run.get('id') is None or run.get('conclusion') not in ('failure', 'startup_failure'):
                         not_started = False
                         break
                     jobs = client.get_optional(f'/repos/{name}/actions/runs/{run["id"]}/jobs',
@@ -446,7 +448,7 @@ def check_run_health(client, repos, expectations, installed, root=ROOT):
                         not_started = None
                         break
                     job_list = (jobs or {}).get('jobs', [])
-                    if any(job.get('steps') or job.get('runner_name') for job in job_list):
+                    if not job_list or any(job.get('steps') or job.get('runner_name') for job in job_list):
                         not_started = False
                         break
                 if not_started is True:
