@@ -50,8 +50,9 @@ horas 01 y 13 UTC en `extract-fallback.yml`, un workflow hermano con los mismos
 pasos: su nombre queda fuera de la cadena de publicación, así que una ejecución
 deduplicada no la dispara. El disparador principal de Vercel lo solicita al
 minuto 07 de esas mismas horas; su instalación y configuración están descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
-Recoge RSS, incorpora referencias históricas pendientes y solicita hasta 16
-solicitudes por ciclo. El presupuesto configurado reduce ese máximo y cuenta cada solicitud
+Recoge RSS, incorpora hasta 50 referencias históricas y solicita como máximo
+16 llamadas a Gemini por ciclo. El presupuesto configurado reduce ese máximo y
+cuenta cada solicitud
 y reintento. Si las cuotas de Google no son visibles, `operator_cap` identifica
 topes propios preventivos; un 429 pausa las llamadas hasta el siguiente día del
 Pacífico. Estos topes no son cuotas confirmadas del proveedor.

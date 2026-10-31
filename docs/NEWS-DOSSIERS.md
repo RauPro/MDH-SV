@@ -209,7 +209,9 @@ permitir fichas de noticias incompletas.
 
 Después del extractor programado, `publish-locations.yml` selecciona las noticias,
 sincroniza solicitudes, evalúa fichas en lotes de hasta cuatro artículos por
-llamada y publica las proyecciones. El techo de ejecución es 50 llamadas; el cupo
+llamada y publica las proyecciones. El techo de ejecución es 50 llamadas,
+pero cada ciclo programado concede como máximo 16 llamadas compartidas entre
+clasificación, extracción y evaluación; el cupo
 real depende del reparto compartido, del trabajo elegible y del saldo diario.
 Con un cupo horario de 10 y trabajo en las tres etapas, el plan reserva 2 llamadas
 para clasificación, 6 para extracción y 2 para validar hasta 8 fichas. Al agotarse

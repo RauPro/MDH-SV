@@ -112,7 +112,7 @@ La variable no sustituye las comprobaciones de identidad, rama o privacidad.
 2. Proteja `main` con PR, `verify` estricto, CODEOWNERS y administradores sujetos
    a las mismas reglas; sin bypass, force push ni borrado. Habilite la política
    de SHA de Actions y el permiso de creación de PR requerido por los bots.
-3. Cree la cola privada e instale las nueve plantillas de `ops` según
+3. Cree la cola privada e instale las diez plantillas de `ops` según
    [PUBLICATION-SECURITY.md](PUBLICATION-SECURITY.md) y
    [GITHUB-ACTIONS.md](GITHUB-ACTIONS.md). El historial público se instala en el
    repositorio público; no copie sus credenciales a la cola por conveniencia.
