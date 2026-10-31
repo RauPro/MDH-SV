@@ -13,7 +13,7 @@ from pathlib import Path
 import re
 
 from .news_scope_policy import CURRENT_SCOPE_PROMPTS
-from .news_selection import validate_scope_review
+from .contracts.selection import validate_scope_review as validate_scope_review
 
 MAX_REQUESTS = 50_000
 MAX_BYTES = 20_000_000

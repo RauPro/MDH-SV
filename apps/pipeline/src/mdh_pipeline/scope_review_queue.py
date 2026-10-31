@@ -13,7 +13,7 @@ from datetime import datetime, timedelta, timezone
 from .article_source import fetch_article
 from .gemini_budget import BudgetConfig, GeminiBudget, QuotaDeferred, estimate_input_tokens
 from .gemini_draft import GeminiDraftError
-from .news_selection import _archive_index, validate_scope_review
+from .contracts.selection import index_archive as _archive_index, validate_scope_review as validate_scope_review
 from .news_scope import MAX_BATCH_ITEMS, SCOPE_PROMPT, classify_scope_batch, prepare_scope_batch
 from .review_queue import GitHubInbox, GitHubRequestError
 from .news_exclusions import (MAX_VERIFICATION_ITEMS, negative, scope_needs_work, validate_verification,

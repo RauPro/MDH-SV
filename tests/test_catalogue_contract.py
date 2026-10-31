@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 from contract_fixtures import load_cases
-from mdh_pipeline.publication import Catalog
+from mdh_pipeline.contracts.catalog import Catalog
 
 CASES = load_cases(Path(__file__).parent / 'fixtures/contracts/catalogue.json')
 

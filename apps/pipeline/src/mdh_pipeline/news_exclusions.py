@@ -90,7 +90,7 @@ def validate_verification(receipt, first, reference, now=None):
     A retained second assessment may have replaced the first in scope-reviews;
     its archived first assessment remains bound inside this minimal receipt.
     """
-    from .news_selection import validate_scope_review
+    from .contracts.selection import validate_scope_review as validate_scope_review
     try:
         if (not isinstance(receipt, dict) or set(receipt) != RECEIPT_KEYS
                 or type(receipt["schema_version"]) is not int or receipt["schema_version"] != 1
@@ -151,7 +151,7 @@ def scope_needs_work(review, verification, reference, now=None):
     Older positive decisions remain usable. All older negative decisions require
     inclusive reclassification. Ambiguous outcomes retry only after seven days.
     """
-    from .news_selection import validate_scope_review
+    from .contracts.selection import validate_scope_review as validate_scope_review
     instant = now or datetime.now(timezone.utc)
     if review is None:
         return True
@@ -220,7 +220,7 @@ def response_schema():
 
 
 def prepare_verification_batch(items):
-    from .news_selection import validate_scope_review
+    from .contracts.selection import validate_scope_review as validate_scope_review
     if not isinstance(items, list) or not 1 <= len(items) <= MAX_VERIFICATION_ITEMS:
         raise GeminiDraftError("invalid_verification_batch")
     try:

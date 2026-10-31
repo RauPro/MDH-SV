@@ -12,7 +12,8 @@ import os
 from collections import deque
 from pathlib import Path
 
-from .history import ROOT, SOURCES, validate_reference
+from .history import ROOT, SOURCES
+from .contracts.reference import validate_reference as validate_reference
 from .review_queue import GitHubInbox
 
 

@@ -350,7 +350,7 @@ def test_collector_does_not_import_optional_ingestion_stack():
 ])
 def test_rss_publication_day_matches_el_salvador_calendar(monkeypatch, published, now, expected):
     from zoneinfo import ZoneInfo
-    from mdh_pipeline import news_dossier
+    from mdh_pipeline.contracts import dossier as news_dossier
     instant = datetime.fromisoformat(now)
     item = entry()
     item['published_parsed'] = datetime.fromisoformat(published).utctimetuple()

@@ -3,7 +3,8 @@ from pathlib import Path
 
 import pytest
 from contract_fixtures import load_cases
-from mdh_pipeline.history import SOURCES, validate_reference
+from mdh_pipeline.publishers import SOURCES
+from mdh_pipeline.contracts.reference import validate_reference
 
 CASES = load_cases(Path(__file__).parent / 'fixtures/contracts/news-reference.json')
 

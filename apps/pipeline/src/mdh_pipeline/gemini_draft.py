@@ -19,8 +19,8 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_valida
 
 from .draft import prepare_draft
 from .gemini_budget import QuotaDeferred, QuotaStateError
-from .news_dossier import FIELD_NAMES as NEWS_FIELDS, empty_news_dossier, validate_news_dossier
-from .publication import Publication
+from .contracts.dossier import FIELD_NAMES as NEWS_FIELDS, empty_news_dossier as empty_news_dossier, validate_news_dossier as validate_news_dossier
+from .contracts.catalog import Publication as Publication
 from .privacy import PRIVACY_POLICY_VERSION, minimize_fields, privacy_flags as _privacy_flags
 from .source_urls import canonical_url, normalize
 from .news_scope_policy import SCOPE_POLICY

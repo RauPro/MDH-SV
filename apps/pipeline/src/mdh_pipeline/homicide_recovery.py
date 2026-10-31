@@ -26,7 +26,8 @@ from .archive_sources import (
     ArchiveError, BudgetExhausted, MAX_ARTICLE_BYTES, MAX_INDEX_BYTES,
     _article_url, _blocked, parse_article_metadata, parse_index,
 )
-from .history import ROOT, TOPICS, page_url, reference_from_metadata, validate_reference
+from .history import ROOT, page_url, reference_from_metadata
+from .contracts.reference import TOPICS as TOPICS, validate_reference as validate_reference
 from .publishers import SOURCES
 from .source_urls import canonical_url, normalize
 from .network_safety import require_public_dns

@@ -17,6 +17,11 @@ from zoneinfo import ZoneInfo
 from .review_queue import GitHubInbox, GitHubRequestError
 from .source_urls import canonical_url
 
+from .contracts.drafts import (
+    validate_envelope as validate_envelope,
+    complete_document as complete_document,
+)
+
 AI_LABELS = {"ai/ready": "16815D", "ai/scope-review": "D97706",
              "ai/privacy-review": "9333EA", "ai/error": "B91C1C", "ai/pending": "D97706"}
 MAX_FILE_BYTES = 180_000
@@ -186,54 +191,13 @@ def put_private_file(inbox, folder, identifier, data, existing_sha=None):
     return sha
 
 
-def validate_envelope(document, candidate, *, allow_legacy=False):
-    if (not isinstance(document, dict) or type(document.get("schema_version")) is not int or document.get("schema_version") != 1 or document.get("candidate_id") != candidate["id"]
-            or document.get("source_url") != candidate["source_url"] or document.get("publishable") is not False
-            or document.get("human_reviewed") is not False
-            or document.get("status") not in ("draft", "needs_scope_review", "needs_privacy_review", "pending", "source_unavailable", "error")):
-        raise ValueError("invalid_draft_envelope")
-    if not allow_legacy or "news_dossier" in document:
-        from .news_dossier import validate_news_dossier
-        try:
-            news = validate_news_dossier(document.get("news_dossier"))
-        except (ValueError, TypeError):
-            raise ValueError("invalid_news_dossier") from None
-        if (news.get("candidate_id") != candidate["id"] or news.get("source_url") != candidate["source_url"]
-                or news.get("human_reviewed") is not False):
-            raise ValueError("invalid_news_dossier_identity")
-        expected = document["status"] if document["status"] in ("pending", "source_unavailable", "error") else "processed"
-        if news.get("extraction_status") != expected:
-            raise ValueError("invalid_news_dossier_status")
-        document["news_dossier"] = news
-    record = document.get("record")
-    if document["status"] == "draft" and record is not None:
-        from .publication import Publication
-        if (not isinstance(record, dict) or record.get("human_reviewed") is not False
-                or record.get("origin_candidate_id") != candidate["id"]
-                or record.get("source_url") != candidate["source_url"] or document.get("relevant") is not True
-                or document.get("classification", {}).get("jurisdiction") != "SV"
-                or document.get("classification", {}).get("relevance") != "relevant"):
-            raise ValueError("invalid_unreviewed_record")
-        # Validate the field structure without removing the publication guard from the stored draft.
-        try:
-            Publication.model_validate({**record, "origin_candidate_id": None})
-        except ValueError:
-            raise ValueError("invalid_unreviewed_record_fields") from None
-    elif record is not None:
-        raise ValueError("unsafe_scope_or_privacy_record")
-
-
-def complete_document(document):
-    return document.get("news_dossier", {}).get("extraction_status") == "processed"
-
-
 def needs_field_privacy_reprocessing(document):
     """Only the former blanket redaction warrants a new bounded model budget.
 
     A valid new-policy dossier may legitimately protect every field. It must not
     be repeatedly extracted, and older safe dossiers need no model call either.
     """
-    from .news_dossier import FIELD_NAMES
+    from .contracts.dossier import FIELD_NAMES as FIELD_NAMES
     fields = document.get("news_dossier", {}).get("fields", {})
     return (complete_document(document) and document.get("status") == "needs_privacy_review"
             and document.get("extraction", {}).get("privacy_policy_version") != PRIVACY_POLICY_VERSION
@@ -242,7 +206,7 @@ def needs_field_privacy_reprocessing(document):
 
 
 def skeleton_envelope(candidate, status="pending", *, error_code=None, model=None):
-    from .news_dossier import empty_news_dossier
+    from .contracts.dossier import empty_news_dossier as empty_news_dossier
     result = {"schema_version": 1, "candidate_id": candidate["id"], "source_url": candidate["source_url"],
               "status": status, "publishable": False, "human_reviewed": False,
               "relevant": None, "classification": {"jurisdiction": "unclear", "relevance": "unclear", "record_type": "undetermined"},
@@ -313,7 +277,6 @@ def error_category(error):
     if isinstance(code, str) and re.fullmatch(r"[a-z][a-z0-9_]{0,63}", code):
         return code, False
     return "extraction_failed", False
-
 
 
 def safe_validation_issues(error):
@@ -414,7 +377,7 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         budget.set_request_limit(limit)
     ensure_ai_labels(inbox)
     candidates = []
-    from .news_dossier import empty_news_dossier
+    from .contracts.dossier import empty_news_dossier as empty_news_dossier
     for issue in pending_issues(inbox):
         try:
             candidate = candidate_from_issue(issue)
@@ -562,7 +525,7 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
                 if not begin_offline_work(issue, candidate):
                     report["deferred"] += 1
                     continue
-                from .news_dossier import empty_news_dossier, from_legacy_record
+                from .contracts.dossier import empty_news_dossier as empty_news_dossier, from_legacy_record as from_legacy_record
                 existing_document = dict(existing_document)
                 if isinstance(existing_document.get("record"), dict):
                     existing_document["news_dossier"] = from_legacy_record(existing_document)
@@ -797,7 +760,8 @@ def _allocation_workload(inbox, archive, drafts, cached, receipts, *, excluded, 
                          verifications=(), rechecks=None):
     """Derive routing from validated source-bound decisions, never title hints."""
     from .automatic_news import _bound_draft, _cached, fingerprint, validate_receipt
-    from .news_selection import _archive_index, project_news_selection, FULL_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT
+    from .news_selection import project_news_selection
+    from .contracts.selection import index_archive as _archive_index, FULL_SCOPE_PROMPT as FULL_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT as RIGHTS_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT as RIGHTS_FULL_SCOPE_PROMPT
     from .news_scope_policy import CURRENT_SCOPE_PROMPTS
     from .news_scope_rechecks import pending_recheck_ids, blocked_source_hashes
     from .news_exclusions import confirmed_exclusion, scope_needs_work
@@ -877,7 +841,7 @@ def _allocation_workload(inbox, archive, drafts, cached, receipts, *, excluded, 
 
 def _refresh_scope_workload(inbox, archive, drafts, cached, receipts, updated_reviews, *, excluded, now, scope_audits,
                             verifications=(), updated_verifications=(), rechecks=None):
-    from .news_selection import _archive_index
+    from .contracts.selection import index_archive as _archive_index
     from .scope_review_queue import _cache_index
     if not isinstance(updated_reviews, list) or len(updated_reviews) > 200:
         raise ValueError("invalid_updated_scope_reviews")

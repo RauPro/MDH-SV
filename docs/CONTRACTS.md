@@ -9,12 +9,12 @@ Los borradores privados y sus envelopes no son formatos públicos compatibles.
 
 | Contrato | Productor o verificación Python | Consumo JavaScript |
 | --- | --- | --- |
-| Catálogo y dossier documental | `mdh_pipeline.publication.Catalog` | `shared/catalog.mjs`: web, API y prebuild |
-| Referencia bibliográfica | `mdh_pipeline.history.validate_reference` | `shared/news-archive.mjs` |
-| Selección de noticias | `mdh_pipeline.news_selection.validate_selection` | `shared/news-selection.mjs` |
-| Ficha de noticia humana v1 o automática v2 | `mdh_pipeline.news_dossier.validate_published_news_dossier` | `shared/news-dossier.mjs` |
-| Estado mínimo de procesamiento | `mdh_pipeline.news_processing.validate_collection` | `shared/news-processing.mjs` |
-| Ubicaciones automáticas v1–v5 | `mdh_pipeline.automatic_locations.validate_collection` | `shared/news-location.mjs` |
+| Catálogo y dossier documental | `mdh_pipeline.contracts.catalog.Catalog` | `shared/catalog.mjs`: web, API y prebuild |
+| Referencia bibliográfica | `mdh_pipeline.contracts.reference.validate_reference` | `shared/news-archive.mjs` |
+| Selección de noticias | `mdh_pipeline.contracts.selection.validate_selection` | `shared/news-selection.mjs` |
+| Ficha de noticia humana v1 o automática v2 | `mdh_pipeline.contracts.dossier.validate_published_news_dossier` | `shared/news-dossier.mjs` |
+| Estado mínimo de procesamiento | `mdh_pipeline.contracts.processing.validate_collection` | `shared/news-processing.mjs` |
+| Ubicaciones automáticas v1–v5 | `mdh_pipeline.contracts.locations.validate_collection` | `shared/news-location.mjs` |
 | Registro de fuentes | `mdh_pipeline.publishers` | `shared/source-registry.mjs` |
 
 Los ejemplos de catálogo, referencias, selección, fichas, procesamiento y
@@ -130,3 +130,29 @@ para validar documentos ya disponibles en memoria.
 validados entre importación y publicación automática. Conserva el contrato de
 reemplazo por archivo, rollback de mejor esfuerzo y reintento de P1.3. Los nombres
 anteriores en los adaptadores se mantienen como aliases de compatibilidad.
+
+## Dirección de dependencias Python
+
+`mdh_pipeline.contracts` es el propietario de las reglas de catálogo, referencias,
+selección, fichas, colecciones, procesamiento, ubicaciones y envelopes de borradores.
+Los adaptadores y CLI importan estos contratos. Los contratos no importan recolectores,
+clientes HTTP/Gemini, la cola de GitHub, escritores de archivos ni exportadores.
+Sólo requieren Python, Pydantic, los esquemas territoriales y datos estáticos del
+registro de fuentes/municipios. Importarlos no lee credenciales ni consulta la red.
+
+Los módulos anteriores conservan aliases de sus clases, validadores y excepciones,
+no implementaciones duplicadas. Los imports públicos existentes y las CLI siguen
+funcionando. En pruebas que controlan un detalle interno (por ejemplo `_today`),
+se sustituye ese detalle en el módulo canónico del contrato, donde vive la regla.
+
+Los helpers públicos `selection.index_archive`, `processing.selected_references`
+y `locations.index_references` mantienen políticas diferentes: no intercambiarlos.
+El índice de procesamiento admite sólo referencias seleccionadas; el de ubicaciones
+valida la bibliografía completa. Los parsers de fecha y errores también conservan
+las reglas propias de cada dominio; no se relajan para unificarlos artificialmente.
+`drafts.validate_envelope` comprueba forma y vínculo privado, no autoriza publicación.
+
+`tests/test_pipeline_boundaries.py` verifica la dirección de imports, incluidos
+imports diferidos, y ejecuta el corpus en un proceso que bloquea los adaptadores,
+HTTP, DNS, Gemini y dependencias pesadas. Las pruebas de adaptadores siguen usando
+los imports de compatibilidad; las del corpus usan directamente los contratos.

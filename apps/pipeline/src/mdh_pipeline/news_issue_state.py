@@ -8,15 +8,12 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import datetime, timezone
 
-from .news_publication import validate_collection
+from .contracts.news_collection import validate_collection as validate_collection
 from .news_scope_policy import CURRENT_SCOPE_PROMPTS
 from .news_exclusions import confirmed_exclusion, is_current_positive
 from .news_scope_rechecks import pending_recheck_ids, validate_rechecks
-from .news_selection import (
-    MAX_SELECTIONS, _archive_index, _bound, _category, _decision,
-    _dossier_decision, _excluded_set, _timestamp, project_news_selection,
-    validate_scope_audits, validate_scope_review,
-)
+from .news_selection import _category, _decision, _dossier_decision, project_news_selection
+from .contracts.selection import MAX_SELECTIONS as MAX_SELECTIONS, index_archive as _archive_index, _bound as _bound, _excluded_set as _excluded_set, parse_timestamp as _timestamp, validate_scope_audits as validate_scope_audits, validate_scope_review as validate_scope_review
 
 _IDENTITY = ("source_url", "publisher", "published_date")
 _ERRORS = (ValueError, TypeError, KeyError, AttributeError)
