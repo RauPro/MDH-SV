@@ -81,15 +81,27 @@ proyecto público; la cola editorial privada no forma parte del alcance.
    .venv/bin/python -m pytest -q tests/test_editorial_corpus.py
    ```
 
-   Tras P2.1 (#249) también aplican
-   `tests/api-budgets.test.mjs` (incluido en `npm run test:api`) y
-   `npm --prefix apps/web run check:bundle`.
+   `npm run test:api` incluye además los presupuestos de bytes y latencia de
+   `tests/api-budgets.test.mjs`, y tras `npm --prefix apps/web run build`,
+   `npm --prefix apps/web run check:bundle` comprueba el tope de gzip del
+   paquete JS.
 4. Antes del PR, `.venv/bin/python scripts/check.py` completo.
-5. CI (`verify`): lint, pruebas Python y JavaScript, contratos, compilación de
-   la web y comprobación de datos generados.
+5. CI (`verify`): instala el escáner de secretos fijado y ejecuta
+   `scripts/publication_guard.py check --ref HEAD` sobre la historia completa
+   antes de instalar dependencias; después `scripts/bootstrap.py`, las
+   bibliotecas de sistema de Chromium para Playwright y
+   `.venv/bin/python scripts/check.py --audit`, el mismo comando que reproduce
+   CI en local. Éste ejecuta `pip check`, el guardián de publicación,
+   `configure_instance.py --check`, `audit_release.py`, Ruff y oxlint,
+   `pytest`, la regeneración y comparación de las exportaciones públicas,
+   `npm run test:api`, las pruebas Vitest y de navegador, la compilación web
+   con el tope del paquete y, con `--audit`, las auditorías de dependencias
+   (`pip_audit` y `npm audit`).
 6. Revisión: un PR por preocupación, `verify` estricto en verde sobre el head,
    todas las conversaciones resueltas, integración con historia lineal
-   (rebase). `.github/CODEOWNERS` exige propietario en todo el árbol.
+   (rebase). La aprobación del propietario es obligatoria en todo el árbol
+   salvo los snapshots generados de «Reglas de datos», que sólo integra el
+   controlador de publicación mediante un PR con CI en verde.
 
 ## Reglas de datos
 
