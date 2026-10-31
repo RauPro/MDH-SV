@@ -107,23 +107,23 @@ separado. Cambiar la frecuencia de los bots requiere acordar esa decisión opera
 ## Carga de datos y presupuestos de respuesta
 
 `tests/api-budgets.test.mjs` acota cada respuesta pública; los umbrales dejan
-margen a la cadencia automatizada de datos. Mediciones de referencia sobre los
-datos publicados al 2026-10-31:
+margen a la cadencia automatizada de datos. Valores impresos por la prueba el
+2026-10-31 sobre los datos del commit `975daf5`:
 
 | Respuesta | Medido | Presupuesto |
 | --- | --- | --- |
-| `/api/v1/news?limit=1&coverage=summary` | ~20 KB | 32 KiB |
+| `/api/v1/news?limit=1&coverage=summary` | 16 399 B | 32 KiB |
 | `search_news` MCP `{limit:1}` | 33 972 B | 64 KiB |
-| `/api/v1/news?coverage=summary` | ~300 KB | 384 KiB |
-| `/api/v1/news?limit=100&coverage=summary` | ~1 MB | 1 MiB |
+| `/api/v1/news?coverage=summary` | 179 508 B | 384 KiB |
+| `/api/v1/news?limit=100&coverage=summary` | 459 479 B | 1 MiB |
 | `/api/v1/news/coverage` | 400 430 B | 1 MiB |
 
-Latencia de búsqueda tras la precarga por snapshot: importación y primera
-consulta ~48 ms (presupuesto 3 000), p95 en caliente ~4 ms sobre 40 consultas
-mixtas (presupuesto 150). La vista inicial transporta `news.json`
-(3 904 537 B, 262 993 brotli), `dossiers.json` (4 557 992 B, 202 568),
-`locations.json` (382 889 B, 41 751), `processing.json` (829 508 B, 180 497) y
-los activos JS/CSS (396 975 B, 101 666 brotli / 119 638 gzip; 33 920 B, 6 088).
-`check:bundle` fija el tope de JS gzip en 149 444 bytes (medido × 1,25).
-Pendiente («help wanted»): cargar el detalle de las fichas de noticia bajo
-demanda en lugar del snapshot completo de `dossiers.json`.
+Latencia medida en la misma ejecución: importación más primera consulta con
+`coverage=summary`, 451,0 ms (presupuesto 3 000); p95 en caliente sobre 40
+consultas mixtas, 3,53 ms (presupuesto 150). La vista inicial transporta
+`news.json` (3 904 537 B, 262 993 brotli), `dossiers.json` (4 557 992 B,
+202 568), `locations.json` (382 889 B, 41 751), `processing.json` (829 508 B,
+180 497) y los activos JS/CSS (396 975 B, 101 666 brotli; 33 920 B, 6 088).
+`check:bundle` fija el tope de JS gzip en 149 444 bytes (medido 119 577 en la
+misma ejecución). Pendiente («help wanted»): cargar el detalle de las fichas de
+noticia bajo demanda en lugar del snapshot completo de `dossiers.json`.
