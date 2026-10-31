@@ -53,12 +53,12 @@ npm --prefix apps/web run build
 npm --prefix apps/web run dev
 ```
 
-Vercel usa la raíz del repositorio y `vercel.json`. La consulta pública no necesita variables de entorno; el disparador horario requiere las credenciales separadas descritas en [ingreso horario](docs/HOURLY-INGESTION.md). El build verifica que todas las descargas correspondan al conjunto canónico. Más detalles en [operación](docs/OPERATIONS.md), [metodología](docs/METHODOLOGY.md) y [seguridad](SECURITY.md).
+Vercel usa la raíz del repositorio y `vercel.json`. La consulta pública no necesita variables de entorno; el disparador programado requiere las credenciales separadas descritas en [ingreso horario](docs/HOURLY-INGESTION.md). El build verifica que todas las descargas correspondan al conjunto canónico. Más detalles en [operación](docs/OPERATIONS.md), [metodología](docs/METHODOLOGY.md) y [seguridad](SECURITY.md).
 
 
 ## Recolección, publicación automática y correcciones
 
-La cola se configura en `instance.json` y debe ser privada. En la instancia original es `RauPro/MDH-SV-review`. El procesamiento horario incorpora RSS y referencias históricas, deduplica por URL y conserva decisiones y reintentos. Gemini extrae una ficha y una segunda pasada del mismo proveedor evalúa sus campos contra la misma versión del artículo. Las reglas locales conservan sólo datos respaldados y publicables. La intervención humana atiende solicitudes públicas no sensibles y solicitudes privadas recibidas por el [canal editorial](docs/PRIVATE-REPORTING.md); la publicación de noticias no exige aprobación previa.
+La cola se configura en `instance.json` y debe ser privada. En la instancia original es `RauPro/MDH-SV-review`. El procesamiento programado incorpora RSS y referencias históricas, deduplica por URL y conserva decisiones y reintentos. Gemini extrae una ficha y una segunda pasada del mismo proveedor evalúa sus campos contra la misma versión del artículo. Las reglas locales conservan sólo datos respaldados y publicables. La intervención humana atiende solicitudes públicas no sensibles y solicitudes privadas recibidas por el [canal editorial](docs/PRIVATE-REPORTING.md); la publicación de noticias no exige aprobación previa.
 
 Los workflows reproducibles están en [ops/review-queue](ops/review-queue/README.md). El enlace «Corrección pública no sensible» abre una solicitud con identificador y versión, sin adjuntar valores de la ficha. «Corrección sensible o retirada en privado» abre el correo editorial sin copiar contenido de la noticia. Las reevaluaciones usan el mismo presupuesto limitado; retiradas y cambios manuales requieren un mantenedor autorizado. El catálogo de casos conserva el importador de propuestas con aprobación humana y no recibe casos automáticamente de las noticias.
 
@@ -70,14 +70,15 @@ El monitor amplía la implementación del artículo [Generative AI-based tool fo
 - **Fichas estructuradas:** hechos, personas afectadas, lugar, fechas, actores, fuentes, temas, grupos, hipótesis atribuida e instrumentos. Cada valor tiene estado y evidencia; los datos protegidos o no consignados quedan explícitos. [Esquema](docs/DOSSIER-SCHEMA.md).
 - **Reutilización:** API REST y MCP remoto de solo lectura con filtros, paginación, atribución y estado editorial, para proyectos externos.
 
-La búsqueda se actualiza cada seis horas. El procesador horario incorpora hasta cincuenta candidatas locales o de ámbito incierto para procesamiento privado, además de las RSS. El archivo público sólo muestra noticias seleccionadas por pertinencia en derechos humanos y vínculo con El Salvador, con evidencia del contenido. Las clasificaciones antiguas requieren reevaluación; una coincidencia de palabras no permite publicar. Publica fichas completas o parciales cuando sus campos superan los controles automáticos, con atribución a una fuente única y sin afirmar revisión humana. [Selección temática](docs/NEWS-SELECTION.md), [colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
+La búsqueda se actualiza cada seis horas. El procesador programado incorpora hasta dieciséis candidatas locales o de ámbito incierto por ciclo, dos ciclos al día, para procesamiento privado, además de las RSS. El archivo público sólo muestra noticias seleccionadas por pertinencia en derechos humanos y vínculo con El Salvador, con evidencia del contenido. Las clasificaciones antiguas requieren reevaluación; una coincidencia de palabras no permite publicar. Publica fichas completas o parciales cuando sus campos superan los controles automáticos, con atribución a una fuente única y sin afirmar revisión humana. [Selección temática](docs/NEWS-SELECTION.md), [colector y cobertura](ops/history/README.md), [borradores privados](docs/PRIVATE-DRAFTS.md).
 
 ## Gemini en el flujo privado de producción
 
 El workflow **Preparar fichas con Gemini**, instalado en la cola privada configurada,
-está programado para recoger noticias nuevas y procesar el backlog cada hora,
-según el presupuesto disponible. El disparo principal de Vercel está configurado
-al minuto 07 y GitHub conserva el respaldo al minuto 23; los eventos y recibos de
+está programado para recoger noticias nuevas y procesar el backlog dos veces
+al día, según el presupuesto disponible. El disparo principal de Vercel está
+configurado a las 01:07 y 13:07 UTC y GitHub conserva el respaldo al minuto 23
+de esas mismas horas; los eventos y recibos de
 ejecución deben comprobarse después de cada cambio de configuración. El tope propio configurado
 es de 240 solicitudes diarias, compartidas entre clasificación, extracción, evaluación y reintentos; no es una cuota confirmada
 de Google, cuyo límite diario sigue sin estar visible. Utiliza el
@@ -88,7 +89,7 @@ La evaluación agrupa hasta cuatro fichas por llamada, con evidencias y controle
 de privacidad separados por artículo. El reparto horario se adapta al trabajo
 pendiente: con un cupo de 10 llamadas y las tres etapas ocupadas, asigna 2 a
 clasificación, 6 a extracción y 2 a evaluar hasta 8 fichas; al terminar la
-clasificación puede asignar 8 a extracción y 2 a evaluación. El techo de 50
+clasificación puede asignar 8 a extracción y 2 a evaluación. El techo de dieciséis
 llamadas por ejecución no concede saldo adicional: cada etapa recibe su parte
 del presupuesto compartido, y cada intento se reserva antes del envío.
 Los límites de 240 llamadas diarias, 2 por minuto y entrada de 200 000 unidades

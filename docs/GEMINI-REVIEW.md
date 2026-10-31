@@ -15,13 +15,20 @@ oficiales conservan sus procesos de revisión humana separados.
 - Variable de Actions: `GEMINI_MODEL=gemini-3.5-flash-lite`. La extracción y la
   evaluación emplean el modelo configurado. La segunda pasada no es otro
   proveedor ni constituye una fuente independiente.
-- Vercel Cron solicita **Preparar fichas con Gemini** cada hora al minuto 07;
-  GitHub conserva el respaldo al minuto 23. Ambos minutos coinciden en UTC y El
-  Salvador. La configuración está en [HOURLY-INGESTION.md](HOURLY-INGESTION.md).
+- Vercel Cron solicita **Preparar fichas con Gemini** dos veces al día, a las
+  01:07 y 13:07 UTC; GitHub conserva el respaldo al minuto 23 de esas mismas
+  horas. Los minutos coinciden en UTC y El Salvador (19:07 y 07:07 locales).
+  La cadencia mantiene la automatización dentro de los minutos gratuitos de
+  Actions durante todo el mes: el régimen horario anterior gastaba unas 240
+  solicitudes diarias durante unos cinco días y después se detenía, mientras
+  que el volumen mensual ahora es continuo. La configuración está en
+  [HOURLY-INGESTION.md](HOURLY-INGESTION.md).
   Un HTTP 202 acredita aceptación del disparo, no fichas terminadas ni publicación.
-- El extractor recoge RSS e incorpora hasta 50 referencias antiguas a la cola.
-  El máximo solicitado no equivale al número procesado: el presupuesto efectivo
-  considera las solicitudes disponibles y las horas que faltan hasta su reinicio.
+- El extractor recoge RSS e incorpora referencias antiguas pendientes a la
+  cola, con un máximo de 16 solicitudes por ciclo. El máximo solicitado no
+  equivale al número procesado: el presupuesto efectivo considera las
+  solicitudes disponibles y las horas que faltan hasta su reinicio, por lo que
+  un ciclo puede conceder menos; se esperan unas 25 a 32 solicitudes diarias.
   `runtime/gemini-hourly.json` evita repetir el lote de extracción de una misma hora.
 - Clasificación, extracción, evaluación automática, actualizaciones por cambio
   de fuente y reintentos comparten `runtime/gemini-budget.json`. Se reserva saldo

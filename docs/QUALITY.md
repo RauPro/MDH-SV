@@ -79,4 +79,4 @@ de Actions debe permanecer en $0 con bloqueo al alcanzarlo. Los runners privados
 pueden dejar de arrancar al agotarse la cuota incluida; en ese caso registre la
 verificación privada como pendiente hasta su renovación, sin presentarla como
 aprobada. El histórico público y las comprobaciones locales se verifican por
-separado. Cambiar la frecuencia de los bots requiere acordar esa decisión operativa.
+separado. Cambiar la frecuencia de los bots requiere acordar esa decisión operativa. La cadencia programada de la cola privada está dimensionada para la cuota incluida: `ops/actions-minutes-budget.json` modela el peor caso mensual y `tests/test_actions_minutes_budget.py` lo verifica contra los horarios reales.

@@ -45,18 +45,19 @@ documentos personales.
 
 ## Generación y estados
 
-**Preparar fichas con Gemini** tiene un respaldo de GitHub cada hora al minuto 23.
-El disparador principal de Vercel lo solicita al minuto 07; su
-instalación y configuración están descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
-Recoge RSS, incorpora hasta 50 referencias históricas y solicita hasta 50 noticias
-por lote. El presupuesto configurado reduce ese máximo y cuenta cada solicitud
+**Preparar fichas con Gemini** tiene un respaldo de GitHub al minuto 23 de las
+horas 01 y 13 UTC. El disparador principal de Vercel lo solicita al minuto 07 de
+esas mismas horas; su instalación y configuración están descritas en el [protocolo horario](https://github.com/RauPro/MDH-SV/blob/main/docs/HOURLY-INGESTION.md).
+Recoge RSS, incorpora referencias históricas pendientes y solicita hasta 16
+solicitudes por ciclo. El presupuesto configurado reduce ese máximo y cuenta cada solicitud
 y reintento. Si las cuotas de Google no son visibles, `operator_cap` identifica
 topes propios preventivos; un 429 pausa las llamadas hasta el siguiente día del
 Pacífico. Estos topes no son cuotas confirmadas del proveedor.
 `runtime/gemini-hourly.json` evita lotes duplicados en la misma hora UTC, incluso
 entre ejecuciones manuales y automáticas.
 Los RSS de Co Latino, GatoEncerrado y Factum y el ingreso histórico independiente
-también tienen horarios cada seis horas. Comprueba en Actions los eventos
+también tienen horarios propios dos veces al día; cada ciclo de extracción recoge
+RSS además, por lo que la recolección total queda aproximadamente cada seis horas. Comprueba en Actions los eventos
 `schedule` y los registros Cron de Vercel: una ejecución manual exitosa no verifica
 el disparo del horario.
 
@@ -117,7 +118,7 @@ horario de 10 y trabajo en las tres colas, el plan asigna 2 llamadas a clasifica
 ese cupo puede pasar a 8 de extracción y 2 de validación. Si una etapa queda sin
 trabajo, el reparto se adapta, y la capacidad no utilizada confirmada de las
 etapas anteriores puede pasar a validación. No existe un límite fijo de 3 fichas
-por hora ni una garantía de publicar el máximo teórico.
+por ciclo ni una garantía de publicar el máximo teórico.
 
 `MDH_ALLOCATION_SOURCE_RUN_ID` identifica la ejecución de extracción que generó
 la asignación. El publicador la reclama una sola vez y sólo dentro del mismo día

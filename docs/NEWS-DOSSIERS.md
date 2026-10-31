@@ -207,7 +207,7 @@ permitir fichas de noticias incompletas.
 
 ## Operación y presupuesto
 
-Después del extractor horario, `publish-locations.yml` selecciona las noticias,
+Después del extractor programado, `publish-locations.yml` selecciona las noticias,
 sincroniza solicitudes, evalúa fichas en lotes de hasta cuatro artículos por
 llamada y publica las proyecciones. El techo de ejecución es 50 llamadas; el cupo
 real depende del reparto compartido, del trabajo elegible y del saldo diario.

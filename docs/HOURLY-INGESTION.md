@@ -1,7 +1,9 @@
 # Ingreso horario con presupuesto gratuito
 
-El código separa el reloj de la extracción. Vercel Cron solicita `extract.yml`
-al minuto 07 de cada hora. GitHub conserva el cron del minuto 23 como respaldo.
+El nombre de este documento es histórico: la cadencia vigente es de dos ciclos
+diarios. El código separa el reloj de la extracción. Vercel Cron solicita
+`extract.yml` a las 01:07 y 13:07 UTC. GitHub conserva el cron del minuto 23 de
+esas mismas horas como respaldo.
 El runner admite una sola ejecución por hora UTC y reserva cuota antes de cada
 petición a Gemini. La configuración del repositorio no acredita por sí sola que
 las credenciales estén instaladas o que el cron esté activo en producción.
@@ -36,7 +38,7 @@ Gemini ni la deploy key del publicador de ubicaciones se copian a Vercel.
 Revocar la instalación o la clave detiene este acceso.
 
 El disparador registra `vercel_cron` cuando recibe la cabecera de Vercel
-`x-vercel-cron-schedule: 7 * * * *`. Las llamadas autenticadas sin esa cabecera
+`x-vercel-cron-schedule: 7 1,13 * * *`. Las llamadas autenticadas sin esa cabecera
 se registran como `manual`. La cabecera describe el origen declarado; la
 autenticación sigue dependiendo de `CRON_SECRET`. Contrastar también horario,
 actor y ejecuciones conocidas para acreditar una invocación automática.
