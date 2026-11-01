@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-01T06:48:05.316969+00:00",
+  "generated_at": "2026-11-01T13:14:18.433638+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 14932,
-      "selected": 1918,
+      "selected": 1920,
       "evaluated": 4892,
-      "relevant": 1918,
-      "excluded": 538,
-      "uncertain": 2436,
+      "relevant": 1920,
+      "excluded": 546,
+      "uncertain": 2426,
       "pending": 10040,
-      "evaluated_at": "2026-11-01T01:22:29.146358+00:00"
+      "evaluated_at": "2026-11-01T13:14:15.682631+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-11-01",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1918,
+    "records": 1920,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1577,
+        "records": 1579,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -845,7 +845,7 @@
           {
             "month": "2015-06",
             "status": "enumerated",
-            "records": 42,
+            "records": 44,
             "screen_version": 3,
             "posts_scanned": 1067,
             "source_total_posts": 1067,
@@ -20011,12 +20011,12 @@
         "month": "2015-06",
         "start_date": "2015-06-01",
         "end_date": "2015-06-30",
-        "records": 43,
+        "records": 45,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 42
+            "records": 44
           },
           {
             "source_id": "gatoencerrado",
@@ -81090,6 +81090,55 @@
       }
     },
     {
+      "id": "36a140c5a86ccb1088196b8a39109a09140bc75f7cf991324c8898b8f475a75e",
+      "title": "Nayib Bukele: en San Salvador hay cero despidos en lo que va de mi administración",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/nayib-bukele-en-san-salvador-hay-cero-despidos-en-lo-que-va-de-mi-administracion/",
+      "published_date": "2015-06-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 70092,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-01T07:09:04.798096-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a0a6784a1eb91774953c61a3027b35a39810ce99bcc53386cb4e134872dff3f3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5",
+            "p6",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
       "id": "1b1eb7871c588035fb8b657e4469a66d619fdf19ae015bf697c7de88542344ef",
       "title": "Organizaciones marchan por el derecho al agua y alimentación",
       "title_truncated": false,
@@ -81131,6 +81180,57 @@
             "p4",
             "p6",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9663ff627164bc6fb8dd72f9d6ff09b19a16d54e77877254b3d03d4c2464ee7c",
+      "title": "PNC captura a sospechoso de matar a policía",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-sospechoso-de-matar-a-policia/",
+      "published_date": "2015-06-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 69996,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-01T07:09:04.798096-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "846009973584b4230c1fddd265669c8d17f3ae493c9514a373688e61e5e2daed",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p9",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5",
+            "p6",
+            "p9",
+            "p11",
+            "p12"
           ]
         }
       }
@@ -84516,9 +84616,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:09:41.675533-06:00",
+        "classified_at": "2026-11-01T07:13:36.823940-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d5349c9c26b3c4febf685fd8ed6f25578adf028958e470f8a85a8d0259ab4bf5",
           "jurisdiction_paragraph_ids": [
@@ -84526,7 +84626,6 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
             "p6"
           ]
         }
@@ -84560,9 +84659,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:09:41.675533-06:00",
+        "classified_at": "2026-11-01T07:13:17.584576-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b58feeb1c1a2989aec52d7a0458563b7a0b1feeda6873671887beb94c8157489",
           "jurisdiction_paragraph_ids": [
@@ -84571,9 +84670,7 @@
           "relevance_paragraph_ids": [
             "p2",
             "p7",
-            "p9",
-            "p13",
-            "p14"
+            "p9"
           ]
         }
       }
@@ -84606,17 +84703,19 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:09:41.675533-06:00",
+        "classified_at": "2026-11-01T07:13:00.283479-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "d29a2ebab0c3ed62c89f708a66925caa058d992328cff7930b345c851cdb017b",
           "jurisdiction_paragraph_ids": [
-            "p5"
+            "p5",
+            "p7"
           ],
           "relevance_paragraph_ids": [
             "p3",
-            "p6",
+            "p5",
+            "p8",
             "p10"
           ]
         }
@@ -84742,16 +84841,15 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:09:41.675533-06:00",
+        "classified_at": "2026-11-01T07:12:10.804678-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "cb261b969abf5c62f244ae9e0d04f8989338d4d6434d003d8aa712b5486722a0",
           "jurisdiction_paragraph_ids": [
             "p3"
           ],
           "relevance_paragraph_ids": [
-            "p3",
             "p5"
           ]
         }
@@ -85560,7 +85658,7 @@
     },
     {
       "id": "8953f8fc70e4094da237aba0697491980b6bca0dc1bd55f16496bbf924f5f97d",
-      "title": "Monseñor Romero, mártir, asesinado por odio a la fe",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
