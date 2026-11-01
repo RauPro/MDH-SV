@@ -217,6 +217,11 @@ def check_variables(client, repos, expectations, root=ROOT):
                 except json.JSONDecodeError:
                     failure('variables', f'{name}: {variable} is not valid JSON')
                     continue
+                keys = ('rpm', 'daily_budget', 'batch_ceiling') + (('rpd',) if config.get('rpd') is not None else ())
+                malformed = [key for key in keys if type(config.get(key)) is not int] if isinstance(config, dict) else ['config']
+                if malformed:
+                    failure('variables', f'{name}: {variable} has non-integer {", ".join(malformed)}')
+                    continue
                 problems = []
                 google = rule.get('google_free_tier', {})
                 if config.get('rpm', 0) > rule.get('max_rpm', 2):
