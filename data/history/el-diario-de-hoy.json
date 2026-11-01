@@ -204,12 +204,12 @@
     },
     "2016-11": {
       "status": "partial",
-      "posts_scanned": 72,
-      "pages_fetched": 72,
+      "posts_scanned": 73,
+      "pages_fetched": 73,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-31T21:50:41.748074+00:00",
+      "last_attempt_at": "2026-11-01T02:38:00.053549+00:00",
       "error": null
     },
     "2016-12": {
@@ -11516,6 +11516,29 @@
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "source_post_id": null,
         "retrieved_at": "2026-10-31T21:50:41.748074+00:00"
+      }
+    },
+    {
+      "id": "ef4a85a5ffd40a9a27280959e87c8bc5bd9a5c0f6bcf8842dde39bf9c6047309",
+      "title": "Asesinan a 4 personas en el cantón Los Hornos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/206845/asesinan-a-4-personas-en-el-canton-los-hornos.html",
+      "published_date": "2016-11-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-01T02:38:00.053549+00:00"
       }
     },
     {
@@ -129647,7 +129670,7 @@
     "phase": "partial",
     "access": "public",
     "notice": "Recorrido reanudable de los sitemaps públicos del archivo. La fecha se consulta en cada artículo; lastmod no se utiliza como fecha de publicación. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-10-31T21:50:41.748074+00:00",
+    "last_attempt_at": "2026-11-01T02:38:00.053549+00:00",
     "indexes": [
       "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
       "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom2.xml",
@@ -136757,7 +136780,7 @@
       "https://historico.elsalvador.com/historico/443651/policia-captura-a-4-presuntos-pandilleros.html",
       "https://historico.elsalvador.com/historico/387553/el-guerrillero-que-mato-a-dos-militares-de-ee-uu-esta-desaparecido.html"
     ],
-    "article_cursor": 5480,
+    "article_cursor": 5481,
     "visited": {
       "https://historico.elsalvador.com/historico/965496/organizacion-promovera-juicios-violacion-derechos-humanos.html": {
         "status": "selected",
@@ -169637,6 +169660,12 @@
         "status": "selected",
         "published_date": "2016-11-15",
         "last_attempt_at": "2026-10-31T21:50:41.748074+00:00",
+        "screen_version": 3
+      },
+      "https://historico.elsalvador.com/historico/206845/asesinan-a-4-personas-en-el-canton-los-hornos.html": {
+        "status": "selected",
+        "published_date": "2016-11-27",
+        "last_attempt_at": "2026-11-01T02:38:00.053549+00:00",
         "screen_version": 3
       }
     },
