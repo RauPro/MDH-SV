@@ -223,6 +223,8 @@ def check_variables(client, repos, expectations, root=ROOT):
                     problems.append(f"rpm={config.get('rpm')} > max_rpm={rule.get('max_rpm', 2)}")
                 if google.get('rpm') and config.get('rpm', 0) > google['rpm']:
                     problems.append(f"rpm={config.get('rpm')} above the Google free-tier {google['rpm']}/min")
+                if google.get('rpd') and config.get('daily_budget', 0) >= google['rpd']:
+                    problems.append(f"daily_budget={config.get('daily_budget')} >= Google free-tier {google['rpd']}/day")
                 if config.get('rpd') is not None:
                     if config.get('daily_budget', 0) >= config['rpd']:
                         problems.append(f"daily_budget={config.get('daily_budget')} >= rpd={config['rpd']}")
