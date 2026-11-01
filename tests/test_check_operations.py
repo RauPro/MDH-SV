@@ -321,6 +321,8 @@ def test_compare_status_mapping(tmp_path):
     ('{"rpm": 10, "rpd": 240, "daily_budget": 240, "batch_ceiling": 50, "model": "gemini-9"}', 'daily_budget=240'),
     ('{"rpm": 10, "rpd": 501, "daily_budget": 240, "batch_ceiling": 50, "model": "gemini-9"}', 'rpd=501'),
     ('{"rpm": 10, "rpd": null, "daily_budget": 600, "batch_ceiling": 50, "model": "gemini-9"}', 'daily_budget=600'),
+    ('{"rpm": 10, "rpd": null, "daily_budget": null, "batch_ceiling": 50, "model": "gemini-9"}', 'non-integer daily_budget'),
+    ('{"rpm": "10", "rpd": 500, "daily_budget": 240, "batch_ceiling": 50, "model": "gemini-9"}', 'non-integer rpm'),
 ])
 def test_budget_rule_uses_the_expectations(tmp_path, config, problem):
     root = make_root(tmp_path)
