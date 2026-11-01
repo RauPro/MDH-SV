@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-31T21:51:40.415581+00:00",
+  "generated_at": "2026-11-01T01:22:32.975498+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 14778,
-      "selected": 1914,
+      "selected": 1918,
       "evaluated": 4892,
-      "relevant": 1914,
-      "excluded": 531,
-      "uncertain": 2447,
+      "relevant": 1918,
+      "excluded": 538,
+      "uncertain": 2436,
       "pending": 9886,
-      "evaluated_at": "2026-10-18T21:16:59.441522+00:00"
+      "evaluated_at": "2026-11-01T01:22:29.146358+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-10-31",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1914,
+    "records": 1918,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1573,
+        "records": 1577,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -773,7 +773,7 @@
           {
             "month": "2014-12",
             "status": "enumerated",
-            "records": 31,
+            "records": 35,
             "screen_version": 3,
             "posts_scanned": 909,
             "source_total_posts": 909,
@@ -19669,12 +19669,12 @@
         "month": "2014-12",
         "start_date": "2014-12-01",
         "end_date": "2014-12-31",
-        "records": 35,
+        "records": 39,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 31
+            "records": 35
           },
           {
             "source_id": "gatoencerrado",
@@ -84705,17 +84705,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:09:41.675533-06:00",
+        "classified_at": "2026-10-31T19:21:50.159714-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "5be612d1c1a78b15d6e4dd1b5137d2baf22db6c44a7a4596bdb37830061fcd80",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p5",
-            "p6"
+            "p2",
+            "p3",
+            "p5"
           ]
         }
       }
@@ -84748,19 +84749,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:09:41.675533-06:00",
+        "classified_at": "2026-10-31T19:20:12.088589-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "febef3567d61772e8d578ba853ccca3651c366fe61c5a076462428f4e2c9cf40",
           "jurisdiction_paragraph_ids": [
-            "p3"
+            "p16"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p9",
-            "p11",
-            "p18"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -84793,17 +84792,19 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:09:41.675533-06:00",
+        "classified_at": "2026-10-31T19:19:49.103556-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "74a66ad4302a0c38ec4a5f5f9c3f8c60b9f4f6cc0fdadf8250b75500d168db94",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p2",
+            "p11"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4"
+            "p4",
+            "p6"
           ]
         }
       }
@@ -85245,19 +85246,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-12T23:16:43.823206-06:00",
+        "classified_at": "2026-10-31T19:18:11.439790-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "3bf1f2dfa2e3273de2b6890c828a10efde97fe8aad1cfb6a7d593436e44617d2",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5",
-            "p7"
+            "p2"
           ]
         }
       }
@@ -86073,7 +86071,7 @@
     },
     {
       "id": "ade9e9288c68343a2bcf33600a1c068736fd29f6db3b4a0f47182b518d70f225",
-      "title": "Sala ampara a personas afectadas por contaminación por plomo en Sitio del Niño",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -86116,7 +86114,7 @@
     },
     {
       "id": "6b9eaf5fb46d569bf6f665449d286c95ca09543a0819c53e175b3ad09cbd3c10",
-      "title": "“Los que asesinaron a Padre Rutilio odiaban la verdad y a los pobres”: Paula Fuentes",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -86340,7 +86338,7 @@
     },
     {
       "id": "7a7619d1985a3608865b084da9f308d29376bc919996b8f160634853dd4950b9",
-      "title": "Sala ampara a personas afectadas por contaminación por plomo",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -89999,6 +89997,100 @@
       }
     },
     {
+      "id": "8c508c5e1f6638234feb006bacc3ffd59a11fcab3cd62f358560b60e4c8507f3",
+      "title": "PNC captura a jueza de Lolotique por vínculos con homicidio de exalcalde",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-jueza-de-lolotique-por-vinculos-con-homicidio-de-exalcalde/",
+      "published_date": "2014-12-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 37350,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-31T19:10:52.600100-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1a1d6a8d80ca484ea5617e2a209fbc3b8843c6e5333649e2906678bdc42771b0",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p7",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8428a2c0f83729f5e67490ec4501e914188dad00d749354c670e252e719ac365",
+      "title": "Más de 500 capturas en primeros días de “Plan Navidad Segura”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/mas-de-500-capturas-en-primeros-dias-de-plan-navidad-segura/",
+      "published_date": "2014-12-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 37382,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-31T19:10:52.600100-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "9ccd517c9a0892f7e56ce1b0c10e3f844a8d03dd81cb5180cb7334f318c2cce2",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p13",
+            "p14",
+            "p16",
+            "p18"
+          ]
+        }
+      }
+    },
+    {
       "id": "4cccf1e48564b38194646961162e223df0dc50acad7e9579911a829d68841868",
       "title": "Cátedra de tortura (made in USA)",
       "title_truncated": false,
@@ -90091,6 +90183,53 @@
             "p17",
             "p19",
             "p21"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e4d7ff95360cd8b6ac68a6a46ef846a9e701a74abb5456b2c331dd9880d86446",
+      "title": "FGR ordena captura 26 personas por diversos delitos",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-ordena-captura-26-personas-por-diversos-delitos/",
+      "published_date": "2014-12-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 37232,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-31T19:10:52.600100-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "48daf368ff71fc7aea3c6a93b3a0fc9b19a64fb0b0126ef1625192a3ff5a32b1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p8",
+            "p9"
           ]
         }
       }
@@ -90400,6 +90539,52 @@
             "p2",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d656f3248b1f6cbc6b5c4292391e627229637447fe0a9b58a1d32358b8e1e17d",
+      "title": "Juzgado ordena detención para ecuatorianos vinculados a cargamento de cocaína",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-detencion-para-ecuatorianos-vinculados-a-cargamento-de-cocaina/",
+      "published_date": "2014-12-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 36091,
+        "retrieved_at": "2026-10-10T21:58:58.832466+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-10-31T19:10:52.600100-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "21416dd6ce8d2deb2e6252bf28701649103e6211dd667ad6e89aeeb18a69b02d",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5",
+            "p12"
           ]
         }
       }
