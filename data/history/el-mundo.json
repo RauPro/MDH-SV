@@ -24,12 +24,12 @@
     },
     "2026-10": {
       "status": "partial",
-      "posts_scanned": 42,
-      "pages_fetched": 42,
+      "posts_scanned": 43,
+      "pages_fetched": 43,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-10-31T21:50:40.786884+00:00",
+      "last_attempt_at": "2026-11-01T06:47:41.998421+00:00",
       "error": null
     }
   },
@@ -327,6 +327,31 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-10-31T06:14:50.463635+00:00"
+      }
+    },
+    {
+      "id": "ccd3b50aa837aaf69f0fd0e4db3cae870c58b57f8eb304c4caf99451758d3b58",
+      "title": "Capturan a tres guatemaltecos y cuatro salvadoreños señalados de transportar 150,000 porciones de droga",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/capturan-a-tres-guatemaltecos-y-cuatro-salvadorenos-senalados-de-transportar-150000-porciones-de-droga",
+      "published_date": "2026-10-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-01T06:47:41.998421+00:00"
       }
     },
     {
@@ -1107,15 +1132,15 @@
   ],
   "collection": {
     "method": "html_archive",
-    "phase": "partial",
+    "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-01T02:37:59.872905+00:00",
+    "last_attempt_at": "2026-11-01T06:47:41.998421+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
     ],
-    "index_cursor": 1,
+    "index_cursor": 2,
     "articles": [
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales",
       "https://diario.elmundo.sv/nacionales/mas-del-30-de-salvadorenos-aprueba-tortura-y-ejecuciones-extrajudiciales",
@@ -1163,7 +1188,7 @@
       "https://diario.elmundo.sv/nacionales/pnc-captura-a-joven-de-26-anos-con-bolsa-llena-de-marihuana",
       "https://diario.elmundo.sv/nacionales/capturan-a-tres-guatemaltecos-y-cuatro-salvadorenos-senalados-de-transportar-150000-porciones-de-droga"
     ],
-    "article_cursor": 44,
+    "article_cursor": 45,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1428,6 +1453,12 @@
         "published_date": "2026-10-31",
         "last_attempt_at": "2026-10-31T21:50:40.786884+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/capturan-a-tres-guatemaltecos-y-cuatro-salvadorenos-senalados-de-transportar-150000-porciones-de-droga": {
+        "status": "selected",
+        "published_date": "2026-10-29",
+        "last_attempt_at": "2026-11-01T06:47:41.998421+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1439,7 +1470,7 @@
         "article_urls_matching_anchor": 6,
         "article_urls_observed": 20,
         "article_urls_selected": 6,
-        "last_attempt_at": "2026-11-01T02:37:59.872905+00:00"
+        "last_attempt_at": "2026-11-01T06:47:41.998421+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -1448,7 +1479,7 @@
         "article_urls_matching_anchor": 2,
         "article_urls_observed": 20,
         "article_urls_selected": 2,
-        "last_attempt_at": "2026-10-31T21:50:40.786884+00:00"
+        "last_attempt_at": "2026-11-01T06:47:41.998421+00:00"
       }
     },
     "index_screen_version": 3

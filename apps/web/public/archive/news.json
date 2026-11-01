@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-01T02:38:01.713255+00:00",
+  "generated_at": "2026-11-01T06:48:05.316969+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -22,13 +22,13 @@
     "selection_gate": {
       "version": 2,
       "scope": "human_rights_el_salvador",
-      "candidates": 14779,
+      "candidates": 14932,
       "selected": 1918,
       "evaluated": 4892,
       "relevant": 1918,
       "excluded": 538,
       "uncertain": 2436,
-      "pending": 9887,
+      "pending": 10040,
       "evaluated_at": "2026-11-01T01:22:29.146358+00:00"
     }
   },
@@ -48,7 +48,7 @@
   },
   "coverage": {
     "start_date": "2010-01-01",
-    "end_date": "2026-10-31",
+    "end_date": "2026-11-01",
     "timezone": "America/El_Salvador",
     "status": "partial",
     "records": 1918,
@@ -57,7 +57,7 @@
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
-        "status": "partial",
+        "status": "enumerated",
         "records": 1577,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
@@ -2476,14 +2476,26 @@
           },
           {
             "month": "2026-10",
-            "status": "partial",
+            "status": "enumerated",
             "records": 10,
             "screen_version": 3,
-            "posts_scanned": 100,
+            "posts_scanned": 371,
             "source_total_posts": 371,
+            "pages_fetched": 4,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-11-01T06:47:37.744502+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-11",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 3,
+            "posts_scanned": 0,
+            "source_total_posts": 0,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-11-01T02:37:58.256179+00:00",
+            "last_attempt_at": "2026-11-01T06:47:37.744502+00:00",
             "error": null
           }
         ]
@@ -4918,7 +4930,19 @@
             "source_total_posts": 10,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-11-01T02:37:58.256476+00:00",
+            "last_attempt_at": "2026-11-01T06:47:37.744713+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-11",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 3,
+            "posts_scanned": 0,
+            "source_total_posts": 0,
+            "pages_fetched": 1,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-11-01T06:47:37.744713+00:00",
             "error": null
           }
         ]
@@ -7353,7 +7377,19 @@
             "source_total_posts": 3,
             "pages_fetched": 1,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-11-01T02:37:58.256896+00:00",
+            "last_attempt_at": "2026-11-01T06:47:37.744978+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-11",
+            "status": "enumerated",
+            "records": 0,
+            "screen_version": 3,
+            "posts_scanned": 0,
+            "source_total_posts": 0,
+            "pages_fetched": 1,
+            "invalid_posts": 0,
+            "last_attempt_at": "2026-11-01T06:47:37.744978+00:00",
             "error": null
           }
         ]
@@ -9790,6 +9826,18 @@
             "invalid_posts": 0,
             "last_attempt_at": "2026-10-31T06:14:49.892093+00:00",
             "error": null
+          },
+          {
+            "month": "2026-11",
+            "status": "not_started",
+            "records": 0,
+            "screen_version": null,
+            "posts_scanned": 0,
+            "source_total_posts": null,
+            "pages_fetched": 0,
+            "invalid_posts": 0,
+            "last_attempt_at": null,
+            "error": null
           }
         ],
         "collection": {
@@ -9797,7 +9845,7 @@
           "phase": "partial",
           "access": "public",
           "notice": "Selección parcial del especial de 2010 y páginas públicas actuales. Algunos enlaces antiguos restringen el acceso; no es una hemeroteca completa.",
-          "last_attempt_at": "2026-11-01T02:37:59.772713+00:00"
+          "last_attempt_at": "2026-11-01T06:47:41.740231+00:00"
         }
       },
       {
@@ -12226,20 +12274,32 @@
             "status": "partial",
             "records": 0,
             "screen_version": 3,
-            "posts_scanned": 42,
+            "posts_scanned": 43,
             "source_total_posts": null,
-            "pages_fetched": 42,
+            "pages_fetched": 43,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-31T21:50:40.786884+00:00",
+            "last_attempt_at": "2026-11-01T06:47:41.998421+00:00",
+            "error": null
+          },
+          {
+            "month": "2026-11",
+            "status": "not_started",
+            "records": 0,
+            "screen_version": null,
+            "posts_scanned": 0,
+            "source_total_posts": null,
+            "pages_fetched": 0,
+            "invalid_posts": 0,
+            "last_attempt_at": null,
             "error": null
           }
         ],
         "collection": {
           "method": "html_article_metadata",
-          "phase": "partial",
+          "phase": "complete",
           "access": "public",
           "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible.",
-          "last_attempt_at": "2026-11-01T02:37:59.872905+00:00"
+          "last_attempt_at": "2026-11-01T06:47:41.998421+00:00"
         }
       },
       {
@@ -14674,6 +14734,18 @@
             "invalid_posts": 0,
             "last_attempt_at": null,
             "error": null
+          },
+          {
+            "month": "2026-11",
+            "status": "not_started",
+            "records": 0,
+            "screen_version": null,
+            "posts_scanned": 0,
+            "source_total_posts": null,
+            "pages_fetched": 0,
+            "invalid_posts": 0,
+            "last_attempt_at": null,
+            "error": null
           }
         ],
         "collection": {
@@ -15214,11 +15286,11 @@
             "status": "partial",
             "records": 3,
             "screen_version": 3,
-            "posts_scanned": 115,
+            "posts_scanned": 118,
             "source_total_posts": null,
-            "pages_fetched": 115,
+            "pages_fetched": 118,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-18T16:07:47.411692+00:00",
+            "last_attempt_at": "2026-11-01T06:47:42.326557+00:00",
             "error": null
           },
           {
@@ -15454,11 +15526,11 @@
             "status": "partial",
             "records": 0,
             "screen_version": 3,
-            "posts_scanned": 47,
+            "posts_scanned": 63,
             "source_total_posts": null,
-            "pages_fetched": 47,
+            "pages_fetched": 63,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-20T05:13:42.055744+00:00",
+            "last_attempt_at": "2026-11-01T06:47:42.326557+00:00",
             "error": null
           },
           {
@@ -15670,11 +15742,11 @@
             "status": "partial",
             "records": 3,
             "screen_version": 3,
-            "posts_scanned": 174,
+            "posts_scanned": 196,
             "source_total_posts": null,
-            "pages_fetched": 174,
+            "pages_fetched": 196,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-31T21:50:41.748074+00:00",
+            "last_attempt_at": "2026-11-01T06:47:42.326557+00:00",
             "error": null
           },
           {
@@ -15682,11 +15754,11 @@
             "status": "partial",
             "records": 0,
             "screen_version": 3,
-            "posts_scanned": 73,
+            "posts_scanned": 111,
             "source_total_posts": null,
-            "pages_fetched": 73,
+            "pages_fetched": 111,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-11-01T02:38:00.053549+00:00",
+            "last_attempt_at": "2026-11-01T06:47:42.326557+00:00",
             "error": null
           },
           {
@@ -15694,11 +15766,11 @@
             "status": "partial",
             "records": 1,
             "screen_version": 3,
-            "posts_scanned": 33,
+            "posts_scanned": 104,
             "source_total_posts": null,
-            "pages_fetched": 33,
+            "pages_fetched": 104,
             "invalid_posts": 0,
-            "last_attempt_at": "2026-10-19T13:54:17.610708+00:00",
+            "last_attempt_at": "2026-11-01T06:47:42.326557+00:00",
             "error": null
           },
           {
@@ -17116,6 +17188,18 @@
             "invalid_posts": 0,
             "last_attempt_at": null,
             "error": null
+          },
+          {
+            "month": "2026-11",
+            "status": "not_started",
+            "records": 0,
+            "screen_version": null,
+            "posts_scanned": 0,
+            "source_total_posts": null,
+            "pages_fetched": 0,
+            "invalid_posts": 0,
+            "last_attempt_at": null,
+            "error": null
           }
         ],
         "collection": {
@@ -17123,7 +17207,7 @@
           "phase": "partial",
           "access": "public",
           "notice": "Recorrido reanudable de los sitemaps públicos del archivo. La fecha se consulta en cada artículo; lastmod no se utiliza como fecha de publicación.",
-          "last_attempt_at": "2026-11-01T02:38:00.053549+00:00"
+          "last_attempt_at": "2026-11-01T06:47:42.326557+00:00"
         }
       }
     ],
@@ -25779,7 +25863,7 @@
         "sources": [
           {
             "source_id": "co-latino",
-            "status": "partial",
+            "status": "enumerated",
             "records": 10
           },
           {
@@ -25800,6 +25884,49 @@
           {
             "source_id": "el-mundo",
             "status": "partial",
+            "records": 0
+          },
+          {
+            "source_id": "la-prensa-grafica",
+            "status": "not_started",
+            "records": 0
+          },
+          {
+            "source_id": "el-diario-de-hoy",
+            "status": "not_started",
+            "records": 0
+          }
+        ]
+      },
+      {
+        "month": "2026-11",
+        "start_date": "2026-11-01",
+        "end_date": "2026-11-01",
+        "records": 0,
+        "sources": [
+          {
+            "source_id": "co-latino",
+            "status": "enumerated",
+            "records": 0
+          },
+          {
+            "source_id": "gatoencerrado",
+            "status": "enumerated",
+            "records": 0
+          },
+          {
+            "source_id": "factum",
+            "status": "enumerated",
+            "records": 0
+          },
+          {
+            "source_id": "el-faro",
+            "status": "not_started",
+            "records": 0
+          },
+          {
+            "source_id": "el-mundo",
+            "status": "not_started",
             "records": 0
           },
           {

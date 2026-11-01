@@ -290,16 +290,17 @@
     "2026-10": {
       "start_date": "2026-10-01",
       "end_date": "2026-10-31",
-      "status": "partial",
-      "last_attempt_at": "2026-11-01T02:37:58.256179+00:00",
+      "status": "enumerated",
+      "last_attempt_at": "2026-11-01T06:47:37.744502+00:00",
       "screen_version": 3,
-      "next_page": 2,
-      "pages_fetched": 1,
-      "posts_scanned": 100,
+      "next_page": 5,
+      "pages_fetched": 4,
+      "posts_scanned": 371,
       "invalid_posts": 0,
       "source_total_posts": 371,
       "source_total_pages": 4,
-      "error": null
+      "error": null,
+      "completed_at": "2026-11-01T06:47:37.744502+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3030,9 +3031,72 @@
       "source_total_pages": 5,
       "error": null,
       "completed_at": "2026-10-14T12:20:03.754783+00:00"
+    },
+    "2026-11": {
+      "start_date": "2026-11-01",
+      "end_date": "2026-11-01",
+      "status": "enumerated",
+      "last_attempt_at": "2026-11-01T06:47:37.744502+00:00",
+      "screen_version": 3,
+      "next_page": 2,
+      "pages_fetched": 1,
+      "posts_scanned": 0,
+      "invalid_posts": 0,
+      "source_total_posts": 0,
+      "source_total_pages": 0,
+      "error": null,
+      "completed_at": "2026-11-01T06:47:37.744502+00:00"
     }
   },
   "records": [
+    {
+      "id": "f515a44babb24e223327a9aecd6a11f0544c0635aa706bec8ec70896f62651c2",
+      "title": "Madres por la Libertad piden justicia por los inocentes muertos dentro de los penales bajo régimen de excepción",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/madres-por-la-libertad-piden-justicia-por-los-inocentes-muertos-dentro-de-los-penales-bajo-regimen-de-excepcion/",
+      "published_date": "2026-10-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421464,
+        "retrieved_at": "2026-11-01T06:47:37.744502+00:00"
+      }
+    },
+    {
+      "id": "e280384f780d0886fba251863f705b312d7406d6b86c082da3ff8dbc47f7cff4",
+      "title": "Colectivos sindicales conmemoran Día del Sindicalista Salvadoreño",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/colectivos-sindicales-conmemoran-dia-del-sindicalista-salvadoreno/",
+      "published_date": "2026-10-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421461,
+        "retrieved_at": "2026-11-01T06:47:37.744502+00:00"
+      }
+    },
     {
       "id": "279f385145be2d2c86f10f6d6dcc6a4c5c1754d1e3f92fe8d19fcf453373fb83",
       "title": "MOVIR inicia recolección de arraigos de inocentes detenidos en el régimen de excepción",
