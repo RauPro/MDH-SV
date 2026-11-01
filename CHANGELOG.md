@@ -20,6 +20,10 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 
 - Dependabot agrupa las actualizaciones menores y de parche por directorio.
 - README reorganizado en secciones escaneables con insignias y ejemplos verificados.
+- README: el catálogo se nombra como casos documentados por organizaciones de
+  derechos humanos, distinto del archivo de noticias; insignias dinámicas con
+  cifras en vivo de la API, enlace de cobertura por fuente y segunda captura
+  del portal (mapa por departamentos).
 
 ### Retirado
 

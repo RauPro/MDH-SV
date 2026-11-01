@@ -13,22 +13,28 @@ Monitor independiente de reportes de presuntas violaciones de derechos humanos: 
 [![Python 3.13](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/)
 [![Node 22](https://img.shields.io/badge/Node-22-green)](https://nodejs.org/)
 
-[Portal](https://mdh-sv.vercel.app) · [API](https://mdh-sv.vercel.app/api/v1/records) · [MCP](https://mdh-sv.vercel.app/mcp) · [Datos abiertos](#acceso-a-los-datos) · [Documentación](#documentación) · [Contribuir](#contribuir)
+[![noticias](https://img.shields.io/badge/dynamic/json?label=noticias&color=blue&url=https%3A%2F%2Fmdh-sv.vercel.app%2Fapi%2Fv1%2Fnews%3Flimit%3D1%26coverage%3Dsummary&query=%24.pagination.total)](https://mdh-sv.vercel.app/api/v1/news?limit=1&coverage=summary)
+[![catálogo](https://img.shields.io/badge/dynamic/json?label=cat%C3%A1logo&color=green&url=https%3A%2F%2Fmdh-sv.vercel.app%2Fapi%2Fv1%2Fstats&query=%24.data.total_records)](https://mdh-sv.vercel.app/api/v1/stats)
+[![estadísticas oficiales](https://img.shields.io/badge/dynamic/json?label=estad%C3%ADsticas%20oficiales&color=orange&url=https%3A%2F%2Fmdh-sv.vercel.app%2Fapi%2Fv1%2Fofficial-statistics&query=%24.meta.returned_rows)](https://mdh-sv.vercel.app/api/v1/official-statistics)
+
+[Portal](https://mdh-sv.vercel.app) · [API](docs/API.md) · [MCP](https://mdh-sv.vercel.app/mcp) · [Datos abiertos](#acceso-a-los-datos) · [Documentación](#documentación) · [Contribuir](#contribuir)
 
 </div>
 
-> **An independent human-rights monitor for El Salvador.** It publishes a source-checked documentary catalogue (human editorial review pending), a structured archive of human-rights news since 2010 and the official homicide statistics, each record traceable to its source. A private Gemini-assisted review queue drafts dossiers that are published automatically, single-source and unreviewed; the public API, portal and remote MCP serve only the published snapshots.
+> **An independent human-rights monitor for El Salvador.** It publishes cases documented by human-rights organisations, a separate archive of human-rights news since 2010 and the official homicide statistics, each record traceable to its source. A private Gemini-assisted review queue drafts news dossiers that are published automatically, single-source and unreviewed; the public API, portal and remote MCP serve only the published snapshots.
 
 ## Qué es
 
-- **Catálogo documental:** 17 reportes individuales, 2 reportes colectivos y 5 informes de contexto con fuente y localizador. Todos están en `source_checked` (consulta documental asistida), que no equivale a revisión editorial humana. Es una muestra documental limitada: no mide prevalencia, no constituye un censo y no suma personas entre fuentes.
-- **Archivo de noticias desde 2010:** referencias seleccionadas por pertinencia en derechos humanos y vínculo con El Salvador, recogidas de Diario Co Latino, GatoEncerrado, Revista Factum, El Faro, Diario El Mundo y el archivo de El Diario de Hoy; La Prensa Gráfica figura en el registro con acceso automatizado restringido y no aporta noticias automáticamente. Los índices pueden ser parciales. Cada referencia tiene una ficha estructurada cuyos campos se publican tras validación automática o quedan pendientes; las fichas automáticas declaran **`human_reviewed: false` y una sola fuente** (`single_source`).
+- **Casos documentados por organizaciones de derechos humanos:** 17 reportes individuales (una persona o un hecho), 2 reportes colectivos y 5 informes de contexto, tomados de publicaciones de Human Rights Watch, Cristosal, Amnistía Internacional, CIDH, Corte IDH, Procedimientos Especiales de la ONU, Citizen Lab y Access Now. Cada registro identifica su fuente y un localizador y está comprobado contra su documento fuente, sin revisión editorial humana (`source_checked`); se sirve en [`/api/v1/records`](https://mdh-sv.vercel.app/api/v1/records).
+- **Archivo de noticias desde 2010:** referencias seleccionadas por pertinencia y vínculo con El Salvador, cada una con una ficha estructurada, en [`/api/v1/news`](https://mdh-sv.vercel.app/api/v1/news). Es una colección aparte: las noticias nunca se cuentan como casos y el catálogo no recibe casos de las noticias automáticamente. Siete fuentes registradas; hoy la mayoría de las referencias proviene de Diario Co Latino, y El Faro y La Prensa Gráfica aún no aportan (esta última tiene acceso automatizado restringido). [Cobertura por fuente y mes en vivo](https://mdh-sv.vercel.app/api/v1/news/coverage).
 - **Estadísticas oficiales de homicidios 2010–2026:** agregados por año y departamento con fuentes y cobertura explícita, consultados con revisión privada previa.
 
 ![Portada del portal público de MDH-SV, con el aviso sobre las fuentes y las secciones de fichas y mapa, archivo de noticias y estadísticas oficiales](docs/assets/portal.png)
 
+![Sección «Mapa de El Salvador» del portal: el mapa por departamentos con el número de reportes en cada uno, la lista de departamentos a la derecha y la leyenda](docs/assets/portal-mapa.png)
+
 > [!IMPORTANT]
-> **Qué no es.** No es un censo ni una determinación judicial. La selección automática no es revisión humana. Una sola fuente no es corroboración independiente. Las organizaciones citadas no patrocinan ni validan el proyecto.
+> **Qué no es.** No es un censo ni una determinación judicial; no mide prevalencia ni suma personas entre fuentes. El catálogo es una muestra documental limitada con revisión editorial pendiente. La selección automática no es revisión humana y las fichas de noticias son automáticas, de una sola fuente y sin revisión humana (`human_reviewed: false`, `single_source`); una sola fuente no es corroboración independiente. Las organizaciones citadas no patrocinan ni validan el proyecto.
 
 ## Acceso a los datos
 
@@ -52,6 +58,8 @@ import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/
 const client = new Client({ name: 'mi-consulta', version: '1.0.0' });
 await client.connect(new StreamableHTTPClientTransport(
   new URL('https://mdh-sv.vercel.app/mcp')));
+const result = await client.callTool({ name: 'search_news', arguments: { q: 'detención', limit: 3 } });
+await client.close();
 ```
 
 ## Cómo funciona
@@ -86,10 +94,14 @@ python3.13 scripts/bootstrap.py      # .venv, dependencias fijadas, Gitleaks, Ch
 Para pruebas y desarrollo:
 
 ```sh
-npm ci && npm run test:api && npm run dev:api
-npm --prefix apps/web ci && npm --prefix apps/web test
-npm --prefix apps/web run build && npm --prefix apps/web run test:browser
-npm --prefix apps/web run dev
+npm ci                                      # dependencias del servidor fijadas
+npm run test:api                            # API pública y contratos OpenAPI
+npm run dev:api                             # API local en escucha (servidor)
+npm --prefix apps/web ci                    # dependencias web fijadas
+npm --prefix apps/web test                  # Vitest de la web
+npm --prefix apps/web run build             # compilar dist/
+npm --prefix apps/web run test:browser      # Playwright sobre dist/
+npm --prefix apps/web run dev               # portal local en escucha (servidor)
 ```
 
 El módulo Python `.venv/bin/python -m mdh_mcp.server` conserva el transporte local `stdio`. Las pruebas y la web local no requieren secretos. Guías: [CONTRIBUTING](CONTRIBUTING.md) y [forks e instancias](docs/FORKS.md).
