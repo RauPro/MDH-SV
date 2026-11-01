@@ -218,8 +218,16 @@ def check_variables(client, repos, expectations, root=ROOT):
                     failure('variables', f'{name}: {variable} is not valid JSON')
                     continue
                 problems = []
-                if config.get('rpm', 0) > 2:
-                    problems.append(f"rpm={config.get('rpm')} > 2")
+                google = rule.get('google_free_tier', {})
+                if config.get('rpm', 0) > rule.get('max_rpm', 2):
+                    problems.append(f"rpm={config.get('rpm')} > max_rpm={rule.get('max_rpm', 2)}")
+                if google.get('rpm') and config.get('rpm', 0) > google['rpm']:
+                    problems.append(f"rpm={config.get('rpm')} above the Google free-tier {google['rpm']}/min")
+                if config.get('rpd') is not None:
+                    if config.get('daily_budget', 0) >= config['rpd']:
+                        problems.append(f"daily_budget={config.get('daily_budget')} >= rpd={config['rpd']}")
+                    if google.get('rpd') and config['rpd'] > google['rpd']:
+                        problems.append(f"rpd={config['rpd']} above the Google free-tier {google['rpd']}/day")
                 if config.get('batch_ceiling', 0) < budget['max_requests_per_cycle']:
                     problems.append(f"batch_ceiling={config.get('batch_ceiling')} < max_requests_per_cycle={budget['max_requests_per_cycle']}")
                 if config.get('model') != model_var.get(role):

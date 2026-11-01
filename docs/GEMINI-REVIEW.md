@@ -36,10 +36,11 @@ oficiales conservan sus procesos de revisión humana separados.
 - Clasificación, extracción, evaluación automática, actualizaciones por cambio
   de fuente y reintentos comparten `runtime/gemini-budget.json`. Se reserva saldo
   antes de cada solicitud HTTP. Los recibos de evaluación no abren otra cuota.
-- La configuración `operator_cap` conserva un **tope propio de 240 solicitudes
-  diarias**, 2 solicitudes por minuto y un límite de entrada de 200 000 unidades
-  conservadoras por minuto. No es una cuota confirmada por Google; el límite diario de este
-  proyecto no aparece disponible. Un 429 detiene las llamadas hasta el siguiente
+- La configuración conserva un **tope propio de 240 solicitudes
+  diarias**, 10 solicitudes por minuto y un límite de entrada de 200 000 unidades
+  conservadoras por minuto, bajo `limits_source: "project_quota"`. Los límites del
+  nivel gratuito de Google son 15 solicitudes por minuto y 500 por día, consultados
+  en la consola de Google Cloud el 1-11-2026 (`rpd: 500` verificado). Un 429 detiene las llamadas hasta el siguiente
   día del Pacífico. No se activa facturación ni se cambia de modelo para continuar.
 - `automatic_validation_limit` en el publicador limita las llamadas adicionales
   de cada ejecución, con valor predeterminado 50. Es sólo un techo: el reparto

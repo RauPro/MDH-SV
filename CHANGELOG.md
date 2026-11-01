@@ -20,6 +20,10 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 
 - Dependabot agrupa las actualizaciones menores y de parche por directorio.
 - README reorganizado en secciones escaneables con insignias y ejemplos verificados.
+- La verificación operativa lee el tope por minuto de `MDH_GEMINI_BUDGET_CONFIG`
+  desde `ops/operations-expectations.json` (`max_rpm: 10` con los límites
+  verificados del nivel gratuito de Google: 15/min y 500/día, consola, 1-11-2026);
+  la configuración privada pasa de `operator_cap` a `project_quota`.
 - README: el catálogo se nombra como casos documentados por organizaciones de
   derechos humanos, distinto del archivo de noticias; insignias dinámicas con
   cifras en vivo de la API, enlace de cobertura por fuente y segunda captura

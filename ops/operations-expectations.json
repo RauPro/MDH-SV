@@ -27,7 +27,8 @@
   "variables": {
     "MDH_AUTOMATION_ENABLED": { "repositories": ["public", "private"], "equals": "true" },
     "GEMINI_MODEL": { "repositories": ["private"], "present": true },
-    "MDH_GEMINI_BUDGET_CONFIG": { "repositories": ["private"], "budget_check": true }
+    "MDH_GEMINI_BUDGET_CONFIG": { "repositories": ["private"], "budget_check": true, "max_rpm": 10,
+      "google_free_tier": { "rpm": 15, "rpd": 500, "verified_at": "2026-11-01", "source": "Google Cloud Console quotas" } }
   },
   "schedule_delay_tolerance_hours": 8
 }
