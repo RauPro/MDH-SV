@@ -89,8 +89,10 @@ La variable de Actions privada `MDH_GEMINI_BUDGET_CONFIG` es un objeto JSON con:
 | `verified_at` | Fecha y hora UTC de la comprobación del nivel y la configuración, con zona horaria. |
 
 Ejemplo de **topes propios**, sin afirmar que estos números sean la cuota del
-proveedor ni que estén instalados en producción: `daily_budget: 240`, `rpm: 2`
+proveedor ni que estén instalados en producción: `daily_budget: 240`, `rpm: 10`
 e `input_tpm: 200000`, con `limits_source: "operator_cap"` y `rpd: null`.
+Los límites verificados del nivel gratuito del proyecto actual son 15 solicitudes
+por minuto y 500 por día, consultados en la consola de Google Cloud el 1-11-2026.
 El mismo registro cubre la clasificación de todo el archivo y las fichas.
 El job usa una única reserva horaria: aproximadamente 70% para clasificar primero
 (hasta dieciséis artículos por solicitud) y el resto para fichas. El trabajo de

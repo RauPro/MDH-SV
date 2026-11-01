@@ -83,7 +83,10 @@ def make_root(tmp_path):
         'private_main_protection': {'protected': False, 'status': 'accepted', 'reason': 'runtime writes'},
         'variables': {'MDH_AUTOMATION_ENABLED': {'repositories': ['public', 'private'], 'equals': 'true'},
                       'GEMINI_MODEL': {'repositories': ['private'], 'present': True},
-                      'MDH_GEMINI_BUDGET_CONFIG': {'repositories': ['private'], 'budget_check': True}},
+                      'MDH_GEMINI_BUDGET_CONFIG': {'repositories': ['private'], 'budget_check': True, 'max_rpm': 10,
+                                                   'google_free_tier': {'rpm': 15, 'rpd': 500,
+                                                                        'verified_at': '2026-11-01',
+                                                                        'source': 'Google Cloud Console quotas'}}},
         'schedule_delay_tolerance_hours': 8}))
     (root / '.github/main-protection.json').write_text(json.dumps(
         {'enforce_admins': True, 'restrictions': None}))
@@ -114,7 +117,7 @@ def responses():
         f'/repos/{PRIV}/actions/variables': {'variables': [
             {'name': 'MDH_AUTOMATION_ENABLED', 'value': 'true'},
             {'name': 'GEMINI_MODEL', 'value': 'gemini-9'},
-            {'name': 'MDH_GEMINI_BUDGET_CONFIG', 'value': '{"rpm": 2, "batch_ceiling": 16, "model": "gemini-9"}'}]},
+            {'name': 'MDH_GEMINI_BUDGET_CONFIG', 'value': '{"rpm": 10, "rpd": 500, "daily_budget": 240, "batch_ceiling": 50, "model": "gemini-9"}'}]},
         f'/repos/{PUB}/rulesets': [{'name': 'main'}],
         f'/repos/{PRIV}/rulesets': [],
         f'/repos/{PUB}/keys': [{'title': 'pub-key', 'read_only': True, 'created_at': 'x'}],
@@ -310,3 +313,24 @@ def test_compare_status_mapping(tmp_path):
     report = ops.run_checks(FakeClient(fixture), root)
     assert any(f['area'] == 'template-drift' and 'does not exist' in f['message']
                for f in levels(report))
+
+
+@pytest.mark.parametrize('config,problem', [
+    ('{"rpm": 10, "rpd": 500, "daily_budget": 240, "batch_ceiling": 50, "model": "gemini-9"}', None),
+    ('{"rpm": 11, "rpd": 500, "daily_budget": 240, "batch_ceiling": 50, "model": "gemini-9"}', 'rpm=11'),
+    ('{"rpm": 10, "rpd": 240, "daily_budget": 240, "batch_ceiling": 50, "model": "gemini-9"}', 'daily_budget=240'),
+    ('{"rpm": 10, "rpd": 501, "daily_budget": 240, "batch_ceiling": 50, "model": "gemini-9"}', 'rpd=501'),
+])
+def test_budget_rule_uses_the_expectations(tmp_path, config, problem):
+    root = make_root(tmp_path)
+    fixture = responses()
+    fixture[f'/repos/{PRIV}/actions/variables']['variables'] = [
+        variable for variable in fixture[f'/repos/{PRIV}/actions/variables']['variables']
+        if variable['name'] != 'MDH_GEMINI_BUDGET_CONFIG'
+    ] + [{'name': 'MDH_GEMINI_BUDGET_CONFIG', 'value': config}]
+    report = ops.run_checks(FakeClient(fixture), root)
+    findings = [f for f in report['findings'] if 'MDH_GEMINI_BUDGET_CONFIG' in f['message']]
+    if problem is None:
+        assert all(f['level'] == 'ok' for f in findings)
+    else:
+        assert any(f['level'] == 'failure' and problem in f['message'] for f in findings)

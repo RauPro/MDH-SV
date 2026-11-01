@@ -85,10 +85,11 @@ a la cola. Cada ciclo programado solicita como máximo 16 llamadas a Gemini;
 el límite efectivo se reduce según el saldo y las horas restantes del día del Pacífico. Cada intento HTTP, incluidos
 los reintentos, consume ese presupuesto compartido por clasificación, extracción y evaluación automática.
 
-La configuración privada utiliza `operator_cap`, con un tope propio de 240
-solicitudes al día, 2 por minuto y 200 000 unidades conservadoras de entrada por
-minuto. El límite diario de Google no está visible (`rpd: null`);
-estos topes no se presentan como cuotas confirmadas del proveedor. Un 429 pausa
+La configuración privada utiliza `project_quota`, con un tope propio de 240
+solicitudes al día, 10 por minuto y 200 000 unidades conservadoras de entrada por
+minuto. Los límites del nivel gratuito de Google son 15 solicitudes por minuto
+y 500 por día, verificados en la consola de Google Cloud el 1-11-2026
+(`rpd: 500`). Un 429 pausa
 las llamadas hasta la siguiente medianoche del Pacífico. No se activa facturación
 ni se cambia automáticamente de modelo. Los archivos privados conservan estado
 y evitan repetir extracciones ya terminadas. Ante autenticación o configuración

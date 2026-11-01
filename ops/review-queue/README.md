@@ -111,9 +111,10 @@ nuevo. `automatic_validation_limit` vale 50 por defecto; cada solicitud puede
 evaluar hasta cuatro fichas. La plantilla usa `VALIDATION_BATCH_SIZE=4` y
 `VALIDATION_LIMIT=50`, que pasan a `automatic_news evaluate --batch-size 4 --limit 50`.
 Clasificación, extracción, evaluación y reintentos comparten
-`runtime/gemini-budget.json`, el tope propio de 240 solicitudes diarias, 2 por minuto,
+`runtime/gemini-budget.json`, el tope propio de 240 solicitudes diarias, 10 por minuto,
 200 000 unidades conservadoras de entrada por minuto y las pausas
-ante 429. Ese tope no es una cuota confirmada por Google. No se activa facturación,
+ante 429. Los límites del nivel gratuito de Google son 15 solicitudes por minuto
+y 500 por día (consola de Google Cloud, 1-11-2026). No se activa facturación,
 no se cambia de modelo al agotar saldo y los disparos manuales no reinician el contador.
 
 El extractor registra el reparto en `runtime/news-allocation.json`. Con un cupo
