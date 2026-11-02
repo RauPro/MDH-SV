@@ -38,6 +38,9 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 ### Corregido
 
 - Las notas de release incluyen las definiciones de los enlaces que citan.
+- La nota de comparabilidad que propone el monitor de estadísticas oficiales ya
+  no deja una mayúscula tras el punto y coma («…departamental; consulte el
+  período…»).
 
 ## [2.1.0] - 2026-10-31
 
