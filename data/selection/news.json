@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-01T13:14:15.682631+00:00",
+  "generated_at": "2026-11-02T01:14:37.503634+00:00",
   "assessment_counts": {
-    "candidates": 14932,
+    "candidates": 15239,
     "evaluated": 4892,
-    "relevant": 1920,
-    "excluded": 546,
-    "uncertain": 2426,
-    "pending": 10040
+    "relevant": 1923,
+    "excluded": 554,
+    "uncertain": 2415,
+    "pending": 10347
   },
   "selections": [
     {
@@ -17032,18 +17032,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-01T19:13:45.081983-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "abb2f71377bb7754ce6ffbecd9b01a08899bb6f9f77eed5921ba218d6fe787d6",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p7"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
             "p7"
           ]
         }
@@ -22925,21 +22923,19 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-01T19:12:29.128343-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56",
           "jurisdiction_paragraph_ids": [
-            "p3",
             "p4",
             "p11"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p6",
-            "p9",
-            "p12"
+            "p3",
+            "p15"
           ]
         }
       }
@@ -34484,6 +34480,35 @@
             "p2",
             "p17",
             "p19"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "9e890998b3d7283fe702183d1ec1ef9531730a1ad9c3d9f95e6a0d02d7ac1984",
+      "source_url": "https://www.diariocolatino.com/primeras-capturas-por-asesinato-de-agente-policial/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-06-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-01T19:09:06.909939-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "3f9ff9e45b3bcafb8557f3e7b3d8d79157ebe2abab4fd0c87bda1078fd773dae",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -48687,6 +48712,39 @@
       }
     },
     {
+      "candidate_id": "e5980a6002c3266e039f19518d887a75a5a15fa60aa1e9dc421e3d5adc478301",
+      "source_url": "https://www.diariocolatino.com/tres-homicidios-en-transporte-publico-de-san-salvador/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-06-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-01T19:09:06.909939-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "699163d41972d99e2599becb4d207bd643725ba702c6123d39ded528f740be4e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p9",
+            "p10",
+            "p15"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "e62d4a867664ddcaf875e992416eeb57cd4192d8e7e6bc3065b52fbf316051d7",
       "source_url": "https://www.revistafactum.com/la-percepcion-de-un-fin-de-semana-con-54-asesinatos/",
       "publisher": "Revista Factum",
@@ -49812,6 +49870,35 @@
             "p9",
             "p11",
             "p12"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "ec651e98d8fa75ffd82c1a701d050f0780094c88cd8dbc3d35db046af886365c",
+      "source_url": "https://historico.elsalvador.com/historico/154399/capturan-a-4-presuntos-pandilleros-salvadorenos-que-asaltaban-en-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-06-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-01T19:09:06.909939-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "265f88956ef9db69b4e39ad2b3a1ca5ddae87b89c24ba7b1981f9242f0852fc0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p4"
           ]
         }
       }
@@ -53306,19 +53393,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-01T19:13:30.224418-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "538fa97b7ba7244f7e68de1737389c34725e2451ab468c348fc5f160f3d296e7",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p7"
+            "p6"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p6"
+            "p2"
           ]
         }
       }
