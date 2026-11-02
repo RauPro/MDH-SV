@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-02T06:47:32.160560+00:00",
+  "generated_at": "2026-11-02T13:16:12.662130+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 15389,
-      "selected": 1923,
+      "selected": 1928,
       "evaluated": 4892,
-      "relevant": 1923,
-      "excluded": 554,
-      "uncertain": 2415,
+      "relevant": 1928,
+      "excluded": 562,
+      "uncertain": 2402,
       "pending": 10497,
-      "evaluated_at": "2026-11-02T01:14:37.503634+00:00"
+      "evaluated_at": "2026-11-02T13:16:10.325539+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-11-02",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1923,
+    "records": 1928,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1581,
+        "records": 1584,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -845,7 +845,7 @@
           {
             "month": "2015-06",
             "status": "enumerated",
-            "records": 46,
+            "records": 49,
             "screen_version": 3,
             "posts_scanned": 1067,
             "source_total_posts": 1067,
@@ -14761,7 +14761,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 228,
+        "records": 230,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15548,7 +15548,7 @@
           {
             "month": "2015-06",
             "status": "partial",
-            "records": 2,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 150,
             "source_total_posts": null,
@@ -20011,12 +20011,12 @@
         "month": "2015-06",
         "start_date": "2015-06-01",
         "end_date": "2015-06-30",
-        "records": 48,
+        "records": 53,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 46
+            "records": 49
           },
           {
             "source_id": "gatoencerrado",
@@ -20046,7 +20046,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 4
           }
         ]
       },
@@ -80399,6 +80399,50 @@
       }
     },
     {
+      "id": "825717a26298f9533ac4fb1ac446e9351dadfc1b6ebabfa53c416d13591d0dd6",
+      "title": "Juzgado decreta detención para implicados en desórdenes en Alcaldía",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-decreta-detencion-para-implicados-en-desordenes-en-alcaldia/",
+      "published_date": "2015-06-16",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 71242,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-02T07:09:31.979862-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "7326a4a674e19ffb8a971bad558edad4f2458b48401aecad29939d2e5432e667",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "id": "2d8210ceb8e498269465fb0125b917c55c2291b5d033d8eac16e2381e5a18e1e",
       "title": "Juzgado decreta detención contra violador en serie",
       "title_truncated": false,
@@ -80542,6 +80586,50 @@
       }
     },
     {
+      "id": "b9ab48be2b3a2e2e7afa828ce20249ebde93a3620b9b0a17b8694507ec3c9c12",
+      "title": "FMLN condena asesinato de militante de Ilopango",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fmln-condena-asesinato-de-militante-de-ilopango/",
+      "published_date": "2015-06-15",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 71102,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-02T07:09:31.979862-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b83333d7691691bd3aebecf21df03a6a843a3df16a22677ea9f388472ccf203e",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "id": "9d017648340f3bc87a850f93eacedcebf3613e2321c76b754d27a35bcc524615",
       "title": "“Discriminación de las víctimas de genocidio nos ponen en riesgo de repetirlo”: PDDH",
       "title_truncated": false,
@@ -80631,6 +80719,53 @@
       }
     },
     {
+      "id": "69a42e9c1423d8a6a1411ba4f185172926b5ee22d16e94052a8b806258211775",
+      "title": "Salvadoreńo detenido en Italia se disculpa por atacar a conductor de tren con un corvo",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/153113/salvadoreno-detenido-en-italia-se-disculpa-por-atacar-a-conductor-de-tren-con-un-corvo.html",
+      "published_date": "2015-06-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "italia",
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-02T07:09:31.979862-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0744389e47f66fd8ae6f00b508cd324f4621ee8a899ca422f31313649252fc10",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "id": "9451cb00f526e721ab7ad94f1705fc368cf04ec7ec836b41dd21f40064eabb4d",
       "title": "Activistas LGBTI realizan acto conmemorativo por líderes históricos",
       "title_truncated": false,
@@ -80672,6 +80807,101 @@
             "p5",
             "p6",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "59252c22dc87d28300a2f7e46e28a7919de23d802d34de034249b06994de8115",
+      "title": "Extraditan a implicado en homicidio de Fiscal de Usulután",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/extraditan-a-implicado-en-homicidio-de-fiscal-de-usulutan/",
+      "published_date": "2015-06-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "usulutan"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 70952,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-02T07:09:31.979862-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5d4876e543ab8ba1db32d78b69c46b3eece9bef81b30afe32e1d031529636c51",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p6",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a320fbbf2a55185553533656d1f6bb76bb5b6431467508b38baf153147b17e07",
+      "title": "Capturan en Italia a pandillero salvadoreńo por intentar matar a conductor de tren",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/153139/capturan-en-italia-a-pandillero-salvadoreno-por-intentar-matar-a-conductor-de-tren.html",
+      "published_date": "2015-06-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "italia",
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-02T07:09:31.979862-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "16b7bc68a9f41090e08c5a5ac21505d0f8165c644020ee4c326836d5e74f95d3",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3"
           ]
         }
       }
@@ -84214,20 +84444,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-02T07:14:43.238039-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p5",
-            "p9",
-            "p10"
+            "p12"
           ]
         }
       }
@@ -84306,20 +84532,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-02T07:13:57.346564-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p10"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p9",
-            "p10",
-            "p11",
-            "p12"
+            "p2"
           ]
         }
       }
@@ -84352,19 +84574,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-02T07:13:32.523356-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p9"
+            "p2"
           ]
         }
       }
@@ -84397,20 +84616,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-02T07:13:07.541015-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8afed83ff7c8895dc463f02bd32c228d3c8bd1a0b71c2b09b316960ff96317ff",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p10",
-            "p17"
+            "p3"
           ]
         }
       }
