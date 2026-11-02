@@ -145,6 +145,8 @@ def test_monthly_update_generates_only_private_candidate_with_provenance(monkeyp
     assert report['proposal_sha256'] == monitor.digest(monitor.json_bytes(candidate))
     assert candidate['periods'][-1]['national']['value'] == 53
     assert '2026 sólo llega a agosto' not in candidate['comparability_note']
+    assert ('sin desglose departamental; consulte el período y los meses disponibles de cada año. '
+            'No disponible no significa cero.') in candidate['comparability_note']
     assert candidate['periods'][-1]['end_date'] == '2026-09-30'
     assert candidate['periods'][-1]['months'][10]['status'] == 'outside_cutoff'
     assert all(d['value'] is None for d in candidate['periods'][-1]['departments'])

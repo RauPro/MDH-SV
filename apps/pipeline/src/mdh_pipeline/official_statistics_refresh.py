@@ -382,7 +382,7 @@ def propose_fgr(baseline: dict, rows: dict[int, dict], as_of: date, checked_at: 
                     and any(note.startswith("Cobertura numérica:") for note in period["notes"])):
                 _refresh_coverage_note(period, as_of)
     updated["comparability_note"] = updated["comparability_note"].replace(
-        "2026 sólo llega a agosto.", "Consulte el período y los meses disponibles de cada año.")
+        "2026 sólo llega a agosto.", "consulte el período y los meses disponibles de cada año.")
     updated["as_of"] = as_of.isoformat()
     updated["generated_at"] = checked_at
     changed_source = next(s for s in updated["sources"] if s["id"] == source["id"])
