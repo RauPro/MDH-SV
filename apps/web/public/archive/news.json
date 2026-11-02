@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-01T22:23:58.938620+00:00",
+  "generated_at": "2026-11-02T01:14:39.650733+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 15239,
-      "selected": 1920,
+      "selected": 1923,
       "evaluated": 4892,
-      "relevant": 1920,
-      "excluded": 546,
-      "uncertain": 2426,
+      "relevant": 1923,
+      "excluded": 554,
+      "uncertain": 2415,
       "pending": 10347,
-      "evaluated_at": "2026-11-01T13:14:15.682631+00:00"
+      "evaluated_at": "2026-11-02T01:14:37.503634+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-11-01",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1920,
+    "records": 1923,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1579,
+        "records": 1581,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -845,7 +845,7 @@
           {
             "month": "2015-06",
             "status": "enumerated",
-            "records": 44,
+            "records": 46,
             "screen_version": 3,
             "posts_scanned": 1067,
             "source_total_posts": 1067,
@@ -14761,7 +14761,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 227,
+        "records": 228,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15548,7 +15548,7 @@
           {
             "month": "2015-06",
             "status": "partial",
-            "records": 1,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 102,
             "source_total_posts": null,
@@ -20011,12 +20011,12 @@
         "month": "2015-06",
         "start_date": "2015-06-01",
         "end_date": "2015-06-30",
-        "records": 45,
+        "records": 48,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 44
+            "records": 46
           },
           {
             "source_id": "gatoencerrado",
@@ -20046,7 +20046,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 1
+            "records": 2
           }
         ]
       },
@@ -80815,6 +80815,55 @@
       }
     },
     {
+      "id": "ec651e98d8fa75ffd82c1a701d050f0780094c88cd8dbc3d35db046af886365c",
+      "title": "Capturan a 4 presuntos pandilleros salvadoreńos que asaltaban en Guatemala",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/154399/capturan-a-4-presuntos-pandilleros-salvadorenos-que-asaltaban-en-guatemala.html",
+      "published_date": "2015-06-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "guatemala",
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-01T19:09:06.909939-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "265f88956ef9db69b4e39ad2b3a1ca5ddae87b89c24ba7b1981f9242f0852fc0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "id": "aa1f3deed8641c951ddb8a3f2575cde74c1ea7fac77fc03e459ee00e5cb9acde",
       "title": "Sala de lo Constitucional suspende desalojo de la Comunidad El Espino",
       "title_truncated": false,
@@ -80948,6 +80997,105 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9e890998b3d7283fe702183d1ec1ef9531730a1ad9c3d9f95e6a0d02d7ac1984",
+      "title": "Primeras capturas por asesinato de agente policial",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/primeras-capturas-por-asesinato-de-agente-policial/",
+      "published_date": "2015-06-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 70408,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-01T19:09:06.909939-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "3f9ff9e45b3bcafb8557f3e7b3d8d79157ebe2abab4fd0c87bda1078fd773dae",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e5980a6002c3266e039f19518d887a75a5a15fa60aa1e9dc421e3d5adc478301",
+      "title": "Tres homicidios en transporte público de San Salvador",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/tres-homicidios-en-transporte-publico-de-san-salvador/",
+      "published_date": "2015-06-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 70294,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-01T19:09:06.909939-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "699163d41972d99e2599becb4d207bd643725ba702c6123d39ded528f740be4e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p9",
+            "p10",
+            "p15"
           ]
         }
       }
@@ -84295,18 +84443,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-01T19:13:45.081983-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "abb2f71377bb7754ce6ffbecd9b01a08899bb6f9f77eed5921ba218d6fe787d6",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p7"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
             "p7"
           ]
         }
@@ -84340,19 +84486,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-01T19:13:30.224418-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "538fa97b7ba7244f7e68de1737389c34725e2451ab468c348fc5f160f3d296e7",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p7"
+            "p6"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p6"
+            "p2"
           ]
         }
       }
@@ -84519,21 +84662,19 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:10:33.583474-06:00",
+        "classified_at": "2026-11-01T19:12:29.128343-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56",
           "jurisdiction_paragraph_ids": [
-            "p3",
             "p4",
             "p11"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p6",
-            "p9",
-            "p12"
+            "p3",
+            "p15"
           ]
         }
       }
@@ -85309,7 +85450,7 @@
     },
     {
       "id": "02e59a4d720a32bd1e30207417294162bffac9c9d36e55b8f8899df04a85cec4",
-      "title": "Nueva Trinidad es el tercer municipio de El Salvador que dice NO a la minería",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "GatoEncerrado",
       "source_id": "gatoencerrado",
