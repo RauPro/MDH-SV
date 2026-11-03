@@ -12561,6 +12561,178 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "1dbafbe3706e4f91bcc5186fa5265c4d70a7129503e34092b76e83d8a48234aa",
+      "source_url": "https://www.diariocolatino.com/dos-militares-asesinados-en-la-zona-para-central/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Dos militares asesinados en la zona para central",
+      "published_date": "2015-04-19",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "Se reportaron los homicidios de dos militares en diferentes hechos ocurridos en Panchimalco y San Luis La Herradura.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Homicidio",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "Se reportó el homicidio de un sargento en el municipio de Panchimalco y el homicidio de otro elemento militar en el departamento de La Paz.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": "La Paz",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "pandilleros",
+            "Ejercito"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Fiscalía General de la República"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "themes": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/dos-militares-asesinados-en-la-zona-para-central/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/dos-militares-asesinados-en-la-zona-para-central/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 74a4bb55a92e5755756fdb5ff2986b8899124afebc9b63be0bcf0d47be89afdb."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/dos-militares-asesinados-en-la-zona-para-central/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 74a4bb55a92e5755756fdb5ff2986b8899124afebc9b63be0bcf0d47be89afdb."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "74a4bb55a92e5755756fdb5ff2986b8899124afebc9b63be0bcf0d47be89afdb",
+        "validated_at": "2026-11-03T01:15:03.367384+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "1de285e4d6f5d5c436046200c7609a9f0d07d351553ae5d96c534afc60a8444b",
       "source_url": "https://www.diariocolatino.com/agenda-de-derechos-laborales-presentada-por-empleadas-de-maquilas/",
       "publisher": "Diario Co Latino",
@@ -25902,6 +26074,203 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "36428f2427627067391b858d7167438623375c4e10672f0b5126104ad1fbf80d",
+      "source_url": "https://www.diariocolatino.com/operativo-policial-deja-24-detenidos-en-san-marcos/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Operativo policial deja 24 detenidos en San Marcos",
+      "published_date": "2015-04-29",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "aggregate"
+      },
+      "fields": {
+        "summary": {
+          "value": "Un operativo conjunto de la Policía Nacional Civil y la Fiscalía General de la República en San Marcos resultó en la captura de 24 personas sospechosas de delitos como extorsión, homicidio y agrupaciones ilícitas.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Capturas y operativos policiales",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "La Policía Nacional Civil y la Fiscalía General de la República informaron sobre la captura de 24 sospechosos durante un operativo en el municipio de San Marcos. Las autoridades indicaron que los detenidos son investigados por delitos que incluyen extorsión, homicidios y agrupaciones ilícitas.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "24 sospechosos"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": "San Marcos",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Policía Nacional Civil",
+            "Fiscalía General de la República",
+            "grupos delictivos"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Policía Nacional Civil",
+            "Fiscalía General de la República"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Seguridad pública",
+            "Detenciones",
+            "Homicidios",
+            "Extorsión"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": [
+            "arma de fuego tipo pistola calibre 9 milímetros"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/operativo-policial-deja-24-detenidos-en-san-marcos/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/operativo-policial-deja-24-detenidos-en-san-marcos/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 f745468f1d45d381dde6524d44d5de8620443d5b269d4f4a61b72b4aeee6cc95."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/operativo-policial-deja-24-detenidos-en-san-marcos/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 f745468f1d45d381dde6524d44d5de8620443d5b269d4f4a61b72b4aeee6cc95."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/operativo-policial-deja-24-detenidos-en-san-marcos/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 f745468f1d45d381dde6524d44d5de8620443d5b269d4f4a61b72b4aeee6cc95."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "f745468f1d45d381dde6524d44d5de8620443d5b269d4f4a61b72b4aeee6cc95",
+        "validated_at": "2026-11-03T01:17:31.447873+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "3653f45e485fc624ef8690fa926204f9a65f731eba008ebc1925e0b80490822c",
       "source_url": "https://www.diariocolatino.com/medicina-legal-28-mujeres-fueron-asesinadas-en-marzo/",
       "publisher": "Diario Co Latino",
@@ -31124,6 +31493,229 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "3f57575ed182b8ff603dc394a8ab20d53f73bbee5952663b8f1237eb333a6a98",
+      "source_url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Organizaciones exigen se ratifique El Derecho al Agua y Alimentación",
+      "published_date": "2015-04-23",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "Organizaciones sociales y relatores de la ONU exigen a la Asamblea Legislativa de El Salvador ratificar el artículo 69 de la Constitución para reconocer el acceso al agua y la alimentación como derechos humanos.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Derechos económicos, sociales y culturales",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "El Foro del Agua y organizaciones sociales exigen la ratificación del artículo 69 de la Constitución salvadoreña sobre el derecho al agua y la alimentación. Relatores de la ONU enviaron una carta al Gobierno y a la Asamblea Legislativa instando a dicha ratificación.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": "El Salvador",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Foro del Agua",
+            "organizaciones sociales",
+            "Relatores Especiales Por El Derecho a la Alimentación de las Naciones Unidas",
+            "Gobierno de El Salvador",
+            "Asamblea Legislativa",
+            "pro vida",
+            "ARENA",
+            "PCN",
+            "PDC",
+            "corte suprema de justicia"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p7",
+            "article-p8",
+            "article-p10",
+            "article-p11"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Derecho al agua",
+            "Derecho a la alimentación",
+            "Reforma constitucional"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p4",
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p10",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Párrafo p10 del texto consultado; SHA-256 ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a."
+        },
+        {
+          "id": "article-p11",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Párrafo p11 del texto consultado; SHA-256 ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a."
+        },
+        {
+          "id": "article-p7",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Párrafo p7 del texto consultado; SHA-256 ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a."
+        },
+        {
+          "id": "article-p8",
+          "url": "https://www.diariocolatino.com/organizaciones-exigen-se-ratifique-el-derecho-al-agua-y-alimentacion/",
+          "locator": "Párrafo p8 del texto consultado; SHA-256 ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "ec357e612c7ce2e36cd1140b1b7aadd952e60fa4a5d095da6502af1b490f432a",
+        "validated_at": "2026-11-03T01:15:28.957926+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "3faf5cfb7ad8225904a457e0340b45116197a092844a249661bfd9e6d8a2ca0e",
       "source_url": "https://www.diariocolatino.com/pddh-reconoce-consolidacion-de-instancias-que-velan-por-los-derechos-humanos/",
       "publisher": "Diario Co Latino",
@@ -32465,6 +33057,225 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "18b53d792ffd3598d0af92987cac07abb5a243d06f1da4e8acaefbf63842d43b",
         "validated_at": "2026-10-17T09:22:37.564335+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "42ce2df324af919ab09e47d74b56ac4183b0b9d19fdbc7cb1b9442b1d433ff2d",
+      "source_url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Vanda Pignato solicita “Día Nacional de la Mujer Defensora de los Derechos Humanos”",
+      "published_date": "2015-04-25",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "La Secretaria de Inclusión Social informó sobre el asesinato de una agente de la Policía Nacional Civil y solicitó medidas de protección y equipo adecuado para las mujeres de la corporación policial.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p12",
+            "article-p13",
+            "article-p15"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Homicidio",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p12"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": "Derecho a la vida",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p12"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "facts": {
+          "value": "La fuente informó sobre el homicidio de una agente de la Policía Nacional Civil, señalando que el crimen presentó múltiples impactos de bala.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p12",
+            "article-p18"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "Agente de la Policía Nacional Civil"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p12"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": "El Salvador",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Secretaría de Inclusión Social",
+            "Instituto Salvadoreño para el Desarrollo de la Mujer"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "Mujeres"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": [
+            "Violencia contra las mujeres",
+            "Seguridad pública"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5",
+            "article-p12"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": "La funcionaria opinó que el crimen tuvo un elemento de odio a la mujer.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p17"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p12",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Párrafo p12 del texto consultado; SHA-256 440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507."
+        },
+        {
+          "id": "article-p13",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Párrafo p13 del texto consultado; SHA-256 440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507."
+        },
+        {
+          "id": "article-p15",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Párrafo p15 del texto consultado; SHA-256 440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507."
+        },
+        {
+          "id": "article-p17",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Párrafo p17 del texto consultado; SHA-256 440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507."
+        },
+        {
+          "id": "article-p18",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Párrafo p18 del texto consultado; SHA-256 440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/vanda-pignato-solicita-dia-nacional-de-la-mujer-defensora-de-los-derechos-humanos/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "440874f4e19160add6b5b2d8232ec8f7dfc05ed7774d3ad0410fe4cba887d507",
+        "validated_at": "2026-11-03T01:16:10.497991+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -36858,6 +37669,210 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "4aa14a24a656fdd28b5edf9bd82462115298b438635525870e399b110b4360b9",
+      "source_url": "https://www.diariocolatino.com/fgr-informa-detencion-de-diputado-suplente-de-gana/",
+      "publisher": "Diario Co Latino",
+      "source_title": "FGR informa detención de diputado suplente de GANA",
+      "published_date": "2015-04-21",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "La Fiscalía General de la República informó sobre la captura de un diputado suplente y otra persona vinculados presuntamente a trata de personas y tráfico ilegal.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Captura y proceso judicial",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": "Trata de personas",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "facts": {
+          "value": "La Fiscalía General de la República informó sobre la captura de un diputado suplente y otro individuo por su presunta vinculación con una red de trata de personas y tráfico ilegal hacia Estados Unidos.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "ciudadanos salvadoreños"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": "Cabañas",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "public_place": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "José German Iraheta Méndez",
+            "Juan Carlos Daniel Quinteros",
+            "Lorenzo Rivas",
+            "Gran Alianza por la Unidad Nacional (GANA)"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Fiscalía General de la República (FGR)",
+            "Unidad Especializada de Tráfico Ilegal y Trata"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "themes": {
+          "value": [
+            "Trata de personas",
+            "Tráfico ilegal"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/fgr-informa-detencion-de-diputado-suplente-de-gana/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/fgr-informa-detencion-de-diputado-suplente-de-gana/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 d89d41c441114f2d0e7fb6f677ca5a30f99fe153071cbcc97171ff5be1245516."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/fgr-informa-detencion-de-diputado-suplente-de-gana/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 d89d41c441114f2d0e7fb6f677ca5a30f99fe153071cbcc97171ff5be1245516."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/fgr-informa-detencion-de-diputado-suplente-de-gana/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 d89d41c441114f2d0e7fb6f677ca5a30f99fe153071cbcc97171ff5be1245516."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/fgr-informa-detencion-de-diputado-suplente-de-gana/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 d89d41c441114f2d0e7fb6f677ca5a30f99fe153071cbcc97171ff5be1245516."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/fgr-informa-detencion-de-diputado-suplente-de-gana/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 d89d41c441114f2d0e7fb6f677ca5a30f99fe153071cbcc97171ff5be1245516."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "d89d41c441114f2d0e7fb6f677ca5a30f99fe153071cbcc97171ff5be1245516",
+        "validated_at": "2026-11-03T01:15:03.373524+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "4ae9329d1b6fac376d1f7215e9199250e3e8ca7d47236a7b3052842e157fdf74",
       "source_url": "https://www.diariocolatino.com/capturan-a-padre-antonio-por-supuesto-cometimiento-de-ilicitos/",
       "publisher": "Diario Co Latino",
@@ -40797,6 +41812,193 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "44bb036dc8551cc592810968a036c18c1d419c218f4e507fe7caea7d759083bd",
         "validated_at": "2026-10-16T01:16:57.730450+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "5543fd48a0be4580b1f101962c6a239c546307a5ece2f21c4a377337b34e184a",
+      "source_url": "https://www.diariocolatino.com/mas-de-10-mil-firmas-por-el-derecho-al-agua-y-la-alimentacion/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Más de 10 mil firmas por el derecho al agua y la alimentación",
+      "published_date": "2015-04-22",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "Organizaciones sociales en El Salvador entregaron más de 10 mil firmas para exigir a la Asamblea Legislativa la ratificación del artículo 69 de la Constitución que garantiza el derecho al agua y a la alimentación.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Derechos económicos, sociales y culturales",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "Representantes de organizaciones sociales entregaron un documento con firmas de pobladores para demandar la ratificación del artículo 69 de la Constitución de la República.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "pobladores de diversas zonas del país"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": "El Salvador",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Asamblea General de las Naciones Unidas (ONU)",
+            "PDDH"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "agua",
+            "alimentación",
+            "derechos humanos"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/mas-de-10-mil-firmas-por-el-derecho-al-agua-y-la-alimentacion/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/mas-de-10-mil-firmas-por-el-derecho-al-agua-y-la-alimentacion/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 abb2f71377bb7754ce6ffbecd9b01a08899bb6f9f77eed5921ba218d6fe787d6."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/mas-de-10-mil-firmas-por-el-derecho-al-agua-y-la-alimentacion/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 abb2f71377bb7754ce6ffbecd9b01a08899bb6f9f77eed5921ba218d6fe787d6."
+        },
+        {
+          "id": "article-p7",
+          "url": "https://www.diariocolatino.com/mas-de-10-mil-firmas-por-el-derecho-al-agua-y-la-alimentacion/",
+          "locator": "Párrafo p7 del texto consultado; SHA-256 abb2f71377bb7754ce6ffbecd9b01a08899bb6f9f77eed5921ba218d6fe787d6."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "abb2f71377bb7754ce6ffbecd9b01a08899bb6f9f77eed5921ba218d6fe787d6",
+        "validated_at": "2026-11-03T01:15:28.951225+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -46176,6 +47378,257 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "de2f52df930b9cf58f835135ce1ca59b85e70a11d4679620a4a3b8620cc55c33",
         "validated_at": "2026-11-02T01:17:03.671908+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "5f3980b62304a43102188d64630eb1f84e3ced2b48370c94b9bc25182560ea49",
+      "source_url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Nueve pandilleros y seis militares asesinados en el fin de semana",
+      "published_date": "2015-04-20",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "Un soldado murió y otros dos resultaron heridos tras un ataque armado al salir de licencia. En otro hecho, nueve presuntos pandilleros fallecieron durante un enfrentamiento con la Fuerza Armada.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Homicidio",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": "Homicidio",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "facts": {
+          "value": "Tres elementos militares fueron atacados al salir de licencia en las cercanías de la Fuerza Naval, resultando un soldado fallecido y dos heridos. En otro hecho en Zacatecoluca, un enfrentamiento entre militares y presuntos pandilleros dejó nueve presuntos miembros de pandillas muertos.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "elementos militares",
+            "pandilleros"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": "El Salvador",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "department": {
+          "value": "La Paz",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "municipality": {
+          "value": "Zacatecoluca",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "public_place": {
+          "value": "parada de buses",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": "madrugada",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "reported_actors": {
+          "value": [
+            "Fuerza Armada de El Salvador (FAES)",
+            "Policía Nacional Civil (PNC)"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Policía",
+            "entidad castrense"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p4",
+            "article-p11"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "militares"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": [
+            "violencia",
+            "enfrentamiento armado",
+            "seguridad pública"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": "Estas acciones podrían ser en respuesta a las medidas que el Presidente de la República Salvador Sánchez Cerén hizo publica",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p15"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "instrument": {
+          "value": [
+            "automóvil",
+            "fusiles M-16",
+            "pistola calibre 9 milímetros",
+            "escopeta calibre 12"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p4",
+            "article-p9"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p11",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p11 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        },
+        {
+          "id": "article-p15",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p15 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        },
+        {
+          "id": "article-p7",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p7 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        },
+        {
+          "id": "article-p8",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p8 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        },
+        {
+          "id": "article-p9",
+          "url": "https://www.diariocolatino.com/nueve-pandilleros-y-seis-militares-asesinados-en-el-fin-de-semana/",
+          "locator": "Párrafo p9 del texto consultado; SHA-256 2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "2917ca18efcee1c87e211a5fae9d28dd6e4df517f73fa297149e0336b667f646",
+        "validated_at": "2026-11-03T01:15:03.370987+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -54141,6 +55594,234 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "6c696b052eca9e94a2a9189a3d2590eefd7501fb9e8bcdaae4367600c7aedbed",
+      "source_url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Instituciones buscan enfoque de Derechos Humanos en cobertura periodística de trata de personas",
+      "published_date": "2015-04-17",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "Diversas instituciones gubernamentales y privadas impulsaron un diplomado y un foro para capacitar a periodistas salvadoreños en la cobertura de la trata de personas con enfoque de derechos humanos y protección a las víctimas.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p4",
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Libertad de expresión y políticas públicas",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "El Departamento de Comunicaciones y Cultura de la Universidad Centroamericana José Simeón Cañas, Save The Children, el Consejo Nacional Contra la Trata de Personas y la Policía Nacional Civil organizaron un diplomado especializado dirigido a periodistas para mejorar el abordaje informativo sobre la trata de personas.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "country": {
+          "value": "El Salvador",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p11"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "department": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "municipality": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "public_place": {
+          "value": null,
+          "status": "not_reported",
+          "evidence_refs": [],
+          "note": "Dato no mencionado en el texto completo consultado, según evaluación automática."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Universidad Centroamericana “José Simeón Cañas”",
+            "Save The Children",
+            "El Consejo Nacional Contra la Trata de Personas",
+            "Policía Nacional Civil",
+            "Unión Europea"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p11"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Roxana Segovia",
+            "Ludin de Chávez",
+            "Tomás Pallás",
+            "Fátima Ortiz"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p8",
+            "article-p10",
+            "article-p11",
+            "article-p15"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "víctimas"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": [
+            "trata de personas",
+            "derechos humanos",
+            "periodismo"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p10",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Párrafo p10 del texto consultado; SHA-256 4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56."
+        },
+        {
+          "id": "article-p11",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Párrafo p11 del texto consultado; SHA-256 4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56."
+        },
+        {
+          "id": "article-p15",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Párrafo p15 del texto consultado; SHA-256 4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56."
+        },
+        {
+          "id": "article-p8",
+          "url": "https://www.diariocolatino.com/instituciones-buscan-enfoque-de-derechos-humanos-en-cobertura-periodistica-de-trata-de-personas/",
+          "locator": "Párrafo p8 del texto consultado; SHA-256 4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "4f28e24647ea0f0d7c70ee63c9289de42acbb36b99fb8c6d42e15a0adb466a56",
+        "validated_at": "2026-11-03T01:15:03.365605+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "6c82f0082a2248b1ddd9fc45e77610e6a6b5a20cfcf9cecfecb764eae49d5289",
       "source_url": "https://www.diariocolatino.com/representante-de-onu-preocupada-por-detencion-y-retorno-de-menores/",
       "publisher": "Diario Co Latino",
@@ -55495,6 +57176,209 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "70d296cb6af59a81cefb389dc945da4b1b9985071a271c76be3e3dd96a6a36c3",
         "validated_at": "2026-10-17T16:20:24.369428+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "6f3547e15023b58745f160220cccae92ede5f906f56176e79cba7a4d054043e8",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Asesinan a un empleado de la PNC y muere presunta pandillera este sábado",
+      "published_date": "2015-04-25",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "aggregate"
+      },
+      "fields": {
+        "summary": {
+          "value": "La Fiscalía General de la República y otras fuentes informaron sobre el homicidio de un empleado de la Policía Nacional Civil en Usulután, la muerte de una persona en Cuscatlán y la explosión de una granada en una vivienda.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p5",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Homicidio y violencia",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Fiscalía General de la república",
+            "Policía Nacional Civil"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Fiscalía General de la república",
+            "PNC"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p4",
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "themes": {
+          "value": [
+            "Homicidios",
+            "Seguridad pública",
+            "Violencia"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p5",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": [
+            "granada"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 cd14f3ab85c946ce1d7907fd8f5d5470425b5fd128b65226a5fefb3c643a2d27."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 cd14f3ab85c946ce1d7907fd8f5d5470425b5fd128b65226a5fefb3c643a2d27."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 cd14f3ab85c946ce1d7907fd8f5d5470425b5fd128b65226a5fefb3c643a2d27."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 cd14f3ab85c946ce1d7907fd8f5d5470425b5fd128b65226a5fefb3c643a2d27."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/asesinan-a-un-empleado-de-la-pnc-y-muere-presunta-pandillera-este-sabado/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 cd14f3ab85c946ce1d7907fd8f5d5470425b5fd128b65226a5fefb3c643a2d27."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "cd14f3ab85c946ce1d7907fd8f5d5470425b5fd128b65226a5fefb3c643a2d27",
+        "validated_at": "2026-11-03T01:16:10.500357+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -74148,6 +76032,189 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "c38d8ca800d67e32c0260cd20b37602bc38118606e5a5d50bcab67afba8f3859",
         "validated_at": "2026-10-18T15:18:03.529704+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "95e66125b4eff774c26d69a1aa32ee96b5dbef994ec5d98aaf19a713bc1f327a",
+      "source_url": "https://www.diariocolatino.com/procurador-condena-violencia-contra-ninez-y-adolescencia-salvadorena/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Noticia con título protegido; consulte la fuente original",
+      "published_date": "2015-04-29",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "category": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "facts": {
+          "value": "El titular de la PDDH expresó su rechazo ante el incremento de asesinatos y atentados contra menores de edad vinculados al accionar de grupos delictivos.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p5",
+            "article-p10"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "niños, niñas y adolescentes",
+            "grupos familiares"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "grupos delincuenciales"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "niños, niñas y adolescentes"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/procurador-condena-violencia-contra-ninez-y-adolescencia-salvadorena/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p10",
+          "url": "https://www.diariocolatino.com/procurador-condena-violencia-contra-ninez-y-adolescencia-salvadorena/",
+          "locator": "Párrafo p10 del texto consultado; SHA-256 9798fb260051bf6d58ab71502dbca7f3b80ebc8f83e1873f34e79d62dd9bfd14."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/procurador-condena-violencia-contra-ninez-y-adolescencia-salvadorena/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 9798fb260051bf6d58ab71502dbca7f3b80ebc8f83e1873f34e79d62dd9bfd14."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/procurador-condena-violencia-contra-ninez-y-adolescencia-salvadorena/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 9798fb260051bf6d58ab71502dbca7f3b80ebc8f83e1873f34e79d62dd9bfd14."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/procurador-condena-violencia-contra-ninez-y-adolescencia-salvadorena/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 9798fb260051bf6d58ab71502dbca7f3b80ebc8f83e1873f34e79d62dd9bfd14."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "9798fb260051bf6d58ab71502dbca7f3b80ebc8f83e1873f34e79d62dd9bfd14",
+        "validated_at": "2026-11-03T01:17:31.450970+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -92871,6 +94938,221 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "bba60236e993cac2555ee447d3ee550a92bb16b29b9feab6462f7ad6ef19e86b",
+      "source_url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+      "publisher": "Diario Co Latino",
+      "source_title": "FGR reporta seis fallecidos, incluido un cuádruple homicidio en Cojutepeque",
+      "published_date": "2015-04-23",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "aggregate"
+      },
+      "fields": {
+        "summary": {
+          "value": "La Fiscalía General de la República reportó diversos homicidios a nivel nacional, incluyendo un cuádruple homicidio en Cojutepeque, un doble homicidio en Santiago Nonualco, la muerte de un reo bajo custodia en San Miguel y otros hechos violentos.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6",
+            "article-p9",
+            "article-p13",
+            "article-p15"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Homicidio",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "La FGR reportó al menos seis homicidios, destacando un cuádruple homicidio por asalto en un bus en Cojutepeque, un doble homicidio en Santiago Nonualco, el fallecimiento de un reo en un hospital de San Miguel y homicidios adicionales en Izalco y Usulután.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6",
+            "article-p9",
+            "article-p13",
+            "article-p15"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Fiscalía General de la República",
+            "Policía Nacional Civil"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p5",
+            "article-p10"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Fiscalía General de la República",
+            "Policía Nacional Civil"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Homicidio",
+            "Seguridad pública",
+            "Sistema penitenciario"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p9",
+            "article-p10"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p10",
+          "url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+          "locator": "Párrafo p10 del texto consultado; SHA-256 5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d."
+        },
+        {
+          "id": "article-p13",
+          "url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+          "locator": "Párrafo p13 del texto consultado; SHA-256 5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d."
+        },
+        {
+          "id": "article-p15",
+          "url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+          "locator": "Párrafo p15 del texto consultado; SHA-256 5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d."
+        },
+        {
+          "id": "article-p9",
+          "url": "https://www.diariocolatino.com/fgr-reporta-seis-fallecidos-incluido-un-cuadruple-homicidio-en-cojutepeque/",
+          "locator": "Párrafo p9 del texto consultado; SHA-256 5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "5c33904533fa548df0dc82e19fbcacd5e46a5d7db0aa9c76d1cc594f036e429d",
+        "validated_at": "2026-11-03T01:16:10.490225+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "bc87d188be61ef212ad79a64c056a1013a19e8d280f85d880007127f98ec16a2",
       "source_url": "https://www.diariocolatino.com/purga-interna-en-pandilla-causa-de-cuadruple-homicidio-en-penal-de-izalco/",
       "publisher": "Diario Co Latino",
@@ -97096,6 +99378,200 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "3bf1f2dfa2e3273de2b6890c828a10efde97fe8aad1cfb6a7d593436e44617d2",
         "validated_at": "2026-11-02T01:16:37.462189+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "c3f1301cddc3e8d3f648398580bcca6e529b04068dfc2ce9eccb9596decbddce",
+      "source_url": "https://www.diariocolatino.com/reglas-basicas-del-periodista/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Reglas básicas del periodista",
+      "published_date": "2015-04-23",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "Artículo de opinión que critica la labor periodística de un medio escrito en El Salvador y debate sobre la ética, la responsabilidad informativa y las acusaciones mutuas de difamación.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6",
+            "article-p13"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Libertad de expresión",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p13"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "Un artículo de opinión analiza y cuestiona los estándares éticos y profesionales de la prensa escrita, discutiendo señalamientos sobre publicaciones editoriales acerca de la gestión municipal en Santa Tecla.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": "Santa Tecla",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "El Diario de Hoy"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Corte de Cuentas"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p9"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Libertad de expresión",
+            "Medios de comunicación"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p13"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/reglas-basicas-del-periodista/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p13",
+          "url": "https://www.diariocolatino.com/reglas-basicas-del-periodista/",
+          "locator": "Párrafo p13 del texto consultado; SHA-256 8fa571677daea2f25beac43721718ccd91270cd38a9b4609ff77f3454bac7701."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/reglas-basicas-del-periodista/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 8fa571677daea2f25beac43721718ccd91270cd38a9b4609ff77f3454bac7701."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/reglas-basicas-del-periodista/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 8fa571677daea2f25beac43721718ccd91270cd38a9b4609ff77f3454bac7701."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/reglas-basicas-del-periodista/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 8fa571677daea2f25beac43721718ccd91270cd38a9b4609ff77f3454bac7701."
+        },
+        {
+          "id": "article-p9",
+          "url": "https://www.diariocolatino.com/reglas-basicas-del-periodista/",
+          "locator": "Párrafo p9 del texto consultado; SHA-256 8fa571677daea2f25beac43721718ccd91270cd38a9b4609ff77f3454bac7701."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "8fa571677daea2f25beac43721718ccd91270cd38a9b4609ff77f3454bac7701",
+        "validated_at": "2026-11-03T01:16:10.493940+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -110775,6 +113251,187 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "e832cb3818d62a809a4b1ed251b8b26a731b675c52b0d81bfc1843008624a92a",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-periodista-deportivo-en-san-miguel/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Asesinan a periodista deportivo en San Miguel",
+      "published_date": "2015-04-28",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "La evidencia automática no permite publicar este campo."
+        },
+        "category": {
+          "value": "Homicidio",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "El comunicador fue ultimado con arma de fuego en las cercanías de su residencia en la colonia Belén de San Miguel cuando regresaba de una reunión.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "La evidencia automática no permite publicar este campo."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": "San Miguel",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "municipality": {
+          "value": "San Miguel",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "public_place": {
+          "value": "colonia Belén",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "sujetos desconocidos",
+            "autoridades policiales"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Seguridad",
+            "Homicidios"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": [
+            "arma de fuego"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/asesinan-a-periodista-deportivo-en-san-miguel/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/asesinan-a-periodista-deportivo-en-san-miguel/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 870b65681b0926d5f4d1e5bac3a62cb7d1f54a978d81100431e4fbeee53dfcf1."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/asesinan-a-periodista-deportivo-en-san-miguel/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 870b65681b0926d5f4d1e5bac3a62cb7d1f54a978d81100431e4fbeee53dfcf1."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "870b65681b0926d5f4d1e5bac3a62cb7d1f54a978d81100431e4fbeee53dfcf1",
+        "validated_at": "2026-11-03T01:17:31.442164+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "e9712e78b49a8be39dfa1fab60063d1d08a1a5130b88f194edc694b24b4b480f",
       "source_url": "https://www.diariocolatino.com/periodistas-independientes-piden-revision-de-resolucion-en-caso-canal-11/",
       "publisher": "Diario Co Latino",
@@ -116049,6 +118706,435 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "f2e97217e9f61d8cc9394481370696bb07dc3f9418282166c6b400e4aae00190",
+      "source_url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Juzgados decretan detención contra presuntos delincuentes",
+      "published_date": "2015-04-28",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "Juzgados de paz en El Salvador decretaron detención provisional contra personas procesadas por delitos como agresiones sexuales, robo agravado y privación de libertad, según informaron fuentes judiciales y fiscales.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p9"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Proceso judicial y detenciones",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": "Agresiones sexuales Robo agravado Privación de libertad",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p9"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "facts": {
+          "value": "Se reportan medidas de detención provisional dictadas por juzgados de paz contra imputados acusados de delitos que atentan contra la libertad sexual y el patrimonio.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p9"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "Personas afectadas"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p9"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": "San Salvador",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": "Parque la Bota",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": "8:30 p.m.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "reported_actors": {
+          "value": [
+            "Alfredo Esteban Granados Ortiz",
+            "Oscar Enrique Miranda"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p9"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Juzgado Octavo de Paz",
+            "Juzgado Décimo de Paz",
+            "Fiscalía",
+            "PNC"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p4",
+            "article-p8",
+            "article-p9",
+            "article-p14"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Justicia",
+            "Seguridad pública"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": [
+            "arma de fuego"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p6",
+            "article-p10"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p10",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p10 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        },
+        {
+          "id": "article-p14",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p14 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        },
+        {
+          "id": "article-p8",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p8 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        },
+        {
+          "id": "article-p9",
+          "url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
+          "locator": "Párrafo p9 del texto consultado; SHA-256 dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "dda2ec62a7d800eca28196ff1305986a842026edd352ac75e18c700c19ef3fb5",
+        "validated_at": "2026-11-03T01:17:31.445214+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "f3c17d579efe05647b7066afa3d9ad4101542db8d6fd233367dc0cba51f3c276",
+      "source_url": "https://www.diariocolatino.com/traslado-de-reos-evitara-accionar-delincuencial-desde-las-carceles/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Traslado de reos evitará accionar delincuencial desde las cárceles",
+      "published_date": "2015-04-22",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "El director de Centros Penales informó sobre el traslado masivo de reclusos como parte de una política de control para evitar la coordinación de estructuras delincuenciales desde el interior de las prisiones.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Política penitenciaria y seguridad",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "Se realizó un traslado simultáneo de 1,827 reos como parte de las nuevas medidas implementadas para recuperar el control estatal en los centros penitenciarios y ordenar el sistema carcelario.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Rodil Hernández",
+            "Narciso Castillo",
+            "Salvador Sánchez Cerén"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p4",
+            "article-p18"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "Sistema penitenciario",
+            "Control carcelario",
+            "Seguridad pública"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/traslado-de-reos-evitara-accionar-delincuencial-desde-las-carceles/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p18",
+          "url": "https://www.diariocolatino.com/traslado-de-reos-evitara-accionar-delincuencial-desde-las-carceles/",
+          "locator": "Párrafo p18 del texto consultado; SHA-256 8afed83ff7c8895dc463f02bd32c228d3c8bd1a0b71c2b09b316960ff96317ff."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/traslado-de-reos-evitara-accionar-delincuencial-desde-las-carceles/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 8afed83ff7c8895dc463f02bd32c228d3c8bd1a0b71c2b09b316960ff96317ff."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/traslado-de-reos-evitara-accionar-delincuencial-desde-las-carceles/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 8afed83ff7c8895dc463f02bd32c228d3c8bd1a0b71c2b09b316960ff96317ff."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/traslado-de-reos-evitara-accionar-delincuencial-desde-las-carceles/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 8afed83ff7c8895dc463f02bd32c228d3c8bd1a0b71c2b09b316960ff96317ff."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "8afed83ff7c8895dc463f02bd32c228d3c8bd1a0b71c2b09b316960ff96317ff",
+        "validated_at": "2026-11-03T01:15:28.955231+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "f3f72ff671e87e46b6e2d476e6577efcb849d0b545a44cab5ffc8346f90950b7",
       "source_url": "https://www.diariocolatino.com/fgr-pide-detencion-provisional-para-ex-jugadores/",
       "publisher": "Diario Co Latino",
@@ -119383,6 +122469,176 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "43f7d6925d5a9cfcb7557e93d634d5fbe5daacdc55214edc7604c91d1b328810",
         "validated_at": "2026-10-18T11:18:11.106961+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "fe08a99a914a33b3bbf375b9761c9b7929e65cb43fea8e4a26eb667e26b2ff93",
+      "source_url": "https://www.diariocolatino.com/relatores-de-derechos-humanos-de-la-onu-piden-ratificacion-constitucional-por-agua-y-la-alimentacion/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Noticia con título protegido; consulte la fuente original",
+      "published_date": "2015-04-21",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "category": {
+          "value": "Derechos Económicos, Sociales y Culturales",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "institutional_sources": {
+          "value": [
+            "Procuraduría para la Defensa de los Derechos Humanos",
+            "Organización de las Naciones Unidas",
+            "Asamblea Legislativa"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p3",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/relatores-de-derechos-humanos-de-la-onu-piden-ratificacion-constitucional-por-agua-y-la-alimentacion/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/relatores-de-derechos-humanos-de-la-onu-piden-ratificacion-constitucional-por-agua-y-la-alimentacion/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 538fa97b7ba7244f7e68de1737389c34725e2451ab468c348fc5f160f3d296e7."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/relatores-de-derechos-humanos-de-la-onu-piden-ratificacion-constitucional-por-agua-y-la-alimentacion/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 538fa97b7ba7244f7e68de1737389c34725e2451ab468c348fc5f160f3d296e7."
+        },
+        {
+          "id": "article-p7",
+          "url": "https://www.diariocolatino.com/relatores-de-derechos-humanos-de-la-onu-piden-ratificacion-constitucional-por-agua-y-la-alimentacion/",
+          "locator": "Párrafo p7 del texto consultado; SHA-256 538fa97b7ba7244f7e68de1737389c34725e2451ab468c348fc5f160f3d296e7."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "538fa97b7ba7244f7e68de1737389c34725e2451ab468c348fc5f160f3d296e7",
+        "validated_at": "2026-11-03T01:15:28.948340+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
