@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-10-18T21:20:16.796304+00:00",
+  "generated_at": "2026-11-03T13:27:05.887121+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -4576,6 +4576,29 @@
       ]
     },
     {
+      "candidate_id": "80dab2630262ca87f8a5691980b760c3f7b6a0969bba331bef0c4c86308b0d71",
+      "source_url": "https://www.diariocolatino.com/tenemos-que-cambiar-la-cultura-machista-y-respetar-los-derechos-de-las-mujeres-sanchez-ceren/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-07",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-18T09:11:47.089923-06:00",
+      "source_checked_at": "2026-11-03T13:26:36.955026+00:00",
+      "evidence": {
+        "paragraph_id": "p8",
+        "content_sha256": "20282f76e36b119cb97e466f829df17c1489dfa7e567cb8b543e3c82fe8f6086"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Quezaltepeque",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
       "candidate_id": "818d5ef5e5c32b1400e56d47bf2bba397b36ee46c2a5636fd57ec9e51400cc29",
       "source_url": "https://www.diariocolatino.com/a-dos-meses-de-cerrar-el-2014-pnc-registra-3387-homicidios/",
       "publisher": "Diario Co Latino",
@@ -7931,6 +7954,29 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=9"
+      }
+    },
+    {
+      "candidate_id": "f04187bdee53da982d2b4d3a170d51941e48dc4d23a738a397b292fc726b705c",
+      "source_url": "https://www.diariocolatino.com/capturan-en-guatemala-a-dos-miembros-del-cartel-de-texis/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-02-25",
+      "department": "La Libertad",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-18T06:16:06.181448-06:00",
+      "source_checked_at": "2026-11-03T13:25:27.615160+00:00",
+      "evidence": {
+        "paragraph_id": "p8",
+        "content_sha256": "0bf1c3d283e8ec8d9e66ebc2aa8105abc501fb2797e7d8e6b4d481c2e7933306"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ciudad Arce",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
       }
     },
     {

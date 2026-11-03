@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-03T01:14:32.649422+00:00",
+  "generated_at": "2026-11-03T13:15:57.142754+00:00",
   "assessment_counts": {
-    "candidates": 15541,
+    "candidates": 15692,
     "evaluated": 4892,
-    "relevant": 1928,
-    "excluded": 570,
-    "uncertain": 2394,
-    "pending": 10649
+    "relevant": 1932,
+    "excluded": 577,
+    "uncertain": 2383,
+    "pending": 10800
   },
   "selections": [
     {
@@ -9412,6 +9412,33 @@
             "p2",
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "2e40a01fc8388b2b28dd47a2da78e7801da69692d23a2c690836abeecbfa17ab",
+      "source_url": "https://historico.elsalvador.com/historico/134266/siete-rostros-de-periodistas-salvadorenos-que-destacan-en-estados-unidos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2014-08-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T13:10:28.004382+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8f397a529e2b2b5ac8fb66a4a6f9cd75393118e67c6fc8be7b5b734351a400a0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p6",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p19"
           ]
         }
       }
@@ -19000,25 +19027,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:16:31.164365-06:00",
+        "classified_at": "2026-11-03T07:14:48.614511-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4b029ad431552b93193b6b17dedf0bf93e336ac9630d91877078cbf60de1146e",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5",
-            "p13",
-            "p18"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p7",
-            "p8",
-            "p9",
-            "p13",
-            "p19",
-            "p20"
+            "p7"
           ]
         }
       }
@@ -19047,6 +19066,35 @@
             "p3",
             "p4",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "5d60a395229a2da20ffdea7d91130d74a388909b8d334f9f9e3638a1f7358b99",
+      "source_url": "https://www.diariocolatino.com/juzgado-decreta-detencion-provisional-contra-45-imputados/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-06-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T07:09:34.433478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6568b4ff05a42330fd40c097d58ac16613098d0dafeaae45f5f72b55e7ce8196",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12"
           ]
         }
       }
@@ -26923,6 +26971,36 @@
       }
     },
     {
+      "candidate_id": "7d0c737b7784456f63ae5d00a21905534f77261c0bd43c1c9a9a1a2333140872",
+      "source_url": "https://www.diariocolatino.com/tres-detenidos-tras-ataque-a-base-militar-en-san-martin/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-06-23",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T07:09:34.433478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "4c37910ff6f93f637611f26808933b7beca441844d50874a929f397118ef79f3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "7d4d5d36c0029cdbe1f4812349f89b25c345b28b48d6a2c9ec06443f7401ee81",
       "source_url": "https://www.diariocolatino.com/pnc-reporta-cuadruple-homicidio-en-la-paz/",
       "publisher": "Diario Co Latino",
@@ -28125,19 +28203,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:13:40.681838-06:00",
+        "classified_at": "2026-11-03T07:13:31.314545-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c50371132da691f8669de82b4a93945acda36fa182a7464ef04f3ff698dec884",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p11"
+            "p4"
           ]
         }
       }
@@ -39407,6 +39483,35 @@
           "relevance_paragraph_ids": [
             "p5",
             "p11"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b68a45bacdd5f14d10352729d0e6cc739c2f32cb4c8e73f1d5174cc32c94e7e4",
+      "source_url": "https://www.diariocolatino.com/cnscc-no-descarta-dialogo-con-pandillas-para-detener-bano-de-sangre/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-06-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T07:09:34.433478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0440b6e80e3d8a52795357528813709ab8b12d5cf031711a60b6b2fcc57c1786",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p9",
+            "p10"
           ]
         }
       }
@@ -51269,17 +51374,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:13:40.681838-06:00",
+        "classified_at": "2026-11-03T07:13:49.158232-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8044c0e983cd6070a8ea2281d3a3a612bcd6c4a7dcb06b53d5a910d03b1d6466",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p6"
+            "p2"
           ]
         }
       }

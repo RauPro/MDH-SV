@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-03T07:13:38.081624+00:00",
+  "generated_at": "2026-11-03T13:16:01.102707+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 15692,
-      "selected": 1928,
+      "selected": 1932,
       "evaluated": 4892,
-      "relevant": 1928,
-      "excluded": 570,
-      "uncertain": 2394,
+      "relevant": 1932,
+      "excluded": 577,
+      "uncertain": 2383,
       "pending": 10800,
-      "evaluated_at": "2026-11-03T01:14:32.649422+00:00"
+      "evaluated_at": "2026-11-03T13:15:57.142754+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-11-03",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1928,
+    "records": 1932,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1584,
+        "records": 1587,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-17",
         "months": [
@@ -845,7 +845,7 @@
           {
             "month": "2015-06",
             "status": "enumerated",
-            "records": 49,
+            "records": 52,
             "screen_version": 3,
             "posts_scanned": 1067,
             "source_total_posts": 1067,
@@ -14761,7 +14761,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 230,
+        "records": 231,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15428,7 +15428,7 @@
           {
             "month": "2014-08",
             "status": "partial",
-            "records": 2,
+            "records": 3,
             "screen_version": 3,
             "posts_scanned": 129,
             "source_total_posts": null,
@@ -19581,7 +19581,7 @@
         "month": "2014-08",
         "start_date": "2014-08-01",
         "end_date": "2014-08-31",
-        "records": 34,
+        "records": 35,
         "sources": [
           {
             "source_id": "co-latino",
@@ -19616,7 +19616,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 3
           }
         ]
       },
@@ -20011,12 +20011,12 @@
         "month": "2015-06",
         "start_date": "2015-06-01",
         "end_date": "2015-06-30",
-        "records": 53,
+        "records": 56,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 49
+            "records": 52
           },
           {
             "source_id": "gatoencerrado",
@@ -79611,6 +79611,52 @@
       }
     },
     {
+      "id": "b68a45bacdd5f14d10352729d0e6cc739c2f32cb4c8e73f1d5174cc32c94e7e4",
+      "title": "CNSCC no descarta diálogo con pandillas para detener “baño de sangre”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/cnscc-no-descarta-dialogo-con-pandillas-para-detener-bano-de-sangre/",
+      "published_date": "2015-06-26",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 72280,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T07:09:34.433478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "0440b6e80e3d8a52795357528813709ab8b12d5cf031711a60b6b2fcc57c1786",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
       "id": "44be3f927ed015392a3cdb07d6397c5c5f26a1c5c17765a5bc914b971efb198b",
       "title": "“Mi compromiso es erradicar la discriminación hacia las mujeres”: Lorena Peña",
       "title_truncated": false,
@@ -79833,6 +79879,99 @@
             "p4",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7d0c737b7784456f63ae5d00a21905534f77261c0bd43c1c9a9a1a2333140872",
+      "title": "Tres detenidos, tras ataque a base militar en San Martín",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/tres-detenidos-tras-ataque-a-base-militar-en-san-martin/",
+      "published_date": "2015-06-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 71899,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T07:09:34.433478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "4c37910ff6f93f637611f26808933b7beca441844d50874a929f397118ef79f3",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6",
+            "p8",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5d60a395229a2da20ffdea7d91130d74a388909b8d334f9f9e3638a1f7358b99",
+      "title": "Juzgado decreta detención provisional contra 45 imputados",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-decreta-detencion-provisional-contra-45-imputados/",
+      "published_date": "2015-06-23",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 71888,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T07:09:34.433478-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6568b4ff05a42330fd40c097d58ac16613098d0dafeaae45f5f72b55e7ce8196",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12"
           ]
         }
       }
@@ -83706,32 +83845,24 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:16:31.164365-06:00",
+        "classified_at": "2026-11-03T07:14:48.614511-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4b029ad431552b93193b6b17dedf0bf93e336ac9630d91877078cbf60de1146e",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5",
-            "p13",
-            "p18"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p7",
-            "p8",
-            "p9",
-            "p13",
-            "p19",
-            "p20"
+            "p7"
           ]
         }
       }
     },
     {
       "id": "453bed99d6c981f46c7e13770fc13dd2fcce487c925410f5cdf64ff97590b65e",
-      "title": "Protección Civil reporta menor desaparecido por fuerte oleaje",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -83847,17 +83978,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:13:40.681838-06:00",
+        "classified_at": "2026-11-03T07:13:49.158232-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8044c0e983cd6070a8ea2281d3a3a612bcd6c4a7dcb06b53d5a910d03b1d6466",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p6"
+            "p2"
           ]
         }
       }
@@ -83890,19 +84020,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:13:40.681838-06:00",
+        "classified_at": "2026-11-03T07:13:31.314545-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c50371132da691f8669de82b4a93945acda36fa182a7464ef04f3ff698dec884",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p11"
+            "p4"
           ]
         }
       }
@@ -98496,6 +98624,53 @@
             "p2",
             "p5",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2e40a01fc8388b2b28dd47a2da78e7801da69692d23a2c690836abeecbfa17ab",
+      "title": "Siete rostros de periodistas salvadoreños que destacan en Estados Unidos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/134266/siete-rostros-de-periodistas-salvadorenos-que-destacan-en-estados-unidos.html",
+      "published_date": "2014-08-27",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "estados unidos",
+        "salvadorenos"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-14T12:20:08.470685+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T13:10:28.004382+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8f397a529e2b2b5ac8fb66a4a6f9cd75393118e67c6fc8be7b5b734351a400a0",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p6",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p19"
           ]
         }
       }
