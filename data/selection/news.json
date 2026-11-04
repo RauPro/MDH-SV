@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-03T13:15:57.142754+00:00",
+  "generated_at": "2026-11-04T01:19:28.472910+00:00",
   "assessment_counts": {
-    "candidates": 15692,
-    "evaluated": 4892,
-    "relevant": 1932,
-    "excluded": 577,
-    "uncertain": 2383,
-    "pending": 10800
+    "candidates": 15845,
+    "evaluated": 4893,
+    "relevant": 1936,
+    "excluded": 585,
+    "uncertain": 2372,
+    "pending": 10952
   },
   "selections": [
     {
@@ -46,19 +46,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-03T19:18:17.158539-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ed33b7ae3d1a80c3d1a938856c3094df932a7b4c7494f1f00e81ecd9b731b270",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p6",
-            "p11"
+            "p4"
           ]
         }
       }
@@ -3345,19 +3343,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-03T19:18:43.416348-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "076829148bc0786e287ef5e546dfd2436b330412f2e764522f6e45c53f69d296",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p7",
-            "p8"
+            "p7"
           ]
         }
       }
@@ -11792,6 +11787,31 @@
       }
     },
     {
+      "candidate_id": "38e222ca825d354bc6f1ea55ce09289f4738cf35d85a8117ce46a1e4f94decb7",
+      "source_url": "https://www.diariocolatino.com/juzgado-ordena-detencion-contra-imputado-en-asesinato-de-una-nina/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-02",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T19:11:00.228949-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "3c2cb4e9b072cd215cb693a698f7394353b816c1166c75a651872ce616511c95",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "38e8b6e77e8664e90828d2ac18782313adbe356eea98bd31a5fa4bfec76be342",
       "source_url": "https://www.diariocolatino.com/procurador-de-derechos-humanos-afirma-que-reforma-fiscal-debe-buscar-justicia-distributiva/",
       "publisher": "Diario Co Latino",
@@ -12525,21 +12545,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-03T19:17:01.380093-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "072329275a2697a4fba92ec9012400f037cad964d30331878e228b2e3ae1092b",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p4",
-            "p5"
+            "p1"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p7",
-            "p12",
-            "p14"
+            "p5"
           ]
         }
       }
@@ -26662,21 +26678,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-03T19:17:36.731490-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "11a88b7882aecf4e558f8e0940fcd427afaf169a3598be8405fd09c3a8fd2967",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p5",
-            "p7"
+            "p3",
+            "p5"
           ]
         }
       }
@@ -28405,6 +28418,31 @@
             "p4",
             "p5",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "83c3d6a020b96a8222d24517f74009c603a697b81ffe1500681477a5acfb202d",
+      "source_url": "https://www.diariocolatino.com/gobierno-lamenta-que-de-17-mil-delincuentes-capturados-por-la-policia-solo-el-5-haya-sido-procesado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T19:11:00.228949-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b2b556c042c5a7ba4a6643a09cfdf8ea7501514c844976a180449d3851231c16",
+          "jurisdiction_paragraph_ids": [
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p6"
           ]
         }
       }
@@ -35353,18 +35391,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:16:31.164365-06:00",
+        "classified_at": "2026-11-03T19:16:02.081147-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "76e05b36c5cdb18409ce796f1af5efe6d0a5104c4b6e10e862642e054560d0f2",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ]
         }
       }
@@ -37761,6 +37797,33 @@
       }
     },
     {
+      "candidate_id": "ae4e24975f87825695d35553a8072b0a7291958d94fa3fa636a5b87cd9696d24",
+      "source_url": "https://www.diariocolatino.com/condenan-a-36-anos-de-carcel-a-pandillero-por-atentar-contra-agentes-pnc/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-01",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T19:11:00.228949-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fb6445932ba2c40aa693b1e0624d04861178072b3cde9ba0203e5b3dd7652fb1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "ae7648d437d608e965c2ec9c3d2220c1a07e6e2b481ff9523a21921abb5d8c2c",
       "source_url": "https://historico.elsalvador.com/historico/100219/hallan-muerto-a-un-prisionero-en-carcel-apanteos.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -39787,6 +39850,31 @@
             "p7",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b7c9bde89c551c34d2397b33c484650ba086b0288405a7664990300d92cce9d7",
+      "source_url": "https://gatoencerrado.news/2026/10/27/ingrid-escobar-denuncia-cidh-muerte-hermano-prision/",
+      "publisher": "GatoEncerrado",
+      "published_date": "2026-10-27",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-03T19:14:23.686972-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cb5e6c1efdaeaea1a980053bc4de03850fcf945a3d40f0fe754e32c165d43e06",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }
@@ -52385,19 +52473,21 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T00:13:40.681838-06:00",
+        "classified_at": "2026-11-03T19:14:59.039093-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "addcc02ff83f0a846ab9331aeb14cb6856dfe0f71c326271811f43773ecc351c",
           "jurisdiction_paragraph_ids": [
-            "p5",
-            "p6"
+            "p5"
           ],
           "relevance_paragraph_ids": [
             "p4",
+            "p6",
             "p7",
-            "p10"
+            "p9",
+            "p10",
+            "p16"
           ]
         }
       }
