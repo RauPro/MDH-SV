@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-11-03T13:27:05.887121+00:00",
+  "generated_at": "2026-11-04T13:22:28.129642+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -4464,6 +4464,30 @@
       }
     },
     {
+      "candidate_id": "7d0c737b7784456f63ae5d00a21905534f77261c0bd43c1c9a9a1a2333140872",
+      "source_url": "https://www.diariocolatino.com/tres-detenidos-tras-ataque-a-base-militar-en-san-martin/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-06-23",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-11-04T13:19:48.738737+00:00",
+      "source_checked_at": "2026-11-04T13:19:48.738737+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "4c37910ff6f93f637611f26808933b7beca441844d50874a929f397118ef79f3"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Martín",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "7efed631dfa96555c1f25ae14a82434bc9c61e03becebd2798b24e163c1ca852",
       "source_url": "https://www.diariocolatino.com/denuncian-inestabilidad-laboral-y-violaciones-de-la-ley/",
       "publisher": "Diario Co Latino",
@@ -7687,6 +7711,23 @@
       "evidence": {
         "paragraph_id": "p12",
         "content_sha256": "3c01c33fdd7f64071f493241f21cb8955429ae7df0d1e2d74b03a198e5e4b1dc"
+      }
+    },
+    {
+      "candidate_id": "e149fae0ca01cccdef6b3cda317b97e8ecb1c6ecacbb7fa6ff95c8daf7469f20",
+      "source_url": "https://www.diariocolatino.com/fgr-presento-requerimiento-contra-cuatro-detenidos-en-ataque-a-agentes-ppi/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-10",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-11-04T13:21:29.921858+00:00",
+      "source_checked_at": "2026-11-04T13:21:29.921858+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "5630151444fb5df1e609d15ddba45782471671a14357acba53add5a06e83c34c"
       }
     },
     {

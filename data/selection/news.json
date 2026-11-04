@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-04T01:19:28.472910+00:00",
+  "generated_at": "2026-11-04T13:18:24.335502+00:00",
   "assessment_counts": {
-    "candidates": 15845,
+    "candidates": 15995,
     "evaluated": 4893,
-    "relevant": 1936,
-    "excluded": 585,
-    "uncertain": 2372,
-    "pending": 10952
+    "relevant": 1944,
+    "excluded": 593,
+    "uncertain": 2356,
+    "pending": 11102
   },
   "selections": [
     {
@@ -9527,6 +9527,38 @@
       }
     },
     {
+      "candidate_id": "2e73a3262482f1d1ed5a49d7e16d1044f93350591ade24c8579c6e59a2bb2a04",
+      "source_url": "https://www.diariocolatino.com/video-vigilancia-de-la-pnc-permite-captura-de-atacantes-de-agentes/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T07:10:02.266911-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cf6dc2d4381b47d14f8fc22f43c1c0a86d2fc3b67269c3add2d290373123aa91",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12",
+            "p13"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p9",
+            "p12",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2ecc5d0084a23421a903533f5b570404154c6fdf600ce7717598ecb83497c38f",
       "source_url": "https://www.diariocolatino.com/fiscalia-ordena-captura-de-dos-personas-con-armas-y-prendas-de-uso-militar/",
       "publisher": "Diario Co Latino",
@@ -14837,6 +14869,35 @@
       }
     },
     {
+      "candidate_id": "49350ab107a19c679d32cdb240e4a9ecf4218b388ba2bd80c52388cc562f27db",
+      "source_url": "https://www.diariocolatino.com/prision-para-ex-alcalde-de-san-jorge-por-malversacion-de-fondos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T07:10:02.266911-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d3a5d042a1de1f7026d324bc43b443a01b5fa8a6f9a55fe0bcfa8bf68c8fc442",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "4947a9d2bee72c1ae323c14226b46d576c3b68a3f3f05f5a230024c28c120f81",
       "source_url": "https://www.diariocolatino.com/ivania-cruz-pregunta-a-bukele-quiere-liberar-inocentes-o-pandilleros/",
       "publisher": "Diario Co Latino",
@@ -16248,20 +16309,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-04T07:14:56.025266-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "32383b481de3e1035e55978b8ddc34d046f9beb72d6844999a2f89c21cb01cb6",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p4"
+            "p4",
+            "p14"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p8",
-            "p9",
-            "p11"
+            "p4",
+            "p5"
           ]
         }
       }
@@ -24184,20 +24243,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-04T07:16:52.111445-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ba37d615a11262e91d7c32172b602a1ec3b972287dcf69ee6540e14d57663057",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p3",
-            "p5"
+            "p1"
           ],
           "relevance_paragraph_ids": [
+            "p1",
             "p3",
-            "p12",
-            "p14",
             "p21"
           ]
         }
@@ -30884,17 +30940,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-04T07:17:19.401794-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "1b9d42e6745089ea2aee6611e3c3e9d6eadec6494276a74a00b6aafc9eabb6aa",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ]
         }
       }
@@ -36794,19 +36849,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-04T07:16:10.395992-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ce1827956c6900a1d45e9d564ad3a04d12b27b2e515253602d51b70b2d5dc78d",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p7"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -37983,6 +38036,35 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "af93e0408de4df0477ec4b961631e2ecba348b8a873ea768cebfd40c18be30b6",
+      "source_url": "https://www.diariocolatino.com/detencion-provisional-contra-implicado-en-atentado-a-policias/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T07:10:02.266911-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5216429f79c6553028dca4fa7fcb5613095045ece1d107e995ef46ba6ef7ae07",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -41786,6 +41868,33 @@
       }
     },
     {
+      "candidate_id": "bebd04b6e59e108ef3b5f9c11a7b30ab7c01f5d996b2bd7ffcebd4884e72da2f",
+      "source_url": "https://www.diariocolatino.com/73504/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T07:10:02.266911-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "99eb79acabc08935011fb24d2e34ca8d4323b7b59717f8675c2635c91f4b9c35",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p41",
+            "p42",
+            "p56"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "bee3f4e9670545171e2716eb050f9e176b25dbe813a580bc9c9cb2550840e341",
       "source_url": "https://www.diariocolatino.com/san-isidro-labrador-sometera-a-consulta-ciudadana-tema-de-mineria-metalica/",
       "publisher": "Diario Co Latino",
@@ -44287,6 +44396,35 @@
             "p2",
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c9bd61ffa52cf29bdab924e99dfd0e74ebf9838fef88bc6367f9cef204bdb468",
+      "source_url": "https://www.diariocolatino.com/tres-personas-detenidas-tras-ataque-a-agentes-policiales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T07:10:02.266911-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8e6d577419e92c46ad1d3a70353c002b703036a8fa8a76d3b901cff56b28ac62",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -48351,6 +48489,34 @@
       }
     },
     {
+      "candidate_id": "e149fae0ca01cccdef6b3cda317b97e8ecb1c6ecacbb7fa6ff95c8daf7469f20",
+      "source_url": "https://www.diariocolatino.com/fgr-presento-requerimiento-contra-cuatro-detenidos-en-ataque-a-agentes-ppi/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T07:10:02.266911-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "5630151444fb5df1e609d15ddba45782471671a14357acba53add5a06e83c34c",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "e14bf8a3dd600381af33df487ee9f09b090aff972be4c622ac4608e84fe6e89e",
       "source_url": "https://www.diariocolatino.com/municipio-cinquera-consulta-popular-prohibir-mineria-territorio/",
       "publisher": "Diario Co Latino",
@@ -48405,6 +48571,34 @@
             "p6",
             "p7",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e22d99fdecccb075cb85b251f34510b3ca2f5bea3f1a99f72ba0f7c33c46c015",
+      "source_url": "https://www.diariocolatino.com/asesinan-a-agente-policial-junto-a-su-hijo/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T07:10:02.266911-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "934d3e342abfcce913e0d09855d0aacc02d51b19e65a2319e999ce15e9af27a5",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
@@ -49050,6 +49244,36 @@
             "p9",
             "p10",
             "p15"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e5b0c495a72ab747e704ce4e6414a634cc1144f656911ab56b22e2a0b4da0b86",
+      "source_url": "https://www.diariocolatino.com/no-hay-jutificacion-para-alza-de-granos-basicos-asegura-defensoria/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-07-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T07:10:02.266911-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2ce0c0831c46063663f6cf5ec92a0870da1994860a1e9f8a729d481d47a1b478",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -50496,19 +50720,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:09:41.238338-06:00",
+        "classified_at": "2026-11-04T07:14:26.722569-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4ab05e9add64540ca87f561584e2b43d6a4449a28b46f7976ea5b6fb8845b530",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p6"
+            "p3"
           ]
         }
       }
