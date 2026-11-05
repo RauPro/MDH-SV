@@ -584,6 +584,18 @@ def review_markdown(report: dict) -> str:
                       json.dumps(change["details"], ensure_ascii=False, indent=2), "```", ""])
     for error in report["errors"]:
         lines.append(f"- Atención: `{error['source_id']}` — `{error['code']}`. Se conserva la publicación anterior.")
+    if report["errors"]:
+        lines.extend(["", "## Recuperación de fuentes", "",
+                      "HTTP 403 indica acceso denegado; HTTP 404 indica una ruta no disponible. "
+                      "No prueban ausencia de registros ni autorizan a sustituir cifras por ceros.",
+                      "Contrastar la URL en el portal oficial o solicitar acceso a la institución. "
+                      "No eludir bloqueos mediante proxies, credenciales o rutas alternativas.",
+                      "Una URL nueva requiere revisión de procedencia, documento, período y unidad; "
+                      "después se repite la consulta y se revisa cualquier propuesta antes de publicar.", ""])
+        failed = {error["source_id"] for error in report["errors"]}
+        for source in report["sources"]:
+            if source["source_id"] in failed:
+                lines.append(f"- `{source['source_id']}`: <{source['url']}>")
     if not report["review_required"]:
         lines.append("No se detectaron cambios en los valores ni documentos oficiales observados.")
     return "\n".join(lines) + "\n"

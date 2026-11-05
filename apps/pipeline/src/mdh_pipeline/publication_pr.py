@@ -399,7 +399,7 @@ def native_pr_runs(client, branch, head, base, number):
     return result
 
 
-def wait_for_native_pr_ci(client, pr, branch, head, base):
+def wait_for_native_pr_ci(client, pr, branch, head, base, *, allow_missing=False):
     # workflow_dispatch checks cannot satisfy required PR checks on GitHub.
     # Only after validating the complete data-only diff do we allow the two
     # read-only native PR workflows to run, using GitHub's approval endpoint.
@@ -412,6 +412,10 @@ def wait_for_native_pr_ci(client, pr, branch, head, base):
         validate_pr(current, branch, head)
         require(current["base"].get("sha") == base, "publication_pr_base_changed")
         native = native_pr_runs(client, branch, head, base, pr["number"])
+        # GITHUB_TOKEN-created PRs do not trigger native PR workflows. A verified
+        # owner push can still satisfy protection; never ignore existing runs.
+        if not native and allow_missing:
+            return
         if ".github/workflows/ci.yml" in native:
             require(all(candidate["status"] != "completed" or candidate.get("conclusion") in {
                 "success", "action_required"} for candidate in native.values()), "native_pr_ci_unsuccessful")
@@ -514,11 +518,10 @@ def control(client, event):
             if attempt < 14:
                 time.sleep(2)
         raise PublicationError("branch_update_pending_rerun_controller")
-    if run["event"] == "workflow_dispatch":
-        wait_for_native_pr_ci(client, pr, branch, head, base)
-        require(ref_sha(client, branch) == head and ref_sha(client, "main") == base,
-                "publication_refs_changed_retry_required")
-        validate_pr(client.call("GET", api(f"pulls/{pr['number']}")), branch, head)
+    wait_for_native_pr_ci(client, pr, branch, head, base, allow_missing=owner_push(run))
+    require(ref_sha(client, branch) == head and ref_sha(client, "main") == base,
+            "publication_refs_changed_retry_required")
+    validate_pr(client.call("GET", api(f"pulls/{pr['number']}")), branch, head)
     merged = client.call("PUT", api(f"pulls/{pr['number']}/merge"), {
         "sha": head, "merge_method": "squash", "commit_title": f"chore: update public {kind} snapshots",
     })

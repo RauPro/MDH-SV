@@ -232,6 +232,12 @@ def test_network_error_keeps_baseline_and_catalog_state(monkeypatch):
     report, candidate, state = run(document, previous_state=previous)
     assert candidate is None and report['status'] == 'error' and state == previous
     assert {e['code'] for e in report['errors']} == {'source_http_403', 'source_http_503'}
+    markdown = monitor.review_markdown(report)
+    assert '## Recuperación de fuentes' in markdown
+    assert f'<{monitor.FGR_URL}>' in markdown
+    assert f'<{monitor.CATALOG_URL}>' in markdown
+    assert f'<{monitor.PNC_URL}>' not in markdown
+    assert 'No eludir bloqueos' in markdown
 
 
 def test_catalog_bootstrap_tracks_inventory_without_mass_queue(monkeypatch):

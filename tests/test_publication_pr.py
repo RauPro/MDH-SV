@@ -455,7 +455,7 @@ def test_new_news_pr_waits_for_github_mergeability(monkeypatch):
     client.mergeability_delay = 2
     assert publication.control(client, client.event()) == "merged_with_required_checks"
     assert waits == [2, 2]
-    assert client.mergeability_reads == 3
+    assert client.mergeability_reads == 5
 
 
 def test_pending_mergeability_fails_without_attempting_merge(monkeypatch):
@@ -659,16 +659,39 @@ def test_dispatch_source_waits_for_native_pr_checks_before_merge():
     assert native_read < merge
 
 
-def test_owner_push_ci_already_satisfies_protection_without_native_approval():
+def test_owner_push_waits_for_native_pr_checks_before_merge():
     client = GitHubFake("news")
     assert publication.control(client, client.event()) == "merged_with_required_checks"
-    assert not any("actions/runs?" in path or path.endswith("/approve") for _, path, _ in client.calls)
+    native_read = client.calls.index(("GET", publication.api("actions/runs/501"), None))
+    merge = next(index for index, (method, path, _) in enumerate(client.calls) if method == "PUT" and path.endswith("/merge"))
+    assert native_read < merge
 
 
-def test_native_ci_and_optional_configuration_are_approved_once_then_awaited(monkeypatch):
+@pytest.mark.parametrize("existing_pr", [False, True])
+def test_owner_push_without_native_runs_preserves_verified_push_route(monkeypatch, existing_pr):
+    monkeypatch.setattr(publication, "CI_WAIT_SECONDS", 0)
+    client = GitHubFake("news")
+    client.native_ids = []
+    if existing_pr:
+        client.pr = pull(client.branch, body="<!-- mdh-publication-origin: 91 -->")
+    assert publication.control(client, client.event()) == "merged_with_required_checks"
+    assert not any(path.endswith("/approve") for _, path, _ in client.calls)
+
+
+def test_dispatched_ci_without_native_runs_still_fails(monkeypatch):
+    monkeypatch.setattr(publication, "CI_WAIT_SECONDS", 0)
+    client = GitHubFake()
+    client.native_ids = []
+    with pytest.raises(publication.PublicationError, match="native_pr_ci_wait_timeout"):
+        publication.control(client, client.event())
+    assert not client.writes()
+
+
+@pytest.mark.parametrize("kind", ["history", "news"])
+def test_native_ci_and_optional_configuration_are_approved_once_then_awaited(monkeypatch, kind):
     waits = []
     monkeypatch.setattr(publication.time, "sleep", waits.append)
-    client = GitHubFake()
+    client = GitHubFake(kind)
     for identifier, path in [(501, ".github/workflows/ci.yml"), (502, ".github/workflows/deploy_web.yml")]:
         ready = native_run(client.branch, identifier, path)
         approval = dict(ready, conclusion="action_required")
@@ -677,7 +700,7 @@ def test_native_ci_and_optional_configuration_are_approved_once_then_awaited(mon
     client.native_ids = [501, 502]
     assert publication.control(client, client.event()) == "merged_with_required_checks"
     assert waits == [10, 10]
-    assert [path.rsplit("/", 2)[-2:] for _, path, _ in client.writes()] == [
+    assert [path.rsplit("/", 2)[-2:] for _, path, _ in client.writes() if path != publication.api("pulls")] == [
         ["501", "approve"], ["502", "approve"], ["7", "merge"],
     ]
 
@@ -750,8 +773,11 @@ def test_native_readback_identity_checked_before_any_approval():
 
 
 @pytest.mark.parametrize("conclusion", ["failure", "cancelled", "timed_out", "skipped"])
-def test_failed_native_ci_never_merges_or_approves_another_run(conclusion):
-    client = GitHubFake()
+@pytest.mark.parametrize("kind", ["history", "news"])
+def test_failed_native_ci_never_merges_or_approves_another_run(conclusion, kind):
+    client = GitHubFake(kind)
+    if kind == "news":
+        client.pr = pull(client.branch, body="<!-- mdh-publication-origin: 91 -->")
     client.runs[501]["conclusion"] = conclusion
     client.runs[502] = native_run(client.branch, 502, ".github/workflows/deploy_web.yml")
     client.runs[502]["conclusion"] = "action_required"
@@ -761,10 +787,13 @@ def test_failed_native_ci_never_merges_or_approves_another_run(conclusion):
     assert not client.writes()
 
 
-def test_missing_native_ci_times_out_without_approving_only_configuration(monkeypatch):
+@pytest.mark.parametrize("kind", ["history", "news"])
+def test_missing_native_ci_times_out_without_approving_only_configuration(monkeypatch, kind):
     monkeypatch.setattr(publication, "CI_WAIT_SECONDS", 20)
     monkeypatch.setattr(publication.time, "sleep", lambda _: None)
-    client = GitHubFake()
+    client = GitHubFake(kind)
+    if kind == "news":
+        client.pr = pull(client.branch, body="<!-- mdh-publication-origin: 91 -->")
     client.runs[502] = native_run(client.branch, 502, ".github/workflows/deploy_web.yml")
     client.runs[502]["conclusion"] = "action_required"
     client.native_ids = [502]
