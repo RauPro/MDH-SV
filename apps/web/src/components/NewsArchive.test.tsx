@@ -359,6 +359,22 @@ it('keeps extraction unknown when its public snapshot cannot be loaded', async (
   expect(screen.queryByText(/pendientes de extracción\./)).not.toBeInTheDocument();
 });
 
+it('shows published geography for a sole privacy-blocked news item without counting it as extraction backlog or locating it', async () => {
+  const archive = structuredClone(fixture);
+  archive.records = archive.records.slice(0, 1);
+  recountArchive(archive);
+  const dossier = automaticNewsDossier(archive.records[0]);
+  dossier.fields.department = { status: 'withheld', value: null, evidence_refs: [], note: 'Departamento protegido por privacidad.' };
+  dossier.fields.municipality = { status: 'reported', value: 'San Salvador', evidence_refs: ['source-p1'], note: null };
+  serve(archive, { schema_version: 1, dossiers: [dossier] }, { ...EMPTY_LOCATIONS, locations: [automatic(archive.records[0])] }, processingFixture([processingEntry(archive.records[0], 'generated')]));
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText(/Dentro de este grupo, 1 tienen departamento o municipio/);
+  expect(screen.getByText('1 sin departamento documentado públicamente.')).toBeInTheDocument();
+  expect(screen.queryByText(/con extracción generada; ubicación aún no disponible en el mapa/)).not.toBeInTheDocument();
+  expect(screen.queryByText('Ubicación automática · Sin revisar')).not.toBeInTheDocument();
+  expect(screen.getByText(/Ninguna noticia tiene un departamento disponible/)).toBeInTheDocument();
+});
+
 it('filters news with reviewed locations independently of the map counts and keeps unlocated news available', async () => {
   const dossier = approved();
   dossier.classification.jurisdiction = 'SV';

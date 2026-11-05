@@ -125,6 +125,10 @@ extracción: pendiente, generada, error, fuente inaccesible o sin confirmar. Una
 ficha pública parcial acredita extracción generada aunque el snapshot de
 procesamiento sea anterior. Un campo geográfico publicado no sustituye la
 comprobación independiente del mapa ni autoriza saltarse un bloqueo de privacidad.
+El recuento de fichas automáticas con campos geográficos publicados abarca todas
+las noticias sin ubicación en el mapa, incluidas las que tienen departamento
+protegido. Se cuenta aparte del desglose de extracción: un bloqueo geográfico no
+se convierte en extracción pendiente ni permite inferir una ubicación.
 
 Una deploy key permite escribir únicamente en el repositorio público MDH-SV;
 GitHub no restringe esa clave por archivo. El workflow y las validaciones limitan

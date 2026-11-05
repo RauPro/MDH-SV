@@ -93,11 +93,12 @@ export function summarizeUnlocatedNewsProcessing(items: readonly NewsTerritoryIt
   };
   const seen = new Set<string>();
   for (const item of items) {
-    if (item.reason !== 'pending_review' || seen.has(item.reference.id)) continue;
+    if (item.reason === 'located' || seen.has(item.reference.id)) continue;
     seen.add(item.reference.id);
+    if (item.dossier.schema_version === 2 && (['department', 'municipality'] as const).some(name => item.dossier.fields[name].status === 'reported')) counts.publishedGeography += 1;
+    if (item.reason !== 'pending_review') continue;
     const status = newsProcessingFor(item.reference, processing, item.dossier);
     counts[status === 'automatically_published' || status === 'reviewed' ? 'generated' : status] += 1;
-    if (item.dossier.schema_version === 2 && (['department', 'municipality'] as const).some(name => item.dossier.fields[name].status === 'reported')) counts.publishedGeography += 1;
   }
   return counts;
 }

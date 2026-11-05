@@ -174,7 +174,7 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
         {territorySummary.reasons.outside_el_salvador > 0 && <li>{territorySummary.reasons.outside_el_salvador} fuera de El Salvador.</li>}
         {territorySummary.reasons.department_unknown > 0 && <li>{territorySummary.reasons.department_unknown} sin departamento documentado públicamente.</li>}
       </ul><p>La extracción de la ficha y la comprobación geográfica son procesos separados. No aparecer en el mapa no significa que la fuente no mencione lugares.</p>
-      {unlocatedProcessing.publishedGeography > 0 && <p>Dentro de este grupo, {unlocatedProcessing.publishedGeography} tienen departamento o municipio reportado en una ficha automática. Incorporarlos al mapa requiere una comprobación geográfica independiente; no equivale a revisión humana.</p>}</div>}
+      {unlocatedProcessing.publishedGeography > 0 && <p>Dentro de este grupo, {unlocatedProcessing.publishedGeography} tienen departamento o municipio reportado en una ficha automática. Estos campos no autorizan por sí solos su incorporación al mapa ni anulan restricciones de privacidad o jurisdicción. La comprobación geográfica es independiente y no equivale a revisión humana.</p>}</div>}
       {department && mapAvailable && <p className="filter-note" role="status">Filtro del mapa: {department === UNKNOWN_DEPARTMENT ? 'sin ubicación pública en El Salvador' : department}.</p>}
     </>}
     <div className="results-heading archive-results" ref={resultsRef} tabIndex={-1} aria-label="Resultados de noticias"><span role="status">{filtered.length} {filtered.length === 1 ? 'noticia seleccionada' : 'noticias seleccionadas'}</span><span>Más recientes primero · por fecha de publicación</span></div>

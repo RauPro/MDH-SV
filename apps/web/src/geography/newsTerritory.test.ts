@@ -53,6 +53,26 @@ describe('unlocated news processing', () => {
     const dossier = approved();
     expect(summarizeUnlocatedNewsProcessing([newsTerritoryItem(reference, index(dossier))]).unknown).toBe(0);
   });
+  it('counts a reported municipality despite a department privacy hold without adding extraction backlog or mapping it', () => {
+    const dossier = automaticNewsDossier(reference);
+    dossier.fields.department = { status: 'withheld', value: null, evidence_refs: [], note: 'Departamento protegido por privacidad.' };
+    dossier.fields.municipality = { status: 'reported', value: 'San Salvador', evidence_refs: ['source-p1'], note: null };
+    const item = newsTerritoryItem(reference, index(dossier), automatic());
+    expect(item.reason).toBe('department_unknown');
+    expect(item.departments).toEqual([]);
+    expect(item.automaticLocation).toBeNull();
+    expect(summarizeUnlocatedNewsProcessing([item, item])).toEqual({
+      pending: 0, generated: 0, error: 0, source_unavailable: 0, unknown: 0, publishedGeography: 1,
+    });
+    expect(summarizeNewsTerritory([item]).located).toBe(0);
+  });
+  it('does not include located automatic dossiers in the unlocated geographic count', () => {
+    const dossier = automaticNewsDossier(reference);
+    dossier.fields.department = { status: 'reported', value: 'San Salvador', evidence_refs: ['source-p1'], note: null };
+    const item = newsTerritoryItem(reference, index(dossier), automatic());
+    expect(item.reason).toBe('located');
+    expect(summarizeUnlocatedNewsProcessing([item]).publishedGeography).toBe(0);
+  });
 });
 
 describe('news territory with a reviewed public source', () => {
