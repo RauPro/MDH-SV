@@ -5,7 +5,8 @@ import type { NewsLocation } from '../../../../shared/news-location.mjs';
 import fixture from '../__fixtures__/newsArchive.json';
 import { parseNewsArchive, type NewsReference } from '../newsArchive';
 import { DEPARTMENTS } from './elSalvador';
-import { buildNewsTerritoryItems, matchesNewsTerritory, newsTerritoryItem, summarizeNewsTerritory } from './newsTerritory';
+import { buildNewsTerritoryItems, matchesNewsTerritory, newsTerritoryItem, summarizeNewsTerritory, summarizeUnlocatedNewsProcessing } from './newsTerritory';
+import type { NewsProcessingEntry } from '../../../../shared/news-processing.mjs';
 import { UNKNOWN_DEPARTMENT } from './territory';
 import { automaticNewsDossier } from '../__fixtures__/automaticNewsDossier';
 
@@ -22,6 +23,37 @@ function approved(source: NewsReference = reference): NewsDossier {
   return dossier;
 }
 const index = (dossier: NewsDossier) => new Map([[dossier.candidate_id, dossier]]);
+
+describe('unlocated news processing', () => {
+  const sources = Array.from({ length: 7 }, (_, offset): NewsReference => ({
+    ...reference, id: sourceId(`${reference.source_url}processing-${offset}/`), source_url: `${reference.source_url}processing-${offset}/`,
+  }));
+  const entries = new Map(sources.map((source, offset): [string, NewsProcessingEntry] => [source.id, {
+    candidate_id: source.id, source_url: source.source_url, publisher: source.publisher, published_date: source.published_date!,
+    selection_content_sha256: source.selection.method === 'gemini_grounded_scope' ? source.selection.evidence.content_sha256 : null,
+    status: (['pending', 'generated', 'error', 'source_unavailable', 'unknown', 'pending', 'pending'] as const)[offset],
+  }]));
+  it('separates extraction states, deduplicates and uses a published partial dossier as proof of generation', () => {
+    const dossier = automaticNewsDossier(sources[5]);
+    dossier.fields.department = { status: 'reported', value: 'San Salvador', evidence_refs: ['source-p1'], note: null };
+    const items = buildNewsTerritoryItems(sources, index(dossier), automatic(sources[6]));
+    expect(summarizeUnlocatedNewsProcessing([...items, items[0]], entries)).toEqual({
+      pending: 1, generated: 2, error: 1, source_unavailable: 1, unknown: 1, publishedGeography: 1,
+    });
+  });
+  it('does not call unavailable, absent or stale processing entries pending', () => {
+    const items = buildNewsTerritoryItems(sources);
+    expect(summarizeUnlocatedNewsProcessing(items).unknown).toBe(7);
+    const stale = new Map(entries);
+    stale.set(sources[0].id, { ...entries.get(sources[0].id)!, source_url: 'https://example.org/stale/' });
+    expect(summarizeUnlocatedNewsProcessing(items, stale).pending).toBe(2);
+    expect(summarizeUnlocatedNewsProcessing(items, stale).unknown).toBe(2);
+  });
+  it('does not mix human geographic holds into extraction backlog', () => {
+    const dossier = approved();
+    expect(summarizeUnlocatedNewsProcessing([newsTerritoryItem(reference, index(dossier))]).unknown).toBe(0);
+  });
+});
 
 describe('news territory with a reviewed public source', () => {
   it('keeps every unreviewed news reference listable without deriving a location from discovery metadata', () => {

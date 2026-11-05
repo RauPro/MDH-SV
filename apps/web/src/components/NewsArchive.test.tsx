@@ -325,7 +325,8 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   expect(screen.queryByLabelText('Vínculo territorial')).not.toBeInTheDocument();
   expect(screen.getAllByRole('article')).toHaveLength(3);
   expect(screen.getByText(/Ninguna noticia tiene un departamento disponible/)).toBeInTheDocument();
-  expect(screen.getByText('3 sin ubicación automática disponible ni ubicación revisada.')).toBeInTheDocument();
+  expect(screen.getByText('3 sin ubicación automática disponible ni ubicación revisada:')).toBeInTheDocument();
+  expect(screen.getByText('3 pendientes de extracción.')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   expect(screen.queryByText('Ver cobertura por medio y mes')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: /Sin ubicación pública en El Salvador/ }));
