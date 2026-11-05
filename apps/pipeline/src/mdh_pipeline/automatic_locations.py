@@ -462,6 +462,8 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
     positives = {item["candidate_id"]: item for item in previous["locations"]} if previous.get("schema_version") in {2, 3, 4, 5} else {}
     stats = {"drafts": len(drafts), "selected_references": len(references), "eligible": 0, "excluded": 0, "invalid": 0, "cached": 0,
              "sources_checked": 0, "source_failures": 0, "unsupported": 0, "deferred": 0,
+             "checked_without_receipt": 0, "checked_retries": 0,
+             "deferred_without_receipt": 0, "deferred_retries": 0,
              "rotation_offset": 0, "rotation_candidates": 0, "ready_without_dossier": 0,
              "negative_cached": 0, "negative_cache_discarded": 0,
              "source_methods": {method: 0 for method in sorted(SOURCE_METHODS)},
@@ -559,6 +561,13 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
         offset = (int(moment.timestamp() // 3600) * limit) % len(ordered)
         stats.update(rotation_offset=offset, rotation_candidates=len(ordered))
         ordered = ordered[offset:] + ordered[:offset]
+    # Sparse schedules can alias the hourly rotation. Preserve progress using
+    # matching private receipts, then retry the oldest checks first.
+    ordered.sort(key=lambda candidate: (
+        candidate["reference"]["id"] in negatives,
+        datetime.fromisoformat(negatives[candidate["reference"]["id"]]["checked_at"].replace("Z", "+00:00")).timestamp()
+        if candidate["reference"]["id"] in negatives else 0,
+    ))
     for candidate in ordered:
         identifier = candidate["reference"]["id"]
         if identifier in cached_ids:
@@ -569,8 +578,10 @@ def project_automatic_locations(drafts, archive, *, previous=None, fetch=fetch_a
             continue
         if stats["sources_checked"] >= limit:
             stats["deferred"] += 1
+            stats["deferred_retries" if negative else "deferred_without_receipt"] += 1
             continue
         stats["sources_checked"] += 1
+        stats["checked_retries" if negative else "checked_without_receipt"] += 1
         failure = None
         location = None
         checked = moment if now is not None else datetime.now(timezone.utc)

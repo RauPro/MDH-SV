@@ -94,9 +94,11 @@ fijado a un SHA revisado y conserva las exclusiones editoriales y fichas humanas
 El lote automático comprueba hasta 50 fuentes seleccionadas. Reutiliza las
 comprobaciones positivas mientras la selección, la evidencia y la privacidad
 permanezcan compatibles. Rota por hora el punto de inicio
-entre candidatos elegibles, para que los rechazos antiguos no bloqueen el resto.
-Con un conjunto estable, los siguientes horarios recorren todos los candidatos;
-repetir una ejecución en la misma hora conserva el mismo punto de inicio.
+entre candidatos elegibles. Con recibos privados compatibles, comprueba primero
+las fuentes sin recibo y después reintenta las comprobaciones más antiguas cuya
+espera haya vencido. Esto evita que horarios espaciados repitan siempre los mismos
+lotes al coincidir con la rotación. Sin esos recibos, sólo queda la rotación horaria;
+no se puede garantizar continuidad entre ejecuciones o pérdidas de caché.
 El inicio manual permite comprobar 20 o 50 fuentes, incluso sin borrador completo.
 Esta comprobación vuelve a leer las fuentes y publica únicamente la proyección
 permitida; no solicita otra extracción a Gemini ni consume su cuota.
@@ -110,6 +112,19 @@ Ni la caché ni sus motivos por noticia se incluyen en el commit público. El to
 del publicador necesita escritura limitada al repositorio privado para persistir
 recibos de evaluación y presupuesto. La comprobación geográfica sigue sin llamar
 a Gemini; las llamadas pertenecen a la etapa separada de validación de fichas.
+
+El diagnóstico agregado distingue `checked_without_receipt`, `checked_retries`,
+`deferred_without_receipt` y `deferred_retries`. Los dos primeros suman
+`sources_checked`; los dos últimos suman `deferred`. Las esperas activas se cuentan
+en `negative_cached`, no como fuentes comprobadas ni como ubicaciones ausentes.
+Un recibo sin resultado acredita únicamente que las reglas no encontraron una
+mención publicable en esa lectura, no que el artículo carezca de lugares.
+
+El portal desglosa las noticias sin proyección ni ubicación revisada por estado de
+extracción: pendiente, generada, error, fuente inaccesible o sin confirmar. Una
+ficha pública parcial acredita extracción generada aunque el snapshot de
+procesamiento sea anterior. Un campo geográfico publicado no sustituye la
+comprobación independiente del mapa ni autoriza saltarse un bloqueo de privacidad.
 
 Una deploy key permite escribir únicamente en el repositorio público MDH-SV;
 GitHub no restringe esa clave por archivo. El workflow y las validaciones limitan
