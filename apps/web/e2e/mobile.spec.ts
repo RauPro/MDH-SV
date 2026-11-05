@@ -23,6 +23,11 @@ test.describe('mobile smoke', () => {
     await opener.click();
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
+    const evidence = dialog.locator('.dossier-evidence');
+    await expect(evidence).toBeVisible();
+    await expect(evidence.getByRole('link').first()).toBeVisible();
+    expect(await dialog.evaluate(element => element.scrollWidth - element.clientWidth)).toBeLessThanOrEqual(1);
+    expect(await evidence.evaluate(element => element.scrollWidth - element.clientWidth)).toBeLessThanOrEqual(1);
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();
     await expect(opener).toBeFocused();
