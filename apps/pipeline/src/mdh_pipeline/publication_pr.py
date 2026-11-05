@@ -514,11 +514,10 @@ def control(client, event):
             if attempt < 14:
                 time.sleep(2)
         raise PublicationError("branch_update_pending_rerun_controller")
-    if run["event"] == "workflow_dispatch":
-        wait_for_native_pr_ci(client, pr, branch, head, base)
-        require(ref_sha(client, branch) == head and ref_sha(client, "main") == base,
-                "publication_refs_changed_retry_required")
-        validate_pr(client.call("GET", api(f"pulls/{pr['number']}")), branch, head)
+    wait_for_native_pr_ci(client, pr, branch, head, base)
+    require(ref_sha(client, branch) == head and ref_sha(client, "main") == base,
+            "publication_refs_changed_retry_required")
+    validate_pr(client.call("GET", api(f"pulls/{pr['number']}")), branch, head)
     merged = client.call("PUT", api(f"pulls/{pr['number']}/merge"), {
         "sha": head, "merge_method": "squash", "commit_title": f"chore: update public {kind} snapshots",
     })
