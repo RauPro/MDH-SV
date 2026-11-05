@@ -97,7 +97,7 @@ export function summarizeUnlocatedNewsProcessing(items: readonly NewsTerritoryIt
     seen.add(item.reference.id);
     const status = newsProcessingFor(item.reference, processing, item.dossier);
     counts[status === 'automatically_published' || status === 'reviewed' ? 'generated' : status] += 1;
-    if (item.dossier.schema_version === 2 && ['department', 'municipality'].some(name => item.dossier.fields[name as 'department' | 'municipality'].status === 'reported')) counts.publishedGeography += 1;
+    if (item.dossier.schema_version === 2 && (['department', 'municipality'] as const).some(name => item.dossier.fields[name].status === 'reported')) counts.publishedGeography += 1;
   }
   return counts;
 }

@@ -338,6 +338,27 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   expect(within(sheet).queryByText('Dato no mencionado')).not.toBeInTheDocument();
 });
 
+it('explains generated and errored unlocated news without treating a published geographic field as a map location', async () => {
+  const dossier = automaticNewsDossier(fixture.records[0]);
+  dossier.fields.department = { status: 'reported', value: 'San Salvador', evidence_refs: ['source-p1'], note: null };
+  serve(fixture, { schema_version: 1, dossiers: [dossier] }, EMPTY_LOCATIONS, processingFixture([
+    processingEntry(fixture.records[0], 'pending'), processingEntry(fixture.records[1], 'generated'), processingEntry(fixture.records[2], 'error'),
+  ]));
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('2 con extracción generada; ubicación aún no disponible en el mapa.');
+  expect(screen.getByText('1 con error de extracción.')).toBeInTheDocument();
+  expect(screen.getByText(/Dentro de este grupo, 1 tienen departamento o municipio/)).toBeInTheDocument();
+  expect(screen.getByText(/Ninguna noticia tiene un departamento disponible/)).toBeInTheDocument();
+  expect(screen.queryByText(/pendientes de extracción\./)).not.toBeInTheDocument();
+});
+
+it('keeps extraction unknown when its public snapshot cannot be loaded', async () => {
+  vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: url !== '/archive/processing.json', json: async () => url === '/archive/dossiers.json' ? EMPTY : url === '/archive/locations.json' ? EMPTY_LOCATIONS : fixture })));
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('3 con estado de extracción sin confirmar.');
+  expect(screen.queryByText(/pendientes de extracción\./)).not.toBeInTheDocument();
+});
+
 it('filters news with reviewed locations independently of the map counts and keeps unlocated news available', async () => {
   const dossier = approved();
   dossier.classification.jurisdiction = 'SV';
