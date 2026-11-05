@@ -34,16 +34,39 @@
     },
     "2026-11": {
       "status": "partial",
-      "posts_scanned": 12,
-      "pages_fetched": 12,
+      "posts_scanned": 13,
+      "pages_fetched": 13,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-11-05T07:21:05.556237+00:00",
+      "last_attempt_at": "2026-11-05T20:15:20.902146+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "3c9030096d7100e7ff8845b6bdd3616412c296e243a9a2496093f768249ee340",
+      "title": "Cuatro homicidios fueron registrados en octubre 2026, según la PNC",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/cuatro-homicidios-fueron-registrados-en-octubre-2026-segun-la-pnc",
+      "published_date": "2026-11-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-05T20:15:20.902146+00:00"
+      }
+    },
     {
       "id": "d33d8a56c4382fa66eba0e14e9847df237c14127349c88f4fc19e9aca66255b9",
       "title": "Hombre que ofreció un falso alquiler de ranchos por $630 en playa San Blas fue condenado a cinco años de prisión",
@@ -1461,7 +1484,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-05T07:21:05.556237+00:00",
+    "last_attempt_at": "2026-11-05T20:15:20.902146+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -1525,9 +1548,10 @@
       "https://diario.elmundo.sv/nacionales/hombre-acusado-de-agredir-sexualmente-y-lesionar-a-una-mujer-en-santa-ana-seguira-en-prision",
       "https://diario.elmundo.sv/nacionales/hombre-que-ofrecio-un-falso-alquiler-de-ranchos-por-630-en-playa-san-blas-fue-condenado-a-cinco-anos-de-prision",
       "https://diario.elmundo.sv/nacionales/hombre-recibe-30-anos-de-carcel-tras-decomiso-de-cocaina-marihuana-y-un-arma-de-fuego",
-      "https://diario.elmundo.sv/nacionales/estados-unidos-extradita-a-procesado-por-el-feminicidio-de-fernanda-najera"
+      "https://diario.elmundo.sv/nacionales/estados-unidos-extradita-a-procesado-por-el-feminicidio-de-fernanda-najera",
+      "https://diario.elmundo.sv/nacionales/cuatro-homicidios-fueron-registrados-en-octubre-2026-segun-la-pnc"
     ],
-    "article_cursor": 58,
+    "article_cursor": 59,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1876,6 +1900,12 @@
         "published_date": "2026-10-29",
         "last_attempt_at": "2026-11-05T07:21:05.556237+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/cuatro-homicidios-fueron-registrados-en-octubre-2026-segun-la-pnc": {
+        "status": "selected",
+        "published_date": "2026-11-05",
+        "last_attempt_at": "2026-11-05T20:15:20.902146+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1884,10 +1914,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 6,
+        "article_urls_matching_anchor": 5,
         "article_urls_observed": 20,
-        "article_urls_selected": 6,
-        "last_attempt_at": "2026-11-05T07:21:05.556237+00:00"
+        "article_urls_selected": 5,
+        "last_attempt_at": "2026-11-05T20:15:20.902146+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -1896,7 +1926,7 @@
         "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
         "article_urls_selected": 3,
-        "last_attempt_at": "2026-11-05T07:21:05.556237+00:00"
+        "last_attempt_at": "2026-11-05T20:15:20.902146+00:00"
       }
     },
     "index_screen_version": 3
