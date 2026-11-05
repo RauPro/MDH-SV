@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-04T20:01:33.824017+00:00",
+  "generated_at": "2026-11-05T01:15:07.989633+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 16148,
-      "selected": 1944,
-      "evaluated": 4893,
-      "relevant": 1944,
-      "excluded": 593,
-      "uncertain": 2356,
-      "pending": 11255,
-      "evaluated_at": "2026-11-04T13:18:24.335502+00:00"
+      "selected": 1953,
+      "evaluated": 4894,
+      "relevant": 1953,
+      "excluded": 601,
+      "uncertain": 2340,
+      "pending": 11254,
+      "evaluated_at": "2026-11-05T01:15:05.060774+00:00"
     }
   },
   "paper": {
@@ -51,16 +51,16 @@
     "end_date": "2026-11-04",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1944,
+    "records": 1953,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1598,
+        "records": 1605,
         "first_published_date": "2014-01-02",
-        "last_published_date": "2026-10-17",
+        "last_published_date": "2026-10-31",
         "months": [
           {
             "month": "2010-01",
@@ -857,7 +857,7 @@
           {
             "month": "2015-07",
             "status": "enumerated",
-            "records": 35,
+            "records": 41,
             "screen_version": 3,
             "posts_scanned": 1116,
             "source_total_posts": 1116,
@@ -2477,7 +2477,7 @@
           {
             "month": "2026-10",
             "status": "enumerated",
-            "records": 10,
+            "records": 11,
             "screen_version": 3,
             "posts_scanned": 371,
             "source_total_posts": 371,
@@ -14761,7 +14761,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 231,
+        "records": 233,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15560,7 +15560,7 @@
           {
             "month": "2015-07",
             "status": "partial",
-            "records": 2,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 140,
             "source_total_posts": null,
@@ -20054,12 +20054,12 @@
         "month": "2015-07",
         "start_date": "2015-07-01",
         "end_date": "2015-07-31",
-        "records": 37,
+        "records": 45,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 35
+            "records": 41
           },
           {
             "source_id": "gatoencerrado",
@@ -20089,7 +20089,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 4
           }
         ]
       },
@@ -25859,12 +25859,12 @@
         "month": "2026-10",
         "start_date": "2026-10-01",
         "end_date": "2026-10-31",
-        "records": 11,
+        "records": 12,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 10
+            "records": 11
           },
           {
             "source_id": "gatoencerrado",
@@ -25944,6 +25944,50 @@
     ]
   },
   "records": [
+    {
+      "id": "f515a44babb24e223327a9aecd6a11f0544c0635aa706bec8ec70896f62651c2",
+      "title": "Madres por la Libertad piden justicia por los inocentes muertos dentro de los penales bajo régimen de excepción",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/madres-por-la-libertad-piden-justicia-por-los-inocentes-muertos-dentro-de-los-penales-bajo-regimen-de-excepcion/",
+      "published_date": "2026-10-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421464,
+        "retrieved_at": "2026-11-01T06:47:37.744502+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:11:57.642674-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c6f0383911b552d1fea7fb98849b986039c47c4e601712b4deefdbd6a2d19df6",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
     {
       "id": "b7c9bde89c551c34d2397b33c484650ba086b0288405a7664990300d92cce9d7",
       "title": "Ingrid Escobar denuncia ante la CIDH la muerte de su hermano en prisión",
@@ -78430,6 +78474,49 @@
       }
     },
     {
+      "id": "27a3f9a253377f7da2fd9cf552045a6f7ccf32541886dd487ac7d46e8dc1537f",
+      "title": "Madres e hijos indocumentados detenidos deberían ser liberados de inmediato",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/155385/madres-e-hijos-indocumentados-detenidos-deberian-ser-liberados-de-inmediato.html",
+      "published_date": "2015-07-25",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:09:09.551590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c0fef0b31200463548e85758e9dbe75b2e867251784894c87a8ade1f4bd15d1e",
+          "jurisdiction_paragraph_ids": [
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p7"
+          ]
+        }
+      }
+    },
+    {
       "id": "df18506d9d9f9ec367c099dbf0a01d7bdd1cb4cae77895920da01d83ce2c944a",
       "title": "Instalan audiencia contra militares por desaparición forzada",
       "title_truncated": false,
@@ -78469,6 +78556,58 @@
           "relevance_paragraph_ids": [
             "p3",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "561111a18fc7718d824e9f583519f75dbb50d96c746fba75080a1ba2aa0b5e92",
+      "title": "Autoridades de la embajada de Venezuela conmemoraron esta mañana, en un acto solemne, el 232 aniversario del natalicio del libertador Simón Bolívar, en el",
+      "title_truncated": true,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/autoridades-de-la-embajada-de-venezuela-conmemoraron-esta-manana-en-un-acto-solemne-el-232-aniversario-del-natalicio-del-libertador-simon-bolivar-en-el-que-participaron-miembros-del-cuerpo-diplomat/",
+      "published_date": "2015-07-24",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "bolivia",
+        "caracas",
+        "colombia",
+        "ecuador",
+        "maduro",
+        "panama",
+        "peru",
+        "venezolano",
+        "venezuela"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75156,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:09:09.551590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "491405d30ace96f1a213ac5249be41832ed3cedd45f2b47f224d910492935624",
+          "jurisdiction_paragraph_ids": [
+            "p23"
+          ],
+          "relevance_paragraph_ids": [
+            "p4"
           ]
         }
       }
@@ -78518,6 +78657,49 @@
       }
     },
     {
+      "id": "a7b87d8b0ba26a80ce8501b5bedff018789aeaa52445b1c712b0af167ee9cd83",
+      "title": "FAES reporta homicidio de un Cabo en Tacuba",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/faes-reporta-homicidio-de-un-cabo-en-tacuba/",
+      "published_date": "2015-07-22",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74889,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:09:09.551590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f2fecca2c00bc4da3f86827993e7cfd5df64edebeb0b6966b01995fb79fdd737",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "id": "0ade50f7884bb6be7cf4d619407a6d14f7e015734d8714520f4157287748932a",
       "title": "Sala de lo Constitucional ordena reinstalo de sindicalista de LIDO",
       "title_truncated": false,
@@ -78557,6 +78739,95 @@
             "p2",
             "p4",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "58ee9f8301bc84a2883e146b726affbe6fbf4833260b97be3399ece3b88b361f",
+      "title": "Prisión a exejecutivos por sus vínculos con la corrupción en la petrolera estatal Petrobras",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/155843/prision-a-exejecutivos-por-sus-vinculos-con-la-corrupcion-en-la-petrolera-estatal-petrobras.html",
+      "published_date": "2015-07-20",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T14:32:49.593964+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:09:09.551590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "381fa964976531e797d2111a253bb549305096dec7a5060f8da365ef61b6a409",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "be5ee9406e875f5587890d109fc87099b820b9d4e360b1e0df02afef2927bf26",
+      "title": "Condenados a 115 años de cárcel por homicidio de ciudadano estadounidense",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/condenados-a-115-anos-de-carcel-por-homicidio-de-ciudadano-estadounidense/",
+      "published_date": "2015-07-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "estadounidense"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74550,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:09:09.551590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a12945cbea8cfcb483815348f6af0e01aa476716160f802ea3fd71ab11d85da8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p6"
           ]
         }
       }
@@ -78646,6 +78917,49 @@
             "p2",
             "p3",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "e54a61725d04d7788d86417a98bdf2e637a787defc77a7ccc0bc72e58aca88d0",
+      "title": "Periodismo “chambroso”",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/periodismo-chambroso/",
+      "published_date": "2015-07-17",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74375,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:09:09.551590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d497ea7c25b529a491e93cb159384e68823cc35b435febd5b3d3448a4af7a27d",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3"
           ]
         }
       }
@@ -78781,6 +79095,92 @@
             "p2",
             "p3",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4896b41f8275a3635876aad8c88df490877caaed6a6741433be5369f62dc6ca0",
+      "title": "Juzgado decreta detención provisional contra imputados por ataque a PARLACEN",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-decreta-detencion-provisional-contra-imputados-por-ataque-a-parlacen/",
+      "published_date": "2015-07-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 74118,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:09:09.551590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "399a0811a6c3720992ea3ac8cd776ca5e27563a460f681841309b22abf8a6aa6",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "13c8cc527507a644920114fd1f2a63b61fd92fe4ff843b218b934a8862d08d99",
+      "title": "La rumorología versus periodismo serio",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/la-rumorologia-versus-periodismo-serio/",
+      "published_date": "2015-07-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 73966,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-04T19:09:09.551590-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "740f3cb3bbaa6317e65763b61e190aab3e31fa3a6c187598e2b5b20a49dedc65",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8"
           ]
         }
       }
@@ -83156,9 +83556,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:10:32.610098-06:00",
+        "classified_at": "2026-11-04T19:14:27.405134-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "e0b8ed792eb4e4478e6cc0cdc9168f12377c77073d18242dbd5b9a2023be06c4",
           "jurisdiction_paragraph_ids": [
@@ -83166,7 +83566,6 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
             "p5"
           ]
         }
@@ -83200,19 +83599,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:10:32.610098-06:00",
+        "classified_at": "2026-11-04T19:14:13.172819-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "54b33d3d00bee0ed46868240d5d680f71652b61ec808b1846dc380ae7e101e15",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p6",
-            "p9",
-            "p10"
+            "p2"
           ]
         }
       }
@@ -83296,18 +83692,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:10:32.610098-06:00",
+        "classified_at": "2026-11-04T19:13:55.996230-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "fdcafc90d0d8f4ea98a1226e62a19e0cfa700f6d7556366e1e9a3b1cc481521f",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p10"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p11"
+            "p3",
+            "p10"
           ]
         }
       }
@@ -83340,17 +83735,15 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:10:32.610098-06:00",
+        "classified_at": "2026-11-04T19:13:38.037426-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6a0c991515c2f6add1d310096afb80e10e81170c5030b3301731a396149bcf32",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
             "p7",
             "p8"
           ]
@@ -83385,18 +83778,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:10:32.610098-06:00",
+        "classified_at": "2026-11-04T19:13:21.425672-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b04419232333d9eea6bc6105e6af54f148029365d04e6f0d5af3db08c176e911",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4"
+            "p2",
+            "p3"
           ]
         }
       }
@@ -83476,18 +83868,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:10:32.610098-06:00",
+        "classified_at": "2026-11-04T19:12:50.861832-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9981ebaba339af318f3d207187e5691cb54e44b91816bec17fab24bb94d3258c",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ]
         }
       }
@@ -83565,19 +83955,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:10:32.610098-06:00",
+        "classified_at": "2026-11-04T19:12:17.887437-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b4529d252fd6066edf16a8178ce046319355b3f5551fb376125cb741eca7d2be",
           "jurisdiction_paragraph_ids": [
             "p2",
-            "p3",
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p5",
-            "p11"
+            "p5"
           ]
         }
       }
