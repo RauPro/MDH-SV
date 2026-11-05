@@ -1,5 +1,6 @@
 import { newsDossierFor, type NewsDossier } from '../../../../shared/news-dossier.mjs';
 import { newsLocationFor, type NewsLocation } from '../../../../shared/news-location.mjs';
+import { newsProcessingFor, type NewsProcessingEntry, type NewsProcessingEntryStatus } from '../../../../shared/news-processing.mjs';
 import type { NewsReference } from '../newsArchive';
 import { DEPARTMENTS } from './elSalvador';
 import { UNKNOWN_DEPARTMENT } from './territory';
@@ -84,4 +85,20 @@ export function matchesNewsTerritory(item: NewsTerritoryItem, selected: string) 
   if (!selected) return true;
   if (selected === UNKNOWN_DEPARTMENT) return item.departments.length === 0;
   return item.departments.includes(selected);
+}
+
+export function summarizeUnlocatedNewsProcessing(items: readonly NewsTerritoryItem[], processing?: Map<string, NewsProcessingEntry>) {
+  const counts: Record<NewsProcessingEntryStatus, number> & { publishedGeography: number } = {
+    pending: 0, generated: 0, source_unavailable: 0, error: 0, unknown: 0, publishedGeography: 0,
+  };
+  const seen = new Set<string>();
+  for (const item of items) {
+    if (item.reason === 'located' || seen.has(item.reference.id)) continue;
+    seen.add(item.reference.id);
+    if (item.dossier.schema_version === 2 && (['department', 'municipality'] as const).some(name => item.dossier.fields[name].status === 'reported')) counts.publishedGeography += 1;
+    if (item.reason !== 'pending_review') continue;
+    const status = newsProcessingFor(item.reference, processing, item.dossier);
+    counts[status === 'automatically_published' || status === 'reviewed' ? 'generated' : status] += 1;
+  }
+  return counts;
 }

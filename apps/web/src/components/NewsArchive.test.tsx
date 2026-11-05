@@ -325,7 +325,8 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   expect(screen.queryByLabelText('Vínculo territorial')).not.toBeInTheDocument();
   expect(screen.getAllByRole('article')).toHaveLength(3);
   expect(screen.getByText(/Ninguna noticia tiene un departamento disponible/)).toBeInTheDocument();
-  expect(screen.getByText('3 sin ubicación automática disponible ni ubicación revisada.')).toBeInTheDocument();
+  expect(screen.getByText('3 sin ubicación automática disponible ni ubicación revisada:')).toBeInTheDocument();
+  expect(screen.getByText('3 pendientes de extracción.')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   expect(screen.queryByText('Ver cobertura por medio y mes')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: /Sin ubicación pública en El Salvador/ }));
@@ -335,6 +336,43 @@ it('lists every territorial scope in Fichas de noticias and keeps all pending sh
   expect(within(sheet).getAllByRole('definition')).toHaveLength(21);
   expect(within(sheet).getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(18);
   expect(within(sheet).queryByText('Dato no mencionado')).not.toBeInTheDocument();
+});
+
+it('explains generated and errored unlocated news without treating a published geographic field as a map location', async () => {
+  const dossier = automaticNewsDossier(fixture.records[0]);
+  dossier.fields.department = { status: 'reported', value: 'San Salvador', evidence_refs: ['source-p1'], note: null };
+  serve(fixture, { schema_version: 1, dossiers: [dossier] }, EMPTY_LOCATIONS, processingFixture([
+    processingEntry(fixture.records[0], 'pending'), processingEntry(fixture.records[1], 'generated'), processingEntry(fixture.records[2], 'error'),
+  ]));
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('2 con extracción generada; ubicación aún no disponible en el mapa.');
+  expect(screen.getByText('1 con error de extracción.')).toBeInTheDocument();
+  expect(screen.getByText(/Dentro de este grupo, 1 tienen departamento o municipio/)).toBeInTheDocument();
+  expect(screen.getByText(/Ninguna noticia tiene un departamento disponible/)).toBeInTheDocument();
+  expect(screen.queryByText(/pendientes de extracción\./)).not.toBeInTheDocument();
+});
+
+it('keeps extraction unknown when its public snapshot cannot be loaded', async () => {
+  vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: url !== '/archive/processing.json', json: async () => url === '/archive/dossiers.json' ? EMPTY : url === '/archive/locations.json' ? EMPTY_LOCATIONS : fixture })));
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText('3 con estado de extracción sin confirmar.');
+  expect(screen.queryByText(/pendientes de extracción\./)).not.toBeInTheDocument();
+});
+
+it('shows published geography for a sole privacy-blocked news item without counting it as extraction backlog or locating it', async () => {
+  const archive = structuredClone(fixture);
+  archive.records = archive.records.slice(0, 1);
+  recountArchive(archive);
+  const dossier = automaticNewsDossier(archive.records[0]);
+  dossier.fields.department = { status: 'withheld', value: null, evidence_refs: [], note: 'Departamento protegido por privacidad.' };
+  dossier.fields.municipality = { status: 'reported', value: 'San Salvador', evidence_refs: ['source-p1'], note: null };
+  serve(archive, { schema_version: 1, dossiers: [dossier] }, { ...EMPTY_LOCATIONS, locations: [automatic(archive.records[0])] }, processingFixture([processingEntry(archive.records[0], 'generated')]));
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  await screen.findByText(/Dentro de este grupo, 1 tienen departamento o municipio/);
+  expect(screen.getByText('1 sin departamento documentado públicamente.')).toBeInTheDocument();
+  expect(screen.queryByText(/con extracción generada; ubicación aún no disponible en el mapa/)).not.toBeInTheDocument();
+  expect(screen.queryByText('Ubicación automática · Sin revisar')).not.toBeInTheDocument();
+  expect(screen.getByText(/Ninguna noticia tiene un departamento disponible/)).toBeInTheDocument();
 });
 
 it('filters news with reviewed locations independently of the map counts and keeps unlocated news available', async () => {

@@ -7,7 +7,7 @@ import { Dialog } from './Dialog';
 import { NewsDossier } from './NewsDossier';
 import { SalvadorMap } from './SalvadorMap';
 import { NewsClassificationProgress } from './NewsClassificationProgress';
-import { buildNewsTerritoryItems, matchesNewsTerritory, newsTerritoryItem, summarizeNewsTerritory } from '../geography/newsTerritory';
+import { buildNewsTerritoryItems, matchesNewsTerritory, newsTerritoryItem, summarizeNewsTerritory, summarizeUnlocatedNewsProcessing } from '../geography/newsTerritory';
 import { UNKNOWN_DEPARTMENT } from '../geography/territory';
 import { newsDossierFor, parsePublishedNewsDossiers, type NewsDossier as Dossier } from '../../../../shared/news-dossier.mjs';
 import { parsePublishedNewsLocations, validateLocationBindings, type NewsLocation } from '../../../../shared/news-location.mjs';
@@ -106,6 +106,7 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
   const territoryItems = useMemo(() => isMonitor ? buildNewsTerritoryItems(matchingReferences, dossiers, usableLocations) : [], [isMonitor, matchingReferences, dossiers, usableLocations]);
   const layerItems = useMemo(() => locationLayer === 'all' ? territoryItems : territoryItems.filter(item => item.locationKind === locationLayer), [locationLayer, territoryItems]);
   const territorySummary = useMemo(() => summarizeNewsTerritory(layerItems), [layerItems]);
+  const unlocatedProcessing = useMemo(() => summarizeUnlocatedNewsProcessing(layerItems, processingState === 'ready' ? processing : undefined), [layerItems, processing, processingState]);
   const filtered = useMemo(() => isMonitor && mapAvailable ? layerItems.filter(item => matchesNewsTerritory(item, department)).map(item => item.reference) : matchingReferences, [department, isMonitor, mapAvailable, matchingReferences, layerItems]);
   const topics = [...new Set(archive?.records.flatMap(record => record.topics) ?? [])].sort((a, b) => topicLabel(a).localeCompare(topicLabel(b), 'es'));
   const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
@@ -162,11 +163,18 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
       <p className="filter-note">Una misma noticia puede aparecer en varios departamentos. El total cuenta noticias únicas; las menciones departamentales no se suman como casos.</p>
       {!invalidDates && mapAvailable && matchingReferences.length > 0 && territorySummary.located === 0 && <p className="notice news-map-pending">Ninguna noticia tiene un departamento disponible en la capa seleccionada. Puedes consultar todas las noticias al restablecer los filtros; una ubicación pendiente no implica ausencia de hechos.</p>}
       {!invalidDates && mapAvailable && territorySummary.unlocated > 0 && <div className="news-map-reasons"><p>Noticias sin ubicación publicable en este mapa:</p><ul>
-        {territorySummary.reasons.pending_review > 0 && <li>{territorySummary.reasons.pending_review} sin ubicación automática disponible ni ubicación revisada.</li>}
+        {territorySummary.reasons.pending_review > 0 && <li>{territorySummary.reasons.pending_review} sin ubicación automática disponible ni ubicación revisada:<ul>
+          {unlocatedProcessing.pending > 0 && <li>{unlocatedProcessing.pending} pendientes de extracción.</li>}
+          {unlocatedProcessing.generated > 0 && <li>{unlocatedProcessing.generated} con extracción generada; ubicación aún no disponible en el mapa.</li>}
+          {unlocatedProcessing.error > 0 && <li>{unlocatedProcessing.error} con error de extracción.</li>}
+          {unlocatedProcessing.source_unavailable > 0 && <li>{unlocatedProcessing.source_unavailable} con fuente no accesible para extracción.</li>}
+          {unlocatedProcessing.unknown > 0 && <li>{unlocatedProcessing.unknown} con estado de extracción sin confirmar.</li>}
+        </ul></li>}
         {territorySummary.reasons.jurisdiction_unknown > 0 && <li>{territorySummary.reasons.jurisdiction_unknown} con jurisdicción por determinar.</li>}
         {territorySummary.reasons.outside_el_salvador > 0 && <li>{territorySummary.reasons.outside_el_salvador} fuera de El Salvador.</li>}
         {territorySummary.reasons.department_unknown > 0 && <li>{territorySummary.reasons.department_unknown} sin departamento documentado públicamente.</li>}
-      </ul></div>}
+      </ul><p>La extracción de la ficha y la comprobación geográfica son procesos separados. No aparecer en el mapa no significa que la fuente no mencione lugares.</p>
+      {unlocatedProcessing.publishedGeography > 0 && <p>Dentro de este grupo, {unlocatedProcessing.publishedGeography} tienen departamento o municipio reportado en una ficha automática. Estos campos no autorizan por sí solos su incorporación al mapa ni anulan restricciones de privacidad o jurisdicción. La comprobación geográfica es independiente y no equivale a revisión humana.</p>}</div>}
       {department && mapAvailable && <p className="filter-note" role="status">Filtro del mapa: {department === UNKNOWN_DEPARTMENT ? 'sin ubicación pública en El Salvador' : department}.</p>}
     </>}
     <div className="results-heading archive-results" ref={resultsRef} tabIndex={-1} aria-label="Resultados de noticias"><span role="status">{filtered.length} {filtered.length === 1 ? 'noticia seleccionada' : 'noticias seleccionadas'}</span><span>Más recientes primero · por fecha de publicación</span></div>

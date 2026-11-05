@@ -238,6 +238,31 @@ def test_hourly_rotation_reaches_every_uncached_candidate_despite_persistent_old
     assert visited == {r["id"] for r, _, _ in samples}
 
 
+def test_sparse_runs_check_unattempted_sources_before_expired_negative_receipts():
+    samples = [sample(number, paragraph="El tribunal presentó un informe.") for number in range(1, 9)]
+    articles = {r["source_url"]: article for r, _, article in samples}
+    visited = []
+    cache = {"schema_version": 1, "entries": []}
+    def fetch(reference):
+        visited.append(reference["id"])
+        return articles[reference["source_url"]]
+    for run in range(4):
+        snapshot, stats = project_automatic_locations([draft for _, draft, _ in samples],
+            {"schema_version": 1, "records": [r for r, _, _ in samples]},
+            limit=2, fetch=fetch, negative_cache=cache, now=NOW + timedelta(hours=12 * run))
+        assert snapshot["locations"] == [] and stats["sources_checked"] == 2
+        assert stats["checked_without_receipt"] == 2
+        assert stats["checked_retries"] == 0
+        assert stats["deferred_without_receipt"] == 6 - run * 2
+    assert len(set(visited)) == len(samples)
+    assert len(cache["entries"]) == len(samples)
+    _, stats = project_automatic_locations([draft for _, draft, _ in samples],
+        {"schema_version": 1, "records": [r for r, _, _ in samples]},
+        limit=2, fetch=fetch, negative_cache=cache, now=NOW + timedelta(days=3))
+    assert stats["checked_retries"] == 2 and stats["checked_without_receipt"] == 0
+    assert visited[-2:] == visited[:2]
+
+
 def test_three_hourly_batches_cover_46_candidates_including_late_success_and_cached_positives():
     samples = [sample(number, paragraph="El tribunal de San Salvador presentó un informe.") for number in range(1, 47)]
     ordered = sorted(samples, key=lambda triple: (triple[0]["published_date"], triple[0]["id"]))
