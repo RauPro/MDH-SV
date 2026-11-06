@@ -34,16 +34,65 @@
     },
     "2026-11": {
       "status": "partial",
-      "posts_scanned": 13,
-      "pages_fetched": 13,
+      "posts_scanned": 15,
+      "pages_fetched": 15,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-11-05T20:15:20.902146+00:00",
+      "last_attempt_at": "2026-11-06T07:21:16.195453+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "84dababbd35f8fd4f182f830f670d89a859127340baddd19abc74b275610bd77",
+      "title": "Dan 45 años de prisión a hombre por asesinato en la colonia San Luis",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/dan-45-anos-de-prision-a-hombre-por-asesinato-en-la-colonia-san-luis",
+      "published_date": "2026-11-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-06T07:21:16.195453+00:00"
+      }
+    },
+    {
+      "id": "5dba5acf2f25962257b7bc63e88e68b670d098fb5349f29e6291aa5b595b1f39",
+      "title": "Cuatro mujeres reciben hasta 20 años de cárcel por tráfico de drogas en Usulután",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/cuatro-mujeres-reciben-hasta-20-anos-de-carcel-por-trafico-de-drogas-en-usulutan",
+      "published_date": "2026-11-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "usulutan"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-06T07:21:16.195453+00:00"
+      }
+    },
     {
       "id": "3c9030096d7100e7ff8845b6bdd3616412c296e243a9a2496093f768249ee340",
       "title": "Cuatro homicidios fueron registrados en octubre 2026, según la PNC",
@@ -1484,7 +1533,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-05T20:15:20.902146+00:00",
+    "last_attempt_at": "2026-11-06T07:21:16.195453+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -1549,9 +1598,11 @@
       "https://diario.elmundo.sv/nacionales/hombre-que-ofrecio-un-falso-alquiler-de-ranchos-por-630-en-playa-san-blas-fue-condenado-a-cinco-anos-de-prision",
       "https://diario.elmundo.sv/nacionales/hombre-recibe-30-anos-de-carcel-tras-decomiso-de-cocaina-marihuana-y-un-arma-de-fuego",
       "https://diario.elmundo.sv/nacionales/estados-unidos-extradita-a-procesado-por-el-feminicidio-de-fernanda-najera",
-      "https://diario.elmundo.sv/nacionales/cuatro-homicidios-fueron-registrados-en-octubre-2026-segun-la-pnc"
+      "https://diario.elmundo.sv/nacionales/cuatro-homicidios-fueron-registrados-en-octubre-2026-segun-la-pnc",
+      "https://diario.elmundo.sv/nacionales/cuatro-mujeres-reciben-hasta-20-anos-de-carcel-por-trafico-de-drogas-en-usulutan",
+      "https://diario.elmundo.sv/nacionales/dan-45-anos-de-prision-a-hombre-por-asesinato-en-la-colonia-san-luis"
     ],
-    "article_cursor": 59,
+    "article_cursor": 61,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -1906,6 +1957,18 @@
         "published_date": "2026-11-05",
         "last_attempt_at": "2026-11-05T20:15:20.902146+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/cuatro-mujeres-reciben-hasta-20-anos-de-carcel-por-trafico-de-drogas-en-usulutan": {
+        "status": "selected",
+        "published_date": "2026-11-05",
+        "last_attempt_at": "2026-11-06T07:21:16.195453+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/dan-45-anos-de-prision-a-hombre-por-asesinato-en-la-colonia-san-luis": {
+        "status": "selected",
+        "published_date": "2026-11-05",
+        "last_attempt_at": "2026-11-06T07:21:16.195453+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -1917,16 +1980,16 @@
         "article_urls_matching_anchor": 5,
         "article_urls_observed": 20,
         "article_urls_selected": 5,
-        "last_attempt_at": "2026-11-05T20:15:20.902146+00:00"
+        "last_attempt_at": "2026-11-06T07:21:16.195453+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 3,
+        "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-11-05T20:15:20.902146+00:00"
+        "article_urls_selected": 1,
+        "last_attempt_at": "2026-11-06T07:21:16.195453+00:00"
       }
     },
     "index_screen_version": 3
