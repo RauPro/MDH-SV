@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T20:15:50.224309+00:00",
+  "generated_at": "2026-11-06T01:18:55.590172+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 16421,
-      "selected": 1953,
-      "evaluated": 4894,
-      "relevant": 1953,
+      "selected": 1956,
+      "evaluated": 4895,
+      "relevant": 1956,
       "excluded": 601,
-      "uncertain": 2340,
-      "pending": 11527,
-      "evaluated_at": "2026-11-05T13:14:23.989812+00:00"
+      "uncertain": 2338,
+      "pending": 11526,
+      "evaluated_at": "2026-11-06T01:18:51.458740+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-11-05",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1953,
+    "records": 1956,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1605,
+        "records": 1608,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-10-31",
         "months": [
@@ -857,7 +857,7 @@
           {
             "month": "2015-07",
             "status": "enumerated",
-            "records": 41,
+            "records": 43,
             "screen_version": 3,
             "posts_scanned": 1116,
             "source_total_posts": 1116,
@@ -2477,7 +2477,7 @@
           {
             "month": "2026-10",
             "status": "enumerated",
-            "records": 11,
+            "records": 12,
             "screen_version": 3,
             "posts_scanned": 371,
             "source_total_posts": 371,
@@ -20054,12 +20054,12 @@
         "month": "2015-07",
         "start_date": "2015-07-01",
         "end_date": "2015-07-31",
-        "records": 45,
+        "records": 47,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 41
+            "records": 43
           },
           {
             "source_id": "gatoencerrado",
@@ -25859,12 +25859,12 @@
         "month": "2026-10",
         "start_date": "2026-10-01",
         "end_date": "2026-10-31",
-        "records": 12,
+        "records": 13,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 11
+            "records": 12
           },
           {
             "source_id": "gatoencerrado",
@@ -25984,6 +25984,51 @@
             "p2",
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "279f385145be2d2c86f10f6d6dcc6a4c5c1754d1e3f92fe8d19fcf453373fb83",
+      "title": "MOVIR inicia recolección de arraigos de inocentes detenidos en el régimen de excepción",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/movir-inicia-recoleccion-de-arraigos-de-inocentes-detenidos-en-el-regimen-de-excepcion/",
+      "published_date": "2026-10-31",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "movir"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421438,
+        "retrieved_at": "2026-10-31T13:01:00.345230+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-05T19:14:10.731696-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e83c922e9c0e09dddef247142ab9b8f85597109817f970dacf5c80175531d994",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3"
           ]
         }
       }
@@ -78232,6 +78277,95 @@
       }
     },
     {
+      "id": "4b806bae0c7cac1ac17c30ee7c6188ffbab0aa6532d1da68bf3d1a309c7ca91a",
+      "title": "FGR reporta captura de pandillero vinculado en boicot al transporte",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-reporta-captura-de-pandillero-vinculado-en-boicot-al-transporte/",
+      "published_date": "2015-07-29",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75546,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-05T19:10:31.938232-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d64d07b2970ecf537046084bb9f1dc57e3cbfab7534c3792b58ed42e796ea557",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "963bc9199369569544a96d445567cbfc29499d649692aef6c9e1c5c3e4455950",
+      "title": "Delincuentes capturados en operativo policial",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/delincuentes-capturados-en-operativo-policial/",
+      "published_date": "2015-07-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 75481,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-05T19:10:31.938232-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a81ee726b41cc70e438453c989c62093723d3323d5e87166a586279fcbd1e0b0",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "id": "85f7e5f3f6c3edd8f70c41be2f2ae9e816f0ed83cca5f23f87a20ae35a3a01d8",
       "title": "Salvadoreþa pide cierre de centros de detenciµn familiar en EE.UU.",
       "title_truncated": false,
@@ -83145,19 +83279,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:11:41.293289-06:00",
+        "classified_at": "2026-11-05T19:17:48.422580-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c9efbcd43fff9bb0fb7b0dff914818dce4fb95bc527888ce4cfd688a49df2dd2",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p6",
-            "p8"
+            "p2"
           ]
         }
       }
@@ -83290,9 +83421,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:11:41.293289-06:00",
+        "classified_at": "2026-11-05T19:16:41.514041-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b3003c516e0c0a3c1aeda028f27147eee05728240eea8963dda84984983e282c",
           "jurisdiction_paragraph_ids": [
@@ -83332,16 +83463,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:11:41.293289-06:00",
+        "classified_at": "2026-11-05T19:16:17.198244-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "7ccb38770750f8ab2bee98925b76180a630ce6d56a00ef98f241bc2b8af42bc5",
           "jurisdiction_paragraph_ids": [
-            "p1"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p1"
+            "p2"
           ]
         }
       }
@@ -83375,20 +83506,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:11:41.293289-06:00",
+        "classified_at": "2026-11-05T19:15:54.563086-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "c3c0ba622844d820a0b67bebe54be6ddbcd703b98876e2b976936a31f705ae0c",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p5"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4",
-            "p5",
-            "p6"
+            "p3"
           ]
         }
       }
@@ -83421,9 +83548,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:11:41.293289-06:00",
+        "classified_at": "2026-11-05T19:15:23.267840-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a183c128d8474e161a81be89d5e87ec4351aa74e7cecd2c9ff0cacde45f542a3",
           "jurisdiction_paragraph_ids": [
@@ -83432,8 +83559,7 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3",
-            "p4",
-            "p9"
+            "p4"
           ]
         }
       }
@@ -83466,9 +83592,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:11:41.293289-06:00",
+        "classified_at": "2026-11-05T19:15:00.695546-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "877df319cf298167936650350ad3146e804d6c4921b401a3a8287db62fd464b9",
           "jurisdiction_paragraph_ids": [
@@ -83476,9 +83602,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p9"
+            "p3"
           ]
         }
       }
@@ -83511,9 +83635,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:11:41.293289-06:00",
+        "classified_at": "2026-11-05T19:14:36.060128-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "75a61a55ef1bb36ac9eec8dfe45c4120c41b5fa8ace3bd9eb1258ea9120a504b",
           "jurisdiction_paragraph_ids": [
@@ -83521,8 +83645,6 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
             "p5"
           ]
         }
