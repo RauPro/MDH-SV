@@ -39,6 +39,7 @@ it('never substitutes zero for unavailable official departments or mixes news fa
   expect(department).toHaveTextContent('Reportes individuales: 2');
   expect(department).not.toBeDisabled();
   expect(screen.getByText(/No se reparte el total nacional/)).toBeInTheDocument();
+  expect(screen.getByTestId('map-region-SVSO').querySelector('.map-count')).toHaveTextContent('S/D');
 });
 
 it('keeps unknown report loads distinct from empty counts and retains news when official loading fails', () => {
@@ -48,6 +49,36 @@ it('keeps unknown report loads distinct from empty counts and retains news when 
   expect(department).toHaveTextContent('Reportes individuales: —');
   expect(department).toHaveTextContent('Oficial: —');
   expect(department).not.toBeDisabled();
+  const region = screen.getByTestId('map-region-SVSO');
+  expect(region.querySelector('.map-count')).toHaveTextContent('3');
+  expect(region).toHaveClass('map-level-4');
+  expect(region).not.toHaveClass('official-layer');
+  expect(screen.getByText(/Cifras y relleno del mapa:/)).toHaveTextContent('noticias');
+  expect(screen.queryByText(/Relleno azul:/)).not.toBeInTheDocument();
+});
+
+it.each([false, true])('uses loaded reports while news is unavailable (invalid dates: %s)', async invalidDates => {
+  render(<SalvadorMap {...props} available={false} invalidDates={invalidDates} layers={layers}/>);
+  await userEvent.click(screen.getByRole('checkbox', { name: 'Homicidios oficiales' }));
+  const region = screen.getByTestId('map-region-SVSO');
+  expect(region.querySelector('.map-count')).toHaveTextContent('2');
+  expect(region).toHaveClass('report-layer', 'map-level-4');
+  expect(screen.getByText(/Cifras y relleno del mapa:/)).toHaveTextContent('reportes individuales');
+  expect(screen.queryByText('Ubicaciones revisadas')).not.toBeInTheDocument();
+  await userEvent.click(screen.getByRole('checkbox', { name: 'Reportes documentados' }));
+  expect(region.querySelector('.map-count')).toHaveTextContent('—');
+  expect(screen.getByRole('button', { name: /^Sonsonate/ })).toBeDisabled();
+  expect(screen.getByText(/Cifras y relleno del mapa:/)).toHaveTextContent('ninguna capa');
+});
+
+it('restores official precedence and preserves a recorded zero after statistics recover', () => {
+  const { rerender } = render(<SalvadorMap {...props} layers={{ ...layers, official: null }}/>);
+  expect(screen.getByTestId('map-region-SVSO').querySelector('.map-count')).toHaveTextContent('3');
+  rerender(<SalvadorMap {...props} layers={layers}/>);
+  const region = screen.getByTestId('map-region-SVSO');
+  expect(region.querySelector('.map-count')).toHaveTextContent('0');
+  expect(region).toHaveClass('official-layer', 'map-level-0');
+  expect(screen.getByText(/Cifras y relleno del mapa:/)).toHaveTextContent('capa oficial de 2010');
 });
 
 it('labels the news map separately and keeps unlocated news discoverable by keyboard', async () => {

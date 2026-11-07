@@ -42,14 +42,13 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
   const selectedOfficial = official?.period.departments.find(row => row.department === selected);
   const officialCounts = Object.fromEntries(official?.period.departments.map(row => [row.department, row.value]) ?? []);
   const officialValue = (department: string) => !official ? '—' : officialCounts[department] === null || officialCounts[department] === undefined ? 'Sin datos' : officialCounts[department]!.toLocaleString('es-SV');
-  const unavailable = layers
-    ? !((primaryVisible && !primaryUnavailable) || (officialVisible && official) || (reportsVisible && layers.reports.available))
-    : primaryUnavailable;
-  const fillCounts = officialVisible ? officialCounts : primaryVisible ? (primaryUnavailable ? {} : counts) : reportsVisible && layers?.reports.available ? layers.reports.counts : {};
+  const fillLayer = officialVisible && official ? 'official' : primaryVisible && !primaryUnavailable ? 'primary' : reportsVisible && layers?.reports.available ? 'reports' : null;
+  const unavailable = fillLayer === null;
+  const fillCounts = fillLayer === 'official' ? officialCounts : fillLayer === 'primary' ? counts : fillLayer === 'reports' ? layers!.reports.counts : {};
   const max = Math.max(1, ...Object.values(fillCounts).filter((value): value is number => typeof value === 'number'));
-  const mapValue = (department: string) => officialVisible ? officialValue(department)
-    : primaryVisible ? primaryUnavailable ? '—' : counts[department] ?? 0
-      : reportsVisible && layers?.reports.available ? layers.reports.counts[department] ?? 0 : '—';
+  const mapValue = (department: string) => fillLayer === 'official' ? officialValue(department)
+    : fillLayer === 'primary' ? counts[department] ?? 0
+      : fillLayer === 'reports' ? layers!.reports.counts[department] ?? 0 : '—';
   const toggle = (layer: keyof typeof enabled) => setEnabled(value => ({ ...value, [layer]: !value[layer] }));
   const choose = (department: string) => { if (!unavailable) onSelect(selected === department ? '' : department); };
   return <section className="territory-map" aria-labelledby="map-title">
@@ -74,7 +73,7 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
       </div>}
       {reportsVisible && <p className="map-scope">Reportes documentados: {layers.reports.available ? `${layers.reports.located} individuales con departamento y ${layers.reports.unlocated} sin departamento` : 'datos no disponibles'}. Catálogo completo, sin aplicar el año oficial ni los filtros de noticias. <a href="#reportes">Consultar sus fichas</a>.</p>}
       {!enabled.news && !enabled.reports && !enabled.official && <p role="status">Activa al menos una capa para consultar el mapa.</p>}
-      <p className="map-scope">Cifras y relleno del mapa: {officialVisible ? `capa oficial${official ? ` de ${official.period.year}` : ''}` : primaryVisible ? 'noticias' : reportsVisible ? 'reportes individuales' : 'ninguna capa'}. Los símbolos sólo indican presencia de las otras capas; sus cantidades se muestran por separado en los botones.</p>
+      <p className="map-scope">Cifras y relleno del mapa: {fillLayer === 'official' ? `capa oficial de ${official!.period.year}` : fillLayer === 'primary' ? 'noticias' : fillLayer === 'reports' ? 'reportes individuales' : 'ninguna capa disponible'}. Los símbolos sólo indican presencia de las otras capas; sus cantidades se muestran por separado en los botones.</p>
     </>}
     <p className="map-scope">{isNews ? 'El mapa distingue departamentos con revisión humana y menciones extraídas automáticamente, sin revisar. Pueden ser referencias secundarias del artículo; no confirman el lugar de una violación. Los recuentos respetan los filtros; las fechas corresponden a la publicación.' : 'Los recuentos respetan la búsqueda, la temática y las fechas. No incluyen reportes colectivos ni informes.'}</p>
     <div className="map-layout">
@@ -84,7 +83,7 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
           const count = fillCounts[dept.name] ?? 0;
           const level = count ? Math.min(4, Math.ceil(count / max * 4)) : 0;
           return <g key={dept.id} data-testid={`map-region-${dept.id}`}
-            className={`map-region map-level-${level}${selected === dept.name ? ' selected' : ''}${hovered === dept.name ? ' hovered' : ''}${unavailable ? ' unavailable' : ''}${isNews && primaryVisible && automaticCounts[dept.name] ? (reviewedCounts[dept.name] ? ' mixed-location' : ' automatic-location') : ''}${officialVisible ? ` official-layer${officialCounts[dept.name] == null ? ' official-missing' : ''}` : ''}${reportsVisible && !primaryVisible && !officialVisible ? ' report-layer' : ''}`}
+            className={`map-region map-level-${level}${selected === dept.name ? ' selected' : ''}${hovered === dept.name ? ' hovered' : ''}${unavailable ? ' unavailable' : ''}${isNews && fillLayer === 'primary' && automaticCounts[dept.name] ? (reviewedCounts[dept.name] ? ' mixed-location' : ' automatic-location') : ''}${fillLayer === 'official' ? ` official-layer${officialCounts[dept.name] == null ? ' official-missing' : ''}` : ''}${fillLayer === 'reports' ? ' report-layer' : ''}`}
             onMouseEnter={() => setHovered(dept.name)} onClick={() => choose(dept.name)}>
             <title>{dept.name}: {layers ? `${primaryVisible ? `Noticias: ${primaryUnavailable ? '—' : counts[dept.name] ?? 0}. ` : ''}${reportsVisible ? `Reportes individuales: ${layers.reports.available ? layers.reports.counts[dept.name] ?? 0 : '—'}. ` : ''}${officialVisible ? `Oficial${official ? ` ${official.period.year}` : ''}: ${officialValue(dept.name)}` : ''}` : invalidDates ? 'rango de fechas inválido' : !available ? 'ubicaciones pendientes de comprobar' : countLabel(count)}</title>
             <path d={dept.d}/>
@@ -111,8 +110,8 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
         </button>)}
       </div>
     </div>
-    {layers && <div className="map-legend">{officialVisible && <span><i className="map-key official"/>Relleno azul: agregado oficial; intensidad relativa en el año</span>}{primaryVisible && <span><i className="map-key news-marker"/>Círculo: noticias con departamento disponible</span>}{reportsVisible && <span><i className="map-key report-marker"/>Cuadrado: reportes individuales</span>}<span>S/D: sin datos · —: no disponible · 0: cero registrado en la capa</span></div>}
-    {primaryVisible && !officialVisible && <div className="map-legend">{available ? <span><i className="map-key map-key-empty"/> 0 en esta consulta</span> : <span>— Ubicaciones pendientes de comprobar</span>}<span><i className="map-key filled"/> {isNews ? 'Ubicaciones revisadas' : 'Con reportes'}</span>{isNews && <><span><i className="map-key automatic"/> Automáticas sin revisar</span><span><i className="map-key mixed"/> Ambas capas</span></>}<span><i className="map-key selected"/> Seleccionado</span></div>}
+    {layers && <div className="map-legend">{fillLayer === 'official' && <span><i className="map-key official"/>Relleno azul: agregado oficial; intensidad relativa en el año</span>}{primaryVisible && <span><i className="map-key news-marker"/>Círculo: noticias con departamento disponible</span>}{reportsVisible && <span><i className="map-key report-marker"/>Cuadrado: reportes individuales</span>}<span>S/D: sin datos · —: no disponible · 0: cero registrado en la capa</span></div>}
+    {(fillLayer === 'primary' || (!layers && primaryVisible)) && <div className="map-legend">{available ? <span><i className="map-key map-key-empty"/> 0 en esta consulta</span> : <span>— Ubicaciones pendientes de comprobar</span>}<span><i className="map-key filled"/> {isNews ? 'Ubicaciones revisadas' : 'Con reportes'}</span>{isNews && <><span><i className="map-key automatic"/> Automáticas sin revisar</span><span><i className="map-key mixed"/> Ambas capas</span></>}<span><i className="map-key selected"/> Seleccionado</span></div>}
     {primaryVisible && <div className="map-summary" aria-live="polite">
       {invalidDates ? <p>Corrige el rango de fechas para consultar los recuentos del mapa.</p> : !available ? <p role="status">{loading ? 'Comprobando las ubicaciones del mapa…' : 'Recuentos del mapa no disponibles. Las noticias siguen consultables en la lista.'}</p> : <p><strong>{located}</strong> {isNews ? (located === 1 ? 'noticia con departamento disponible' : 'noticias con departamento disponible') : (located === 1 ? 'reporte con departamento documentado' : 'reportes con departamento documentado')}</p>}
       {isNews && available && !invalidDates && <p className="map-review-summary"><span className="reviewed"><strong>{reviewed}</strong> {reviewed === 1 ? 'noticia' : 'noticias'} con ubicación revisada</span><span className="automatic"><strong>{automated}</strong> {automated === 1 ? 'noticia' : 'noticias'} con menciones automáticas sin revisar</span></p>}
