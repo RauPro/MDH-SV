@@ -291,7 +291,7 @@
       "start_date": "2026-10-01",
       "end_date": "2026-10-31",
       "status": "enumerated",
-      "last_attempt_at": "2026-11-07T06:33:22.968770+00:00",
+      "last_attempt_at": "2026-11-07T22:16:00.649438+00:00",
       "screen_version": 3,
       "next_page": 5,
       "pages_fetched": 4,
@@ -300,7 +300,7 @@
       "source_total_posts": 371,
       "source_total_pages": 4,
       "error": null,
-      "completed_at": "2026-11-07T06:33:22.968770+00:00"
+      "completed_at": "2026-11-07T22:16:00.649438+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3036,19 +3036,69 @@
       "start_date": "2026-11-01",
       "end_date": "2026-11-07",
       "status": "enumerated",
-      "last_attempt_at": "2026-11-07T06:33:22.968770+00:00",
+      "last_attempt_at": "2026-11-07T22:16:00.649438+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
-      "posts_scanned": 72,
+      "posts_scanned": 83,
       "invalid_posts": 0,
-      "source_total_posts": 72,
+      "source_total_posts": 83,
       "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-11-07T06:33:22.968770+00:00"
+      "completed_at": "2026-11-07T22:16:00.649438+00:00"
     }
   },
   "records": [
+    {
+      "id": "d0bccbf1ebc36ceb42a3133595fa7755afb84755cf1615d47f0d350917f74522",
+      "title": "Exigimos protección para quienes defienden los derechos humanos y ambientales en El Salvador",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/exigimos-proteccion-para-quienes-defienden-los-derechos-humanos-y-ambientales-en-el-salvador/",
+      "published_date": "2026-11-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421792,
+        "retrieved_at": "2026-11-07T22:16:00.649438+00:00"
+      }
+    },
+    {
+      "id": "5361ce60b6b3ea3dd3f3a517f2be1a53fa984dbb64e953bb5d249b73494d5ebf",
+      "title": "APES denuncian campaña de difamación contra periodista por su trabajo en Haití",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/apes-denuncian-campana-de-difamacion-contra-periodista-por-su-trabajo-en-haiti/",
+      "published_date": "2026-11-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "haiti"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421753,
+        "retrieved_at": "2026-11-07T22:16:00.649438+00:00"
+      }
+    },
     {
       "id": "d171332f7fda23976f91f922a52360fb0ecd329ab582981d6d13f34277b8f8be",
       "title": "Red de Mujeres Transfronterizas denuncia devastación ambiental y amenaza extractiva en Centroamérica",
