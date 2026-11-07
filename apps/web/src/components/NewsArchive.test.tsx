@@ -449,7 +449,7 @@ it('updates the news map with search, detected topic, scope and publication date
   fireEvent.change(screen.getByLabelText('Publicación hasta'), { target: { value: '2026-08-18' } });
   expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeInTheDocument();
   fireEvent.change(screen.getByLabelText('Publicación desde'), { target: { value: '2026-10-01' } });
-  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toHaveTextContent('Noticias: —');
   expect(screen.getByText('0 noticias seleccionadas')).toBeInTheDocument();
 });
 
@@ -458,7 +458,7 @@ it('retains every news reference and its pending sheet in the monitor when appro
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
   expect(screen.getAllByRole('article')).toHaveLength(3);
-  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toHaveTextContent('Noticias: —');
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.getByRole('region', { name: 'Ficha estructurada de la noticia' })).toBeInTheDocument();
   expect(screen.getAllByText(PUBLIC_FIELD_PENDING).length).toBeGreaterThanOrEqual(18);
@@ -551,7 +551,7 @@ it.each(['unavailable', 'private_extra', 'wrong_binding', 'stale_source'])('keep
   await screen.findByRole('button', { name: 'Reintentar ubicaciones' });
   expect(screen.getAllByRole('article')).toHaveLength(3);
   expect(screen.queryByRole('button', { name: /0 noticias/ })).not.toBeInTheDocument();
-  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toHaveTextContent('Noticias: —');
   expect(screen.queryByText('PRIVATE VALUE')).not.toBeInTheDocument();
   retried = true;
   await userEvent.click(screen.getByRole('button', { name: 'Reintentar ubicaciones' }));
@@ -567,7 +567,7 @@ it('does not use automatic data while the human-review overlay is unavailable', 
   }) as Response);
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByRole('button', { name: 'Reintentar fichas públicas' });
-  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toHaveTextContent('Noticias: —');
   expect(screen.queryByText('Ubicación automática · Sin revisar')).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: fixture.records[0].title }));
   expect(screen.queryByRole('region', { name: 'Ubicación automática sin revisar' })).not.toBeInTheDocument();
@@ -586,7 +586,7 @@ it('clamps a later page when a delayed automatic layer finishes loading', async 
   vi.mocked(fetch).mockImplementation(async url => ({ ok: true, json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? locations : archive }) as Response);
   render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
   await screen.findByText('31 noticias seleccionadas');
-  expect(screen.getByRole('button', { name: /^San Salvador/ })).toBeDisabled();
+  expect(screen.getByRole('button', { name: /^San Salvador/ })).toHaveTextContent('Noticias: —');
   await userEvent.selectOptions(screen.getByLabelText('Capa de ubicaciones'), 'automated_unreviewed');
   await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
   expect(screen.getByText('Página 2 de 2')).toBeInTheDocument();
