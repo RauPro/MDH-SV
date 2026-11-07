@@ -1,0 +1,26 @@
+.homicide-chart { min-width:0; margin:22px 0; padding:20px; border:1px solid var(--border-subtle); border-radius:8px; background:var(--bg-secondary); }
+.homicide-chart-heading { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+.homicide-chart-heading h3 { font-size:24px; margin:6px 0 0; }
+.homicide-chart-heading > a { font-size:11px; }
+.homicide-chart-note { color:var(--text-secondary); font-size:11px; line-height:1.7; margin:8px 0; }
+.homicide-chart-scroll { overflow-x:auto; padding:6px; margin:0 -6px; }
+.homicide-chart-columns { display:grid; gap:6px; }
+.homicide-chart-year { display:flex; flex-direction:column; min-width:0; padding:26px 4px 7px; border-color:transparent; background:transparent; border-radius:4px; color:var(--text-secondary); font:10px var(--font-mono); }
+.homicide-chart-year-label { order:1; }
+.homicide-chart-year[aria-pressed="true"] { background:var(--accent-verified-bg); border-color:var(--accent-verified); color:var(--text-primary); }
+.homicide-chart-track { display:flex; align-items:flex-end; justify-content:center; position:relative; height:108px; width:100%; border-bottom:1px solid var(--border-focus); margin-bottom:9px; }
+.homicide-chart-bar { position:relative; display:block; width:70%; background:var(--text-muted); border-radius:2px 2px 0 0; }
+.homicide-chart-year[aria-pressed="true"] .homicide-chart-bar { background:var(--accent-verified); }
+.homicide-chart-bar[data-partial="true"] { background:repeating-linear-gradient(135deg,var(--text-muted) 0 2px,transparent 2px 4px); outline:1px dashed var(--text-muted); }
+.homicide-chart-year[aria-pressed="true"] .homicide-chart-bar[data-partial="true"] { background:repeating-linear-gradient(135deg,var(--accent-verified) 0 2px,transparent 2px 4px); }
+.homicide-chart-value { position:absolute; bottom:calc(100% + 7px); left:50%; transform:translateX(-50%); white-space:nowrap; color:var(--text-secondary); font-variant-numeric:tabular-nums; }
+.homicide-chart-year[aria-pressed="true"] .homicide-chart-value { color:var(--text-primary); font-weight:600; }
+.homicide-chart-missing { margin-bottom:7px; }
+.homicide-chart-detail { border-top:1px solid var(--border-subtle); margin-top:12px; padding-top:10px; color:var(--text-secondary); font-size:12px; line-height:1.7; overflow-wrap:anywhere; }
+.homicide-chart-detail p { margin:4px 0; }
+.homicide-chart-detail strong { color:var(--text-primary); }
+.homicide-chart-detail summary { cursor:pointer; width:fit-content; margin-top:6px; }
+@media(max-width:640px) {
+  .homicide-chart { padding:15px; }
+  .homicide-chart-heading h3 { font-size:21px; }
+}

@@ -4,6 +4,18 @@ import { consoleErrors, dossierBackedReference, externalRequests } from './helpe
 // Spec 8: 390×844 mobile smoke — the home render (spec 1 essentials) and the
 // dossier dialog (spec 3) on a phone-sized viewport.
 test.describe('mobile smoke', () => {
+  test('contains the historical chart overflow and keeps every year keyboard-accessible', async ({ page }) => {
+    await page.goto('/');
+    const chart = page.getByRole('region', { name: 'Homicidios reportados por fuentes oficiales' });
+    const years = chart.getByRole('group', { name: 'Totales nacionales por año' });
+    const last = years.getByRole('button').last();
+    await last.focus();
+    await page.keyboard.press('Enter');
+    await expect(last).toHaveAttribute('aria-pressed', 'true');
+    expect(await years.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  });
+
   test('home renders without errors or external requests', async ({ page }) => {
     const errors = consoleErrors(page);
     const external = externalRequests(page);

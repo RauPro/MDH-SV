@@ -11,6 +11,7 @@ import { archiveInstant, type NewsArchiveData } from '../newsArchive';
 import municipalityReference from '../../../../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json';
 import { NEWS_DOSSIER_FIELDS, pendingNewsDossier, type NewsDossier } from '../../../../shared/news-dossier.mjs';
 import { automaticNewsDossier } from '../__fixtures__/automaticNewsDossier';
+import { officialStatistics } from '../__fixtures__/officialStatistics';
 
 const PUBLIC_FIELD_PENDING = 'Dato aún no publicado';
 const EMPTY = { schema_version: 1, dossiers: [] };
@@ -19,7 +20,7 @@ const processingFixture = (entries = fixture.records.map(reference => processing
 const EMPTY_LOCATIONS = { schema_version: 1, generated_at: '2026-10-10T10:00:00Z', locations: [] };
 const automatic = (reference = fixture.records[0]) => ({ candidate_id: reference.id, source_url: reference.source_url, publisher: reference.publisher, published_date: reference.published_date, department: 'San Salvador', review_status: 'automated_unreviewed', human_reviewed: false, method: 'gemini_explicit_department', extracted_at: '2026-10-10T10:00:00Z', source_checked_at: '2026-10-10T10:02:00Z', evidence: { paragraph_id: 'p1', content_sha256: reference.selection.evidence.content_sha256 } });
 function serve(archive: unknown = fixture, dossiers: unknown = EMPTY, locations: unknown = EMPTY_LOCATIONS, processing: unknown = processingFixture()) {
-  vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: true, json: async () => url === '/archive/dossiers.json' ? dossiers : url === '/archive/locations.json' ? locations : url === '/archive/processing.json' ? processing : archive })));
+  vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: true, json: async () => url === '/statistics/homicides.json' ? officialStatistics : url === '/archive/dossiers.json' ? dossiers : url === '/archive/locations.json' ? locations : url === '/archive/processing.json' ? processing : archive })));
 }
 function approved(): NewsDossier {
   const dossier = pendingNewsDossier(fixture.records[0]);
@@ -29,6 +30,33 @@ function approved(): NewsDossier {
 }
 beforeEach(() => { vi.restoreAllMocks(); serve(); });
 const ready = async () => { render(<NewsArchive records={[]} onOpenRecord={vi.fn()}/>); await screen.findByText('3 noticias seleccionadas'); };
+it('keeps national historical context above the news map and independent from news filters', async () => {
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  const chart = await screen.findByRole('region', { name: 'Homicidios reportados por fuentes oficiales' });
+  await within(chart).findByRole('group', { name: 'Totales nacionales por año' });
+  const map = screen.getByRole('region', { name: 'Mapa de El Salvador' });
+  expect(chart.compareDocumentPosition(map) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  await userEvent.click(within(chart).getByRole('button', { name: /^2026:/ }));
+  expect(screen.getByLabelText('Publicación desde')).toHaveValue('');
+  expect(screen.getByLabelText('Publicación hasta')).toHaveValue('');
+  expect(screen.getByText('3 noticias seleccionadas')).toBeInTheDocument();
+  await userEvent.type(screen.getByRole('searchbox'), 'sin coincidencias');
+  expect(within(chart).getByRole('button', { name: /^2026:/ })).toHaveAttribute('aria-pressed', 'true');
+  expect(within(chart).getAllByRole('button')).toHaveLength(17);
+  expect(vi.mocked(fetch).mock.calls.filter(call => call[0] === '/statistics/homicides.json')).toHaveLength(1);
+});
+it('does not load historical context in the bibliographic archive', async () => {
+  await ready();
+  expect(screen.queryByRole('region', { name: 'Homicidios reportados por fuentes oficiales' })).not.toBeInTheDocument();
+  expect(fetch).not.toHaveBeenCalledWith('/statistics/homicides.json', expect.anything());
+});
+it('retains the news map and list when official historical context is unavailable', async () => {
+  vi.mocked(fetch).mockImplementation(async url => ({ ok: String(url) !== '/statistics/homicides.json', json: async () => String(url) === '/archive/dossiers.json' ? EMPTY : String(url) === '/archive/locations.json' ? EMPTY_LOCATIONS : String(url) === '/archive/processing.json' ? processingFixture() : fixture }) as Response);
+  render(<NewsArchive view="monitor" records={[]} onOpenRecord={vi.fn()}/>);
+  expect(await screen.findByRole('alert')).toHaveTextContent('No pudimos cargar el contexto histórico');
+  expect(screen.getByRole('region', { name: 'Mapa de El Salvador' })).toBeInTheDocument();
+  expect(screen.getByText('3 noticias seleccionadas')).toBeInTheDocument();
+});
 it('lists every department mentioned by one news item while counting and displaying the news only once', async () => {
   const { department, evidence, ...common } = automatic();
   const location = { ...common, method: 'source_administrative_mentions', rule_version: 2,
