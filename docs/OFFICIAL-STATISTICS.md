@@ -58,6 +58,10 @@ La actualización de fuentes no valida fichas de noticias ni modifica su flujo a
 
 La pestaña **Estadísticas oficiales** (`/#estadisticas`) carga un snapshot validado, con filtros por año y departamento. La consulta de esta edición no consume Gemini ni depende de la cola de noticias. Un proceso privado independiente consulta diariamente las fuentes a las 06:37 de El Salvador y deja cambios y alertas en revisión. No actualiza las cifras públicas automáticamente; una aprobación humana todavía requiere PR y CI para publicar. Véase el [procedimiento de consulta y revisión](../ops/official-statistics-review/README.md).
 
+Sobre el mapa de noticias, una gráfica compacta muestra los totales nacionales de este mismo snapshot, validado con el contrato compartido. Es contexto histórico separado: seleccionar una barra consulta su cifra, unidad, período, fuente y metodología, sin filtrar noticias ni modificar el mapa. Los filtros de noticias tampoco alteran las barras. La selección inicial corresponde al mayor total disponible de un período completo, calculado a partir de los datos; no se fija un año manualmente.
+
+Las barras parten de cero, conservan los valores publicados y no homogeneizan unidades o instituciones. Los períodos parciales llevan asterisco y trama, no se anualizan; los datos no disponibles figuran como «S/D», sin dibujar una barra de cero. En pantallas estrechas la gráfica permite desplazamiento horizontal y las barras se pueden consultar con teclado. Las advertencias de comparabilidad y el acceso a la metodología completa permanecen disponibles. Un fallo de carga de esta capa no bloquea el mapa ni las fichas.
+
 Después de incorporar y comprobar una nueva edición en el archivo canónico:
 
 ```sh

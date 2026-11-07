@@ -6,6 +6,7 @@ import { archiveInstant, archiveMonth, collectionStatusLabel, filterNews, invali
 import { Dialog } from './Dialog';
 import { NewsDossier } from './NewsDossier';
 import { SalvadorMap } from './SalvadorMap';
+import { OfficialHomicideChart } from './OfficialHomicideChart';
 import { NewsClassificationProgress } from './NewsClassificationProgress';
 import { buildNewsTerritoryItems, matchesNewsTerritory, newsTerritoryItem, summarizeNewsTerritory, summarizeUnlocatedNewsProcessing } from '../geography/newsTerritory';
 import { UNKNOWN_DEPARTMENT } from '../geography/territory';
@@ -158,6 +159,7 @@ export function NewsArchive({ onOpenRecord, records, view = 'archive' }: { onOpe
     <p className="filter-note" id={dateHelpId}>Las fechas corresponden a la publicación declarada por el medio; no a la fecha de los hechos.</p>
     {invalidDates && <p role="alert" id={dateErrorId}>La fecha inicial debe ser válida y anterior o igual a la final.</p>}
     {isMonitor && <>
+      <OfficialHomicideChart/>
       <label className="news-location-filter">Capa de ubicaciones<select value={locationLayer} onChange={event => { setLocationLayer(event.target.value as typeof locationLayer); setDepartment(''); setPage(1); }}><option value="all">Todas las ubicaciones</option><option value="reviewed">Revisadas</option><option value="automated_unreviewed">Automáticas sin revisar</option></select></label>
       <SalvadorMap unit="news" available={mapAvailable} loading={mapLoading} reviewed={territorySummary.reviewed} automated={territorySummary.automated} reviewedCounts={territorySummary.reviewedCounts} automaticCounts={territorySummary.automaticCounts} selected={department} onSelect={value => { setDepartment(value); setPage(1); }} counts={territorySummary.counts} located={territorySummary.located} unlocated={territorySummary.unlocated} invalidDates={invalidDates}/>
       <p className="filter-note">Una misma noticia puede aparecer en varios departamentos. El total cuenta noticias únicas; las menciones departamentales no se suman como casos.</p>
