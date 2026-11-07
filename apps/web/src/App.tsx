@@ -129,7 +129,7 @@ export function App() {
         <button aria-pressed={collection === 'reports'} onClick={() => selectCollection('reports')}>Reportes documentados{catalog ? ` (${records.length})` : ''}</button>
         <p>Consulta todas las noticias y sus fichas. Cada colección mantiene sus propios recuentos en el mapa.</p>
       </nav>}
-      {view === 'records' && collection === 'news' && <NewsArchive key="monitor" view="monitor" records={records} onOpenRecord={openRelatedRecord}/>}
+      {view === 'records' && collection === 'news' && <NewsArchive key="monitor" view="monitor" records={records} reportsAvailable={catalog !== null} onOpenRecord={openRelatedRecord}/>}
       {view === 'records' && collection === 'reports' && (error ? <section className="empty" role="alert"><h2>No pudimos cargar los datos</h2><p>No mostraremos cifras incompletas. Intenta nuevamente.</p><button className="primary" onClick={() => { setError(false); setAttempt(n => n + 1); }}>Reintentar</button></section>
         : !catalog ? <p role="status" className="empty">Cargando los reportes y sus fuentes…</p>
         : <>

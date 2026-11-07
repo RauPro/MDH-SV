@@ -1,5 +1,5 @@
 import { beforeEach, expect, it, vi } from 'vitest';
-import { act, render, screen, within } from '@testing-library/react';
+import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import publicStatistics from '../../public/statistics/homicides.json';
@@ -15,6 +15,16 @@ async function ready() {
   render(<OfficialHomicideChart/>);
   return screen.findByRole('group', { name: 'Totales nacionales por año' });
 }
+
+it('shares only the selected official period and provenance with the map', async () => {
+  const onContextChange = vi.fn();
+  render(<OfficialHomicideChart onContextChange={onContextChange}/>);
+  const chart = await screen.findByRole('group', { name: 'Totales nacionales por año' });
+  await waitFor(() => expect(onContextChange).toHaveBeenLastCalledWith(expect.objectContaining({ period: expect.objectContaining({ year: 2022 }), source: officialStatistics.sources[1] })));
+  await userEvent.selectOptions(screen.getByLabelText('Año de estadísticas oficiales'), '2010');
+  expect(within(chart).getByRole('button', { name: /^2010:/ })).toHaveAttribute('aria-pressed', 'true');
+  expect(onContextChange).toHaveBeenLastCalledWith(expect.objectContaining({ period: expect.objectContaining({ year: 2010 }), source: officialStatistics.sources[0] }));
+});
 
 it('loads only validated official statistics and keeps historical context separate from the map', async () => {
   await ready();
