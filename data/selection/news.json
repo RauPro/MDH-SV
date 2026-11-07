@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-07T01:14:38.423490+00:00",
+  "generated_at": "2026-11-07T13:14:08.689673+00:00",
   "assessment_counts": {
     "candidates": 16427,
     "evaluated": 4896,
-    "relevant": 1961,
-    "excluded": 617,
-    "uncertain": 2318,
+    "relevant": 1965,
+    "excluded": 625,
+    "uncertain": 2306,
     "pending": 11531
   },
   "selections": [
@@ -5862,6 +5862,32 @@
           "relevance_paragraph_ids": [
             "p2",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "1d07463da410871240791f47db468e83a4d7ccbf646fb4263d28332a775308c6",
+      "source_url": "https://historico.elsalvador.com/historico/158786/racha-de-homicidios-en-lo-que-va-del-domingo.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-08-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-07T07:09:00.866635-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "c25bda6af50a7b5fc0588cd1cf4b0123dcdc84de74d905263b134173a46405eb",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2"
           ]
         }
       }
@@ -19839,6 +19865,34 @@
       }
     },
     {
+      "candidate_id": "5fecbc5b6ea0425d0286a42b74c066be365dbb7dfdb38fac6be794ee2639f6d2",
+      "source_url": "https://www.diariocolatino.com/homicidios-contra-agentes-policiales-no-quedaran-en-la-impunidad-dice-benito-lara/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-07T07:09:00.866635-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "410e67509a6ddce7d590fd914edcadbc88b8927ba3adfffbe04344b93bb39aa6",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p9",
+            "p14"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "60306bfee79be1cb7380261cdfb42ce8d3bb3ea9b571f7606b52bc9e2a21af16",
       "source_url": "https://historico.elsalvador.com/historico/166704/honduras-arresta-2-pandilleros-salvadorenos-buscados-en-el-pais-por-asesinato.html",
       "publisher": "El Diario de Hoy (archivo)",
@@ -23997,6 +24051,34 @@
             "p7",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "70006d3b796bade84faaa608f8b968681f01e23519ac1354237a4e6bd6b9d0b6",
+      "source_url": "https://historico.elsalvador.com/historico/158616/dan-12-anos-de-prision-a-un-exjefe-de-petrobras-por-corrupcion.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-08-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-07T07:09:00.866635-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "bbfa20569d17f119650331fc7b435dcd8420560443a0054cba9f626681a58e57",
+          "jurisdiction_paragraph_ids": [
+            "p11",
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p11",
+            "p12"
           ]
         }
       }
@@ -29002,20 +29084,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:12:42.756371-06:00",
+        "classified_at": "2026-11-07T07:12:01.320759-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "ba7e55c9a63db5034acf88723ba3bf41ef3cb8a9fc05f175c0de17f0fcbfe68f",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p6"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p5",
-            "p6"
+            "p3"
           ]
         }
       }
@@ -37040,14 +37119,13 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:13:40.816558-06:00",
+        "classified_at": "2026-11-07T07:13:00.822242-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "55e5d277b0e7ad4abbd0e2ff40c45cc2d63fee359bcb315c753959cc549933db",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p7"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
@@ -37485,21 +37563,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:12:42.756371-06:00",
+        "classified_at": "2026-11-07T07:12:17.870295-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "75a9033381a6f308f5b54e6935d33948227d463a4525f6518a144a9657319f68",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p6"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4",
-            "p6",
-            "p8"
+            "p2"
           ]
         }
       }
@@ -38735,6 +38808,34 @@
             "p6",
             "p9",
             "p29"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "b1b2e5d4051cb33fb781d9998e464b557dd734500f578c61e482d9674cc32cdd",
+      "source_url": "https://www.diariocolatino.com/operativo-deja-cinco-pandilleros-fallecidos-y-un-detenido/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-08-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-07T07:09:00.866635-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f6a479f8374212705e40d2ef00d7f2fe28d43f2a094503cfc8345847a38c7df3",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
           ]
         }
       }
