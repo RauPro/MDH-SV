@@ -55082,6 +55082,170 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "66857ebf34eab642ce22a3772bbdf9d5cb5b523ac51817c947cbab20d30b296e",
+      "source_url": "https://www.diariocolatino.com/malevolos-pensamientos-de-los-asesinos-de-la-fe/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Noticia con título protegido; consulte la fuente original",
+      "published_date": "2015-05-26",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "category": {
+          "value": "memoria histórica",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": "homicidio",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "facts": {
+          "value": "El texto discute desde una perspectiva ficticia o reflexiva los detalles del asesinato de un sacerdote en una capilla mediante disparos de francotirador, mencionando su posterior beatificación.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": "Aguilares",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "memoria histórica",
+            "justicia transicional",
+            "impunidad"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/malevolos-pensamientos-de-los-asesinos-de-la-fe/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/malevolos-pensamientos-de-los-asesinos-de-la-fe/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 7ccb38770750f8ab2bee98925b76180a630ce6d56a00ef98f241bc2b8af42bc5."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "7ccb38770750f8ab2bee98925b76180a630ce6d56a00ef98f241bc2b8af42bc5",
+        "validated_at": "2026-11-07T01:15:09.157770+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "66f07ddbb737b65e76b57fc21e04a0a620e05577f8a79c42f8dec2f1297f4a1f",
       "source_url": "https://www.diariocolatino.com/fotoperiodista-de-diario-co-latino-recibe-reconocimiento/",
       "publisher": "Diario Co Latino",
@@ -71401,6 +71565,188 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "82a8cdd9f6122a2fedcbf33839244d3c65c6e03ac8a27d58c2ec74e91d9851b5",
+      "source_url": "https://www.diariocolatino.com/probusqueda-presenta-siete-habeas-corpus-de-victimas-de-guinda-de-mayo/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Noticia con título protegido; consulte la fuente original",
+      "published_date": "2015-05-27",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "category": {
+          "value": "Desaparición forzada",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": "Desaparición forzada",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "facts": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "affected_persons": {
+          "value": [
+            "niños y niñas",
+            "familiares de víctimas"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": "Chalatenango",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Sala de lo Constitucional",
+            "Corte Suprema de Justicia",
+            "PDDH",
+            "Fiscalía"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "niños y niñas"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": [
+            "memoria histórica",
+            "justicia transicional",
+            "desaparición forzada"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": [
+            "operativo militar"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/probusqueda-presenta-siete-habeas-corpus-de-victimas-de-guinda-de-mayo/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/probusqueda-presenta-siete-habeas-corpus-de-victimas-de-guinda-de-mayo/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 b3003c516e0c0a3c1aeda028f27147eee05728240eea8963dda84984983e282c."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "b3003c516e0c0a3c1aeda028f27147eee05728240eea8963dda84984983e282c",
+        "validated_at": "2026-11-07T01:15:09.161088+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "82d18bc4c423c2de7114261da38faaa19238a420a4485893504ac452fbf362ee",
       "source_url": "https://www.diariocolatino.com/asder-y-sis-por-los-derechos-de-las-mujeres/",
       "publisher": "Diario Co Latino",
@@ -77580,6 +77926,220 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "8f02e128554d4fd325a755bfd2bdcc3ad9d5d4330b55ebc1d7a2a108139aaacd",
+      "source_url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+      "publisher": "Diario Co Latino",
+      "source_title": "“Queremos garantizar una estructura penitenciaria, moderna y mejor equipada en todo el país”: Oscar Ortiz",
+      "published_date": "2015-05-28",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "Autoridades gubernamentales anunciaron el inicio de obras para finalizar la tercera fase del Complejo Penitenciario de Seguridad de Izalco con el fin de reducir el hacinamiento carcelario y fortalecer la reinserción.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6",
+            "article-p15"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Política penitenciaria",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "El Vicepresidente de la República, autoridades penitenciarias y judiciales informaron sobre la inversión para concluir las obras del Complejo Penitenciario de Seguridad de Izalco en su fase III, proyecto financiado por el Banco Centroamericano de Integración Económica.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": "Izalco",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "public_place": {
+          "value": "Complejo Penitenciario de Seguridad de Izalco",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Oscar Ortiz",
+            "Rodil Hernández",
+            "Eliud Ayala"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p11",
+            "article-p14"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "privados de libertad"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": [
+            "hacinamiento carcelario",
+            "rehabilitación",
+            "reinserción"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p6",
+            "article-p11",
+            "article-p15"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p11",
+          "url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+          "locator": "Párrafo p11 del texto consultado; SHA-256 b0a0de80d23b4d1f87a29db5c8427c56043926a0fa6fcf88037291dd93fca2b5."
+        },
+        {
+          "id": "article-p14",
+          "url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+          "locator": "Párrafo p14 del texto consultado; SHA-256 b0a0de80d23b4d1f87a29db5c8427c56043926a0fa6fcf88037291dd93fca2b5."
+        },
+        {
+          "id": "article-p15",
+          "url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+          "locator": "Párrafo p15 del texto consultado; SHA-256 b0a0de80d23b4d1f87a29db5c8427c56043926a0fa6fcf88037291dd93fca2b5."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 b0a0de80d23b4d1f87a29db5c8427c56043926a0fa6fcf88037291dd93fca2b5."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 b0a0de80d23b4d1f87a29db5c8427c56043926a0fa6fcf88037291dd93fca2b5."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 b0a0de80d23b4d1f87a29db5c8427c56043926a0fa6fcf88037291dd93fca2b5."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/queremos-garantizar-una-estructura-penitenciaria-moderna-y-mejor-equipada-en-todo-el-pais-oscar-ortiz/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 b0a0de80d23b4d1f87a29db5c8427c56043926a0fa6fcf88037291dd93fca2b5."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "b0a0de80d23b4d1f87a29db5c8427c56043926a0fa6fcf88037291dd93fca2b5",
+        "validated_at": "2026-11-07T01:16:03.953042+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "8f4b1dc9f8a76c9926a5868597e0e42164d51acc22cb42b49eee869729fbcb75",
       "source_url": "https://www.diariocolatino.com/fmln-espera-que-legislatura-saliente-apruebe-leyes-de-beneficio-popular-como-el-derecho-al-agua/",
       "publisher": "Diario Co Latino",
@@ -77772,6 +78332,194 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "74a66ad4302a0c38ec4a5f5f9c3f8c60b9f4f6cc0fdadf8250b75500d168db94",
         "validated_at": "2026-11-02T01:16:37.464555+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "905179c9647ec592f9d4a55d1863d8aaa37037fb593e24bf9ff48d33b14239ad",
+      "source_url": "https://www.diariocolatino.com/el-beato-monsenor-romero-era-un-defensor-de-los-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Noticia con título protegido; consulte la fuente original",
+      "published_date": "2015-05-25",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "category": {
+          "value": "Memoria histórica y defensa de derechos humanos",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": null,
+          "status": "withheld",
+          "evidence_refs": [],
+          "note": "Dato omitido por la política automática de protección de personas."
+        },
+        "affected_persons": {
+          "value": [
+            "población menos favorecida o abusada",
+            "madres de presos políticos"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Comité de madres de presos políticos",
+            "Frente Farabundo Martí para la Liberación Nacional (FMLN)"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "El Vaticano"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p5"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "memoria histórica",
+            "defensa de los derechos humanos"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/el-beato-monsenor-romero-era-un-defensor-de-los-derechos-humanos/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/el-beato-monsenor-romero-era-un-defensor-de-los-derechos-humanos/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 c3c0ba622844d820a0b67bebe54be6ddbcd703b98876e2b976936a31f705ae0c."
+        },
+        {
+          "id": "article-p5",
+          "url": "https://www.diariocolatino.com/el-beato-monsenor-romero-era-un-defensor-de-los-derechos-humanos/",
+          "locator": "Párrafo p5 del texto consultado; SHA-256 c3c0ba622844d820a0b67bebe54be6ddbcd703b98876e2b976936a31f705ae0c."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/el-beato-monsenor-romero-era-un-defensor-de-los-derechos-humanos/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 c3c0ba622844d820a0b67bebe54be6ddbcd703b98876e2b976936a31f705ae0c."
+        },
+        {
+          "id": "article-p8",
+          "url": "https://www.diariocolatino.com/el-beato-monsenor-romero-era-un-defensor-de-los-derechos-humanos/",
+          "locator": "Párrafo p8 del texto consultado; SHA-256 c3c0ba622844d820a0b67bebe54be6ddbcd703b98876e2b976936a31f705ae0c."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "c3c0ba622844d820a0b67bebe54be6ddbcd703b98876e2b976936a31f705ae0c",
+        "validated_at": "2026-11-07T01:15:09.154339+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -105190,6 +105938,208 @@
     {
       "schema_version": 2,
       "kind": "news_dossier",
+      "candidate_id": "c4ac65b7da99abba06b06fe7347045c0c8fcd8ecc5d45f5b0d95784dfe65d812",
+      "source_url": "https://www.diariocolatino.com/pandillas-pretenden-presionar-al-gobierno-incrementando-homicidios/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Pandillas pretenden presionar al gobierno incrementando homicidios",
+      "published_date": "2015-05-27",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "La Policía Nacional Civil señala que el incremento de homicidios podría ser un mecanismo de presión de las pandillas contra el gobierno y menciona que una parte de las víctimas son miembros de estas estructuras.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Homicidios y violencia",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "La Policía Nacional Civil indicó que el aumento de homicidios podría deberse a presiones de las pandillas hacia el gobierno y señaló que muchos de los fallecidos son integrantes de las mismas estructuras criminales ajusticiados internamente.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": "El Salvador",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "pandillas",
+            "policía",
+            "ejército"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p8"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Policía Nacional Civil"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "homicidios",
+            "violencia",
+            "pandillas",
+            "seguridad pública"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": "El incremento de homicidios responde a un mecanismo de presión de las pandillas para obligar al gobierno a negociar y como respuesta a las medidas de seguridad ejecutadas.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/pandillas-pretenden-presionar-al-gobierno-incrementando-homicidios/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/pandillas-pretenden-presionar-al-gobierno-incrementando-homicidios/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 f1b3df93e345855a6f6a9ed5defabf717d9365043623f479c01dc4d2021c11b2."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://www.diariocolatino.com/pandillas-pretenden-presionar-al-gobierno-incrementando-homicidios/",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 f1b3df93e345855a6f6a9ed5defabf717d9365043623f479c01dc4d2021c11b2."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/pandillas-pretenden-presionar-al-gobierno-incrementando-homicidios/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 f1b3df93e345855a6f6a9ed5defabf717d9365043623f479c01dc4d2021c11b2."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/pandillas-pretenden-presionar-al-gobierno-incrementando-homicidios/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 f1b3df93e345855a6f6a9ed5defabf717d9365043623f479c01dc4d2021c11b2."
+        },
+        {
+          "id": "article-p8",
+          "url": "https://www.diariocolatino.com/pandillas-pretenden-presionar-al-gobierno-incrementando-homicidios/",
+          "locator": "Párrafo p8 del texto consultado; SHA-256 f1b3df93e345855a6f6a9ed5defabf717d9365043623f479c01dc4d2021c11b2."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "f1b3df93e345855a6f6a9ed5defabf717d9365043623f479c01dc4d2021c11b2",
+        "validated_at": "2026-11-07T01:15:52.679631+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
       "candidate_id": "c50742dfd409defdc51affccc4903bfaabfc4b7cd9b5de11d2bceeb10b07a9f9",
       "source_url": "https://www.diariocolatino.com/la-fgr-informa-cuadruple-homicidio-en-san-jose-guayabal/",
       "publisher": "Diario Co Latino",
@@ -108379,6 +109329,190 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "677fcd43a7b1a4d78112697eeae3de443536ed186248ca2bf1abbcd3c27463b7",
         "validated_at": "2026-10-15T20:17:29.952057+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "c95254cfff6ec5bef298fce689c38c6b7237322f5e7a51e4f3def58a50190b54",
+      "source_url": "https://www.diariocolatino.com/mesa-nacional-frente-a-la-mineria-metalica-piden-al-ejecutivo-no-permitir-la-mineria/",
+      "publisher": "Diario Co Latino",
+      "source_title": "Mesa Nacional frente a la Minería Metálica piden al Ejecutivo no permitir la minería",
+      "published_date": "2015-05-27",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "publication"
+      },
+      "fields": {
+        "summary": {
+          "value": "La Mesa Nacional frente a la Minería Metálica criticó la gestión ambiental del gobierno y exigió una ley que prohíba la minería metálica en el país.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "medio ambiente y derechos humanos",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "facts": {
+          "value": "La Mesa Nacional frente a la Minería solicitó al Ejecutivo mantener la prohibición de la minería metálica, decretar una moratoria y expresar preocupación por la demanda de Pacific Rim ante el CIADI y la presencia de la Fundación El Dorado en Cabañas.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p4",
+            "article-p6",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "country": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "department": {
+          "value": "Cabañas",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Mesa Nacional frente a la Minería"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "themes": {
+          "value": [
+            "minería metálica",
+            "gestión ambiental"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://www.diariocolatino.com/mesa-nacional-frente-a-la-mineria-metalica-piden-al-ejecutivo-no-permitir-la-mineria/",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://www.diariocolatino.com/mesa-nacional-frente-a-la-mineria-metalica-piden-al-ejecutivo-no-permitir-la-mineria/",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 c9efbcd43fff9bb0fb7b0dff914818dce4fb95bc527888ce4cfd688a49df2dd2."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://www.diariocolatino.com/mesa-nacional-frente-a-la-mineria-metalica-piden-al-ejecutivo-no-permitir-la-mineria/",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 c9efbcd43fff9bb0fb7b0dff914818dce4fb95bc527888ce4cfd688a49df2dd2."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://www.diariocolatino.com/mesa-nacional-frente-a-la-mineria-metalica-piden-al-ejecutivo-no-permitir-la-mineria/",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 c9efbcd43fff9bb0fb7b0dff914818dce4fb95bc527888ce4cfd688a49df2dd2."
+        },
+        {
+          "id": "article-p7",
+          "url": "https://www.diariocolatino.com/mesa-nacional-frente-a-la-mineria-metalica-piden-al-ejecutivo-no-permitir-la-mineria/",
+          "locator": "Párrafo p7 del texto consultado; SHA-256 c9efbcd43fff9bb0fb7b0dff914818dce4fb95bc527888ce4cfd688a49df2dd2."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "c9efbcd43fff9bb0fb7b0dff914818dce4fb95bc527888ce4cfd688a49df2dd2",
+        "validated_at": "2026-11-07T01:15:52.682258+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"
@@ -119012,6 +120146,224 @@
         "policy_version": "auto-news-v1",
         "source_content_sha256": "ea08685c58c831fccef1197d572513043961e4314583201342f301a46fe4751d",
         "validated_at": "2026-10-16T13:18:46.666138+00:00",
+        "method": "gemini_evidence_review",
+        "evaluator_model": "gemini-3.5-flash-lite",
+        "corroboration": "single_source"
+      }
+    },
+    {
+      "schema_version": 2,
+      "kind": "news_dossier",
+      "candidate_id": "e76c8bcb48965e28822adca353686a7a1716bd27de909e57464be8d938195adb",
+      "source_url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_title": "Detenidos miembros de red que secuestraba a jóvenes salvadoreńos en Guatemala",
+      "published_date": "2015-05-28",
+      "extraction_status": "processed",
+      "classification": {
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "record_type": "incident"
+      },
+      "fields": {
+        "summary": {
+          "value": "Autoridades detuvieron a cinco personas señaladas de integrar una red dedicada al secuestro de migrantes salvadoreños en Guatemala para exigir rescate.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "category": {
+          "value": "Seguridad y justicia",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "alleged_violation": {
+          "value": "Secuestro",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "facts": {
+          "value": "Cinco personas fueron detenidas en operativos en el departamento de Jutiapa bajo señalamientos de secuestrar a jóvenes salvadoreños para exigir rescates a sus familias.",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1",
+            "article-p4",
+            "article-p6",
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "affected_persons": {
+          "value": [
+            "Jóvenes salvadoreños"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p6"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "country": {
+          "value": "Guatemala",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "department": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "municipality": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "public_place": {
+          "value": "área montańosa de Jutiapa",
+          "status": "reported",
+          "evidence_refs": [
+            "article-p7"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "event_date": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "event_date_end": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Intervalo sin fecha inicial respaldada."
+        },
+        "event_time": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "reported_actors": {
+          "value": [
+            "Luguer Francisco Rodríguez",
+            "Vladimir Alexander Arana Cáceres",
+            "Elmer Arana",
+            "Víctor José Pop Paau",
+            "José Abieser Galicia Salguero"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "institutional_sources": {
+          "value": [
+            "Ministerio Público (MP-Fiscalía)",
+            "Policía Nacional Civil (PNC)"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p2",
+            "article-p4"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "vulnerable_groups": {
+          "value": [
+            "Migrantes"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p1"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "themes": {
+          "value": [
+            "Secuestro",
+            "Tráfico ilegal de personas"
+          ],
+          "status": "reported",
+          "evidence_refs": [
+            "article-p3"
+          ],
+          "note": "Dato atribuido a la fuente, contrastado automáticamente; no implica corroboración independiente."
+        },
+        "hypothesis": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        },
+        "instrument": {
+          "value": null,
+          "status": "pending",
+          "evidence_refs": [],
+          "note": "Dato no resuelto por los controles automáticos; no se afirma que esté ausente."
+        }
+      },
+      "date_precision": "unknown",
+      "evidence": [
+        {
+          "id": "primary",
+          "url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+          "locator": "Referencia bibliográfica; los campos se atribuyen al texto de la fuente."
+        },
+        {
+          "id": "article-p1",
+          "url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+          "locator": "Párrafo p1 del texto consultado; SHA-256 ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982."
+        },
+        {
+          "id": "article-p2",
+          "url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+          "locator": "Párrafo p2 del texto consultado; SHA-256 ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982."
+        },
+        {
+          "id": "article-p3",
+          "url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+          "locator": "Párrafo p3 del texto consultado; SHA-256 ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982."
+        },
+        {
+          "id": "article-p4",
+          "url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+          "locator": "Párrafo p4 del texto consultado; SHA-256 ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982."
+        },
+        {
+          "id": "article-p6",
+          "url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+          "locator": "Párrafo p6 del texto consultado; SHA-256 ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982."
+        },
+        {
+          "id": "article-p7",
+          "url": "https://historico.elsalvador.com/historico/151384/detenidos-miembros-de-red-que-secuestraba-a-jovenes-salvadorenos-en-guatemala.html",
+          "locator": "Párrafo p7 del texto consultado; SHA-256 ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982."
+        }
+      ],
+      "human_reviewed": false,
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null,
+      "automation": {
+        "policy_version": "auto-news-v1",
+        "source_content_sha256": "ddb8d6f61400d1c1667798eddb8d738e2e9dbab703a09c79cef0e4c069abd982",
+        "validated_at": "2026-11-07T01:16:03.955285+00:00",
         "method": "gemini_evidence_review",
         "evaluator_model": "gemini-3.5-flash-lite",
         "corroboration": "single_source"

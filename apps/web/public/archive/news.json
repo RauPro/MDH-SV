@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-06T19:41:44.793982+00:00",
+  "generated_at": "2026-11-07T01:14:41.857531+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 16427,
-      "selected": 1957,
-      "evaluated": 4895,
-      "relevant": 1957,
-      "excluded": 609,
-      "uncertain": 2329,
-      "pending": 11532,
-      "evaluated_at": "2026-11-06T13:20:19.902568+00:00"
+      "selected": 1961,
+      "evaluated": 4896,
+      "relevant": 1961,
+      "excluded": 617,
+      "uncertain": 2318,
+      "pending": 11531,
+      "evaluated_at": "2026-11-07T01:14:38.423490+00:00"
     }
   },
   "paper": {
@@ -51,16 +51,16 @@
     "end_date": "2026-11-06",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1957,
+    "records": 1961,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1609,
+        "records": 1613,
         "first_published_date": "2014-01-02",
-        "last_published_date": "2026-10-31",
+        "last_published_date": "2026-11-02",
         "months": [
           {
             "month": "2010-01",
@@ -869,7 +869,7 @@
           {
             "month": "2015-08",
             "status": "enumerated",
-            "records": 29,
+            "records": 32,
             "screen_version": 3,
             "posts_scanned": 1004,
             "source_total_posts": 1004,
@@ -2489,7 +2489,7 @@
           {
             "month": "2026-11",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 66,
             "source_total_posts": 66,
@@ -20097,12 +20097,12 @@
         "month": "2015-08",
         "start_date": "2015-08-01",
         "end_date": "2015-08-31",
-        "records": 36,
+        "records": 39,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 29
+            "records": 32
           },
           {
             "source_id": "gatoencerrado",
@@ -25902,12 +25902,12 @@
         "month": "2026-11",
         "start_date": "2026-11-01",
         "end_date": "2026-11-06",
-        "records": 0,
+        "records": 1,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "gatoencerrado",
@@ -25944,6 +25944,49 @@
     ]
   },
   "records": [
+    {
+      "id": "3a19b53e9b659c264eaf55f9d6e354a86f81570b6bc0b64507aadaf5346775fd",
+      "title": "Madres por la Libertad rinden tributo ante Romero por sus familiares muertos en régimen de excepción",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/madres-por-la-libertad-rinden-tributo-ante-romero-por-sus-familiares-muertos-en-regimen-de-excepcion/",
+      "published_date": "2026-11-02",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421484,
+        "retrieved_at": "2026-11-02T21:55:16.203293+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-06T19:11:40.883105-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "2ab5e4b843489992549c6797f05a1b39cf47d7314bafd34cce5ab8822f18209a",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p8"
+          ]
+        }
+      }
+    },
     {
       "id": "f515a44babb24e223327a9aecd6a11f0544c0635aa706bec8ec70896f62651c2",
       "title": "Madres por la Libertad piden justicia por los inocentes muertos dentro de los penales bajo régimen de excepción",
@@ -77717,6 +77760,155 @@
       }
     },
     {
+      "id": "df05cbb124d29afa85a31ff12d3fbf55d62e19381459e6a062ed71605553daf0",
+      "title": "FGR reporta tres múltiples homicidios",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-reporta-tres-multiples-homicidios/",
+      "published_date": "2015-08-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76674,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-06T19:09:05.020493-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "34af9c26b6508f3c2db894fafe35538ba7a45e474f448be83ebf88421c83e52f",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b6f6ae5d83904cfd5ecf728c03151991c170870b152de81d7ba4a8d10dc46cd9",
+      "title": "FGR reporta homicidios en las últimas horas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-reporta-homicidios-en-las-ultimas-horas/",
+      "published_date": "2015-08-10",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76658,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-06T19:09:05.020493-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ec978176c14ed02bdc959c0160df5da96975db45fd4c1a0e38007b53efb597f1",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p8"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p7",
+            "p8",
+            "p9",
+            "p10"
+          ]
+        }
+      }
+    },
+    {
+      "id": "737f19242286e9e65a7976ebca099e7186aff5942a4373167737f943de11632b",
+      "title": "Sistema de video vigilancia permite captura de delincuentes en San Salvador",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/sistema-de-video-vigilancia-permite-captura-de-delincuentes-en-san-salvador/",
+      "published_date": "2015-08-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "san salvador"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 76475,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-06T19:09:05.020493-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "f6107ce936bd1b45490ef3f1e28f8b373616af4b3a1f69d38a7ef659cdf05968",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p8",
+            "p9"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8",
+            "p9",
+            "p12",
+            "p15",
+            "p16"
+          ]
+        }
+      }
+    },
+    {
       "id": "457721f08cbcaf7daefede581c79b75e499361c5852006599b1d408522ca706b",
       "title": "Concejal de ARENA pasará proceso judicial en prisión",
       "title_truncated": false,
@@ -82473,19 +82665,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:12:42.756371-06:00",
+        "classified_at": "2026-11-06T19:13:54.667714-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "3709528e9dfed33dc30d410c7af8bda82222a18f9a8509857d90a65b83f3d341",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4",
-            "p5"
+            "p2"
           ]
         }
       }
@@ -82617,9 +82806,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:12:42.756371-06:00",
+        "classified_at": "2026-11-06T19:13:18.088053-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "aec985afc7003eeb91451d492585aeb9cd65817f102c0b8882b1e4ad04c8c4d0",
           "jurisdiction_paragraph_ids": [
@@ -82627,9 +82816,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p5",
-            "p6"
+            "p5"
           ]
         }
       }
@@ -82662,20 +82849,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:12:42.756371-06:00",
+        "classified_at": "2026-11-06T19:13:03.446901-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8e6b346ab11eb92f8617e30885db190d8fa6a9c7ea419a537051dc9995c734bf",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p4",
-            "p7",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -82708,20 +82892,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:12:42.756371-06:00",
+        "classified_at": "2026-11-06T19:12:48.249035-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "3e5e8fafa989da706a1375824ce1bc64ef6f7b4ea114494b90f75d81e9738d20",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p13"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p9",
-            "p10",
-            "p15"
+            "p2"
           ]
         }
       }
@@ -82803,20 +82983,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:12:42.756371-06:00",
+        "classified_at": "2026-11-06T19:12:33.257633-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "22b50db162fa3d73e56995909e916cb2f02460815f28873515ecc56431b4e8a4",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p4"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4",
-            "p6",
-            "p8"
+            "p2",
+            "p3"
           ]
         }
       }
@@ -82900,21 +83077,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:12:42.756371-06:00",
+        "classified_at": "2026-11-06T19:11:56.895538-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "88e261488d963eb52d47c607b011e6cefd03ba00fd44cb6b21143b02d6f61852",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p10"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p5",
-            "p6",
-            "p8",
-            "p9",
-            "p10"
+            "p7",
+            "p8"
           ]
         }
       }
@@ -83421,7 +83594,7 @@
     },
     {
       "id": "82a8cdd9f6122a2fedcbf33839244d3c65c6e03ac8a27d58c2ec74e91d9851b5",
-      "title": "Probúsqueda presenta siete “Habeas Corpus” de víctimas de “Guinda de Mayo”",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -83463,7 +83636,7 @@
     },
     {
       "id": "66857ebf34eab642ce22a3772bbdf9d5cb5b523ac51817c947cbab20d30b296e",
-      "title": "Malévolos pensamientos de los asesinos de la fe",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -83505,7 +83678,7 @@
     },
     {
       "id": "905179c9647ec592f9d4a55d1863d8aaa37037fb593e24bf9ff48d33b14239ad",
-      "title": "El Beato Monseñor Romero era un defensor de los derechos humanos",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
