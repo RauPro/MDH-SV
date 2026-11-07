@@ -3,6 +3,8 @@
 .homicide-chart-heading h3 { font-size:24px; margin:6px 0 0; }
 .homicide-chart-heading > a { font-size:11px; }
 .homicide-chart-note { color:var(--text-secondary); font-size:11px; line-height:1.7; margin:8px 0; }
+.homicide-chart-select { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:12px 0; font-size:12px; color:var(--text-secondary); }
+.homicide-chart-select select { padding:8px; border:1px solid var(--border-subtle); border-radius:4px; background:var(--bg-primary); color:var(--text-primary); }
 .homicide-chart-scroll { overflow-x:auto; padding:6px; margin:0 -6px; }
 .homicide-chart-columns { display:grid; gap:6px; }
 .homicide-chart-year { display:flex; flex-direction:column; min-width:0; padding:26px 4px 7px; border-color:transparent; background:transparent; border-radius:4px; color:var(--text-secondary); font:10px var(--font-mono); }
