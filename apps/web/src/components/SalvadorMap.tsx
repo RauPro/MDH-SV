@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { MapPin, X } from 'lucide-react';
 import { DEPARTMENTS } from '../geography/elSalvador';
 import { UNKNOWN_DEPARTMENT } from '../geography/territory';
@@ -20,6 +20,7 @@ interface Props {
   automated?: number;
   reviewedCounts?: Record<string, number>;
   automaticCounts?: Record<string, number>;
+  controls?: ReactNode;
   layers?: {
     official: OfficialMapContext | null;
     reports: { counts: Record<string, number>; located: number; unlocated: number; available: boolean };
@@ -29,7 +30,11 @@ interface Props {
 const reportLabel = (count: number) => `${count} ${count === 1 ? 'reporte individual' : 'reportes individuales'}`;
 const newsLabel = (count: number) => `${count} ${count === 1 ? 'noticia' : 'noticias'}`;
 
-export function SalvadorMap({ selected, onSelect, counts, located, unlocated, invalidDates, unit = 'reports', available = true, loading = false, reviewed = 0, automated = 0, reviewedCounts = {}, automaticCounts = {}, layers }: Props) {
+function MapLayerValue({ label, shortLabel, value }: { label: string; shortLabel: string; value: string | number }) {
+  return <span className="map-layer-value"><span className="sr-only">{label}: {value}</span><span aria-hidden="true"><b>{shortLabel}</b> {value === 'Sin datos' ? 'S/D' : value}</span></span>;
+}
+
+export function SalvadorMap({ selected, onSelect, counts, located, unlocated, invalidDates, unit = 'reports', available = true, loading = false, reviewed = 0, automated = 0, reviewedCounts = {}, automaticCounts = {}, controls, layers }: Props) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [enabled, setEnabled] = useState({ news: true, reports: true, official: true });
   const isNews = unit === 'news';
@@ -57,25 +62,24 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
         <p>{isNews ? 'Selecciona un departamento para consultar sus noticias por ubicación revisada o automática sin revisar.' : 'Selecciona un departamento para consultar sus reportes individuales.'}</p></div>
       {selected && <button className="map-clear" onClick={() => onSelect('')}><X size={14} aria-hidden="true"/> Quitar filtro del mapa</button>}
     </div>
-    {layers && <>
-      <fieldset className="map-layer-controls"><legend>Capas del mapa</legend>
+    {(layers || controls) && <div className="map-toolbar" role="group" aria-label="Controles del mapa">
+    {layers && <fieldset className="map-layer-controls"><legend>Capas del mapa</legend>
         <label><input type="checkbox" checked={enabled.news} onChange={() => toggle('news')}/>Noticias</label>
         <label><input type="checkbox" checked={enabled.reports} onChange={() => toggle('reports')}/>Reportes documentados</label>
         <label><input type="checkbox" checked={enabled.official} onChange={() => toggle('official')}/>Homicidios oficiales</label>
-      </fieldset>
-      <p className="map-scope">Cada capa conserva su unidad: noticias, reportes individuales y agregados oficiales. Nunca se suman. Las casillas sólo cambian la visibilidad; los filtros de noticias no alteran las otras capas. Seleccionar un departamento filtra la lista de noticias.</p>
+      </fieldset>}
+    {controls}
+    </div>}
+    {layers && <>
       {officialVisible && <div className="map-official-context">
-        {official ? <><p><strong>Homicidios oficiales · {official.period.year}</strong> · {official.period.unit === 'persons' ? 'personas registradas por la fuente' : 'homicidios reportados por la fuente'} · {official.period.completeness === 'partial' ? 'Período parcial' : official.period.completeness === 'complete' ? 'Período completo' : 'Sin datos verificados'}.</p>
-          <p>{formatDate(official.period.start_date)} al {formatDate(official.period.end_date)}. <a href={official.source.url} target="_blank" rel="noopener noreferrer">{official.source.institution}</a>. Corte: {formatDate(official.asOf)}. El año se selecciona en la gráfica.</p>
-          <details><summary>Procedencia y límites de la capa oficial</summary><p>{official.source.title}. {official.source.edition_note}</p><p>{official.period.methodology}</p>{selectedOfficial && <p>{selectedOfficial.department}: {officialValue(selectedOfficial.department)}. {selectedOfficial.locator}</p>}{official.period.notes.map((note, index) => <p key={index}>{note}</p>)}<p>Estos agregados no identifican por sí solos violaciones de derechos humanos ni generan reportes individuales.</p></details>
+        {official ? <><p><strong>Homicidios oficiales · {official.period.year}</strong> · {official.period.unit === 'persons' ? 'personas registradas por la fuente' : 'homicidios reportados por la fuente'} · {official.period.completeness === 'partial' ? 'Período parcial' : official.period.completeness === 'complete' ? 'Período completo' : 'Sin datos verificados'}. <a href={official.source.url} target="_blank" rel="noopener noreferrer">{official.source.institution}</a>.</p>
           {!official.period.departments.some(row => row.status === 'available') && <p>Sin datos territoriales para este año. No se reparte el total nacional entre departamentos. «Sin datos» no equivale a cero.</p>}
         </> : <p>Capa oficial pendiente de datos validados. Consulta el estado y el reintento en la gráfica; no se muestran ceros provisionales.</p>}
       </div>}
-      {reportsVisible && <p className="map-scope">Reportes documentados: {layers.reports.available ? `${layers.reports.located} individuales con departamento y ${layers.reports.unlocated} sin departamento` : 'datos no disponibles'}. Catálogo completo, sin aplicar el año oficial ni los filtros de noticias. <a href="#reportes">Consultar sus fichas</a>.</p>}
+      {reportsVisible && !layers.reports.available && <p className="map-scope map-metric" role="status">Reportes documentados: datos no disponibles.</p>}
       {!enabled.news && !enabled.reports && !enabled.official && <p role="status">Activa al menos una capa para consultar el mapa.</p>}
-      <p className="map-scope">Cifras y relleno del mapa: {fillLayer === 'official' ? `capa oficial de ${official!.period.year}` : fillLayer === 'primary' ? 'noticias' : fillLayer === 'reports' ? 'reportes individuales' : 'ninguna capa disponible'}. Los símbolos sólo indican presencia de las otras capas; sus cantidades se muestran por separado en los botones.</p>
+      <p className="map-scope map-metric">Cifras y relleno del mapa: {fillLayer === 'official' ? `capa oficial de ${official!.period.year}` : fillLayer === 'primary' ? 'noticias' : fillLayer === 'reports' ? 'reportes individuales' : 'ninguna capa disponible'}. Las capas no se suman.</p>
     </>}
-    <p className="map-scope">{isNews ? 'El mapa distingue departamentos con revisión humana y menciones extraídas automáticamente, sin revisar. Pueden ser referencias secundarias del artículo; no confirman el lugar de una violación. Los recuentos respetan los filtros; las fechas corresponden a la publicación.' : 'Los recuentos respetan la búsqueda, la temática y las fechas. No incluyen reportes colectivos ni informes.'}</p>
     <div className="map-layout">
       {/* Equivalent native buttons expose every action to keyboard and assistive technology. */}
       <svg viewBox="0 0 1000 547" className="map-canvas" aria-hidden="true" focusable="false" onMouseLeave={() => setHovered(null)}>
@@ -102,15 +106,15 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
           onMouseEnter={() => setHovered(dept.name)} onMouseLeave={() => setHovered(null)}
           onClick={() => choose(dept.name)}>
           <span>{dept.name}{layers && <span className="map-layer-values">
-            {primaryVisible && <span>Noticias: {primaryUnavailable ? '—' : counts[dept.name] ?? 0}</span>}
-            {reportsVisible && <span>Reportes individuales: {layers.reports.available ? layers.reports.counts[dept.name] ?? 0 : '—'}</span>}
-            {officialVisible && <span>Oficial{official ? ` ${official.period.year}` : ''}: {officialValue(dept.name)}</span>}
+            {primaryVisible && <MapLayerValue label="Noticias" shortLabel="N" value={primaryUnavailable ? '—' : counts[dept.name] ?? 0}/>}
+            {reportsVisible && <MapLayerValue label="Reportes individuales" shortLabel="R" value={layers.reports.available ? layers.reports.counts[dept.name] ?? 0 : '—'}/>}
+            {officialVisible && <MapLayerValue label={`Oficial${official ? ` ${official.period.year}` : ''}`} shortLabel="H" value={officialValue(dept.name)}/>}
           </span>}{isNews && primaryVisible && available && !invalidDates && (counts[dept.name] ?? 0) > 0 && <small className="map-location-breakdown"><span className="reviewed">{reviewedCounts[dept.name] ?? 0} revisadas</span><span className="automatic">{automaticCounts[dept.name] ?? 0} automáticas</span></small>}</span>{!layers && <><strong>{unavailable ? '—' : counts[dept.name] ?? 0}</strong>
           <span className="sr-only"> {invalidDates ? 'rango de fechas inválido' : !available ? 'ubicaciones pendientes de comprobar' : countLabel(counts[dept.name] ?? 0).replace(/^\d+\s*/, '')}</span></>}
         </button>)}
       </div>
     </div>
-    {layers && <div className="map-legend">{fillLayer === 'official' && <span><i className="map-key official"/>Relleno azul: agregado oficial; intensidad relativa en el año</span>}{primaryVisible && <span><i className="map-key news-marker"/>Círculo: noticias con departamento disponible</span>}{reportsVisible && <span><i className="map-key report-marker"/>Cuadrado: reportes individuales</span>}<span>S/D: sin datos · —: no disponible · 0: cero registrado en la capa</span></div>}
+    {layers && <div className="map-legend">{fillLayer === 'official' && <span><i className="map-key official"/>Relleno azul: agregado oficial; intensidad relativa en el año</span>}{primaryVisible && <span><i className="map-key news-marker"/>N: noticias</span>}{reportsVisible && <span><i className="map-key report-marker"/>R: reportes individuales</span>}{officialVisible && <span>H: homicidios oficiales{official ? ` · ${official.period.year}` : ''}</span>}<span>S/D: sin datos · —: no disponible · 0: cero registrado en la capa</span></div>}
     {(fillLayer === 'primary' || (!layers && primaryVisible)) && <div className="map-legend">{available ? <span><i className="map-key map-key-empty"/> 0 en esta consulta</span> : <span>— Ubicaciones pendientes de comprobar</span>}<span><i className="map-key filled"/> {isNews ? 'Ubicaciones revisadas' : 'Con reportes'}</span>{isNews && <><span><i className="map-key automatic"/> Automáticas sin revisar</span><span><i className="map-key mixed"/> Ambas capas</span></>}<span><i className="map-key selected"/> Seleccionado</span></div>}
     {primaryVisible && <div className="map-summary" aria-live="polite">
       {invalidDates ? <p>Corrige el rango de fechas para consultar los recuentos del mapa.</p> : !available ? <p role="status">{loading ? 'Comprobando las ubicaciones del mapa…' : 'Recuentos del mapa no disponibles. Las noticias siguen consultables en la lista.'}</p> : <p><strong>{located}</strong> {isNews ? (located === 1 ? 'noticia con departamento disponible' : 'noticias con departamento disponible') : (located === 1 ? 'reporte con departamento documentado' : 'reportes con departamento documentado')}</p>}
@@ -119,7 +123,14 @@ export function SalvadorMap({ selected, onSelect, counts, located, unlocated, in
         {isNews ? 'Sin ubicación pública en El Salvador' : 'Sin departamento identificado'} <strong>{primaryUnavailable ? '—' : unlocated}</strong>
       </button>
     </div>}
-    <p className="map-note">{isNews ? 'Las noticias sin ubicación pública siguen disponibles en la lista. Pueden tener extracción o validación pendiente, ubicación no determinada, datos protegidos o corresponder a otros países. Las noticias no se suman al recuento de casos. ' : ''}Un departamento sin registros no implica ausencia de violaciones. Los contornos representan departamentos, no ubicaciones de personas.</p>
+    <p className="map-note">Un departamento sin registros no implica ausencia de violaciones.{isNews && ' Las ubicaciones automáticas no tienen revisión humana.'}</p>
+    <details className="map-guidance"><summary>Cómo leer el mapa y sus fuentes</summary>
+      {layers && <p className="map-scope">Cada capa conserva su unidad: noticias, reportes individuales y agregados oficiales. Nunca se suman. Las casillas sólo cambian la visibilidad; los filtros de noticias no alteran las otras capas. Seleccionar un departamento filtra la lista de noticias. Los símbolos sólo indican presencia de las otras capas; sus cantidades se muestran por separado en los botones.</p>}
+      <p className="map-scope">{isNews ? 'El mapa distingue departamentos con revisión humana y menciones extraídas automáticamente, sin revisar. Pueden ser referencias secundarias del artículo; no confirman el lugar de una violación. Los recuentos respetan los filtros; las fechas corresponden a la publicación.' : 'Los recuentos respetan la búsqueda, la temática y las fechas. No incluyen reportes colectivos ni informes.'}</p>
+      {officialVisible && official && <div className="map-official-context"><p>{formatDate(official.period.start_date)} al {formatDate(official.period.end_date)}. Corte: {formatDate(official.asOf)}. El año se selecciona en la gráfica.</p><p>{official.source.title}. {official.source.edition_note}</p><p>{official.period.methodology}</p>{selectedOfficial && <p>{selectedOfficial.department}: {officialValue(selectedOfficial.department)}. {selectedOfficial.locator}</p>}{official.period.notes.map((note, index) => <p key={index}>{note}</p>)}<p>Estos agregados no identifican por sí solos violaciones de derechos humanos ni generan reportes individuales.</p></div>}
+      {reportsVisible && layers && <p className="map-scope">Reportes documentados: {layers.reports.available ? `${layers.reports.located} individuales con departamento y ${layers.reports.unlocated} sin departamento` : 'datos no disponibles'}. Catálogo completo, sin aplicar el año oficial ni los filtros de noticias. <a href="#reportes">Consultar sus fichas</a>.</p>}
+      <p className="map-note">{isNews ? 'Las noticias sin ubicación pública siguen disponibles en la lista. Pueden tener extracción o validación pendiente, ubicación no determinada, datos protegidos o corresponder a otros países. Las noticias no se suman al recuento de casos. ' : ''}Los contornos representan departamentos, no ubicaciones de personas.</p>
+    </details>
     <p className="map-attribution">Cartografía simplificada adaptada de <a href="https://simplemaps.com/svg/country/sv" target="_blank" rel="noopener noreferrer">Simplemaps</a> · <a href="https://simplemaps.com/resources/svg-license" target="_blank" rel="noopener noreferrer">Licencia</a></p>
   </section>;
 }

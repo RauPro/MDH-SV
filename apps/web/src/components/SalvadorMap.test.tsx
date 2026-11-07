@@ -11,6 +11,19 @@ const layers = {
 };
 const props = { unit: 'news' as const, selected: '', onSelect: vi.fn(), counts: { Sonsonate: 3 }, located: 3, unlocated: 4, invalidDates: false };
 
+it('groups map controls and keeps detailed interpretation collapsed without hiding source or missing-data warnings', async () => {
+  render(<SalvadorMap {...props} layers={layers} controls={<label>Capa de ubicaciones<select><option>Todas</option></select></label>}/>);
+  const toolbar = screen.getByRole('group', { name: 'Controles del mapa' });
+  expect(within(toolbar).getByLabelText('Capa de ubicaciones')).toBeVisible();
+  expect(within(toolbar).getByRole('checkbox', { name: 'Homicidios oficiales' })).toBeVisible();
+  const disclosure = screen.getByText('Cómo leer el mapa y sus fuentes').closest('details')!;
+  expect(disclosure).not.toHaveAttribute('open');
+  expect(screen.getByRole('link', { name: layers.official.source.institution })).toBeVisible();
+  await userEvent.click(screen.getByText('Cómo leer el mapa y sus fuentes'));
+  expect(disclosure).toHaveAttribute('open');
+  expect(screen.getByText(/Cada capa conserva su unidad/)).toBeVisible();
+});
+
 it('shows separate official, news and report values on one map with independent checkboxes', async () => {
   render(<SalvadorMap {...props} layers={layers}/>);
   const map = screen.getByRole('region', { name: 'Mapa de El Salvador' });
@@ -38,7 +51,7 @@ it('never substitutes zero for unavailable official departments or mixes news fa
   expect(department).toHaveTextContent('Noticias: —');
   expect(department).toHaveTextContent('Reportes individuales: 2');
   expect(department).not.toBeDisabled();
-  expect(screen.getByText(/No se reparte el total nacional/)).toBeInTheDocument();
+  expect(screen.getByText(/No se reparte el total nacional/)).toBeVisible();
   expect(screen.getByTestId('map-region-SVSO').querySelector('.map-count')).toHaveTextContent('S/D');
 });
 
@@ -55,6 +68,8 @@ it('keeps unknown report loads distinct from empty counts and retains news when 
   expect(region).not.toHaveClass('official-layer');
   expect(screen.getByText(/Cifras y relleno del mapa:/)).toHaveTextContent('noticias');
   expect(screen.queryByText(/Relleno azul:/)).not.toBeInTheDocument();
+  expect(screen.getByRole('status')).toHaveTextContent('Reportes documentados: datos no disponibles.');
+  expect(screen.getByRole('status')).toBeVisible();
 });
 
 it.each([false, true])('uses loaded reports while news is unavailable (invalid dates: %s)', async invalidDates => {
