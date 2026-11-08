@@ -111,7 +111,7 @@ export function App() {
 
   return <>
     <a className="skip-link" href="#contenido">Saltar al contenido</a>
-    <header className="header"><a className="brand" href="/" aria-label="MDH-SV, inicio"><span>MDH<span className="brand-muted">—SV</span></span><span className="brand-caption">Monitor independiente</span></a>
+    <header className="header"><a className="brand" href="/" title="Ir al inicio"><span>MDH<span className="brand-muted">—SV</span></span><span className="brand-caption">Monitor independiente</span></a>
       <nav aria-label="Navegación principal"><button onClick={() => open('metodologia')}>Metodología</button><button className="header-data" onClick={() => open('datos')}>Datos y API <ArrowUpRight size={14} aria-hidden="true"/></button><button className="theme-toggle" aria-label={theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'} title={theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>{theme === 'dark' ? <Sun size={16} aria-hidden="true"/> : <Moon size={16} aria-hidden="true"/>}<span>{theme === 'dark' ? 'Claro' : 'Oscuro'}</span></button></nav>
     </header>
     <main id="contenido" tabIndex={-1}>
