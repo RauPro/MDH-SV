@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-08T06:41:18.898112+00:00",
+  "generated_at": "2026-11-08T13:15:40.129221+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 16437,
-      "selected": 1968,
+      "selected": 1969,
       "evaluated": 4896,
-      "relevant": 1968,
-      "excluded": 633,
-      "uncertain": 2295,
+      "relevant": 1969,
+      "excluded": 640,
+      "uncertain": 2287,
       "pending": 11541,
-      "evaluated_at": "2026-11-08T01:14:38.648201+00:00"
+      "evaluated_at": "2026-11-08T13:15:35.954720+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-11-08",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1968,
+    "records": 1969,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1616,
+        "records": 1617,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-11-02",
         "months": [
@@ -653,7 +653,7 @@
           {
             "month": "2014-02",
             "status": "enumerated",
-            "records": 32,
+            "records": 33,
             "screen_version": 3,
             "posts_scanned": 967,
             "source_total_posts": 967,
@@ -19323,12 +19323,12 @@
         "month": "2014-02",
         "start_date": "2014-02-01",
         "end_date": "2014-02-28",
-        "records": 34,
+        "records": 35,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 32
+            "records": 33
           },
           {
             "source_id": "gatoencerrado",
@@ -81955,21 +81955,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:14:42.670720-06:00",
+        "classified_at": "2026-11-08T07:14:56.187462-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "0abbf6e6ebc5f4986205abeb8fb0cf53f1976fb814675f6ea082649b16bc95c3",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4",
-            "p5",
-            "p8"
+            "p2"
           ]
         }
       }
@@ -82004,21 +81999,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:14:42.670720-06:00",
+        "classified_at": "2026-11-08T07:14:42.424017-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "102ba356f72df320b3b0c2b5a3f034c341d6d51e686defdce8a7269113498bd7",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5",
-            "p7"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p5"
+            "p3"
           ]
         }
       }
@@ -82051,20 +82042,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:14:42.670720-06:00",
+        "classified_at": "2026-11-08T07:14:27.405083-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "e8691ba8dbf4b1ff1d58161d0d84d723b789ec3db4d49b371800f1831ac13e6e",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p6"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p5",
-            "p6"
+            "p2"
           ]
         }
       }
@@ -82097,9 +82084,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:13:40.816558-06:00",
+        "classified_at": "2026-11-08T07:14:11.321132-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "e685c61fad55af0c43113c77dea4ab2f0e7651db7741930bbd46af97ef5d6484",
           "jurisdiction_paragraph_ids": [
@@ -82109,11 +82096,11 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
+            "p3",
             "p4",
-            "p10",
-            "p11",
+            "p9",
             "p12",
-            "p14"
+            "p13"
           ]
         }
       }
@@ -82146,20 +82133,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T01:13:40.816558-06:00",
+        "classified_at": "2026-11-08T07:13:54.924170-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "37f46a180cfa8070a51afeb41bfe24d9fa545b8586ccb4df07771fbc27060a2f",
           "jurisdiction_paragraph_ids": [
-            "p11",
-            "p14"
+            "p11"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p5",
             "p11",
-            "p13",
             "p14"
           ]
         }
@@ -82852,7 +82835,7 @@
     },
     {
       "id": "aa1f3deed8641c951ddb8a3f2575cde74c1ea7fac77fc03e459ee00e5cb9acde",
-      "title": "Sala de lo Constitucional suspende desalojo de la Comunidad El Espino",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -109874,6 +109857,52 @@
             "p2",
             "p3",
             "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ab5e5988019014e3e5bc1580fdc806704f6bee4d37f9aa42c347c5a5473d4b24",
+      "title": "Movimiento Sindical muestra apoyo a Gobierno constitucional de Venezuela",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/movimiento-sindical-muestra-apoyo-a-gobierno-constitucional-de-venezuela/",
+      "published_date": "2014-02-19",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "venezuela"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 6397,
+        "retrieved_at": "2026-10-10T18:02:39.731625+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-08T13:11:15.497460+00:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-exclusion-1-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cae9c5a8f0e2c9c2a595b92881690513250a2256c2d73cc6adcc2ac292db5f97",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
             "p6"
           ]
         }
