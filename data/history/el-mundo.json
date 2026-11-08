@@ -34,12 +34,12 @@
     },
     "2026-11": {
       "status": "partial",
-      "posts_scanned": 25,
-      "pages_fetched": 25,
+      "posts_scanned": 27,
+      "pages_fetched": 27,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-11-07T22:16:04.503357+00:00",
+      "last_attempt_at": "2026-11-08T06:40:28.443276+00:00",
       "error": null
     }
   },
@@ -88,6 +88,58 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-11-07T22:16:04.503357+00:00"
+      }
+    },
+    {
+      "id": "d0e7d8f1005404e8cb67597746e4d774b247ff1d40910a4774037027c7048d3e",
+      "title": "Fiscalía pide detención preventiva con fines de extradición para salvadoreño requerido en Panamá por violación",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/fiscalia-pide-detencion-preventiva-con-fines-de-extradicion-para-salvadoreno-requerido-en-panama-por-violacion",
+      "published_date": "2026-11-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso",
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "panama",
+        "salvadoreno"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-08T06:40:28.443276+00:00"
+      }
+    },
+    {
+      "id": "b1d87a5f4752db748e2d9b348b0ded745692cdb1ee85717c3b2dc38bddcb5337",
+      "title": "Capturan a cinco jóvenes por participar en una riña afuera de una cervecería en Sonsonate",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/capturan-a-cinco-jovenes-por-participar-en-una-rina-afuera-de-una-cerveceria-en-sonsonate",
+      "published_date": "2026-11-07",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "sonsonate"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-08T06:40:28.443276+00:00"
       }
     },
     {
@@ -1765,7 +1817,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-07T22:16:04.503357+00:00",
+    "last_attempt_at": "2026-11-08T06:40:28.443276+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -1842,9 +1894,11 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-46-anos-de-carcel-a-conductor-ebrio-por-la-muerte-de-dos-adultos-mayores-en-morazan",
       "https://diario.elmundo.sv/nacionales/capturan-a-conductor-ebrio-tras-atropellar-y-causar-la-muerte-de-un-hombre-en-el-redondel-claudia-lars",
       "https://diario.elmundo.sv/nacionales/condenan-hasta-con-115-anos-de-carcel-a-26-pandilleros-del-barrio-18-en-santa-ana",
-      "https://diario.elmundo.sv/nacionales/ormusa-reporta-21-feminicidios-y-muertes-violentas-de-mujeres-entre-enero-y-septiembre-2026"
+      "https://diario.elmundo.sv/nacionales/ormusa-reporta-21-feminicidios-y-muertes-violentas-de-mujeres-entre-enero-y-septiembre-2026",
+      "https://diario.elmundo.sv/nacionales/fiscalia-pide-detencion-preventiva-con-fines-de-extradicion-para-salvadoreno-requerido-en-panama-por-violacion",
+      "https://diario.elmundo.sv/nacionales/capturan-a-cinco-jovenes-por-participar-en-una-rina-afuera-de-una-cerveceria-en-sonsonate"
     ],
-    "article_cursor": 71,
+    "article_cursor": 73,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -2271,6 +2325,18 @@
         "published_date": "2026-11-07",
         "last_attempt_at": "2026-11-07T22:16:04.503357+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/fiscalia-pide-detencion-preventiva-con-fines-de-extradicion-para-salvadoreno-requerido-en-panama-por-violacion": {
+        "status": "selected",
+        "published_date": "2026-11-07",
+        "last_attempt_at": "2026-11-08T06:40:28.443276+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/capturan-a-cinco-jovenes-por-participar-en-una-rina-afuera-de-una-cerveceria-en-sonsonate": {
+        "status": "selected",
+        "published_date": "2026-11-07",
+        "last_attempt_at": "2026-11-08T06:40:28.443276+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -2279,10 +2345,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 8,
+        "article_urls_matching_anchor": 9,
         "article_urls_observed": 20,
-        "article_urls_selected": 8,
-        "last_attempt_at": "2026-11-07T22:16:04.503357+00:00"
+        "article_urls_selected": 9,
+        "last_attempt_at": "2026-11-08T06:40:28.443276+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -2291,7 +2357,7 @@
         "article_urls_matching_anchor": 2,
         "article_urls_observed": 20,
         "article_urls_selected": 2,
-        "last_attempt_at": "2026-11-07T22:16:04.503357+00:00"
+        "last_attempt_at": "2026-11-08T06:40:28.443276+00:00"
       }
     },
     "index_screen_version": 3
