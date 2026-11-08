@@ -76,6 +76,24 @@ it('works when local storage is denied', async () => {
   await userEvent.click(screen.getByRole('button',{name:'Activar tema oscuro'}));
   expect(document.documentElement).toHaveClass('dark');
 });
+it('defaults to light and exposes a visible theme choice', async () => {
+  await ready();
+  expect(document.documentElement).toHaveClass('light');
+  expect(screen.getByRole('button', { name: 'Activar tema oscuro' })).toHaveTextContent('Oscuro');
+});
+it('restores a saved dark theme and persists switching back to light', async () => {
+  localStorage.setItem('mdh_theme', 'dark');
+  await ready();
+  expect(document.documentElement).toHaveClass('dark');
+  await userEvent.click(screen.getByRole('button', { name: 'Activar tema claro' }));
+  expect(document.documentElement).toHaveClass('light');
+  expect(localStorage.getItem('mdh_theme')).toBe('light');
+});
+it('falls back to light for an unrecognized stored theme', async () => {
+  localStorage.setItem('mdh_theme', 'unexpected');
+  await ready();
+  expect(document.documentElement).toHaveClass('light');
+});
 it('offers same-origin downloads and describes MCP accurately', async () => {
   await ready();
   await userEvent.click(screen.getByRole('button',{name:'Datos y API'}));

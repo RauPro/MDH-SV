@@ -111,13 +111,13 @@ export function App() {
 
   return <>
     <a className="skip-link" href="#contenido">Saltar al contenido</a>
-    <header className="header"><a className="brand" href="/" aria-label="MDH-SV, inicio"><ShieldAlert size={24} aria-hidden="true"/><span>MDH<span className="brand-muted">—SV</span></span></a>
-      <nav aria-label="Navegación principal"><button onClick={() => open('metodologia')}>Metodología</button><button onClick={() => open('datos')}>Datos y API</button><button className="icon-button" aria-label={theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>{theme === 'dark' ? <Sun size={18}/> : <Moon size={18}/>}</button></nav>
+    <header className="header"><a className="brand" href="/" aria-label="MDH-SV, inicio"><span>MDH<span className="brand-muted">—SV</span></span><span className="brand-caption">Monitor independiente</span></a>
+      <nav aria-label="Navegación principal"><button onClick={() => open('metodologia')}>Metodología</button><button className="header-data" onClick={() => open('datos')}>Datos y API <ArrowUpRight size={14} aria-hidden="true"/></button><button className="theme-toggle" aria-label={theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'} title={theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>{theme === 'dark' ? <Sun size={16} aria-hidden="true"/> : <Moon size={16} aria-hidden="true"/>}<span>{theme === 'dark' ? 'Claro' : 'Oscuro'}</span></button></nav>
     </header>
     <main id="contenido" tabIndex={-1}>
       <section className="hero" aria-labelledby="title"><div className="eyebrow">EL SALVADOR <span>MONITOR INDEPENDIENTE · FUENTES ABIERTAS</span></div>
-        <h1 id="title">Monitor de Derechos Humanos<br/><span>de El Salvador</span></h1>
-        <p className="hero-description">Monitor de presuntas violaciones de derechos humanos en El Salvador. Consulta reportes, contrasta sus fuentes y reutiliza los datos para investigación y seguimiento institucional.</p>
+        <div className="hero-content"><h1 id="title">Monitor de<br/>Derechos Humanos<br/><span>de El Salvador</span></h1>
+        <p className="hero-description">Monitor de presuntas violaciones de derechos humanos en El Salvador. Consulta reportes, contrasta sus fuentes y reutiliza los datos para investigación y seguimiento institucional.</p></div>
         <div className="hero-bottom"><span>Acceso abierto, sin registro</span>{view !== 'statistics' && <span>{catalog ? `Última revisión del catálogo de reportes: ${formatDate(catalog.updated_at)}` : 'Cargando conjunto documental…'}</span>}</div>
       </section>
       {view !== 'statistics' && <aside className="notice"><Shield size={19} aria-hidden="true"/><div><strong>La fuente es el punto de partida.</strong> Cobertura inicial y parcial. Cada ficha atribuye lo reportado a su fuente; no es una determinación judicial ni una verificación independiente. El estado de revisión se indica en cada ficha. <button className="text-button" onClick={() => open('metodologia')}>Leer criterios y límites <ArrowUpRight size={13}/></button></div></aside>}

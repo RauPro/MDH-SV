@@ -1,33 +1,35 @@
-/* Default / Dark Theme (Harvey AI Dark Style) */
+/* Neutral surfaces; semantic accents are reserved for data and review states. */
 html.dark {
+  color-scheme: dark;
   --font-serif: 'Newsreader Variable', Georgia, Cambria, serif;
   --font-sans: 'Plus Jakarta Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono Variable', monospace;
 
   /* Backgrounds */
-  --bg-primary: #0A0A0A;
-  --bg-secondary: #121212;
-  --bg-tertiary: #18181B;
-  --bg-card: #121212;
-  --bg-card-hover: #18181B;
-  --header-bg: rgba(10, 10, 10, 0.85);
+  --bg-primary: #111111;
+  --bg-secondary: #191919;
+  --bg-tertiary: #222222;
+  --bg-card: #191919;
+  --bg-card-hover: #202020;
+  --header-bg: rgba(17, 17, 17, 0.96);
 
   /* Borders */
-  --border-subtle: #27272A;
-  --border-focus: #3F3F46;
+  --border-subtle: #333333;
+  --border-focus: #777777;
 
   /* Text */
-  --text-primary: #EDEDED;
-  --text-secondary: #A1A1AA;
-  --text-muted: #96969F;
-  --text-inverse: #0A0A0A;
+  --text-primary: #F2F2F2;
+  --text-secondary: #B0B0B0;
+  --text-muted: #999999;
+  --text-inverse: #111111;
+  --selection-bg: #292929;
 
   /* Functional Accents */
   --accent-critical: #FB7185;
   --accent-critical-bg: rgba(225, 29, 72, 0.12);
-  --accent-warning: #F59E0B;
+  --accent-warning: #E7BA76;
   --accent-warning-bg: rgba(245, 158, 11, 0.12);
-  --accent-verified: #10B981;
+  --accent-verified: #8AB7A1;
   --accent-verified-bg: rgba(16, 185, 129, 0.12);
   --accent-neutral-bg: rgba(161, 161, 170, 0.10);
 
@@ -41,35 +43,37 @@ html.dark {
   --modal-backdrop: rgba(0, 0, 0, 0.75);
 }
 
-/* Light Theme (Harvey AI Ivory / Clean Legal Style) */
+/* Light is the default, independent of the operating-system preference. */
 :root, html.light {
+  color-scheme: light;
   --font-serif: 'Newsreader Variable', Georgia, Cambria, serif;
   --font-sans: 'Plus Jakarta Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono Variable', monospace;
   /* Backgrounds */
-  --bg-primary: #FAF9F6;
+  --bg-primary: #FAFAF9;
   --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F4F3EF;
+  --bg-tertiary: #F1F1EF;
   --bg-card: #FFFFFF;
-  --bg-card-hover: #F8F8F9;
-  --header-bg: rgba(250, 249, 246, 0.95);
+  --bg-card-hover: #F5F5F3;
+  --header-bg: rgba(250, 250, 249, 0.96);
 
   /* Borders */
-  --border-subtle: #E4E4E7;
-  --border-focus: #D4D4D8;
+  --border-subtle: #DEDEDA;
+  --border-focus: #858581;
 
   /* Text */
-  --text-primary: #09090B;
-  --text-secondary: #52525B;
-  --text-muted: #71717A;
+  --text-primary: #171717;
+  --text-secondary: #565653;
+  --text-muted: #6C6C68;
   --text-inverse: #FFFFFF;
+  --selection-bg: #EBEBE8;
 
   /* Functional Accents */
-  --accent-critical: #B91C1C;
+  --accent-critical: #9D3737;
   --accent-critical-bg: rgba(220, 38, 38, 0.08);
   --accent-warning: #9A600B;
   --accent-warning-bg: rgba(217, 119, 6, 0.08);
-  --accent-verified: #16764F;
+  --accent-verified: #35664F;
   --accent-verified-bg: rgba(5, 150, 105, 0.08);
   --accent-neutral-bg: rgba(113, 113, 122, 0.08);
 
@@ -87,7 +91,6 @@ html.dark {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 body {
@@ -97,8 +100,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
-  overflow-x: hidden;
 }
+
+body, button, input, select, a {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+::selection { background: var(--text-primary); color: var(--text-inverse); }
 
 /* Typography styles */
 .font-serif {
