@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-09T01:14:57.219886+00:00",
+  "generated_at": "2026-11-09T13:16:09.012739+00:00",
   "assessment_counts": {
-    "candidates": 16441,
+    "candidates": 16442,
     "evaluated": 4896,
-    "relevant": 1969,
-    "excluded": 648,
-    "uncertain": 2279,
-    "pending": 11545
+    "relevant": 1971,
+    "excluded": 656,
+    "uncertain": 2269,
+    "pending": 11546
   },
   "selections": [
     {
@@ -14017,16 +14017,15 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "classified_at": "2026-11-09T07:14:45.934804-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "de03dd8675198a5afa5013aff5d4c5cbc4f345b1e732da966871250b151bac87",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
             "p5",
             "p6"
           ]
@@ -26683,6 +26682,36 @@
             "p5",
             "p14",
             "p22"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "798099d0d024897ab9fba3b93b1c4aa7fe2614ff80cec8f04e88c1a0553a3808",
+      "source_url": "https://www.diariocolatino.com/juzgados-especializados-envian-a-prision-a-94-pandilleros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-09-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-09T07:09:38.747839-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "456499b60ccedf9290b266b4720d724a93670ad40cbc4d228d6cde99296f6ebb",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p10"
           ]
         }
       }
@@ -43327,18 +43356,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "classified_at": "2026-11-09T07:13:33.130302-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "8f3dec6b1ff47ee99d9adf6b010885c41622cec34e037dc8384dd5a15ea39e45",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p6"
           ],
           "relevance_paragraph_ids": [
             "p4",
-            "p7",
-            "p8"
+            "p7"
           ]
         }
       }
@@ -44296,9 +44324,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "classified_at": "2026-11-09T07:14:27.468228-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "2ac9ae37e06f2c3fc23025b8b984b0e1cb0f92e068f6b28fff2123e8ad8e56c8",
           "jurisdiction_paragraph_ids": [
@@ -44307,7 +44335,8 @@
           "relevance_paragraph_ids": [
             "p2",
             "p4",
-            "p9"
+            "p6",
+            "p8"
           ]
         }
       }
@@ -45021,19 +45050,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "classified_at": "2026-11-09T07:13:53.826926-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "f783e26a2c87aef2a91e78af71b119710a5d2de47caf70e239e89f7510b9fd9a",
           "jurisdiction_paragraph_ids": [
-            "p2",
             "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p6",
-            "p8"
+            "p6"
           ]
         }
       }
@@ -46330,9 +46357,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T12:16:59.800599-06:00",
+        "classified_at": "2026-11-09T07:14:07.522162-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "979b1598b68dadfb924bf4e63818d803f90451c6e437543092ea88781d0a6c51",
           "jurisdiction_paragraph_ids": [
@@ -46340,9 +46367,7 @@
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p5",
-            "p6",
-            "p11"
+            "p9"
           ]
         }
       }
@@ -53036,18 +53061,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "classified_at": "2026-11-09T07:15:25.080812-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9d4cb2c0e761edd05dfcddde3d5da1bbed6ca3b777a9a88d35970216521de46d",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p7"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p5",
-            "p6"
+            "p2",
+            "p3"
           ]
         }
       }
@@ -54611,6 +54635,33 @@
             "p7",
             "p8",
             "p9"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "fe71ba0b2b8a2c4100f3f5ffe0114db912fcab783cc2bed6f3884f5932a5aa29",
+      "source_url": "https://www.diariocolatino.com/la-pnc-inicia-campana-para-la-captura-de-300-pandilleros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-09-18",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-09T07:09:38.747839-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1488ea2160f0a0c65035c2af00a3315178cfb223cfe9a7b9d11992eead1fd638",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
