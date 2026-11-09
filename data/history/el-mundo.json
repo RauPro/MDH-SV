@@ -34,16 +34,41 @@
     },
     "2026-11": {
       "status": "partial",
-      "posts_scanned": 32,
-      "pages_fetched": 32,
+      "posts_scanned": 33,
+      "pages_fetched": 33,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-11-09T07:08:25.065320+00:00",
+      "last_attempt_at": "2026-11-09T22:40:48.138260+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "c540226195f74c5b57aa1cdd460e0e6ccf2daaa7b18c53128e1a6bf8bf8b4b0c",
+      "title": "Nicaragüense condenado por lavado de dinero en su país recibe 13 años de cárcel por traficar cocaína en El Salvador",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/nicaraguense-condenado-por-lavado-de-dinero-en-su-pais-recibe-13-anos-de-carcel-por-traficar-cocaina-en-el-salvador",
+      "published_date": "2026-11-09",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-09T22:40:48.138260+00:00"
+      }
+    },
     {
       "id": "f1d294c53fd22824d082b02df713d513b308801c8a2b2916a3bf97717d0c7f36",
       "title": "Condenan a 26 años de cárcel a sujeto que violó a menor tras contactarla por redes sociales",
@@ -1938,7 +1963,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-09T07:08:25.065320+00:00",
+    "last_attempt_at": "2026-11-09T22:40:48.138260+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -2022,9 +2047,10 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-30-anos-de-prision-a-pandillero-de-la-ms-13-por-ataque-armado-en-soyapango",
       "https://diario.elmundo.sv/nacionales/capturan-a-motociclista-ebrio-y-sin-licencia-tras-atropellar-a-un-peaton-en-chalatenango",
       "https://diario.elmundo.sv/el-mundo/eeuu-felicita-a-honduras-por-capturar-a-lider-de-red-transnacional-de-trafico-de-migrantes",
-      "https://diario.elmundo.sv/nacionales/condenan-a-23-anos-de-carcel-a-pandillero-por-homicidio-en-chapeltique-en-2016"
+      "https://diario.elmundo.sv/nacionales/condenan-a-23-anos-de-carcel-a-pandillero-por-homicidio-en-chapeltique-en-2016",
+      "https://diario.elmundo.sv/nacionales/nicaraguense-condenado-por-lavado-de-dinero-en-su-pais-recibe-13-anos-de-carcel-por-traficar-cocaina-en-el-salvador"
     ],
-    "article_cursor": 78,
+    "article_cursor": 79,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -2493,6 +2519,12 @@
         "published_date": "2026-11-08",
         "last_attempt_at": "2026-11-09T07:08:25.065320+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/nicaraguense-condenado-por-lavado-de-dinero-en-su-pais-recibe-13-anos-de-carcel-por-traficar-cocaina-en-el-salvador": {
+        "status": "selected",
+        "published_date": "2026-11-09",
+        "last_attempt_at": "2026-11-09T22:40:48.138260+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -2501,10 +2533,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 6,
+        "article_urls_matching_anchor": 3,
         "article_urls_observed": 20,
-        "article_urls_selected": 6,
-        "last_attempt_at": "2026-11-09T07:08:25.065320+00:00"
+        "article_urls_selected": 3,
+        "last_attempt_at": "2026-11-09T22:40:48.138260+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -2513,7 +2545,7 @@
         "article_urls_matching_anchor": 2,
         "article_urls_observed": 20,
         "article_urls_selected": 2,
-        "last_attempt_at": "2026-11-09T07:08:25.065320+00:00"
+        "last_attempt_at": "2026-11-09T22:40:48.138260+00:00"
       }
     },
     "index_screen_version": 3
