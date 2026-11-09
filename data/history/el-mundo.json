@@ -34,12 +34,12 @@
     },
     "2026-11": {
       "status": "partial",
-      "posts_scanned": 31,
-      "pages_fetched": 31,
+      "posts_scanned": 32,
+      "pages_fetched": 32,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-11-08T22:27:12.051286+00:00",
+      "last_attempt_at": "2026-11-09T07:08:25.065320+00:00",
       "error": null
     }
   },
@@ -65,6 +65,30 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-11-08T22:27:12.051286+00:00"
+      }
+    },
+    {
+      "id": "de61ccf399cb1d7b207dd4964e46b0b6122184e33770049de981ea79ddb3248a",
+      "title": "Condenan a 23 años de cárcel a pandillero por homicidio en Chapeltique en 2016",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/condenan-a-23-anos-de-carcel-a-pandillero-por-homicidio-en-chapeltique-en-2016",
+      "published_date": "2026-11-08",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-09T07:08:25.065320+00:00"
       }
     },
     {
@@ -1914,7 +1938,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-08T22:27:12.051286+00:00",
+    "last_attempt_at": "2026-11-09T07:08:25.065320+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -1997,9 +2021,10 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-26-anos-de-carcel-a-sujeto-que-violo-a-menor-tras-contactarla-por-redes-sociales",
       "https://diario.elmundo.sv/nacionales/condenan-a-30-anos-de-prision-a-pandillero-de-la-ms-13-por-ataque-armado-en-soyapango",
       "https://diario.elmundo.sv/nacionales/capturan-a-motociclista-ebrio-y-sin-licencia-tras-atropellar-a-un-peaton-en-chalatenango",
-      "https://diario.elmundo.sv/el-mundo/eeuu-felicita-a-honduras-por-capturar-a-lider-de-red-transnacional-de-trafico-de-migrantes"
+      "https://diario.elmundo.sv/el-mundo/eeuu-felicita-a-honduras-por-capturar-a-lider-de-red-transnacional-de-trafico-de-migrantes",
+      "https://diario.elmundo.sv/nacionales/condenan-a-23-anos-de-carcel-a-pandillero-por-homicidio-en-chapeltique-en-2016"
     ],
-    "article_cursor": 77,
+    "article_cursor": 78,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -2462,6 +2487,12 @@
         "published_date": "2026-11-06",
         "last_attempt_at": "2026-11-08T22:27:12.051286+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/condenan-a-23-anos-de-carcel-a-pandillero-por-homicidio-en-chapeltique-en-2016": {
+        "status": "selected",
+        "published_date": "2026-11-08",
+        "last_attempt_at": "2026-11-09T07:08:25.065320+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -2470,10 +2501,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 7,
+        "article_urls_matching_anchor": 6,
         "article_urls_observed": 20,
-        "article_urls_selected": 7,
-        "last_attempt_at": "2026-11-08T22:27:12.051286+00:00"
+        "article_urls_selected": 6,
+        "last_attempt_at": "2026-11-09T07:08:25.065320+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -2482,7 +2513,7 @@
         "article_urls_matching_anchor": 2,
         "article_urls_observed": 20,
         "article_urls_selected": 2,
-        "last_attempt_at": "2026-11-08T22:27:12.051286+00:00"
+        "last_attempt_at": "2026-11-09T07:08:25.065320+00:00"
       }
     },
     "index_screen_version": 3
