@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T07:43:31.479402+00:00",
+  "generated_at": "2026-11-10T13:15:13.261056+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 16444,
-      "selected": 1980,
+      "selected": 1986,
       "evaluated": 4897,
-      "relevant": 1980,
-      "excluded": 664,
-      "uncertain": 2253,
+      "relevant": 1986,
+      "excluded": 672,
+      "uncertain": 2239,
       "pending": 11547,
-      "evaluated_at": "2026-11-10T01:15:44.601936+00:00"
+      "evaluated_at": "2026-11-10T13:15:10.787000+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-11-10",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1980,
+    "records": 1986,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1626,
+        "records": 1630,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-11-03",
         "months": [
@@ -893,7 +893,7 @@
           {
             "month": "2015-10",
             "status": "enumerated",
-            "records": 24,
+            "records": 28,
             "screen_version": 3,
             "posts_scanned": 1087,
             "source_total_posts": 1087,
@@ -14761,7 +14761,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 239,
+        "records": 241,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15596,7 +15596,7 @@
           {
             "month": "2015-10",
             "status": "partial",
-            "records": 0,
+            "records": 2,
             "screen_version": 3,
             "posts_scanned": 130,
             "source_total_posts": null,
@@ -20183,12 +20183,12 @@
         "month": "2015-10",
         "start_date": "2015-10-01",
         "end_date": "2015-10-31",
-        "records": 27,
+        "records": 33,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 24
+            "records": 28
           },
           {
             "source_id": "gatoencerrado",
@@ -20218,7 +20218,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 0
+            "records": 2
           }
         ]
       },
@@ -75373,6 +75373,239 @@
       }
     },
     {
+      "id": "acd0c3bbae74ba77751969f2318ff002a6fe5ac9cf5fefb23ab046d77acd0405",
+      "title": "FGR reporta cuádruple homicidio en Santa Ana",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fgr-reporta-cuadruple-homicidio-en-santa-ana/",
+      "published_date": "2015-10-06",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 82473,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1d35f4f9a44e929f1a8d73ec60e3e405109f28a438d253fc0d16acea62761f0b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p7",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bf717f8c083652e62c351b8b90519cb7ff35ca9df73966a4092727763fec972d",
+      "title": "EE.UU: Emiten normas sobre detenci¾n de inmigrantes",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/165781/ee-uu-emiten-normas-sobre-detencion-de-inmigrantes.html",
+      "published_date": "2015-10-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "ee uu",
+        "eeuu"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T23:06:27.811174+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cdeecd1dd489f862c39a1334fec93e7f85b8c1589e09bbd8403bb19c292190f4",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "51794a48d2561ac2df0cca9c0f0e0fc2982c9668d5cc0f9959a0fd7102003c7d",
+      "title": "FMLN propone castigar con cárcel a todos aquellos que no pagan impuesto",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/fmln-propone-castigar-con-carcel-a-todos-aquellos-que-no-pagan-impuesto/",
+      "published_date": "2015-10-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 82358,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "3bb67d8d4ca42e6d28697d520a8774c052a3a5dd4713f0e063cd2f8c70b050e4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p11",
+            "p13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4570df86154bb42fe70b1257fc2527eaa9c1c7351c367bc6cb5a1d1b1e5d3f16",
+      "title": "Agente policial detenido por tráfico de droga",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/agente-policial-detenido-por-trafico-de-droga/",
+      "published_date": "2015-10-05",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 82354,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8487ad0732fe9624c223f2f84d1e4021e4bdf798500f1f2c22d8008059e8718a",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b4d0ceb227065260dbdee52a83ac9b2d948c869f898637fd25151f3d03e6eb99",
+      "title": "Juzgado decreta medidas sustitutivas para 92 personas detenidas en fiesta de pandillas",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/juzgado-decreta-medidas-sustitutivas-para-92-personas-detenidas-en-fiesta-de-pandillas/",
+      "published_date": "2015-10-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 82218,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e238e037ffc6301327a685c63bec222de895d3ae5b17e42eb66bd62503acecff",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "id": "1ae4f97fa5ec196999deae0627d67301a17f54a5592a97a79f662b56fb9681a4",
       "title": "Prisión a insurgentes salvadoreños y deportación en el siglo XIX",
       "title_truncated": false,
@@ -75412,6 +75645,51 @@
           ],
           "relevance_paragraph_ids": [
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1a61cd8e814d135a3b86f6ef1b2e314ddf65efc23d672a9aa800f01c35faa4c5",
+      "title": "Fotoperiodistas de El Diario de Hoy destacan en concurso internacional",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/165942/fotoperiodistas-de-el-diario-de-hoy-destacan-en-concurso-internacional.html",
+      "published_date": "2015-10-03",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "libertad_de_expresion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T23:06:27.811174+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8f86ed7692d72ffb6e56404cab687903a5cd677e395970f202959afdc00830eb",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p9"
           ]
         }
       }
@@ -81168,9 +81446,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T02:10:06.640617-06:00",
+        "classified_at": "2026-11-10T07:14:18.128637-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "559cb5d4c9cb44cebaeb6ec288280b0052ffec98ce912566eba279f2d0c74132",
           "jurisdiction_paragraph_ids": [

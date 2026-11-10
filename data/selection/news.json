@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-10T01:15:44.601936+00:00",
+  "generated_at": "2026-11-10T13:15:10.787000+00:00",
   "assessment_counts": {
-    "candidates": 16443,
+    "candidates": 16444,
     "evaluated": 4897,
-    "relevant": 1980,
-    "excluded": 664,
-    "uncertain": 2253,
-    "pending": 11546
+    "relevant": 1986,
+    "excluded": 672,
+    "uncertain": 2239,
+    "pending": 11547
   },
   "selections": [
     {
@@ -5299,6 +5299,34 @@
           "relevance_paragraph_ids": [
             "p2",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "1a61cd8e814d135a3b86f6ef1b2e314ddf65efc23d672a9aa800f01c35faa4c5",
+      "source_url": "https://historico.elsalvador.com/historico/165942/fotoperiodistas-de-el-diario-de-hoy-destacan-en-concurso-internacional.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-10-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8f86ed7692d72ffb6e56404cab687903a5cd677e395970f202959afdc00830eb",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p9"
           ]
         }
       }
@@ -14289,6 +14317,32 @@
       }
     },
     {
+      "candidate_id": "4570df86154bb42fe70b1257fc2527eaa9c1c7351c367bc6cb5a1d1b1e5d3f16",
+      "source_url": "https://www.diariocolatino.com/agente-policial-detenido-por-trafico-de-droga/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8487ad0732fe9624c223f2f84d1e4021e4bdf798500f1f2c22d8008059e8718a",
+          "jurisdiction_paragraph_ids": [
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "457721f08cbcaf7daefede581c79b75e499361c5852006599b1d408522ca706b",
       "source_url": "https://www.diariocolatino.com/concejal-de-arena-pasara-proceso-judicial-en-prision/",
       "publisher": "Diario Co Latino",
@@ -16735,6 +16789,38 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "51794a48d2561ac2df0cca9c0f0e0fc2982c9668d5cc0f9959a0fd7102003c7d",
+      "source_url": "https://www.diariocolatino.com/fmln-propone-castigar-con-carcel-a-todos-aquellos-que-no-pagan-impuesto/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "3bb67d8d4ca42e6d28697d520a8774c052a3a5dd4713f0e063cd2f8c70b050e4",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p4",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6",
+            "p11",
+            "p13"
           ]
         }
       }
@@ -38198,6 +38284,37 @@
       }
     },
     {
+      "candidate_id": "acd0c3bbae74ba77751969f2318ff002a6fe5ac9cf5fefb23ab046d77acd0405",
+      "source_url": "https://www.diariocolatino.com/fgr-reporta-cuadruple-homicidio-en-santa-ana/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-06",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1d35f4f9a44e929f1a8d73ec60e3e405109f28a438d253fc0d16acea62761f0b",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p6",
+            "p7",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "ad09289d6059ffde5fee29725040649661abbc1bdfbb9dd9125c36519ada09f8",
       "source_url": "https://www.diariocolatino.com/alza-de-homicidios-estaria-vinculada-a-proceso-electoral/",
       "publisher": "Diario Co Latino",
@@ -39728,6 +39845,35 @@
       }
     },
     {
+      "candidate_id": "b4d0ceb227065260dbdee52a83ac9b2d948c869f898637fd25151f3d03e6eb99",
+      "source_url": "https://www.diariocolatino.com/juzgado-decreta-medidas-sustitutivas-para-92-personas-detenidas-en-fiesta-de-pandillas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-03",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e238e037ffc6301327a685c63bec222de895d3ae5b17e42eb66bd62503acecff",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p11"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p4",
+            "p8",
+            "p9"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "b52ed3e890f5e9d5b681059ded7dfc6ba37b282473e6bd4fe6ee94ce51db1450",
       "source_url": "https://www.diariocolatino.com/se-llevaron-a-prision-a-un-gran-lider-para-evitar-que-vuelva-a-ser-presidente/",
       "publisher": "Diario Co Latino",
@@ -40993,9 +41139,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T02:10:06.640617-06:00",
+        "classified_at": "2026-11-10T07:14:18.128637-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "559cb5d4c9cb44cebaeb6ec288280b0052ffec98ce912566eba279f2d0c74132",
           "jurisdiction_paragraph_ids": [
@@ -42684,6 +42830,33 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "bf717f8c083652e62c351b8b90519cb7ff35ca9df73966a4092727763fec972d",
+      "source_url": "https://historico.elsalvador.com/historico/165781/ee-uu-emiten-normas-sobre-detencion-de-inmigrantes.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-10-05",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T07:09:35.747200-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "cdeecd1dd489f862c39a1334fec93e7f85b8c1589e09bbd8403bb19c292190f4",
+          "jurisdiction_paragraph_ids": [
+            "p1"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5"
           ]
         }
       }
