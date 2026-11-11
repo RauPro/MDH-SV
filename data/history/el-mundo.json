@@ -34,16 +34,62 @@
     },
     "2026-11": {
       "status": "partial",
-      "posts_scanned": 35,
-      "pages_fetched": 35,
+      "posts_scanned": 37,
+      "pages_fetched": 37,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-11-11T07:02:48.632615+00:00",
+      "last_attempt_at": "2026-11-11T19:50:55.807992+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "348433fd5fa5488d0d85521e19d5b654e3a84cef4bf1038a68ef9e5493076d2f",
+      "title": "Condenan a prisión perpetua a hombre por violar a una menor",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/condenan-a-prision-perpetua-a-hombre-por-violar-a-una-menor",
+      "published_date": "2026-11-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-11T19:50:55.807992+00:00"
+      }
+    },
+    {
+      "id": "2b6643b69c2ed5dd5ec6717802e7c2b274b6970daf93f5ca7e4165d7f845c7fa",
+      "title": "Arrestan en Santa Ana a dominicano requerido por la Interpol por violación sexual",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/arrestan-en-santa-ana-a-dominicano-requerido-por-la-interpol-por-violacion-sexual",
+      "published_date": "2026-11-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_sexual_y_discriminacion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-11T19:50:55.807992+00:00"
+      }
+    },
     {
       "id": "39e18a9247db33fe5d04dba3afde8f7573bea6c9256f093140779585d3763a45",
       "title": "Diez años de prisión para un hombre por portar cinco porciones de marihuana",
@@ -2009,7 +2055,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-11T07:02:48.632615+00:00",
+    "last_attempt_at": "2026-11-11T19:50:55.807992+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -2096,9 +2142,11 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-23-anos-de-carcel-a-pandillero-por-homicidio-en-chapeltique-en-2016",
       "https://diario.elmundo.sv/nacionales/nicaraguense-condenado-por-lavado-de-dinero-en-su-pais-recibe-13-anos-de-carcel-por-traficar-cocaina-en-el-salvador",
       "https://diario.elmundo.sv/nacionales/diez-anos-de-prision-para-un-hombre-por-portar-cinco-porciones-de-marihuana",
-      "https://diario.elmundo.sv/nacionales/condenan-a-10-anos-de-carcel-a-dos-colaboradoras-de-la-pandilla-18-por-extorsionar-a-comerciante-en-apopa"
+      "https://diario.elmundo.sv/nacionales/condenan-a-10-anos-de-carcel-a-dos-colaboradoras-de-la-pandilla-18-por-extorsionar-a-comerciante-en-apopa",
+      "https://diario.elmundo.sv/nacionales/condenan-a-prision-perpetua-a-hombre-por-violar-a-una-menor",
+      "https://diario.elmundo.sv/nacionales/arrestan-en-santa-ana-a-dominicano-requerido-por-la-interpol-por-violacion-sexual"
     ],
-    "article_cursor": 81,
+    "article_cursor": 83,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -2585,6 +2633,18 @@
         "published_date": "2026-11-10",
         "last_attempt_at": "2026-11-11T07:02:48.632615+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/condenan-a-prision-perpetua-a-hombre-por-violar-a-una-menor": {
+        "status": "selected",
+        "published_date": "2026-11-11",
+        "last_attempt_at": "2026-11-11T19:50:55.807992+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/arrestan-en-santa-ana-a-dominicano-requerido-por-la-interpol-por-violacion-sexual": {
+        "status": "selected",
+        "published_date": "2026-11-11",
+        "last_attempt_at": "2026-11-11T19:50:55.807992+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -2592,11 +2652,11 @@
       "https://diario.elmundo.sv/nacionales": {
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
-        "duplicate_article_urls": 13,
-        "article_urls_matching_anchor": 3,
-        "article_urls_observed": 19,
-        "article_urls_selected": 3,
-        "last_attempt_at": "2026-11-11T07:02:48.632615+00:00"
+        "duplicate_article_urls": 12,
+        "article_urls_matching_anchor": 5,
+        "article_urls_observed": 20,
+        "article_urls_selected": 5,
+        "last_attempt_at": "2026-11-11T19:50:55.807992+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -2605,7 +2665,7 @@
         "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
         "article_urls_selected": 1,
-        "last_attempt_at": "2026-11-11T07:02:48.632615+00:00"
+        "last_attempt_at": "2026-11-11T19:50:55.807992+00:00"
       }
     },
     "index_screen_version": 3
