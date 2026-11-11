@@ -159,7 +159,7 @@ qué se guarda ni los límites; sin ellas el comportamiento es el anterior.
 | --- | --- |
 | `MDH_SCOPE_BATCH_COMMITS=true` | Guarda las evaluaciones de cada lote de alcance en un único commit en lugar de una escritura pausada por noticia. O se guarda el lote entero o nada; nunca se fuerza `main`. |
 | `MDH_SOURCE_FETCH_WORKERS=2..4` | Lee hasta ese número de fuentes a la vez dentro del mismo tope de lecturas. Varias lecturas simultáneas pueden recaer en un mismo medio: use el valor más bajo que baste. |
-| `MDH_SCOPE_REQUESTS_PER_CYCLE=1..8` | Solicitudes de alcance que puede usar un ciclo (por defecto 2, hasta 16 noticias cada una). |
+| `MDH_SCOPE_REQUESTS_PER_CYCLE=1..8` | Solicitudes de alcance que puede usar un ciclo (por defecto 2, hasta 16 noticias cada una). Una solicitud de alcance lee y guarda hasta 16 noticias, así que consume más tiempo de runner que una de extracción: súbalo junto con las dos variables anteriores y compruebe `phase_seconds` frente al modelo de minutos. |
 | `MDH_CYCLE_HOURS=1,13` | Horas UTC programadas. Reparte el saldo diario entre los ciclos que quedan, no entre horas en que nada se ejecuta. |
 
 Los informes de ejecución incluyen `phase_seconds` y, en la fase de alcance,
