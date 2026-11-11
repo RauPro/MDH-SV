@@ -24,9 +24,12 @@ import json
 import re
 from zoneinfo import ZoneInfo
 
+from .contracts.providers import GEMINI, valid_model
+
 MODEL = "gemini-3.5-flash-lite"
 STATE_PATH = "runtime/gemini-budget.json"
 PACIFIC = ZoneInfo("America/Los_Angeles")
+RESET_ZONES = {"America/Los_Angeles": PACIFIC, "UTC": timezone.utc}
 MAX_REQUESTS = 20_000
 MAX_STATE_BYTES = 4_000_000
 MAX_CAS_ATTEMPTS = 3
@@ -76,9 +79,13 @@ def _integer(value, minimum, maximum):
     return type(value) is int and minimum <= value <= maximum
 
 
+def next_reset(now, zone=PACIFIC):
+    local = _utc(now).astimezone(zone)
+    return datetime.combine(local.date() + timedelta(days=1), time(), zone).astimezone(timezone.utc)
+
+
 def next_pacific_midnight(now):
-    local = _utc(now).astimezone(PACIFIC)
-    return datetime.combine(local.date() + timedelta(days=1), time(), PACIFIC).astimezone(timezone.utc)
+    return next_reset(now, PACIFIC)
 
 
 @dataclass(frozen=True)
@@ -92,11 +99,23 @@ class BudgetConfig:
     batch_ceiling: int
     verified_at: str
     limits_source: str = "project_quota"
+    provider: str = GEMINI
+    reset_timezone: str = "America/Los_Angeles"
+
+    @property
+    def zone(self):
+        return RESET_ZONES[self.reset_timezone]
+
+    @property
+    def state_path(self):
+        return STATE_PATH if self.provider == GEMINI else f"runtime/llm-budget-{self.provider}.json"
 
     def __post_init__(self):
         if (not isinstance(self.project_id, str)
                 or not re.fullmatch(r"[a-z][a-z0-9-]{4,62}", self.project_id)
-                or self.model != MODEL
+                or (self.model != MODEL if self.provider == GEMINI else not valid_model(self.provider, self.model))
+                or not isinstance(self.reset_timezone, str) or self.reset_timezone not in RESET_ZONES
+                or (self.provider == GEMINI and self.reset_timezone != "America/Los_Angeles")
                 or not _integer(self.rpm, 1, MAX_REQUESTS)
                 or not _integer(self.input_tpm, TOKEN_FRAMING_ALLOWANCE + 1, 100_000_000)
                 or not _integer(self.daily_budget, 1, MAX_REQUESTS)
@@ -142,7 +161,7 @@ def initial_state(config, *, now, used_requests):
     if not _integer(used_requests, 0, MAX_REQUESTS):
         raise QuotaStateError("invalid_budget_seed")
     return {"schema_version": 1, "project_id": config.project_id, "model": config.model,
-            "day": now.astimezone(PACIFIC).date().isoformat(), "used_requests": used_requests,
+            "day": now.astimezone(getattr(config, "zone", PACIFIC)).date().isoformat(), "used_requests": used_requests,
             "updated_at": now.isoformat(), "cooldown_until": (now + timedelta(seconds=60)).isoformat(),
             "reservations": []}
 
@@ -155,11 +174,12 @@ def _validate_state(value, config):
             or not isinstance(value["reservations"], list) or len(value["reservations"]) > MAX_REQUESTS):
         raise QuotaStateError("invalid_budget_state")
     updated = _timestamp(value["updated_at"])
-    if value["day"] != updated.astimezone(PACIFIC).date().isoformat():
+    zone = getattr(config, "zone", PACIFIC)
+    if value["day"] != updated.astimezone(zone).date().isoformat():
         raise QuotaStateError("invalid_budget_day")
     if value["cooldown_until"] is not None:
         cooldown = _timestamp(value["cooldown_until"])
-        if cooldown > next_pacific_midnight(updated) + timedelta(seconds=60):
+        if cooldown > next_reset(updated, zone) + timedelta(seconds=60):
             raise QuotaStateError("invalid_budget_cooldown")
     previous = None
     same_day_count = 0
@@ -173,20 +193,20 @@ def _validate_state(value, config):
                 or (previous and instant < previous)):
             raise QuotaStateError("invalid_budget_reservation_clock")
         previous = instant
-        same_day_count += instant.astimezone(PACIFIC).date().isoformat() == value["day"]
+        same_day_count += instant.astimezone(zone).date().isoformat() == value["day"]
     if same_day_count > value["used_requests"]:
         raise QuotaStateError("invalid_budget_request_count")
     return deepcopy(value)
 
 
-def _advance(state, now):
+def _advance(state, now, zone=PACIFIC):
     if now < _timestamp(state["updated_at"]):
         raise QuotaStateError("budget_clock_moved_backwards")
-    day = now.astimezone(PACIFIC).date().isoformat()
+    day = now.astimezone(zone).date().isoformat()
     if day != state["day"]:
         # Requests dispatched before midnight can reach the provider after it.
         # Charge still-live previous-day reservations to both days, never refund.
-        boundary = datetime.combine(now.astimezone(PACIFIC).date(), time(), PACIFIC).astimezone(timezone.utc)
+        boundary = datetime.combine(now.astimezone(zone).date(), time(), zone).astimezone(timezone.utc)
         carried = sum(_timestamp(item["at"]) > boundary - timedelta(seconds=RESERVATION_RETENTION_SECONDS)
                       for item in state["reservations"])
         state["day"], state["used_requests"] = day, carried
@@ -212,7 +232,9 @@ class GeminiBudget:
     """GitHub Contents SHA-CAS ledger. Missing/invalid state never starts at zero."""
     def __init__(self, inbox, config: BudgetConfig, *, clock=utcnow):
         self.inbox, self.config, self.clock = inbox, config, clock
-        self.path = inbox.base + "/contents/" + STATE_PATH
+        self.state_path = getattr(config, "state_path", STATE_PATH)
+        self.zone = getattr(config, "zone", PACIFIC)
+        self.path = inbox.base + "/contents/" + self.state_path
         self.request_limit = None
         self.requests_this_run = 0
 
@@ -235,7 +257,7 @@ class GeminiBudget:
             raise QuotaStateError("budget_read_failed") from None
         if file is None:
             raise QuotaStateError("budget_state_missing_provision_explicitly")
-        if (not isinstance(file, dict) or file.get("type") != "file" or file.get("path") != STATE_PATH
+        if (not isinstance(file, dict) or file.get("type") != "file" or file.get("path") != self.state_path
                 or file.get("encoding") != "base64" or not _integer(file.get("size"), 1, MAX_STATE_BYTES)
                 or not isinstance(file.get("content"), str) or len(file["content"]) > MAX_STATE_BYTES * 2
                 or not isinstance(file.get("sha"), str) or not re.fullmatch(r"[a-f0-9]{40,64}", file["sha"])):
@@ -253,7 +275,9 @@ class GeminiBudget:
         raw = (json.dumps(state, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n").encode()
         if len(raw) > MAX_STATE_BYTES:
             raise QuotaStateError("budget_state_too_large")
-        payload = {"message": message, "content": base64.b64encode(raw).decode(), "branch": "main"}
+        provider = getattr(self.config, "provider", GEMINI)
+        payload = {"message": message if provider == GEMINI else message.replace("Gemini", provider),
+                   "content": base64.b64encode(raw).decode(), "branch": "main"}
         if sha is not None:
             payload["sha"] = sha
         result = self.inbox.call("PUT", self.path, json=payload)
@@ -276,7 +300,7 @@ class GeminiBudget:
 
     def snapshot(self):
         state, _ = self._read()
-        state = _advance(state, _utc(self.clock()))
+        state = _advance(state, _utc(self.clock()), self.zone)
         return {"day": state["day"], "used_requests": state["used_requests"],
                 "remaining_requests": max(0, self.config.daily_budget - state["used_requests"]),
                 "cooldown_until": state["cooldown_until"]}
@@ -293,7 +317,7 @@ class GeminiBudget:
         if now < reservation.reserved_at:
             raise QuotaStateError("budget_clock_moved_backwards")
         if (now > reservation.dispatch_deadline
-                or now.astimezone(PACIFIC).date().isoformat() != reservation.day):
+                or now.astimezone(self.zone).date().isoformat() != reservation.day):
             raise QuotaDeferred("reservation_expired", now + timedelta(seconds=1))
 
     def reserve(self, payload):
@@ -304,13 +328,13 @@ class GeminiBudget:
         for _ in range(MAX_CAS_ATTEMPTS):
             state, sha = self._read()
             now = _utc(self.clock())
-            state = _advance(state, now)
+            state = _advance(state, now, self.zone)
             if tokens >= self.config.input_tpm:
-                raise QuotaDeferred("payload_exceeds_tpm", next_pacific_midnight(now))
+                raise QuotaDeferred("payload_exceeds_tpm", next_reset(now, self.zone))
             if state["cooldown_until"]:
                 raise QuotaDeferred("provider_cooldown", _timestamp(state["cooldown_until"]))
             if state["used_requests"] >= self.config.daily_budget:
-                raise QuotaDeferred("daily_budget_exhausted", next_pacific_midnight(now))
+                raise QuotaDeferred("daily_budget_exhausted", next_reset(now, self.zone))
             recent = state["reservations"]
             running_tokens = sum(item["input_tokens"] for item in recent)
             if len(recent) >= self.config.rpm or running_tokens + tokens > self.config.input_tpm:
@@ -333,18 +357,24 @@ class GeminiBudget:
                 raise QuotaStateError("budget_reservation_write_failed") from None
             self.requests_this_run += 1
             reservation = Reservation(now, state["day"], state["used_requests"], tokens,
-                min(now + timedelta(seconds=DISPATCH_LIFETIME_SECONDS), next_pacific_midnight(now)))
+                min(now + timedelta(seconds=DISPATCH_LIFETIME_SECONDS), next_reset(now, self.zone)))
             self.assert_dispatch_allowed(reservation)
             return reservation
         raise QuotaStateError("budget_concurrent_update_exhausted")
 
-    def record_429(self):
-        """Stop all workers until the next Pacific day; no automatic 429 retries."""
+    def record_429(self, retry_after=None):
+        """Stop all workers until the next Pacific day; no automatic 429 retries.
+
+        Another provider's ledger pauses until its own daily reset, or for the
+        bounded wait that provider requested, never less than one minute.
+        """
         for _ in range(MAX_CAS_ATTEMPTS):
             state, sha = self._read()
             now = _utc(self.clock())
-            state = _advance(state, now)
-            deadline = next_pacific_midnight(now)
+            state = _advance(state, now, self.zone)
+            deadline = next_reset(now, self.zone)
+            if getattr(self.config, "provider", GEMINI) != GEMINI and _integer(retry_after, 1, 3600):
+                deadline = min(deadline, now + timedelta(seconds=max(60, retry_after)))
             if state["cooldown_until"]:
                 deadline = max(deadline, _timestamp(state["cooldown_until"]))
             state["cooldown_until"] = deadline.isoformat()

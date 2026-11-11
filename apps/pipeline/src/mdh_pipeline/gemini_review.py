@@ -1017,7 +1017,9 @@ def main():
         if not 1 <= args.limit <= 50:
             raise QuotaStateError("invalid_requested_batch_size")
         inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
-        budget = GeminiBudget(inbox, config)
+        from .llm_engine import load_fallbacks, with_fallbacks
+        lanes = load_fallbacks(inbox)
+        budget = with_fallbacks(inbox, GeminiBudget(inbox, config), lanes=lanes)
         budget.snapshot()  # Missing budget state fails closed before claiming work.
         slots = HourlySlots(inbox)
         source = ("github_schedule" if os.environ.get("GITHUB_EVENT_NAME") == "schedule"
@@ -1036,7 +1038,8 @@ def main():
                 retry_failed=args.retry_failed,
                 allocation_ledger=AllocationLedger(inbox, project_id=config.project_id, model=model),
                 run_id=os.environ.get("GITHUB_RUN_ID", ""), exceptions_path=args.exceptions,
-                scope_audits_path=args.scope_audits)
+                scope_audits_path=args.scope_audits, **({"budget_factory": lambda queue, settings: with_fallbacks(
+                    queue, GeminiBudget(queue, settings), lanes=lanes)} if lanes else {}))
         else:
             report = process_queue(inbox, api_key=key, model=model, budget=budget,
                                    limit=min(args.limit, config.batch_ceiling), retry_failed=args.retry_failed, archive=archive)
@@ -1045,6 +1048,8 @@ def main():
         slots.finish(claim, status=status,
                      counts={name: report[name] for name in ("attempted", "news_dossiers", "errors", "migrated", "http_requests")})
         report["hourly_slot"] = claim["hour"]
+        if lanes:
+            report["fallback_providers"] = [lane.report(utcnow()) for lane in lanes]
     except Exception as error:
         if claim is not None and slots is not None:
             try:

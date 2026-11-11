@@ -18,7 +18,7 @@ from .automatic_news import (
     response_schema,
 )
 from .gemini_budget import TOKEN_FRAMING_ALLOWANCE, estimate_input_tokens
-from .gemini_draft import GeminiDraftError, _input, _request, _single_json
+from .gemini_draft import GeminiDraftError, _input, _request, _single_json, served_by
 
 MAX_BATCH_SIZE = 4
 MAX_BATCH_INPUT_TOKENS = 90_000
@@ -207,6 +207,7 @@ def evaluate_batch(items, *, api_key, model, budget, session=None, now=None):
     finally:
         if owned:
             session.close()
+    provider, served_model = served_by(raw, model)
     results = {}
     for row in prepared:
         identifier = row["reference"]["id"]
@@ -217,7 +218,7 @@ def evaluate_batch(items, *, api_key, model, budget, session=None, now=None):
         if safe["source_title"] == PROTECTED_TITLE:
             protected.add("source_title")
         judgment["protected_fields"] = sorted(protected)
-        public = project_dossier(safe, judgment, source_hash=row["article"]["content_sha256"], model=model,
-                                 truncated=bool(row["article"].get("truncated")), now=now)
+        public = project_dossier(safe, judgment, source_hash=row["article"]["content_sha256"], model=served_model,
+                                 provider=provider, truncated=bool(row["article"].get("truncated")), now=now)
         results[identifier] = {"judgment": judgment, "dossier": public, "usage": None}
     return results

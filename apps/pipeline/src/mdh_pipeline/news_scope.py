@@ -17,7 +17,7 @@ import requests
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 from .gemini_budget import GeminiBudget, QuotaStateError, estimate_input_tokens
-from .gemini_draft import GeminiDraftError, _input, _request, _single_json
+from .gemini_draft import GeminiDraftError, _input, _request, _single_json, served_by
 from .publishers import SOURCES
 
 from .news_scope_policy import SCOPE_PROMPT, SCOPE_POLICY
@@ -182,6 +182,7 @@ def classify_scope_batch(items, *, api_key, model, budget, request_session=None)
     finally:
         if owned:
             session.close()
+    provider, served_model = served_by(response, model)
     by_id = {item.candidate_id: item for item in assessments}
     if len(by_id) != len(assessments) or set(by_id) != identities:
         raise GeminiDraftError("scope_identity_mismatch")
@@ -199,6 +200,6 @@ def classify_scope_batch(items, *, api_key, model, budget, request_session=None)
                 "jurisdiction_paragraph_ids": assessment.jurisdiction_paragraph_ids,
                 "relevance_paragraph_ids": assessment.relevance_paragraph_ids},
             "source_read": source_read,
-            "extraction": {"provider": "gemini", "model": model,
+            "extraction": {"provider": provider, "model": served_model,
                            "prompt_version": SCOPE_PROMPT, "prepared_at": prepared_at}})
     return results

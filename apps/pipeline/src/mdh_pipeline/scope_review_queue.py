@@ -529,7 +529,8 @@ def main():
     try:
         inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
         config = BudgetConfig(**json.loads(os.environ["MDH_GEMINI_BUDGET_CONFIG"]))
-        budget = GeminiBudget(inbox, config)
+        from .llm_engine import with_fallbacks
+        budget = with_fallbacks(inbox, GeminiBudget(inbox, config))
         root = args.drafts.parent if args.drafts else Path.cwd()
         reviews = load_scope_cache(args.scope_reviews or root / "scope-reviews")
         attempts = load_scope_cache(args.attempts or root / "scope-attempts", maximum_bytes=10_000)

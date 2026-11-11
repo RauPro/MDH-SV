@@ -24,6 +24,7 @@ from .contracts.catalog import Publication as Publication
 from .privacy import PRIVACY_POLICY_VERSION, minimize_fields, privacy_flags as _privacy_flags
 from .source_urls import canonical_url, normalize
 from .news_scope_policy import SCOPE_POLICY
+from .contracts.providers import GEMINI, SERVED_BY, valid_model
 
 PROMPT_VERSION = "mdh-universal-news-grounded-11-inclusive-violence"
 MAX_TEXT_CHARS = 32_000
@@ -33,6 +34,7 @@ MAX_ATTEMPTS = 3
 MAX_USAGE_TOKENS = 2_000_000
 API_TIMEOUT = (10, 90)
 MAX_BUDGET_WAIT_SECONDS = 125
+MAX_LANE_SWITCHES = 4
 T = TypeVar("T")
 
 
@@ -425,27 +427,54 @@ def _reserve_with_bounded_wait(budget, payload, *, remaining_wait):
             waited += delay
 
 
+def served_by(response, model):
+    """Provider and model of the lane that produced a response; only this client sets it."""
+    lane = response.get(SERVED_BY) if isinstance(response, dict) else None
+    if isinstance(lane, dict) and valid_model(lane.get("provider"), lane.get("model")):
+        return lane["provider"], lane["model"]
+    return GEMINI, model
+
+
 def _request(payload, *, api_key, model, session, budget=None):
     endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     budget_waited = 0.0
-    for attempt in range(MAX_ATTEMPTS):
+    attempt = switches = 0
+    while attempt < MAX_ATTEMPTS:
         response = None
+        lane = None
         try:
             if budget is not None:
                 reservation, waited = _reserve_with_bounded_wait(budget, payload,
                     remaining_wait=MAX_BUDGET_WAIT_SECONDS - budget_waited)
                 budget_waited += waited
                 budget.assert_dispatch_allowed(reservation)
-            response = session.post(endpoint, headers={"X-goog-api-key": api_key, "Content-Type": "application/json"},
-                                    json=payload, timeout=API_TIMEOUT, allow_redirects=False, stream=True)
+                # Only the multi-provider budget tags a reservation with its lane.
+                lane = getattr(reservation, "lane", None)
+            foreign = lane is not None and lane.provider != GEMINI
+            if foreign:
+                response = session.post(lane.endpoint, headers=lane.headers, json=lane.encode(payload),
+                                        timeout=API_TIMEOUT, allow_redirects=False, stream=True)
+            else:
+                response = session.post(endpoint, headers={"X-goog-api-key": api_key, "Content-Type": "application/json"},
+                                        json=payload, timeout=API_TIMEOUT, allow_redirects=False, stream=True)
             status = response.status_code
             if status == 429 and budget is not None:
                 # Persist a project-wide cooldown before surfacing the deferral.
                 # Each retry consumes quota; a 429 must never trigger a retry loop.
-                retry_at = budget.record_429()
+                if lane is None:
+                    retry_at = budget.record_429()
+                else:
+                    retry_at = budget.reject(reservation, response.headers.get("Retry-After", ""))
+                    if switches < MAX_LANE_SWITCHES and budget.open_lanes():
+                        switches += 1
+                        continue
                 raise QuotaDeferred("provider_cooldown", retry_at)
             retryable = status == 429 or 500 <= status < 600
             if status != 200:
+                if (lane is not None and (retryable or foreign) and attempt < MAX_ATTEMPTS - 1
+                        and budget.bench(reservation, status)):
+                    attempt += 1
+                    continue
                 if retryable and attempt < MAX_ATTEMPTS - 1:
                     delay = min(15, 2 ** (attempt + 1))
                     retry_after = response.headers.get("Retry-After", "")
@@ -456,6 +485,7 @@ def _request(payload, *, api_key, model, session, budget=None):
                     response.close()
                     time.sleep(delay)
                     budget_waited += delay
+                    attempt += 1
                     continue
                 raise GeminiDraftError("provider_http_error", retryable=retryable, status_code=status)
             size = response.headers.get("Content-Length")
@@ -466,14 +496,23 @@ def _request(payload, *, api_key, model, session, budget=None):
                 content.extend(chunk)
                 if len(content) > MAX_RESPONSE_BYTES:
                     raise GeminiDraftError("response_too_large")
-            return _single_json(bytes(content))
+            document = _single_json(bytes(content))
+            if foreign:
+                return lane.decode(document)
+            if isinstance(document, dict):
+                document.pop(SERVED_BY, None)
+            return document
         except (requests.Timeout, requests.ConnectionError):
             if attempt < MAX_ATTEMPTS - 1:
+                if lane is not None and budget.bench(reservation, 0):
+                    attempt += 1
+                    continue
                 delay = 2 ** (attempt + 1)
                 if budget is not None and budget_waited + delay > MAX_BUDGET_WAIT_SECONDS:
                     raise GeminiDraftError("provider_unavailable", retryable=True) from None
                 time.sleep(delay)
                 budget_waited += delay
+                attempt += 1
                 continue
             raise GeminiDraftError("provider_unavailable", retryable=True) from None
         except requests.RequestException:
@@ -482,7 +521,6 @@ def _request(payload, *, api_key, model, session, budget=None):
             if response is not None:
                 response.close()
     raise GeminiDraftError("provider_unavailable", retryable=True)
-
 
 def _response_body(response, anchors):
     try:
@@ -765,6 +803,7 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None, b
     finally:
         if owned_session:
             session.close()
+    provider, served_model = served_by(raw, model)
     scope = {name: getattr(output, name) for name in ("jurisdiction", "relevance", "record_type")}
     for name in scope:
         citations = getattr(output.scope_evidence, name)
@@ -780,7 +819,7 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None, b
             for field in ScopeEvidence.model_fields}},
         "completion_required": ["Revisión humana de alcance, privacidad y hechos antes de preparar la publicación."],
         "notice": "Extracción automatizada privada. Citas literales no equivalen a hechos verificados; no publicar sin revisión humana.",
-        "extraction": {"provider": "gemini", "model": model, "prompt_version": PROMPT_VERSION,
+        "extraction": {"provider": provider, "model": served_model, "prompt_version": PROMPT_VERSION,
                        "privacy_policy_version": PRIVACY_POLICY_VERSION, "protected_fields": [],
                        "response_mode": "json_schema_with_local_validation",
                        "content_sha256": article["content_sha256"], "fetched_at": article["fetched_at"],
@@ -866,7 +905,9 @@ def extract_draft(candidate, article, *, api_key, model, request_session=None, b
             penitentiary_related=extracted.penitentiary_related.value or False,
             coverage="El Salvador según clasificación automatizada; alcance pendiente de revisión humana.",
             source_locator="Párrafos " + ", ".join(cited_ids) + "; localización sobre texto extraído, no numeración editorial del medio.",
-            source_check_method="Texto público consultado y extraído automáticamente con Gemini; citas contrastadas literalmente, "
+            source_check_method="Texto público consultado y extraído automáticamente con "
+                                + ("Gemini" if provider == GEMINI else f"un modelo de lenguaje ({provider})")
+                                + "; citas contrastadas literalmente, "
                                 "sin corroboración independiente ni revisión humana.",
             privacy_note="Borrador privado con minimización automática; revisión humana de identidad, datos sensibles y ubicación obligatoria.",
         )

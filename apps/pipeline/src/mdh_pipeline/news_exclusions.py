@@ -16,7 +16,7 @@ import requests
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from .gemini_budget import GeminiBudget, QuotaStateError, estimate_input_tokens
-from .gemini_draft import GeminiDraftError, _request
+from .gemini_draft import GeminiDraftError, _request, served_by
 from .news_scope import _response, prepare_scope_batch, MAX_SCOPE_REQUEST_UNITS
 from .news_scope_policy import CURRENT_SCOPE_PROMPTS, EXCLUSION_PROMPT, POLICY_VERSION, SCOPE_POLICY, SCOPE_PROMPT
 
@@ -263,10 +263,12 @@ def verify_exclusions_batch(items, *, api_key, model, budget, request_session=No
     owned = request_session is None
     session = request_session if request_session is not None else requests.Session()
     try:
-        assessments = _response(_request(payload, api_key=api_key, model=model, session=session, budget=budget), ExclusionResponse)
+        raw = _request(payload, api_key=api_key, model=model, session=session, budget=budget)
+        assessments = _response(raw, ExclusionResponse)
     finally:
         if owned:
             session.close()
+    provider, served_model = served_by(raw, model)
     by_id = {row.candidate_id: row for row in assessments}
     if len(by_id) != len(assessments) or set(by_id) != {row[0]["id"] for row in prepared}:
         raise GeminiDraftError("scope_identity_mismatch")
@@ -285,7 +287,7 @@ def verify_exclusions_batch(items, *, api_key, model, budget, request_session=No
             "classification": {"jurisdiction": row.jurisdiction, "relevance": row.relevance},
             "evidence": {"content_sha256": digest, "jurisdiction_paragraph_ids": jurisdiction_ids,
                          "relevance_paragraph_ids": relevance_ids},
-            "source_read": source_read, "extraction": {"provider": "gemini", "model": model,
+            "source_read": source_read, "extraction": {"provider": provider, "model": served_model,
                 "prompt_version": EXCLUSION_PROMPT, "prepared_at": timestamp}}
         first = item["first_review"]
         outcome = _outcome(first, second, row.reason_code)
