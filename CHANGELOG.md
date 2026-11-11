@@ -10,6 +10,16 @@ código. La política completa está en [docs/RELEASES.md](docs/RELEASES.md).
 
 ### Añadido
 
+- Carriles de respaldo opcionales de coste cero (Groq, NVIDIA, Mistral y
+  OpenRouter gratuito) para la cola privada, cada uno con clave, tope explícito
+  y registro propios (`MDH_LLM_FALLBACK_CONFIG`, `mdh_pipeline.llm_engine`).
+  Sin configuración el comportamiento no cambia.
+- Procedencia pública del proveedor: `llm_grounded_scope` con `provider` y
+  `llm_evidence_review` con `evaluator_provider`. Las formas de Gemini no cambian.
+- Variables opcionales para gastar menos minutos de runner por solicitud:
+  commit único por lote de alcance, lecturas de fuentes en paralelo, más
+  solicitudes de alcance por ciclo y reparto diario según los ciclos programados.
+
 - `MAINTAINERS.md` con áreas, responsable, suplentes vacantes, continuidad y
   tareas iniciales.
 - Comprobación periódica de deriva operativa y credenciales de solo lectura

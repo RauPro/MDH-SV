@@ -64,6 +64,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
+          MDH_LLM_FALLBACK_CONFIG: ${{ vars.MDH_LLM_FALLBACK_CONFIG }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           MDH_SCOPE_REQUESTS: ${{ inputs.max_requests || '2' }}
           PYTHONPATH: monitor/apps/pipeline/src:monitor/packages/schema/src
         run: python -m mdh_pipeline.scope_review_queue --drafts inbox/drafts --scope-reviews inbox/scope-reviews --attempts inbox/scope-attempts --verifications inbox/scope-verifications --rechecks inbox/runtime/news-scope-rechecks.json --archive candidates.json --excluded-ids scope-exclusions.json --max-requests "$MDH_SCOPE_REQUESTS"

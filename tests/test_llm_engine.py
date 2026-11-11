@@ -416,3 +416,28 @@ def test_evaluation_on_a_fallback_lane_publishes_a_named_review():
     assert (automation["method"], automation["evaluator_provider"], automation["evaluator_model"]) == (
         "llm_evidence_review", "groq", GROQ_MODEL)
     assert result["dossier"]["human_reviewed"] is False and result["usage"]["total_tokens"] == 14
+
+
+def test_private_templates_expose_fallback_keys_only_where_the_gemini_key_already_is():
+    from pathlib import Path
+    import yaml
+    folder = Path(__file__).resolve().parents[1] / "ops/review-queue/.github/workflows"
+    secrets = {name: "${{ secrets." + name + " }}" for name in llm_engine.KEY_VARIABLES.values()}
+    keyed = 0
+    for path in sorted(folder.glob("*.yml")):
+        document = yaml.load(path.read_text(), Loader=yaml.BaseLoader)
+        for job in document["jobs"].values():
+            for step in job["steps"]:
+                env = step.get("env", {})
+                if "GEMINI_API_KEY" in env:
+                    keyed += 1
+                    assert {name: env.get(name) for name in secrets} == secrets
+                    assert env[CONFIG_VARIABLE] == "${{ vars." + CONFIG_VARIABLE + " }}"
+                else:
+                    assert not set(env) & (set(secrets) | {CONFIG_VARIABLE})
+                    assert not any(name in step.get("run", "") for name in secrets)
+    assert keyed == 4
+    extract = yaml.load((folder / "extract.yml").read_text(), Loader=yaml.BaseLoader)
+    env = next(step["env"] for step in extract["jobs"]["extract"]["steps"] if "GEMINI_API_KEY" in step.get("env", {}))
+    for name in ("MDH_CYCLE_HOURS", "MDH_SCOPE_REQUESTS_PER_CYCLE", "MDH_SCOPE_BATCH_COMMITS", "MDH_SOURCE_FETCH_WORKERS"):
+        assert env[name] == "${{ vars." + name + " }}"

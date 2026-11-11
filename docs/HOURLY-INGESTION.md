@@ -71,7 +71,8 @@ La configuración distingue dos procedencias explícitas:
 El sistema no cambia a `operator_cap` por sí solo. No se puede garantizar la
 ausencia de respuestas 429 cuando las cuotas reales no son visibles. Este modo
 limita las solicitudes, detiene el procesamiento ante un 429 y no habilita
-facturación ni cambia automáticamente de modelo o proyecto. Confirmar el nivel
+facturación ni cambia de proyecto. Sólo usa otro proveedor gratuito si el operador
+configuró un carril de respaldo explícito ([GEMINI-REVIEW.md](GEMINI-REVIEW.md#proveedores-de-respaldo)). Confirmar el nivel
 gratuito es una comprobación operativa; el registro de solicitudes no consulta
 ni modifica la configuración de facturación de Google.
 
@@ -136,7 +137,7 @@ Un 429 detiene llamadas hasta la siguiente medianoche de
 `America/Los_Angeles`. La fecha de reinicio sigue el horario de verano del
 Pacífico; no se codifica una hora fija de El Salvador. La pausa se aplica también
 en `operator_cap`, aunque quede saldo del tope propio. No hay reintentos
-automáticos de ese 429 ni cambio a otro modelo o nivel de pago. La cuota agotada no marca
+automáticos de ese 429 ni cambio a un nivel de pago; con carriles de respaldo configurados, las solicitudes siguientes pasan a ellos. La cuota agotada no marca
 la noticia como error ni modifica sus intentos o su borrador. Faltas de datos,
 revisión humana y publicación conservan sus reglas anteriores.
 
@@ -145,6 +146,29 @@ hora de inicio, retraso y resultado. Todos los disparos comparten ese registro.
 Si una ejecución se interrumpe, no se repite en la misma hora; puede continuar
 en la siguiente. Una solicitud atrasada hasta dos horas consume la hora actual,
 sin acumular lotes atrasados. Solicitudes más antiguas o futuras se rechazan.
+
+## Aprovechar mejor cada minuto de runner
+
+El ritmo lo limitan los minutos gratuitos de Actions del repositorio privado, no
+la cuota de Gemini: con dos ciclos diarios y 16 solicitudes por ciclo se usan
+unas 29 de las 240 solicitudes diarias del tope propio. Estas variables de
+Actions, todas opcionales, reducen el tiempo de runner por solicitud sin cambiar
+qué se guarda ni los límites; sin ellas el comportamiento es el anterior.
+
+| Variable | Efecto |
+| --- | --- |
+| `MDH_SCOPE_BATCH_COMMITS=true` | Guarda las evaluaciones de cada lote de alcance en un único commit en lugar de una escritura pausada por noticia. O se guarda el lote entero o nada; nunca se fuerza `main`. |
+| `MDH_SOURCE_FETCH_WORKERS=2..4` | Lee hasta ese número de fuentes a la vez dentro del mismo tope de lecturas. Varias lecturas simultáneas pueden recaer en un mismo medio: use el valor más bajo que baste. |
+| `MDH_SCOPE_REQUESTS_PER_CYCLE=1..8` | Solicitudes de alcance que puede usar un ciclo (por defecto 2, hasta 16 noticias cada una). |
+| `MDH_CYCLE_HOURS=1,13` | Horas UTC programadas. Reparte el saldo diario entre los ciclos que quedan, no entre horas en que nada se ejecuta. |
+
+Los informes de ejecución incluyen `phase_seconds` y, en la fase de alcance,
+`seconds` (fuentes, modelo y almacenamiento). Subir el tope de 16 solicitudes
+por ciclo es una decisión operativa aparte: mida varias ejecuciones con las
+variables activas, actualice `gemini_minutes_per_request` y
+`max_requests_per_cycle` en `ops/actions-minutes-budget.json` junto con el
+`batch_size` del disparador y de las plantillas, y compruebe que
+`tests/test_actions_minutes_budget.py` sigue dentro de los minutos incluidos.
 
 ## Instalación y comprobación
 

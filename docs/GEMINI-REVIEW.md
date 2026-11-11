@@ -13,8 +13,9 @@ oficiales conservan sus procesos de revisión humana separados.
   API de secretos cifrados de GitHub. Su valor no se guarda en archivos versionados,
   comandos de terminal ni logs.
 - Variable de Actions: `GEMINI_MODEL=gemini-3.5-flash-lite`. La extracción y la
-  evaluación emplean el modelo configurado. La segunda pasada no es otro
-  proveedor ni constituye una fuente independiente.
+  evaluación emplean el modelo configurado. La segunda pasada no constituye
+  una fuente independiente, tampoco cuando la atiende un proveedor de respaldo
+  (véase «Proveedores de respaldo»).
 - Vercel Cron solicita **Preparar fichas con Gemini** dos veces al día, a las
   01:07 y 13:07 UTC; GitHub conserva el respaldo al minuto 23 de esas mismas
   horas en `extract-fallback.yml`, un workflow hermano que no dispara la cadena
@@ -41,12 +42,67 @@ oficiales conservan sus procesos de revisión humana separados.
   conservadoras por minuto, bajo `limits_source: "project_quota"`. Los límites del
   nivel gratuito de Google son 15 solicitudes por minuto y 500 por día, consultados
   en la consola de Google Cloud el 1-11-2026 (`rpd: 500` verificado). Un 429 detiene las llamadas hasta el siguiente
-  día del Pacífico. No se activa facturación ni se cambia de modelo para continuar.
+  día del Pacífico. No se activa facturación. Sólo si el operador configuró carriles
+  de respaldo explícitos, las solicitudes siguientes pasan a ellos.
 - `automatic_validation_limit` en el publicador limita las llamadas adicionales
   de cada ejecución, con valor predeterminado 50. Es sólo un techo: el reparto
   horario y el saldo compartido determinan cuántas pueden ejecutarse. Cada llamada
   puede evaluar hasta cuatro fichas. Una ejecución manual no reinicia el contador
   y una solicitud en GitHub tampoco lo elude.
+
+## Proveedores de respaldo
+
+Sin la variable `MDH_LLM_FALLBACK_CONFIG` el comportamiento es el descrito arriba:
+sólo Gemini. La variable es una lista JSON de carriles; cada elemento tiene los
+mismos campos que `MDH_GEMINI_BUDGET_CONFIG` más `provider`, `reset_timezone`
+(`UTC` o `America/Los_Angeles`) y, opcionalmente, `response_mode`
+(`json_schema`, `json_object` o `guided_json`). Proveedores admitidos, todos de
+coste cero: `groq`, `nvidia`, `mistral` y `openrouter` (sólo `openrouter/free` o
+modelos `:free`). Los proveedores de pago no existen en el registro, y las URL de
+destino están fijadas en el código: la configuración no puede redirigir una
+solicitud ni una clave.
+
+Cada carril usa su propio secreto (`GROQ_API_KEY`, `NVIDIA_API_KEY`,
+`MISTRAL_API_KEY`, `OPENROUTER_API_KEY`) y su propio registro
+`runtime/llm-budget-<proveedor>.json`. Los límites son topes declarados por el
+operador tras leerlos en la consola de cada proveedor; no hay valores por defecto.
+Un registro ausente no se crea solo: el carril queda sin usar hasta provisionarlo.
+El registro está vinculado a la cuenta y al modelo declarados; cambiar de modelo
+exige retirar ese archivo y provisionarlo de nuevo con el consumo previo real.
+
+```sh
+python -m mdh_pipeline.llm_engine bootstrap --provider groq --used-requests 0
+python -m mdh_pipeline.llm_engine probe --provider groq     # una solicitud con texto ficticio
+python -m mdh_pipeline.llm_engine status
+```
+
+`probe` reserva una solicitud, envía un texto ficticio y sólo informa si la
+respuesta fue JSON válido; no imprime texto del modelo. Ejecútelo antes de
+confiar en un carril: los formatos de salida estructurada de estos proveedores
+no se han comprobado contra sus API reales desde este repositorio.
+
+Gemini sigue siendo el carril principal. Un carril de respaldo atiende una
+solicitud cuando Gemini está en pausa por un 429, sin saldo, con el minuto lleno
+o devuelve un error de servidor. El tope de solicitudes de la ejecución es único
+para todos los carriles. Un 429 de un carril de respaldo lo pausa hasta su propio
+reinicio diario o, si el proveedor indica una espera, durante esa espera (mínimo
+un minuto). Una clave rechazada cierra el carril en esa ejecución. Un registro
+de Gemini ausente o corrupto sigue deteniendo todo.
+
+La procedencia registra el carril real. Los borradores y evaluaciones privadas
+guardan `extraction.provider` y `extraction.model`. En los datos públicos una
+clasificación de respaldo aparece como `llm_grounded_scope` con `provider`, y una
+evaluación como `llm_evidence_review` con `evaluator_provider`
+([CONTRACTS.md](CONTRACTS.md#procedencia-del-modelo)). Los borradores extraídos
+por un carril de respaldo no generan ubicaciones `gemini_*`; su ubicación procede
+de las reglas `source_*`. Las instrucciones y los validadores locales son los
+mismos para todos los carriles; una respuesta que no los cumple se rechaza igual.
+
+Antes de activar un carril, valore que el texto de las noticias se envía a ese
+tercero. Los niveles gratuitos pueden usar las solicitudes para entrenar modelos
+(Mistral lo permite desactivar; en OpenRouter depende del modelo), y NVIDIA
+limita su acceso gratuito a prototipado y pruebas. Las cifras de límites cambian
+con frecuencia: regístrelas con su fecha en `verified_at`.
 
 El reparto se calcula con el trabajo elegible de clasificación, extracción y
 validación; no usa la cantidad de issues abiertas. Con las tres colas ocupadas

@@ -225,7 +225,7 @@ por ejecución. El saldo no utilizado y confirmado de las etapas anteriores pued
 pasar al evaluador. Evaluación, reextracción por fuente cambiada y reintentos
 comparten `runtime/gemini-budget.json` con el extractor. No se amplía el tope
 propio de 240 solicitudes diarias, 2 por minuto y 200 000 unidades conservadoras
-de entrada por minuto, ni se utiliza otro proveedor o una clave para eludirlo. Cada intento HTTP
+de entrada por minuto. Un carril de respaldo sólo se usa si el operador lo configuró con su propio tope explícito ([GEMINI-REVIEW.md](GEMINI-REVIEW.md#proveedores-de-respaldo)). Cada intento HTTP
 se reserva antes del envío; un 429 detiene los trabajadores hasta el siguiente
 día de cuota. El tope configurado es operativo, no una afirmación de los límites
 no publicados por Google. La cuota consumida fuera de estos trabajadores no

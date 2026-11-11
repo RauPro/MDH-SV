@@ -143,6 +143,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
           MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
+          MDH_LLM_FALLBACK_CONFIG: ${{ vars.MDH_LLM_FALLBACK_CONFIG }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          MDH_CYCLE_HOURS: ${{ vars.MDH_CYCLE_HOURS }}
           VALIDATION_LIMIT: ${{ inputs.automatic_validation_limit || '50' }}
           VALIDATION_BATCH_SIZE: '4'
           MDH_ALLOCATION_SOURCE_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.name == 'Preparar fichas con Gemini' && format('{0}', github.event.workflow_run.id) || '' }}

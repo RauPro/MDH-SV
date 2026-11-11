@@ -119,7 +119,9 @@ Publica sólo campos respaldados y seguros; la
 generación por sí sola no autoriza publicar. Los fallos ordinarios conservan
 reintentos acotados y los fallos de configuración requieren intervención técnica.
 Las solicitudes de GitHub permiten reevaluar o corregir fichas; no se envía al
-modelo el texto de los issues. Véase el [procedimiento Gemini](GEMINI-REVIEW.md).
+modelo el texto de los issues. Véase el [procedimiento Gemini](GEMINI-REVIEW.md),
+que describe también los carriles de respaldo opcionales, y las variables para
+[aprovechar cada minuto de runner](HOURLY-INGESTION.md#aprovechar-mejor-cada-minuto-de-runner).
 
 ## Presupuesto de minutos de Actions
 

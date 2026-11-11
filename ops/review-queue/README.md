@@ -115,7 +115,7 @@ Clasificación, extracción, evaluación y reintentos comparten
 200 000 unidades conservadoras de entrada por minuto y las pausas
 ante 429. Los límites del nivel gratuito de Google son 15 solicitudes por minuto
 y 500 por día (consola de Google Cloud, 1-11-2026). No se activa facturación,
-no se cambia de modelo al agotar saldo y los disparos manuales no reinician el contador.
+sólo se usa otro proveedor gratuito si hay carriles de respaldo configurados, y los disparos manuales no reinician el contador.
 
 El extractor registra el reparto en `runtime/news-allocation.json`. Con un cupo
 horario de 10 y trabajo en las tres colas, el plan asigna 2 llamadas a clasificación,
@@ -265,8 +265,11 @@ permanece en Actions Secrets y `GEMINI_MODEL` selecciona el modelo. La variable
 Sin configuración o registro válidos, el procesador no llama a Google.
 La clave Gemini no se guarda en Issues, fichas, archivos públicos ni Vercel.
 El disparador Vercel utiliza una credencial separada de GitHub App con Actions:write
-para este repositorio. El evaluador es una segunda pasada de Gemini sobre la
-misma fuente, no una corroboración independiente. El motor de reglas decide qué
+para este repositorio. El evaluador es una segunda pasada automática sobre la
+misma fuente (Gemini o, si se configuró, un carril de respaldo identificado en la
+procedencia), no una corroboración independiente. Las claves de respaldo
+(`GROQ_API_KEY`, `NVIDIA_API_KEY`, `MISTRAL_API_KEY`, `OPENROUTER_API_KEY`) son
+secretos de Actions opcionales y `MDH_LLM_FALLBACK_CONFIG` declara sus topes. El motor de reglas decide qué
 campos conservar después de validar el resultado. El publicador actualiza
 `data/selection/news.json`, `data/automated/news_dossiers.json` y los snapshots
 públicos de bibliografía, fichas, ubicaciones y progreso. Combina las fichas v2

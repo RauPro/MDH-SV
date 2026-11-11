@@ -103,6 +103,15 @@ jobs:
           MDH_CODE_REF: MDH_PUBLIC_CODE_REF
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
           MDH_GEMINI_BUDGET_CONFIG: ${{ vars.MDH_GEMINI_BUDGET_CONFIG }}
+          MDH_LLM_FALLBACK_CONFIG: ${{ vars.MDH_LLM_FALLBACK_CONFIG }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          MDH_CYCLE_HOURS: ${{ vars.MDH_CYCLE_HOURS }}
+          MDH_SCOPE_REQUESTS_PER_CYCLE: ${{ vars.MDH_SCOPE_REQUESTS_PER_CYCLE }}
+          MDH_SCOPE_BATCH_COMMITS: ${{ vars.MDH_SCOPE_BATCH_COMMITS }}
+          MDH_SOURCE_FETCH_WORKERS: ${{ vars.MDH_SOURCE_FETCH_WORKERS }}
           MDH_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.batch_size) || '16' }}
           MDH_RETRY_FAILED: ${{ inputs.retry_failed || false }}
           MDH_SCHEDULED_HOUR: ${{ inputs.scheduled_hour || '' }}

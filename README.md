@@ -75,7 +75,7 @@ flowchart LR
 ```
 
 - Las decisiones humanas prevalecen sobre las automáticas, que se conservan por separado.
-- Las fichas automáticas declaran `human_reviewed: false` y `automation.corroboration: single_source`: una segunda pasada de Gemini no es una fuente independiente.
+- Las fichas automáticas declaran `human_reviewed: false` y `automation.corroboration: single_source`: una segunda pasada automática de un modelo no es una fuente independiente.
 - Los datos sensibles o no consignados se omiten o se marcan explícitamente; no se inventan datos.
 - La API pública nunca consulta la cola privada; la clave de Gemini nunca llega a Vercel, al navegador ni al repositorio público.
 - Fuente pública canónica: `data/reviewed/publications.json`; validador y exportador `python -m mdh_pipeline.publication`; el manifiesto SHA-256 comprueba los archivos, no la veracidad de los hechos. Las geometrías públicas son nulas: el departamento no representa un lugar preciso.
