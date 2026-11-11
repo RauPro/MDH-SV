@@ -427,7 +427,10 @@ test('OpenAPI is a public, versioned executable contract', async () => {
   assert.equal(body.components.schemas.NewsProcessingEntry.additionalProperties, false);
   assert.equal(body.components.schemas.NewsProcessingCollection.additionalProperties, false);
   assert.equal(body.components.schemas.NewsProcessingEntry.properties.status.enum.includes('reviewed'), false);
-  assert.equal(body.components.schemas.NewsSelection.oneOf.length, 2);
+  assert.equal(body.components.schemas.NewsSelection.oneOf.length, 3);
+  assert.deepEqual(body.components.schemas.NewsSelection.oneOf.map(schema => schema.properties.method.const), ['gemini_grounded_scope', 'llm_grounded_scope', 'editorial_scope']);
+  assert.deepEqual(body.components.schemas.NewsSelection.oneOf[1].properties.provider.enum, ['groq', 'nvidia', 'mistral', 'openrouter']);
+  assert.equal(body.components.schemas.NewsDossierAutomation.additionalProperties, false);
   assert.ok(body.components.schemas.NewsSelection.oneOf.every(schema => schema.additionalProperties === false && schema.properties.jurisdiction.const === 'SV' && schema.properties.relevance.const === 'relevant'));
   assert.equal(body.components.schemas.NewsSelectionGate.additionalProperties, false);
   assert.deepEqual(body.components.schemas.NewsDossier.properties.fields.required, NEWS_DOSSIER_FIELDS);

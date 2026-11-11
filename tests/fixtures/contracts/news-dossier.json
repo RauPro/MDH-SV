@@ -1151,6 +1151,214 @@
           "value": " https://www.diariocolatino.com/contract-fixture/ "
         }
       ]
+    },
+    {
+      "name": "llm evidence review valid",
+      "base": "automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "method"
+          ],
+          "value": "llm_evidence_review"
+        },
+        {
+          "op": "add",
+          "path": [
+            "automation",
+            "evaluator_provider"
+          ],
+          "value": "nvidia"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "evaluator_model"
+          ],
+          "value": "meta/llama-3.3-70b-instruct"
+        }
+      ]
+    },
+    {
+      "name": "llm evidence review by the openrouter free router valid",
+      "base": "automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "method"
+          ],
+          "value": "llm_evidence_review"
+        },
+        {
+          "op": "add",
+          "path": [
+            "automation",
+            "evaluator_provider"
+          ],
+          "value": "openrouter"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "evaluator_model"
+          ],
+          "value": "openrouter/free"
+        }
+      ]
+    },
+    {
+      "name": "llm evidence review requires its provider",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "method"
+          ],
+          "value": "llm_evidence_review"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "evaluator_model"
+          ],
+          "value": "openai/gpt-oss-120b"
+        }
+      ]
+    },
+    {
+      "name": "gemini evidence review cannot carry a provider",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "automation",
+            "evaluator_provider"
+          ],
+          "value": "groq"
+        }
+      ]
+    },
+    {
+      "name": "llm evidence review rejects a paid openrouter model",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "method"
+          ],
+          "value": "llm_evidence_review"
+        },
+        {
+          "op": "add",
+          "path": [
+            "automation",
+            "evaluator_provider"
+          ],
+          "value": "openrouter"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "evaluator_model"
+          ],
+          "value": "anthropic/claude-3.5-sonnet"
+        }
+      ]
+    },
+    {
+      "name": "llm evidence review rejects an unapproved provider",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "method"
+          ],
+          "value": "llm_evidence_review"
+        },
+        {
+          "op": "add",
+          "path": [
+            "automation",
+            "evaluator_provider"
+          ],
+          "value": "xai"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "evaluator_model"
+          ],
+          "value": "grok-4.7"
+        }
+      ]
+    },
+    {
+      "name": "llm evidence review cannot claim the gemini provider",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "method"
+          ],
+          "value": "llm_evidence_review"
+        },
+        {
+          "op": "add",
+          "path": [
+            "automation",
+            "evaluator_provider"
+          ],
+          "value": "gemini"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "evaluator_model"
+          ],
+          "value": "gemini-fixture"
+        }
+      ]
+    },
+    {
+      "name": "unknown evidence review method rejected",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "automation",
+            "method"
+          ],
+          "value": "model_evidence_review"
+        }
+      ]
     }
   ]
 }

@@ -5,6 +5,7 @@ from datetime import date, datetime, timezone
 import hashlib
 import re
 from ..news_scope_policy import SCOPE_PROMPT, EXCLUSION_PROMPT
+from .providers import AUTOMATED_SCOPE_METHODS, GEMINI, LLM_SCOPE_METHOD, valid_model
 
 _HEX = r"[a-f0-9]{64}"
 
@@ -35,6 +36,8 @@ _STAMP = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2
 _COMMON = {"method", "review_status", "human_reviewed", "jurisdiction", "relevance"}
 
 _AUTOMATIC = _COMMON | {"classified_at", "model", "prompt_version", "evidence"}
+
+_LLM_AUTOMATIC = _AUTOMATIC | {"provider"}
 
 _HUMAN = _COMMON | {"reviewed_by", "reviewed_at"}
 
@@ -76,9 +79,13 @@ def validate_selection(value):
     if (not isinstance(value, dict) or value.get("jurisdiction") != "SV"
             or value.get("relevance") != "relevant" or type(value.get("human_reviewed")) is not bool):
         _fail()
-    if value.get("method") == "gemini_grounded_scope":
-        if (set(value) != _AUTOMATIC or value["review_status"] != "automated_unreviewed"
-                or value["human_reviewed"] is not False or not _matches(_MODEL, value["model"])
+    method = value.get("method")
+    if isinstance(method, str) and method in AUTOMATED_SCOPE_METHODS:
+        llm = method == LLM_SCOPE_METHOD
+        provider = value.get("provider") if llm else GEMINI
+        if (set(value) != (_LLM_AUTOMATIC if llm else _AUTOMATIC) or (llm and provider == GEMINI)
+                or value["review_status"] != "automated_unreviewed"
+                or value["human_reviewed"] is not False or not valid_model(provider, value["model"])
                 or not isinstance(value["prompt_version"], str) or value["prompt_version"] not in _SELECTION_PROMPTS):
             _fail()
         parse_timestamp(value["classified_at"])
@@ -89,7 +96,7 @@ def validate_selection(value):
             _fail()
         _paragraphs(evidence["jurisdiction_paragraph_ids"])
         _paragraphs(evidence["relevance_paragraph_ids"])
-    elif value.get("method") == "editorial_scope":
+    elif method == "editorial_scope":
         if (set(value) != _HUMAN or value["review_status"] != "editorially_reviewed"
                 or value["human_reviewed"] is not True
                 or not _matches(r"[A-Za-z0-9][A-Za-z0-9-]{0,38}", value["reviewed_by"])):
@@ -173,7 +180,7 @@ def validate_manifest(document, archive=None):
         selection = validate_selection(entry["selection"])
         # A manifest carries automated decisions only. Human decisions must
         # come from validate_collection(require_reviewed) inside select_archive.
-        if selection["method"] != "gemini_grounded_scope":
+        if selection["method"] not in AUTOMATED_SCOPE_METHODS:
             _fail()
         classified = parse_timestamp(selection["classified_at"])
         if classified > generated or classified.date() < published:
@@ -216,7 +223,7 @@ def _validate_scope_review_shape(document):
                 "content_sha256", "jurisdiction_paragraph_ids", "relevance_paragraph_ids"}
             or not _matches(_HEX, evidence["content_sha256"])
             or not isinstance(extraction, dict) or set(extraction) != {"provider", "model", "prompt_version", "prepared_at"}
-            or extraction["provider"] != "gemini" or not _matches(_MODEL, extraction["model"])
+            or not valid_model(extraction["provider"], extraction["model"])
             or extraction["prompt_version"] not in (
                 {INCLUSIVE_SCOPE_PROMPT, RIGHTS_SCOPE_PROMPT, SCOPE_PROMPT, EXCLUSION_PROMPT} if document["schema_version"] == 2 else {SCOPE_REVIEW_PROMPT})):
         _fail()

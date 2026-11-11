@@ -1,5 +1,6 @@
 import { safeSource } from './news-dossier.mjs';
 import { canonicalNewsSource, sourceIdentityMatches } from './news-identity.mjs';
+import { isAutomatedScope } from './llm-providers.mjs';
 import municipalityReference from '../apps/pipeline/src/mdh_pipeline/data/el_salvador_municipalities.json' with { type: 'json' };
 
 export const NEWS_LOCATION_DEPARTMENTS = Object.freeze(['Ahuachapán', 'Santa Ana', 'Sonsonate', 'Chalatenango', 'La Libertad', 'San Salvador', 'Cuscatlán', 'La Paz', 'Cabañas', 'San Vicente', 'Usulután', 'San Miguel', 'Morazán', 'La Unión']);
@@ -88,7 +89,7 @@ export function validateLocationBindings(index, references) {
   return index;
 }
 const bound = (location, reference) => location.candidate_id === reference.id && location.source_url === reference.source_url && location.publisher === reference.publisher && location.published_date === reference.published_date
-  && (reference.selection?.method !== 'gemini_grounded_scope'
+  && (!isAutomatedScope(reference.selection)
     || (sha(reference.selection.evidence?.content_sha256) && location.evidence?.content_sha256 === reference.selection.evidence.content_sha256));
 
 export function newsLocationFor(reference, locations = new Map()) {

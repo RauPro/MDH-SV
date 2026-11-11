@@ -1,9 +1,12 @@
 export const NEWS_SELECTION_PROMPTS: readonly ['mdh-universal-news-grounded-8-relevance-scope', 'mdh-universal-news-grounded-9-inclusive-context', 'mdh-news-scope-1', 'mdh-news-scope-2-inclusive-context', 'mdh-news-scope-3-rights-nexus', 'mdh-universal-news-grounded-10-rights-nexus', 'mdh-universal-news-grounded-11-inclusive-violence', 'mdh-news-scope-4-inclusive-violence', 'mdh-news-exclusion-1-inclusive-violence'];
-export type NewsSelection = {
-  method: 'gemini_grounded_scope'; review_status: 'automated_unreviewed'; human_reviewed: false; jurisdiction: 'SV'; relevance: 'relevant';
+export type LlmProvider = 'groq' | 'nvidia' | 'mistral' | 'openrouter';
+type AutomatedNewsSelection = {
+  review_status: 'automated_unreviewed'; human_reviewed: false; jurisdiction: 'SV'; relevance: 'relevant';
   classified_at: string; model: string; prompt_version: typeof NEWS_SELECTION_PROMPTS[number];
   evidence: { content_sha256: string; jurisdiction_paragraph_ids: string[]; relevance_paragraph_ids: string[] };
-} | {
+};
+export type NewsSelection = (AutomatedNewsSelection & { method: 'gemini_grounded_scope'; provider?: never })
+  | (AutomatedNewsSelection & { method: 'llm_grounded_scope'; provider: LlmProvider }) | {
   method: 'editorial_scope'; review_status: 'editorially_reviewed'; human_reviewed: true; jurisdiction: 'SV'; relevance: 'relevant'; reviewed_by: string; reviewed_at: string;
 };
 export type NewsSelectionGate = { scope: 'human_rights_el_salvador'; candidates: number; selected: number } & (

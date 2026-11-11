@@ -31,6 +31,9 @@ versión del criterio, fecha, hash del texto y localizadores de los párrafos de
 alcance y pertinencia. Sigue `automated_unreviewed`: es una clasificación
 automatizada, no una corroboración de los hechos ni una aprobación de la ficha.
 No incluye cuerpos, citas literales ni campos personales del borrador.
+`llm_grounded_scope` tiene la misma forma y añade `provider`, que identifica al
+proveedor gratuito aprobado (`groq`, `nvidia`, `mistral` u `openrouter`) cuando la
+clasificación no la hizo Gemini; `gemini_grounded_scope` nunca lleva ese campo.
 `editorial_scope` requiere una ficha aprobada y coincidente en identidad, revisor
 y fecha; una decisión humana negativa o incierta prevalece.
 

@@ -33,6 +33,7 @@ from .contracts.processing import selected_references as _references, selection_
 from .privacy import minimize_fields, privacy_flags
 from .review_queue import GitHubInbox
 from .news_scope_policy import SCOPE_POLICY, CURRENT_SCOPE_PROMPTS
+from .contracts.providers import AUTOMATED_SCOPE_METHODS, GEMINI, review_method
 
 # Compatibility aliases for the former processing helper imports.
 _read_json = read_processing_json
@@ -286,7 +287,7 @@ def evaluate_draft(document, reference, article, *, api_key, model, budget, sess
     return {"judgment": judgment, "dossier": projected, "usage": _usage(raw)}
 
 
-def project_dossier(safe, judgment, *, source_hash, model, truncated=False, now=None):
+def project_dossier(safe, judgment, *, source_hash, model, truncated=False, now=None, provider=GEMINI):
     safe = validate_news_dossier(safe)
     judgment = _validate_judgment(judgment)
     if any(judgment[key]["verdict"] != "supported" for key in ("jurisdiction", "relevance")):
@@ -334,7 +335,8 @@ def project_dossier(safe, judgment, *, source_hash, model, truncated=False, now=
                            for identifier in sorted(ids)]
     result.update(schema_version=2, human_reviewed=False, reviewed_by=None, reviewed_at=None, review_notes=None,
                   automation={"policy_version": POLICY_VERSION, "source_content_sha256": source_hash,
-                              "validated_at": _instant(now).isoformat(), "method": "gemini_evidence_review",
+                              "validated_at": _instant(now).isoformat(), "method": review_method(provider),
+                              **({} if provider == GEMINI else {"evaluator_provider": provider}),
                               "evaluator_model": model, "corroboration": "single_source"})
     return validate_published_news_dossier(result, now=now)
 
@@ -354,7 +356,8 @@ def _canonical_receipt_projection(draft, receipt):
             safe["fields"]["event_date_end"] = _masked(None, "withheld", "Intervalo protegido junto a su fecha inicial.")
     automation = receipt["dossier"]["automation"]
     return project_dossier(safe, judgment, source_hash=receipt["source_content_sha256"],
-        model=automation["evaluator_model"], truncated=bool(draft.get("extraction", {}).get("truncated")),
+        model=automation["evaluator_model"], provider=automation.get("evaluator_provider", GEMINI),
+        truncated=bool(draft.get("extraction", {}).get("truncated")),
         now=datetime.fromisoformat(automation["validated_at"].replace("Z", "+00:00")))
 
 
@@ -430,7 +433,7 @@ def needs_scope_reassessment(receipt, reference):
     try:
         selection = validate_selection(reference["selection"])
         if (receipt["status"] != "scope_rejected" or receipt["candidate_id"] != reference["id"]
-                or selection["method"] != "gemini_grounded_scope"
+                or selection["method"] not in AUTOMATED_SCOPE_METHODS
                 or selection["prompt_version"] not in CURRENT_SCOPE_PROMPTS | {FULL_SCOPE_PROMPT}
                 or selection["evidence"]["content_sha256"] != receipt["source_content_sha256"]):
             return False

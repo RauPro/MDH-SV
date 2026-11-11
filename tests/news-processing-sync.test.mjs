@@ -29,6 +29,15 @@ test('withdrawn or changed reference receipts are removed without changing the r
   }
 });
 
+test('a selection classified by another approved provider keeps the same source-hash binding', () => {
+  const llm = { ...reference, selection: { method: 'llm_grounded_scope', provider: 'groq', evidence: { content_sha256: 'b'.repeat(64) } } };
+  assert.deepEqual(reconcileNewsProcessing(snapshot(), [llm]), snapshot());
+  const changed = { ...llm, selection: { ...llm.selection, evidence: { content_sha256: 'c'.repeat(64) } } };
+  assert.deepEqual(reconcileNewsProcessing(snapshot(), [changed], '2026-10-14T12:00:00Z').entries, []);
+  const unknown = { ...llm, selection: { ...llm.selection, method: 'model_grounded_scope' } };
+  assert.deepEqual(reconcileNewsProcessing(snapshot(), [unknown], '2026-10-14T12:00:00Z').entries, []);
+});
+
 test('sync rejects unexpected private fields and duplicate reference identities', () => {
   const invalid = snapshot(); invalid.entries[0].summary = 'Private model text';
   assert.throws(() => reconcileNewsProcessing(invalid, [reference]));

@@ -889,3 +889,35 @@ def test_reassessment_quota_deferral_or_failure_does_not_reset_candidate_budget_
     assert second["http_requests"] == 1
     assert inbox.writes[-1][1]["attempts"] == expected + 1
     assert inbox.writes[-1][1]["fingerprint"] == old["fingerprint"]
+
+
+def test_review_by_another_approved_provider_is_named_and_reconstructed_exactly():
+    document, reference, _ = inputs()
+    public = project_dossier(document["news_dossier"], judgment(), source_hash=document["extraction"]["content_sha256"],
+                             model="openai/gpt-oss-120b", provider="groq", now=NOW)
+    assert public["automation"]["method"] == "llm_evidence_review"
+    assert public["automation"]["evaluator_provider"] == "groq" and public["human_reviewed"] is False
+    value = receipt(document, reference)
+    assert value["dossier"]["automation"]["method"] == "gemini_evidence_review"
+    assert "evaluator_provider" not in value["dossier"]["automation"]
+    value["dossier"] = public
+    automatic, merged = project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference))
+    assert automatic["dossiers"] == merged["dossiers"] == [public]
+    for mutate in (lambda a: a.pop("evaluator_provider"), lambda a: a.update(evaluator_provider="xai"),
+                   lambda a: a.update(evaluator_provider="gemini"), lambda a: a.update(method="gemini_evidence_review"),
+                   lambda a: a.update(evaluator_provider="openrouter", evaluator_model="openai/gpt-4o")):
+        broken = deepcopy(value)
+        mutate(broken["dossier"]["automation"])
+        with pytest.raises(AutomaticNewsError):
+            project_collection({reference["id"]: document}, {reference["id"]: broken}, archive(reference))
+
+
+def test_selection_by_another_provider_binds_evaluation_to_the_same_source_hash():
+    document, reference, _ = inputs()
+    reference["selection"].update(method="llm_grounded_scope", provider="groq", model="openai/gpt-oss-120b")
+    value = receipt(document, reference)
+    automatic, _ = project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference))
+    assert len(automatic["dossiers"]) == 1
+    reference["selection"]["evidence"]["content_sha256"] = "f" * 64
+    automatic, _ = project_collection({reference["id"]: document}, {reference["id"]: value}, archive(reference))
+    assert automatic["dossiers"] == []

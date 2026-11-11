@@ -29,6 +29,26 @@
       "relevance": "relevant",
       "reviewed_by": "fixture-editor",
       "reviewed_at": "2025-05-02"
+    },
+    "llm_automatic": {
+      "method": "llm_grounded_scope",
+      "provider": "groq",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "jurisdiction": "SV",
+      "relevance": "relevant",
+      "classified_at": "2025-05-02T12:00:00Z",
+      "model": "openai/gpt-oss-120b",
+      "prompt_version": "mdh-news-scope-4-inclusive-violence",
+      "evidence": {
+        "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "jurisdiction_paragraph_ids": [
+          "p1"
+        ],
+        "relevance_paragraph_ids": [
+          "p2"
+        ]
+      }
     }
   },
   "cases": [
@@ -316,6 +336,237 @@
             "classified_at"
           ],
           "value": "2025-05-02T12:00:00+01:99"
+        }
+      ]
+    },
+    {
+      "name": "llm automatic valid",
+      "base": "llm_automatic",
+      "valid": true,
+      "operations": []
+    },
+    {
+      "name": "llm openrouter free variant valid",
+      "base": "llm_automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "provider"
+          ],
+          "value": "openrouter"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "nvidia/nemotron-3-super:free"
+        }
+      ]
+    },
+    {
+      "name": "llm openrouter free router valid",
+      "base": "llm_automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "provider"
+          ],
+          "value": "openrouter"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "openrouter/free"
+        }
+      ]
+    },
+    {
+      "name": "llm openrouter paid model rejected",
+      "base": "llm_automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "provider"
+          ],
+          "value": "openrouter"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "openai/gpt-4o"
+        }
+      ]
+    },
+    {
+      "name": "llm missing provider rejected",
+      "base": "llm_automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "remove",
+          "path": [
+            "provider"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "llm unapproved paid provider rejected",
+      "base": "llm_automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "provider"
+          ],
+          "value": "xai"
+        }
+      ]
+    },
+    {
+      "name": "llm nvidia provider valid",
+      "base": "llm_automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "provider"
+          ],
+          "value": "nvidia"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "meta/llama-3.3-70b-instruct"
+        }
+      ]
+    },
+    {
+      "name": "llm mistral provider valid",
+      "base": "llm_automatic",
+      "valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "provider"
+          ],
+          "value": "mistral"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "mistral-small-latest"
+        }
+      ]
+    },
+    {
+      "name": "llm method cannot claim the gemini provider",
+      "base": "llm_automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "provider"
+          ],
+          "value": "gemini"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "gemini-fixture"
+        }
+      ]
+    },
+    {
+      "name": "gemini method cannot carry a provider",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": [
+            "provider"
+          ],
+          "value": "groq"
+        }
+      ]
+    },
+    {
+      "name": "gemini method requires a gemini model",
+      "base": "automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "openai/gpt-oss-120b"
+        }
+      ]
+    },
+    {
+      "name": "llm model cannot contain spaces",
+      "base": "llm_automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "openai/gpt oss"
+        }
+      ]
+    },
+    {
+      "name": "llm model cannot nest two namespaces",
+      "base": "llm_automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "model"
+          ],
+          "value": "vendor/family/model"
+        }
+      ]
+    },
+    {
+      "name": "llm provider must be a string",
+      "base": "llm_automatic",
+      "valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": [
+            "provider"
+          ],
+          "value": [
+            "groq"
+          ]
         }
       ]
     }

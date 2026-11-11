@@ -38,6 +38,25 @@ describe('public news selection boundary', () => {
   ])('rejects an invalid or misleading automatic selection: %j', patch => {
     expect(() => validateNewsSelection({ ...auto(), ...patch })).toThrow();
   });
+  const llm = () => ({ ...auto(), method: 'llm_grounded_scope', provider: 'groq', model: 'openai/gpt-oss-120b' });
+  it('accepts a named zero-cost provider and keeps the Gemini shape unchanged', () => {
+    expect(validateNewsSelection(llm())).toEqual(llm());
+    expect(validateNewsSelection({ ...llm(), provider: 'openrouter', model: 'openrouter/free' })).toMatchObject({ human_reviewed: false });
+    expect(validateNewsSelection({ ...llm(), provider: 'openrouter', model: 'meta-llama/llama-4-scout:free' })).toMatchObject({ provider: 'openrouter' });
+    expect(validateNewsSelection(auto())).not.toHaveProperty('provider');
+  });
+  it.each([
+    { provider: undefined }, { provider: 'xai' }, { provider: 'gemini' }, { provider: 'openrouter' }, { provider: ['groq'] },
+    { model: 'openai/gpt oss' }, { model: 'a/b/c' }, { model: '' }, { human_reviewed: true }, { method: 'gemini_grounded_scope' },
+    { provider: 'openrouter', model: 'openai/gpt-4o' }, { private_article: 'PRIVATE_VALUE' },
+  ])('rejects an unnamed, unapproved or paid provider: %j', patch => {
+    const value: Record<string, unknown> = { ...llm(), ...patch };
+    if (Object.hasOwn(patch, 'provider') && patch.provider === undefined) delete value.provider;
+    expect(() => validateNewsSelection(value)).toThrow();
+  });
+  it('never lets a provider name ride on the original Gemini method', () => {
+    expect(() => validateNewsSelection({ ...auto(), provider: 'groq' })).toThrow();
+  });
   it.each([
     { content_sha256: 'bad' }, { jurisdiction_paragraph_ids: [] }, { relevance_paragraph_ids: [] },
     { jurisdiction_paragraph_ids: ['p1', 'p1'] }, { relevance_paragraph_ids: ['p1000'] },

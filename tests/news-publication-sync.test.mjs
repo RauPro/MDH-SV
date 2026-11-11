@@ -114,6 +114,30 @@ test('protected source titles are masked in archive metadata and remain masked a
   assert.equal(reconcileNewsPublication(unbound).archive.records[0].title, reference.title);
 });
 
+test('selections and reviews by other approved providers keep their named provenance and bindings', () => {
+  const before = input();
+  Object.assign(before.archive.records[0].selection, { method: 'llm_grounded_scope', provider: 'groq', model: 'openai/gpt-oss-120b' });
+  Object.assign(before.automated.dossiers[0].automation, { method: 'llm_evidence_review', evaluator_provider: 'nvidia', evaluator_model: 'meta/llama-3.3-70b-instruct' });
+  const result = reconcileNewsPublication(before, '2026-10-14T12:00:00Z');
+  assert.deepEqual(result.automated, before.automated);
+  assert.deepEqual(result.locations, before.locations);
+  assert.equal(result.published.dossiers[0].automation.evaluator_provider, 'nvidia');
+  const stale = structuredClone(before);
+  stale.archive.records[0].selection.evidence.content_sha256 = 'f'.repeat(64);
+  const discarded = reconcileNewsPublication(stale, '2026-10-14T12:00:00Z');
+  assert.equal(discarded.automated.dossiers.length + discarded.locations.locations.length, 0);
+  for (const mutate of [
+    value => { delete value.automated.dossiers[0].automation.evaluator_provider; },
+    value => { value.automated.dossiers[0].automation.evaluator_provider = 'xai'; },
+    value => { Object.assign(value.automated.dossiers[0].automation, { evaluator_provider: 'openrouter', evaluator_model: 'openai/gpt-4o' }); },
+    value => { delete value.archive.records[0].selection.provider; },
+    value => { value.archive.records[0].selection.model = 'gemini fixture'; },
+  ]) {
+    const invalid = structuredClone(before); mutate(invalid);
+    assert.throws(() => reconcileNewsPublication(invalid));
+  }
+});
+
 test('invalid or private inputs fail before reconciliation rather than silently sanitizing unsafe data', () => {
   for (const mutate of [
     value => { value.automated.dossiers[0].private_prompt = 'PRIVATE_SENTINEL'; },

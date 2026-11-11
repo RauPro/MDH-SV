@@ -1,10 +1,11 @@
 export type NewsDossierFieldName = 'summary' | 'category' | 'alleged_violation' | 'facts' | 'affected_persons' | 'country' | 'department' | 'municipality' | 'public_place' | 'event_date' | 'event_date_end' | 'event_time' | 'reported_actors' | 'institutional_sources' | 'vulnerable_groups' | 'themes' | 'hypothesis' | 'instrument';
 export type NewsDossierFieldStatus = 'pending' | 'reported' | 'not_reported' | 'withheld' | 'not_applicable';
 export interface NewsDossierField { value: string | string[] | null; status: NewsDossierFieldStatus; evidence_refs: string[]; note: string | null }
-export interface NewsDossierAutomation {
+export type NewsDossierAutomation = {
   policy_version: 'auto-news-v1'; source_content_sha256: string; validated_at: string;
-  method: 'gemini_evidence_review'; evaluator_model: string; corroboration: 'single_source';
-}
+  evaluator_model: string; corroboration: 'single_source';
+} & ({ method: 'gemini_evidence_review'; evaluator_provider?: never }
+  | { method: 'llm_evidence_review'; evaluator_provider: 'groq' | 'nvidia' | 'mistral' | 'openrouter' });
 export interface NewsDossier {
   schema_version: 1 | 2; kind: 'news_dossier'; candidate_id: string; source_url: string; publisher: string; source_title: string;
   published_date: string | null; extraction_status: 'pending' | 'processed' | 'source_unavailable' | 'error';

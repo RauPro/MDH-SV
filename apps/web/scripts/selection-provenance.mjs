@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { safeSource, validatePublishedNewsDossier } from '../../../shared/news-dossier.mjs';
 import { assertSelectedNewsArchive, isSelectedNewsReference, validateNewsSelection } from '../../../shared/news-selection.mjs';
+import { isAutomatedScope } from '../../../shared/llm-providers.mjs';
 
 const exact = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
 const day = value => typeof value === 'string' && !value.startsWith('0000-') && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
@@ -35,7 +36,7 @@ export function assertSelectionProvenance(archive, manifest, allApproved = new M
       || typeof entry.publisher !== 'string' || entry.publisher.trim().length < 3 || entry.publisher.length > 200 || !day(entry.published_date)
       || selections.has(entry.candidate_id)) fail();
     const selection = validateNewsSelection(entry.selection);
-    if (selection.method !== 'gemini_grounded_scope' || Date.parse(selection.classified_at) > Date.parse(manifest.generated_at)
+    if (!isAutomatedScope(selection) || Date.parse(selection.classified_at) > Date.parse(manifest.generated_at)
       || selection.classified_at.slice(0, 10) < entry.published_date) fail();
     selections.set(entry.candidate_id, entry);
   }
@@ -49,7 +50,7 @@ export function assertSelectionProvenance(archive, manifest, allApproved = new M
       try { assert.deepEqual(reference.selection, expected); } catch { fail(); }
     } else {
       const entry = selections.get(reference.id);
-      if (reference.selection.method !== 'gemini_grounded_scope' || !entry || !bound(entry, reference)) fail();
+      if (!isAutomatedScope(reference.selection) || !entry || !bound(entry, reference)) fail();
       try { assert.deepEqual(reference.selection, entry.selection); } catch { fail(); }
     }
   }

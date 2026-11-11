@@ -1,3 +1,5 @@
+import { AUTOMATED_SCOPE_METHODS, validGeminiModel, validLlmModel } from './llm-providers.mjs';
+
 export const NEWS_SELECTION_PROMPTS = Object.freeze(['mdh-universal-news-grounded-8-relevance-scope', 'mdh-universal-news-grounded-9-inclusive-context', 'mdh-news-scope-1', 'mdh-news-scope-2-inclusive-context', 'mdh-news-scope-3-rights-nexus', 'mdh-universal-news-grounded-10-rights-nexus', 'mdh-universal-news-grounded-11-inclusive-violence', 'mdh-news-scope-4-inclusive-violence', 'mdh-news-exclusion-1-inclusive-violence']);
 
 // Public relevance gate: keyword discovery is never evidence for publishing a reference.
@@ -11,10 +13,11 @@ const fail = () => { throw new Error('Selección pública de noticias inválida 
 
 export function validateNewsSelection(value) {
   if (!object(value) || value.jurisdiction !== 'SV' || value.relevance !== 'relevant') fail();
-  if (value.method === 'gemini_grounded_scope') {
-    if (!exact(value, ['method', 'review_status', 'human_reviewed', 'jurisdiction', 'relevance', 'classified_at', 'model', 'prompt_version', 'evidence'])
+  if (AUTOMATED_SCOPE_METHODS.includes(value.method)) {
+    const llm = value.method === 'llm_grounded_scope';
+    if (!exact(value, ['method', 'review_status', 'human_reviewed', 'jurisdiction', 'relevance', 'classified_at', 'model', 'prompt_version', 'evidence', ...(llm ? ['provider'] : [])])
       || value.review_status !== 'automated_unreviewed' || value.human_reviewed !== false || !instant(value.classified_at)
-      || typeof value.model !== 'string' || !/^gemini-[A-Za-z0-9_.-]{1,90}$/.test(value.model)
+      || !(llm ? validLlmModel(value.provider, value.model) : validGeminiModel(value.model))
       || !NEWS_SELECTION_PROMPTS.includes(value.prompt_version)
       || !exact(value.evidence, ['content_sha256', 'jurisdiction_paragraph_ids', 'relevance_paragraph_ids'])
       || typeof value.evidence.content_sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.evidence.content_sha256)

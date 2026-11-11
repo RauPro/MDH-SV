@@ -42,7 +42,8 @@ cuenta la noticia una sola vez: sumar las columnas puede superar el total de
 noticias, y no representa una suma de casos o víctimas. El detalle muestra todas
 las menciones sin convertir una referencia secundaria en el lugar de una violación.
 
-Cuando la referencia fue seleccionada con `gemini_grounded_scope`, el hash del
+Cuando la referencia fue seleccionada automáticamente (`gemini_grounded_scope` o
+`llm_grounded_scope`), el hash del
 texto de la ubicación debe coincidir con el de esa selección. Una coincidencia
 de URL y fecha por sí sola no permite mezclar lecturas distintas de la fuente.
 Los datos humanos revisados siguen prevaleciendo sobre cualquier capa automática.

@@ -16,6 +16,7 @@ Los borradores privados y sus envelopes no son formatos públicos compatibles.
 | Estado mínimo de procesamiento | `mdh_pipeline.contracts.processing.validate_collection` | `shared/news-processing.mjs` |
 | Ubicaciones automáticas v1–v5 | `mdh_pipeline.contracts.locations.validate_collection` | `shared/news-location.mjs` |
 | Registro de fuentes | `mdh_pipeline.publishers` | `shared/source-registry.mjs` |
+| Proveedores de modelos y su procedencia pública | `mdh_pipeline.contracts.providers` | `shared/llm-providers.mjs` |
 
 Los ejemplos de catálogo, referencias, selección, fichas, procesamiento y
 ubicaciones de `tests/fixtures/contracts` se ejecutan en ambos lenguajes con el
@@ -43,6 +44,17 @@ comprobación de exports. El servidor rechaza un catálogo inválido con un erro
 503 genérico; no intenta convertir candidatos en registros revisados ni expone
 sus campos desconocidos. Los defaults documentados se normalizan como en Python;
 no se convierten cadenas o números en booleanos de revisión.
+
+## Procedencia del modelo
+
+Gemini conserva su forma original (`gemini_grounded_scope`, `gemini_evidence_review`).
+Cualquier otro proveedor debe constar por nombre: `llm_grounded_scope` exige `provider`
+y `llm_evidence_review` exige `evaluator_provider`, con un identificador de modelo
+acotado por el patrón de ese proveedor. Sólo se admiten proveedores de coste cero
+(`groq`, `nvidia`, `mistral`, `openrouter`); OpenRouter se limita a `openrouter/free`
+o variantes `:free`. Un método de Gemini no puede llevar proveedor ni un método `llm_*`
+puede declarar `gemini`. El identificador vincula datos: no prueba que el modelo
+exista ni que su resultado sea correcto.
 
 ## Identidad y privacidad
 

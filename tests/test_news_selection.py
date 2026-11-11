@@ -1117,3 +1117,50 @@ def test_invalid_audit_requests_fail_export_and_cli_honors_private_source_hold(t
     with pytest.raises(SystemExit, match="No se exportó"):
         main()
     assert output.read_bytes() == before
+
+
+def llm_review(item=None, provider="groq", model="openai/gpt-oss-120b", **classification):
+    value = current_review(item, **classification)
+    value["extraction"].update(provider=provider, model=model)
+    return value
+
+
+def test_scope_review_by_another_approved_provider_publishes_its_named_provenance():
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[llm_review()])
+    selection = manifest["selections"][0]["selection"]
+    assert selection["method"] == "llm_grounded_scope" and selection["provider"] == "groq"
+    assert selection["model"] == "openai/gpt-oss-120b" and selection["human_reviewed"] is False
+    assert select_archive(archive(), manifest)["records"][0]["selection"] == selection
+    gemini = project_news_selection([], archive(), now=NOW, scope_reviews=[current_review()])
+    assert gemini["selections"][0]["selection"]["method"] == "gemini_grounded_scope"
+    assert "provider" not in gemini["selections"][0]["selection"]
+
+
+@pytest.mark.parametrize("provider,model", [
+    ("xai", "grok-4.7"), ("openrouter", "openai/gpt-4o"), ("groq", "gemini fixture"),
+    ("gemini", "openai/gpt-oss-120b"), ("groq", "a/b/c"), (None, "openai/gpt-oss-120b"), (["groq"], "openai/gpt-oss-120b"),
+])
+def test_scope_review_from_an_unapproved_or_mislabeled_provider_never_selects(provider, model):
+    manifest = project_news_selection([], archive(), now=NOW, scope_reviews=[llm_review(provider=provider, model=model)])
+    assert manifest["selections"] == [] and manifest["assessment_counts"]["evaluated"] == 0
+
+
+def test_full_dossier_scope_by_another_provider_is_named_in_the_selection():
+    value = draft()
+    value["extraction"].update(provider="mistral", model="mistral-small-latest")
+    selection = project(value)["selections"][0]["selection"]
+    assert selection["method"] == "llm_grounded_scope" and selection["provider"] == "mistral"
+    value["extraction"]["provider"] = "unapproved"
+    assert project(value)["selections"] == []
+
+
+@pytest.mark.parametrize("change", [
+    {"provider": "gemini"}, {"provider": "xai"}, {"model": "openai/gpt oss"}, {"method": "gemini_grounded_scope"},
+    {"human_reviewed": True}, {"private": "PRIVATE_SENTINEL"},
+])
+def test_named_provider_selection_is_an_exact_public_shape(change):
+    selection = project_news_selection([], archive(), now=NOW, scope_reviews=[llm_review()])["selections"][0]["selection"]
+    assert validate_selection(selection) == selection
+    with pytest.raises(ValueError) as error:
+        validate_selection({**selection, **change})
+    assert "PRIVATE_SENTINEL" not in str(error.value)

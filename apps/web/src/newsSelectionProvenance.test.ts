@@ -39,6 +39,16 @@ describe('build-time selection provenance', () => {
     archive.records[0].selection.model = 'gemini-another-model';
     expect(() => assertSelectionProvenance(archive, manifest)).toThrow();
   });
+  it('binds a selection made by another approved provider to the identical manifest entry', () => {
+    const { archive, manifest } = setup();
+    const llm = { ...archive.records[0].selection, method: 'llm_grounded_scope', provider: 'groq', model: 'openai/gpt-oss-120b' };
+    Object.assign(archive.records[0], { selection: structuredClone(llm) });
+    expect(() => assertSelectionProvenance(archive, manifest)).toThrow();
+    Object.assign(manifest.selections[0], { selection: structuredClone(llm) });
+    expect(assertSelectionProvenance(archive, manifest)).toBe(archive);
+    Object.assign(archive.records[0].selection, { provider: 'nvidia' });
+    expect(() => assertSelectionProvenance(archive, manifest)).toThrow();
+  });
   it.each(['source_url', 'publisher', 'published_date', 'candidate_id'])('rejects selection metadata bound to another reference: %s', field => {
     const { archive, manifest } = setup();
     Object.assign(manifest.selections[0], { [field]: field === 'published_date' ? '2026-10-01' : field === 'candidate_id' ? 'b'.repeat(64) : field === 'source_url' ? 'https://www.diariocolatino.com/other-fixture/' : 'Otro medio' });

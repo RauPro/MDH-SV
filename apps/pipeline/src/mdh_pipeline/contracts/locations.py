@@ -7,6 +7,7 @@ from urllib.parse import urlsplit
 from mdh_schema import DepartmentEnum
 from ..publishers import SOURCES
 from .reference import validate_reference
+from .providers import AUTOMATED_SCOPE_METHODS
 from ..source_urls import canonical_url
 from ..municipalities import resolve_municipality, REFERENCE_VERSION
 
@@ -193,6 +194,6 @@ def selection_content_hash(reference):
     if "selection" not in reference:
         return None
     selection = validate_selection(reference["selection"])
-    if selection["method"] != "gemini_grounded_scope":
+    if selection["method"] not in AUTOMATED_SCOPE_METHODS:
         return None  # Human geography is managed by the editorial projection.
     return selection["evidence"]["content_sha256"]

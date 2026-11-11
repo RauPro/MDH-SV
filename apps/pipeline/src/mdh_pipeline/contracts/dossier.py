@@ -9,6 +9,7 @@ from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 from .catalog import Publication
+from .providers import GEMINI, GEMINI_REVIEW_METHOD, LLM_REVIEW_METHOD, valid_model
 from ..publishers import NEWS_HOSTS
 from ..source_urls import canonical_url
 
@@ -201,11 +202,15 @@ def validate_published_news_dossier(document, *, now=None):
         if document["schema_version"] != 2:
             raise ValueError()
         automation = document["automation"]
-        if (not isinstance(automation, dict) or set(automation) != {
-                "policy_version", "source_content_sha256", "validated_at", "method",
+        keys = {"policy_version", "source_content_sha256", "validated_at", "method",
                 "evaluator_model", "corroboration"}
+        llm = isinstance(automation, dict) and automation.get("method") == LLM_REVIEW_METHOD
+        if (not isinstance(automation, dict)
+                or set(automation) != (keys | {"evaluator_provider"} if llm else keys)
                 or automation["policy_version"] != "auto-news-v1"
-                or automation["method"] != "gemini_evidence_review"
+                or automation["method"] not in (GEMINI_REVIEW_METHOD, LLM_REVIEW_METHOD)
+                or (llm and (automation["evaluator_provider"] == GEMINI or not valid_model(
+                    automation["evaluator_provider"], automation["evaluator_model"])))
                 or automation["corroboration"] != "single_source"
                 or not isinstance(automation["source_content_sha256"], str)
                 or not re.fullmatch(r"[a-f0-9]{64}", automation["source_content_sha256"])

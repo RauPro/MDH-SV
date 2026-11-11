@@ -1,5 +1,6 @@
 import { newsDossierFor, safeSource } from './news-dossier.mjs';
 import { sourceIdentityMatches } from './news-identity.mjs';
+import { isAutomatedScope } from './llm-providers.mjs';
 
 // This projection describes processing only. It never contains draft fields,
 // model output, private review notes or a claim of human approval.
@@ -41,7 +42,7 @@ export function processingMatchesReference(entry, reference) {
   if (!object(entry)) return false;
   if (!reference || entry.candidate_id !== reference.id || entry.source_url !== reference.source_url
     || entry.publisher !== reference.publisher || entry.published_date !== (reference.published_date ?? null)) return false;
-  if (reference.selection?.method === 'gemini_grounded_scope') {
+  if (isAutomatedScope(reference.selection)) {
     return sha(reference.selection.evidence?.content_sha256) && entry.selection_content_sha256 === reference.selection.evidence.content_sha256;
   }
   return reference.selection?.method === 'editorial_scope' && entry.selection_content_sha256 === null;

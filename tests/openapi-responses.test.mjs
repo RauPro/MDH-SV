@@ -292,6 +292,20 @@ test('accepted shared Python/JavaScript fixtures also satisfy the advertised wir
   }
 });
 
+test('the advertised schemas reject the same provider provenance errors as the shared validators', () => {
+  const schemas = { 'news-selection': 'NewsSelection', 'news-dossier': 'NewsDossier' };
+  const provenance = /llm|gemini method|evidence review/;
+  let rejected = 0;
+  for (const [contract, schema] of Object.entries(schemas)) {
+    for (const { name, valid, document } of loadContractCases(new URL(`./fixtures/contracts/${contract}.json`, import.meta.url))) {
+      if (valid || !provenance.test(name)) continue;
+      assert.equal(contracts.components[schema](document), false, `${contract}: ${name}`);
+      rejected += 1;
+    }
+  }
+  assert.ok(rejected >= 14);
+});
+
 test('malformed responses, missing evidence, private extras and invalid formats are rejected without repair', async () => {
   const recordResponse = await request('/api/v1/records?limit=1');
   const schema = documented.paths['/api/v1/records'].get.responses['200'].content['application/json'].schema;

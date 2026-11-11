@@ -1,5 +1,6 @@
 import { NEWS_HOSTS, PRIMARY_SOURCE_HOSTS } from './source-registry.mjs';
 import { canonicalNewsSource, sourceIdentityMatches } from './news-identity.mjs';
+import { isAutomatedScope, validLlmModel } from './llm-providers.mjs';
 // Shared browser/server contract. Only this module constructs public placeholders.
 export const NEWS_DOSSIER_FIELDS = Object.freeze([
   'summary', 'category', 'alleged_violation', 'facts', 'affected_persons', 'country',
@@ -102,9 +103,11 @@ export function validatePublishedNewsDossier(value) {
     || !text(value.review_notes) || length(value.review_notes) < 20 || length(value.review_notes) > 4000)) fail();
   if (value.schema_version === 2) {
     const receipt = value.automation;
+    const llmReview = receipt?.method === 'llm_evidence_review';
     if (value.human_reviewed !== false || value.reviewed_by !== null || value.reviewed_at !== null || value.review_notes !== null
-      || !exactKeys(receipt, ['policy_version', 'source_content_sha256', 'validated_at', 'method', 'evaluator_model', 'corroboration'])
-      || receipt.policy_version !== 'auto-news-v1' || receipt.method !== 'gemini_evidence_review' || receipt.corroboration !== 'single_source'
+      || !exactKeys(receipt, ['policy_version', 'source_content_sha256', 'validated_at', 'method', 'evaluator_model', 'corroboration', ...(llmReview ? ['evaluator_provider'] : [])])
+      || receipt.policy_version !== 'auto-news-v1' || !['gemini_evidence_review', 'llm_evidence_review'].includes(receipt.method) || receipt.corroboration !== 'single_source'
+      || (llmReview && !validLlmModel(receipt.evaluator_provider, receipt.evaluator_model))
       || !sha(receipt.source_content_sha256) || !utcInstant(receipt.validated_at)
       || Date.parse(receipt.validated_at) > Date.now() + 300000
       || (value.published_date && receipt.validated_at.slice(0, 10) < value.published_date)
@@ -181,7 +184,7 @@ export function validateDossierBindings(index, references) {
 function dossierMatchesReference(value, reference) {
   return Boolean(reference && value.candidate_id === reference.id && value.source_url === reference.source_url
     && value.publisher === reference.publisher && value.published_date === (reference.published_date ?? null)
-    && (value.schema_version !== 2 || (reference.selection?.method === 'gemini_grounded_scope'
+    && (value.schema_version !== 2 || (isAutomatedScope(reference.selection)
       && sha(reference.selection.evidence?.content_sha256) && value.automation?.source_content_sha256 === reference.selection.evidence.content_sha256)));
 }
 

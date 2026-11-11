@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 
 from .news_scope_policy import SCOPE_PROMPT, EXCLUSION_PROMPT
+from .contracts.providers import GEMINI, scope_method, valid_model
 
 from .contracts.selection import (
     _HEX as _HEX,
@@ -68,11 +69,13 @@ def _decision(scope, extraction, evidence, *, fetched_at=None, exclusion_verifie
     prepared = _timestamp(extraction["prepared_at"])
     selection = None
     if category == "relevant":
+        provider = extraction["provider"]
         selection = validate_selection({
-            "method": "gemini_grounded_scope", "review_status": "automated_unreviewed",
+            "method": scope_method(provider), "review_status": "automated_unreviewed",
             "human_reviewed": False, "jurisdiction": "SV", "relevance": "relevant",
             "classified_at": extraction["prepared_at"], "model": extraction["model"],
             "prompt_version": extraction["prompt_version"], "evidence": evidence,
+            **({} if provider == GEMINI else {"provider": provider}),
         })
     return {"category": category, "selection": selection, "scope": (scope["jurisdiction"], scope["relevance"]),
             "hash": evidence["content_sha256"], "policy": extraction["prompt_version"],
@@ -87,9 +90,9 @@ def _dossier_decision(original, reference, instant):
     scope = news["classification"]
     fetched, prepared = _timestamp(extraction["fetched_at"]), _timestamp(extraction["prepared_at"])
     if (news["extraction_status"] != "processed" or not _bound(news, reference)
-            or scope != document.get("classification") or extraction.get("provider") != "gemini"
+            or scope != document.get("classification")
             or extraction.get("prompt_version") not in {FULL_SCOPE_PROMPT, RIGHTS_FULL_SCOPE_PROMPT, LEGACY_FULL_SCOPE_PROMPT, PREVIOUS_FULL_SCOPE_PROMPT}
-            or not _matches(_MODEL, extraction.get("model"))
+            or not valid_model(extraction.get("provider"), extraction.get("model"))
             or not _matches(_HEX, extraction.get("content_sha256"))
             or not _day(news["published_date"]) <= fetched.date()
             or not fetched <= prepared <= instant):
