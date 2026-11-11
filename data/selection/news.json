@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-10T13:15:10.787000+00:00",
+  "generated_at": "2026-11-11T01:25:17.508979+00:00",
   "assessment_counts": {
     "candidates": 16444,
     "evaluated": 4897,
-    "relevant": 1986,
+    "relevant": 1989,
     "excluded": 672,
-    "uncertain": 2239,
+    "uncertain": 2236,
     "pending": 11547
   },
   "selections": [
@@ -2497,20 +2497,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T02:10:06.640617-06:00",
+        "classified_at": "2026-11-10T19:22:11.999271-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4c226abb4c8861c1c05225d892e745fbe08247e06971996972cb15e3506c005a",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p6"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
             "p4",
-            "p6",
-            "p7"
+            "p6"
           ]
         }
       }
@@ -3609,18 +3607,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "classified_at": "2026-11-10T19:22:39.153556-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "f6ea659707584a6fe012ab4b3d7a17a95ca1f9e4eac04eb19c3a8a6a41f3ff0b",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p8"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -3987,6 +3984,31 @@
             "p3",
             "p4",
             "p5"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "143a1b40f936807828dfb698faf5c2989f48e3b7e86dfd75d2e4c02b317ba8e8",
+      "source_url": "https://historico.elsalvador.com/historico/163016/mexico-captura-a-operador-de-fuga-de-el-chapo-guzman.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-10-21",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T19:16:59.456625-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e5c6bd46a4111accbf86fd561711c8221961c2cd7816a356b56a783d86d10080",
+          "jurisdiction_paragraph_ids": [
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p12"
           ]
         }
       }
@@ -12935,18 +12957,20 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "classified_at": "2026-11-10T19:23:48.166051-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "cf45d60a5a2e3380780cb2b77abf468775dc6cf31b5aee562f37b3f33f6ac6f4",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
             "p10"
           ]
         }
@@ -35068,6 +35092,34 @@
       }
     },
     {
+      "candidate_id": "9d5e6520f67e26216d3bf3330ea14b4ad8d1a1f7905d2c8ab7613574fb5fc8dc",
+      "source_url": "https://historico.elsalvador.com/historico/164876/arrestan-a-6-pandilleros-en-guatemala-por-12-asesinatos.html",
+      "publisher": "El Diario de Hoy (archivo)",
+      "published_date": "2015-10-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T19:16:59.456625-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "92e5badb52da5f8d59ee0878180b231bfca12514b07f8573b14016df65787409",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "9dc0e35b35b49132dd649d6b613fb713d0e0938495e4f556c53fe9b50ce4c556",
       "source_url": "https://www.diariocolatino.com/confras-entrega-mas-de-mil-cartas-de-la-sociedad-civil-por-el-derecho-al-agua/",
       "publisher": "Diario Co Latino",
@@ -45074,6 +45126,35 @@
             "p2",
             "p7",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "c946d28e6d02a9bf411336e22d96cacaf8b6b578b5da557335d074e512ee9b83",
+      "source_url": "https://www.revistafactum.com/la-selecta-y-la-ironia-del-dia-del-sindicalista/",
+      "publisher": "Revista Factum",
+      "published_date": "2015-10-28",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T19:16:59.456625-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1676fbec6c34bb4bc00b6112fd81869ae2f0dda018d17e07e2133c9fa9ffe900",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p14",
+            "p27"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p28"
           ]
         }
       }
