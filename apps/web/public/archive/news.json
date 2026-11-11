@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T13:15:13.261056+00:00",
+  "generated_at": "2026-11-11T01:25:19.852579+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 16444,
-      "selected": 1986,
+      "selected": 1989,
       "evaluated": 4897,
-      "relevant": 1986,
+      "relevant": 1989,
       "excluded": 672,
-      "uncertain": 2239,
+      "uncertain": 2236,
       "pending": 11547,
-      "evaluated_at": "2026-11-10T13:15:10.787000+00:00"
+      "evaluated_at": "2026-11-11T01:25:17.508979+00:00"
     }
   },
   "paper": {
@@ -51,7 +51,7 @@
     "end_date": "2026-11-10",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1986,
+    "records": 1989,
     "sources": [
       {
         "id": "co-latino",
@@ -4952,7 +4952,7 @@
         "publisher": "Revista Factum",
         "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 53,
+        "records": 54,
         "first_published_date": "2014-10-25",
         "last_published_date": "2024-11-28",
         "months": [
@@ -5787,7 +5787,7 @@
           {
             "month": "2015-10",
             "status": "enumerated",
-            "records": 0,
+            "records": 1,
             "screen_version": 3,
             "posts_scanned": 24,
             "source_total_posts": 24,
@@ -14761,7 +14761,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 241,
+        "records": 243,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15596,7 +15596,7 @@
           {
             "month": "2015-10",
             "status": "partial",
-            "records": 2,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 130,
             "source_total_posts": null,
@@ -20183,7 +20183,7 @@
         "month": "2015-10",
         "start_date": "2015-10-01",
         "end_date": "2015-10-31",
-        "records": 33,
+        "records": 36,
         "sources": [
           {
             "source_id": "co-latino",
@@ -20198,7 +20198,7 @@
           {
             "source_id": "factum",
             "status": "enumerated",
-            "records": 0
+            "records": 1
           },
           {
             "source_id": "el-faro",
@@ -20218,7 +20218,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 4
           }
         ]
       },
@@ -74375,6 +74375,52 @@
       }
     },
     {
+      "id": "c946d28e6d02a9bf411336e22d96cacaf8b6b578b5da557335d074e512ee9b83",
+      "title": "La Selecta y la ironía del Día del Sindicalista",
+      "title_truncated": false,
+      "publisher": "Revista Factum",
+      "source_id": "factum",
+      "source_url": "https://www.revistafactum.com/la-selecta-y-la-ironia-del-dia-del-sindicalista/",
+      "published_date": "2015-10-28",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.revistafactum.com/wp-json/wp/v2/posts",
+        "source_post_id": 7298,
+        "retrieved_at": "2026-10-10T18:02:39.732033+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T19:16:59.456625-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1676fbec6c34bb4bc00b6112fd81869ae2f0dda018d17e07e2133c9fa9ffe900",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2",
+            "p14",
+            "p27"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p28"
+          ]
+        }
+      }
+    },
+    {
       "id": "723d539f867532b5fd35124274a4ffd533a4f9599c648847c48878349fe3ed7b",
       "title": "PNC captura a 45 pandilleros en San Pedro Perulapán",
       "title_truncated": false,
@@ -74784,6 +74830,50 @@
       }
     },
     {
+      "id": "143a1b40f936807828dfb698faf5c2989f48e3b7e86dfd75d2e4c02b317ba8e8",
+      "title": "México captura a operador de fuga de “El Chapo” Guzmán",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/163016/mexico-captura-a-operador-de-fuga-de-el-chapo-guzman.html",
+      "published_date": "2015-10-21",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "mexico"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T23:06:27.811174+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T19:16:59.456625-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e5c6bd46a4111accbf86fd561711c8221961c2cd7816a356b56a783d86d10080",
+          "jurisdiction_paragraph_ids": [
+            "p12"
+          ],
+          "relevance_paragraph_ids": [
+            "p12"
+          ]
+        }
+      }
+    },
+    {
       "id": "a8e0cedb2827d641f05470b924f0622d0b2f03ebf50fd9d71b8e510bd984ca1e",
       "title": "Preven reducción de hacinamiento carcelario para 2018",
       "title_truncated": false,
@@ -75180,6 +75270,53 @@
           "relevance_paragraph_ids": [
             "p3",
             "p4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9d5e6520f67e26216d3bf3330ea14b4ad8d1a1f7905d2c8ab7613574fb5fc8dc",
+      "title": "Arrestan a 6 pandilleros en Guatemala por 12 asesinatos",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/164876/arrestan-a-6-pandilleros-en-guatemala-por-12-asesinatos.html",
+      "published_date": "2015-10-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "guatemala"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T23:06:27.811174+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-10T19:16:59.456625-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "92e5badb52da5f8d59ee0878180b231bfca12514b07f8573b14016df65787409",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p3",
+            "p6"
           ]
         }
       }
@@ -81220,18 +81357,20 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "classified_at": "2026-11-10T19:23:48.166051-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "cf45d60a5a2e3380780cb2b77abf468775dc6cf31b5aee562f37b3f33f6ac6f4",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p5"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
+            "p5",
+            "p6",
+            "p7",
+            "p8",
             "p10"
           ]
         }
@@ -81355,18 +81494,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:09:26.142643-06:00",
+        "classified_at": "2026-11-10T19:22:39.153556-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "f6ea659707584a6fe012ab4b3d7a17a95ca1f9e4eac04eb19c3a8a6a41f3ff0b",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p8"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p8"
+            "p3"
           ]
         }
       }
@@ -81400,20 +81538,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-14T02:10:06.640617-06:00",
+        "classified_at": "2026-11-10T19:22:11.999271-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "4c226abb4c8861c1c05225d892e745fbe08247e06971996972cb15e3506c005a",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p6"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
             "p4",
-            "p6",
-            "p7"
+            "p6"
           ]
         }
       }
@@ -82081,7 +82217,7 @@
     },
     {
       "id": "c741c89c118655968e10c8aa5e6c49c949cd5a37006d797a3146bc5debeb1ad2",
-      "title": "Ambientalistas censuran labor de Fiscal General en caso de ambientalistas asesinados",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
