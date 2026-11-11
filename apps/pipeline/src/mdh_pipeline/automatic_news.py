@@ -23,6 +23,7 @@ import requests
 from .contracts.dossier import PROTECTED_TITLE as PROTECTED_TITLE
 
 from .gemini_budget import BudgetConfig, GeminiBudget, QuotaDeferred, QuotaStateError
+from .llm_engine import with_fallbacks
 from .gemini_draft import _input, _request, _single_json, _usage, extract_draft, served_by
 from .gemini_review import put_private_file
 from .contracts.drafts import validate_envelope as validate_envelope
@@ -787,7 +788,6 @@ def main():
             config = BudgetConfig(**json.loads(os.environ["MDH_GEMINI_BUDGET_CONFIG"]))
             model = os.environ.get("GEMINI_MODEL", config.model)
             inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
-            from .llm_engine import with_fallbacks
             budget = with_fallbacks(inbox, GeminiBudget(inbox, config))
             archive = read_processing_json(args.archive, 30_000_000)
             grant, allocation = allocated_validation_grant(inbox, args.inbox_dir, archive,

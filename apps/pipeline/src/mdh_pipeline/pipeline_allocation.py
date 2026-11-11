@@ -192,7 +192,7 @@ class AllocationLedger:
 
 
 def plan_pipeline_requests(hourly_grant, *, extraction_pending, validation_ready,
-                           scope_pending, batch_size=4):
+                           scope_pending, batch_size=4, scope_ceiling=2):
     """Return bounded grants based on eligible work, never open issue counts.
 
     Two bulk scope calls keep discoveries moving. With all queues populated a
@@ -202,9 +202,10 @@ def plan_pipeline_requests(hourly_grant, *, extraction_pending, validation_ready
     for value in (hourly_grant, extraction_pending, validation_ready, scope_pending):
         if type(value) is not int or not 0 <= value <= 100_000:
             raise ValueError("invalid_pipeline_workload")
-    if hourly_grant > 50 or type(batch_size) is not int or not 1 <= batch_size <= 4:
+    if (hourly_grant > 50 or type(batch_size) is not int or not 1 <= batch_size <= 4
+            or type(scope_ceiling) is not int or not 1 <= scope_ceiling <= 8):
         raise ValueError("invalid_pipeline_allocation")
-    scope = min(2, math.ceil(hourly_grant / 5), math.ceil(scope_pending / 16)) if scope_pending else 0
+    scope = min(scope_ceiling, math.ceil(hourly_grant / 5), math.ceil(scope_pending / 16)) if scope_pending else 0
     # One remaining call is more useful completing an existing dossier than
     # creating more classified work that cannot yet be enriched or published.
     if hourly_grant == 1 and (validation_ready or extraction_pending):

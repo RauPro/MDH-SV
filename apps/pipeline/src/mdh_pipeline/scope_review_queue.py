@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+from concurrent.futures import ThreadPoolExecutor
 import json
 import os
 from pathlib import Path
@@ -13,6 +14,7 @@ from datetime import datetime, timedelta, timezone
 from .article_source import fetch_article
 from .gemini_budget import BudgetConfig, GeminiBudget, QuotaDeferred, estimate_input_tokens
 from .gemini_draft import GeminiDraftError
+from .llm_engine import with_fallbacks
 from .contracts.selection import index_archive as _archive_index, validate_scope_review as validate_scope_review
 from .news_scope import MAX_BATCH_ITEMS, SCOPE_PROMPT, classify_scope_batch, prepare_scope_batch
 from .review_queue import GitHubInbox, GitHubRequestError
@@ -153,11 +155,57 @@ def _put_private(inbox, folder, document, *, before_write):
         raise ValueError("scope_write_receipt_invalid")
 
 
+class _BatchCommit:
+    """Store the private documents of one batch in a single fast-forward commit.
+
+    Either every document of the batch reaches main or none does. Other files
+    are preserved through the base tree, and a moved branch is never overwritten.
+    """
+    def __init__(self, inbox, before_write):
+        self.inbox, self.files, self.before_write = inbox, {}, before_write
+
+    def add(self, folder, document):
+        self.files[f"{folder}/{document['candidate_id']}.json"] = document
+
+    def _sha(self, method, path, key=None, **kwargs):
+        if method != "GET":
+            self.before_write()
+        result = self.inbox.call(method, self.inbox.base + path, **kwargs)
+        value = result.get(key, {}).get("sha") if key and isinstance(result, dict) else (
+            result.get("sha") if isinstance(result, dict) else None)
+        if not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{40,64}", value):
+            raise ValueError("scope_write_receipt_invalid")
+        return value
+
+    def flush(self, message):
+        if not self.files:
+            return
+        entries = [{"path": path, "mode": "100644", "type": "blob",
+                    "content": json.dumps(document, ensure_ascii=False, indent=2) + "\n"}
+                   for path, document in sorted(self.files.items())]
+        for _ in range(3):
+            head = self._sha("GET", "/git/ref/heads/main", "object")
+            parent = self._sha("GET", "/git/commits/" + head, "tree")
+            tree = self._sha("POST", "/git/trees", json={"base_tree": parent, "tree": entries})
+            commit = self._sha("POST", "/git/commits", json={"message": message, "tree": tree, "parents": [head]})
+            try:
+                stored = self._sha("PATCH", "/git/refs/heads/main", "object", json={"sha": commit, "force": False})
+            except GitHubRequestError as error:
+                if error.status_code == 422:
+                    continue  # main moved; rebuild on its new head instead of forcing.
+                raise
+            if stored != commit:
+                raise ValueError("scope_write_receipt_invalid")
+            self.files = {}
+            return
+        raise ValueError("scope_batch_commit_conflict")
+
+
 def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_requests=2,
                   batch_size=MAX_BATCH_ITEMS, max_seconds=720, excluded_ids=(), scope_reviews=(), attempts=(),
                   verifications=(), priority_ids=(), rechecks=None,
                   fetch=fetch_article, classify=classify_scope_batch, verify=verify_exclusions_batch, clock=time.monotonic,
-                  sleep=time.sleep, now=None):
+                  sleep=time.sleep, now=None, batch_commits=False, fetch_workers=1):
     """Classify all bibliography references independently of drafts or issues.
 
     drafts remains for caller compatibility. Load scope_reviews and attempts once
@@ -171,6 +219,8 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
         raise ValueError("invalid_scope_batch_limit")
     if type(max_seconds) is not int or not 60 <= max_seconds <= 720:
         raise ValueError("invalid_scope_time_limit")
+    if type(batch_commits) is not bool or type(fetch_workers) is not int or not 1 <= fetch_workers <= 4:
+        raise ValueError("invalid_scope_storage_options")
     if budget is None or model != budget.config.model:
         raise ValueError("scope_budget_required")
     if (not isinstance(excluded_ids, (list, tuple, set))
@@ -259,6 +309,47 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
     dispatch_budget = _ScopeDeadlineBudget(budget, deadline, clock, starting_requests + maximum_http)
     last_write = None
     fresh_articles = {}
+    prefetched = {}
+    spent = {"sources": 0.0, "model": 0.0, "storage": 0.0}
+
+    def timed(kind, operation, *args, **kwargs):
+        started = time.perf_counter()
+        try:
+            return operation(*args, **kwargs)
+        finally:
+            spent[kind] += time.perf_counter() - started
+
+    def put(folder, document):
+        if batch is not None:
+            batch.add(folder, document)
+        else:
+            timed("storage", _put_private, inbox, folder, document, before_write=pace_write)
+
+    def commit(message):
+        if batch is not None:
+            timed("storage", batch.flush, message)
+
+    def read_sources(candidates, wanted):
+        """Read the next few sources together; every read counts against the same bound."""
+        chosen = []
+        for reference in candidates:
+            if len(chosen) >= min(fetch_workers, wanted, maximum_sources - report["sources_checked"]):
+                break
+            if reference["id"] not in fresh_articles and reference["id"] not in prefetched:
+                chosen.append(reference)
+        report["sources_checked"] += len(chosen)
+
+        def read(reference):
+            try:
+                return fetch({**reference, "source_title": reference["title"]})
+            except Exception as error:
+                return error
+        if len(chosen) > 1:
+            with ThreadPoolExecutor(max_workers=len(chosen)) as pool:
+                results = timed("sources", lambda: list(pool.map(read, chosen)))
+        else:
+            results = timed("sources", lambda: [read(reference) for reference in chosen])
+        prefetched.update((reference["id"], result) for reference, result in zip(chosen, results, strict=True))
 
     def available():
         return clock() < deadline and budget.requests_this_run - starting_requests < maximum_http
@@ -271,6 +362,8 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
                 sleep(delay)
         last_write = clock()
 
+    batch = _BatchCommit(inbox, pace_write) if batch_commits else None
+
     def failed_source(reference, error):
         code = getattr(error, "code", "source_fetch_failed")
         if not isinstance(code, str) or code not in SOURCE_ERRORS:
@@ -280,7 +373,7 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
                     "status": "source_unavailable", "error_code": code, "attempted_at": timestamp.isoformat(),
                     "next_retry_at": (timestamp + timedelta(days=7 if code in {"source_access_restricted", "source_content_mismatch"} else 1)).isoformat()}
         validate_scope_attempt(document, reference=reference, now=timestamp)
-        _put_private(inbox, "scope-attempts", document, before_write=pace_write)
+        put("scope-attempts", document)
         report["source_unavailable"] += 1
 
     def classify_and_store(items):
@@ -289,7 +382,7 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
         if not available():
             return
         try:
-            results = classify(items, api_key=api_key, model=model, budget=dispatch_budget)
+            results = timed("model", classify, items, api_key=api_key, model=model, budget=dispatch_budget)
         except GeminiDraftError as error:
             if error.code not in RECOVERABLE_SCOPE_ERRORS:
                 # HTTP/provider/configuration failures are not grounds for more
@@ -320,7 +413,7 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
                     or result.get("source_read") != receipt):
                 raise ValueError("scope_source_receipt_mismatch")
         for result in results:
-            _put_private(inbox, "scope-reviews", result, before_write=pace_write)
+            put("scope-reviews", result)
             updated_reviews[result["candidate_id"]] = result
             reviews[result["candidate_id"]] = result
             if negative(result) and result.get("source_read", {}).get("truncated") is False:
@@ -333,11 +426,12 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
                 selected.add(result["candidate_id"])
                 report["relevant_sv"] += 1
                 report["accepted"] += 1
+        commit("Store private news scope assessments")
 
     def verify_and_store(items):
         if not available():
             return
-        results = verify(items, api_key=api_key, model=model, budget=dispatch_budget, now=now)
+        results = timed("model", verify, items, api_key=api_key, model=model, budget=dispatch_budget, now=now)
         if not isinstance(results, list) or len(results) != len(items):
             raise ValueError("invalid_scope_verification_results")
         for result, item in zip(results, items, strict=True):
@@ -348,14 +442,14 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
         for result in results:
             # Persist provenance before publishing a retained reassessment or
             # allowing a later reconciliation worker to close an exclusion.
-            _put_private(inbox, "scope-verifications", result, before_write=pace_write)
+            put("scope-verifications", result)
             report["updated_verifications"].append(result)
             verified[result["candidate_id"]] = result
             report["verified"] += 1
             outcome = result["outcome"]
             if outcome == "retained":
                 second = result["second_review"]
-                _put_private(inbox, "scope-reviews", second, before_write=pace_write)
+                put("scope-reviews", second)
                 reviews[result["candidate_id"]] = second
                 updated_reviews[second["candidate_id"]] = second
                 selected.add(result["candidate_id"])
@@ -366,6 +460,7 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
                 report["confirmed_excluded"] += 1
             else:
                 report["uncertain_verifications"] += 1
+        commit("Store independent news exclusion verifications")
 
     def priority(value):
         prior = reviews.get(value["id"])
@@ -377,12 +472,13 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
             if index >= maximum_sources or clock() >= deadline:
                 report["stopped_reason"] = "source_check_limit" if index >= maximum_sources else "run_limit"
                 break
-            _put_private(inbox, "scope-reviews", retained, before_write=pace_write)
+            put("scope-reviews", retained)
             reviews[retained["candidate_id"]] = retained
             selected.add(retained["candidate_id"])
             updated_reviews[retained["candidate_id"]] = retained
             report["cached"] += 1
             report["retained"] += 1
+        commit("Store retained news scope assessments")
         # Recovered writes and newly read candidates share the same bounded
         # update inventory expected by the extraction coordinator.
         maximum_sources -= len(updated_reviews)
@@ -410,13 +506,16 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
                 if identifier in fresh_articles:
                     article = fresh_articles[identifier]
                 else:
-                    if report["sources_checked"] >= maximum_sources:
-                        queue.insert(0, reference)
-                        report["stopped_reason"] = "source_check_limit"
-                        break
-                    report["sources_checked"] += 1
+                    if identifier not in prefetched:
+                        if report["sources_checked"] >= maximum_sources:
+                            queue.insert(0, reference)
+                            report["stopped_reason"] = "source_check_limit"
+                            break
+                        read_sources([reference, *queue], limit - len(current))
                     try:
-                        article = fetch({**reference, "source_title": reference["title"]})
+                        article = prefetched.pop(identifier)
+                        if isinstance(article, Exception):
+                            raise article
                         prepare_scope_batch([{"reference": reference, "article": article}])
                         if article["content_sha256"] == blocked.get(identifier):
                             raise GeminiDraftError("source_content_mismatch")
@@ -467,6 +566,8 @@ def recheck_scope(inbox, drafts, archive, *, api_key, model, budget, max_request
     except GeminiDraftError as error:
         report["stopped_reason"] = "model_error"
         report["error_code"] = error.code
+    commit("Record bounded source retries")
+    report["seconds"] = {kind: round(value, 1) for kind, value in spent.items()}
     unresolved = recovery_ids - recovered_ids
     report["model_recovered_articles"] = len(recovered_ids)
     report["model_failed_articles"] = len(unresolved & singleton_failures)
@@ -529,7 +630,6 @@ def main():
     try:
         inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
         config = BudgetConfig(**json.loads(os.environ["MDH_GEMINI_BUDGET_CONFIG"]))
-        from .llm_engine import with_fallbacks
         budget = with_fallbacks(inbox, GeminiBudget(inbox, config))
         root = args.drafts.parent if args.drafts else Path.cwd()
         reviews = load_scope_cache(args.scope_reviews or root / "scope-reviews")

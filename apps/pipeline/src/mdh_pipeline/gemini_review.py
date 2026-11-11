@@ -15,6 +15,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .review_queue import GitHubInbox, GitHubRequestError
+from .llm_engine import load_fallbacks, with_fallbacks
 from .source_urls import canonical_url
 
 from .contracts.drafts import (
@@ -301,12 +302,54 @@ def safe_validation_issues(error):
         result.append({"field": field, "type": kind if isinstance(kind, str) and kind in types else "validation_error"})
     return result
 
-def hourly_request_allowance(snapshot, config, requested_limit, now):
+def scheduled_cycle_hours(environ=None):
+    """UTC hours at which the operator schedules a cycle; unset keeps the hourly share."""
+    raw = (os.environ if environ is None else environ).get("MDH_CYCLE_HOURS", "")
+    if not raw:
+        return None
+    hours = {int(value) for value in raw.split(",")} if re.fullmatch(r"\d{1,2}(?:,\d{1,2}){0,23}", raw) else set()
+    if len(hours) != raw.count(",") + 1 or max(hours) > 23:
+        from .gemini_budget import QuotaStateError
+        raise QuotaStateError("invalid_cycle_hours")
+    return hours
+
+
+def hourly_request_allowance(snapshot, config, requested_limit, now, cycle_hours=None):
     pacific = now.astimezone(ZoneInfo("America/Los_Angeles"))
-    reset_local = (pacific + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-    remaining_hours = max(1, math.ceil((reset_local.astimezone(timezone.utc) - now).total_seconds() / 3600))
+    reset = (pacific + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0).astimezone(timezone.utc)
+    cycle_hours = scheduled_cycle_hours() if cycle_hours is None else cycle_hours
+    if cycle_hours:
+        # Share the day among this cycle and the scheduled starts left before the
+        # provider's daily reset, instead of among hours in which nothing runs.
+        start = now.replace(minute=0, second=0, microsecond=0)
+        remaining_hours = 1 + sum((start + timedelta(hours=offset)).hour in cycle_hours
+                                  for offset in range(1, 26) if start + timedelta(hours=offset) < reset)
+    else:
+        remaining_hours = max(1, math.ceil((reset - now).total_seconds() / 3600))
     share = math.ceil(snapshot["remaining_requests"] / remaining_hours)
     return min(requested_limit, config.batch_ceiling, snapshot["remaining_requests"], share), remaining_hours
+
+
+def scope_storage_options(environ=None):
+    """Explicit, bounded operator switches; unset keeps one write per document and sequential reads."""
+    environ = os.environ if environ is None else environ
+    batch, workers = environ.get("MDH_SCOPE_BATCH_COMMITS", ""), environ.get("MDH_SOURCE_FETCH_WORKERS", "")
+    if batch not in ("", "true", "false") or not re.fullmatch(r"[1-4]?", workers):
+        raise ValueError("invalid_scope_storage_options")
+    options = {}
+    if batch == "true":
+        options["batch_commits"] = True
+    if workers not in ("", "1"):
+        options["fetch_workers"] = int(workers)
+    return options
+
+
+def scope_request_ceiling(environ=None):
+    """Scope requests one cycle may use; unset keeps the original two."""
+    raw = (os.environ if environ is None else environ).get("MDH_SCOPE_REQUESTS_PER_CYCLE", "")
+    if not re.fullmatch(r"[1-8]?", raw):
+        raise ValueError("invalid_scope_request_ceiling")
+    return int(raw or 2)
 
 
 def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seconds=4,
@@ -599,7 +642,9 @@ def process_queue(inbox, *, api_key, model, limit=20, max_attempts=3, pause_seco
         if not current_pending(issue, candidate):
             report["deferred"] += 1
             continue
-        if report["attempted"]:
+        # The durable ledger already spaces model requests; a fixed pause is
+        # only needed when no budget governs this run.
+        if report["attempted"] and budget is None:
             sleep(pause_seconds)
         report["attempted"] += 1
         report["unclassified_rss_attempts"] += int(unclassified_rss)
@@ -859,7 +904,8 @@ def _refresh_scope_workload(inbox, archive, drafts, cached, receipts, updated_re
 
 def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox_dir,
                         limit, retry_failed=False, now=None, scope_worker=None, budget_factory=None,
-                        allocation_ledger=None, run_id=None, exceptions_path=None, scope_audits_path=None):
+                        allocation_ledger=None, run_id=None, exceptions_path=None, scope_audits_path=None,
+                        scope_options=None, scope_ceiling=2):
     """Share one hourly grant across classification, extraction and validation."""
     from .gemini_budget import GeminiBudget, QuotaStateError
     from .scope_review_queue import recheck_scope
@@ -885,7 +931,8 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
     workload = _allocation_workload(inbox, archive, drafts, cached, receipts, excluded=excluded, now=now,
                                     scope_audits=scope_audits, verifications=verifications, rechecks=rechecks)
     plan = plan_pipeline_requests(allowance, extraction_pending=workload["extraction_pending"],
-        validation_ready=workload["validation_ready"], scope_pending=workload["scope_pending"])
+        validation_ready=workload["validation_ready"], scope_pending=workload["scope_pending"],
+        scope_ceiling=scope_ceiling)
     scope_limit = plan["scope_requests"]
     validation_limit = plan["validation_requests"]
     if allocation_ledger is not None:
@@ -893,6 +940,7 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
     scope_worker = scope_worker or recheck_scope
     budget_factory = budget_factory or GeminiBudget
     scope_report = {"http_requests": 0, "classified": 0, "accepted": 0, "stopped_reason": None}
+    started = time.perf_counter()
     selected = sorted(workload["selected_ids"])
     blocked = workload["excluded_ids"]
     reprocess = workload["scope_reprocessing_ids"]
@@ -902,7 +950,7 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
             scope_report = scope_worker(inbox, drafts, archive, api_key=api_key, model=model,
                 budget=budget, max_requests=scope_limit, max_seconds=720,
                 scope_reviews=cached, attempts=attempts, excluded_ids=excluded, verifications=verifications,
-                rechecks=rechecks, priority_ids=sorted(workload["scope_priority_ids"]))
+                rechecks=rechecks, priority_ids=sorted(workload["scope_priority_ids"]), **(scope_options or {}))
             new_selected = scope_report.get("selected_ids", [])
             if (not isinstance(new_selected, list) or len(new_selected) > 50_000
                     or any(not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value) for value in new_selected)):
@@ -927,6 +975,7 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
                 or any(not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value) for value in selected)):
             raise ValueError("invalid_scope_selection_ids")
         selected = sorted(set(selected) - blocked)
+    scope_seconds = time.perf_counter() - started
     scope_used = budget.requests_this_run
     if type(scope_used) is not int or not 0 <= scope_used <= scope_limit:
         raise QuotaStateError("scope_phase_limit_exceeded")
@@ -965,7 +1014,7 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
     safe_scope_keys = {"candidates", "cached", "sources_checked", "source_unavailable", "source_changed",
                        "reviewed", "relevant_sv", "classified", "accepted", "http_requests", "stopped_reason",
                        "quota_reason", "error_code", "error_type", "deferred", "excluded", "attempts_saved",
-                       "classified_total", "accepted_total", "remaining", "retry_deferred"}
+                       "classified_total", "accepted_total", "remaining", "retry_deferred", "seconds"}
     safe_scope_keys.update({"model_errors", "model_recovery_splits", "model_recovered_articles",
                             "model_failed_articles", "model_deferred_articles", "last_model_error_code", "halt_reason",
                             "verified", "confirmed_excluded", "retained", "uncertain_verifications"})
@@ -976,7 +1025,9 @@ def process_scope_first(inbox, *, api_key, model, config, budget, archive, inbox
                   validation_request_reservation=validation_limit,
                   validation_request_limit=allowance - scope_used - full_used,
                   allocation_workload={key: workload[key] for key in ("extraction_pending", "validation_ready", "scope_pending")},
-                  http_requests=scope_used + full_used, prioritized_candidates=prioritized)
+                  http_requests=scope_used + full_used, prioritized_candidates=prioritized,
+                  phase_seconds={"scope": round(scope_seconds, 1),
+                                 "dossiers": round(time.perf_counter() - started - scope_seconds, 1)})
     if enqueue_error:
         report["priority_enqueue_error"] = enqueue_error
     return report
@@ -1017,7 +1068,6 @@ def main():
         if not 1 <= args.limit <= 50:
             raise QuotaStateError("invalid_requested_batch_size")
         inbox = GitHubInbox(os.environ["GITHUB_REPOSITORY"], os.environ["GH_TOKEN"])
-        from .llm_engine import load_fallbacks, with_fallbacks
         lanes = load_fallbacks(inbox)
         budget = with_fallbacks(inbox, GeminiBudget(inbox, config), lanes=lanes)
         budget.snapshot()  # Missing budget state fails closed before claiming work.
@@ -1038,7 +1088,7 @@ def main():
                 retry_failed=args.retry_failed,
                 allocation_ledger=AllocationLedger(inbox, project_id=config.project_id, model=model),
                 run_id=os.environ.get("GITHUB_RUN_ID", ""), exceptions_path=args.exceptions,
-                scope_audits_path=args.scope_audits, **({"budget_factory": lambda queue, settings: with_fallbacks(
+                scope_audits_path=args.scope_audits, scope_options=scope_storage_options(), scope_ceiling=scope_request_ceiling(), **({"budget_factory": lambda queue, settings: with_fallbacks(
                     queue, GeminiBudget(queue, settings), lanes=lanes)} if lanes else {}))
         else:
             report = process_queue(inbox, api_key=key, model=model, budget=budget,
