@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-11-09T01:17:06.929881+00:00",
+  "generated_at": "2026-11-11T13:17:12.234513+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -1866,6 +1866,30 @@
       "evidence": {
         "paragraph_id": "p2",
         "content_sha256": "db1fa094540429f220b0b354923cc856ac8f842b9854809201126644320f5f98"
+      }
+    },
+    {
+      "candidate_id": "318b7d12618bf9919b4e7740ecb0b2a9fd097f4f5d69f1a05d5f30f5cf971867",
+      "source_url": "https://www.diariocolatino.com/fiscalia-exige-explicaciones-por-liberacion-de-cien-detenidos-en-apopa/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-09-28",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-11-11T13:16:56.778772+00:00",
+      "source_checked_at": "2026-11-11T13:16:56.778772+00:00",
+      "evidence": {
+        "paragraph_id": "p6",
+        "content_sha256": "9dd846ede27be18691a35b178fd0e585e42fc2a96e9ac7f559d6b364f2575764"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Apopa",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -3946,6 +3970,30 @@
       }
     },
     {
+      "candidate_id": "6ae9384bac0c5fad76fe307a7a9e003e93110cd26cd81fae059b60fc7ab0afe9",
+      "source_url": "https://www.diariocolatino.com/fgr-ordena-40-capturas-por-vinculos-con-homicidios/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-09-22",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-11-11T13:16:33.437414+00:00",
+      "source_checked_at": "2026-11-11T13:16:33.437414+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "839be92e3b409bfce170b3c5fbc1214181ab80f275d1555740db1debe9043b56"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Tonacatepeque",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "6b04d36e855adc92cc6103e4af124342193bb56c2445f87105b364c04e83b0e4",
       "source_url": "https://www.diariocolatino.com/lamentan-que-hijo-de-asesino-intelectual-de-romero-sea-edil-de-santa-tecla/",
       "publisher": "Diario Co Latino",
@@ -4492,6 +4540,23 @@
           }
         }
       ]
+    },
+    {
+      "candidate_id": "798099d0d024897ab9fba3b93b1c4aa7fe2614ff80cec8f04e88c1a0553a3808",
+      "source_url": "https://www.diariocolatino.com/juzgados-especializados-envian-a-prision-a-94-pandilleros/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-09-19",
+      "department": "La Paz",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_explicit_department",
+      "rule_version": 2,
+      "extracted_at": "2026-11-11T13:16:28.017535+00:00",
+      "source_checked_at": "2026-11-11T13:16:28.017535+00:00",
+      "evidence": {
+        "paragraph_id": "p11",
+        "content_sha256": "456499b60ccedf9290b266b4720d724a93670ad40cbc4d228d6cde99296f6ebb"
+      }
     },
     {
       "candidate_id": "79955a216f7c41ef65fcf93841e0a672bbdfc06aebe6915b285fbba2a7b975fe",
@@ -6317,6 +6382,30 @@
       }
     },
     {
+      "candidate_id": "acd0c3bbae74ba77751969f2318ff002a6fe5ac9cf5fefb23ab046d77acd0405",
+      "source_url": "https://www.diariocolatino.com/fgr-reporta-cuadruple-homicidio-en-santa-ana/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-06",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-11-11T13:17:03.957844+00:00",
+      "source_checked_at": "2026-11-11T13:17:03.957844+00:00",
+      "evidence": {
+        "paragraph_id": "p3",
+        "content_sha256": "1d35f4f9a44e929f1a8d73ec60e3e405109f28a438d253fc0d16acea62761f0b"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Santa Ana",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=12"
+      }
+    },
+    {
       "candidate_id": "ad09289d6059ffde5fee29725040649661abbc1bdfbb9dd9125c36519ada09f8",
       "source_url": "https://www.diariocolatino.com/alza-de-homicidios-estaria-vinculada-a-proceso-electoral/",
       "publisher": "Diario Co Latino",
@@ -6494,6 +6583,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "b4d0ceb227065260dbdee52a83ac9b2d948c869f898637fd25151f3d03e6eb99",
+      "source_url": "https://www.diariocolatino.com/juzgado-decreta-medidas-sustitutivas-para-92-personas-detenidas-en-fiesta-de-pandillas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-03",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-11-11T13:16:59.083725+00:00",
+      "source_checked_at": "2026-11-11T13:16:59.083725+00:00",
+      "evidence": {
+        "paragraph_id": "p12",
+        "content_sha256": "e238e037ffc6301327a685c63bec222de895d3ae5b17e42eb66bd62503acecff"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Apopa",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
