@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T19:52:16.902451+00:00",
+  "generated_at": "2026-11-12T01:14:30.105460+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 16452,
-      "selected": 1989,
+      "selected": 1993,
       "evaluated": 4897,
-      "relevant": 1989,
-      "excluded": 680,
-      "uncertain": 2228,
+      "relevant": 1993,
+      "excluded": 688,
+      "uncertain": 2216,
       "pending": 11555,
-      "evaluated_at": "2026-11-11T13:14:39.447538+00:00"
+      "evaluated_at": "2026-11-12T01:14:25.827138+00:00"
     }
   },
   "paper": {
@@ -51,14 +51,14 @@
     "end_date": "2026-11-11",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1989,
+    "records": 1993,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1630,
+        "records": 1632,
         "first_published_date": "2014-01-02",
         "last_published_date": "2026-11-03",
         "months": [
@@ -905,7 +905,7 @@
           {
             "month": "2015-11",
             "status": "enumerated",
-            "records": 33,
+            "records": 35,
             "screen_version": 3,
             "posts_scanned": 989,
             "source_total_posts": 989,
@@ -14761,7 +14761,7 @@
         "publisher": "El Diario de Hoy (archivo)",
         "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
         "status": "partial",
-        "records": 243,
+        "records": 245,
         "first_published_date": "2012-06-28",
         "last_published_date": "2018-02-14",
         "months": [
@@ -15608,7 +15608,7 @@
           {
             "month": "2015-11",
             "status": "partial",
-            "records": 2,
+            "records": 4,
             "screen_version": 3,
             "posts_scanned": 127,
             "source_total_posts": null,
@@ -20226,12 +20226,12 @@
         "month": "2015-11",
         "start_date": "2015-11-01",
         "end_date": "2015-11-30",
-        "records": 37,
+        "records": 41,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 33
+            "records": 35
           },
           {
             "source_id": "gatoencerrado",
@@ -20261,7 +20261,7 @@
           {
             "source_id": "el-diario-de-hoy",
             "status": "partial",
-            "records": 2
+            "records": 4
           }
         ]
       },
@@ -73410,6 +73410,55 @@
       }
     },
     {
+      "id": "64cfa7cc1105c4cc4d9f47a316341571522c05302116333ddb9de2806c06d083",
+      "title": "Autoridades salvadoreńas: Sirios detenidos en Honduras procedían de Costa Rica",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/167528/autoridades-salvadorenas-sirios-detenidos-en-honduras-procedian-de-costa-rica.html",
+      "published_date": "2015-11-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "costa rica",
+        "honduras",
+        "salvadorenas"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T23:06:27.811174+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-11T19:09:13.495070-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "6a1d2f4fe3c4efb387ca64a6a711c07beed609613177bd7f7ef06f4c6828270c",
+          "jurisdiction_paragraph_ids": [
+            "p1",
+            "p2"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p2",
+            "p3"
+          ]
+        }
+      }
+    },
+    {
       "id": "5aedd4f56968c78257c3171acb66b7de20e8dd7324913d5b2bfb44e92e97aba1",
       "title": "Tribunal condena a pandilleros por homicidio agravado",
       "title_truncated": false,
@@ -73449,6 +73498,54 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4786593b9dd6777f6be36a482cfffba699b965bc61813c682b3e4e484ae7ed80",
+      "title": "Sirios detenidos en Honduras con pasaportes robados procedían de El Salvador",
+      "title_truncated": false,
+      "publisher": "El Diario de Hoy (archivo)",
+      "source_id": "el-diario-de-hoy",
+      "source_url": "https://historico.elsalvador.com/historico/167622/sirios-detenidos-en-honduras-con-pasaportes-robados-procedian-de-el-salvador.html",
+      "published_date": "2015-11-18",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "el salvador",
+        "honduras"
+      ],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://historico.elsalvador.com/historico/SiteMapHistoricoEscom.xml",
+        "source_post_id": null,
+        "retrieved_at": "2026-10-13T23:06:27.811174+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-11T19:09:13.495070-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "04963fb5777fc25333fded8e29dc15fa4ac138e46742ad89acfbf4836eafb4f3",
+          "jurisdiction_paragraph_ids": [
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p1",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -73592,6 +73689,52 @@
       }
     },
     {
+      "id": "c0c01d97102ede15704f219a08cd7d8659c685bd4ce1d3b822470e661f59c5e2",
+      "title": "PNC confirma homicidio de excandidato a alcalde de Acajutla",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-confirma-homicidio-de-excandidato-a-alcalde-de-acajutla/",
+      "published_date": "2015-11-14",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "violencia_y_desapariciones"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 86266,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-11T19:09:13.495070-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "e531d3487fd918fa7d5e8d3ac5012e99718024564003aff6102de141fa3d8dd8",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p8"
+          ]
+        }
+      }
+    },
+    {
       "id": "ec8b5465df74e1c1f539a3dc761fc953378bd34792b94469aed9888481852c04",
       "title": "El asesinato de los jesuitas de la UCA y la memoria",
       "title_truncated": false,
@@ -73678,6 +73821,49 @@
             "p2",
             "p6",
             "p8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4d7ca240ff1b37ca25b32915f533caca8630af9d2d5af56f03535496b8285829",
+      "title": "PNC captura a ciudadano mexicano con 50 mil dólares",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-ciudadano-mexicano-con-50-mil-dolares/",
+      "published_date": "2015-11-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 86159,
+        "retrieved_at": "2026-10-11T06:23:53.884051+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-11T19:09:13.495070-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "8f6dafcf98e0ae3f755c136399145903272ab96d553143621bd18336fa6ffaf7",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -80942,21 +81128,19 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "classified_at": "2026-11-11T19:13:07.822858-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "cffcafa0dbaf7ad837ac081c317a648f12727587a949c9a318b719fdb5e301cd",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p11"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
             "p6",
             "p11",
-            "p13"
+            "p12"
           ]
         }
       }
@@ -80989,18 +81173,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "classified_at": "2026-11-11T19:12:53.580974-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9ebc2e8ae5f759429c3be096a1316a3ff52d80bbcd23d7596592d9c169aaa445",
           "jurisdiction_paragraph_ids": [
             "p8"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p9",
-            "p10"
+            "p10",
+            "p11"
           ]
         }
       }
@@ -81194,7 +81377,7 @@
     },
     {
       "id": "c9bd61ffa52cf29bdab924e99dfd0e74ebf9838fef88bc6367f9cef204bdb468",
-      "title": "Tres personas detenidas tras ataque a agentes policiales",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -81240,7 +81423,7 @@
     },
     {
       "id": "e22d99fdecccb075cb85b251f34510b3ca2f5bea3f1a99f72ba0f7c33c46c015",
-      "title": "Asesinan a agente policial junto a su hijo",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -81285,7 +81468,7 @@
     },
     {
       "id": "af93e0408de4df0477ec4b961631e2ecba348b8a873ea768cebfd40c18be30b6",
-      "title": "Detención provisional contra implicado en atentado a policías",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -81331,7 +81514,7 @@
     },
     {
       "id": "3de8d2f3d4fe155165b3d0016a54ac9334ec67ec63b8105ae0e04df94b0fa746",
-      "title": "FGR deficiente en la investigación de feminicidios: Las Dignas",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
@@ -81378,7 +81561,7 @@
     },
     {
       "id": "933b94026d51dfee14d08e1f4a28e009e06ceb226cc98dd1ab768834fb0e8de6",
-      "title": "Acusado de femenicidio continuará proceso en prisión",
+      "title": "Noticia con título protegido; consulte la fuente original",
       "title_truncated": false,
       "publisher": "Diario Co Latino",
       "source_id": "co-latino",
