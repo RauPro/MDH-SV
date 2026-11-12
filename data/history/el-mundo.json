@@ -34,16 +34,62 @@
     },
     "2026-11": {
       "status": "partial",
-      "posts_scanned": 38,
-      "pages_fetched": 38,
+      "posts_scanned": 40,
+      "pages_fetched": 40,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-11-12T07:41:25.380370+00:00",
+      "last_attempt_at": "2026-11-12T20:24:43.461011+00:00",
       "error": null
     }
   },
   "records": [
+    {
+      "id": "5c327a57864769f25bcdffbc3ccfae0b86575ced7033d1d1b13a16f9a367e2e3",
+      "title": "Envían a prisión a hombre acusado de estafar $60,000 con la venta de una vivienda en Soyapango",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/envian-a-prision-a-hombre-acusado-de-estafar-60000-con-la-venta-de-una-vivienda-en-soyapango",
+      "published_date": "2026-11-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-12T20:24:43.461011+00:00"
+      }
+    },
+    {
+      "id": "02bda003bb2d6b2adf006b4be6a0f55152a2bfff972113ebe19ee3cea83f2fa0",
+      "title": "Ordenan captura de ocho hombres y dos mujeres señalados de integrar estructura de narcomenudeo en el oriente del país",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/ordenan-captura-de-ocho-hombres-y-dos-mujeres-senalados-de-integrar-estructura-de-narcomenudeo-en-el-oriente-del-pais",
+      "published_date": "2026-11-12",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-12T20:24:43.461011+00:00"
+      }
+    },
     {
       "id": "348433fd5fa5488d0d85521e19d5b654e3a84cef4bf1038a68ef9e5493076d2f",
       "title": "Condenan a prisión perpetua a hombre por violar a una menor",
@@ -2078,7 +2124,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-12T07:41:25.380370+00:00",
+    "last_attempt_at": "2026-11-12T20:24:43.461011+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -2168,9 +2214,11 @@
       "https://diario.elmundo.sv/nacionales/condenan-a-10-anos-de-carcel-a-dos-colaboradoras-de-la-pandilla-18-por-extorsionar-a-comerciante-en-apopa",
       "https://diario.elmundo.sv/nacionales/condenan-a-prision-perpetua-a-hombre-por-violar-a-una-menor",
       "https://diario.elmundo.sv/nacionales/arrestan-en-santa-ana-a-dominicano-requerido-por-la-interpol-por-violacion-sexual",
-      "https://diario.elmundo.sv/nacionales/pnc-reporta-la-captura-de-dos-presuntos-pandilleros-en-la-paz"
+      "https://diario.elmundo.sv/nacionales/pnc-reporta-la-captura-de-dos-presuntos-pandilleros-en-la-paz",
+      "https://diario.elmundo.sv/nacionales/envian-a-prision-a-hombre-acusado-de-estafar-60000-con-la-venta-de-una-vivienda-en-soyapango",
+      "https://diario.elmundo.sv/nacionales/ordenan-captura-de-ocho-hombres-y-dos-mujeres-senalados-de-integrar-estructura-de-narcomenudeo-en-el-oriente-del-pais"
     ],
-    "article_cursor": 84,
+    "article_cursor": 86,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -2675,27 +2723,39 @@
         "published_date": "2026-11-11",
         "last_attempt_at": "2026-11-12T07:41:25.380370+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/envian-a-prision-a-hombre-acusado-de-estafar-60000-con-la-venta-de-una-vivienda-en-soyapango": {
+        "status": "selected",
+        "published_date": "2026-11-12",
+        "last_attempt_at": "2026-11-12T20:24:43.461011+00:00",
+        "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/ordenan-captura-de-ocho-hombres-y-dos-mujeres-senalados-de-integrar-estructura-de-narcomenudeo-en-el-oriente-del-pais": {
+        "status": "selected",
+        "published_date": "2026-11-12",
+        "last_attempt_at": "2026-11-12T20:24:43.461011+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
     "index_stats": {
       "https://diario.elmundo.sv/nacionales": {
-        "url_entries_observed": 91,
-        "url_entries_rejected": 59,
+        "url_entries_observed": 92,
+        "url_entries_rejected": 60,
         "duplicate_article_urls": 12,
         "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
         "article_urls_selected": 4,
-        "last_attempt_at": "2026-11-12T07:41:25.380370+00:00"
+        "last_attempt_at": "2026-11-12T20:24:43.461011+00:00"
       },
       "https://diario.elmundo.sv/politica": {
-        "url_entries_observed": 91,
-        "url_entries_rejected": 59,
+        "url_entries_observed": 92,
+        "url_entries_rejected": 60,
         "duplicate_article_urls": 12,
         "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
         "article_urls_selected": 1,
-        "last_attempt_at": "2026-11-12T07:41:25.380370+00:00"
+        "last_attempt_at": "2026-11-12T20:24:43.461011+00:00"
       }
     },
     "index_screen_version": 3
