@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T07:42:47.130196+00:00",
+  "generated_at": "2026-11-12T13:14:28.851065+00:00",
   "policy": {
     "record_type": "news_reference",
     "screen_version": 3,
@@ -23,13 +23,13 @@
       "version": 2,
       "scope": "human_rights_el_salvador",
       "candidates": 16454,
-      "selected": 1993,
-      "evaluated": 4897,
-      "relevant": 1993,
+      "selected": 1994,
+      "evaluated": 4898,
+      "relevant": 1994,
       "excluded": 688,
       "uncertain": 2216,
-      "pending": 11557,
-      "evaluated_at": "2026-11-12T01:14:25.827138+00:00"
+      "pending": 11556,
+      "evaluated_at": "2026-11-12T13:14:25.686834+00:00"
     }
   },
   "paper": {
@@ -51,16 +51,16 @@
     "end_date": "2026-11-12",
     "timezone": "America/El_Salvador",
     "status": "partial",
-    "records": 1993,
+    "records": 1994,
     "sources": [
       {
         "id": "co-latino",
         "publisher": "Diario Co Latino",
         "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
         "status": "enumerated",
-        "records": 1632,
+        "records": 1633,
         "first_published_date": "2014-01-02",
-        "last_published_date": "2026-11-03",
+        "last_published_date": "2026-11-04",
         "months": [
           {
             "month": "2010-01",
@@ -2489,7 +2489,7 @@
           {
             "month": "2026-11",
             "status": "enumerated",
-            "records": 2,
+            "records": 3,
             "screen_version": 3,
             "posts_scanned": 121,
             "source_total_posts": 121,
@@ -25902,12 +25902,12 @@
         "month": "2026-11",
         "start_date": "2026-11-01",
         "end_date": "2026-11-12",
-        "records": 2,
+        "records": 3,
         "sources": [
           {
             "source_id": "co-latino",
             "status": "enumerated",
-            "records": 2
+            "records": 3
           },
           {
             "source_id": "gatoencerrado",
@@ -25944,6 +25944,48 @@
     ]
   },
   "records": [
+    {
+      "id": "d171332f7fda23976f91f922a52360fb0ecd329ab582981d6d13f34277b8f8be",
+      "title": "Red de Mujeres Transfronterizas denuncia devastación ambiental y amenaza extractiva en Centroamérica",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/red-de-mujeres-transfronterizas-denuncia-devastacion-ambiental-y-amenaza-extractiva-en-centroamerica/",
+      "published_date": "2026-11-04",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "derechos_sociales_y_ambientales"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421624,
+        "retrieved_at": "2026-11-04T20:00:27.732726+00:00"
+      },
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T07:11:34.976682-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "02089a02e3615cbd40f7640c22c0e04f132cb5ed69dab93a8c7fb11baa34f492",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p15"
+          ]
+        }
+      }
+    },
     {
       "id": "df04999c538bebcb1d42fdbba648be408b32dcfbb484a0956f1e759520a48c8c",
       "title": "Ingrid Escobar denuncia «deriva autoritaria» y aumento a 584 muertes en cárceles",
@@ -80817,9 +80859,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "classified_at": "2026-11-12T07:13:37.139575-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "85e4058dd242b3821e7da4aca9b9c991ade183dec93f548ddf1ed9f10c6783ff",
           "jurisdiction_paragraph_ids": [
@@ -80827,8 +80869,8 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p8"
+            "p4",
+            "p5"
           ]
         }
       }
@@ -80861,18 +80903,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "classified_at": "2026-11-12T07:12:51.643206-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b647ec81f707a5632ff10f62ca6034d05972257d155b01b531fde02ee128e67b",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p9"
+            "p2"
           ]
         }
       }
@@ -80991,19 +81031,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "classified_at": "2026-11-12T07:11:51.496642-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b988b7e8dafbb722fc0ebff3329e4b57f1f5594956d22ad63a70f99561f11f54",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p9",
-            "p10"
+            "p2"
           ]
         }
       }
