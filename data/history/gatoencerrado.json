@@ -291,7 +291,7 @@
       "start_date": "2026-10-01",
       "end_date": "2026-10-31",
       "status": "enumerated",
-      "last_attempt_at": "2026-11-11T19:50:52.540928+00:00",
+      "last_attempt_at": "2026-11-12T07:41:21.535467+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
@@ -300,7 +300,7 @@
       "source_total_posts": 10,
       "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-11-11T19:50:52.540928+00:00"
+      "completed_at": "2026-11-12T07:41:21.535467+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3034,21 +3034,48 @@
     },
     "2026-11": {
       "start_date": "2026-11-01",
-      "end_date": "2026-11-11",
+      "end_date": "2026-11-12",
       "status": "enumerated",
-      "last_attempt_at": "2026-11-11T19:50:52.540928+00:00",
+      "last_attempt_at": "2026-11-12T07:41:21.535467+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
-      "posts_scanned": 8,
+      "posts_scanned": 9,
       "invalid_posts": 0,
-      "source_total_posts": 8,
+      "source_total_posts": 9,
       "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-11-11T19:50:52.540928+00:00"
+      "completed_at": "2026-11-12T07:41:21.535467+00:00"
     }
   },
   "records": [
+    {
+      "id": "e5e1af576ca470fd1b7de28f965a603f0ebce85466b04549887680f248f8e291",
+      "title": "Condenan a 15 años de prisión a Fidel Zavala, el defensor que denunció torturas en las cárceles de Bukele",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2026/11/11/15-anos-de-prision-a-fidel-zavala-el-defensor-que-denuncio-torturas-en-carceles-de-bukele/",
+      "published_date": "2026-11-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion",
+        "defensores_y_sociedad_civil"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "bukele",
+        "fidel zavala"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 84761,
+        "retrieved_at": "2026-11-12T07:41:21.535467+00:00"
+      }
+    },
     {
       "id": "e4b6109b59e8f39997667a0391eaea52fa8bcf2bca16d77fff6e516664f5369a",
       "title": "Ulloa mintió: ni hubo una epidemia de viruela en penales ni Inglaterra pidió copiar el modelo carcelario de Bukele",
