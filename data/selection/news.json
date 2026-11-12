@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-12T01:14:25.827138+00:00",
+  "generated_at": "2026-11-12T13:14:25.686834+00:00",
   "assessment_counts": {
-    "candidates": 16452,
-    "evaluated": 4897,
-    "relevant": 1993,
+    "candidates": 16454,
+    "evaluated": 4898,
+    "relevant": 1994,
     "excluded": 688,
     "uncertain": 2216,
-    "pending": 11555
+    "pending": 11556
   },
   "selections": [
     {
@@ -6551,18 +6551,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "classified_at": "2026-11-12T07:12:51.643206-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b647ec81f707a5632ff10f62ca6034d05972257d155b01b531fde02ee128e67b",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p9"
+            "p2"
           ]
         }
       }
@@ -13120,19 +13118,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:10:20.319486-06:00",
+        "classified_at": "2026-11-12T07:11:51.496642-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "b988b7e8dafbb722fc0ebff3329e4b57f1f5594956d22ad63a70f99561f11f54",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p4",
-            "p9",
-            "p10"
+            "p2"
           ]
         }
       }
@@ -24716,9 +24711,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "classified_at": "2026-11-12T07:13:37.139575-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "85e4058dd242b3821e7da4aca9b9c991ade183dec93f548ddf1ed9f10c6783ff",
           "jurisdiction_paragraph_ids": [
@@ -24726,8 +24721,8 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
-            "p8"
+            "p4",
+            "p5"
           ]
         }
       }
@@ -46654,6 +46649,31 @@
           "relevance_paragraph_ids": [
             "p2",
             "p3"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "d171332f7fda23976f91f922a52360fb0ecd329ab582981d6d13f34277b8f8be",
+      "source_url": "https://www.diariocolatino.com/red-de-mujeres-transfronterizas-denuncia-devastacion-ambiental-y-amenaza-extractiva-en-centroamerica/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2026-11-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T07:11:34.976682-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
+        "evidence": {
+          "content_sha256": "02089a02e3615cbd40f7640c22c0e04f132cb5ed69dab93a8c7fb11baa34f492",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p15"
           ]
         }
       }
