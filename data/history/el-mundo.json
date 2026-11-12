@@ -34,12 +34,12 @@
     },
     "2026-11": {
       "status": "partial",
-      "posts_scanned": 37,
-      "pages_fetched": 37,
+      "posts_scanned": 38,
+      "pages_fetched": 38,
       "invalid_posts": 0,
       "source_total_posts": null,
       "screen_version": 3,
-      "last_attempt_at": "2026-11-11T19:50:55.807992+00:00",
+      "last_attempt_at": "2026-11-12T07:41:25.380370+00:00",
       "error": null
     }
   },
@@ -65,6 +65,29 @@
         "endpoint": "https://diario.elmundo.sv/nacionales",
         "source_post_id": null,
         "retrieved_at": "2026-11-11T19:50:55.807992+00:00"
+      }
+    },
+    {
+      "id": "2be8c3cd5a483be1c6f2753ccc296f22cd41c21868642c6fddac57a5060ad5d0",
+      "title": "PNC reporta la captura de dos presuntos pandilleros en La Paz",
+      "title_truncated": false,
+      "publisher": "Diario El Mundo",
+      "source_id": "el-mundo",
+      "source_url": "https://diario.elmundo.sv/nacionales/pnc-reporta-la-captura-de-dos-presuntos-pandilleros-en-la-paz",
+      "published_date": "2026-11-11",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "detencion_y_debido_proceso"
+      ],
+      "scope_hint": "undetermined",
+      "scope_terms": [],
+      "discovery": {
+        "method": "html_article_metadata",
+        "endpoint": "https://diario.elmundo.sv/nacionales",
+        "source_post_id": null,
+        "retrieved_at": "2026-11-12T07:41:25.380370+00:00"
       }
     },
     {
@@ -2055,7 +2078,7 @@
     "phase": "complete",
     "access": "public",
     "notice": "Selección parcial de secciones públicas y enlaces históricos verificados. No se ha identificado un índice histórico completo accesible. La consulta de artículos se limita a términos temáticos en URLs o enlaces de los listados y a enlaces históricos configurados; puede omitir noticias pertinentes. Los títulos y fechas publicados se obtienen de cada artículo.",
-    "last_attempt_at": "2026-11-11T19:50:55.807992+00:00",
+    "last_attempt_at": "2026-11-12T07:41:25.380370+00:00",
     "indexes": [
       "https://diario.elmundo.sv/nacionales",
       "https://diario.elmundo.sv/politica"
@@ -2144,9 +2167,10 @@
       "https://diario.elmundo.sv/nacionales/diez-anos-de-prision-para-un-hombre-por-portar-cinco-porciones-de-marihuana",
       "https://diario.elmundo.sv/nacionales/condenan-a-10-anos-de-carcel-a-dos-colaboradoras-de-la-pandilla-18-por-extorsionar-a-comerciante-en-apopa",
       "https://diario.elmundo.sv/nacionales/condenan-a-prision-perpetua-a-hombre-por-violar-a-una-menor",
-      "https://diario.elmundo.sv/nacionales/arrestan-en-santa-ana-a-dominicano-requerido-por-la-interpol-por-violacion-sexual"
+      "https://diario.elmundo.sv/nacionales/arrestan-en-santa-ana-a-dominicano-requerido-por-la-interpol-por-violacion-sexual",
+      "https://diario.elmundo.sv/nacionales/pnc-reporta-la-captura-de-dos-presuntos-pandilleros-en-la-paz"
     ],
-    "article_cursor": 83,
+    "article_cursor": 84,
     "visited": {
       "https://diario.elmundo.sv/nacionales/pddh-senala-a-policia-y-ejercito-por-ejecuciones-extrajudiciales": {
         "status": "selected",
@@ -2645,6 +2669,12 @@
         "published_date": "2026-11-11",
         "last_attempt_at": "2026-11-11T19:50:55.807992+00:00",
         "screen_version": 3
+      },
+      "https://diario.elmundo.sv/nacionales/pnc-reporta-la-captura-de-dos-presuntos-pandilleros-en-la-paz": {
+        "status": "selected",
+        "published_date": "2026-11-11",
+        "last_attempt_at": "2026-11-12T07:41:25.380370+00:00",
+        "screen_version": 3
       }
     },
     "failures": {},
@@ -2653,10 +2683,10 @@
         "url_entries_observed": 91,
         "url_entries_rejected": 59,
         "duplicate_article_urls": 12,
-        "article_urls_matching_anchor": 5,
+        "article_urls_matching_anchor": 4,
         "article_urls_observed": 20,
-        "article_urls_selected": 5,
-        "last_attempt_at": "2026-11-11T19:50:55.807992+00:00"
+        "article_urls_selected": 4,
+        "last_attempt_at": "2026-11-12T07:41:25.380370+00:00"
       },
       "https://diario.elmundo.sv/politica": {
         "url_entries_observed": 91,
@@ -2665,7 +2695,7 @@
         "article_urls_matching_anchor": 1,
         "article_urls_observed": 20,
         "article_urls_selected": 1,
-        "last_attempt_at": "2026-11-11T19:50:55.807992+00:00"
+        "last_attempt_at": "2026-11-12T07:41:25.380370+00:00"
       }
     },
     "index_screen_version": 3
