@@ -291,7 +291,7 @@
       "start_date": "2026-10-01",
       "end_date": "2026-10-31",
       "status": "enumerated",
-      "last_attempt_at": "2026-11-12T20:24:39.735366+00:00",
+      "last_attempt_at": "2026-11-13T20:00:00.337410+00:00",
       "screen_version": 3,
       "next_page": 5,
       "pages_fetched": 4,
@@ -300,7 +300,7 @@
       "source_total_posts": 371,
       "source_total_pages": 4,
       "error": null,
-      "completed_at": "2026-11-12T20:24:39.735366+00:00"
+      "completed_at": "2026-11-13T20:00:00.337410+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3034,21 +3034,47 @@
     },
     "2026-11": {
       "start_date": "2026-11-01",
-      "end_date": "2026-11-12",
+      "end_date": "2026-11-13",
       "status": "enumerated",
-      "last_attempt_at": "2026-11-12T20:24:39.735366+00:00",
+      "last_attempt_at": "2026-11-13T20:00:00.337410+00:00",
       "screen_version": 3,
       "next_page": 3,
       "pages_fetched": 2,
-      "posts_scanned": 131,
+      "posts_scanned": 146,
       "invalid_posts": 0,
-      "source_total_posts": 131,
+      "source_total_posts": 146,
       "source_total_pages": 2,
       "error": null,
-      "completed_at": "2026-11-12T20:24:39.735366+00:00"
+      "completed_at": "2026-11-13T20:00:00.337410+00:00"
     }
   },
   "records": [
+    {
+      "id": "f295e9aa87c71e870d804101cbeeadf1d4a20ef849c4dac3df48bfdad44079ec",
+      "title": "UNIDEHC rechaza la condena al defensor de derechos humanos Fidel Zavala",
+      "title_truncated": false,
+      "publisher": "Diario Co Latino",
+      "source_id": "co-latino",
+      "source_url": "https://www.diariocolatino.com/unidehc-rechaza-la-condena-al-defensor-de-derechos-humanos-fidel-zavala/",
+      "published_date": "2026-11-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "defensores_y_sociedad_civil",
+        "derechos_humanos"
+      ],
+      "scope_hint": "el_salvador",
+      "scope_terms": [
+        "fidel zavala"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://www.diariocolatino.com/wp-json/wp/v2/posts",
+        "source_post_id": 421986,
+        "retrieved_at": "2026-11-13T20:00:00.337410+00:00"
+      }
+    },
     {
       "id": "afd8a685ea00009c6c4b724699464b09138a8b48d58073f74658e6c86be04257",
       "title": "Periodistas cuestionan uso del régimen de excepción y advierten persecución política en caso de Zavala",
