@@ -28,7 +28,7 @@
 .official-statistics tbody th { font-weight:500; white-space:nowrap; }
 .official-statistics td[data-numeric="true"] { font-variant-numeric:tabular-nums; white-space:nowrap; }
 .official-statistics td small { display:block; color:var(--text-secondary); line-height:1.7; margin-top:5px; }
-.official-statistics tbody tr[data-selected="true"] { background:var(--accent-verified-bg); }
+.official-statistics tbody tr[data-selected="true"] { background:var(--selection-bg); }
 .official-statistics-link { border:0; background:none; padding:0; text-align:left; text-decoration:underline; text-underline-offset:4px; font:inherit; }
 .official-statistics-source-link { display:inline-flex; align-items:center; gap:4px; }
 .official-statistics-sources { display:flex; flex-direction:column; gap:12px; }
