@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-11-12T13:16:08.291002+00:00",
+  "generated_at": "2026-11-14T13:17:53.186225+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -2423,6 +2423,29 @@
       "resolution": {
         "type": "municipality_to_department",
         "municipality": "Atiquizaya",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "456be9e119275bedd3b813fc72c64868510bbe829d4f73abc5b0e4b13abea5f7",
+      "source_url": "https://www.diariocolatino.com/renacimiento-de-monsenor-romero-el-castigo-divino-de-sus-asesinos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-25",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-18T14:12:12.029214-06:00",
+      "source_checked_at": "2026-11-14T13:17:26.470242+00:00",
+      "evidence": {
+        "paragraph_id": "p8",
+        "content_sha256": "e50e3d2ad550b8b3db7348c7f43589b2e377e965539c523d69a53da48424af4e"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
@@ -6011,6 +6034,29 @@
       }
     },
     {
+      "candidate_id": "9e9935d1680dc1d9b0227f8ecba58df6390df4cf35de7c01c676db1a548a5ab9",
+      "source_url": "https://www.diariocolatino.com/onu-reclama-justicia-por-violaciones-de-derechos-humanos/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-24",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_municipality_reference",
+      "extracted_at": "2026-10-18T13:16:37.483003-06:00",
+      "source_checked_at": "2026-11-14T13:17:23.716315+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "0f61feea29088bbe2910f2adf65c4aeb034afa2f670c007dcd7a3ee9c8558f66"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "San Salvador",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
       "candidate_id": "9ef6ad66714d513c07cf880dee5032bae46917cd1f11d988563139c67773dab9",
       "source_url": "https://www.diariocolatino.com/fisdl-y-municipalidad-cumplen-con-el-compromiso-de-garantizar-el-derecho-al-agua/",
       "publisher": "Diario Co Latino",
@@ -7083,6 +7129,22 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
+      }
+    },
+    {
+      "candidate_id": "c3acb8188318896bac9d1a3b9894cba556556200dafb64e4d740b34bd4e790ab",
+      "source_url": "https://www.diariocolatino.com/orquideas-del-mar-denuncia-agresiones-a-derechos-humanos-de-mujeres-trabajadoras-sexuales/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-03-26",
+      "department": "Santa Ana",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "gemini_explicit_department",
+      "extracted_at": "2026-10-31T19:18:11.439790-06:00",
+      "source_checked_at": "2026-11-14T13:17:31.963394+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "3bf1f2dfa2e3273de2b6890c828a10efde97fe8aad1cfb6a7d593436e44617d2"
       }
     },
     {

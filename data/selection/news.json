@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-12T13:14:25.686834+00:00",
+  "generated_at": "2026-11-14T13:14:25.115836+00:00",
   "assessment_counts": {
-    "candidates": 16454,
+    "candidates": 16460,
     "evaluated": 4898,
-    "relevant": 1994,
-    "excluded": 688,
-    "uncertain": 2216,
-    "pending": 11556
+    "relevant": 2012,
+    "excluded": 720,
+    "uncertain": 2166,
+    "pending": 11562
   },
   "selections": [
     {
@@ -467,6 +467,33 @@
             "p11",
             "p13",
             "p15"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "022215efc32f069cd000633f5132e19700d145ea71b6886dc9c68594e822b771",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-delincuentes-tras-enfrentamiento-en-ayutuxtepeque/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-26",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "32b4399f40cedd358205ba4c1a059640bb211c76ec5e1fab59bbcfea10780bc9",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5"
           ]
         }
       }
@@ -2552,18 +2579,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "classified_at": "2026-11-12T19:14:15.875400-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9a412ba3cb6e4a6f594bde73f911aed85ae663e1905cad144d06acb355f667eb",
           "jurisdiction_paragraph_ids": [
-            "p2"
+            "p4",
+            "p5"
           ],
           "relevance_paragraph_ids": [
-            "p2",
             "p4",
-            "p10"
+            "p6"
           ]
         }
       }
@@ -3276,6 +3303,33 @@
       }
     },
     {
+      "candidate_id": "10327f6b8816af8af12f7502ba89871e3c6f32ce477fb7b759eff5c659a67776",
+      "source_url": "https://www.diariocolatino.com/enfrentamiento-entre-pnc-y-pandilleros-deja-tres-capturas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-25",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d997c25dbf49a60336c9a1f602702696bcec927560d949ad419af38307fa1938",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "10634f289be233de7fdcaedb3f95222ff5dc42fb11243c370155a56a4542fbca",
       "source_url": "https://www.diariocolatino.com/el-asesinato-de-los-jesuitas-es-un-crimen-contra-la-humanidad/",
       "publisher": "Diario Co Latino",
@@ -3647,6 +3701,35 @@
             "p28",
             "p31",
             "p33"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "12e52e4e710c4967353a13611df31d0ab95387e81d036befefee30466a5da5e0",
+      "source_url": "https://www.diariocolatino.com/capturan-a-implicados-en-asesinato-de-catedratico-de-la-uca/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-12-16",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-14T07:09:14.956449-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d955d6c6bbab191a86987a7bc4f6946fb87bd2efe86dac7c5f544fbd0166146c",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p7",
+            "p13"
           ]
         }
       }
@@ -4553,20 +4636,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "classified_at": "2026-11-13T19:14:54.436176-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "5a8f8e464053b9112ae7e277b256c80c1d87770e4ab3f1a259a207f0e8418b34",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p9",
-            "p10"
+            "p2"
           ]
         }
       }
@@ -7873,6 +7952,36 @@
       }
     },
     {
+      "candidate_id": "26ef73c654dc17b6d6157de7adacd1d949b083b12d635d69f47e9e0f952049b0",
+      "source_url": "https://www.diariocolatino.com/alcaldia-de-santa-tecla-no-da-respuesta-a-vendedores-desalojado/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-13T07:09:17.108737-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "65f5d8fc74cea110c8ec3de69d4ce6c4e849841ae9176071e8061126e0a1dc27",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "2707b8a4e5dc3c565fed64300af10c56aa1629301fc923fbd63731a816a9582d",
       "source_url": "https://www.diariocolatino.com/goes-la-mineria-metalica/",
       "publisher": "Diario Co Latino",
@@ -9019,9 +9128,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T18:10:21.644430-06:00",
+        "classified_at": "2026-11-13T19:15:08.057047-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "689aa6eb3a710ba4e0a06e461f2a87b30e8d72b78a3497a99d2b9eddb340d68e",
           "jurisdiction_paragraph_ids": [
@@ -9029,7 +9138,7 @@
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p4",
+            "p3",
             "p5",
             "p6"
           ]
@@ -12310,19 +12419,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "classified_at": "2026-11-13T19:15:22.710212-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "5ff62e5363d6a149f25ebd87d00f88bf01663422feed5db69632fe9b8ab4383a",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p5",
             "p6"
           ]
         }
@@ -12532,18 +12638,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "classified_at": "2026-11-12T19:13:32.893779-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "05c88a4d25b5e01e20c7b85dc6f109a9cfff77ebf5af2e5cdcd62a59b89eb324",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p8",
-            "p10"
+            "p2"
           ]
         }
       }
@@ -13056,6 +13160,33 @@
       }
     },
     {
+      "candidate_id": "3e8478486e49963056a5d5821c2ca591b4e264980766345e94cb91e3f8892729",
+      "source_url": "https://www.diariocolatino.com/fgr-ordena-captura-de-72-miembros-de-pandillas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-22",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "65d111584a5b43b6b4ca814da772e321976af0fc69c19d7684e4c90d10ab5b47",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p6"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "3eb58ab19926df6b32d8cda79e1d1ec46d90328dcb43e22b8daaf0cbcb057d38",
       "source_url": "https://www.diariocolatino.com/educacion-valores-y-derechos-humanos-una-apuesta-de-pais/",
       "publisher": "Diario Co Latino",
@@ -13186,6 +13317,33 @@
           ],
           "relevance_paragraph_ids": [
             "p2"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "3f7374518148896d1eb4ab50fe5b2a88c76e0534c708af000b6f6b8a01c92f3b",
+      "source_url": "https://www.diariocolatino.com/pnc-reporta-captura-de-pandillero-con-difusion-roja-en-ee-uu/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-17",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "868a2336f38c457af02a6d089ff377a7ce8f343648d73439bb2ba30ff4a603a2",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p4",
+            "p5"
           ]
         }
       }
@@ -14372,17 +14530,19 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "classified_at": "2026-11-14T07:13:01.269697-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a200f3c71c423598edca78e1b0f8b608689cf5d50b34477ed60a099feff3e59c",
           "jurisdiction_paragraph_ids": [
             "p2",
-            "p3"
+            "p3",
+            "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
+            "p3",
             "p4"
           ]
         }
@@ -17190,19 +17350,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:12:19.562322-06:00",
+        "classified_at": "2026-11-13T07:13:08.573075-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "370e63004809da7cd71cb0da329eeeab8f1fceb33dac9fc0926442358a09a3b5",
           "jurisdiction_paragraph_ids": [
             "p2",
-            "p3",
-            "p6"
+            "p3"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p10",
+            "p5",
             "p11"
           ]
         }
@@ -19183,26 +19342,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "classified_at": "2026-11-13T19:14:04.167674-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "df5c42d82edf5c73c385e8c6a55cdee628c854084c44e82a4f8d4f2019e6350a",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3",
-            "p4",
-            "p5",
-            "p6",
-            "p8"
+            "p4"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p4",
-            "p5",
-            "p6",
-            "p8"
+            "p6"
           ]
         }
       }
@@ -22987,6 +23137,33 @@
             "p14",
             "p16",
             "p21"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "6abd025437a411138034f8b2b8aa883f68126ef998e6b9c8cef3595aa669e74f",
+      "source_url": "https://www.diariocolatino.com/agente-de-la-pnc-fue-asesinado-en-santa-tecla/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-24",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "85eddb9c220cf7b01aecdf42049ce74617b3cdb82a2819d149b5be4ea758e949",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
           ]
         }
       }
@@ -27283,23 +27460,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T13:15:33.712488-06:00",
+        "classified_at": "2026-11-13T07:13:44.219532-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "262d82935db52eb1fce7d83ad8b707709934c42893fd2ca2b1f2af8673c7198c",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p3",
-            "p6"
+            "p1"
           ],
           "relevance_paragraph_ids": [
-            "p1",
-            "p2",
-            "p3",
-            "p4",
-            "p5",
-            "p9"
+            "p1"
           ]
         }
       }
@@ -29567,25 +29737,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T13:15:33.712488-06:00",
+        "classified_at": "2026-11-13T07:13:57.544371-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a737086ce215bb75b6047e4d686cb54a4abed62fb71d0d243132f168ce34feee",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p4"
+            "p1"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p2",
-            "p4",
-            "p6",
-            "p7",
-            "p8",
-            "p9",
-            "p10",
-            "p11"
+            "p6"
           ]
         }
       }
@@ -31134,6 +31296,33 @@
       }
     },
     {
+      "candidate_id": "8c30058702c71a742e733204ae0b78dcd00a5f7b2e22ae49aa8e5d79a2b62d8c",
+      "source_url": "https://www.diariocolatino.com/capturan-a-miembro-de-banda-del-burro-herrera/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-14",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "19e318459ae293f8b2d95e94b1ac99add3e774adfaaa28de728d9d2fcb13908c",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p7"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "8c508c5e1f6638234feb006bacc3ffd59a11fcab3cd62f358560b60e4c8507f3",
       "source_url": "https://www.diariocolatino.com/pnc-captura-a-jueza-de-lolotique-por-vinculos-con-homicidio-de-exalcalde/",
       "publisher": "Diario Co Latino",
@@ -31418,6 +31607,33 @@
       }
     },
     {
+      "candidate_id": "8d9912f7732b928f1588918b228f272430238f68217319e41fda5035fbcf660e",
+      "source_url": "https://www.diariocolatino.com/pnc-captura-a-supuestos-pandilleros-con-armamento-de-grueso-calibre/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-07",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "a3057547263d2eae3b6937e2e5258f5debbd450735f033593c9a7ff2a3cc91bd",
+          "jurisdiction_paragraph_ids": [
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "8de2fdd38b0038f4e6b9e242586dc41c4b1c5c2e6521636220ec53db45e7e0e9",
       "source_url": "https://www.diariocolatino.com/stesec-pide-detener-acoso-laboral-motivado-por-un-sindicato-minoritario/",
       "publisher": "Diario Co Latino",
@@ -31581,6 +31797,36 @@
             "p2",
             "p4",
             "p7"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8e33333b22bb805b6e2b4f3ff436053932cf861e712a402dcaa284ab41cecee2",
+      "source_url": "https://www.diariocolatino.com/estrategia-de-seguridad-ya-refleja-reduccion-de-homicidios-diputado-misael-mejia/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-12-09",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-14T07:09:14.956449-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "32f5cf750cceb93ee7a0f3f4f2ece6d19f710a7de687c6d5373434488f85bb6e",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p5",
+            "p6"
           ]
         }
       }
@@ -31912,6 +32158,33 @@
             "p6",
             "p24",
             "p27"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "8fc9cc83ca3694b84e7fac78cd1e22e06fd9bae7eb3d7cf3d1c68112f7079929",
+      "source_url": "https://www.diariocolatino.com/agente-de-la-pnc-es-enviado-a-prision-por-trafico-de-drogas/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-08",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "b1ff5d1d954e75ba99a61041570895b5af25277a9fde1d62d4498981e3d9a983",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p5"
           ]
         }
       }
@@ -36867,6 +37140,35 @@
       }
     },
     {
+      "candidate_id": "a480c8a116bc834364179a9986cf9cc9492dcfd5bd85ab8ed8ae09fef9210af1",
+      "source_url": "https://www.diariocolatino.com/capturan-a-implicado-en-homicidio-de-agente-de-pnc-en-santa-tecla/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-13T07:09:17.108737-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "1a4652a743c21f221963815976bbb928d3d2bcf6b19090f5f4c95b024a55a2e7",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "a49f11266866de6b7784a54c43b22000707e8d45c52cfb6a6cb3b2d31925b891",
       "source_url": "https://www.diariocolatino.com/la-especializacion-es-el-reto-latente-del-gremio-periodistico/",
       "publisher": "Diario Co Latino",
@@ -40598,19 +40900,15 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "classified_at": "2026-11-14T07:12:17.110133-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "116f14036f5c3d1afa0fe29c1228cd6a9baa89a6531af3919ea00b7e74f6ecd5",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p4",
-            "p5"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p4",
             "p5"
           ]
         }
@@ -41122,21 +41420,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T18:10:21.644430-06:00",
+        "classified_at": "2026-11-14T07:12:46.272245-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "9ddfe8c26b615dd1bf47e51829723238e565349be93af7f0bf35e136f8e841de",
           "jurisdiction_paragraph_ids": [
-            "p1",
-            "p4",
-            "p16"
+            "p1"
           ],
           "relevance_paragraph_ids": [
             "p1",
-            "p3",
-            "p13",
-            "p14"
+            "p6"
           ]
         }
       }
@@ -45595,6 +45889,33 @@
       }
     },
     {
+      "candidate_id": "cb29e5e7f2015108cfbb877e50617d3a8655223b0315a80993501a3fb41be0f4",
+      "source_url": "https://www.diariocolatino.com/defensoria-del-consumidor-clausura-iii-diplomado-en-derecho-y-consumo-sostenible/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-12-12",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-14T07:09:14.956449-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "bef9ac76fcba7115646be5ebdc953922d9b1ff786f34ebae998e32f40a129d0d",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4",
+            "p5"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "cb35f4b31ca233d15e9894a76765e780192472ab07191b51df309c88948c7ae9",
       "source_url": "https://www.diariocolatino.com/sis-en-feria-de-logros-de-granja-penitenciaria/",
       "publisher": "Diario Co Latino",
@@ -46293,6 +46614,34 @@
           ],
           "relevance_paragraph_ids": [
             "p16"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "cf1ef5146eb7b649c2b6fefdd8feb12e4b19f6e5d0bc50d8c257727315779db5",
+      "source_url": "https://www.diariocolatino.com/embajada-de-venezuela-entrega-en-custodia-su-pabellon-nacional/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-13T07:09:17.108737-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "9e005071985783b2f02035d6a98d0cc921f1df44ba803c31f96cc23061616d64",
+          "jurisdiction_paragraph_ids": [
+            "p2",
+            "p3",
+            "p4",
+            "p6"
+          ],
+          "relevance_paragraph_ids": [
+            "p6"
           ]
         }
       }
@@ -47172,20 +47521,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:12:19.562322-06:00",
+        "classified_at": "2026-11-13T07:13:30.058280-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "302088c77987d97edeca7cb0450d66997412c233736d1934bac2a44419fa3a1b",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p6",
-            "p11"
+            "p6"
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p10",
-            "p11"
+            "p3",
+            "p7"
           ]
         }
       }
@@ -48634,6 +48981,32 @@
       }
     },
     {
+      "candidate_id": "dc8e52248bae9f1670a82a0b2986b2c483897a5fe31f2e225b961cc0d81fdb53",
+      "source_url": "https://www.diariocolatino.com/al-periodista-santiago-leiva/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-10",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "fa348d5e0290b1610115de11dc3fac5aa1c7d87fabd7f0e10acf5f4858546c36",
+          "jurisdiction_paragraph_ids": [
+            "p35"
+          ],
+          "relevance_paragraph_ids": [
+            "p2",
+            "p23"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "dcd43455b7f51a077dabe562cd0c807a747f1a60c973323be02234e7d0a1f946",
       "source_url": "https://www.diariocolatino.com/perdomo-supervisa-trabajos-de-instalacion-de-bloqueadores-en-centros-penitenciarios/",
       "publisher": "Diario Co Latino",
@@ -49118,18 +49491,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:12:19.562322-06:00",
+        "classified_at": "2026-11-13T07:12:28.997825-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "722d59e07a9bb2c02d397cf56a835fc1194fe65d693202f7c26366add9b88ccc",
           "jurisdiction_paragraph_ids": [
-            "p3",
-            "p5"
+            "p3"
           ],
           "relevance_paragraph_ids": [
-            "p3",
-            "p5"
+            "p3"
           ]
         }
       }
@@ -49542,20 +49913,18 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:12:19.562322-06:00",
+        "classified_at": "2026-11-13T19:13:48.059219-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "e08417a9bfda26579bbd7ebc4efa43f59f3075cc6c7920861b6b3e49f4c80ea7",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p4"
+            "p2"
           ],
           "relevance_paragraph_ids": [
             "p2",
             "p3",
-            "p5",
-            "p10"
+            "p5"
           ]
         }
       }
@@ -49986,18 +50355,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "classified_at": "2026-11-12T19:14:47.432436-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "a5d3d21a78b77c00354e9fd0c4f7ea8f91bc9cabb56dbabe82fce8b3c2cb73f6",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p4",
-            "p5",
-            "p6"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -50194,6 +50562,32 @@
           "relevance_paragraph_ids": [
             "p2",
             "p10"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "e443c9595cc2545322431b86112fb0a58edd38ba618b8160a8b76b75f64c553f",
+      "source_url": "https://www.diariocolatino.com/juzgado-envia-a-vista-publica-a-50-imputados-por-homicidio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-10-15",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-12T19:09:46.455215-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "ff09b691ca08a6ef83af630ed6a73b85c2a6ba85854a365f96bcc323fd7b54e4",
+          "jurisdiction_paragraph_ids": [
+            "p5"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p5"
           ]
         }
       }
@@ -51707,16 +52101,17 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "classified_at": "2026-11-13T19:14:39.083750-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "2e835913bf13827615ef571fc1a8c4c992929e0ae0c040c2d9d079a405e4c124",
           "jurisdiction_paragraph_ids": [
             "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2"
+            "p2",
+            "p4"
           ]
         }
       }
@@ -52871,6 +53266,32 @@
       }
     },
     {
+      "candidate_id": "f2b2f041803f06fa3af2f735c51f87c7310ca4f3d076ad959dae3f70acd36923",
+      "source_url": "https://www.diariocolatino.com/tribunal-dicta-30-anos-de-prision-para-un-homicida/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-12-04",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-13T19:09:33.880722-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "d0cdb831f5fd2e3b604f20ac48145be77b5970f195017f78653f18a410759982",
+          "jurisdiction_paragraph_ids": [
+            "p3"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
+          ]
+        }
+      }
+    },
+    {
       "candidate_id": "f2e97217e9f61d8cc9394481370696bb07dc3f9418282166c6b400e4aae00190",
       "source_url": "https://www.diariocolatino.com/juzgados-decretan-detencion-contra-presuntos-delincuentes/",
       "publisher": "Diario Co Latino",
@@ -53235,6 +53656,33 @@
           "relevance_paragraph_ids": [
             "p3",
             "p6"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "f4e0a179ddf83440985567d6ed9232e240775e8c36f121999086d46eb04ec072",
+      "source_url": "https://www.diariocolatino.com/pandilleros-asesinan-a-agente-policial-en-la-libertad/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2015-11-19",
+      "selection": {
+        "method": "gemini_grounded_scope",
+        "review_status": "automated_unreviewed",
+        "human_reviewed": false,
+        "jurisdiction": "SV",
+        "relevance": "relevant",
+        "classified_at": "2026-11-13T07:09:17.108737-06:00",
+        "model": "gemini-3.5-flash-lite",
+        "prompt_version": "mdh-news-scope-4-inclusive-violence",
+        "evidence": {
+          "content_sha256": "11852a7e338213200970b4b7ef34e5abe512d11c3a60e2a8172d1065b7a206dd",
+          "jurisdiction_paragraph_ids": [
+            "p3",
+            "p4"
+          ],
+          "relevance_paragraph_ids": [
+            "p3",
+            "p4"
           ]
         }
       }
@@ -53864,20 +54312,16 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:13:27.934517-06:00",
+        "classified_at": "2026-11-14T07:12:31.637644-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "50c765da666212c131bb158058b2ffcb8fb13a2a0b4a9ec7596b3812826b3eb6",
           "jurisdiction_paragraph_ids": [
-            "p2",
-            "p3"
+            "p2"
           ],
           "relevance_paragraph_ids": [
-            "p2",
-            "p3",
-            "p5",
-            "p13"
+            "p2"
           ]
         }
       }
@@ -54161,9 +54605,9 @@
         "human_reviewed": false,
         "jurisdiction": "SV",
         "relevance": "relevant",
-        "classified_at": "2026-10-13T02:11:26.904303-06:00",
+        "classified_at": "2026-11-12T19:13:17.125982-06:00",
         "model": "gemini-3.5-flash-lite",
-        "prompt_version": "mdh-news-scope-3-rights-nexus",
+        "prompt_version": "mdh-universal-news-grounded-11-inclusive-violence",
         "evidence": {
           "content_sha256": "6ebb66fd3788dcca67149962450d1f5533cf5c3a61f38a72ef734d351a86120d",
           "jurisdiction_paragraph_ids": [
@@ -54171,8 +54615,7 @@
           ],
           "relevance_paragraph_ids": [
             "p2",
-            "p3",
-            "p8"
+            "p3"
           ]
         }
       }
