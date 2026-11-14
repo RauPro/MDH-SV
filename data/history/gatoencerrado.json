@@ -291,7 +291,7 @@
       "start_date": "2026-10-01",
       "end_date": "2026-10-31",
       "status": "enumerated",
-      "last_attempt_at": "2026-11-12T20:24:39.735632+00:00",
+      "last_attempt_at": "2026-11-14T06:59:18.707754+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
@@ -300,7 +300,7 @@
       "source_total_posts": 10,
       "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-11-12T20:24:39.735632+00:00"
+      "completed_at": "2026-11-14T06:59:18.707754+00:00"
     },
     "2010-01": {
       "start_date": "2010-01-01",
@@ -3034,21 +3034,47 @@
     },
     "2026-11": {
       "start_date": "2026-11-01",
-      "end_date": "2026-11-12",
+      "end_date": "2026-11-14",
       "status": "enumerated",
-      "last_attempt_at": "2026-11-12T20:24:39.735632+00:00",
+      "last_attempt_at": "2026-11-14T06:59:18.707754+00:00",
       "screen_version": 3,
       "next_page": 2,
       "pages_fetched": 1,
-      "posts_scanned": 10,
+      "posts_scanned": 14,
       "invalid_posts": 0,
-      "source_total_posts": 10,
+      "source_total_posts": 14,
       "source_total_pages": 1,
       "error": null,
-      "completed_at": "2026-11-12T20:24:39.735632+00:00"
+      "completed_at": "2026-11-14T06:59:18.707754+00:00"
     }
   },
   "records": [
+    {
+      "id": "1abbdcf48e0d0a6a9445b43ea27580b4af46e106b2b197c663c5e83ff043f5a9",
+      "title": "Paraguay: El presidente admirado por Trump que terminó en la cárcel en medio de un escándalo financiero monumental",
+      "title_truncated": false,
+      "publisher": "GatoEncerrado",
+      "source_id": "gatoencerrado",
+      "source_url": "https://gatoencerrado.news/2026/11/13/paraguay-el-presidente-admirado-por-trump-que-termino-en-la-carcel-en-medio-de-un-escandalo-financiero-monumental/",
+      "published_date": "2026-11-13",
+      "review_status": "not_reviewed",
+      "jurisdiction_status": "not_reviewed",
+      "record_type": "news_reference",
+      "topics": [
+        "condiciones_de_reclusion"
+      ],
+      "scope_hint": "international_context",
+      "scope_terms": [
+        "paraguay",
+        "trump"
+      ],
+      "discovery": {
+        "method": "wordpress_rest_title_screen",
+        "endpoint": "https://gatoencerrado.news/wp-json/wp/v2/posts",
+        "source_post_id": 84993,
+        "retrieved_at": "2026-11-14T06:59:18.707754+00:00"
+      }
+    },
     {
       "id": "e5e1af576ca470fd1b7de28f965a603f0ebce85466b04549887680f248f8e291",
       "title": "Condenan a 15 años de prisión a Fidel Zavala, el defensor que denunció torturas en las cárceles de Bukele",
