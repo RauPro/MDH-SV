@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "generated_at": "2026-11-12T13:16:08.291002+00:00",
+  "generated_at": "2026-11-22T01:16:53.419631+00:00",
   "locations": [
     {
       "candidate_id": "00d8e0e2484955bfef163561c78041cfce0503c121404c33a447095e413c2a3b",
@@ -809,6 +809,30 @@
       "evidence": {
         "paragraph_id": "p9",
         "content_sha256": "8f10cdaf2a87301135e0a8bd8b1741fedeaabff6e6a4bc0cd8842024a539a63d"
+      }
+    },
+    {
+      "candidate_id": "1563beee1acac71708bab15e86888c67ebcb98e1fb5c6c4c49eec29f1df95330",
+      "source_url": "https://www.diariocolatino.com/reduccion-de-homicidios-y-extorsiones-objetivo-de-nuevas-autoridades/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-01-25",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-11-22T01:15:35.147766+00:00",
+      "source_checked_at": "2026-11-22T01:15:35.147766+00:00",
+      "evidence": {
+        "paragraph_id": "p14",
+        "content_sha256": "bb69ff3dd2b73d1002d22aed411134e367db9d096e9dbfc9f07d075ceabd38a8"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Ciudad Delgado",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
@@ -5092,6 +5116,30 @@
         "municipality_kind": "district",
         "reference_version": "sv-decree-762-2023-v1",
         "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=7"
+      }
+    },
+    {
+      "candidate_id": "8886e7f99ddecf5d45f6cb7ded7b6a772539120e31c91ae50b77e6d2b2961388",
+      "source_url": "https://www.diariocolatino.com/empleado-de-comuna-de-apopa-detenido-por-homicidio/",
+      "publisher": "Diario Co Latino",
+      "published_date": "2016-02-26",
+      "department": "San Salvador",
+      "review_status": "automated_unreviewed",
+      "human_reviewed": false,
+      "method": "source_municipality_reference",
+      "rule_version": 2,
+      "extracted_at": "2026-11-22T01:16:26.360320+00:00",
+      "source_checked_at": "2026-11-22T01:16:26.360320+00:00",
+      "evidence": {
+        "paragraph_id": "p2",
+        "content_sha256": "1a07fb7be654a16c795c8db6d4ef538d5d045e33853b55c3ac30a99007d4a914"
+      },
+      "resolution": {
+        "type": "municipality_to_department",
+        "municipality": "Apopa",
+        "municipality_kind": "district",
+        "reference_version": "sv-decree-762-2023-v1",
+        "source_url": "https://cuscatlansur.gob.sv/wp-content/uploads/2024/08/LEY-ESPECIAL-PARA-LA-REESTRUCTURACION-MUNICIPAL.pdf#page=6"
       }
     },
     {
